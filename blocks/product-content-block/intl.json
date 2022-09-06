@@ -21,17 +21,6 @@
 		"pt": "Details",
 		"sv": "Details"
 	},
-	"product-content.size-and-fit": {
-		"de": "Size & Fit",
-		"en": "Size & Fit",
-		"es": "Size & Fit",
-		"fr": "Size & Fit",
-		"ja": "Size & Fit",
-		"ko": "Size & Fit",
-		"no": "Size & Fit",
-		"pt": "Size & Fit",
-		"sv": "Size & Fit"
-	},
 	"product-content.shipping-and-returns": {
 		"de": "Shipping & Returns",
 		"en": "Shipping & Returns",
@@ -42,5 +31,16 @@
 		"no": "Shipping & Returns",
 		"pt": "Shipping & Returns",
 		"sv": "Shipping & Returns"
+	},
+	"product-content.size-and-fit": {
+		"de": "Size & Fit",
+		"en": "Size & Fit",
+		"es": "Size & Fit",
+		"fr": "Size & Fit",
+		"ja": "Size & Fit",
+		"ko": "Size & Fit",
+		"no": "Size & Fit",
+		"pt": "Size & Fit",
+		"sv": "Size & Fit"
 	}
 }

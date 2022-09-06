@@ -1,15 +1,4 @@
 {
-	"alert-bar-block.element-aria-label": {
-		"de": "Eilmeldungsalarm",
-		"en": "Breaking News Alert",
-		"es": "Alerta noticias de última hora",
-		"fr": "Alerte de dernière minute",
-		"ja": "ニュース速報アラート",
-		"ko": "속보 알림",
-		"no": "Nyhetsvarsel",
-		"pt": "Alerta de notícias de última hora",
-		"sv": "Senaste nytt"
-	},
 	"alert-bar-block.close-button": {
 		"de": "Eilmeldungsalarm verwerfen",
 		"en": "Dismiss breaking news alert",
@@ -20,5 +9,16 @@
 		"no": "Avvis nyhetsvarsel",
 		"pt": "Ignorar alerta de notícias de última hora",
 		"sv": "Ignorera avisering om senaste nytt"
+	},
+	"alert-bar-block.element-aria-label": {
+		"de": "Eilmeldungsalarm",
+		"en": "Breaking News Alert",
+		"es": "Alerta noticias de última hora",
+		"fr": "Alerte de dernière minute",
+		"ja": "ニュース速報アラート",
+		"ko": "속보 알림",
+		"no": "Nyhetsvarsel",
+		"pt": "Alerta de notícias de última hora",
+		"sv": "Senaste nytt"
 	}
 }

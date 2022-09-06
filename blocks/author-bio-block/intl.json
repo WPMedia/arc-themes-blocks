@@ -10,39 +10,6 @@
 		"pt": "Enviar e-mail para %{authorName}",
 		"sv": "Skicka e-post till %{authorName}"
 	},
-	"author-bio-block.social-rss": {
-		"de": "RSS Feed von %{authorName} abonnieren",
-		"en": "Subscribe to %{authorName} RSS feed",
-		"es": "Suscribirse a la fuente RSS de %{authorName}",
-		"fr": "S'abonner au flux RSS de %{authorName}",
-		"ja": "%{authorName}のRSSフィードを登録",
-		"ko": "%{authorName} RSS 피드 구독",
-		"no": "Abonner på %{authorName}s RSS-feed",
-		"pt": "Subscrever o feed RSS de %{authorName}",
-		"sv": "Prenumerera på %{authorName}s RSS-kanal"
-	},
-	"author-bio-block.social-soundcloud": {
-		"de": "%{authorName} auf SoundCloud anhören",
-		"en": "Listen to %{authorName} on SoundCloud",
-		"es": "Escuchar a %{authorName} en SoundCloud",
-		"fr": "Écouter %{authorName} sur SoundCloud",
-		"ja": "SoundCloudで%{authorName}を聞く",
-		"ko": "SoundCloud에서 %{authorName} 듣기",
-		"no": "Lytt til %{authorName} på SoundCloud",
-		"pt": "Ouvir %{authorName} no SoundCloud",
-		"sv": "Lyssna på %{authorName} på SoundCloud"
-	},
-	"author-bio-block.social-twitter": {
-		"de": "Auf Twitter verbinden",
-		"en": "Connect on Twitter",
-		"es": "Conectar en Twitter",
-		"fr": "Se connecter sur Twitter",
-		"ja": "Twitterで接続",
-		"ko": "Twitter에서 연결",
-		"no": "Oppnå kontakt på Twitter",
-		"pt": "Ligar ao Twitter",
-		"sv": "Kontakta via Twitter"
-	},
 	"author-bio-block.social-facebook": {
 		"de": "Auf Facebook verbinden",
 		"en": "Connect on Facebook",
@@ -76,28 +43,6 @@
 		"pt": "Ligar ao LinkedIn",
 		"sv": "Kontakta via LinkedIn"
 	},
-	"author-bio-block.social-reddit": {
-		"de": "Auf Reddit verbinden",
-		"en": "Connect on Reddit",
-		"es": "Conectar en Reddit",
-		"fr": "Se connecter sur Reddit",
-		"ja": "Redditで接続",
-		"ko": "Reddit에서 연결",
-		"no": "Oppnå kontakt på Reddit",
-		"pt": "Ligar ao Reddit",
-		"sv": "Kontakta via Reddit"
-	},
-	"author-bio-block.social-youtube": {
-		"de": "Auf YouTube verbinden",
-		"en": "Connect on YouTube",
-		"es": "Conectar en YouTube",
-		"fr": "Se connecter sur YouTube",
-		"ja": "YouTubeで接続",
-		"ko": "YouTube에서 연결",
-		"no": "Oppnå kontakt på YouTube",
-		"pt": "Ligar ao YouTube",
-		"sv": "Kontakta via YouTube"
-	},
 	"author-bio-block.social-medium": {
 		"de": "Auf Medium verbinden",
 		"en": "Connect on Medium",
@@ -108,17 +53,6 @@
 		"no": "Oppnå kontakt på Medium",
 		"pt": "Ligar ao Medium",
 		"sv": "Kontakta via Medium"
-	},
-	"author-bio-block.social-tumblr": {
-		"de": "Auf Tumblr verbinden",
-		"en": "Connect on Tumblr",
-		"es": "Conectar en Tumblr",
-		"fr": "Se connecter sur Tumblr",
-		"ja": "Tumblrで接続",
-		"ko": "Tumblr에서 연결",
-		"no": "Oppnå kontakt på Tumblr",
-		"pt": "Ligar ao Tumblr",
-		"sv": "Kontakta via Tumblr"
 	},
 	"author-bio-block.social-pinterest": {
 		"de": "Auf Pinterest verbinden",
@@ -131,6 +65,28 @@
 		"pt": "Ligar ao Pinterest",
 		"sv": "Kontakta via Pinterest"
 	},
+	"author-bio-block.social-reddit": {
+		"de": "Auf Reddit verbinden",
+		"en": "Connect on Reddit",
+		"es": "Conectar en Reddit",
+		"fr": "Se connecter sur Reddit",
+		"ja": "Redditで接続",
+		"ko": "Reddit에서 연결",
+		"no": "Oppnå kontakt på Reddit",
+		"pt": "Ligar ao Reddit",
+		"sv": "Kontakta via Reddit"
+	},
+	"author-bio-block.social-rss": {
+		"de": "RSS Feed von %{authorName} abonnieren",
+		"en": "Subscribe to %{authorName} RSS feed",
+		"es": "Suscribirse a la fuente RSS de %{authorName}",
+		"fr": "S'abonner au flux RSS de %{authorName}",
+		"ja": "%{authorName}のRSSフィードを登録",
+		"ko": "%{authorName} RSS 피드 구독",
+		"no": "Abonner på %{authorName}s RSS-feed",
+		"pt": "Subscrever o feed RSS de %{authorName}",
+		"sv": "Prenumerera på %{authorName}s RSS-kanal"
+	},
 	"author-bio-block.social-snapchat": {
 		"de": "Auf Snapchat verbinden",
 		"en": "Connect on Snapchat",
@@ -142,6 +98,39 @@
 		"pt": "Ligar ao Snapchat",
 		"sv": "Kontakta via Snapchat"
 	},
+	"author-bio-block.social-soundcloud": {
+		"de": "%{authorName} auf SoundCloud anhören",
+		"en": "Listen to %{authorName} on SoundCloud",
+		"es": "Escuchar a %{authorName} en SoundCloud",
+		"fr": "Écouter %{authorName} sur SoundCloud",
+		"ja": "SoundCloudで%{authorName}を聞く",
+		"ko": "SoundCloud에서 %{authorName} 듣기",
+		"no": "Lytt til %{authorName} på SoundCloud",
+		"pt": "Ouvir %{authorName} no SoundCloud",
+		"sv": "Lyssna på %{authorName} på SoundCloud"
+	},
+	"author-bio-block.social-tumblr": {
+		"de": "Auf Tumblr verbinden",
+		"en": "Connect on Tumblr",
+		"es": "Conectar en Tumblr",
+		"fr": "Se connecter sur Tumblr",
+		"ja": "Tumblrで接続",
+		"ko": "Tumblr에서 연결",
+		"no": "Oppnå kontakt på Tumblr",
+		"pt": "Ligar ao Tumblr",
+		"sv": "Kontakta via Tumblr"
+	},
+	"author-bio-block.social-twitter": {
+		"de": "Auf Twitter verbinden",
+		"en": "Connect on Twitter",
+		"es": "Conectar en Twitter",
+		"fr": "Se connecter sur Twitter",
+		"ja": "Twitterで接続",
+		"ko": "Twitter에서 연결",
+		"no": "Oppnå kontakt på Twitter",
+		"pt": "Ligar ao Twitter",
+		"sv": "Kontakta via Twitter"
+	},
 	"author-bio-block.social-whatsapp": {
 		"de": "Auf WhatsApp verbinden",
 		"en": "Connect on WhatsApp",
@@ -152,5 +141,16 @@
 		"no": "Oppnå kontakt på WhatsApp",
 		"pt": "Ligar ao WhatsApp",
 		"sv": "Kontakta via WhatsApp"
+	},
+	"author-bio-block.social-youtube": {
+		"de": "Auf YouTube verbinden",
+		"en": "Connect on YouTube",
+		"es": "Conectar en YouTube",
+		"fr": "Se connecter sur YouTube",
+		"ja": "YouTubeで接続",
+		"ko": "YouTube에서 연결",
+		"no": "Oppnå kontakt på YouTube",
+		"pt": "Ligar ao YouTube",
+		"sv": "Kontakta via YouTube"
 	}
 }

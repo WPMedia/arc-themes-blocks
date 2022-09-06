@@ -1,14 +1,25 @@
 {
-	"header-nav-chain-block.sections-button": {
-		"de": "Rubriken",
-		"en": "Sections",
-		"es": "Secciones",
-		"fr": "Sections",
-		"ja": "セクション",
-		"ko": "섹션",
-		"no": "Seksjoner",
-		"pt": "Secções",
-		"sv": "Meny"
+	"header-nav-chain-block.links-element-aria-label": {
+		"de": "Relevanteste Links",
+		"en": "Top Links",
+		"es": "Mejores enlaces",
+		"fr": "Principaux liens",
+		"ja": "トップリンク",
+		"ko": "위쪽 링크",
+		"no": "Topplenker",
+		"pt": "Ligações em destaque",
+		"sv": "Topplänkar"
+	},
+	"header-nav-chain-block.querly-search-aria-label": {
+		"de": "Suche",
+		"en": "Search",
+		"es": "Buscar",
+		"fr": "Rechercher",
+		"ja": "検索",
+		"ko": "검색",
+		"no": "Søk",
+		"pt": "Procurar",
+		"sv": "Sök"
 	},
 	"header-nav-chain-block.search-text": {
 		"de": "Suche",
@@ -20,6 +31,17 @@
 		"no": "Søk",
 		"pt": "Procurar",
 		"sv": "Sök"
+	},
+	"header-nav-chain-block.sections-button": {
+		"de": "Rubriken",
+		"en": "Sections",
+		"es": "Secciones",
+		"fr": "Sections",
+		"ja": "セクション",
+		"ko": "섹션",
+		"no": "Seksjoner",
+		"pt": "Secções",
+		"sv": "Meny"
 	},
 	"header-nav-chain-block.sections-button-aria-label": {
 		"de": "%{item} Unterrubriken anzeigen",
@@ -42,27 +64,5 @@
 		"no": "Seksjoner-menyen",
 		"pt": "Menu Secções",
 		"sv": "Kategorimeny"
-	},
-	"header-nav-chain-block.links-element-aria-label": {
-		"de": "Relevanteste Links",
-		"en": "Top Links",
-		"es": "Mejores enlaces",
-		"fr": "Principaux liens",
-		"ja": "トップリンク",
-		"ko": "위쪽 링크",
-		"no": "Topplenker",
-		"pt": "Ligações em destaque",
-		"sv": "Topplänkar"
-	},
-	"header-nav-chain-block.querly-search-aria-label": {
-		"de": "Suche",
-		"en": "Search",
-		"es": "Buscar",
-		"fr": "Rechercher",
-		"ja": "検索",
-		"ko": "검색",
-		"no": "Søk",
-		"pt": "Procurar",
-		"sv": "Sök"
 	}
 }

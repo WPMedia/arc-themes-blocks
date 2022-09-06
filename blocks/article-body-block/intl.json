@@ -1,15 +1,4 @@
 {
-	"article-body-block.correction": {
-		"de": "Korrektur",
-		"en": "Correction",
-		"es": "Corrección",
-		"fr": "Correction",
-		"ja": "修正",
-		"ko": "정정",
-		"no": "Korreksjon",
-		"pt": "Correção",
-		"sv": "Korrektion"
-	},
 	"article-body-block.clarification": {
 		"de": "Klarstellung",
 		"en": "Clarification",
@@ -20,6 +9,17 @@
 		"no": "Avklaring",
 		"pt": "Clarificação",
 		"sv": "Klargörande"
+	},
+	"article-body-block.correction": {
+		"de": "Korrektur",
+		"en": "Correction",
+		"es": "Corrección",
+		"fr": "Correction",
+		"ja": "修正",
+		"ko": "정정",
+		"no": "Korreksjon",
+		"pt": "Correção",
+		"sv": "Korrektion"
 	},
 	"article-body-block.interstitial-link-aria-label": {
 		"de": "Ähnlichen Artikel öffnen",

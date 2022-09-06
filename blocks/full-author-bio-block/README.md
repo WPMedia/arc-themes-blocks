@@ -6,9 +6,9 @@ The Full Author Bio block displays the author's photo, name, role, bio, and soci
 
 ### CustomFields
 
-| **Prop**     | **Required** | **Type** | **Description**                                                                 |
-| ------------ | ------------ | -------- | ------------------------------------------------------------------------------- |
-| **lazyLoad** | no           | Boolean  | Determine if the block will wait until the block is on screen before rendering. |
+| **Prop**     | **Required** | **Type** | **Description**                                                                |
+| ------------ | ------------ | -------- | ------------------------------------------------------------------------------ |
+| **lazyLoad** | no           | Boolean  | Determine if the block will wait until the block is on screen before rendering |
 
 ## ANS Schema
 

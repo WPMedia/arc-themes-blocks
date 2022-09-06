@@ -1,224 +1,4 @@
 {
-	"checkout-block.headline": {
-		"de": "Review Subscription Order",
-		"en": "Review Subscription Order",
-		"es": "Review Subscription Order",
-		"fr": "Review Subscription Order",
-		"ja": "Review Subscription Order",
-		"ko": "Review Subscription Order",
-		"no": "Review Subscription Order",
-		"pt": "Review Subscription Order",
-		"sv": "Review Subscription Order"
-	},
-	"checkout-block.back-to-offer-page": {
-		"de": "Back to subscription selection",
-		"en": "Back to subscription selection",
-		"es": "Back to subscription selection",
-		"fr": "Back to subscription selection",
-		"ja": "Back to subscription selection",
-		"ko": "Back to subscription selection",
-		"no": "Back to subscription selection",
-		"pt": "Back to subscription selection",
-		"sv": "Back to subscription selection"
-	},
-	"checkout-block.order-summary": {
-		"de": "Order Summary",
-		"en": "Order Summary",
-		"es": "Order Summary",
-		"fr": "Order Summary",
-		"ja": "Order Summary",
-		"ko": "Order Summary",
-		"no": "Order Summary",
-		"pt": "Order Summary",
-		"sv": "Order Summary"
-	},
-	"checkout-block.due-today": {
-		"de": "Due today",
-		"en": "Due today",
-		"es": "Due today",
-		"fr": "Due today",
-		"ja": "Due today",
-		"ko": "Due today",
-		"no": "Due today",
-		"pt": "Due today",
-		"sv": "Due today"
-	},
-	"checkout-block.plus-sales-tax": {
-		"de": "Plus applicable sales tax",
-		"en": "Plus applicable sales tax",
-		"es": "Plus applicable sales tax",
-		"fr": "Plus applicable sales tax",
-		"ja": "Plus applicable sales tax",
-		"ko": "Plus applicable sales tax",
-		"no": "Plus applicable sales tax",
-		"pt": "Plus applicable sales tax",
-		"sv": "Plus applicable sales tax"
-	},
-	"checkout-block.empty-cart-message": {
-		"de": "Select from one of our offers",
-		"en": "Select from one of our offers",
-		"es": "Select from one of our offers",
-		"fr": "Select from one of our offers",
-		"ja": "Select from one of our offers",
-		"ko": "Select from one of our offers",
-		"no": "Select from one of our offers",
-		"pt": "Select from one of our offers",
-		"sv": "Select from one of our offers"
-	},
-	"checkout-block.contact-info": {
-		"de": "Contact Info",
-		"en": "Contact Info",
-		"es": "Contact Info",
-		"fr": "Contact Info",
-		"ja": "Contact Info",
-		"ko": "Contact Info",
-		"no": "Contact Info",
-		"pt": "Contact Info",
-		"sv": "Contact Info"
-	},
-	"checkout-block.identity-social": {
-		"de": "Connected",
-		"en": "Connected",
-		"es": "Connected",
-		"fr": "Connected",
-		"ja": "Connected",
-		"ko": "Connected",
-		"no": "Connected",
-		"pt": "Connected",
-		"sv": "Connected"
-	},
-	"checkout-block.identity-email": {
-		"de": "Signed in as %{email}",
-		"en": "Signed in as %{email}",
-		"es": "Signed in as %{email}",
-		"fr": "Signed in as %{email}",
-		"ja": "Signed in as %{email}",
-		"ko": "Signed in as %{email}",
-		"no": "Signed in as %{email}",
-		"pt": "Signed in as %{email}",
-		"sv": "Signed in as %{email}"
-	},
-	"checkout-block.identity-sign-out": {
-		"de": "Sign out",
-		"en": "Sign out",
-		"es": "Sign out",
-		"fr": "Sign out",
-		"ja": "Sign out",
-		"ko": "Sign out",
-		"no": "Sign out",
-		"pt": "Sign out",
-		"sv": "Sign out"
-	},
-	"checkout-block.email": {
-		"de": "Email address",
-		"en": "Email address",
-		"es": "Email address",
-		"fr": "Email address",
-		"ja": "Email address",
-		"ko": "Email address",
-		"no": "Email address",
-		"pt": "Email address",
-		"sv": "Email address"
-	},
-	"checkout-block.email-requirements": {
-		"de": "Please enter a valid email address",
-		"en": "Please enter a valid email address",
-		"es": "Please enter a valid email address",
-		"fr": "Please enter a valid email address",
-		"ja": "Please enter a valid email address",
-		"ko": "Please enter a valid email address",
-		"no": "Please enter a valid email address",
-		"pt": "Please enter a valid email address",
-		"sv": "Please enter a valid email address"
-	},
-	"checkout-block.first-name": {
-		"de": "First name",
-		"en": "First name",
-		"es": "First name",
-		"fr": "First name",
-		"ja": "First name",
-		"ko": "First name",
-		"no": "First name",
-		"pt": "First name",
-		"sv": "First name"
-	},
-	"checkout-block.first-name-requirements": {
-		"de": "Please enter first name",
-		"en": "Please enter first name",
-		"es": "Please enter first name",
-		"fr": "Please enter first name",
-		"ja": "Please enter first name",
-		"ko": "Please enter first name",
-		"no": "Please enter first name",
-		"pt": "Please enter first name",
-		"sv": "Please enter first name"
-	},
-	"checkout-block.last-name": {
-		"de": "Last name",
-		"en": "Last name",
-		"es": "Last name",
-		"fr": "Last name",
-		"ja": "Last name",
-		"ko": "Last name",
-		"no": "Last name",
-		"pt": "Last name",
-		"sv": "Last name"
-	},
-	"checkout-block.last-name-requirements": {
-		"de": "Please enter last name",
-		"en": "Please enter last name",
-		"es": "Please enter last name",
-		"fr": "Please enter last name",
-		"ja": "Please enter last name",
-		"ko": "Please enter last name",
-		"no": "Please enter last name",
-		"pt": "Please enter last name",
-		"sv": "Please enter last name"
-	},
-	"checkout-block.continue-to-checkout": {
-		"de": "Continue to Checkout",
-		"en": "Continue to Checkout",
-		"es": "Continue to Checkout",
-		"fr": "Continue to Checkout",
-		"ja": "Continue to Checkout",
-		"ko": "Continue to Checkout",
-		"no": "Continue to Checkout",
-		"pt": "Continue to Checkout",
-		"sv": "Continue to Checkout"
-	},
-	"checkout-block.country": {
-		"de": "Country or region",
-		"en": "Country or region",
-		"es": "Country or region",
-		"fr": "Country or region",
-		"ja": "Country or region",
-		"ko": "Country or region",
-		"no": "Country or region",
-		"pt": "Country or region",
-		"sv": "Country or region"
-	},
-	"checkout-block.country-requirements": {
-		"de": "Please select country or region",
-		"en": "Please select country or region",
-		"es": "Please select country or region",
-		"fr": "Please select country or region",
-		"ja": "Please select country or region",
-		"ko": "Please select country or region",
-		"no": "Please select country or region",
-		"pt": "Please select country or region",
-		"sv": "Please select country or region"
-	},
-	"checkout-block.Select-Country": {
-		"de": "Select Country",
-		"en": "Select Country",
-		"es": "Select Country",
-		"fr": "Select Country",
-		"ja": "Select Country",
-		"ko": "Select Country",
-		"no": "Select Country",
-		"pt": "Select Country",
-		"sv": "Select Country"
-	},
 	"checkout-block.Afghanistan": {
 		"de": "Afghanistan",
 		"en": "Afghanistan",
@@ -229,17 +9,6 @@
 		"no": "Afghanistan",
 		"pt": "Afghanistan",
 		"sv": "Afghanistan"
-	},
-	"checkout-block.Åland-Islands": {
-		"de": "Åland Islands",
-		"en": "Åland Islands",
-		"es": "Åland Islands",
-		"fr": "Åland Islands",
-		"ja": "Åland Islands",
-		"ko": "Åland Islands",
-		"no": "Åland Islands",
-		"pt": "Åland Islands",
-		"sv": "Åland Islands"
 	},
 	"checkout-block.Albania": {
 		"de": "Albania",
@@ -2177,6 +1946,17 @@
 		"pt": "Qatar",
 		"sv": "Qatar"
 	},
+	"checkout-block.RWANDA": {
+		"de": "RWANDA",
+		"en": "RWANDA",
+		"es": "RWANDA",
+		"fr": "RWANDA",
+		"ja": "RWANDA",
+		"ko": "RWANDA",
+		"no": "RWANDA",
+		"pt": "RWANDA",
+		"sv": "RWANDA"
+	},
 	"checkout-block.Reunion": {
 		"de": "Reunion",
 		"en": "Reunion",
@@ -2209,17 +1989,6 @@
 		"no": "Russian Federation",
 		"pt": "Russian Federation",
 		"sv": "Russian Federation"
-	},
-	"checkout-block.RWANDA": {
-		"de": "RWANDA",
-		"en": "RWANDA",
-		"es": "RWANDA",
-		"fr": "RWANDA",
-		"ja": "RWANDA",
-		"ko": "RWANDA",
-		"no": "RWANDA",
-		"pt": "RWANDA",
-		"sv": "RWANDA"
 	},
 	"checkout-block.Saint-Helena": {
 		"de": "Saint Helena",
@@ -2319,6 +2088,17 @@
 		"no": "Saudi Arabia",
 		"pt": "Saudi Arabia",
 		"sv": "Saudi Arabia"
+	},
+	"checkout-block.Select-Country": {
+		"de": "Select Country",
+		"en": "Select Country",
+		"es": "Select Country",
+		"fr": "Select Country",
+		"ja": "Select Country",
+		"ko": "Select Country",
+		"no": "Select Country",
+		"pt": "Select Country",
+		"sv": "Select Country"
 	},
 	"checkout-block.Senegal": {
 		"de": "Senegal",
@@ -2892,6 +2672,226 @@
 		"pt": "Zimbabwe",
 		"sv": "Zimbabwe"
 	},
+	"checkout-block.back-to-offer-page": {
+		"de": "Back to subscription selection",
+		"en": "Back to subscription selection",
+		"es": "Back to subscription selection",
+		"fr": "Back to subscription selection",
+		"ja": "Back to subscription selection",
+		"ko": "Back to subscription selection",
+		"no": "Back to subscription selection",
+		"pt": "Back to subscription selection",
+		"sv": "Back to subscription selection"
+	},
+	"checkout-block.contact-info": {
+		"de": "Contact Info",
+		"en": "Contact Info",
+		"es": "Contact Info",
+		"fr": "Contact Info",
+		"ja": "Contact Info",
+		"ko": "Contact Info",
+		"no": "Contact Info",
+		"pt": "Contact Info",
+		"sv": "Contact Info"
+	},
+	"checkout-block.continue-to-checkout": {
+		"de": "Continue to Checkout",
+		"en": "Continue to Checkout",
+		"es": "Continue to Checkout",
+		"fr": "Continue to Checkout",
+		"ja": "Continue to Checkout",
+		"ko": "Continue to Checkout",
+		"no": "Continue to Checkout",
+		"pt": "Continue to Checkout",
+		"sv": "Continue to Checkout"
+	},
+	"checkout-block.country": {
+		"de": "Country or region",
+		"en": "Country or region",
+		"es": "Country or region",
+		"fr": "Country or region",
+		"ja": "Country or region",
+		"ko": "Country or region",
+		"no": "Country or region",
+		"pt": "Country or region",
+		"sv": "Country or region"
+	},
+	"checkout-block.country-requirements": {
+		"de": "Please select country or region",
+		"en": "Please select country or region",
+		"es": "Please select country or region",
+		"fr": "Please select country or region",
+		"ja": "Please select country or region",
+		"ko": "Please select country or region",
+		"no": "Please select country or region",
+		"pt": "Please select country or region",
+		"sv": "Please select country or region"
+	},
+	"checkout-block.due-today": {
+		"de": "Due today",
+		"en": "Due today",
+		"es": "Due today",
+		"fr": "Due today",
+		"ja": "Due today",
+		"ko": "Due today",
+		"no": "Due today",
+		"pt": "Due today",
+		"sv": "Due today"
+	},
+	"checkout-block.email": {
+		"de": "Email address",
+		"en": "Email address",
+		"es": "Email address",
+		"fr": "Email address",
+		"ja": "Email address",
+		"ko": "Email address",
+		"no": "Email address",
+		"pt": "Email address",
+		"sv": "Email address"
+	},
+	"checkout-block.email-requirements": {
+		"de": "Please enter a valid email address",
+		"en": "Please enter a valid email address",
+		"es": "Please enter a valid email address",
+		"fr": "Please enter a valid email address",
+		"ja": "Please enter a valid email address",
+		"ko": "Please enter a valid email address",
+		"no": "Please enter a valid email address",
+		"pt": "Please enter a valid email address",
+		"sv": "Please enter a valid email address"
+	},
+	"checkout-block.empty-cart-message": {
+		"de": "Select from one of our offers",
+		"en": "Select from one of our offers",
+		"es": "Select from one of our offers",
+		"fr": "Select from one of our offers",
+		"ja": "Select from one of our offers",
+		"ko": "Select from one of our offers",
+		"no": "Select from one of our offers",
+		"pt": "Select from one of our offers",
+		"sv": "Select from one of our offers"
+	},
+	"checkout-block.first-name": {
+		"de": "First name",
+		"en": "First name",
+		"es": "First name",
+		"fr": "First name",
+		"ja": "First name",
+		"ko": "First name",
+		"no": "First name",
+		"pt": "First name",
+		"sv": "First name"
+	},
+	"checkout-block.first-name-requirements": {
+		"de": "Please enter first name",
+		"en": "Please enter first name",
+		"es": "Please enter first name",
+		"fr": "Please enter first name",
+		"ja": "Please enter first name",
+		"ko": "Please enter first name",
+		"no": "Please enter first name",
+		"pt": "Please enter first name",
+		"sv": "Please enter first name"
+	},
+	"checkout-block.headline": {
+		"de": "Review Subscription Order",
+		"en": "Review Subscription Order",
+		"es": "Review Subscription Order",
+		"fr": "Review Subscription Order",
+		"ja": "Review Subscription Order",
+		"ko": "Review Subscription Order",
+		"no": "Review Subscription Order",
+		"pt": "Review Subscription Order",
+		"sv": "Review Subscription Order"
+	},
+	"checkout-block.identity-email": {
+		"de": "Signed in as %{email}",
+		"en": "Signed in as %{email}",
+		"es": "Signed in as %{email}",
+		"fr": "Signed in as %{email}",
+		"ja": "Signed in as %{email}",
+		"ko": "Signed in as %{email}",
+		"no": "Signed in as %{email}",
+		"pt": "Signed in as %{email}",
+		"sv": "Signed in as %{email}"
+	},
+	"checkout-block.identity-sign-out": {
+		"de": "Sign out",
+		"en": "Sign out",
+		"es": "Sign out",
+		"fr": "Sign out",
+		"ja": "Sign out",
+		"ko": "Sign out",
+		"no": "Sign out",
+		"pt": "Sign out",
+		"sv": "Sign out"
+	},
+	"checkout-block.identity-social": {
+		"de": "Connected",
+		"en": "Connected",
+		"es": "Connected",
+		"fr": "Connected",
+		"ja": "Connected",
+		"ko": "Connected",
+		"no": "Connected",
+		"pt": "Connected",
+		"sv": "Connected"
+	},
+	"checkout-block.last-name": {
+		"de": "Last name",
+		"en": "Last name",
+		"es": "Last name",
+		"fr": "Last name",
+		"ja": "Last name",
+		"ko": "Last name",
+		"no": "Last name",
+		"pt": "Last name",
+		"sv": "Last name"
+	},
+	"checkout-block.last-name-requirements": {
+		"de": "Please enter last name",
+		"en": "Please enter last name",
+		"es": "Please enter last name",
+		"fr": "Please enter last name",
+		"ja": "Please enter last name",
+		"ko": "Please enter last name",
+		"no": "Please enter last name",
+		"pt": "Please enter last name",
+		"sv": "Please enter last name"
+	},
+	"checkout-block.order-summary": {
+		"de": "Order Summary",
+		"en": "Order Summary",
+		"es": "Order Summary",
+		"fr": "Order Summary",
+		"ja": "Order Summary",
+		"ko": "Order Summary",
+		"no": "Order Summary",
+		"pt": "Order Summary",
+		"sv": "Order Summary"
+	},
+	"checkout-block.plus-sales-tax": {
+		"de": "Plus applicable sales tax",
+		"en": "Plus applicable sales tax",
+		"es": "Plus applicable sales tax",
+		"fr": "Plus applicable sales tax",
+		"ja": "Plus applicable sales tax",
+		"ko": "Plus applicable sales tax",
+		"no": "Plus applicable sales tax",
+		"pt": "Plus applicable sales tax",
+		"sv": "Plus applicable sales tax"
+	},
+	"checkout-block.Åland-Islands": {
+		"de": "Åland Islands",
+		"en": "Åland Islands",
+		"es": "Åland Islands",
+		"fr": "Åland Islands",
+		"ja": "Åland Islands",
+		"ko": "Åland Islands",
+		"no": "Åland Islands",
+		"pt": "Åland Islands",
+		"sv": "Åland Islands"
+	},
 	"subscriptions-block.credit-card-information": {
 		"de": "Payment Method and Information",
 		"en": "Payment Method and Information",
@@ -2902,6 +2902,17 @@
 		"no": "Payment Method and Information",
 		"pt": "Payment Method and Information",
 		"sv": "Payment Method and Information"
+	},
+	"subscriptions-block.payment-error": {
+		"de": "There was an error processing your payment.",
+		"en": "There was an error processing your payment.",
+		"es": "There was an error processing your payment.",
+		"fr": "There was an error processing your payment.",
+		"ja": "There was an error processing your payment.",
+		"ko": "There was an error processing your payment.",
+		"no": "There was an error processing your payment.",
+		"pt": "There was an error processing your payment.",
+		"sv": "There was an error processing your payment."
 	},
 	"subscriptions-block.payment-information": {
 		"de": "Credit card information",
@@ -2924,16 +2935,5 @@
 		"no": "Purchase Subscription",
 		"pt": "Purchase Subscription",
 		"sv": "Purchase Subscription"
-	},
-	"subscriptions-block.payment-error": {
-		"de": "There was an error processing your payment.",
-		"en": "There was an error processing your payment.",
-		"es": "There was an error processing your payment.",
-		"fr": "There was an error processing your payment.",
-		"ja": "There was an error processing your payment.",
-		"ko": "There was an error processing your payment.",
-		"no": "There was an error processing your payment.",
-		"pt": "There was an error processing your payment.",
-		"sv": "There was an error processing your payment."
 	}
 }

@@ -1,58 +1,39 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import getThemeStyle from "fusion:themes";
 import getTranslatedPhrases from "fusion:intl";
-import styled from "styled-components";
-import { LinkSVGHover } from "@wpmedia/news-theme-css/js/styled/linkHovers";
-import {
-	Image,
-	EnvelopeIcon,
-	InstagramIcon,
-	LinkedInIcon,
-	TwitterIcon,
-	FacebookIcon,
-	RedditIcon,
-	YoutubeIcon,
-	MediumIcon,
-	TumblrIcon,
-	PinterestIcon,
-	SnapchatIcon,
-	WhatsAppIcon,
-	SoundCloudIcon,
-	RssIcon,
-	LazyLoad,
-	isServerSide,
-	constructSocialURL,
-} from "@wpmedia/engine-theme-sdk";
-import { PrimaryFont } from "@wpmedia/shared-styles";
 import getProperties from "fusion:properties";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import {
+	Conditional,
+	formatSocialURL,
+	Heading,
+	HeadingSection,
+	Icon,
+	Image,
+	isServerSide,
+	Link,
+	Paragraph,
+	Stack,
+} from "@wpmedia/arc-themes-components";
 
-import "./author-bio.scss";
-import "@wpmedia/shared-styles/scss/_author-bio.scss";
+const BLOCK_CLASS_NAME = "b-author-bio";
 
-const MediaLinksStyled = styled(LinkSVGHover)``;
-
-const renderAuthorInfo = (author, arcSite) => {
-	const { image = {}, name, resized_params: resizedImageOptions } = author;
-
-	const { url = "", alt_text: altText = "" } = image;
-
-	return url ? (
-		<Image
-			url={url}
-			alt={altText || name}
-			smallWidth={84}
-			smallHeight={0}
-			mediumWidth={84}
-			mediumHeight={0}
-			largeWidth={84}
-			largeHeight={0}
-			breakpoints={getProperties(arcSite)?.breakpoints}
-			resizerURL={getProperties(arcSite)?.resizerURL}
-			resizedImageOptions={resizedImageOptions}
-		/>
-	) : null;
+const siteMap = {
+	email: "Envelope",
+	facebook: "Facebook",
+	instagram: "Instagram",
+	linkedin: "LinkedIn",
+	medium: "Medium",
+	pinterest: "Pinterest",
+	reddit: "Reddit",
+	rss: "Rss",
+	snapchat: "Snapchat",
+	soundcloud: "SoundCloud",
+	tumblr: "Tumblr",
+	twitter: "Twitter",
+	whatsapp: "WhatsApp",
+	youtube: "Youtube",
 };
 
 const AuthorBioItemsContainer = () => {
@@ -62,208 +43,89 @@ const AuthorBioItemsContainer = () => {
 };
 
 export const AuthorBioItems = ({ arcSite, content }) => {
-	const { locale } = getProperties(arcSite);
-
+	const { locale = "en" } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 	const { credits = {} } = content;
 	const { by = [] } = credits;
-	const PrimaryColor = getThemeStyle(arcSite)["primary-color"];
 
 	// Generate a list of author components
-	const authors = by.reduce((authorList, author) => {
-		const { additional_properties: additionalProperties, name } = author;
-		const { original } = additionalProperties;
-
+	const authors = by
 		// If the author doesn't have a description, then do not add them to the list
 		// Also check for their bio, which means that they are a staff
-		if (
-			author.description &&
-			author.description.length > 0 &&
-			original &&
-			original.bio &&
-			original.bio.length > 0
-		) {
-			// A loop to generate the list of social media links.
-			// If no url is provided, then the social link will be skipped.
-			const socialLinks =
-				author.social_links && author.social_links.length > 0
-					? author.social_links.reduce((result, socialLink) => {
-							if (socialLink.site && socialLink.url && socialLink.url.length > 0) {
-								let socialButton;
-								const constructedURL = constructSocialURL(socialLink.site, socialLink.url);
+		.filter(
+			({ additional_properties: additionalProperties = {}, description = "" }) =>
+				description?.length && additionalProperties?.original?.bio?.length
+		)
+		// A loop to generate the list of social media links.
+		// If no url is provided, then the social link will be skipped.
+		.map(
+			({
+				additional_properties: { original: { byline } } = {},
+				description,
+				name,
+				image: { url: imageUrl = "", alt_text: altText = "" } = {},
+				social_links: socialLinks = [],
+				url: authorUrl,
+			}) => (
+				<Stack direction="horizontal" className={`${BLOCK_CLASS_NAME}__author`} key={name}>
+					{imageUrl ? <Image src={imageUrl} alt={altText || name} width={100} /> : null}
+					<Stack>
+						{byline ? (
+							<Conditional
+								className={`${BLOCK_CLASS_NAME}__author-name-link`}
+								condition={authorUrl}
+								component={Link}
+								href={authorUrl}
+							>
+								<HeadingSection>
+									<Heading className={`${BLOCK_CLASS_NAME}__author-name`}>{byline}</Heading>
+								</HeadingSection>
+							</Conditional>
+						) : null}
+						<Paragraph className={`${BLOCK_CLASS_NAME}__author-description`}>
+							{description}
+						</Paragraph>
+						{socialLinks?.length ? (
+							<Stack
+								direction="horizontal"
+								wrap="wrap"
+								className={`${BLOCK_CLASS_NAME}__social-link-wrapper`}
+							>
+								{socialLinks
+									.filter(({ site, url }) => site && url?.length)
+									.map(({ site, url }) => (
+										<Link
+											aria-label={phrases.t(`global.social-${site.toLowerCase()}-connect`, {
+												authorName: name,
+											})}
+											className={`${BLOCK_CLASS_NAME}__social-link`}
+											href={formatSocialURL(site, url)}
+											id={site === "youtube" ? "link-social-youtube" : undefined}
+											key={site}
+											openInNewTab
+										>
+											<Icon name={siteMap[site] || "Envelope"} />
+										</Link>
+									))}
+							</Stack>
+						) : null}
+					</Stack>
+				</Stack>
+			)
+		);
 
-								const MediaLink = ({ children, webService, ...otherProps }) => (
-									<MediaLinksStyled
-										href={constructedURL}
-										target="_blank"
-										rel="noreferrer noopener"
-										aria-label={
-											webService
-												? phrases.t(`author-bio-block.social-${webService.toLowerCase()}`, {
-														authorName: name,
-												  })
-												: null
-										}
-										primaryColor={PrimaryColor}
-										{...otherProps}
-									>
-										{children}
-									</MediaLinksStyled>
-								);
-
-								switch (socialLink.site) {
-									case "linkedin":
-										socialButton = (
-											<MediaLink webService="linkedin">
-												<LinkedInIcon fill={PrimaryColor} />
-											</MediaLink>
-										);
-										break;
-									case "twitter":
-										socialButton = (
-											<MediaLink webService="twitter">
-												<TwitterIcon fill={PrimaryColor} />
-											</MediaLink>
-										);
-										break;
-									case "instagram":
-										socialButton = (
-											<MediaLink webService="instagram">
-												<InstagramIcon fill={PrimaryColor} />
-											</MediaLink>
-										);
-										break;
-									case "facebook":
-										socialButton = (
-											<MediaLink webService="facebook">
-												<FacebookIcon fill={PrimaryColor} />
-											</MediaLink>
-										);
-										break;
-									case "reddit":
-										socialButton = (
-											<MediaLink webService="reddit">
-												<RedditIcon fill={PrimaryColor} />
-											</MediaLink>
-										);
-										break;
-									case "youtube":
-										socialButton = (
-											<MediaLink webService="youtube" id="link-social-youtube">
-												<YoutubeIcon fill={PrimaryColor} />
-											</MediaLink>
-										);
-										break;
-									case "medium":
-										socialButton = (
-											<MediaLink webService="medium">
-												<MediumIcon fill={PrimaryColor} />
-											</MediaLink>
-										);
-										break;
-									case "tumblr":
-										socialButton = (
-											<MediaLink webService="tumblr">
-												<TumblrIcon fill={PrimaryColor} />
-											</MediaLink>
-										);
-										break;
-									case "pinterest":
-										socialButton = (
-											<MediaLink webService="pinterest">
-												<PinterestIcon fill={PrimaryColor} />
-											</MediaLink>
-										);
-										break;
-									case "snapchat":
-										socialButton = (
-											<MediaLink webService="snapchat">
-												<SnapchatIcon fill={PrimaryColor} />
-											</MediaLink>
-										);
-										break;
-									case "whatsapp":
-										socialButton = (
-											<MediaLink webService="whatsapp">
-												<WhatsAppIcon fill={PrimaryColor} />
-											</MediaLink>
-										);
-										break;
-									case "soundcloud":
-										socialButton = (
-											<MediaLink webService="soundcloud">
-												<SoundCloudIcon fill={PrimaryColor} />
-											</MediaLink>
-										);
-										break;
-									case "rss":
-										socialButton = (
-											<MediaLink webService="rss">
-												<RssIcon fill={PrimaryColor} />
-											</MediaLink>
-										);
-										break;
-									default:
-										socialButton = (
-											<MediaLink webService="email">
-												<EnvelopeIcon fill={PrimaryColor} />
-											</MediaLink>
-										);
-										break;
-								}
-								result.push(<Fragment key={socialLink.site}>{socialButton}</Fragment>);
-							}
-							return result;
-					  }, [])
-					: null;
-
-			// Make the name a hyperlink if a url to the bio page is provided
-			const authorName = original.byline ? (
-				<PrimaryFont as="h2" className="authorName" fontColor="primary-color">
-					{original.byline}
-				</PrimaryFont>
-			) : undefined;
-			const authorNameWithHyperlink = author.url ? (
-				<a href={author.url}>{authorName}</a>
-			) : undefined;
-
-			authorList.push(
-				<section key={author.name ? author.name : ""} className="authors">
-					<section className="author">
-						{renderAuthorInfo(author, arcSite)}
-						<section className="descriptions">
-							{authorNameWithHyperlink || authorName}
-							{/* there will always be a description via conditional on 52 */}
-							<p>{author.description}</p>
-							<section className="socialButtons">{socialLinks}</section>
-						</section>
-					</section>
-				</section>
-			);
-		}
-
-		return authorList;
-	}, []);
-
-	if (authors.length === 0) {
-		return null;
-	}
-
-	return (
-		<PrimaryFont as="section" className="author-bio">
-			{authors}
-		</PrimaryFont>
-	);
+	return authors.length ? <Stack className={BLOCK_CLASS_NAME}>{authors}</Stack> : null;
 };
 
 const AuthorBio = ({ customFields = {} }) => {
 	const { isAdmin } = useFusionContext();
+
 	if (customFields.lazyLoad && isServerSide() && !isAdmin) {
 		// On Server
 		return null;
 	}
 	return (
-		<LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+		<LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
 			<AuthorBioItemsContainer />
 		</LazyLoad>
 	);

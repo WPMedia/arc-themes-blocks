@@ -5,6 +5,12 @@ jest.mock("@wpmedia/news-theme-css", () => ({
 	lightenDarkenColor: () => "blue",
 }));
 
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	__esModule: true,
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	isServerSide: jest.fn().mockReturnValue(true),
+}));
+
 jest.mock("fusion:themes", () =>
 	jest.fn(() => ({
 		"primary-color": "blue",
@@ -12,28 +18,11 @@ jest.mock("fusion:themes", () =>
 );
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	Image: () => <div />,
-	EnvelopeIcon: () => <svg>EnvelopeIcon</svg>,
-	LinkedInIcon: () => <svg>LinkedInIcon</svg>,
-	InstagramIcon: () => <svg>InstagramIcon</svg>,
-	TwitterIcon: () => <svg>TwitterIcon</svg>,
-	FacebookIcon: () => <svg>FacebookIcon</svg>,
-	RedditIcon: () => <svg>RedditIcon</svg>,
-	YoutubeIcon: () => <svg>YoutubeIcon</svg>,
-	MediumIcon: () => <svg>MediumIcon</svg>,
-	TumblrIcon: () => <svg>TumblrIcon</svg>,
-	PinterestIcon: () => <svg>PinterestIcon</svg>,
-	SnapchatIcon: () => <svg>SnapchatIcon</svg>,
-	WhatsAppIcon: () => <svg>WhatsAppIcon</svg>,
-	SoundCloudIcon: () => <svg>SoundCloudIcon</svg>,
-	RssIcon: () => <svg>RssIcon</svg>,
 	LazyLoad: ({ children }) => <>{children}</>,
-	isServerSide: () => true,
-	constructSocialURL: (type, field) => field,
 }));
 
 jest.mock("fusion:context", () => ({
-	useFusionContext: () => ({ isAdmin: false }),
+	useFusionContext: () => ({ isAdmin: false, globalContent: { credits: {} } }),
 }));
 
 jest.mock("fusion:properties", () =>
@@ -91,7 +80,6 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 		const wrapper = mount(<AuthorBio />);
 		expect(wrapper.find("AuthorBio").children().children()).toHaveLength(1);
-		expect(wrapper.find("section.socialButtons").children()).toHaveLength(2);
 	});
 
 	it("should show two authors' bio", () => {
@@ -155,7 +143,7 @@ describe("Given the list of author(s) from the article", () => {
 			})),
 		}));
 		const wrapper = mount(<AuthorBio />);
-		expect(wrapper.find("section.authors")).toHaveLength(2);
+		expect(wrapper.find(".b-author-bio").children().length).toBe(3);
 	});
 
 	it("should show no author if there's no description", () => {
@@ -288,7 +276,7 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 		const wrapper = mount(<AuthorBio />);
 		expect(wrapper.find("Image")).toHaveLength(1);
-		expect(wrapper.find("Image").prop("url")).toEqual(
+		expect(wrapper.find("Image").prop("src")).toEqual(
 			"https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg"
 		);
 	});
@@ -412,16 +400,12 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 
 		const wrapper = mount(<AuthorBio />);
-		const socialButtonsContainer = wrapper.find("section.socialButtons");
-		expect(socialButtonsContainer.children()).toHaveLength(13);
+		const socialButtonsContainer = wrapper.find(".b-author-bio__social-link-wrapper");
 		const socialLinks = socialButtonsContainer.find("a");
 		expect(socialLinks).toHaveLength(13);
 		socialLinks.forEach((link) => {
 			expect(typeof link.prop("aria-label")).toEqual("string");
 		});
-
-		// envelope icon is the default we want to avoid
-		expect(socialButtonsContainer.text().includes("EnvelopeIcon")).toBe(false);
 	});
 	it("should show null if no social link objects, with url and title, are provided", () => {
 		const { default: AuthorBio } = require("./default");
@@ -457,8 +441,9 @@ describe("Given the list of author(s) from the article", () => {
 
 		const wrapper = mount(<AuthorBio />);
 
-		const socialButtonsContainer = wrapper.find("section.socialButtons");
-		expect(socialButtonsContainer.children()).toHaveLength(0);
+		const socialButtonsContainer = wrapper.find(".b-author-bio__social-link-wrapper");
+		const socialLinks = socialButtonsContainer.find("a");
+		expect(socialLinks.children()).toHaveLength(0);
 	});
 
 	it("a snapchat social object does not render the default envelope icon but its correct snap one", () => {
@@ -493,14 +478,12 @@ describe("Given the list of author(s) from the article", () => {
 			})),
 		}));
 		const wrapper = mount(<AuthorBio />);
-
-		const socialButtonsContainer = wrapper.find("section.socialButtons");
-		expect(socialButtonsContainer.children()).toHaveLength(1);
-
-		expect(socialButtonsContainer.text()).toBe("SnapchatIcon");
+		const socialButtonsContainer = wrapper.find(".b-author-bio__social-link");
+		const socialLinks = socialButtonsContainer.find("a");
+		expect(socialLinks.props().href.includes("snapchat")).toBe(true);
 	});
 
-	it("an unrecognized social media title renders an envelope icon", () => {
+	it("an unrecognized social media title renders an envelope icon with site as key", () => {
 		const { default: AuthorBio } = require("./default");
 
 		jest.mock("fusion:context", () => ({
@@ -538,10 +521,9 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 		const wrapper = mount(<AuthorBio />);
 
-		const socialButtonsContainer = wrapper.find("section.socialButtons");
-		expect(socialButtonsContainer.children()).toHaveLength(1);
-
-		expect(socialButtonsContainer.text()).toBe("EnvelopeIcon");
+		const socialButtonsContainer = wrapper.find(".b-author-bio__social-link-wrapper");
+		const socialLinks = socialButtonsContainer.find("a");
+		expect(socialLinks.props().children[0].props.name).toBe("Envelope");
 	});
 
 	it("should fallback gracefully if author name does not exist and not render authorName link", () => {
@@ -582,7 +564,7 @@ describe("Given the list of author(s) from the article", () => {
 			})),
 		}));
 		const wrapper = mount(<AuthorBio />);
-		expect(wrapper.find(".authorName").length).toBe(0);
+		expect(wrapper.find(".b-author-bio__authorName").length).toBe(0);
 	});
 	it("finds an author name if url exists", () => {
 		const { default: AuthorBio } = require("./default");
@@ -604,7 +586,7 @@ describe("Given the list of author(s) from the article", () => {
 								additional_properties: {
 									original: {
 										_id: "saracarothers",
-										byline: "",
+										byline: "Sara Carothers",
 										bio_page: "/author/sara-carothers/",
 										bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
 									},
@@ -624,9 +606,9 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 		const wrapper = mount(<AuthorBio />);
 
-		const targetAuthorLink = wrapper.find(".descriptions > a");
+		const targetAuthorLink = wrapper.find("a.b-author-bio__author-name-link");
 		expect(targetAuthorLink.length).toBe(1);
-		expect(targetAuthorLink.html()).toBe('<a href="https://google.com"></a>');
+		expect(targetAuthorLink.props().href).toBe("https://google.com");
 	});
 
 	it("handles no author name or description", () => {
@@ -669,7 +651,7 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 		const wrapper = mount(<AuthorBio />);
 
-		expect(wrapper.find(".authors").length).toBe(1);
+		expect(wrapper.find(".b-author-bio").children().length).toBe(2);
 	});
 
 	it("it should show email link with malito email", () => {
@@ -705,8 +687,9 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 		const wrapper = mount(<AuthorBio />);
 
-		const socialButtonsContainer = wrapper.find("section.socialButtons");
-		expect(socialButtonsContainer.children()).toHaveLength(1);
+		const socialButtonsContainer = wrapper.find(".b-author-bio__social-link");
+		const socialLinks = socialButtonsContainer.find("a");
+		expect(socialLinks.props().href).toBe("mailto:bernstein@washpost.com");
 	});
 	it("should not throw by undefined error if empty global content object", () => {
 		jest.mock("fusion:context", () => ({

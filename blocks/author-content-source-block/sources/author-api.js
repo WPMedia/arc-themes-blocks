@@ -17,7 +17,6 @@ export default {
 						? getResizedImageData(authorObject.image, null, true, null, query["arc-site"])
 						: {},
 			  }));
-
 		return {
 			...data,
 			authors,

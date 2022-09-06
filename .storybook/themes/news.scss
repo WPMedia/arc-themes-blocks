@@ -164,6 +164,7 @@
 		"font-family-secondary": "Georgia",
 		// Colors
 		"color-primary": var(--global-black),
+		"color-primary-hover": var(--global-neutral-7),
 		"text-color": var(--global-neutral-8),
 		"text-color-subtle": var(--global-neutral-5),
 		"background-color": var(--global-white),
@@ -966,6 +967,74 @@
 				),
 				double-chain-child-item-empty: (
 					display: contents,
+				),
+				full-author-bio: (
+					display: flex,
+					flex-direction: column,
+					gap: var(--global-spacing-4),
+					margin: auto,
+					components: (
+						heading: (
+							color: var(--color-primary),
+							font-family: var(--font-family-primary),
+						),
+						image: (
+							aspect-ratio: 1,
+							border-radius: var(--border-radius-circle),
+							margin: auto,
+							max-height: 9.375rem,
+							max-width: 9.375rem,
+						),
+						paragraph: (
+							color: var(--text-color),
+							font-family: var(--font-family-primary),
+						),
+					),
+				),
+				full-author-bio-identification: (
+					gap: 0,
+				),
+				full-author-bio-name: (
+					font-size: var(--heading-level-3-font-size),
+					font-weight: var(--heading-level-3-font-weight),
+					line-height: var(--heading-level-3-line-height),
+				),
+				full-author-bio-role: (
+					font-size: var(--heading-level-6-font-size),
+					font-weight: var(--heading-level-6-font-weight),
+					line-height: var(--heading-level-6-line-height),
+				),
+				full-author-bio-social: (
+					gap: var(--global-spacing-2),
+				),
+				full-author-bio-social-header: (
+					text-align: center,
+					font-size: var(--heading-level-6-font-size),
+					font-weight: var(--heading-level-6-font-weight),
+					line-height: var(--heading-level-6-line-height),
+				),
+				full-author-bio-social-icons: (
+					display: flex,
+					flex-wrap: wrap,
+					justify-content: center,
+					gap: var(--global-spacing-4),
+				),
+				full-author-bio-social-link: (
+					components: (
+						icon: (
+							fill: var(--color-primary),
+						),
+					),
+				),
+				full-author-bio-social-link-hover: (
+					components: (
+						icon: (
+							fill: var(--color-primary-hover),
+						),
+					),
+				),
+				full-author-bio-text: (
+					gap: var(--global-spacing-4),
 				),
 				gallery: (
 					components: (
@@ -1976,6 +2045,25 @@
 				double-chain-child-item-empty: (
 					display: initial,
 				),
+				full-author-bio: (
+					flex-direction: row,
+					gap: var(--global-spacing-5),
+					margin: 0,
+					max-width: auto,
+					components: (
+						image: (
+							margin: 0,
+							max-height: 11.25rem,
+							max-width: 11.25rem,
+						),
+					),
+				),
+				full-author-bio-social-header: (
+					text-align: left,
+				),
+				full-author-bio-social-icons: (
+					justify-content: flex-start,
+				),
 				gallery: (
 					components: (
 						carousel-additional-controls: (
@@ -2190,6 +2278,7 @@
 @use "../../blocks/double-chain-block";
 @use "../../blocks/extra-large-manual-promo-block";
 @use "../../blocks/extra-large-promo-block";
+@use "../../blocks/full-author-bio-block";
 @use "../../blocks/gallery-block";
 @use "../../blocks/header-block";
 @use "../../blocks/header-nav-chain-block";

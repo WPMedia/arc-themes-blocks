@@ -1,15 +1,4 @@
 {
-	"global.by-text": {
-		"de": "Von",
-		"en": "By",
-		"es": "Por",
-		"fr": "Par",
-		"ja": "担当者：",
-		"ko": "저작자",
-		"no": "Av",
-		"pt": "Por",
-		"sv": "Av"
-	},
 	"global.and-text": {
 		"de": "und",
 		"en": "and",
@@ -21,27 +10,16 @@
 		"pt": "e",
 		"sv": "och"
 	},
-	"global.gallery-expand-button": {
-		"de": "Erweitern",
-		"en": "Expand",
-		"es": "Expandir",
-		"fr": "Développer",
-		"ja": "展開",
-		"ko": "더보기",
-		"no": "Utvid",
-		"pt": "Expandir",
-		"sv": "Förstora"
-	},
-	"global.gallery-page-count-text": {
-		"de": "%{current} von %{total}",
-		"en": "<span class='visually-hidden'>Image</span> %{current} of %{total}",
-		"es": "%{current} de %{total}",
-		"fr": "%{current} de %{total}",
-		"ja": "%{current} / %{total}",
-		"ko": "%{current}/%개 보는 %{total}",
-		"no": "<span class='visually-hidden'>Bilde</span> %{current} av %{total}",
-		"pt": "<span class='visually-hidden'>Imagem</span> %{current} de %{total}",
-		"sv": "%{current} av %{total}"
+	"global.by-text": {
+		"de": "Von",
+		"en": "By",
+		"es": "Por",
+		"fr": "Par",
+		"ja": "担当者：",
+		"ko": "저작자",
+		"no": "Av",
+		"pt": "Por",
+		"sv": "Av"
 	},
 	"global.gallery-autoplay-button": {
 		"de": "Automatische Wiedergabe",
@@ -53,17 +31,6 @@
 		"no": "Automatisk avspilling",
 		"pt": "Reprodução automática",
 		"sv": "Spela upp"
-	},
-	"global.gallery-pause-autoplay-button": {
-		"de": "Automatische Wiedergabe anhalten",
-		"en": "Pause autoplay",
-		"es": "Pausar reproducción automática",
-		"fr": "Mettre en pause la lecture automatique",
-		"ja": "自動再生の一時停止",
-		"ko": "자동 재생 일시 중지",
-		"no": "Sett automatisk avspilling på pause",
-		"pt": "Colocar a reprodução automática em pausa",
-		"sv": "Pausa"
 	},
 	"global.gallery-autoplay-label-start": {
 		"de": "Start automatic slide show",
@@ -87,82 +54,38 @@
 		"pt": "Parar apresentação automática de diapositivos",
 		"sv": "Stop automatic slide show"
 	},
-	"global.social-twitter": {
-		"de": "Twitter",
-		"en": "Twitter",
-		"es": "Twitter",
-		"fr": "Twitter",
-		"ja": "Twitter",
-		"ko": "Twitter",
-		"no": "Twitter",
-		"pt": "Twitter",
-		"sv": "Twitter"
+	"global.gallery-expand-button": {
+		"de": "Erweitern",
+		"en": "Expand",
+		"es": "Expandir",
+		"fr": "Développer",
+		"ja": "展開",
+		"ko": "더보기",
+		"no": "Utvid",
+		"pt": "Expandir",
+		"sv": "Förstora"
 	},
-	"global.social-facebook": {
-		"de": "Facebook",
-		"en": "Facebook",
-		"es": "Facebook",
-		"fr": "Facebook",
-		"ja": "Facebook",
-		"ko": "Facebook",
-		"no": "Facebook",
-		"pt": "Facebook",
-		"sv": "Facebook"
+	"global.gallery-page-count-text": {
+		"de": "%{current} von %{total}",
+		"en": "<span class='visually-hidden'>Image</span> %{current} of %{total}",
+		"es": "%{current} de %{total}",
+		"fr": "%{current} de %{total}",
+		"ja": "%{current} / %{total}",
+		"ko": "%{current}/%개 보는 %{total}",
+		"no": "<span class='visually-hidden'>Bilde</span> %{current} av %{total}",
+		"pt": "<span class='visually-hidden'>Imagem</span> %{current} de %{total}",
+		"sv": "%{current} av %{total}"
 	},
-	"global.social-linkedin": {
-		"de": "LinkedIn",
-		"en": "LinkedIn",
-		"es": "LinkedIn",
-		"fr": "LinkedIn",
-		"ja": "LinkedIn",
-		"ko": "LinkedIn",
-		"no": "LinkedIn",
-		"pt": "LinkedIn",
-		"sv": "LinkedIn"
-	},
-	"global.social-pinterest": {
-		"de": "Pinterest",
-		"en": "Pinterest",
-		"es": "Pinterest",
-		"fr": "Pinterest",
-		"ja": "Pinterest",
-		"ko": "Pinterest",
-		"no": "Pinterest",
-		"pt": "Pinterest",
-		"sv": "Pinterest"
-	},
-	"global.social-email": {
-		"de": "E-Mail",
-		"en": "Email",
-		"es": "Email",
-		"fr": "E-mail",
-		"ja": "メールアドレス",
-		"ko": "이메일 전송",
-		"no": "E-post",
-		"pt": "E-mail",
-		"sv": "E-post"
-	},
-	"global.opens-in-new-window": {
-		"de": "(Wird in einem neuen Fenster geöffnet)",
-		"en": "(Opens in new window)",
-		"es": "(Se abre en una nueva ventana)",
-		"fr": "(S'ouvre dans une nouvelle fenêtre)",
-		"ja": "（新しいウィンドウで開きます）",
-		"ko": "(새 창에서 열기)",
-		"no": "(Åpnes i et nytt vindu)",
-		"pt": "(Abre numa nova janela)",
-		"sv": "(Öppnas i nytt fönster)"
-	},
-	"global.sponsored-content": {
-		"de": "Werblicher Inhalt",
-		"en": "Sponsored Content",
-		"es": "Contenido patrocinado",
-		"fr": "Contenu sponsorisé",
-		"ja": "スポンサー付きコンテンツ",
-		"ko": "Sponsored Content",
-		"no": "Sponset innhold",
-		"pt": "Conteúdo patrocinado",
-		"sv": "Sponsrat innehåll"
+	"global.gallery-pause-autoplay-button": {
+		"de": "Automatische Wiedergabe anhalten",
+		"en": "Pause autoplay",
+		"es": "Pausar reproducción automática",
+		"fr": "Mettre en pause la lecture automatique",
+		"ja": "自動再生の一時停止",
+		"ko": "자동 재생 일시 중지",
+		"no": "Sett automatisk avspilling på pause",
+		"pt": "Colocar a reprodução automática em pausa",
+		"sv": "Pausa"
 	},
 	"global.gallery-text": {
 		"de": "Galerie",
@@ -175,27 +98,27 @@
 		"pt": "Galeria",
 		"sv": "Bildspel"
 	},
-	"global.video-text": {
-		"de": "Video",
-		"en": "Video",
-		"es": "Video",
-		"fr": "Vidéo",
-		"ja": "ビデオ",
-		"ko": "비디오",
-		"no": "Video",
-		"pt": "Vídeo",
-		"sv": "Video"
+	"global.opens-in-new-window": {
+		"de": "(Wird in einem neuen Fenster geöffnet)",
+		"en": "(Opens in new window)",
+		"es": "(Se abre en una nueva ventana)",
+		"fr": "(S'ouvre dans une nouvelle fenêtre)",
+		"ja": "（新しいウィンドウで開きます）",
+		"ko": "(새 창에서 열기)",
+		"no": "(Åpnes i et nytt vindu)",
+		"pt": "(Abre numa nova janela)",
+		"sv": "(Öppnas i nytt fönster)"
 	},
-	"global.social-rss": {
-		"de": "Subscribe to %{authorName} RSS feed",
-		"en": "Subscribe to %{authorName} RSS feed",
-		"es": "Subscribe to %{authorName} RSS feed",
-		"fr": "Subscribe to %{authorName} RSS feed",
-		"ja": "Subscribe to %{authorName} RSS feed",
-		"ko": "Subscribe to %{authorName} RSS feed",
-		"no": "Subscribe to %{authorName} RSS feed",
-		"pt": "Subscribe to %{authorName} RSS feed",
-		"sv": "Subscribe to %{authorName} RSS feed"
+	"global.social-email": {
+		"de": "E-Mail",
+		"en": "Email",
+		"es": "Email",
+		"fr": "E-mail",
+		"ja": "メールアドレス",
+		"ko": "이메일 전송",
+		"no": "E-post",
+		"pt": "E-mail",
+		"sv": "E-post"
 	},
 	"global.social-email-connect": {
 		"de": "E-Mail an %{authorName} senden",
@@ -208,16 +131,16 @@
 		"pt": "Enviar e-mail para %{authorName}",
 		"sv": "Skicka e-post till %{authorName}"
 	},
-	"global.social-soundcloud-connect": {
-		"de": "%{authorName} auf SoundCloud anhören",
-		"en": "Listen to %{authorName} on SoundCloud",
-		"es": "Escuchar a %{authorName} en SoundCloud",
-		"fr": "Écouter %{authorName} sur SoundCloud",
-		"ja": "SoundCloudで%{authorName}を聞く",
-		"ko": "SoundCloud에서 %{authorName} 듣기",
-		"no": "Lytt til %{authorName} på SoundCloud",
-		"pt": "Ouvir %{authorName} no SoundCloud",
-		"sv": "Lyssna på %{authorName} på SoundCloud"
+	"global.social-facebook": {
+		"de": "Facebook",
+		"en": "Facebook",
+		"es": "Facebook",
+		"fr": "Facebook",
+		"ja": "Facebook",
+		"ko": "Facebook",
+		"no": "Facebook",
+		"pt": "Facebook",
+		"sv": "Facebook"
 	},
 	"global.social-facebook-connect": {
 		"de": "Auf Facebook verbinden",
@@ -241,6 +164,17 @@
 		"pt": "Seguir no Instagram",
 		"sv": "Följ på Instagram"
 	},
+	"global.social-linkedin": {
+		"de": "LinkedIn",
+		"en": "LinkedIn",
+		"es": "LinkedIn",
+		"fr": "LinkedIn",
+		"ja": "LinkedIn",
+		"ko": "LinkedIn",
+		"no": "LinkedIn",
+		"pt": "LinkedIn",
+		"sv": "LinkedIn"
+	},
 	"global.social-linkedin-connect": {
 		"de": "Auf LinkedIn verbinden",
 		"en": "Connect on LinkedIn",
@@ -251,28 +185,6 @@
 		"no": "Oppnå kontakt på LinkedIn",
 		"pt": "Ligar ao LinkedIn",
 		"sv": "Kontakta via LinkedIn"
-	},
-	"global.social-reddit-connect": {
-		"de": "Auf Reddit verbinden",
-		"en": "Connect on Reddit",
-		"es": "Conectar en Reddit",
-		"fr": "Se connecter sur Reddit",
-		"ja": "Redditで接続",
-		"ko": "Reddit에서 연결",
-		"no": "Oppnå kontakt på Reddit",
-		"pt": "Ligar ao Reddit",
-		"sv": "Kontakta via Reddit"
-	},
-	"global.social-youtube-connect": {
-		"de": "Auf YouTube verbinden",
-		"en": "Connect on YouTube",
-		"es": "Conectar en YouTube",
-		"fr": "Se connecter sur YouTube",
-		"ja": "YouTubeで接続",
-		"ko": "YouTube에서 연결",
-		"no": "Oppnå kontakt på YouTube",
-		"pt": "Ligar ao YouTube",
-		"sv": "Kontakta via YouTube"
 	},
 	"global.social-medium-connect": {
 		"de": "Auf Medium verbinden",
@@ -285,16 +197,16 @@
 		"pt": "Ligar ao Medium",
 		"sv": "Kontakta via Medium"
 	},
-	"global.social-tumblr-connect": {
-		"de": "Auf Tumblr verbinden",
-		"en": "Connect on Tumblr",
-		"es": "Conectar en Tumblr",
-		"fr": "Se connecter sur Tumblr",
-		"ja": "Tumblrで接続",
-		"ko": "Tumblr에서 연결",
-		"no": "Oppnå kontakt på Tumblr",
-		"pt": "Ligar ao Tumblr",
-		"sv": "Kontakta via Tumblr"
+	"global.social-pinterest": {
+		"de": "Pinterest",
+		"en": "Pinterest",
+		"es": "Pinterest",
+		"fr": "Pinterest",
+		"ja": "Pinterest",
+		"ko": "Pinterest",
+		"no": "Pinterest",
+		"pt": "Pinterest",
+		"sv": "Pinterest"
 	},
 	"global.social-pinterest-connect": {
 		"de": "Auf Pinterest verbinden",
@@ -307,27 +219,27 @@
 		"pt": "Ligar ao Pinterest",
 		"sv": "Kontakta via Pinterest"
 	},
-	"global.social-snapchat-connect": {
-		"de": "Auf Snapchat verbinden",
-		"en": "Connect on Snapchat",
-		"es": "Conectar en Snapchat",
-		"fr": "Se connecter sur Snapchat",
-		"ja": "Snapchatで接続",
-		"ko": "Snapchat에서 연결",
-		"no": "Oppnå kontakt på Snapchat",
-		"pt": "Ligar ao Snapchat",
-		"sv": "Kontakta via Snapchat"
+	"global.social-reddit-connect": {
+		"de": "Auf Reddit verbinden",
+		"en": "Connect on Reddit",
+		"es": "Conectar en Reddit",
+		"fr": "Se connecter sur Reddit",
+		"ja": "Redditで接続",
+		"ko": "Reddit에서 연결",
+		"no": "Oppnå kontakt på Reddit",
+		"pt": "Ligar ao Reddit",
+		"sv": "Kontakta via Reddit"
 	},
-	"global.social-whatsapp-connect": {
-		"de": "Auf WhatsApp verbinden",
-		"en": "Connect on WhatsApp",
-		"es": "Conectar en WhatsApp",
-		"fr": "Se connecter sur WhatsApp",
-		"ja": "WhatsAppで接続",
-		"ko": "WhatsApp에서 연결",
-		"no": "Oppnå kontakt på WhatsApp",
-		"pt": "Ligar ao WhatsApp",
-		"sv": "Kontakta via WhatsApp"
+	"global.social-rss": {
+		"de": "Subscribe to %{authorName} RSS feed",
+		"en": "Subscribe to %{authorName} RSS feed",
+		"es": "Subscribe to %{authorName} RSS feed",
+		"fr": "Subscribe to %{authorName} RSS feed",
+		"ja": "Subscribe to %{authorName} RSS feed",
+		"ko": "Subscribe to %{authorName} RSS feed",
+		"no": "Subscribe to %{authorName} RSS feed",
+		"pt": "Subscribe to %{authorName} RSS feed",
+		"sv": "Subscribe to %{authorName} RSS feed"
 	},
 	"global.social-rss-connect": {
 		"de": "RSS Feed von %{authorName} abonnieren",
@@ -340,6 +252,50 @@
 		"pt": "Subscrever o feed RSS de %{authorName}",
 		"sv": "Prenumerera på %{authorName}s RSS-kanal"
 	},
+	"global.social-snapchat-connect": {
+		"de": "Auf Snapchat verbinden",
+		"en": "Connect on Snapchat",
+		"es": "Conectar en Snapchat",
+		"fr": "Se connecter sur Snapchat",
+		"ja": "Snapchatで接続",
+		"ko": "Snapchat에서 연결",
+		"no": "Oppnå kontakt på Snapchat",
+		"pt": "Ligar ao Snapchat",
+		"sv": "Kontakta via Snapchat"
+	},
+	"global.social-soundcloud-connect": {
+		"de": "%{authorName} auf SoundCloud anhören",
+		"en": "Listen to %{authorName} on SoundCloud",
+		"es": "Escuchar a %{authorName} en SoundCloud",
+		"fr": "Écouter %{authorName} sur SoundCloud",
+		"ja": "SoundCloudで%{authorName}を聞く",
+		"ko": "SoundCloud에서 %{authorName} 듣기",
+		"no": "Lytt til %{authorName} på SoundCloud",
+		"pt": "Ouvir %{authorName} no SoundCloud",
+		"sv": "Lyssna på %{authorName} på SoundCloud"
+	},
+	"global.social-tumblr-connect": {
+		"de": "Auf Tumblr verbinden",
+		"en": "Connect on Tumblr",
+		"es": "Conectar en Tumblr",
+		"fr": "Se connecter sur Tumblr",
+		"ja": "Tumblrで接続",
+		"ko": "Tumblr에서 연결",
+		"no": "Oppnå kontakt på Tumblr",
+		"pt": "Ligar ao Tumblr",
+		"sv": "Kontakta via Tumblr"
+	},
+	"global.social-twitter": {
+		"de": "Twitter",
+		"en": "Twitter",
+		"es": "Twitter",
+		"fr": "Twitter",
+		"ja": "Twitter",
+		"ko": "Twitter",
+		"no": "Twitter",
+		"pt": "Twitter",
+		"sv": "Twitter"
+	},
 	"global.social-twitter-connect": {
 		"de": "Auf Twitter verbinden",
 		"en": "Connect on Twitter",
@@ -350,5 +306,49 @@
 		"no": "Oppnå kontakt på Twitter",
 		"pt": "Ligar ao Twitter",
 		"sv": "Kontakta via Twitter"
+	},
+	"global.social-whatsapp-connect": {
+		"de": "Auf WhatsApp verbinden",
+		"en": "Connect on WhatsApp",
+		"es": "Conectar en WhatsApp",
+		"fr": "Se connecter sur WhatsApp",
+		"ja": "WhatsAppで接続",
+		"ko": "WhatsApp에서 연결",
+		"no": "Oppnå kontakt på WhatsApp",
+		"pt": "Ligar ao WhatsApp",
+		"sv": "Kontakta via WhatsApp"
+	},
+	"global.social-youtube-connect": {
+		"de": "Auf YouTube verbinden",
+		"en": "Connect on YouTube",
+		"es": "Conectar en YouTube",
+		"fr": "Se connecter sur YouTube",
+		"ja": "YouTubeで接続",
+		"ko": "YouTube에서 연결",
+		"no": "Oppnå kontakt på YouTube",
+		"pt": "Ligar ao YouTube",
+		"sv": "Kontakta via YouTube"
+	},
+	"global.sponsored-content": {
+		"de": "Werblicher Inhalt",
+		"en": "Sponsored Content",
+		"es": "Contenido patrocinado",
+		"fr": "Contenu sponsorisé",
+		"ja": "スポンサー付きコンテンツ",
+		"ko": "Sponsored Content",
+		"no": "Sponset innhold",
+		"pt": "Conteúdo patrocinado",
+		"sv": "Sponsrat innehåll"
+	},
+	"global.video-text": {
+		"de": "Video",
+		"en": "Video",
+		"es": "Video",
+		"fr": "Vidéo",
+		"ja": "ビデオ",
+		"ko": "비디오",
+		"no": "Video",
+		"pt": "Vídeo",
+		"sv": "Video"
 	}
 }

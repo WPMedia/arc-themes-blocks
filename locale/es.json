@@ -11,6 +11,22 @@
 		"article-body-block.correction": "Corrección",
 		"article-body-block.interstitial-link-aria-label": "Abrir historia relacionada"
 	},
+	"author-bio-block": {
+		"author-bio-block.social-email": "Enviar un correo electrónico a %{authorName}",
+		"author-bio-block.social-facebook": "Conectar en Facebook",
+		"author-bio-block.social-instagram": "Seguir en Instagram",
+		"author-bio-block.social-linkedin": "Conectar en LinkedIn",
+		"author-bio-block.social-medium": "Conectar en Medium",
+		"author-bio-block.social-pinterest": "Conectar en Pinterest",
+		"author-bio-block.social-reddit": "Conectar en Reddit",
+		"author-bio-block.social-rss": "Suscribirse a la fuente RSS de %{authorName}",
+		"author-bio-block.social-snapchat": "Conectar en Snapchat",
+		"author-bio-block.social-soundcloud": "Escuchar a %{authorName} en SoundCloud",
+		"author-bio-block.social-tumblr": "Conectar en Tumblr",
+		"author-bio-block.social-twitter": "Conectar en Twitter",
+		"author-bio-block.social-whatsapp": "Conectar en WhatsApp",
+		"author-bio-block.social-youtube": "Conectar en YouTube"
+	},
 	"category-carousel-block": {
 		"category-carousel.aria-label": "Categories",
 		"category-carousel.left-arrow-label": "Previous",
@@ -73,7 +89,7 @@
 		"global.social-twitter-connect": "Conectar en Twitter",
 		"global.social-whatsapp-connect": "Conectar en WhatsApp",
 		"global.social-youtube-connect": "Conectar en YouTube",
-		"global.sponsored-connect": "Contenido patrocinado",
+		"global.sponsored-content": "Contenido patrocinado",
 		"global.video-text": "Video"
 	},
 	"header-nav-block": {

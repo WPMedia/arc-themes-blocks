@@ -1,59 +1,4 @@
 {
-	"identity-block.email": {
-		"de": "E-Mail-Adresse",
-		"en": "Email address",
-		"es": "Dirección de correo electrónico",
-		"fr": "Adresse e-mail",
-		"ja": "メールアドレス",
-		"ko": "이메일 주소",
-		"no": "Email address",
-		"pt": "Email address",
-		"sv": "Email address"
-	},
-	"identity-block.password": {
-		"de": "Passwort",
-		"en": "Password",
-		"es": "Contraseña",
-		"fr": "Mot de passe",
-		"ja": "パスワード",
-		"ko": "비밀번호",
-		"no": "Password",
-		"pt": "Password",
-		"sv": "Password"
-	},
-	"identity-block.sign-up": {
-		"de": "Sign Up",
-		"en": "Sign Up",
-		"es": "Sign Up",
-		"fr": "Sign Up",
-		"ja": "Sign Up",
-		"ko": "Sign Up",
-		"no": "Sign Up",
-		"pt": "Sign Up",
-		"sv": "Sign Up"
-	},
-	"identity-block.confirm-password": {
-		"de": "Confirm password",
-		"en": "Confirm password",
-		"es": "Confirm password",
-		"fr": "Confirm password",
-		"ja": "Confirm password",
-		"ko": "Confirm password",
-		"no": "Confirm password",
-		"pt": "Confirm password",
-		"sv": "Confirm password"
-	},
-	"identity-block.username": {
-		"de": "Benutzername",
-		"en": "Username",
-		"es": "Nombre de usuario",
-		"fr": "Nom d’utilisateur",
-		"ja": "ユーザー名",
-		"ko": "사용자 이름",
-		"no": "Username",
-		"pt": "Username",
-		"sv": "Username"
-	},
 	"identity-block.account": {
 		"de": "Account",
 		"en": "Account",
@@ -64,182 +9,6 @@
 		"no": "Account",
 		"pt": "Account",
 		"sv": "Account"
-	},
-	"identity-block.manage-account": {
-		"de": "Manage Your Account",
-		"en": "Manage Your Account",
-		"es": "Manage Your Account",
-		"fr": "Manage Your Account",
-		"ja": "Manage Your Account",
-		"ko": "Manage Your Account",
-		"no": "Manage Your Account",
-		"pt": "Manage Your Account",
-		"sv": "Manage Your Account"
-	},
-	"identity-block.log-out": {
-		"de": "Ausloggen",
-		"en": "Log Out",
-		"es": "Cerrar sesión",
-		"fr": "Déconnexion",
-		"ja": "ログアウト",
-		"ko": "로그아웃",
-		"no": "Log Out",
-		"pt": "Log Out",
-		"sv": "Log Out"
-	},
-	"identity-block.log-in": {
-		"de": "Log In",
-		"en": "Log In",
-		"es": "Log In",
-		"fr": "Log In",
-		"ja": "Log In",
-		"ko": "Log In",
-		"no": "Log In",
-		"pt": "Log In",
-		"sv": "Log In"
-	},
-	"identity-block.login-options": {
-		"de": "Log in options",
-		"en": "Log in options",
-		"es": "Log in options",
-		"fr": "Log in options",
-		"ja": "Log in options",
-		"ko": "Log in options",
-		"no": "Log in options",
-		"pt": "Log in options",
-		"sv": "Log in options"
-	},
-	"identity-block.confirm-password-error": {
-		"de": "Passwords must match",
-		"en": "Passwords must match",
-		"es": "Passwords must match",
-		"fr": "Passwords must match",
-		"ja": "Passwords must match",
-		"ko": "Passwords must match",
-		"no": "Passwords must match",
-		"pt": "Passwords must match",
-		"sv": "Passwords must match"
-	},
-	"identity-block.password-requirements": {
-		"de": "Please enter a valid password.",
-		"en": "Please enter a valid password.",
-		"es": "Please enter a valid password.",
-		"fr": "Please enter a valid password.",
-		"ja": "Please enter a valid password.",
-		"ko": "Please enter a valid password.",
-		"no": "Please enter a valid password.",
-		"pt": "Please enter a valid password.",
-		"sv": "Please enter a valid password."
-	},
-	"identity-block.password-requirements-lowercase": {
-		"de": "Must have at least %{requirementCount} letter(s).",
-		"en": "Must have at least %{requirementCount} letter(s).",
-		"es": "Must have at least %{requirementCount} letter(s).",
-		"fr": "Must have at least %{requirementCount} letter(s).",
-		"ja": "Must have at least %{requirementCount} letter(s).",
-		"ko": "Must have at least %{requirementCount} letter(s).",
-		"no": "Must have at least %{requirementCount} letter(s).",
-		"pt": "Must have at least %{requirementCount} letter(s).",
-		"sv": "Must have at least %{requirementCount} letter(s)."
-	},
-	"identity-block.password-requirements-characters": {
-		"de": "Must be at least %{requirementCount} total characters.",
-		"en": "Must be at least %{requirementCount} total characters.",
-		"es": "Must be at least %{requirementCount} total characters.",
-		"fr": "Must be at least %{requirementCount} total characters.",
-		"ja": "Must be at least %{requirementCount} total characters.",
-		"ko": "Must be at least %{requirementCount} total characters.",
-		"no": "Must be at least %{requirementCount} total characters.",
-		"pt": "Must be at least %{requirementCount} total characters.",
-		"sv": "Must be at least %{requirementCount} total characters."
-	},
-	"identity-block.password-requirements-numbers": {
-		"de": "Must have at least %{requirementCount} number(s).",
-		"en": "Must have at least %{requirementCount} number(s).",
-		"es": "Must have at least %{requirementCount} number(s).",
-		"fr": "Must have at least %{requirementCount} number(s).",
-		"ja": "Must have at least %{requirementCount} number(s).",
-		"ko": "Must have at least %{requirementCount} number(s).",
-		"no": "Must have at least %{requirementCount} number(s).",
-		"pt": "Must have at least %{requirementCount} number(s).",
-		"sv": "Must have at least %{requirementCount} number(s)."
-	},
-	"identity-block.password-requirements-special": {
-		"de": "Must have at least %{requirementCount} special character(s).",
-		"en": "Must have at least %{requirementCount} special character(s).",
-		"es": "Must have at least %{requirementCount} special character(s).",
-		"fr": "Must have at least %{requirementCount} special character(s).",
-		"ja": "Must have at least %{requirementCount} special character(s).",
-		"ko": "Must have at least %{requirementCount} special character(s).",
-		"no": "Must have at least %{requirementCount} special character(s).",
-		"pt": "Must have at least %{requirementCount} special character(s).",
-		"sv": "Must have at least %{requirementCount} special character(s)."
-	},
-	"identity-block.password-requirements-uppercase": {
-		"de": "Must have at least %{requirementCount} uppercase character(s).",
-		"en": "Must have at least %{requirementCount} uppercase character(s).",
-		"es": "Must have at least %{requirementCount} uppercase character(s).",
-		"fr": "Must have at least %{requirementCount} uppercase character(s).",
-		"ja": "Must have at least %{requirementCount} uppercase character(s).",
-		"ko": "Must have at least %{requirementCount} uppercase character(s).",
-		"no": "Must have at least %{requirementCount} uppercase character(s).",
-		"pt": "Must have at least %{requirementCount} uppercase character(s).",
-		"sv": "Must have at least %{requirementCount} uppercase character(s)."
-	},
-	"identity-block.email-requirements": {
-		"de": "Please enter a valid email address",
-		"en": "Please enter a valid email address",
-		"es": "Please enter a valid email address",
-		"fr": "Please enter a valid email address",
-		"ja": "Please enter a valid email address",
-		"ko": "Please enter a valid email address",
-		"no": "Please enter a valid email address",
-		"pt": "Please enter a valid email address",
-		"sv": "Please enter a valid email address"
-	},
-	"identity-block.sign-up-form-error": {
-		"de": "There's been an error creating your account",
-		"en": "There's been an error creating your account",
-		"es": "There's been an error creating your account",
-		"fr": "There's been an error creating your account",
-		"ja": "There's been an error creating your account",
-		"ko": "There's been an error creating your account",
-		"no": "There's been an error creating your account",
-		"pt": "There's been an error creating your account",
-		"sv": "There's been an error creating your account"
-	},
-	"identity-block.login-form-error": {
-		"de": "There's been an error logging you in",
-		"en": "There's been an error logging you in",
-		"es": "There's been an error logging you in",
-		"fr": "There's been an error logging you in",
-		"ja": "There's been an error logging you in",
-		"ko": "There's been an error logging you in",
-		"no": "There's been an error logging you in",
-		"pt": "There's been an error logging you in",
-		"sv": "There's been an error logging you in"
-	},
-	"identity-block.login-links-login": {
-		"de": "Already have an account? Log in.",
-		"en": "Already have an account? Log in.",
-		"es": "Already have an account? Log in.",
-		"fr": "Already have an account? Log in.",
-		"ja": "Already have an account? Log in.",
-		"ko": "Already have an account? Log in.",
-		"no": "Already have an account? Log in.",
-		"pt": "Already have an account? Log in.",
-		"sv": "Already have an account? Log in."
-	},
-	"identity-block.login-links-signup": {
-		"de": "Sign up for an account.",
-		"en": "Sign up for an account.",
-		"es": "Sign up for an account.",
-		"fr": "Sign up for an account.",
-		"ja": "Sign up for an account.",
-		"ko": "Sign up for an account.",
-		"no": "Sign up for an account.",
-		"pt": "Sign up for an account.",
-		"sv": "Sign up for an account."
 	},
 	"identity-block.account-information": {
 		"de": "Account Information",
@@ -252,27 +21,16 @@
 		"pt": "Account Information",
 		"sv": "Account Information"
 	},
-	"identity-block.edit": {
-		"de": "Edit",
-		"en": "Edit",
-		"es": "Edit",
-		"fr": "Edit",
-		"ja": "Edit",
-		"ko": "Edit",
-		"no": "Edit",
-		"pt": "Edit",
-		"sv": "Edit"
-	},
-	"identity-block.save": {
-		"de": "Save",
-		"en": "Save",
-		"es": "Save",
-		"fr": "Save",
-		"ja": "Save",
-		"ko": "Save",
-		"no": "Save",
-		"pt": "Save",
-		"sv": "Save"
+	"identity-block.add-password": {
+		"de": "Add Password",
+		"en": "Add Password",
+		"es": "Add Password",
+		"fr": "Add Password",
+		"ja": "Add Password",
+		"ko": "Add Password",
+		"no": "Add Password",
+		"pt": "Add Password",
+		"sv": "Add Password"
 	},
 	"identity-block.cancel": {
 		"de": "Cancel",
@@ -285,82 +43,27 @@
 		"pt": "Cancel",
 		"sv": "Cancel"
 	},
-	"identity-block.update-email-error": {
-		"de": "There's been an error updating your email address",
-		"en": "There's been an error updating your email address",
-		"es": "There's been an error updating your email address",
-		"fr": "There's been an error updating your email address",
-		"ja": "There's been an error updating your email address",
-		"ko": "There's been an error updating your email address",
-		"no": "There's been an error updating your email address",
-		"pt": "There's been an error updating your email address",
-		"sv": "There's been an error updating your email address"
+	"identity-block.confirm-password": {
+		"de": "Confirm password",
+		"en": "Confirm password",
+		"es": "Confirm password",
+		"fr": "Confirm password",
+		"ja": "Confirm password",
+		"ko": "Confirm password",
+		"no": "Confirm password",
+		"pt": "Confirm password",
+		"sv": "Confirm password"
 	},
-	"identity-block.password-placeholder": {
-		"de": "**********",
-		"en": "**********",
-		"es": "**********",
-		"fr": "**********",
-		"ja": "**********",
-		"ko": "**********",
-		"no": "**********",
-		"pt": "**********",
-		"sv": "**********"
-	},
-	"identity-block.add-password": {
-		"de": "Add Password",
-		"en": "Add Password",
-		"es": "Add Password",
-		"fr": "Add Password",
-		"ja": "Add Password",
-		"ko": "Add Password",
-		"no": "Add Password",
-		"pt": "Add Password",
-		"sv": "Add Password"
-	},
-	"identity-block.new-password": {
-		"de": "New Password",
-		"en": "New Password",
-		"es": "New Password",
-		"fr": "New Password",
-		"ja": "New Password",
-		"ko": "New Password",
-		"no": "New Password",
-		"pt": "New Password",
-		"sv": "New Password"
-	},
-	"identity-block.current-password": {
-		"de": "Current Password",
-		"en": "Current Password",
-		"es": "Current Password",
-		"fr": "Current Password",
-		"ja": "Current Password",
-		"ko": "Current Password",
-		"no": "Current Password",
-		"pt": "Current Password",
-		"sv": "Current Password"
-	},
-	"identity-block.update-password-error": {
-		"de": "There's been an error updating your password",
-		"en": "There's been an error updating your password",
-		"es": "There's been an error updating your password",
-		"fr": "There's been an error updating your password",
-		"ja": "There's been an error updating your password",
-		"ko": "There's been an error updating your password",
-		"no": "There's been an error updating your password",
-		"pt": "There's been an error updating your password",
-		"sv": "There's been an error updating your password"
-	},
-	"identity-block.connected-accounts": {
-		"de": "Connected Accounts",
-		"en": "Connected Accounts",
-		"es": "Connected Accounts",
-		"fr": "Connected Accounts",
-		"ja": "Connected Accounts",
-		"ko": "Connected Accounts",
-		"no": "Connected Accounts",
-		"pt": "Connected Accounts",
-		"sv": "Connected Accounts"
+	"identity-block.confirm-password-error": {
+		"de": "Passwords must match",
+		"en": "Passwords must match",
+		"es": "Passwords must match",
+		"fr": "Passwords must match",
+		"ja": "Passwords must match",
+		"ko": "Passwords must match",
+		"no": "Passwords must match",
+		"pt": "Passwords must match",
+		"sv": "Passwords must match"
 	},
 	"identity-block.connect-account": {
 		"de": "Connected",
@@ -373,17 +76,6 @@
 		"pt": "Connected",
 		"sv": "Connected"
 	},
-	"identity-block.disconnect-account": {
-		"de": "Disconnect",
-		"en": "Disconnect",
-		"es": "Disconnect",
-		"fr": "Disconnect",
-		"ja": "Disconnect",
-		"ko": "Disconnect",
-		"no": "Disconnect",
-		"pt": "Disconnect",
-		"sv": "Disconnect"
-	},
 	"identity-block.connect-platform": {
 		"de": "Connect %{platform}",
 		"en": "Connect %{platform}",
@@ -395,16 +87,82 @@
 		"pt": "Connect %{platform}",
 		"sv": "Connect %{platform}"
 	},
-	"identity-block.login-links-forgot": {
-		"de": "Forgot Password?",
-		"en": "Forgot Password?",
-		"es": "Forgot Password?",
-		"fr": "Forgot Password?",
-		"ja": "Forgot Password?",
-		"ko": "Forgot Password?",
-		"no": "Forgot Password?",
-		"pt": "Forgot Password?",
-		"sv": "Forgot Password?"
+	"identity-block.connected-accounts": {
+		"de": "Connected Accounts",
+		"en": "Connected Accounts",
+		"es": "Connected Accounts",
+		"fr": "Connected Accounts",
+		"ja": "Connected Accounts",
+		"ko": "Connected Accounts",
+		"no": "Connected Accounts",
+		"pt": "Connected Accounts",
+		"sv": "Connected Accounts"
+	},
+	"identity-block.current-password": {
+		"de": "Current Password",
+		"en": "Current Password",
+		"es": "Current Password",
+		"fr": "Current Password",
+		"ja": "Current Password",
+		"ko": "Current Password",
+		"no": "Current Password",
+		"pt": "Current Password",
+		"sv": "Current Password"
+	},
+	"identity-block.disconnect-account": {
+		"de": "Disconnect",
+		"en": "Disconnect",
+		"es": "Disconnect",
+		"fr": "Disconnect",
+		"ja": "Disconnect",
+		"ko": "Disconnect",
+		"no": "Disconnect",
+		"pt": "Disconnect",
+		"sv": "Disconnect"
+	},
+	"identity-block.edit": {
+		"de": "Edit",
+		"en": "Edit",
+		"es": "Edit",
+		"fr": "Edit",
+		"ja": "Edit",
+		"ko": "Edit",
+		"no": "Edit",
+		"pt": "Edit",
+		"sv": "Edit"
+	},
+	"identity-block.email": {
+		"de": "E-Mail-Adresse",
+		"en": "Email address",
+		"es": "Dirección de correo electrónico",
+		"fr": "Adresse e-mail",
+		"ja": "メールアドレス",
+		"ko": "이메일 주소",
+		"no": "Email address",
+		"pt": "Email address",
+		"sv": "Email address"
+	},
+	"identity-block.email-requirements": {
+		"de": "Please enter a valid email address",
+		"en": "Please enter a valid email address",
+		"es": "Please enter a valid email address",
+		"fr": "Please enter a valid email address",
+		"ja": "Please enter a valid email address",
+		"ko": "Please enter a valid email address",
+		"no": "Please enter a valid email address",
+		"pt": "Please enter a valid email address",
+		"sv": "Please enter a valid email address"
+	},
+	"identity-block.forgot-password-error": {
+		"de": "There was an error processing your request.",
+		"en": "There was an error processing your request.",
+		"es": "There was an error processing your request.",
+		"fr": "There was an error processing your request.",
+		"ja": "There was an error processing your request.",
+		"ko": "There was an error processing your request.",
+		"no": "There was an error processing your request.",
+		"pt": "There was an error processing your request.",
+		"sv": "There was an error processing your request."
 	},
 	"identity-block.forgot-password-headline": {
 		"de": "Forgot Password",
@@ -461,7 +219,194 @@
 		"pt": "Send",
 		"sv": "Send"
 	},
-	"identity-block.forgot-password-error": {
+	"identity-block.log-in": {
+		"de": "Log In",
+		"en": "Log In",
+		"es": "Log In",
+		"fr": "Log In",
+		"ja": "Log In",
+		"ko": "Log In",
+		"no": "Log In",
+		"pt": "Log In",
+		"sv": "Log In"
+	},
+	"identity-block.log-out": {
+		"de": "Ausloggen",
+		"en": "Log Out",
+		"es": "Cerrar sesión",
+		"fr": "Déconnexion",
+		"ja": "ログアウト",
+		"ko": "로그아웃",
+		"no": "Log Out",
+		"pt": "Log Out",
+		"sv": "Log Out"
+	},
+	"identity-block.login-form-error": {
+		"de": "There's been an error logging you in",
+		"en": "There's been an error logging you in",
+		"es": "There's been an error logging you in",
+		"fr": "There's been an error logging you in",
+		"ja": "There's been an error logging you in",
+		"ko": "There's been an error logging you in",
+		"no": "There's been an error logging you in",
+		"pt": "There's been an error logging you in",
+		"sv": "There's been an error logging you in"
+	},
+	"identity-block.login-links-forgot": {
+		"de": "Forgot Password?",
+		"en": "Forgot Password?",
+		"es": "Forgot Password?",
+		"fr": "Forgot Password?",
+		"ja": "Forgot Password?",
+		"ko": "Forgot Password?",
+		"no": "Forgot Password?",
+		"pt": "Forgot Password?",
+		"sv": "Forgot Password?"
+	},
+	"identity-block.login-links-login": {
+		"de": "Already have an account? Log in.",
+		"en": "Already have an account? Log in.",
+		"es": "Already have an account? Log in.",
+		"fr": "Already have an account? Log in.",
+		"ja": "Already have an account? Log in.",
+		"ko": "Already have an account? Log in.",
+		"no": "Already have an account? Log in.",
+		"pt": "Already have an account? Log in.",
+		"sv": "Already have an account? Log in."
+	},
+	"identity-block.login-links-signup": {
+		"de": "Sign up for an account.",
+		"en": "Sign up for an account.",
+		"es": "Sign up for an account.",
+		"fr": "Sign up for an account.",
+		"ja": "Sign up for an account.",
+		"ko": "Sign up for an account.",
+		"no": "Sign up for an account.",
+		"pt": "Sign up for an account.",
+		"sv": "Sign up for an account."
+	},
+	"identity-block.login-options": {
+		"de": "Log in options",
+		"en": "Log in options",
+		"es": "Log in options",
+		"fr": "Log in options",
+		"ja": "Log in options",
+		"ko": "Log in options",
+		"no": "Log in options",
+		"pt": "Log in options",
+		"sv": "Log in options"
+	},
+	"identity-block.manage-account": {
+		"de": "Manage Your Account",
+		"en": "Manage Your Account",
+		"es": "Manage Your Account",
+		"fr": "Manage Your Account",
+		"ja": "Manage Your Account",
+		"ko": "Manage Your Account",
+		"no": "Manage Your Account",
+		"pt": "Manage Your Account",
+		"sv": "Manage Your Account"
+	},
+	"identity-block.new-password": {
+		"de": "New Password",
+		"en": "New Password",
+		"es": "New Password",
+		"fr": "New Password",
+		"ja": "New Password",
+		"ko": "New Password",
+		"no": "New Password",
+		"pt": "New Password",
+		"sv": "New Password"
+	},
+	"identity-block.password": {
+		"de": "Passwort",
+		"en": "Password",
+		"es": "Contraseña",
+		"fr": "Mot de passe",
+		"ja": "パスワード",
+		"ko": "비밀번호",
+		"no": "Password",
+		"pt": "Password",
+		"sv": "Password"
+	},
+	"identity-block.password-placeholder": {
+		"de": "**********",
+		"en": "**********",
+		"es": "**********",
+		"fr": "**********",
+		"ja": "**********",
+		"ko": "**********",
+		"no": "**********",
+		"pt": "**********",
+		"sv": "**********"
+	},
+	"identity-block.password-requirements": {
+		"de": "Please enter a valid password.",
+		"en": "Please enter a valid password.",
+		"es": "Please enter a valid password.",
+		"fr": "Please enter a valid password.",
+		"ja": "Please enter a valid password.",
+		"ko": "Please enter a valid password.",
+		"no": "Please enter a valid password.",
+		"pt": "Please enter a valid password.",
+		"sv": "Please enter a valid password."
+	},
+	"identity-block.password-requirements-characters": {
+		"de": "Must be at least %{requirementCount} total characters.",
+		"en": "Must be at least %{requirementCount} total characters.",
+		"es": "Must be at least %{requirementCount} total characters.",
+		"fr": "Must be at least %{requirementCount} total characters.",
+		"ja": "Must be at least %{requirementCount} total characters.",
+		"ko": "Must be at least %{requirementCount} total characters.",
+		"no": "Must be at least %{requirementCount} total characters.",
+		"pt": "Must be at least %{requirementCount} total characters.",
+		"sv": "Must be at least %{requirementCount} total characters."
+	},
+	"identity-block.password-requirements-lowercase": {
+		"de": "Must have at least %{requirementCount} letter(s).",
+		"en": "Must have at least %{requirementCount} letter(s).",
+		"es": "Must have at least %{requirementCount} letter(s).",
+		"fr": "Must have at least %{requirementCount} letter(s).",
+		"ja": "Must have at least %{requirementCount} letter(s).",
+		"ko": "Must have at least %{requirementCount} letter(s).",
+		"no": "Must have at least %{requirementCount} letter(s).",
+		"pt": "Must have at least %{requirementCount} letter(s).",
+		"sv": "Must have at least %{requirementCount} letter(s)."
+	},
+	"identity-block.password-requirements-numbers": {
+		"de": "Must have at least %{requirementCount} number(s).",
+		"en": "Must have at least %{requirementCount} number(s).",
+		"es": "Must have at least %{requirementCount} number(s).",
+		"fr": "Must have at least %{requirementCount} number(s).",
+		"ja": "Must have at least %{requirementCount} number(s).",
+		"ko": "Must have at least %{requirementCount} number(s).",
+		"no": "Must have at least %{requirementCount} number(s).",
+		"pt": "Must have at least %{requirementCount} number(s).",
+		"sv": "Must have at least %{requirementCount} number(s)."
+	},
+	"identity-block.password-requirements-special": {
+		"de": "Must have at least %{requirementCount} special character(s).",
+		"en": "Must have at least %{requirementCount} special character(s).",
+		"es": "Must have at least %{requirementCount} special character(s).",
+		"fr": "Must have at least %{requirementCount} special character(s).",
+		"ja": "Must have at least %{requirementCount} special character(s).",
+		"ko": "Must have at least %{requirementCount} special character(s).",
+		"no": "Must have at least %{requirementCount} special character(s).",
+		"pt": "Must have at least %{requirementCount} special character(s).",
+		"sv": "Must have at least %{requirementCount} special character(s)."
+	},
+	"identity-block.password-requirements-uppercase": {
+		"de": "Must have at least %{requirementCount} uppercase character(s).",
+		"en": "Must have at least %{requirementCount} uppercase character(s).",
+		"es": "Must have at least %{requirementCount} uppercase character(s).",
+		"fr": "Must have at least %{requirementCount} uppercase character(s).",
+		"ja": "Must have at least %{requirementCount} uppercase character(s).",
+		"ko": "Must have at least %{requirementCount} uppercase character(s).",
+		"no": "Must have at least %{requirementCount} uppercase character(s).",
+		"pt": "Must have at least %{requirementCount} uppercase character(s).",
+		"sv": "Must have at least %{requirementCount} uppercase character(s)."
+	},
+	"identity-block.reset-password-error": {
 		"de": "There was an error processing your request.",
 		"en": "There was an error processing your request.",
 		"es": "There was an error processing your request.",
@@ -538,15 +483,70 @@
 		"pt": "Continue to log in",
 		"sv": "Continue to log in"
 	},
-	"identity-block.reset-password-error": {
-		"de": "There was an error processing your request.",
-		"en": "There was an error processing your request.",
-		"es": "There was an error processing your request.",
-		"fr": "There was an error processing your request.",
-		"ja": "There was an error processing your request.",
-		"ko": "There was an error processing your request.",
-		"no": "There was an error processing your request.",
-		"pt": "There was an error processing your request.",
-		"sv": "There was an error processing your request."
+	"identity-block.save": {
+		"de": "Save",
+		"en": "Save",
+		"es": "Save",
+		"fr": "Save",
+		"ja": "Save",
+		"ko": "Save",
+		"no": "Save",
+		"pt": "Save",
+		"sv": "Save"
+	},
+	"identity-block.sign-up": {
+		"de": "Sign Up",
+		"en": "Sign Up",
+		"es": "Sign Up",
+		"fr": "Sign Up",
+		"ja": "Sign Up",
+		"ko": "Sign Up",
+		"no": "Sign Up",
+		"pt": "Sign Up",
+		"sv": "Sign Up"
+	},
+	"identity-block.sign-up-form-error": {
+		"de": "There's been an error creating your account",
+		"en": "There's been an error creating your account",
+		"es": "There's been an error creating your account",
+		"fr": "There's been an error creating your account",
+		"ja": "There's been an error creating your account",
+		"ko": "There's been an error creating your account",
+		"no": "There's been an error creating your account",
+		"pt": "There's been an error creating your account",
+		"sv": "There's been an error creating your account"
+	},
+	"identity-block.update-email-error": {
+		"de": "There's been an error updating your email address",
+		"en": "There's been an error updating your email address",
+		"es": "There's been an error updating your email address",
+		"fr": "There's been an error updating your email address",
+		"ja": "There's been an error updating your email address",
+		"ko": "There's been an error updating your email address",
+		"no": "There's been an error updating your email address",
+		"pt": "There's been an error updating your email address",
+		"sv": "There's been an error updating your email address"
+	},
+	"identity-block.update-password-error": {
+		"de": "There's been an error updating your password",
+		"en": "There's been an error updating your password",
+		"es": "There's been an error updating your password",
+		"fr": "There's been an error updating your password",
+		"ja": "There's been an error updating your password",
+		"ko": "There's been an error updating your password",
+		"no": "There's been an error updating your password",
+		"pt": "There's been an error updating your password",
+		"sv": "There's been an error updating your password"
+	},
+	"identity-block.username": {
+		"de": "Benutzername",
+		"en": "Username",
+		"es": "Nombre de usuario",
+		"fr": "Nom d’utilisateur",
+		"ja": "ユーザー名",
+		"ko": "사용자 이름",
+		"no": "Username",
+		"pt": "Username",
+		"sv": "Username"
 	}
 }

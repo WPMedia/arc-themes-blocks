@@ -10,6 +10,28 @@
 		"pt": "Products",
 		"sv": "Products"
 	},
+	"product-gallery.left-arrow-label": {
+		"de": "Previous",
+		"en": "Previous",
+		"es": "Previous",
+		"fr": "Previous",
+		"ja": "Previous",
+		"ko": "Previous",
+		"no": "Previous",
+		"pt": "Previous",
+		"sv": "Previous"
+	},
+	"product-gallery.right-arrow-label": {
+		"de": "Next",
+		"en": "Next",
+		"es": "Next",
+		"fr": "Next",
+		"ja": "Next",
+		"ko": "Next",
+		"no": "Next",
+		"pt": "Next",
+		"sv": "Next"
+	},
 	"product-gallery.slide-indicator": {
 		"de": "Slide %{current} of %{maximum}",
 		"en": "Slide %{current} of %{maximum}",

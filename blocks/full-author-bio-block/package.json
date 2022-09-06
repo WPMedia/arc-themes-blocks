@@ -7,7 +7,7 @@
 	"license": "CC-BY-NC-ND-4.0",
 	"main": "",
 	"files": [
-		"__index.scss",
+		"_index.scss",
 		"features",
 		"intl.json"
 	],

@@ -831,8 +831,8 @@
 					gap: var(--global-spacing-4),
 					components: (
 						image: (
-							max-width: 5.188rem,
-							max-height: 5.125rem,
+							max-width: var(--global-spacing-13),
+							max-height: var(--global-spacing-13),
 							border-radius: var(--border-radius-circle),
 							height: 100%,
 							width: 100%,

@@ -1,0 +1,21 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-medium-promo {
+	&--show-image {
+		@include scss.block-properties("medium-promo-show-image");
+		@include scss.block-components("medium-promo-show-image");
+	}
+
+	&__icon_label {
+		@include scss.block-components("medium-promo-icon-label");
+		@include scss.block-properties("medium-promo-icon-label");
+	}
+
+	&__label {
+		@include scss.block-components("medium-promo-label");
+		@include scss.block-properties("medium-promo-label");
+	}
+
+	@include scss.block-properties("medium-promo");
+	@include scss.block-components("medium-promo");
+}

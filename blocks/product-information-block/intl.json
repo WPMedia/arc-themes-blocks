@@ -1,15 +1,4 @@
 {
-	"product-information.sale-price": {
-		"de": "Sale Price %{price}",
-		"en": "Sale Price %{price}",
-		"es": "Sale Price %{price}",
-		"fr": "Sale Price %{price}",
-		"ja": "Sale Price %{price}",
-		"ko": "Sale Price %{price}",
-		"no": "Sale Price %{price}",
-		"pt": "Sale Price %{price}",
-		"sv": "Sale Price %{price}"
-	},
 	"product-information.list-price": {
 		"de": "List Price %{price}",
 		"en": "List Price %{price}",
@@ -20,5 +9,16 @@
 		"no": "List Price %{price}",
 		"pt": "List Price %{price}",
 		"sv": "List Price %{price}"
+	},
+	"product-information.sale-price": {
+		"de": "Sale Price %{price}",
+		"en": "Sale Price %{price}",
+		"es": "Sale Price %{price}",
+		"fr": "Sale Price %{price}",
+		"ja": "Sale Price %{price}",
+		"ko": "Sale Price %{price}",
+		"no": "Sale Price %{price}",
+		"pt": "Sale Price %{price}",
+		"sv": "Sale Price %{price}"
 	}
 }

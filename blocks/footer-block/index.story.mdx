@@ -1,7 +1,13 @@
 import Footer from "./features/footer/default";
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
 
-<Meta title="Blocks/Footer" component={Footer} />
+<Meta
+	title="Blocks/Footer"
+	component={Footer}
+	parameters={{
+		chromatic: { viewports: [320, 1200] },
+	}}
+/>
 
 # Footer
 

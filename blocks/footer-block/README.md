@@ -1,18 +1,18 @@
-# `@wpmedia/header-nav-block`
+# `@wpmedia/footer-block`
 
-_Footer block for the Fusion News Theme. This will pull the data from the footer hierarchy from the organization's site service._
+Footer block for the Fusion News Theme. This will pull the data from the footer hierarchy from the organization's site service.
 
 ## Acceptance Criteria
 
-- Add AC relevant to the block
+- Lazy loads if specified in the block configuration
+- Displays the footer hierarchy content
 
 ## Props
 
-| **Prop**                  | **Required** | **Type** | **Description**                                     |
-| ------------------------- | ------------ | -------- | --------------------------------------------------- |
-| **required prop**         | yes          |          |                                                     |
-| **optional prop**         | no           |          |                                                     |
-| **contentConfig example** |              |          | Please specify which content sources are compatible |
+| **Prop**                            | **Required** | **Type** | **Description**                                                                                                        |
+| ----------------------------------- | ------------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
+| lazyLoad                            | yes          | boolean  | Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user. |
+| navigation-hierarchy content source |              |          |                                                                                                                        |
 
 ## ANS Schema
 
@@ -30,24 +30,12 @@ Available through `useContent`
 
 ## Internationalization fields
 
-- Add all internationalization fields used in the block
+| Phrase key                   | Default (English) |
+| ---------------------------- | ----------------- |
+| `footer-block.facebook-link` | `Facebook page`   |
+| `footer-block.rss-link`      | `Twitter feed`    |
+| `footer-block.twitter-link`  | `RSS feed`        |
 
 ## Events
 
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
-
-### Event Listening
-
-Include block specific instructions for event listening.
-
-OR
-
-This block does not emit any events.
-
-## Additional Considerations
-
-_This is optional. Please add an additional context that would be important to know in order to use this block._
+This block does not emit events nor does it listen for events.

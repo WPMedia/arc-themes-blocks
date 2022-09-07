@@ -10,17 +10,6 @@
 		"pt": "Página do Facebook",
 		"sv": "Facebook-sida"
 	},
-	"footer-block.twitter-link": {
-		"de": "Twitter Feed",
-		"en": "Twitter feed",
-		"es": "Fuente Twitter",
-		"fr": "Flux Twitter",
-		"ja": "Twitter フィード",
-		"ko": "Twitter 피드",
-		"no": "Twitter-feed",
-		"pt": "Feed do Twitter",
-		"sv": "Twitter-flöde"
-	},
 	"footer-block.rss-link": {
 		"de": "RSS Feed",
 		"en": "RSS feed",
@@ -31,5 +20,16 @@
 		"no": "RSS-feed",
 		"pt": "Feed RSS",
 		"sv": "RSS-kanal"
+	},
+	"footer-block.twitter-link": {
+		"de": "Twitter Feed",
+		"en": "Twitter feed",
+		"es": "Fuente Twitter",
+		"fr": "Flux Twitter",
+		"ja": "Twitter フィード",
+		"ko": "Twitter 피드",
+		"no": "Twitter-feed",
+		"pt": "Feed do Twitter",
+		"sv": "Twitter-flöde"
 	}
 }

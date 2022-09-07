@@ -164,6 +164,7 @@
 		"font-family-secondary": "Georgia",
 		// Colors
 		"color-primary": var(--global-black),
+		"color-primary-hover": var(--global-neutral-7),
 		"text-color": var(--global-neutral-8),
 		"text-color-subtle": var(--global-neutral-5),
 		"background-color": var(--global-white),
@@ -1048,6 +1049,77 @@
 						),
 					),
 				),
+				full-author-bio: (
+					display: flex,
+					flex-direction: column,
+					gap: var(--global-spacing-4),
+					margin: auto,
+					components: (
+						heading: (
+							color: var(--color-primary),
+							font-family: var(--font-family-primary),
+						),
+						image: (
+							aspect-ratio: 1,
+							border-radius: var(--border-radius-circle),
+							margin: auto,
+							max-height: 9.375rem,
+							max-width: 9.375rem,
+						),
+						paragraph: (
+							color: var(--text-color),
+							font-family: var(--font-family-primary),
+						),
+					),
+				),
+				full-author-bio-identification: (
+					gap: 0,
+				),
+				full-author-bio-name: (
+					font-size: var(--heading-level-3-font-size),
+					font-weight: var(--heading-level-3-font-weight),
+					line-height: var(--heading-level-3-line-height),
+				),
+				full-author-bio-role: (
+					font-size: var(--heading-level-6-font-size),
+					font-weight: var(--heading-level-6-font-weight),
+					line-height: var(--heading-level-6-line-height),
+				),
+				full-author-bio-social: (
+					gap: var(--global-spacing-2),
+				),
+				full-author-bio-social-header: (
+					text-align: center,
+					font-size: var(--heading-level-6-font-size),
+					font-weight: var(--heading-level-6-font-weight),
+					line-height: var(--heading-level-6-line-height),
+				),
+				full-author-bio-social-icons: (
+					display: flex,
+					flex-wrap: wrap,
+					justify-content: center,
+					gap: var(--global-spacing-4),
+				),
+				full-author-bio-social-link: (
+					components: (
+						icon: (
+							fill: var(--color-primary),
+						),
+						link: (
+							padding: var(--global-spacing-2),
+						),
+					),
+				),
+				full-author-bio-social-link-hover: (
+					components: (
+						icon: (
+							fill: var(--color-primary-hover),
+						),
+					),
+				),
+				full-author-bio-text: (
+					gap: var(--global-spacing-4),
+				),
 				gallery: (
 					components: (
 						icon: (
@@ -1572,6 +1644,63 @@
 					margin: 0,
 					padding: 0,
 				),
+				medium-promo: (
+					components: (
+						attribution: (
+							display: block,
+							margin-top: var(--global-spacing-4),
+						),
+						media-item: (
+							float: right,
+							max-width: 100px,
+						),
+						heading: (
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
+							margin-bottom: var(--global-spacing-4),
+						),
+						paragraph: (
+							display: block,
+						),
+						separator: (
+							padding: 0 var(--global-spacing-2),
+						),
+						link: (
+							position: relative,
+						),
+					),
+				),
+				medium-promo-show-image: (
+					components: (
+						heading: (
+							// hard-coded based on previous implementation and product requirements for such
+							width: 68%,
+						),
+					),
+				),
+				medium-promo-icon-label: (
+					align-items: center,
+					padding: var(--global-spacing-2),
+					background-color: var(--color-primary),
+					border: 0,
+					border-radius: var(--global-spacing-2),
+					bottom: var(--global-spacing-2),
+					margin-left: var(--global-spacing-2),
+					position: absolute,
+					z-index: 1,
+					components: (
+						icon: (
+							fill: var(--global-white),
+							height: var(--global-spacing-4),
+							width: var(--global-spacing-4),
+						),
+					),
+				),
+				medium-promo-label: (
+					margin-left: var(--global-spacing-2),
+					color: var(--global-white),
+				),
 				medium-manual-promo: (
 					components: (
 						attribution: (
@@ -2085,6 +2214,25 @@
 						),
 					),
 				),
+				full-author-bio: (
+					flex-direction: row,
+					gap: var(--global-spacing-5),
+					margin: 0,
+					max-width: auto,
+					components: (
+						image: (
+							margin: 0,
+							max-height: 11.25rem,
+							max-width: 11.25rem,
+						),
+					),
+				),
+				full-author-bio-social-header: (
+					text-align: left,
+				),
+				full-author-bio-social-icons: (
+					justify-content: flex-start,
+				),
 				gallery: (
 					components: (
 						carousel-additional-controls: (
@@ -2147,6 +2295,35 @@
 				masthead: (
 					display: flex,
 				),
+				medium-promo: (
+					components: (
+						attribution: (
+							display: block,
+						),
+						media-item: (
+							float: left,
+							margin: 0,
+							max-width: 33%,
+						),
+						paragraph: (
+							display: block,
+						),
+					),
+				),
+				medium-promo-show-image: (
+					components: (
+						attribution: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+						),
+						heading: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+							width: auto,
+						),
+						paragraph: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+						),
+					),
+				),
 				medium-manual-promo: (
 					components: (
 						media-item: (
@@ -2161,12 +2338,12 @@
 				),
 				medium-manual-promo-show-image: (
 					components: (
+						paragraph: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+						),
 						heading: (
 							margin-left: calc(33% + var(--global-spacing-6)),
 							width: auto,
-						),
-						paragraph: (
-							margin-left: calc(33% + var(--global-spacing-6)),
 						),
 					),
 				),
@@ -2300,6 +2477,7 @@
 @use "../../blocks/footer-block";
 @use "../../blocks/extra-large-manual-promo-block";
 @use "../../blocks/extra-large-promo-block";
+@use "../../blocks/full-author-bio-block";
 @use "../../blocks/gallery-block";
 @use "../../blocks/header-block";
 @use "../../blocks/header-nav-chain-block";
@@ -2309,6 +2487,7 @@
 @use "../../blocks/large-promo-block";
 @use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
+@use "../../blocks/medium-promo-block";
 @use "../../blocks/medium-manual-promo-block";
 @use "../../blocks/numbered-list-block";
 @use "../../blocks/overline-block";

@@ -10,17 +10,6 @@
 		"pt": "Products",
 		"sv": "Products"
 	},
-	"product-assortment-carousel.right-arrow-label": {
-		"de": "Next",
-		"en": "Next",
-		"es": "Next",
-		"fr": "Next",
-		"ja": "Next",
-		"ko": "Next",
-		"no": "Next",
-		"pt": "Next",
-		"sv": "Next"
-	},
 	"product-assortment-carousel.left-arrow-label": {
 		"de": "Previous",
 		"en": "Previous",
@@ -31,6 +20,17 @@
 		"no": "Previous",
 		"pt": "Previous",
 		"sv": "Previous"
+	},
+	"product-assortment-carousel.right-arrow-label": {
+		"de": "Next",
+		"en": "Next",
+		"es": "Next",
+		"fr": "Next",
+		"ja": "Next",
+		"ko": "Next",
+		"no": "Next",
+		"pt": "Next",
+		"sv": "Next"
 	},
 	"product-assortment-carousel.slide-indicator": {
 		"de": "Slide %{current} of %{maximum}",

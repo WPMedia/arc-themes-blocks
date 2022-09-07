@@ -10,17 +10,6 @@
 		"pt": "Stories",
 		"sv": "Stories"
 	},
-	"story-carousel.right-arrow-label": {
-		"de": "Next",
-		"en": "Next",
-		"es": "Next",
-		"fr": "Next",
-		"ja": "Next",
-		"ko": "Next",
-		"no": "Next",
-		"pt": "Next",
-		"sv": "Next"
-	},
 	"story-carousel.left-arrow-label": {
 		"de": "Previous",
 		"en": "Previous",
@@ -31,6 +20,17 @@
 		"no": "Previous",
 		"pt": "Previous",
 		"sv": "Previous"
+	},
+	"story-carousel.right-arrow-label": {
+		"de": "Next",
+		"en": "Next",
+		"es": "Next",
+		"fr": "Next",
+		"ja": "Next",
+		"ko": "Next",
+		"no": "Next",
+		"pt": "Next",
+		"sv": "Next"
 	},
 	"story-carousel.slide-indicator": {
 		"de": "Slide %{current} of %{maximum}",

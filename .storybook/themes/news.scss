@@ -507,6 +507,7 @@
 					border-radius: var(--border-radius),
 					components: (
 						stack: (
+							gap: var(--global-spacing-4),
 							padding-bottom: var(--global-spacing-5),
 						),
 						paragraph: (
@@ -968,6 +969,86 @@
 				double-chain-child-item-empty: (
 					display: contents,
 				),
+				footer: (
+					width: var(--content-scale-width),
+					gap: var(--global-spacing-6),
+					margin: 0 auto,
+					max-width: calc(var(--content-max-width) * 1px),
+					components: (
+						image: (
+							margin: auto,
+							max-height: var(--global-spacing-7),
+						),
+					),
+				),
+				footer-links: (
+					gap: var(--global-spacing-6),
+					grid-auto-flow: row,
+					grid-template-columns: 1fr,
+					grid-template-rows: 1fr,
+				),
+				footer-links-group: (
+					components: (
+						heading: (
+							color: var(--text-color),
+							font-family: var(--font-family-primary),
+							font-size: var(--body-font-size-small),
+							line-height: var(--body-line-height-small),
+						),
+						link: (
+							color: var(--text-color-subtle),
+							font-family: var(--font-family-primary),
+							font-size: var(--body-font-size-small),
+							font-weight: var(--global-font-weight-5),
+							line-height: var(--body-line-height-small),
+						),
+					),
+				),
+				footer-links-group-list-item: (
+					list-style: none,
+				),
+				footer-top-container: (
+					border-top: 1px solid var(--global-neutral-4),
+					border-bottom: none,
+					display: grid,
+					grid-template-columns: 100%,
+					grid-template-rows: auto auto,
+					grid-auto-flow: column,
+					gap: var(--global-spacing-6),
+					justify-content: center,
+					width: 100%,
+					components: (
+						paragraph: (
+							justify-self: center,
+						),
+					),
+				),
+				footer-social-links: (
+					border: 1px solid var(--color-primary),
+					border-radius: var(--border-radius),
+					margin: var(--global-spacing-2) auto,
+					width: fit-content,
+					components: (
+						icon: (
+							fill: var(--color-primary),
+						),
+						link: (
+							border-right: 1px solid var(--color-primary),
+							padding: var(--global-spacing-2),
+						),
+					),
+				),
+				footer-social-links-container: (
+					border-bottom: 1px solid var(--global-neutral-4),
+					width: 100%,
+				),
+				footer-social-links-last: (
+					components: (
+						link: (
+							border-right: none,
+						),
+					),
+				),
 				full-author-bio: (
 					display: flex,
 					flex-direction: column,
@@ -1023,6 +1104,9 @@
 					components: (
 						icon: (
 							fill: var(--color-primary),
+						),
+						link: (
+							padding: var(--global-spacing-2),
 						),
 					),
 				),
@@ -2102,6 +2186,34 @@
 				double-chain-child-item-empty: (
 					display: initial,
 				),
+				footer: (
+					components: (
+						image: (
+							max-height: var(--global-spacing-10),
+						),
+					),
+				),
+				footer-links: (
+					grid-auto-flow: column,
+					grid-template-columns: 1fr 1fr 1fr 1fr,
+				),
+				footer-social-links-container: (
+					border-bottom: none,
+					width: max-content,
+				),
+				footer-top-container: (
+					border-bottom: 1px solid var(--global-neutral-4),
+					grid-auto-flow: column,
+					grid-template-columns: 1fr auto 1fr,
+					grid-template-rows: auto,
+					components: (
+						paragraph: (
+							display: block,
+							align-self: center,
+							text-align: center,
+						),
+					),
+				),
 				full-author-bio: (
 					flex-direction: row,
 					gap: var(--global-spacing-5),
@@ -2362,6 +2474,7 @@
 @use "../../blocks/card-list-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/double-chain-block";
+@use "../../blocks/footer-block";
 @use "../../blocks/extra-large-manual-promo-block";
 @use "../../blocks/extra-large-promo-block";
 @use "../../blocks/full-author-bio-block";

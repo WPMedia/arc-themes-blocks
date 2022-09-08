@@ -4,13 +4,6 @@ import getProperties from "fusion:properties";
 import { useContent } from "fusion:content";
 import Footer from "./default";
 
-jest.mock("fusion:intl", () => ({
-	__esModule: true,
-	default: jest.fn((locale) => ({
-		t: jest.fn((phrase) => require("../../intl.json")[phrase][locale]),
-	})),
-}));
-
 // A payload with 4 columns and 11 column items
 const mockPayload = {
 	children: [
@@ -107,27 +100,26 @@ const mockPayload = {
 	],
 };
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	FacebookAltIcon: () => <svg>FacebookAltIcon</svg>,
-	TwitterIcon: () => <svg>TwitterIcon</svg>,
-	RssIcon: () => <svg>RssIcon</svg>,
-	LazyLoad: ({ children }) => <>{children}</>,
-	isServerSide: () => true,
-	formatURL: jest.fn((input) => input.toString()),
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	isServerSide: jest.fn(() => true),
+	Icon: ({ name }) => <div data-testid={name} />,
 }));
-
-jest.mock("fusion:themes", () => jest.fn(() => ({})));
-jest.mock("fusion:properties", () => jest.fn(() => ({})));
+jest.mock("@wpmedia/engine-theme-sdk", () => ({
+	LazyLoad: ({ children }) => <>{children}</>,
+}));
+jest.mock("fusion:content", () => ({
+	useContent: jest.fn(() => mockPayload),
+}));
 jest.mock("fusion:context", () => ({
+	isAdmin: false,
 	useFusionContext: jest.fn(() => ({
 		contextPath: "pf",
 		deployment: jest.fn((path) => path),
 	})),
 }));
-
-jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => mockPayload),
-}));
+jest.mock("fusion:properties", () => jest.fn(() => ({})));
+jest.mock("fusion:themes", () => jest.fn(() => ({})));
 
 describe("the footer feature for the default output type", () => {
 	afterEach(() => {
@@ -166,7 +158,7 @@ describe("the footer feature for the default output type", () => {
 		// there are only 4 columns with any non-empty string data
 		// two of the 5 objects have empty string names
 		// therefore those h4 elements should not render if no content is present
-		expect(wrapper.find("h4.footer-header")).toHaveLength(3);
+		expect(wrapper.find("Heading")).toHaveLength(3);
 	});
 
 	it("should have 12 column items", () => {
@@ -181,7 +173,7 @@ describe("the footer feature for the default output type", () => {
 			/>
 		);
 
-		expect(wrapper.find("ul > li")).toHaveLength(12);
+		expect(wrapper.find("Link")).toHaveLength(12);
 	});
 
 	it("should have a link with target blank if is an absolute link with (http(s))", () => {
@@ -215,7 +207,7 @@ describe("the footer feature for the default output type", () => {
 			useContent: jest.fn(() => ({})),
 		}));
 
-		expect(wrapper.find("footer > ul")).toHaveLength(0);
+		expect(wrapper.find(".b_footer__links-group")).toHaveLength(0);
 	});
 
 	it("should have empty column without error when undefined payload is given", () => {
@@ -234,7 +226,7 @@ describe("the footer feature for the default output type", () => {
 			useContent: jest.fn(() => undefined),
 		}));
 
-		expect(wrapper.find("footer > ul")).toHaveLength(0);
+		expect(wrapper.find(".b_footer__links-group")).toHaveLength(0);
 	});
 
 	describe("the content source configuration", () => {
@@ -302,7 +294,7 @@ describe("the footer feature for the default output type", () => {
 					/>
 				);
 
-				expect(wrapper.find("div > img")).toHaveProp("src", "pf/my-nav-logo.svg");
+				expect(wrapper.find("img.b-footer__logo")).toHaveProp("src", "pf/my-nav-logo.svg");
 			});
 
 			it("should make the absolute src of the logo the provided image", () => {
@@ -321,7 +313,7 @@ describe("the footer feature for the default output type", () => {
 					/>
 				);
 
-				expect(wrapper.find("div > img")).toHaveProp("src", "http://test/my-nav-logo.svg");
+				expect(wrapper.find("img.b-footer__logo")).toHaveProp("src", "http://test/my-nav-logo.svg");
 			});
 
 			it("should make the base64 src of the logo the provided image", () => {
@@ -340,7 +332,7 @@ describe("the footer feature for the default output type", () => {
 					/>
 				);
 
-				expect(wrapper.find("div > img")).toHaveProp("src", "base64:my-nav-logo.svg");
+				expect(wrapper.find("img.b-footer__logo")).toHaveProp("src", "base64:my-nav-logo.svg");
 			});
 
 			describe("when the theme manifest provides alt text", () => {
@@ -361,7 +353,7 @@ describe("the footer feature for the default output type", () => {
 						/>
 					);
 
-					expect(wrapper.find("div > img")).toHaveProp("alt", "my alt text");
+					expect(wrapper.find("img.b-footer__logo")).toHaveProp("alt", "my alt text");
 				});
 			});
 
@@ -382,7 +374,7 @@ describe("the footer feature for the default output type", () => {
 						/>
 					);
 
-					expect(wrapper.find("div > img")).toHaveProp("alt", "");
+					expect(wrapper.find("img.b-footer__logo")).toHaveProp("alt", "");
 				});
 			});
 		});
@@ -405,7 +397,7 @@ describe("the footer feature for the default output type", () => {
 					/>
 				);
 
-				expect(wrapper.find("div > img")).toHaveProp("src", "pf/light.svg");
+				expect(wrapper.find("img.b-footer__logo")).toHaveProp("src", "pf/light.svg");
 			});
 
 			it("should make the relative src of the logo the provided image", () => {
@@ -424,7 +416,7 @@ describe("the footer feature for the default output type", () => {
 					/>
 				);
 
-				expect(wrapper.find("div > img")).toHaveProp("src", "pf/my-nav-logo.svg");
+				expect(wrapper.find("img.b-footer__logo")).toHaveProp("src", "pf/my-nav-logo.svg");
 			});
 
 			it("should make the absolute src of the logo the provided image", () => {
@@ -443,7 +435,7 @@ describe("the footer feature for the default output type", () => {
 					/>
 				);
 
-				expect(wrapper.find("div > img")).toHaveProp("src", "http://test/my-nav-logo.svg");
+				expect(wrapper.find("img.b-footer__logo")).toHaveProp("src", "http://test/my-nav-logo.svg");
 			});
 
 			it("should make the base64 src of the logo the provided image", () => {
@@ -462,7 +454,7 @@ describe("the footer feature for the default output type", () => {
 					/>
 				);
 
-				expect(wrapper.find("div > img")).toHaveProp("src", "base64:my-nav-logo.svg");
+				expect(wrapper.find("img.b-footer__logo")).toHaveProp("src", "base64:my-nav-logo.svg");
 			});
 
 			describe("when the theme manifest provides alt text", () => {
@@ -483,7 +475,7 @@ describe("the footer feature for the default output type", () => {
 						/>
 					);
 
-					expect(wrapper.find("div > img")).toHaveProp("alt", "my alt text");
+					expect(wrapper.find("img.b-footer__logo")).toHaveProp("alt", "my alt text");
 				});
 
 				it("should use the light alt text over the primary alt text", () => {
@@ -504,7 +496,7 @@ describe("the footer feature for the default output type", () => {
 						/>
 					);
 
-					expect(wrapper.find("div > img")).toHaveProp("alt", "light");
+					expect(wrapper.find("img.b-footer__logo")).toHaveProp("alt", "light");
 				});
 			});
 
@@ -525,7 +517,7 @@ describe("the footer feature for the default output type", () => {
 						/>
 					);
 
-					expect(wrapper.find("div > img")).toHaveProp("alt", "");
+					expect(wrapper.find("img.b-footer__logo")).toHaveProp("alt", "");
 				});
 			});
 		});
@@ -544,7 +536,7 @@ describe("the footer feature for the default output type", () => {
 					/>
 				);
 
-				expect(wrapper.find("div.primaryLogo")).toHaveLength(0);
+				expect(wrapper.find("MediaItem")).toHaveLength(0);
 			});
 		});
 	});
@@ -566,7 +558,10 @@ describe("the footer feature for the default output type", () => {
 						}}
 					/>
 				);
-				expect(wrapper.find("p").find("#copyright-top").text()).toStrictEqual("my copyright text");
+
+				expect(wrapper.find(".b-footer__top-container p").text()).toStrictEqual(
+					"my copyright text"
+				);
 			});
 		});
 
@@ -584,15 +579,16 @@ describe("the footer feature for the default output type", () => {
 					/>
 				);
 
-				expect(wrapper.find("p").find("#copyright-top").text()).toStrictEqual("");
+				expect(wrapper.find(".b-footer__top-container p").text()).toStrictEqual("");
 			});
 		});
 	});
 
 	describe("the social media buttons", () => {
 		describe("when a facebook page is provided", () => {
-			it("should show a facebook button", () => {
+			it("should show a facebook button with the proper url", () => {
 				getProperties.mockImplementation(() => ({ locale: "en", facebookPage: "thesun" }));
+
 				const wrapper = mount(
 					<Footer
 						customFields={{
@@ -604,23 +600,12 @@ describe("the footer feature for the default output type", () => {
 					/>
 				);
 
-				expect(wrapper.find({ title: "Facebook page" })).toHaveLength(1);
-			});
-
-			it("should have a href prop with the proper url", () => {
-				window.open = jest.fn();
-				const wrapper = mount(
-					<Footer
-						customFields={{
-							navigationConfig: {
-								contentService: "footer-service",
-								contentConfiguration: {},
-							},
-						}}
-					/>
-				);
-
-				expect(wrapper.find({ title: "Facebook page" }).prop("href")).toEqual("thesun");
+				expect(
+					wrapper.find(`Link[supplementalText="footer-block.facebook-link"] > a`)
+				).toHaveLength(1);
+				expect(
+					wrapper.find(`Link[supplementalText="footer-block.facebook-link"] > a`).prop("href")
+				).toEqual("thesun");
 			});
 		});
 
@@ -639,13 +624,16 @@ describe("the footer feature for the default output type", () => {
 					/>
 				);
 
-				expect(wrapper.find({ title: "Facebook page" })).toHaveLength(0);
+				expect(
+					wrapper.find(`Link[supplementalText="footer-block.facebook-link"] > a`)
+				).toHaveLength(0);
 			});
 		});
 
 		describe("when a twitter username is provided", () => {
-			it("should show a twitter button", () => {
+			it("should show a twitter button with the proper url", () => {
 				getProperties.mockImplementation(() => ({ locale: "en", twitterUsername: "thesun" }));
+
 				const wrapper = mount(
 					<Footer
 						customFields={{
@@ -657,25 +645,12 @@ describe("the footer feature for the default output type", () => {
 					/>
 				);
 
-				expect(wrapper.find({ title: "Twitter feed" })).toHaveLength(1);
-			});
-
-			it("should have a href prop with the proper url", () => {
-				window.open = jest.fn();
-				const wrapper = mount(
-					<Footer
-						customFields={{
-							navigationConfig: {
-								contentService: "footer-service",
-								contentConfiguration: {},
-							},
-						}}
-					/>
+				expect(wrapper.find(`Link[supplementalText="footer-block.twitter-link"] > a`)).toHaveLength(
+					1
 				);
-
-				expect(wrapper.find({ title: "Twitter feed" }).prop("href")).toEqual(
-					"https://twitter.com/thesun"
-				);
+				expect(
+					wrapper.find(`Link[supplementalText="footer-block.twitter-link"] > a`).prop("href")
+				).toEqual("https://twitter.com/thesun");
 			});
 		});
 
@@ -694,12 +669,14 @@ describe("the footer feature for the default output type", () => {
 					/>
 				);
 
-				expect(wrapper.find({ title: "Twitter feed" })).toHaveLength(0);
+				expect(wrapper.find(`Link[supplementalText="footer-block.twitter-link"] > a`)).toHaveLength(
+					0
+				);
 			});
 		});
 
 		describe("when a rss link is provided", () => {
-			it("should show a rss button", () => {
+			it("should show a rss button with the proper url", () => {
 				getProperties.mockImplementation(() => ({ locale: "en", rssUrl: "thesun" }));
 
 				const wrapper = mount(
@@ -713,23 +690,10 @@ describe("the footer feature for the default output type", () => {
 					/>
 				);
 
-				expect(wrapper.find({ title: "RSS feed" })).toHaveLength(1);
-			});
-
-			it("should have a href prop with the proper url", () => {
-				window.open = jest.fn();
-				const wrapper = mount(
-					<Footer
-						customFields={{
-							navigationConfig: {
-								contentService: "footer-service",
-								contentConfiguration: {},
-							},
-						}}
-					/>
-				);
-
-				expect(wrapper.find({ title: "RSS feed" }).prop("href")).toEqual("thesun");
+				expect(wrapper.find(`Link[supplementalText="footer-block.rss-link"] > a`)).toHaveLength(1);
+				expect(
+					wrapper.find(`Link[supplementalText="footer-block.rss-link"] > a`).prop("href")
+				).toEqual("thesun");
 			});
 		});
 
@@ -748,7 +712,7 @@ describe("the footer feature for the default output type", () => {
 					/>
 				);
 
-				expect(wrapper.find({ title: "RSS feed" })).toHaveLength(0);
+				expect(wrapper.find(`Link[supplementalText="footer-block.rss-link"] > a`)).toHaveLength(0);
 			});
 		});
 
@@ -770,12 +734,16 @@ describe("the footer feature for the default output type", () => {
 						}}
 					/>
 				);
-				expect(wrapper.find({ title: "Facebook page" })).toHaveLength(0);
-				expect(wrapper.find({ title: "Twitter feed" })).toHaveLength(0);
-				expect(wrapper.find({ title: "RSS feed" })).toHaveLength(0);
-				const container = wrapper.find(".socialBtn-container");
+				expect(
+					wrapper.find(`Link[supplementalText="footer-block.facebook-link"] > a`)
+				).toHaveLength(0);
+				expect(wrapper.find(`Link[supplementalText="footer-block.twitter-link"] > a`)).toHaveLength(
+					0
+				);
+				expect(wrapper.find(`Link[supplementalText="footer-block.rss-link"] > a`)).toHaveLength(0);
+				const container = wrapper.find(".b-footer__social-links");
 				expect(container).toBeDefined();
-				expect(container.get(0).props.hasSocialLinks).toBeFalsy();
+				expect(container.find("Link").length).toBe(0);
 			});
 		});
 	});

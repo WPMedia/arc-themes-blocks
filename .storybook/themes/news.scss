@@ -995,17 +995,19 @@
 							font-size: var(--body-font-size-small),
 							line-height: var(--body-line-height-small),
 						),
-						link: (
-							color: var(--text-color-subtle),
-							font-family: var(--font-family-primary),
-							font-size: var(--body-font-size-small),
-							font-weight: var(--global-font-weight-5),
-							line-height: var(--body-line-height-small),
-						),
 					),
 				),
 				footer-links-group-list-item: (
 					list-style: none,
+					components: (
+						link: (
+							color: var(--text-color-subtle),
+							font-family: var(--font-family-primary),
+							font-size: var(--body-font-size-small),
+							font-weight: var(--global-font-weight-4),
+							line-height: var(--body-line-height-small),
+						),
+					),
 				),
 				footer-top-container: (
 					border-top: 1px solid var(--global-neutral-4),

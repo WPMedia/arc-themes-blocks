@@ -20,6 +20,7 @@ const authorObject = {
 	lastName: "Doe",
 	byline: "Jane Da Doe",
 	role: "Senior Product Manager",
+	url: "#",
 	image:
 		"https://s3.amazonaws.com/arc-authors/corecomponents/0a2eb086-d143-48a1-b306-69dba75cb5b8.png",
 	email: "jane@doe.com",
@@ -103,3 +104,7 @@ export const noImage = () => {
 
 	return <FullAuthorBioPresentational author={authorNoImage} locale="en" />;
 };
+
+export const linkedAuthorName = () => (
+	<FullAuthorBioPresentational author={authorObject} linkAuthorProfile locale="en" />
+);

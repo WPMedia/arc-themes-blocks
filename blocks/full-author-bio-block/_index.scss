@@ -12,6 +12,10 @@
 	}
 
 	&__name {
+		&-link {
+			@include scss.block-properties("full-author-bio-name-link");
+			@include scss.block-components("full-author-bio-name-link");
+		}
 		@include scss.block-properties("full-author-bio-name");
 		@include scss.block-components("full-author-bio-name");
 	}

@@ -3,6 +3,7 @@ import React from "react";
 import getTranslatedPhrases from "fusion:intl";
 
 import {
+	Conditional,
 	formatSocialURL,
 	Heading,
 	HeadingSection,
@@ -33,14 +34,14 @@ const socialIcons = {
 
 const BLOCK_CLASS_NAME = "b-full-author-bio";
 
-const Presentation = ({ author = {}, locale }) => {
+const Presentation = ({ author = {}, linkAuthorProfile = false, locale }) => {
 	const phrases = getTranslatedPhrases(locale);
 	const supportedSocials = Object.keys(socialIcons);
 	const socials = Object.entries(author)
 		.filter(([key, value]) => supportedSocials.includes(key) && value)
 		.map(([key]) => key);
 
-	const bio = author?.bio || author?.longBio;
+	const bio = author?.longBio || author?.bio;
 
 	return author?.byline || author?.image || author?.role || bio || socials.length ? (
 		<div className={BLOCK_CLASS_NAME}>
@@ -55,7 +56,14 @@ const Presentation = ({ author = {}, locale }) => {
 						{author?.byline || author?.role ? (
 							<Stack className={`${BLOCK_CLASS_NAME}__identification`}>
 								{author.byline ? (
-									<Heading className={`${BLOCK_CLASS_NAME}__name`}>{author.byline}</Heading>
+									<Conditional
+										className={`${BLOCK_CLASS_NAME}__name-link`}
+										condition={linkAuthorProfile && author.url}
+										component={Link}
+										href={author.url}
+									>
+										<Heading className={`${BLOCK_CLASS_NAME}__name`}>{author.byline}</Heading>
+									</Conditional>
 								) : null}
 								{author.role ? (
 									<HeadingSection>

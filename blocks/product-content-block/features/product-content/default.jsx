@@ -36,13 +36,13 @@ const ProductContent = ({ customFields }) => {
 		return null;
 	}
 
-	const productData = getNestedObject(globalContent, contentMapping[contentType]);
+	const productData = getNestedObject(globalContent, contentMapping[contentType]) || {};
 	const visible =
 		typeof productData === "object" && Object.prototype.hasOwnProperty.call(productData, "visible")
 			? productData?.visible
 			: true;
 
-	if (!visible) {
+	if (!visible || (typeof productData === "object" && !productData?.value)) {
 		return null;
 	}
 

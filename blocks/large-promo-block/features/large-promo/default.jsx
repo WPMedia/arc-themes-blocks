@@ -47,7 +47,6 @@ export const LargePromoPresentation = ({
 	displayDate,
 	editableDescription,
 	embedMarkup,
-	imageSearchField,
 	labelIconName,
 	labelIconText,
 	promoImageURL,
@@ -66,7 +65,7 @@ export const LargePromoPresentation = ({
 		<HeadingSection>
 			<Grid as="article" className={BLOCK_CLASS_NAME}>
 				{embedMarkup || promoImageURL ? (
-					<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>
+					<MediaItem {...searchableField("imageOverrideURL")} suppressContentEditableWarning>
 						<Conditional
 							component={Link}
 							condition={contentUrl}
@@ -82,13 +81,7 @@ export const LargePromoPresentation = ({
 								/>
 							) : (
 								<>
-									<Image
-										alt={contentHeadline}
-										src={promoImageURL}
-										width={377}
-										height={283}
-										searchableField
-									/>
+									<Image alt={contentHeadline} src={promoImageURL} width={377} height={283} />
 									{labelIconName ? (
 										<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
 											<Icon name={labelIconName} />
@@ -324,7 +317,6 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	const contentOverline = showOverline ? overlineText : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
 	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
-	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
 	const promoImageURL =
 		showImage && (imageOverrideURL || getImageFromANS(content)?.url || fallbackImage);
 
@@ -342,7 +334,6 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			displayDate={displayDate}
 			editableDescription={editableDescription}
 			embedMarkup={embedMarkup}
-			imageSearchField={imageSearchField}
 			labelIconName={labelIconName}
 			labelIconText={labelIconText}
 			promoImageURL={promoImageURL}

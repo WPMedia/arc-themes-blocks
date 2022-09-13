@@ -158,11 +158,13 @@ const MediumPromo = ({ customFields }) => {
 	const imageAuthToken = promoImageData?.auth?.[RESIZER_APP_VERSION] || null;
 	let resizeImage = false;
 	let imageSrc = imageOverrideURL || fallbackImage;
-	if (promoType === "video") {
-		imageSrc = promoImageData.url;
-	} else if (promoImageData) {
-		imageSrc = imageANSToImageSrc(promoImageData);
-		resizeImage = true;
+	if (!imageOverrideURL) {
+		if (promoType === "video") {
+			imageSrc = promoImageData.url;
+		} else if (promoImageData) {
+			imageSrc = imageANSToImageSrc(promoImageData);
+			resizeImage = true;
+		}
 	}
 
 	return showHeadline || showImage || showDescription || showByline || showDate ? (
@@ -183,7 +185,6 @@ const MediumPromo = ({ customFields }) => {
 								<Image
 									alt={content?.headlines?.basic}
 									src={imageSrc}
-									searchableField
 									data-aspect-ratio={imageRatio?.replace(":", "/")}
 									resizedOptions={{ auth: imageAuthToken }}
 									responsiveImages={[100, 500]}

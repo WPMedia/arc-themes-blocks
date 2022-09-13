@@ -34,7 +34,7 @@ const socialIcons = {
 
 const BLOCK_CLASS_NAME = "b-full-author-bio";
 
-const Presentation = ({ author = {}, linkAuthorProfile = false, locale }) => {
+const Presentation = ({ author = {}, authorProfileLink, locale }) => {
 	const phrases = getTranslatedPhrases(locale);
 	const supportedSocials = Object.keys(socialIcons);
 	const socials = Object.entries(author)
@@ -58,9 +58,9 @@ const Presentation = ({ author = {}, linkAuthorProfile = false, locale }) => {
 								{author.byline ? (
 									<Conditional
 										className={`${BLOCK_CLASS_NAME}__name-link`}
-										condition={linkAuthorProfile && author.url}
+										condition={authorProfileLink}
 										component={Link}
-										href={author.url}
+										href={authorProfileLink}
 									>
 										<Heading className={`${BLOCK_CLASS_NAME}__name`}>{author.byline}</Heading>
 									</Conditional>

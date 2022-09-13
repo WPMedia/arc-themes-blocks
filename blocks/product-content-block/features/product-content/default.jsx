@@ -42,7 +42,7 @@ const ProductContent = ({ customFields }) => {
 			? productData?.visible
 			: true;
 
-	if (!visible) {
+	if (!visible || (typeof productData === "object" && !productData?.value)) {
 		return null;
 	}
 

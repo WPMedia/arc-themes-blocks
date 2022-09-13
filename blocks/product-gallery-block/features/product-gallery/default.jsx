@@ -24,18 +24,19 @@ export function ProductGalleryDisplay({
 	const shortenedCarouselItems = carouselItems.slice(0, isFeaturedImageEnabled ? 9 : 8);
 
 	const thumbnailsArray = shortenedCarouselItems.map((item) => {
-		const { altText, auth, _id: itemId } = item;
+		const { auth, _id: itemId } = item;
 		const targetAuth = auth[resizerAppVersion];
 		return (
 			<Image
-				alt={altText}
-				key={itemId}
-				src={imageANSToImageSrc(item)}
-				resizedOptions={{ auth: targetAuth }}
-				width={40}
+				// used as part of a page design so empty string alt text
+				alt=""
 				height={40}
+				key={itemId}
+				resizedOptions={{ auth: targetAuth }}
 				resizerURL={resizerURL}
 				responsiveImages={[40, 80, 120]}
+				src={imageANSToImageSrc(item)}
+				width={40}
 			/>
 		);
 	});

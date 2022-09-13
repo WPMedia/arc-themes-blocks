@@ -110,6 +110,7 @@ const MOCK_GLOBAL_CONTENT = {
 
 const DEFAULT_CUSTOM_FIELDS = {
 	isFeaturedImageEnabled: false,
+	indicatorType: "thumbnails",
 };
 
 describe("Product Gallery", () => {

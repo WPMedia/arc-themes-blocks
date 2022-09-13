@@ -21,12 +21,25 @@ describe("Product Content", () => {
 		expect(container.firstChild).toBe(null);
 	});
 
-	it("should render null schema item has no value", () => {
+	it("should render null if schema item has no value", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: {
 				description: "Product Description",
 				schema: {
 					productDetails: {},
+				},
+			},
+		}));
+		const { container } = render(<ProductContent customFields={{ contentType: "details" }} />);
+		expect(container.firstChild).toBe(null);
+	});
+
+	it("should render null if schema item is not pressent", () => {
+		useFusionContext.mockImplementation(() => ({
+			globalContent: {
+				description: "Product Description",
+				schema: {
+					sizeAndFit: {},
 				},
 			},
 		}));

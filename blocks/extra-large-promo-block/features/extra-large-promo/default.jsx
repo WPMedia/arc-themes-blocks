@@ -194,7 +194,6 @@ const ExtraLargePromo = ({ customFields }) => {
 				<Image
 					alt={content?.headlines?.basic}
 					src={promoImageURL || fallbackImage}
-					searchableField
 					data-aspect-ratio={imageRatio?.replace(":", "/")}
 				/>
 			</Conditional>

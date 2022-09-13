@@ -43,10 +43,14 @@ export function ProductGalleryDisplay({
 	return (
 		<Carousel
 			className={BLOCK_CLASS_NAME}
-			key={id}
+			goToSlidePhrase={
+				/* istanbul ignore next */ (slideNumber) =>
+					phrases.t("product-gallery.go-to-slide", { slideNumber })
+			}
 			id={id}
-			label={phrases.t("product-gallery.aria-label")}
 			indicators={indicatorType}
+			key={id}
+			label={phrases.t("product-gallery.aria-label")}
 			thumbnails={thumbnailsArray}
 		>
 			{shortenedCarouselItems?.map((item, carouselIndex) => {

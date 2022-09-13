@@ -10,6 +10,17 @@
 		"pt": "Products",
 		"sv": "Products"
 	},
+	"product-gallery.go-to-slide": {
+		"de": "Go to slide %{slideNumber}",
+		"en": "Go to slide %{slideNumber}",
+		"es": "Go to slide %{slideNumber}",
+		"fr": "Go to slide %{slideNumber}",
+		"ja": "Go to slide %{slideNumber}",
+		"ko": "Go to slide %{slideNumber}",
+		"no": "Go to slide %{slideNumber}",
+		"pt": "Go to slide %{slideNumber}",
+		"sv": "Go to slide %{slideNumber}"
+	},
 	"product-gallery.left-arrow-label": {
 		"de": "Previous",
 		"en": "Previous",

@@ -59,6 +59,7 @@ export const defaultFeaturedImageDisabled = () => (
 		arcSite="story-book"
 		id="id"
 		resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
+		indicatorType="thumbnails"
 	/>
 );
 
@@ -70,5 +71,6 @@ export const featuredImageEnabled = () => (
 		id="id"
 		arcSite="story-book"
 		resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
+		indicatorType="thumbnails"
 	/>
 );

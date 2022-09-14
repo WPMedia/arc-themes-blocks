@@ -359,6 +359,47 @@
 					max-width: var(--content-scale-width),
 					width: 100%,
 				),
+				carousel-indicator-dots-container: (
+					display: flex,
+					gap: var(--global-spacing-4),
+					padding: var(--global-spacing-4) 0 0 0,
+					justify-content: center,
+					align-items: center,
+				),
+				carousel-indicator-dot: (
+					height: var(--global-spacing-3),
+					width: var(--global-spacing-3),
+					border: var(--global-border-width-1) var(--global-border-style-1) var(--border-color),
+					border-radius: var(--border-radius-circle),
+					background-color: transparent,
+				),
+				carousel-indicator-dot-active: (
+					border: none,
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+					background-color: var(--global-neutral-4),
+				),
+				carousel-indicator-thumbnails-container: (
+					display: block,
+					padding: var(--global-spacing-4) var(--global-spacing-3) 0 var(--global-spacing-3),
+					width: 100%,
+					overflow-x: auto,
+					overflow-y: hidden,
+					height: var(--global-spacing-11),
+					white-space: nowrap,
+				),
+				carousel-indicator-thumbnail: (
+					margin: 0 var(--global-spacing-3),
+					height: var(--global-spacing-7),
+					width: var(--global-spacing-7),
+					padding: var(--global-spacing-1),
+					background-color: transparent,
+					opacity: 40%,
+				),
+				carousel-indicator-thumbnail-active: (
+					border: var(--global-border-width-1) var(--global-border-style-1) var(--global-black),
+					opacity: 1,
+				),
 				date: (
 					font-size: var(--body-font-size-small),
 					line-height: var(--body-line-height-small),
@@ -1003,6 +1044,12 @@
 						carousel-track: (
 							// slides should flow down rather than be hidden off to the side
 							flex-wrap: wrap,
+						),
+						carousel-indicator-dots-container: (
+							display: none,
+						),
+						carousel-indicator-thumbnails-container: (
+							display: none,
 						),
 					),
 				),

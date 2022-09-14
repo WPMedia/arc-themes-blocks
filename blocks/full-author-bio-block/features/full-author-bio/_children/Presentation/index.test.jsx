@@ -16,13 +16,14 @@ describe("Full Author Bio Block", () => {
 		expect(container.firstChild).toBeNull();
 	});
 
-	it("should render the author url if the linkAuthorProfile if true", () => {
+	it("should render the author url if the authorProfileLink if true", () => {
 		const author = {
 			_id: "janedoe",
 			byline: "Jane Da Doe",
-			url: "/author/profile",
 		};
-		render(<Presentation arcSite="test-site" author={author} linkAuthorProfile />);
+		render(
+			<Presentation arcSite="test-site" author={author} authorProfileLink="/author/profile" />
+		);
 		const link = screen.queryByRole("link", { name: author.byline });
 		expect(link).not.toBeNull();
 		expect(link.href).toBe("http://localhost/author/profile");

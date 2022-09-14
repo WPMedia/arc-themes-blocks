@@ -21,9 +21,14 @@ const FullAuthorBio = ({ customFields = {} }) => {
 	const currentAuthor =
 		globalContent?.authors?.[0] || globalContent?.credits?.by?.[0]?.additional_properties?.original;
 
+	const authorProfileLink =
+		currentAuthor === globalContent?.credits?.by?.[0]?.additional_properties?.original
+			? globalContent?.credits?.by?.[0]?.url
+			: null;
+
 	return currentAuthor ? (
 		<LazyLoad enabled={isLazyLoad}>
-			<Presentation author={currentAuthor} locale={locale} />
+			<Presentation author={currentAuthor} authorProfileLink={authorProfileLink} locale={locale} />
 		</LazyLoad>
 	) : null;
 };

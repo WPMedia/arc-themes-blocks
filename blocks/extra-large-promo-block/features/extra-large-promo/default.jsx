@@ -186,7 +186,6 @@ const ExtraLargePromo = ({ customFields }) => {
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
 	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 	const hasAuthors = showByline && content?.credits?.by.length > 0;
-	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
 	const promoImageURL = imageOverrideURL || getImageFromANS(content)?.url;
 
 	const MediaImage = () =>
@@ -195,7 +194,6 @@ const ExtraLargePromo = ({ customFields }) => {
 				<Image
 					alt={content?.headlines?.basic}
 					src={promoImageURL || fallbackImage}
-					searchableField
 					data-aspect-ratio={imageRatio?.replace(":", "/")}
 				/>
 			</Conditional>
@@ -222,7 +220,7 @@ const ExtraLargePromo = ({ customFields }) => {
 							</HeadingSection>
 						) : null}
 						{embedMarkup || showImage ? (
-							<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>
+							<MediaItem {...searchableField("imageOverrideURL")} suppressContentEditableWarning>
 								{embedMarkup ? <Video embedMarkup={embedMarkup} /> : <MediaImage />}
 							</MediaItem>
 						) : null}

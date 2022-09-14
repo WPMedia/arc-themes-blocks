@@ -10,6 +10,8 @@ jest.mock("fusion:environment", () => ({
 	RESIZER_URL: "https://resizer.com",
 }));
 
+window.HTMLElement.prototype.scrollIntoView = jest.fn();
+
 const MOCK_ASSET = {
 	_id: "HY6LDPEW4BBFDLBYD4S3S7LZ3E",
 	alt_text: "Man smiling posing in front of shelves. (This is alt text.)",

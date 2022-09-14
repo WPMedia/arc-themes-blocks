@@ -2,7 +2,7 @@
 
 As a Page Builder user, I want to add the Product Gallery - Arc Block to my PDP page, so that I can merchandise multiple images on my PDP. The Product Gallery uses the Carousel component in Themes Components, along with its indicator type functionality, to show options only available on the mobile viewport.
 
-## Props
+## Custom Fields
 
 | **Prop**               | **Required** | **Type** | **Description**                                            |
 | ---------------------- | ------------ | -------- | ---------------------------------------------------------- |

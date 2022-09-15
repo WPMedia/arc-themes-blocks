@@ -390,11 +390,12 @@
 				),
 				carousel-indicator-thumbnail: (
 					margin: 0 var(--global-spacing-3),
-					height: var(--global-spacing-8),
-					width: var(--global-spacing-8),
+					height: 50px,
+					width: 50px,
 					padding: var(--global-spacing-1),
 					background-color: transparent,
 					opacity: 40%,
+					border: var(--global-border-width-1) var(--global-border-style-1) transparent,
 				),
 				carousel-indicator-thumbnail-active: (
 					border: var(--global-border-width-1) var(--global-border-style-1) var(--global-black),

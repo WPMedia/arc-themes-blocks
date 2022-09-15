@@ -30,6 +30,7 @@ export function ProductGalleryDisplay({
 			<Image
 				// used as part of a page design so empty string alt text
 				alt=""
+				className={`${BLOCK_CLASS_NAME}__thumbnail`}
 				height={40}
 				key={itemId}
 				resizedOptions={{ auth: targetAuth }}

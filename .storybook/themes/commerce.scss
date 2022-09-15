@@ -390,9 +390,8 @@
 				),
 				carousel-indicator-thumbnail: (
 					margin: 0 var(--global-spacing-3),
-					height: 50px,
-					width: 50px,
-					padding: var(--global-spacing-1),
+					height: var(--global-spacing-8),
+					width: var(--global-spacing-8),
 					background-color: transparent,
 					opacity: 40%,
 					border: var(--global-border-width-1) var(--global-border-style-1) transparent,
@@ -794,6 +793,11 @@
 							width: 100%,
 						),
 					),
+				),
+				product-gallery-thumbnail: (
+					margin: 3px,
+					height: var(--global-spacing-7),
+					width: var(--global-spacing-7),
 				),
 				product-gallery-featured-slide: (
 					// for featured enabled, this will apply for the desktop growing to expand full width. On mobile, it doesn't hurt.

@@ -6,6 +6,11 @@
 		@include scss.block-properties("product-gallery-featured-slide");
 	}
 
+	&__thumbnail {
+		@include scss.block-components("product-gallery-thumbnail");
+		@include scss.block-properties("product-gallery-thumbnail");
+	}
+
 	@include scss.block-components("product-gallery");
 	@include scss.block-properties("product-gallery");
 }

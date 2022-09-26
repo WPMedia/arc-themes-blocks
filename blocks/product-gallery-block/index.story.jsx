@@ -59,6 +59,7 @@ export const defaultFeaturedImageDisabled = () => (
 		arcSite="story-book"
 		id="id"
 		resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
+		indicatorType="thumbnails"
 	/>
 );
 
@@ -70,5 +71,42 @@ export const featuredImageEnabled = () => (
 		id="id"
 		arcSite="story-book"
 		resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
+		indicatorType="thumbnails"
+	/>
+);
+
+export const indicatorTypeDotsOnMobile = () => (
+	<ProductGalleryDisplay
+		carouselItems={MOCK_CAROUSEL_ITEMS}
+		isFeaturedImageEnabled={false}
+		resizerAppVersion={2}
+		arcSite="story-book"
+		id="id"
+		resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
+		indicatorType="dots"
+	/>
+);
+
+export const indicatorTypeNoneOnMobile = () => (
+	<ProductGalleryDisplay
+		carouselItems={MOCK_CAROUSEL_ITEMS}
+		isFeaturedImageEnabled={false}
+		resizerAppVersion={2}
+		arcSite="story-book"
+		id="id"
+		resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
+		indicatorType="none"
+	/>
+);
+
+export const indicatorTypeThumbnailsOnMobile = () => (
+	<ProductGalleryDisplay
+		carouselItems={MOCK_CAROUSEL_ITEMS}
+		isFeaturedImageEnabled={false}
+		resizerAppVersion={2}
+		arcSite="story-book"
+		id="id"
+		resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
+		indicatorType="thumbnails"
 	/>
 );

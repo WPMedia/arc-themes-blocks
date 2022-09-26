@@ -16,18 +16,44 @@ export function ProductGalleryDisplay({
 	isFeaturedImageEnabled,
 	resizerAppVersion,
 	resizerURL,
+	indicatorType,
 }) {
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
 	const shortenedCarouselItems = carouselItems.slice(0, isFeaturedImageEnabled ? 9 : 8);
 
+	const thumbnailsArray = shortenedCarouselItems.map((item) => {
+		const { auth, _id: itemId } = item;
+		const targetAuth = auth[resizerAppVersion];
+		return (
+			<Image
+				// used as part of a page design so empty string alt text
+				alt=""
+				className={`${BLOCK_CLASS_NAME}__thumbnail`}
+				height={40}
+				key={itemId}
+				resizedOptions={{ auth: targetAuth }}
+				resizerURL={resizerURL}
+				responsiveImages={[40, 80, 120]}
+				src={imageANSToImageSrc(item)}
+				width={40}
+			/>
+		);
+	});
+
 	return (
 		<Carousel
 			className={BLOCK_CLASS_NAME}
-			key={id}
+			goToSlidePhrase={
+				/* istanbul ignore next */ (slideNumber) =>
+					phrases.t("product-gallery.go-to-slide", { slideNumber })
+			}
 			id={id}
+			indicators={indicatorType}
+			key={id}
 			label={phrases.t("product-gallery.aria-label")}
+			thumbnails={thumbnailsArray}
 		>
 			{shortenedCarouselItems?.map((item, carouselIndex) => {
 				const { _id: itemId, auth, alt_text: altText } = item;
@@ -77,7 +103,7 @@ export function ProductGalleryDisplay({
 	);
 }
 function ProductGallery({ customFields }) {
-	const { isFeaturedImageEnabled } = customFields;
+	const { isFeaturedImageEnabled, indicatorType } = customFields;
 	const { id } = useComponentContext();
 
 	const { arcSite, globalContent = {} } = useFusionContext();
@@ -107,6 +133,7 @@ function ProductGallery({ customFields }) {
 			isFeaturedImageEnabled={isFeaturedImageEnabled}
 			resizerAppVersion={RESIZER_APP_VERSION}
 			resizerURL={RESIZER_URL}
+			indicatorType={indicatorType}
 		/>
 	);
 }
@@ -120,6 +147,18 @@ ProductGallery.propTypes = {
 		isFeaturedImageEnabled: PropTypes.boolean.tag({
 			name: "Display the product's featured image",
 			defaultValue: false,
+		}),
+		indicatorType: PropTypes.oneOf(["dots", "thumbnails", "none"]).tag({
+			label: "Indicator Type",
+			defaultValue: "thumbnails",
+			group: "Mobile Layout Options",
+			description:
+				"The type of indicator to use only on mobile screens to show which slide is featured in the carousel. The indicators can also be used for navigating between slides.",
+			labels: {
+				dots: "Carousel Indicators",
+				thumbnails: "Thumbnails",
+				none: "None",
+			},
 		}),
 	}),
 };

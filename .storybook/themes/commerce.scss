@@ -881,7 +881,7 @@
 					grid-template-rows: 1fr,
 					gap: var(--global-spacing-5),
 					margin: auto,
-					max-width: 100%,
+					max-width: calc(var(--content-max-width) * 1px),
 					width: 100%,
 				),
 				right-rail-main-right-rail: (

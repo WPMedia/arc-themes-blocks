@@ -1,45 +1,33 @@
 import React from "react";
 
 import { useFusionContext } from "fusion:context";
-import { Image } from "@wpmedia/arc-themes-components";
-import { RESIZER_APP_VERSION } from "fusion:environment";
+import { imageANSToImageSrc, Image } from "@wpmedia/arc-themes-components";
+import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 
 const BLOCK_CLASS_NAME = "b-product-featured-image";
 
-export const ProductFeaturedImageDisplay = ({ data, resizerAppVersion }) => {
-	const featuredImageAsset = data.schema?.featuredImage?.value?.assets.find(
-		(asset) => asset.type === "image"
-	);
-
-	if (!featuredImageAsset) {
-		return null;
-	}
-
-	const { url, auth, alt_text: altText } = featuredImageAsset;
-
-	// take in app version that's the public key for the auth object in resizer v2
-	const targetAuth = auth[resizerAppVersion];
-
+export const ProductFeaturedImageDisplay = ({ featuredImage }) => {
+	const { auth, alt_text: altText } = featuredImage;
 	return (
 		<Image
-			src={url}
-			className={BLOCK_CLASS_NAME}
-			resizedOptions={{ auth: targetAuth }}
 			alt={altText}
+			className={BLOCK_CLASS_NAME}
+			height={768}
+			resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
+			resizerURL={RESIZER_URL}
+			responsiveImages={[320, 768]}
+			src={imageANSToImageSrc(featuredImage)}
+			width={768}
 		/>
 	);
 };
 
 function ProductFeaturedImage() {
 	const { globalContent = {} } = useFusionContext();
-
-	if (!Object.keys(globalContent).length) {
-		return null;
-	}
-
-	return (
-		<ProductFeaturedImageDisplay resizerAppVersion={RESIZER_APP_VERSION} data={globalContent} />
+	const featuredImage = globalContent?.schema?.featuredImage?.value?.assets.find(
+		({ type }) => type === "image"
 	);
+	return featuredImage ? <ProductFeaturedImageDisplay featuredImage={featuredImage} /> : null;
 }
 
 ProductFeaturedImage.label = "Product Featured Image – Arc Block";

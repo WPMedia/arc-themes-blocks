@@ -10,6 +10,38 @@
 		@include scss.block-components("product-gallery-thumbnail");
 		@include scss.block-properties("product-gallery-thumbnail");
 	}
+	&__focus-view {
+		@include scss.block-components("product-gallery-focus-view");
+		@include scss.block-properties("product-gallery-focus-view");
+	}
+	&__focus-view-main-image {
+		@include scss.block-components("product-gallery-focus-view-main-image");
+		@include scss.block-properties("product-gallery-focus-view-main-image");
+	}
+	&__focus-view-main-images {
+		@include scss.block-components("product-gallery-focus-view-main-images");
+		@include scss.block-properties("product-gallery-focus-view-main-images");
+	}
+	&__focus-view-thumbnail-bar {
+		@include scss.block-components("product-gallery-focus-view-thumbnail-bar");
+		@include scss.block-properties("product-gallery-focus-view-thumbnail-bar");
+	}
+	&__focus-view-thumbnail-bar-spacer {
+		@include scss.block-components("product-gallery-focus-view-thumbnail-bar-spacer");
+		@include scss.block-properties("product-gallery-focus-view-thumbnail-bar-spacer");
+	}
+	&__focus-view-thumbnail-image {
+		@include scss.block-components("product-gallery-focus-view-thumbnail-image");
+		@include scss.block-properties("product-gallery-focus-view-thumbnail-image");
+	}
+	&__focus-view-thumbnail-image--selected {
+		@include scss.block-components("product-gallery-focus-view-thumbnail-image-selected");
+		@include scss.block-properties("product-gallery-focus-view-thumbnail-image-selected");
+	}
+	&__focus-view-toolbar {
+		@include scss.block-components("product-gallery-focus-view-toolbar");
+		@include scss.block-properties("product-gallery-focus-view-toolbar");
+	}
 
 	@include scss.block-components("product-gallery");
 	@include scss.block-properties("product-gallery");

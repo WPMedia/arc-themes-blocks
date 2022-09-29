@@ -35,8 +35,8 @@
     "generate:content-source:content-source": "hygen content-source content-source",
     "generate:content-source:feature": "hygen content-source feature",
     "prepare": "husky install",
-    "test:changed-feature-branch": "jest --changedSince=origin/arc-themes-release-version-1.20 --coverage --passWithNoTests",
-    "lint:changed-feature-branch": "eslint --max-warnings 0 --no-error-on-unmatched-pattern $(git diff --name-only origin/arc-themes-release-version-1.20 | grep -E \"(.js$|.jsx$)\" || echo \"no js/jsx files changed\")",
+    "test:changed-feature-branch": "jest --changedSince=origin/arc-themes-release-version-1.23 --coverage --passWithNoTests",
+    "lint:changed-feature-branch": "eslint --max-warnings 0 --no-error-on-unmatched-pattern $(git diff --name-only origin/arc-themes-release-version-1.23 | grep -E \"(.js$|.jsx$)\" || echo \"no js/jsx files changed\")",
     "lint:changed-feature-branch:fix": "npm run lint:changed-feature-branch -- --fix",
     "format": "prettier --write ."
   },

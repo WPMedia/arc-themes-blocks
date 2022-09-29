@@ -62,7 +62,7 @@ const adMapping = {
 		adName: "leaderboard_large", // TODO: Rename 'leaderboard_flex'?
 		adLabel: "Leaderboard - Large",
 		adClass: "728x90",
-		dimensionsArray: [[sz970x250, sz970x90, sz728x90], sz728x90, sz320x50],
+		dimensionsArray: [[sz970x250, sz970x90, sz728x90], sz728x90, [sz320x50, sz300x250]],
 		ampDimensionsArray: sz320x50,
 	},
 };

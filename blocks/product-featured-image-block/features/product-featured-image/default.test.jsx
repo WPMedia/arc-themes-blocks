@@ -88,4 +88,20 @@ describe("Product Featured Image", () => {
 		expect(image).toBeInTheDocument();
 		expect(image).toHaveAttribute("alt", "");
 	});
+	it("should render with no auth", () => {
+		useFusionContext.mockImplementation(() => ({
+			globalContent: {
+				schema: {
+					featuredImage: {
+						value: {
+							assets: [{ ...FEATURED_IMAGE_ASSET, auth: undefined }],
+						},
+					},
+				},
+			},
+		}));
+		render(<ProductFeaturedImage />);
+		const image = screen.getByRole("img");
+		expect(image).toBeInTheDocument();
+	});
 });

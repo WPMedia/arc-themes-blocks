@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext, useComponentContext } from "fusion:context";
 import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
@@ -6,6 +6,8 @@ import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 
 import { Carousel, Image, imageANSToImageSrc } from "@wpmedia/arc-themes-components";
+
+import ProductFocusView from "./_children/ProductFocusView";
 
 const BLOCK_CLASS_NAME = "b-product-gallery";
 
@@ -20,6 +22,8 @@ export function ProductGalleryDisplay({
 }) {
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
+
+	const [focusViewItemId, setFocusViewItemId] = useState("");
 
 	const shortenedCarouselItems = carouselItems.slice(0, isFeaturedImageEnabled ? 9 : 8);
 
@@ -43,63 +47,75 @@ export function ProductGalleryDisplay({
 	});
 
 	return (
-		<Carousel
-			className={BLOCK_CLASS_NAME}
-			goToSlidePhrase={
-				/* istanbul ignore next */ (slideNumber) =>
-					phrases.t("product-gallery.go-to-slide", { slideNumber })
-			}
-			id={id}
-			indicators={indicatorType}
-			key={id}
-			label={phrases.t("product-gallery.aria-label")}
-			thumbnails={thumbnailsArray}
-		>
-			{shortenedCarouselItems?.map((item, carouselIndex) => {
-				const { _id: itemId, auth, alt_text: altText } = item;
+		<div>
+			<Carousel
+				className={BLOCK_CLASS_NAME}
+				goToSlidePhrase={
+					/* istanbul ignore next */ (slideNumber) =>
+						phrases.t("product-gallery.go-to-slide", { slideNumber })
+				}
+				id={id}
+				indicators={indicatorType}
+				key={id}
+				label={phrases.t("product-gallery.aria-label")}
+				thumbnails={thumbnailsArray}
+			>
+				{shortenedCarouselItems?.map((item, carouselIndex) => {
+					const { _id: itemId, auth, alt_text: altText } = item;
 
-				// is this a featured image?
-				const isFeaturedImage = isFeaturedImageEnabled && carouselIndex === 0;
+					// is this a featured image?
+					const isFeaturedImage = isFeaturedImageEnabled && carouselIndex === 0;
 
-				// take in app version that's the public key for the auth object in resizer v2
-				const targetAuth = auth[resizerAppVersion];
-				return (
-					<Carousel.Item
-						key={item.testId || itemId}
-						className={isFeaturedImage ? `${BLOCK_CLASS_NAME}__featured-slide` : ""}
-						label={`${phrases.t("product-gallery.slide-indicator", {
-							current: carouselIndex + 1,
-							maximum: carouselItems.length,
-						})}`}
-					>
-						<Image
-							alt={altText}
-							src={imageANSToImageSrc(item)}
-							resizedOptions={{ auth: targetAuth }}
-							width={375}
-							height={375}
-							responsiveImages={[150, 375, 500, 1500, 2000]}
-							resizerURL={resizerURL}
-							sizes={[
-								{
-									// featured image should take up full width of the screen on mobile and desktop
-									isDefault: true,
-									sourceSizeValue: "100vw",
-								},
-								...(isFeaturedImage
-									? []
-									: [
-											{
-												sourceSizeValue: "50vw",
-												mediaCondition: "(min-width: 48rem)",
-											},
-									  ]),
-							]}
-						/>
-					</Carousel.Item>
-				);
-			})}
-		</Carousel>
+					// take in app version that's the public key for the auth object in resizer v2
+					const targetAuth = auth[resizerAppVersion];
+					return (
+						<Carousel.Item
+							key={item.testId || itemId}
+							className={isFeaturedImage ? `${BLOCK_CLASS_NAME}__featured-slide` : ""}
+							label={`${phrases.t("product-gallery.slide-indicator", {
+								current: carouselIndex + 1,
+								maximum: carouselItems.length,
+							})}`}
+						>
+							<Image
+								alt={altText}
+								onClick={() => setFocusViewItemId(item.testId || itemId)}
+								src={imageANSToImageSrc(item)}
+								resizedOptions={{ auth: targetAuth }}
+								width={375}
+								height={375}
+								responsiveImages={[150, 375, 500, 1500, 2000]}
+								resizerURL={resizerURL}
+								sizes={[
+									{
+										// featured image should take up full width of the screen on mobile and desktop
+										isDefault: true,
+										sourceSizeValue: "100vw",
+									},
+									...(isFeaturedImage
+										? []
+										: [
+												{
+													sourceSizeValue: "50vw",
+													mediaCondition: "(min-width: 48rem)",
+												},
+										  ]),
+								]}
+							/>
+						</Carousel.Item>
+					);
+				})}
+			</Carousel>
+			{focusViewItemId !== "" ? (
+				<ProductFocusView
+					onClose={() => setFocusViewItemId("")}
+					productImages={shortenedCarouselItems}
+					resizerAppVersion={resizerAppVersion}
+					resizerURL={resizerURL}
+					initialItemId={focusViewItemId}
+				/>
+			) : null}
+		</div>
 	);
 }
 function ProductGallery({ customFields }) {
@@ -137,8 +153,6 @@ function ProductGallery({ customFields }) {
 		/>
 	);
 }
-
-ProductGallery.label = "Product Gallery – Arc Block";
 
 ProductGallery.icon = "picture-polaroid-four";
 

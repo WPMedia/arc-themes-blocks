@@ -887,9 +887,11 @@
 				right-rail-main-right-rail: (
 					align-items: stretch,
 					grid-column: 1,
+					max-width: calc(var(--content-max-width) * 1px),
 				),
 				right-rail-main-interior-item: (
 					grid-column: 1,
+					max-width: calc(var(--content-max-width) * 1px),
 				),
 				single-column-regular-main: (
 					components: (

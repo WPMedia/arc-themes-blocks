@@ -880,18 +880,16 @@
 					grid-template-columns: initial,
 					grid-template-rows: 1fr,
 					gap: var(--global-spacing-5),
-					margin: auto,
-					max-width: calc(var(--content-max-width) * 1px),
-					width: 100%,
+					margin: 0,
+					max-width: var(--content-max-width),
+					width: var(--content-max-width),
 				),
 				right-rail-main-right-rail: (
 					align-items: stretch,
 					grid-column: 1,
-					max-width: calc(var(--content-max-width) * 1px),
 				),
 				right-rail-main-interior-item: (
 					grid-column: 1,
-					max-width: calc(var(--content-max-width) * 1px),
 				),
 				single-column-regular-main: (
 					components: (

@@ -18,7 +18,7 @@ const ProductFocusView = ({
 	resizerAppVersion,
 	resizerURL,
 }) => {
-	const thumbnailBarItemLimit = 5;
+	const thumbnailBarItemLimit = 3;
 	const getImageIndexById = (id) => productImages.findIndex((image) => image._id === id);
 	const mainImagesRef = useRef([]);
 	const [selectedImageIndex, setSelectedImageIndex] = useState(getImageIndexById(initialItemId));

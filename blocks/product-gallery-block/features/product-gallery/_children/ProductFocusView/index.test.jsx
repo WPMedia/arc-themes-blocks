@@ -12,12 +12,10 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import ProductFocusView from "./index";
-import mockData from "./mock-data.js";
+import mockData from "./mock-data";
 
 window.HTMLElement.prototype.scrollIntoView = jest.fn();
 const setFocusViewItemId = jest.fn();
-
-const DEFAULT_PROPS = {};
 
 describe("Product Focus View", () => {
 	it("Renders when expected props are provided.", () => {

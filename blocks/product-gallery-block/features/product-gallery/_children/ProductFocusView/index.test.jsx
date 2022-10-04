@@ -18,7 +18,7 @@ window.HTMLElement.prototype.scrollIntoView = jest.fn();
 const setFocusViewItemId = jest.fn();
 
 describe("Product Focus View", () => {
-	it("Renders when expected props are provided.", () => {
+	it("Renders 3 thumbnail images and 5 (all) product images.", () => {
 		render(
 			<ProductFocusView
 				onClose={() => setFocusViewItemId("")}
@@ -28,7 +28,7 @@ describe("Product Focus View", () => {
 				resizerURL="https://www.resizer.com/"
 			/>
 		);
-		expect(screen.queryAllByRole("img")).toHaveLength(12);
+		expect(screen.queryAllByRole("img")).toHaveLength(8);
 	});
 
 	it("Renders a down (next) button when images in the thumbnail bar can be advanced.", () => {

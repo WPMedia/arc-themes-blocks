@@ -52,7 +52,10 @@ const ProductFocusView = ({
 						{selectedImageIndex + 1} / {productImages.length}
 					</Paragraph>
 					{shouldShowUpButton() ? (
-						<Button onClick={() => setThumbnailBarStartIndex(thumbnailBarStartIndex - 1)}>
+						<Button
+							accessibilityLabel="Previous Image"
+							onClick={() => setThumbnailBarStartIndex(thumbnailBarStartIndex - 1)}
+						>
 							<Icon name="ChevronUp" />
 						</Button>
 					) : (
@@ -88,7 +91,10 @@ const ProductFocusView = ({
 							))}
 					</Stack>
 					{shouldShowDownButton() ? (
-						<Button onClick={() => setThumbnailBarStartIndex(thumbnailBarStartIndex + 1)}>
+						<Button
+							accessibilityLabel="Next Image"
+							onClick={() => setThumbnailBarStartIndex(thumbnailBarStartIndex + 1)}
+						>
 							<Icon name="ChevronDown" />
 						</Button>
 					) : null}
@@ -120,7 +126,7 @@ const ProductFocusView = ({
 					))}
 				</Stack>
 				<div className={`${BLOCK_CLASS_NAME}__focus-view-toolbar`}>
-					<Button accessibilityLabel="TODO" onClick={onClose} size="large" variant="reverse">
+					<Button accessibilityLabel="Close" onClick={onClose} size="large" variant="secondary">
 						<Icon name="Close" />
 					</Button>
 				</div>

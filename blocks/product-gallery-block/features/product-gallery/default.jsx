@@ -128,13 +128,12 @@ function ProductGallery({ customFields }) {
 		return null;
 	}
 
-	const carouselItems =
-		globalContent?.schema?.productGallery?.value?.assets.filter(
-			(asset) => asset.type === "image"
-		) || [];
+	const carouselItems = globalContent?.schema?.productGallery?.value
+		? globalContent?.schema?.productGallery?.value.filter((asset) => asset.type === "image")
+		: [];
 
-	if (isFeaturedImageEnabled && globalContent?.schema?.featuredImage?.value?.assets) {
-		carouselItems.unshift(...globalContent?.schema?.featuredImage?.value?.assets);
+	if (isFeaturedImageEnabled && carouselItems.length) {
+		carouselItems.unshift(...globalContent?.schema?.featuredImage?.value);
 	}
 
 	if (carouselItems.length === 0) {

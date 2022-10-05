@@ -1,9 +1,7 @@
 import React from "react";
 import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 
-import { Heading, Price, Stack } from "@wpmedia/arc-themes-components";
+import { Heading, Price, Stack, usePhrases } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-information";
 
@@ -17,9 +15,7 @@ const priceDisplay = (pricing, item) =>
 	}).format(item.amount);
 
 export const ProductInformationDisplay = ({ data }) => {
-	const { arcSite } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const phrases = usePhrases();
 
 	const pricing = (data?.pricing && data?.pricing[0]) || null;
 	const ListPrice = getPrice("List", pricing?.prices);

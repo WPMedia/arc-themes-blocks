@@ -2,19 +2,18 @@ import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 
 import { useFusionContext, useComponentContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 import { useContent, useEditableContent } from "fusion:content";
 
 import {
 	Carousel,
-	Image,
-	Icon,
 	Heading,
+	HeadingSection,
+	Icon,
+	Image,
+	Link,
 	Price,
 	Stack,
-	HeadingSection,
-	Link,
+	usePhrases,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-assortment-carousel";
@@ -43,9 +42,8 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 	} = customFields;
 	const { id } = useComponentContext();
 	const { searchableField } = useEditableContent();
-	const { arcSite, isAdmin } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const { isAdmin } = useFusionContext();
+	const phrases = usePhrases();
 
 	// assortmentCondition is a stringified JSON object set by the Product Assortment
 	// integration from PageBuilder and requires it to be parsed to an object.

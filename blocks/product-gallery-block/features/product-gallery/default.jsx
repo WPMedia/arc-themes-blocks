@@ -2,15 +2,12 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext, useComponentContext } from "fusion:context";
 import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 
-import { Carousel, Image, imageANSToImageSrc } from "@wpmedia/arc-themes-components";
+import { Carousel, Image, imageANSToImageSrc, usePhrases } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-gallery";
 
 export function ProductGalleryDisplay({
-	arcSite,
 	carouselItems,
 	id,
 	isFeaturedImageEnabled,
@@ -18,8 +15,7 @@ export function ProductGalleryDisplay({
 	resizerURL,
 	indicatorType,
 }) {
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const phrases = usePhrases();
 
 	const shortenedCarouselItems = carouselItems.slice(0, isFeaturedImageEnabled ? 9 : 8);
 
@@ -106,7 +102,7 @@ function ProductGallery({ customFields }) {
 	const { isFeaturedImageEnabled, indicatorType } = customFields;
 	const { id } = useComponentContext();
 
-	const { arcSite, globalContent = {} } = useFusionContext();
+	const { globalContent = {} } = useFusionContext();
 
 	if (!Object.keys(globalContent).length) {
 		return null;
@@ -127,7 +123,6 @@ function ProductGallery({ customFields }) {
 
 	return (
 		<ProductGalleryDisplay
-			arcSite={arcSite}
 			carouselItems={carouselItems}
 			id={id}
 			isFeaturedImageEnabled={isFeaturedImageEnabled}

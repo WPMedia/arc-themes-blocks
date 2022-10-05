@@ -1,16 +1,14 @@
 import React from "react";
 
 import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 
-import { Attribution, formatAuthors } from "@wpmedia/arc-themes-components";
+import { Attribution, formatAuthors, usePhrases } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-byline";
 
 const Byline = () => {
-	const { arcSite, globalContent } = useFusionContext();
-	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+	const { globalContent } = useFusionContext();
+	const phrases = usePhrases();
 	const bylineNodes = formatAuthors(globalContent?.credits?.by, phrases.t("global.and-text"));
 
 	return bylineNodes?.length > 0 ? (

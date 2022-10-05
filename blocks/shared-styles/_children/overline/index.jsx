@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useFusionContext } from "fusion:context";
 import { useEditableContent } from "fusion:content";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
+import { usePhrases } from "@wpmedia/arc-themes-components";
 import { formatURL } from "@wpmedia/engine-theme-sdk";
 import PrimaryFont from "../primary-font";
 
@@ -12,7 +11,7 @@ import "./overline.scss";
 const Overline = (props) => {
 	const { globalContent, arcSite } = useFusionContext();
 	const { editableContent } = useEditableContent();
-	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+	const phrases = usePhrases();
 	const { customText, customUrl, editable, story, className = "" } = props;
 
 	const sourceContent = story || globalContent || {};

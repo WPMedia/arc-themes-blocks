@@ -1,7 +1,6 @@
 import React from "react";
 
 import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
 
 import PropTypes from "@arc-fusion/prop-types";
 import { isServerSide } from "@wpmedia/arc-themes-components";
@@ -10,14 +9,13 @@ import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import Presentation from "./_children/Presentation";
 
 const FullAuthorBio = ({ customFields = {} }) => {
-	const { arcSite, globalContent, isAdmin } = useFusionContext();
+	const { globalContent, isAdmin } = useFusionContext();
 
 	const isLazyLoad = customFields.lazyLoad && !isAdmin;
 	if (isLazyLoad && isServerSide()) {
 		return null;
 	}
 
-	const { locale } = getProperties(arcSite);
 	const currentAuthor =
 		globalContent?.authors?.[0] || globalContent?.credits?.by?.[0]?.additional_properties?.original;
 
@@ -28,7 +26,7 @@ const FullAuthorBio = ({ customFields = {} }) => {
 
 	return currentAuthor ? (
 		<LazyLoad enabled={isLazyLoad}>
-			<Presentation author={currentAuthor} authorProfileLink={authorProfileLink} locale={locale} />
+			<Presentation author={currentAuthor} authorProfileLink={authorProfileLink} />
 		</LazyLoad>
 	) : null;
 };

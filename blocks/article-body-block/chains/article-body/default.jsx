@@ -1,13 +1,11 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
 
 import {
-	formatCredits,
 	Carousel,
+	formatCredits,
 	Heading,
 	HeadingSection,
 	Icon,
@@ -15,6 +13,7 @@ import {
 	Link,
 	MediaItem,
 	Paragraph,
+	usePhrases,
 	Video,
 } from "@wpmedia/arc-themes-components";
 
@@ -294,8 +293,7 @@ export const ArticleBodyChainPresentation = ({ children, customFields = {}, cont
 
 	const { content_elements: contentElements = [], copyright, location } = items;
 	const { elementPlacement: adPlacementConfigObj = {} } = customFields;
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const phrases = usePhrases();
 
 	const adPlacements = Object.keys(adPlacementConfigObj).map((key) => ({
 		feature: +key,

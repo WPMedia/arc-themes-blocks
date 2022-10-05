@@ -1,9 +1,7 @@
 import React from "react";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
-import { Stack, Link, Separator } from "@wpmedia/arc-themes-components";
+import { Stack, Link, Separator, usePhrases } from "@wpmedia/arc-themes-components";
 
 const NavLinksBar = ({
 	hierarchy,
@@ -11,9 +9,8 @@ const NavLinksBar = ({
 	ariaLabel,
 	blockClassName,
 }) => {
-	const { id, arcSite } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const { id } = useFusionContext();
+	const phrases = usePhrases();
 
 	const content = useContent({
 		source: "site-service-hierarchy",

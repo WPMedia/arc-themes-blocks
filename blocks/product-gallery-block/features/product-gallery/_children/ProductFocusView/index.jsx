@@ -80,7 +80,7 @@ const ProductFocusView = ({
 										image._id === productImages[selectedImageIndex]._id ? "--selected" : ""
 									}`}
 									height={100}
-									key={image._id}
+									key={`focus-view-thumbnail-${image._id}`}
 									onClick={() => setSelectedImageIndex(getImageIndexById(image._id))}
 									resizedOptions={{ auth: image.auth[resizerAppVersion] }}
 									resizerURL={resizerURL}
@@ -107,7 +107,7 @@ const ProductFocusView = ({
 					{productImages.map((image, index) => (
 						<div
 							style={{ flexBasis: "100vh", flexShrink: 0 }}
-							key={image._id}
+							key={`focus_main_view_${image._id}`}
 							ref={(element) => {
 								mainImagesRef.current[index] = element;
 							}}

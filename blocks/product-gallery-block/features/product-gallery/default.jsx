@@ -153,6 +153,7 @@ function ProductGallery({ customFields }) {
 	);
 }
 
+ProductGallery.label = "Product Gallery – Arc Block";
 ProductGallery.icon = "picture-polaroid-four";
 
 ProductGallery.propTypes = {

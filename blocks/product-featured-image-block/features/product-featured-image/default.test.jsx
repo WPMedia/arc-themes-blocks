@@ -43,9 +43,7 @@ describe("Product Featured Image", () => {
 			globalContent: {
 				schema: {
 					featuredImage: {
-						value: {
-							assets: [],
-						},
+						value: [],
 					},
 				},
 			},
@@ -57,11 +55,7 @@ describe("Product Featured Image", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: {
 				schema: {
-					featuredImage: {
-						value: {
-							assets: [FEATURED_IMAGE_ASSET],
-						},
-					},
+					featuredImage: { value: [FEATURED_IMAGE_ASSET] },
 				},
 			},
 		}));
@@ -75,11 +69,7 @@ describe("Product Featured Image", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: {
 				schema: {
-					featuredImage: {
-						value: {
-							assets: [{ ...FEATURED_IMAGE_ASSET, alt_text: undefined }],
-						},
-					},
+					featuredImage: { value: [{ ...FEATURED_IMAGE_ASSET, alt_text: undefined }] },
 				},
 			},
 		}));
@@ -87,5 +77,17 @@ describe("Product Featured Image", () => {
 		const image = screen.getByRole("img");
 		expect(image).toBeInTheDocument();
 		expect(image).toHaveAttribute("alt", "");
+	});
+	it("should render with no auth", () => {
+		useFusionContext.mockImplementation(() => ({
+			globalContent: {
+				schema: {
+					featuredImage: { value: [{ ...FEATURED_IMAGE_ASSET, auth: undefined }] },
+				},
+			},
+		}));
+		render(<ProductFeaturedImage />);
+		const image = screen.getByRole("img");
+		expect(image).toBeInTheDocument();
 	});
 });

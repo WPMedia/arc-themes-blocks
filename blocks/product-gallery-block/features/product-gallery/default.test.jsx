@@ -184,7 +184,10 @@ describe("Product Gallery", () => {
 					},
 					productGallery: {
 						...MOCK_GLOBAL_CONTENT.schema.productGallery,
-						value: Array.from({ length: 10 }, (_, i) => ({ ...MOCK_ASSET, _id: i })),
+						value: [
+							...MOCK_GLOBAL_CONTENT.schema.productGallery.value,
+							...Array.from({ length: 10 }, (_, i) => ({ ...MOCK_ASSET, _id: i })),
+						],
 					},
 				},
 			},
@@ -203,7 +206,10 @@ describe("Product Gallery", () => {
 					...MOCK_GLOBAL_CONTENT.schema,
 					productGallery: {
 						...MOCK_GLOBAL_CONTENT.schema.productGallery,
-						value: Array.from({ length: 10 }, (_, i) => ({ ...MOCK_ASSET, _id: i })),
+						value: [
+							...MOCK_GLOBAL_CONTENT.schema.productGallery.value,
+							...Array.from({ length: 10 }, (_, i) => ({ ...MOCK_ASSET, _id: i })),
+						],
 					},
 				},
 			},

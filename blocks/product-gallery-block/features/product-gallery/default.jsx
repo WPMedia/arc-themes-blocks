@@ -47,7 +47,7 @@ export function ProductGalleryDisplay({
 	});
 
 	return (
-		<div>
+		<>
 			<Carousel
 				className={BLOCK_CLASS_NAME}
 				goToSlidePhrase={
@@ -115,7 +115,7 @@ export function ProductGalleryDisplay({
 					initialItemId={focusViewItemId}
 				/>
 			) : null}
-		</div>
+		</>
 	);
 }
 function ProductGallery({ customFields }) {

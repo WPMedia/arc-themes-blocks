@@ -734,6 +734,11 @@
 						),
 					),
 				),
+				product-content: (
+					margin: auto,
+					max-width: var(--content-max-width),
+					width: 100%,
+				),
 				product-content-ul: (
 					list-style: disc,
 					margin-left: var(--global-spacing-4),
@@ -743,6 +748,9 @@
 					margin-left: var(--global-spacing-4),
 				),
 				product-information: (
+					margin: auto,
+					max-width: var(--content-max-width),
+					width: 100%,
 					components: (
 						heading: (
 							color: var(--global-black),

@@ -735,7 +735,7 @@
 					),
 				),
 				product-content: (
-					margin: auto,
+					margin: 0 auto,
 					max-width: var(--content-max-width),
 					width: 100%,
 				),
@@ -748,7 +748,7 @@
 					margin-left: var(--global-spacing-4),
 				),
 				product-information: (
-					margin: auto,
+					margin: 0 auto,
 					max-width: var(--content-max-width),
 					width: 100%,
 					components: (

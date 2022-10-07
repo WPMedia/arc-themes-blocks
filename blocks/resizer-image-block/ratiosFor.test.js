@@ -1,6 +1,6 @@
 import ratiosFor from "./ratiosFor";
 
-describe("validates arithmatic for ratios", () => {
+describe("validates arithmetic for ratios", () => {
 	describe("validate parameters", () => {
 		it("if size is missing, must use XL", () => {
 			const ratios = ratiosFor();

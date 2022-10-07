@@ -11,7 +11,7 @@ const sizes = {
 		options: [
 			{ kind: "small", width: 600 },
 			{ kind: "medium", width: 800 },
-			{ kind: "large", width: 377 },
+			{ kind: "large", width: 600 },
 		],
 		defaultRatio: "4:3",
 	},

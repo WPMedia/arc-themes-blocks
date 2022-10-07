@@ -736,7 +736,7 @@
 				),
 				product-content: (
 					margin: 0 auto,
-					max-width: var(--content-max-width),
+					max-width: var(--content-scale-width),
 					width: 100%,
 				),
 				product-content-ul: (
@@ -749,7 +749,7 @@
 				),
 				product-information: (
 					margin: 0 auto,
-					max-width: var(--content-max-width),
+					max-width: var(--content-scale-width),
 					width: 100%,
 					components: (
 						heading: (
@@ -889,8 +889,7 @@
 					grid-template-rows: 1fr,
 					gap: var(--global-spacing-5),
 					margin: 0,
-					max-width: var(--content-max-width),
-					width: var(--content-max-width),
+					width: 100%,
 				),
 				right-rail-main-right-rail: (
 					align-items: stretch,
@@ -1045,6 +1044,12 @@
 							line-height: var(--heading-level-5-line-height),
 						),
 					),
+				),
+				product-content: (
+					max-width: 100%,
+				),
+				product-information: (
+					max-width: 100%,
 				),
 				product-gallery: (
 					components: (

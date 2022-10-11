@@ -116,7 +116,7 @@ function ProductGallery({ customFields }) {
 		? globalContent?.schema?.productGallery?.value.filter((asset) => asset.type === "image")
 		: [];
 
-	if (isFeaturedImageEnabled && carouselItems.length) {
+	if (isFeaturedImageEnabled) {
 		carouselItems.unshift(...globalContent?.schema?.featuredImage?.value);
 	}
 

@@ -156,8 +156,8 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 
 							should I handle both or is this an algolia issue?
 						*/
-						const SalePrice = getPrice("Sale", item.prices[0].prices);
-						const ListPrice = getPrice("List", item.prices[0].prices);
+						const SalePrice = getPrice("Sale", item.prices?.[0].prices || item.pricing[0].prices);
+						const ListPrice = getPrice("List", item.prices?.[0].prices || item.pricing[0].prices);
 
 						const salePriceAmount = SalePrice?.amount;
 						const listPriceAmount = ListPrice?.amount;
@@ -192,6 +192,26 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 												<Price.Sale>
 													{new Intl.NumberFormat(SalePrice.currencyLocale, {
 														style: "currency",
+														// does not have a currency code on the item
+														/*
+															would expect the item to look like this 
+															
+															{
+																amount: 26,
+																type: "List",
+																currencyLocale: "en-US",
+																currencyCode: "USD",
+															},
+
+															instead 
+
+																{
+																	amount: 139.99,
+																	id: 70059,
+																	type: "Sale"
+																}
+
+														*/
 														currency: SalePrice.currencyCode,
 														minimumFractionDigits: 2,
 													}).format(salePriceAmount)}

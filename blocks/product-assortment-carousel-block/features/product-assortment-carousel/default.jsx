@@ -125,8 +125,40 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 					}
 				>
 					{content.map((item, carouselIndex) => {
-						const SalePrice = getPrice("Sale", item.prices);
-						const ListPrice = getPrice("List", item.prices);
+						/*
+							incoming data is both: 
+						1)
+							{
+								pricing: [
+									{
+										prices: [
+											{
+												type: "Sale"
+											}
+										]
+									}
+								]
+							}
+
+						2)
+
+							{
+								prices: [
+									{
+										prices: [
+											{
+												type: "Sale"
+											}
+										]
+									}
+								]
+							}
+
+							should I handle both or is this an algolia issue?
+						*/
+						const SalePrice = getPrice("Sale", item.prices[0].prices);
+						const ListPrice = getPrice("List", item.prices[0].prices);
+
 						const salePriceAmount = SalePrice?.amount;
 						const listPriceAmount = ListPrice?.amount;
 						const isOnSale = salePriceAmount && salePriceAmount !== listPriceAmount;

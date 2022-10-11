@@ -97,15 +97,13 @@ const MOCK_GLOBAL_CONTENT = {
 	schema: {
 		productGallery: {
 			label: "Gallery",
-			value: {
-				assets: [
-					MOCK_ASSET,
-					{
-						...MOCK_ASSET,
-						_id: "HY6LDPEW4BBFDLBfff",
-					},
-				],
-			},
+			value: [
+				MOCK_ASSET,
+				{
+					...MOCK_ASSET,
+					_id: "HY6LDPEW4BBFDLBfff",
+				},
+			],
 		},
 	},
 };
@@ -135,9 +133,7 @@ describe("Product Gallery", () => {
 			globalContent: {
 				schema: {
 					productGallery: {
-						value: {
-							assets: [],
-						},
+						value: [],
 					},
 				},
 			},
@@ -184,16 +180,14 @@ describe("Product Gallery", () => {
 				schema: {
 					...MOCK_GLOBAL_CONTENT.schema,
 					featuredImage: {
-						value: {
-							assets: [MOCK_ASSET],
-						},
+						value: [MOCK_ASSET],
 					},
 					productGallery: {
 						...MOCK_GLOBAL_CONTENT.schema.productGallery,
-						value: {
+						value: [
 							...MOCK_GLOBAL_CONTENT.schema.productGallery.value,
-							assets: Array.from({ length: 10 }, (_, i) => ({ ...MOCK_ASSET, _id: i })),
-						},
+							...Array.from({ length: 10 }, (_, i) => ({ ...MOCK_ASSET, _id: i })),
+						],
 					},
 				},
 			},
@@ -212,10 +206,10 @@ describe("Product Gallery", () => {
 					...MOCK_GLOBAL_CONTENT.schema,
 					productGallery: {
 						...MOCK_GLOBAL_CONTENT.schema.productGallery,
-						value: {
+						value: [
 							...MOCK_GLOBAL_CONTENT.schema.productGallery.value,
-							assets: Array.from({ length: 10 }, (_, i) => ({ ...MOCK_ASSET, _id: i })),
-						},
+							...Array.from({ length: 10 }, (_, i) => ({ ...MOCK_ASSET, _id: i })),
+						],
 					},
 				},
 			},

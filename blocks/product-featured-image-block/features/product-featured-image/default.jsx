@@ -24,7 +24,7 @@ export const ProductFeaturedImageDisplay = ({ featuredImage, resizerAppVersion, 
 
 function ProductFeaturedImage() {
 	const { globalContent = {} } = useFusionContext();
-	const featuredImage = globalContent?.schema?.featuredImage?.value?.assets.find(
+	const featuredImage = globalContent?.schema?.featuredImage?.value.find(
 		({ type }) => type === "image"
 	);
 	return featuredImage ? (

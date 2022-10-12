@@ -125,39 +125,9 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 					}
 				>
 					{content.map((item, carouselIndex) => {
-						/*
-							incoming data is both: 
-						1)
-							{
-								pricing: [
-									{
-										prices: [
-											{
-												type: "Sale"
-											}
-										]
-									}
-								]
-							}
-
-						2)
-
-							{
-								prices: [
-									{
-										prices: [
-											{
-												type: "Sale"
-											}
-										]
-									}
-								]
-							}
-
-							should I handle both or is this an algolia issue?
-						*/
-						const SalePrice = getPrice("Sale", item.prices?.[0].prices || item.pricing[0].prices);
-						const ListPrice = getPrice("List", item.prices?.[0].prices || item.pricing[0].prices);
+						const pricing = item.pricing[0];
+						const SalePrice = getPrice("Sale", pricing.prices);
+						const ListPrice = getPrice("List", pricing.prices);
 
 						const salePriceAmount = SalePrice?.amount;
 						const listPriceAmount = ListPrice?.amount;
@@ -190,37 +160,17 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 										>
 											{isOnSale ? (
 												<Price.Sale>
-													{new Intl.NumberFormat(SalePrice.currencyLocale, {
+													{new Intl.NumberFormat(pricing.currencyLocale, {
 														style: "currency",
-														// does not have a currency code on the item
-														/*
-															would expect the item to look like this 
-															
-															{
-																amount: 26,
-																type: "List",
-																currencyLocale: "en-US",
-																currencyCode: "USD",
-															},
-
-															instead 
-
-																{
-																	amount: 139.99,
-																	id: 70059,
-																	type: "Sale"
-																}
-
-														*/
-														currency: SalePrice.currencyCode,
+														currency: pricing.currencyCode,
 														minimumFractionDigits: 2,
 													}).format(salePriceAmount)}
 												</Price.Sale>
 											) : null}
 											<Price.List>
-												{new Intl.NumberFormat(ListPrice.currencyLocale, {
+												{new Intl.NumberFormat(pricing.currencyLocale, {
 													style: "currency",
-													currency: ListPrice.currencyCode,
+													currency: pricing.currencyCode,
 													minimumFractionDigits: 2,
 												}).format(listPriceAmount)}
 											</Price.List>

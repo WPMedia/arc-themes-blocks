@@ -1,6 +1,6 @@
 import ratiosFor from "./ratiosFor";
 
-describe("validates arithmatic for ratios", () => {
+describe("validates arithmetic for ratios", () => {
 	describe("validate parameters", () => {
 		it("if size is missing, must use XL", () => {
 			const ratios = ratiosFor();
@@ -50,8 +50,8 @@ describe("validates arithmatic for ratios", () => {
 			expect(ratios.smallHeight).toMatchInlineSnapshot("450");
 			expect(ratios.mediumWidth).toMatchInlineSnapshot("800");
 			expect(ratios.mediumHeight).toMatchInlineSnapshot("600");
-			expect(ratios.largeWidth).toMatchInlineSnapshot("377");
-			expect(ratios.largeHeight).toMatchInlineSnapshot("283");
+			expect(ratios.largeWidth).toMatchInlineSnapshot("600");
+			expect(ratios.largeHeight).toMatchInlineSnapshot("450");
 		});
 
 		it("default values for MD", () => {
@@ -110,8 +110,8 @@ describe("validates arithmatic for ratios", () => {
 			expect(ratios.smallHeight).toMatchInlineSnapshot("338");
 			expect(ratios.smallWidth).toMatchInlineSnapshot("600");
 			expect(ratios.smallHeight).toMatchInlineSnapshot("338");
-			expect(ratios.largeWidth).toMatchInlineSnapshot("377");
-			expect(ratios.largeHeight).toMatchInlineSnapshot("212");
+			expect(ratios.largeWidth).toMatchInlineSnapshot("600");
+			expect(ratios.largeHeight).toMatchInlineSnapshot(`338`);
 		});
 		it("LG on 4:3", () => {
 			const ratios = ratiosFor("LG", "4:3");
@@ -119,8 +119,8 @@ describe("validates arithmatic for ratios", () => {
 			expect(ratios.smallHeight).toMatchInlineSnapshot("450");
 			expect(ratios.mediumWidth).toMatchInlineSnapshot("800");
 			expect(ratios.mediumHeight).toMatchInlineSnapshot("600");
-			expect(ratios.largeWidth).toMatchInlineSnapshot("377");
-			expect(ratios.largeHeight).toMatchInlineSnapshot("283");
+			expect(ratios.largeWidth).toMatchInlineSnapshot("600");
+			expect(ratios.largeHeight).toMatchInlineSnapshot("450");
 		});
 		it("LG on 3:2", () => {
 			const ratios = ratiosFor("LG", "3:2");
@@ -128,8 +128,8 @@ describe("validates arithmatic for ratios", () => {
 			expect(ratios.smallHeight).toMatchInlineSnapshot("400");
 			expect(ratios.mediumWidth).toMatchInlineSnapshot("800");
 			expect(ratios.mediumHeight).toMatchInlineSnapshot("533");
-			expect(ratios.largeWidth).toMatchInlineSnapshot("377");
-			expect(ratios.largeHeight).toMatchInlineSnapshot("251");
+			expect(ratios.largeWidth).toMatchInlineSnapshot("600");
+			expect(ratios.largeHeight).toMatchInlineSnapshot(`400`);
 		});
 
 		it("MD on 16:9", () => {

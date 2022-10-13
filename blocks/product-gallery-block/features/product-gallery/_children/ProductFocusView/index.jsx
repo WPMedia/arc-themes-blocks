@@ -1,38 +1,36 @@
 import React, { useEffect, useState, useRef } from "react";
+// import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
+import { Button, Icon, Stack } from "@wpmedia/arc-themes-components";
 
-import {
-	Button,
-	Icon,
-	Image,
-	Paragraph,
-	Stack,
-	imageANSToImageSrc,
-} from "@wpmedia/arc-themes-components";
+import MainImage from "../MainImage";
+import ThumbnailBar from "../ThumbnailBar";
 
 const BLOCK_CLASS_NAME = "b-product-gallery";
 
-const ProductFocusView = ({
-	initialItemId,
-	onClose,
-	productImages,
-	resizerAppVersion,
-	resizerURL,
-}) => {
-	const thumbnailBarItemLimit = 3;
+const ProductFocusView = ({ initialItemId, onClose, productImages }) => {
 	const getImageIndexById = (id) => productImages.findIndex((image) => image._id === id);
 	const mainImagesRef = useRef([]);
 	const [selectedImageIndex, setSelectedImageIndex] = useState(getImageIndexById(initialItemId));
-	const [thumbnailBarStartIndex, setThumbnailBarStartIndex] = useState(selectedImageIndex);
+	const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(
+		getImageIndexById(initialItemId)
+	);
+	/*
+	useEffect(() => {
+		//  thumbnailBarItemLimit
+		//  selectedThumbnailIndex
+		//  productImages.length
+		// 	thumbnailBarStartIndex
+		// 	setThumbnailBarStartIndex
+	}, [selectedThumbnailIndex]);
+*/
 
-	const shouldShowDownButton = () =>
-		productImages.length >= thumbnailBarItemLimit &&
-		thumbnailBarStartIndex + thumbnailBarItemLimit < productImages.length;
-
-	const shouldShowUpButton = () => thumbnailBarStartIndex !== 0;
-
+	// Scrolls main image into view when thumbnail is selected.
 	useEffect(() => {
 		let scrollTimeout;
 		const scrollImageIntoView = () => {
+			mainImagesRef.current?.[selectedImageIndex]
+				.querySelector("img")
+				?.setAttribute("loading", "eager");
 			const currentImageContainer = mainImagesRef.current?.[selectedImageIndex];
 			if (currentImageContainer?.querySelector("img").complete) {
 				currentImageContainer.scrollIntoView();
@@ -41,64 +39,21 @@ const ProductFocusView = ({
 			}
 		};
 		scrollImageIntoView();
+		console.log(selectedImageIndex);
 		return () => clearTimeout(scrollTimeout);
 	}, [selectedImageIndex, mainImagesRef]);
 
 	return (
 		<div className={`${BLOCK_CLASS_NAME}__focus-view`}>
-			<Stack direction="horizontal" justifacation="start">
-				<div className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-bar`}>
-					<Paragraph>
-						{selectedImageIndex + 1} / {productImages.length}
-					</Paragraph>
-					{shouldShowUpButton() ? (
-						<Button
-							accessibilityLabel="Previous Image"
-							onClick={() => setThumbnailBarStartIndex(thumbnailBarStartIndex - 1)}
-						>
-							<Icon name="ChevronUp" />
-						</Button>
-					) : (
-						<div className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-bar-spacer`} />
-					)}
-					<Stack alignment="center" direction="vertical" justifacation="start">
-						{productImages
-							.filter(
-								(_, index) =>
-									index >=
-										Math.min(
-											thumbnailBarStartIndex,
-											productImages.length - thumbnailBarItemLimit
-										) && index < thumbnailBarStartIndex + thumbnailBarItemLimit
-								// as long as selected index is less than the length of the product images minus the window
-							)
-							.map((image) => (
-								<Image
-									// used as part of a page design so empty string alt text
-									alt=""
-									className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-image${
-										image._id === productImages[selectedImageIndex]._id ? "--selected" : ""
-									}`}
-									height={100}
-									key={`focus-view-thumbnail-${image._id}`}
-									onClick={() => setSelectedImageIndex(getImageIndexById(image._id))}
-									resizedOptions={{ auth: image.auth[resizerAppVersion] }}
-									resizerURL={resizerURL}
-									responsiveImages={[120]}
-									src={imageANSToImageSrc(image)}
-									width={100}
-								/>
-							))}
-					</Stack>
-					{shouldShowDownButton() ? (
-						<Button
-							accessibilityLabel="Next Image"
-							onClick={() => setThumbnailBarStartIndex(thumbnailBarStartIndex + 1)}
-						>
-							<Icon name="ChevronDown" />
-						</Button>
-					) : null}
-				</div>
+			<Stack direction="horizontal" justification="start">
+				<ThumbnailBar
+					images={productImages}
+					selectedIndex={selectedThumbnailIndex}
+					onImageSelect={setSelectedImageIndex}
+				/>
+				{/*
+					<ThumbnailBar images={productImages} selectedImage={selectedThumbnailIndex} onImageSelect={(imageId)=>{}} />
+				 */}
 				<Stack
 					alignment="center"
 					direction="vertical"
@@ -106,21 +61,18 @@ const ProductFocusView = ({
 				>
 					{productImages.map((image, index) => (
 						<div
-							style={{ flexBasis: "100vh", flexShrink: 0 }}
 							key={`focus_main_view_${image._id}`}
 							ref={(element) => {
 								mainImagesRef.current[index] = element;
 							}}
 						>
-							<Image
-								// used as part of a page design so empty string alt text
-								alt=""
-								className={`${BLOCK_CLASS_NAME}__focus-view-main-image`}
-								loading={index === selectedImageIndex ? "eager" : "lazy"}
-								resizedOptions={{ auth: image.auth[resizerAppVersion] }}
-								resizerURL={resizerURL}
-								responsiveImages={[150, 375, 500, 1500, 2000]}
-								src={imageANSToImageSrc(image)}
+							<MainImage
+								image={image}
+								loading={index === 0 ? "eager" : undefined}
+								onVisible={() => {
+									setSelectedThumbnailIndex(index);
+									console.log("setSelectedThumbnailIndex('", index, "')");
+								}}
 							/>
 						</div>
 					))}

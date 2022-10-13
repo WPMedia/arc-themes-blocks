@@ -8,7 +8,6 @@ import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
 import { LargePromoPresentation } from "@wpmedia/shared-styles";
 
 const LargePromoItem = ({ customFields, arcSite }) => {
-	// todo: update to use new width specified for large size
 	const content =
 		useContent({
 			source: customFields?.itemContentConfig?.contentService ?? null,
@@ -99,7 +98,6 @@ const LargePromoItem = ({ customFields, arcSite }) => {
       }
     }`,
 		}) || null;
-	console.log("large promo", content); // null then the client-side resizer
 
 	return <LargePromoPresentation content={content} {...customFields} />;
 };

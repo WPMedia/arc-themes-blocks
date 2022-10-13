@@ -106,6 +106,7 @@ export const TopTableList = (props) => {
 		...new Array(small).fill(SMALL),
 	];
 
+	// todo: update to remove and replace with updated large sizes
 	const { content_elements: contentElements = [] } =
 		useContent({
 			source: contentService,

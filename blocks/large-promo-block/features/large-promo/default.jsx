@@ -8,6 +8,7 @@ import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
 import { LargePromoPresentation } from "@wpmedia/shared-styles";
 
 const LargePromoItem = ({ customFields, arcSite }) => {
+	// todo: update to use new width specified for large size
 	const content =
 		useContent({
 			source: customFields?.itemContentConfig?.contentService ?? null,
@@ -68,6 +69,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
                 274x206
                 274x183
                 274x154
+                450x600
               }
             }
           }
@@ -82,6 +84,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
             274x206
             274x183
             274x154
+            450x600
           }
         }
       }

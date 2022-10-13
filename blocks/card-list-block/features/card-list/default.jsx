@@ -35,7 +35,6 @@ const CardListItems = (props) => {
 	} = props;
 
 	// need to inject the arc site here into use content
-	// todo: update to use new width specified for large size
 	const { content_elements: contentElements = [] } =
 		useContent({
 			source: contentService,

@@ -63,12 +63,12 @@ const LargePromoItem = ({ customFields, arcSite }) => {
               type
               url
               resized_params {
-                274x206
-                274x183
-                274x154
-                600x450
-                600x400
-                600x338
+								600x450
+								600x400
+								600x338
+								800x600
+								800x533
+								800x450
               }
             }
           }
@@ -77,12 +77,12 @@ const LargePromoItem = ({ customFields, arcSite }) => {
           type
           url
           resized_params {
-            274x206
-            274x183
-            274x154
             600x450
             600x400
             600x338
+            800x600
+            800x533
+						800x450
           }
         }
       }
@@ -99,6 +99,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
       }
     }`,
 		}) || null;
+	console.log("large promo", content); // null then the client-side resizer
 
 	return <LargePromoPresentation content={content} {...customFields} />;
 };

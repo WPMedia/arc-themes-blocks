@@ -58,12 +58,12 @@ export const largePromoMock = {
 	promo_items: {
 		basic: {
 			resized_params: {
-				"274x154": "EfMJE6Iiv4GxwSe15iCDxBnN2ag=filters:format(jpg):quality(70)/",
-				"274x183": "a0vSW5PVOKTguW9d5fVcZO-61L4=filters:format(jpg):quality(70)/",
-				"274x206": "Uq6qFBw-w6VLN6hhAt0sjSt5UXs=filters:format(jpg):quality(70)/",
-				"377x212": "6hCESxDFY823IfORYxfAE__fhPw=filters:format(jpg):quality(70)/",
-				"377x251": "oKOQKByIKv7SDRQ3XezELPSAs_o=filters:format(jpg):quality(70)/",
-				"377x283": "kJ48hfQYVtqL6H_kUy06_Od9GIU=filters:format(jpg):quality(70)/",
+				"600x338": "qWT18YpKxePThXKBein9aY0zZDs=filters:format(jpg):quality(70)/",
+				"600x400": "yM-m_8pw6OE-bM8hbuXmRR68G98=filters:format(jpg):quality(70)/",
+				"600x450": "9vj5ohq3yatpskUInAyz8QAeWOw=filters:format(jpg):quality(70)/",
+				"800x450": "0y-YrUmEOik2AYzYM8iQc_ivoXY=filters:format(jpg):quality(70)/",
+				"800x533": "wqVc64sRXHHNZTyUPHQDkMZ7oyc=filters:format(jpg):quality(70)/",
+				"800x600": "BgHSvg8vnXov0goT4Zml2dRGFa8=filters:format(jpg):quality(70)/",
 			},
 			type: "image",
 			url: "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CLPUNWMKOZHWPLFYKRZXW6XTNU.jpg",

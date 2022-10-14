@@ -82,21 +82,24 @@ describe("the large promo presentational component", () => {
 	it("should have one img when show image is true with 4:3 default ratio", () => {
 		const wrapper = mount(<LargePromoPresentation {...config} content={mockData} />);
 		expect(wrapper.find("Image")).toHaveLength(1);
-		expect(wrapper.find("Image").prop("largeHeight")).toBe(283);
+		expect(wrapper.find("Image").prop("largeHeight")).toBe(450);
+		expect(wrapper.find("Image").prop("largeWidth")).toBe(600);
 	});
 
 	it("should accept a 16:9 image ratio", () => {
 		const myConfig = { ...config, imageRatio: "16:9" };
 		const wrapper = mount(<LargePromoPresentation {...myConfig} content={mockData} />);
 		expect(wrapper.find("Image")).toHaveLength(1);
-		expect(wrapper.find("Image").prop("largeHeight")).toBe(212);
+		expect(wrapper.find("Image").prop("largeHeight")).toBe(338);
+		expect(wrapper.find("Image").prop("largeWidth")).toBe(600);
 	});
 
 	it("should accept a 3:2 image ratio", () => {
 		const myConfig = { ...config, imageRatio: "3:2" };
 		const wrapper = mount(<LargePromoPresentation {...myConfig} content={mockData} />);
 		expect(wrapper.find("Image")).toHaveLength(1);
-		expect(wrapper.find("Image").prop("largeHeight")).toBe(251);
+		expect(wrapper.find("Image").prop("largeHeight")).toBe(400);
+		expect(wrapper.find("Image").prop("largeWidth")).toBe(600);
 	});
 
 	it("Headline div should have class .col-md-xl-6 when show image is true", () => {
@@ -163,7 +166,8 @@ describe("the large promo presentational component", () => {
 	it("should have by default an 4:3 image ratio", () => {
 		const wrapper = mount(<LargePromoPresentation {...config} content={mockData} />);
 		const img = wrapper.find("Image");
-		expect(img.prop("largeHeight")).toBe(283);
+		expect(img.prop("largeHeight")).toBe(450);
+		expect(img.prop("largeWidth")).toBe(600);
 		wrapper.unmount();
 	});
 
@@ -171,7 +175,8 @@ describe("the large promo presentational component", () => {
 		const myConfig = { ...config, imageRatio: "16:9" };
 		const wrapper = mount(<LargePromoPresentation {...myConfig} content={mockData} />);
 		const img = wrapper.find("Image");
-		expect(img.prop("largeHeight")).toBe(212);
+		expect(img.prop("largeHeight")).toBe(338);
+		expect(img.prop("largeWidth")).toBe(600);
 		wrapper.unmount();
 	});
 
@@ -179,7 +184,8 @@ describe("the large promo presentational component", () => {
 		const myConfig = { ...config, imageRatio: "3:2" };
 		const wrapper = mount(<LargePromoPresentation {...myConfig} content={mockData} />);
 		const img = wrapper.find("Image");
-		expect(img.prop("largeHeight")).toBe(251);
+		expect(img.prop("largeHeight")).toBe(400);
+		expect(img.prop("largeWidth")).toBe(600);
 		wrapper.unmount();
 	});
 
@@ -187,7 +193,8 @@ describe("the large promo presentational component", () => {
 		const myConfig = { ...config, imageRatio: "4:3" };
 		const wrapper = mount(<LargePromoPresentation {...myConfig} content={mockData} />);
 		const img = wrapper.find("Image");
-		expect(img.prop("largeHeight")).toBe(283);
+		expect(img.prop("largeHeight")).toBe(450);
+		expect(img.prop("largeWidth")).toBe(600);
 		wrapper.unmount();
 	});
 

@@ -18,6 +18,7 @@
     "storybook": "start-storybook -p 60001",
     "test": "jest",
     "test:watch": "npm run test -- --watch -o --coverage",
+    "build-storybook": "build-storybook -c .storybook",
     "test:coverage": "jest --coverage",
     "generate:intl": "node locale/scripts/generate-intl.js",
     "postinstall": "npx lerna clean -y",

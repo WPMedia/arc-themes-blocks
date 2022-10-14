@@ -4,6 +4,16 @@ This is the lerna-managed monorepo for the blocks that make up the Arc Themes. T
 
 Documentation is located in the [Themes Internal confluence for internal themes developers](https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2341405138/Development+Information+Guides).
 
+## Available Commands
+
+### `npm i`
+
+Install all dependencies, including nested ones. See more on [local paths](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#local-paths). The local paths are used for fusion linking. On [`postinstall`](https://docs.npmjs.com/cli/v8/using-npm/scripts#life-cycle-scripts), the `npx lerna clean -y` will run, which removes nested dependencies [docs](https://github.com/lerna/lerna/tree/main/commands/clean#readme). Any dependencies that an individual block needs, it needs to be installed at the top-level for testing to work. For example, the package `algoliasearch` will need to be installed at the top-level for testing to work for the `algolia-assortment-content-source-block`.
+
+### `npm run test:watch`
+
+Run all tests for code that has changed. Will also show coverage for changed code. This is the command to run when developing. To see coverage thresholds goals, see the `jest.config.js` file `coverageThreshold` property. For more information on the `jest` configuration coverage, see [jest docs](https://jestjs.io/docs/configuration#coveragethreshold-object).
+
 ## Storybook Setup
 
 1. Make sure you have an npmrc file with read-access to @wpmedia packages. This is available in your [dev settings](https://github.com/settings/tokens).

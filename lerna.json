@@ -1,6 +1,5 @@
 {
-	"packages": ["blocks/*", "components/*"],
-	"version": "5.14.1",
+	"packages": ["blocks/*"],
 	"ignoreChanges": ["**/node_modules/**", "**/package-lock.json"],
 	"version": "independent",
 	"command": {

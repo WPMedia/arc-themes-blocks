@@ -1,32 +1,38 @@
-import getResizedImageData from "@wpmedia/resizer-image-block";
+import axios from "axios";
+import { CONTENT_BASE, ARC_ACCESS_TOKEN, RESIZER_APP_VERSION } from "fusion:environment";
+
+import signImagesInANSObject from "@wpmedia/arc-themes-components";
+import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
+
+const params = {
+	_id: "text",
+	"arc-site": "text",
+};
+
+const fetch = ({ _id, "arc-site": site }, { cachedCall }) => {
+	if (!_id || !site) {
+		return "";
+	}
+
+	const urlSearch = new URLSearchParams({
+		_id,
+		website: site,
+	}).toString();
+
+	return axios({
+		url: `${CONTENT_BASE}/content/v4/related-content?${urlSearch}`,
+		headers: {
+			"content-type": "application/json",
+			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+		},
+		method: "GET",
+	})
+		.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_APP_VERSION))
+		.then(({ data }) => data);
+};
 
 export default {
-	resolve: ({ _id, "arc-site": arcSite } = {}) => {
-		const baseUrl = "/content/v4/related-content";
-
-		let params = [];
-		params = params.concat(_id ? `_id=${_id}` : undefined);
-		params = params.concat(arcSite ? `website=${arcSite}` : undefined);
-		params = params.reduce((acc, ele) => (ele ? acc.concat(ele) : acc), []);
-
-		if (params.length < 2) {
-			return "";
-		}
-
-		return `${baseUrl}?${params.join("&")}`;
-	},
+	fetch,
+	params,
 	schemaName: "ans-feed",
-	params: {
-		_id: "text",
-	},
-	transform: (data, query) => {
-		if (data && data.basic && Array.isArray(data.basic)) {
-			return {
-				content_elements: data.basic.map((ele) =>
-					getResizedImageData(ele, null, null, null, query["arc-site"])
-				),
-			};
-		}
-		return data;
-	},
 };

@@ -9,6 +9,10 @@ jest.mock("axios", () => ({
 	default: jest.fn((data) => Promise.resolve({ data })),
 }));
 
+// jest.mock("@wpmedia/signing-service-content-source-block", () =>
+// 	Promise.resolve("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890ABCDEFGHIJKLMNOPQR")
+// );
+
 describe("the collections content source block", () => {
 	it("should use the proper param types", () => {
 		expect(contentSource.params).toEqual({

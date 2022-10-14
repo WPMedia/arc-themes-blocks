@@ -1,23 +1,36 @@
-import getResizedImageData from "@wpmedia/resizer-image-block";
+import axios from "axios";
+import { CONTENT_BASE, ARC_ACCESS_TOKEN, RESIZER_APP_VERSION } from "fusion:environment";
+
+import signImagesInANSObject from "@wpmedia/arc-themes-components";
+import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
 
 const params = {
 	_id: "text",
+	"arc-site": "text",
 	website_url: "text",
 };
 
-const resolve = (key = {}) => {
-	const site = key["arc-site"];
-	const { website_url: websiteUrl, _id: id } = key;
-	return `/content/v4/?${id ? `_id=${id}` : `website_url=${websiteUrl}`}${
-		site ? `&website=${site}` : ""
-	}`;
+const fetch = ({ _id, "arc-site": site, website_url }, { cachedCall }) => {
+	const urlSearch = new URLSearchParams({
+		_id,
+		...(site ? { website: site } : {}),
+		website_url,
+	}).toString();
+
+	return axios({
+		url: `${CONTENT_BASE}/content/v4/?${urlSearch}`,
+		headers: {
+			"content-type": "application/json",
+			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+		},
+		method: "GET",
+	})
+		.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_APP_VERSION))
+		.then(({ data }) => data);
 };
 
-const transform = (data, query) => getResizedImageData(data, null, null, null, query["arc-site"]);
-
 export default {
-	schemaName: "ans-item",
+	fetch,
 	params,
-	resolve,
-	transform,
+	schemaName: "ans-feed",
 };

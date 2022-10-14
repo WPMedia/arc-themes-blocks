@@ -1,25 +1,27 @@
 {
-  "name": "@wpmedia/content-api-source-block",
-  "version": "5.14.1",
-  "description": "Content source block for Content API queries",
-  "homepage": "https://github.com/WPMedia/arc-themes-blocks",
-  "license": "CC-BY-NC-ND-4.0",
-  "main": "",
-  "files": [
-    "sources"
-  ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
-    "directory": "blocks/content-api-source-block"
-  },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx sources"
-  },
-  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
+	"name": "@wpmedia/content-api-source-block",
+	"version": "5.14.1",
+	"description": "Content source block for Content API queries",
+	"author": "Arc XP - Themes",
+	"homepage": "https://github.com/WPMedia/arc-themes-blocks",
+	"license": "CC-BY-NC-ND-4.0",
+	"main": "",
+	"files": [
+		"sources"
+	],
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/",
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
+		"directory": "blocks/content-api-source-block"
+	},
+	"dependencies": {
+		"axios": "^0.26.0",
+		"@wpmedia/arc-themes-components": "*",
+		"@wpmedia/signing-service-content-source-block": "*"
+	},
+	"gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

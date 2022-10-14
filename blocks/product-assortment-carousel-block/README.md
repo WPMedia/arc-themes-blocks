@@ -35,7 +35,6 @@ The block relies on Algolia data to render the products in the carousel. The fie
       - For each price object
         - `type` - `Sale` or `List`
         - `amount`
-        - `id`
 
 ## Internationalization fields
 

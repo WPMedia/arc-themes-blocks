@@ -16,7 +16,7 @@ _This is a helper to transform the return value of the content sources. This is 
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
+Outline any schema information requirements necessary to know for this block
 
 ### ANS Fields
 

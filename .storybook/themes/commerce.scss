@@ -888,7 +888,8 @@
 					grid-template-columns: initial,
 					grid-template-rows: 1fr,
 					gap: var(--global-spacing-5),
-					margin: 0,
+					margin: auto,
+					max-width: calc(var(--content-max-width) * 1px),
 					width: 100%,
 				),
 				right-rail-main-right-rail: (
@@ -1106,11 +1107,9 @@
 					gap: var(--global-spacing-10),
 				),
 				right-rail-rail-container: (
-					margin: auto,
 					grid-template-columns: repeat(12, 1fr),
 					gap: var(--global-spacing-6),
 					grid-template-rows: initial,
-					max-width: calc(var(--content-max-width) * 1px),
 					width: var(--content-scale-width),
 				),
 				right-rail-main-right-rail: (

@@ -5,9 +5,7 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-content-source-block/featur
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 
-import { useFusionContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
-import getTranslatedPhrases from 'fusion:intl';
+import { usePhrases } from '@wpmedia/arc-themes-components';
 
 // icons and other utilities can be found in the engine theme sdk storybook
 // https://beta--5eed0506faad4f0022fedf95.chromatic.com/
@@ -22,9 +20,7 @@ function <%= h.changeCase.pascal(feature_name) %>({ customFields }) {
 
   // get properties from context for using translations in intl.json
   // See document for more info https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
-  const { arcSite } = useFusionContext();
-  const { locale } = getProperties(arcSite);
-  const phrases = getTranslatedPhrases(locale);
+  const phrases = usePhrases();
 
   return (
     <div>

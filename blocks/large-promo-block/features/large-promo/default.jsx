@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import getTranslatedPhrases from "fusion:intl";
 import getProperties from "fusion:properties";
 import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
@@ -27,6 +26,7 @@ import {
 	formatAuthors,
 	Attribution,
 	Separator,
+	usePhrases,
 	Video,
 } from "@wpmedia/arc-themes-components";
 
@@ -258,7 +258,6 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 		},
 		fallbackImage,
-		locale,
 	} = getProperties(arcSite);
 
 	const displayDate = localizeDateTime(
@@ -267,7 +266,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		language,
 		timeZone
 	);
-	const phrases = getTranslatedPhrases(locale || "en");
+	const phrases = usePhrases();
 
 	const editableDescription = content?.description
 		? editableContent(content, "description.basic")

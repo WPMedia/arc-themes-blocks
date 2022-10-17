@@ -1,7 +1,5 @@
 import React from "react";
 
-import getTranslatedPhrases from "fusion:intl";
-
 import {
 	Conditional,
 	formatSocialURL,
@@ -13,6 +11,7 @@ import {
 	MediaItem,
 	Paragraph,
 	Stack,
+	usePhrases,
 } from "@wpmedia/arc-themes-components";
 
 const socialIcons = {
@@ -34,8 +33,8 @@ const socialIcons = {
 
 const BLOCK_CLASS_NAME = "b-full-author-bio";
 
-const Presentation = ({ author = {}, authorProfileLink, locale }) => {
-	const phrases = getTranslatedPhrases(locale);
+const Presentation = ({ author = {}, authorProfileLink }) => {
+	const phrases = usePhrases();
 	const supportedSocials = Object.keys(socialIcons);
 	const socials = Object.entries(author)
 		.filter(([key, value]) => supportedSocials.includes(key) && value)

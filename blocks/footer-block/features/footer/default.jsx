@@ -3,7 +3,6 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
@@ -17,6 +16,7 @@ import {
 	MediaItem,
 	Paragraph,
 	Stack,
+	usePhrases,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-footer";
@@ -32,9 +32,8 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 		lightBackgroundLogoAlt,
 		primaryLogo,
 		primaryLogoAlt,
-		locale,
 	} = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const phrases = usePhrases();
 
 	// Check if URL is absolute/base64
 	let logoUrl = lightBackgroundLogo || primaryLogo;

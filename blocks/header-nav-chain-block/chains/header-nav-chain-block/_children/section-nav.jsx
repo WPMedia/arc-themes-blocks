@@ -1,8 +1,5 @@
 import React from "react";
-import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
-import { Link, Stack, Button, Icon } from "@wpmedia/arc-themes-components";
+import { Link, Stack, Button, Icon, usePhrases } from "@wpmedia/arc-themes-components";
 
 function hasChildren(node) {
 	return node.children && node.children.length > 0;
@@ -51,9 +48,7 @@ const isSamePath = (current, menuLink) => {
 // and has default button behaviour and the onClick event on the parent
 // div receives the event via propagation.
 const SubSectionAnchor = ({ item, isOpen, isHidden, blockClassName }) => {
-	const { arcSite } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const phrases = usePhrases();
 
 	return (
 		<Stack

@@ -46,7 +46,6 @@ describe("Given the list of author(s) from the article", () => {
 
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
 				globalContent: {
 					credits: {
 						by: [
@@ -87,7 +86,6 @@ describe("Given the list of author(s) from the article", () => {
 
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
 				globalContent: {
 					credits: {
 						by: [
@@ -151,7 +149,6 @@ describe("Given the list of author(s) from the article", () => {
 
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
 				globalContent: {
 					credits: {
 						by: [
@@ -213,7 +210,6 @@ describe("Given the list of author(s) from the article", () => {
 
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
 				globalContent: {
 					credits: {
 						by: [
@@ -248,7 +244,6 @@ describe("Given the list of author(s) from the article", () => {
 
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
 				globalContent: {
 					credits: {
 						by: [
@@ -286,7 +281,6 @@ describe("Given the list of author(s) from the article", () => {
 
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
 				globalContent: {
 					credits: {
 						by: [
@@ -321,7 +315,6 @@ describe("Given the list of author(s) from the article", () => {
 
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
 				globalContent: {
 					credits: {
 						by: [
@@ -412,7 +405,6 @@ describe("Given the list of author(s) from the article", () => {
 
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
 				globalContent: {
 					credits: {
 						by: [
@@ -451,7 +443,6 @@ describe("Given the list of author(s) from the article", () => {
 
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
 				globalContent: {
 					credits: {
 						by: [
@@ -488,7 +479,6 @@ describe("Given the list of author(s) from the article", () => {
 
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
 				globalContent: {
 					credits: {
 						by: [
@@ -531,7 +521,6 @@ describe("Given the list of author(s) from the article", () => {
 
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
 				globalContent: {
 					credits: {
 						by: [
@@ -571,7 +560,6 @@ describe("Given the list of author(s) from the article", () => {
 
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
 				globalContent: {
 					credits: {
 						by: [
@@ -616,7 +604,6 @@ describe("Given the list of author(s) from the article", () => {
 
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
 				globalContent: {
 					credits: {
 						by: [
@@ -659,7 +646,6 @@ describe("Given the list of author(s) from the article", () => {
 
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
 				globalContent: {
 					credits: {
 						by: [

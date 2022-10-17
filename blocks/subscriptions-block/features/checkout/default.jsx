@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
-import { PrimaryFont } from "@wpmedia/shared-styles";
+
+import { usePhrases } from "@wpmedia/arc-themes-components";
 import useIdentity from "@wpmedia/identity-block/components/Identity";
+import { PrimaryFont } from "@wpmedia/shared-styles";
+
 import useSales from "../../components/useSales";
 import Cart from "../../components/Cart";
 import ContactInfo from "../../components/ContactInfo";
@@ -24,9 +24,7 @@ const Checkout = ({ customFields }) => {
 
 	const { Identity, getSignedInIdentity } = useIdentity();
 	const { Sales } = useSales();
-
-	const { arcSite } = useFusionContext();
-	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+	const phrases = usePhrases();
 
 	useEffect(() => {
 		const isLoggedIn = async () => {

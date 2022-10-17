@@ -3,7 +3,6 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext, useAppContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
@@ -14,6 +13,7 @@ import {
 	imageANSToImageSrc,
 	isServerSide,
 	MediaItem,
+	usePhrases,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-gallery";
@@ -48,8 +48,8 @@ export const GalleryPresentation = ({
 		AdBlock = () => <p>Ad block not found</p>;
 	}
 
-	const { galleryCubeClicks, locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const { galleryCubeClicks } = getProperties(arcSite);
+	const phrases = usePhrases();
 	const content = useContent(
 		galleryContentConfig
 			? {

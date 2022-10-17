@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import getTranslatedPhrases from "fusion:intl";
-import getProperties from "fusion:properties";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
 	Conditional,
@@ -15,6 +13,7 @@ import {
 	Link,
 	Paragraph,
 	Stack,
+	usePhrases,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-author-bio";
@@ -37,14 +36,13 @@ const siteMap = {
 };
 
 const AuthorBioItemsContainer = () => {
-	const { globalContent: content, arcSite } = useFusionContext();
+	const { globalContent: content } = useFusionContext();
 
-	return <AuthorBioItems arcSite={arcSite} content={content} />;
+	return <AuthorBioItems content={content} />;
 };
 
-export const AuthorBioItems = ({ arcSite, content }) => {
-	const { locale = "en" } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+export const AuthorBioItems = ({ content }) => {
+	const phrases = usePhrases();
 	const { credits = {} } = content;
 	const { by = [] } = credits;
 

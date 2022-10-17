@@ -6,9 +6,49 @@ Documentation is located in the [Themes Internal confluence for internal themes 
 
 ## Available Commands
 
+### `npm run build-storybook`
+
+Builds the storybook static site to the default `storybook-static` directory based on [documentation](https://www.chromatic.com/docs/cli#storybook-options). This command is exclusively used for [building the storybook static site for Chromatic](https://www.chromatic.com/docs/setup). Chromatic is used for visual regression testing within your pull request. The [GitHub Workflow](./.github/workflows/chromatic.yml) can be modified depending on potential Chromatic or Storybook updates.
+
+### `npm run format`
+
+Run [`prettier`](https://prettier.io/docs/en/index.html) to format all files not excluded by `.prettierignore`. The `.prettierrc.js` opts into using tabs for accessibility. See [Prettier docs](https://prettier.io/docs/en/options.html#tabs) for more information on tabs in prettier. Prettier is run on pre-commit using `lint-staged` for changed files. `npx lint-staged` is called from the [Husky pre-commit file](./.husky/pre-commit). The pre-commit hook ensures that all of the files don't need to be formatted with each iteration. I'd also encourage downloading and using [the recommended VS Code extensions configured](./.vscode/extensions.json), specifically the [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extension.
+
+### `npm run generate:chain`
+
+The command will generate a new chain. This will create a new block folder with a chain folder containing the new chain. The prompt is available: [`_templates/chain/new`](./_templates/chain/new/prompt.js).
+
+### `npm run generate:content-source`
+
+The command will generate a new content source. This will create a new block folder with a content source folder containing the new `sources` folder. The prompt is available: [`_templates/content-source/new`](./_templates/content-source/new/prompt.js).
+
+### `npm run generate:feature`
+
+The command will generate a new feature. This will create a new block folder with a feature folder containing the new feature. The prompt is available: [`_templates/feature/new`](./_templates/feature/new/prompt.js).
+
+### `npm run generate:feature:feature`
+
+The command will generate a new feature within an existing feature block. Within the existing feature folder, a new feature will be created within the preexisting block. The prompt is available: [`_templates/feature/feature`](./_templates/feature/feature/prompt.js).
+
+### `npm run generate:feature:content-source`
+
+The command will generate a new content source within an existing feature block. Within the existing feature folder, a new content source will be created within the preexisting block. The prompt is available: [`_templates/feature/content-source`](./_templates/feature/content-source/prompt.js).
+
+### `npm run generate:content-source:content-source`
+
+The command will generate a new content source within an existing content source block. Within the existing content source folder, a new content source will be created within the preexisting block. The prompt is available: [`_templates/content-source/content-source`](./_templates/content-source/content-source/prompt.js).
+
+### `npm run generate:content-source:feature`
+
+The command will generate a new feature within an existing content source block. Within the existing content source folder, a new feature will be created within the preexisting block. The prompt is available: [`_templates/content-source/feature`](./_templates/content-source/feature/prompt.js).
+
 ### `npm i`
 
 Install all dependencies, including nested ones. See more on [local paths](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#local-paths). The local paths are used for fusion linking. On [`postinstall`](https://docs.npmjs.com/cli/v8/using-npm/scripts#life-cycle-scripts), the `npx lerna clean -y` will run, which removes nested dependencies [docs](https://github.com/lerna/lerna/tree/main/commands/clean#readme). Any dependencies that an individual block needs, it needs to be installed at the top-level for testing to work. For example, the package `algoliasearch` will need to be installed at the [top-level](./package.json) for testing to work for the [`algolia-assortment-content-source-block`](./blocks/algolia-assortment-content-source-block/sources/algolia-assortment.js). It should also be installed in the nested block's [package.json](./blocks/algolia-assortment-content-source-block/package.json) for [installing on Fusion](https://github.com/WPMedia/fusion/blob/master/engine/src/scripts/block-installer.js#L68).
+
+### `npm run generate:intl`
+
+Based off of the [Lokalise](https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Arc+Themes+Blocks+Internationalisation) structure, this generates locale files that Fusion can read for each block (e.g., Article Body Block's [intl.json](./blocks/article-body-block/intl.json)). The base translations are available within [the locale folder](./locale/). This script is also located within [the locale folder](./locale/scripts/generate-intl.js). Note that there is a block that is exclusively translations across other blocks called [Global Phrases Block](./blocks/global-phrases-block/intl.json).
 
 ### `npm run lint`
 
@@ -22,13 +62,9 @@ Fixes any lint issues that can be fixed automatically from the files mentioned i
 
 The base lint command that runs `stylelint` on `.scss` files, excluding any files in `.stylelintignore`. Stylelint is used to find potential issues in styles.
 
-### `npm run test:watch`
+### `npm run lint:styles:fix`
 
-Run all tests for code that has changed. Will also show coverage for changed code. This is the command to run when developing. To see coverage thresholds goals, see the `jest.config.js` file `coverageThreshold` property. For more information on the `jest` configuration coverage, see [jest docs](https://jestjs.io/docs/configuration#coveragethreshold-object).
-
-### `npm run test:changed-feature-branch`
-
-Similar to `npm run test:watch`, but will run tests for all blocks that have changed since the last commit on the target release branch. This should be updated with each new version `"jest --changedSince=origin/arc-themes-release-version-2.0.3 --coverage --passWithNoTests",` -> `"jest --changedSince=origin/arc-themes-release-version-2.0.4 --coverage --passWithNoTests",` for `2.0.3` -> `2.0.4`. This runs in the [GitHub Workflow for testing blocks on Pull Requests](./.github/workflows/test-coverage-blocks.yml). It also runs on pre-push using [Husky](https://github.com/typicode/husky#usage). Note that the Husky pre-push file is located in [root](./.husky/pre-push) and not in the package.json, per version 7 of Husky.
+Fixes any stylelint issues that can be fixed automatically from the files mentioned in `npm run lint:styles`.
 
 ### `npm run lint:changed-feature-branch`
 
@@ -38,9 +74,13 @@ Similar to `npm run test:changed-feature-branch`, this runs on pre-push and with
 
 Using `npm run lint:changed-feature-branch` logic, but will also fix any potential problems using ESlint's [`--fix` flag](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix). Note that there are some errors and warnings that cannot be fixed automatically, so this command will not fix all issues.
 
-### `npm run format`
+### `npm run test:watch`
 
-Run [`prettier`](https://prettier.io/docs/en/index.html) to format all files not excluded by `.prettierignore`. The `.prettierrc.js` opts into using tabs for accessibility. See [Prettier docs](https://prettier.io/docs/en/options.html#tabs) for more information on tabs in prettier. Prettier is run on pre-commit using `lint-staged` for changed files. `npx lint-staged` is called from the [Husky pre-commit file](./.husky/pre-commit). The pre-commit hook ensures that all of the files don't need to be formatted with each iteration. I'd also encourage downloading and using [the recommended VS Code extensions configured](./.vscode/extensions.json), specifically the [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extension.
+Run all tests for code that has changed. Will also show coverage for changed code. This is the command to run when developing. To see coverage thresholds goals, see the `jest.config.js` file `coverageThreshold` property. For more information on the `jest` configuration coverage, see [jest docs](https://jestjs.io/docs/configuration#coveragethreshold-object).
+
+### `npm run test:changed-feature-branch`
+
+Similar to `npm run test:watch`, but will run tests for all blocks that have changed since the last commit on the target release branch. This should be updated with each new version `"jest --changedSince=origin/arc-themes-release-version-2.0.3 --coverage --passWithNoTests",` -> `"jest --changedSince=origin/arc-themes-release-version-2.0.4 --coverage --passWithNoTests",` for `2.0.3` -> `2.0.4`. This runs in the [GitHub Workflow for testing blocks on Pull Requests](./.github/workflows/test-coverage-blocks.yml). It also runs on pre-push using [Husky](https://github.com/typicode/husky#usage). Note that the Husky pre-push file is located in [root](./.husky/pre-push) and not in the package.json, per version 7 of Husky.
 
 ## Storybook Setup
 

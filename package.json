@@ -13,7 +13,7 @@
   "scripts": {
     "lint": "eslint --ext js --ext jsx blocks .storybook --no-error-on-unmatched-pattern",
     "lint:styles": "stylelint '**/*.scss' --formatter verbose",
-    "lint:styles:fix": "stylelint '**/*.scss' --fix",
+    "lint:styles:fix": "npm run lint:styles -- --fix",
     "lint:fix": "npm run lint -- --fix",
     "storybook": "start-storybook -p 60001",
     "test": "jest",

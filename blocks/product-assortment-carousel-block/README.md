@@ -26,14 +26,15 @@ The block relies on Algolia data to render the products in the carousel. The fie
 - Image
 - Attributes - array of objects
   - `name = product_url`
-- Prices - array of object
-  - `type = List`
-  - `type = Sale`
-  - For each price
+- Pricing - array of object
+  - For each pricing object
     - `currencyLocale`
     - `currencyCode`
-    - `amount`
-    - `type`
+    - `currencyDisplayFormat`
+    - Prices - array of object
+      - For each price object
+        - `type` - `Sale` or `List`
+        - `amount`
 
 ## Internationalization fields
 

@@ -2,7 +2,6 @@ import React from "react";
 
 import { useContent, useEditableContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
-import getTranslatedPhrases from "fusion:intl";
 import getProperties from "fusion:properties";
 
 import PropTypes from "@arc-fusion/prop-types";
@@ -24,6 +23,7 @@ import {
 	Paragraph,
 	Separator,
 	Stack,
+	usePhrases,
 	Video,
 } from "@wpmedia/arc-themes-components";
 
@@ -41,9 +41,8 @@ const ExtraLargePromo = ({ customFields }) => {
 			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 		},
 		fallbackImage,
-		locale,
 	} = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale || "en");
+	const phrases = usePhrases();
 	const {
 		imageOverrideURL,
 		imageRatio,

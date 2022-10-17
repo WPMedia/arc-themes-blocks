@@ -1,8 +1,5 @@
 import React from "react";
-import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
-import { Button, Icon } from "@wpmedia/arc-themes-components";
+import { Button, Icon, usePhrases } from "@wpmedia/arc-themes-components";
 
 /*
   This querylySearchClick event isn't the ideal solution -
@@ -17,9 +14,7 @@ const querylySearchClick = () => {
 };
 
 const QuerylySearch = () => {
-	const { arcSite } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const phrases = usePhrases();
 
 	return (
 		<Button

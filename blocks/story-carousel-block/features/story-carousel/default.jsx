@@ -2,19 +2,19 @@ import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import {
 	Carousel,
-	Image,
-	Icon,
+	getImageFromANS,
 	Heading,
+	HeadingSection,
+	Icon,
+	Image,
 	Link,
 	Paragraph,
 	Stack,
-	HeadingSection,
-	getImageFromANS,
+	usePhrases,
 } from "@wpmedia/arc-themes-components";
+
 import { useContent } from "fusion:content";
 import { useFusionContext, useComponentContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 
 const BLOCK_CLASS_NAME = "b-story-carousel";
 
@@ -26,8 +26,7 @@ const StoryCarousel = ({
 }) => {
 	const { id } = useComponentContext();
 	const { arcSite, isAdmin } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const phrases = usePhrases();
 	const content =
 		useContent({
 			source: contentService,

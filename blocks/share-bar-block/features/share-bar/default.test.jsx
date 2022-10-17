@@ -3,11 +3,9 @@ import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
-import getTranslatedPhrases from "fusion:intl";
 // presentational component not container
 import ShareBarContainer, { ShareBar } from "./default";
 
-const mockPhrases = { t: jest.fn((phrase) => phrase) };
 const websiteDomain = "https://www.thesun.com/";
 const websiteName = "The Sun";
 const websiteUrl = "/2019/07/15/global-kitchen-sink-article/";
@@ -29,7 +27,6 @@ describe("Share Bar", () => {
 				websiteDomain={websiteDomain}
 				websiteUrl={websiteUrl}
 				headlineString={headlineString}
-				phrases={mockPhrases}
 			/>
 		);
 		const buttons = getAllByRole("button");
@@ -50,7 +47,6 @@ describe("Share Bar", () => {
 				websiteDomain={websiteDomain}
 				websiteUrl={websiteUrl}
 				headlineString={headlineString}
-				phrases={mockPhrases}
 			/>
 		);
 
@@ -72,7 +68,6 @@ describe("Share Bar", () => {
 				websiteDomain={websiteDomain}
 				websiteUrl={websiteUrl}
 				headlineString={headlineString}
-				phrases={mockPhrases}
 			/>
 		);
 		expect(container.firstChild).toBeNull();
@@ -86,7 +81,6 @@ describe("Share Bar", () => {
 				websiteDomain={websiteDomain}
 				websiteUrl={websiteUrl}
 				headlineString={headlineString}
-				phrases={mockPhrases}
 			/>
 		);
 		expect(container.firstChild).toBeNull();
@@ -106,7 +100,6 @@ describe("Share Bar", () => {
 					websiteDomain={websiteDomain}
 					websiteUrl={websiteUrl}
 					headlineString={headlineString}
-					phrases={mockPhrases}
 				/>
 			);
 			global.open = jest.fn();
@@ -133,7 +126,6 @@ describe("Share Bar", () => {
 					websiteDomain={websiteDomain}
 					websiteUrl={websiteUrl}
 					headlineString={headlineString}
-					phrases={mockPhrases}
 				/>
 			);
 			global.open = jest.fn();
@@ -160,7 +152,6 @@ describe("Share Bar", () => {
 					websiteDomain={websiteDomain}
 					websiteUrl={websiteUrl}
 					headlineString={headlineString}
-					phrases={mockPhrases}
 				/>
 			);
 			global.open = jest.fn();
@@ -187,7 +178,6 @@ describe("Share Bar", () => {
 					websiteDomain={websiteDomain}
 					websiteUrl={websiteUrl}
 					headlineString={headlineString}
-					phrases={mockPhrases}
 				/>
 			);
 			global.open = jest.fn();
@@ -214,7 +204,6 @@ describe("Share Bar", () => {
 					websiteDomain={websiteDomain}
 					websiteUrl={websiteUrl}
 					headlineString={headlineString}
-					phrases={mockPhrases}
 				/>
 			);
 			global.open = jest.fn();
@@ -233,7 +222,6 @@ describe("Share Bar", () => {
 	describe("Share Bar Container", () => {
 		beforeEach(() => {
 			jest.clearAllMocks();
-			getTranslatedPhrases.mockImplementation(() => ({}));
 		});
 
 		it("Should call ShareBar", () => {
@@ -260,7 +248,6 @@ describe("Share Bar", () => {
 					websiteDomain={websiteDomain}
 					websiteUrl={websiteUrl}
 					headlineString={headlineString}
-					phrases={mockPhrases}
 				/>
 			);
 			expect(container.firstChild).not.toBeNull();
@@ -289,7 +276,6 @@ describe("Share Bar", () => {
 					websiteDomain={websiteDomain}
 					websiteUrl={websiteUrl}
 					headlineString={headlineString}
-					phrases={mockPhrases}
 				/>
 			);
 			expect(container.firstChild).not.toBeNull();

@@ -40,7 +40,7 @@ Using `npm run lint:changed-feature-branch` logic, but will also fix any potenti
 
 ### `npm run format`
 
-Run [`prettier`](https://prettier.io/docs/en/index.html) to format all files not excluded by `.prettierignore`. The `.prettierrc.js` opts into using tabs for accessibility. See [Prettier docs](https://prettier.io/docs/en/options.html#tabs) for more information. Prettier is run on pre-commit using `lint-staged` for changed files. `npx lint-staged` is called from the [Husky pre-commit file](./.husky/pre-commit). The pre-commit hook ensures that all of the files don't need to be formatted with each iteration. I'd also encourage downloading and using [the recommended VS Code extensions configured](./.vscode/extensions.json), specifically the [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extension.
+Run [`prettier`](https://prettier.io/docs/en/index.html) to format all files not excluded by `.prettierignore`. The `.prettierrc.js` opts into using tabs for accessibility. See [Prettier docs](https://prettier.io/docs/en/options.html#tabs) for more information on tabs in prettier. Prettier is run on pre-commit using `lint-staged` for changed files. `npx lint-staged` is called from the [Husky pre-commit file](./.husky/pre-commit). The pre-commit hook ensures that all of the files don't need to be formatted with each iteration. I'd also encourage downloading and using [the recommended VS Code extensions configured](./.vscode/extensions.json), specifically the [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extension.
 
 ## Storybook Setup
 

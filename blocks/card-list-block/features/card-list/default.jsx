@@ -4,7 +4,6 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 import { LazyLoad, localizeDate } from "@wpmedia/engine-theme-sdk";
 import {
 	Attribution,
@@ -20,6 +19,7 @@ import {
 	Overline,
 	Separator,
 	Stack,
+	usePhrases,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-card-list";
@@ -50,6 +50,7 @@ const CardListItems = (props) => {
 			dateFormat: "LLLL d, yyyy",
 		},
 	} = props;
+	const phrases = usePhrases();
 
 	// need to inject the arc site here into use content
 	const { content_elements: contentElements = [] } =
@@ -132,7 +133,6 @@ const CardListItems = (props) => {
 	}
 
 	const sourceContent = contentElements[0];
-	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
 
 	const displayDate = localizeDate(sourceContent.display_date, dateFormat, language, timeZone);
 
@@ -149,10 +149,7 @@ const CardListItems = (props) => {
 	const shouldUseLabel = !!labelDisplay;
 
 	const { _id: sectionUrl, name: sectionText } =
-		(sourceContent.websites &&
-			sourceContent.websites[arcSite] &&
-			sourceContent.websites[arcSite].website_section) ||
-		{};
+		sourceContent?.websites?.[arcSite]?.website_section || {};
 
 	// Default to websites object data
 	let [text, url] = [sectionText, sectionUrl];

@@ -1,14 +1,12 @@
 import React from "react";
 import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
-import { Overline as OverlineOutput, formatURL } from "@wpmedia/arc-themes-components";
+import { formatURL, Overline as OverlineOutput, usePhrases } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-overline";
 
 const Overline = () => {
 	const { globalContent, arcSite } = useFusionContext();
-	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+	const phrases = usePhrases();
 
 	const sourceContent = globalContent || {};
 

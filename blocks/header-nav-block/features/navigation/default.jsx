@@ -5,8 +5,8 @@ import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getThemeStyle from "fusion:themes";
-import getTranslatedPhrases from "fusion:intl";
 import { HamburgerMenuIcon, UserIcon } from "@wpmedia/engine-theme-sdk";
+import { usePhrases } from "@wpmedia/arc-themes-components";
 import SectionNav from "./_children/section-nav";
 import SearchBox from "./_children/search-box";
 // shares styles with header nav chain
@@ -57,7 +57,6 @@ const Nav = (props) => {
 		primaryLogo,
 		primaryLogoAlt,
 		navColor = "dark",
-		locale = "en",
 		navBarBackground,
 	} = getProperties(arcSite);
 	let primaryLogoPath;
@@ -65,7 +64,7 @@ const Nav = (props) => {
 	const { "primary-color": primaryColor = "#000", "primary-font-family": primaryFont } =
 		getThemeStyle(arcSite);
 
-	const phrases = getTranslatedPhrases(locale);
+	const phrases = usePhrases();
 
 	const { customFields: { hierarchy, showSignIn } = {}, customSearchAction = null } = props;
 

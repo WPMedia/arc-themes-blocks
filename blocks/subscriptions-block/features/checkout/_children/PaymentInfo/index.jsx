@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
+
+import { usePhrases } from "@wpmedia/arc-themes-components";
+
 import PaymentForm from "../../../../components/PaymentForm";
 
 const PaymentInfo = ({ orderNumber, paymentDetails, paymentMethodID, successURL }) => {
@@ -12,9 +12,7 @@ const PaymentInfo = ({ orderNumber, paymentDetails, paymentMethodID, successURL 
 	// initialized payment doc https://redirector.arcpublishing.com/alc/docs/api/arc-sdks/interfaces/_sdk_sales_src_sdk_order_.initializedpayment.html
 	const { parameter2: stripeKey, parameter1: clientSecret } = paymentDetails;
 
-	const { arcSite } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const phrases = usePhrases();
 
 	const formErrorText = phrases.t("subscriptions-block.payment-error");
 	const formLabel = phrases.t("subscriptions-block.credit-card-information");

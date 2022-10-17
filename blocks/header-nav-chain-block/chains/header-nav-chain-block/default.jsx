@@ -3,9 +3,8 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 import FocusTrap from "focus-trap-react";
-import { Stack } from "@wpmedia/arc-themes-components";
+import { Stack, usePhrases } from "@wpmedia/arc-themes-components";
 import { useDebouncedCallback } from "use-debounce";
 import { generateNavComponentPropTypes } from "./nav-helper";
 import SectionNav from "./_children/section-nav";
@@ -155,7 +154,7 @@ const Nav = (props) => {
 	const [isScrolled, setIsScrolled] = useState(false);
 	const { arcSite, isAdmin, deployment, contextPath } = useFusionContext();
 
-	const { locale, primaryLogo, primaryLogoAlt } = getProperties(arcSite);
+	const { primaryLogo, primaryLogoAlt } = getProperties(arcSite);
 
 	// Check if URL is absolute/base64
 	const primaryLogoPath =
@@ -164,7 +163,7 @@ const Nav = (props) => {
 			? primaryLogo
 			: deployment(`${contextPath}/${primaryLogo}`));
 
-	const phrases = getTranslatedPhrases(locale);
+	const phrases = usePhrases();
 
 	const { children = [], customFields } = props;
 	const {

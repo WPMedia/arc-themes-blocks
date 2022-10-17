@@ -74,6 +74,10 @@ Similar to `npm run test:changed-feature-branch`, this runs on pre-push and with
 
 Using `npm run lint:changed-feature-branch` logic, but will also fix any potential problems using ESlint's [`--fix` flag](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix). Note that there are some errors and warnings that cannot be fixed automatically, so this command will not fix all issues.
 
+### `npm run storybook`
+
+See storybook setup below for more information. This is a helpful way of developing blocks without using Fusion. Please note the pattern used in blocks for consuming content in the [`.storybook/alias/content.js`](./.storybook/alias/content.js) file. This is a helpful way of mocking content for blocks using mocks available in the [`storybook/mock-content`](./.storybook/mock-content/footer.js) folder. There is also a pattern of mocking the content call by using presentational components with a thin wrapper. See examples at [Large Promo](./blocks/large-promo-block/features/large-promo/default.jsx) and its [Storybook file](./blocks/large-promo-block/index.story.jsx), as well as using a parent class-based component with [Alert Bar](./blocks/alert-bar-block/features/alert-bar/default.jsx) and its [Storybook file](./blocks/alert-bar-block/index.story.jsx).
+
 ### `npm run test:watch`
 
 Run all tests for code that has changed. Will also show coverage for changed code. This is the command to run when developing. To see coverage thresholds goals, see the `jest.config.js` file `coverageThreshold` property. For more information on the `jest` configuration coverage, see [jest docs](https://jestjs.io/docs/configuration#coveragethreshold-object).
@@ -99,11 +103,11 @@ registry=https://registry.npmjs.org
 
 ## `dist-tags`
 
-Please see the release notes in Confluence if you are a Themes developer.
+Please see the [release notes in Confluence](https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2344910925/Themes+Releases) if you are a Themes developer.
 
 This package has been published with a number of dist-tags meant for different purposes:
 
-- `arc-themes-release-version-X.XX` - These are versioned versions of all blocks for a given release cycle
+- `arc-themes-release-version-X.XX` - These are versioned versions of all blocks for a given release cycle in the [Theme Manifest repo](https://github.com/WPMedia/arc-themes-manifests)
 
 ## License
 

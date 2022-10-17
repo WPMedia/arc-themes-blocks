@@ -19,6 +19,6 @@
     "directory": "blocks/commerce-product-content-source-block"
   },
   "dependencies": {
-    "axios": "^0.26.0"
+    "axios": "^1.1.3"
   }
 }

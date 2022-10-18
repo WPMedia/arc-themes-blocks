@@ -1,87 +1,120 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 
-import {
-	Button,
-	Icon,
-	Image,
-	Paragraph,
-	Stack,
-	imageANSToImageSrc,
-} from "@wpmedia/arc-themes-components";
+import { Button, Icon, Image, Stack, imageANSToImageSrc } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-gallery";
 
 const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
-	const thumbnailBarItemLimit = 3;
 	const getImageIndexById = (id) => images.findIndex((image) => image._id === id);
-	const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(selectedIndex);
 	const [thumbnailBarStartIndex, setThumbnailBarStartIndex] = useState(selectedIndex);
+	const [thumbnailBarItemLimit, setThumbnailBarItemLimit] = useState(3);
 
+	const upButtonRef = useRef();
+	const downButtonRef = useRef();
+	const imageContainerRef = useRef();
+	const indicatorRef = useRef();
+	const thumbnailBarRef = useRef();
 	const shouldShowDownButton = () =>
 		images.length >= thumbnailBarItemLimit &&
 		thumbnailBarStartIndex + thumbnailBarItemLimit < images.length;
 
-	const shouldShowUpButton = () => thumbnailBarStartIndex !== 0;
+	const shouldShowUpButton = () =>
+		thumbnailBarItemLimit < images.length && thumbnailBarStartIndex !== 0;
 
-	/*
 	useEffect(() => {
-		//  thumbnailBarItemLimit
-		//  selectedThumbnailIndex
-		//  productImages.length
-		// 	thumbnailBarStartIndex
-		// 	setThumbnailBarStartIndex
-	}, [selectedThumbnailIndex]);
-	*/
+		setThumbnailBarStartIndex(selectedIndex);
+	}, [selectedIndex]);
+
+	useEffect(() => {
+		const windowResize = () => {
+			// Math
+			const upButtonHeight = upButtonRef.current?.getBoundingClientRect().height || 0;
+			const downButtonHeight = downButtonRef.current?.getBoundingClientRect().height || 0;
+			const indicatorHeight = indicatorRef.current.getBoundingClientRect().height;
+			const thumbnailBarHeight = thumbnailBarRef.current.getBoundingClientRect().height;
+
+			const imageContainerGap = Number.parseInt(
+				window.getComputedStyle(imageContainerRef.current.firstChild).getPropertyValue("gap"),
+				10
+			);
+			const thumbnailBarTopPadding = Number.parseInt(
+				window.getComputedStyle(thumbnailBarRef.current).getPropertyValue("padding-top"),
+				10
+			);
+			const thumbnailBarBottomPadding = Number.parseInt(
+				window.getComputedStyle(thumbnailBarRef.current).getPropertyValue("padding-bottom"),
+				10
+			);
+			const availableHeight =
+				thumbnailBarHeight -
+				upButtonHeight -
+				downButtonHeight -
+				indicatorHeight -
+				thumbnailBarTopPadding -
+				thumbnailBarBottomPadding;
+
+			const spots = Math.floor(availableHeight / (100 + imageContainerGap));
+
+			setThumbnailBarItemLimit(Math.max(spots, 1));
+		};
+		// windowResize();
+		window.addEventListener("resize", windowResize);
+
+		return () => window.removeEventListener("resize", windowResize);
+	}, [upButtonRef, downButtonRef, imageContainerRef, indicatorRef, thumbnailBarRef]);
 
 	return (
-		<div className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-bar`}>
-			<Paragraph>
-				{selectedThumbnailIndex + 1} / {images.length}
-			</Paragraph>
+		<div className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-bar`} ref={thumbnailBarRef}>
+			<span ref={indicatorRef}>
+				{selectedIndex + 1} / {images.length}
+			</span>
 			{shouldShowUpButton() ? (
 				<Button
 					accessibilityLabel="Previous Image"
 					onClick={() => setThumbnailBarStartIndex(thumbnailBarStartIndex - 1)}
+					ref={upButtonRef}
 				>
 					<Icon name="ChevronUp" />
 				</Button>
 			) : (
 				<div className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-bar-spacer`} />
 			)}
-			<Stack alignment="center" direction="vertical" justifacation="start">
-				{images
-					.filter(
-						(_, index) =>
-							index >= Math.min(thumbnailBarStartIndex, images.length - thumbnailBarItemLimit) &&
-							index < thumbnailBarStartIndex + thumbnailBarItemLimit
-						// as long as selected index is less than the length of the product images minus the window
-					)
-					.map((image) => (
-						<Image
-							// used as part of a page design so empty string alt text
-							alt=""
-							className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-image${
-								image._id === images[selectedThumbnailIndex]._id ? "--selected" : ""
-							}`}
-							height={100}
-							key={`focus-view-thumbnail-${image._id}`}
-							onClick={() => {
-								onImageSelect(getImageIndexById(image._id));
-								setSelectedThumbnailIndex(getImageIndexById(image._id));
-							}}
-							resizedOptions={{ auth: image.auth[RESIZER_APP_VERSION] }}
-							resizerURL={RESIZER_URL}
-							responsiveImages={[120]}
-							src={imageANSToImageSrc(image)}
-							width={100}
-						/>
-					))}
-			</Stack>
+			<div ref={imageContainerRef}>
+				<Stack alignment="center" direction="vertical" justification="start">
+					{images
+						.filter(
+							(_, index) =>
+								index >= Math.min(thumbnailBarStartIndex, images.length - thumbnailBarItemLimit) &&
+								index < thumbnailBarStartIndex + thumbnailBarItemLimit
+							// as long as selected index is less than the length of the product images minus the window
+						)
+						.map((image) => (
+							<Image
+								// used as part of a page design so empty string alt text
+								alt=""
+								className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-image${
+									image._id === images[selectedIndex]._id ? "--selected" : ""
+								}`}
+								height={100}
+								key={`focus-view-thumbnail-${image._id}`}
+								onClick={() => {
+									onImageSelect(getImageIndexById(image._id));
+								}}
+								resizedOptions={{ auth: image.auth[RESIZER_APP_VERSION] }}
+								resizerURL={RESIZER_URL}
+								responsiveImages={[120]}
+								src={imageANSToImageSrc(image)}
+								width={100}
+							/>
+						))}
+				</Stack>
+			</div>
 			{shouldShowDownButton() ? (
 				<Button
 					accessibilityLabel="Next Image"
 					onClick={() => setThumbnailBarStartIndex(thumbnailBarStartIndex + 1)}
+					ref={downButtonRef}
 				>
 					<Icon name="ChevronDown" />
 				</Button>

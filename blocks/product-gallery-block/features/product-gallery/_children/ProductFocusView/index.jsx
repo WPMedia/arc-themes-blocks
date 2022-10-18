@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-// import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
-import { Button, Icon, Stack } from "@wpmedia/arc-themes-components";
+import { Button, Grid, Icon, Stack } from "@wpmedia/arc-themes-components";
 
 import MainImage from "../MainImage";
 import ThumbnailBar from "../ThumbnailBar";
@@ -14,15 +13,6 @@ const ProductFocusView = ({ initialItemId, onClose, productImages }) => {
 	const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(
 		getImageIndexById(initialItemId)
 	);
-	/*
-	useEffect(() => {
-		//  thumbnailBarItemLimit
-		//  selectedThumbnailIndex
-		//  productImages.length
-		// 	thumbnailBarStartIndex
-		// 	setThumbnailBarStartIndex
-	}, [selectedThumbnailIndex]);
-*/
 
 	// Scrolls main image into view when thumbnail is selected.
 	useEffect(() => {
@@ -39,21 +29,17 @@ const ProductFocusView = ({ initialItemId, onClose, productImages }) => {
 			}
 		};
 		scrollImageIntoView();
-		console.log(selectedImageIndex);
 		return () => clearTimeout(scrollTimeout);
 	}, [selectedImageIndex, mainImagesRef]);
 
 	return (
 		<div className={`${BLOCK_CLASS_NAME}__focus-view`}>
-			<Stack direction="horizontal" justification="start">
+			<Grid>
 				<ThumbnailBar
 					images={productImages}
 					selectedIndex={selectedThumbnailIndex}
 					onImageSelect={setSelectedImageIndex}
 				/>
-				{/*
-					<ThumbnailBar images={productImages} selectedImage={selectedThumbnailIndex} onImageSelect={(imageId)=>{}} />
-				 */}
 				<Stack
 					alignment="center"
 					direction="vertical"
@@ -69,9 +55,8 @@ const ProductFocusView = ({ initialItemId, onClose, productImages }) => {
 							<MainImage
 								image={image}
 								loading={index === 0 ? "eager" : undefined}
-								onVisible={() => {
-									setSelectedThumbnailIndex(index);
-									console.log("setSelectedThumbnailIndex('", index, "')");
+								onVisible={(id) => {
+									setSelectedThumbnailIndex(getImageIndexById(id));
 								}}
 							/>
 						</div>
@@ -82,7 +67,7 @@ const ProductFocusView = ({ initialItemId, onClose, productImages }) => {
 						<Icon name="Close" />
 					</Button>
 				</div>
-			</Stack>
+			</Grid>
 		</div>
 	);
 };

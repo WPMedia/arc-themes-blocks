@@ -5,7 +5,7 @@ import { Image, imageANSToImageSrc } from "@wpmedia/arc-themes-components";
 function useOnScreen(ref) {
 	const [isIntersecting, setIntersecting] = useState(false);
 	const observer = new IntersectionObserver(([entry]) => setIntersecting(entry.isIntersecting), {
-		threshold: 0.7,
+		rootMargin: "-50% 0% -50% 0%",
 	});
 
 	useEffect(() => {
@@ -25,7 +25,6 @@ const MainImage = ({ image, loading, onVisible }) => {
 	// if (isVisible) setThumbnailId(image._id);
 	useEffect(() => {
 		if (isVisible) {
-			//			console.log(image._id);
 			onVisible(image._id);
 		}
 	}, [isVisible, onVisible, image._id]);

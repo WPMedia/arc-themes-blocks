@@ -1,45 +1,71 @@
+import contentSource from "./content-api-unpublished";
+
+jest.mock("fusion:environment", () => ({
+	CONTENT_BASE: "https://content.base",
+}));
+
+jest.mock("axios", () => ({
+	__esModule: true,
+	default: jest.fn((request) => {
+		const requestUrl = new URL(request.url);
+		const url = {
+			hostname: requestUrl.hostname,
+			pathname: requestUrl.pathname,
+			searchObject: Object.fromEntries(requestUrl.searchParams),
+		};
+		return Promise.resolve({
+			data: {
+				content_elements: [{ url }],
+				request: {
+					...request,
+					url,
+				},
+			},
+		});
+	}),
+}));
+
 describe("the unpublished content source block", () => {
 	it("should use the proper param types", () => {
-		const { default: contentSource } = require("./content-api-unpublished");
 		expect(contentSource.params).toEqual({
 			_id: "text",
+			"arc-site": "text",
 		});
 	});
 
 	describe("when an id is provided", () => {
-		it("should build the correct url", () => {
-			const { default: contentSource } = require("./content-api-unpublished");
-			const url = contentSource.resolve({
-				_id: "test",
-				"arc-site": "bbbbb-ccccc",
-			});
+		it("should build the correct url", async () => {
+			const contentSourceFetch = await contentSource.fetch(
+				{
+					_id: "test",
+					"arc-site": "bbbbb-ccccc",
+				},
+				{ cachedCall: () => {} }
+			);
 
-			expect(url).toEqual("content/v4?_id=test&website=bbbbb-ccccc&published=false");
+			expect(contentSourceFetch.request.url.pathname).toEqual("/content/v4/");
+			expect(contentSourceFetch.request.url.searchObject).toEqual(
+				expect.objectContaining({
+					_id: "test",
+					published: "false",
+					website: "bbbbb-ccccc",
+				})
+			);
 		});
 	});
 
 	describe("when an id and website are NOT provided", () => {
-		it("should not build a url with an id and website", () => {
-			const { default: contentSource } = require("./content-api-unpublished");
-			const url = contentSource.resolve({});
+		it("should not build a url with an id and website", async () => {
+			const contentSourceFetch = await contentSource.fetch({}, { cachedCall: () => {} });
 
-			expect(url).toEqual("content/v4?_id=undefined&website=undefined&published=false");
-		});
-	});
-
-	describe("when use transform function", () => {
-		const mockFn = jest.fn(() => ({}));
-		beforeAll(() => {
-			jest.mock("@wpmedia/resizer-image-block", () => mockFn);
-		});
-		afterAll(() => {
-			jest.resetModules();
-		});
-
-		it("should call getResizedImageData", () => {
-			const { default: contentSource } = require("./content-api-unpublished");
-			contentSource.transform([], {});
-			expect(mockFn.mock.calls.length).toBe(1);
+			expect(contentSourceFetch.request.url.pathname).toEqual("/content/v4/");
+			expect(contentSourceFetch.request.url.searchObject).toEqual(
+				expect.objectContaining({
+					_id: "undefined",
+					published: "false",
+					website: "undefined",
+				})
+			);
 		});
 	});
 });

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CONTENT_BASE, ARC_ACCESS_TOKEN, RESIZER_APP_VERSION } from "fusion:environment";
+import { ARC_ACCESS_TOKEN, CONTENT_BASE, RESIZER_APP_VERSION } from "fusion:environment";
 
 import { signImagesInANSObject } from "@wpmedia/arc-themes-components";
 import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";

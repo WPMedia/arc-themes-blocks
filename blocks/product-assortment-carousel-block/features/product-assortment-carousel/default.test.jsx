@@ -6,10 +6,17 @@ import { useFusionContext } from "fusion:context";
 
 import ProductAssortmentCarousel from "./default";
 
+jest.mock("fusion:environment", () => ({
+	RESIZER_APP_VERSION: 2,
+	RESIZER_URL: "https://resizer.com",
+}));
+
 const IMAGE_OBJECT = {
 	alt_text: "",
-	auth: "auth",
-	url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
+	auth: {
+		2: "auth",
+	},
+	url: "image.jpeg",
 };
 
 const FEATURED_IMAGE_SCHEMA = {

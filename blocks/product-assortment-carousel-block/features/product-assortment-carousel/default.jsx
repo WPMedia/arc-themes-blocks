@@ -156,9 +156,9 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 											resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
 											resizerURL={RESIZER_URL}
 											src={imageANSToImageSrc(featuredImage)}
-											width={150}
-											height={150}
-											responsiveImages={[150, 375, 500, 1500]}
+											width={280}
+											height={280}
+											responsiveImages={[280, 420, 560, 840]}
 										/>
 										{item.name ? (
 											<HeadingSection>

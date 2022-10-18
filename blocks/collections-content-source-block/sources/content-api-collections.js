@@ -1,7 +1,7 @@
 import axios from "axios";
 import { CONTENT_BASE, ARC_ACCESS_TOKEN, RESIZER_APP_VERSION } from "fusion:environment";
 
-import signImagesInANSObject from "@wpmedia/arc-themes-components";
+import { signImagesInANSObject } from "@wpmedia/arc-themes-components";
 import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
 
 const params = {
@@ -9,12 +9,12 @@ const params = {
 	"arc-site": "text",
 	content_alias: "text",
 	from: "text",
-	getNext: "text", // content-source API specifies only "text", "number", or "site" as valid.
+	getNext: "text",
 	size: "text",
 };
-
+// test
 const fetch = (
-	{ _id, "arc-site": site, content_alias, from = "0", getNext = "false", size = "20" },
+	{ _id, "arc-site": site, content_alias, from, getNext = "false", size },
 	{ cachedCall }
 ) => {
 	// Max collection size is 20
@@ -22,14 +22,14 @@ const fetch = (
 	const constrainedSize = size > 20 ? 20 : size;
 	const urlSearch = new URLSearchParams({
 		...(_id ? { _id } : { content_alias }),
-		from,
+		...(from ? { from } : {}),
 		published: true,
-		size: constrainedSize,
 		...(site ? { website: site } : {}),
-	}).toString();
+		...(size ? { size: constrainedSize } : {}),
+	});
 
 	return axios({
-		url: `${CONTENT_BASE}/content/v4/collections?${urlSearch}`,
+		url: `${CONTENT_BASE}/content/v4/collections?${urlSearch.toString()}`,
 		headers: {
 			"content-type": "application/json",
 			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
@@ -38,21 +38,30 @@ const fetch = (
 	})
 		.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_APP_VERSION))
 		.then(({ data }) => {
-			if (getNext !== "false") {
+			if (getNext === "false") {
 				return data;
 			} else {
-				urlSearch.set("from", from + constrainedSize);
+				urlSearch.set("from", (parseInt(from) || 0) + parseInt(constrainedSize));
 				return axios({
-					url: `${CONTENT_BASE}/content/v4/collections?${urlSearch}`,
+					url: `${CONTENT_BASE}/content/v4/collections?${urlSearch.toString()}`,
 					headers: {
 						"content-type": "application/json",
 						Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
 					},
 					method: "GET",
-				}).then(({ data: next }) => ({
-					...data,
-					content_elements: [...data.content_elements, ...(next?.content_elements || [])],
-				}));
+				})
+					.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_APP_VERSION))
+					.then(({ data: next }) => ({
+						...data,
+						...(data?.content_elements || next?.content_elements
+							? {
+									content_elements: [
+										...(data?.content_elements || []),
+										...(next?.content_elements || []),
+									],
+							  }
+							: {}),
+					}));
 			}
 		});
 };

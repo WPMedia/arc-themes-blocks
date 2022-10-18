@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ARC_ACCESS_TOKEN, RESIZER_APP_VERSION, searchKey as SEARCH_KEY } from "fusion:environment";
 
-import signImagesInANSObject from "@wpmedia/arc-themes-components";
+import { signImagesInANSObject } from "@wpmedia/arc-themes-components";
 import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
 
 const params = {
@@ -18,20 +18,20 @@ const fetch = ({ _id, "arc-site": site, page = "1", query }, { cachedCall }) => 
 
 	const urlSearch = new URLSearchParams({
 		page,
-		q: decodeURIComponent(query),
+		q: encodeURIComponent(decodeURIComponent(query)),
 		...(SEARCH_KEY ? { key: SEARCH_KEY } : {}),
 		...(site ? { website_id: site } : {}),
-	}).toString();
+	});
 
 	return axios({
-		url: `https://search.arcpublishing.com/search?${urlSearch}`,
+		url: `https://search.arcpublishing.com/search?${urlSearch.toString()}`,
 		headers: {
 			"content-type": "application/json",
 			//Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
 		},
 		method: "GET",
 	})
-		.then(signImagesInANSObject(cachedCall, signing.fetch, RESIZER_APP_VERSION))
+		.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_APP_VERSION))
 		.then(({ data }) => data);
 };
 

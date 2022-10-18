@@ -1,72 +1,125 @@
 import contentApi from "./content-api";
 
+jest.mock("fusion:environment", () => ({
+	CONTENT_BASE: "https://content.base",
+}));
+
+jest.mock("axios", () => ({
+	__esModule: true,
+	default: jest.fn((request) => {
+		const requestUrl = new URL(request.url);
+		const url = {
+			hostname: requestUrl.hostname,
+			pathname: requestUrl.pathname,
+			searchObject: Object.fromEntries(requestUrl.searchParams),
+		};
+		return Promise.resolve({
+			data: {
+				content_elements: [{ url }],
+				request: {
+					...request,
+					url,
+				},
+			},
+		});
+	}),
+}));
+
 describe("the content api source block", () => {
 	it("should use the proper param types", () => {
 		expect(contentApi.params).toEqual({
-			website_url: "text",
 			_id: "text",
+			"arc-site": "text",
+			website_url: "text",
 		});
 	});
 
 	describe("when a site is provided", () => {
-		it('should include the "website" query param with the value', () => {
-			const url = contentApi.resolve({
-				website_url: "/aaaa/bccccd/",
-				"arc-site": "wapo",
-			});
+		it('should include the "website" query param with the value', async () => {
+			const contentSourceFetch = await contentApi.fetch(
+				{
+					"arc-site": "wapo",
+					website_url: "/aaaa/bccccd/",
+				},
+				{ cachedCall: () => {} }
+			);
 
-			expect(url).toEqual("/content/v4/?website_url=/aaaa/bccccd/&website=wapo");
+			expect(contentSourceFetch.request.url.pathname).toEqual("/content/v4/");
+			expect(contentSourceFetch.request.url.searchObject).toEqual(
+				expect.objectContaining({
+					website: "wapo",
+					website_url: "/aaaa/bccccd/",
+				})
+			);
 		});
 	});
 
-	describe("when a site is NOT provided", () => {
-		it('should NOT include the "website" query param', () => {
-			const url = contentApi.resolve({ website_url: "/aaaa/bccccd/" });
+	describe("when a site is NOT provided but a website url is ", () => {
+		it('should NOT include the "website" query param', async () => {
+			const contentSourceFetch = await contentApi.fetch(
+				{
+					website_url: "/aaaa/bccccd/",
+				},
+				{ cachedCall: () => {} }
+			);
 
-			expect(url).toEqual("/content/v4/?website_url=/aaaa/bccccd/");
-		});
-	});
-
-	describe("when a website url is provided", () => {
-		it("should set the website_url query param", () => {
-			const url = contentApi.resolve({ website_url: "/aaaa/eeeeee/" });
-
-			expect(url).toEqual("/content/v4/?website_url=/aaaa/eeeeee/");
+			expect(contentSourceFetch.request.url.pathname).toEqual("/content/v4/");
+			expect(contentSourceFetch.request.url.searchObject).toEqual(
+				expect.objectContaining({
+					website_url: "/aaaa/bccccd/",
+				})
+			);
 		});
 	});
 
 	describe("when an _id is provided", () => {
-		it("should set the _id query param", () => {
-			const url = contentApi.resolve({ _id: "myid" });
+		it("should set the _id query param", async () => {
+			const contentSourceFetch = await contentApi.fetch(
+				{
+					_id: "myid",
+				},
+				{ cachedCall: () => {} }
+			);
 
-			expect(url).toEqual("/content/v4/?_id=myid");
+			expect(contentSourceFetch.request.url.pathname).toEqual("/content/v4/");
+			expect(contentSourceFetch.request.url.searchObject).toEqual(
+				expect.objectContaining({
+					_id: "myid",
+				})
+			);
 		});
 	});
 
 	describe("when an _id and website_url are both provided", () => {
-		it("should set the _id query param", () => {
-			const url = contentApi.resolve({
-				website_url: "/aaaa/eeeeee/",
-				_id: "myid",
-			});
+		it("should set the _id query param", async () => {
+			const contentSourceFetch = await contentApi.fetch(
+				{
+					_id: "myid",
+					website_url: "/aaaa/eeeeee/",
+				},
+				{ cachedCall: () => {} }
+			);
 
-			expect(url).toEqual("/content/v4/?_id=myid");
+			expect(contentSourceFetch.request.url.pathname).toEqual("/content/v4/");
+			expect(contentSourceFetch.request.url.searchObject).toEqual(
+				expect.objectContaining({
+					_id: "myid",
+					website_url: "/aaaa/eeeeee/",
+				})
+			);
 		});
 	});
 
 	describe("when a website url is and an id are NOT provided", () => {
-		it("should have an undefined website_url", () => {
-			const url = contentApi.resolve({});
+		it("should have an undefined website_url", async () => {
+			const contentSourceFetch = await contentApi.fetch({}, { cachedCall: () => {} });
 
-			expect(url).toEqual("/content/v4/?website_url=undefined");
-		});
-	});
-
-	describe("when a parameter is NOT provided", () => {
-		it("should have an undefined website_url", () => {
-			const url = contentApi.resolve();
-
-			expect(url).toEqual("/content/v4/?website_url=undefined");
+			expect(contentSourceFetch.request.url.pathname).toEqual("/content/v4/");
+			expect(contentSourceFetch.request.url.searchObject).toEqual(
+				expect.objectContaining({
+					website_url: "undefined",
+				})
+			);
 		});
 	});
 });

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { CONTENT_BASE, ARC_ACCESS_TOKEN, RESIZER_APP_VERSION } from "fusion:environment";
 
-import signImagesInANSObject from "@wpmedia/arc-themes-components";
+import { signImagesInANSObject } from "@wpmedia/arc-themes-components";
 import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
 
 const params = {
@@ -15,10 +15,10 @@ const fetch = ({ _id, "arc-site": site, website_url }, { cachedCall }) => {
 		_id,
 		...(site ? { website: site } : {}),
 		website_url,
-	}).toString();
+	});
 
 	return axios({
-		url: `${CONTENT_BASE}/content/v4/?${urlSearch}`,
+		url: `${CONTENT_BASE}/content/v4/?${urlSearch.toString()}`,
 		headers: {
 			"content-type": "application/json",
 			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,

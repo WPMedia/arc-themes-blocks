@@ -11,7 +11,7 @@ const params = {
 	query: "text",
 };
 
-const fetch = ({ _id, "arc-site": site, page = "1", query }, { cachedCall }) => {
+const fetch = ({ "arc-site": site, page = "1", query }, { cachedCall }) => {
 	if (!query) {
 		return "";
 	}
@@ -27,7 +27,7 @@ const fetch = ({ _id, "arc-site": site, page = "1", query }, { cachedCall }) => 
 		url: `https://search.arcpublishing.com/search?${urlSearch.toString()}`,
 		headers: {
 			"content-type": "application/json",
-			//Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
 		},
 		method: "GET",
 	})

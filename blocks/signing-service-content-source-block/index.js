@@ -1,3 +1,3 @@
-import { fetch } from "./sources/signing-service.js";
+import sourceMethods from "./sources/signing-service";
 
-export default { fetch };
+export default sourceMethods;

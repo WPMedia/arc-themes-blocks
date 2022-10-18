@@ -208,7 +208,7 @@ ProductAssortmentCarousel.propTypes = {
 			description: "Add a headline for the product carousel component.",
 		}),
 		itemsToDisplay: PropTypes.number.tag({
-			label: "Amount of products to dispay",
+			label: "Amount of products to display",
 			defaultValue: 4,
 			min: 4,
 			max: 12,

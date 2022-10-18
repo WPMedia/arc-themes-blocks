@@ -1,2 +1,3 @@
 node_modules
+# including storybook as .folder are hidden by default and need to be overriden
 !.storybook

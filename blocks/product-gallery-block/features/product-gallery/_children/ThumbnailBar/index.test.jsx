@@ -11,33 +11,29 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import ProductFocusView from "./index";
+import ThumbnailBar from "./index";
 import mockData from "../../mock-data";
 
 jest.mock("fusion:environment", () => ({
 	RESIZER_APP_VERSION: 2,
 	RESIZER_URL: "https://resizer.com",
 }));
-
-window.HTMLElement.prototype.scrollIntoView = jest.fn();
-const setFocusViewItemId = jest.fn();
-
+// window.HTMLElement.prototype.scrollIntoView = jest.fn();
+/*
 const observe = jest.fn();
 const disconnect = jest.fn();
 window.IntersectionObserver = jest.fn(() => ({
 	observe,
 	disconnect,
 }));
+*/
 
-describe("Product Focus View", () => {
-	it("Renders 5 images.", () => {
-		render(
-			<ProductFocusView
-				onClose={() => setFocusViewItemId("")}
-				productImages={mockData}
-				initialItemId={mockData[0]._id}
-			/>
-		);
-		expect(screen.queryAllByRole("img")).toHaveLength(8);
+describe("Thumbnail Bar", () => {
+	it("Renders 3 images and two buttons.", () => {
+		//		const windowResizeSpy = jest.spyOn(ThumbnailBar.prototype, "windowResize");
+		render(<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={() => true} />);
+		//		expect(windowResizeSpy).toBeCalledTimes(1);
+		expect(screen.queryAllByRole("img")).toHaveLength(3);
+		expect(screen.queryAllByRole("button")).toHaveLength(2);
 	});
 });

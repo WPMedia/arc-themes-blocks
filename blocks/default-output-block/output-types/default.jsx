@@ -1,9 +1,8 @@
 import React, { Fragment } from "react";
 import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 import { useFusionContext } from "fusion:context";
 import { MetaData } from "@wpmedia/engine-theme-sdk";
-import { Stack } from "@wpmedia/arc-themes-components";
+import { Stack, usePhrases } from "@wpmedia/arc-themes-components";
 
 import blocks from "~/blocks.json";
 
@@ -155,7 +154,7 @@ const SampleOutputType = ({
 		]),
 	].join(";");
 
-	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+	const phrases = usePhrases();
 
 	return (
 		<html lang={locale}>

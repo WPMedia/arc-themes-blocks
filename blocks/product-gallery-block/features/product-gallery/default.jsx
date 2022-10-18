@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext, useComponentContext } from "fusion:context";
 import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 
-import { Carousel, Image, imageANSToImageSrc } from "@wpmedia/arc-themes-components";
+import { Carousel, Image, imageANSToImageSrc, usePhrases } from "@wpmedia/arc-themes-components";
 
 import ProductFocusView from "./_children/ProductFocusView";
 
@@ -13,7 +11,6 @@ const BLOCK_CLASS_NAME = "b-product-gallery";
 const DESKTOP_MINIMUM = 768;
 
 export function ProductGalleryDisplay({
-	arcSite,
 	carouselItems,
 	id,
 	isFeaturedImageEnabled,
@@ -21,8 +18,7 @@ export function ProductGalleryDisplay({
 	resizerURL,
 	indicatorType,
 }) {
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const phrases = usePhrases();
 
 	const [focusViewItemId, setFocusViewItemId] = useState("");
 
@@ -123,7 +119,7 @@ function ProductGallery({ customFields }) {
 	const { isFeaturedImageEnabled, indicatorType } = customFields;
 	const { id } = useComponentContext();
 
-	const { arcSite, globalContent = {} } = useFusionContext();
+	const { globalContent = {} } = useFusionContext();
 
 	if (!Object.keys(globalContent).length) {
 		return null;
@@ -133,7 +129,7 @@ function ProductGallery({ customFields }) {
 		? globalContent?.schema?.productGallery?.value.filter((asset) => asset.type === "image")
 		: [];
 
-	if (isFeaturedImageEnabled && carouselItems.length) {
+	if (isFeaturedImageEnabled) {
 		carouselItems.unshift(...globalContent?.schema?.featuredImage?.value);
 	}
 
@@ -143,7 +139,6 @@ function ProductGallery({ customFields }) {
 
 	return (
 		<ProductGalleryDisplay
-			arcSite={arcSite}
 			carouselItems={carouselItems}
 			id={id}
 			isFeaturedImageEnabled={isFeaturedImageEnabled}

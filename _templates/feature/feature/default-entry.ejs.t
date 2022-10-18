@@ -5,14 +5,11 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-block/features/<%= h.inflec
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 
-import { useFusionContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
-import getTranslatedPhrases from 'fusion:intl';
-
 // Arc Themes Components - Base set of components used to compose blocks
 // https://github.com/WPMedia/arc-themes-components/
 import {
   Heading,
+  usePhrases,
 } from '@wpmedia/arc-themes-components';
 
 const BLOCK_CLASS_NAME = "b-<%= h.inflection.dasherize(block_name) %>";
@@ -24,9 +21,7 @@ function <%= h.changeCase.pascal(feature_name) %>({ customFields }) {
 
   // get properties from context for using translations in intl.json
   // See document for more info https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
-  const { arcSite } = useFusionContext();
-  const { locale } = getProperties(arcSite);
-  const phrases = getTranslatedPhrases(locale);
+  const phrases = usePhrases();
 
   return (
     <div className={`${BLOCK_CLASS_NAME}`}>

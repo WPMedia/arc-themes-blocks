@@ -1,8 +1,5 @@
 import React from "react";
-import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
-import { Button, Icon } from "@wpmedia/arc-themes-components";
+import { Button, Icon, usePhrases } from "@wpmedia/arc-themes-components";
 import SearchBox from "./search-box";
 import QuerylySearch from "./queryly-search";
 import { WIDGET_CONFIG, PLACEMENT_AREAS } from "../nav-helper";
@@ -15,9 +12,7 @@ const NavWidget = ({
 	position = 0,
 	type,
 }) => {
-	const { arcSite } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const phrases = usePhrases();
 	if (!type || type === "none") return null;
 
 	const predefinedWidget =

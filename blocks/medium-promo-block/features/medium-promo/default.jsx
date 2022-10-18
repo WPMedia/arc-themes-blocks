@@ -3,7 +3,6 @@ import React from "react";
 import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
 import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
-import getTranslatedPhrases from "fusion:intl";
 import getProperties from "fusion:properties";
 import PropTypes from "@arc-fusion/prop-types";
 import { LazyLoad, localizeDateTime } from "@wpmedia/engine-theme-sdk";
@@ -26,6 +25,7 @@ import {
 	MediaItem,
 	Paragraph,
 	Separator,
+	usePhrases,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-medium-promo";
@@ -41,9 +41,8 @@ const MediumPromo = ({ customFields }) => {
 			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 		},
 		fallbackImage,
-		locale,
 	} = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale || "en");
+	const phrases = usePhrases();
 
 	const {
 		imageRatio,

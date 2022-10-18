@@ -2,19 +2,18 @@ import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 
 import { useFusionContext, useComponentContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 import { useContent, useEditableContent } from "fusion:content";
 
 import {
 	Carousel,
-	Image,
-	Icon,
 	Heading,
+	HeadingSection,
+	Icon,
+	Image,
+	Link,
 	Price,
 	Stack,
-	HeadingSection,
-	Link,
+	usePhrases,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-assortment-carousel";
@@ -43,9 +42,8 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 	} = customFields;
 	const { id } = useComponentContext();
 	const { searchableField } = useEditableContent();
-	const { arcSite, isAdmin } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const { isAdmin } = useFusionContext();
+	const phrases = usePhrases();
 
 	// assortmentCondition is a stringified JSON object set by the Product Assortment
 	// integration from PageBuilder and requires it to be parsed to an object.
@@ -125,8 +123,10 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 					}
 				>
 					{content.map((item, carouselIndex) => {
-						const SalePrice = getPrice("Sale", item.prices);
-						const ListPrice = getPrice("List", item.prices);
+						const pricing = item.pricing[0];
+						const SalePrice = getPrice("Sale", pricing.prices);
+						const ListPrice = getPrice("List", pricing.prices);
+
 						const salePriceAmount = SalePrice?.amount;
 						const listPriceAmount = ListPrice?.amount;
 						const isOnSale = salePriceAmount && salePriceAmount !== listPriceAmount;
@@ -158,17 +158,17 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 										>
 											{isOnSale ? (
 												<Price.Sale>
-													{new Intl.NumberFormat(SalePrice.currencyLocale, {
+													{new Intl.NumberFormat(pricing.currencyLocale, {
 														style: "currency",
-														currency: SalePrice.currencyCode,
+														currency: pricing.currencyCode,
 														minimumFractionDigits: 2,
 													}).format(salePriceAmount)}
 												</Price.Sale>
 											) : null}
 											<Price.List>
-												{new Intl.NumberFormat(ListPrice.currencyLocale, {
+												{new Intl.NumberFormat(pricing.currencyLocale, {
 													style: "currency",
-													currency: ListPrice.currencyCode,
+													currency: pricing.currencyCode,
 													minimumFractionDigits: 2,
 												}).format(listPriceAmount)}
 											</Price.List>

@@ -19,7 +19,9 @@
 		"directory": "blocks/collections-content-source-block"
 	},
 	"dependencies": {
-		"axios": "^0.26.0",
+		"axios": "^0.26.0"
+	},
+	"peerDependencies": {
 		"@wpmedia/arc-themes-components": "*",
 		"@wpmedia/signing-service-content-source-block": "*"
 	},

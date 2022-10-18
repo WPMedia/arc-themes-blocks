@@ -3,6 +3,7 @@ import PropTypes from "@arc-fusion/prop-types";
 
 import { useFusionContext, useComponentContext } from "fusion:context";
 import { useContent, useEditableContent } from "fusion:content";
+import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 
 import {
 	Carousel,
@@ -10,6 +11,7 @@ import {
 	HeadingSection,
 	Icon,
 	Image,
+	imageANSToImageSrc,
 	Link,
 	Price,
 	Stack,
@@ -131,6 +133,10 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 						const listPriceAmount = ListPrice?.amount;
 						const isOnSale = salePriceAmount && salePriceAmount !== listPriceAmount;
 
+						const featuredImage = item.schema.featuredImage.value[0];
+
+						const { alt_text: altText, auth } = featuredImage;
+
 						return (
 							<Carousel.Item
 								key={item.sku}
@@ -145,7 +151,12 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 										href={item.attributes ? getProductURL(item?.attributes) : "#"}
 										assistiveHidden={viewable ? null : true}
 									>
-										<Image alt={item.name ? "" : item.name} src={item.image} />
+										<Image
+											alt={altText}
+											resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
+											resizerURL={RESIZER_URL}
+											src={imageANSToImageSrc(featuredImage)}
+										/>
 										{item.name ? (
 											<HeadingSection>
 												<Heading>{item.name}</Heading>

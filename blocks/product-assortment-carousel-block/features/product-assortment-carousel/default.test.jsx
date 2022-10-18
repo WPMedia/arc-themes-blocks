@@ -6,6 +6,17 @@ import { useFusionContext } from "fusion:context";
 
 import ProductAssortmentCarousel from "./default";
 
+const IMAGE_OBJECT = {
+	alt_text: "",
+	auth: "auth",
+	url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
+};
+
+const FEATURED_IMAGE_SCHEMA = {
+	featuredImage: {
+		value: [IMAGE_OBJECT],
+	},
+};
 const PRICING_ARRAY_ONLY_LIST = [
 	{
 		id: null,
@@ -65,7 +76,7 @@ const PRICING_ARRAY_SAME_LIST_SALE = [
 const mockContent = [
 	{
 		name: "Item 1",
-		image: "image-url",
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-1",
 		pricing: PRICING_ARRAY_ONLY_LIST,
 		attributes: [
@@ -77,18 +88,18 @@ const mockContent = [
 	},
 	{
 		name: "Item 2",
-		image: "image-url",
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-2",
 		pricing: PRICING_ARRAY_DIFFERENT_LIST_SALE,
 	},
 	{
 		name: "Item 3",
-		image: "image-url",
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-3",
 		pricing: PRICING_ARRAY_ONLY_LIST,
 	},
 	{
-		image: "image-url",
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-4",
 		pricing: PRICING_ARRAY_ONLY_LIST,
 	},
@@ -156,8 +167,8 @@ describe("Product Assortment Carousel", () => {
 		useContent.mockReturnValue([
 			{
 				name: "List Price Render",
-				image: "image-url",
 				sku: "sku-mock",
+				schema: FEATURED_IMAGE_SCHEMA,
 				pricing: PRICING_ARRAY_ONLY_LIST,
 				attributes: [
 					{
@@ -182,7 +193,7 @@ describe("Product Assortment Carousel", () => {
 		useContent.mockReturnValue([
 			{
 				name: "List + Sale Price Render",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-mock",
 				pricing: PRICING_ARRAY_DIFFERENT_LIST_SALE,
 			},
@@ -202,7 +213,7 @@ describe("Product Assortment Carousel", () => {
 		useContent.mockReturnValue([
 			{
 				name: "List Price Render",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-mock",
 				pricing: PRICING_ARRAY_SAME_LIST_SALE,
 				attributes: [
@@ -229,7 +240,7 @@ describe("Product Assortment Carousel", () => {
 		useContent.mockReturnValue([
 			{
 				name: "Has product_url attribute",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-1",
 				pricing: PRICING_ARRAY_ONLY_LIST,
 				attributes: [
@@ -241,7 +252,7 @@ describe("Product Assortment Carousel", () => {
 			},
 			{
 				name: "Has no product_url attribute",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-2",
 				pricing: PRICING_ARRAY_ONLY_LIST,
 				attributes: [
@@ -253,14 +264,14 @@ describe("Product Assortment Carousel", () => {
 			},
 			{
 				name: "Has empty attribute array",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-3",
 				pricing: PRICING_ARRAY_ONLY_LIST,
 				attributes: [],
 			},
 			{
 				name: "Has no attribute key",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-4",
 				pricing: PRICING_ARRAY_ONLY_LIST,
 			},

@@ -10,6 +10,7 @@ import { Carousel, Image, imageANSToImageSrc } from "@wpmedia/arc-themes-compone
 import ProductFocusView from "./_children/ProductFocusView";
 
 const BLOCK_CLASS_NAME = "b-product-gallery";
+const DESKTOP_MINIMUM = 768;
 
 export function ProductGalleryDisplay({
 	arcSite,
@@ -106,7 +107,7 @@ export function ProductGalleryDisplay({
 					);
 				})}
 			</Carousel>
-			{focusViewItemId !== "" ? (
+			{focusViewItemId !== "" && window?.innerWidth >= DESKTOP_MINIMUM ? (
 				<ProductFocusView
 					onClose={() => setFocusViewItemId("")}
 					productImages={shortenedCarouselItems}

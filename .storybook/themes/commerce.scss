@@ -811,6 +811,11 @@
 					overflow: hidden,
 					top: 0,
 					width: 100vw,
+					components: (
+						grid: (
+							--grid-template-columns: auto 1fr,
+						),
+					),
 				),
 				product-gallery-focus-view-main-images: (
 					gap: var(--global-spacing-7),
@@ -850,13 +855,13 @@
 							max-height: 100px,
 							max-width: 100px,
 						),
-						paragraph: (
-							font-family: var(--font-family-primary),
-							font-size: var(--heading-level-6-font-size),
-							font-weight: var(--global-font-size-4),
-							line-height: var(--heading-level-6-line-height),
-						),
 					),
+				),
+				product-gallery-focus-view-thumbnail-bar-indicator: (
+					font-family: var(--font-family-primary),
+					font-size: var(--heading-level-6-font-size),
+					font-weight: var(--global-font-weight-4),
+					line-height: var(--heading-level-6-line-height),
 				),
 				product-gallery-focus-view-thumbnail-bar-spacer: (
 					height: var(--global-spacing-4),

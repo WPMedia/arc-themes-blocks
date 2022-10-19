@@ -1,13 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
-import { Button, Icon } from "@wpmedia/arc-themes-components";
+import { Button, Icon, usePhrases } from "@wpmedia/arc-themes-components";
 
 export default ({ alwaysOpen = false, placeholderText, customSearchAction = null }) => {
-	const { arcSite } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const phrases = usePhrases();
 
 	const [shouldSearchOpen, setShouldSearchOpen] = useState(false);
 	const [isSearchBarPending, setSearchBarPending] = useState(false);

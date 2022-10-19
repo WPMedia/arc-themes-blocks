@@ -1,10 +1,10 @@
 import React from "react";
 import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
+
+import { usePhrases } from "@wpmedia/arc-themes-components";
+
 import PrimaryFont from "../primary-font";
 import SecondaryFont from "../secondary-font";
-
 import "./index.scss";
 
 const DEFAULT_FONT = "Secondary";
@@ -17,8 +17,8 @@ const Byline = (props) => {
 		list = false,
 		font = DEFAULT_FONT,
 	} = props;
-	const { arcSite, globalContent } = useFusionContext();
-	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+	const { globalContent } = useFusionContext();
+	const phrases = usePhrases();
 
 	const FontType = font === DEFAULT_FONT ? SecondaryFont : PrimaryFont;
 

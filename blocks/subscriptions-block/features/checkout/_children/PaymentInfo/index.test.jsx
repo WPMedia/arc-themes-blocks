@@ -3,14 +3,10 @@ import { mount } from "enzyme";
 
 import PaymentInfo from "./index";
 
-jest.mock("fusion:properties", () =>
-	jest.fn(() => ({
-		locale: "en",
-	}))
-);
+jest.mock("@stripe/stripe-js", () => ({ loadStripe: () => Promise.resolve({}) }));
 
 describe("PaymentInfo", () => {
-	it("renders null if no stripe promise", () => {
+	it("renders null initially waiting for the resolved promise", () => {
 		const wrapper = mount(
 			<PaymentInfo
 				orderNumber={1}

@@ -23,17 +23,23 @@ The block is dependent on the PageBuilder Product Assortment integration to enab
 The block relies on Algolia data to render the products in the carousel. The fields the block uses is
 
 - Name
-- Image
+- Schema
+  - featuredImage
+    - value - array of image objects
+      - url - url of image
+      - alt_text - alt text of image
+      - auth - auth of object
 - Attributes - array of objects
   - `name = product_url`
-- Prices - array of object
-  - `type = List`
-  - `type = Sale`
-  - For each price
+- Pricing - array of object
+  - For each pricing object
     - `currencyLocale`
     - `currencyCode`
-    - `amount`
-    - `type`
+    - `currencyDisplayFormat`
+    - Prices - array of object
+      - For each price object
+        - `type` - `Sale` or `List`
+        - `amount`
 
 ## Internationalization fields
 

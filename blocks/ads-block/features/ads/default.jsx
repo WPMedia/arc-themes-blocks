@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
-import { Paragraph, Stack } from "@wpmedia/arc-themes-components";
+import { Paragraph, Stack, usePhrases } from "@wpmedia/arc-themes-components";
 import adMap from "./ad-mapping";
 import AdUnit from "./_children/AdUnit";
 import ArcAdminAd from "./_children/ArcAdminAd";
@@ -62,9 +60,7 @@ export const ArcAdDisplay = (props) => {
 
 const ArcAd = (props) => {
 	const fusionContext = useFusionContext();
-	const { arcSite } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const phrases = usePhrases();
 	const [instanceId] = useState(() => generateInstanceId(fusionContext.id || "0000"));
 	const propsWithContext = {
 		...fusionContext, // siteProperties: { dfpId } included in fusionContext

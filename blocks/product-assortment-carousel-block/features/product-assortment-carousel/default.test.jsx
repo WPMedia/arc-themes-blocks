@@ -6,19 +6,86 @@ import { useFusionContext } from "fusion:context";
 
 import ProductAssortmentCarousel from "./default";
 
+jest.mock("fusion:environment", () => ({
+	RESIZER_APP_VERSION: 2,
+	RESIZER_URL: "https://resizer.com",
+}));
+
+const IMAGE_OBJECT = {
+	alt_text: "",
+	auth: {
+		2: "auth",
+	},
+	url: "image.jpeg",
+};
+
+const FEATURED_IMAGE_SCHEMA = {
+	featuredImage: {
+		value: [IMAGE_OBJECT],
+	},
+};
+const PRICING_ARRAY_ONLY_LIST = [
+	{
+		id: null,
+		currencyCode: "USD",
+		currencyDisplayFormat: "symbol",
+		currencyLocale: "en-US",
+		prices: [
+			{
+				type: "List",
+				amount: 26,
+			},
+		],
+		schema: {},
+	},
+];
+
+const PRICING_ARRAY_DIFFERENT_LIST_SALE = [
+	{
+		id: null,
+		currencyCode: "USD",
+		currencyDisplayFormat: "symbol",
+		currencyLocale: "en-US",
+		prices: [
+			{
+				type: "List",
+				amount: 26,
+			},
+			{
+				type: "Sale",
+				amount: 16,
+			},
+		],
+		schema: {},
+	},
+];
+
+const PRICING_ARRAY_SAME_LIST_SALE = [
+	{
+		id: null,
+		currencyCode: "USD",
+		currencyDisplayFormat: "symbol",
+		currencyLocale: "en-US",
+		prices: [
+			{
+				type: "List",
+				amount: 26,
+			},
+			{
+				type: "Sale",
+				amount: 26,
+			},
+		],
+		schema: {},
+	},
+];
+
 const mockContent = [
 	{
 		name: "Item 1",
-		image: "image-url",
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-1",
-		prices: [
-			{
-				amount: 26,
-				type: "List",
-				currencyLocale: "en-US",
-				currencyCode: "USD",
-			},
-		],
+		pricing: PRICING_ARRAY_ONLY_LIST,
 		attributes: [
 			{
 				name: "product_url",
@@ -28,47 +95,20 @@ const mockContent = [
 	},
 	{
 		name: "Item 2",
-		image: "image-url",
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-2",
-		prices: [
-			{
-				amount: 16,
-				type: "Sale",
-				currencyLocale: "en-US",
-				currencyCode: "USD",
-			},
-			{
-				amount: 26,
-				type: "List",
-				currencyLocale: "en-US",
-				currencyCode: "USD",
-			},
-		],
+		pricing: PRICING_ARRAY_DIFFERENT_LIST_SALE,
 	},
 	{
 		name: "Item 3",
-		image: "image-url",
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-3",
-		prices: [
-			{
-				amount: 26,
-				type: "List",
-				currencyLocale: "en-US",
-				currencyCode: "USD",
-			},
-		],
+		pricing: PRICING_ARRAY_ONLY_LIST,
 	},
 	{
-		image: "image-url",
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-4",
-		prices: [
-			{
-				amount: 26,
-				type: "List",
-				currencyLocale: "en-US",
-				currencyCode: "USD",
-			},
-		],
+		pricing: PRICING_ARRAY_ONLY_LIST,
 	},
 ];
 
@@ -134,16 +174,9 @@ describe("Product Assortment Carousel", () => {
 		useContent.mockReturnValue([
 			{
 				name: "List Price Render",
-				image: "image-url",
 				sku: "sku-mock",
-				prices: [
-					{
-						amount: 26,
-						type: "List",
-						currencyLocale: "en-US",
-						currencyCode: "USD",
-					},
-				],
+				schema: FEATURED_IMAGE_SCHEMA,
+				pricing: PRICING_ARRAY_ONLY_LIST,
 				attributes: [
 					{
 						name: "product_url",
@@ -167,22 +200,9 @@ describe("Product Assortment Carousel", () => {
 		useContent.mockReturnValue([
 			{
 				name: "List + Sale Price Render",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-mock",
-				prices: [
-					{
-						amount: 16,
-						type: "Sale",
-						currencyLocale: "en-US",
-						currencyCode: "USD",
-					},
-					{
-						amount: 26,
-						type: "List",
-						currencyLocale: "en-US",
-						currencyCode: "USD",
-					},
-				],
+				pricing: PRICING_ARRAY_DIFFERENT_LIST_SALE,
 			},
 			...mockContent,
 		]);
@@ -200,22 +220,9 @@ describe("Product Assortment Carousel", () => {
 		useContent.mockReturnValue([
 			{
 				name: "List Price Render",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-mock",
-				prices: [
-					{
-						amount: 26,
-						type: "Sale",
-						currencyLocale: "en-US",
-						currencyCode: "USD",
-					},
-					{
-						amount: 26,
-						type: "List",
-						currencyLocale: "en-US",
-						currencyCode: "USD",
-					},
-				],
+				pricing: PRICING_ARRAY_SAME_LIST_SALE,
 				attributes: [
 					{
 						name: "product_url",
@@ -240,16 +247,9 @@ describe("Product Assortment Carousel", () => {
 		useContent.mockReturnValue([
 			{
 				name: "Has product_url attribute",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-1",
-				prices: [
-					{
-						amount: 26,
-						type: "List",
-						currencyLocale: "en-US",
-						currencyCode: "USD",
-					},
-				],
+				pricing: PRICING_ARRAY_ONLY_LIST,
 				attributes: [
 					{
 						name: "product_url",
@@ -259,16 +259,9 @@ describe("Product Assortment Carousel", () => {
 			},
 			{
 				name: "Has no product_url attribute",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-2",
-				prices: [
-					{
-						amount: 26,
-						type: "List",
-						currencyLocale: "en-US",
-						currencyCode: "USD",
-					},
-				],
+				pricing: PRICING_ARRAY_ONLY_LIST,
 				attributes: [
 					{
 						name: "unrelated_field",
@@ -278,30 +271,16 @@ describe("Product Assortment Carousel", () => {
 			},
 			{
 				name: "Has empty attribute array",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-3",
-				prices: [
-					{
-						amount: 26,
-						type: "List",
-						currencyLocale: "en-US",
-						currencyCode: "USD",
-					},
-				],
+				pricing: PRICING_ARRAY_ONLY_LIST,
 				attributes: [],
 			},
 			{
 				name: "Has no attribute key",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-4",
-				prices: [
-					{
-						amount: 26,
-						type: "List",
-						currencyLocale: "en-US",
-						currencyCode: "USD",
-					},
-				],
+				pricing: PRICING_ARRAY_ONLY_LIST,
 			},
 		]);
 		const { container } = render(

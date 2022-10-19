@@ -1,10 +1,11 @@
 import React from "react";
+import styled from "styled-components";
 import { useFusionContext } from "fusion:context";
 import getThemeStyle from "fusion:themes";
-import styled from "styled-components";
+
+import { usePhrases } from "@wpmedia/arc-themes-components";
 import { PlayIcon, CameraIcon } from "@wpmedia/engine-theme-sdk";
-import getTranslatedPhrases from "fusion:intl";
-import getProperties from "fusion:properties";
+
 import PrimaryFont from "../primary-font";
 
 const LabelBoxLarge = styled.div`
@@ -75,6 +76,8 @@ const LabelSmall = ({ arcSite, type }) => (
 
 const PromoLabel = ({ type, size }) => {
 	const { arcSite } = useFusionContext();
+	const phrases = usePhrases();
+
 	if (!type || type === "other") {
 		return null;
 	}
@@ -84,8 +87,6 @@ const PromoLabel = ({ type, size }) => {
 	if (labelSize === "small") {
 		return <LabelSmall arcSite={arcSite} type={type} />;
 	}
-
-	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
 
 	return <LabelLarge arcSite={arcSite} type={type} labelText={getLabelText(phrases, type)} />;
 };

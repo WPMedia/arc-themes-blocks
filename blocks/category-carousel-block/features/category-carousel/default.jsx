@@ -1,7 +1,5 @@
 import React, { Fragment } from "react";
-import { useComponentContext, useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
+import { useComponentContext } from "fusion:context";
 
 import PropTypes from "@arc-fusion/prop-types";
 import {
@@ -12,6 +10,7 @@ import {
 	Icon,
 	Image,
 	Stack,
+	usePhrases,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-category-carousel";
@@ -48,9 +47,7 @@ function CategoryCarousel({ customFields }) {
 	const { headerText } = customFields;
 
 	const { id } = useComponentContext();
-	const { arcSite } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const phrases = usePhrases();
 	const Wrapper = headerText ? HeadingSection : Fragment;
 
 	const validCategoryData = customFieldGroups

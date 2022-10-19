@@ -57,6 +57,7 @@ jobs:
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
 
+      # See confluence pages https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2983788608/How+To+Do+Product-Facing+Tag+Release and https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/3013541978/Github+Actions+for+NodeJS+Standards+Best+Practices for documentation
       - name: Get version of target tag and point the new tag to that version
         run: npx lerna exec --stream --no-bail --concurrency 1 -- 'PKG_VERSION=$(npm view ${LERNA_PACKAGE_NAME}@${{ env.TARGET_RELEASE_TAG }} version); [ -n "$PKG_VERSION" ] && (npm dist-tag add ${LERNA_PACKAGE_NAME}@${PKG_VERSION} ${{ env.NEW_RELEASE_TAG }}) || exit 0'
         env:

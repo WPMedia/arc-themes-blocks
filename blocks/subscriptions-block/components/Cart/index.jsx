@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
+import { usePhrases } from "@wpmedia/arc-themes-components";
 import { PrimaryFont } from "@wpmedia/shared-styles";
 import useSales from "../useSales";
 import currency from "../../utils/currency";
@@ -16,7 +16,7 @@ const getPaymentInfo = ({ origin, endpoint, priceCode }) =>
 
 const Cart = ({ offerURL }) => {
 	const { arcSite } = useFusionContext();
-	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+	const phrases = usePhrases();
 
 	const [isFetching, setIsFetching] = useState(true);
 	const [cartItems, setCartItems] = useState();

@@ -2,9 +2,7 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
-import { Link, Stack, Separator } from "@wpmedia/arc-themes-components";
+import { Link, Stack, Separator, usePhrases } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-links-bar";
 
@@ -25,8 +23,8 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
       }
     }`,
 	});
-	const { id, arcSite } = useFusionContext();
-	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+	const { id } = useFusionContext();
+	const phrases = usePhrases();
 	const menuItems = content && content.children ? content.children : [];
 	const showSeparator = !!(content && content.children && content.children.length > 1);
 

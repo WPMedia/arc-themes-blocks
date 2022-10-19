@@ -2,19 +2,20 @@ import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 
 import { useFusionContext, useComponentContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 import { useContent, useEditableContent } from "fusion:content";
+import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 
 import {
 	Carousel,
-	Image,
-	Icon,
 	Heading,
+	HeadingSection,
+	Icon,
+	Image,
+	imageANSToImageSrc,
+	Link,
 	Price,
 	Stack,
-	HeadingSection,
-	Link,
+	usePhrases,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-assortment-carousel";
@@ -43,9 +44,8 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 	} = customFields;
 	const { id } = useComponentContext();
 	const { searchableField } = useEditableContent();
-	const { arcSite, isAdmin } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const { isAdmin } = useFusionContext();
+	const phrases = usePhrases();
 
 	// assortmentCondition is a stringified JSON object set by the Product Assortment
 	// integration from PageBuilder and requires it to be parsed to an object.
@@ -125,11 +125,17 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 					}
 				>
 					{content.map((item, carouselIndex) => {
-						const SalePrice = getPrice("Sale", item.prices);
-						const ListPrice = getPrice("List", item.prices);
+						const pricing = item.pricing[0];
+						const SalePrice = getPrice("Sale", pricing.prices);
+						const ListPrice = getPrice("List", pricing.prices);
+
 						const salePriceAmount = SalePrice?.amount;
 						const listPriceAmount = ListPrice?.amount;
 						const isOnSale = salePriceAmount && salePriceAmount !== listPriceAmount;
+
+						const featuredImage = item.schema.featuredImage.value[0];
+
+						const { alt_text: altText, auth } = featuredImage;
 
 						return (
 							<Carousel.Item
@@ -145,7 +151,15 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 										href={item.attributes ? getProductURL(item?.attributes) : "#"}
 										assistiveHidden={viewable ? null : true}
 									>
-										<Image alt={item.name ? "" : item.name} src={item.image} />
+										<Image
+											alt={altText}
+											resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
+											resizerURL={RESIZER_URL}
+											src={imageANSToImageSrc(featuredImage)}
+											width={280}
+											height={280}
+											responsiveImages={[280, 420, 560, 840]}
+										/>
 										{item.name ? (
 											<HeadingSection>
 												<Heading>{item.name}</Heading>
@@ -158,17 +172,17 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 										>
 											{isOnSale ? (
 												<Price.Sale>
-													{new Intl.NumberFormat(SalePrice.currencyLocale, {
+													{new Intl.NumberFormat(pricing.currencyLocale, {
 														style: "currency",
-														currency: SalePrice.currencyCode,
+														currency: pricing.currencyCode,
 														minimumFractionDigits: 2,
 													}).format(salePriceAmount)}
 												</Price.Sale>
 											) : null}
 											<Price.List>
-												{new Intl.NumberFormat(ListPrice.currencyLocale, {
+												{new Intl.NumberFormat(pricing.currencyLocale, {
 													style: "currency",
-													currency: ListPrice.currencyCode,
+													currency: pricing.currencyCode,
 													minimumFractionDigits: 2,
 												}).format(listPriceAmount)}
 											</Price.List>
@@ -208,7 +222,7 @@ ProductAssortmentCarousel.propTypes = {
 			description: "Add a headline for the product carousel component.",
 		}),
 		itemsToDisplay: PropTypes.number.tag({
-			label: "Amount of products to dispay",
+			label: "Amount of products to display",
 			defaultValue: 4,
 			min: 4,
 			max: 12,

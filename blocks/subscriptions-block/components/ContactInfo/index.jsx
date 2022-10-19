@@ -1,3 +1,6 @@
+import React, { useRef } from "react";
+
+import { usePhrases } from "@wpmedia/arc-themes-components";
 import {
 	Button,
 	BUTTON_SIZES,
@@ -6,10 +9,7 @@ import {
 	FormInputField,
 	PrimaryFont,
 } from "@wpmedia/shared-styles";
-import React, { useRef } from "react";
-import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
+
 import countryCodes from "./countryCodes";
 import GoogleIcon from "./google.svg";
 import FacebookIcon from "./facebook.svg";
@@ -41,8 +41,7 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback }) => {
 		logoutCallback();
 	};
 
-	const { arcSite } = useFusionContext();
-	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+	const phrases = usePhrases();
 
 	const getTranslatedCountries = countryCodes.map((entry) => ({
 		code: entry.code,

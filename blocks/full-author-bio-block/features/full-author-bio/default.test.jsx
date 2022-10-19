@@ -74,7 +74,6 @@ describe("Full author bio block", () => {
 	describe("when author(s) from globalContent are present", () => {
 		beforeEach(() => {
 			useFusionContext.mockImplementation(() => ({
-				arcSite: "no-site",
 				globalContent: {
 					authors,
 				},
@@ -94,7 +93,6 @@ describe("Full author bio block", () => {
 				locale: undefined,
 			}));
 			useFusionContext.mockImplementation(() => ({
-				arcSite: "no-site",
 				globalContent: {
 					authors,
 				},
@@ -111,7 +109,6 @@ describe("Full author bio block", () => {
 	describe("when there are no authors", () => {
 		beforeEach(() => {
 			useFusionContext.mockImplementation(() => ({
-				arcSite: "no-site",
 				globalContent: {
 					authors: [],
 				},

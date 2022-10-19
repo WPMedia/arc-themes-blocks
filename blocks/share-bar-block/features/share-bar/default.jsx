@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { Button, Icon, Stack } from "@wpmedia/arc-themes-components";
+import { Button, Icon, Stack, usePhrases } from "@wpmedia/arc-themes-components";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 
 const BLOCK_CLASS_NAME = "b-share-bar";
 
@@ -71,9 +70,7 @@ const ShareBarContainer = () => {
 		arcSite,
 	} = useFusionContext();
 
-	const { websiteDomain, websiteName, locale } = getProperties(arcSite);
-
-	const phrases = getTranslatedPhrases(locale);
+	const { websiteDomain, websiteName } = getProperties(arcSite);
 
 	return (
 		<ShareBar
@@ -82,7 +79,6 @@ const ShareBarContainer = () => {
 			websiteDomain={websiteDomain}
 			websiteUrl={websiteUrl}
 			headlineString={headlineString}
-			phrases={phrases}
 		/>
 	);
 };
@@ -93,8 +89,8 @@ export const ShareBar = ({
 	websiteDomain,
 	websiteUrl,
 	headlineString,
-	phrases,
 }) => {
+	const phrases = usePhrases();
 	const shareButtons = [];
 	Object.keys(customFields).forEach((social) => {
 		if (customFields[social]) {

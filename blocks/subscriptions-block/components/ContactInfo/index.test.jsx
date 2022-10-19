@@ -1,23 +1,8 @@
 import React from "react";
 import { mount } from "enzyme";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 import ContactInfo from ".";
 
 describe("ContactInfo", () => {
-	afterEach(() => {
-		jest.resetModules();
-		jest.clearAllMocks();
-	});
-
-	beforeEach(() => {
-		getProperties.mockImplementation(() => ({ locale: [] }));
-
-		getTranslatedPhrases.mockImplementation(() => ({
-			t: jest.fn().mockReturnValue("Some mock text"),
-		}));
-	});
-
 	it("renders form and associated inputs", () => {
 		const mockCallBack = jest.fn();
 		const mockCallBack2 = jest.fn();

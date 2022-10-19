@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ARC_ACCESS_TOKEN, RESIZER_APP_VERSION, searchKey as SEARCH_KEY } from "fusion:environment";
 
-import { signImagesInANSObject } from "@wpmedia/arc-themes-components";
+import signImagesInANSObject from "@wpmedia/arc-themes-components/src/utils/sign-images-in-ans-object";
 import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
 
 const params = {

@@ -1,3 +1,3 @@
-import sourceMethods from "./sources/signing-service";
+import service from "./sources/signing-service";
 
-export default sourceMethods;
+export const fetch = service.fetch;

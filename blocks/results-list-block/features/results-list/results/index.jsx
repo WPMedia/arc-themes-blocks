@@ -1,5 +1,5 @@
 import React, { createRef, useCallback, useEffect, useReducer, useState } from "react";
-import { Button, BUTTON_STYLES, BUTTON_TYPES } from "@wpmedia/shared-styles";
+import { Button, Stack } from "@wpmedia/arc-themes-components";
 import { useContent } from "fusion:content";
 
 import ResultItem from "./result-item";
@@ -21,6 +21,8 @@ const Results = ({
 	showImage = false,
 	showItemOverline = false,
 	targetFallbackImage,
+	overline,
+	overlineURL,
 }) => {
 	const [queryOffset, setQueryOffset] = useState(configuredOffset);
 
@@ -190,7 +192,7 @@ const Results = ({
 	}, [configuredSize, setQueryOffset]);
 
 	return viewableElements?.length > 0 && !isServerSideLazy ? (
-		<div className="results-list-container">
+		<Stack>
 			{viewableElements.map((element, index) => (
 				<ResultItem
 					key={`result-card-${element._id}`}
@@ -206,20 +208,23 @@ const Results = ({
 					showImage={showImage}
 					showItemOverline={showItemOverline}
 					targetFallbackImage={targetFallbackImage}
+					overlineURL={overlineURL}
+					overline={overline}
 				/>
 			))}
 			{isThereMore && (
-				<div className="see-more">
+				<Stack>
 					<Button
-						ariaLabel={phrases.t("results-list-block.see-more-button-aria-label")}
-						buttonStyle={BUTTON_STYLES.PRIMARY}
-						buttonTypes={BUTTON_TYPES.LABEL_ONLY}
+						accessibilityLabel={phrases.t("results-list-block.see-more-button-aria-label")}
+						primary="primary"
 						onClick={onReadMoreClick}
-						text={phrases.t("results-list-block.see-more-button")}
-					/>
-				</div>
+					>
+						{" "}
+						{phrases.t("results-list-block.see-more-button")}
+					</Button>
+				</Stack>
 			)}
-		</div>
+		</Stack>
 	) : null;
 };
 

@@ -4,22 +4,15 @@ import "@testing-library/jest-dom/extend-expect";
 
 import ResultItem from "./result-item";
 
-jest.mock("@wpmedia/date-block", () => ({
-	__esModule: true,
-	default: () => <div>Date Sample Text - 123</div>,
-}));
-
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	Image: () => <div>Image Sample Text - 123</div>,
-}));
-
-jest.mock("@wpmedia/shared-styles", () => ({
-	Byline: () => <div>Byline Sample Text - 123</div>,
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	Stack: ({ children }) => <div>{children}</div>,
+	Link: ({ href, children }) => <a href={href}>{children}</a>,
+	Image: ({ src, alt }) => <img href={src} alt={alt} />,
 	Heading: ({ children }) => <>{children}</>,
-	Overline: ({ customText, customUrl, story }) => (
-		<a href={customUrl || "nourl"}>{customText || JSON.stringify(story)}</a>
-	),
-	SecondaryFont: () => <div>Font Sample Text - 123</div>,
+	Overline: () => <div>Overline Text</div>,
+	Date: () => <div>2021-01-01T00:01:00Z</div>,
+	Paragraph: () => <p>Description 1</p>,
+	formatAuthors: jest.fn().mockReturnValue("Byline Sample Text - 123"),
 }));
 
 const fallbackImage = "http://test/resources/fallback.jpg";
@@ -50,6 +43,8 @@ const element = {
 		},
 	},
 	_id: "element_1",
+	overline: "Overline Text",
+	overlineURL: "https://www.google.com",
 };
 
 describe("Result parts", () => {
@@ -82,7 +77,7 @@ describe("Result parts", () => {
 			/>
 		);
 
-		expect(screen.getAllByText(/Date Sample Text - 123/i)).toHaveLength(1);
+		expect(screen.getAllByText(/2021-01-01T00:01:00Z/i)).toHaveLength(1);
 
 		unmount();
 	});
@@ -99,7 +94,7 @@ describe("Result parts", () => {
 			/>
 		);
 
-		expect(screen.getAllByText(/Font Sample Text - 123/i)).toHaveLength(1);
+		expect(screen.getAllByText(/Description 1/i)).toHaveLength(1);
 
 		unmount();
 	});
@@ -152,8 +147,7 @@ describe("Result parts", () => {
 				showItemOverline
 			/>
 		);
-
-		expect(screen.getAllByText(/"website_section"/i)).toHaveLength(1);
+		expect(screen.getByText(/Overline Text/i)).toBeInTheDocument();
 
 		unmount();
 	});
@@ -190,7 +184,7 @@ describe("Result parts", () => {
 			/>
 		);
 
-		expect(screen.getAllByText(/Image Sample Text - 123/i)).toHaveLength(1);
+		expect(screen.getAllByAltText(/logo alt/i)).toHaveLength(1);
 
 		unmount();
 	});
@@ -215,7 +209,7 @@ describe("Result parts", () => {
 			/>
 		);
 
-		expect(screen.getAllByText(/Image Sample Text - 123/i)).toHaveLength(1);
+		expect(screen.getAllByAltText(/Test headline 1/i)).toHaveLength(1);
 
 		unmount();
 	});

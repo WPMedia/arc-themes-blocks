@@ -4,14 +4,12 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getTranslatedPhrases from "fusion:intl";
 import getProperties from "fusion:properties";
+import { isServerSide, HeadingSection } from "@wpmedia/arc-themes-components";
 
-import { isServerSide, LazyLoad } from "@wpmedia/engine-theme-sdk";
-import { HeadingSection } from "@wpmedia/shared-styles";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
 // shared with search results list
 // to modify, go to the shared styles block
-import "@wpmedia/shared-styles/scss/_results-list.scss";
-
 import { resolveDefaultPromoElements } from "./results/helpers";
 import Results from "./results";
 
@@ -20,6 +18,8 @@ const ResultsList = ({ customFields }) => {
 	const {
 		lazyLoad,
 		listContentConfig: { contentService, contentConfigValues },
+		overline,
+		overlineURL,
 	} = customFields;
 	const { fallbackImage, locale, primaryLogoAlt, breakpoints, resizerURL } = getProperties(arcSite);
 	const imageProperties = {
@@ -66,6 +66,8 @@ const ResultsList = ({ customFields }) => {
 					showImage={promoElements.showImage}
 					showItemOverline={promoElements.showItemOverline}
 					targetFallbackImage={targetFallbackImage}
+					overline={overline}
+					overlineURL={overlineURL}
 				/>
 			</HeadingSection>
 		</LazyLoad>
@@ -81,6 +83,14 @@ ResultsList.propTypes = {
 		listContentConfig: PropTypes.contentConfig("ans-feed").tag({
 			group: "Configure Content",
 			label: "Display Content Info",
+		}),
+		overline: PropTypes.string.tag({
+			label: "Overline",
+			group: "Configure Content",
+		}),
+		overlineURL: PropTypes.string.tag({
+			label: "Overline URL",
+			group: "Configure Content",
 		}),
 		showItemOverline: PropTypes.bool.tag({
 			label: "Show overline",

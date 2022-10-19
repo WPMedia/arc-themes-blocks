@@ -1,9 +1,21 @@
 import React from "react";
+import getProperties from "fusion:properties";
+import getTranslatedPhrases from "fusion:intl";
 
-import ArticleDate from "@wpmedia/date-block";
-import { Image } from "@wpmedia/engine-theme-sdk";
 import { extractResizedParams, extractImageFromStory } from "@wpmedia/resizer-image-block";
-import { Byline, Heading, SecondaryFont, Overline } from "@wpmedia/shared-styles";
+import {
+	Stack,
+	Separator,
+	Heading,
+	Overline,
+	Image,
+	Link,
+	Date,
+	formatAuthors,
+	Paragraph,
+} from "@wpmedia/arc-themes-components";
+
+const BLOCK_CLASS_NAME = "b-result-list";
 
 const ResultItem = React.memo(
 	React.forwardRef(
@@ -20,6 +32,8 @@ const ResultItem = React.memo(
 				showHeadline,
 				showImage,
 				showItemOverline,
+				overline,
+				overlineURL,
 			},
 			ref
 		) => {
@@ -28,58 +42,64 @@ const ResultItem = React.memo(
 				display_date: displayDate,
 				headlines: { basic: headlineText } = {},
 				websites,
+				credits,
 			} = element;
-
+			const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+			/* Author Formatting */
+			const bylineNodes = formatAuthors(credits?.by, phrases.t("byline-block.and-text"));
 			const imageURL = extractImageFromStory(element);
 			const url = websites[arcSite].website_url;
 			return (
-				<div className={`list-item ${!showImage ? "no-image" : ""}`} ref={ref}>
+				<Stack ref={ref} direction="horizontal" className={BLOCK_CLASS_NAME}>
+					<Stack className={`${BLOCK_CLASS_NAME}__leftContent`}>
+						{showItemOverline || showHeadline ? (
+							<Stack>
+								{showItemOverline ? <Overline href={overlineURL}>{overline}</Overline> : null}
+								{showHeadline ? (
+									<Link href={url}>
+										<Heading>{headlineText}</Heading>
+									</Link>
+								) : null}
+							</Stack>
+						) : null}
+						{showDescription || showDate || showByline ? (
+							<Stack>
+								{showDescription && descriptionText ? (
+									<Link href={url}>
+										<Paragraph>{descriptionText}</Paragraph>
+									</Link>
+								) : null}
+								{showDate || showByline ? (
+									<Stack direction="horizontal" className={`${BLOCK_CLASS_NAME}__author`}>
+										{showByline ? (
+											<>
+												<span>{bylineNodes}</span>
+												{showDate ? <Separator /> : null}
+											</>
+										) : null}
+										{showDate ? <Date dateString={displayDate} dateTime={displayDate} /> : null}
+									</Stack>
+								) : null}
+							</Stack>
+						) : null}
+					</Stack>
 					{showImage ? (
-						<div className="results-list--image-container">
-							<a href={url} title={headlineText} aria-hidden="true" tabIndex="-1">
+						<Stack>
+							<Link href={url} assistiveHidden>
 								<Image
 									{...imageProperties}
-									url={imageURL !== null ? imageURL : targetFallbackImage}
+									src={imageURL !== null ? imageURL : targetFallbackImage}
 									alt={imageURL !== null ? headlineText : imageProperties.primaryLogoAlt}
-									resizedImageOptions={
+									resizedOptions={
 										imageURL !== null
 											? extractResizedParams(element)
 											: placeholderResizedImageOptions
 									}
 								/>
-							</a>
-						</div>
+							</Link>
+						</Stack>
 					) : null}
-					{showItemOverline || showHeadline ? (
-						<div className="results-list--headline-container">
-							{showItemOverline ? <Overline story={element} /> : null}
-							{showHeadline ? (
-								<a href={url} title={headlineText}>
-									<Heading className="headline-text">{headlineText}</Heading>
-								</a>
-							) : null}
-						</div>
-					) : null}
-					{showDescription || showDate || showByline ? (
-						<div className="results-list--description-author-container">
-							{showDescription && descriptionText ? (
-								<a href={url} title={headlineText}>
-									<SecondaryFont as="p" className="description-text">
-										{descriptionText}
-									</SecondaryFont>
-								</a>
-							) : null}
-							{showDate || showByline ? (
-								<div className="results-list--author-date">
-									{showByline ? (
-										<Byline content={element} list separator={showDate} font="Primary" />
-									) : null}
-									{showDate ? <ArticleDate classNames="story-date" date={displayDate} /> : null}
-								</div>
-							) : null}
-						</div>
-					) : null}
-				</div>
+				</Stack>
 			);
 		}
 	)

@@ -1,4 +1,17 @@
-import testImageURL from "../../resources/camera.jpg";
+const IMAGE_OBJECT = {
+	alt_text: "",
+	_id: "EM5DTGYGABDJZODV7YVFOC2DOM",
+	auth: {
+		2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf",
+	},
+	url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
+};
+
+const FEATURED_IMAGE_SCHEMA = {
+	featuredImage: {
+		value: [IMAGE_OBJECT],
+	},
+};
 
 const PRICING_ARRAY_ONLY_LIST = [
 	{
@@ -60,7 +73,7 @@ const PRICING_ARRAY_DIFFERENT_LIST_SALE = [
 export const algoliaProductMock = [
 	{
 		name: "Item 1",
-		image: testImageURL,
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-1",
 		pricing: PRICING_ARRAY_ONLY_LIST,
 		attributes: [
@@ -72,29 +85,29 @@ export const algoliaProductMock = [
 	},
 	{
 		name: "Item 2",
-		image: testImageURL,
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-2",
 		pricing: PRICING_ARRAY_DIFFERENT_LIST_SALE,
 	},
 	{
 		name: "Item 3",
-		image: testImageURL,
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-3",
 		pricing: PRICING_ARRAY_ONLY_LIST,
 	},
 	{
-		image: testImageURL,
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-4",
 		pricing: PRICING_ARRAY_ONLY_LIST,
 	},
 	{
-		image: testImageURL,
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-5",
 		pricing: PRICING_ARRAY_ONLY_LIST,
 	},
 	{
 		name: "Item 6",
-		image: testImageURL,
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-6",
 		pricing: PRICING_ARRAY_SAME_LIST_SALE,
 	},

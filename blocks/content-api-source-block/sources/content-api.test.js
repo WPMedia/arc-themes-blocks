@@ -29,7 +29,6 @@ describe("the content api source block", () => {
 	it("should use the proper param types", () => {
 		expect(contentApi.params).toEqual({
 			_id: "text",
-			"arc-site": "text",
 			website_url: "text",
 		});
 	});

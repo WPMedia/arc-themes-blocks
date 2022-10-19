@@ -29,7 +29,6 @@ describe("the unpublished content source block", () => {
 	it("should use the proper param types", () => {
 		expect(contentSource.params).toEqual({
 			_id: "text",
-			"arc-site": "text",
 		});
 	});
 

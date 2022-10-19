@@ -30,7 +30,6 @@ describe("the search content source block", () => {
 	it("should use the proper param types", () => {
 		expect(contentSource.params).toEqual({
 			_id: "text",
-			"arc-site": "text",
 			page: "text",
 			query: "text",
 		});

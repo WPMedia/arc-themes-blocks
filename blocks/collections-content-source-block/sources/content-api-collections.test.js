@@ -30,7 +30,6 @@ describe("the collections content source block", () => {
 	it("should use the proper param types", () => {
 		expect(contentSource.params).toEqual({
 			_id: "text",
-			"arc-site": "text",
 			content_alias: "text",
 			from: "text",
 			getNext: "text",

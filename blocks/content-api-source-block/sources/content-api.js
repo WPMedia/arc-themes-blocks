@@ -6,7 +6,6 @@ import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-b
 
 const params = {
 	_id: "text",
-	"arc-site": "text",
 	website_url: "text",
 };
 

@@ -282,7 +282,7 @@ describe("the collections content source block", () => {
 
 	describe("when there are no content_elements", () => {
 		it("should not return content_elements", async () => {
-			axios.mockImplementation(() => Promise.resolve({}));
+			axios.mockImplementation(() => Promise.resolve({ data: {} }));
 			const contentSourceFetch = await contentSource.fetch(
 				{
 					_id: "test",

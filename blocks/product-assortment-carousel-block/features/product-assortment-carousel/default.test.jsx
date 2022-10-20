@@ -170,6 +170,30 @@ describe("Product Assortment Carousel", () => {
 		).not.toBeNull();
 	});
 
+	it("should not show pricing data if not present", () => {
+		useContent.mockReturnValue([
+			{
+				name: "List Price Render",
+				sku: "sku-mock",
+				schema: FEATURED_IMAGE_SCHEMA,
+				attributes: [
+					{
+						name: "product_url",
+						value: "a-url",
+					},
+				],
+			},
+			...mockContent,
+		]);
+		const { queryAllByTestId } = render(
+			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />
+		);
+
+		const priceItemsContainer = queryAllByTestId("price");
+
+		expect(priceItemsContainer.length).toBe(4);
+	});
+
 	it("should render list price only when no sale price", () => {
 		useContent.mockReturnValue([
 			{
@@ -191,6 +215,8 @@ describe("Product Assortment Carousel", () => {
 		);
 
 		const priceItemsContainer = queryAllByTestId("price");
+
+		expect(priceItemsContainer.length).toBe(5);
 
 		expect(priceItemsContainer[0].querySelector(".c-price__list")).toHaveTextContent("$26");
 		expect(priceItemsContainer[0].querySelector(".c-price__sale")).not.toBeInTheDocument();
@@ -240,6 +266,37 @@ describe("Product Assortment Carousel", () => {
 
 		expect(priceItemsContainer[0].querySelector(".c-price__list")).toHaveTextContent("$26");
 		expect(priceItemsContainer[0].querySelector(".c-price__sale")).not.toBeInTheDocument();
+	});
+
+	it("should render images", () => {
+		useContent.mockReturnValue([
+			{
+				name: "Image",
+				schema: FEATURED_IMAGE_SCHEMA,
+				sku: "sku-mock",
+				pricing: PRICING_ARRAY_DIFFERENT_LIST_SALE,
+			},
+			...mockContent,
+		]);
+
+		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
+
+		expect(screen.queryAllByRole("img").length).toBe(4);
+	});
+
+	it("will not render a product image if not present", () => {
+		useContent.mockReturnValue([
+			{
+				name: "Image",
+				sku: "sku-mock",
+				pricing: PRICING_ARRAY_DIFFERENT_LIST_SALE,
+			},
+			...mockContent,
+		]);
+
+		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
+
+		expect(screen.queryAllByRole("img").length).toBe(3);
 	});
 
 	it("should generate product URL", () => {

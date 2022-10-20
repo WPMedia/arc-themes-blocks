@@ -6,6 +6,24 @@ import { useFusionContext } from "fusion:context";
 
 import ProductAssortmentCarousel from "./default";
 
+jest.mock("fusion:environment", () => ({
+	RESIZER_APP_VERSION: 2,
+	RESIZER_URL: "https://resizer.com",
+}));
+
+const IMAGE_OBJECT = {
+	alt_text: "",
+	auth: {
+		2: "auth",
+	},
+	url: "image.jpeg",
+};
+
+const FEATURED_IMAGE_SCHEMA = {
+	featuredImage: {
+		value: [IMAGE_OBJECT],
+	},
+};
 const PRICING_ARRAY_ONLY_LIST = [
 	{
 		id: null,
@@ -65,7 +83,7 @@ const PRICING_ARRAY_SAME_LIST_SALE = [
 const mockContent = [
 	{
 		name: "Item 1",
-		image: "image-url",
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-1",
 		pricing: PRICING_ARRAY_ONLY_LIST,
 		attributes: [
@@ -77,18 +95,18 @@ const mockContent = [
 	},
 	{
 		name: "Item 2",
-		image: "image-url",
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-2",
 		pricing: PRICING_ARRAY_DIFFERENT_LIST_SALE,
 	},
 	{
 		name: "Item 3",
-		image: "image-url",
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-3",
 		pricing: PRICING_ARRAY_ONLY_LIST,
 	},
 	{
-		image: "image-url",
+		schema: FEATURED_IMAGE_SCHEMA,
 		sku: "sku-4",
 		pricing: PRICING_ARRAY_ONLY_LIST,
 	},
@@ -152,12 +170,36 @@ describe("Product Assortment Carousel", () => {
 		).not.toBeNull();
 	});
 
+	it("should not show pricing data if not present", () => {
+		useContent.mockReturnValue([
+			{
+				name: "List Price Render",
+				sku: "sku-mock",
+				schema: FEATURED_IMAGE_SCHEMA,
+				attributes: [
+					{
+						name: "product_url",
+						value: "a-url",
+					},
+				],
+			},
+			...mockContent,
+		]);
+		const { queryAllByTestId } = render(
+			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />
+		);
+
+		const priceItemsContainer = queryAllByTestId("price");
+
+		expect(priceItemsContainer.length).toBe(4);
+	});
+
 	it("should render list price only when no sale price", () => {
 		useContent.mockReturnValue([
 			{
 				name: "List Price Render",
-				image: "image-url",
 				sku: "sku-mock",
+				schema: FEATURED_IMAGE_SCHEMA,
 				pricing: PRICING_ARRAY_ONLY_LIST,
 				attributes: [
 					{
@@ -174,6 +216,8 @@ describe("Product Assortment Carousel", () => {
 
 		const priceItemsContainer = queryAllByTestId("price");
 
+		expect(priceItemsContainer.length).toBe(5);
+
 		expect(priceItemsContainer[0].querySelector(".c-price__list")).toHaveTextContent("$26");
 		expect(priceItemsContainer[0].querySelector(".c-price__sale")).not.toBeInTheDocument();
 	});
@@ -182,7 +226,7 @@ describe("Product Assortment Carousel", () => {
 		useContent.mockReturnValue([
 			{
 				name: "List + Sale Price Render",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-mock",
 				pricing: PRICING_ARRAY_DIFFERENT_LIST_SALE,
 			},
@@ -202,7 +246,7 @@ describe("Product Assortment Carousel", () => {
 		useContent.mockReturnValue([
 			{
 				name: "List Price Render",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-mock",
 				pricing: PRICING_ARRAY_SAME_LIST_SALE,
 				attributes: [
@@ -224,12 +268,43 @@ describe("Product Assortment Carousel", () => {
 		expect(priceItemsContainer[0].querySelector(".c-price__sale")).not.toBeInTheDocument();
 	});
 
+	it("should render images", () => {
+		useContent.mockReturnValue([
+			{
+				name: "Image",
+				schema: FEATURED_IMAGE_SCHEMA,
+				sku: "sku-mock",
+				pricing: PRICING_ARRAY_DIFFERENT_LIST_SALE,
+			},
+			...mockContent,
+		]);
+
+		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
+
+		expect(screen.queryAllByRole("img").length).toBe(4);
+	});
+
+	it("will not render a product image if not present", () => {
+		useContent.mockReturnValue([
+			{
+				name: "Image",
+				sku: "sku-mock",
+				pricing: PRICING_ARRAY_DIFFERENT_LIST_SALE,
+			},
+			...mockContent,
+		]);
+
+		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
+
+		expect(screen.queryAllByRole("img").length).toBe(3);
+	});
+
 	it("should generate product URL", () => {
 		const mockUrl = "a-url";
 		useContent.mockReturnValue([
 			{
 				name: "Has product_url attribute",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-1",
 				pricing: PRICING_ARRAY_ONLY_LIST,
 				attributes: [
@@ -241,7 +316,7 @@ describe("Product Assortment Carousel", () => {
 			},
 			{
 				name: "Has no product_url attribute",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-2",
 				pricing: PRICING_ARRAY_ONLY_LIST,
 				attributes: [
@@ -253,14 +328,14 @@ describe("Product Assortment Carousel", () => {
 			},
 			{
 				name: "Has empty attribute array",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-3",
 				pricing: PRICING_ARRAY_ONLY_LIST,
 				attributes: [],
 			},
 			{
 				name: "Has no attribute key",
-				image: "image-url",
+				schema: FEATURED_IMAGE_SCHEMA,
 				sku: "sku-4",
 				pricing: PRICING_ARRAY_ONLY_LIST,
 			},

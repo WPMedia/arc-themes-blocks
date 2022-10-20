@@ -215,12 +215,12 @@ const Results = ({
 			{isThereMore && (
 				<Stack>
 					<Button
-						accessibilityLabel={phrases.t("results-list-block.see-more-button-aria-label")}
+						accessibilityLabel={phrases.t("global.see-more-button-aria-label")}
 						primary="primary"
 						onClick={onReadMoreClick}
 					>
 						{" "}
-						{phrases.t("results-list-block.see-more-button")}
+						{phrases.t("global.see-more-button")}
 					</Button>
 				</Stack>
 			)}

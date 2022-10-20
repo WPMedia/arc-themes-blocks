@@ -2,20 +2,20 @@
 
 _Results List block for Fusion News Theme. Displays a results list where each result card will have a description, headline, byline block and publish date. ._
 
-## Acceptance Criteria
-
-- If there's one author, it will return `By <author>`
-- If there are two authors, it will return `By <author_0> and <author_1>`
-- If there are three or more authors, it will return with the pattern `By <author_0>, <author_1>, ... <author_(n-1)> and <author_(n)>`
-- It expects the user to configure its content source.
-
 ## Props
 
-| **Prop**                  | **Required** | **Type** | **Description**                                     |
-| ------------------------- | ------------ | -------- | --------------------------------------------------- |
-| **required prop**         | yes          |          |                                                     |
-| **optional prop**         | no           |          |                                                     |
-| **contentConfig example** |              |          | Please specify which content sources are compatible |
+| **Prop**              | **Required** | **Type** | **Description**                                                                                                   |
+| --------------------- | ------------ | -------- | ----------------------------------------------------------------------------------------------------------------- |
+| **listContentConfig** | no           |          | Content info to be displayed                                                                                      |
+| **overline**          | no           |          | overline to be displayed                                                                                          |
+| **overlineURL**       | no           | String   | URL of overline to be displayed                                                                                   |
+| **showItemOverline**  | no           | Boolean  | Do or do not display the item overline. Default value is `true`.                                                  |
+| **showHeadline**      | no           | Boolean  | Do or do not display the headline text. Default value is `true`.                                                  |
+| **showImage**         | no           | Boolean  | Do or do not display the image. Default value is `true`                                                           |
+| **showDescription**   | no           | Boolean  | Do or do not display the description text. Default value is `true`.                                               |
+| **showByline**        | no           | Boolean  | Do or do not display the byline, showing the author of the content. Defaults to `true`, showing the byline        |
+| **showDate**          | no           | Boolean  | Do or do not display the date, showing the time and day of the content. Defaults to `true`, showing the date info |
+| **lazyLoad**          | no           | Boolean  | Prevent block display until when nearly in-view for the user. Default is false.                                   |
 
 ## ANS Schema
 
@@ -32,9 +32,11 @@ Outline any schema information requirements necessary to know for ths block
 
 ## Internationalization fields
 
-| Phrase key                           | Default (English) |
-| ------------------------------------ | ----------------- |
-| `results-list-block.see-more-button` | `See More`        |
+| Phrase key                          | Default (English)                   |
+| ----------------------------------- | ----------------------------------- |
+| `global.see-more-button`            | `See More`                          |
+| `global.and-text`                   | `and`                               |
+| `global.see-more-button-aria-label` | `See more stories about this topic` |
 
 ## Events
 

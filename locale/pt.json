@@ -69,6 +69,8 @@
 		"global.gallery-pause-autoplay-button": "Colocar a reprodução automática em pausa",
 		"global.gallery-text": "Galeria",
 		"global.opens-in-new-window": "(Abre numa nova janela)",
+		"global.see-more-button": "Veja mais",
+		"global.see-more-button-aria-label": "Veja mais histórias sobre este tópico",
 		"global.social-email": "E-mail",
 		"global.social-email-connect": "Enviar e-mail para %{authorName}",
 		"global.social-facebook": "Facebook",

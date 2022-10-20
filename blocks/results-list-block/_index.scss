@@ -5,6 +5,7 @@
 		@include scss.block-components("result-list-left-content");
 		@include scss.block-properties("result-list-left-content");
 	}
+
 	&__author {
 		@include scss.block-components("result-list-author");
 		@include scss.block-properties("result-list-author");

@@ -46,7 +46,7 @@ const ResultItem = React.memo(
 			} = element;
 			const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
 			/* Author Formatting */
-			const bylineNodes = formatAuthors(credits?.by, phrases.t("byline-block.and-text"));
+			const bylineNodes = formatAuthors(credits?.by, phrases.t("global.and-text"));
 			const imageURL = extractImageFromStory(element);
 			const url = websites[arcSite].website_url;
 			return (

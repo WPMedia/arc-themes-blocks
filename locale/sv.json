@@ -69,6 +69,8 @@
 		"global.gallery-pause-autoplay-button": "Pausa",
 		"global.gallery-text": "Bildspel",
 		"global.opens-in-new-window": "(Öppnas i nytt fönster)",
+		"global.see-more-button": "Fler artiklar",
+		"global.see-more-button-aria-label": "Se fler artiklar om detta ämne",
 		"global.social-email": "E-post",
 		"global.social-email-connect": "Skicka e-post till %{authorName}",
 		"global.social-facebook": "Facebook",

@@ -76,7 +76,9 @@ const NavLogo = ({ imageAltText, imageSource, blockClassName, logoAlignment }) =
 			} ${isLogoVisible ? "nav-logo-show" : "nav-logo-hidden"} ${isLogoSVG ? "svg-logo" : ""}`}
 			assistiveHidden={!isLogoVisible}
 		>
-			{imageSource ? <img src={imageSource} alt={imageAltText || ""} /> : null}
+			{imageSource ? (
+				<img src={imageSource} alt={imageAltText || ""} data-chromatic="ignore" />
+			) : null}
 		</Link>
 	);
 };

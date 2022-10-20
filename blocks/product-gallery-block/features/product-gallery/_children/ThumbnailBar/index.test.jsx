@@ -9,31 +9,57 @@
 */
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import ThumbnailBar from "./index";
 import mockData from "../../mock-data";
 
 jest.mock("fusion:environment", () => ({
-	RESIZER_APP_VERSION: 2,
-	RESIZER_URL: "https://resizer.com",
+	RESIZER_APP_VERSION: 1,
+	RESIZER_URL: "https://resizer.com/",
 }));
-// window.HTMLElement.prototype.scrollIntoView = jest.fn();
-/*
-const observe = jest.fn();
-const disconnect = jest.fn();
-window.IntersectionObserver = jest.fn(() => ({
-	observe,
-	disconnect,
-}));
-*/
 
 describe("Thumbnail Bar", () => {
-	it("Renders 3 images and two buttons.", () => {
-		//		const windowResizeSpy = jest.spyOn(ThumbnailBar.prototype, "windowResize");
+	it("Renders 1 image and two buttons.", () => {
 		render(<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={() => true} />);
-		//		expect(windowResizeSpy).toBeCalledTimes(1);
-		expect(screen.queryAllByRole("img")).toHaveLength(3);
+		expect(screen.queryAllByRole("img")).toHaveLength(1);
 		expect(screen.queryAllByRole("button")).toHaveLength(2);
+	});
+
+	it("does not render buttons", () => {
+		render(<ThumbnailBar images={[mockData[0]]} selectedIndex={0} onImageSelect={() => true} />);
+		expect(screen.queryAllByRole("img")).toHaveLength(1);
+		expect(screen.queryAllByRole("button")).toHaveLength(0);
+	});
+
+	it("navigates up and down images using buttons", () => {
+		const { container } = render(
+			<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={() => true} />
+		);
+		expect(screen.queryAllByRole("img")).toHaveLength(1);
+		expect(screen.queryAllByRole("button")).toHaveLength(2);
+
+		expect(
+			container
+				.querySelector(".b-product-gallery__focus-view-thumbnail-image--selected")
+				.getAttribute("src")
+				.includes(mockData[1]._id)
+		).toBeTruthy();
+
+		fireEvent.click(screen.getByRole("button", { name: "Next Image" }));
+		expect(screen.queryByRole("img").getAttribute("src").includes(mockData[2]._id)).toBeTruthy();
+
+		fireEvent.click(screen.getByRole("button", { name: "Previous Image" }));
+		expect(screen.queryByRole("img").getAttribute("src").includes(mockData[1]._id)).toBeTruthy();
+	});
+
+	it("call onImageSelect function when image clicked", () => {
+		const imageSelectSpy = jest.fn();
+		render(<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={imageSelectSpy} />);
+		expect(screen.queryAllByRole("img")).toHaveLength(1);
+		expect(screen.queryAllByRole("button")).toHaveLength(2);
+
+		fireEvent.click(screen.getByRole("img"));
+		expect(imageSelectSpy).toHaveBeenCalled();
 	});
 });

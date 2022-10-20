@@ -22,7 +22,6 @@ const MainImage = ({ image, loading, onVisible }) => {
 	const ref = useRef();
 	const isVisible = useOnScreen(ref);
 
-	// if (isVisible) setThumbnailId(image._id);
 	useEffect(() => {
 		if (isVisible) {
 			onVisible(image._id);

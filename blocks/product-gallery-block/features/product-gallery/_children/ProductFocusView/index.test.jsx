@@ -15,7 +15,7 @@ import ProductFocusView from "./index";
 import mockData from "../../mock-data";
 
 jest.mock("fusion:environment", () => ({
-	RESIZER_APP_VERSION: 2,
+	RESIZER_APP_VERSION: 1,
 	RESIZER_URL: "https://resizer.com",
 }));
 
@@ -30,7 +30,7 @@ window.IntersectionObserver = jest.fn(() => ({
 }));
 
 describe("Product Focus View", () => {
-	it("Renders 5 images.", () => {
+	it("Renders 6 images.", () => {
 		render(
 			<ProductFocusView
 				onClose={() => setFocusViewItemId("")}
@@ -38,6 +38,6 @@ describe("Product Focus View", () => {
 				initialItemId={mockData[0]._id}
 			/>
 		);
-		expect(screen.queryAllByRole("img")).toHaveLength(5);
+		expect(screen.queryAllByRole("img")).toHaveLength(6);
 	});
 });

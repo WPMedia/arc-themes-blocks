@@ -30,15 +30,16 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 		const thumbnailBarHeight = thumbnailBarRef.current.getBoundingClientRect().height;
 
 		const imageContainerGap = Number.parseInt(
-			window.getComputedStyle(imageContainerRef.current.firstChild).getPropertyValue("gap"),
+			window.getComputedStyle(imageContainerRef.current.firstChild).getPropertyValue("gap") || 0,
 			10
 		);
+
 		const thumbnailBarTopPadding = Number.parseInt(
-			window.getComputedStyle(thumbnailBarRef.current).getPropertyValue("padding-top"),
+			window.getComputedStyle(thumbnailBarRef.current).getPropertyValue("padding-top") || 0,
 			10
 		);
 		const thumbnailBarBottomPadding = Number.parseInt(
-			window.getComputedStyle(thumbnailBarRef.current).getPropertyValue("padding-bottom"),
+			window.getComputedStyle(thumbnailBarRef.current).getPropertyValue("padding-bottom") || 0,
 			10
 		);
 		const availableHeight =

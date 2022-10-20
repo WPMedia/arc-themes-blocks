@@ -22,45 +22,45 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 	const shouldShowUpButton = () =>
 		thumbnailBarItemLimit < images.length && thumbnailBarStartIndex !== 0;
 
+	const windowResize = () => {
+		// Math
+		const upButtonHeight = upButtonRef.current?.getBoundingClientRect().height || 0;
+		const downButtonHeight = downButtonRef.current?.getBoundingClientRect().height || 0;
+		const indicatorHeight = indicatorRef.current.getBoundingClientRect().height;
+		const thumbnailBarHeight = thumbnailBarRef.current.getBoundingClientRect().height;
+
+		const imageContainerGap = Number.parseInt(
+			window.getComputedStyle(imageContainerRef.current.firstChild).getPropertyValue("gap"),
+			10
+		);
+		const thumbnailBarTopPadding = Number.parseInt(
+			window.getComputedStyle(thumbnailBarRef.current).getPropertyValue("padding-top"),
+			10
+		);
+		const thumbnailBarBottomPadding = Number.parseInt(
+			window.getComputedStyle(thumbnailBarRef.current).getPropertyValue("padding-bottom"),
+			10
+		);
+		const availableHeight =
+			thumbnailBarHeight -
+			upButtonHeight -
+			downButtonHeight -
+			indicatorHeight -
+			thumbnailBarTopPadding -
+			thumbnailBarBottomPadding;
+
+		const spots = Math.floor(availableHeight / (100 + imageContainerGap));
+
+		setThumbnailBarItemLimit(Math.max(spots, 1));
+	};
+
 	useEffect(() => {
 		setThumbnailBarStartIndex(selectedIndex);
 	}, [selectedIndex]);
 
 	useEffect(() => {
-		const windowResize = () => {
-			// Math
-			const upButtonHeight = upButtonRef.current?.getBoundingClientRect().height || 0;
-			const downButtonHeight = downButtonRef.current?.getBoundingClientRect().height || 0;
-			const indicatorHeight = indicatorRef.current.getBoundingClientRect().height;
-			const thumbnailBarHeight = thumbnailBarRef.current.getBoundingClientRect().height;
-
-			const imageContainerGap = Number.parseInt(
-				window.getComputedStyle(imageContainerRef.current.firstChild).getPropertyValue("gap"),
-				10
-			);
-			const thumbnailBarTopPadding = Number.parseInt(
-				window.getComputedStyle(thumbnailBarRef.current).getPropertyValue("padding-top"),
-				10
-			);
-			const thumbnailBarBottomPadding = Number.parseInt(
-				window.getComputedStyle(thumbnailBarRef.current).getPropertyValue("padding-bottom"),
-				10
-			);
-			const availableHeight =
-				thumbnailBarHeight -
-				upButtonHeight -
-				downButtonHeight -
-				indicatorHeight -
-				thumbnailBarTopPadding -
-				thumbnailBarBottomPadding;
-
-			const spots = Math.floor(availableHeight / (100 + imageContainerGap));
-
-			setThumbnailBarItemLimit(Math.max(spots, 1));
-		};
-		// windowResize();
+		windowResize();
 		window.addEventListener("resize", windowResize);
-
 		return () => window.removeEventListener("resize", windowResize);
 	}, [upButtonRef, downButtonRef, imageContainerRef, indicatorRef, thumbnailBarRef]);
 

@@ -38,6 +38,6 @@ describe("Product Focus View", () => {
 				initialItemId={mockData[0]._id}
 			/>
 		);
-		expect(screen.queryAllByRole("img")).toHaveLength(8);
+		expect(screen.queryAllByRole("img")).toHaveLength(5);
 	});
 });

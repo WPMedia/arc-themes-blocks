@@ -3,16 +3,30 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
 import ResultItem from "./result-item";
+import mockData from "./mock-data";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
-	Stack: ({ children }) => <div>{children}</div>,
+	MediaItem: ({ children }) => <div>{children}</div>,
 	Link: ({ href, children }) => <a href={href}>{children}</a>,
 	Image: ({ src, alt }) => <img href={src} alt={alt} />,
 	Heading: ({ children }) => <>{children}</>,
 	Overline: () => <div>Overline Text</div>,
 	Date: () => <div>2021-01-01T00:01:00Z</div>,
 	Paragraph: () => <p>Description 1</p>,
+	Separator: ({ children }) => <div>{children}</div>,
+	Join: ({ children }) => <div>{children}</div>,
+	Conditional: ({ children }) => <div>{children}</div>,
+	Attribution: ({ children }) => <div>{children}</div>,
 	formatAuthors: jest.fn().mockReturnValue("Byline Sample Text - 123"),
+	formatURL: jest.fn().mockReturnValue("https://www.google.com"),
+}));
+
+jest.mock("fusion:content", () => ({
+	useContent: jest.fn(() => mockData),
+	useEditableContent: jest.fn(() => ({
+		editableContent: () => ({ contentEditable: "true" }),
+		searchableField: () => {},
+	})),
 }));
 
 const fallbackImage = "http://test/resources/fallback.jpg";
@@ -41,6 +55,9 @@ const element = {
 				name: "Section",
 			},
 		},
+	},
+	credits: {
+		by: "Matthew Roach",
 	},
 	_id: "element_1",
 	overline: "Overline Text",

@@ -1,18 +1,24 @@
 import React from "react";
+import { useEditableContent } from "fusion:content";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
+import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
 
 import { extractResizedParams, extractImageFromStory } from "@wpmedia/resizer-image-block";
 import {
-	Stack,
+	Attribution,
 	Separator,
 	Heading,
 	Overline,
 	Image,
 	Link,
-	Date,
+	Date as DateComponent,
 	formatAuthors,
 	Paragraph,
+	Join,
+	formatURL,
+	MediaItem,
+	Conditional,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-result-list";
@@ -44,47 +50,30 @@ const ResultItem = React.memo(
 				websites,
 				credits,
 			} = element;
+			const {
+				dateLocalization: { language, timeZone, dateTimeFormat } = {
+					language: "en",
+					timeZone: "GMT",
+					dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
+				},
+			} = getProperties(arcSite);
 			const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+
 			/* Author Formatting */
-			const bylineNodes = formatAuthors(credits?.by, phrases.t("global.and-text"));
 			const imageURL = extractImageFromStory(element);
+			const { searchableField } = useEditableContent();
+			const hasAuthors = showByline ? credits?.by && credits?.by.length : null;
+			const formattedDate = Date.parse(displayDate)
+				? localizeDateTime(new Date(displayDate), dateTimeFormat, language, timeZone)
+				: "";
 			const url = websites[arcSite].website_url;
 			return (
-				<Stack ref={ref} direction="horizontal" className={BLOCK_CLASS_NAME}>
-					<Stack className={`${BLOCK_CLASS_NAME}__leftContent`}>
-						{showItemOverline || showHeadline ? (
-							<Stack>
-								{showItemOverline ? <Overline href={overlineURL}>{overline}</Overline> : null}
-								{showHeadline ? (
-									<Link href={url}>
-										<Heading>{headlineText}</Heading>
-									</Link>
-								) : null}
-							</Stack>
-						) : null}
-						{showDescription || showDate || showByline ? (
-							<Stack>
-								{showDescription && descriptionText ? (
-									<Link href={url}>
-										<Paragraph>{descriptionText}</Paragraph>
-									</Link>
-								) : null}
-								{showDate || showByline ? (
-									<Stack direction="horizontal" className={`${BLOCK_CLASS_NAME}__author`}>
-										{showByline ? (
-											<>
-												<span>{bylineNodes}</span>
-												{showDate ? <Separator /> : null}
-											</>
-										) : null}
-										{showDate ? <Date dateString={displayDate} dateTime={displayDate} /> : null}
-									</Stack>
-								) : null}
-							</Stack>
-						) : null}
-					</Stack>
+				<div
+					ref={ref}
+					className={`${BLOCK_CLASS_NAME}${showImage ? ` ${BLOCK_CLASS_NAME}--show-image` : ""}`}
+				>
 					{showImage ? (
-						<Stack>
+						<MediaItem {...searchableField("imageOverrideURL")} suppressContentEditableWarning>
 							<Link href={url} assistiveHidden>
 								<Image
 									{...imageProperties}
@@ -95,11 +84,54 @@ const ResultItem = React.memo(
 											? extractResizedParams(element)
 											: placeholderResizedImageOptions
 									}
+									sizes={[
+										{
+											isDefault: true,
+											sourceSizeValue: "100px",
+										},
+										{
+											sourceSizeValue: "500px",
+											mediaCondition: "(min-width: 48rem)",
+										},
+									]}
+									responsiveImages={[100, 500]}
 								/>
 							</Link>
-						</Stack>
+						</MediaItem>
 					) : null}
-				</Stack>
+					{showItemOverline ? (
+						<div>
+							<Overline href={overlineURL}>{overline}</Overline>
+						</div>
+					) : null}
+					{showHeadline ? (
+						<Heading>
+							<Conditional component={Link} condition={url} href={formatURL(url)}>
+								{headlineText}
+							</Conditional>
+						</Heading>
+					) : null}
+					{showDescription && descriptionText ? (
+						<Link href={url}>
+							<Paragraph>{descriptionText}</Paragraph>
+						</Link>
+					) : null}
+					{showDate || hasAuthors ? (
+						<Attribution>
+							<Join separator={Separator}>
+								{hasAuthors ? (
+									<Join separator={() => " "}>
+										{phrases.t("global.by-text")}
+										{formatAuthors(credits?.by, phrases.t("global.and-text"))}
+									</Join>
+								) : null}
+								{showDate ? (
+									<DateComponent dateTime={displayDate} dateString={formattedDate} />
+								) : null}
+							</Join>
+						</Attribution>
+					) : null}
+				</div>
 			);
 		}
 	)

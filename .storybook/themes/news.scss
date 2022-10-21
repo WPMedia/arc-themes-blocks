@@ -1788,6 +1788,42 @@
 				quad-chain-child-item-empty: (
 					display: contents,
 				),
+				result-list: (
+					padding-bottom: var(--global-spacing-4),
+					border-bottom: 1px solid #dadada,
+					components: (
+						attribution: (
+							display: block,
+							margin-top: var(--global-spacing-4),
+						),
+						media-item: (
+							float: right,
+							max-width: 100px,
+						),
+						heading: (
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
+							margin-bottom: var(--global-spacing-4),
+						),
+						overline: (
+							display: block,
+						),
+						paragraph: (
+							display: block,
+						),
+						separator: (
+							padding: 0 var(--global-spacing-2),
+						),
+					),
+				),
+				result-list-show-image: (
+					components: (
+						heading: (
+							width: 68%,
+						),
+					),
+				),
 				right-rail: (
 					gap: var(--global-spacing-6),
 				),
@@ -2359,6 +2395,43 @@
 				),
 				quad-chain-child-item-empty: (
 					display: initial,
+				),
+				result-list: (
+					padding-bottom: var(--global-spacing-4),
+					border-bottom: 1px solid #dadada,
+					components: (
+						attribution: (
+							display: block,
+						),
+						media-item: (
+							float: left,
+							margin: 0,
+							max-width: 33%,
+						),
+						overline: (
+							display: block,
+						),
+						paragraph: (
+							display: block,
+						),
+					),
+				),
+				result-list-show-image: (
+					components: (
+						attribution: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+						),
+						heading: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+							width: auto,
+						),
+						paragraph: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+						),
+						overline: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+						),
+					),
 				),
 				right-rail-navigation: (
 					padding: 0 0 var(--global-spacing-8) 0,

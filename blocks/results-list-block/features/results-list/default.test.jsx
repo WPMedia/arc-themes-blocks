@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
 import { useFusionContext } from "fusion:context";
+import getTranslatedPhrases from "fusion:intl";
 import getProperties from "fusion:properties";
 
 import { isServerSide } from "@wpmedia/arc-themes-components";
@@ -23,6 +24,7 @@ jest.mock("fusion:intl", () => ({
 
 getProperties.mockReturnValue({
 	fallbackImage: "placeholder.jpg",
+	locale: "en",
 	resizerURL: "https://resizer.me",
 	primaryLogoAlt: "image alt",
 	breakpoints: {},
@@ -123,6 +125,37 @@ describe("getFallbackImageURL", () => {
 
 		const { unmount } = render(<ResultsList customFields={customFields} />);
 		expect(mockDeployment).toHaveBeenCalledTimes(0);
+		unmount();
+	});
+});
+
+describe("phrases", () => {
+	it('should default to "en" if locale is not configured', () => {
+		const mockGetTranslatedPhrases = jest.fn();
+
+		getTranslatedPhrases.mockImplementation(mockGetTranslatedPhrases);
+
+		getProperties.mockReturnValue({
+			fallbackImage: "placeholder.jpg",
+			locale: null,
+			resizerURL: "https://resizer.me",
+			primaryLogoAlt: "image alt",
+			breakpoints: {},
+		});
+
+		const customFields = {
+			lazyLoad: true,
+			listContentConfig: {
+				contentService: null,
+				contentConfigValues: {
+					offset: 0,
+					size: 1,
+				},
+			},
+		};
+
+		const { unmount } = render(<ResultsList customFields={customFields} />);
+		expect(mockGetTranslatedPhrases).toHaveBeenCalledWith("en");
 		unmount();
 	});
 });

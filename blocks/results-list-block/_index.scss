@@ -1,14 +1,14 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-result-list {
-	&__leftContent {
-		@include scss.block-components("result-list-left-content");
-		@include scss.block-properties("result-list-left-content");
+	&--show-image {
+		@include scss.block-properties("result-list-show-image");
+		@include scss.block-components("result-list-show-image");
 	}
 
-	&__author {
-		@include scss.block-components("result-list-author");
-		@include scss.block-properties("result-list-author");
+	&__label {
+		@include scss.block-components("result-list-label");
+		@include scss.block-properties("result-list-label");
 	}
 	@include scss.block-components("result-list");
 	@include scss.block-properties("result-list");

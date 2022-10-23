@@ -24,7 +24,7 @@ const MAX_SLIDES = 12;
 
 const getProductURL = (item) => item.filter((x) => x.name === "product_url")[0]?.value || "#";
 
-const getPrice = (type, prices) => prices.filter((x) => x.type === type)[0] || {};
+const getPrice = (type, prices) => (prices && prices.filter((x) => x.type === type)?.[0]) || null;
 
 const parseCondition = (condition) => {
 	try {
@@ -125,15 +125,15 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 					}
 				>
 					{content.map((item, carouselIndex) => {
-						const pricing = item.pricing[0];
-						const SalePrice = getPrice("Sale", pricing.prices);
-						const ListPrice = getPrice("List", pricing.prices);
+						const pricing = item?.pricing?.[0] || {};
+						const SalePrice = getPrice("Sale", pricing?.prices);
+						const ListPrice = getPrice("List", pricing?.prices);
 
 						const salePriceAmount = SalePrice?.amount;
 						const listPriceAmount = ListPrice?.amount;
 						const isOnSale = salePriceAmount && salePriceAmount !== listPriceAmount;
 
-						const featuredImage = item.schema.featuredImage.value[0];
+						const featuredImage = item?.schema?.featuredImage?.value?.[0] || {};
 
 						const { alt_text: altText, auth } = featuredImage;
 
@@ -151,42 +151,46 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 										href={item.attributes ? getProductURL(item?.attributes) : "#"}
 										assistiveHidden={viewable ? null : true}
 									>
-										<Image
-											alt={altText}
-											resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
-											resizerURL={RESIZER_URL}
-											src={imageANSToImageSrc(featuredImage)}
-											width={280}
-											height={280}
-											responsiveImages={[280, 420, 560, 840]}
-										/>
+										{auth ? (
+											<Image
+												alt={altText}
+												resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
+												resizerURL={RESIZER_URL}
+												src={imageANSToImageSrc(featuredImage)}
+												width={280}
+												height={280}
+												responsiveImages={[280, 420, 560, 840]}
+											/>
+										) : null}
 										{item.name ? (
 											<HeadingSection>
 												<Heading>{item.name}</Heading>
 											</HeadingSection>
 										) : null}
-										<Price
-											className={`${
-												!isOnSale ? `${BLOCK_CLASS_NAME}__product-single-price` : null
-											}`}
-										>
-											{isOnSale ? (
-												<Price.Sale>
+										{ListPrice ? (
+											<Price
+												className={`${
+													!isOnSale ? `${BLOCK_CLASS_NAME}__product-single-price` : null
+												}`}
+											>
+												{isOnSale && SalePrice ? (
+													<Price.Sale>
+														{new Intl.NumberFormat(pricing.currencyLocale, {
+															style: "currency",
+															currency: pricing.currencyCode,
+															minimumFractionDigits: 2,
+														}).format(salePriceAmount)}
+													</Price.Sale>
+												) : null}
+												<Price.List>
 													{new Intl.NumberFormat(pricing.currencyLocale, {
 														style: "currency",
 														currency: pricing.currencyCode,
 														minimumFractionDigits: 2,
-													}).format(salePriceAmount)}
-												</Price.Sale>
-											) : null}
-											<Price.List>
-												{new Intl.NumberFormat(pricing.currencyLocale, {
-													style: "currency",
-													currency: pricing.currencyCode,
-													minimumFractionDigits: 2,
-												}).format(listPriceAmount)}
-											</Price.List>
-										</Price>
+													}).format(listPriceAmount)}
+												</Price.List>
+											</Price>
+										) : null}
 									</Link>
 								)}
 							</Carousel.Item>

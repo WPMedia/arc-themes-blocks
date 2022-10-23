@@ -140,10 +140,10 @@ jest.mock("fusion:themes", () => jest.fn(() => ({})));
 const mockPhrases = {
 	t: jest.fn((phraseString) => {
 		switch (phraseString) {
-			case "results-list-block.see-more-button": {
+			case "global.see-more-button": {
 				return "See More";
 			}
-			case "results-list-block.see-more-button-aria-label": {
+			case "global.see-more-button-aria-label": {
 				return "button";
 			}
 			default: {
@@ -488,12 +488,7 @@ describe("story-feed-sections service", () => {
 
 describe("story-feed-tag service", () => {
 	it("should call useContent with appropriate query parameters", () => {
-		useContent
-			.mockReset()
-			.mockReturnValueOnce({})
-			.mockReturnValueOnce(mockContent[0])
-			.mockReturnValueOnce({})
-			.mockReturnValueOnce(mockContent[1]);
+		useContent.mockReset().mockReturnValueOnce(mockContent[0]).mockReturnValueOnce(mockContent[1]);
 
 		const { unmount } = render(
 			<Results

@@ -1,5 +1,6 @@
 import React from "react";
 import { useEditableContent } from "fusion:content";
+import { useComponentContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
@@ -58,23 +59,36 @@ const ResultItem = React.memo(
 				},
 			} = getProperties(arcSite);
 			const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+			const { registerSuccessEvent } = useComponentContext();
 
 			/* Author Formatting */
 			const imageURL = extractImageFromStory(element);
 			const { searchableField } = useEditableContent();
 			const hasAuthors = showByline ? credits?.by && credits?.by.length : null;
+			const contentHeading = showHeadline ? headlineText : null;
 			const formattedDate = Date.parse(displayDate)
 				? localizeDateTime(new Date(displayDate), dateTimeFormat, language, timeZone)
 				: "";
 			const url = websites[arcSite].website_url;
-			return (
+			return showHeadline ||
+				showImage ||
+				showDescription ||
+				showByline ||
+				showDate ||
+				showItemOverline ? (
 				<div
 					ref={ref}
 					className={`${BLOCK_CLASS_NAME}${showImage ? ` ${BLOCK_CLASS_NAME}--show-image` : ""}`}
 				>
 					{showImage ? (
 						<MediaItem {...searchableField("imageOverrideURL")} suppressContentEditableWarning>
-							<Link href={url} assistiveHidden>
+							<Conditional
+								component={Link}
+								condition={url}
+								href={formatURL(url)}
+								onClick={registerSuccessEvent}
+								assistiveHidden
+							>
 								<Image
 									{...imageProperties}
 									src={imageURL !== null ? imageURL : targetFallbackImage}
@@ -96,7 +110,7 @@ const ResultItem = React.memo(
 									]}
 									responsiveImages={[100, 500]}
 								/>
-							</Link>
+							</Conditional>
 						</MediaItem>
 					) : null}
 					{showItemOverline ? (
@@ -104,9 +118,14 @@ const ResultItem = React.memo(
 							<Overline href={overlineURL}>{overline}</Overline>
 						</div>
 					) : null}
-					{showHeadline ? (
+					{contentHeading ? (
 						<Heading>
-							<Conditional component={Link} condition={url} href={formatURL(url)}>
+							<Conditional
+								component={Link}
+								condition={url}
+								href={formatURL(url)}
+								onClick={registerSuccessEvent}
+							>
 								{headlineText}
 							</Conditional>
 						</Heading>
@@ -132,7 +151,7 @@ const ResultItem = React.memo(
 						</Attribution>
 					) : null}
 				</div>
-			);
+			) : null;
 		}
 	)
 );

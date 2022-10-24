@@ -48,7 +48,7 @@ export const wideLogo = () => (
 		sections={[]}
 		showDotSeparators={false}
 		signInOrder={1}
-		primaryLogoPath="https://place-hold.it/1200x150"
+		primaryLogoPath="/1200x150.gif"
 		primaryLogoAlt="Shows dimensions of 1200 by 150 for testing purposes"
 	/>
 );
@@ -67,7 +67,7 @@ export const tallLogo = () => (
 		sections={[]}
 		showDotSeparators={false}
 		signInOrder={1}
-		primaryLogoPath="https://place-hold.it/100x800"
+		primaryLogoPath="/100x800.gif"
 		primaryLogoAlt="Shows dimensions of 100 by 800 for tall testing purposes"
 	/>
 );
@@ -86,7 +86,7 @@ export const squareLogo = () => (
 		sections={[]}
 		showDotSeparators={false}
 		signInOrder={1}
-		primaryLogoPath="https://place-hold.it/100x100"
+		primaryLogoPath="/100x100.gif"
 		primaryLogoAlt="Shows dimensions of 100 by 100 for tall testing purposes"
 	/>
 );
@@ -103,7 +103,7 @@ export const centerLogo = () => (
 		sections={[]}
 		showDotSeparators={false}
 		signInOrder={1}
-		primaryLogoPath="https://place-hold.it/100x100"
+		primaryLogoPath="/100x100.gif"
 		primaryLogoAlt="Shows dimensions of 100 by 100 for tall testing purposes"
 	/>
 );
@@ -123,7 +123,7 @@ export const scrolledNav = () => (
 		sections={[]}
 		showDotSeparators={false}
 		signInOrder={1}
-		primaryLogoPath="https://place-hold.it/100x100"
+		primaryLogoPath="/100x100.gif"
 		primaryLogoAlt="Shows dimensions of 100 by 100 for tall testing purposes"
 	/>
 );
@@ -148,7 +148,7 @@ export const leftLogoWithLinks = () => (
 		sections={[]}
 		showDotSeparators
 		signInOrder={1}
-		primaryLogoPath="https://place-hold.it/86x36"
+		primaryLogoPath="/86x36.gif"
 		primaryLogoAlt="Shows dimensions of 86 by 36."
 	/>
 );
@@ -169,7 +169,7 @@ export const leftLogoWithRightItems = () => (
 		sections={[]}
 		showDotSeparators
 		signInOrder={1}
-		primaryLogoPath="https://place-hold.it/86x36"
+		primaryLogoPath="/86x36.gif"
 		primaryLogoAlt="Shows dimensions of 86 by 36."
 	/>
 );
@@ -192,7 +192,7 @@ export const leftLogoWithLinksAndSearch = () => (
 		sections={headerNavMock}
 		showDotSeparators={false}
 		signInOrder={1}
-		primaryLogoPath="https://place-hold.it/1200x150"
+		primaryLogoPath="/1200x150.gif"
 		primaryLogoAlt="Shows dimensions of 1200 by 150 for testing purposes"
 	/>
 );
@@ -211,7 +211,7 @@ export const sectionMenuOpen = () => (
 		sections={headerNavMock}
 		showDotSeparators={false}
 		signInOrder={1}
-		primaryLogoPath="https://place-hold.it/1200x150"
+		primaryLogoPath="/1200x150.gif"
 		primaryLogoAlt="Shows dimensions of 1200 by 150 for testing purposes"
 	/>
 );
@@ -239,7 +239,7 @@ export const sectionMenuOpenWithSearch = () => (
 		sections={headerNavMock}
 		showDotSeparators={false}
 		signInOrder={1}
-		primaryLogoPath="https://place-hold.it/1200x150"
+		primaryLogoPath="/1200x150.gif"
 		primaryLogoAlt="Shows dimensions of 1200 by 150 for testing purposes"
 	/>
 );

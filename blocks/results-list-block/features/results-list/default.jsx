@@ -5,11 +5,8 @@ import { useFusionContext } from "fusion:context";
 import getTranslatedPhrases from "fusion:intl";
 import getProperties from "fusion:properties";
 import { isServerSide, HeadingSection } from "@wpmedia/arc-themes-components";
-
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
-// shared with search results list
-// to modify, go to the shared styles block
 import { resolveDefaultPromoElements } from "./results/helpers";
 import Results from "./results";
 
@@ -83,14 +80,6 @@ ResultsList.propTypes = {
 		listContentConfig: PropTypes.contentConfig("ans-feed").tag({
 			group: "Configure Content",
 			label: "Display Content Info",
-		}),
-		overline: PropTypes.string.tag({
-			label: "Overline",
-			group: "Configure Content",
-		}),
-		overlineURL: PropTypes.string.tag({
-			label: "Overline URL",
-			group: "Configure Content",
 		}),
 		showItemOverline: PropTypes.bool.tag({
 			label: "Show overline",

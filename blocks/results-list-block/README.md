@@ -7,8 +7,6 @@ _Results List block for Fusion News Theme. Displays a results list where each re
 | **Prop**              | **Required** | **Type** | **Description**                                                                                                   |
 | --------------------- | ------------ | -------- | ----------------------------------------------------------------------------------------------------------------- |
 | **listContentConfig** | no           |          | Content info to be displayed                                                                                      |
-| **overline**          | no           |          | overline to be displayed                                                                                          |
-| **overlineURL**       | no           | String   | URL of overline to be displayed                                                                                   |
 | **showItemOverline**  | no           | Boolean  | Do or do not display the item overline. Default value is `true`.                                                  |
 | **showHeadline**      | no           | Boolean  | Do or do not display the headline text. Default value is `true`.                                                  |
 | **showImage**         | no           | Boolean  | Do or do not display the image. Default value is `true`                                                           |

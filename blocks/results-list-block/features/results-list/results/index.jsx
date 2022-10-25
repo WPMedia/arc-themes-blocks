@@ -5,6 +5,8 @@ import { useContent } from "fusion:content";
 import ResultItem from "./result-item";
 import { reduceResultList } from "./helpers";
 
+const BLOCK_CLASS_NAME = "b-result-list";
+
 const Results = ({
 	arcSite,
 	configuredOffset,
@@ -180,7 +182,6 @@ const Results = ({
 		0,
 		queryOffset + configuredSize - configuredOffset
 	);
-
 	const fullListLength = resultList?.count
 		? resultList?.count - configuredOffset
 		: resultList?.content_elements.length;
@@ -190,7 +191,6 @@ const Results = ({
 	const onReadMoreClick = useCallback(() => {
 		setQueryOffset((oldOffset) => oldOffset + configuredSize);
 	}, [configuredSize, setQueryOffset]);
-
 	return viewableElements?.length > 0 && !isServerSideLazy ? (
 		<Stack>
 			{viewableElements.map((element, index) => (
@@ -213,13 +213,12 @@ const Results = ({
 				/>
 			))}
 			{isThereMore && (
-				<Stack>
+				<Stack alignment="center" className={`${BLOCK_CLASS_NAME}__see-more`}>
 					<Button
 						accessibilityLabel={phrases.t("global.see-more-button-aria-label")}
-						primary="primary"
+						variant="primary"
 						onClick={onReadMoreClick}
 					>
-						{" "}
 						{phrases.t("global.see-more-button")}
 					</Button>
 				</Stack>

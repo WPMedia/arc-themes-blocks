@@ -1824,6 +1824,13 @@
 						),
 					),
 				),
+				result-list-see-more: (
+					components: (
+						button: (
+							margin-top: var(--global-spacing-4),
+						),
+					),
+				),
 				right-rail: (
 					gap: var(--global-spacing-6),
 				),
@@ -2397,8 +2404,6 @@
 					display: initial,
 				),
 				result-list: (
-					padding-bottom: var(--global-spacing-4),
-					border-bottom: 1px solid #dadada,
 					components: (
 						attribution: (
 							display: block,
@@ -2407,12 +2412,6 @@
 							float: left,
 							margin: 0,
 							max-width: 33%,
-						),
-						overline: (
-							display: block,
-						),
-						paragraph: (
-							display: block,
 						),
 					),
 				),

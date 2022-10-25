@@ -1,9 +1,14 @@
 import React from "react";
 import { mount } from "enzyme";
 import { useFusionContext } from "fusion:context";
-import { isServerSide } from "@wpmedia/engine-theme-sdk";
+import { isServerSide } from "@wpmedia/arc-themes-components";
 
 import ArticleBodyChain from "./default";
+
+jest.mock("fusion:environment", () => ({
+	RESIZER_APP_VERSION: 2,
+	RESIZER_URL: "http://some.url",
+}));
 
 jest.mock("fusion:properties", () =>
 	jest.fn(() => ({
@@ -13,6 +18,10 @@ jest.mock("fusion:properties", () =>
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
 	LazyLoad: ({ children }) => <>{children}</>,
+}));
+
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(),
 }));
 
@@ -81,7 +90,7 @@ describe("article-body chain", () => {
 					<span>3</span>
 				</ArticleBodyChain>
 			);
-
+			//
 			expect(wrapper.find("article")).toHaveLength(1);
 			expect(wrapper.find("article").find("div")).toHaveLength(2);
 		});
@@ -1244,6 +1253,9 @@ describe("article-body chain", () => {
 			},
 			address: {},
 			alt_text: "A person walks down a path with their surfboard towards the ocean.",
+			auth: {
+				2: "RESIZER_AUTH_KEY",
+			},
 			caption:
 				"Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break. ",
 			created_date: "2019-07-09T22:26:02Z",
@@ -1288,7 +1300,6 @@ describe("article-body chain", () => {
 			url: "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg",
 			version: "0.9.0",
 			width: 5616,
-			resized_params: { "1440x0": "" },
 		};
 
 		it("should render image with figcaption and author", () => {
@@ -1368,6 +1379,9 @@ describe("article-body chain", () => {
 							},
 							address: {},
 							alt_text: "A person walks down a path with their surfboard towards the ocean.",
+							auth: {
+								2: "RESIZER_AUTH_KEY",
+							},
 							caption:
 								"Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break. ",
 							created_date: "2019-07-09T22:26:02Z",
@@ -1472,6 +1486,9 @@ describe("article-body chain", () => {
 							},
 							address: {},
 							alt_text: "A person walks down a path with their surfboard towards the ocean.",
+							auth: {
+								2: "RESIZER_AUTH_KEY",
+							},
 							caption:
 								"Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break. ",
 							created_date: "2019-07-09T22:26:02Z",
@@ -1521,7 +1538,6 @@ describe("article-body chain", () => {
 							url: "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg",
 							version: "0.9.0",
 							width: 5616,
-							resized_params: { "1440x0": "" },
 						},
 					],
 				},
@@ -1593,6 +1609,9 @@ describe("article-body chain", () => {
 							},
 							address: {},
 							alt_text: "A person walks down a path with their surfboard towards the ocean.",
+							auth: {
+								2: "RESIZER_AUTH_KEY",
+							},
 							caption:
 								"Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break. ",
 							created_date: "2019-07-09T22:26:02Z",
@@ -1652,7 +1671,6 @@ describe("article-body chain", () => {
 							url: "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg",
 							version: "0.9.0",
 							width: 5616,
-							resized_params: { "1440x0": "" },
 						},
 					],
 				},
@@ -1720,6 +1738,9 @@ describe("article-body chain", () => {
 							},
 							address: {},
 							alt_text: "A person walks down a path with their surfboard towards the ocean.",
+							auth: {
+								2: "RESIZER_AUTH_KEY",
+							},
 							caption:
 								"Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break. ",
 							created_date: "2019-07-09T22:26:02Z",
@@ -1779,7 +1800,6 @@ describe("article-body chain", () => {
 							url: "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg",
 							version: "0.9.0",
 							width: 5616,
-							resized_params: { "1440x0": "" },
 						},
 					],
 				},
@@ -1840,6 +1860,9 @@ describe("article-body chain", () => {
 							},
 							address: {},
 							alt_text: "A person walks down a path with their surfboard towards the ocean.",
+							auth: {
+								2: "RESIZER_AUTH_KEY",
+							},
 							caption:
 								"Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break. ",
 							created_date: "2019-07-09T22:26:02Z",
@@ -1899,7 +1922,6 @@ describe("article-body chain", () => {
 							url: "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg",
 							version: "0.9.0",
 							width: 5616,
-							resized_params: { "1440x0": "" },
 						},
 					],
 				},
@@ -2000,6 +2022,9 @@ describe("article-body chain", () => {
 								comments: [],
 								inline_comments: [],
 							},
+							auth: {
+								2: "RESIZER_AUTH_KEY",
+							},
 							content: "This story has a divider below this paragraph",
 						},
 						{
@@ -2017,6 +2042,9 @@ describe("article-body chain", () => {
 								comments: [],
 								inline_comments: [],
 							},
+							auth: {
+								2: "RESIZER_AUTH_KEY",
+							},
 							content:
 								"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi elit, varius quis dui nec, bibendum accumsan nisl. Cras et efficitur ex. Maecenas tempor pellentesque sem, ac interdum felis mollis ac. Sed at tristique felis. Morbi a dictum sapien, quis lacinia nulla. Vestibulum sagittis mauris vitae faucibus sodales. Nunc porttitor sollicitudin leo, ut varius metus condimentum sit amet. Nam ipsum ante, vestibulum vitae rutrum at, viverra sed neque. In non imperdiet risus. Duis maximus lectus a sollicitudin pulvinar. Curabitur non fermentum neque. In sed lacus in leo venenatis luctus. Cras mollis et mi at pretium.",
 						},
@@ -2027,6 +2055,9 @@ describe("article-body chain", () => {
 								comments: [],
 								inline_comments: [],
 							},
+							auth: {
+								2: "RESIZER_AUTH_KEY",
+							},
 							content:
 								"Suspendisse sollicitudin nulla nisi, sed accumsan leo interdum a. Mauris sit amet fermentum dolor, non sollicitudin tortor. Cras enim ante, consectetur sed sapien ac, blandit dictum ex. Suspendisse lacinia ligula at mauris fermentum viverra. Duis facilisis sit amet risus quis blandit. Suspendisse eget nulla quam. Etiam facilisis purus ac interdum convallis. Nunc vel ultrices ante, eget lacinia est. Etiam sollicitudin, mi quis gravida tempor, lorem sem ultricies massa, nec blandit purus nunc vitae metus. Suspendisse potenti. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus imperdiet ullamcorper facilisis.",
 						},
@@ -2036,6 +2067,9 @@ describe("article-body chain", () => {
 							additional_properties: {
 								comments: [],
 								inline_comments: [],
+							},
+							auth: {
+								2: "RESIZER_AUTH_KEY",
 							},
 							content: "There is another divider below this paragraph",
 						},
@@ -2053,6 +2087,9 @@ describe("article-body chain", () => {
 							additional_properties: {
 								comments: [],
 								inline_comments: [],
+							},
+							auth: {
+								2: "RESIZER_AUTH_KEY",
 							},
 							content:
 								"Vivamus scelerisque vestibulum pharetra. Nullam erat elit, suscipit ac eros nec, faucibus dapibus diam. Curabitur venenatis orci sit amet massa suscipit, non cursus diam consequat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sollicitudin, justo ac tristique blandit, felis dolor lobortis turpis, a facilisis diam lectus id nisi. Ut quis accumsan felis. Praesent nec condimentum eros, sed faucibus tortor. Nullam at commodo purus.",
@@ -2089,6 +2126,9 @@ describe("article-body chain", () => {
 								comments: [],
 								inline_comments: [],
 							},
+							auth: {
+								2: "RESIZER_AUTH_KEY",
+							},
 							content: "Paragraph with Copyright Following",
 						},
 					],
@@ -2121,6 +2161,9 @@ describe("article-body chain", () => {
 							additional_properties: {
 								comments: [],
 								inline_comments: [],
+							},
+							auth: {
+								2: "RESIZER_AUTH_KEY",
 							},
 							content: "",
 						},
@@ -2155,6 +2198,9 @@ describe("article-body chain", () => {
 								comments: [],
 								inline_comments: [],
 							},
+							auth: {
+								2: "RESIZER_AUTH_KEY",
+							},
 							content: "Paragraph with Copyright Following",
 						},
 					],
@@ -2179,6 +2225,9 @@ describe("article-body chain", () => {
 							additional_properties: {
 								comments: [],
 								inline_comments: [],
+							},
+							auth: {
+								2: "RESIZER_AUTH_KEY",
 							},
 							content: "",
 						},
@@ -2237,6 +2286,9 @@ describe("article-body chain", () => {
 								{
 									_id: "image_id1",
 									alt_text: "Image Alt Text 1",
+									auth: {
+										2: "RESIZER_AUTH_KEY",
+									},
 									caption: "Image Caption 1",
 									credits: {
 										affiliation: [{ name: "Affiliation 1", type: "author" }],
@@ -2263,14 +2315,6 @@ describe("article-body chain", () => {
 										],
 									},
 									height: 3744,
-									resized_params: {
-										"274x0": "--al0lnFNBcEFSRnjIDaqW3hEXs=filters:format(jpg):quality(70)/",
-										"400x0": "D1TuuuNZJiX29k5IcHROrI-y1zI=filters:format(jpg):quality(70)/",
-										"768x0": "C6NNPZQgZICy5VMk-jLjNpbg_vw=filters:format(jpg):quality(70)/",
-										"800x0": "SFAi-Aks2Fy99PkwQ9LLvd2Jxl4=filters:format(jpg):quality(70)/",
-										"1024x0": "LSihqkSkpwAFfD0qsLDFuLw08P8=filters:format(jpg):quality(70)/",
-										"1440x0": "mnOhSZmQiFynETHFN7BAYI5-Pzg=filters:format(jpg):quality(70)/",
-									},
 									subtitle: "Image Subtitle 1",
 									type: "image",
 									url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg",
@@ -2279,6 +2323,9 @@ describe("article-body chain", () => {
 								{
 									_id: "image_id2",
 									alt_text: "Image Alt Text 2",
+									auth: {
+										2: "RESIZER_AUTH_KEY",
+									},
 									caption: "Image Caption 2",
 									credits: {
 										affiliation: [{ name: "Affiliation 2", type: "author" }],
@@ -2291,14 +2338,6 @@ describe("article-body chain", () => {
 										],
 									},
 									height: 3744,
-									resized_params: {
-										"274x0": "--al0lnFNBcEFSRnjIDaqW3hEXs=filters:format(jpg):quality(70)/",
-										"400x0": "D1TuuuNZJiX29k5IcHROrI-y1zI=filters:format(jpg):quality(70)/",
-										"768x0": "C6NNPZQgZICy5VMk-jLjNpbg_vw=filters:format(jpg):quality(70)/",
-										"800x0": "SFAi-Aks2Fy99PkwQ9LLvd2Jxl4=filters:format(jpg):quality(70)/",
-										"1024x0": "LSihqkSkpwAFfD0qsLDFuLw08P8=filters:format(jpg):quality(70)/",
-										"1440x0": "mnOhSZmQiFynETHFN7BAYI5-Pzg=filters:format(jpg):quality(70)/",
-									},
 									subtitle: "Image Subtitle 2",
 									type: "image",
 									url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG",

@@ -1,15 +1,20 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
+import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
+
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
 import {
 	Carousel,
+	Conditional,
 	formatCredits,
 	Heading,
 	HeadingSection,
 	Icon,
 	Image,
+	imageANSToImageSrc,
+	isServerSide,
 	Link,
 	MediaItem,
 	Paragraph,
@@ -44,13 +49,13 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 	switch (type) {
 		case "text": {
 			return content && content.length > 0 ? (
-				<Paragraph key={key} dangerouslySetInnerHTML={{ __html: content }} />
+				<Paragraph key={`${type}_${key}`} dangerouslySetInnerHTML={{ __html: content }} />
 			) : null;
 		}
 		case "copyright": {
 			return content && content.length > 0 ? (
 				<Paragraph
-					key={key}
+					key={`${type}_${key}`}
 					className={`${BLOCK_CLASS_NAME}__copyright`}
 					dangerouslySetInnerHTML={{ __html: content }}
 				/>
@@ -58,69 +63,51 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		}
 
 		case "divider": {
-			return <hr className={`${BLOCK_CLASS_NAME}__divider`} key={key} />;
+			return <hr className={`${BLOCK_CLASS_NAME}__divider`} key={`${type}_${key}`} />;
 		}
 
 		case "image": {
 			const {
-				url,
-				subtitle,
-				caption,
-				credits,
-				alt_text: altText,
-				vanity_credits: vanityCredits,
+				additional_properties: { link = "" } = {},
 				// alignment not always present
 				alignment = "",
-				additional_properties: additionalProperties = {},
+				alt_text: altText,
+				auth,
+				caption,
+				credits,
+				subtitle,
+				url,
+				vanity_credits: vanityCredits,
 			} = item;
-
-			// link url set in composer
-			const { link = "" } = additionalProperties;
 
 			// only left and right float supported
 			const allowedFloatValue = alignment === "left" || alignment === "right" ? alignment : "";
-
-			let figureImageClassName = `${BLOCK_CLASS_NAME}__image`;
-
-			if (allowedFloatValue) {
-				// add space after initial string ' '
-				figureImageClassName +=
-					allowedFloatValue === "left"
-						? ` ${BLOCK_CLASS_NAME}__image-float-left`
-						: ` ${BLOCK_CLASS_NAME}__image-float-right`;
-			}
+			const figureImageClassName = `${BLOCK_CLASS_NAME}__image${
+				allowedFloatValue ? ` ${BLOCK_CLASS_NAME}__image-float-${allowedFloatValue}` : ""
+			}`;
 
 			if (url) {
-				const ArticleBodyImage = () => <Image src={url} alt={altText} />;
 				const formattedCredits = formatCredits(vanityCredits || credits);
-
-				const ArticleBodyImageContainer = ({ children }) => (
+				return (
 					<MediaItem
-						key={key}
+						key={`${type}_${key}`}
 						className={figureImageClassName}
 						caption={!hideImageCaption ? caption : null}
 						credit={!hideImageCredits ? formattedCredits : null}
 						title={!hideImageTitle ? subtitle : null}
 					>
-						{children}
+						<Conditional component={Link} condition={link} href={link}>
+							<Image
+								src={imageANSToImageSrc(item)}
+								alt={altText}
+								resizerURL={RESIZER_URL}
+								resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
+								width={item.width}
+								height={item.height}
+								responsiveImages={[274, 400, 768, 1024, 1440]}
+							/>
+						</Conditional>
 					</MediaItem>
-				);
-
-				// if link url then make entire image clickable
-				if (link) {
-					return (
-						<ArticleBodyImageContainer key={key}>
-							<Link href={link}>
-								<ArticleBodyImage />
-							</Link>
-						</ArticleBodyImageContainer>
-					);
-				}
-
-				return (
-					<ArticleBodyImageContainer key={key}>
-						<ArticleBodyImage />
-					</ArticleBodyImageContainer>
 				);
 			}
 			return null;
@@ -134,7 +121,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 			const afterContent = "&nbsp;]";
 
 			return (
-				<Paragraph key={key} className={`${BLOCK_CLASS_NAME}__interstitial-link`}>
+				<Paragraph key={`${type}_${key}`} className={`${BLOCK_CLASS_NAME}__interstitial-link`}>
 					<span dangerouslySetInnerHTML={{ __html: beforeContent }} />
 					<Link
 						href={url}
@@ -149,15 +136,20 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 
 		case "raw_html": {
 			return content && content.length > 0 ? (
-				<HTML key={key} id={key} className={`${BLOCK_CLASS_NAME}__html`} content={content} />
+				<HTML
+					key={`${type}_${key}`}
+					id={key}
+					className={`${BLOCK_CLASS_NAME}__html`}
+					content={content}
+				/>
 			) : null;
 		}
 
 		case "list": {
-			const { list_type: listType, items: listItems } = item;
+			const { _id: listId = "", list_type: listType, items: listItems } = item;
 			// eslint-disable-next-line arrow-body-style
 			return listItems && listItems.length > 0 ? (
-				<List key={key} listType={listType} listItems={listItems} />
+				<List key={`${type}_${listId}_${key}`} listType={listType} listItems={listItems} />
 			) : null;
 		}
 
@@ -170,7 +162,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 					: phrases.t("article-body-block.correction");
 
 			return item.text && item.text.length > 0 ? (
-				<section className={`${BLOCK_CLASS_NAME}__correction`} key={key}>
+				<section className={`${BLOCK_CLASS_NAME}__correction`} key={`${type}_${key}`}>
 					<HeadingSection>
 						<Heading>{labelText}</Heading>
 						<Paragraph>{item.text}</Paragraph>
@@ -181,33 +173,42 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 
 		case "header":
 			return item.content && item.content.length > 0 ? (
-				<Header key={key} classPrefix={BLOCK_CLASS_NAME} element={item} />
+				<Header key={`${type}_${key}`} classPrefix={BLOCK_CLASS_NAME} element={item} />
 			) : null;
 
 		case "oembed_response": {
 			return item.raw_oembed ? (
-				<Oembed key={key} classPrefix={BLOCK_CLASS_NAME} element={item} />
+				<Oembed key={`${type}_${key}`} classPrefix={BLOCK_CLASS_NAME} element={item} />
 			) : null;
 		}
 
 		case "table": {
-			return item.rows ? <Table key={key} element={item} classPrefix={BLOCK_CLASS_NAME} /> : null;
+			return item.rows ? (
+				<Table key={`${type}_${key}`} element={item} classPrefix={BLOCK_CLASS_NAME} />
+			) : null;
 		}
 
 		case "quote":
 			switch (item.subtype) {
 				case "pullquote":
-					return <Quote key={key} element={item} classPrefix={BLOCK_CLASS_NAME} type="pullquote" />;
+					return (
+						<Quote
+							key={`${type}_${key}`}
+							element={item}
+							classPrefix={BLOCK_CLASS_NAME}
+							type="pullquote"
+						/>
+					);
 
 				case "blockquote":
 				default:
-					return <Quote key={key} element={item} classPrefix={BLOCK_CLASS_NAME} />;
+					return <Quote key={`${type}_${key}`} element={item} classPrefix={BLOCK_CLASS_NAME} />;
 			}
 
 		case "video":
 			return (
 				<MediaItem
-					key={key}
+					key={`${type}_${key}`}
 					caption={!hideVideoCaption ? item?.description?.basic : null}
 					credit={!hideVideoCredits ? formatCredits(item.credits) : null}
 					title={!hideVideoTitle ? item?.headlines?.basic : null}
@@ -218,7 +219,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		case "gallery": {
 			const total = item.content_elements.length;
 			return (
-				<section key={key}>
+				<section key={`${type}_${key}`}>
 					<Carousel
 						id={key}
 						className={`${BLOCK_CLASS_NAME}__gallery`}

@@ -113,11 +113,7 @@ const ResultItem = React.memo(
 							</Conditional>
 						</MediaItem>
 					) : null}
-					{showItemOverline ? (
-						<div>
-							<Overline href={overlineURL}>{overline}</Overline>
-						</div>
-					) : null}
+					{showItemOverline ? <Overline href={overlineURL}>{overline}</Overline> : null}
 					{contentHeading ? (
 						<Heading>
 							<Conditional

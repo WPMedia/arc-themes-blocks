@@ -2,9 +2,8 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 
 import { useFusionContext } from "fusion:context";
-import getTranslatedPhrases from "fusion:intl";
 import getProperties from "fusion:properties";
-import { isServerSide, HeadingSection } from "@wpmedia/arc-themes-components";
+import { isServerSide, HeadingSection, usePhrases } from "@wpmedia/arc-themes-components";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
 import { resolveDefaultPromoElements } from "./results/helpers";
@@ -18,7 +17,7 @@ const ResultsList = ({ customFields }) => {
 		overline,
 		overlineURL,
 	} = customFields;
-	const { fallbackImage, locale, primaryLogoAlt, breakpoints, resizerURL } = getProperties(arcSite);
+	const { fallbackImage, primaryLogoAlt, breakpoints, resizerURL } = getProperties(arcSite);
 	const imageProperties = {
 		smallWidth: 158,
 		smallHeight: 89,
@@ -34,7 +33,7 @@ const ResultsList = ({ customFields }) => {
 		? deployment(`${contextPath}/${fallbackImage}`)
 		: fallbackImage;
 	const promoElements = resolveDefaultPromoElements(customFields);
-	const phrases = getTranslatedPhrases(locale || "en");
+	const phrases = usePhrases();
 	const isServerSideLazy = lazyLoad && isServerSide() && !isAdmin;
 	const configuredOffset =
 		parseInt(contentConfigValues?.offset, 10) ||

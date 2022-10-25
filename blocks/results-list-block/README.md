@@ -1,6 +1,6 @@
 # `@wpmedia/results-list-block`
 
-_Results List block for Fusion News Theme. Displays a results list where each result card will have a description, headline, byline block and publish date. ._
+Results List block for Fusion News Theme. Displays a results list where each result card will have a description, headline, byline block and publish date.
 
 ## Props
 
@@ -14,10 +14,6 @@ _Results List block for Fusion News Theme. Displays a results list where each re
 | **showByline**        | no           | Boolean  | Do or do not display the byline, showing the author of the content. Defaults to `true`, showing the byline        |
 | **showDate**          | no           | Boolean  | Do or do not display the date, showing the time and day of the content. Defaults to `true`, showing the date info |
 | **lazyLoad**          | no           | Boolean  | Prevent block display until when nearly in-view for the user. Default is false.                                   |
-
-## ANS Schema
-
-Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
 
@@ -40,18 +36,14 @@ Outline any schema information requirements necessary to know for ths block
 
 Blocks can emit events. The following is a list of events that are emitted by this block.
 
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
+| **Event Name**      | **Description**                |
+| ------------------- | ------------------------------ |
+| **onReadMoreClick** | Onclick to see more list items |
 
 ### Event Listening
-
-Include block specific instructions for event listening.
-
-OR
 
 This block does not emit any events.
 
 ## Additional Considerations
 
-_Makes use of Byline to display authors of each story and it is included as a dependency._
+Makes use of Byline to display authors of each story and it is included as a dependency.

@@ -26,7 +26,6 @@ const sampleData = {
 	showHeadline: false,
 	showImage: false,
 	showItemOverline: false,
-	overline: "overline",
 	overlineURL: "www.google.com",
 };
 

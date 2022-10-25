@@ -1,65 +1,71 @@
 import axios from "axios";
-import { CONTENT_BASE, ARC_ACCESS_TOKEN } from "fusion:environment";
-import getResizedImageData from "@wpmedia/resizer-image-block";
+import { CONTENT_BASE, ARC_ACCESS_TOKEN, RESIZER_APP_VERSION } from "fusion:environment";
+
+import signImagesInANSObject from "@wpmedia/arc-themes-components/src/utils/sign-images-in-ans-object";
+import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
 
 const params = {
 	_id: "text",
 	content_alias: "text",
 	from: "text",
+	getNext: "text",
 	size: "text",
 };
-
-const fetch = (key = {}) => {
-	const { "arc-site": site, _id, content_alias: contentAlias, from, size, getNext = "false" } = key;
-	let updatedSize = size;
+// test
+const fetch = (
+	{ _id, "arc-site": site, content_alias: contentAlias, from, getNext = "false", size },
+	{ cachedCall }
+) => {
 	// Max collection size is 20
 	// See: https://redirector.arcpublishing.com/alc/docs/swagger/?url=./arc-products/content-api.json
-	// Want to ensure size is capped at 20 to prevent an error.
-	if (updatedSize && updatedSize > 9) updatedSize = size < 20 ? size : 20;
+	const constrainedSize = size > 20 ? 20 : size;
+	const urlSearch = new URLSearchParams({
+		...(_id ? { _id } : { content_alias: contentAlias }),
+		...(from ? { from } : {}),
+		published: true,
+		...(site ? { website: site } : {}),
+		...(size ? { size: constrainedSize } : {}),
+	});
 
 	return axios({
-		url: `${CONTENT_BASE}/content/v4/collections?${
-			_id ? `_id=${_id}` : `content_alias=${contentAlias}`
-		}${site ? `&website=${site}` : ""}${from ? `&from=${from}` : ""}${
-			size ? `&size=${updatedSize}` : ""
-		}&published=true`,
+		url: `${CONTENT_BASE}/content/v4/collections?${urlSearch.toString()}`,
 		headers: {
 			"content-type": "application/json",
 			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
 		},
 		method: "GET",
-	}).then(({ data: content }) => {
-		if (getNext === "false") {
-			return content;
-		}
-
-		const existingData = content;
-
-		return axios({
-			url: `${CONTENT_BASE}/content/v4/collections?${
-				_id ? `_id=${_id}` : `content_alias=${contentAlias}`
-			}${site ? `&website=${site}` : ""}&from=${updatedSize}${
-				size ? `&size=${updatedSize}` : ""
-			}&published=true`,
-			headers: {
-				"content-type": "application/json",
-				Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
-			},
-			method: "GET",
-		}).then(({ data: nextContent }) => {
-			existingData.content_elements = [
-				...existingData.content_elements,
-				...nextContent?.content_elements,
-			];
-			return existingData;
+	})
+		.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_APP_VERSION))
+		.then(({ data }) => {
+			if (getNext === "false") {
+				return data;
+			}
+			urlSearch.set("from", (parseInt(from, 10) || 0) + parseInt(constrainedSize, 10));
+			return axios({
+				url: `${CONTENT_BASE}/content/v4/collections?${urlSearch.toString()}`,
+				headers: {
+					"content-type": "application/json",
+					Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+				},
+				method: "GET",
+			})
+				.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_APP_VERSION))
+				.then(({ data: next }) => ({
+					...data,
+					...(data?.content_elements || next?.content_elements
+						? {
+								content_elements: [
+									...(data?.content_elements || []),
+									...(next?.content_elements || []),
+								],
+						  }
+						: {}),
+				}));
 		});
-	});
 };
 
 export default {
-	params,
 	fetch,
+	params,
 	schemaName: "ans-feed",
-	// other options null use default functionality, such as filter quality
-	transform: (data, query) => getResizedImageData(data, null, null, null, query["arc-site"]),
 };

@@ -56,6 +56,9 @@ const mockGallery = {
 		{
 			_id: "image_id1",
 			alt_text: "Image Alt Text 1",
+			auth: {
+				2: "RESIZER_AUTH_KEY",
+			},
 			caption: "Image Caption 1",
 			credits: {
 				affiliation: [{ name: "Affiliation 1", type: "author" }],
@@ -98,6 +101,9 @@ const mockGallery = {
 		{
 			_id: "image_id2",
 			alt_text: "Image Alt Text 2",
+			auth: {
+				2: "RESIZER_AUTH_KEY",
+			},
 			caption: "Image Caption 2",
 			credits: {
 				affiliation: [{ name: "Affiliation 2", type: "author" }],
@@ -154,6 +160,9 @@ const mockHeader4 = {
 const mockImage = {
 	_id: "image_id",
 	alt_text: "Image Alt Text",
+	auth: {
+		2: "RESIZER_AUTH_KEY",
+	},
 	caption: "Image Caption",
 	credits: {
 		affiliation: [{ name: "Affiliation", type: "author" }],

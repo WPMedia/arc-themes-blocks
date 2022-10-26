@@ -90,7 +90,6 @@ describe("article-body chain", () => {
 					<span>3</span>
 				</ArticleBodyChain>
 			);
-			//
 			expect(wrapper.find("article")).toHaveLength(1);
 			expect(wrapper.find("article").find("div")).toHaveLength(2);
 		});

@@ -734,6 +734,11 @@
 						),
 					),
 				),
+				product-content: (
+					margin: 0 auto,
+					max-width: var(--content-scale-width),
+					width: 100%,
+				),
 				product-content-ul: (
 					list-style: disc,
 					margin-left: var(--global-spacing-4),
@@ -743,6 +748,9 @@
 					margin-left: var(--global-spacing-4),
 				),
 				product-information: (
+					margin: 0 auto,
+					max-width: var(--content-scale-width),
+					width: 100%,
 					components: (
 						heading: (
 							color: var(--global-black),
@@ -956,7 +964,7 @@
 					gap: var(--global-spacing-5),
 					margin: auto,
 					max-width: calc(var(--content-max-width) * 1px),
-					width: var(--content-scale-width),
+					width: 100%,
 				),
 				right-rail-main-right-rail: (
 					align-items: stretch,
@@ -1112,6 +1120,12 @@
 						),
 					),
 				),
+				product-content: (
+					max-width: 100%,
+				),
+				product-information: (
+					max-width: 100%,
+				),
 				product-gallery: (
 					components: (
 						carousel: (
@@ -1167,10 +1181,10 @@
 					gap: var(--global-spacing-10),
 				),
 				right-rail-rail-container: (
-					margin: auto,
 					grid-template-columns: repeat(12, 1fr),
 					gap: var(--global-spacing-6),
 					grid-template-rows: initial,
+					width: var(--content-scale-width),
 				),
 				right-rail-main-right-rail: (
 					grid-column: span 5,

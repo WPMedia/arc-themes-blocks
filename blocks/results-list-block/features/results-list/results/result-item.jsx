@@ -5,7 +5,6 @@ import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
 
-import { extractResizedParams, extractImageFromStory } from "@wpmedia/resizer-image-block";
 import {
 	Attribution,
 	Separator,
@@ -20,6 +19,7 @@ import {
 	formatURL,
 	MediaItem,
 	Conditional,
+	getImageFromANS,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-result-list";
@@ -32,7 +32,7 @@ const ResultItem = React.memo(
 				element,
 				imageProperties,
 				targetFallbackImage,
-				placeholderResizedImageOptions,
+				// placeholderResizedImageOptions,
 				showByline,
 				showDate,
 				showDescription,
@@ -62,7 +62,7 @@ const ResultItem = React.memo(
 			const { registerSuccessEvent } = useComponentContext();
 
 			/* Author Formatting */
-			const imageURL = extractImageFromStory(element);
+			const imageURL = getImageFromANS(element)?.url || null;
 			const { searchableField } = useEditableContent();
 			const hasAuthors = showByline ? credits?.by && credits?.by.length : null;
 			const contentHeading = showHeadline ? headlineText : null;
@@ -93,11 +93,6 @@ const ResultItem = React.memo(
 									{...imageProperties}
 									src={imageURL !== null ? imageURL : targetFallbackImage}
 									alt={imageURL !== null ? headlineText : imageProperties.primaryLogoAlt}
-									resizedOptions={
-										imageURL !== null
-											? extractResizedParams(element)
-											: placeholderResizedImageOptions
-									}
 									sizes={[
 										{
 											isDefault: true,

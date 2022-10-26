@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
@@ -13,7 +12,6 @@ import {
 	HeadingSection,
 	Icon,
 	Image,
-	imageANSToImageSrc,
 	isServerSide,
 	Link,
 	MediaItem,
@@ -21,6 +19,8 @@ import {
 	usePhrases,
 	Video,
 } from "@wpmedia/arc-themes-components";
+
+import getResizeParamsFromANSImage from "./shared/get-resize-params-from-ans-image";
 
 import Header from "./_children/heading";
 import HTML from "./_children/html";
@@ -72,7 +72,6 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 				// alignment not always present
 				alignment = "",
 				alt_text: altText,
-				auth,
 				caption,
 				credits,
 				subtitle,
@@ -98,13 +97,12 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 					>
 						<Conditional component={Link} condition={link} href={link}>
 							<Image
-								src={imageANSToImageSrc(item)}
+								{...getResizeParamsFromANSImage(
+									item,
+									allowedFloatValue ? 400 : 800,
+									[274, 400, 768, 1024, 1440].map((w) => (allowedFloatValue ? w / 2 : w))
+								)}
 								alt={altText}
-								resizerURL={RESIZER_URL}
-								resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
-								width={item.width}
-								height={item.height}
-								responsiveImages={[274, 400, 768, 1024, 1440]}
 							/>
 						</Conditional>
 					</MediaItem>
@@ -275,7 +273,10 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 									title={!hideGalleryTitle ? i.subtitle : null}
 								>
 									<div className={`${BLOCK_CLASS_NAME}__image-wrapper`}>
-										<Image src={i.url} alt={i.alt_text} width={800} />
+										<Image
+											{...getResizeParamsFromANSImage(i, 800, [400, 600, 800, 1600])}
+											alt={i.alt_text}
+										/>
 									</div>
 								</MediaItem>
 							</Carousel.Item>

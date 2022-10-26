@@ -49,13 +49,13 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 	switch (type) {
 		case "text": {
 			return content && content.length > 0 ? (
-				<Paragraph key={`${type}_${key}`} dangerouslySetInnerHTML={{ __html: content }} />
+				<Paragraph key={`${type}_${index}_${key}`} dangerouslySetInnerHTML={{ __html: content }} />
 			) : null;
 		}
 		case "copyright": {
 			return content && content.length > 0 ? (
 				<Paragraph
-					key={`${type}_${key}`}
+					key={`${type}_${index}_${key}`}
 					className={`${BLOCK_CLASS_NAME}__copyright`}
 					dangerouslySetInnerHTML={{ __html: content }}
 				/>
@@ -63,7 +63,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		}
 
 		case "divider": {
-			return <hr className={`${BLOCK_CLASS_NAME}__divider`} key={`${type}_${key}`} />;
+			return <hr className={`${BLOCK_CLASS_NAME}__divider`} key={`${type}_${index}_${key}`} />;
 		}
 
 		case "image": {
@@ -89,7 +89,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 				const formattedCredits = formatCredits(vanityCredits || credits);
 				return (
 					<MediaItem
-						key={`${type}_${key}`}
+						key={`${type}_${index}_${key}`}
 						className={figureImageClassName}
 						caption={!hideImageCaption ? caption : null}
 						credit={!hideImageCredits ? formattedCredits : null}
@@ -119,7 +119,10 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 			const afterContent = "&nbsp;]";
 
 			return (
-				<Paragraph key={`${type}_${key}`} className={`${BLOCK_CLASS_NAME}__interstitial-link`}>
+				<Paragraph
+					key={`${type}_${index}_${key}`}
+					className={`${BLOCK_CLASS_NAME}__interstitial-link`}
+				>
 					<span dangerouslySetInnerHTML={{ __html: beforeContent }} />
 					<Link
 						href={url}
@@ -135,7 +138,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		case "raw_html": {
 			return content && content.length > 0 ? (
 				<HTML
-					key={`${type}_${key}`}
+					key={`${type}_${index}_${key}`}
 					id={key}
 					className={`${BLOCK_CLASS_NAME}__html`}
 					content={content}
@@ -147,7 +150,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 			const { _id: listId = "", list_type: listType, items: listItems } = item;
 			// eslint-disable-next-line arrow-body-style
 			return listItems && listItems.length > 0 ? (
-				<List key={`${type}_${listId}_${key}`} listType={listType} listItems={listItems} />
+				<List key={`${type}_${index}_${listId}_${key}`} listType={listType} listItems={listItems} />
 			) : null;
 		}
 
@@ -160,7 +163,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 					: phrases.t("article-body-block.correction");
 
 			return item.text && item.text.length > 0 ? (
-				<section className={`${BLOCK_CLASS_NAME}__correction`} key={`${type}_${key}`}>
+				<section className={`${BLOCK_CLASS_NAME}__correction`} key={`${type}_${index}_${key}`}>
 					<HeadingSection>
 						<Heading>{labelText}</Heading>
 						<Paragraph>{item.text}</Paragraph>
@@ -171,18 +174,18 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 
 		case "header":
 			return item.content && item.content.length > 0 ? (
-				<Header key={`${type}_${key}`} classPrefix={BLOCK_CLASS_NAME} element={item} />
+				<Header key={`${type}_${index}_${key}`} classPrefix={BLOCK_CLASS_NAME} element={item} />
 			) : null;
 
 		case "oembed_response": {
 			return item.raw_oembed ? (
-				<Oembed key={`${type}_${key}`} classPrefix={BLOCK_CLASS_NAME} element={item} />
+				<Oembed key={`${type}_${index}_${key}`} classPrefix={BLOCK_CLASS_NAME} element={item} />
 			) : null;
 		}
 
 		case "table": {
 			return item.rows ? (
-				<Table key={`${type}_${key}`} element={item} classPrefix={BLOCK_CLASS_NAME} />
+				<Table key={`${type}_${index}_${key}`} element={item} classPrefix={BLOCK_CLASS_NAME} />
 			) : null;
 		}
 
@@ -191,7 +194,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 				case "pullquote":
 					return (
 						<Quote
-							key={`${type}_${key}`}
+							key={`${type}_${index}_${key}`}
 							element={item}
 							classPrefix={BLOCK_CLASS_NAME}
 							type="pullquote"
@@ -200,13 +203,15 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 
 				case "blockquote":
 				default:
-					return <Quote key={`${type}_${key}`} element={item} classPrefix={BLOCK_CLASS_NAME} />;
+					return (
+						<Quote key={`${type}_${index}_${key}`} element={item} classPrefix={BLOCK_CLASS_NAME} />
+					);
 			}
 
 		case "video":
 			return (
 				<MediaItem
-					key={`${type}_${key}`}
+					key={`${type}_${index}_${key}`}
 					caption={!hideVideoCaption ? item?.description?.basic : null}
 					credit={!hideVideoCredits ? formatCredits(item.credits) : null}
 					title={!hideVideoTitle ? item?.headlines?.basic : null}
@@ -217,7 +222,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		case "gallery": {
 			const total = item.content_elements.length;
 			return (
-				<section key={`${type}_${key}`}>
+				<section key={`${type}_${index}_${key}`}>
 					<Carousel
 						id={key}
 						className={`${BLOCK_CLASS_NAME}__gallery`}

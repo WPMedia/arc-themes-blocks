@@ -54,7 +54,7 @@ const mockGallery = {
 	_id: "gallery_id",
 	content_elements: [
 		{
-			_id: "image_id1",
+			_id: "CITIAYX2ERDOPP2TPJGEUV7SNQ",
 			alt_text: "Image Alt Text 1",
 			auth: {
 				2: "RESIZER_AUTH_KEY",
@@ -99,7 +99,7 @@ const mockGallery = {
 			width: 5616,
 		},
 		{
-			_id: "image_id2",
+			_id: "4PUA6PJWEBEELOHMHMUUUB2WSM",
 			alt_text: "Image Alt Text 2",
 			auth: {
 				2: "RESIZER_AUTH_KEY",
@@ -158,7 +158,7 @@ const mockHeader4 = {
 };
 
 const mockImage = {
-	_id: "image_id",
+	_id: "CITIAYX2ERDOPP2TPJGEUV7SNQ",
 	alt_text: "Image Alt Text",
 	auth: {
 		2: "RESIZER_AUTH_KEY",
@@ -169,14 +169,6 @@ const mockImage = {
 		by: [{ byline: "Custom Credit", name: "Smith Smitherson", type: "author" }],
 	},
 	height: 3744,
-	resized_params: {
-		"274x0": "--al0lnFNBcEFSRnjIDaqW3hEXs=filters:format(jpg):quality(70)/",
-		"400x0": "D1TuuuNZJiX29k5IcHROrI-y1zI=filters:format(jpg):quality(70)/",
-		"768x0": "C6NNPZQgZICy5VMk-jLjNpbg_vw=filters:format(jpg):quality(70)/",
-		"800x0": "SFAi-Aks2Fy99PkwQ9LLvd2Jxl4=filters:format(jpg):quality(70)/",
-		"1024x0": "LSihqkSkpwAFfD0qsLDFuLw08P8=filters:format(jpg):quality(70)/",
-		"1440x0": "mnOhSZmQiFynETHFN7BAYI5-Pzg=filters:format(jpg):quality(70)/",
-	},
 	subtitle: "Image Subtitle",
 	type: "image",
 	url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg",

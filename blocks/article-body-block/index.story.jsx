@@ -54,10 +54,10 @@ const mockGallery = {
 	_id: "gallery_id",
 	content_elements: [
 		{
-			_id: "CITIAYX2ERDOPP2TPJGEUV7SNQ",
+			_id: "EM5DTGYGABDJZODV7YVFOC2DOM",
 			alt_text: "Image Alt Text 1",
 			auth: {
-				2: "RESIZER_AUTH_KEY",
+				2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf",
 			},
 			caption: "Image Caption 1",
 			credits: {
@@ -95,14 +95,14 @@ const mockGallery = {
 			},
 			subtitle: "Image Subtitle 1",
 			type: "image",
-			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg",
+			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
 			width: 5616,
 		},
 		{
-			_id: "4PUA6PJWEBEELOHMHMUUUB2WSM",
+			_id: "2KCJNN2JM5ECLEZDNHBWJQZKYQ",
 			alt_text: "Image Alt Text 2",
 			auth: {
-				2: "RESIZER_AUTH_KEY",
+				2: "1d2390c4cc8df2265924631d707ead2490865f17830bfbb52c8541b8696bf573",
 			},
 			caption: "Image Caption 2",
 			credits: {
@@ -126,7 +126,7 @@ const mockGallery = {
 			},
 			subtitle: "Image Subtitle 2",
 			type: "image",
-			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG",
+			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/2KCJNN2JM5ECLEZDNHBWJQZKYQ.jpg",
 			width: 5616,
 		},
 	],
@@ -158,10 +158,10 @@ const mockHeader4 = {
 };
 
 const mockImage = {
-	_id: "CITIAYX2ERDOPP2TPJGEUV7SNQ",
+	_id: "EM5DTGYGABDJZODV7YVFOC2DOM",
 	alt_text: "Image Alt Text",
 	auth: {
-		2: "RESIZER_AUTH_KEY",
+		2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf",
 	},
 	caption: "Image Caption",
 	credits: {
@@ -171,7 +171,7 @@ const mockImage = {
 	height: 3744,
 	subtitle: "Image Subtitle",
 	type: "image",
-	url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg",
+	url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
 	width: 5616,
 };
 

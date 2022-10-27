@@ -40,10 +40,6 @@ Blocks can emit events. The following is a list of events that are emitted by th
 | ------------------- | ------------------------------ |
 | **onReadMoreClick** | Onclick to see more list items |
 
-### Event Listening
-
-This block does not emit any events.
-
 ## Additional Considerations
 
 Makes use of Byline to display authors of each story and it is included as a dependency.

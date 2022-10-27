@@ -1788,12 +1788,11 @@
 				quad-chain-child-item-empty: (
 					display: contents,
 				),
-				result-list: (
+				results-list: (
 					padding-bottom: var(--global-spacing-4),
 					border-bottom: 1px solid #dadada,
 					components: (
 						attribution: (
-							display: block,
 							margin-top: var(--global-spacing-4),
 						),
 						media-item: (
@@ -1806,25 +1805,19 @@
 							line-height: var(--heading-level-5-line-height),
 							margin-bottom: var(--global-spacing-4),
 						),
-						overline: (
-							display: block,
-						),
-						paragraph: (
-							display: block,
-						),
 						separator: (
 							padding: 0 var(--global-spacing-2),
 						),
 					),
 				),
-				result-list-show-image: (
+				results-list-show-image: (
 					components: (
 						heading: (
 							width: 68%,
 						),
 					),
 				),
-				result-list-see-more: (
+				results-list-see-more: (
 					components: (
 						button: (
 							margin-top: var(--global-spacing-4),
@@ -2403,11 +2396,8 @@
 				quad-chain-child-item-empty: (
 					display: initial,
 				),
-				result-list: (
+				results-list: (
 					components: (
-						attribution: (
-							display: block,
-						),
 						media-item: (
 							float: left,
 							margin: 0,
@@ -2415,7 +2405,7 @@
 						),
 					),
 				),
-				result-list-show-image: (
+				results-list-show-image: (
 					components: (
 						attribution: (
 							margin-left: calc(33% + var(--global-spacing-6)),

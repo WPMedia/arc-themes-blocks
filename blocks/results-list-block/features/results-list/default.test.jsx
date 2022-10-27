@@ -128,37 +128,6 @@ describe("getFallbackImageURL", () => {
 	});
 });
 
-// describe("phrases", () => {
-// 	it('should default to "en" if locale is not configured', () => {
-// 		// const mockGetTranslatedPhrases = jest.fn();
-
-// 		// getTranslatedPhrases.mockImplementation(mockGetTranslatedPhrases);
-
-// 		getProperties.mockReturnValue({
-// 			fallbackImage: "placeholder.jpg",
-// 			locale: null,
-// 			resizerURL: "https://resizer.me",
-// 			primaryLogoAlt: "image alt",
-// 			breakpoints: {},
-// 		});
-
-// 		const customFields = {
-// 			lazyLoad: true,
-// 			listContentConfig: {
-// 				contentService: null,
-// 				contentConfigValues: {
-// 					offset: 0,
-// 					size: 1,
-// 				},
-// 			},
-// 		};
-
-// 		const { unmount } = render(<ResultsList customFields={customFields} />);
-// 		expect(mockGetTranslatedPhrases).toHaveBeenCalledWith("en");
-// 		unmount();
-// 	});
-// });
-
 describe("configured values", () => {
 	it("should default offset to 0 if not configured", () => {
 		const customFields = {

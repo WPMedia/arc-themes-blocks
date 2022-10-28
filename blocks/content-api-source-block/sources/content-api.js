@@ -9,11 +9,10 @@ const params = {
 	website_url: "text",
 };
 
-const fetch = ({ _id, "arc-site": site, website_url: websiteUrl }, { cachedCall }) => {
+const fetch = ({ _id, "arc-site": website, website_url: websiteUrl }, { cachedCall }) => {
 	const urlSearch = new URLSearchParams({
-		_id,
-		...(site ? { website: site } : {}),
-		website_url: websiteUrl,
+		...(_id ? { _id } : { website_url: websiteUrl }),
+		...(website ? { website } : {}),
 	});
 
 	return axios({

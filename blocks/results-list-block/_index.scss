@@ -6,6 +6,11 @@
 		@include scss.block-components("results-list-show-image");
 	}
 
+	&--fallback-image {
+		@include scss.block-properties("results-list-fallback-image");
+		@include scss.block-components("results-list-fallback-image");
+	}
+
 	&__label {
 		@include scss.block-components("results-list-label");
 		@include scss.block-properties("results-list-label");

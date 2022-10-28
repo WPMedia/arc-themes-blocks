@@ -1,11 +1,12 @@
 import React, { createRef, useCallback, useEffect, useReducer, useState } from "react";
 import { Button, Stack } from "@wpmedia/arc-themes-components";
+import Divider from "@wpmedia/arc-themes-components/src/components/divider";
 import { useContent } from "fusion:content";
 
 import ResultItem from "./result-item";
 import { reduceResultList } from "./helpers";
 
-const BLOCK_CLASS_NAME = "b-result-list";
+const BLOCK_CLASS_NAME = "b-results-list";
 
 const Results = ({
 	arcSite,
@@ -23,8 +24,6 @@ const Results = ({
 	showImage = false,
 	showItemOverline = false,
 	targetFallbackImage,
-	overline,
-	overlineURL,
 }) => {
 	const [queryOffset, setQueryOffset] = useState(configuredOffset);
 
@@ -108,10 +107,7 @@ const Results = ({
           basic {
             type
             url
-            resized_params {
-              274x154
-              158x89
-            }
+            auth
           }
           lead_art {
             promo_items {
@@ -194,23 +190,24 @@ const Results = ({
 	return viewableElements?.length > 0 && !isServerSideLazy ? (
 		<Stack>
 			{viewableElements.map((element, index) => (
-				<ResultItem
-					key={`result-card-${element._id}`}
-					ref={elementRefs[index]}
-					arcSite={arcSite}
-					element={element}
-					imageProperties={imageProperties}
-					placeholderResizedImageOptions={placeholderResizedImageOptions}
-					showByline={showByline}
-					showDate={showDate}
-					showDescription={showDescription}
-					showHeadline={showHeadline}
-					showImage={showImage}
-					showItemOverline={showItemOverline}
-					targetFallbackImage={targetFallbackImage}
-					overlineURL={overlineURL}
-					overline={overline}
-				/>
+				<Stack gap="1rem">
+					<ResultItem
+						key={`result-card-${element._id}`}
+						ref={elementRefs[index]}
+						arcSite={arcSite}
+						element={element}
+						imageProperties={imageProperties}
+						placeholderResizedImageOptions={placeholderResizedImageOptions}
+						showByline={showByline}
+						showDate={showDate}
+						showDescription={showDescription}
+						showHeadline={showHeadline}
+						showImage={showImage}
+						showItemOverline={showItemOverline}
+						targetFallbackImage={targetFallbackImage}
+					/>
+					<Divider />
+				</Stack>
 			))}
 			{isThereMore && (
 				<Stack alignment="center" className={`${BLOCK_CLASS_NAME}__see-more`}>

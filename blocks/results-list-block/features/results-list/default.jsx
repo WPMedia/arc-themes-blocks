@@ -14,8 +14,6 @@ const ResultsList = ({ customFields }) => {
 	const {
 		lazyLoad,
 		listContentConfig: { contentService, contentConfigValues },
-		overline,
-		overlineURL,
 	} = customFields;
 	const { fallbackImage, primaryLogoAlt, breakpoints, resizerURL } = getProperties(arcSite);
 	const imageProperties = {
@@ -62,8 +60,6 @@ const ResultsList = ({ customFields }) => {
 					showImage={promoElements.showImage}
 					showItemOverline={promoElements.showItemOverline}
 					targetFallbackImage={targetFallbackImage}
-					overline={overline}
-					overlineURL={overlineURL}
 				/>
 			</HeadingSection>
 		</LazyLoad>

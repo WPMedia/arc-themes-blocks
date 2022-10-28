@@ -7,10 +7,11 @@ import mockData from "./mock-data";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
-	Overline: () => <div>Overline Text</div>,
-	Date: () => <div>2021-01-01T00:01:00Z</div>,
 	formatAuthors: jest.fn().mockReturnValue("Byline Sample Text - 123"),
 	formatURL: jest.fn().mockReturnValue("https://www.google.com"),
+	usePhrases: jest.fn().mockReturnValue({
+		t: jest.fn().mockReturnValue("Sample phrases"),
+	}),
 }));
 
 jest.mock("fusion:content", () => ({
@@ -43,6 +44,11 @@ const imageProperties = {
 
 const element = {
 	description: { basic: "Description 1" },
+	label: {
+		basic: {
+			text: "Overline Text",
+		},
+	},
 	display_date: "2021-01-01T00:01:00Z",
 	headlines: { basic: "Test headline 1" },
 	websites: {
@@ -92,7 +98,7 @@ describe("Result parts", () => {
 			/>
 		);
 
-		expect(screen.getAllByText(/2021-01-01T00:01:00Z/i)).toHaveLength(1);
+		expect(screen.getAllByText(/January 01, 2021 at 12:01 am UTC/i)).toHaveLength(1);
 
 		unmount();
 	});

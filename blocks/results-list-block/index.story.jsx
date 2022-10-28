@@ -26,7 +26,6 @@ const sampleData = {
 	showHeadline: false,
 	showImage: false,
 	showItemOverline: false,
-	overlineURL: "www.google.com",
 };
 
 export const withLazyLoadAndAllEnabled = () => {

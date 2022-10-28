@@ -2,7 +2,6 @@ import React from "react";
 import { useEditableContent } from "fusion:content";
 import { useComponentContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
 
 import {
@@ -20,9 +19,10 @@ import {
 	MediaItem,
 	Conditional,
 	getImageFromANS,
+	usePhrases,
 } from "@wpmedia/arc-themes-components";
 
-const BLOCK_CLASS_NAME = "b-result-list";
+const BLOCK_CLASS_NAME = "b-results-list";
 
 const ResultItem = React.memo(
 	React.forwardRef(
@@ -32,14 +32,12 @@ const ResultItem = React.memo(
 				element,
 				imageProperties,
 				targetFallbackImage,
-				// placeholderResizedImageOptions,
 				showByline,
 				showDate,
 				showDescription,
 				showHeadline,
 				showImage,
 				showItemOverline,
-				overline,
 				overlineURL,
 			},
 			ref
@@ -47,6 +45,7 @@ const ResultItem = React.memo(
 			const {
 				description: { basic: descriptionText } = {},
 				display_date: displayDate,
+				label: { basic = {} } = {},
 				headlines: { basic: headlineText } = {},
 				websites,
 				credits,
@@ -58,9 +57,10 @@ const ResultItem = React.memo(
 					dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 				},
 			} = getProperties(arcSite);
-			const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+			const overline = basic?.text || "Overline";
+			const phrases = usePhrases();
 			const { registerSuccessEvent } = useComponentContext();
-
+			console.log("element", element);
 			/* Author Formatting */
 			const imageURL = getImageFromANS(element)?.url || null;
 			const { searchableField } = useEditableContent();
@@ -78,7 +78,9 @@ const ResultItem = React.memo(
 				showItemOverline ? (
 				<div
 					ref={ref}
-					className={`${BLOCK_CLASS_NAME}${showImage ? ` ${BLOCK_CLASS_NAME}--show-image` : ""}`}
+					className={`${BLOCK_CLASS_NAME}${showImage ? ` ${BLOCK_CLASS_NAME}--show-image` : ""} ${
+						imageURL === null ? ` ${BLOCK_CLASS_NAME}--fallback-image` : null
+					}`}
 				>
 					{showImage ? (
 						<MediaItem {...searchableField("imageOverrideURL")} suppressContentEditableWarning>

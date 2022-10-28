@@ -54,8 +54,11 @@ const mockGallery = {
 	_id: "gallery_id",
 	content_elements: [
 		{
-			_id: "image_id1",
+			_id: "EM5DTGYGABDJZODV7YVFOC2DOM",
 			alt_text: "Image Alt Text 1",
+			auth: {
+				2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf",
+			},
 			caption: "Image Caption 1",
 			credits: {
 				affiliation: [{ name: "Affiliation 1", type: "author" }],
@@ -92,12 +95,15 @@ const mockGallery = {
 			},
 			subtitle: "Image Subtitle 1",
 			type: "image",
-			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg",
+			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
 			width: 5616,
 		},
 		{
-			_id: "image_id2",
+			_id: "2KCJNN2JM5ECLEZDNHBWJQZKYQ",
 			alt_text: "Image Alt Text 2",
+			auth: {
+				2: "1d2390c4cc8df2265924631d707ead2490865f17830bfbb52c8541b8696bf573",
+			},
 			caption: "Image Caption 2",
 			credits: {
 				affiliation: [{ name: "Affiliation 2", type: "author" }],
@@ -120,7 +126,7 @@ const mockGallery = {
 			},
 			subtitle: "Image Subtitle 2",
 			type: "image",
-			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG",
+			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/2KCJNN2JM5ECLEZDNHBWJQZKYQ.jpg",
 			width: 5616,
 		},
 	],
@@ -152,25 +158,20 @@ const mockHeader4 = {
 };
 
 const mockImage = {
-	_id: "image_id",
+	_id: "EM5DTGYGABDJZODV7YVFOC2DOM",
 	alt_text: "Image Alt Text",
+	auth: {
+		2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf",
+	},
 	caption: "Image Caption",
 	credits: {
 		affiliation: [{ name: "Affiliation", type: "author" }],
 		by: [{ byline: "Custom Credit", name: "Smith Smitherson", type: "author" }],
 	},
 	height: 3744,
-	resized_params: {
-		"274x0": "--al0lnFNBcEFSRnjIDaqW3hEXs=filters:format(jpg):quality(70)/",
-		"400x0": "D1TuuuNZJiX29k5IcHROrI-y1zI=filters:format(jpg):quality(70)/",
-		"768x0": "C6NNPZQgZICy5VMk-jLjNpbg_vw=filters:format(jpg):quality(70)/",
-		"800x0": "SFAi-Aks2Fy99PkwQ9LLvd2Jxl4=filters:format(jpg):quality(70)/",
-		"1024x0": "LSihqkSkpwAFfD0qsLDFuLw08P8=filters:format(jpg):quality(70)/",
-		"1440x0": "mnOhSZmQiFynETHFN7BAYI5-Pzg=filters:format(jpg):quality(70)/",
-	},
 	subtitle: "Image Subtitle",
 	type: "image",
-	url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg",
+	url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
 	width: 5616,
 };
 

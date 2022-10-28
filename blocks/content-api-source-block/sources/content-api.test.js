@@ -103,7 +103,6 @@ describe("the content api source block", () => {
 			expect(contentSourceFetch.request.url.searchObject).toEqual(
 				expect.objectContaining({
 					_id: "myid",
-					website_url: "/aaaa/eeeeee/",
 				})
 			);
 		});

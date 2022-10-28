@@ -29,10 +29,7 @@ const MainImage = ({ image, loading, onVisible }) => {
 	}, [isVisible, onVisible, image._id]);
 
 	return (
-		<div
-			style={{ flexBasis: "100vh", minHeight: "100vh", minWidth: "1px", flexShrink: 0 }}
-			ref={ref}
-		>
+		<div ref={ref}>
 			<Image
 				// used as part of a page design so empty string alt text
 				alt=""

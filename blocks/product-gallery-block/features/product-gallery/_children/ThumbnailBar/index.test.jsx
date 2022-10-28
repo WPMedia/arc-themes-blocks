@@ -46,10 +46,12 @@ describe("Thumbnail Bar", () => {
 				.includes(mockData[1]._id)
 		).toBeTruthy();
 
-		fireEvent.click(screen.getByRole("button", { name: "Next Image" }));
+		fireEvent.click(screen.getByRole("button", { name: "product-gallery.focus-thumbnail-next" }));
 		expect(screen.queryByRole("img").getAttribute("src").includes(mockData[2]._id)).toBeTruthy();
 
-		fireEvent.click(screen.getByRole("button", { name: "Previous Image" }));
+		fireEvent.click(
+			screen.getByRole("button", { name: "product-gallery.focus-thumbnail-previous" })
+		);
 		expect(screen.queryByRole("img").getAttribute("src").includes(mockData[1]._id)).toBeTruthy();
 	});
 

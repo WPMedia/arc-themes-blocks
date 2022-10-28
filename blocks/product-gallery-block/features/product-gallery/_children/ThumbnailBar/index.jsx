@@ -1,7 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 
-import { Button, Icon, Image, Stack, imageANSToImageSrc } from "@wpmedia/arc-themes-components";
+import {
+	Button,
+	Icon,
+	Image,
+	Stack,
+	imageANSToImageSrc,
+	usePhrases,
+} from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-gallery";
 
@@ -9,6 +16,8 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 	const getImageIndexById = (id) => images.findIndex((image) => image._id === id);
 	const [thumbnailBarStartIndex, setThumbnailBarStartIndex] = useState(selectedIndex);
 	const [thumbnailBarItemLimit, setThumbnailBarItemLimit] = useState(3);
+
+	const phrases = usePhrases();
 
 	const upButtonRef = useRef();
 	const downButtonRef = useRef();
@@ -29,10 +38,12 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 		const indicatorHeight = indicatorRef.current.getBoundingClientRect().height;
 		const thumbnailBarHeight = thumbnailBarRef.current.getBoundingClientRect().height;
 
-		const imageContainerGap = Number.parseInt(
-			window.getComputedStyle(imageContainerRef.current.firstChild).getPropertyValue("gap") || 0,
+		let imageContainerGap = Number.parseInt(
+			window.getComputedStyle(imageContainerRef.current.firstChild).getPropertyValue("gap"),
 			10
 		);
+
+		imageContainerGap = Number.isNaN(imageContainerGap) ? 0 : imageContainerGap;
 
 		const thumbnailBarTopPadding = Number.parseInt(
 			window.getComputedStyle(thumbnailBarRef.current).getPropertyValue("padding-top") || 0,
@@ -67,59 +78,67 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 
 	return (
 		<div className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-bar`} ref={thumbnailBarRef}>
-			<span ref={indicatorRef}>
-				{selectedIndex + 1} / {images.length}
-			</span>
-			{shouldShowUpButton() ? (
-				<Button
-					accessibilityLabel="Previous Image"
-					onClick={() => setThumbnailBarStartIndex(thumbnailBarStartIndex - 1)}
-					ref={upButtonRef}
-				>
-					<Icon name="ChevronUp" />
-				</Button>
-			) : (
-				<div className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-bar-spacer`} />
-			)}
-			<div ref={imageContainerRef}>
-				<Stack alignment="center" direction="vertical" justification="start">
-					{images
-						.filter(
-							(_, index) =>
-								index >= Math.min(thumbnailBarStartIndex, images.length - thumbnailBarItemLimit) &&
-								index < thumbnailBarStartIndex + thumbnailBarItemLimit
-							// as long as selected index is less than the length of the product images minus the window
-						)
-						.map((image) => (
-							<Image
-								// used as part of a page design so empty string alt text
-								alt=""
-								className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-image${
-									image._id === images[selectedIndex]._id ? "--selected" : ""
-								}`}
-								height={100}
-								key={`focus-view-thumbnail-${image._id}`}
-								onClick={() => {
-									onImageSelect(getImageIndexById(image._id));
-								}}
-								resizedOptions={{ auth: image.auth[RESIZER_APP_VERSION] }}
-								resizerURL={RESIZER_URL}
-								responsiveImages={[120]}
-								src={imageANSToImageSrc(image)}
-								width={100}
-							/>
-						))}
-				</Stack>
-			</div>
-			{shouldShowDownButton() ? (
-				<Button
-					accessibilityLabel="Next Image"
-					onClick={() => setThumbnailBarStartIndex(thumbnailBarStartIndex + 1)}
-					ref={downButtonRef}
-				>
-					<Icon name="ChevronDown" />
-				</Button>
-			) : null}
+			<Stack alignment="center" direction="vertical" justification="start">
+				<p className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-bar-indicator`} ref={indicatorRef}>
+					{selectedIndex + 1} / {images.length}
+				</p>
+				{shouldShowUpButton() ? (
+					<Button
+						accessibilityLabel={phrases.t("product-gallery.focus-thumbnail-previous")}
+						onClick={() => setThumbnailBarStartIndex(thumbnailBarStartIndex - 1)}
+						ref={upButtonRef}
+					>
+						<Icon name="ChevronUp" />
+					</Button>
+				) : null}
+				<div ref={imageContainerRef}>
+					<Stack
+						alignment="center"
+						direction="vertical"
+						justification="start"
+						className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-bar-images`}
+					>
+						{images
+							.filter(
+								(_, index) =>
+									index >=
+										Math.min(thumbnailBarStartIndex, images.length - thumbnailBarItemLimit) &&
+									index < thumbnailBarStartIndex + thumbnailBarItemLimit
+								// as long as selected index is less than the length of the product images minus the window
+							)
+							.map((image) => (
+								<Image
+									// used as part of a page design so empty string alt text
+									alt=""
+									className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-image ${
+										image._id === images[selectedIndex]._id
+											? `${BLOCK_CLASS_NAME}__focus-view-thumbnail-image--selected`
+											: ""
+									}`}
+									height={100}
+									key={`focus-view-thumbnail-${image._id}`}
+									onClick={() => {
+										onImageSelect(getImageIndexById(image._id));
+									}}
+									resizedOptions={{ auth: image.auth[RESIZER_APP_VERSION] }}
+									resizerURL={RESIZER_URL}
+									responsiveImages={[120]}
+									src={imageANSToImageSrc(image)}
+									width={100}
+								/>
+							))}
+					</Stack>
+				</div>
+				{shouldShowDownButton() ? (
+					<Button
+						accessibilityLabel={phrases.t("product-gallery.focus-thumbnail-next")}
+						onClick={() => setThumbnailBarStartIndex(thumbnailBarStartIndex + 1)}
+						ref={downButtonRef}
+					>
+						<Icon name="ChevronDown" />
+					</Button>
+				) : null}
+			</Stack>
 		</div>
 	);
 };

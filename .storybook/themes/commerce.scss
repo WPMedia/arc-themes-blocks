@@ -819,6 +819,7 @@
 					overflow: hidden,
 					top: 0,
 					width: 100vw,
+					z-index: var(--global-z-index-5),
 					components: (
 						grid: (
 							--grid-template-columns: auto 1fr,
@@ -836,8 +837,6 @@
 					max-width: 100%,
 				),
 				product-gallery-focus-view-toolbar: (
-					background: transparent,
-					bottom: 0,
 					position: fixed,
 					padding-top: var(--global-spacing-5),
 					padding-right: var(--global-spacing-5),
@@ -846,12 +845,10 @@
 					top: 0,
 				),
 				product-gallery-focus-view-thumbnail-bar: (
-					gap: var(--global-spacing-5),
 					padding-top: var(--global-spacing-7),
 					padding-right: var(--global-spacing-6),
 					padding-bottom: var(--global-spacing-7),
 					padding-left: var(--global-spacing-6),
-					text-align: center,
 					components: (
 						button: (
 							justify-content: center,
@@ -863,6 +860,9 @@
 							max-height: 100px,
 							max-width: 100px,
 						),
+						stack: (
+							gap: var(--global-spacing-2),
+						),
 					),
 				),
 				product-gallery-focus-view-thumbnail-bar-indicator: (
@@ -870,20 +870,20 @@
 					font-size: var(--heading-level-6-font-size),
 					font-weight: var(--global-font-weight-4),
 					line-height: var(--heading-level-6-line-height),
+					margin-bottom: var(--global-spacing-2),
 				),
-				product-gallery-focus-view-thumbnail-bar-spacer: (
-					height: var(--global-spacing-4),
+				product-gallery-focus-view-thumbnail-bar-images: (
+					gap: var(--global-spacing-5),
 				),
 				product-gallery-focus-view-thumbnail-image: (
 					border-color: var(--global-white),
 					border-style: var(--global-border-style-1),
-					border-width: 0.5px,
+					border-width: var(--global-border-width-1),
 					opacity: 0.75,
 				),
 				product-gallery-focus-view-thumbnail-image-selected: (
 					border-color: var(--global-black),
-					border-style: var(--global-border-style-1),
-					border-width: 0.5px,
+					opacity: 1,
 				),
 				quilted-image: (
 					margin-left: auto,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Button, Grid, Icon, Stack } from "@wpmedia/arc-themes-components";
+import { Button, Grid, Icon, Stack, usePhrases } from "@wpmedia/arc-themes-components";
 
 import MainImage from "../MainImage";
 import ThumbnailBar from "../ThumbnailBar";
@@ -13,6 +13,8 @@ const ProductFocusView = ({ initialItemId, onClose, productImages }) => {
 	const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(
 		getImageIndexById(initialItemId)
 	);
+
+	const phrases = usePhrases();
 
 	// Scrolls main image into view when thumbnail is selected.
 	useEffect(() => {
@@ -62,8 +64,13 @@ const ProductFocusView = ({ initialItemId, onClose, productImages }) => {
 						</div>
 					))}
 				</Stack>
-				<div className={`${BLOCK_CLASS_NAME}__focus-view-toolbar`}>
-					<Button accessibilityLabel="Close" onClick={onClose} size="large" variant="secondary">
+				<div className={`${BLOCK_CLASS_NAME}__focus-view-close`}>
+					<Button
+						accessibilityLabel={phrases.t("product-gallery.focus-close")}
+						onClick={onClose}
+						size="large"
+						variant="secondary"
+					>
 						<Icon name="Close" />
 					</Button>
 				</div>

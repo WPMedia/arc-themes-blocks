@@ -10,6 +10,17 @@
 		"pt": "Products",
 		"sv": "Products"
 	},
+	"product-gallery.focus-close": {
+		"de": "Close",
+		"en": "Close",
+		"es": "Close",
+		"fr": "Close",
+		"ja": "Close",
+		"ko": "Close",
+		"no": "Close",
+		"pt": "Close",
+		"sv": "Close"
+	},
 	"product-gallery.focus-thumbnail-next": {
 		"de": "Next Image",
 		"en": "Next Image",

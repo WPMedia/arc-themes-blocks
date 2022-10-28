@@ -836,13 +836,10 @@
 					height: auto,
 					max-width: 100%,
 				),
-				product-gallery-focus-view-toolbar: (
+				product-gallery-focus-view-close: (
 					position: fixed,
-					padding-top: var(--global-spacing-5),
-					padding-right: var(--global-spacing-5),
-					padding-bottom: var(--global-spacing-7),
-					right: 0,
-					top: 0,
+					right: var(--global-spacing-5),
+					top: var(--global-spacing-5),
 				),
 				product-gallery-focus-view-thumbnail-bar: (
 					padding-top: var(--global-spacing-7),

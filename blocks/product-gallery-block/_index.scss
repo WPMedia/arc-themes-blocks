@@ -51,9 +51,9 @@
 		@include scss.block-properties("product-gallery-focus-view-thumbnail-image-selected");
 	}
 
-	&__focus-view-toolbar {
-		@include scss.block-components("product-gallery-focus-view-toolbar");
-		@include scss.block-properties("product-gallery-focus-view-toolbar");
+	&__focus-view-close {
+		@include scss.block-components("product-gallery-focus-view-close");
+		@include scss.block-properties("product-gallery-focus-view-close");
 	}
 
 	@include scss.block-components("product-gallery");

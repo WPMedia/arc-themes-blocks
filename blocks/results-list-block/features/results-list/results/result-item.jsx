@@ -60,7 +60,6 @@ const ResultItem = React.memo(
 			const overline = basic?.text || "Overline";
 			const phrases = usePhrases();
 			const { registerSuccessEvent } = useComponentContext();
-			console.log("element", element);
 			/* Author Formatting */
 			const imageURL = getImageFromANS(element)?.url || null;
 			const { searchableField } = useEditableContent();

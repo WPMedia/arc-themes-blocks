@@ -32,7 +32,6 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 		thumbnailBarItemLimit < images.length && thumbnailBarStartIndex !== 0;
 
 	const windowResize = () => {
-		// Math
 		const upButtonHeight = upButtonRef.current?.getBoundingClientRect().height || 0;
 		const downButtonHeight = downButtonRef.current?.getBoundingClientRect().height || 0;
 		const indicatorHeight = indicatorRef.current.getBoundingClientRect().height;

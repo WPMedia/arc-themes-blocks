@@ -10,6 +10,39 @@
 		"pt": "Products",
 		"sv": "Products"
 	},
+	"product-gallery.focus-close": {
+		"de": "Close",
+		"en": "Close",
+		"es": "Close",
+		"fr": "Close",
+		"ja": "Close",
+		"ko": "Close",
+		"no": "Close",
+		"pt": "Close",
+		"sv": "Close"
+	},
+	"product-gallery.focus-thumbnail-next": {
+		"de": "Next Image",
+		"en": "Next Image",
+		"es": "Next Image",
+		"fr": "Next Image",
+		"ja": "Next Image",
+		"ko": "Next Image",
+		"no": "Next Image",
+		"pt": "Next Image",
+		"sv": "Next Image"
+	},
+	"product-gallery.focus-thumbnail-previous": {
+		"de": "Previous Image",
+		"en": "Previous Image",
+		"es": "Previous Image",
+		"fr": "Previous Image",
+		"ja": "Previous Image",
+		"ko": "Previous Image",
+		"no": "Previous Image",
+		"pt": "Previous Image",
+		"sv": "Previous Image"
+	},
 	"product-gallery.go-to-slide": {
 		"de": "Go to slide %{slideNumber}",
 		"en": "Go to slide %{slideNumber}",

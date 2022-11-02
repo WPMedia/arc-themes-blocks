@@ -840,6 +840,11 @@
 					position: fixed,
 					right: var(--global-spacing-5),
 					top: var(--global-spacing-5),
+					components: (
+						button-secondary-hover: (
+							background-color: white,
+						),
+					),
 				),
 				product-gallery-focus-view-thumbnail-bar: (
 					padding-top: var(--global-spacing-7),

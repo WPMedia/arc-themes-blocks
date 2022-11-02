@@ -1,5 +1,6 @@
 import React from "react";
 
+import { RESIZER_APP_VERSION } from "fusion:environment";
 import { useContent, useEditableContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
@@ -44,7 +45,9 @@ const ExtraLargePromo = ({ customFields }) => {
 	} = getProperties(arcSite);
 	const phrases = usePhrases();
 	const {
+		imageOverrideAuth,
 		imageOverrideURL,
+		imageOverrideId,
 		imageRatio,
 		itemContentConfig,
 		lazyLoad,
@@ -107,35 +110,21 @@ const ExtraLargePromo = ({ customFields }) => {
 						type
 						promo_items {
 							basic {
+								_id
 								type
 								url
-								resized_params {
-									800x600
-									800x533
-									800x450
-									600x450
-									600x400
-									600x338
-									400x300
-									400x267
-									400x225
+								auth {
+									${RESIZER_APP_VERSION}
 								}
 							}
 						}
 					}
 					basic {
+						_id
 						type
 						url
-						resized_params {
-							800x600
-							800x533
-							800x450
-							600x450
-							600x400
-							600x338
-							400x300
-							400x267
-							400x225
+						auth {
+							${RESIZER_APP_VERSION}
 						}
 					}
 				}
@@ -185,18 +174,27 @@ const ExtraLargePromo = ({ customFields }) => {
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
 	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 	const hasAuthors = showByline && content?.credits?.by.length > 0;
-	const promoImageURL = imageOverrideURL || getImageFromANS(content)?.url;
-
-	const MediaImage = () =>
-		showImage ? (
-			<Conditional component={Link} condition={contentUrl} href={contentUrl}>
-				<Image
-					alt={content?.headlines?.basic}
-					src={promoImageURL || fallbackImage}
-					data-aspect-ratio={imageRatio?.replace(":", "/")}
-				/>
-			</Conditional>
-		) : null;
+	const imageParams =
+		imageOverrideURL || content
+			? {
+					ansImage: imageOverrideURL
+						? {
+								_id: imageOverrideId,
+								url: imageOverrideURL,
+								auth: JSON.parse(imageOverrideAuth),
+						  }
+						: getImageFromANS(content),
+					alt: content?.headlines?.basic || "",
+					aspectRatio: imageRatio,
+					resizedOptions: {
+						smart: true,
+					},
+					responsiveImages: [400, 600, 800, 1200],
+					width: 800,
+			  }
+			: {
+					src: fallbackImage,
+			  };
 
 	return showOverline ||
 		contentHeading ||
@@ -219,8 +217,26 @@ const ExtraLargePromo = ({ customFields }) => {
 							</HeadingSection>
 						) : null}
 						{embedMarkup || showImage ? (
-							<MediaItem {...searchableField("imageOverrideURL")} suppressContentEditableWarning>
-								{embedMarkup ? <Video embedMarkup={embedMarkup} /> : <MediaImage />}
+							<MediaItem
+								{...searchableField({
+									imageOverrideURL: "url",
+									imageOverrideId: "_id",
+									imageOverrideAuth: "auth",
+								})}
+								suppressContentEditableWarning
+							>
+								{embedMarkup ? (
+									<Video embedMarkup={embedMarkup} />
+								) : (
+									<Conditional
+										component={Link}
+										condition={contentUrl}
+										href={contentUrl}
+										assistiveHidden
+									>
+										<Image {...imageParams} />
+									</Conditional>
+								)}
 							</MediaItem>
 						) : null}
 						{contentDescription ? <Paragraph>{contentDescription}</Paragraph> : null}
@@ -282,10 +298,18 @@ ExtraLargePromo.propTypes = {
 			group: "Show promo elements",
 			label: "Show date",
 		}),
+		imageOverrideAuth: PropTypes.string.tag({
+			group: "Image",
+			hidden: true,
+		}),
 		imageOverrideURL: PropTypes.string.tag({
 			group: "Image",
 			label: "Image URL",
 			searchable: "image",
+		}),
+		imageOverrideId: PropTypes.string.tag({
+			group: "Image",
+			hidden: true,
 		}),
 		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
 			defaultValue: "4:3",

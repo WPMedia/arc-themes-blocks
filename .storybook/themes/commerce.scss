@@ -841,8 +841,8 @@
 					right: var(--global-spacing-5),
 					top: var(--global-spacing-5),
 					components: (
-						button-secondary-hover: (
-							background-color: white,
+						icon: (
+							fill: currentColor,
 						),
 					),
 				),

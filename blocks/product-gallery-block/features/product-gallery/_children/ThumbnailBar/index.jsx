@@ -14,8 +14,7 @@ const BLOCK_CLASS_NAME = "b-product-gallery";
 
 const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 	const getImageIndexById = (id) => images.findIndex((image) => image._id === id);
-	const [thumbnailBarStartIndex, setThumbnailBarStartIndex] = useState(selectedIndex);
-	const [thumbnailBarItemLimit, setThumbnailBarItemLimit] = useState(3);
+	const [viewableItems, setViewableItems] = useState([...Array(3).keys()]);
 
 	const phrases = usePhrases();
 
@@ -24,14 +23,11 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 	const imageContainerRef = useRef();
 	const indicatorRef = useRef();
 	const thumbnailBarRef = useRef();
-	const shouldShowDownButton = () =>
-		images.length >= thumbnailBarItemLimit &&
-		thumbnailBarStartIndex + thumbnailBarItemLimit < images.length;
+	const shouldShowDownButton = viewableItems[viewableItems.length - 1] < images.length - 1;
 
-	const shouldShowUpButton = () =>
-		thumbnailBarItemLimit < images.length && thumbnailBarStartIndex !== 0;
+	const shouldShowUpButton = viewableItems[0] > 0;
 
-	const windowResize = () => {
+	const getAvailableSpots = () => {
 		const upButtonHeight = upButtonRef.current?.getBoundingClientRect().height || 0;
 		const downButtonHeight = downButtonRef.current?.getBoundingClientRect().height || 0;
 		const indicatorHeight = indicatorRef.current.getBoundingClientRect().height;
@@ -60,17 +56,29 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 			thumbnailBarTopPadding -
 			thumbnailBarBottomPadding;
 
-		const spots = Math.floor(availableHeight / (100 + imageContainerGap));
-
-		setThumbnailBarItemLimit(Math.max(spots, 1));
+		return Math.floor(availableHeight / (100 + imageContainerGap));
 	};
 
 	useEffect(() => {
-		setThumbnailBarStartIndex(selectedIndex);
-	}, [selectedIndex]);
+		const spots = viewableItems.length;
+		const x = [...Array(spots).keys()];
+		const b = [];
+		let viewables = [];
+		if (selectedIndex - spots >= 0) {
+			x.forEach((_, iX) => {
+				b.push(selectedIndex - iX);
+			});
+			viewables = b.reverse();
+		} else {
+			viewables = x;
+		}
+		setViewableItems(viewables);
+	}, [selectedIndex, viewableItems.length]);
 
 	useEffect(() => {
-		windowResize();
+		const windowResize = () => {
+			setViewableItems([...Array(getAvailableSpots()).keys()]);
+		};
 		window.addEventListener("resize", windowResize);
 		return () => window.removeEventListener("resize", windowResize);
 	}, [upButtonRef, downButtonRef, imageContainerRef, indicatorRef, thumbnailBarRef]);
@@ -81,10 +89,16 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 				<p className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-bar-indicator`} ref={indicatorRef}>
 					{selectedIndex + 1} / {images.length}
 				</p>
-				{shouldShowUpButton() ? (
+				{shouldShowUpButton ? (
 					<Button
 						accessibilityLabel={phrases.t("product-gallery.focus-thumbnail-previous")}
-						onClick={() => setThumbnailBarStartIndex(thumbnailBarStartIndex - 1)}
+						onClick={() => {
+							const inViewItems = viewableItems;
+							inViewItems.pop();
+
+							inViewItems.unshift(inViewItems[0] - 1);
+							setViewableItems([...inViewItems]);
+						}}
 						ref={upButtonRef}
 					>
 						<Icon name="ChevronUp" />
@@ -98,13 +112,7 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 						className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-bar-images`}
 					>
 						{images
-							.filter(
-								(_, index) =>
-									index >=
-										Math.min(thumbnailBarStartIndex, images.length - thumbnailBarItemLimit) &&
-									index < thumbnailBarStartIndex + thumbnailBarItemLimit
-								// as long as selected index is less than the length of the product images minus the window
-							)
+							.filter((_, index) => viewableItems.indexOf(index) !== -1)
 							.map((image) => (
 								<Image
 									// used as part of a page design so empty string alt text
@@ -128,10 +136,17 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 							))}
 					</Stack>
 				</div>
-				{shouldShowDownButton() ? (
+				{shouldShowDownButton ? (
 					<Button
 						accessibilityLabel={phrases.t("product-gallery.focus-thumbnail-next")}
-						onClick={() => setThumbnailBarStartIndex(thumbnailBarStartIndex + 1)}
+						onClick={() => {
+							const inViewItems = viewableItems;
+							const n = inViewItems[inViewItems.length - 1] + 1;
+
+							inViewItems.shift();
+							inViewItems.push(n);
+							setViewableItems([...inViewItems]);
+						}}
 						ref={downButtonRef}
 					>
 						<Icon name="ChevronDown" />

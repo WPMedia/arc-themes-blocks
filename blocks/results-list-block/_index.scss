@@ -4,20 +4,17 @@
 	&__container {
 		@include scss.block-properties("results-list-container");
 		@include scss.block-components("results-list-container");
+
 		&--first {
 			@include scss.block-properties("results-list-container-first");
 			@include scss.block-components("results-list-container-first");
 		}
 	}
+
 	&--show-image {
 		@include scss.block-properties("results-list-show-image");
 		@include scss.block-components("results-list-show-image");
 	}
-
-	// &--fallback-image {
-	// 	@include scss.block-properties("results-list-fallback-image");
-	// 	@include scss.block-components("results-list-fallback-image");
-	// }
 
 	&__label {
 		@include scss.block-components("results-list-label");

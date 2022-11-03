@@ -9,7 +9,7 @@
 */
 
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import ThumbnailBar from "./index";
 import mockData from "../../mock-data";
@@ -20,19 +20,21 @@ jest.mock("fusion:environment", () => ({
 }));
 
 describe("Thumbnail Bar", () => {
-	it("Renders 1 image and 1 buttons.", () => {
+	it("Renders 1 image and 2 buttons.", () => {
 		Object.defineProperty(window, "innerHeight", {
 			writable: true,
 			configurable: true,
 			value: 150,
 		});
 
-		window.dispatchEvent(new Event("resize"));
-
 		render(<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={() => true} />);
 
-		expect(screen.queryAllByRole("img")).toHaveLength(3);
-		expect(screen.queryAllByRole("button")).toHaveLength(1);
+		act(() => {
+			window.dispatchEvent(new Event("resize"));
+		});
+
+		expect(screen.queryAllByRole("img")).toHaveLength(1);
+		expect(screen.queryAllByRole("button")).toHaveLength(2);
 	});
 
 	it("does not render buttons", () => {

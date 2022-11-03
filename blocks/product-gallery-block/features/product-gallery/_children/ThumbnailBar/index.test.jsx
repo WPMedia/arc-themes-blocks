@@ -21,7 +21,16 @@ jest.mock("fusion:environment", () => ({
 
 describe("Thumbnail Bar", () => {
 	it("Renders 1 image and two buttons.", () => {
+		Object.defineProperty(window, "innerHeight", {
+			writable: true,
+			configurable: true,
+			value: 150,
+		});
+
+		window.dispatchEvent(new Event("resize"));
+
 		render(<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={() => true} />);
+
 		expect(screen.queryAllByRole("img")).toHaveLength(1);
 		expect(screen.queryAllByRole("button")).toHaveLength(2);
 	});

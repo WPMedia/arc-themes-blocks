@@ -35,7 +35,7 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 		const upButtonHeight = upButtonRef.current?.getBoundingClientRect().height || 0;
 		const downButtonHeight = downButtonRef.current?.getBoundingClientRect().height || 0;
 		const indicatorHeight = indicatorRef.current.getBoundingClientRect().height;
-		const windowHeight = window.innerHeight;
+		const windowHeight = window.innerHeight || 0;
 
 		let imageContainerGap = Number.parseInt(
 			window.getComputedStyle(imageContainerRef.current.firstChild).getPropertyValue("gap"),

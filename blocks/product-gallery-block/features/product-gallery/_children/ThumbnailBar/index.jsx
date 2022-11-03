@@ -61,16 +61,16 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 
 	useEffect(() => {
 		const spots = viewableItems.length;
-		const x = [...Array(spots).keys()];
-		const b = [];
+		const defaultViewable = [...Array(spots).keys()];
 		let viewables = [];
 		if (selectedIndex - spots >= 0) {
-			x.forEach((_, iX) => {
-				b.push(selectedIndex - iX);
+			const updatedViewable = [];
+			defaultViewable.forEach((_, iX) => {
+				updatedViewable.push(selectedIndex - iX);
 			});
-			viewables = b.reverse();
+			viewables = updatedViewable.reverse();
 		} else {
-			viewables = x;
+			viewables = defaultViewable;
 		}
 		setViewableItems(viewables);
 	}, [selectedIndex, viewableItems.length]);

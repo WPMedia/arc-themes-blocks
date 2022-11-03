@@ -1808,6 +1808,12 @@
 						),
 					),
 				),
+				results-list-container: (
+					padding-top: var(--global-spacing-4),
+				),
+				results-list-container-first: (
+					padding-top: 0,
+				),
 				results-list-show-image: (
 					components: (
 						heading: (
@@ -2406,7 +2412,8 @@
 				results-list-show-image: (
 					components: (
 						attribution: (
-							margin-left: var(--global-spacing-6),
+							display: block,
+							margin-left: calc(33% + var(--global-spacing-6)),
 						),
 						heading: (
 							margin-left: calc(33% + var(--global-spacing-6)),
@@ -2417,13 +2424,6 @@
 						),
 						overline: (
 							margin-left: var(--global-spacing-6),
-						),
-					),
-				),
-				results-list-fallback-image: (
-					components: (
-						attribution: (
-							margin-left: calc(33% + var(--global-spacing-6)),
 						),
 					),
 				),

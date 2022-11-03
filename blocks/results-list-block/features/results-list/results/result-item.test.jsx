@@ -198,14 +198,13 @@ describe("Result parts", () => {
 			<ResultItem
 				arcSite="the-sun"
 				element={element}
-				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
-				placeholderResizedImageOptions={{}}
+				// placeholderResizedImageOptions={{}}
 				showImage
 			/>
 		);
-
-		expect(screen.getAllByAltText(/logo alt/i)).toHaveLength(1);
+		const imageSrc = screen.getByAltText(/Test headline 1/i);
+		expect(imageSrc.src).toBe("http://test/resources/fallback.jpg");
 
 		unmount();
 	});

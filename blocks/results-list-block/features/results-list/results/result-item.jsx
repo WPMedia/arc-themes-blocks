@@ -2,6 +2,7 @@ import React from "react";
 import { useEditableContent } from "fusion:content";
 import { useComponentContext } from "fusion:context";
 import getProperties from "fusion:properties";
+import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
 
 import {
@@ -19,6 +20,7 @@ import {
 	MediaItem,
 	Conditional,
 	getImageFromANS,
+	imageANSToImageSrc,
 	usePhrases,
 } from "@wpmedia/arc-themes-components";
 
@@ -30,7 +32,6 @@ const ResultItem = React.memo(
 			{
 				arcSite,
 				element,
-				imageProperties,
 				targetFallbackImage,
 				showByline,
 				showDate,
@@ -49,6 +50,7 @@ const ResultItem = React.memo(
 				headlines: { basic: headlineText } = {},
 				websites,
 				credits,
+				// promo_items: { basic: promoBasic } = {},
 			} = element;
 			const {
 				dateLocalization: { language, timeZone, dateTimeFormat } = {
@@ -61,7 +63,8 @@ const ResultItem = React.memo(
 			const phrases = usePhrases();
 			const { registerSuccessEvent } = useComponentContext();
 			/* Author Formatting */
-			const imageURL = getImageFromANS(element)?.url || null;
+			const imageURL = imageANSToImageSrc(getImageFromANS(element)) || null;
+			const auth = getImageFromANS(element)?.auth || {};
 			const { searchableField } = useEditableContent();
 			const hasAuthors = showByline ? credits?.by && credits?.by.length : null;
 			const contentHeading = showHeadline ? headlineText : null;
@@ -77,9 +80,7 @@ const ResultItem = React.memo(
 				showItemOverline ? (
 				<div
 					ref={ref}
-					className={`${BLOCK_CLASS_NAME}${showImage ? ` ${BLOCK_CLASS_NAME}--show-image` : ""} ${
-						imageURL === null ? ` ${BLOCK_CLASS_NAME}--fallback-image` : null
-					}`}
+					className={`${BLOCK_CLASS_NAME}${showImage ? ` ${BLOCK_CLASS_NAME}--show-image` : ""}`}
 				>
 					{showImage ? (
 						<MediaItem {...searchableField("imageOverrideURL")} suppressContentEditableWarning>
@@ -91,9 +92,10 @@ const ResultItem = React.memo(
 								assistiveHidden
 							>
 								<Image
-									{...imageProperties}
 									src={imageURL !== null ? imageURL : targetFallbackImage}
-									alt={imageURL !== null ? headlineText : imageProperties.primaryLogoAlt}
+									alt={headlineText}
+									resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
+									resizerURL={RESIZER_URL}
 									sizes={[
 										{
 											isDefault: true,
@@ -105,6 +107,7 @@ const ResultItem = React.memo(
 										},
 									]}
 									responsiveImages={[100, 500]}
+									width="500"
 								/>
 							</Conditional>
 						</MediaItem>

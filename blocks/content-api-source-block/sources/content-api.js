@@ -30,5 +30,5 @@ const fetch = ({ _id, "arc-site": website, website_url: websiteUrl }, { cachedCa
 export default {
 	fetch,
 	params,
-	schemaName: "ans-feed",
+	schemaName: "ans-item",
 };

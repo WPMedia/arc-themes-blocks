@@ -31,7 +31,7 @@ describe("Thumbnail Bar", () => {
 
 		render(<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={() => true} />);
 
-		expect(screen.queryAllByRole("img")).toHaveLength(1);
+		expect(screen.queryAllByRole("img")).toHaveLength(3);
 		expect(screen.queryAllByRole("button")).toHaveLength(2);
 	});
 
@@ -45,7 +45,7 @@ describe("Thumbnail Bar", () => {
 		const { container } = render(
 			<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={() => true} />
 		);
-		expect(screen.queryAllByRole("img")).toHaveLength(1);
+		expect(screen.queryAllByRole("img")).toHaveLength(3);
 		expect(screen.queryAllByRole("button")).toHaveLength(2);
 
 		expect(
@@ -67,7 +67,7 @@ describe("Thumbnail Bar", () => {
 	it("call onImageSelect function when image clicked", () => {
 		const imageSelectSpy = jest.fn();
 		render(<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={imageSelectSpy} />);
-		expect(screen.queryAllByRole("img")).toHaveLength(1);
+		expect(screen.queryAllByRole("img")).toHaveLength(3);
 		expect(screen.queryAllByRole("button")).toHaveLength(2);
 
 		fireEvent.click(screen.getByRole("img"));

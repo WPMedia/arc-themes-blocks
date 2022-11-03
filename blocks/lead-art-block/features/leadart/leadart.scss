@@ -1,5 +1,4 @@
 .lead-art-wrapper {
-	@include block-margin-bottom;
 	display: block;
 	height: auto;
 	margin-left: 0;
@@ -53,4 +52,5 @@
 		vertical-align: middle;
 		width: 100%;
 	}
+	@include block-margin-bottom;
 }

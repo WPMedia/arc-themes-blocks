@@ -2,13 +2,12 @@
 
 .b-results-list {
 	&__container {
-		@include scss.block-properties("results-list-container");
-		@include scss.block-components("results-list-container");
-
 		&--first {
 			@include scss.block-properties("results-list-container-first");
 			@include scss.block-components("results-list-container-first");
 		}
+		@include scss.block-properties("results-list-container");
+		@include scss.block-components("results-list-container");
 	}
 
 	&--show-image {

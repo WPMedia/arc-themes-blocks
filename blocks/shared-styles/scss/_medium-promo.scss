@@ -7,10 +7,10 @@
 	}
 
 	.md-promo-headline {
-		@include link-color-active-hover($ui-primary-font-color);
 		display: block;
 		margin-bottom: map-get($spacers, "sm");
 		text-decoration: none;
+		@include link-color-active-hover($ui-primary-font-color);
 
 		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
 			margin-bottom: map-get($spacers, "md");

@@ -15,7 +15,6 @@
 	}
 
 	.xl-promo-headline {
-		@include link-color-active-hover($ui-primary-font-color);
 		display: block;
 		font-size: calculateRem(32px);
 		font-weight: bold;
@@ -24,6 +23,7 @@
 		text-align: center;
 		text-decoration: none;
 		width: 100%;
+		@include link-color-active-hover($ui-primary-font-color);
 
 		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
 			font-size: calculateRem(52px);

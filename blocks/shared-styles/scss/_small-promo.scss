@@ -21,13 +21,13 @@
 	}
 
 	.sm-promo-headline {
-		@include link-color-active-hover($ui-primary-font-color);
 		font-size: calculateRem(16px);
 		font-weight: normal;
 		line-height: calculateRem(24px);
 		margin: 0;
 		padding: 0 map-get($spacers, "xxs") 0 0;
 		text-decoration: none;
+		@include link-color-active-hover($ui-primary-font-color);
 		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
 			padding: 0;
 		}

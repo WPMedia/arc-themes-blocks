@@ -186,7 +186,6 @@ const Results = ({
 	const onReadMoreClick = useCallback(() => {
 		setQueryOffset((oldOffset) => oldOffset + configuredSize);
 	}, [configuredSize, setQueryOffset]);
-	console.log("element", viewableElements);
 	return viewableElements?.length > 0 && !isServerSideLazy ? (
 		<Stack>
 			{viewableElements.map((element, index) => (

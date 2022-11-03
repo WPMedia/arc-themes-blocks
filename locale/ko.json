@@ -176,6 +176,9 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "Products",
+		"product-gallery.focus-close": "Close",
+		"product-gallery.focus-thumbnail-next": "Next Image",
+		"product-gallery.focus-thumbnail-previous": "Previous Image",
 		"product-gallery.go-to-slide": "Go to slide %{slideNumber}",
 		"product-gallery.left-arrow-label": "Previous",
 		"product-gallery.right-arrow-label": "Next",

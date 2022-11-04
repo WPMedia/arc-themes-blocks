@@ -30,7 +30,7 @@ window.IntersectionObserver = jest.fn(() => ({
 }));
 
 describe("Product Focus View", () => {
-	it("Renders 8 images.", () => {
+	it("Renders 10 images.", () => {
 		render(
 			<ProductFocusView
 				onClose={() => setFocusViewItemId("")}
@@ -38,6 +38,6 @@ describe("Product Focus View", () => {
 				initialItemId={mockData[0]._id}
 			/>
 		);
-		expect(screen.queryAllByRole("img")).toHaveLength(8);
+		expect(screen.queryAllByRole("img")).toHaveLength(10);
 	});
 });

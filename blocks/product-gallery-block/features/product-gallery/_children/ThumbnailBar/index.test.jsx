@@ -20,7 +20,7 @@ jest.mock("fusion:environment", () => ({
 }));
 
 describe("Thumbnail Bar", () => {
-	it("Renders 1 image and 2 buttons.", () => {
+	it("Renders 1 image and 1 buttons.", () => {
 		Object.defineProperty(window, "innerHeight", {
 			writable: true,
 			configurable: true,
@@ -34,7 +34,7 @@ describe("Thumbnail Bar", () => {
 		});
 
 		expect(screen.queryAllByRole("img")).toHaveLength(1);
-		expect(screen.queryAllByRole("button")).toHaveLength(2);
+		expect(screen.queryAllByRole("button")).toHaveLength(1);
 	});
 
 	it("does not render buttons", () => {
@@ -47,8 +47,9 @@ describe("Thumbnail Bar", () => {
 		const { container } = render(
 			<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={() => true} />
 		);
-		expect(screen.queryAllByRole("img")).toHaveLength(3);
-		expect(screen.queryAllByRole("button")).toHaveLength(1);
+
+		expect(screen.queryAllByRole("img")).toHaveLength(1);
+		expect(screen.queryAllByRole("button")).toHaveLength(2);
 
 		expect(
 			container
@@ -58,24 +59,19 @@ describe("Thumbnail Bar", () => {
 		).toBeTruthy();
 
 		fireEvent.click(screen.getByRole("button", { name: "product-gallery.focus-thumbnail-next" }));
-		expect(
-			screen.queryAllByRole("img")[1].getAttribute("src").includes(mockData[2]._id)
-		).toBeTruthy();
+		expect(screen.queryByRole("img").getAttribute("src").includes(mockData[2]._id)).toBeTruthy();
 
 		fireEvent.click(
 			screen.getByRole("button", { name: "product-gallery.focus-thumbnail-previous" })
 		);
-		expect(
-			screen.queryAllByRole("img")[1].getAttribute("src").includes(mockData[1]._id)
-		).toBeTruthy();
 	});
 
 	it("call onImageSelect function when image clicked", () => {
 		const imageSelectSpy = jest.fn();
 		render(<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={imageSelectSpy} />);
 
-		expect(screen.queryAllByRole("img")).toHaveLength(3);
-		expect(screen.queryAllByRole("button")).toHaveLength(1);
+		expect(screen.queryAllByRole("img")).toHaveLength(1);
+		expect(screen.queryAllByRole("button")).toHaveLength(2);
 
 		fireEvent.click(screen.queryAllByRole("img")[0]);
 		expect(imageSelectSpy).toHaveBeenCalled();

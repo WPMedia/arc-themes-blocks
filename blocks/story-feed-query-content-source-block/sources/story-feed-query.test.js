@@ -1,79 +1,57 @@
-import contentSource from "./story-feed-query";
+import storyQuery from "./story-feed-query";
 
-jest.mock("fusion:environment", () => ({
-	CONTENT_BASE: "https://content.base",
-}));
-
-jest.mock("axios", () => ({
-	__esModule: true,
-	default: jest.fn((request) => {
-		const requestUrl = new URL(request.url);
-		const url = {
-			hostname: requestUrl.hostname,
-			pathname: requestUrl.pathname,
-			searchObject: Object.fromEntries(requestUrl.searchParams),
-		};
-		return Promise.resolve({
-			data: {
-				content_elements: [{ url }],
-				request: {
-					...request,
-					url,
-				},
-			},
-		});
-	}),
-}));
-
-describe("story-feed-author-content-source-block", () => {
+describe("the story feed query block", () => {
 	it("should use the proper param types", () => {
-		expect(contentSource.params).toEqual({
+		expect(storyQuery.params).toEqual({
 			query: "text",
 			size: "number",
 			offset: "number",
 		});
 	});
 
-	it("should build the correct url", async () => {
-		const contentSourceFetch = await contentSource.fetch(
-			{
-				query: "slug",
-				offset: 4,
-				size: 3,
-				"arc-site": "the-site",
-			},
-			{ cachedCall: () => {} }
-		);
+	it("should be associated with the ans-feed schema", () => {
+		expect(storyQuery.schemaName).toEqual("ans-feed");
+	});
 
-		expect(contentSourceFetch.request.url.hostname).toEqual("content.base");
-		expect(contentSourceFetch.request.url.pathname).toEqual("/content/v4/search/published");
-		expect(contentSourceFetch.request.url.searchObject).toEqual(
-			expect.objectContaining({
-				from: "4",
-				q: "slug",
-				sort: "display_date:desc",
-				size: "3",
-				website: "the-site",
-			})
+	describe("when a query is provided", () => {
+		expect(storyQuery.resolve({ "arc-site": "my-site", query: "queryqueryquery" })).toEqual(
+			"/content/v4/search/published?q=queryqueryquery&website=my-site&size=8&from=0&sort=display_date:desc"
 		);
 	});
 
-	it("should default query to * size to 8 and offset to 0", async () => {
-		const contentSourceFetch = await contentSource.fetch(
-			{
-				"arc-site": "the-site",
-			},
-			{ cachedCall: () => {} }
+	describe("when a query is NOT provided", () => {
+		expect(storyQuery.resolve({ "arc-site": "my-site" })).toEqual(
+			"/content/v4/search/published?q=*&website=my-site&size=8&from=0&sort=display_date:desc"
 		);
+	});
 
-		expect(contentSourceFetch.request.url.searchObject).toEqual(
-			expect.objectContaining({
-				from: "0",
-				q: "*",
-				sort: "display_date:desc",
-				size: "8",
-				website: "the-site",
-			})
+	describe("when a size is provided", () => {
+		expect(storyQuery.resolve({ "arc-site": "my-site", size: 4 })).toEqual(
+			"/content/v4/search/published?q=*&website=my-site&size=4&from=0&sort=display_date:desc"
+		);
+	});
+
+	describe("when a size is NOT provided", () => {
+		expect(storyQuery.resolve({ "arc-site": "my-site" })).toEqual(
+			"/content/v4/search/published?q=*&website=my-site&size=8&from=0&sort=display_date:desc"
+		);
+	});
+
+	describe("when an offset is provided", () => {
+		expect(storyQuery.resolve({ "arc-site": "my-site", offset: 12 })).toEqual(
+			"/content/v4/search/published?q=*&website=my-site&size=8&from=12&sort=display_date:desc"
+		);
+	});
+
+	describe("when an offset is NOT provided", () => {
+		expect(storyQuery.resolve({ "arc-site": "my-site" })).toEqual(
+			"/content/v4/search/published?q=*&website=my-site&size=8&from=0&sort=display_date:desc"
+		);
+	});
+
+	describe("the arc site param", () => {
+		expect(storyQuery.resolve({ "arc-site": "my-other-site" })).toEqual(
+			"/content/v4/search/published?q=*&website=my-other-site&size=8&from=0&sort=display_date:desc"
 		);
 	});
 });

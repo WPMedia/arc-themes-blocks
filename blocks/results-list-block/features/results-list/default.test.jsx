@@ -21,7 +21,6 @@ jest.mock("fusion:intl", () => ({
 
 getProperties.mockReturnValue({
 	fallbackImage: "placeholder.jpg",
-	locale: "en",
 	resizerURL: "https://resizer.me",
 	primaryLogoAlt: "image alt",
 	breakpoints: {},

@@ -190,11 +190,11 @@ const Results = ({
 		<Stack>
 			{viewableElements.map((element, index) => (
 				<Stack
+					key={`result-card-${element._id}`}
 					gap="1rem"
 					className={`${BLOCK_CLASS_NAME}__${index === 0 ? "container--first" : "container"}`}
 				>
 					<ResultItem
-						key={`result-card-${element._id}`}
 						ref={elementRefs[index]}
 						arcSite={arcSite}
 						element={element}

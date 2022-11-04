@@ -107,7 +107,7 @@ const ResultItem = React.memo(
 										},
 									]}
 									responsiveImages={[100, 500]}
-									width="500"
+									width={500}
 								/>
 							</Conditional>
 						</MediaItem>

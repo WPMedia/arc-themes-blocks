@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
 import ResultItem from "./result-item";
-import mockData from "./mock-data";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
@@ -15,7 +14,6 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 }));
 
 jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => mockData),
 	useEditableContent: jest.fn(() => ({
 		editableContent: () => ({ contentEditable: "true" }),
 		searchableField: () => {},

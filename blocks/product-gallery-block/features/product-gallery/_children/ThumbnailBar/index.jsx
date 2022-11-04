@@ -83,6 +83,10 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 		return () => window.removeEventListener("resize", windowResize);
 	}, [upButtonRef, downButtonRef, imageContainerRef, indicatorRef, thumbnailBarRef]);
 
+	useEffect(() => {
+		setViewableItems([...Array(getAvailableSpots()).keys()]);
+	}, []);
+
 	return (
 		<div className={`${BLOCK_CLASS_NAME}__focus-view-thumbnail-bar`} ref={thumbnailBarRef}>
 			<Stack alignment="center" direction="vertical" justification="start">
@@ -95,8 +99,8 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 						onClick={() => {
 							const inViewItems = viewableItems;
 							inViewItems.pop();
-
 							inViewItems.unshift(inViewItems[0] - 1);
+
 							setViewableItems([...inViewItems]);
 						}}
 						ref={upButtonRef}
@@ -140,12 +144,10 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 					<Button
 						accessibilityLabel={phrases.t("product-gallery.focus-thumbnail-next")}
 						onClick={() => {
-							const inViewItems = viewableItems;
-							const n = inViewItems[inViewItems.length - 1] + 1;
+							const [, ...rest] = viewableItems;
+							const nextItem = viewableItems[viewableItems.length - 1] + 1;
 
-							inViewItems.shift();
-							inViewItems.push(n);
-							setViewableItems([...inViewItems]);
+							setViewableItems([...rest, nextItem]);
 						}}
 						ref={downButtonRef}
 					>

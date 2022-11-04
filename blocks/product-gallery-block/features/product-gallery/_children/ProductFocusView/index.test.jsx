@@ -30,7 +30,7 @@ window.IntersectionObserver = jest.fn(() => ({
 }));
 
 describe("Product Focus View", () => {
-	it("Renders 10 images.", () => {
+	it("Renders 8 images.", () => {
 		render(
 			<ProductFocusView
 				onClose={() => setFocusViewItemId("")}

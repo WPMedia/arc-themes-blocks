@@ -1,45 +1,93 @@
-import storyFeedTag from "./story-feed-tag";
+import contentSource from "./story-feed-tag";
 
-describe("content source object", () => {
-	describe("source.resolve function", () => {
-		const key = {
-			"arc-site": "test-site",
-			tagSlug: "my-slug",
-			feedOffset: 0,
-			feedSize: 5,
+jest.mock("fusion:environment", () => ({
+	CONTENT_BASE: "https://content.base",
+}));
+
+jest.mock("axios", () => ({
+	__esModule: true,
+	default: jest.fn((request) => {
+		const requestUrl = new URL(request.url);
+		const url = {
+			hostname: requestUrl.hostname,
+			pathname: requestUrl.pathname,
+			searchObject: Object.fromEntries(requestUrl.searchParams),
 		};
-
-		it("Checks that source.resolve returns the right pattern from the key", () => {
-			const website = key["arc-site"];
-			const { tagSlug, feedOffset, feedSize } = key;
-
-			const endpoint = `/content/v4/search/published?q=taxonomy.tags.slug:${tagSlug}&size=${feedSize}&from=${feedOffset}&sort=display_date:desc&website=${website}`;
-			expect(storyFeedTag.resolve(key)).toBe(endpoint);
+		return Promise.resolve({
+			data: {
+				content_elements: [{ url }],
+				request: {
+					...request,
+					url,
+				},
+			},
 		});
+	}),
+}));
 
-		it("Throws error on empty string tag slug", () => {
-			const emptyTagSlug = "";
-
-			const options = {
-				feedOffset: 0,
-				feedSize: 5,
-				tagSlug: emptyTagSlug,
-			};
-
-			expect(() => storyFeedTag.resolve(options)).toThrow("tagSlug parameter is required");
+describe("story-feed-author-content-source-block", () => {
+	it("should use the proper param types", () => {
+		expect(contentSource.params).toEqual({
+			feedOffset: "number",
+			feedSize: "number",
+			tagSlug: "text",
 		});
+	});
 
-		it("Throws error on undefined tag slug", () => {
-			const options = {
-				feedOffset: 0,
-				feedSize: 5,
-			};
+	it("should build the correct url", async () => {
+		const contentSourceFetch = await contentSource.fetch(
+			{
+				feedOffset: 4,
+				feedSize: 3,
+				tagSlug: "slug",
+				"arc-site": "the-site",
+			},
+			{ cachedCall: () => {} }
+		);
 
-			expect(() => storyFeedTag.resolve(options)).toThrow("tagSlug parameter is required");
-		});
+		expect(contentSourceFetch.request.url.hostname).toEqual("content.base");
+		expect(contentSourceFetch.request.url.pathname).toEqual("/content/v4/search/published");
+		expect(contentSourceFetch.request.url.searchObject).toEqual(
+			expect.objectContaining({
+				from: "4",
+				q: "taxonomy.tags.slug:slug",
+				sort: "display_date:desc",
+				size: "3",
+				website: "the-site",
+			})
+		);
+	});
 
-		it("Returns error if no params", () => {
-			expect(() => storyFeedTag.resolve()).toThrow("tagSlug parameter is required");
-		});
+	it("should default size to 10 and offset to 0", async () => {
+		const contentSourceFetch = await contentSource.fetch(
+			{
+				tagSlug: "slug",
+				"arc-site": "the-site",
+			},
+			{ cachedCall: () => {} }
+		);
+
+		expect(contentSourceFetch.request.url.searchObject).toEqual(
+			expect.objectContaining({
+				from: "0",
+				q: "taxonomy.tags.slug:slug",
+				sort: "display_date:desc",
+				size: "10",
+				website: "the-site",
+			})
+		);
+	});
+
+	it("should fail if tagSlug is not passed in", async () => {
+		const contentSourceFetch = await contentSource
+			.fetch(
+				{
+					"arc-site": "the-site",
+				},
+				{ cachedCall: () => {} }
+			)
+			.catch((e) => expect(e).not.toBeNull());
+
+		expect(contentSourceFetch).not.toBeDefined();
 	});
 });

@@ -1,4 +1,4 @@
-import contentSource from "./story-feed-query";
+import contentSource from "./story-feed-author";
 
 jest.mock("fusion:environment", () => ({
 	CONTENT_BASE: "https://content.base",
@@ -28,18 +28,18 @@ jest.mock("axios", () => ({
 describe("story-feed-author-content-source-block", () => {
 	it("should use the proper param types", () => {
 		expect(contentSource.params).toEqual({
-			query: "text",
-			size: "number",
-			offset: "number",
+			authorSlug: "text",
+			feedOffset: "number",
+			feedSize: "number",
 		});
 	});
 
 	it("should build the correct url", async () => {
 		const contentSourceFetch = await contentSource.fetch(
 			{
-				query: "slug",
-				offset: 4,
-				size: 3,
+				authorSlug: "slug",
+				feedOffset: 4,
+				feedSize: 3,
 				"arc-site": "the-site",
 			},
 			{ cachedCall: () => {} }
@@ -50,7 +50,7 @@ describe("story-feed-author-content-source-block", () => {
 		expect(contentSourceFetch.request.url.searchObject).toEqual(
 			expect.objectContaining({
 				from: "4",
-				q: "slug",
+				q: 'credits.by.slug:"slug"',
 				sort: "display_date:desc",
 				size: "3",
 				website: "the-site",
@@ -58,9 +58,10 @@ describe("story-feed-author-content-source-block", () => {
 		);
 	});
 
-	it("should default query to * size to 8 and offset to 0", async () => {
+	it("should default size to 8 and offset to 0", async () => {
 		const contentSourceFetch = await contentSource.fetch(
 			{
+				authorSlug: "slug",
 				"arc-site": "the-site",
 			},
 			{ cachedCall: () => {} }
@@ -69,7 +70,7 @@ describe("story-feed-author-content-source-block", () => {
 		expect(contentSourceFetch.request.url.searchObject).toEqual(
 			expect.objectContaining({
 				from: "0",
-				q: "*",
+				q: 'credits.by.slug:"slug"',
 				sort: "display_date:desc",
 				size: "8",
 				website: "the-site",

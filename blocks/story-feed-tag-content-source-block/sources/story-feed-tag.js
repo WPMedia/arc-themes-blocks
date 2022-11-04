@@ -1,43 +1,45 @@
-import getResizedImageData from "@wpmedia/resizer-image-block";
+import axios from "axios";
+import { ARC_ACCESS_TOKEN, CONTENT_BASE, RESIZER_APP_VERSION } from "fusion:environment";
+
+import signImagesInANSObject from "@wpmedia/arc-themes-components/src/utils/sign-images-in-ans-object";
+import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
 
 const params = {
-	tagSlug: "text",
-	feedSize: "number",
 	feedOffset: "number",
+	feedSize: "number",
+	tagSlug: "text",
 };
 
-/**
- * @func pattern
- * @param {Object} key
- * @return {String} slugified content api search url
- */
-const pattern = (key = {}) => {
-	const website = key["arc-site"] || "Arc Site is not defined";
-	const { tagSlug, feedOffset, feedSize } = key;
-
+const fetch = (
+	{ feedSize: size = 10, feedOffset: from = 0, tagSlug, "arc-site": website },
+	{ cachedCall }
+) => {
 	if (!tagSlug) {
-		throw new Error("tagSlug parameter is required");
+		return Promise.reject(new Error("tagSlug parameter is required"));
 	}
 
-	// have to use inline due to content source
-	// defaults for feedSize 10 and feedOffset 0
-	return `/content/v4/search/published?q=taxonomy.tags.slug:${tagSlug}&size=${
-		feedSize || 10
-	}&from=${feedOffset || 0}&sort=display_date:desc&website=${website}`;
+	const urlSearch = new URLSearchParams({
+		from,
+		q: `taxonomy.tags.slug:${tagSlug}`,
+		size,
+		sort: "display_date:desc",
+		website,
+	});
+
+	return axios({
+		url: `${CONTENT_BASE}/content/v4/search/published?${urlSearch.toString()}`,
+		headers: {
+			"content-type": "application/json",
+			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+		},
+		method: "GET",
+	})
+		.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_APP_VERSION))
+		.then(({ data }) => data);
 };
 
-/**
- * @func resolve
- * @param {Object} key - the object key to return a slugified pattern for
- * @return {String} slugified content api search url
- */
-const resolve = (key) => pattern(key);
-
 export default {
-	resolve,
-	schemaName: "ans-feed",
+	fetch,
 	params,
-
-	// other options null use default functionality, such as filter quality
-	transform: (data, query) => getResizedImageData(data, null, null, null, query["arc-site"]),
+	schemaName: "ans-feed",
 };

@@ -1,11 +1,8 @@
-import getResizedImageData from "@wpmedia/resizer-image-block";
+import axios from "axios";
+import { ARC_ACCESS_TOKEN, CONTENT_BASE, RESIZER_APP_VERSION } from "fusion:environment";
 
-const params = {
-	includeSections: "text",
-	excludeSections: "text",
-	feedSize: "number",
-	feedOffset: "number",
-};
+import signImagesInANSObject from "@wpmedia/arc-themes-components/src/utils/sign-images-in-ans-object";
+import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
 
 /**
  * @func itemsToArray
@@ -13,23 +10,28 @@ const params = {
  * @return {String[]} the itemString now in an array
  */
 export const itemsToArray = (itemString = "") =>
-	itemString.split(",").map((item) => item.replace(/"/g, ""));
+	itemString.split(",").map((item) => item.trim().replace(/"/g, ""));
 
-/**
- * @func pattern
- * @param {Object} key
- * @return {String} elastic search query for the feed sections
- */
-const pattern = (key = {}) => {
-	const website = key["arc-site"];
-	const { includeSections, excludeSections, feedOffset, feedSize } = key;
+const params = {
+	excludeSections: "text",
+	feedOffset: "number",
+	feedSize: "number",
+	includeSections: "text",
+};
 
+const fetch = (
+	{
+		excludeSections,
+		feedOffset: from = 0,
+		feedSize: size = 10,
+		includeSections,
+		"arc-site": website,
+	},
+	{ cachedCall }
+) => {
 	if (!includeSections) {
-		throw new Error("includeSections parameter is required");
+		return Promise.reject(new Error("includeSections parameter is required"));
 	}
-
-	const sectionsIncluded = itemsToArray(includeSections);
-	const sectionsExcluded = itemsToArray(excludeSections);
 
 	const body = {
 		query: {
@@ -48,7 +50,7 @@ const pattern = (key = {}) => {
 									must: [
 										{
 											terms: {
-												"taxonomy.sections._id": sectionsIncluded,
+												"taxonomy.sections._id": itemsToArray(includeSections),
 											},
 										},
 										{
@@ -71,7 +73,7 @@ const pattern = (key = {}) => {
 									must: [
 										{
 											terms: {
-												"taxonomy.sections._id": sectionsExcluded,
+												"taxonomy.sections._id": itemsToArray(excludeSections),
 											},
 										},
 										{
@@ -89,19 +91,28 @@ const pattern = (key = {}) => {
 		},
 	};
 
-	const encodedBody = encodeURI(JSON.stringify(body));
+	const urlSearch = new URLSearchParams({
+		body: encodeURI(JSON.stringify(body)),
+		from,
+		size,
+		sort: "display_date:desc",
+		website,
+	});
 
-	return `/content/v4/search/published?body=${encodedBody}&website=${website}&size=${
-		feedSize || 10
-	}&from=${feedOffset || 0}&sort=display_date:desc`;
+	return axios({
+		url: `${CONTENT_BASE}/content/v4/search/published?${urlSearch.toString()}`,
+		headers: {
+			"content-type": "application/json",
+			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+		},
+		method: "GET",
+	})
+		.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_APP_VERSION))
+		.then(({ data }) => data);
 };
 
-const resolve = (key) => pattern(key);
-
 export default {
-	resolve,
-	schemaName: "ans-feed",
+	fetch,
 	params,
-	// other options null use default functionality, such as filter quality
-	transform: (data, query) => getResizedImageData(data, null, null, null, query["arc-site"]),
+	schemaName: "ans-feed",
 };

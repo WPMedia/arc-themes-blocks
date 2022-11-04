@@ -92,7 +92,7 @@ const fetch = (
 	};
 
 	const urlSearch = new URLSearchParams({
-		body: encodeURI(JSON.stringify(body)),
+		body: JSON.stringify(body),
 		from,
 		size,
 		sort: "display_date:desc",

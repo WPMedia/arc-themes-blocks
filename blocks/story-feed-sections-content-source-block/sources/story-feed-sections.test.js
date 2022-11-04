@@ -110,7 +110,7 @@ describe("story-feed-author-content-source-block", () => {
 		expect(contentSourceFetch.request.url.searchObject).toEqual(
 			expect.objectContaining({
 				from: "4",
-				body: encodeURI(JSON.stringify(body)),
+				body: JSON.stringify(body),
 				sort: "display_date:desc",
 				size: "3",
 				website: "the-site",
@@ -131,7 +131,7 @@ describe("story-feed-author-content-source-block", () => {
 		expect(contentSourceFetch.request.url.searchObject).toEqual(
 			expect.objectContaining({
 				from: "0",
-				body: encodeURI(JSON.stringify(body)),
+				body: JSON.stringify(body),
 				sort: "display_date:desc",
 				size: "10",
 				website: "the-site",
@@ -164,38 +164,36 @@ describe("story-feed-author-content-source-block", () => {
 		expect(contentSourceFetch.request.url.searchObject).toEqual(
 			expect.objectContaining({
 				from: "0",
-				body: encodeURI(
-					JSON.stringify({
-						...body,
-						query: {
-							...body.query,
-							bool: {
-								...body.query.bool,
-								must_not: [
-									{
-										nested: {
-											...body.query.bool.must_not[0].nested,
-											query: {
-												...body.query.bool.must_not[0].nested.query,
-												bool: {
-													...body.query.bool.must_not[0].nested.query.bool,
-													must: [
-														{
-															terms: { "taxonomy.sections._id": [""] },
-														},
-														{
-															term: { "taxonomy.sections._website": "the-site" },
-														},
-													],
-												},
+				body: JSON.stringify({
+					...body,
+					query: {
+						...body.query,
+						bool: {
+							...body.query.bool,
+							must_not: [
+								{
+									nested: {
+										...body.query.bool.must_not[0].nested,
+										query: {
+											...body.query.bool.must_not[0].nested.query,
+											bool: {
+												...body.query.bool.must_not[0].nested.query.bool,
+												must: [
+													{
+														terms: { "taxonomy.sections._id": [""] },
+													},
+													{
+														term: { "taxonomy.sections._website": "the-site" },
+													},
+												],
 											},
 										},
 									},
-								],
-							},
+								},
+							],
 						},
-					})
-				),
+					},
+				}),
 				sort: "display_date:desc",
 				size: "10",
 				website: "the-site",

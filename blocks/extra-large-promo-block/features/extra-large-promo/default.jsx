@@ -151,6 +151,7 @@ const ExtraLargePromo = ({ customFields }) => {
 	const formattedDate = Date.parse(displayDate)
 		? localizeDateTime(new Date(displayDate), dateTimeFormat, language, timeZone)
 		: "";
+	const hasDate = showDate && formattedDate;
 
 	const { display: labelDisplay, url: labelUrl, text: labelText } = content?.label?.basic || {};
 
@@ -169,6 +170,8 @@ const ExtraLargePromo = ({ customFields }) => {
 		[overlineText, overlineUrl] = [labelText, labelUrl];
 	}
 
+	const hasOverline = showOverline && overlineText;
+
 	const contentDescription = showDescription ? content?.description?.basic : null;
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
@@ -181,7 +184,7 @@ const ExtraLargePromo = ({ customFields }) => {
 						? {
 								_id: imageOverrideId,
 								url: imageOverrideURL,
-								auth: JSON.parse(imageOverrideAuth),
+								auth: imageOverrideAuth ? JSON.parse(imageOverrideAuth) : null,
 						  }
 						: getImageFromANS(content),
 					alt: content?.headlines?.basic || "",
@@ -196,16 +199,16 @@ const ExtraLargePromo = ({ customFields }) => {
 					src: fallbackImage,
 			  };
 
-	return showOverline ||
+	return hasOverline ||
 		contentHeading ||
 		showImage ||
 		contentDescription ||
 		hasAuthors ||
-		showDate ? (
+		hasDate ? (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<article className={BLOCK_CLASS_NAME}>
-				{showOverline ? <Overline href={overlineUrl}>{overlineText}</Overline> : null}
-				{contentHeading || showImage || contentDescription || hasAuthors || showDate ? (
+				{hasOverline ? <Overline href={overlineUrl}>{overlineText}</Overline> : null}
+				{contentHeading || showImage || contentDescription || hasAuthors || hasDate ? (
 					<Stack>
 						{contentHeading ? (
 							<HeadingSection>
@@ -240,7 +243,7 @@ const ExtraLargePromo = ({ customFields }) => {
 							</MediaItem>
 						) : null}
 						{contentDescription ? <Paragraph>{contentDescription}</Paragraph> : null}
-						{hasAuthors || showDate ? (
+						{hasAuthors || hasDate ? (
 							<Attribution>
 								<Join separator={Separator}>
 									{hasAuthors ? (
@@ -249,7 +252,7 @@ const ExtraLargePromo = ({ customFields }) => {
 											{formatAuthors(content?.credits?.by, phrases.t("global.and-text"))}
 										</Join>
 									) : null}
-									{showDate ? (
+									{hasDate ? (
 										<DateComponent dateTime={displayDate} dateString={formattedDate} />
 									) : null}
 								</Join>

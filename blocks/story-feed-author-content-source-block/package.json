@@ -5,7 +5,7 @@
 	"author": "Arc XP - Themes",
 	"homepage": "https://github.com/WPMedia/arc-themes-blocks",
 	"license": "CC-BY-NC-ND-4.0",
-	"main": "index.js",
+	"main": "",
 	"files": [
 		"sources"
 	],
@@ -18,10 +18,9 @@
 		"url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
 		"directory": "blocks/story-feed-author-content-source-block"
 	},
-	"gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95",
 	"peerDependencies": {
-		"@wpmedia/resizer-image-block": "*",
 		"@wpmedia/arc-themes-components": "*",
 		"@wpmedia/signing-service-content-source-block": "*"
-	}
+	},
+	"gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

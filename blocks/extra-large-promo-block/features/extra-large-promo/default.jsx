@@ -184,7 +184,7 @@ const ExtraLargePromo = ({ customFields }) => {
 						? {
 								_id: imageOverrideId,
 								url: imageOverrideURL,
-								auth: imageOverrideAuth ? JSON.parse(imageOverrideAuth) : null,
+								auth: imageOverrideAuth ? JSON.parse(imageOverrideAuth) : {},
 						  }
 						: getImageFromANS(content),
 					alt: content?.headlines?.basic || "",

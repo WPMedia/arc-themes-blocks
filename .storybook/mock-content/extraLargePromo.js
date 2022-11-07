@@ -35,19 +35,11 @@ export const extraLargePromo = {
 	},
 	promo_items: {
 		basic: {
-			resized_params: {
-				"400x225": "Ajb8uwIAZ0XSQ8IPqWGLLW7NifQ=filters:format(jpg):quality(70)/",
-				"400x267": "_iFZPwsbU19A0A9D1xRlPLhVx8A=filters:format(jpg):quality(70)/",
-				"400x300": "i-eI-H-xOkI6EyCk-Ph98hBjjRg=filters:format(jpg):quality(70)/",
-				"600x338": "cwoIRHNCzgkrRQCiW3SogwZS1AY=filters:format(jpg):quality(70)/",
-				"600x400": "WxcB_Wff18LDqZt1wd3JH8vPTZI=filters:format(jpg):quality(70)/",
-				"600x450": "LRgGYobwJDQZyfeEhtalyrn3Ad0=filters:format(jpg):quality(70)/",
-				"800x450": "vvQrhtG0ck1TcO519Mo2dZQCRTE=filters:format(jpg):quality(70)/",
-				"800x533": "LQ2EhhmbD5brfMTBNwl_PT8Tkdg=filters:format(jpg):quality(70)/",
-				"800x600": "AjVgpLNL9WYSLNei-Ks_kwDEa7Q=filters:format(jpg):quality(70)/",
+			auth: {
+				2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf",
 			},
 			type: "image",
-			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/RYNL5SXYCVDH7LCJPXAHYF3DJI.JPG",
+			url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
 		},
 	},
 	type: "story",

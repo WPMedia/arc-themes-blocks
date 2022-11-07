@@ -1,27 +1,44 @@
+import axios from "axios";
+import { ARC_ACCESS_TOKEN, CONTENT_BASE, RESIZER_APP_VERSION } from "fusion:environment";
+
+import signImagesInANSObject from "@wpmedia/arc-themes-components/src/utils/sign-images-in-ans-object";
+import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
+
+const params = {
+	hierarchy: "text",
+	sectionId: "text",
+};
+
+const fetch = ({ hierarchy, sectionId, "arc-site": website }, { cachedCall }) => {
+	const urlSearch = new URLSearchParams({
+		...(hierarchy ? { hierarchy } : {}),
+		...(sectionId ? { _id: sectionId } : {}),
+	});
+
+	return axios({
+		url: `${CONTENT_BASE}/site/v3/navigation/${website}?${urlSearch.toString()}`,
+		headers: {
+			"content-type": "application/json",
+			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+		},
+		method: "GET",
+	})
+		.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_APP_VERSION))
+		.then(({ data }) => data);
+};
+
 export default {
-	resolve(resolveParams) {
-		const { hierarchy, sectionId, "arc-site": arcSite } = resolveParams;
-		return `/site/v3/navigation/${arcSite}?${hierarchy ? `hierarchy=${hierarchy}` : ""}${
-			sectionId ? `&_id=${sectionId}` : ""
-		}`;
-	},
+	fetch,
+	params,
 	schemaName: "navigation-hierarchy",
-	params: {
-		hierarchy: "text",
-		sectionId: "text",
-	},
 	transform: (data, query) => {
-		let idMatch = false;
-		if (query.sectionId) {
-			idMatch = data._id !== query.sectionId;
+		if (query.sectionId && query.sectionId !== data._id) {
+			if (!query.hierarchy || query.uri) {
+				const error = new Error("Not found");
+				error.statusCode = 404;
+				return Promise.reject(error);
+			}
 		}
-
-		if ((!query.hierarchy && idMatch) || (query.uri && idMatch)) {
-			const error = new Error("Not found");
-			error.statusCode = 404;
-			throw error;
-		}
-
 		return data;
 	},
 };

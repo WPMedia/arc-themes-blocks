@@ -1,38 +1,26 @@
 {
-  "name": "@wpmedia/site-hierarchy-content-block",
-  "version": "5.16.0",
-  "description": "Block containing a site service hierarchy content source",
-  "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
-  "contributors": [
-    "Jack Howard <jack.howard@washpost.com>"
-  ],
-  "homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
-  "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "sources"
-  ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
-    "directory": "blocks/site-hierarchy-content-block"
-  },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx sources"
-  },
-  "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/news-theme-css": "*",
-    "styled-components": "^4.4.0"
-  },
-  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
+	"name": "@wpmedia/site-hierarchy-content-block",
+	"version": "5.16.0",
+	"description": "Block containing a site service hierarchy content source",
+	"author": "Arc XP - Themes",
+	"homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
+	"license": "CC-BY-NC-ND-4.0",
+	"main": "",
+	"files": [
+		"sources"
+	],
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/",
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
+		"directory": "blocks/site-hierarchy-content-block"
+	},
+	"peerDependencies": {
+		"@wpmedia/arc-themes-components": "*",
+		"@wpmedia/signing-service-content-source-block": "*"
+	},
+	"gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

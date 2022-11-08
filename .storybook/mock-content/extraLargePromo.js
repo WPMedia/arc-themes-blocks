@@ -35,6 +35,7 @@ export const extraLargePromo = {
 	},
 	promo_items: {
 		basic: {
+			_id: "EM5DTGYGABDJZODV7YVFOC2DOM",
 			auth: {
 				2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf",
 			},

@@ -1,4 +1,5 @@
 import React, { createRef, useCallback, useEffect, useReducer, useState } from "react";
+import { RESIZER_APP_VERSION } from "fusion:environment";
 import { Button, Stack } from "@wpmedia/arc-themes-components";
 import Divider from "@wpmedia/arc-themes-components/src/components/divider";
 import { useContent } from "fusion:content";
@@ -106,7 +107,9 @@ const Results = ({
         promo_items {
           basic {
 			_id
-            auth
+            auth {
+				${RESIZER_APP_VERSION}
+			}
             type
             url
           }
@@ -114,7 +117,9 @@ const Results = ({
             promo_items {
               basic {
 				_id
-				auth
+				auth {
+					${RESIZER_APP_VERSION}
+				}
                 type
                 url
               }

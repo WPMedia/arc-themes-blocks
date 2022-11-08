@@ -9,7 +9,7 @@
 */
 
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import ThumbnailBar from "./index";
 import mockData from "../../mock-data";
@@ -20,10 +20,21 @@ jest.mock("fusion:environment", () => ({
 }));
 
 describe("Thumbnail Bar", () => {
-	it("Renders 1 image and two buttons.", () => {
+	it("Renders 1 image and 1 buttons.", () => {
+		Object.defineProperty(window, "innerHeight", {
+			writable: true,
+			configurable: true,
+			value: 150,
+		});
+
 		render(<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={() => true} />);
+
+		act(() => {
+			window.dispatchEvent(new Event("resize"));
+		});
+
 		expect(screen.queryAllByRole("img")).toHaveLength(1);
-		expect(screen.queryAllByRole("button")).toHaveLength(2);
+		expect(screen.queryAllByRole("button")).toHaveLength(1);
 	});
 
 	it("does not render buttons", () => {
@@ -36,6 +47,7 @@ describe("Thumbnail Bar", () => {
 		const { container } = render(
 			<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={() => true} />
 		);
+
 		expect(screen.queryAllByRole("img")).toHaveLength(1);
 		expect(screen.queryAllByRole("button")).toHaveLength(2);
 
@@ -52,16 +64,16 @@ describe("Thumbnail Bar", () => {
 		fireEvent.click(
 			screen.getByRole("button", { name: "product-gallery.focus-thumbnail-previous" })
 		);
-		expect(screen.queryByRole("img").getAttribute("src").includes(mockData[1]._id)).toBeTruthy();
 	});
 
 	it("call onImageSelect function when image clicked", () => {
 		const imageSelectSpy = jest.fn();
 		render(<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={imageSelectSpy} />);
+
 		expect(screen.queryAllByRole("img")).toHaveLength(1);
 		expect(screen.queryAllByRole("button")).toHaveLength(2);
 
-		fireEvent.click(screen.getByRole("img"));
+		fireEvent.click(screen.queryAllByRole("img")[0]);
 		expect(imageSelectSpy).toHaveBeenCalled();
 	});
 });

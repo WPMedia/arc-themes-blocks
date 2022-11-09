@@ -193,6 +193,7 @@ const Results = ({
 			<Join separator={Divider}>
 				{viewableElements.map((element, index) => (
 					<ResultItem
+						key={`result-card-${element._id}`}
 						ref={elementRefs[index]}
 						arcSite={arcSite}
 						element={element}

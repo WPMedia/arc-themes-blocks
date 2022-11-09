@@ -50,7 +50,6 @@ const ResultItem = React.memo(
 				headlines: { basic: headlineText } = {},
 				websites,
 				credits,
-				// promo_items: { basic: promoBasic } = {},
 			} = element;
 			const {
 				dateLocalization: { language, timeZone, dateTimeFormat } = {

@@ -67,7 +67,7 @@ describe("the extra large promo feature", () => {
 		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
 	});
 
-	it("should return a fallback image if showImage is trueand imageUrl is not valid", () => {
+	it("should return a fallback image if showImage is true and imageUrl is not valid", () => {
 		const config = {
 			imageRatio: "4:3",
 			showImage: true,

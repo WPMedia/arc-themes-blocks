@@ -15,18 +15,7 @@ const ResultsList = ({ customFields }) => {
 		lazyLoad,
 		listContentConfig: { contentService, contentConfigValues },
 	} = customFields;
-	const { fallbackImage, primaryLogoAlt, breakpoints, resizerURL } = getProperties(arcSite);
-	const imageProperties = {
-		smallWidth: 158,
-		smallHeight: 89,
-		mediumWidth: 274,
-		mediumHeight: 154,
-		largeWidth: 274,
-		largeHeight: 154,
-		primaryLogoAlt,
-		breakpoints,
-		resizerURL,
-	};
+	const { fallbackImage } = getProperties(arcSite);
 	const targetFallbackImage = !fallbackImage.includes("http")
 		? deployment(`${contextPath}/${fallbackImage}`)
 		: fallbackImage;
@@ -50,7 +39,6 @@ const ResultsList = ({ customFields }) => {
 					configuredSize={configuredSize}
 					contentConfigValues={contentConfigValues}
 					contentService={contentService}
-					imageProperties={imageProperties}
 					isServerSideLazy={isServerSideLazy}
 					phrases={phrases}
 					showByline={promoElements.showByline}

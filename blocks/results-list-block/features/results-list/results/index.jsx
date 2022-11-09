@@ -13,7 +13,6 @@ const Results = ({
 	configuredSize,
 	contentConfigValues,
 	contentService,
-	imageProperties,
 	isServerSideLazy = false,
 	phrases,
 	showByline = false,
@@ -197,7 +196,6 @@ const Results = ({
 						ref={elementRefs[index]}
 						arcSite={arcSite}
 						element={element}
-						imageProperties={imageProperties}
 						placeholderResizedImageOptions={placeholderResizedImageOptions}
 						showByline={showByline}
 						showDate={showDate}

@@ -1,15 +1,6 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-results-list {
-	&__container {
-		&--first {
-			@include scss.block-properties("results-list-container-first");
-			@include scss.block-components("results-list-container-first");
-		}
-		@include scss.block-properties("results-list-container");
-		@include scss.block-components("results-list-container");
-	}
-
 	&--show-image {
 		@include scss.block-properties("results-list-show-image");
 		@include scss.block-components("results-list-show-image");

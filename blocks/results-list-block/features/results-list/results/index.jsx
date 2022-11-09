@@ -1,13 +1,11 @@
 import React, { createRef, useCallback, useEffect, useReducer, useState } from "react";
 import { RESIZER_APP_VERSION } from "fusion:environment";
-import { Button, Stack } from "@wpmedia/arc-themes-components";
+import { Button, Join, Stack } from "@wpmedia/arc-themes-components";
 import Divider from "@wpmedia/arc-themes-components/src/components/divider";
 import { useContent } from "fusion:content";
 
 import ResultItem from "./result-item";
 import { reduceResultList } from "./helpers";
-
-const BLOCK_CLASS_NAME = "b-results-list";
 
 const Results = ({
 	arcSite,
@@ -192,13 +190,9 @@ const Results = ({
 		setQueryOffset((oldOffset) => oldOffset + configuredSize);
 	}, [configuredSize, setQueryOffset]);
 	return viewableElements?.length > 0 && !isServerSideLazy ? (
-		<Stack>
-			{viewableElements.map((element, index) => (
-				<Stack
-					key={`result-card-${element._id}`}
-					gap="1rem"
-					className={`${BLOCK_CLASS_NAME}__${index === 0 ? "container--first" : "container"}`}
-				>
+		<Stack gap="1rem">
+			<Join separator={Divider}>
+				{viewableElements.map((element, index) => (
 					<ResultItem
 						ref={elementRefs[index]}
 						arcSite={arcSite}
@@ -213,20 +207,19 @@ const Results = ({
 						showItemOverline={showItemOverline}
 						targetFallbackImage={targetFallbackImage}
 					/>
-					<Divider />
-				</Stack>
-			))}
-			{isThereMore && (
-				<Stack alignment="center" className={`${BLOCK_CLASS_NAME}__see-more`}>
-					<Button
-						accessibilityLabel={phrases.t("global.see-more-button-aria-label")}
-						variant="primary"
-						onClick={onReadMoreClick}
-					>
-						{phrases.t("global.see-more-button")}
-					</Button>
-				</Stack>
-			)}
+				))}
+				{isThereMore && (
+					<Stack alignment="center">
+						<Button
+							accessibilityLabel={phrases.t("global.see-more-button-aria-label")}
+							variant="primary"
+							onClick={onReadMoreClick}
+						>
+							{phrases.t("global.see-more-button")}
+						</Button>
+					</Stack>
+				)}
+			</Join>
 		</Stack>
 	) : null;
 };

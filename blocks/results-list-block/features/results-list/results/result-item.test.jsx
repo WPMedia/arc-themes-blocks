@@ -57,11 +57,13 @@ const element = {
 		},
 	},
 	credits: {
-		by: "Matthew Roach",
+		by: [
+			{
+				name: "Matthew Roach",
+			},
+		],
 	},
 	_id: "element_1",
-	overline: "Overline Text",
-	overlineURL: "https://www.google.com",
 };
 
 describe("Result parts", () => {
@@ -77,7 +79,7 @@ describe("Result parts", () => {
 			/>
 		);
 
-		expect(screen.getAllByText(/Byline Sample Text - 123/i)).toHaveLength(1);
+		expect(screen.getAllByText(/Sample phrases/i)).toHaveLength(1);
 
 		unmount();
 	});

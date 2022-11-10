@@ -6,8 +6,6 @@ import ResultItem from "./result-item";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
-	formatAuthors: jest.fn().mockReturnValue("Byline Sample Text - 123"),
-	formatURL: jest.fn().mockReturnValue("https://www.google.com"),
 	usePhrases: jest.fn().mockReturnValue({
 		t: jest.fn().mockReturnValue("Sample phrases"),
 	}),

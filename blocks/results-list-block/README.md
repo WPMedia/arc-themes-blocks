@@ -31,15 +31,3 @@ Results List block for Fusion News Theme. Displays a results list where each res
 | `global.see-more-button`            | `See More`                          |
 | `global.and-text`                   | `and`                               |
 | `global.see-more-button-aria-label` | `See more stories about this topic` |
-
-## Events
-
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name**      | **Description**                |
-| ------------------- | ------------------------------ |
-| **onReadMoreClick** | Onclick to see more list items |
-
-## Additional Considerations
-
-Makes use of Byline to display authors of each story and it is included as a dependency.

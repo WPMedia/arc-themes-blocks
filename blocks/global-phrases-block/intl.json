@@ -109,28 +109,6 @@
 		"pt": "(Abre numa nova janela)",
 		"sv": "(Öppnas i nytt fönster)"
 	},
-	"global.see-more-button": {
-		"de": "Mehr anzeigen",
-		"en": "See more",
-		"es": "Ver más",
-		"fr": "En savoir plus",
-		"ja": "詳細",
-		"ko": "자세히 보기",
-		"no": "Se mer",
-		"pt": "Veja mais",
-		"sv": "Fler artiklar"
-	},
-	"global.see-more-button-aria-label": {
-		"de": "Sehen Sie sich weitere Artikel zu diesem Thema an",
-		"en": "See more stories about this topic",
-		"es": "Ver más historias sobre este tema",
-		"fr": "Voir plus d'articles concernant ce sujet",
-		"ja": "このトピックに関するその他の記事を表示",
-		"ko": "이 주제에 대한 스토리 더 보기",
-		"no": "Se flere historier om dette emnet",
-		"pt": "Veja mais histórias sobre este tópico",
-		"sv": "Se fler artiklar om detta ämne"
-	},
 	"global.social-email": {
 		"de": "E-Mail",
 		"en": "Email",

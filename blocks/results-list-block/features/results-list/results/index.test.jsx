@@ -140,10 +140,10 @@ jest.mock("fusion:themes", () => jest.fn(() => ({})));
 const mockPhrases = {
 	t: jest.fn((phraseString) => {
 		switch (phraseString) {
-			case "global.see-more-button": {
+			case "results-list-block.see-more-button": {
 				return "See More";
 			}
-			case "global.see-more-button-aria-label": {
+			case "results-list-block.see-more-button-aria-label": {
 				return "button";
 			}
 			default: {

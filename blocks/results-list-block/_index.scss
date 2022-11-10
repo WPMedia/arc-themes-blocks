@@ -1,6 +1,11 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-results-list {
+	&__wrapper {
+		@include scss.block-properties("results-list-wrapper");
+		@include scss.block-components("results-list-wrapper");
+	}
+
 	&--show-image {
 		@include scss.block-properties("results-list-show-image");
 		@include scss.block-components("results-list-show-image");

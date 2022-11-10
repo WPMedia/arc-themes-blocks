@@ -69,8 +69,6 @@
 		"global.gallery-pause-autoplay-button": "Sett automatisk avspilling på pause",
 		"global.gallery-text": "Bildegalleri",
 		"global.opens-in-new-window": "(Åpnes i et nytt vindu)",
-		"global.see-more-button": "Se mer",
-		"global.see-more-button-aria-label": "Se flere historier om dette emnet",
 		"global.social-email": "E-post",
 		"global.social-email-connect": "Send en e-post til %{authorName}",
 		"global.social-facebook": "Facebook",

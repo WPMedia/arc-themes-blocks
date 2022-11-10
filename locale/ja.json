@@ -69,8 +69,6 @@
 		"global.gallery-pause-autoplay-button": "自動再生の一時停止",
 		"global.gallery-text": "ギャラリー",
 		"global.opens-in-new-window": "（新しいウィンドウで開きます）",
-		"global.see-more-button": "詳細",
-		"global.see-more-button-aria-label": "このトピックに関するその他の記事を表示",
 		"global.social-email": "メールアドレス",
 		"global.social-email-connect": "%{authorName}にメールを送信",
 		"global.social-facebook": "Facebook",

@@ -69,8 +69,6 @@
 		"global.gallery-pause-autoplay-button": "자동 재생 일시 중지",
 		"global.gallery-text": "갤러리",
 		"global.opens-in-new-window": "(새 창에서 열기)",
-		"global.see-more-button": "자세히 보기",
-		"global.see-more-button-aria-label": "이 주제에 대한 스토리 더 보기",
 		"global.social-email": "이메일 전송",
 		"global.social-email-connect": "%{authorName}(으)로 이메일 보내기",
 		"global.social-facebook": "Facebook",

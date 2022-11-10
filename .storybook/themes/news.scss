@@ -2387,6 +2387,9 @@
 				quad-chain-child-item-empty: (
 					display: initial,
 				),
+				results-list-wrapper: (
+					gap: var(--global-spacing-4),
+				),
 				results-list: (
 					components: (
 						media-item: (

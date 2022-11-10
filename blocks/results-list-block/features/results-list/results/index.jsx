@@ -1,11 +1,12 @@
 import React, { createRef, useCallback, useEffect, useReducer, useState } from "react";
 import { RESIZER_APP_VERSION } from "fusion:environment";
-import { Button, Join, Stack } from "@wpmedia/arc-themes-components";
-import Divider from "@wpmedia/arc-themes-components/src/components/divider";
 import { useContent } from "fusion:content";
+import { Button, Divider, Join, Stack } from "@wpmedia/arc-themes-components";
 
 import ResultItem from "./result-item";
 import { reduceResultList } from "./helpers";
+
+const BLOCK_CLASS_NAME = "b-results-list";
 
 const Results = ({
 	arcSite,
@@ -189,7 +190,7 @@ const Results = ({
 		setQueryOffset((oldOffset) => oldOffset + configuredSize);
 	}, [configuredSize, setQueryOffset]);
 	return viewableElements?.length > 0 && !isServerSideLazy ? (
-		<Stack gap="1rem">
+		<Stack className={`${BLOCK_CLASS_NAME}__wrapper`}>
 			<Join separator={Divider}>
 				{viewableElements.map((element, index) => (
 					<ResultItem
@@ -210,11 +211,11 @@ const Results = ({
 				{isThereMore && (
 					<Stack alignment="center">
 						<Button
-							accessibilityLabel={phrases.t("global.see-more-button-aria-label")}
+							accessibilityLabel={phrases.t("results-list-block.see-more-button-aria-label")}
 							variant="primary"
 							onClick={onReadMoreClick}
 						>
-							{phrases.t("global.see-more-button")}
+							{phrases.t("results-list-block.see-more-button")}
 						</Button>
 					</Stack>
 				)}

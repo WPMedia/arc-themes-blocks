@@ -1788,6 +1788,9 @@
 				quad-chain-child-item-empty: (
 					display: contents,
 				),
+				results-list-wrapper: (
+					gap: var(--global-spacing-4),
+				),
 				results-list: (
 					components: (
 						attribution: (

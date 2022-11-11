@@ -68,7 +68,7 @@ const ProductFocusView = ({ initialItemId, onClose, productImages }) => {
 					<Button
 						accessibilityLabel={phrases.t("product-gallery.focus-close")}
 						onClick={onClose}
-						size="large"
+						size="medium"
 						variant="secondary"
 					>
 						<Icon name="Close" />

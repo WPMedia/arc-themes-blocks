@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import getProperties from "fusion:properties";
+import { RESIZER_APP_VERSION } from "fusion:environment";
 import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
 
@@ -40,7 +41,6 @@ export const LargePromoPresentation = ({
 	contentDate,
 	contentDescription,
 	contentHeading,
-	contentHeadline,
 	contentOverline,
 	contentOverlineURL,
 	contentUrl,
@@ -49,7 +49,7 @@ export const LargePromoPresentation = ({
 	embedMarkup,
 	labelIconName,
 	labelIconText,
-	promoImageURL,
+	promoImageParams,
 	registerSuccessEvent,
 	searchableField,
 	translationByText,
@@ -61,11 +61,18 @@ export const LargePromoPresentation = ({
 	contentDescription ||
 	contentAuthors ||
 	contentDate ||
-	promoImageURL ? (
+	promoImageParams ? (
 		<HeadingSection>
 			<Grid as="article" className={BLOCK_CLASS_NAME}>
-				{embedMarkup || promoImageURL ? (
-					<MediaItem {...searchableField("imageOverrideURL")} suppressContentEditableWarning>
+				{embedMarkup || promoImageParams ? (
+					<MediaItem
+						{...searchableField({
+							imageOverrideURL: "url",
+							imageOverrideId: "_id",
+							imageOverrideAuth: "auth",
+						})}
+						suppressContentEditableWarning
+					>
 						<Conditional
 							component={Link}
 							condition={contentUrl}
@@ -81,7 +88,7 @@ export const LargePromoPresentation = ({
 								/>
 							) : (
 								<>
-									<Image alt={contentHeadline} src={promoImageURL} width={377} height={283} />
+									<Image {...promoImageParams} />
 									{labelIconName ? (
 										<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
 											<Icon name={labelIconName} />
@@ -148,6 +155,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	const {
 		aspectRatio,
 		imageOverrideURL,
+		imageOverrideId,
 		playVideoInPlace,
 		showByline,
 		showDate,
@@ -156,6 +164,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		showImage,
 		showOverline,
 		viewportPercentage,
+		imageOverrideAuth,
 	} = customFields;
 
 	const content =
@@ -209,29 +218,21 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 						type
 						promo_items {
 							basic {
+								_id
 								type
 								url
-								resized_params {
-									377x283
-									377x251
-									377x212
-									274x206
-									274x183
-									274x154
+								auth {
+									${RESIZER_APP_VERSION}
 								}
 							}
 						}
 					}
 					basic {
+						_id
 						type
 						url
-						resized_params {
-							377x283
-							377x251
-							377x212
-							274x206
-							274x183
-							274x154
+						auth {
+							${RESIZER_APP_VERSION}
 						}
 					}
 				}
@@ -316,9 +317,27 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	const contentOverline = showOverline ? overlineText : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
 	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
-	const promoImageURL =
-		showImage && (imageOverrideURL || getImageFromANS(content)?.url || fallbackImage);
-
+	const promoImageParams =
+		showImage &&
+		(imageOverrideURL || content
+			? {
+					src: imageOverrideURL
+						? {
+								_id: imageOverrideId,
+								url: imageOverrideURL,
+								auth: imageOverrideAuth ? JSON.parse(imageOverrideAuth) : null,
+						  }.url
+						: getImageFromANS(content).url,
+					alt: content?.headlines?.basic || "",
+					resizedOptions: {
+						smart: true,
+					},
+					responsiveImages: [400, 600, 800, 1200],
+					width: 377,
+			  }
+			: {
+					src: fallbackImage,
+			  });
 	return (
 		<LargePromoPresentation
 			aspectRatio={aspectRatio}
@@ -335,7 +354,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			embedMarkup={embedMarkup}
 			labelIconName={labelIconName}
 			labelIconText={labelIconText}
-			promoImageURL={promoImageURL}
+			promoImageParams={promoImageParams}
 			registerSuccessEvent={registerSuccessEvent}
 			searchableField={searchableField}
 			translationByText={phrases.t("global.by-text")}

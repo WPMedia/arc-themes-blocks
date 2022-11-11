@@ -197,7 +197,6 @@
 		"search-results-block.see-more-button-aria-label": "See more stories about this topic",
 		"search-results-blocks.search-input-placeholder": "Enter your search terms"
 	},
-
 	"share-bar-block": {
 		"share-bar-block.share-button-aria-label": "Share current article via %{socialType}"
 	},

@@ -841,6 +841,9 @@
 					right: var(--global-spacing-5),
 					top: var(--global-spacing-5),
 					components: (
+						button-medium: (
+							padding: var(--global-spacing-3),
+						),
 						icon: (
 							fill: currentColor,
 						),

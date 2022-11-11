@@ -97,10 +97,9 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 					<Button
 						accessibilityLabel={phrases.t("product-gallery.focus-thumbnail-previous")}
 						onClick={() => {
-							const inViewItems = viewableItems;
-							const firstItem = inViewItems.pop();
-							inViewItems.unshift(firstItem - 1);
-
+							const inViewItems = [...viewableItems];
+							inViewItems.pop();
+							inViewItems.unshift(inViewItems[0] - 1);
 							setViewableItems([...inViewItems]);
 						}}
 						ref={upButtonRef}

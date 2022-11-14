@@ -156,6 +156,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		aspectRatio,
 		imageOverrideURL,
 		imageOverrideId,
+		imageRatio,
 		playVideoInPlace,
 		showByline,
 		showDate,
@@ -326,9 +327,10 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 								_id: imageOverrideId,
 								url: imageOverrideURL,
 								auth: imageOverrideAuth ? JSON.parse(imageOverrideAuth) : null,
-						  }.url
-						: getImageFromANS(content).url,
+						  }
+						: getImageFromANS(content),
 					alt: content?.headlines?.basic || "",
+					aspectRatio: imageRatio,
 					resizedOptions: {
 						smart: true,
 					},

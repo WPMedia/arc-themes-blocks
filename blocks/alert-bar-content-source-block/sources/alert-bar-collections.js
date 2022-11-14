@@ -1,12 +1,9 @@
 import axios from "axios";
-import { ARC_ACCESS_TOKEN, CONTENT_BASE, RESIZER_APP_VERSION } from "fusion:environment";
-
-import signImagesInANSObject from "@wpmedia/arc-themes-components/src/utils/sign-images-in-ans-object";
-import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
+import { ARC_ACCESS_TOKEN, CONTENT_BASE } from "fusion:environment";
 
 const params = {};
 
-const fetch = ({ "arc-site": website }, { cachedCall }) => {
+const fetch = ({ "arc-site": website }) => {
 	const urlSearch = new URLSearchParams({
 		content_alias: "alert-bar",
 		from: 0,
@@ -24,7 +21,6 @@ const fetch = ({ "arc-site": website }, { cachedCall }) => {
 			},
 			method: "GET",
 		})
-			.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_APP_VERSION))
 			// when a collection as a unpublished elements, the content_elements has a
 			// reference to the data without being expanded, and need to be removed
 			.then(({ data }) => ({

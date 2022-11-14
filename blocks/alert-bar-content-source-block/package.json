@@ -18,9 +18,6 @@
 		"url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
 		"directory": "blocks/alert-bar-content-source-block"
 	},
-	"gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95",
-	"peerDependencies": {
-		"@wpmedia/arc-themes-components": "*",
-		"@wpmedia/signing-service-content-source-block": "*"
-	}
+	"peerDependencies": {},
+	"gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

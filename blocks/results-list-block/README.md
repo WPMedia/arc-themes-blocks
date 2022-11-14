@@ -26,8 +26,8 @@ Results List block for Fusion News Theme. Displays a results list where each res
 
 ## Internationalization fields
 
-| Phrase key                          | Default (English)                   |
-| ----------------------------------- | ----------------------------------- |
-| `global.see-more-button`            | `See More`                          |
-| `global.and-text`                   | `and`                               |
-| `global.see-more-button-aria-label` | `See more stories about this topic` |
+| Phrase key                                      | Default (English)                   |
+| ----------------------------------------------- | ----------------------------------- |
+| `results-list-block.see-more-button`            | `See More`                          |
+| `results-list-block.and-text`                   | `and`                               |
+| `results-list-block.see-more-button-aria-label` | `See more stories about this topic` |

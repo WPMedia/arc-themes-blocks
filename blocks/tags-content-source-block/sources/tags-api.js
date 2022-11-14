@@ -34,5 +34,4 @@ const fetch = ({ slug: slugs = "" }, { cachedCall }) => {
 export default {
 	fetch,
 	params,
-	schemaName: "ans-feed",
 };

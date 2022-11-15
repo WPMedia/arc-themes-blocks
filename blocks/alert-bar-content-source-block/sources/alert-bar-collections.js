@@ -1,34 +1,37 @@
-const resolve = (key = {}) => {
-	const { "arc-site": site } = key;
+import axios from "axios";
+import { ARC_ACCESS_TOKEN, CONTENT_BASE } from "fusion:environment";
 
-	return `content/v4/collections?content_alias=alert-bar${
-		site ? `&website=${site}` : ""
-	}&from=0&size=1&published=true`;
+const params = {};
+
+const fetch = ({ "arc-site": website }) => {
+	const urlSearch = new URLSearchParams({
+		content_alias: "alert-bar",
+		from: 0,
+		published: true,
+		size: 1,
+		...(website ? { website } : {}),
+	});
+
+	return (
+		axios({
+			url: `${CONTENT_BASE}/content/v4/collections?${urlSearch.toString()}`,
+			headers: {
+				"content-type": "application/json",
+				Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+			},
+			method: "GET",
+		})
+			// when a collection as a unpublished elements, the content_elements has a
+			// reference to the data without being expanded, and need to be removed
+			.then(({ data }) => ({
+				...data,
+				content_elements: data.content_elements.filter((element) => !element.referent),
+			}))
+	);
 };
 
-const make404 = () => {
-	const error = new Error("Not found");
-	error.statusCode = 404;
-	throw error;
-};
-
-// when a collection as a unpublished elements, the content_elements has a
-// reference to the data without being expanded, and need to be removed
 export default {
+	fetch,
+	params,
 	ttl: 120,
-	resolve,
-	transform: (data) => {
-		const source = data;
-
-		if (!data) {
-			make404();
-		}
-
-		const elements = source.content_elements.reduce(
-			(acc, ele) => (!ele.referent ? acc.concat(ele) : acc),
-			[]
-		);
-		source.content_elements = elements;
-		return source;
-	},
 };

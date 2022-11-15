@@ -1,26 +1,32 @@
-const make404 = () => {
-	const error = new Error("Not found");
-	error.statusCode = 404;
-	throw error;
+import axios from "axios";
+import { ARC_ACCESS_TOKEN, CONTENT_BASE } from "fusion:environment";
+
+const params = {
+	slug: "text",
 };
 
-export default {
-	resolve({ slug }) {
-		return `/tags/v2/slugs?slugs=${slug}`;
-	},
-	params: {
-		slug: "text",
-	},
-	transform: (data) => {
-		if (!data || !data.Payload) {
-			make404();
-		}
+const fetch = ({ slug: slugs = "" }) => {
+	const urlSearch = new URLSearchParams({ slugs });
 
-		const hasValues = data.Payload.some((ele) => !!ele);
-		if (hasValues) {
+	return axios({
+		url: `${CONTENT_BASE}/tags/v2/slugs?${urlSearch.toString()}`,
+		headers: {
+			"content-type": "application/json",
+			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+		},
+		method: "GET",
+	}).then(({ data }) => {
+		if (data?.Payload?.some((ele) => !!ele)) {
 			return data;
 		}
 
-		return make404();
-	},
+		const error = new Error("Not found");
+		error.statusCode = 404;
+		return Promise.reject(error);
+	});
+};
+
+export default {
+	fetch,
+	params,
 };

@@ -64,7 +64,6 @@ const ResultItem = React.memo(
 			/* Author Formatting */
 			const imageURL = imageANSToImageSrc(getImageFromANS(element)) || null;
 			const auth = getImageFromANS(element)?.auth || {};
-			console.log(element);
 			const { searchableField } = useEditableContent();
 			const hasAuthors = showByline ? credits?.by && credits?.by.length : null;
 			const contentHeading = showHeadline ? headlineText : null;

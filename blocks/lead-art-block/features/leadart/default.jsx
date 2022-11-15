@@ -1,226 +1,249 @@
 /* eslint-disable camelcase */
-import React, { Component } from "react";
+import React, { useState, useRef } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import Consumer from "fusion:consumer";
+import { useFusionContext } from "fusion:context";
+import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 import getThemeStyle from "fusion:themes";
 import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 import Static from "fusion:static";
 import {
-	Gallery,
-	ImageMetadata,
+	Button,
+	Carousel,
+	formatCredits,
+	formatPowaVideoEmbed,
+	Icon,
 	Image,
-	Lightbox,
-	// presentational component does not do data fetching
-	VideoPlayer as VideoPlayerPresentational,
-	videoPlayerCustomFields,
-	FullscreenIcon,
-} from "@wpmedia/engine-theme-sdk";
-import { PrimaryFont } from "@wpmedia/shared-styles";
-import "./leadart.scss";
+	imageANSToImageSrc,
+	MediaItem,
+	usePhrases,
+	Video,
+} from "@wpmedia/arc-themes-components";
+
+const BLOCK_CLASS_NAME = "b-lead-art";
 
 /**
- * @file LeadArt is a React Class Component
+ * @file LeadArt is a React Functional Component
  * @summary React component for displaying an image along with a control to present the image in a
  * lightbox (see the lightbox component  in the +shared directory).
  * @extends Component
  */
-@Consumer
-class LeadArt extends Component {
-	constructor(props) {
-		super(props);
-		const { globalContent: content, arcSite } = this.props;
-		this.phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
-		this.state = {
-			isOpen: false,
-			buttonLabel: this.phrases.t("global.gallery-expand-button"),
-			content,
-		};
 
-		this.imgRef = React.createRef();
-		this.setIsOpenToFalse = this.setIsOpenToFalse.bind(this);
-		this.setIsOpenToTrue = this.setIsOpenToTrue.bind(this);
-	}
+const LeadArt = (props) => {
+	const { globalContent: content, arcSite } = useFusionContext();
+	const phrases = usePhrases();
+	const [isOpen, setIsOpen] = useState(false);
+	const buttonLabel = phrases.t("global.gallery-expand-button");
+	const imgRef = useRef();
 
-	setIsOpenToFalse() {
-		this.setState({ isOpen: false });
-	}
+	const { customFields } = props;
+	const {
+		hideTitle = false,
+		hideCaption = false,
+		hideCredits = false,
+		imageLoadingStrategy,
+	} = customFields;
 
-	setIsOpenToTrue() {
-		this.setState({ isOpen: true });
-	}
+	const toggleFullScreen = () => {
+		// the full screen element is the div wrapping a lead art of type image
+		const fullScreenElement = imgRef.current;
 
-	lightboxImgHandler() {
-		const imgParentElm = this.imgRef.current;
-		const imgElm = imgParentElm.querySelector("img");
-		if (imgElm) {
-			// this is where it's getting the resized lightbox img
-			return imgElm.dataset.lightbox;
+		if (document.fullscreenEnabled) {
+			if (!document.fullscreenElement) {
+				fullScreenElement.requestFullscreen().then(() => setIsOpen(true));
+			} else {
+				document.exitFullscreen().then(() => setIsOpen(false));
+			}
+		} else {
+			// safari needs prefix
+			// eslint-disable-next-line no-lonely-if
+			if (document.webkitFullscreenEnabled) {
+				if (!document.webkitFullscreenElement) {
+					fullScreenElement.webkitRequestFullscreen().then(() => setIsOpen(true));
+				} else {
+					document.webkitExitFullscreen().then(() => setIsOpen(false));
+				}
+			}
 		}
-		return "";
+	};
+
+	let AdBlock;
+
+	try {
+		/* istanbul ignore next */
+		const { default: AdFeature } = require("@wpmedia/ads-block/features/ads/default");
+		/* istanbul ignore next */
+		AdBlock = () => (
+			<AdFeature
+				customFields={{
+					adType: "300x250_gallery",
+					displayAdLabel: true,
+				}}
+			/>
+		);
+	} catch (e) {
+		/* istanbul ignore next */
+		AdBlock = () => <p>Ad block not found</p>;
 	}
 
-	render() {
-		const { isOpen, content, buttonLabel } = this.state;
+	if (content.promo_items && (content.promo_items.lead_art || content.promo_items.basic)) {
+		const lead_art = content.promo_items.lead_art || content.promo_items.basic;
 
-		const { arcSite, customFields, id } = this.props;
-		const {
-			hideTitle = false,
-			hideCaption = false,
-			hideCredits = false,
-			imageLoadingStrategy,
-		} = customFields;
-
-		// handles empty string for selecting no option and undefined for default
-		const allowedImageLoadingStrategy = imageLoadingStrategy || "eager";
-
-		let AdBlock;
-
-		try {
-			/* istanbul ignore next */
-			const { default: AdFeature } = require("@wpmedia/ads-block/features/ads/default");
-			/* istanbul ignore next */
-			AdBlock = () => (
-				<AdFeature
-					customFields={{
-						adType: "300x250_gallery",
-						displayAdLabel: true,
-					}}
-				/>
+		if (lead_art.type === "raw_html") {
+			return (
+				<div className={BLOCK_CLASS_NAME}>
+					<Static id={lead_art._id}>
+						<div className="inner-content" dangerouslySetInnerHTML={{ __html: lead_art.content }} />
+					</Static>
+				</div>
 			);
-		} catch (e) {
-			/* istanbul ignore next */
-			AdBlock = () => <p>Ad block not found</p>;
 		}
 
-		if (content.promo_items && (content.promo_items.lead_art || content.promo_items.basic)) {
-			const lead_art = content.promo_items.lead_art || content.promo_items.basic;
-			let lightbox = null;
-			let caption = null;
-
-			if (lead_art.type === "raw_html") {
-				return (
-					<div className="lead-art-wrapper">
-						<Static id={lead_art._id}>
-							<div
-								className="inner-content"
-								dangerouslySetInnerHTML={{ __html: lead_art.content }}
-							/>
-						</Static>
-					</div>
-				);
-			}
-
-			if (lead_art.type === "video") {
-				return (
-					<VideoPlayerPresentational
-						id={id}
-						embedMarkup={lead_art?.embed_html}
-						enableAutoplay={!!customFields?.enableAutoplay}
-						shrinkToFit={customFields?.shrinkToFit}
+		if (lead_art.type === "video") {
+			const embedMarkup = formatPowaVideoEmbed(lead_art?.embed_html, {
+				autoplay: customFields?.enableAutoplay,
+				playthrough: customFields?.playthrough,
+			});
+			return (
+				<MediaItem
+					caption={!hideCaption ? lead_art?.description?.basic : null}
+					className={BLOCK_CLASS_NAME}
+					credit={!hideCredits ? formatCredits(lead_art.credits) : null}
+					title={!hideTitle ? lead_art?.headlines?.basic : null}
+				>
+					<Video
+						aspectRatio="16 / 9"
+						embedMarkup={embedMarkup}
 						viewportPercentage={customFields?.viewportPercentage}
-						customFields={{
-							playthrough: !!customFields?.playthrough,
-						}}
-						displayTitle={!hideTitle}
-						displayCaption={!hideCaption}
-						displayCredits={!hideCredits}
-						subtitle={lead_art?.headlines?.basic}
-						caption={lead_art?.description?.basic}
-						credits={lead_art.credits}
 					/>
-				);
-			}
-
-			if (lead_art.type === "image") {
-				lightbox = (
-					<>
-						{isOpen && (
-							<Lightbox
-								mainSrc={this.lightboxImgHandler()}
-								onCloseRequest={this.setIsOpenToFalse}
-								imageCaption={!hideCaption ? lead_art.caption : null}
-							/>
-						)}
-					</>
-				);
-
-				caption = (
-					<ImageMetadata
-						subtitle={!hideTitle ? lead_art.subtitle : null}
-						caption={!hideCaption ? lead_art.caption : null}
-						credits={!hideCredits ? lead_art.credits : null}
-					/>
-				);
-
-				return (
-					<figure className="lead-art-wrapper">
-						<button type="button" className="btn-full-screen" onClick={this.setIsOpenToTrue}>
-							<FullscreenIcon width="100%" height="100%" fill="#6B6B6B" />
-							<PrimaryFont as="span">{buttonLabel}</PrimaryFont>
-						</button>
-						<div ref={this.imgRef}>
-							<Image
-								url={lead_art.url}
-								alt={lead_art.alt_text}
-								smallWidth={800}
-								smallHeight={0}
-								mediumWidth={800}
-								mediumHeight={0}
-								largeWidth={800}
-								largeHeight={0}
-								lightBoxWidth={1600}
-								lightBoxHeight={0}
-								breakpoints={getProperties(arcSite)?.breakpoints}
-								resizerURL={getProperties(arcSite)?.resizerURL}
-								resizedImageOptions={lead_art.resized_params}
-								loading={allowedImageLoadingStrategy} // eager by default, otherwise lazy
-							/>
-						</div>
-						{lightbox}
-						{!hideTitle || !hideCaption || !hideCredits ? <figcaption>{caption}</figcaption> : null}
-					</figure>
-				);
-			}
-			if (lead_art.type === "gallery") {
-				const galleryCubeClicks = getProperties(arcSite)?.galleryCubeClicks;
-				const interstitialClicks = parseInt(galleryCubeClicks, 10);
-
-				return (
-					<Gallery
-						galleryElements={lead_art.content_elements}
-						resizerURL={getProperties(arcSite)?.resizerURL}
-						ansId={lead_art._id}
-						ansHeadline={lead_art.headlines.basic ? lead_art.headlines.basic : ""}
-						expandPhrase={this.phrases.t("global.gallery-expand-button")}
-						autoplayPhraseLabels={{
-							start: this.phrases.t("global.gallery-autoplay-label-start"),
-							stop: this.phrases.t("global.gallery-autoplay-label-stop"),
-						}}
-						controlsFont={getThemeStyle(arcSite)["primary-font-family"]}
-						autoplayPhrase={this.phrases.t("global.gallery-autoplay-button")}
-						pausePhrase={this.phrases.t("global.gallery-pause-autoplay-button")}
-						pageCountPhrase={
-							/* istanbul ignore next */ (current, total) =>
-								this.phrases.t("global.gallery-page-count-text", {
-									current,
-									total,
-								})
-						}
-						adElement={/* istanbul ignore next */ () => <AdBlock />}
-						interstitialClicks={interstitialClicks}
-						displayTitle={!hideTitle}
-						displayCaption={!hideCaption}
-						displayCredits={!hideCredits}
-					/>
-				);
-			}
-
-			return null;
+				</MediaItem>
+			);
 		}
+
+		if (lead_art.type === "image") {
+			return (
+				<MediaItem
+					caption={!hideCaption ? lead_art.caption : null}
+					className={BLOCK_CLASS_NAME}
+					credit={!hideCredits ? formatCredits(lead_art.credits) : null}
+					title={!hideTitle ? lead_art.subtitle : null}
+				>
+					<Button
+						iconLeft={<Icon name="Fullscreen" width="100%" height="100%" fill="#6B6B6B" />}
+						label={`${isOpen ? "Exit" : "Enter"} full screen mode displaying the lead image`}
+						onClick={toggleFullScreen}
+					>
+						<span>{buttonLabel}</span>
+					</Button>
+					<div ref={imgRef}>
+						<Image
+							src={imageANSToImageSrc(lead_art)}
+							alt={lead_art.alt_text}
+							loading={imageLoadingStrategy}
+							// 16:9 aspect ratio
+							width={800}
+							height={450}
+							responsiveImages={[800, 1600]}
+							resizedOptions={{ auth: lead_art.auth[RESIZER_APP_VERSION] }}
+							resizerURL={RESIZER_URL}
+						/>
+					</div>
+				</MediaItem>
+			);
+		}
+		if (lead_art.type === "gallery") {
+			const galleryCubeClicks = getProperties(arcSite)?.galleryCubeClicks;
+			const interstitialClicks = parseInt(galleryCubeClicks, 10);
+
+			return (
+				<Carousel
+					id={lead_art._id}
+					className={BLOCK_CLASS_NAME}
+					showLabel
+					label={lead_art?.headlines?.basic}
+					slidesToShow={1}
+					showAdditionalSlideControls
+					pageCountPhrase={
+						/* istanbul ignore next */ (current, total) =>
+							phrases.t("global.gallery-page-count-text", { current, total })
+					}
+					enableAutoplay
+					startAutoplayIcon={<Icon name="Play" />}
+					startAutoplayText={phrases.t("global.gallery-autoplay-button")}
+					stopAutoplayIcon={<Icon name="Pause" />}
+					stopAutoplayText={phrases.t("global.gallery-pause-autoplay-button")}
+					autoplayPhraseLabels={{
+						start: phrases.t("global.gallery-autoplay-label-start"),
+						stop: phrases.t("global.gallery-autoplay-label-stop"),
+					}}
+					enableFullScreen
+					fullScreenShowButton={
+						<button type="button">
+							<Icon name="Fullscreen" />
+							{phrases.t("global.gallery-expand-button")}
+						</button>
+					}
+					fullScreenMinimizeButton={
+						<button type="button">
+							<Icon name="Close" />
+						</button>
+					}
+					adElement={/* istanbul ignore next */ <AdBlock />}
+					adInterstitialClicks={interstitialClicks}
+					nextButton={
+						<Carousel.Button id={lead_art._id} label="Next Slide">
+							<Icon
+								className={`${BLOCK_CLASS_NAME}__track-icon`}
+								fill="white"
+								name="ChevronRight"
+							/>
+						</Carousel.Button>
+					}
+					previousButton={
+						<Carousel.Button id={lead_art._id} label="Previous Slide">
+							<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} name="ChevronLeft" />
+						</Carousel.Button>
+					}
+				>
+					{lead_art.content_elements.map((galleryItem, itemIndex) => (
+						<Carousel.Item
+							label={phrases.t("global.gallery-page-count-text", {
+								itemIndex,
+								galleryLength: lead_art.content_elements.length,
+							})}
+							key={`gallery-item-${galleryItem.url}`}
+						>
+							<MediaItem
+								caption={!hideCaption ? galleryItem.caption : null}
+								credit={
+									!hideCredits
+										? formatCredits(galleryItem.vanityCredits || galleryItem.credits)
+										: null
+								}
+								title={!hideTitle ? galleryItem.subtitle : null}
+							>
+								<div className={`${BLOCK_CLASS_NAME}__image-wrapper`}>
+									<Image
+										src={imageANSToImageSrc(galleryItem)}
+										resizerURL={RESIZER_URL}
+										resizedOptions={{ auth: galleryItem.auth[RESIZER_APP_VERSION] }}
+										// 16:9 aspect ratio
+										width={800}
+										height={450}
+										responsiveImages={[800, 1600]}
+										alt={galleryItem.alt_text}
+									/>
+								</div>
+							</MediaItem>
+						</Carousel.Item>
+					))}
+				</Carousel>
+			);
+		}
+
 		return null;
 	}
-}
+	return null;
+};
 
 LeadArt.label = "Lead Art – Arc Block";
 
@@ -245,7 +268,6 @@ LeadArt.propTypes = {
 			defaultValue: false,
 			group: "Video",
 		}),
-		...videoPlayerCustomFields(),
 		hideTitle: PropTypes.bool.tag({
 			description:
 				"This display option applies to Lead Art media types: Images, Gallery, and Video",

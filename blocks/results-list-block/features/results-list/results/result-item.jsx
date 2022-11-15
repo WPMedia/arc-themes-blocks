@@ -39,14 +39,13 @@ const ResultItem = React.memo(
 				showHeadline,
 				showImage,
 				showItemOverline,
-				overlineURL,
 			},
 			ref
 		) => {
 			const {
 				description: { basic: descriptionText } = {},
+				overline: { basic: { text: overlineText, url: overlineURL } = {} } = {},
 				display_date: displayDate,
-				label: { basic = {} } = {},
 				headlines: { basic: headlineText } = {},
 				websites,
 				credits,
@@ -58,12 +57,14 @@ const ResultItem = React.memo(
 					dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 				},
 			} = getProperties(arcSite);
-			const overline = basic?.text || "Overline";
+			// const overline = basic?.text || "Overline";
+
 			const phrases = usePhrases();
 			const { registerSuccessEvent } = useComponentContext();
 			/* Author Formatting */
 			const imageURL = imageANSToImageSrc(getImageFromANS(element)) || null;
 			const auth = getImageFromANS(element)?.auth || {};
+			console.log(element);
 			const { searchableField } = useEditableContent();
 			const hasAuthors = showByline ? credits?.by && credits?.by.length : null;
 			const contentHeading = showHeadline ? headlineText : null;
@@ -111,7 +112,9 @@ const ResultItem = React.memo(
 							</Conditional>
 						</MediaItem>
 					) : null}
-					{showItemOverline ? <Overline href={overlineURL}>{overline}</Overline> : null}
+					{showItemOverline && overlineText ? (
+						<Overline href={overlineURL}>{overlineText}</Overline>
+					) : null}
 					{contentHeading ? (
 						<Heading>
 							<Conditional

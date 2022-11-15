@@ -322,7 +322,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		showImage &&
 		(imageOverrideURL || content
 			? {
-					src: imageOverrideURL
+					ansImage: imageOverrideURL
 						? {
 								_id: imageOverrideId,
 								url: imageOverrideURL,

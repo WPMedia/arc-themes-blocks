@@ -40,11 +40,6 @@ const imageProperties = {
 
 const element = {
 	description: { basic: "Description 1" },
-	label: {
-		basic: {
-			text: "Overline Text",
-		},
-	},
 	display_date: "2021-01-01T00:01:00Z",
 	headlines: { basic: "Test headline 1" },
 	websites: {
@@ -64,6 +59,13 @@ const element = {
 		],
 	},
 	_id: "element_1",
+	overline: {
+		basic: {
+			display: true,
+			text: "Overline Text",
+			url: "https://www.google.com",
+		},
+	},
 };
 
 describe("Result parts", () => {

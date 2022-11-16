@@ -3,7 +3,6 @@ import React, { useState, useRef } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
-import getThemeStyle from "fusion:themes";
 import getProperties from "fusion:properties";
 import Static from "fusion:static";
 import {
@@ -28,14 +27,13 @@ const BLOCK_CLASS_NAME = "b-lead-art";
  * @extends Component
  */
 
-const LeadArt = (props) => {
-	const { globalContent: content, arcSite } = useFusionContext();
+export const LeadArtPresentation = (props) => {
 	const phrases = usePhrases();
 	const [isOpen, setIsOpen] = useState(false);
 	const buttonLabel = phrases.t("global.gallery-expand-button");
 	const imgRef = useRef();
 
-	const { customFields } = props;
+	const { arcSite, content, customFields } = props;
 	const {
 		hideTitle = false,
 		hideCaption = false,
@@ -84,17 +82,15 @@ const LeadArt = (props) => {
 		/* istanbul ignore next */
 		AdBlock = () => <p>Ad block not found</p>;
 	}
-
-	if (content.promo_items && (content.promo_items.lead_art || content.promo_items.basic)) {
-		const lead_art = content.promo_items.lead_art || content.promo_items.basic;
+	const lead_art = content?.promo_items?.lead_art || content?.promo_items?.basic;
+	if (lead_art) {
+		let leadArtContent = "";
 
 		if (lead_art.type === "raw_html") {
-			return (
-				<div className={BLOCK_CLASS_NAME}>
-					<Static id={lead_art._id}>
-						<div className="inner-content" dangerouslySetInnerHTML={{ __html: lead_art.content }} />
-					</Static>
-				</div>
+			leadArtContent = (
+				<Static id={`${BLOCK_CLASS_NAME}-${lead_art._id}`}>
+					<div dangerouslySetInnerHTML={{ __html: lead_art.content }} />
+				</Static>
 			);
 		}
 
@@ -103,10 +99,9 @@ const LeadArt = (props) => {
 				autoplay: customFields?.enableAutoplay,
 				playthrough: customFields?.playthrough,
 			});
-			return (
+			leadArtContent = (
 				<MediaItem
 					caption={!hideCaption ? lead_art?.description?.basic : null}
-					className={BLOCK_CLASS_NAME}
 					credit={!hideCredits ? formatCredits(lead_art.credits) : null}
 					title={!hideTitle ? lead_art?.headlines?.basic : null}
 				>
@@ -120,10 +115,9 @@ const LeadArt = (props) => {
 		}
 
 		if (lead_art.type === "image") {
-			return (
+			leadArtContent = (
 				<MediaItem
 					caption={!hideCaption ? lead_art.caption : null}
-					className={BLOCK_CLASS_NAME}
 					credit={!hideCredits ? formatCredits(lead_art.credits) : null}
 					title={!hideTitle ? lead_art.subtitle : null}
 				>
@@ -154,10 +148,9 @@ const LeadArt = (props) => {
 			const galleryCubeClicks = getProperties(arcSite)?.galleryCubeClicks;
 			const interstitialClicks = parseInt(galleryCubeClicks, 10);
 
-			return (
+			leadArtContent = (
 				<Carousel
-					id={lead_art._id}
-					className={BLOCK_CLASS_NAME}
+					id={`${BLOCK_CLASS_NAME}-${lead_art._id}`}
 					showLabel
 					label={lead_art?.headlines?.basic}
 					slidesToShow={1}
@@ -190,7 +183,7 @@ const LeadArt = (props) => {
 					adElement={/* istanbul ignore next */ <AdBlock />}
 					adInterstitialClicks={interstitialClicks}
 					nextButton={
-						<Carousel.Button id={lead_art._id} label="Next Slide">
+						<Carousel.Button id={`${BLOCK_CLASS_NAME}-${lead_art._id}`} label="Next Slide">
 							<Icon
 								className={`${BLOCK_CLASS_NAME}__track-icon`}
 								fill="white"
@@ -199,7 +192,7 @@ const LeadArt = (props) => {
 						</Carousel.Button>
 					}
 					previousButton={
-						<Carousel.Button id={lead_art._id} label="Previous Slide">
+						<Carousel.Button id={`${BLOCK_CLASS_NAME}-${lead_art._id}`} label="Previous Slide">
 							<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} name="ChevronLeft" />
 						</Carousel.Button>
 					}
@@ -240,9 +233,20 @@ const LeadArt = (props) => {
 			);
 		}
 
-		return null;
+		return <div className={BLOCK_CLASS_NAME}>{leadArtContent}</div>;
 	}
 	return null;
+};
+
+const LeadArt = (props) => {
+	const { globalContent, arcSite } = useFusionContext();
+	return (
+		<LeadArtPresentation
+			customFields={props.customFields}
+			content={globalContent}
+			arcSite={arcSite}
+		/>
+	);
 };
 
 LeadArt.label = "Lead Art – Arc Block";

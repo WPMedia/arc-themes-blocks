@@ -1,0 +1,15 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-lead-art {
+	&__track-icon {
+		@include scss.block-components("lead-art-carousel-track-icon");
+		@include scss.block-properties("lead-art-carousel-track-icon");
+	}
+
+	&__image-wrapper {
+		@include scss.block-components("lead-art-carousel-image-wrapper");
+		@include scss.block-properties("lead-art-carousel-image-wrapper");
+	}
+	@include scss.block-components("lead-art");
+	@include scss.block-properties("lead-art");
+}

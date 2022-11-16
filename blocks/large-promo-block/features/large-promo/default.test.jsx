@@ -244,6 +244,7 @@ describe("Large Promo", () => {
 			<LargePromo
 				customFields={{
 					showImage: true,
+					imageRatio: "4:3",
 				}}
 			/>
 		);
@@ -283,6 +284,7 @@ describe("Large Promo", () => {
 					showDescription: false,
 					showHeadline: true,
 					showImage: false,
+					imageRatio: "4:3",
 					showOverline: true,
 				}}
 			/>
@@ -299,6 +301,7 @@ describe("Large Promo", () => {
 			<LargePromo
 				customFields={{
 					showImage: true,
+					imageRatio: "4:3",
 					showImageOrVideoLabel: true,
 					playVideoInPlace: false,
 				}}
@@ -312,6 +315,7 @@ describe("Large Promo", () => {
 			<LargePromo
 				customFields={{
 					showImage: true,
+					imageRatio: "4:3",
 					playVideoInPlace: true,
 				}}
 			/>

@@ -1,5 +1,5 @@
 import React from "react";
-import { TopTableList } from "./features/top-table-list/default";
+import TopTableListWrapper from "./features/top-table-list/default";
 
 export default {
 	title: "Blocks/Top Table List",
@@ -31,10 +31,10 @@ const config = {
 	imagePositionSM: "right",
 };
 
-export const noStories = () => <TopTableList />;
+export const noStories = () => <TopTableListWrapper />;
 
 export const allSizes = () => (
-	<TopTableList
+	<TopTableListWrapper
 		customFields={{
 			...config,
 			extraLarge: 1,
@@ -46,7 +46,7 @@ export const allSizes = () => (
 );
 
 export const allSizesNoOverline = () => (
-	<TopTableList
+	<TopTableListWrapper
 		customFields={{
 			...config,
 			extraLarge: 1,
@@ -60,7 +60,7 @@ export const allSizesNoOverline = () => (
 );
 
 export const allSizesNoHeadlines = () => (
-	<TopTableList
+	<TopTableListWrapper
 		customFields={{
 			...config,
 			extraLarge: 1,
@@ -76,7 +76,7 @@ export const allSizesNoHeadlines = () => (
 );
 
 export const allSizesNoDescriptions = () => (
-	<TopTableList
+	<TopTableListWrapper
 		customFields={{
 			...config,
 			extraLarge: 1,
@@ -91,7 +91,7 @@ export const allSizesNoDescriptions = () => (
 );
 
 export const allSizesNoImages = () => (
-	<TopTableList
+	<TopTableListWrapper
 		customFields={{
 			...config,
 			extraLarge: 1,
@@ -107,7 +107,7 @@ export const allSizesNoImages = () => (
 );
 
 export const allSizesNoByLines = () => (
-	<TopTableList
+	<TopTableListWrapper
 		customFields={{
 			...config,
 			extraLarge: 1,
@@ -122,7 +122,7 @@ export const allSizesNoByLines = () => (
 );
 
 export const allSizesNoByDates = () => (
-	<TopTableList
+	<TopTableListWrapper
 		customFields={{
 			...config,
 			extraLarge: 1,
@@ -137,7 +137,7 @@ export const allSizesNoByDates = () => (
 );
 
 export const oneExtraLarge = () => (
-	<TopTableList
+	<TopTableListWrapper
 		customFields={{
 			...config,
 			extraLarge: 1,
@@ -146,7 +146,7 @@ export const oneExtraLarge = () => (
 );
 
 export const oneLarge = () => (
-	<TopTableList
+	<TopTableListWrapper
 		customFields={{
 			...config,
 			large: 1,
@@ -155,7 +155,7 @@ export const oneLarge = () => (
 );
 
 export const oneMedium = () => (
-	<TopTableList
+	<TopTableListWrapper
 		customFields={{
 			...config,
 			medium: 1,
@@ -164,7 +164,7 @@ export const oneMedium = () => (
 );
 
 export const fourMediumStories = () => (
-	<TopTableList
+	<TopTableListWrapper
 		customFields={{
 			...config,
 			medium: 4,
@@ -173,7 +173,7 @@ export const fourMediumStories = () => (
 );
 
 export const fourMediumStoriesNoBorder = () => (
-	<TopTableList
+	<TopTableListWrapper
 		customFields={{
 			...config,
 			medium: 4,
@@ -183,7 +183,7 @@ export const fourMediumStoriesNoBorder = () => (
 );
 
 export const oneSmall = () => (
-	<TopTableList
+	<TopTableListWrapper
 		customFields={{
 			...config,
 			small: 1,
@@ -193,14 +193,14 @@ export const oneSmall = () => (
 
 export const fourSmallStoriesOnePerRow = () => (
 	<div>
-		<TopTableList
+		<TopTableListWrapper
 			customFields={{
 				...config,
 				small: 4,
 				storiesPerRowSM: 1,
 			}}
 		/>
-		<TopTableList
+		<TopTableListWrapper
 			customFields={{
 				...config,
 				small: 4,
@@ -208,7 +208,7 @@ export const fourSmallStoriesOnePerRow = () => (
 				imagePositionSM: "below",
 			}}
 		/>
-		<TopTableList
+		<TopTableListWrapper
 			customFields={{
 				...config,
 				small: 4,
@@ -216,7 +216,7 @@ export const fourSmallStoriesOnePerRow = () => (
 				imagePositionSM: "left",
 			}}
 		/>
-		<TopTableList
+		<TopTableListWrapper
 			customFields={{
 				...config,
 				small: 4,
@@ -228,7 +228,7 @@ export const fourSmallStoriesOnePerRow = () => (
 );
 
 export const fourSmallStoriesPerRow = () => (
-	<TopTableList
+	<TopTableListWrapper
 		customFields={{
 			...config,
 			small: 8,
@@ -238,7 +238,7 @@ export const fourSmallStoriesPerRow = () => (
 );
 
 export const fourSmallStoriesPerRowNoBorder = () => (
-	<TopTableList
+	<TopTableListWrapper
 		customFields={{
 			...config,
 			small: 8,

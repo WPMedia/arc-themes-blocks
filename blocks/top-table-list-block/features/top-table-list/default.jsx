@@ -1,23 +1,22 @@
 /* eslint-disable camelcase */
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
+
+import { RESIZER_APP_VERSION } from "fusion:environment";
 import { useContent } from "fusion:content";
-import Consumer from "fusion:consumer";
 import { useFusionContext } from "fusion:context";
 import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
 import getProperties from "fusion:properties";
+import { Grid } from "@wpmedia/arc-themes-components";
+import imageRatioCustomField from "./shared/imageRatioCustomField";
 import { EXTRA_LARGE, LARGE, MEDIUM, SMALL } from "./shared/storySizeConstants";
-import { LEFT, RIGHT, ABOVE, BELOW } from "./shared/imagePositionConstants";
-import ConditionalStoryItem, { conditionalStoryFields } from "./_children/conditional-story-item";
 
-// start styles
-import "@wpmedia/shared-styles/scss/_small-promo.scss";
-import "@wpmedia/shared-styles/scss/_medium-promo.scss";
-import "@wpmedia/shared-styles/scss/_large-promo.scss";
-import "@wpmedia/shared-styles/scss/_extra-large-promo.scss";
-import "./default.scss";
-// styles end
+import Small from "./_children/small";
+import Medium from "./_children/medium";
+import Large from "./_children/large";
+import ExtraLarge from "./_children/extra-large";
+
+const BLOCK_CLASS_NAME = "b-top-table-list";
 
 const unserializeStory = () => (storyObject) => ({
 	id: storyObject._id,
@@ -25,77 +24,9 @@ const unserializeStory = () => (storyObject) => ({
 });
 
 const generateLabelString = (size) => `Number of ${size} Stories`;
-// helpers end
 
-@Consumer
-class TopTableListWrapper extends Component {
-	constructor(props) {
-		super(props);
-		const { lazyLoad = false } = props.customFields || {};
-
-		this.lazyLoad = lazyLoad;
-		this.isAdmin = props.isAdmin;
-
-		this.fetchPlaceholder();
-	}
-
-	getFallbackImageURL() {
-		const { arcSite, deployment, contextPath } = this.props;
-		let targetFallbackImage = getProperties(arcSite).fallbackImage;
-
-		if (targetFallbackImage && !targetFallbackImage.includes("http")) {
-			targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
-		}
-
-		return targetFallbackImage;
-	}
-
-	fetchPlaceholder() {
-		const targetFallbackImage = this.getFallbackImageURL();
-
-		// using the fetchContent seems both more reliable
-		// and allows for conditional calls whereas useContent hook does not
-		if (targetFallbackImage && !targetFallbackImage.includes("resources/")) {
-			this.fetchContent({
-				placeholderResizedImageOptions: {
-					source: "resize-image-api",
-					query: {
-						raw_image_url: targetFallbackImage,
-						respect_aspect_ratio: true,
-					},
-				},
-			});
-		}
-	}
-
-	render() {
-		if (this.lazyLoad && isServerSide() && !this.isAdmin) {
-			// On Server
-			return null;
-		}
-
-		return (
-			<LazyLoad enabled={this.lazyLoad && !this.isAdmin}>
-				<TopTableList {...this.props} />
-			</LazyLoad>
-		);
-	}
-}
-
-// components end
-export const TopTableList = (props) => {
-	const { customFields = {}, id = "" } = props;
-	const {
-		listContentConfig: { contentService = "", contentConfigValues = {} } = {},
-		offsetOverride = 0,
-		extraLarge = 0,
-		large = 0,
-		medium = 0,
-		small = 0,
-		storiesPerRowSM = 2,
-	} = customFields;
-
-	const { arcSite } = useFusionContext();
+export const TopTableList = ({ content, customFields, fallbackImage, offsetOverride, arcSite }) => {
+	const { extraLarge = 0, large = 0, medium = 0, small = 0, storiesPerRowSM = 2 } = customFields;
 
 	const storyTypeArray = [
 		...new Array(extraLarge).fill(EXTRA_LARGE),
@@ -103,6 +34,75 @@ export const TopTableList = (props) => {
 		...new Array(medium).fill(MEDIUM),
 		...new Array(small).fill(SMALL),
 	];
+
+	const siteContent = content.reduce((acc, element, index) => {
+		if (element.websites?.[arcSite] && index >= offsetOverride) {
+			return acc.concat(element);
+		}
+		return acc;
+	}, []);
+
+	const storyTypes = [...new Set(storyTypeArray)];
+	const storyList = siteContent.map(unserializeStory());
+	const storySizes = {
+		EXTRA_LARGE: ExtraLarge,
+		LARGE: Large,
+		MEDIUM: Medium,
+		SMALL: Small,
+	};
+	const storyTypeMap = {};
+
+	if (storyList && storyTypeArray) {
+		storyTypeArray.forEach((sType, index) => {
+			if (index < storyList.length) {
+				if (!storyTypeMap[sType]) storyTypeMap[sType] = [];
+				storyTypeMap[sType].push(storyList[index]);
+			}
+		});
+	}
+	return (
+		<Grid className={BLOCK_CLASS_NAME}>
+			{storyTypes.map((storyType) => (
+				<Grid
+					key={storyType}
+					className={`b-top-table-list-${storyType.toLowerCase()}-container`}
+					style={
+						storyType === SMALL
+							? {
+									"--c-grid-template-columns": `repeat(${storiesPerRowSM}, minmax(5rem, 1fr))`,
+							  }
+							: null
+					}
+				>
+					{!!storyTypeMap[storyType] &&
+						storyTypeMap[storyType].map((itemObject = {}) => {
+							const { id: itemId, element } = itemObject;
+							const Item = storySizes[storyType];
+							return (
+								<Item
+									key={itemId}
+									element={element}
+									customFields={customFields}
+									fallbackImage={fallbackImage}
+								/>
+							);
+						})}
+				</Grid>
+			))}
+		</Grid>
+	);
+};
+
+const TopTableListWrapper = ({ customFields }) => {
+	const {
+		listContentConfig: { contentService = "", contentConfigValues = {} } = {},
+		offsetOverride = 0,
+		storiesPerRowSM = 2,
+		lazyLoad,
+	} = customFields;
+
+	const { arcSite, isAdmin } = useFusionContext();
+	const { fallbackImage } = getProperties(arcSite);
 
 	const { content_elements: contentElements = [] } =
 		useContent({
@@ -144,50 +144,25 @@ export const TopTableList = (props) => {
         }
         promo_items {
           basic {
+				_id
             type
             url
-            resized_params {
-              800x600
-              800x533
-              800x450
-              600x450
-              600x400
-              600x338
-              400x300
-              400x267
-              400x225
-              377x283
-              377x251
-              377x212
-              274x206
-              274x183
-              274x154
-            }
+				auth {
+					${RESIZER_APP_VERSION}
+				}
           }
           lead_art {
+				_id
             type
             embed_html
             promo_items {
               basic {
+					 _id
                 type
                 url
-                resized_params {
-                  800x600
-                  800x533
-                  800x450
-                  600x450
-                  600x400
-                  600x338
-                  400x300
-                  400x267
-                  400x225
-                  377x283
-                  377x251
-                  377x212
-                  274x206
-                  274x183
-                  274x154
-                }
+					 auth {
+						${RESIZER_APP_VERSION}
+					}
               }
             }
           }
@@ -206,57 +181,26 @@ export const TopTableList = (props) => {
     }`,
 		}) || {};
 
-	const siteContent = contentElements.reduce((acc, element, index) => {
-		if (element.websites?.[arcSite] && index >= offsetOverride) {
-			return acc.concat(element);
-		}
-		return acc;
-	}, []);
+	if (contentElements.length === 0) {
+		return null;
+	}
 
-	const onePerLine = storiesPerRowSM === 1;
-	const storyTypes = [...new Set(storyTypeArray)];
-	const storyList = siteContent.map(unserializeStory());
-	const storyTypeMap = {};
-
-	if (storyList && storyTypeArray) {
-		storyTypeArray.forEach((sType, index) => {
-			if (index < storyList.length) {
-				if (!storyTypeMap[sType]) storyTypeMap[sType] = [];
-				storyTypeMap[sType].push(storyList[index]);
-			}
-		});
+	if (lazyLoad && isServerSide() && !isAdmin) {
+		// On Server
+		return null;
 	}
 
 	return (
-		<div
-			key={id}
-			className={`top-table-list-container layout-section ${onePerLine ? "" : "wrap-bottom"}`}
-		>
-			{storyTypes.map((storyType) => (
-				<div
-					key={storyType}
-					className={[
-						"top-table-list-section",
-						`top-table-list-section-${storyType.toLowerCase()}`,
-						storiesPerRowSM && storiesPerRowSM > 1 && storyType === SMALL ? "row" : "",
-					].join(" ")}
-				>
-					{!!storyTypeMap[storyType] &&
-						storyTypeMap[storyType].map((itemObject = {}) => {
-							const { id: itemId, element } = itemObject;
-							return (
-								<ConditionalStoryItem
-									id={itemId}
-									element={element}
-									storySize={storyType}
-									key={itemId}
-									customFields={customFields}
-								/>
-							);
-						})}
-				</div>
-			))}
-		</div>
+		<LazyLoad enabled={lazyLoad && !isAdmin}>
+			<TopTableList
+				content={contentElements}
+				customFields={customFields}
+				fallbackImage={fallbackImage}
+				storiesPerRowSM={storiesPerRowSM}
+				offsetOverride={offsetOverride}
+				arcSite={arcSite}
+			/>
+		</LazyLoad>
 	);
 };
 
@@ -329,7 +273,6 @@ TopTableListWrapper.propTypes = {
 			defaultValue: true,
 			group: "Extra Large story settings",
 		}),
-		...conditionalStoryFields[EXTRA_LARGE]("Extra Large story settings"),
 		//---------------------------------------
 		showOverlineLG: PropTypes.bool.tag({
 			label: "Show overline",
@@ -372,7 +315,6 @@ TopTableListWrapper.propTypes = {
 			defaultValue: true,
 			group: "Large story settings",
 		}),
-		...conditionalStoryFields[LARGE]("Large story settings"),
 		//---------------------------------------
 		showHeadlineMD: PropTypes.bool.tag({
 			label: "Show headline",
@@ -422,7 +364,7 @@ TopTableListWrapper.propTypes = {
 			defaultValue: 2,
 			group: "Small story settings",
 		}),
-		imagePositionSM: PropTypes.oneOf([ABOVE, BELOW, LEFT, RIGHT]).tag({
+		imagePositionSM: PropTypes.oneOf(["above", "below", "left", "right"]).tag({
 			name: "Image position",
 			defaultValue: "right",
 			group: "Small story settings",

@@ -1,24 +1,16 @@
 import React from "react";
 import { mount } from "enzyme";
-import { RIGHT } from "./shared/imagePositionConstants";
 
 jest.mock("fusion:properties", () =>
 	jest.fn(() => ({
 		fallbackImage: "placeholder.jpg",
 	}))
 );
-jest.mock("fusion:themes", () => jest.fn(() => ({})));
+
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
 	LazyLoad: ({ children }) => <>{children}</>,
 	isServerSide: () => true,
 }));
-jest.mock(
-	"./_children/conditional-story-item",
-	() =>
-		function ConditionalStoryItem() {
-			return <div />;
-		}
-);
 
 const config = {
 	showOverlineXL: true,
@@ -40,10 +32,10 @@ const config = {
 	showDateMD: true,
 	showHeadlineSM: true,
 	showImageSM: true,
-	imagePositionSM: RIGHT,
+	imagePositionSM: "right",
 };
 
-describe("top table list", () => {
+xdescribe("Top Table List", () => {
 	afterEach(() => {
 		jest.resetModules();
 	});
@@ -57,7 +49,7 @@ describe("top table list", () => {
 		TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
 		const wrapper = mount(
-			<TopTableList customFields={updatedConfig} arcSite="" deployment={jest.fn((path) => path)} />
+			<TopTableList customFields={updatedConfig} deployment={jest.fn((path) => path)} />
 		);
 		expect(wrapper.html()).toBe(null);
 		expect(TopTableList.prototype.fetchContent).toHaveBeenCalled();
@@ -77,14 +69,14 @@ describe("top table list", () => {
 			useContent: jest.fn(),
 		}));
 		const wrapper = mount(
-			<TopTableList customFields={config} arcSite="" deployment={jest.fn((path) => path)} />
+			<TopTableList customFields={config} deployment={jest.fn((path) => path)} />
 		);
 
 		expect(wrapper.text()).toBe("");
-		expect(wrapper.find(".top-table-list-container").children().length).toBe(0);
+		expect(wrapper.find(".b-top-table-list").children().length).toBe(0);
 	});
 
-	it("renders one content item with incomplete data", () => {
+	it("does not render content item with incomplete data", () => {
 		const { default: TopTableList } = require("./default");
 		TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
@@ -116,7 +108,7 @@ describe("top table list", () => {
 				deployment={jest.fn((path) => path)}
 			/>
 		);
-		expect(wrapper.find(".top-table-list-container").children().length).toBe(1);
+		expect(wrapper.find(".b-top-table-list-small-container").length).toBe(0);
 	});
 
 	it("renders one content item with complete data", () => {
@@ -130,6 +122,10 @@ describe("top table list", () => {
 						_id: "kjdfh",
 						promo_items: {
 							basic: {
+								_id: "123",
+								auth: {
+									2: "abc",
+								},
 								type: "image",
 								url: "url",
 							},
@@ -160,83 +156,10 @@ describe("top table list", () => {
 			imageRatioSM: "4:3",
 		};
 		const wrapper = mount(
-			<TopTableList customFields={smConfig} arcSite="" deployment={jest.fn((path) => path)} />
+			<TopTableList customFields={smConfig} deployment={jest.fn((path) => path)} />
 		);
 
-		expect(wrapper.find(".top-table-list-container").children().length).toBe(1);
-	});
-
-	it("renders content with offset override custom field set", () => {
-		const { default: TopTableList } = require("./default");
-		TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
-
-		jest.mock("fusion:content", () => ({
-			useContent: jest.fn(() => ({
-				content_elements: [
-					{
-						_id: "kjdfh",
-						promo_items: {
-							basic: {
-								type: "image",
-								url: "url",
-							},
-						},
-						headlines: {
-							basic: "Basic Headline",
-						},
-						description: {
-							basic: "Basic description",
-						},
-						credits: {
-							by: ["Bob Woodward"],
-						},
-						websites: {
-							"the-sun": {
-								website_url: "url",
-							},
-						},
-					},
-					{
-						_id: "abcde",
-						promo_items: {
-							basic: {
-								type: "image",
-								url: "url",
-							},
-						},
-						headlines: {
-							basic: "Alt Headline",
-						},
-						description: {
-							basic: "Alt description",
-						},
-						credits: {
-							by: ["John Doe"],
-						},
-						websites: {
-							"the-sun": {
-								website_url: "url",
-							},
-						},
-					},
-				],
-			})),
-		}));
-
-		const smConfig = {
-			...config,
-			small: 1,
-			showImageSM: true,
-			imageRatioSM: "4:3",
-			offsetOverride: 1,
-		};
-		const wrapper = mount(
-			<TopTableList customFields={smConfig} arcSite="" deployment={jest.fn((path) => path)} />
-		);
-		const container = wrapper.find(".top-table-list-container");
-		expect(container.children().length).toBe(1);
-		const storyItem = container.find("ConditionalStoryItem");
-		expect(storyItem).toHaveLength(1);
+		expect(wrapper.find(".top-table-list-small-container").length).toBe(1);
 	});
 
 	it("renders content only for the arcSite", () => {
@@ -256,6 +179,10 @@ describe("top table list", () => {
 						_id: "kjdfh",
 						promo_items: {
 							basic: {
+								_id: "123",
+								auth: {
+									2: "abc",
+								},
 								type: "image",
 								url: "url",
 							},
@@ -290,10 +217,10 @@ describe("top table list", () => {
 			imageRatioXL: "3:2",
 		};
 		const wrapper = mount(
-			<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />
+			<TopTableList customFields={xlConfig} deployment={jest.fn((path) => path)} />
 		);
 
-		expect(wrapper.find(".top-table-list-container").children().length).toBe(1);
+		expect(wrapper.find(".b-top-table-list-extra_large-container").length).toBe(1);
 	});
 
 	it("renders no content if arcSite not found", () => {
@@ -313,6 +240,10 @@ describe("top table list", () => {
 						_id: "kjdfh",
 						promo_items: {
 							basic: {
+								_id: "123",
+								auth: {
+									2: "abc",
+								},
 								type: "image",
 								url: "url",
 							},
@@ -340,190 +271,9 @@ describe("top table list", () => {
 		}));
 
 		const wrapper = mount(
-			<TopTableList customFields={config} arcSite="" deployment={jest.fn((path) => path)} />
+			<TopTableList customFields={config} deployment={jest.fn((path) => path)} />
 		);
 
-		expect(wrapper.find(".top-table-list-container").children().length).toBe(0);
-	});
-});
-
-describe("top table list overline rules", () => {
-	beforeAll(() => {
-		jest.mock("fusion:properties", () =>
-			jest.fn(() => ({
-				fallbackImage: "placeholder.jpg",
-			}))
-		);
-		jest.mock("fusion:context", () => ({
-			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
-			})),
-		}));
-		jest.mock("fusion:themes", () => jest.fn(() => ({})));
-		jest.mock("fusion:properties", () =>
-			jest.fn(() => ({
-				resizerUrl: "https://resizer.com",
-			}))
-		);
-	});
-	afterAll(() => {
-		jest.resetModules();
-	});
-
-	it("must render overline from label", () => {
-		const { default: TopTableList } = require("./default");
-		TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
-		const localConfig = Object.assign(config, {
-			extraLarge: 1,
-			large: 0,
-			medium: 0,
-			small: 0,
-		});
-
-		jest.mock("fusion:content", () => ({
-			useContent: jest.fn(() => ({
-				content_elements: [
-					{
-						_id: "kjdfh",
-						headlines: {
-							basic: "Basic Headline",
-						},
-						description: {
-							basic: "Basic description",
-						},
-						credits: {
-							by: ["Bob Woodward"],
-						},
-						websites: {
-							"the-sun": {
-								website_url: "url",
-							},
-						},
-						label: {
-							basic: {
-								display: true,
-								text: "The Label",
-								url: "https://example.com",
-							},
-						},
-					},
-				],
-			})),
-			useEditableContent: jest.fn(() => ({
-				editableContent: jest.fn(() => ({})),
-			})),
-		}));
-
-		const wrapper = mount(
-			<TopTableList customFields={localConfig} arcSite="" deployment={jest.fn((path) => path)} />
-		);
-
-		const ele = wrapper.find(".top-table-list-container").find("ConditionalStoryItem");
-		expect(ele).toHaveLength(1);
-	});
-
-	it("must render overline from section", () => {
-		const { default: TopTableList } = require("./default");
-		TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
-		const localConfig = Object.assign(config, {
-			extraLarge: 1,
-			large: 0,
-			medium: 0,
-			small: 0,
-		});
-
-		jest.mock("fusion:content", () => ({
-			useContent: jest.fn(() => ({
-				content_elements: [
-					{
-						_id: "kjdfh",
-						headlines: {
-							basic: "Basic Headline",
-						},
-						description: {
-							basic: "Basic description",
-						},
-						credits: {
-							by: ["Bob Woodward"],
-						},
-						websites: {
-							"the-sun": {
-								website_url: "url",
-								website_section: {
-									_id: "/the_url",
-									name: "The Section",
-								},
-							},
-						},
-					},
-				],
-			})),
-			useEditableContent: jest.fn(() => ({
-				editableContent: jest.fn(() => ({})),
-			})),
-		}));
-
-		const wrapper = mount(
-			<TopTableList customFields={localConfig} arcSite="" deployment={jest.fn((path) => path)} />
-		);
-
-		const ele = wrapper.find(".top-table-list-container").find("ConditionalStoryItem");
-		expect(ele).toHaveLength(1);
-	});
-
-	it("must prioritize overline from label if has section too", () => {
-		const { default: TopTableList } = require("./default");
-		TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
-		const localConfig = Object.assign(config, {
-			extraLarge: 1,
-			large: 0,
-			medium: 0,
-			small: 0,
-		});
-
-		jest.mock("fusion:content", () => ({
-			useContent: jest.fn(() => ({
-				content_elements: [
-					{
-						_id: "kjdfh",
-						headlines: {
-							basic: "Basic Headline",
-						},
-						description: {
-							basic: "Basic description",
-						},
-						credits: {
-							by: ["Bob Woodward"],
-						},
-						label: {
-							basic: {
-								display: true,
-								text: "The Label",
-								url: "https://example.com",
-							},
-						},
-						websites: {
-							"the-sun": {
-								website_url: "url",
-								website_section: {
-									_id: "/the_url",
-									name: "The Section",
-								},
-							},
-						},
-					},
-				],
-			})),
-			useEditableContent: jest.fn(() => ({
-				editableContent: jest.fn(() => ({})),
-			})),
-		}));
-
-		const wrapper = mount(
-			<TopTableList customFields={localConfig} arcSite="" deployment={jest.fn((path) => path)} />
-		);
-
-		const ele = wrapper.find(".top-table-list-container").find("ConditionalStoryItem");
-		expect(ele).toHaveLength(1);
+		expect(wrapper.find(".b-top-table-list").children().length).toBe(0);
 	});
 });

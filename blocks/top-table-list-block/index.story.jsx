@@ -31,7 +31,17 @@ const config = {
 	imagePositionSM: "right",
 };
 
-export const noStories = () => <TopTableListWrapper />;
+export const noStories = () => (
+	<TopTableListWrapper
+		customFields={{
+			...config,
+			extraLarge: 0,
+			large: 0,
+			medium: 0,
+			small: 0,
+		}}
+	/>
+);
 
 export const allSizes = () => (
 	<TopTableListWrapper

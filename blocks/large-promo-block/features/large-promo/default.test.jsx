@@ -66,6 +66,7 @@ const largePromoMock = {
 		basic: {
 			type: "image",
 			url: "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CLPUNWMKOZHWPLFYKRZXW6XTNU.jpg",
+			auth: {},
 		},
 		lead_art: {
 			type: "video",
@@ -102,6 +103,7 @@ jest.mock("fusion:content", () => ({
 		searchableField: () => {},
 	})),
 }));
+jest.mock("fusion:environment", () => ({}));
 
 describe("Large Promo", () => {
 	afterEach(() => {

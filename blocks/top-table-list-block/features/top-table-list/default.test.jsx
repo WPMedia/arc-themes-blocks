@@ -1,7 +1,7 @@
 import React from "react";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 
 import { isServerSide } from "@wpmedia/arc-themes-components";
 

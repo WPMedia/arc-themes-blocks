@@ -2,6 +2,26 @@
 
 .b-top-table-list {
 	&-small-container {
+		&--1 {
+			@include scss.block-components("top-table-list-small-container-1");
+			@include scss.block-properties("top-table-list-small-container-1");
+		}
+
+		&--2 {
+			@include scss.block-components("top-table-list-small-container-2");
+			@include scss.block-properties("top-table-list-small-container-2");
+		}
+
+		&--3 {
+			@include scss.block-components("top-table-list-small-container-3");
+			@include scss.block-properties("top-table-list-small-container-3");
+		}
+
+		&--4 {
+			@include scss.block-components("top-table-list-small-container-4");
+			@include scss.block-properties("top-table-list-small-container-4");
+		}
+
 		@include scss.block-components("top-table-list-small-container");
 		@include scss.block-properties("top-table-list-small-container");
 	}
@@ -67,6 +87,16 @@
 	}
 
 	&-small {
+		&--below {
+			@include scss.block-components("top-table-list-small-below");
+			@include scss.block-properties("top-table-list-small-below");
+		}
+
+		&--above {
+			@include scss.block-components("top-table-list-small-above");
+			@include scss.block-properties("top-table-list-small-above");
+		}
+
 		&--right {
 			@include scss.block-components("top-table-list-small-right");
 			@include scss.block-properties("top-table-list-small-right");

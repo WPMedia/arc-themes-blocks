@@ -70,14 +70,11 @@ const TopTableList = ({ content, customFields, fallbackImage, offsetOverride, ar
 			{storyTypes.map((storyType) => (
 				<Grid
 					key={storyType}
-					className={`b-top-table-list-${storyType.toLowerCase()}-container`}
-					style={
-						storyType === SMALL
-							? {
-									"--c-grid-template-columns": `repeat(${storiesPerRowSM}, minmax(5rem, 1fr))`,
-							  }
-							: null
-					}
+					className={[
+						`b-top-table-list-${storyType.toLowerCase()}-container`,
+						storyType === SMALL &&
+							`b-top-table-list-${storyType.toLowerCase()}-container--${storiesPerRowSM}`,
+					].join(" ")}
 				>
 					{!!storyTypeMap[storyType] &&
 						storyTypeMap[storyType].map((itemObject) => {

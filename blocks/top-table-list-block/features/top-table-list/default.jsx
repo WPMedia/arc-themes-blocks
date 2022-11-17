@@ -5,9 +5,9 @@ import PropTypes from "@arc-fusion/prop-types";
 import { RESIZER_APP_VERSION } from "fusion:environment";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import getProperties from "fusion:properties";
-import { Grid } from "@wpmedia/arc-themes-components";
+import { Grid, isServerSide } from "@wpmedia/arc-themes-components";
 import imageRatioCustomField from "./shared/imageRatioCustomField";
 import { EXTRA_LARGE, LARGE, MEDIUM, SMALL } from "./shared/storySizeConstants";
 
@@ -25,7 +25,7 @@ const unserializeStory = () => (storyObject) => ({
 
 const generateLabelString = (size) => `Number of ${size} Stories`;
 
-export const TopTableList = ({ content, customFields, fallbackImage, offsetOverride, arcSite }) => {
+const TopTableList = ({ content, customFields, fallbackImage, offsetOverride, arcSite }) => {
 	const { extraLarge = 0, large = 0, medium = 0, small = 0, storiesPerRowSM = 2 } = customFields;
 
 	const storyTypeArray = [
@@ -60,6 +60,11 @@ export const TopTableList = ({ content, customFields, fallbackImage, offsetOverr
 			}
 		});
 	}
+
+	if (siteContent.length === 0) {
+		return null;
+	}
+
 	return (
 		<Grid className={BLOCK_CLASS_NAME}>
 			{storyTypes.map((storyType) => (
@@ -75,7 +80,7 @@ export const TopTableList = ({ content, customFields, fallbackImage, offsetOverr
 					}
 				>
 					{!!storyTypeMap[storyType] &&
-						storyTypeMap[storyType].map((itemObject = {}) => {
+						storyTypeMap[storyType].map((itemObject) => {
 							const { id: itemId, element } = itemObject;
 							const Item = storySizes[storyType];
 							return (

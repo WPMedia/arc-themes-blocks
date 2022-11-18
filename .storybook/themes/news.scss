@@ -2038,10 +2038,10 @@
 				top-table-list: (
 					grid-template-columns: auto,
 					grid-template-rows: auto,
-					gap: 1rem,
+					gap: var(--global-spacing-5),
 					components: (
 						grid: (
-							gap: 1rem,
+							gap: var(--global-spacing-5),
 						),
 					),
 				),

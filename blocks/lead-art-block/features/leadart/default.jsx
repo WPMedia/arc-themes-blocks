@@ -22,9 +22,8 @@ const BLOCK_CLASS_NAME = "b-lead-art";
 
 /**
  * @file LeadArt is a React Functional Component
- * @summary React component for displaying an image along with a control to present the image in a
- * lightbox (see the lightbox component  in the +shared directory).
- * @extends Component
+ * @summary React component for displaying the lead art of a story whether it is an image, gallery,
+ * video, or raw HTML.
  */
 
 export const LeadArtPresentation = (props) => {
@@ -41,6 +40,7 @@ export const LeadArtPresentation = (props) => {
 		imageLoadingStrategy,
 	} = customFields;
 
+	/* istanbul ignore next  */
 	const toggleFullScreen = () => {
 		// the full screen element is the div wrapping a lead art of type image
 		const fullScreenElement = imgRef.current;
@@ -82,12 +82,10 @@ export const LeadArtPresentation = (props) => {
 		/* istanbul ignore next */
 		AdBlock = () => <p>Ad block not found</p>;
 	}
-	const lead_art = content?.promo_items?.lead_art || content?.promo_items?.basic;
-	if (lead_art) {
-		let leadArtContent = "";
 
+	const getLeadArtContent = (lead_art) => {
 		if (lead_art.type === "raw_html") {
-			leadArtContent = (
+			return (
 				<Static id={`${BLOCK_CLASS_NAME}-${lead_art._id}`}>
 					<div dangerouslySetInnerHTML={{ __html: lead_art.content }} />
 				</Static>
@@ -99,7 +97,7 @@ export const LeadArtPresentation = (props) => {
 				autoplay: customFields?.enableAutoplay,
 				playthrough: customFields?.playthrough,
 			});
-			leadArtContent = (
+			return (
 				<MediaItem
 					caption={!hideCaption ? lead_art?.description?.basic : null}
 					credit={!hideCredits ? formatCredits(lead_art.credits) : null}
@@ -115,7 +113,7 @@ export const LeadArtPresentation = (props) => {
 		}
 
 		if (lead_art.type === "image") {
-			leadArtContent = (
+			return (
 				<MediaItem
 					caption={!hideCaption ? lead_art.caption : null}
 					credit={!hideCredits ? formatCredits(lead_art.credits) : null}
@@ -123,7 +121,9 @@ export const LeadArtPresentation = (props) => {
 				>
 					<Button
 						iconLeft={<Icon name="Fullscreen" width="100%" height="100%" fill="#6B6B6B" />}
-						label={`${isOpen ? "Exit" : "Enter"} full screen mode displaying the lead image`}
+						label={`${
+							/* istanbul ignore next */ !isOpen ? "Enter" : "Exit"
+						} full screen mode displaying the lead image`}
 						onClick={toggleFullScreen}
 					>
 						<span>{buttonLabel}</span>
@@ -144,11 +144,12 @@ export const LeadArtPresentation = (props) => {
 				</MediaItem>
 			);
 		}
+
 		if (lead_art.type === "gallery") {
 			const galleryCubeClicks = getProperties(arcSite)?.galleryCubeClicks;
 			const interstitialClicks = parseInt(galleryCubeClicks, 10);
 
-			leadArtContent = (
+			return (
 				<Carousel
 					id={`${BLOCK_CLASS_NAME}-${lead_art._id}`}
 					showLabel
@@ -200,8 +201,8 @@ export const LeadArtPresentation = (props) => {
 					{lead_art.content_elements.map((galleryItem, itemIndex) => (
 						<Carousel.Item
 							label={phrases.t("global.gallery-page-count-text", {
-								itemIndex,
-								galleryLength: lead_art.content_elements.length,
+								current: itemIndex + 1,
+								total: lead_art.content_elements.length,
 							})}
 							key={`gallery-item-${galleryItem.url}`}
 						>
@@ -233,19 +234,22 @@ export const LeadArtPresentation = (props) => {
 			);
 		}
 
+		return null;
+	};
+
+	const lead_art = content?.promo_items?.lead_art || content?.promo_items?.basic || {};
+	const leadArtContent = getLeadArtContent(lead_art);
+	if (leadArtContent) {
 		return <div className={BLOCK_CLASS_NAME}>{leadArtContent}</div>;
 	}
+
 	return null;
 };
 
-const LeadArt = (props) => {
+const LeadArt = ({ customFields }) => {
 	const { globalContent, arcSite } = useFusionContext();
 	return (
-		<LeadArtPresentation
-			customFields={props.customFields}
-			content={globalContent}
-			arcSite={arcSite}
-		/>
+		<LeadArtPresentation customFields={customFields} content={globalContent} arcSite={arcSite} />
 	);
 };
 

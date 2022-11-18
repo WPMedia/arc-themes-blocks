@@ -253,5 +253,5 @@ export const video = () => {
 			lead_art: leadArtVideo,
 		},
 	};
-	return <LeadArt content={globalContent} customFields={{}} />;
+	return <LeadArt content={globalContent} customFields={{ playthrough: false }} />;
 };

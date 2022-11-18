@@ -86,20 +86,21 @@ const ExtraLarge = (props) => {
 	const contentUrl = element?.websites?.[arcSite]?.website_url;
 	const embedMarkup = playVideoInPlaceXL && getVideoFromANS(element);
 	const hasAuthors = showBylineXL && element?.credits?.by.length > 0;
-	const imageParams = element
-		? {
-				ansImage: getImageFromANS(element),
-				alt: element?.headlines?.basic || "",
-				aspectRatio: imageRatioXL,
-				resizedOptions: {
-					smart: true,
-				},
-				responsiveImages: [400, 600, 800, 1200],
-				width: 800,
-		  }
-		: {
-				src: fallbackImage,
-		  };
+	const imageParams =
+		element && getImageFromANS(element)
+			? {
+					ansImage: getImageFromANS(element),
+					alt: element?.headlines?.basic || "",
+					aspectRatio: imageRatioXL,
+					resizedOptions: {
+						smart: true,
+					},
+					responsiveImages: [400, 600, 800, 1200],
+					width: 800,
+			  }
+			: {
+					src: fallbackImage,
+			  };
 
 	return hasOverline ||
 		contentHeading ||

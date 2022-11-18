@@ -113,20 +113,21 @@ const Large = (props) => {
 	const embedMarkup = playVideoInPlaceLG && getVideoFromANS(element);
 	const promoImageURL = showImageLG && (getImageFromANS(element)?.url || fallbackImage);
 
-	const imageParams = element
-		? {
-				ansImage: getImageFromANS(element),
-				alt: element?.headlines?.basic || "",
-				aspectRatio: imageRatioLG,
-				resizedOptions: {
-					smart: true,
-				},
-				responsiveImages: [400, 600, 800, 1200],
-				width: 800,
-		  }
-		: {
-				src: fallbackImage,
-		  };
+	const imageParams =
+		element && getImageFromANS(element)
+			? {
+					ansImage: getImageFromANS(element),
+					alt: element?.headlines?.basic || "",
+					aspectRatio: imageRatioLG,
+					resizedOptions: {
+						smart: true,
+					},
+					responsiveImages: [400, 600, 800, 1200],
+					width: 800,
+			  }
+			: {
+					src: fallbackImage,
+			  };
 
 	return embedMarkup ||
 		contentOverline ||

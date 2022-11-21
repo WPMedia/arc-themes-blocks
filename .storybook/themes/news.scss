@@ -2061,6 +2061,7 @@
 				top-table-list-small: (
 					display: grid,
 					gap: var(--global-spacing-5) var(--global-spacing-6),
+					grid-template-columns: 1fr,
 					components: (
 						heading: (
 							font-size: var(--body-font-size),

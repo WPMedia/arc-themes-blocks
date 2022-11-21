@@ -2058,6 +2058,18 @@
 					grid-template-columns: 1fr,
 					grid-template-rows: auto,
 				),
+				top-table-list-small-container-1: (
+					grid-template-columns: 1fr,
+				),
+				top-table-list-small-container-2: (
+					grid-template-columns: repeat(2, minmax(5rem, 1fr)),
+				),
+				top-table-list-small-container-3: (
+					grid-template-columns: repeat(3, minmax(5rem, 1fr)),
+				),
+				top-table-list-small-container-4: (
+					grid-template-columns: repeat(4, minmax(5rem, 1fr)),
+				),
 				top-table-list-small: (
 					display: grid,
 					gap: var(--global-spacing-4) var(--global-spacing-6),
@@ -2598,15 +2610,6 @@
 				),
 				single-chain-children-stack: (
 					gap: var(--global-spacing-5),
-				),
-				top-table-list-small-container-2: (
-					grid-template-columns: repeat(2, minmax(5rem, 1fr)),
-				),
-				top-table-list-small-container-3: (
-					grid-template-columns: repeat(3, minmax(5rem, 1fr)),
-				),
-				top-table-list-small-container-4: (
-					grid-template-columns: repeat(4, minmax(5rem, 1fr)),
 				),
 				top-table-list-medium-container: (
 					gap: var(--global-spacing-5),

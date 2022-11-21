@@ -2048,6 +2048,7 @@
 				top-table-list-medium-container: (
 					grid-template-columns: 1fr,
 					grid-template-rows: auto,
+					gap: var(--global-spacing-8),
 				),
 				top-table-list-large-container: (
 					grid-template-columns: 1fr,
@@ -2606,6 +2607,9 @@
 				),
 				top-table-list-small-container-4: (
 					grid-template-columns: repeat(4, minmax(5rem, 1fr)),
+				),
+				top-table-list-medium-container: (
+					gap: var(--global-spacing-5),
 				),
 				top-table-list-medium: (
 					components: (

@@ -1,79 +1,120 @@
 import React from "react";
 import getProperties from "fusion:properties";
 
-import ArticleDate from "@wpmedia/date-block";
-import { Image } from "@wpmedia/engine-theme-sdk";
-import { extractImageFromStory } from "@wpmedia/resizer-image-block";
-import { Byline, Heading, SecondaryFont } from "@wpmedia/shared-styles";
+import {
+	Attribution,
+	Conditional,
+	Date as DateComponent,
+	formatAuthors,
+	formatURL,
+	getImageFromANS,
+	Heading,
+	HeadingSection,
+	Image,
+	Join,
+	Link,
+	MediaItem,
+	Paragraph,
+	Separator,
+	usePhrases,
+} from "@wpmedia/arc-themes-components";
 
-const SearchResult = ({
-	element,
-	arcSite,
-	targetFallbackImage,
-	resizedImageOptions,
-	promoElements = {},
-	imageProps,
-}) => {
-	const {
-		description: { basic: descriptionText } = {},
-		headlines: { basic: headlineText } = {},
-		display_date: displayDate,
-		websites = {},
-	} = element;
-	if (!websites[arcSite]) {
+import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
+
+const SearchResult = ({ arcSite, className, content, promoElements }) => {
+	const phrases = usePhrases();
+
+	if (!content?.websites?.[arcSite]) {
 		return null;
 	}
 
-	const url = websites[arcSite].website_url;
 	const { showHeadline, showImage, showDescription, showByline, showDate } = promoElements;
+	const {
+		dateLocalization: { dateTimeFormat, language, timeZone } = {
+			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
+			language: "en",
+			timeZone: "GMT",
+		},
+		fallbackImage,
+	} = getProperties(arcSite);
+
+	const contentDescription = showDescription ? content?.description?.basic : null;
+	const contentHeading = showHeadline ? content?.headlines?.basic : null;
+	const contentUrl = content?.websites?.[arcSite]?.website_url;
+	const hasAuthors = showByline ? content?.credits?.by?.length : null;
+
+	const ansImage = getImageFromANS(content);
+	const imageParams =
+		content && ansImage
+			? {
+					ansImage,
+					resizedOptions: {
+						smart: true,
+					},
+					responsiveImages: [200, 400, 800],
+					sizes: [
+						{
+							isDefault: true,
+							sourceSizeValue: "100px",
+						},
+						{
+							sourceSizeValue: "500px",
+							mediaCondition: "(min-width: 48rem)",
+						},
+					],
+					width: 400,
+			  }
+			: {
+					src: fallbackImage,
+			  };
+
+	const displayDate = content?.display_date;
+	const formattedDate = Date.parse(displayDate)
+		? localizeDateTime(new Date(displayDate), dateTimeFormat, language, timeZone)
+		: "";
 
 	return (
-		<div className={`list-item ${!showImage ? "no-image" : ""}`} key={`result-card-${url}`}>
-			{showImage ? (
-				<div className="results-list--image-container">
-					<a href={url} className="list-anchor" aria-hidden="true" tabIndex="-1">
-						<Image
-							{...imageProps}
-							url={
-								extractImageFromStory(element)
-									? extractImageFromStory(element)
-									: targetFallbackImage
-							}
-							alt={
-								extractImageFromStory(element)
-									? headlineText
-									: getProperties(arcSite).primaryLogoAlt
-							}
-							resizedImageOptions={resizedImageOptions}
-						/>
-					</a>
-				</div>
-			) : null}
-			{showHeadline ? (
-				<div className="results-list--headline-container">
-					<a href={url} className="list-anchor">
-						<Heading className="headline-text">{headlineText}</Heading>
-					</a>
-				</div>
-			) : null}
-			{showDescription || showDate || showByline ? (
-				<div className="results-list--description-author-container">
-					{showDescription ? (
-						<SecondaryFont as="p" className="description-text">
-							{descriptionText}
-						</SecondaryFont>
-					) : null}
-					{showDate || showByline ? (
-						<div className="results-list--author-date">
-							{showByline ? (
-								<Byline content={element} list separator={showDate} font="Primary" />
+		<HeadingSection>
+			<article className={`${className}${showImage ? ` ${className}--show-image` : ""}`}>
+				{showImage ? (
+					<MediaItem>
+						<Conditional
+							component={Link}
+							condition={contentUrl}
+							href={formatURL(contentUrl)}
+							assistiveHidden
+						>
+							<Image {...imageParams} alt={contentHeading} />
+						</Conditional>
+					</MediaItem>
+				) : null}
+
+				{contentHeading ? (
+					<Heading>
+						<Conditional component={Link} condition={contentUrl} href={formatURL(contentUrl)}>
+							{contentHeading}
+						</Conditional>
+					</Heading>
+				) : null}
+
+				{showDescription ? <Paragraph>{contentDescription}</Paragraph> : null}
+				{hasAuthors || showDate ? (
+					<Attribution>
+						<Join separator={Separator}>
+							{hasAuthors ? (
+								<Join separator={() => " "}>
+									{phrases.t("global.by-text")}
+									{formatAuthors(content?.credits?.by, phrases.t("global.and-text"))}
+								</Join>
 							) : null}
-							{showDate ? <ArticleDate classNames="story-date" date={displayDate} /> : null}
-						</div>
-					) : null}
-				</div>
-			) : null}
-		</div>
+							{showDate ? (
+								<DateComponent dateTime={displayDate} dateString={formattedDate} />
+							) : null}
+						</Join>
+					</Attribution>
+				) : null}
+			</article>
+		</HeadingSection>
 	);
 };
 

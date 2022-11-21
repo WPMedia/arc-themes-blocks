@@ -1,15 +1,16 @@
 /* istanbul ignore file */
 import React from "react";
 import Consumer from "fusion:consumer";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
-import { SearchIcon } from "@wpmedia/engine-theme-sdk";
-import { extractResizedParams, extractImageFromStory } from "@wpmedia/resizer-image-block";
-import { Button, BUTTON_STYLES, BUTTON_TYPES, PrimaryFont } from "@wpmedia/shared-styles";
 
-import SearchResult from "./search-result";
-import "@wpmedia/shared-styles/scss/_results-list.scss";
-import "./search-results-list.scss";
+import { Stack } from "@wpmedia/arc-themes-components";
+
+import SearchField from "./search-field";
+import ResultsList from "./results-list";
+
+const BLOCK_CLASS_NAME = "b-search-results-list";
+
+// import "@wpmedia/shared-styles/scss/_results-list.scss";
+// import "./search-results-list.scss";
 
 @Consumer
 class GlobalSearchResultsList extends React.Component {
@@ -22,30 +23,9 @@ class GlobalSearchResultsList extends React.Component {
 			resultList: {},
 			page: 1,
 			value: query || "",
-			placeholderResizedImageOptions: {},
 			focusItem: 0,
 		};
 
-		const { websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL, locale } =
-			getProperties(props.arcSite) || {};
-
-		this.phrases = getTranslatedPhrases(locale);
-		this.websiteDomain = websiteDomain;
-		this.fallbackImage = fallbackImage;
-
-		this.imageProps = {
-			smallWidth: 158,
-			smallHeight: 89,
-			mediumWidth: 274,
-			mediumHeight: 154,
-			largeWidth: 274,
-			largeHeight: 154,
-			primaryLogoAlt,
-			breakpoints,
-			resizerURL,
-		};
-
-		this.fetchPlaceholder();
 		this.customSearchAction = props.customSearchAction || null;
 		this.listItemRefs = {};
 	}
@@ -68,33 +48,6 @@ class GlobalSearchResultsList extends React.Component {
 			this.customSearchAction(value);
 		} else if (value.length > 0) {
 			window.location.href = `/search/${value}`;
-		}
-	}
-
-	getFallbackImageURL() {
-		const { arcSite, deployment, contextPath } = this.props;
-		let targetFallbackImage = getProperties(arcSite).fallbackImage;
-
-		if (targetFallbackImage && !targetFallbackImage.includes("http")) {
-			targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
-		}
-
-		return targetFallbackImage;
-	}
-
-	fetchPlaceholder() {
-		const targetFallbackImage = this.getFallbackImageURL();
-
-		if (!targetFallbackImage.includes("/resources/")) {
-			this.fetchContent({
-				placeholderResizedImageOptions: {
-					source: "resize-image-api",
-					query: {
-						raw_image_url: targetFallbackImage,
-						respect_aspect_ratio: true,
-					},
-				},
-			});
 		}
 	}
 
@@ -139,91 +92,29 @@ class GlobalSearchResultsList extends React.Component {
 	}
 
 	render() {
-		const { globalContent, arcSite } = this.props;
-		const { data, metadata: { total_hits: totalHits, q: query } = {} } = globalContent;
-		const {
-			resultList: { data: moreStories } = {},
-			value,
-			placeholderResizedImageOptions,
-		} = this.state;
-
-		const targetFallbackImage = this.getFallbackImageURL();
-		const results = moreStories || data;
-		const { promoElements } = this.props;
+		const { resultList: { data, metadata: { total_hits: totalHits } = {} } = {}, searchTerm } =
+			this.state;
+		const { arcSite, promoElements } = this.props;
 
 		return (
-			<div>
-				<div className="search-container">
-					<div>
-						<div className="search-icon-container">
-							<SearchIcon fill="#979797" />
-						</div>
-						<PrimaryFont
-							as="input"
-							type="text"
-							placeholder={this.phrases.t("search-results-blocks.search-input-placeholder")}
-							value={value}
-							className="search-bar"
-							onChange={(evt) => this.setState({ value: evt.target.value })}
-						/>
-						<PrimaryFont
-							as="button"
-							type="button"
-							className="btn btn-sm"
-							backgroundColor="primary-color"
-							onClick={() => this.handleSearch()}
-						>
-							{this.phrases.t("search-results-block.search-button")}
-						</PrimaryFont>
-					</div>
-					{data && (
-						<p className="search-results-text">
-							{this.phrases.t("search-results-block.search-result-number", {
-								smart_count: totalHits,
-								searchTerm: query,
-							})}
-						</p>
-					)}
-				</div>
-				<div className="results-list-container">
-					{results &&
-						results.length > 0 &&
-						results.map((element) => {
-							const resizedImageOptions = extractImageFromStory(element)
-								? extractResizedParams(element)
-								: placeholderResizedImageOptions;
-
-							return (
-								<div
-									key={`result-card-${element._id}`}
-									ref={(ref) => {
-										this.listItemRefs[element._id] = ref;
-									}}
-								>
-									<SearchResult
-										element={element}
-										arcSite={arcSite}
-										targetFallbackImage={targetFallbackImage}
-										resizedImageOptions={resizedImageOptions}
-										promoElements={promoElements}
-										imageProps={this.imageProps}
-									/>
-								</div>
-							);
-						})}
-					{!!(results && results.length > 0 && results.length < totalHits) && (
-						<div className="see-more">
-							<Button
-								ariaLabel={this.phrases.t("search-results-block.see-more-button-aria-label")}
-								buttonStyle={BUTTON_STYLES.PRIMARY}
-								buttonTypes={BUTTON_TYPES.LABEL_ONLY}
-								text={this.phrases.t("search-results-block.see-more-button")}
-								onClick={() => this.fetchStories()}
-							/>
-						</div>
-					)}
-				</div>
-			</div>
+			<Stack className={BLOCK_CLASS_NAME}>
+				<SearchField
+					className={`${BLOCK_CLASS_NAME}__field`}
+					results={data}
+					onChange={(event) => this.setState({ value: event.target.value })}
+					onSearch={() => this.handleSearch()}
+					searchTerm={searchTerm}
+					totalItems={totalHits}
+				/>
+				<ResultsList
+					arcSite={arcSite}
+					className={`${BLOCK_CLASS_NAME}__results`}
+					results={data}
+					onSearch={() => this.fetchStories()}
+					promoElements={promoElements}
+					totalItems={totalHits}
+				/>
+			</Stack>
 		);
 	}
 }

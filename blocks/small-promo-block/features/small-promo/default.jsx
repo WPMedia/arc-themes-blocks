@@ -1,6 +1,7 @@
 import React from "react";
+import { RESIZER_APP_VERSION } from "fusion:environment";
 import PropTypes from "@arc-fusion/prop-types";
-import { useContent } from "fusion:content";
+import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import {
@@ -20,9 +21,19 @@ import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 const BLOCK_CLASS_NAME = "b-small-promo";
 
 const SmallPromo = ({ customFields }) => {
-	const { imagePosition, lazyLoad, showHeadline, showImage, imageOverrideURL } = customFields;
+	const {
+		imagePosition,
+		lazyLoad,
+		showHeadline,
+		showImage,
+		imageOverrideAuth,
+		imageOverrideURL,
+		imageOverrideId,
+		imageRatio,
+	} = customFields;
 	const { registerSuccessEvent } = useComponentContext();
 	const { arcSite, isAdmin } = useFusionContext();
+	const { searchableField } = useEditableContent();
 	const shouldLazyLoad = lazyLoad && !isAdmin;
 
 	const content =
@@ -37,7 +48,7 @@ const SmallPromo = ({ customFields }) => {
 			// does not need embed_html because no video section
 			// does not need website section nor label because no overline
 			// does not need byline because no byline shown
-			filter: `{
+			filters: `{
 		_id
 		description {
 			basic
@@ -51,32 +62,19 @@ const SmallPromo = ({ customFields }) => {
 			type
 			url
 			lead_art {
+				_id
 				type
-				promo_items {
-					basic {
-						type
-						url
-						resized_params {
-							800x600
-							800x533
-							800x450
-							600x450
-							600x400
-							600x338
-						}
-					}
+				url
+				auth {
+					${RESIZER_APP_VERSION}
 				}
 			}
 			basic {
+				_id
 				type
 				url
-				resized_params {
-					800x600
-					800x533
-					800x450
-					600x450
-					600x400
-					600x338
+				auth {
+					${RESIZER_APP_VERSION}
 				}
 			}
 		}
@@ -95,13 +93,32 @@ const SmallPromo = ({ customFields }) => {
 	}
 
 	const linkURL = content?.websites?.[arcSite]?.website_url;
-	const imageURL = getImageFromANS(content)?.url;
 	const headline = content?.headlines?.basic;
 
 	const PromoImage = () => {
 		const { fallbackImage } = getProperties(arcSite);
-		const availableImage = imageOverrideURL || imageURL || fallbackImage;
-		return showImage && availableImage ? (
+		const imageParams =
+			imageOverrideURL || (content && getImageFromANS(content))
+				? {
+						ansImage: imageOverrideURL
+							? {
+									_id: imageOverrideId,
+									url: imageOverrideURL,
+									auth: imageOverrideAuth ? JSON.parse(imageOverrideAuth) : {},
+							  }
+							: getImageFromANS(content),
+						aspectRatio: imageRatio,
+						resizedOptions: {
+							smart: true,
+						},
+						responsiveImages: [200, 400, 600, 800, 1200],
+						width: 600,
+				  }
+				: {
+						src: fallbackImage,
+				  };
+
+		return showImage ? (
 			<Conditional
 				component={Link}
 				condition={linkURL}
@@ -109,8 +126,15 @@ const SmallPromo = ({ customFields }) => {
 				onClick={registerSuccessEvent}
 				assistiveHidden
 			>
-				<MediaItem>
-					<Image alt="" src={availableImage} />
+				<MediaItem
+					{...searchableField({
+						imageOverrideURL: "url",
+						imageOverrideId: "_id",
+						imageOverrideAuth: "auth",
+					})}
+					suppressContentEditableWarning
+				>
+					<Image {...imageParams} />
 				</MediaItem>
 			</Conditional>
 		) : null;
@@ -174,10 +198,18 @@ SmallPromo.propTypes = {
 			defaultValue: true,
 			group: "Show promo elements",
 		}),
+		imageOverrideAuth: PropTypes.string.tag({
+			group: "Image",
+			hidden: true,
+		}),
 		imageOverrideURL: PropTypes.string.tag({
 			label: "Image URL",
 			group: "Image",
 			searchable: "image",
+		}),
+		imageOverrideId: PropTypes.string.tag({
+			group: "Image",
+			hidden: true,
 		}),
 		imagePosition: PropTypes.oneOf(["right", "left", "above", "below"]).tag({
 			defaultValue: "right",

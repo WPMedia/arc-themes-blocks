@@ -48,7 +48,7 @@ const SmallPromo = ({ customFields }) => {
 			// does not need embed_html because no video section
 			// does not need website section nor label because no overline
 			// does not need byline because no byline shown
-			filters: `{
+			filter: `{
 		_id
 		description {
 			basic

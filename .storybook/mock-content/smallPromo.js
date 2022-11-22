@@ -11,20 +11,12 @@ export const smallPromoMock = {
 	},
 	promo_items: {
 		basic: {
-			resized_params: {
-				"600x400":
-					"IYlSHyCyebwHaotJBuhSSiykktg=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/",
-				"600x450":
-					"pmSxIhr_2yF6wtOJyOkbEaphdok=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/",
-				"800x450":
-					"VD7LAiaSV3kPnNUuP36bbTT2S0Y=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/",
-				"800x533":
-					"4dhmPhU2HvAd69Kkkj0rcfE41mw=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/",
-				"800x600":
-					"6fqhqLAchOq1gB_xNn2lGb-WHmk=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/",
+			_id: "CDWC6JPN35FPPOHYR4DOTSZCTU",
+			auth: {
+				2: "d2370512e4a061f3744ebecb30cffebcbf99767061400b5418f61b85f28f743d",
 			},
 			type: "image",
-			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG",
+			url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/CDWC6JPN35FPPOHYR4DOTSZCTU.jpeg",
 		},
 	},
 	type: "story",

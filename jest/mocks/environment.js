@@ -6,4 +6,6 @@ const searchKey = "ABCDEF";
 
 const RESIZER_APP_VERSION = 2;
 
-export { TIMEZONE, resizerKey, searchKey, RESIZER_APP_VERSION };
+const RESIZER_URL = "http://url.com/";
+
+export { TIMEZONE, resizerKey, searchKey, RESIZER_APP_VERSION, RESIZER_URL };

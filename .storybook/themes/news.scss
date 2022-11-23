@@ -2479,6 +2479,15 @@
 				),
 				large-promo: (
 					gap: var(--global-spacing-6),
+					components: (
+						divider: (
+							grid-column: span 2,
+						),
+						grid: (
+							gap: var(--global-spacing-5),
+							--grid-template-columns: 1fr 1fr,
+						),
+					),
 				),
 				large-promo-text: (
 					components: (

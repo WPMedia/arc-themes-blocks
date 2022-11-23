@@ -2035,10 +2035,14 @@
 				top-table-list-small: (
 					display: grid,
 					gap: var(--global-spacing-5) var(--global-spacing-6),
+					grid-template-columns: 1fr,
 					components: (
 						heading: (
 							font-size: var(--body-font-size),
 							line-height: var(--body-line-height),
+						),
+						divider: (
+							grid-row: 2,
 						),
 					),
 				),
@@ -2472,7 +2476,6 @@
 					components: (
 						grid: (
 							gap: var(--global-spacing-5),
-							--grid-template-columns: 1fr 1fr,
 						),
 					),
 				),

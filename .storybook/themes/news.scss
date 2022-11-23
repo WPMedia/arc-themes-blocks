@@ -2047,9 +2047,6 @@
 							font-size: var(--body-font-size),
 							line-height: var(--body-line-height),
 						),
-						divider: (
-							grid-row: 2,
-						),
 					),
 				),
 				top-table-list-small-below: (
@@ -2461,7 +2458,6 @@
 						),
 						grid: (
 							gap: var(--global-spacing-5),
-							// --grid-template-columns: 1fr 1fr,
 						),
 					),
 				),
@@ -2677,7 +2673,6 @@
 						),
 						grid: (
 							gap: var(--global-spacing-5),
-							// --grid-template-columns: 1fr 1fr,
 						),
 					),
 				),

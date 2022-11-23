@@ -2061,27 +2061,33 @@
 				top-table-list-small: (
 					display: grid,
 					gap: var(--global-spacing-5) var(--global-spacing-6),
-					grid-template-columns: 1fr,
 					components: (
 						heading: (
 							font-size: var(--body-font-size),
 							line-height: var(--body-line-height),
 						),
+						grid: (
+							--grid-template-columns: 1fr,
+						),
 					),
 				),
 				top-table-list-small-left: (
-					grid-template-columns: 1fr 2fr,
 					components: (
 						divider: (
 							grid-column: span 2,
 						),
+						grid: (
+							--grid-template-columns: 1fr 2fr,
+						),
 					),
 				),
 				top-table-list-small-right: (
-					grid-template-columns: 2fr 1fr,
 					components: (
 						divider: (
 							grid-column: span 2,
+						),
+						grid: (
+							--grid-template-columns: 2fr 1fr,
 						),
 					),
 				),
@@ -2600,16 +2606,32 @@
 					gap: var(--global-spacing-5),
 				),
 				top-table-list-small-container-1: (
-					grid-template-columns: 1fr,
+					components: (
+						grid: (
+							--grid-template-columns: 1fr,
+						),
+					),
 				),
 				top-table-list-small-container-2: (
-					grid-template-columns: repeat(2, minmax(5rem, 1fr)),
+					components: (
+						grid: (
+							--grid-template-columns: repeat(2, minmax(5rem, 1fr)),
+						),
+					),
 				),
 				top-table-list-small-container-3: (
-					grid-template-columns: repeat(3, minmax(5rem, 1fr)),
+					components: (
+						grid: (
+							--grid-template-columns: repeat(3, minmax(5rem, 1fr)),
+						),
+					),
 				),
 				top-table-list-small-container-4: (
-					grid-template-columns: repeat(4, minmax(5rem, 1fr)),
+					components: (
+						grid: (
+							--grid-template-columns: repeat(4, minmax(5rem, 1fr)),
+						),
+					),
 				),
 				top-table-list-medium-container: (
 					gap: var(--global-spacing-5),

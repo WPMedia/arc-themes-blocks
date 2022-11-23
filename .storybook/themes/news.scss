@@ -2018,17 +2018,23 @@
 					),
 				),
 				top-table-list: (
-					grid-template-columns: auto,
+					grid-template-columns: 1fr,
 					grid-template-rows: auto,
 					gap: var(--global-spacing-5),
 					components: (
 						grid: (
 							gap: var(--global-spacing-5),
-							--grid-template-columns: 1fr,
 						),
 					),
 				),
+				top-table-list-xl-container: (
+					grid-template-columns: 1fr,
+				),
+				top-table-list-large-container: (
+					grid-template-columns: 1fr,
+				),
 				top-table-list-medium-container: (
+					grid-template-columns: 1fr,
 					grid-template-rows: auto,
 					gap: var(--global-spacing-8),
 				),
@@ -2061,22 +2067,18 @@
 					),
 				),
 				top-table-list-small-left: (
+					grid-template-columns: 1fr 2fr,
 					components: (
 						divider: (
 							grid-column: span 2,
-						),
-						grid: (
-							--grid-template-columns: 1fr 2fr,
 						),
 					),
 				),
 				top-table-list-small-right: (
+					grid-template-columns: 2fr 1fr,
 					components: (
 						divider: (
 							grid-column: span 2,
-						),
-						grid: (
-							--grid-template-columns: 2fr 1fr,
 						),
 					),
 				),
@@ -2459,7 +2461,7 @@
 						),
 						grid: (
 							gap: var(--global-spacing-5),
-							--grid-template-columns: 1fr 1fr,
+							// --grid-template-columns: 1fr 1fr,
 						),
 					),
 				),
@@ -2611,28 +2613,28 @@
 				top-table-list-small-container-1: (
 					components: (
 						grid: (
-							--grid-template-columns: 1fr,
+							template-columns: 1fr,
 						),
 					),
 				),
 				top-table-list-small-container-2: (
 					components: (
 						grid: (
-							--grid-template-columns: repeat(2, minmax(5rem, 1fr)),
+							template-columns: repeat(2, minmax(5rem, 1fr)),
 						),
 					),
 				),
 				top-table-list-small-container-3: (
 					components: (
 						grid: (
-							--grid-template-columns: repeat(3, minmax(5rem, 1fr)),
+							template-columns: repeat(3, minmax(5rem, 1fr)),
 						),
 					),
 				),
 				top-table-list-small-container-4: (
 					components: (
 						grid: (
-							--grid-template-columns: repeat(4, minmax(5rem, 1fr)),
+							template-columns: repeat(4, minmax(5rem, 1fr)),
 						),
 					),
 				),
@@ -2675,7 +2677,7 @@
 						),
 						grid: (
 							gap: var(--global-spacing-5),
-							--grid-template-columns: 1fr 1fr,
+							// --grid-template-columns: 1fr 1fr,
 						),
 					),
 				),

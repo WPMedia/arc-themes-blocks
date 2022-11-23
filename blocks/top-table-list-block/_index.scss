@@ -59,7 +59,7 @@
 
 		&__label {
 			@include scss.block-components("top-table-list-large-label");
-			@include scss.block-properties("large-label");
+			@include scss.block-properties("top-table-list-large-label");
 		}
 
 		@include scss.block-properties("top-table-list-large");

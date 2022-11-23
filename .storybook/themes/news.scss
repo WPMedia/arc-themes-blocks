@@ -2036,15 +2036,23 @@
 					display: grid,
 					gap: var(--global-spacing-5) var(--global-spacing-6),
 					components: (
-						divider: (
-							grid-column: span 1,
-						),
 						heading: (
 							font-size: var(--body-font-size),
 							line-height: var(--body-line-height),
 						),
-						grid: (
-							--grid-template-columns: 1fr,
+					),
+				),
+				top-table-list-small-below: (
+					components: (
+						divider: (
+							grid-column: span 1,
+						),
+					),
+				),
+				top-table-list-small-above: (
+					components: (
+						divider: (
+							grid-column: span 1,
 						),
 					),
 				),
@@ -2462,9 +2470,6 @@
 				large-promo: (
 					gap: var(--global-spacing-6),
 					components: (
-						divider: (
-							grid-column: span 2,
-						),
 						grid: (
 							gap: var(--global-spacing-5),
 							--grid-template-columns: 1fr 1fr,

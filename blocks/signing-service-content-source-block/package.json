@@ -19,6 +19,6 @@
     "directory": "blocks/signing-service-content-source-block"
   },
   "dependencies": {
-    "axios": "^0.26.0"
+    "axios": "^1.2.0"
   }
 }

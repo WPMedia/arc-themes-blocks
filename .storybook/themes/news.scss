@@ -2154,13 +2154,6 @@
 						link: (
 							position: relative,
 						),
-						divider: (
-							grid-column: span 2,
-						),
-						grid: (
-							gap: var(--global-spacing-5),
-							--grid-template-columns: 1fr 1fr,
-						),
 					),
 				),
 				top-table-list-large-icon-label: (
@@ -2466,6 +2459,15 @@
 				),
 				large-manual-promo: (
 					gap: var(--global-spacing-6),
+					components: (
+						divider: (
+							grid-column: span 2,
+						),
+						grid: (
+							gap: var(--global-spacing-5),
+							--grid-template-columns: 1fr 1fr,
+						),
+					),
 				),
 				large-manual-promo-text: (
 					components: (
@@ -2668,6 +2670,15 @@
 				),
 				top-table-list-large: (
 					gap: var(--global-spacing-6),
+					components: (
+						divider: (
+							grid-column: span 2,
+						),
+						grid: (
+							gap: var(--global-spacing-5),
+							--grid-template-columns: 1fr 1fr,
+						),
+					),
 				),
 				top-table-list-large-text: (
 					components: (

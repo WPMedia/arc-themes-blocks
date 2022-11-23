@@ -350,5 +350,11 @@
 		"no": "Video",
 		"pt": "Vídeo",
 		"sv": "Video"
+	},
+	"global.gallery-next-label": {
+		"en": "Next Slide"
+	},
+	"global.gallery-previous-label": {
+		"en": "Previous Slide"
 	}
 }

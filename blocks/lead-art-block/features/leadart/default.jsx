@@ -184,7 +184,10 @@ export const LeadArtPresentation = (props) => {
 					adElement={/* istanbul ignore next */ <AdBlock />}
 					adInterstitialClicks={interstitialClicks}
 					nextButton={
-						<Carousel.Button id={`${BLOCK_CLASS_NAME}-${lead_art._id}`} label="Next Slide">
+						<Carousel.Button
+							id={`${BLOCK_CLASS_NAME}-${lead_art._id}`}
+							label={phrases.t("global.gallery-next-label")}
+						>
 							<Icon
 								className={`${BLOCK_CLASS_NAME}__track-icon`}
 								fill="white"
@@ -193,7 +196,10 @@ export const LeadArtPresentation = (props) => {
 						</Carousel.Button>
 					}
 					previousButton={
-						<Carousel.Button id={`${BLOCK_CLASS_NAME}-${lead_art._id}`} label="Previous Slide">
+						<Carousel.Button
+							id={`${BLOCK_CLASS_NAME}-${lead_art._id}`}
+							label={phrases.t("global.gallery-previous-label")}
+						>
 							<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} name="ChevronLeft" />
 						</Carousel.Button>
 					}

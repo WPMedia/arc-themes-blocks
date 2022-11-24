@@ -1,0 +1,116 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-top-table-list {
+	&-small-container {
+		&--1 {
+			@include scss.block-components("top-table-list-small-container-1");
+			@include scss.block-properties("top-table-list-small-container-1");
+		}
+
+		&--2 {
+			@include scss.block-components("top-table-list-small-container-2");
+			@include scss.block-properties("top-table-list-small-container-2");
+		}
+
+		&--3 {
+			@include scss.block-components("top-table-list-small-container-3");
+			@include scss.block-properties("top-table-list-small-container-3");
+		}
+
+		&--4 {
+			@include scss.block-components("top-table-list-small-container-4");
+			@include scss.block-properties("top-table-list-small-container-4");
+		}
+
+		@include scss.block-components("top-table-list-small-container");
+		@include scss.block-properties("top-table-list-small-container");
+	}
+
+	&-medium-container {
+		@include scss.block-components("top-table-list-medium-container");
+		@include scss.block-properties("top-table-list-medium-container");
+	}
+
+	&-large-container {
+		@include scss.block-components("top-table-list-large-container");
+		@include scss.block-properties("top-table-list-large-container");
+	}
+
+	&-extra_large-container {
+		@include scss.block-components("top-table-list-xl-container");
+		@include scss.block-properties("top-table-list-xl-container");
+	}
+
+	&-xl {
+		@include scss.block-properties("top-table-list-xl");
+		@include scss.block-components("top-table-list-xl");
+	}
+
+	&-large {
+		&__text {
+			@include scss.block-components("top-table-list-large-text");
+			@include scss.block-properties("top-table-list-large-text");
+		}
+
+		&__icon_label {
+			@include scss.block-components("top-table-list-large-icon-label");
+			@include scss.block-properties("top-table-list-large-icon-label");
+		}
+
+		&__label {
+			@include scss.block-components("top-table-list-large-label");
+			@include scss.block-properties("top-table-list-large-label");
+		}
+
+		@include scss.block-properties("top-table-list-large");
+		@include scss.block-components("top-table-list-large");
+	}
+
+	&-medium {
+		&--show-image {
+			@include scss.block-properties("top-table-list-medium-show-image");
+			@include scss.block-components("top-table-list-medium-show-image");
+		}
+
+		&__icon_label {
+			@include scss.block-components("top-table-list-medium-icon-label");
+			@include scss.block-properties("top-table-list-medium-icon-label");
+		}
+
+		&__label {
+			@include scss.block-components("top-table-list-medium-label");
+			@include scss.block-properties("top-table-list-medium-label");
+		}
+
+		@include scss.block-properties("top-table-list-medium");
+		@include scss.block-components("top-table-list-medium");
+	}
+
+	&-small {
+		&--below {
+			@include scss.block-components("top-table-list-small-below");
+			@include scss.block-properties("top-table-list-small-below");
+		}
+
+		&--above {
+			@include scss.block-components("top-table-list-small-above");
+			@include scss.block-properties("top-table-list-small-above");
+		}
+
+		&--right {
+			@include scss.block-components("top-table-list-small-right");
+			@include scss.block-properties("top-table-list-small-right");
+		}
+
+		&--left {
+			@include scss.block-components("top-table-list-small-left");
+			@include scss.block-properties("top-table-list-small-left");
+		}
+
+		@include scss.block-components("top-table-list-small");
+		@include scss.block-properties("top-table-list-small");
+	}
+
+	@include scss.block-components("top-table-list");
+	@include scss.block-properties("top-table-list");
+}

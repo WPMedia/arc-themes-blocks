@@ -10,7 +10,6 @@ import PromoHeadline from "./_children/promo-headline";
 import PromoImage from "./_children/promo-image";
 import PromoLabel from "./_children/promo-label";
 import SecondaryFont from "./_children/secondary-font";
-import MediumPromoPresentation from "./_children/promos/medium";
 import {
 	getNavSpecificSecondaryButtonTheme,
 	getNavSpecificPrimaryButtonTheme,
@@ -33,7 +32,6 @@ export {
 	PromoImage,
 	PromoLabel,
 	SecondaryFont,
-	MediumPromoPresentation,
 	getNavSpecificSecondaryButtonTheme,
 	getNavSpecificPrimaryButtonTheme,
 	FormInputField,

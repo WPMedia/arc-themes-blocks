@@ -2,10 +2,6 @@
 
 This small promo block displays a headline and image. Content is queried from an ANS data source.
 
-## Acceptance Criteria
-
-1. A choice of aspect ratios is provided for the image.
-
 ## Props
 
 | **Prop**                       | **Required** | **Type** | **Description**                                                                                       |

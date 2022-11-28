@@ -17,7 +17,7 @@ class GlobalSearchResultsList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.arcSite = props.arcSite;
-		const query = props.globalContent.metadata && props.globalContent.metadata.q;
+		const query = props?.globalContent?.metadata?.q;
 		this.state = {
 			storedList: {},
 			resultList: {},

@@ -79,4 +79,20 @@ describe("Search Results List - Search Field", () => {
 		);
 		expect(onChange).toHaveBeenCalledWith({ value: "changed search" });
 	});
+
+	it("should should include a defaultValue if defined", () => {
+		const onChange = jest.fn();
+		render(
+			<SearchField
+				defaultValue="test"
+				results={[{ _id: "ID1" }]}
+				onChange={onChange}
+				onSearch={() => {}}
+				searchTerm="search term"
+				totalItems={2}
+			/>
+		);
+
+		expect(screen.getByRole("textbox", { value: "test" })).toBeDefined();
+	});
 });

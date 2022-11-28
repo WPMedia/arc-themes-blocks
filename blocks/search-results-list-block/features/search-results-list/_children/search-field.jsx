@@ -2,7 +2,15 @@ import React from "react";
 
 import { Button, Icon, Input, Paragraph, Stack, usePhrases } from "@wpmedia/arc-themes-components";
 
-const SearchField = ({ className, results, onChange, onSearch, searchTerm, totalItems }) => {
+const SearchField = ({
+	className,
+	defaultValue,
+	results,
+	onChange,
+	onSearch,
+	searchTerm,
+	totalItems,
+}) => {
 	// const { placeholderResizedImageOptions } = this.state;
 
 	const phrases = usePhrases();
@@ -12,11 +20,12 @@ const SearchField = ({ className, results, onChange, onSearch, searchTerm, total
 			<Stack className={className} direction="vertical">
 				<Icon name="Search" />
 				<Input
-					type="text"
-					placeholder={phrases.t("search-results-blocks.search-input-placeholder")}
 					className="search-bar"
+					{...(defaultValue ? { defaultValue } : {})}
 					name="searchQuery"
 					onChange={onChange}
+					placeholder={phrases.t("search-results-blocks.search-input-placeholder")}
+					type="text"
 				/>
 				<Button
 					aria-label={phrases.t("search-results-block.search-button")}

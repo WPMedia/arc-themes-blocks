@@ -92,24 +92,25 @@ class GlobalSearchResultsList extends React.Component {
 	}
 
 	render() {
-		const { resultList: { data, metadata: { total_hits: totalHits } = {} } = {}, searchTerm } =
-			this.state;
-		const { arcSite, promoElements } = this.props;
+		const { arcSite, globalContent = {}, promoElements } = this.props;
+		const { data, metadata: { total_hits: totalHits, q: query } = {} } = globalContent;
+		const { resultList: { data: moreStories } = {}, value } = this.state;
 
 		return (
 			<Stack className={BLOCK_CLASS_NAME}>
 				<SearchField
 					className={`${BLOCK_CLASS_NAME}__field`}
-					results={data}
+					defaultValue={value}
+					results={moreStories || data}
 					onChange={(event) => this.setState({ value: event.target.value })}
 					onSearch={() => this.handleSearch()}
-					searchTerm={searchTerm}
+					searchTerm={query}
 					totalItems={totalHits}
 				/>
 				<ResultsList
 					arcSite={arcSite}
 					className={`${BLOCK_CLASS_NAME}__results`}
-					results={data}
+					results={moreStories || data}
 					onSearch={() => this.fetchStories()}
 					promoElements={promoElements}
 					totalItems={totalHits}

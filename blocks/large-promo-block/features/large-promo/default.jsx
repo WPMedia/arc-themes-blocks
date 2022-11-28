@@ -320,7 +320,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 	const promoImageParams =
 		showImage &&
-		(imageOverrideURL || content
+		(imageOverrideURL || (content && getImageFromANS(content))
 			? {
 					ansImage: imageOverrideURL
 						? {

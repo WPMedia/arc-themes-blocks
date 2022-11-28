@@ -47,7 +47,7 @@ class GlobalSearchResultsList extends React.Component {
 		if (this.customSearchAction && value.length > 0) {
 			this.customSearchAction(value);
 		} else if (value.length > 0) {
-			window.location.href = `/search/${value}`;
+			window.location.href = `/search/${encodeURI(value)}`;
 		}
 	}
 

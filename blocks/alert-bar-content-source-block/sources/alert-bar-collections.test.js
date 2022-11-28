@@ -1,67 +1,87 @@
 import contentSource from "./alert-bar-collections";
 
-import mockCollection from "./mockCollection";
-import mockCollectionEmpty from "./mockCollectionEmpty";
-import mockCollectionUnpublishedStory from "./mockCollectionUnpublishedStory";
+jest.mock("fusion:environment", () => ({
+	CONTENT_BASE: "https://content.base",
+}));
 
-describe("the collections content source block", () => {
-	describe("when a website param is provided", () => {
-		it("should build the correct url", () => {
-			const url = contentSource.resolve({
-				"arc-site": "the-sun",
+jest.mock("axios", () => ({
+	__esModule: true,
+	default: jest.fn((request) => {
+		const requestUrl = new URL(request.url);
+		const url = {
+			hostname: requestUrl.hostname,
+			pathname: requestUrl.pathname,
+			searchObject: Object.fromEntries(requestUrl.searchParams),
+		};
+		if (request.url.includes("referent")) {
+			return Promise.resolve({
+				data: {
+					content_elements: [{ _id: "valid" }, { referent: "ignoreMe" }],
+				},
 			});
+		}
 
-			expect(url).toEqual(
-				"content/v4/collections?content_alias=alert-bar&website=the-sun&from=0&size=1&published=true"
-			);
+		return Promise.resolve({
+			data: {
+				content_elements: [{ url }],
+				request: {
+					...request,
+					url,
+				},
+			},
 		});
+	}),
+}));
+
+describe("the author api content source block", () => {
+	it("should use the proper param types", () => {
+		expect(contentSource.params).toEqual({});
 	});
 
-	describe("when a website param is not provided", () => {
-		it("should build the url without the website", () => {
-			const url = contentSource.resolve({});
+	it("should build the correct url", async () => {
+		const contentSourceFetch = await contentSource.fetch(
+			{
+				"arc-site": "the-site",
+			},
+			{ cachedCall: () => {} }
+		);
 
-			expect(url).toEqual(
-				"content/v4/collections?content_alias=alert-bar&from=0&size=1&published=true"
-			);
-		});
-
-		it("should build the url without parameters", () => {
-			const url = contentSource.resolve();
-
-			expect(url).toEqual(
-				"content/v4/collections?content_alias=alert-bar&from=0&size=1&published=true"
-			);
-		});
+		expect(contentSourceFetch.request.url.hostname).toEqual("content.base");
+		expect(contentSourceFetch.request.url.pathname).toEqual("/content/v4/collections");
+		expect(contentSourceFetch.request.url.searchObject).toEqual(
+			expect.objectContaining({
+				content_alias: "alert-bar",
+				from: "0",
+				published: "true",
+				size: "1",
+				website: "the-site",
+			})
+		);
 	});
 
-	describe("when a collection is empty", () => {
-		it("should return an empty content_elements", () => {
-			const content = contentSource.transform(mockCollectionEmpty);
-			expect(content.content_elements.length).toBe(0);
-		});
+	it("should build the correct url when the site is not passed", async () => {
+		const contentSourceFetch = await contentSource.fetch({}, { cachedCall: () => {} });
+
+		expect(contentSourceFetch.request.url.searchObject).toEqual(
+			expect.objectContaining({
+				content_alias: "alert-bar",
+				from: "0",
+				published: "true",
+				size: "1",
+			})
+		);
 	});
 
-	describe("when a collection has data", () => {
-		it("should return an one item on content_elements", () => {
-			const content = contentSource.transform(mockCollection);
-			expect(content.content_elements.length).toBe(1);
-		});
-	});
-
-	describe("when a collection has unpublished content", () => {
-		it("should return an empty content_elements", () => {
-			const content = contentSource.transform(mockCollectionUnpublishedStory);
-			expect(content.content_elements.length).toBe(0);
-		});
-	});
-
-	describe("when a collection returns no data", () => {
-		it("it should throw an error", () => {
-			const throwsError = () => {
-				contentSource.transform();
-			};
-			expect(throwsError).toThrow("Not found");
+	it("should remove the referent (unpublished) values", async () => {
+		expect(
+			await contentSource.fetch(
+				{
+					"arc-site": "referent-site",
+				},
+				{ cachedCall: () => {} }
+			)
+		).toEqual({
+			content_elements: [{ _id: "valid" }],
 		});
 	});
 });

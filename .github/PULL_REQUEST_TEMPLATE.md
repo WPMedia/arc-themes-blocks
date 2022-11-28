@@ -6,7 +6,7 @@ _Information about what you changed for this PR_
 
 ## Jira Ticket
 
-- [TMEDIA-](https://arcpublishing.atlassian.net/browse/TMEDIA-)
+- [THEMES-](https://arcpublishing.atlassian.net/browse/THEMES-)
 
 ## Acceptance Criteria
 
@@ -38,8 +38,8 @@ _Example: When I clicked the search button, the button turned green._
 
 _Examples of dependencies or side effects are:_
 
-- Manifest pr for new block: 
-- Feature pack pr for local development: 
+- Manifest pr for new block:
+- Feature pack pr for local development:
 - How to deploy to news: https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/3138682964/News+Theme+2.0+Migration+Development+Deployment+Notes
 - Additional settings that will be required in the blocks.json
 - Changes to the custom fields which will require users to reconfigure features

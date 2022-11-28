@@ -55,7 +55,7 @@ describe("the medium promo feature", () => {
 
 	it("should display an image if showImage is true", () => {
 		const config = {
-			imageOverrideURL: "#",
+			imageOverrideURL: "test.jpg",
 			imageRatio: "4:3",
 			showImage: true,
 		};

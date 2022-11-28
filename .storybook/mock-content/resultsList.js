@@ -18,13 +18,6 @@ export const resultsList = {
 					},
 				],
 			},
-			overline: {
-				basic: {
-					display: true,
-					text: "Exclusive news",
-					url: "https://www.google.com",
-				},
-			},
 			description: {
 				basic: "",
 			},

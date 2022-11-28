@@ -168,7 +168,7 @@ describe("Result parts", () => {
 				showItemOverline
 			/>
 		);
-		expect(screen.getByText(/Overline Text/i)).toBeInTheDocument();
+		expect(screen.getByText(/Section/i)).toBeInTheDocument();
 
 		unmount();
 	});

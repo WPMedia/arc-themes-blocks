@@ -44,12 +44,13 @@ const ResultItem = React.memo(
 		) => {
 			const {
 				description: { basic: descriptionText } = {},
-				overline: { basic: { text: overlineText, url: overlineURL } = {} } = {},
 				display_date: displayDate,
 				headlines: { basic: headlineText } = {},
 				websites,
 				credits,
 			} = element;
+			const phrases = usePhrases();
+			const { registerSuccessEvent } = useComponentContext();
 			const {
 				dateLocalization: { language, timeZone, dateTimeFormat } = {
 					language: "en",
@@ -57,10 +58,24 @@ const ResultItem = React.memo(
 					dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 				},
 			} = getProperties(arcSite);
-			// const overline = basic?.text || "Overline";
 
-			const phrases = usePhrases();
-			const { registerSuccessEvent } = useComponentContext();
+			const {
+				display: labelDisplay,
+				url: labelUrl,
+				text: labelText,
+			} = (element?.label && element?.label?.basic) || {};
+
+			const { _id: sectionUrl, name: sectionText } =
+				element?.websites?.[arcSite]?.website_section || {};
+
+			let [overlineText, overlineURL] = [sectionText, sectionUrl];
+			if (element?.owner?.sponsored) {
+				overlineText = element?.label?.basic?.text || phrases.t("global.sponsored-content");
+				overlineURL = null;
+			} else if (labelDisplay) {
+				[overlineText, overlineURL] = [labelText, labelUrl];
+			}
+
 			/* Author Formatting */
 			const imageURL = imageANSToImageSrc(getImageFromANS(element)) || null;
 			const auth = getImageFromANS(element)?.auth || {};

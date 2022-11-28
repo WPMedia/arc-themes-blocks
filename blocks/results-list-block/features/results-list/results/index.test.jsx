@@ -135,25 +135,6 @@ jest.mock("fusion:content", () => ({
 	useContent: jest.fn(),
 }));
 
-jest.mock("fusion:themes", () => jest.fn(() => ({})));
-
-const mockPhrases = {
-	t: jest.fn((phraseString) => {
-		switch (phraseString) {
-			case "results-list-block.see-more-button": {
-				return "See More";
-			}
-			case "results-list-block.see-more-button-aria-label": {
-				return "button";
-			}
-			default: {
-				break;
-			}
-		}
-		return "";
-	}),
-};
-
 describe("seeMore", () => {
 	it("should trigger a state update", () => {
 		useContent
@@ -170,7 +151,6 @@ describe("seeMore", () => {
 				configuredSize={1}
 				contentConfigValues={{}}
 				contentService="story-feed-query"
-				phrases={mockPhrases}
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
@@ -179,7 +159,7 @@ describe("seeMore", () => {
 
 		expect(screen.getAllByText(/Result Item/i)).toHaveLength(1);
 
-		fireEvent.click(screen.getByText("See More"));
+		fireEvent.click(screen.getByText("results-list-block.see-more-button"));
 
 		expect(screen.getAllByText(/Result Item/i)).toHaveLength(2);
 
@@ -197,14 +177,13 @@ describe("seeMore", () => {
 				configuredSize={1}
 				contentConfigValues={{}}
 				contentService="story-feed-query"
-				phrases={mockPhrases}
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
 			/>
 		);
 
-		expect(screen.queryByText("See More")).not.toBeInTheDocument();
+		expect(screen.queryByText("results-list-block.see-more-button")).not.toBeInTheDocument();
 
 		unmount();
 	});
@@ -221,7 +200,6 @@ describe("focus", () => {
 				configuredSize={1}
 				contentConfigValues={{}}
 				contentService="story-feed-query"
-				phrases={mockPhrases}
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
@@ -246,13 +224,12 @@ describe("focus", () => {
 				configuredSize={1}
 				contentConfigValues={{}}
 				contentService="story-feed-query"
-				phrases={mockPhrases}
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
 			/>
 		);
-		fireEvent.click(screen.getByText("See More"));
+		fireEvent.click(screen.getByText("results-list-block.see-more-button"));
 		expect(screen.getByText(/"_id":"element_2"/i)).toHaveFocus();
 		unmount();
 	});
@@ -272,13 +249,12 @@ describe("focus", () => {
 				configuredSize={1}
 				contentConfigValues={{}}
 				contentService="story-feed-query"
-				phrases={mockPhrases}
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
 				showDescription
 			/>
 		);
-		fireEvent.click(screen.getByText("See More"));
+		fireEvent.click(screen.getByText("results-list-block.see-more-button"));
 		expect(screen.getAllByText(/Result Item/i)[1]).not.toHaveFocus();
 		unmount();
 	});
@@ -300,7 +276,6 @@ describe("story-feed-query service", () => {
 				configuredSize={1}
 				contentConfigValues={{}}
 				contentService="story-feed-query"
-				phrases={mockPhrases}
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
@@ -318,7 +293,7 @@ describe("story-feed-query service", () => {
 			})
 		);
 
-		fireEvent.click(screen.getByText("See More"));
+		fireEvent.click(screen.getByText("results-list-block.see-more-button"));
 
 		expect(useContent).toHaveBeenLastCalledWith(
 			expect.objectContaining({
@@ -350,7 +325,6 @@ describe("content-api-collections service", () => {
 				configuredSize={1}
 				contentConfigValues={{}}
 				contentService="content-api-collections"
-				phrases={mockPhrases}
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
@@ -369,7 +343,7 @@ describe("content-api-collections service", () => {
 			})
 		);
 
-		fireEvent.click(screen.getByText("See More"));
+		fireEvent.click(screen.getByText("results-list-block.see-more-button"));
 
 		expect(useContent).toHaveBeenLastCalledWith(
 			expect.objectContaining({
@@ -402,7 +376,6 @@ describe("story-feed-author service", () => {
 				configuredSize={1}
 				contentConfigValues={{}}
 				contentService="story-feed-author"
-				phrases={mockPhrases}
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
@@ -420,7 +393,7 @@ describe("story-feed-author service", () => {
 			})
 		);
 
-		fireEvent.click(screen.getByText("See More"));
+		fireEvent.click(screen.getByText("results-list-block.see-more-button"));
 
 		expect(useContent).toHaveBeenLastCalledWith(
 			expect.objectContaining({
@@ -452,7 +425,6 @@ describe("story-feed-sections service", () => {
 				configuredSize={1}
 				contentConfigValues={{}}
 				contentService="story-feed-sections"
-				phrases={mockPhrases}
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
@@ -470,7 +442,7 @@ describe("story-feed-sections service", () => {
 			})
 		);
 
-		fireEvent.click(screen.getByText("See More"));
+		fireEvent.click(screen.getByText("results-list-block.see-more-button"));
 
 		expect(useContent).toHaveBeenLastCalledWith(
 			expect.objectContaining({
@@ -497,7 +469,6 @@ describe("story-feed-tag service", () => {
 				configuredSize={1}
 				contentConfigValues={{}}
 				contentService="story-feed-tag"
-				phrases={mockPhrases}
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
@@ -515,7 +486,7 @@ describe("story-feed-tag service", () => {
 			})
 		);
 
-		fireEvent.click(screen.getByText("See More"));
+		fireEvent.click(screen.getByText("results-list-block.see-more-button"));
 
 		expect(useContent).toHaveBeenLastCalledWith(
 			expect.objectContaining({
@@ -550,7 +521,6 @@ describe("unknown service", () => {
 					defaultSize: 1,
 				}}
 				contentService="unknown"
-				phrases={mockPhrases}
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
@@ -593,7 +563,6 @@ describe("lazy flags", () => {
 					defaultSize: 1,
 				}}
 				contentService="unknown"
-				phrases={mockPhrases}
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
@@ -626,7 +595,6 @@ describe("fallback image", () => {
 					defaultSize: 1,
 				}}
 				contentService="unknown"
-				phrases={mockPhrases}
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage="http://test/fallback.jpg"

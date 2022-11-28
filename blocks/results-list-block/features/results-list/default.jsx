@@ -3,7 +3,7 @@ import PropTypes from "@arc-fusion/prop-types";
 
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { isServerSide, HeadingSection, usePhrases } from "@wpmedia/arc-themes-components";
+import { isServerSide, HeadingSection } from "@wpmedia/arc-themes-components";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
 import { resolveDefaultPromoElements } from "./results/helpers";
@@ -20,7 +20,6 @@ const ResultsList = ({ customFields }) => {
 		? deployment(`${contextPath}/${fallbackImage}`)
 		: fallbackImage;
 	const promoElements = resolveDefaultPromoElements(customFields);
-	const phrases = usePhrases();
 	const isServerSideLazy = lazyLoad && isServerSide() && !isAdmin;
 	const configuredOffset =
 		parseInt(contentConfigValues?.offset, 10) ||
@@ -40,7 +39,6 @@ const ResultsList = ({ customFields }) => {
 					contentConfigValues={contentConfigValues}
 					contentService={contentService}
 					isServerSideLazy={isServerSideLazy}
-					phrases={phrases}
 					showByline={promoElements.showByline}
 					showDate={promoElements.showDate}
 					showDescription={promoElements.showDescription}

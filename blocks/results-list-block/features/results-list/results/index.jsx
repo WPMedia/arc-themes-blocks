@@ -1,7 +1,7 @@
 import React, { createRef, useCallback, useEffect, useReducer, useState } from "react";
 import { RESIZER_APP_VERSION } from "fusion:environment";
 import { useContent } from "fusion:content";
-import { Button, Divider, Join, Stack } from "@wpmedia/arc-themes-components";
+import { Button, Divider, Join, Stack, usePhrases } from "@wpmedia/arc-themes-components";
 
 import ResultItem from "./result-item";
 import { reduceResultList } from "./helpers";
@@ -15,7 +15,6 @@ const Results = ({
 	contentConfigValues,
 	contentService,
 	isServerSideLazy = false,
-	phrases,
 	showByline = false,
 	showDate = false,
 	showDescription = false,
@@ -25,6 +24,7 @@ const Results = ({
 	targetFallbackImage,
 }) => {
 	const [queryOffset, setQueryOffset] = useState(configuredOffset);
+	const phrases = usePhrases();
 
 	const placeholderResizedImageOptions = useContent({
 		source: !targetFallbackImage.includes("/resources/") ? "resize-image-api" : null,
@@ -86,13 +86,6 @@ const Results = ({
             }
           }
         }
-		overline {
-			basic {
-				display
-				text
-				url
-			}
-		}
         headlines {
           basic
         }

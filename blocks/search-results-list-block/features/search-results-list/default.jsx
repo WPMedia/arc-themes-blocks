@@ -21,7 +21,7 @@ const SearchResultsListContainer = ({ customFields = {}, customSearchAction = nu
 	if (isServerSide() && lazyLoadNonPagebuilder) {
 		return null;
 	}
-
+	//
 	if (showGlobalContent) {
 		return (
 			<LazyLoad enabled={lazyLoadNonPagebuilder}>
@@ -30,7 +30,7 @@ const SearchResultsListContainer = ({ customFields = {}, customSearchAction = nu
 					<GlobalContentSearch
 						arcSite={arcSite}
 						customSearchAction={customSearchAction}
-						{...(customFields.globalContent ? { globalContent: customFields.globalContent } : {})}
+						{...(customFields?.globalContent ? { globalContent: customFields.globalContent } : {})}
 						promoElements={resolveDefaultPromoElements(customFields)}
 					/>
 				</HeadingSection>

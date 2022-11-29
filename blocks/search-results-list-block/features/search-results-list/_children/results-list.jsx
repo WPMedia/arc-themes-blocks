@@ -3,22 +3,22 @@ import React from "react";
 import { Button, Divider, Join, Stack, usePhrases } from "@wpmedia/arc-themes-components";
 import SearchResult from "./search-result";
 
-const ResultsList = ({ arcSite, className, results, onSearch, promoElements, totalItems }) => {
+const ResultsList = ({ arcSite, className, content, onSearch, promoElements, totalItems }) => {
 	const phrases = usePhrases();
 
-	return results?.length > 0 ? (
+	return content?.length > 0 ? (
 		<Stack className={className}>
 			<Join separator={Divider}>
-				{results.map((content) => (
+				{content.map((contentItem) => (
 					<SearchResult
 						arcSite={arcSite}
 						className={`${className}-item`}
-						content={content}
-						key={`result-card-${content._id}`}
+						content={contentItem}
+						key={`result-card-${contentItem._id}`}
 						promoElements={promoElements}
 					/>
 				))}
-				{results.length < totalItems && (
+				{content.length < totalItems && (
 					<Button
 						accessibilityLabel={phrases.t("search-results-block.see-more-button-aria-label")}
 						onClick={onSearch}

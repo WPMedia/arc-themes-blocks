@@ -9,7 +9,7 @@ describe("Search Results List - Results List", () => {
 		const { container } = render(
 			<ResultsList
 				arcSite="arc-site"
-				results={[]}
+				content={[]}
 				onSearch={() => {}}
 				promoElements={{
 					showHeadline: true,
@@ -28,7 +28,7 @@ describe("Search Results List - Results List", () => {
 		render(
 			<ResultsList
 				arcSite="arc-site"
-				results={[{ _id: "ID1" }]}
+				content={[{ _id: "ID1" }]}
 				onSearch={() => {}}
 				promoElements={{
 					showHeadline: true,
@@ -51,7 +51,7 @@ describe("Search Results List - Results List", () => {
 		render(
 			<ResultsList
 				arcSite="arc-site"
-				results={[{ _id: "ID1" }]}
+				content={[{ _id: "ID1" }]}
 				onSearch={() => {}}
 				promoElements={{
 					showHeadline: true,
@@ -73,7 +73,7 @@ describe("Search Results List - Results List", () => {
 		render(
 			<ResultsList
 				arcSite="arc-site"
-				results={[{ _id: "ID1" }]}
+				content={[{ _id: "ID1" }]}
 				onSearch={onSearch}
 				promoElements={{
 					showHeadline: true,

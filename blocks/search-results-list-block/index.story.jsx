@@ -15,7 +15,7 @@ const globalContent = {
 			display_date: "2022-01-01T00:00:00.000Z",
 			headlines: { basic: "Basic Headline Text" },
 			websites: {
-				"test-site": {
+				"story-book": {
 					website_url: "#",
 				},
 			},
@@ -25,7 +25,7 @@ const globalContent = {
 			display_date: "2022-01-01T00:00:00.000Z",
 			headlines: { basic: "Basic Headline Text" },
 			websites: {
-				"test-site": {
+				"story-book": {
 					website_url: "#",
 				},
 			},
@@ -35,7 +35,7 @@ const globalContent = {
 			display_date: "2022-01-01T00:00:00.000Z",
 			headlines: { basic: "Basic Headline Text" },
 			websites: {
-				"test-site": {
+				"story-book": {
 					website_url: "#",
 				},
 			},

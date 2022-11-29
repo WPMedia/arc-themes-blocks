@@ -120,7 +120,7 @@ export const LeadArtPresentation = (props) => {
 					title={!hideTitle ? lead_art.subtitle : null}
 				>
 					<Button
-						iconLeft={<Icon name="Fullscreen" width="100%" height="100%" fill="#6B6B6B" />}
+						iconLeft={<Icon name="Fullscreen" fill="#6B6B6B" />}
 						label={
 							!isOpen
 								? phrases.t("lead-art-block.fullscreen-enter")

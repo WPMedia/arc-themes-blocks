@@ -8,7 +8,6 @@ describe("Search Results List - Search Field", () => {
 	it("should render the search field", async () => {
 		render(
 			<SearchField
-				results={[]}
 				onChange={() => {}}
 				onSearch={() => {}}
 				searchTerm="search term"
@@ -26,10 +25,10 @@ describe("Search Results List - Search Field", () => {
 	it("should render the search metadata if there are results", async () => {
 		render(
 			<SearchField
-				results={[{ _id: "ID1" }]}
 				onChange={() => {}}
 				onSearch={() => {}}
 				searchTerm="search term"
+				showResultsStats
 				totalItems={2}
 			/>
 		);
@@ -41,7 +40,7 @@ describe("Search Results List - Search Field", () => {
 		const onSearch = jest.fn();
 		render(
 			<SearchField
-				results={[{ _id: "ID1" }]}
+				showResultsStats
 				onChange={() => {}}
 				onSearch={onSearch}
 				searchTerm="search term"
@@ -61,10 +60,10 @@ describe("Search Results List - Search Field", () => {
 		const onChange = jest.fn();
 		render(
 			<SearchField
-				results={[{ _id: "ID1" }]}
 				onChange={onChange}
 				onSearch={() => {}}
 				searchTerm="search term"
+				showResultsStats
 				totalItems={2}
 			/>
 		);
@@ -85,10 +84,10 @@ describe("Search Results List - Search Field", () => {
 		render(
 			<SearchField
 				defaultValue="test"
-				results={[{ _id: "ID1" }]}
 				onChange={onChange}
 				onSearch={() => {}}
 				searchTerm="search term"
+				showResultsStats
 				totalItems={2}
 			/>
 		);

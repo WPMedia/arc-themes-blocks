@@ -89,16 +89,16 @@ class CustomSearchResultsList extends React.Component {
 			<Stack className={BLOCK_CLASS_NAME}>
 				<SearchField
 					className={`${BLOCK_CLASS_NAME}__field`}
-					results={data}
 					onChange={(event) => this.setState({ value: event.target.value })}
 					onSearch={() => this.fetchStories(false)}
 					searchTerm={searchTerm}
+					showResultsStats={data?.length > 0}
 					totalItems={totalHits}
 				/>
 				<ResultsList
 					arcSite={arcSite}
 					className={`${BLOCK_CLASS_NAME}__results`}
-					results={data}
+					content={data}
 					onSearch={() => this.fetchStories(true)}
 					promoElements={promoElements}
 					totalItems={totalHits}

@@ -17,16 +17,15 @@ class GlobalSearchResultsList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.arcSite = props.arcSite;
-		const query = props?.globalContent?.metadata?.q;
 		this.state = {
 			storedList: {},
 			resultList: {},
 			page: 1,
-			value: query || "",
+			value: props?.globalContent?.metadata?.q || "",
 			focusItem: 0,
 		};
 
-		this.customSearchAction = props.customSearchAction || null;
+		this.customSearchAction = props?.customSearchAction || null;
 		this.listItemRefs = {};
 	}
 
@@ -96,21 +95,23 @@ class GlobalSearchResultsList extends React.Component {
 		const { data, metadata: { total_hits: totalHits, q: query } = {} } = globalContent;
 		const { resultList: { data: moreStories } = {}, value } = this.state;
 
+		const content = moreStories || data;
+
 		return (
 			<Stack className={BLOCK_CLASS_NAME}>
 				<SearchField
 					className={`${BLOCK_CLASS_NAME}__field`}
 					defaultValue={value}
-					results={moreStories || data}
 					onChange={(event) => this.setState({ value: event.target.value })}
 					onSearch={() => this.handleSearch()}
 					searchTerm={query}
+					showResultsStats={content?.length > 0}
 					totalItems={totalHits}
 				/>
 				<ResultsList
 					arcSite={arcSite}
 					className={`${BLOCK_CLASS_NAME}__results`}
-					results={moreStories || data}
+					content={content}
 					onSearch={() => this.fetchStories()}
 					promoElements={promoElements}
 					totalItems={totalHits}

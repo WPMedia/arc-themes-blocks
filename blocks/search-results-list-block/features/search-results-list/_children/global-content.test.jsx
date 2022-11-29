@@ -48,13 +48,7 @@ describe("The search results list - global content", () => {
 		SearchResultsList.prototype.fetchStories = jest.fn();
 		SearchResultsList.prototype.onChange = jest.fn();
 		SearchResultsList.prototype.fetchContent = jest.fn();
-		const wrapper = shallow(
-			<SearchResultsList
-				arcSite="test-site"
-				targetFallbackImage=""
-				deployment={jest.fn((path) => path)}
-			/>
-		);
+		const wrapper = shallow(<SearchResultsList arcSite="test-site" />);
 		wrapper.setState({ resultList: mockData, searchTerm: "test" }, () => {
 			wrapper.update();
 

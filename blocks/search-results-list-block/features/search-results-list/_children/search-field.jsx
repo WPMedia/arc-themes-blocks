@@ -5,10 +5,10 @@ import { Button, Icon, Input, Paragraph, Stack, usePhrases } from "@wpmedia/arc-
 const SearchField = ({
 	className,
 	defaultValue,
-	results,
 	onChange,
 	onSearch,
 	searchTerm,
+	showResultsStats,
 	totalItems,
 }) => {
 	// const { placeholderResizedImageOptions } = this.state;
@@ -36,14 +36,14 @@ const SearchField = ({
 					{phrases.t("search-results-block.search-button")}
 				</Button>
 			</Stack>
-			{results && (
+			{showResultsStats ? (
 				<Paragraph className="search-results-text">
 					{phrases.t("search-results-block.search-result-number", {
 						smart_count: totalItems,
 						searchTerm,
 					})}
 				</Paragraph>
-			)}
+			) : null}
 		</Stack>
 	);
 };

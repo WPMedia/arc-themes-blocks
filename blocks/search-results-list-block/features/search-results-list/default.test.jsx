@@ -4,11 +4,7 @@ import { shallow } from "enzyme";
 
 jest.mock("./_children/global-content", () => class GlobalContentSearchResultsList {});
 jest.mock("./_children/custom-content", () => class CustomContentSearchResultsList {});
-// jest.mock("prop-types", () => ({
-// 	bool: true,
-// 	shape: () => {},
-// 	contentConfig: () => {},
-// }));
+
 jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({})),
 }));
@@ -16,11 +12,6 @@ jest.mock("@wpmedia/engine-theme-sdk", () => ({
 	...jest.requireActual("@wpmedia/engine-theme-sdk"),
 	LazyLoad: ({ children }) => <>{children}</>,
 }));
-jest.mock("fusion:properties", () =>
-	jest.fn(() => ({
-		fallbackImage: "placeholder.jpg",
-	}))
-);
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	HeadingSection: ({ children }) => <>{children}</>,
@@ -35,12 +26,48 @@ const defaultPromos = {
 	showImage: true,
 };
 
+const globalContent = {
+	data: [
+		{
+			description: { basic: "Basic Description 1" },
+			display_date: "2022-01-01T00:00:00.000Z",
+			headlines: { basic: "Basic Headline Text" },
+			websites: {
+				"test-site": {
+					website_url: "#",
+				},
+			},
+		},
+		{
+			description: { basic: "Basic Description 2" },
+			display_date: "2022-01-01T00:00:00.000Z",
+			headlines: { basic: "Basic Headline Text" },
+			websites: {
+				"test-site": {
+					website_url: "#",
+				},
+			},
+		},
+		{
+			description: { basic: "Basic Description 3" },
+			display_date: "2022-01-01T00:00:00.000Z",
+			headlines: { basic: "Basic Headline Text" },
+			websites: {
+				"test-site": {
+					website_url: "#",
+				},
+			},
+		},
+	],
+	metadata: { total_hits: 3, q: "storybook search" },
+};
+
 describe("the search results list feature block", () => {
 	describe("when it is configured to inherit global content", () => {
 		it("should render the global content search results list", () => {
 			const { default: SearchResultsListContainer } = require("./default");
 			const wrapper = shallow(
-				<SearchResultsListContainer customFields={{ inheritGlobalContent: true }} />
+				<SearchResultsListContainer customFields={{ inheritGlobalContent: true, globalContent }} />
 			);
 			expect(wrapper.find("GlobalContentSearchResultsList")).toBeTruthy();
 		});

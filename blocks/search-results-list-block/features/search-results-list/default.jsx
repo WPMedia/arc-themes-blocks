@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 
 import { HeadingSection, isServerSide } from "@wpmedia/arc-themes-components";
@@ -26,9 +26,11 @@ const SearchResultsListContainer = ({ customFields = {}, customSearchAction = nu
 		return (
 			<LazyLoad enabled={lazyLoadNonPagebuilder}>
 				<HeadingSection>
+					{/* The globalContent line is only for testing/storybook, the Consumer decorator injects this in prod */}
 					<GlobalContentSearch
 						arcSite={arcSite}
 						customSearchAction={customSearchAction}
+						{...(customFields.globalContent ? { globalContent: customFields.globalContent } : {})}
 						promoElements={resolveDefaultPromoElements(customFields)}
 					/>
 				</HeadingSection>

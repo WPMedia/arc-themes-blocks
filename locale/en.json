@@ -71,6 +71,8 @@
 		"global.gallery-previous-label": "Previous Slide",
 		"global.gallery-text": "Gallery",
 		"global.opens-in-new-window": "(Opens in new window)",
+		"global.see-more-button": "See more",
+		"global.see-more-button-aria-label": "See more stories about this topic",
 		"global.social-email": "Email",
 		"global.social-email-connect": "Send an email to %{authorName}",
 		"global.social-facebook": "Facebook",
@@ -158,6 +160,10 @@
 		"identity-block.update-email-error": "There's been an error updating your email address",
 		"identity-block.update-password-error": "There's been an error updating your password",
 		"identity-block.username": "Username"
+	},
+	"lead-art-block": {
+		"lead-art-block.fullscreen-enter": "Enter full screen mode displaying the lead image",
+		"lead-art-block.fullscreen-exit": "Exit full screen mode displaying the lead image"
 	},
 	"links-bar-block": {
 		"links-bar-block.element-aria-label": "More Links"

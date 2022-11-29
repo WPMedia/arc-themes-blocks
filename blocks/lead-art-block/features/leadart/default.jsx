@@ -121,9 +121,11 @@ export const LeadArtPresentation = (props) => {
 				>
 					<Button
 						iconLeft={<Icon name="Fullscreen" width="100%" height="100%" fill="#6B6B6B" />}
-						label={`${
-							/* istanbul ignore next */ !isOpen ? "Enter" : "Exit"
-						} full screen mode displaying the lead image`}
+						label={
+							!isOpen
+								? phrases.t("lead-art-block.fullscreen-enter")
+								: phrases.t("lead-art-block.fullscreen-exit")
+						}
 						onClick={toggleFullScreen}
 					>
 						<span>{buttonLabel}</span>

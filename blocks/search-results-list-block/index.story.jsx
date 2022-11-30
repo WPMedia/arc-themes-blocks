@@ -46,6 +46,7 @@ const globalContent = {
 
 export const allFields = () => {
 	const customFields = {
+		itemContentConfig: {},
 		globalContent,
 		inheritGlobalContent: true,
 		showHeadline: true,

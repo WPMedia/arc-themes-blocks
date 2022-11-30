@@ -21,7 +21,7 @@ const SearchResultsListContainer = ({ customFields = {}, customSearchAction = nu
 	if (isServerSide() && lazyLoadNonPagebuilder) {
 		return null;
 	}
-	//
+
 	if (showGlobalContent) {
 		return (
 			<LazyLoad enabled={lazyLoadNonPagebuilder}>

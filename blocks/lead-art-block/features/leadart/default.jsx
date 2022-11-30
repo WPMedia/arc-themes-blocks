@@ -128,7 +128,7 @@ export const LeadArtPresentation = (props) => {
 						}
 						onClick={toggleFullScreen}
 					>
-						<span>{buttonLabel}</span>
+						{buttonLabel}
 					</Button>
 					<div ref={imgRef}>
 						<Image

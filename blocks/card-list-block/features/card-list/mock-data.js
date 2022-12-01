@@ -59,6 +59,9 @@ export const oneListItem = {
 			promo_items: {
 				basic: {
 					_id: "YJH6DMK6UFCZFABUOH3NQ4IHRA",
+					auth: {
+						2: "0034d20d12780c22adc5fc4d6c8b7dc5d42933e4939e15a18c40600600136670",
+					},
 					additional_properties: {
 						fullSizeResizeUrl:
 							"/photo/resize/Ojb4x1TYVodUSpp-xAx_U5sVDmI=/arc-anglerfish-arc2-prod-corecomponents/public/YJH6DMK6UFCZFABUOH3NQ4IHRA.jpg",
@@ -757,6 +760,9 @@ export default {
 			promo_items: {
 				basic: {
 					_id: "K6FTNMOXBBDS5HHTYTAV7LNEF4",
+					auth: {
+						2: "0034d20d12780c22adc5fc4d6c8b7dc5d42933e4939e15a18c40600600136670",
+					},
 					additional_properties: {
 						fullSizeResizeUrl:
 							"/photo/resize/kvPd0cFmz3KJM-l--Flir-Rq1Do=/arc-anglerfish-arc2-prod-corecomponents/public/K6FTNMOXBBDS5HHTYTAV7LNEF4.jpg",
@@ -3879,12 +3885,16 @@ export default {
 					promo_items: {
 						basic: {
 							type: "image",
+							_id: "123",
 							version: "0.5.8",
 							credits: {},
 							caption: "GF Default - A Shallow River Streaming Through A Bed Of Rocks",
 							url: "https://d22ff27hdsy159.cloudfront.net/11-05-2019/t_9f51049ae2e640ba99b4a7f1763ca5fc_name_t_1c01cadfde48422b857383e38d8553a7_name_Pexels_Videos_2330708__scaled.jpg",
 							width: 1920,
 							height: 1080,
+							auth: {
+								2: "0034d20d12780c22adc5fc4d6c8b7dc5d42933e4939e15a18c40600600136670",
+							},
 						},
 					},
 					related_content: {
@@ -5415,6 +5425,9 @@ export default {
 					promo_items: {
 						basic: {
 							_id: "P3V3THIJPVGUBLRIIYWKFHZTKA",
+							auth: {
+								2: "0034d20d12780c22adc5fc4d6c8b7dc5d42933e4939e15a18c40600600136670",
+							},
 							additional_properties: {
 								fullSizeResizeUrl:
 									"/photo/resize/6aRJ4xT2a4iiFV-JRBBWUdpDtvE=/arc-anglerfish-arc2-prod-corecomponents/public/P3V3THIJPVGUBLRIIYWKFHZTKA.jpg",
@@ -7938,6 +7951,9 @@ export default {
 			promo_items: {
 				basic: {
 					_id: "2DOFQDRVRNBNRFEJPJG7I7LTWY",
+					auth: {
+						2: "0034d20d12780c22adc5fc4d6c8b7dc5d42933e4939e15a18c40600600136670",
+					},
 					additional_properties: {
 						fullSizeResizeUrl:
 							"/photo/resize/MpQa--IHjMajtu3E6JOTeKbFFP4=/arc-anglerfish-arc2-prod-corecomponents/public/2DOFQDRVRNBNRFEJPJG7I7LTWY.jpg",
@@ -10384,6 +10400,9 @@ export default {
 			promo_items: {
 				basic: {
 					_id: "7P2OXUXGHNAIVHEHPC2STWGEEI",
+					auth: {
+						2: "0034d20d12780c22adc5fc4d6c8b7dc5d42933e4939e15a18c40600600136670",
+					},
 					additional_properties: {
 						fullSizeResizeUrl:
 							"/photo/resize/ISs5SBQXHxMMU7lh2HM5GaYmKYs=/arc-anglerfish-arc2-prod-corecomponents/public/7P2OXUXGHNAIVHEHPC2STWGEEI.jpg",

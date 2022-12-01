@@ -208,7 +208,7 @@ const CardListItems = (props) => {
 								<Attribution>
 									{hasAuthor ? (
 										<>
-											<span>{phrases.t("byline-block.by-text")}</span> <span>{bylineNodes}</span>
+											<span>{phrases.t("global.by-text")}</span> <span>{bylineNodes}</span>
 											<Separator />
 										</>
 									) : null}

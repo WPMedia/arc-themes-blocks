@@ -137,7 +137,7 @@ const CardListItems = (props) => {
 	const displayDate = localizeDate(sourceContent.display_date, dateFormat, language, timeZone);
 
 	/* Author Formatting */
-	const bylineNodes = formatAuthors(sourceContent?.credits?.by, phrases.t("byline-block.and-text"));
+	const bylineNodes = formatAuthors(sourceContent?.credits?.by, phrases.t("global.and-text"));
 	const hasAuthor = !!bylineNodes.length;
 
 	// Start Overline data

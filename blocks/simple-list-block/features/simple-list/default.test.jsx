@@ -1,20 +1,23 @@
 import React from "react";
-import { mount } from "enzyme";
-import { useFusionContext } from "fusion:context";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 import { useContent } from "fusion:content";
+import { useFusionContext } from "fusion:context";
 import { isServerSide } from "@wpmedia/arc-themes-components";
+
 import SimpleList from "./default";
 
-const mockOutput = {
+const mockData = {
 	content_elements: [
 		{
 			promo_items: {
 				basic: {
+					_id: "7P2OXUXGHNAIVHEHPC2STWGEEI",
+					auth: {
+						2: "0034d20d12780c22adc5fc4d6c8b7dc5d42933e4939e15a18c40600600136670",
+					},
 					type: "image",
 					url: "something.jpg",
-					resized_params: {
-						"274x183": "",
-					},
 				},
 			},
 			headlines: {
@@ -37,11 +40,12 @@ const mockOutput = {
 		{
 			promo_items: {
 				basic: {
+					_id: "7P2OXUXGHNAIVHEHPC2STWGEEI",
+					auth: {
+						2: "0034d20d12780c22adc5fc4d6c8b7dc5d42933e4939e15a18c40600600136670",
+					},
 					type: "image",
 					url: "something2.jpg",
-					resized_params: {
-						"274x183": "",
-					},
 				},
 			},
 			headlines: {
@@ -79,29 +83,8 @@ const mockOutput = {
 };
 
 jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => mockOutput),
-	useFusionContext: jest.fn(() => {}),
+	useContent: jest.fn(() => mockData),
 }));
-
-jest.mock("fusion:context", () => ({
-	useFusionContext: jest.fn(() => ({
-		arcSite: "the-sun",
-		customFields: {
-			elementPlacement: { 1: 2, 2: 1 },
-		},
-		deployment: jest.fn(() => {}),
-	})),
-}));
-
-jest.mock("fusion:properties", () =>
-	jest.fn(() => ({
-		websiteDomain: "",
-		fallbackImage: "/resources/placeholder.jpg",
-		resizerURL: "resizer",
-	}))
-);
-
-jest.mock("fusion:themes", () => jest.fn(() => ({})));
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
 	LazyLoad: ({ children }) => <>{children}</>,
@@ -112,86 +95,166 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	isServerSide: jest.fn(),
 }));
 
-jest.mock(
-	"./_children/story-item",
-	() =>
-		function StoryItem() {
-			return <div />;
-		}
-);
+const listContentConfig = {
+	contentConfigValues: {
+		offset: "0",
+		query: "type:story",
+		size: "30",
+	},
+	contentService: "story-feed-query",
+};
 
-describe("Simple list", () => {
-	it("should show title if there is a title provided", () => {
-		const testText = "List Over Here";
-
-		const customFields = {
-			title: testText,
-			lazyLoad: false,
-		};
-
-		const wrapper = mount(<SimpleList customFields={customFields} />);
-
-		expect(wrapper.find("Heading").first().text()).toBe(testText);
-	});
-
-	it("should show no title if there is no title provided", () => {
-		const wrapper = mount(<SimpleList customFields={{ lazyLoad: false }} />);
-
-		expect(wrapper.find(".b-simple-list__title").length).toBe(0);
-	});
-
-	it("should fetch an array of data when content service is provided", () => {
-		const customFields = {
-			lazyLoad: false,
-			listContentConfig: {
-				contentService: "something",
-				contentConfigValues: {
-					query: "",
-				},
-			},
-		};
-
-		const wrapper = mount(<SimpleList customFields={customFields} arcSite="the-sun" />);
-
-		expect(wrapper.find("StoryItem").length).toBe(2);
-	});
-
-	it("should render content only for the arcSite", () => {
-		const wrapper = mount(<SimpleList arcSite="the-sun" customFields={{ lazyLoad: false }} />);
-
-		expect(wrapper.find("StoryItem")).toHaveLength(2);
-	});
-
-	it("should not render items when no data provided", () => {
-		const customFields = {
-			lazyLoad: false,
-			listContentConfig: {
-				contentService: "something",
-				contentConfigValues: {
-					query: "",
-				},
-			},
-		};
-
-		useContent.mockReturnValueOnce(null);
-
-		const wrapper = mount(<SimpleList customFields={customFields} arcSite="the-sun" />);
-
-		expect(wrapper.find("StoryItem").length).toBe(0);
-	});
-
-	it("should render null if isServerSide and lazyLoad enabled", () => {
-		const customFields = {
-			lazyLoad: true,
-		};
-		isServerSide.mockReturnValue(true);
-		useFusionContext.mockReturnValueOnce({
+describe("The simple-list-block", () => {
+	beforeEach(() => {
+		useFusionContext.mockReturnValue({
 			arcSite: "the-sun",
+			contextPath: "pf",
 			deployment: jest.fn((x) => x),
 			isAdmin: false,
 		});
+	});
 
-		const wrapper = mount(<SimpleList customFields={customFields} />);
-		expect(wrapper).toBeEmptyRender();
+	describe("render a list of simple-list-items", () => {
+		it("should render null if isServerSide and lazyLoad enabled", () => {
+			const customFields = {
+				listContentConfig,
+				showHeadline: true,
+				showImage: true,
+				lazyLoad: true,
+			};
+			isServerSide.mockReturnValue(true);
+
+			const { container } = render(<SimpleList customFields={customFields} />);
+			expect(container.firstChild).toBeNull();
+		});
+
+		it("should render in Admin with lazyLoad enabled", () => {
+			const customFields = {
+				listContentConfig,
+				showHeadline: true,
+				showImage: true,
+				lazyLoad: true,
+			};
+
+			useFusionContext.mockReturnValue({
+				arcSite: "the-sun",
+				deployment: jest.fn((x) => x),
+				isAdmin: true,
+			});
+
+			const { container } = render(<SimpleList customFields={customFields} />);
+			expect(container.firstChild).not.toBeNull();
+		});
+
+		it("should render list item with headline, image and a number", () => {
+			const customFields = {
+				lazyLoad: false,
+			};
+
+			const { unmount } = render(<SimpleList customFields={customFields} />);
+
+			expect(screen.getByText("Video Test")).toBeInTheDocument();
+			const image = screen.queryAllByRole("img", { hidden: true });
+			expect(image).toBeTruthy();
+
+			unmount();
+		});
+
+		it("should not show headline", () => {
+			const customFields = {
+				listContentConfig,
+				showHeadline: false,
+				showImage: true,
+			};
+
+			const { unmount } = render(<SimpleList customFields={customFields} />);
+
+			expect(screen.queryByText("Video Test")).not.toBeInTheDocument();
+
+			unmount();
+		});
+
+		it("should not show image", () => {
+			const customFields = {
+				listContentConfig,
+				showHeadline: true,
+				showImage: false,
+			};
+
+			const { unmount } = render(<SimpleList customFields={customFields} />);
+
+			expect(screen.queryByText("Video Test")).toBeInTheDocument();
+			const image = screen.queryAllByRole("img", { hidden: true });
+			expect(image.length).toBe(0);
+
+			unmount();
+		});
+
+		it("should render a placeholder image", () => {
+			const customFields = {
+				listContentConfig,
+				showHeadline: true,
+				showImage: true,
+			};
+
+			const { unmount } = render(<SimpleList customFields={customFields} />);
+			const image = document.querySelectorAll("img[src='pf/placeholder.jpg']");
+			expect(image.length).toBeTruthy();
+
+			unmount();
+		});
+
+		it("should render a title from custom field", () => {
+			const customFields = {
+				title: "Simple List Title",
+				listContentConfig,
+				showHeadline: true,
+				showImage: true,
+			};
+
+			const { unmount } = render(<SimpleList customFields={customFields} />);
+
+			expect(screen.queryByText("Simple List Title")).toBeInTheDocument();
+
+			unmount();
+		});
+
+		it("should render elements only for arcSite", () => {
+			const customFields = {
+				listContentConfig,
+				showHeadline: true,
+				showImage: true,
+			};
+
+			useFusionContext.mockReturnValue({
+				arcSite: "the-sun",
+				deployment: jest.fn(() => {}),
+			});
+
+			const { unmount } = render(<SimpleList customFields={customFields} />);
+			expect(screen.queryByText("Video Test")).toBeInTheDocument();
+			expect(screen.queryByText("Story with video as the Lead Art")).not.toBeInTheDocument();
+			unmount();
+		});
+	});
+
+	describe("not render list items", () => {
+		it("should render no list if no list items present", () => {
+			useContent.mockReturnValue({});
+
+			const customFields = {
+				listContentConfig,
+				showHeadline: true,
+				showImage: true,
+				lazyLoad: false,
+			};
+
+			const { unmount } = render(<SimpleList customFields={customFields} />);
+
+			expect(screen.queryByText("Article with a YouTube embed in it")).not.toBeInTheDocument();
+			expect(screen.queryByText("Story with video as the Lead Art")).not.toBeInTheDocument();
+
+			unmount();
+		});
 	});
 });

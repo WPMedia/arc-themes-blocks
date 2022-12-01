@@ -43,7 +43,6 @@ const CardListItems = (props) => {
 			displayAmount,
 		},
 		targetFallbackImage,
-		primaryLogoAlt,
 		dateLocalization: { language, timeZone, dateFormat } = {
 			language: "en",
 			timeZone: "GMT",

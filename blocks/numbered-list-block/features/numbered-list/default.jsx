@@ -4,7 +4,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-
+import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
 	getImageFromANS,
@@ -12,6 +12,7 @@ import {
 	Heading,
 	HeadingSection,
 	Image,
+	imageANSToImageSrc,
 	Link,
 	Paragraph,
 	Stack,
@@ -54,22 +55,22 @@ const NumberedList = (props) => {
         }
         promo_items {
           basic {
+			_id
+			auth {
+				${RESIZER_APP_VERSION}
+			}
             type
             url
-            resized_params {
-              274x183
-              105x70
-            }
           }
           lead_art {
             promo_items {
               basic {
+				_id
+				auth {
+					${RESIZER_APP_VERSION}
+				}
                 type
                 url
-                resized_params {
-                  274x183
-                  105x70
-                }
               }
             }
             type
@@ -95,7 +96,8 @@ const NumberedList = (props) => {
 						{contentElements.length
 							? contentElements.map((element, i) => {
 									const { headlines: { basic: headlineText = "" } = {}, websites } = element;
-									const imageURL = getImageFromANS(element)?.url;
+									const imageObj = getImageFromANS(element);
+									const imageURL = imageANSToImageSrc(imageObj);
 
 									if (!websites[arcSite]) {
 										return null;
@@ -117,7 +119,13 @@ const NumberedList = (props) => {
 														href={url}
 														assistiveHidden={showHeadline}
 													>
-														<Image {...imageProps} src={imageURL || targetFallbackImage} />
+														<Image
+															{...imageProps}
+															src={imageURL || targetFallbackImage}
+															resizedOptions={
+																imageURL ? { auth: imageObj?.auth[RESIZER_APP_VERSION] } : {}
+															}
+														/>
 													</Link>
 												) : null}
 											</Stack>
@@ -134,8 +142,7 @@ const NumberedList = (props) => {
 
 const NumberedListWrapper = ({ customFields }) => {
 	const { id, arcSite, contextPath, deployment, isAdmin } = useFusionContext();
-	const { websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL } =
-		getProperties(arcSite);
+	const { websiteDomain, fallbackImage, primaryLogoAlt } = getProperties(arcSite);
 
 	const targetFallbackImage = getFallbackImageURL({
 		deployment,
@@ -143,17 +150,12 @@ const NumberedListWrapper = ({ customFields }) => {
 		fallbackImage,
 	});
 
-	// Resizer V1 values - will need updated when implementing v2 resizer
 	const imageProps = {
-		smallWidth: 105,
-		smallHeight: 70,
-		mediumWidth: 105,
-		mediumHeight: 70,
-		largeWidth: 274,
-		largeHeight: 183,
-		primaryLogoAlt,
-		breakpoints,
-		resizerURL,
+		width: 274,
+		height: 183,
+		responsiveImages: [105, 274],
+		alt: primaryLogoAlt,
+		resizerURL: RESIZER_URL,
 	};
 
 	const placeholderResizedImageOptions = useContent({

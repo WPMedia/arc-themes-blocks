@@ -65,6 +65,17 @@
 		"pt": "Expandir",
 		"sv": "Förstora"
 	},
+	"global.gallery-next-label": {
+		"de": "Next Slide",
+		"en": "Next Slide",
+		"es": "Next Slide",
+		"fr": "Next Slide",
+		"ja": "Next Slide",
+		"ko": "Next Slide",
+		"no": "Next Slide",
+		"pt": "Next Slide",
+		"sv": "Next Slide"
+	},
 	"global.gallery-page-count-text": {
 		"de": "%{current} von %{total}",
 		"en": "<span class='visually-hidden'>Image</span> %{current} of %{total}",
@@ -87,6 +98,17 @@
 		"pt": "Colocar a reprodução automática em pausa",
 		"sv": "Pausa"
 	},
+	"global.gallery-previous-label": {
+		"de": "Previous Slide",
+		"en": "Previous Slide",
+		"es": "Previous Slide",
+		"fr": "Previous Slide",
+		"ja": "Previous Slide",
+		"ko": "Previous Slide",
+		"no": "Previous Slide",
+		"pt": "Previous Slide",
+		"sv": "Previous Slide"
+	},
 	"global.gallery-text": {
 		"de": "Galerie",
 		"en": "Gallery",
@@ -108,6 +130,28 @@
 		"no": "(Åpnes i et nytt vindu)",
 		"pt": "(Abre numa nova janela)",
 		"sv": "(Öppnas i nytt fönster)"
+	},
+	"global.see-more-button": {
+		"de": "Mehr anzeigen",
+		"en": "See more",
+		"es": "Ver más",
+		"fr": "En savoir plus",
+		"ja": "詳細",
+		"ko": "자세히 보기",
+		"no": "Se mer",
+		"pt": "Veja mais",
+		"sv": "Fler artiklar"
+	},
+	"global.see-more-button-aria-label": {
+		"de": "Sehen Sie sich weitere Artikel zu diesem Thema an",
+		"en": "See more stories about this topic",
+		"es": "Ver más historias sobre este tema",
+		"fr": "Voir plus d'articles concernant ce sujet",
+		"ja": "このトピックに関するその他の記事を表示",
+		"ko": "이 주제에 대한 스토리 더 보기",
+		"no": "Se flere historier om dette emnet",
+		"pt": "Veja mais histórias sobre este tópico",
+		"sv": "Se fler artiklar om detta ämne"
 	},
 	"global.social-email": {
 		"de": "E-Mail",

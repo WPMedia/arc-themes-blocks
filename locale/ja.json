@@ -65,10 +65,14 @@
 		"global.gallery-autoplay-label-start": "Start automatic slide show",
 		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
 		"global.gallery-expand-button": "展開",
+		"global.gallery-next-label": "Next Slide",
 		"global.gallery-page-count-text": "%{current} \/ %{total}",
 		"global.gallery-pause-autoplay-button": "自動再生の一時停止",
+		"global.gallery-previous-label": "Previous Slide",
 		"global.gallery-text": "ギャラリー",
 		"global.opens-in-new-window": "（新しいウィンドウで開きます）",
+		"global.see-more-button": "詳細",
+		"global.see-more-button-aria-label": "このトピックに関するその他の記事を表示",
 		"global.social-email": "メールアドレス",
 		"global.social-email-connect": "%{authorName}にメールを送信",
 		"global.social-facebook": "Facebook",
@@ -156,6 +160,10 @@
 		"identity-block.update-email-error": "There's been an error updating your email address",
 		"identity-block.update-password-error": "There's been an error updating your password",
 		"identity-block.username": "ユーザー名"
+	},
+	"lead-art-block": {
+		"lead-art-block.fullscreen-enter": "Enter full screen mode displaying the lead image",
+		"lead-art-block.fullscreen-exit": "Exit full screen mode displaying the lead image"
 	},
 	"links-bar-block": {
 		"links-bar-block.element-aria-label": "その他のリンク"

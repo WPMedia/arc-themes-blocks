@@ -65,10 +65,14 @@
 		"global.gallery-autoplay-label-start": "Iniciar apresentação automática de diapositivos",
 		"global.gallery-autoplay-label-stop": "Parar apresentação automática de diapositivos",
 		"global.gallery-expand-button": "Expandir",
+		"global.gallery-next-label": "Next Slide",
 		"global.gallery-page-count-text": "<span class='visually-hidden'>Imagem<\/span> %{current} de %{total}",
 		"global.gallery-pause-autoplay-button": "Colocar a reprodução automática em pausa",
+		"global.gallery-previous-label": "Previous Slide",
 		"global.gallery-text": "Galeria",
 		"global.opens-in-new-window": "(Abre numa nova janela)",
+		"global.see-more-button": "Veja mais",
+		"global.see-more-button-aria-label": "Veja mais histórias sobre este tópico",
 		"global.social-email": "E-mail",
 		"global.social-email-connect": "Enviar e-mail para %{authorName}",
 		"global.social-facebook": "Facebook",
@@ -156,6 +160,10 @@
 		"identity-block.update-email-error": "There's been an error updating your email address",
 		"identity-block.update-password-error": "There's been an error updating your password",
 		"identity-block.username": "Username"
+	},
+	"lead-art-block": {
+		"lead-art-block.fullscreen-enter": "Enter full screen mode displaying the lead image",
+		"lead-art-block.fullscreen-exit": "Exit full screen mode displaying the lead image"
 	},
 	"links-bar-block": {
 		"links-bar-block.element-aria-label": "Mais ligações"

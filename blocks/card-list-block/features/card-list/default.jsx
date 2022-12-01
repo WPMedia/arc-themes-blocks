@@ -162,7 +162,21 @@ const CardListItems = (props) => {
 	}
 	// End Overline data
 
-	const imageUrl = getImageFromANS(sourceContent)?.url;
+	const ansImage = getImageFromANS(sourceContent);
+
+	const featuredImageParams = ansImage
+		? {
+				ansImage,
+				aspectRatio: "4:3",
+				resizedOptions: {
+					smart: true,
+				},
+				responsiveImages: [377, 754, 1508],
+				width: 377,
+		  }
+		: {
+				src: targetFallbackImage,
+		  };
 
 	return contentItems.length > 0 ? (
 		<HeadingSection>
@@ -174,16 +188,7 @@ const CardListItems = (props) => {
 						className={`${BLOCK_CLASS_NAME}__main-item-image-link`}
 						href={sourceContent.websites[arcSite].website_url}
 					>
-						{imageUrl ? (
-							<Image width={377} height={283} src={imageUrl} alt={sourceContent.headlines.basic} />
-						) : (
-							<Image
-								width={377}
-								height={283}
-								src={targetFallbackImage}
-								alt={primaryLogoAlt || ""}
-							/>
-						)}
+						<Image {...featuredImageParams} />
 					</Link>
 					<Stack className={`${BLOCK_CLASS_NAME}__list`} divider>
 						<Stack
@@ -213,11 +218,25 @@ const CardListItems = (props) => {
 						</Stack>
 						{contentItems.slice(1).map((element) => {
 							const { headlines: { basic: headlineText } = {} } = element;
-							const imageURL = getImageFromANS(element)?.url;
 							const itemUrl = element.websites[arcSite]?.website_url;
 							if (!itemUrl) {
 								return null;
 							}
+							const itemAnsImage = getImageFromANS(element);
+
+							const itemImageParams = itemAnsImage
+								? {
+										ansImage: itemAnsImage,
+										aspectRatio: "3:2",
+										resizedOptions: {
+											smart: true,
+										},
+										responsiveImages: [105, 210, 420],
+										width: 105,
+								  }
+								: {
+										src: targetFallbackImage,
+								  };
 							return (
 								<Stack
 									as="article"
@@ -236,12 +255,7 @@ const CardListItems = (props) => {
 										href={itemUrl}
 										className={`${BLOCK_CLASS_NAME}__secondary-item-image-link`}
 									>
-										<Image
-											height={105}
-											width={70}
-											src={imageURL || targetFallbackImage}
-											alt={imageURL ? headlineText : primaryLogoAlt || ""}
-										/>
+										<Image {...itemImageParams} />
 									</Link>
 								</Stack>
 							);

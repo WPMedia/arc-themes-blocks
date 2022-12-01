@@ -23,8 +23,6 @@ jest.mock("fusion:context", () => ({
 	})),
 }));
 
-jest.mock("fusion:themes", () => jest.fn(() => ({})));
-
 jest.mock("fusion:properties", () =>
 	jest.fn(() => ({
 		fallbackImage: "placeholder.jpg",
@@ -195,12 +193,6 @@ describe("Card list", () => {
 			const anchors = wrapper.find(".c-link");
 			expect(anchors.at(0).prop("href")).toEqual("/this/is/the/correct/url");
 			expect(anchors.at(1).prop("href")).toEqual("/this/is/the/correct/url");
-		});
-
-		it("should render an anchor and an image with alt text", () => {
-			expect(wrapper.find(".b-card-list__main-item-image-link").find("Image").prop("alt")).toEqual(
-				"Article with a YouTube embed in it"
-			);
 		});
 
 		it("should render an overline", () => {

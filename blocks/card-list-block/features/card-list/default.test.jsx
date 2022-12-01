@@ -23,16 +23,11 @@ jest.mock("fusion:context", () => ({
 	})),
 }));
 
-jest.mock("fusion:properties", () =>
-	jest.fn(() => ({
-		fallbackImage: "placeholder.jpg",
-	}))
-);
-
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
 	LazyLoad: ({ children }) => <>{children}</>,
 	localizeDate: jest.fn(() => "date"),
 }));
+
 describe("Card list", () => {
 	it("should render null if isServerSide and lazyLoad enabled", () => {
 		const listContentConfig = {

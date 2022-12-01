@@ -31,13 +31,12 @@ export const simpleListMock = {
 			},
 			promo_items: {
 				basic: {
-					resized_params: {
-						"105x70": "toq6Dkqxl1xDvAHTWaO9c5qw4_o=filters:format(jpg):quality(70)/",
-						"274x183": "Y9lCrjFoGrJZukqRLRMi5ntzkak=filters:format(jpg):quality(70)/",
-						"377x283": "fpRHXIzIpdkN2NZ-2GLSF8sl4Pk=filters:format(jpg):quality(70)/",
+					_id: "P5EYZSWH6FBEHDIQMV7H35ENWM",
+					auth: {
+						2: "2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade",
 					},
 					type: "image",
-					url: "https://d22ff27hdsy159.cloudfront.net/12-12-2019/t_42fd2e985d3f4b868b927ca58620a2ca_name_file_1280x720_2000_v3_1_.jpg",
+					url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/P5EYZSWH6FBEHDIQMV7H35ENWM.jpg",
 				},
 			},
 			websites: {
@@ -68,13 +67,12 @@ commodo consequat lectus.`,
 			},
 			promo_items: {
 				basic: {
-					resized_params: {
-						"105x70": "toq6Dkqxl1xDvAHTWaO9c5qw4_o=filters:format(jpg):quality(70)/",
-						"274x183": "Y9lCrjFoGrJZukqRLRMi5ntzkak=filters:format(jpg):quality(70)/",
-						"377x283": "fpRHXIzIpdkN2NZ-2GLSF8sl4Pk=filters:format(jpg):quality(70)/",
+					_id: "Y3STKUZ2CVHUBN4CLLFKP4JRQU",
+					auth: {
+						2: "e1ee90266f0068204492e7212dc50cf4a7f9a05a21480ec1821346511a09b65b",
 					},
 					type: "image",
-					url: "https://d22ff27hdsy159.cloudfront.net/12-12-2019/t_42fd2e985d3f4b868b927ca58620a2ca_name_file_1280x720_2000_v3_1_.jpg",
+					url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/Y3STKUZ2CVHUBN4CLLFKP4JRQU.jpg",
 				},
 			},
 			websites: {
@@ -90,13 +88,12 @@ commodo consequat lectus.`,
 			},
 			promo_items: {
 				basic: {
-					resized_params: {
-						"105x70": "toq6Dkqxl1xDvAHTWaO9c5qw4_o=filters:format(jpg):quality(70)/",
-						"274x183": "Y9lCrjFoGrJZukqRLRMi5ntzkak=filters:format(jpg):quality(70)/",
-						"377x283": "fpRHXIzIpdkN2NZ-2GLSF8sl4Pk=filters:format(jpg):quality(70)/",
+					_id: "BG2AHSPHGFCVRKZXJMNTQSLEDU",
+					auth: {
+						2: "0034d20d12780c22adc5fc4d6c8b7dc5d42933e4939e15a18c40600600136670",
 					},
 					type: "image",
-					url: "https://d22ff27hdsy159.cloudfront.net/12-12-2019/t_42fd2e985d3f4b868b927ca58620a2ca_name_file_1280x720_2000_v3_1_.jpg",
+					url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/BG2AHSPHGFCVRKZXJMNTQSLEDU.jpg",
 				},
 			},
 			websites: {
@@ -112,13 +109,12 @@ commodo consequat lectus.`,
 			},
 			promo_items: {
 				basic: {
-					resized_params: {
-						"105x70": "toq6Dkqxl1xDvAHTWaO9c5qw4_o=filters:format(jpg):quality(70)/",
-						"274x183": "Y9lCrjFoGrJZukqRLRMi5ntzkak=filters:format(jpg):quality(70)/",
-						"377x283": "fpRHXIzIpdkN2NZ-2GLSF8sl4Pk=filters:format(jpg):quality(70)/",
+					_id: "QQUBBHAFJRDH7IVNHAI4IBEQVY",
+					auth: {
+						2: "ea391c022766c61dfadf9c6778efa43a8c31b87db157dc7d5db888562ff3150e",
 					},
 					type: "image",
-					url: "https://d22ff27hdsy159.cloudfront.net/12-12-2019/t_42fd2e985d3f4b868b927ca58620a2ca_name_file_1280x720_2000_v3_1_.jpg",
+					url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/QQUBBHAFJRDH7IVNHAI4IBEQVY.jpg",
 				},
 			},
 			websites: {

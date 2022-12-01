@@ -4,6 +4,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
+import { RESIZER_APP_VERSION } from "fusion:environment";
 import { LazyLoad, localizeDate } from "@wpmedia/engine-theme-sdk";
 import {
 	Attribution,
@@ -57,61 +58,61 @@ const CardListItems = (props) => {
 			source: contentService,
 			query: { ...contentConfigValues, feature: "card-list" },
 			filter: `{
-      content_elements {
-        _id,
-        display_date
-        credits {
-          by {
-            _id
-            name
-            url
-            type
-            additional_properties {
-              original {
-                byline
-              }
-            }
-          }
-        }
-        headlines {
-          basic
-        }
-        owner {
-          sponsored
-        }
-        promo_items {
-          basic {
-            type
-            url
-            resized_params {
-              377x283
-              105x70
-            }
-          }
-          lead_art {
-            promo_items {
-              basic {
-                type
-                url
-                resized_params {
-                  377x283
-                  105x70
-                }
-              }
-            }
-            type
-          }
-        }
-        websites {
-          ${arcSite} {
-            website_url
-            website_section {
-              name
-            }
-          }
-        }
-      }
-    }`,
+		content_elements {
+		  _id,
+		  display_date
+		  credits {
+			 by {
+				_id
+				name
+				url
+				type
+				additional_properties {
+					original {
+						byline
+					}
+				}
+			 }
+		  }
+		  headlines {
+			 basic
+		  }
+		  owner {
+			 sponsored
+		  }
+		  promo_items {
+			 basic {
+				_id
+				type
+				url
+				auth {
+					${RESIZER_APP_VERSION}
+				}
+			 }
+			 lead_art {
+				promo_items {
+				  basic {
+					_id
+					type
+					url
+					auth {
+						${RESIZER_APP_VERSION}
+					}
+				  }
+				}
+				type
+			 }
+		  }
+		  websites {
+			 ${arcSite} {
+				website_url
+				website_section {
+				  name
+				}
+			 }
+		  }
+		}
+	 }`,
 		}) || {};
 
 	if (contentElements.length === 0) {

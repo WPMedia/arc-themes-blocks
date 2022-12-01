@@ -4,6 +4,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
+import { RESIZER_APP_VERSION } from "fusion:environment";
 import { LazyLoad, localizeDate } from "@wpmedia/engine-theme-sdk";
 import {
 	Attribution,
@@ -43,7 +44,6 @@ const CardListItems = (props) => {
 			displayAmount,
 		},
 		targetFallbackImage,
-		primaryLogoAlt,
 		dateLocalization: { language, timeZone, dateFormat } = {
 			language: "en",
 			timeZone: "GMT",
@@ -58,61 +58,61 @@ const CardListItems = (props) => {
 			source: contentService,
 			query: { ...contentConfigValues, feature: "card-list" },
 			filter: `{
-      content_elements {
-        _id,
-        display_date
-        credits {
-          by {
-            _id
-            name
-            url
-            type
-            additional_properties {
-              original {
-                byline
-              }
-            }
-          }
-        }
-        headlines {
-          basic
-        }
-        owner {
-          sponsored
-        }
-        promo_items {
-          basic {
-            type
-            url
-            resized_params {
-              377x283
-              105x70
-            }
-          }
-          lead_art {
-            promo_items {
-              basic {
-                type
-                url
-                resized_params {
-                  377x283
-                  105x70
-                }
-              }
-            }
-            type
-          }
-        }
-        websites {
-          ${arcSite} {
-            website_url
-            website_section {
-              name
-            }
-          }
-        }
-      }
-    }`,
+		content_elements {
+		  _id,
+		  display_date
+		  credits {
+			 by {
+				_id
+				name
+				url
+				type
+				additional_properties {
+					original {
+						byline
+					}
+				}
+			 }
+		  }
+		  headlines {
+			 basic
+		  }
+		  owner {
+			 sponsored
+		  }
+		  promo_items {
+			 basic {
+				_id
+				type
+				url
+				auth {
+					${RESIZER_APP_VERSION}
+				}
+			 }
+			 lead_art {
+				promo_items {
+				  basic {
+					_id
+					type
+					url
+					auth {
+						${RESIZER_APP_VERSION}
+					}
+				  }
+				}
+				type
+			 }
+		  }
+		  websites {
+			 ${arcSite} {
+				website_url
+				website_section {
+				  name
+				}
+			 }
+		  }
+		}
+	 }`,
 		}) || {};
 
 	if (contentElements.length === 0) {
@@ -137,7 +137,7 @@ const CardListItems = (props) => {
 	const displayDate = localizeDate(sourceContent.display_date, dateFormat, language, timeZone);
 
 	/* Author Formatting */
-	const bylineNodes = formatAuthors(sourceContent?.credits?.by, phrases.t("byline-block.and-text"));
+	const bylineNodes = formatAuthors(sourceContent?.credits?.by, phrases.t("global.and-text"));
 	const hasAuthor = !!bylineNodes.length;
 
 	// Start Overline data
@@ -162,7 +162,21 @@ const CardListItems = (props) => {
 	}
 	// End Overline data
 
-	const imageUrl = getImageFromANS(sourceContent)?.url;
+	const ansImage = getImageFromANS(sourceContent);
+
+	const featuredImageParams = ansImage
+		? {
+				ansImage,
+				aspectRatio: "4:3",
+				resizedOptions: {
+					smart: true,
+				},
+				responsiveImages: [377, 754, 1508],
+				width: 377,
+		  }
+		: {
+				src: targetFallbackImage,
+		  };
 
 	return contentItems.length > 0 ? (
 		<HeadingSection>
@@ -174,16 +188,7 @@ const CardListItems = (props) => {
 						className={`${BLOCK_CLASS_NAME}__main-item-image-link`}
 						href={sourceContent.websites[arcSite].website_url}
 					>
-						{imageUrl ? (
-							<Image width={377} height={283} src={imageUrl} alt={sourceContent.headlines.basic} />
-						) : (
-							<Image
-								width={377}
-								height={283}
-								src={targetFallbackImage}
-								alt={primaryLogoAlt || ""}
-							/>
-						)}
+						<Image {...featuredImageParams} />
 					</Link>
 					<Stack className={`${BLOCK_CLASS_NAME}__list`} divider>
 						<Stack
@@ -203,7 +208,7 @@ const CardListItems = (props) => {
 								<Attribution>
 									{hasAuthor ? (
 										<>
-											<span>{phrases.t("byline-block.by-text")}</span> <span>{bylineNodes}</span>
+											<span>{phrases.t("global.by-text")}</span> <span>{bylineNodes}</span>
 											<Separator />
 										</>
 									) : null}
@@ -213,11 +218,25 @@ const CardListItems = (props) => {
 						</Stack>
 						{contentItems.slice(1).map((element) => {
 							const { headlines: { basic: headlineText } = {} } = element;
-							const imageURL = getImageFromANS(element)?.url;
 							const itemUrl = element.websites[arcSite]?.website_url;
 							if (!itemUrl) {
 								return null;
 							}
+							const itemAnsImage = getImageFromANS(element);
+
+							const itemImageParams = itemAnsImage
+								? {
+										ansImage: itemAnsImage,
+										aspectRatio: "3:2",
+										resizedOptions: {
+											smart: true,
+										},
+										responsiveImages: [105, 210, 420],
+										width: 105,
+								  }
+								: {
+										src: targetFallbackImage,
+								  };
 							return (
 								<Stack
 									as="article"
@@ -236,12 +255,7 @@ const CardListItems = (props) => {
 										href={itemUrl}
 										className={`${BLOCK_CLASS_NAME}__secondary-item-image-link`}
 									>
-										<Image
-											height={105}
-											width={70}
-											src={imageURL || targetFallbackImage}
-											alt={imageURL ? headlineText : primaryLogoAlt || ""}
-										/>
+										<Image {...itemImageParams} />
 									</Link>
 								</Stack>
 							);

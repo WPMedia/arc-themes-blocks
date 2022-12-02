@@ -130,7 +130,7 @@ export const LeadArtPresentation = (props) => {
 					>
 						{buttonLabel}
 					</Button>
-					<div ref={imgRef}>
+					<div className={`${BLOCK_CLASS_NAME}__image-wrapper`} ref={imgRef}>
 						<Image
 							src={imageANSToImageSrc(lead_art)}
 							alt={lead_art.alt_text}
@@ -139,7 +139,7 @@ export const LeadArtPresentation = (props) => {
 							width={800}
 							height={450}
 							responsiveImages={[800, 1600]}
-							resizedOptions={{ auth: lead_art.auth[RESIZER_APP_VERSION] }}
+							resizedOptions={{ auth: lead_art.auth[RESIZER_APP_VERSION], smart: true }}
 							resizerURL={RESIZER_URL}
 						/>
 					</div>
@@ -227,7 +227,7 @@ export const LeadArtPresentation = (props) => {
 									<Image
 										src={imageANSToImageSrc(galleryItem)}
 										resizerURL={RESIZER_URL}
-										resizedOptions={{ auth: galleryItem.auth[RESIZER_APP_VERSION] }}
+										resizedOptions={{ auth: galleryItem.auth[RESIZER_APP_VERSION], smart: true }}
 										// 16:9 aspect ratio
 										width={800}
 										height={450}

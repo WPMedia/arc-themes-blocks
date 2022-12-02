@@ -13,17 +13,24 @@ export const SectionTitle = ({ content }) =>
 			<Stack direction="horizontal" wrap="wrap">
 				<Join separator={Separator}>
 					{!!(content.children && content.children.length > 0) &&
-						content.children.map((child) =>
-							child.node_type && child.node_type === "link" ? (
-								<Link href={formatURL(child.url)} key={child.url}>
-									{child.display_name}
-								</Link>
-							) : (
-								<Link href={formatURL(child._id)} key={child._id}>
-									{child.name}
-								</Link>
-							)
-						)}
+						content.children.map((child) => {
+							if (child.node_type && child.node_type === "link") {
+								return (
+									<Link href={formatURL(child.url)} key={child.url}>
+										{child.display_name}
+									</Link>
+								);
+							}
+
+							if (child._id && child.name) {
+								return (
+									<Link href={formatURL(child._id)} key={child._id}>
+										{child.name}
+									</Link>
+								);
+							}
+							return null;
+						})}
 				</Join>
 			</Stack>
 		</Stack>

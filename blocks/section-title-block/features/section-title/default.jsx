@@ -10,7 +10,7 @@ export const SectionTitle = ({ content }) =>
 	content && (content.name || content.display_name) ? (
 		<Stack className={BLOCK_CLASS_NAME}>
 			<Heading>{content.name || content.display_name}</Heading>
-			<Stack direction="horizontal">
+			<Stack direction="horizontal" wrap="wrap">
 				<Join separator={Separator}>
 					{!!(content.children && content.children.length > 0) &&
 						content.children.map((child) =>

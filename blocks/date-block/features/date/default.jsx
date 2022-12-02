@@ -12,7 +12,7 @@ const ArticleDate = () => {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
 			timeZone: "GMT",
-			dateFormat: "LLLL d, yyyy 'at' K:m bbbb z",
+			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 		},
 	} = getProperties(arcSite);
 	const formattedDate =

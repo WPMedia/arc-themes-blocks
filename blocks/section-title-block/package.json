@@ -20,7 +20,8 @@
     "directory": "blocks/section-title-block"
   },
   "peerDependencies": {
-    "@arc-fusion/prop-types": "^0.1.5"
+    "@arc-fusion/prop-types": "^0.1.5",
+	 "@wpmedia/arc-themes-components": "*"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

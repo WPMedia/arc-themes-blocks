@@ -1,0 +1,6 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-section-title {
+	@include scss.block-properties("section-title");
+	@include scss.block-components("section-title");
+}

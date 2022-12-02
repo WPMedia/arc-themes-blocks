@@ -1,6 +1,6 @@
 import React from "react";
 import { withKnobs } from "@storybook/addon-knobs";
-import SectionTitle from "./features/section-title/_children/section-title";
+import { SectionTitle } from "./features/section-title/default";
 
 export default {
 	title: "Blocks/Section Title",

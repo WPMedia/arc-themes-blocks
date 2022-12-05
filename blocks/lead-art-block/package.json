@@ -2,12 +2,13 @@
   "name": "@wpmedia/lead-art-block",
   "version": "5.17.0",
   "description": "Fusion News Theme lead art block",
-  "author": "Brent Miller <brent.miller@washpost.com>",
+  "author": "Arc XP - Themes",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
+  "main": "",
   "files": [
-    "features"
+    "features",
+    "_index.scss"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -19,14 +20,7 @@
     "directory": "blocks/lead-art-block"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/news-theme-css": "*",
-    "@wpmedia/shared-styles": "*",
-    "@wpmedia/video-player-block": "*"
-  },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
+    "@wpmedia/arc-themes-components": "*"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

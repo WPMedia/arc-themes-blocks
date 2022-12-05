@@ -1,0 +1,24 @@
+{
+	"lead-art-block.fullscreen-enter": {
+		"de": "Enter full screen mode displaying the lead image",
+		"en": "Enter full screen mode displaying the lead image",
+		"es": "Enter full screen mode displaying the lead image",
+		"fr": "Enter full screen mode displaying the lead image",
+		"ja": "Enter full screen mode displaying the lead image",
+		"ko": "Enter full screen mode displaying the lead image",
+		"no": "Enter full screen mode displaying the lead image",
+		"pt": "Enter full screen mode displaying the lead image",
+		"sv": "Enter full screen mode displaying the lead image"
+	},
+	"lead-art-block.fullscreen-exit": {
+		"de": "Exit full screen mode displaying the lead image",
+		"en": "Exit full screen mode displaying the lead image",
+		"es": "Exit full screen mode displaying the lead image",
+		"fr": "Exit full screen mode displaying the lead image",
+		"ja": "Exit full screen mode displaying the lead image",
+		"ko": "Exit full screen mode displaying the lead image",
+		"no": "Exit full screen mode displaying the lead image",
+		"pt": "Exit full screen mode displaying the lead image",
+		"sv": "Exit full screen mode displaying the lead image"
+	}
+}

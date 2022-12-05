@@ -1,10 +1,6 @@
 # `@wpmedia/lead-art-block`
 
-_Fusion News Theme lead art block. Please provide a 1-2 sentence description of what the block is and what it does._
-
-## Acceptance Criteria
-
-- Add AC relevant to the block
+Themes lead art block. This block is for displaying the lead art of a story whether it is an image, gallery, video, or raw HTML.
 
 ## Props
 

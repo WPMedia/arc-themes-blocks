@@ -47,6 +47,9 @@ export const useAppContext = () => ({
 			children: [0],
 		},
 	],
+	globalContent: {
+		display_date: "2021-08-05T20:00:19+00:00",
+	},
 });
 
 export const withFusionContext = (x) => x;

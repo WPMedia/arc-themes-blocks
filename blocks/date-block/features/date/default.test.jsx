@@ -1,62 +1,45 @@
-const React = require("react");
-const { render } = require("enzyme");
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import { useAppContext } from "fusion:context";
+import getProperties from "fusion:properties";
 
-jest.mock("fusion:properties", () =>
-	jest.fn(() => ({
-		dateLocalization: {
-			language: "en",
-			timeZone: "America/New_York",
-			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
-			dateFormat: "LLLL d, yyyy",
-		},
-	}))
-);
+import ArticleDate from "./default";
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	localizeDateTime: jest.fn(() => new Date().toDateString()),
-}));
-
-jest.mock("fusion:themes", () => jest.fn(() => ({})));
-
-jest.mock("fusion:context", () => ({
-	useFusionContext: jest.fn(() => ({
-		globalContent: {},
-		arcSite: "the-sun",
-	})),
-}));
-
-describe("Given the display time from ANS, it should coinvert to the proper timezone format we want", () => {
+describe("Given the display time from ANS, it should convert to the proper timezone format we want", () => {
 	it("should return proper long form with correctly converted timezone (mocked timezone is in CDT)", () => {
-		const { default: ArticleDate } = require("./default");
-		const displayDate = "2019-08-11T16:45:33.209Z";
-		const globalContent = { display_date: displayDate };
-		const wrapper = render(<ArticleDate globalContent={globalContent} arcSite="the-sun" />);
+		getProperties.mockReturnValue({
+			dateLocalization: {
+				language: "en",
+				timeZone: "America/New_York",
+				dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
+			},
+		});
+		useAppContext.mockReturnValue({ globalContent: { display_date: "2019-08-11T16:45:33.209Z" } });
+		render(<ArticleDate />);
 
-		const testDate = new Intl.DateTimeFormat("en", {
-			year: "numeric",
-			day: "numeric",
-			month: "long",
-			hour: "numeric",
-			minute: "numeric",
-			timeZone: "America/Chicago",
-			timeZoneName: "short",
-		})
-			.format(new Date(displayDate))
-			.replace(/(,)(.*?)(,)/, "$1$2 at")
-			.replace("PM", "p.m.")
-			.replace("AM", "a.m.");
-
-		expect(wrapper.attr("class").includes("sc-")).toBe(true);
-		expect(wrapper.text()).not.toEqual(testDate);
+		expect(screen.queryByText("August 11, 2019 at 12:45 pm EDT")).not.toBeNull();
 	});
 
-	it("should return a blank string if the display_time is an invalid timestring", () => {
-		const { default: ArticleDate } = require("./default");
-		const displayDate = "invalid time string";
-		const globalContent = { display_date: displayDate };
+	it("should use default localization values", () => {
+		useAppContext.mockReturnValue({ globalContent: { display_date: "2019-08-11T16:45:33.209Z" } });
+		getProperties.mockReturnValue({});
 
-		const wrapper = render(<ArticleDate globalContent={globalContent} arcSite="the-sun" />);
+		render(<ArticleDate />);
 
-		expect(wrapper.text()).toEqual("");
+		expect(screen.queryByText("August 11, 2019 at 4:45 pm UTC")).not.toBeNull();
+	});
+
+	it("should not output date if display_date is value", () => {
+		useAppContext.mockReturnValue({ globalContent: { display_date: "9-08-11T16:45:33.209Z" } });
+		render(<ArticleDate />);
+
+		expect(screen.queryByText("August 11, 2019 at 12:45 pm EDT")).toBeNull();
+	});
+
+	it("should not output date", () => {
+		useAppContext.mockReturnValue({});
+		render(<ArticleDate />);
+
+		expect(screen.queryByText("August 11, 2019 at 12:45 pm EDT")).toBeNull();
 	});
 });

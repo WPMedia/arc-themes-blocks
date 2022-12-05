@@ -1,0 +1,6 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-date {
+	@include scss.block-properties("date");
+	@include scss.block-components("date");
+}

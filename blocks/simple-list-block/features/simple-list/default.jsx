@@ -101,6 +101,7 @@ const SimpleList = (props) => {
 								${RESIZER_APP_VERSION}
 							}
 						}
+					}
 					type
 			 	}
 		  	}

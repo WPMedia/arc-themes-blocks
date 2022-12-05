@@ -1959,8 +1959,8 @@
 							font-weight: var(--heading-level-1-font-weight),
 							line-height: var(--heading-level-1-line-height),
 						),
-						stack: (
-							gap: var(--global-spacing-4),
+						separator: (
+							margin: 0 var(--global-spacing-4),
 						),
 					),
 				),

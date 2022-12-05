@@ -10,29 +10,31 @@ export const SectionTitle = ({ content }) =>
 	content && (content.name || content.display_name) ? (
 		<Stack className={BLOCK_CLASS_NAME}>
 			<Heading>{content.name || content.display_name}</Heading>
-			<div className={`${BLOCK_CLASS_NAME}__links`}>
-				<Join separator={Separator}>
-					{!!(content.children && content.children.length > 0) &&
-						content.children.map((child) => {
-							if (child.node_type && child.node_type === "link") {
-								return (
-									<Link href={formatURL(child.url)} key={child.url}>
-										{child.display_name}
-									</Link>
-								);
-							}
+			{content.children && content.children.length ? (
+				<div className={`${BLOCK_CLASS_NAME}__links`}>
+					<Join separator={Separator}>
+						{!!(content.children && content.children.length > 0) &&
+							content.children.map((child) => {
+								if (child.node_type && child.node_type === "link") {
+									return (
+										<Link href={formatURL(child.url)} key={child.url}>
+											{child.display_name}
+										</Link>
+									);
+								}
 
-							if (child._id && child.name) {
-								return (
-									<Link href={formatURL(child._id)} key={child._id}>
-										{child.name}
-									</Link>
-								);
-							}
-							return null;
-						})}
-				</Join>
-			</div>
+								if (child._id && child.name) {
+									return (
+										<Link href={formatURL(child._id)} key={child._id}>
+											{child.name}
+										</Link>
+									);
+								}
+								return null;
+							})}
+					</Join>
+				</div>
+			) : null}
 		</Stack>
 	) : null;
 

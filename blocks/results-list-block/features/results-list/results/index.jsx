@@ -209,7 +209,7 @@ const Results = ({
 					/>
 				))}
 				{isThereMore && (
-					<Stack alignment="center">
+					<Stack alignment="center" className={`${BLOCK_CLASS_NAME}__seeMore`}>
 						<Button
 							accessibilityLabel={phrases.t("results-list-block.see-more-button-aria-label")}
 							variant="primary"

@@ -1775,7 +1775,10 @@
 					display: contents,
 				),
 				results-list-wrapper: (
-					gap: var(--global-spacing-4),
+					gap: var(--global-spacing-5),
+				),
+				results-list-see-more: (
+					margin-top: var(--global-spacing-2),
 				),
 				results-list: (
 					components: (
@@ -1792,6 +1795,9 @@
 							line-height: var(--heading-level-5-line-height),
 							margin-bottom: var(--global-spacing-4),
 						),
+						button: (
+							gap: var(--global-spacing-6),
+						),
 						separator: (
 							padding: 0 var(--global-spacing-2),
 						),
@@ -1802,10 +1808,13 @@
 						heading: (
 							width: 68%,
 						),
+						overline: (
+							font-size: var(--body-font-size),
+						),
 					),
 				),
 				right-rail: (
-					gap: var(--global-spacing-6),
+					gap: var(--global-spacing-5),
 				),
 				right-rail-navigation: (
 					position: sticky,
@@ -2611,6 +2620,7 @@
 						),
 						overline: (
 							margin-left: var(--global-spacing-6),
+							font-size: var(--global-font-size-7),
 						),
 					),
 				),

@@ -1580,6 +1580,86 @@
 						),
 					),
 				),
+				lead-art: (
+					margin-bottom: var(--global-spacing-5),
+					components: (
+						button: (
+							border-style: none,
+							box-shadow: none,
+							height: var(--global-spacing-4),
+						),
+						carousel-controls: (
+							padding: 0 0 var(--global-spacing-2) 0,
+						),
+						carousel-actions: (
+							display: flex,
+						),
+						carousel-track: (
+							gap: initial,
+							max-width: initial,
+						),
+						carousel-button: (
+							border: none,
+							box-shadow: none,
+							height: var(--global-spacing-4),
+						),
+						carousel-button-enter-full-screen: (
+							padding: 0,
+							font-size: var(--body-font-size-tiny),
+							line-height: var(--body-line-height-tiny),
+						),
+						carousel-additional-controls: (
+							display: none,
+						),
+						carousel-button-toggle-auto-play: (
+							padding: 0 var(--global-spacing-4),
+							font-size: var(--body-font-size-tiny),
+							line-height: var(--body-line-height-tiny),
+						),
+						carousel-image-counter: (
+							font-size: var(--body-font-size-tiny),
+							line-height: var(--body-line-height-tiny),
+						),
+						carousel-button-next: (
+							background-color: transparent,
+						),
+						carousel-button-previous: (
+							background-color: transparent,
+						),
+						carousel-button-additional-previous: (
+							padding: 0,
+						),
+						carousel-button-additional-next: (
+							padding: 0,
+						),
+						icon: (
+							fill: var(--text-color),
+							height: var(--global-spacing-4),
+							width: var(--global-spacing-4),
+						),
+						image: (
+							width: 100%,
+						),
+					),
+				),
+				lead-art-carousel-image-wrapper: (
+					align-items: center,
+					display: flex,
+					justify-content: center,
+					max-height: 75vh,
+					background-color: var(--global-black),
+					components: (
+						image: (
+							width: auto,
+							max-height: 75vh,
+						),
+					),
+				),
+				lead-art-carousel-track-icon: (
+					fill: var(--global-white),
+					height: var(--global-spacing-8),
+					width: var(--global-spacing-8),
+				),
 				links-bar: (
 					gap: var(--global-spacing-2),
 				),
@@ -2485,6 +2565,15 @@
 						),
 					),
 				),
+				lead-art: (
+					components: (
+						carousel-additional-controls: (
+							display: flex,
+							gap: var(--global-spacing-2),
+							padding: 0 0 0 var(--global-spacing-2),
+						),
+					),
+				),
 				masthead: (
 					display: flex,
 				),
@@ -2768,6 +2857,7 @@
 @use "../../blocks/hero-block";
 @use "../../blocks/large-manual-promo-block";
 @use "../../blocks/large-promo-block";
+@use "../../blocks/lead-art-block";
 @use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
 @use "../../blocks/medium-promo-block";

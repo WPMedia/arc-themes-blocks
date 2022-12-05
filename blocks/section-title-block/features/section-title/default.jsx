@@ -64,6 +64,7 @@ SectionTitleContainer.propTypes = {
 		}),
 		inheritGlobalContent: PropTypes.bool.tag({
 			group: "Configure Content",
+			defaultValue: true,
 		}),
 	}),
 };

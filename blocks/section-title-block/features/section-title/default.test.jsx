@@ -1,73 +1,93 @@
-// eslint-disable-next-line max-classes-per-file
 import React from "react";
-import { shallow } from "enzyme";
+import { render, screen } from "@testing-library/react";
+import { useContent } from "fusion:content";
+import { useAppContext } from "fusion:context";
 
-// two classes for testing purposes
-jest.mock("./_children/global-content", () => class GlobalContentSectionTitle {});
-jest.mock("./_children/custom-content", () => class CustomContentSectionTitle {});
-jest.mock("@arc-fusion/prop-types", () => ({
-	bool: true,
-	shape: () => {},
-	contentConfig: () => {},
+import SectionTitleContainer from "./default";
+
+import { mockNoChildren, mockOneSection, mockTwoSectionWithUrl } from "./mock-data";
+
+jest.mock("fusion:content", () => ({
+	useContent: jest.fn(() => mockOneSection),
 }));
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	formatURL: jest.fn((input) => input.toString()),
-}));
-
-describe("the section title feature block", () => {
-	describe("when it is configured to inherit global content", () => {
-		it("should render the global content section title", () => {
-			const { default: SectionTitleContainer } = require("./default");
-			const wrapper = shallow(
-				<SectionTitleContainer customFields={{ inheritGlobalContent: true }} />
-			);
-			expect(wrapper.is("GlobalContentSectionTitle")).toBeTruthy();
-		});
+describe("Section Title", () => {
+	afterEach(() => {
+		jest.resetModules();
+		jest.clearAllMocks();
 	});
 
-	describe("when it is configured to NOT inherit global content", () => {
-		it("should render the global content section title", () => {
-			const { default: SectionTitleContainer } = require("./default");
+	it("should return null if no content", () => {
+		const config = {
+			sectionContentConfig: {},
+		};
+		useContent.mockReturnValueOnce(null);
+		useAppContext.mockReturnValue({});
 
-			const wrapper = shallow(
-				<SectionTitleContainer
-					customFields={{
-						inheritGlobalContent: false,
-						sectionContentConfig: {},
-					}}
-				/>
-			);
-			expect(wrapper.is("CustomContentSectionTitle")).toBeTruthy();
-		});
-
-		it("should pass the content config for fetching the section title", () => {
-			const { default: SectionTitleContainer } = require("./default");
-			const wrapper = shallow(
-				<SectionTitleContainer
-					customFields={{
-						inheritGlobalContent: false,
-						sectionContentConfig: {},
-					}}
-				/>
-			);
-			expect(wrapper.props()).toStrictEqual({ contentConfig: {} });
-		});
+		const { container } = render(<SectionTitleContainer customFields={config} />);
+		expect(container.firstChild).toBe(null);
 	});
 
-	describe("when customFields is empty", () => {
-		it("should render the global content section title", () => {
-			const { default: SectionTitleContainer } = require("./default");
-			const wrapper = shallow(<SectionTitleContainer customFields={{}} />);
-			expect(wrapper.is("GlobalContentSectionTitle")).toBeTruthy();
-		});
+	it("should display section display name from global content", () => {
+		const config = {};
+		useAppContext.mockReturnValue({ globalContent: mockOneSection });
+
+		render(<SectionTitleContainer customFields={config} />);
+
+		expect(screen.queryByRole("heading", { name: "Section Title" })).not.toBeNull();
 	});
 
-	describe("when customFields is missing", () => {
-		it("should render the global content section title", () => {
-			const { default: SectionTitleContainer } = require("./default");
-			const wrapper = shallow(<SectionTitleContainer customFields={undefined} />);
-			expect(wrapper.is("GlobalContentSectionTitle")).toBeTruthy();
-		});
+	it("should display section display name from content", () => {
+		const config = {
+			sectionContentConfig: {},
+			inheritGlobalContent: false,
+		};
+		useContent.mockReturnValue(mockOneSection);
+
+		render(<SectionTitleContainer customFields={config} />);
+
+		expect(screen.queryByRole("heading", { name: "Section Title" })).not.toBeNull();
+	});
+
+	it("should display only section display name from content", () => {
+		const config = {
+			sectionContentConfig: {},
+			inheritGlobalContent: false,
+		};
+		useContent.mockReturnValue(mockNoChildren);
+
+		render(<SectionTitleContainer customFields={config} />);
+
+		expect(screen.queryByRole("heading", { name: "Section Title Display Name" })).not.toBeNull();
+		expect(screen.queryByRole("link")).toBeNull();
+	});
+
+	it("should display section display name and link", () => {
+		const config = {
+			sectionContentConfig: {},
+			inheritGlobalContent: false,
+		};
+		useContent.mockReturnValue(mockOneSection);
+
+		render(<SectionTitleContainer customFields={config} />);
+
+		expect(screen.queryByRole("heading", { name: "Section Title" })).not.toBeNull();
+		expect(screen.queryByRole("link")).not.toBeNull();
+	});
+
+	it("should display section display name and links", () => {
+		const config = {
+			sectionContentConfig: {},
+			inheritGlobalContent: false,
+		};
+		useContent.mockReturnValue(mockTwoSectionWithUrl);
+
+		render(<SectionTitleContainer customFields={config} />);
+
+		expect(screen.queryByRole("heading", { name: "Section Title" })).not.toBeNull();
+		expect(screen.queryAllByRole("link")).not.toBeNull();
+
+		expect(screen.queryByRole("link", { name: "News" })).not.toBeNull();
+		expect(screen.queryByRole("link", { name: "Sports" })).not.toBeNull();
 	});
 });

@@ -4,6 +4,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
+import { RESIZER_APP_VERSION } from "fusion:environment";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
 	getImageFromANS,
@@ -11,22 +12,11 @@ import {
 	isServerSide,
 	Heading,
 	HeadingSection,
+	Image,
+	Link,
 } from "@wpmedia/arc-themes-components";
-import StoryItem from "./_children/story-item";
 
 const BLOCK_CLASS_NAME = "b-simple-list";
-
-const unserializeStory = (arcSite) => (acc, storyObject) => {
-	if (storyObject.websites?.[arcSite]) {
-		return acc.concat({
-			id: storyObject._id,
-			itemTitle: storyObject.headlines.basic,
-			imageURL: getImageFromANS(storyObject)?.url || "",
-			websiteURL: storyObject.websites[arcSite].website_url || "",
-		});
-	}
-	return acc;
-};
 
 const getFallbackImageURL = ({ deployment, contextPath, fallbackImage }) => {
 	let targetFallbackImage = fallbackImage;
@@ -70,7 +60,6 @@ const SimpleListWrapper = ({ customFields }) => {
 const SimpleList = (props) => {
 	const {
 		arcSite,
-		websiteDomain,
 		customFields: {
 			listContentConfig: { contentService = "", contentConfigValues = {} } = {},
 			title = "",
@@ -79,7 +68,6 @@ const SimpleList = (props) => {
 		} = {},
 		id = "",
 		targetFallbackImage,
-		primaryLogoAlt,
 	} = props;
 
 	// need to inject the arc site here into use content
@@ -88,40 +76,42 @@ const SimpleList = (props) => {
 			source: contentService,
 			query: { ...contentConfigValues, feature: "simple-list" },
 			filter: `{
-      content_elements {
-        _id
-        headlines {
-          basic
-        }
-        website_url
-        promo_items {
-          basic {
-            type
-            url
-            resized_params {
-              274x183
-            }
-          }
-          lead_art {
-            promo_items {
-              basic {
-                type
-                url
-                resized_params {
-                  274x183
-                }
-              }
-            }
-            type
-          }
-        }
-        websites {
-          ${arcSite} {
-            website_url
-          }
-        }
-      }
-    }`,
+		content_elements {
+			_id
+			headlines {
+				basic
+			}
+		  	website_url
+		  	promo_items {
+				basic {
+					_id
+					type
+					url
+					auth {
+						${RESIZER_APP_VERSION}
+					}
+			 	}
+				lead_art {
+					promo_items {
+				  		basic {
+							_id
+							type
+							url
+							auth {
+								${RESIZER_APP_VERSION}
+							}
+						}
+					}
+					type
+			 	}
+		  	}
+		  	websites {
+				${arcSite} {
+					website_url
+				}
+		  	}
+		}
+	 }`,
 		}) || {};
 
 	const Wrapper = title ? HeadingSection : React.Fragment;
@@ -132,23 +122,48 @@ const SimpleList = (props) => {
 				{title ? <Heading>{title}</Heading> : null}
 				<Wrapper>
 					<Stack className={`${BLOCK_CLASS_NAME}__items`} divider>
-						{contentElements
-							.reduce(unserializeStory(arcSite), [])
-							.map(({ id: listItemId, itemTitle, imageURL, websiteURL }) => (
-								<StoryItem
-									key={listItemId}
-									classPrefix={BLOCK_CLASS_NAME}
-									itemTitle={itemTitle}
-									imageURL={imageURL}
-									websiteURL={websiteURL}
-									websiteDomain={websiteDomain}
-									showHeadline={showHeadline}
-									showImage={showImage}
-									targetFallbackImage={targetFallbackImage}
-									arcSite={arcSite}
-									primaryLogoAlt={primaryLogoAlt}
-								/>
-							))}
+						{contentElements.map((element) => {
+							const { headlines: { basic: headlineText = "" } = {}, websites } = element;
+							const image = getImageFromANS(element);
+
+							if (!websites[arcSite]) {
+								return null;
+							}
+							const url = websites[arcSite].website_url;
+							const imageParams = image
+								? {
+										ansImage: image,
+										aspectRatio: "3:2",
+										resizedOptions: {
+											smart: true,
+										},
+										responsiveImages: [274, 548, 1096],
+										width: 274,
+								  }
+								: {
+										src: targetFallbackImage,
+								  };
+
+							return (
+								<Stack
+									as="article"
+									className={`${BLOCK_CLASS_NAME}__item`}
+									direction="horizontal"
+									key={`simple-list-${element._id}`}
+								>
+									{showImage ? (
+										<Link href={url} className={`${BLOCK_CLASS_NAME}__item-anchor`} assistiveHidden>
+											<Image {...imageParams} />
+										</Link>
+									) : null}
+									{showHeadline && headlineText !== "" ? (
+										<Link href={url}>
+											<Heading truncationLines={3}>{headlineText}</Heading>
+										</Link>
+									) : null}
+								</Stack>
+							);
+						})}
 					</Stack>
 				</Wrapper>
 			</Stack>

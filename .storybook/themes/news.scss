@@ -1989,6 +1989,20 @@
 				right-rail-advanced-main-right-rail-bottom: (
 					grid-area: main-right-rail-bottom,
 				),
+				section-title: (
+					gap: var(--global-spacing-4),
+					components: (
+						heading: (
+							font-family: var(--font-family-primary),
+							font-size: var(--heading-level-1-font-size),
+							font-weight: var(--heading-level-1-font-weight),
+							line-height: var(--heading-level-1-line-height),
+						),
+						separator: (
+							margin: 0 var(--global-spacing-4),
+						),
+					),
+				),
 				share-bar: (
 					background: var(--background-color),
 					box-shadow: var(--global-box-shadow-1),
@@ -2915,6 +2929,7 @@
 @use "../../blocks/author-bio-block";
 @use "../../blocks/card-list-block";
 @use "../../blocks/category-carousel-block";
+@use "../../blocks/date-block";
 @use "../../blocks/double-chain-block";
 @use "../../blocks/footer-block";
 @use "../../blocks/extra-large-manual-promo-block";
@@ -2939,6 +2954,7 @@
 @use "../../blocks/results-list-block";
 @use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
+@use "../../blocks/section-title-block";
 @use "../../blocks/share-bar-block";
 @use "../../blocks/simple-list-block";
 @use "../../blocks/single-chain-block";

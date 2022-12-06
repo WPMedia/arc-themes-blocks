@@ -2,12 +2,13 @@
   "name": "@wpmedia/section-title-block",
   "version": "5.15.0",
   "description": "Fusion News Theme section title block",
-  "author": "Beltran Caliz <beltran.caliz@washpost.com>",
+  "author": "Arc XP Themes",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
   "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
+  "main": "",
   "files": [
-    "features"
+    "features",
+	 "_index.scss"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -18,15 +19,9 @@
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/section-title-block"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
-  },
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/news-theme-css": "*",
-    "@wpmedia/shared-styles": "*"
+	 "@wpmedia/arc-themes-components": "*"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

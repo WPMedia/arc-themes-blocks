@@ -32,6 +32,7 @@ const sampleData = {
 	author: "Jane and John Dee",
 	dateTime: "2021-01-12 13:23",
 	dateString: "January 12, 2021 at 1:23PM EST",
+	imageRatio: "4:3",
 };
 
 export const allFields = () => {

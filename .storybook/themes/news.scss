@@ -1854,6 +1854,42 @@
 				quad-chain-child-item-empty: (
 					display: contents,
 				),
+				search-results-list: (
+					components: (
+						attribution: (
+							margin-top: var(--global-spacing-4),
+						),
+						heading: (
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
+							margin-bottom: var(--global-spacing-4),
+						),
+						media-item: (
+							float: left,
+							margin: 0,
+							max-width: 33%,
+						),
+						overline: (
+							font-weight: var(--heading-level-4-font-weight),
+							font-size: var(--heading-level-5-font-size),
+							line-height: var(--heading-level-5-line-height),
+						),
+						paragraph: (
+							display: block,
+						),
+					),
+				),
+				search-results-list-show-image: (
+					components: (
+						heading: (
+							width: 68%,
+						),
+						overline: (
+							font-size: var(--body-font-size),
+						),
+					),
+				),
 				right-rail: (
 					gap: var(--global-spacing-6),
 				),
@@ -1949,6 +1985,34 @@
 				),
 				right-rail-advanced-main-right-rail-bottom: (
 					grid-area: main-right-rail-bottom,
+				),
+				search-results-list-search-bar: (
+					background-color: #fff,
+					border: 1px solid var(--global-neutral-8),
+					border-radius: 2px,
+					border-bottom-right-radius: 0,
+					border-top-right-radius: 0,
+					box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2),
+					display: inline-block,
+					font-size: var(--global-font-size-5),
+					padding-left: 47px,
+					components: (
+						input: (
+							border: none,
+						),
+					),
+				),
+				search-results-list-result-text: (
+					color: #000,
+					font-size: 14px,
+					margin-top: 32px,
+					text-align: left,
+				),
+				search-results-list-search-icon: (
+					margin-left: 12px,
+					margin-top: 12px,
+					position: absolute,
+					z-index: 5,
 				),
 				share-bar: (
 					background: var(--background-color),
@@ -2643,6 +2707,34 @@
 				quad-chain-child-item-empty: (
 					display: initial,
 				),
+				search-results-list: (
+					components: (
+						media-item: (
+							float: left,
+							margin: 0,
+							max-width: 33%,
+						),
+					),
+				),
+				search-results-list-show-image: (
+					components: (
+						attribution: (
+							display: block,
+							margin-left: calc(33% + var(--global-spacing-6)),
+						),
+						heading: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+							width: auto,
+						),
+						paragraph: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+						),
+						overline: (
+							margin-left: var(--global-spacing-6),
+							font-size: var(--heading-level-5-font-size),
+						),
+					),
+				),
 				right-rail-navigation: (
 					padding: 0 0 var(--global-spacing-8) 0,
 				),
@@ -2868,6 +2960,7 @@
 @use "../../blocks/quilted-image-block";
 @use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
+@use "../../blocks/search-results-list-block";
 @use "../../blocks/share-bar-block";
 @use "../../blocks/simple-list-block";
 @use "../../blocks/single-chain-block";

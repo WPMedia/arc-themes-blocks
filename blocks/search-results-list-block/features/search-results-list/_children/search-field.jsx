@@ -17,10 +17,10 @@ const SearchField = ({
 
 	return (
 		<Stack className={className}>
-			<Stack className={className} direction="vertical">
-				<Icon name="Search" />
+			<Stack className={className} direction="row">
+				<Icon name="Search" className={`${className}-search-icon`} />
 				<Input
-					className="search-bar"
+					className={`${className}-search-bar`}
 					{...(defaultValue ? { defaultValue } : {})}
 					name="searchQuery"
 					onChange={onChange}
@@ -28,7 +28,7 @@ const SearchField = ({
 					type="text"
 				/>
 				<Button
-					aria-label={phrases.t("search-results-block.search-button")}
+					accessibilityLabel={phrases.t("search-results-block.search-button")}
 					onClick={() => onSearch(false)}
 					size="small"
 					variant="primary"
@@ -37,7 +37,7 @@ const SearchField = ({
 				</Button>
 			</Stack>
 			{showResultsStats ? (
-				<Paragraph className="search-results-text">
+				<Paragraph className={`${className}-result-text`}>
 					{phrases.t("search-results-block.search-result-number", {
 						smart_count: totalItems,
 						searchTerm,

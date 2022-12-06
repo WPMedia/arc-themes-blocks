@@ -17,6 +17,7 @@ import {
 	Paragraph,
 	Separator,
 	usePhrases,
+	Overline,
 } from "@wpmedia/arc-themes-components";
 
 import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
@@ -28,7 +29,15 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 		return null;
 	}
 
-	const { showHeadline, showImage, showDescription, showByline, showDate } = promoElements;
+	const {
+		overlineURL,
+		showByline,
+		showDate,
+		showDescription,
+		showHeadline,
+		showImage,
+		showItemOverline,
+	} = promoElements;
 	const {
 		dateLocalization: { dateTimeFormat, language, timeZone } = {
 			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
@@ -42,6 +51,7 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
 	const hasAuthors = showByline ? content?.credits?.by?.length : null;
+	const overline = content?.text || "Overline";
 
 	const ansImage = getImageFromANS(content);
 	const imageParams =
@@ -75,7 +85,7 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 
 	return (
 		<HeadingSection>
-			<article className={`${className}${showImage ? ` ${className}--show-image` : ""}`}>
+			<div className={`${className}${showImage ? ` ${className}--show-image` : ""}`}>
 				{showImage ? (
 					<MediaItem>
 						<Conditional
@@ -88,7 +98,7 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 						</Conditional>
 					</MediaItem>
 				) : null}
-
+				{showItemOverline && overline ? <Overline href={overlineURL}>{overline}</Overline> : null}
 				{contentHeading ? (
 					<Heading>
 						<Conditional component={Link} condition={contentUrl} href={formatURL(contentUrl)}>
@@ -113,7 +123,7 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 						</Join>
 					</Attribution>
 				) : null}
-			</article>
+			</div>
 		</HeadingSection>
 	);
 };

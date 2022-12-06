@@ -110,10 +110,10 @@ class CustomSearchResultsList extends React.Component {
 
 CustomSearchResultsList.propTypes = {
 	customFields: PropTypes.shape({
-		searchContentConfig: PropTypes.contentConfig().tag({
-			group: "Configure Content",
-			label: "Display Content Info",
-		}),
+		// searchContentConfig: PropTypes.contentConfig().tag({
+		// 	group: "Configure Content",
+		// 	label: "Display Content Info",
+		// }),
 	}),
 };
 

@@ -171,6 +171,12 @@ LargeManualPromo.propTypes = {
 			group: "Configure Content",
 			searchable: "image",
 		}),
+		imageAuth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageId: PropTypes.string.tag({
+			hidden: true,
+		}),
 		linkURL: PropTypes.string.tag({
 			label: "Link URL",
 			group: "Configure Content",

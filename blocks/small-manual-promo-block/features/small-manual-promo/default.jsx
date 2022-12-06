@@ -158,11 +158,9 @@ SmallManualPromo.propTypes = {
 			searchable: "image",
 		}),
 		imageAuth: PropTypes.string.tag({
-			group: "Image",
 			hidden: true,
 		}),
 		imageId: PropTypes.string.tag({
-			group: "Image",
 			hidden: true,
 		}),
 		linkURL: PropTypes.string.tag({

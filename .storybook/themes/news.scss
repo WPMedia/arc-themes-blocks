@@ -1869,6 +1869,9 @@
 							float: right,
 							max-width: 100px,
 						),
+						overline: (
+							font-size: var(--body-font-size),
+						),
 						heading: (
 							font-size: var(--heading-level-5-font-size),
 							font-weight: var(--heading-level-5-font-weight),

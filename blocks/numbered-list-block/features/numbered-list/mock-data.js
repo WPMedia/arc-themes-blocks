@@ -80,6 +80,9 @@ export const oneListItem = {
 					},
 					address: {},
 					alt_text: "An aerial view of the Brooklyn Bridge",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption: "A trip above the New York City skyline in a helicopter.",
 					created_date: "2019-07-09T23:06:05Z",
 					credits: {
@@ -734,6 +737,9 @@ export const withoutByline = {
 					},
 					address: {},
 					alt_text: "An aerial view of the Brooklyn Bridge",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption: "A trip above the New York City skyline in a helicopter.",
 					created_date: "2019-07-09T23:06:05Z",
 					credits: {
@@ -1445,6 +1451,9 @@ export const LineItemWithOutDescription = {
 					},
 					address: {},
 					alt_text: "An aerial view of the Brooklyn Bridge",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption: "A trip above the New York City skyline in a helicopter.",
 					created_date: "2019-07-09T23:06:05Z",
 					credits: {
@@ -2098,6 +2107,9 @@ export default {
 					},
 					address: {},
 					alt_text: "A person holds their surfboard and looks out across the dunes at the ocean.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption:
 						"Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day. Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break; cowabunga Keanu.",
 					created_date: "2019-07-09T22:26:02Z",
@@ -3490,6 +3502,9 @@ export default {
 							url: "https://d22ff27hdsy159.cloudfront.net/11-05-2019/t_9f51049ae2e640ba99b4a7f1763ca5fc_name_t_1c01cadfde48422b857383e38d8553a7_name_Pexels_Videos_2330708__scaled.jpg",
 							width: 1920,
 							height: 1080,
+							auth: {
+								2: "AUTH_TOKEN",
+							},
 						},
 					},
 					related_content: {
@@ -3585,6 +3600,9 @@ export default {
 						url: "https://d22ff27hdsy159.cloudfront.net/11-05-2019/t_9f51049ae2e640ba99b4a7f1763ca5fc_name_t_1c01cadfde48422b857383e38d8553a7_name_Pexels_Videos_2330708__scaled.jpg",
 						width: 1920,
 						height: 1080,
+						auth: {
+							2: "AUTH_TOKEN",
+						},
 					},
 					embed_html:
 						'<div class="powa" id="powa-e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" data-org="corecomponents" data-env="prod" data-uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>',
@@ -4248,6 +4266,9 @@ export default {
 							},
 							address: {},
 							alt_text: "A person laying on their surfboard in the ocean.",
+							auth: {
+								2: "AUTH_TOKEN",
+							},
 							caption: "I'm overriding the caption on this image for this particular gallery",
 							created_date: "2019-07-09T22:26:02Z",
 							credits: {
@@ -4338,6 +4359,9 @@ export default {
 							},
 							address: {},
 							alt_text: "A person laying on their surfboard in the ocean.",
+							auth: {
+								2: "AUTH_TOKEN",
+							},
 							caption: "I'm overriding the caption on this image for this particular gallery",
 							created_date: "2019-07-09T22:26:02Z",
 							credits: {
@@ -4407,6 +4431,9 @@ export default {
 							},
 							address: {},
 							alt_text: "A person walks down a path with their surfboard towards the ocean.",
+							auth: {
+								2: "AUTH_TOKEN",
+							},
 							caption:
 								"Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day. Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break; cowabunga Keanu.",
 							created_date: "2019-07-09T22:26:02Z",
@@ -4477,6 +4504,9 @@ export default {
 							},
 							address: {},
 							alt_text: "Three tiny silhouettes of people walking in the Australian wilderness.",
+							auth: {
+								2: "AUTH_TOKEN",
+							},
 							caption:
 								"Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day. Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break; cowabunga Keanu.",
 							created_date: "2019-07-09T22:26:02Z",
@@ -4548,6 +4578,9 @@ export default {
 							},
 							address: {},
 							alt_text: "Palm trees stand in front of a building.",
+							auth: {
+								2: "AUTH_TOKEN",
+							},
 							caption: "The rain had chased all the beach-goers away. It was cloudy and cold.",
 							credits: {
 								affiliation: [],
@@ -4605,6 +4638,9 @@ export default {
 							address: {},
 							alt_text:
 								"A woman with her back to the camera looks out at the ocean on a cloudy day.",
+							auth: {
+								2: "AUTH_TOKEN",
+							},
 							caption: "The rain had chased all the beach-goers away. It was cloudy and cold.",
 							credits: {
 								affiliation: [],
@@ -5386,6 +5422,9 @@ export default {
 					},
 					address: {},
 					alt_text: "Waves crashing at the shore.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption: "Ocean waves at the English coast.",
 					created_date: "2019-07-09T22:04:46Z",
 					credits: {
@@ -5456,6 +5495,9 @@ export default {
 					},
 					address: {},
 					alt_text: "Waves crashing at the shore.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption:
 						"A lazy Sunday spent relaxing at the English coast. Tea and toast and the fresh sea air, all wrapped up in one trip.",
 					created_date: "2019-07-09T22:04:46Z",
@@ -6400,6 +6442,9 @@ export default {
 					},
 					address: {},
 					alt_text: "An aerial view of the lower tip of Manhattan",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption: "A trip above the New York City skyline in a helicopter.",
 					created_date: "2019-07-09T23:06:05Z",
 					credits: {
@@ -6461,6 +6506,9 @@ export default {
 					},
 					address: {},
 					alt_text: "An aerial view of the lower tip of Manhattan",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption: "A trip above the New York City skyline in a helicopter.",
 					created_date: "2019-07-09T23:06:05Z",
 					credits: {
@@ -7536,6 +7584,9 @@ export default {
 						version: 2,
 					},
 					address: {},
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption: "Orange and pink flowers with dark green leaves",
 					created_date: "2019-08-19T23:56:26Z",
 					credits: {
@@ -7611,6 +7662,9 @@ export default {
 						version: 2,
 					},
 					address: {},
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption: "Orange and pink flowers with dark green leaves",
 					created_date: "2019-08-19T23:56:26Z",
 					credits: {
@@ -8241,6 +8295,9 @@ export default {
 					},
 					address: {},
 					alt_text: "An aerial view of a coastline with steep cliffs.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption:
 						"Experience Above took to the the sky from Big Sur to San Fransisco with their drone.",
 					created_date: "2019-07-09T22:51:30Z",
@@ -8413,6 +8470,9 @@ export default {
 							url: "https://d22ff27hdsy159.cloudfront.net/11-05-2019/t_9f51049ae2e640ba99b4a7f1763ca5fc_name_t_1c01cadfde48422b857383e38d8553a7_name_Pexels_Videos_2330708__scaled.jpg",
 							width: 1920,
 							height: 1080,
+							auth: {
+								2: "AUTH_TOKEN",
+							},
 						},
 					},
 					related_content: {
@@ -9117,6 +9177,9 @@ export default {
 						version: 2,
 					},
 					address: {},
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					alt_text: "The Empire State Building in the middle of an aerial view of New York",
 					caption: "A trip above the New York City skyline in a helicopter.",
 					created_date: "2019-07-09T23:06:05Z",
@@ -9546,6 +9609,9 @@ export default {
 					address: {},
 					alt_text:
 						"An old-fashioned camera, some pens and a small air plant sitting on a sparse modern white desk.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption:
 						"The Northeast Collaborative, a newly formed all-female collaborative studio space.",
 					copyright: "Death to the Stock Photo",
@@ -9766,6 +9832,9 @@ export default {
 					},
 					address: {},
 					alt_text: "An aerial view of a tall arched bridge between two hills on the coast.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption:
 						"Experience Above took to the the sky from Big Sur to San Fransisco with their drone.",
 					created_date: "2019-07-09T22:51:30Z",
@@ -10550,6 +10619,9 @@ export default {
 						version: 2,
 					},
 					address: {},
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption: "Orange and pink flowers with dark green leaves",
 					created_date: "2019-08-19T23:56:26Z",
 					credits: {
@@ -11152,6 +11224,9 @@ export default {
 					},
 					address: {},
 					alt_text: "A path through the woods, partially dusted with snow.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption:
 						"A visit to Snoqualmie Pass near Seattle, Washington included skating on the ice, tip-toeing across fallen tress, eating chex mix, and being refreshed by the cold mountain air.",
 					created_date: "2019-07-09T22:09:07Z",
@@ -11736,6 +11811,9 @@ export default {
 					},
 					address: {},
 					alt_text: "An aerial view of a coastline with steep cliffs.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption:
 						"Experience Above took to the the sky from Big Sur to San Fransisco with their drone.",
 					created_date: "2019-07-09T22:51:30Z",
@@ -11799,6 +11877,9 @@ export default {
 					},
 					address: {},
 					alt_text: "A person with brown hiking boots walks across a shallow creek.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption:
 						"A visit to Snoqualmie Pass near Seattle, Washington included skating on the ice, tip-toeing across fallen tress, eating chex mix, and being refreshed by the cold mountain air.",
 					created_date: "2019-07-09T22:09:07Z",
@@ -12380,6 +12461,9 @@ export default {
 					},
 					address: {},
 					alt_text: "A man stands in front of a grove of trees.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption: "The rain had chased all the beach-goers away. It was cloudy and cold.",
 					created_date: "2019-07-09T22:23:18Z",
 					credits: {
@@ -12613,6 +12697,9 @@ export default {
 					},
 					address: {},
 					alt_text: "A man cooking in a kitchen next to a spice rack.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption:
 						"Australian home chef  Damien Matter\nheads to the market, prepares food, and serves a dinner party of friends.",
 					created_date: "2019-07-09T22:41:16Z",
@@ -12852,6 +12939,9 @@ export default {
 					},
 					address: {},
 					alt_text: "The silhouettes of two people are seein in front of a lake at sunset.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption:
 						"A visit to Snoqualmie Pass near Seattle, Washington included skating on the ice, tip-toeing across fallen tress, eating chex mix, and being refreshed by the cold mountain air.",
 					created_date: "2019-07-09T22:09:07Z",
@@ -13099,6 +13189,9 @@ export default {
 					address: {},
 					alt_text:
 						"A few photography film cartridges sitting on some books on a desk, with a Mac computer in the background.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption:
 						"The Northeast Collaborative, a newly formed all-female collaborative studio space.",
 					copyright: "Death to the Stock Photo",
@@ -13339,6 +13432,9 @@ export default {
 					},
 					address: {},
 					alt_text: "Two benches back-to-back on the tracks of an outdoor subway platform at dusk.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption:
 						"Areas of London are so rich and distinct from one another, that they become like characters in their own right.",
 					created_date: "2019-07-09T22:38:29Z",
@@ -13587,6 +13683,9 @@ export default {
 					address: {},
 					alt_text:
 						"A phone laying on a modern white desk with some succulent plants arranged in the background.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption:
 						"The Northeast Collaborative, a newly formed all-female collaborative studio space.",
 					copyright: "Death to the Stock Photo",
@@ -13828,6 +13927,9 @@ export default {
 					},
 					address: {},
 					alt_text: "An aerial view of the Brooklyn Bridge",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption: "A trip above the New York City skyline in a helicopter.",
 					created_date: "2019-07-09T23:06:05Z",
 					credits: {
@@ -14082,6 +14184,9 @@ export default {
 						version: 0,
 					},
 					address: {},
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption:
 						"Dave Bautista, left, plays a police detective recovering from eye surgery, and Kumail Nanjiani is his Uber driver in “Stuber.”",
 					created_date: "2019-07-10T15:20:56Z",
@@ -14143,6 +14248,9 @@ export default {
 						version: 0,
 					},
 					address: {},
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption:
 						"Dave Bautista, left, plays a police detective recovering from eye surgery, and Kumail Nanjiani is his Uber driver in “Stuber.”",
 					created_date: "2019-07-10T15:20:56Z",
@@ -14428,6 +14536,9 @@ export default {
 					},
 					address: {},
 					alt_text: "An aerial view of the Hudson river and the New York skyline at night.",
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					caption: "A trip above the New York City skyline in a helicopter.",
 					created_date: "2019-07-09T23:06:05Z",
 					credits: {
@@ -14602,6 +14713,9 @@ export default {
 						_id: "E6V2A5YH7JCAZNCQVMB6UPGUAA",
 					},
 					address: {},
+					auth: {
+						2: "AUTH_TOKEN",
+					},
 					created_date: "2019-04-10T21:00:13Z",
 					credits: {
 						affiliation: [

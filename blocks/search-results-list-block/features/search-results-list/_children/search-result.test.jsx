@@ -50,6 +50,7 @@ describe("The search results", () => {
 	describe("renders one list item correctly", () => {
 		const fullElements = {
 			showHeadline: true,
+			showOverline: true,
 			showImage: true,
 			showDescription: true,
 			showByline: true,

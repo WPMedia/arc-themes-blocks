@@ -1,6 +1,6 @@
 import React from "react";
-import { RESIZER_APP_VERSION } from "fusion:environment";
 import PropTypes from "@arc-fusion/prop-types";
+import { RESIZER_APP_VERSION } from "fusion:environment";
 import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
@@ -56,6 +56,7 @@ const SmallManualPromo = ({ customFields }) => {
 		imageAuthToken[RESIZER_APP_VERSION] = imageAuthToken.hash;
 	}
 
+	const alt = headline || null;
 	const imageParams =
 		imageId && imageURL
 			? {
@@ -64,6 +65,7 @@ const SmallManualPromo = ({ customFields }) => {
 						url: imageURL,
 						auth: imageAuth ? JSON.parse(imageAuth) : imageAuthTokenObj,
 					},
+					alt,
 					aspectRatio: imageRatio,
 					resizedOptions: {
 						smart: true,
@@ -73,6 +75,7 @@ const SmallManualPromo = ({ customFields }) => {
 			  }
 			: {
 					src: fallbackImage,
+					alt,
 			  };
 
 	const PromoImage = () => {
@@ -93,7 +96,7 @@ const SmallManualPromo = ({ customFields }) => {
 				href={formatURL(linkURL)}
 				openInNewTab={newTab}
 				onClick={registerSuccessEvent}
-				assistiveHidden
+				assistiveHidden={showImage && showHeadline}
 			>
 				{ImageDisplay}
 			</Link>

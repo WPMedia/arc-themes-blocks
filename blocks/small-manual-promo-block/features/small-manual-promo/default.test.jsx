@@ -63,6 +63,11 @@ describe("the small manual promo feature", () => {
 		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
 	});
 
+	it("should use fallback image", () => {
+		render(<SmallManualPromo customFields={{ ...customFields, imageId: null }} />);
+		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+	});
+
 	it("should have no image when showImage is false", () => {
 		render(<SmallManualPromo customFields={{ ...customFields, showImage: false }} />);
 		expect(screen.queryByRole("img")).toBeNull();
@@ -70,6 +75,11 @@ describe("the small manual promo feature", () => {
 
 	it("should have no headline when showHeadline is false", () => {
 		render(<SmallManualPromo customFields={{ ...customFields, showHeadline: false }} />);
+		expect(screen.queryByText("This is the headline")).toBeNull();
+	});
+
+	it("should not display headline", () => {
+		render(<SmallManualPromo customFields={{ ...customFields, headline: null }} />);
 		expect(screen.queryByText("This is the headline")).toBeNull();
 	});
 

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { useEditableContent } from "fusion:content";
+import { RESIZER_APP_VERSION } from "fusion:environment";
+import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import {
@@ -22,7 +23,10 @@ const MediumManualPromo = ({ customFields }) => {
 	const {
 		description,
 		headline,
+		imageAuth,
 		imageURL,
+		imageId,
+		imageRatio,
 		lazyLoad,
 		linkURL,
 		newTab,
@@ -36,37 +40,75 @@ const MediumManualPromo = ({ customFields }) => {
 	const { fallbackImage } = getProperties(arcSite);
 	const shouldLazyLoad = lazyLoad && !isAdmin;
 
+	const imageAuthToken = useContent(
+		!imageAuth && imageId
+			? {
+					source: "signing-service",
+					query: { id: imageId },
+			  }
+			: {}
+	);
+
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}
 
-	const availableImageURL = showImage ? imageURL || fallbackImage : null;
-	const headlineText = showHeadline ? headline : null;
-	const descriptionText = showDescription ? description : null;
+	const imageAuthTokenObj = {};
+	if (imageAuthToken?.hash) {
+		imageAuthToken[RESIZER_APP_VERSION] = imageAuthToken.hash;
+	}
+
+	const alt = headline || description || null;
+	const imageParams =
+		imageId && imageURL
+			? {
+					ansImage: {
+						_id: imageId,
+						url: imageURL,
+						auth: imageAuth ? JSON.parse(imageAuth) : imageAuthTokenObj,
+					},
+					alt,
+					aspectRatio: imageRatio,
+					resizedOptions: {
+						smart: true,
+					},
+					responsiveImages: [200, 400, 600, 800, 1200],
+					width: 600,
+			  }
+			: {
+					src: fallbackImage,
+					alt,
+			  };
 
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
 				<article
-					className={`${BLOCK_CLASS_NAME}${
-						availableImageURL ? ` ${BLOCK_CLASS_NAME}--show-image` : ""
-					}`}
+					className={`${BLOCK_CLASS_NAME}${showImage ? ` ${BLOCK_CLASS_NAME}--show-image` : ""}`}
 				>
-					{availableImageURL ? (
-						<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
+					{showImage ? (
+						<MediaItem
+							{...searchableField({
+								imageURL: "url",
+								imageId: "_id",
+								imageAuth: "auth",
+							})}
+							suppressContentEditableWarning
+						>
 							<Conditional
 								component={Link}
 								condition={linkURL}
 								href={formatURL(linkURL)}
 								openInNewTab={newTab}
 								onClick={registerSuccessEvent}
+								assistiveHidden={showImage && showHeadline && showDescription}
 							>
-								<Image alt={headline} src={availableImageURL} searchableField />
+								<Image {...imageParams} />
 							</Conditional>
 						</MediaItem>
 					) : null}
 
-					{headlineText ? (
+					{showHeadline && headline ? (
 						<Heading>
 							<Conditional
 								component={Link}
@@ -79,7 +121,7 @@ const MediumManualPromo = ({ customFields }) => {
 							</Conditional>
 						</Heading>
 					) : null}
-					{descriptionText ? <Paragraph>{description}</Paragraph> : null}
+					{showDescription ? <Paragraph>{description}</Paragraph> : null}
 				</article>
 			</HeadingSection>
 		</LazyLoad>
@@ -100,6 +142,14 @@ MediumManualPromo.propTypes = {
 			label: "Image URL",
 			group: "Configure Content",
 			searchable: "image",
+		}),
+		imageAuth: PropTypes.string.tag({
+			group: "Image",
+			hidden: true,
+		}),
+		imageId: PropTypes.string.tag({
+			group: "Image",
+			hidden: true,
 		}),
 		linkURL: PropTypes.string.tag({
 			label: "Link URL",

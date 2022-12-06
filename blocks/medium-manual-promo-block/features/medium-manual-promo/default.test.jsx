@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { isServerSide } from "@wpmedia/arc-themes-components";
+import { useContent } from "fusion:content";
 
 import MediumManualPromo from "./default";
 
@@ -13,10 +14,6 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	isServerSide: jest.fn(() => false),
 }));
 
-jest.mock("fusion:properties", () => () => ({
-	fallbackImage: "http://fallback.img",
-}));
-
 jest.mock("fusion:content", () => ({
 	useContent: jest.fn(() => {}),
 	useEditableContent: jest.fn(() => ({
@@ -27,7 +24,9 @@ jest.mock("fusion:content", () => ({
 const customFieldData = {
 	headline: "Headline",
 	description: "Description",
+	imageId: 123,
 	imageURL: "image-url.jpg",
+	imageAuth: '{"2":"1d2390c4cc8df2265924631d707ead2490865f17830bfbb52c8541b8696bf573"}',
 	linkURL: "arcxp.com",
 	newTab: false,
 	showHeadline: true,
@@ -53,7 +52,7 @@ describe("the medium promo feature", () => {
 		render(<MediumManualPromo customFields={customFieldData} />);
 		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
 		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
 	});
 
 	it("does not show image", () => {
@@ -77,19 +76,37 @@ describe("the medium promo feature", () => {
 		render(<MediumManualPromo customFields={fallbackImage} />);
 		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
 		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+	});
+
+	it("should use content source to get image auth", () => {
+		useContent.mockReturnValueOnce({ hash: 123 });
+		render(
+			<MediumManualPromo
+				customFields={{
+					...customFieldData,
+					headline: undefined,
+					linkURL: undefined,
+					imageAuth: undefined,
+					imageId: 123,
+				}}
+			/>
+		);
+		expect(useContent).toHaveBeenCalled();
+		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
 	});
 
 	it("does not show description", () => {
 		const noDescription = {
 			...customFieldData,
 			showDescription: false,
+			description: null,
 		};
 
 		render(<MediumManualPromo customFields={noDescription} />);
 		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
 		expect(screen.queryByText(customFieldData.description)).toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
 	});
 
 	it("does not show headline", () => {
@@ -103,6 +120,20 @@ describe("the medium promo feature", () => {
 		expect(screen.queryByText(customFieldData.headline)).toBeNull();
 		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
 		expect(screen.queryByRole("img")).not.toBeNull();
+	});
+
+	it("does not show description or headline", () => {
+		const noDescriptionOrHeadline = {
+			...customFieldData,
+			headline: null,
+			showDescription: false,
+			description: null,
+		};
+
+		render(<MediumManualPromo customFields={noDescriptionOrHeadline} />);
+		expect(screen.queryByText(customFieldData.headline)).toBeNull();
+		expect(screen.queryByText(customFieldData.description)).toBeNull();
+		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
 	});
 
 	it("renders headline with no link", () => {

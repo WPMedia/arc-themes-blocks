@@ -85,7 +85,7 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 
 	return (
 		<HeadingSection>
-			<div className={`${className}${showImage ? ` ${className}--show-image` : ""}`}>
+			<article className={`${className}${showImage ? ` ${className}--show-image` : ""}`}>
 				{showImage ? (
 					<MediaItem>
 						<Conditional
@@ -123,7 +123,7 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 						</Join>
 					</Attribution>
 				) : null}
-			</div>
+			</article>
 		</HeadingSection>
 	);
 };

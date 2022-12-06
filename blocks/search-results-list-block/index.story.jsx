@@ -43,7 +43,7 @@ const globalContent = {
 			},
 		},
 	],
-	metadata: { total_hits: 3, q: "storybook search" },
+	metadata: { total_hits: 3, q: "Enter search items" },
 };
 
 export const allFields = () => {

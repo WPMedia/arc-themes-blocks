@@ -115,7 +115,7 @@ const LargeManualPromo = ({ customFields }) => {
 								href={formatURL(linkURL)}
 								openInNewTab={newTab}
 								onClick={registerSuccessEvent}
-								assistiveHidden={showImage && showHeadline && showDescription}
+								assistiveHidden={showHeadline && showDescription}
 							>
 								<Image {...imageParams} />
 							</Conditional>

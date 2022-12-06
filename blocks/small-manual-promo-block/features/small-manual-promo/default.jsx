@@ -96,7 +96,7 @@ const SmallManualPromo = ({ customFields }) => {
 				href={formatURL(linkURL)}
 				openInNewTab={newTab}
 				onClick={registerSuccessEvent}
-				assistiveHidden={showImage && showHeadline}
+				assistiveHidden={showHeadline}
 			>
 				{ImageDisplay}
 			</Link>

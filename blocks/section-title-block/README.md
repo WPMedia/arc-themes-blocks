@@ -1,22 +1,10 @@
 # `@wpmedia/section-title-block`
 
-_Fusion News Theme section title block# Name of Block. Please provide a 1-2 sentence description of what the block is and what it does._
-
-## Acceptance Criteria
-
-- Add AC relevant to the block
-
-## Props
-
-| **Prop**                  | **Required** | **Type** | **Description**                                     |
-| ------------------------- | ------------ | -------- | --------------------------------------------------- |
-| **required prop**         | yes          |          |                                                     |
-| **optional prop**         | no           |          |                                                     |
-| **contentConfig example** |              |          | Please specify which content sources are compatible |
+A block that can display the section title and links from Site SErvice
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
+This block relies on the Site Service ANS schema to diplay section title and section links if any
 
 ### Example output for section
 
@@ -62,29 +50,3 @@ Outline any schema information requirements necessary to know for ths block
 - `content.children[x].id`
 - `content.children[x]._id` used as href for link
 - `content.children[x].name`
-
-## Internationalization fields
-
-| Phrase key | Default (English)     |
-| ---------- | --------------------- |
-| `key`      | `english translation` |
-
-## Events
-
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
-
-### Event Listening
-
-Include block specific instructions for event listening.
-
-OR
-
-This block does not emit any events.
-
-## Additional Considerations
-
-_This is optional. Please add an additional context that would be important to know in order to use this block._

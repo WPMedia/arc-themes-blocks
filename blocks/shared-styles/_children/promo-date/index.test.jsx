@@ -8,8 +8,8 @@ jest.mock("fusion:properties", () =>
 		dateLocalization: {
 			language: "en",
 			timeZone: "America/New_York",
-			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
-			dateFormat: "LLLL d, yyyy",
+			dateTimeFormat: "%B %d, %Y 'at' K:m bbbb z",
+			dateFormat: "%B %d, %Y",
 		},
 	}))
 );

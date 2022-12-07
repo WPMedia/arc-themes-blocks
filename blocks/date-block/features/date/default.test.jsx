@@ -11,7 +11,7 @@ describe("Given the display time from ANS, it should convert to the proper timez
 			dateLocalization: {
 				language: "en",
 				timeZone: "America/New_York",
-				dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
+				dateTimeFormat: "%B %d, %Y at %l:%M %P %Z",
 			},
 		});
 		useAppContext.mockReturnValue({ globalContent: { display_date: "2019-08-11T16:45:33.209Z" } });

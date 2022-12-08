@@ -154,15 +154,12 @@ export const resultsList = {
 			},
 			promo_items: {
 				basic: {
-					resized_params: {
-						"158x89": "z_Azn1Z4KC_AMcBuhd9bYOb9CtQ=filters:format(jpg):quality(70)/",
-						"274x154": "qn8DuxfoBI80mL-M7Dh7K_BkskA=filters:format(jpg):quality(70)/",
+					_id: "HY6LDPEW4BBFDLBYD4S3S7LZ3E",
+					auth: {
+						2: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 					},
 					type: "image",
-					url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/CPRE2IPJNNHUTB2VAV6YUGWLLM.JPG",
-				},
-				lead_art: {
-					type: "raw_html",
+					url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg",
 				},
 			},
 			type: "story",
@@ -251,12 +248,12 @@ export const resultsList = {
 			},
 			promo_items: {
 				basic: {
-					resized_params: {
-						"158x89": "3ydOFCKNVdYmZHRyPsggyX3mFwI=filters:format(jpg):quality(70)/",
-						"274x154": "lSxneJemariteTE2atxvDYzfgXg=filters:format(jpg):quality(70)/",
+					_id: "HY6LDPEW4BBFDLBYD4S3S7LZ3E",
+					auth: {
+						2: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 					},
 					type: "image",
-					url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/PIU72D6VANCJFLW44O5RZP2PKY.jpeg",
+					url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg",
 				},
 			},
 			type: "story",
@@ -299,14 +296,12 @@ export const resultsList = {
 				lead_art: {
 					promo_items: {
 						basic: {
-							resized_params: {
-								"158x89":
-									"uhJ4ZJSFbUwK8cBD4A_SxcZWu4c=filters:format(jpg):quality(70):focal(5245x213:5255x223)/",
-								"274x154":
-									"ZmLdSvDBkde3hricZAJMymrD02o=filters:format(jpg):quality(70):focal(5245x213:5255x223)/",
+							_id: "HY6LDPEW4BBFDLBYD4S3S7LZ3E",
+							auth: {
+								2: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 							},
 							type: "image",
-							url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/P3V3THIJPVGUBLRIIYWKFHZTKA.jpg",
+							url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg",
 						},
 					},
 					type: "gallery",
@@ -389,17 +384,15 @@ export const resultsList = {
 				lead_art: {
 					promo_items: {
 						basic: {
-							resized_params: {
-								"158x89":
-									"UwKc89nRN3Lr9-X_cBSDs4i3Byg=filters:format(jpg):quality(70):focal(1038x633:1048x643)/",
-								"274x154":
-									"Hs17Lsr3-zIs1ECJ4k0pq3Db4Yo=filters:format(jpg):quality(70):focal(1038x633:1048x643)/",
+							_id: "HY6LDPEW4BBFDLBYD4S3S7LZ3E",
+							auth: {
+								2: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 							},
 							type: "image",
-							url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/GIFTTDFDL5HNXFIU7IFKLHLPAM.jpg",
+							url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg",
 						},
 					},
-					type: "gallery",
+					type: "image",
 				},
 			},
 			type: "story",
@@ -529,12 +522,12 @@ export const resultsList = {
 				lead_art: {
 					promo_items: {
 						basic: {
-							resized_params: {
-								"158x89": "lzLE5pGrdb-MjYzz2iyfVDSjPFE=filters:format(jpg):quality(70)/",
-								"274x154": "_K4-uAc-tHjOoeQHda1JdJjAgag=filters:format(jpg):quality(70)/",
+							_id: "QQUBBHAFJRDH7IVNHAI4IBEQVY",
+							auth: {
+								2: "ea391c022766c61dfadf9c6778efa43a8c31b87db157dc7d5db888562ff3150e",
 							},
 							type: "image",
-							url: "https://d22ff27hdsy159.cloudfront.net/05-14-2021/t_c6858dbae3ac4beda344a87d10c7ccaf_name_file_1080x1920_5400_.jpg",
+							url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/QQUBBHAFJRDH7IVNHAI4IBEQVY.jpg",
 						},
 					},
 					type: "video",
@@ -584,12 +577,12 @@ export const resultsList = {
 				lead_art: {
 					promo_items: {
 						basic: {
-							resized_params: {
-								"158x89": "V2qLzLEy5MVe4zgh-ftBRmPjG50=filters:format(png):quality(70)/",
-								"274x154": "y38BCyaHIOXsJMTjGi2O67kiGf8=filters:format(png):quality(70)/",
+							_id: "2KCJNN2JM5ECLEZDNHBWJQZKYQ",
+							auth: {
+								2: "1d2390c4cc8df2265924631d707ead2490865f17830bfbb52c8541b8696bf573",
 							},
 							type: "image",
-							url: "https://d22ff27hdsy159.cloudfront.net/11-05-2019/t_8fd2235468274172b2b7a61615424ac9_name_Screen_Shot_2019_11_05_at_2_57_53_PM.png",
+							url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/2KCJNN2JM5ECLEZDNHBWJQZKYQ.jpg",
 						},
 					},
 					type: "video",
@@ -637,12 +630,12 @@ export const resultsList = {
 			},
 			promo_items: {
 				basic: {
-					resized_params: {
-						"158x89": "PxX42qaeF-Nt5OG1DLQqo5EtxiE=filters:format(jpg):quality(70)/",
-						"274x154": "yg12GBuFErMOBmgnVivRYfR_7RU=filters:format(jpg):quality(70)/",
+					_id: "EM5DTGYGABDJZODV7YVFOC2DOM",
+					auth: {
+						2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf",
 					},
 					type: "image",
-					url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/X47S2KWAVNB3ZBA6GQBV3KMYPA.jpg",
+					url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
 				},
 			},
 			type: "story",
@@ -726,12 +719,12 @@ export const resultsList = {
 			},
 			promo_items: {
 				basic: {
-					resized_params: {
-						"158x89": "-NYWSF__HmJf6nqC3cSsHyic-Fs=filters:format(jpg):quality(70)/",
-						"274x154": "k7LxveUG7pXaw3G_OZle88hQYj8=filters:format(jpg):quality(70)/",
+					_id: "EM5DTGYGABDJZODV7YVFOC2DOM",
+					auth: {
+						2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf",
 					},
 					type: "image",
-					url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/RYNL5SXYCVDH7LCJPXAHYF3DJI.JPG",
+					url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
 				},
 			},
 			type: "story",
@@ -776,15 +769,12 @@ export const resultsList = {
 			},
 			promo_items: {
 				basic: {
-					resized_params: {
-						"158x89": "-NYWSF__HmJf6nqC3cSsHyic-Fs=filters:format(jpg):quality(70)/",
-						"274x154": "k7LxveUG7pXaw3G_OZle88hQYj8=filters:format(jpg):quality(70)/",
+					_id: "2KCJNN2JM5ECLEZDNHBWJQZKYQ",
+					auth: {
+						2: "1d2390c4cc8df2265924631d707ead2490865f17830bfbb52c8541b8696bf573",
 					},
 					type: "image",
-					url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/RYNL5SXYCVDH7LCJPXAHYF3DJI.JPG",
-				},
-				lead_art: {
-					type: "image",
+					url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/2KCJNN2JM5ECLEZDNHBWJQZKYQ.jpg",
 				},
 			},
 			type: "story",
@@ -881,14 +871,12 @@ export const resultsList = {
 				lead_art: {
 					promo_items: {
 						basic: {
-							resized_params: {
-								"158x89":
-									"uhJ4ZJSFbUwK8cBD4A_SxcZWu4c=filters:format(jpg):quality(70):focal(5245x213:5255x223)/",
-								"274x154":
-									"ZmLdSvDBkde3hricZAJMymrD02o=filters:format(jpg):quality(70):focal(5245x213:5255x223)/",
+							_id: "2KCJNN2JM5ECLEZDNHBWJQZKYQ",
+							auth: {
+								2: "1d2390c4cc8df2265924631d707ead2490865f17830bfbb52c8541b8696bf573",
 							},
 							type: "image",
-							url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/P3V3THIJPVGUBLRIIYWKFHZTKA.jpg",
+							url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/2KCJNN2JM5ECLEZDNHBWJQZKYQ.jpg",
 						},
 					},
 					type: "gallery",
@@ -938,12 +926,12 @@ export const resultsList = {
 				lead_art: {
 					promo_items: {
 						basic: {
-							resized_params: {
-								"158x89": "xePynlCSm_bqk3alpT1YZK9oEYk=filters:format(jpg):quality(70)/",
-								"274x154": "IaXvSMVLuBXkDdvBDlw5k34Eias=filters:format(jpg):quality(70)/",
+							_id: "DBUX66M3LRFMHKXZOM46RO4EXM",
+							auth: {
+								2: "ea391c022766c61dfadf9c6778efa43a8c31b87db157dc7d5db888562ff3150e",
 							},
 							type: "image",
-							url: "https://d22ff27hdsy159.cloudfront.net/09-15-2020/t_9b14ae0c00ac446bae3dbce6260846c9_name_t_9f51049ae2e640ba99b4a7f1763ca5fc_name_t_1c01cadfde48422b857383e38d8553a7_name_Pexels_Videos_2330708__scaled.jpg",
+							url: "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/DBUX66M3LRFMHKXZOM46RO4EXM.png",
 						},
 					},
 					type: "video",

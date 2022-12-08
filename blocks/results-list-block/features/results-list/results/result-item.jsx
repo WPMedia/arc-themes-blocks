@@ -1,9 +1,30 @@
 import React from "react";
+import { useEditableContent } from "fusion:content";
+import { useComponentContext } from "fusion:context";
+import getProperties from "fusion:properties";
+import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
+import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
 
-import ArticleDate from "@wpmedia/date-block";
-import { Image } from "@wpmedia/engine-theme-sdk";
-import { extractResizedParams, extractImageFromStory } from "@wpmedia/resizer-image-block";
-import { Byline, Heading, SecondaryFont, Overline } from "@wpmedia/shared-styles";
+import {
+	Attribution,
+	Separator,
+	Heading,
+	Overline,
+	Image,
+	Link,
+	Date as DateComponent,
+	formatAuthors,
+	Paragraph,
+	Join,
+	formatURL,
+	MediaItem,
+	Conditional,
+	getImageFromANS,
+	imageANSToImageSrc,
+	usePhrases,
+} from "@wpmedia/arc-themes-components";
+
+const BLOCK_CLASS_NAME = "b-results-list";
 
 const ResultItem = React.memo(
 	React.forwardRef(
@@ -11,9 +32,7 @@ const ResultItem = React.memo(
 			{
 				arcSite,
 				element,
-				imageProperties,
 				targetFallbackImage,
-				placeholderResizedImageOptions,
 				showByline,
 				showDate,
 				showDescription,
@@ -28,59 +47,122 @@ const ResultItem = React.memo(
 				display_date: displayDate,
 				headlines: { basic: headlineText } = {},
 				websites,
+				credits,
 			} = element;
+			const phrases = usePhrases();
+			const { registerSuccessEvent } = useComponentContext();
+			const {
+				dateLocalization: { language, timeZone, dateTimeFormat } = {
+					language: "en",
+					timeZone: "GMT",
+					dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
+				},
+			} = getProperties(arcSite);
 
-			const imageURL = extractImageFromStory(element);
+			const {
+				display: labelDisplay,
+				url: labelUrl,
+				text: labelText,
+			} = (element?.label && element?.label?.basic) || {};
+
+			const { _id: sectionUrl, name: sectionText } =
+				element?.websites?.[arcSite]?.website_section || {};
+
+			let [overlineText, overlineURL] = [sectionText, sectionUrl];
+			if (element?.owner?.sponsored) {
+				overlineText = element?.label?.basic?.text || phrases.t("global.sponsored-content");
+				overlineURL = null;
+			} else if (labelDisplay) {
+				[overlineText, overlineURL] = [labelText, labelUrl];
+			}
+
+			/* Author Formatting */
+			const imageURL = imageANSToImageSrc(getImageFromANS(element)) || null;
+			const auth = getImageFromANS(element)?.auth || {};
+			const { searchableField } = useEditableContent();
+			const hasAuthors = showByline ? credits?.by && credits?.by.length : null;
+			const contentHeading = showHeadline ? headlineText : null;
+			const formattedDate = Date.parse(displayDate)
+				? localizeDateTime(new Date(displayDate), dateTimeFormat, language, timeZone)
+				: "";
 			const url = websites[arcSite].website_url;
-			return (
-				<div className={`list-item ${!showImage ? "no-image" : ""}`} ref={ref}>
+			return showHeadline ||
+				showImage ||
+				showDescription ||
+				showByline ||
+				showDate ||
+				showItemOverline ? (
+				<div
+					ref={ref}
+					className={`${BLOCK_CLASS_NAME}${showImage ? ` ${BLOCK_CLASS_NAME}--show-image` : ""}`}
+				>
 					{showImage ? (
-						<div className="results-list--image-container">
-							<a href={url} title={headlineText} aria-hidden="true" tabIndex="-1">
+						<MediaItem {...searchableField("imageOverrideURL")} suppressContentEditableWarning>
+							<Conditional
+								component={Link}
+								condition={url}
+								href={formatURL(url)}
+								onClick={registerSuccessEvent}
+								assistiveHidden
+							>
 								<Image
-									{...imageProperties}
-									url={imageURL !== null ? imageURL : targetFallbackImage}
-									alt={imageURL !== null ? headlineText : imageProperties.primaryLogoAlt}
-									resizedImageOptions={
-										imageURL !== null
-											? extractResizedParams(element)
-											: placeholderResizedImageOptions
-									}
+									src={imageURL !== null ? imageURL : targetFallbackImage}
+									alt={headlineText}
+									resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
+									resizerURL={RESIZER_URL}
+									sizes={[
+										{
+											isDefault: true,
+											sourceSizeValue: "100px",
+										},
+										{
+											sourceSizeValue: "500px",
+											mediaCondition: "(min-width: 48rem)",
+										},
+									]}
+									responsiveImages={[100, 500]}
+									width={500}
 								/>
-							</a>
-						</div>
+							</Conditional>
+						</MediaItem>
 					) : null}
-					{showItemOverline || showHeadline ? (
-						<div className="results-list--headline-container">
-							{showItemOverline ? <Overline story={element} /> : null}
-							{showHeadline ? (
-								<a href={url} title={headlineText}>
-									<Heading className="headline-text">{headlineText}</Heading>
-								</a>
-							) : null}
-						</div>
+					{showItemOverline && overlineText ? (
+						<Overline href={overlineURL}>{overlineText}</Overline>
 					) : null}
-					{showDescription || showDate || showByline ? (
-						<div className="results-list--description-author-container">
-							{showDescription && descriptionText ? (
-								<a href={url} title={headlineText}>
-									<SecondaryFont as="p" className="description-text">
-										{descriptionText}
-									</SecondaryFont>
-								</a>
-							) : null}
-							{showDate || showByline ? (
-								<div className="results-list--author-date">
-									{showByline ? (
-										<Byline content={element} list separator={showDate} font="Primary" />
-									) : null}
-									{showDate ? <ArticleDate classNames="story-date" date={displayDate} /> : null}
-								</div>
-							) : null}
-						</div>
+					{contentHeading ? (
+						<Heading>
+							<Conditional
+								component={Link}
+								condition={url}
+								href={formatURL(url)}
+								onClick={registerSuccessEvent}
+							>
+								{headlineText}
+							</Conditional>
+						</Heading>
+					) : null}
+					{showDescription && descriptionText ? (
+						<Link href={url}>
+							<Paragraph>{descriptionText}</Paragraph>
+						</Link>
+					) : null}
+					{showDate || hasAuthors ? (
+						<Attribution>
+							<Join separator={Separator}>
+								{hasAuthors ? (
+									<Join separator={() => " "}>
+										{phrases.t("global.by-text")}
+										{formatAuthors(credits?.by, phrases.t("global.and-text"))}
+									</Join>
+								) : null}
+								{showDate ? (
+									<DateComponent dateTime={displayDate} dateString={formattedDate} />
+								) : null}
+							</Join>
+						</Attribution>
 					) : null}
 				</div>
-			);
+			) : null;
 		}
 	)
 );

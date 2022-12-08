@@ -4,22 +4,24 @@ import "@testing-library/jest-dom/extend-expect";
 
 import ResultItem from "./result-item";
 
-jest.mock("@wpmedia/date-block", () => ({
-	__esModule: true,
-	default: () => <div>Date Sample Text - 123</div>,
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	usePhrases: jest.fn().mockReturnValue({
+		t: jest.fn().mockReturnValue("Sample phrases"),
+	}),
 }));
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	Image: () => <div>Image Sample Text - 123</div>,
+jest.mock("fusion:content", () => ({
+	useEditableContent: jest.fn(() => ({
+		editableContent: () => ({ contentEditable: "true" }),
+		searchableField: () => {},
+	})),
 }));
 
-jest.mock("@wpmedia/shared-styles", () => ({
-	Byline: () => <div>Byline Sample Text - 123</div>,
-	Heading: ({ children }) => <>{children}</>,
-	Overline: ({ customText, customUrl, story }) => (
-		<a href={customUrl || "nourl"}>{customText || JSON.stringify(story)}</a>
-	),
-	SecondaryFont: () => <div>Font Sample Text - 123</div>,
+jest.mock("fusion:context", () => ({
+	useComponentContext: jest.fn(() => ({
+		registerSuccessEvent: jest.fn(),
+	})),
 }));
 
 const fallbackImage = "http://test/resources/fallback.jpg";
@@ -49,7 +51,21 @@ const element = {
 			},
 		},
 	},
+	credits: {
+		by: [
+			{
+				name: "Matthew Roach",
+			},
+		],
+	},
 	_id: "element_1",
+	overline: {
+		basic: {
+			display: true,
+			text: "Overline Text",
+			url: "https://www.google.com",
+		},
+	},
 };
 
 describe("Result parts", () => {
@@ -65,7 +81,7 @@ describe("Result parts", () => {
 			/>
 		);
 
-		expect(screen.getAllByText(/Byline Sample Text - 123/i)).toHaveLength(1);
+		expect(screen.getAllByText(/Sample phrases/i)).toHaveLength(1);
 
 		unmount();
 	});
@@ -82,7 +98,7 @@ describe("Result parts", () => {
 			/>
 		);
 
-		expect(screen.getAllByText(/Date Sample Text - 123/i)).toHaveLength(1);
+		expect(screen.getAllByText(/January 01, 2021 at 12:01 am UTC/i)).toHaveLength(1);
 
 		unmount();
 	});
@@ -99,7 +115,7 @@ describe("Result parts", () => {
 			/>
 		);
 
-		expect(screen.getAllByText(/Font Sample Text - 123/i)).toHaveLength(1);
+		expect(screen.getAllByText(/Description 1/i)).toHaveLength(1);
 
 		unmount();
 	});
@@ -152,8 +168,7 @@ describe("Result parts", () => {
 				showItemOverline
 			/>
 		);
-
-		expect(screen.getAllByText(/"website_section"/i)).toHaveLength(1);
+		expect(screen.getByText(/Section/i)).toBeInTheDocument();
 
 		unmount();
 	});
@@ -183,14 +198,13 @@ describe("Result parts", () => {
 			<ResultItem
 				arcSite="the-sun"
 				element={element}
-				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
-				placeholderResizedImageOptions={{}}
+				// placeholderResizedImageOptions={{}}
 				showImage
 			/>
 		);
-
-		expect(screen.getAllByText(/Image Sample Text - 123/i)).toHaveLength(1);
+		const imageSrc = screen.getByAltText(/Test headline 1/i);
+		expect(imageSrc.src).toBe("http://test/resources/fallback.jpg");
 
 		unmount();
 	});
@@ -215,7 +229,7 @@ describe("Result parts", () => {
 			/>
 		);
 
-		expect(screen.getAllByText(/Image Sample Text - 123/i)).toHaveLength(1);
+		expect(screen.getAllByAltText(/Test headline 1/i)).toHaveLength(1);
 
 		unmount();
 	});

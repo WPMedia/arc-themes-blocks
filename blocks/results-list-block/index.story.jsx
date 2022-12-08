@@ -14,7 +14,7 @@ export default {
 const sampleData = {
 	lazyLoad: false,
 	listContentConfig: {
-		contentService: null,
+		contentService: "content-service",
 		contentConfigValues: {
 			offset: 0,
 			size: 17,

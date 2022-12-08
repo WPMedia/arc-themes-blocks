@@ -1,11 +1,13 @@
 import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
+import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 
 // Arc Themes Components - Base set of components used to compose blocks
 // https://github.com/WPMedia/arc-themes-components/
 import {
 	Button,
 	Heading,
+	getImageFromANS,
 	HeadingSection,
 	Paragraph,
 	Picture,
@@ -32,6 +34,8 @@ function Hero({ customFields }) {
 		link2Text,
 		link2Type,
 		subHeadline,
+		element,
+		targetFallbackImage,
 		variant = "dark",
 	} = customFields;
 
@@ -42,12 +46,46 @@ function Hero({ customFields }) {
 	].join(" ");
 
 	const HeadingWrapper = headline ? HeadingSection : Fragment;
-
+	const auth = getImageFromANS(element)?.auth || {};
 	return (
 		<div className={classes}>
 			<Picture>
-				<Picture.Source src={imageURLDesktop} media={DESKTOP_PHOTO_BREAKPOINT} />
-				<Picture.Image src={imageURLMobile} alt={imageAltText} />
+				<Picture.Source
+					src={imageURLDesktop !== null ? imageURLDesktop : targetFallbackImage}
+					resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
+					resizerURL={RESIZER_URL}
+					sizes={[
+						{
+							isDefault: true,
+							sourceSizeValue: "100px",
+						},
+						{
+							sourceSizeValue: "500px",
+							mediaCondition: "(min-width: 48rem)",
+						},
+					]}
+					responsiveImages={[100, 500]}
+					width={500}
+					media={DESKTOP_PHOTO_BREAKPOINT}
+				/>
+				<Picture.Image
+					alt={imageAltText}
+					src={imageURLMobile !== null ? imageURLMobile : targetFallbackImage}
+					resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
+					resizerURL={RESIZER_URL}
+					sizes={[
+						{
+							isDefault: true,
+							sourceSizeValue: "100px",
+						},
+						{
+							sourceSizeValue: "500px",
+							mediaCondition: "(min-width: 48rem)",
+						},
+					]}
+					responsiveImages={[100, 500]}
+					width={500}
+				/>
 			</Picture>
 
 			<Stack

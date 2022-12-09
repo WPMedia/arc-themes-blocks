@@ -11,8 +11,6 @@ const SearchField = ({
 	showResultsStats,
 	totalItems,
 }) => {
-	// const { placeholderResizedImageOptions } = this.state;
-
 	const phrases = usePhrases();
 
 	return (

@@ -9,9 +9,6 @@ import ResultsList from "./results-list";
 
 const BLOCK_CLASS_NAME = "b-search-results-list";
 
-// import "@wpmedia/shared-styles/scss/_results-list.scss";
-// import "./search-results-list.scss";
-
 @Consumer
 class GlobalSearchResultsList extends React.Component {
 	constructor(props) {

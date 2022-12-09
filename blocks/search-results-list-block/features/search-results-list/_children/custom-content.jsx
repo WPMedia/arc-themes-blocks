@@ -10,13 +10,6 @@ import ResultsList from "./results-list";
 
 const BLOCK_CLASS_NAME = "b-search-results-list";
 
-// // shared with results list
-// // to modify, go to the shared styles block
-// import "@wpmedia/shared-styles/scss/_results-list.scss";
-
-// // not shared with results list
-// import "./search-results-list.scss";
-
 @Consumer
 class CustomSearchResultsList extends React.Component {
 	constructor(props) {

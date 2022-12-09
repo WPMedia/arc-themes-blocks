@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-
+import { RESIZER_APP_VERSION } from "fusion:environment";
+import { useFusionContext } from "fusion:context";
+import { useContent, useEditableContent } from "fusion:content";
 // Arc Themes Components - Base set of components used to compose blocks
 // https://github.com/WPMedia/arc-themes-components/
 import {
@@ -14,10 +16,7 @@ import {
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-quilted-image";
-const ASPECT_RATIO_MAP = {
-	"16/9": "16:9",
-	"4/3": "4:3",
-};
+const ASPECT_RATIO_MAP = ["16:9", "4:3"];
 const OVERLAY_TEXT_VARIANTS = ["dark", "light"];
 const BUTTON_VARIANTS = ["primary", "secondary"];
 
@@ -27,6 +26,9 @@ function QuiltedImage({ customFields }) {
 		fullWidthImage,
 		image1URL,
 		image1AspectRatio,
+		image1Auth,
+		image1Id,
+		image1Alt,
 		overlay1Text,
 		overlay1TextVariant,
 		button1Text,
@@ -34,6 +36,9 @@ function QuiltedImage({ customFields }) {
 		button1Variant,
 		image2URL,
 		image2AspectRatio,
+		image2Auth,
+		image2Id,
+		image2Alt,
 		overlay2Text,
 		overlay2TextVariant,
 		button2Text,
@@ -41,6 +46,9 @@ function QuiltedImage({ customFields }) {
 		button2Variant,
 		image3URL,
 		image3AspectRatio,
+		image3Auth,
+		image3Id,
+		image3Alt,
 		overlay3Text,
 		overlay3TextVariant,
 		button3Text,
@@ -48,8 +56,154 @@ function QuiltedImage({ customFields }) {
 		button3Variant,
 	} = customFields;
 
+	console.log(customFields);
+
+	const { isAdmin } = useFusionContext();
+	const { searchableField } = useEditableContent();
+
+	const sharedImageParams = {
+		resizedOptions: {
+			smart: true,
+		},
+		responsiveImages: [200, 400, 600, 800, 1000],
+		width: 600,
+	};
+
+	const image1AuthToken = useContent(
+		!image1Auth && image1Id
+			? {
+					source: "signing-service",
+					query: { id: image1Id },
+			  }
+			: {}
+	);
+
+	const image1AuthTokenObj = {};
+	if (image1AuthToken?.hash) {
+		image1AuthTokenObj[RESIZER_APP_VERSION] = image1AuthToken.hash;
+	}
+
+	const image1Params =
+		image1Id && image1URL
+			? {
+					ansImage: {
+						_id: image1Id,
+						url: image1URL,
+						auth: image1Auth ? JSON.parse(image1Auth) : image1AuthTokenObj,
+					},
+					alt: image1Alt,
+					aspectRatio: image1AspectRatio,
+					...sharedImageParams,
+			  }
+			: {};
+
+	const image2AuthToken = useContent(
+		!image2Auth && image2Id
+			? {
+					source: "signing-service",
+					query: { id: image2Id },
+			  }
+			: {}
+	);
+
+	const image2AuthTokenObj = {};
+	if (image2AuthToken?.hash) {
+		image2AuthTokenObj[RESIZER_APP_VERSION] = image2AuthToken.hash;
+	}
+
+	const image2Params =
+		image2Id && image2URL
+			? {
+					ansImage: {
+						_id: image2Id,
+						url: image2URL,
+						auth: image2Auth ? JSON.parse(image2Auth) : image2AuthTokenObj,
+					},
+					alt: image2Alt,
+					aspectRatio: image2AspectRatio,
+					...sharedImageParams,
+			  }
+			: {};
+
+	const image3AuthToken = useContent(
+		!image3Auth && image3Id
+			? {
+					source: "signing-service",
+					query: { id: image3Id },
+			  }
+			: {}
+	);
+
+	const image3AuthTokenObj = {};
+	if (image3AuthToken?.hash) {
+		image3AuthTokenObj[RESIZER_APP_VERSION] = image3AuthToken.hash;
+	}
+
+	const image3Params =
+		image3Id && image3URL
+			? {
+					ansImage: {
+						_id: image3Id,
+						url: image3URL,
+						auth: image3Auth ? JSON.parse(image3Auth) : image3AuthTokenObj,
+					},
+					alt: image3Alt,
+					aspectRatio: image3AspectRatio,
+					...sharedImageParams,
+			  }
+			: {};
+
+	const adminDivStyles = {
+		position: "relative",
+		flexBasis: "33%",
+	};
+
 	return (
 		<div className={BLOCK_CLASS_NAME}>
+			{isAdmin && (
+				<div style={{ display: "flex", marginTop: "1rem" }}>
+					Admin Only:
+					<div style={adminDivStyles}>
+						<div
+							{...searchableField({
+								image1URL: "url",
+								image1Id: "_id",
+								image1Auth: "auth",
+								image1Alt: "alt_text",
+							})}
+							suppressContentEditableWarning
+						>
+							Select Image 1
+						</div>
+					</div>
+					<div style={adminDivStyles}>
+						<div
+							{...searchableField({
+								image2URL: "url",
+								image2Id: "_id",
+								image2Auth: "auth",
+								image2Alt: "alt_text",
+							})}
+							suppressContentEditableWarning
+						>
+							Select Image 2
+						</div>
+					</div>
+					<div style={adminDivStyles}>
+						<div
+							{...searchableField({
+								image3URL: "url",
+								image3Id: "_id",
+								image3Auth: "auth",
+								image3Alt: "alt_text",
+							})}
+							suppressContentEditableWarning
+						>
+							Select Image 3
+						</div>
+					</div>
+				</div>
+			)}
 			<HeadingSection>
 				{headline ? <Heading>{headline}</Heading> : null}
 				<div className={`${BLOCK_CLASS_NAME}__wrapper`}>
@@ -60,7 +214,7 @@ function QuiltedImage({ customFields }) {
 								fullWidthImage === "top" ? `${BLOCK_CLASS_NAME}__wrapper-top` : ""
 							}`}
 						>
-							<Image src={image1URL} style={{ aspectRatio: image1AspectRatio }} />
+							<Image {...image1Params} />
 							<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
 								<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlay1TextVariant}`}>
 									{overlay1Text}
@@ -73,7 +227,7 @@ function QuiltedImage({ customFields }) {
 					) : null}
 					{image2URL && item2Action && overlay2Text && button2Text ? (
 						<Link href={item2Action} className={`${BLOCK_CLASS_NAME}__media-panel`}>
-							<Image src={image2URL} style={{ aspectRatio: image2AspectRatio }} />
+							<Image {...image2Params} />
 							<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
 								<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlay2TextVariant}`}>
 									{overlay2Text}
@@ -91,7 +245,7 @@ function QuiltedImage({ customFields }) {
 								fullWidthImage === "bottom" ? `${BLOCK_CLASS_NAME}__wrapper-bottom` : ""
 							}`}
 						>
-							<Image src={image3URL} style={{ aspectRatio: image3AspectRatio }} />
+							<Image {...image3Params} />
 							<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
 								<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlay3TextVariant}`}>
 									{overlay3Text}
@@ -129,11 +283,20 @@ QuiltedImage.propTypes = {
 			description: "URL of first image, displayed at 4:3 aspect ratio.",
 			group: "Image 1",
 		}).isRequired,
-		image1AspectRatio: PropTypes.oneOf(Object.keys(ASPECT_RATIO_MAP)).tag({
+		image1AspectRatio: PropTypes.oneOf(ASPECT_RATIO_MAP).tag({
 			labels: ASPECT_RATIO_MAP,
-			defaultValue: "4/3",
+			defaultValue: "4:3",
 			hidden: true,
 			group: "Image 1",
+		}),
+		image1Auth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		image1Id: PropTypes.string.tag({
+			hidden: true,
+		}),
+		image1Alt: PropTypes.string.tag({
+			hidden: true,
 		}),
 		overlay1Text: PropTypes.string.tag({
 			label: "Overlay Text",
@@ -168,11 +331,20 @@ QuiltedImage.propTypes = {
 			description: "URL of first image, displayed at 4:3 aspect ratio on desktop displays.",
 			group: "Image 2",
 		}).isRequired,
-		image2AspectRatio: PropTypes.oneOf(Object.keys(ASPECT_RATIO_MAP)).tag({
+		image2AspectRatio: PropTypes.oneOf(ASPECT_RATIO_MAP).tag({
 			labels: ASPECT_RATIO_MAP,
-			defaultValue: "4/3",
+			defaultValue: "4:3",
 			hidden: true,
 			group: "Image 2",
+		}),
+		image2Auth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		image2Id: PropTypes.string.tag({
+			hidden: true,
+		}),
+		image2Alt: PropTypes.string.tag({
+			hidden: true,
 		}),
 		overlay2Text: PropTypes.string.tag({
 			label: "Overlay Text",
@@ -207,11 +379,20 @@ QuiltedImage.propTypes = {
 			description: "URL of first image, displayed at 4:3 aspect ratio on desktop displays.",
 			group: "Image 3",
 		}).isRequired,
-		image3AspectRatio: PropTypes.oneOf(Object.keys(ASPECT_RATIO_MAP)).tag({
+		image3AspectRatio: PropTypes.oneOf(ASPECT_RATIO_MAP).tag({
 			labels: ASPECT_RATIO_MAP,
-			defaultValue: "16/9",
+			defaultValue: "16:9",
 			hidden: true,
 			group: "Image 3",
+		}),
+		image3Auth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		image3Id: PropTypes.string.tag({
+			hidden: true,
+		}),
+		image3Alt: PropTypes.string.tag({
+			hidden: true,
 		}),
 		overlay3Text: PropTypes.string.tag({
 			label: "Overlay Text",

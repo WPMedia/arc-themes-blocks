@@ -1989,7 +1989,7 @@
 					),
 				),
 				right-rail: (
-					gap: var(--global-spacing-6),
+					gap: var(--global-spacing-5),
 				),
 				right-rail-navigation: (
 					position: sticky,
@@ -3107,6 +3107,7 @@
 @use "../../blocks/overline-block";
 @use "../../blocks/quad-chain-block";
 @use "../../blocks/quilted-image-block";
+@use "../../blocks/results-list-block";
 @use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
 @use "../../blocks/search-results-list-block";

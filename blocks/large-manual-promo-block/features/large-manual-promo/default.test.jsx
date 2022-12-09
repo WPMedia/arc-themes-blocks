@@ -1,19 +1,12 @@
 import React from "react";
-import { mount } from "enzyme";
-import {
-	Grid,
-	MediaItem,
-	Heading,
-	Overline,
-	Paragraph,
-	Link,
-} from "@wpmedia/arc-themes-components";
+import { render, screen } from "@testing-library/react";
+import { useContent } from "fusion:content";
+import { isServerSide } from "@wpmedia/arc-themes-components";
+
 import LargeManualPromo from "./default";
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	Image: () => <div />,
 	LazyLoad: ({ children }) => <>{children}</>,
-	formatURL: jest.fn((input) => input.toString()),
 }));
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
@@ -21,9 +14,6 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	isServerSide: jest.fn(() => true),
 }));
 
-jest.mock("fusion:themes", () => jest.fn(() => ({})));
-jest.mock("fusion:properties", () => jest.fn(() => ({})));
-jest.mock("fusion:properties", () => jest.fn(() => ({})));
 jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({})),
 	useComponentContext: jest.fn(() => ({
@@ -38,7 +28,7 @@ jest.mock("fusion:content", () => ({
 	})),
 }));
 
-const config = {
+const customFieldData = {
 	showOverline: true,
 	showHeadline: true,
 	showImage: true,
@@ -47,7 +37,9 @@ const config = {
 	description: "This is the description",
 	overline: "overline",
 	overlineURL: "www.google.com",
+	imageId: 123,
 	imageURL: "www.google.com/fake.png",
+	imageAuth: '{"2":"1d2390c4cc8df2265924631d707ead2490865f17830bfbb52c8541b8696bf573"}',
 	linkURL: "www.google.com",
 };
 
@@ -66,81 +58,145 @@ describe("the large promo feature", () => {
 	});
 
 	it("should return null if lazyLoad on the server and not in the admin", () => {
-		const updatedConfig = {
-			...config,
+		isServerSide.mockReturnValueOnce(true);
+		const config = {
 			lazyLoad: true,
 		};
-		const wrapper = mount(<LargeManualPromo customFields={updatedConfig} />);
-		expect(wrapper.html()).toBe(null);
+		const { container } = render(<LargeManualPromo customFields={config} />);
+		expect(container.firstChild).toBe(null);
 	});
 
-	it("should have 1 container Grid component", () => {
-		const wrapper = mount(<LargeManualPromo customFields={config} />);
-		expect(wrapper.find(Grid)).toHaveLength(1);
-	});
-
-	it("should render MediaItem component when showImage is true", () => {
-		const wrapper = mount(<LargeManualPromo customFields={config} />);
-		expect(wrapper.find(MediaItem)).toHaveLength(1);
-	});
-
-	it("should render Overline component when showOverline is true", () => {
-		const wrapper = mount(<LargeManualPromo customFields={config} />);
-		expect(wrapper.find(Overline)).toHaveLength(1);
-	});
-
-	it("should render Overline component without href when showOverline is true and overlineURL prop is not provided", () => {
-		const wrapper = mount(<LargeManualPromo customFields={{ ...config, overlineURL: "" }} />);
-		const overline = wrapper.find(Overline);
-		expect(overline).toHaveLength(1);
-		expect(overline.props().href).toBeUndefined();
-	});
-
-	it("should not render Overline component when either showOverline or overline prop is false provided", () => {
-		const wrapper = mount(
-			<LargeManualPromo customFields={{ ...config, showOverline: false, overline: "" }} />
-		);
-		const overline = wrapper.find(Overline);
-		expect(overline).toHaveLength(0);
-	});
-
-	it("should render Heading component when showHeadline is true", () => {
-		const wrapper = mount(<LargeManualPromo customFields={config} />);
-		expect(wrapper.find(Heading)).toHaveLength(1);
-	});
-
-	it("should render Link component inside the Header component when linkURL is provided", () => {
-		const wrapper = mount(<LargeManualPromo customFields={config} />);
-		expect(wrapper.find(Heading)).toHaveLength(1);
-		expect(wrapper.find(Link)).toHaveLength(2);
-	});
-
-	it("should not render Link inside the Header component when linkURL is not provided", () => {
-		const wrapper = mount(<LargeManualPromo customFields={{ ...config, linkURL: "" }} />);
-		expect(wrapper.find(Heading)).toHaveLength(1);
-		expect(wrapper.find(Link)).toHaveLength(0);
-	});
-
-	it("should render Paragraph component when showDescription is true", () => {
-		const wrapper = mount(<LargeManualPromo customFields={config} />);
-		expect(wrapper.find(Paragraph)).toHaveLength(1);
-	});
-
-	it("should not render Overline, Header, MediaItem when corresponding show props are false", () => {
-		const wrapper = mount(
+	it("should use content source to get image auth", () => {
+		useContent.mockReturnValueOnce({ hash: 123 });
+		render(
 			<LargeManualPromo
 				customFields={{
-					...config,
-					showImage: false,
-					showDescription: false,
-					showHeadline: false,
-					showOverline: false,
+					...customFieldData,
+					headline: undefined,
+					linkURL: undefined,
+					imageAuth: undefined,
+					imageId: 123,
 				}}
 			/>
 		);
-		expect(wrapper.find(Heading)).toHaveLength(0);
-		expect(wrapper.find(Overline)).toHaveLength(0);
-		expect(wrapper.find(Paragraph)).toHaveLength(0);
-		expect(wrapper.find(MediaItem)).toHaveLength(0);
+		expect(useContent).toHaveBeenCalled();
+		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+	});
+
+	it("does not show image", () => {
+		const noImage = {
+			...customFieldData,
+			showImage: false,
+		};
+
+		render(<LargeManualPromo customFields={noImage} />);
+		expect(screen.queryByRole("img")).toBeNull();
+	});
+
+	it("does not show headline", () => {
+		const noHeadline = {
+			...customFieldData,
+			headline: null,
+			showHeadline: false,
+		};
+
+		render(<LargeManualPromo customFields={noHeadline} />);
+		expect(screen.queryByText(customFieldData.headline)).toBeNull();
+		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
+		expect(screen.queryByRole("img")).not.toBeNull();
+	});
+
+	it("renders headline with no link", () => {
+		const noHeadline = {
+			...customFieldData,
+			linkURL: undefined,
+		};
+
+		render(<LargeManualPromo customFields={noHeadline} />);
+		expect(screen.queryByRole("link", { name: customFieldData.headline })).toBeNull();
+		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
+		expect(screen.queryByRole("img")).not.toBeNull();
+	});
+
+	it("does not show headline or description", () => {
+		const noHeadlineOrDescription = {
+			...customFieldData,
+			showHeadline: false,
+			showDescription: false,
+			headline: null,
+			description: null,
+		};
+
+		render(<LargeManualPromo customFields={noHeadlineOrDescription} />);
+		expect(screen.queryByText(customFieldData.headline)).toBeNull();
+		expect(screen.queryByText(customFieldData.description)).toBeNull();
+		expect(screen.queryByRole("img")).not.toBeNull();
+	});
+
+	it("does not show description", () => {
+		const noDescripiton = {
+			...customFieldData,
+			showDescription: false,
+			description: null,
+		};
+
+		render(<LargeManualPromo customFields={noDescripiton} />);
+		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.queryByText(customFieldData.description)).toBeNull();
+		expect(screen.queryByRole("img")).not.toBeNull();
+	});
+
+	it("renders overline", () => {
+		const noHeadline = {
+			...customFieldData,
+			linkURL: undefined,
+		};
+
+		render(<LargeManualPromo customFields={noHeadline} />);
+		expect(screen.queryByRole("link", { name: customFieldData.overline })).not.toBeNull();
+		expect(screen.queryByText(customFieldData.overline)).not.toBeNull();
+		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
+		expect(screen.queryByRole("img")).not.toBeNull();
+	});
+
+	it("renders overline without link", () => {
+		const noOverlineLink = {
+			...customFieldData,
+			overlineURL: undefined,
+		};
+
+		render(<LargeManualPromo customFields={noOverlineLink} />);
+		expect(screen.queryByRole("link", { name: customFieldData.overline })).toBeNull();
+		expect(screen.queryByText(customFieldData.overline)).not.toBeNull();
+		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
+		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+	});
+
+	it("does not render overline", () => {
+		const noOverlineLink = {
+			...customFieldData,
+			showOverline: false,
+			overlineURL: undefined,
+		};
+
+		render(<LargeManualPromo customFields={noOverlineLink} />);
+		expect(screen.queryByRole("link", { name: customFieldData.overline })).toBeNull();
+		expect(screen.queryByText(customFieldData.overline)).toBeNull();
+		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
+		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+	});
+
+	it("should return a fallback image if showImage is true and imageId is not valid", () => {
+		const config = {
+			headline: "This is a headline text",
+			showImage: true,
+			imageId: null,
+		};
+		render(<LargeManualPromo customFields={config} />);
+		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
 	});
 });

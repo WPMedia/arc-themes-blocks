@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
+import { RESIZER_APP_VERSION } from "fusion:environment";
 import { useComponentContext, useFusionContext } from "fusion:context";
-import { useEditableContent } from "fusion:content";
+import { useContent, useEditableContent } from "fusion:content";
 import getProperties from "fusion:properties";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
@@ -22,11 +23,13 @@ import {
 const BLOCK_CLASS_NAME = "b-large-manual-promo";
 
 const LargeManualPromo = ({ customFields }) => {
-	const { isAdmin } = useFusionContext();
 	const {
 		description,
 		headline,
+		imageAuth,
 		imageURL,
+		imageId,
+		imageRatio,
 		lazyLoad,
 		linkURL,
 		newTab,
@@ -37,48 +40,51 @@ const LargeManualPromo = ({ customFields }) => {
 		showImage,
 		showOverline,
 	} = customFields;
-	const shouldLazyLoad = lazyLoad && !isAdmin;
-	const { arcSite } = useFusionContext();
+	const { arcSite, isAdmin } = useFusionContext();
 	const { fallbackImage } = getProperties(arcSite);
 	const { registerSuccessEvent } = useComponentContext();
+	const { searchableField } = useEditableContent();
+	const shouldLazyLoad = lazyLoad && !isAdmin;
+
+	const imageAuthToken = useContent(
+		!imageAuth && imageId
+			? {
+					source: "signing-service",
+					query: { id: imageId },
+			  }
+			: {}
+	);
 
 	if (shouldLazyLoad && isServerSide()) {
-		// On Server
 		return null;
 	}
 
-	const PromoImage = () => {
-		const { searchableField } = useEditableContent();
+	const imageAuthTokenObj = {};
+	if (imageAuthToken?.hash) {
+		imageAuthToken[RESIZER_APP_VERSION] = imageAuthToken.hash;
+	}
 
-		return (
-			<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
-				<Conditional
-					component={Link}
-					condition={linkURL}
-					href={formatURL(linkURL)}
-					openInNewTab={newTab}
-					onClick={registerSuccessEvent}
-				>
-					<Image alt={headline} src={imageURL || fallbackImage} searchableField />
-				</Conditional>
-			</MediaItem>
-		);
-	};
-
-	const PromoHeading = () =>
-		showHeadline && headline ? (
-			<Heading>
-				<Conditional
-					component={Link}
-					condition={linkURL}
-					href={formatURL(linkURL)}
-					openInNewTab={newTab}
-					onClick={registerSuccessEvent}
-				>
-					{headline}
-				</Conditional>
-			</Heading>
-		) : null;
+	const alt = headline || description || null;
+	const imageParams =
+		imageId && imageURL
+			? {
+					ansImage: {
+						_id: imageId,
+						url: imageURL,
+						auth: imageAuth ? JSON.parse(imageAuth) : imageAuthTokenObj,
+					},
+					alt,
+					aspectRatio: imageRatio,
+					resizedOptions: {
+						smart: true,
+					},
+					responsiveImages: [200, 400, 600, 800, 1200],
+					width: 600,
+			  }
+			: {
+					src: fallbackImage,
+					alt,
+			  };
 
 	const PromoOverline = () => {
 		if (showOverline && overline) {
@@ -90,19 +96,49 @@ const LargeManualPromo = ({ customFields }) => {
 		return null;
 	};
 
-	const PromoDescription = () => <Paragraph>{description}</Paragraph>;
-
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
 				<Grid as="article" className={BLOCK_CLASS_NAME}>
-					{showImage && imageURL ? <PromoImage /> : null}
+					{showImage ? (
+						<MediaItem
+							{...searchableField({
+								imageURL: "url",
+								imageId: "_id",
+								imageAuth: "auth",
+							})}
+							suppressContentEditableWarning
+						>
+							<Conditional
+								component={Link}
+								condition={linkURL}
+								href={formatURL(linkURL)}
+								openInNewTab={newTab}
+								onClick={registerSuccessEvent}
+								assistiveHidden={showHeadline && showDescription}
+							>
+								<Image {...imageParams} />
+							</Conditional>
+						</MediaItem>
+					) : null}
 					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
 						<PromoOverline />
 						{showDescription || showHeadline ? (
 							<Stack>
-								<PromoHeading />
-								{showDescription && description ? <PromoDescription /> : null}
+								{showHeadline && headline ? (
+									<Heading>
+										<Conditional
+											component={Link}
+											condition={linkURL}
+											href={formatURL(linkURL)}
+											openInNewTab={newTab}
+											onClick={registerSuccessEvent}
+										>
+											{headline}
+										</Conditional>
+									</Heading>
+								) : null}
+								{showDescription && description ? <Paragraph>{description}</Paragraph> : null}
 							</Stack>
 						) : null}
 					</Stack>
@@ -134,6 +170,12 @@ LargeManualPromo.propTypes = {
 			label: "Image URL",
 			group: "Configure Content",
 			searchable: "image",
+		}),
+		imageAuth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageId: PropTypes.string.tag({
+			hidden: true,
 		}),
 		linkURL: PropTypes.string.tag({
 			label: "Link URL",

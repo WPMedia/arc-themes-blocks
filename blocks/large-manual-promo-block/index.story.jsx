@@ -23,13 +23,16 @@ const sampleData = {
 	description: "This is the description",
 	overline: "overline",
 	overlineURL: "www.google.com",
+	imageId: "P5EYZSWH6FBEHDIQMV7H35ENWM",
 	imageURL:
-		"https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG",
+		"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/P5EYZSWH6FBEHDIQMV7H35ENWM.jpg",
+	imageAuth: '{"2":"2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade"}',
 	linkURL: "www.google.com",
 	imagePosition: "bottom",
 	author: "Jane and John Dee",
 	dateTime: "2021-01-12 13:23",
 	dateString: "January 12, 2021 at 1:23PM EST",
+	imageRatio: "4:3",
 };
 
 export const allFields = () => {

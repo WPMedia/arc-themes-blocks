@@ -58,9 +58,6 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 		content && ansImage
 			? {
 					ansImage,
-					resizedOptions: {
-						smart: true,
-					},
 					responsiveImages: [200, 400, 800],
 					sizes: [
 						{
@@ -72,7 +69,6 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 							mediaCondition: "(min-width: 48rem)",
 						},
 					],
-					width: 400,
 			  }
 			: {
 					src: fallbackImage,

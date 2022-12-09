@@ -22,7 +22,7 @@ const ResultsList = ({ arcSite, className, content, onSearch, promoElements, tot
 					<Button
 						accessibilityLabel={phrases.t("search-results-block.see-more-button-aria-label")}
 						onClick={onSearch}
-						size="small"
+						size="medium"
 						variant="primary"
 					>
 						{phrases.t("search-results-block.see-more-button")}

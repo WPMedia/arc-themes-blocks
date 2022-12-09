@@ -1,30 +1,31 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-search-results-list {
-	&__results {
-		@include scss.block-components("search-results-list");
-		@include scss.block-properties("search-results-list");
-	}
-
-	&--show-image {
-		@include scss.block-properties("search-results-list-show-image");
-		@include scss.block-components("search-results-list-show-image");
-	}
-
 	&__field {
-		&-search-bar {
-			@include scss.block-components("search-results-list-search-bar");
-			@include scss.block-properties("search-results-list-search-bar");
+		&-wrapper {
+			@include scss.block-properties("search-results-list-field-wrapper");
+			@include scss.block-components("search-results-list-field-wrapper");
 		}
 
-		&-search-icon {
-			@include scss.block-components("search-results-list-search-icon");
-			@include scss.block-properties("search-results-list-search-icon");
-		}
-
-		&-result-text {
-			@include scss.block-components("search-results-list-result-text");
-			@include scss.block-properties("search-results-list-result-text");
-		}
+		@include scss.block-components("search-results-list-field");
+		@include scss.block-properties("search-results-list-field");
 	}
+
+	&__results {
+		&-item {
+			&--show-image {
+				@include scss.block-properties("search-results-list-results-item-show-image");
+				@include scss.block-components("search-results-list-results-item-show-image");
+			}
+
+			@include scss.block-properties("search-results-list-results-item");
+			@include scss.block-components("search-results-list-results-item");
+		}
+
+		@include scss.block-components("search-results-list-results");
+		@include scss.block-properties("search-results-list-results");
+	}
+
+	@include scss.block-components("search-results-list");
+	@include scss.block-properties("search-results-list");
 }

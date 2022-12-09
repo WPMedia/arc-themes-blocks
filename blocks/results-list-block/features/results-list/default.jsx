@@ -3,14 +3,8 @@ import PropTypes from "@arc-fusion/prop-types";
 
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-
-import { usePhrases } from "@wpmedia/arc-themes-components";
-import { isServerSide, LazyLoad } from "@wpmedia/engine-theme-sdk";
-import { HeadingSection } from "@wpmedia/shared-styles";
-
-// shared with search results list
-// to modify, go to the shared styles block
-import "@wpmedia/shared-styles/scss/_results-list.scss";
+import { isServerSide, HeadingSection } from "@wpmedia/arc-themes-components";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
 import { resolveDefaultPromoElements } from "./results/helpers";
 import Results from "./results";
@@ -21,23 +15,11 @@ const ResultsList = ({ customFields }) => {
 		lazyLoad,
 		listContentConfig: { contentService, contentConfigValues },
 	} = customFields;
-	const { fallbackImage, primaryLogoAlt, breakpoints, resizerURL } = getProperties(arcSite);
-	const imageProperties = {
-		smallWidth: 158,
-		smallHeight: 89,
-		mediumWidth: 274,
-		mediumHeight: 154,
-		largeWidth: 274,
-		largeHeight: 154,
-		primaryLogoAlt,
-		breakpoints,
-		resizerURL,
-	};
+	const { fallbackImage } = getProperties(arcSite);
 	const targetFallbackImage = !fallbackImage.includes("http")
 		? deployment(`${contextPath}/${fallbackImage}`)
 		: fallbackImage;
 	const promoElements = resolveDefaultPromoElements(customFields);
-	const phrases = usePhrases();
 	const isServerSideLazy = lazyLoad && isServerSide() && !isAdmin;
 	const configuredOffset =
 		parseInt(contentConfigValues?.offset, 10) ||
@@ -56,9 +38,7 @@ const ResultsList = ({ customFields }) => {
 					configuredSize={configuredSize}
 					contentConfigValues={contentConfigValues}
 					contentService={contentService}
-					imageProperties={imageProperties}
 					isServerSideLazy={isServerSideLazy}
-					phrases={phrases}
 					showByline={promoElements.showByline}
 					showDate={promoElements.showDate}
 					showDescription={promoElements.showDescription}

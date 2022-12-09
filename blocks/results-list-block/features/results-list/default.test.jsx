@@ -5,13 +5,11 @@ import "@testing-library/jest-dom/extend-expect";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 
-import { isServerSide } from "@wpmedia/engine-theme-sdk";
-
 import ResultsList from "./default";
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	...jest.requireActual("@wpmedia/engine-theme-sdk"),
-	isServerSide: jest.fn(),
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	isServerSide: jest.fn().mockReturnValue(true),
 }));
 
 jest.mock("fusion:intl", () => ({
@@ -166,8 +164,6 @@ describe("isServerSideLazy flag", () => {
 			},
 		};
 
-		isServerSide.mockReturnValue(true);
-
 		const { unmount } = render(<ResultsList customFields={customFields} />);
 		expect(screen.queryByText(/"isServerSideLazy":false/i)).toBeInTheDocument();
 		unmount();
@@ -188,8 +184,6 @@ describe("isServerSideLazy flag", () => {
 			},
 		};
 
-		isServerSide.mockReturnValue(true);
-
 		const { unmount } = render(<ResultsList customFields={customFields} />);
 		expect(screen.queryByText(/"isServerSideLazy":false/i)).toBeInTheDocument();
 		unmount();
@@ -209,8 +203,6 @@ describe("isServerSideLazy flag", () => {
 				contentConfigValues: {},
 			},
 		};
-
-		isServerSide.mockReturnValue(true);
 
 		const { unmount } = render(<ResultsList customFields={customFields} />);
 		expect(screen.queryByText(/"isServerSideLazy":true/i)).toBeInTheDocument();

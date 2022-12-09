@@ -39,9 +39,9 @@
 	}
 
 	a {
-		@include link-color-active-hover($ui-primary-font-color);
 		color: $ui-primary-font-color;
 		text-decoration: none;
+		@include link-color-active-hover($ui-primary-font-color);
 	}
 
 	a,

@@ -17,8 +17,10 @@ const allCustomFields = {
 	description: "This is the description",
 	overline: "overline",
 	overlineURL: "www.google.com",
+	imageId: "P5EYZSWH6FBEHDIQMV7H35ENWM",
 	imageURL:
-		"https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG",
+		"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/P5EYZSWH6FBEHDIQMV7H35ENWM.jpg",
+	imageAuth: '{"2":"2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade"}',
 	linkURL: "www.google.com",
 };
 

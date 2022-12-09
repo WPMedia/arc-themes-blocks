@@ -1,0 +1,25 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-results-list {
+	&__wrapper {
+		@include scss.block-properties("results-list-wrapper");
+		@include scss.block-components("results-list-wrapper");
+	}
+
+	&--show-image {
+		@include scss.block-properties("results-list-show-image");
+		@include scss.block-components("results-list-show-image");
+	}
+
+	&__seeMore {
+		@include scss.block-properties("results-list-see-more");
+		@include scss.block-components("results-list-see-more");
+	}
+
+	&__label {
+		@include scss.block-components("results-list-label");
+		@include scss.block-properties("results-list-label");
+	}
+	@include scss.block-components("results-list");
+	@include scss.block-properties("results-list");
+}

@@ -40,7 +40,7 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 	} = promoElements;
 	const {
 		dateLocalization: { dateTimeFormat, language, timeZone } = {
-			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
+			dateTimeFormat: "%B %d, %Y at %1:%M %P %Z",
 			language: "en",
 			timeZone: "GMT",
 		},

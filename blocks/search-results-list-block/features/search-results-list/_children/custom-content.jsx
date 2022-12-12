@@ -1,6 +1,5 @@
 /* istanbul ignore file */
 import React from "react";
-import PropTypes from "prop-types";
 import Consumer from "fusion:consumer";
 
 import { Stack } from "@wpmedia/arc-themes-components";
@@ -100,14 +99,5 @@ class CustomSearchResultsList extends React.Component {
 		);
 	}
 }
-
-CustomSearchResultsList.propTypes = {
-	customFields: PropTypes.shape({
-		// searchContentConfig: PropTypes.contentConfig().tag({
-		// 	group: "Configure Content",
-		// 	label: "Display Content Info",
-		// }),
-	}),
-};
 
 export default CustomSearchResultsList;

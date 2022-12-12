@@ -25,12 +25,7 @@ const SearchField = ({
 					placeholder={phrases.t("search-results-blocks.search-input-placeholder")}
 					type="text"
 				/>
-				<Button
-					accessibilityLabel={phrases.t("search-results-block.search-button")}
-					onClick={() => onSearch(false)}
-					size="large"
-					variant="primary"
-				>
+				<Button onClick={onSearch} size="large" variant="primary">
 					{phrases.t("search-results-block.search-button")}
 				</Button>
 			</Stack>

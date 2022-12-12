@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { RESIZER_APP_VERSION } from "fusion:environment";
-import { useFusionContext } from "fusion:context";
 import { useContent, useEditableContent } from "fusion:content";
+import { useFusionContext } from "fusion:context";
+import { RESIZER_APP_VERSION } from "fusion:environment";
 // Arc Themes Components - Base set of components used to compose blocks
 // https://github.com/WPMedia/arc-themes-components/
 import {
@@ -16,7 +16,10 @@ import {
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-quilted-image";
-const ASPECT_RATIO_MAP = ["16:9", "4:3"];
+const ASPECT_RATIO_MAP = {
+	"16/9": "16:9",
+	"4/3": "4:3",
+};
 const OVERLAY_TEXT_VARIANTS = ["dark", "light"];
 const BUTTON_VARIANTS = ["primary", "secondary"];
 
@@ -56,8 +59,6 @@ function QuiltedImage({ customFields }) {
 		button3Variant,
 	} = customFields;
 
-	console.log(customFields);
-
 	const { isAdmin } = useFusionContext();
 	const { searchableField } = useEditableContent();
 
@@ -92,10 +93,13 @@ function QuiltedImage({ customFields }) {
 						auth: image1Auth ? JSON.parse(image1Auth) : image1AuthTokenObj,
 					},
 					alt: image1Alt,
-					aspectRatio: image1AspectRatio,
+					aspectRatio: ASPECT_RATIO_MAP[image1AspectRatio],
 					...sharedImageParams,
 			  }
-			: {};
+			: {
+					src: image1URL,
+					alt: overlay1Text,
+			  };
 
 	const image2AuthToken = useContent(
 		!image2Auth && image2Id
@@ -120,10 +124,13 @@ function QuiltedImage({ customFields }) {
 						auth: image2Auth ? JSON.parse(image2Auth) : image2AuthTokenObj,
 					},
 					alt: image2Alt,
-					aspectRatio: image2AspectRatio,
+					aspectRatio: ASPECT_RATIO_MAP[image2AspectRatio],
 					...sharedImageParams,
 			  }
-			: {};
+			: {
+					src: image2URL,
+					alt: overlay2Text,
+			  };
 
 	const image3AuthToken = useContent(
 		!image3Auth && image3Id
@@ -148,66 +155,20 @@ function QuiltedImage({ customFields }) {
 						auth: image3Auth ? JSON.parse(image3Auth) : image3AuthTokenObj,
 					},
 					alt: image3Alt,
-					aspectRatio: image3AspectRatio,
+					aspectRatio: ASPECT_RATIO_MAP[image3AspectRatio],
 					...sharedImageParams,
 			  }
-			: {};
-
-	const adminDivStyles = {
-		position: "relative",
-		flexBasis: "33%",
-	};
+			: {
+					src: image3URL,
+					alt: overlay3Text,
+			  };
 
 	return (
 		<div className={BLOCK_CLASS_NAME}>
-			{isAdmin && (
-				<div style={{ display: "flex", marginTop: "1rem" }}>
-					Admin Only:
-					<div style={adminDivStyles}>
-						<div
-							{...searchableField({
-								image1URL: "url",
-								image1Id: "_id",
-								image1Auth: "auth",
-								image1Alt: "alt_text",
-							})}
-							suppressContentEditableWarning
-						>
-							Select Image 1
-						</div>
-					</div>
-					<div style={adminDivStyles}>
-						<div
-							{...searchableField({
-								image2URL: "url",
-								image2Id: "_id",
-								image2Auth: "auth",
-								image2Alt: "alt_text",
-							})}
-							suppressContentEditableWarning
-						>
-							Select Image 2
-						</div>
-					</div>
-					<div style={adminDivStyles}>
-						<div
-							{...searchableField({
-								image3URL: "url",
-								image3Id: "_id",
-								image3Auth: "auth",
-								image3Alt: "alt_text",
-							})}
-							suppressContentEditableWarning
-						>
-							Select Image 3
-						</div>
-					</div>
-				</div>
-			)}
 			<HeadingSection>
 				{headline ? <Heading>{headline}</Heading> : null}
 				<div className={`${BLOCK_CLASS_NAME}__wrapper`}>
-					{image1URL && item1Action && overlay1Text && button1Text ? (
+					{(image1URL && item1Action && overlay1Text && button1Text) || isAdmin ? (
 						<Link
 							href={item1Action}
 							className={`${BLOCK_CLASS_NAME}__media-panel  ${
@@ -215,7 +176,17 @@ function QuiltedImage({ customFields }) {
 							}`}
 						>
 							<Image {...image1Params} />
-							<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
+							<Stack
+								className={`${BLOCK_CLASS_NAME}__overlay`}
+								inline
+								{...searchableField({
+									image1URL: "url",
+									image1Id: "_id",
+									image1Auth: "auth",
+									image1Alt: "alt_text",
+								})}
+								suppressContentEditableWarning
+							>
 								<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlay1TextVariant}`}>
 									{overlay1Text}
 								</Paragraph>
@@ -225,10 +196,20 @@ function QuiltedImage({ customFields }) {
 							</Stack>
 						</Link>
 					) : null}
-					{image2URL && item2Action && overlay2Text && button2Text ? (
+					{(image2URL && item2Action && overlay2Text && button2Text) || isAdmin ? (
 						<Link href={item2Action} className={`${BLOCK_CLASS_NAME}__media-panel`}>
 							<Image {...image2Params} />
-							<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
+							<Stack
+								className={`${BLOCK_CLASS_NAME}__overlay`}
+								inline
+								{...searchableField({
+									image2URL: "url",
+									image2Id: "_id",
+									image2Auth: "auth",
+									image2Alt: "alt_text",
+								})}
+								suppressContentEditableWarning
+							>
 								<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlay2TextVariant}`}>
 									{overlay2Text}
 								</Paragraph>
@@ -238,7 +219,7 @@ function QuiltedImage({ customFields }) {
 							</Stack>
 						</Link>
 					) : null}
-					{image3URL && item3Action && overlay3Text && button3Text ? (
+					{(image3URL && item3Action && overlay3Text && button3Text) || isAdmin ? (
 						<Link
 							href={item3Action}
 							className={`${BLOCK_CLASS_NAME}__media-panel ${
@@ -246,7 +227,17 @@ function QuiltedImage({ customFields }) {
 							}`}
 						>
 							<Image {...image3Params} />
-							<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
+							<Stack
+								className={`${BLOCK_CLASS_NAME}__overlay`}
+								inline
+								{...searchableField({
+									image3URL: "url",
+									image3Id: "_id",
+									image3Auth: "auth",
+									image3Alt: "alt_text",
+								})}
+								suppressContentEditableWarning
+							>
 								<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlay3TextVariant}`}>
 									{overlay3Text}
 								</Paragraph>
@@ -283,9 +274,9 @@ QuiltedImage.propTypes = {
 			description: "URL of first image, displayed at 4:3 aspect ratio.",
 			group: "Image 1",
 		}).isRequired,
-		image1AspectRatio: PropTypes.oneOf(ASPECT_RATIO_MAP).tag({
+		image1AspectRatio: PropTypes.oneOf(Object.keys(ASPECT_RATIO_MAP)).tag({
 			labels: ASPECT_RATIO_MAP,
-			defaultValue: "4:3",
+			defaultValue: "4/3",
 			hidden: true,
 			group: "Image 1",
 		}),
@@ -331,9 +322,9 @@ QuiltedImage.propTypes = {
 			description: "URL of first image, displayed at 4:3 aspect ratio on desktop displays.",
 			group: "Image 2",
 		}).isRequired,
-		image2AspectRatio: PropTypes.oneOf(ASPECT_RATIO_MAP).tag({
+		image2AspectRatio: PropTypes.oneOf(Object.keys(ASPECT_RATIO_MAP)).tag({
 			labels: ASPECT_RATIO_MAP,
-			defaultValue: "4:3",
+			defaultValue: "4/3",
 			hidden: true,
 			group: "Image 2",
 		}),
@@ -379,9 +370,9 @@ QuiltedImage.propTypes = {
 			description: "URL of first image, displayed at 4:3 aspect ratio on desktop displays.",
 			group: "Image 3",
 		}).isRequired,
-		image3AspectRatio: PropTypes.oneOf(ASPECT_RATIO_MAP).tag({
+		image3AspectRatio: PropTypes.oneOf(Object.keys(ASPECT_RATIO_MAP)).tag({
 			labels: ASPECT_RATIO_MAP,
-			defaultValue: "16:9",
+			defaultValue: "16/9",
 			hidden: true,
 			group: "Image 3",
 		}),

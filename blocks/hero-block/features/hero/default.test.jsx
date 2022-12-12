@@ -4,6 +4,10 @@ import "@testing-library/jest-dom/extend-expect";
 
 import Hero from "./default";
 
+jest.mock("fusion:content", () => ({
+	useContent: jest.fn(() => ({})),
+}));
+
 describe("Hero", () => {
 	it("should render", () => {
 		render(
@@ -210,6 +214,6 @@ describe("Hero", () => {
 				}}
 			/>
 		);
-		expect(container.querySelector("img").getAttribute("alt")).toBe("¿Dónde está la biblioteca?");
+		expect(container.querySelector("img").getAttribute("alt")).toBe("My Headline");
 	});
 });

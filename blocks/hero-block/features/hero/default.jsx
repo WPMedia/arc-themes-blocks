@@ -1,13 +1,15 @@
 import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
+import { RESIZER_APP_VERSION } from "fusion:environment";
+import { useContent } from "fusion:content";
+import { useFusionContext } from "fusion:context";
+import getProperties from "fusion:properties";
 
 // Arc Themes Components - Base set of components used to compose blocks
 // https://github.com/WPMedia/arc-themes-components/
 import {
 	Button,
 	Heading,
-	getImageFromANS,
 	HeadingSection,
 	Paragraph,
 	Picture,
@@ -16,17 +18,18 @@ import {
 
 const BLOCK_CLASS_NAME = "b-hero";
 
-const DESKTOP_PHOTO_BREAKPOINT = "(min-width: 700px)";
-
 function Hero({ customFields }) {
 	const {
 		layout = "overlay",
 		alignment = "center",
 		description,
 		headline,
+		imageId,
+		imageAuth,
+		mobileImageAuth,
 		imageURLDesktop,
+		mobileImageId,
 		imageURLMobile,
-		imageAltText,
 		link1Action,
 		link1Text,
 		link1Type,
@@ -34,58 +37,87 @@ function Hero({ customFields }) {
 		link2Text,
 		link2Type,
 		subHeadline,
-		element,
-		targetFallbackImage,
+		// targetFallbackImage,
 		variant = "dark",
 	} = customFields;
-
+	const { arcSite } = useFusionContext();
+	const { fallbackImage } = getProperties(arcSite);
 	const classes = [
 		BLOCK_CLASS_NAME,
 		`${BLOCK_CLASS_NAME}--${layout}`,
 		variant === "dark" ? `${BLOCK_CLASS_NAME}--dark` : `${BLOCK_CLASS_NAME}--light`,
 	].join(" ");
+	const alt = headline || description || null;
+	const imageAuthToken = useContent(
+		!imageAuth && imageId
+			? {
+					source: "signing-service",
+					query: { id: imageId },
+			  }
+			: {}
+	);
+	const mobileImageAuthToken = useContent(
+		!mobileImageAuth && mobileImageId
+			? {
+					source: "signing-service",
+					query: { id: mobileImageId },
+			  }
+			: {}
+	);
+	const imageAuthTokenObj = {};
+	if (imageAuthToken?.hash) {
+		imageAuthToken[RESIZER_APP_VERSION] = imageAuthToken.hash;
+	}
+	const mobileImageAuthTokenObj = {};
+	if (mobileImageAuthToken?.hash) {
+		mobileImageAuthToken[RESIZER_APP_VERSION] = mobileImageAuthToken.hash;
+	}
+	const desktopImageParams =
+		imageId && imageURLDesktop
+			? {
+					ansImage: {
+						_id: imageId,
+						url: imageURLDesktop,
+						auth: imageAuth ? JSON.parse(imageAuth) : imageAuthTokenObj,
+					},
+					alt,
+					resizedOptions: {
+						smart: true,
+					},
+					responsiveImages: [600, 800, 1200, 1600, 1800],
+					width: 600,
+			  }
+			: {
+					src: fallbackImage,
+					alt,
+			  };
 
+	const mobileImageParams =
+		mobileImageId && imageURLMobile
+			? {
+					ansImage: {
+						_id: mobileImageId,
+						url: imageURLMobile,
+						auth: mobileImageAuth ? JSON.parse(mobileImageAuth) : mobileImageAuthTokenObj,
+					},
+					alt,
+					resizedOptions: {
+						smart: true,
+					},
+					responsiveImages: [200, 400, 600, 800, 1200],
+					width: 600,
+			  }
+			: {
+					src: fallbackImage,
+					alt,
+			  };
 	const HeadingWrapper = headline ? HeadingSection : Fragment;
-	const auth = getImageFromANS(element)?.auth || {};
+	console.log(customFields);
 	return (
 		<div className={classes}>
 			<Picture>
-				<Picture.Source
-					src={imageURLDesktop !== null ? imageURLDesktop : targetFallbackImage}
-					resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
-					resizerURL={RESIZER_URL}
-					sizes={[
-						{
-							isDefault: true,
-							sourceSizeValue: "100px",
-						},
-						{
-							sourceSizeValue: "500px",
-							mediaCondition: "(min-width: 48rem)",
-						},
-					]}
-					responsiveImages={[100, 500]}
-					width={500}
-					media={DESKTOP_PHOTO_BREAKPOINT}
-				/>
-				<Picture.Image
-					alt={imageAltText}
-					src={imageURLMobile !== null ? imageURLMobile : targetFallbackImage}
-					resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
-					resizerURL={RESIZER_URL}
-					sizes={[
-						{
-							isDefault: true,
-							sourceSizeValue: "100px",
-						},
-						{
-							sourceSizeValue: "500px",
-							mediaCondition: "(min-width: 48rem)",
-						},
-					]}
-					responsiveImages={[100, 500]}
-					width={500}
-				/>
+				<Picture.Source {...desktopImageParams} />
+				<Picture.Image {...mobileImageParams} />
 			</Picture>
 
 			<Stack

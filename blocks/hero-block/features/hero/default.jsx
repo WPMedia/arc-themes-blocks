@@ -112,7 +112,6 @@ function Hero({ customFields }) {
 					alt,
 			  };
 	const HeadingWrapper = headline ? HeadingSection : Fragment;
-	console.log(customFields);
 	return (
 		<div className={classes}>
 			<Picture>

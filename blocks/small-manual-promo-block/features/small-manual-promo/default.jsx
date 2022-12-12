@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { useEditableContent } from "fusion:content";
+import { RESIZER_APP_VERSION } from "fusion:environment";
+import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import {
@@ -18,22 +19,76 @@ import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 const BLOCK_CLASS_NAME = "b-small-manual-promo";
 
 const SmallManualPromo = ({ customFields }) => {
-	const { headline, imagePosition, imageURL, lazyLoad, linkURL, newTab, showHeadline, showImage } =
-		customFields;
+	const {
+		headline,
+		imagePosition,
+		imageAuth,
+		imageURL,
+		imageId,
+		imageRatio,
+		lazyLoad,
+		linkURL,
+		newTab,
+		showHeadline,
+		showImage,
+	} = customFields;
 	const { registerSuccessEvent } = useComponentContext();
 	const { arcSite, isAdmin } = useFusionContext();
+	const { searchableField } = useEditableContent();
+	const { fallbackImage } = getProperties(arcSite);
 	const shouldLazyLoad = lazyLoad && !isAdmin;
+
+	const imageAuthToken = useContent(
+		!imageAuth && imageId
+			? {
+					source: "signing-service",
+					query: { id: imageId },
+			  }
+			: {}
+	);
 
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}
 
+	const imageAuthTokenObj = {};
+	if (imageAuthToken?.hash) {
+		imageAuthToken[RESIZER_APP_VERSION] = imageAuthToken.hash;
+	}
+
+	const alt = headline || null;
+	const imageParams =
+		imageId && imageURL
+			? {
+					ansImage: {
+						_id: imageId,
+						url: imageURL,
+						auth: imageAuth ? JSON.parse(imageAuth) : imageAuthTokenObj,
+					},
+					alt,
+					aspectRatio: imageRatio,
+					resizedOptions: {
+						smart: true,
+					},
+					responsiveImages: [200, 400, 600, 800, 1200],
+					width: 600,
+			  }
+			: {
+					src: fallbackImage,
+					alt,
+			  };
+
 	const PromoImage = () => {
-		const { searchableField } = useEditableContent();
-		const { fallbackImage } = getProperties(arcSite);
 		const ImageDisplay = showImage ? (
-			<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
-				<Image alt={headline} src={imageURL || fallbackImage} searchableField />
+			<MediaItem
+				{...searchableField({
+					imageURL: "url",
+					imageId: "_id",
+					imageAuth: "auth",
+				})}
+				suppressContentEditableWarning
+			>
+				<Image {...imageParams} />
 			</MediaItem>
 		) : null;
 		return showImage && linkURL ? (
@@ -41,7 +96,7 @@ const SmallManualPromo = ({ customFields }) => {
 				href={formatURL(linkURL)}
 				openInNewTab={newTab}
 				onClick={registerSuccessEvent}
-				assistiveHidden
+				assistiveHidden={showHeadline}
 			>
 				{ImageDisplay}
 			</Link>
@@ -51,7 +106,7 @@ const SmallManualPromo = ({ customFields }) => {
 	};
 
 	const PromoHeading = () =>
-		showHeadline ? (
+		showHeadline && headline ? (
 			<Heading>
 				{linkURL ? (
 					<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
@@ -101,6 +156,12 @@ SmallManualPromo.propTypes = {
 			label: "Image URL",
 			group: "Configure Content",
 			searchable: "image",
+		}),
+		imageAuth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageId: PropTypes.string.tag({
+			hidden: true,
 		}),
 		linkURL: PropTypes.string.tag({
 			label: "Link URL",

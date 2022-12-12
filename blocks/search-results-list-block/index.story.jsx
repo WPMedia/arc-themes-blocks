@@ -91,8 +91,6 @@ export const allFields = () => {
 	return (
 		<>
 			<SearchResultsList customFields={customFields} />
-			<div>&nbsp;</div>
-			<div>&nbsp;</div>
 		</>
 	);
 };

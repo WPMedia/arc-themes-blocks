@@ -13,7 +13,7 @@ const PromoDate = (props) => {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
 			timeZone: "GMT",
-			dateFormat: "LLLL d, yyyy 'at' K:m bbbb z",
+			dateFormat: "%B %d, %Y 'at' K:m bbbb z",
 		},
 	} = getProperties(arcSite);
 

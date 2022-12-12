@@ -38,7 +38,7 @@ const MediumPromo = ({ customFields }) => {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
 			timeZone: "GMT",
-			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
+			dateTimeFormat: "%B %d, %Y at %l:%M %P %Z",
 		},
 		fallbackImage,
 	} = getProperties(arcSite);

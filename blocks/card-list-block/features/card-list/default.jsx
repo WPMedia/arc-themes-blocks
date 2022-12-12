@@ -47,7 +47,7 @@ const CardListItems = (props) => {
 		dateLocalization: { language, timeZone, dateFormat } = {
 			language: "en",
 			timeZone: "GMT",
-			dateFormat: "LLLL d, yyyy",
+			dateFormat: "%B %d, %Y",
 		},
 	} = props;
 	const phrases = usePhrases();

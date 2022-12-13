@@ -13,7 +13,7 @@ Results List block for Fusion News Theme. Displays a results list where each res
 | **showDescription**   | no           | Boolean  | Do or do not display the description text. Default value is `true`.                                               |
 | **showByline**        | no           | Boolean  | Do or do not display the byline, showing the author of the content. Defaults to `true`, showing the byline        |
 | **showDate**          | no           | Boolean  | Do or do not display the date, showing the time and day of the content. Defaults to `true`, showing the date info |
-| **lazyLoad**          | no           | Boolean  | Prevent block display until when nearly in-view for the user. Default is false.                                   |
+| **lazyLoad**          | no           | Boolean  | Prevent block display until when nearly in-view for the user. Default is `false`. Set as `true` to activate it.   |
 
 ### ANS Fields
 

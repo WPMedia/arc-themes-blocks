@@ -31,7 +31,7 @@ const ImageComponent = ({
 	imageURL,
 	overlayText,
 }) => {
-	const image1AuthToken = useContent(
+	const imageAuthToken = useContent(
 		!imageAuth && imageId
 			? {
 					source: "signing-service",
@@ -40,9 +40,9 @@ const ImageComponent = ({
 			: {}
 	);
 
-	const image1AuthTokenObj = {};
-	if (image1AuthToken?.hash) {
-		image1AuthTokenObj[RESIZER_APP_VERSION] = image1AuthToken.hash;
+	const imageAuthTokenObj = {};
+	if (imageAuthToken?.hash) {
+		imageAuthTokenObj[RESIZER_APP_VERSION] = imageAuthToken.hash;
 	}
 
 	const imageParams =
@@ -51,7 +51,7 @@ const ImageComponent = ({
 					ansImage: {
 						_id: imageId,
 						url: imageURL,
-						auth: imageAuth ? JSON.parse(imageAuth) : image1AuthTokenObj,
+						auth: imageAuth ? JSON.parse(imageAuth) : imageAuthTokenObj,
 					},
 					alt: imageAlt,
 					aspectRatio: ASPECT_RATIO_MAP[imageAspectRatio],

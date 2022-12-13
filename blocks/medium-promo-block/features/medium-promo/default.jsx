@@ -184,6 +184,7 @@ const MediumPromo = ({ customFields }) => {
 								<Image
 									alt={content?.headlines?.basic}
 									src={imageSrc}
+									aspectRatio={imageRatio}
 									resizedOptions={resizeImage ? { auth: imageAuthToken } : {}}
 									responsiveImages={[100, 500]}
 									resizerURL={resizeImage ? RESIZER_URL : null}

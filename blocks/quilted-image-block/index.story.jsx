@@ -7,6 +7,9 @@ export default {
 	title: "Blocks/Quilted Image",
 	parameters: {
 		chromatic: { viewports: [320, 768, 1200] },
+		cssVariables: {
+			theme: "commerce",
+		},
 	},
 };
 

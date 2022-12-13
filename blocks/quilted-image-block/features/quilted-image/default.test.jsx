@@ -78,7 +78,7 @@ describe("Quilted Image", () => {
 		);
 		const firstLinkElement = container.querySelectorAll("a")[0];
 		expect(firstLinkElement.getAttribute("class")).toBe(
-			"c-link b-quilted-image__media-panel  b-quilted-image__wrapper-top"
+			"c-link b-quilted-image__media-panel b-quilted-image__wrapper-top"
 		);
 		const thirdLinkElement = container.querySelectorAll("a")[2];
 		expect(thirdLinkElement.getAttribute("class")).toBe("c-link b-quilted-image__media-panel ");
@@ -88,7 +88,7 @@ describe("Quilted Image", () => {
 			<QuiltedImage customFields={{ ...FILLED_IN_CUSTOM_FIELDS, fullWidthImage: "bottom" }} />
 		);
 		const linkElement1 = container.querySelectorAll("a")[0];
-		expect(linkElement1.getAttribute("class")).toBe("c-link b-quilted-image__media-panel  ");
+		expect(linkElement1.getAttribute("class")).toBe("c-link b-quilted-image__media-panel ");
 		const linkElement3 = container.querySelectorAll("a")[2];
 		expect(linkElement3.getAttribute("class")).toBe(
 			"c-link b-quilted-image__media-panel b-quilted-image__wrapper-bottom"

@@ -27,7 +27,7 @@ export const showOverlayCenter = () => (
 			mobileImageId: "EM5DTGYGABDJZODV7YVFOC2DOM",
 			imageURLMobile:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
-			mobileImageAuth: { 2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf" },
+			mobileImageAuth: '{"2":"75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf"}',
 			imageAltText: "Picture of man in the forest",
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
@@ -55,7 +55,7 @@ export const showOverlayLeft = () => (
 			mobileImageId: "EM5DTGYGABDJZODV7YVFOC2DOM",
 			imageURLMobile:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
-			mobileImageAuth: { 2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf" },
+			mobileImageAuth: '{"2":"75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf"}',
 			imageAltText: "Picture of man in the forest",
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
@@ -83,7 +83,7 @@ export const showButtonVariants = () => (
 			mobileImageId: "EM5DTGYGABDJZODV7YVFOC2DOM",
 			imageURLMobile:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
-			mobileImageAuth: { 2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf" },
+			mobileImageAuth: '{"2":"75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf"}',
 			imageAltText: "Picture of man in the forest",
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
@@ -111,7 +111,7 @@ export const showOnlyOneButton = () => (
 			mobileImageId: "EM5DTGYGABDJZODV7YVFOC2DOM",
 			imageURLMobile:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
-			mobileImageAuth: { 2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf" },
+			mobileImageAuth: '{"2":"75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf"}',
 			imageAltText: "Picture of man in the forest",
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
@@ -136,7 +136,7 @@ export const showStackedCenter = () => (
 			mobileImageId: "EM5DTGYGABDJZODV7YVFOC2DOM",
 			imageURLMobile:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
-			mobileImageAuth: { 2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf" },
+			mobileImageAuth: '{"2":"75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf"}',
 			imageAltText: "Picture of man in the forest",
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
@@ -164,7 +164,7 @@ export const showStackedLeft = () => (
 			mobileImageId: "EM5DTGYGABDJZODV7YVFOC2DOM",
 			imageURLMobile:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
-			mobileImageAuth: { 2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf" },
+			mobileImageAuth: '{"2":"75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf"}',
 			imageAltText: "Picture of man in the forest",
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",

@@ -41,7 +41,7 @@ function Hero({ customFields }) {
 		variant = "dark",
 	} = customFields;
 	const { arcSite } = useFusionContext();
-	const { fallbackImage } = getProperties(arcSite);
+	const { fallbackImage, resizerURL } = getProperties(arcSite);
 	const classes = [
 		BLOCK_CLASS_NAME,
 		`${BLOCK_CLASS_NAME}--${layout}`,
@@ -80,12 +80,14 @@ function Hero({ customFields }) {
 						url: imageURLDesktop,
 						auth: imageAuth ? JSON.parse(imageAuth) : imageAuthTokenObj,
 					},
+					src: imageURLDesktop,
 					alt,
 					resizedOptions: {
 						smart: true,
 					},
 					responsiveImages: [600, 800, 1200, 1600, 1800],
 					width: 600,
+					resizerURL,
 			  }
 			: {
 					src: fallbackImage,
@@ -106,6 +108,7 @@ function Hero({ customFields }) {
 					},
 					responsiveImages: [200, 400, 600, 800, 1200],
 					width: 600,
+					resizerURL,
 			  }
 			: {
 					src: fallbackImage,
@@ -115,7 +118,7 @@ function Hero({ customFields }) {
 	return (
 		<div className={classes}>
 			<Picture>
-				<Picture.Source {...desktopImageParams} />
+				<Picture.Source {...{ media: "(min-width:600px)", ...desktopImageParams }} />
 				<Picture.Image {...mobileImageParams} />
 			</Picture>
 

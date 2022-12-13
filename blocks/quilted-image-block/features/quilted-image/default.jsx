@@ -23,14 +23,22 @@ const ASPECT_RATIO_MAP = {
 const OVERLAY_TEXT_VARIANTS = ["dark", "light"];
 const BUTTON_VARIANTS = ["primary", "secondary"];
 
-const ImageComponent = ({
+const ImageItem = ({
+	buttonText,
+	buttonVariant,
+	className,
+	fieldId,
 	imageAlt,
 	imageAspectRatio,
 	imageAuth,
 	imageId,
 	imageURL,
+	itemAction,
 	overlayText,
+	overlayTextVariant,
 }) => {
+	const { isAdmin } = useFusionContext();
+	const { searchableField } = useEditableContent();
 	const imageAuthToken = useContent(
 		!imageAuth && imageId
 			? {
@@ -66,7 +74,32 @@ const ImageComponent = ({
 					alt: overlayText,
 			  };
 
-	return <Image {...imageParams} />;
+	if ((imageURL && itemAction && overlayText && buttonText) || isAdmin) {
+		return (
+			<Link href={itemAction} className={`${BLOCK_CLASS_NAME}__media-panel ${className}`}>
+				<Image {...imageParams} />
+				<Stack
+					className={`${BLOCK_CLASS_NAME}__overlay`}
+					inline
+					{...searchableField({
+						[`image${fieldId}URL`]: "url",
+						[`image${fieldId}Id`]: "_id",
+						[`image${fieldId}Auth`]: "auth",
+						[`image${fieldId}Alt`]: "alt_text",
+					})}
+					suppressContentEditableWarning
+				>
+					<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlayTextVariant}`}>
+						{overlayText}
+					</Paragraph>
+					<Button variant={buttonVariant} size="small" assistiveHidden>
+						{buttonText}
+					</Button>
+				</Stack>
+			</Link>
+		);
+	}
+	return null;
 };
 
 function QuiltedImage({ customFields }) {
@@ -105,114 +138,53 @@ function QuiltedImage({ customFields }) {
 		button3Variant,
 	} = customFields;
 
-	const { isAdmin } = useFusionContext();
-	const { searchableField } = useEditableContent();
-
 	return (
 		<div className={BLOCK_CLASS_NAME}>
 			<HeadingSection>
 				{headline ? <Heading>{headline}</Heading> : null}
 				<div className={`${BLOCK_CLASS_NAME}__wrapper`}>
-					{(image1URL && item1Action && overlay1Text && button1Text) || isAdmin ? (
-						<Link
-							href={item1Action}
-							className={`${BLOCK_CLASS_NAME}__media-panel  ${
-								fullWidthImage === "top" ? `${BLOCK_CLASS_NAME}__wrapper-top` : ""
-							}`}
-						>
-							<ImageComponent
-								imageAlt={image1Alt}
-								imageAspectRatio={image1AspectRatio}
-								imageAuth={image1Auth}
-								imageId={image1Id}
-								imageURL={image1URL}
-								overlayText={overlay1Text}
-							/>
-							<Stack
-								className={`${BLOCK_CLASS_NAME}__overlay`}
-								inline
-								{...searchableField({
-									image1URL: "url",
-									image1Id: "_id",
-									image1Auth: "auth",
-									image1Alt: "alt_text",
-								})}
-								suppressContentEditableWarning
-							>
-								<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlay1TextVariant}`}>
-									{overlay1Text}
-								</Paragraph>
-								<Button variant={button1Variant} size="small" assistiveHidden>
-									{button1Text}
-								</Button>
-							</Stack>
-						</Link>
-					) : null}
-					{(image2URL && item2Action && overlay2Text && button2Text) || isAdmin ? (
-						<Link href={item2Action} className={`${BLOCK_CLASS_NAME}__media-panel`}>
-							<ImageComponent
-								imageAlt={image2Alt}
-								imageAspectRatio={image2AspectRatio}
-								imageAuth={image2Auth}
-								imageId={image2Id}
-								imageURL={image2URL}
-								overlayText={overlay2Text}
-							/>
-							<Stack
-								className={`${BLOCK_CLASS_NAME}__overlay`}
-								inline
-								{...searchableField({
-									image2URL: "url",
-									image2Id: "_id",
-									image2Auth: "auth",
-									image2Alt: "alt_text",
-								})}
-								suppressContentEditableWarning
-							>
-								<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlay2TextVariant}`}>
-									{overlay2Text}
-								</Paragraph>
-								<Button variant={button2Variant} size="small" assistiveHidden>
-									{button2Text}
-								</Button>
-							</Stack>
-						</Link>
-					) : null}
-					{(image3URL && item3Action && overlay3Text && button3Text) || isAdmin ? (
-						<Link
-							href={item3Action}
-							className={`${BLOCK_CLASS_NAME}__media-panel ${
-								fullWidthImage === "bottom" ? `${BLOCK_CLASS_NAME}__wrapper-bottom` : ""
-							}`}
-						>
-							<ImageComponent
-								imageAlt={image3Alt}
-								imageAspectRatio={image3AspectRatio}
-								imageAuth={image3Auth}
-								imageId={image3Id}
-								imageURL={image3URL}
-								overlayText={overlay3Text}
-							/>
-							<Stack
-								className={`${BLOCK_CLASS_NAME}__overlay`}
-								inline
-								{...searchableField({
-									image3URL: "url",
-									image3Id: "_id",
-									image3Auth: "auth",
-									image3Alt: "alt_text",
-								})}
-								suppressContentEditableWarning
-							>
-								<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlay3TextVariant}`}>
-									{overlay3Text}
-								</Paragraph>
-								<Button variant={button3Variant} size="small" assistiveHidden>
-									{button3Text}
-								</Button>
-							</Stack>
-						</Link>
-					) : null}
+					<ImageItem
+						buttonText={button1Text}
+						buttonVariant={button1Variant}
+						className={fullWidthImage === "top" ? `${BLOCK_CLASS_NAME}__wrapper-top` : ""}
+						fieldId="1"
+						itemAction={item1Action}
+						imageAlt={image1Alt}
+						imageAspectRatio={image1AspectRatio}
+						imageAuth={image1Auth}
+						imageId={image1Id}
+						imageURL={image1URL}
+						overlayText={overlay1Text}
+						overlayTextVariant={overlay1TextVariant}
+					/>
+					<ImageItem
+						buttonText={button2Text}
+						buttonVariant={button2Variant}
+						className=""
+						fieldId="2"
+						itemAction={item2Action}
+						imageAlt={image2Alt}
+						imageAspectRatio={image2AspectRatio}
+						imageAuth={image2Auth}
+						imageId={image2Id}
+						imageURL={image2URL}
+						overlayText={overlay2Text}
+						overlayTextVariant={overlay2TextVariant}
+					/>
+					<ImageItem
+						buttonText={button3Text}
+						buttonVariant={button3Variant}
+						className={fullWidthImage === "bottom" ? `${BLOCK_CLASS_NAME}__wrapper-bottom` : ""}
+						fieldId="1"
+						itemAction={item3Action}
+						imageAlt={image3Alt}
+						imageAspectRatio={image3AspectRatio}
+						imageAuth={image3Auth}
+						imageId={image3Id}
+						imageURL={image3URL}
+						overlayText={overlay3Text}
+						overlayTextVariant={overlay3TextVariant}
+					/>
 				</div>
 			</HeadingSection>
 		</div>

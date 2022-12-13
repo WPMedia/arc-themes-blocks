@@ -5,7 +5,7 @@ import "@testing-library/jest-dom/extend-expect";
 import Hero from "./default";
 
 jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => ({})),
+	useContent: jest.fn(() => ({ hash: "2cc3c2b3" })),
 }));
 
 describe("Hero", () => {
@@ -42,6 +42,12 @@ describe("Hero", () => {
 					headline: "My Headline",
 					subHeadline: "My Sub Headline",
 					description: "My description",
+					imageId: "P5EYZ",
+					imageURLDesktop: "https://www.google.com",
+					imageAuth: '{"2":"2dd3c2a2"}',
+					mobileImageId: "P5EYZ",
+					imageURLMobile: "https://www.google.com",
+					mobileImageAuth: '{"2":"2cc3c2b3"}',
 				}}
 			/>
 		);

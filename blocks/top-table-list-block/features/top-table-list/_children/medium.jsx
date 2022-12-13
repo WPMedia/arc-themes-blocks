@@ -47,7 +47,7 @@ const Medium = (props) => {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
 			timeZone: "GMT",
-			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
+			dateTimeFormat: "%B %d, %Y at %l:%M %P %Z",
 		},
 	} = getProperties(arcSite);
 	const phrases = usePhrases();

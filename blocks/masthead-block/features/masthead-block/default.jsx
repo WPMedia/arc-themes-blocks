@@ -48,7 +48,7 @@ const MastheadContainer = (props) => {
 		dateLocalization: { language, timeZone, dateFormat } = {
 			language: "en",
 			timeZone: "GMT",
-			dateFormat: "LLLL d, yyyy",
+			dateFormat: "%B %d, %Y",
 		},
 	} = getProperties(arcSite);
 

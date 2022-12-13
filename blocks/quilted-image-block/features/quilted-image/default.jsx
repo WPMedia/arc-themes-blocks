@@ -23,6 +23,52 @@ const ASPECT_RATIO_MAP = {
 const OVERLAY_TEXT_VARIANTS = ["dark", "light"];
 const BUTTON_VARIANTS = ["primary", "secondary"];
 
+const ImageComponent = ({
+	imageAlt,
+	imageAspectRatio,
+	imageAuth,
+	imageId,
+	imageURL,
+	overlayText,
+}) => {
+	const image1AuthToken = useContent(
+		!imageAuth && imageId
+			? {
+					source: "signing-service",
+					query: { id: imageId },
+			  }
+			: {}
+	);
+
+	const image1AuthTokenObj = {};
+	if (image1AuthToken?.hash) {
+		image1AuthTokenObj[RESIZER_APP_VERSION] = image1AuthToken.hash;
+	}
+
+	const imageParams =
+		imageId && imageURL
+			? {
+					ansImage: {
+						_id: imageId,
+						url: imageURL,
+						auth: imageAuth ? JSON.parse(imageAuth) : image1AuthTokenObj,
+					},
+					alt: imageAlt,
+					aspectRatio: ASPECT_RATIO_MAP[imageAspectRatio],
+					resizedOptions: {
+						smart: true,
+					},
+					responsiveImages: [200, 400, 600, 800, 1000],
+					width: 600,
+			  }
+			: {
+					src: imageURL,
+					alt: overlayText,
+			  };
+
+	return <Image {...imageParams} />;
+};
+
 function QuiltedImage({ customFields }) {
 	const {
 		headline,
@@ -62,107 +108,6 @@ function QuiltedImage({ customFields }) {
 	const { isAdmin } = useFusionContext();
 	const { searchableField } = useEditableContent();
 
-	const sharedImageParams = {
-		resizedOptions: {
-			smart: true,
-		},
-		responsiveImages: [200, 400, 600, 800, 1000],
-		width: 600,
-	};
-
-	const image1AuthToken = useContent(
-		!image1Auth && image1Id
-			? {
-					source: "signing-service",
-					query: { id: image1Id },
-			  }
-			: {}
-	);
-
-	const image1AuthTokenObj = {};
-	if (image1AuthToken?.hash) {
-		image1AuthTokenObj[RESIZER_APP_VERSION] = image1AuthToken.hash;
-	}
-
-	const image1Params =
-		image1Id && image1URL
-			? {
-					ansImage: {
-						_id: image1Id,
-						url: image1URL,
-						auth: image1Auth ? JSON.parse(image1Auth) : image1AuthTokenObj,
-					},
-					alt: image1Alt,
-					aspectRatio: ASPECT_RATIO_MAP[image1AspectRatio],
-					...sharedImageParams,
-			  }
-			: {
-					src: image1URL,
-					alt: overlay1Text,
-			  };
-
-	const image2AuthToken = useContent(
-		!image2Auth && image2Id
-			? {
-					source: "signing-service",
-					query: { id: image2Id },
-			  }
-			: {}
-	);
-
-	const image2AuthTokenObj = {};
-	if (image2AuthToken?.hash) {
-		image2AuthTokenObj[RESIZER_APP_VERSION] = image2AuthToken.hash;
-	}
-
-	const image2Params =
-		image2Id && image2URL
-			? {
-					ansImage: {
-						_id: image2Id,
-						url: image2URL,
-						auth: image2Auth ? JSON.parse(image2Auth) : image2AuthTokenObj,
-					},
-					alt: image2Alt,
-					aspectRatio: ASPECT_RATIO_MAP[image2AspectRatio],
-					...sharedImageParams,
-			  }
-			: {
-					src: image2URL,
-					alt: overlay2Text,
-			  };
-
-	const image3AuthToken = useContent(
-		!image3Auth && image3Id
-			? {
-					source: "signing-service",
-					query: { id: image3Id },
-			  }
-			: {}
-	);
-
-	const image3AuthTokenObj = {};
-	if (image3AuthToken?.hash) {
-		image3AuthTokenObj[RESIZER_APP_VERSION] = image3AuthToken.hash;
-	}
-
-	const image3Params =
-		image3Id && image3URL
-			? {
-					ansImage: {
-						_id: image3Id,
-						url: image3URL,
-						auth: image3Auth ? JSON.parse(image3Auth) : image3AuthTokenObj,
-					},
-					alt: image3Alt,
-					aspectRatio: ASPECT_RATIO_MAP[image3AspectRatio],
-					...sharedImageParams,
-			  }
-			: {
-					src: image3URL,
-					alt: overlay3Text,
-			  };
-
 	return (
 		<div className={BLOCK_CLASS_NAME}>
 			<HeadingSection>
@@ -175,7 +120,14 @@ function QuiltedImage({ customFields }) {
 								fullWidthImage === "top" ? `${BLOCK_CLASS_NAME}__wrapper-top` : ""
 							}`}
 						>
-							<Image {...image1Params} />
+							<ImageComponent
+								imageAlt={image1Alt}
+								imageAspectRatio={image1AspectRatio}
+								imageAuth={image1Auth}
+								imageId={image1Id}
+								imageURL={image1URL}
+								overlayText={overlay1Text}
+							/>
 							<Stack
 								className={`${BLOCK_CLASS_NAME}__overlay`}
 								inline
@@ -198,7 +150,14 @@ function QuiltedImage({ customFields }) {
 					) : null}
 					{(image2URL && item2Action && overlay2Text && button2Text) || isAdmin ? (
 						<Link href={item2Action} className={`${BLOCK_CLASS_NAME}__media-panel`}>
-							<Image {...image2Params} />
+							<ImageComponent
+								imageAlt={image2Alt}
+								imageAspectRatio={image2AspectRatio}
+								imageAuth={image2Auth}
+								imageId={image2Id}
+								imageURL={image2URL}
+								overlayText={overlay2Text}
+							/>
 							<Stack
 								className={`${BLOCK_CLASS_NAME}__overlay`}
 								inline
@@ -226,7 +185,14 @@ function QuiltedImage({ customFields }) {
 								fullWidthImage === "bottom" ? `${BLOCK_CLASS_NAME}__wrapper-bottom` : ""
 							}`}
 						>
-							<Image {...image3Params} />
+							<ImageComponent
+								imageAlt={image3Alt}
+								imageAspectRatio={image3AspectRatio}
+								imageAuth={image3Auth}
+								imageId={image3Id}
+								imageURL={image3URL}
+								overlayText={overlay3Text}
+							/>
 							<Stack
 								className={`${BLOCK_CLASS_NAME}__overlay`}
 								inline

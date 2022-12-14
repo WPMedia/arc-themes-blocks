@@ -1710,6 +1710,9 @@
 					padding: 0,
 				),
 				medium-promo: (
+					clear: both,
+					display: table,
+					width: 100%,
 					components: (
 						attribution: (
 							display: block,
@@ -1767,6 +1770,9 @@
 					color: var(--global-white),
 				),
 				medium-manual-promo: (
+					clear: both,
+					display: table,
+					width: 100%,
 					components: (
 						attribution: (
 							color: var(--text-color),

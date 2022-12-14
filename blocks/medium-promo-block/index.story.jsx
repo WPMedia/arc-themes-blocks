@@ -199,3 +199,21 @@ export const headingAndDate = () => {
 
 	return <MediumPromo customFields={customFields} />;
 };
+
+export const twoPromos = () => {
+	const customFields = {
+		...sampleData,
+		showHeadline: true,
+		showImage: true,
+		showDescription: true,
+		showByline: true,
+		showDate: true,
+	};
+
+	return (
+		<>
+			<MediumPromo customFields={customFields} />
+			<MediumPromo customFields={customFields} />
+		</>
+	);
+};

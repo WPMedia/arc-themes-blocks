@@ -54,7 +54,14 @@ const customFields = {
 export const fullWidthImageOnBottom = () => <QuiltedImage customFields={{ ...customFields }} />;
 
 export const fullWidthImageOnTop = () => (
-	<QuiltedImage customFields={{ ...customFields, fullWidthImage: "top" }} />
+	<QuiltedImage
+		customFields={{
+			...customFields,
+			fullWidthImage: "top",
+			image1AspectRatio: "16/9",
+			image3AspectRatio: "4/3",
+		}}
+	/>
 );
 
 export const secondaryButtonVariant = () => (

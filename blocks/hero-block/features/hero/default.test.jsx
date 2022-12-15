@@ -211,6 +211,10 @@ describe("Hero", () => {
 					subHeadline: "My Sub Headline",
 					description: "My description",
 					link1Action: "#",
+					imageMobileId: "EM5DTGYGABDJZODV7YVFOC2DOM",
+					imageMobileURL:
+						"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
+					imageMobileAlt: "Picture of man in the forest",
 					link1Text: "For Him",
 					link1Type: "secondary",
 					link2Action: "#",
@@ -220,6 +224,6 @@ describe("Hero", () => {
 				}}
 			/>
 		);
-		expect(container.querySelector("img").getAttribute("src")).toBe("placeholder.jpg");
+		expect(container.querySelector("img").getAttribute("alt")).toBe("My Headline");
 	});
 });

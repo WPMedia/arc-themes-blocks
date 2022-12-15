@@ -184,20 +184,10 @@ const MediumPromo = ({ customFields }) => {
 								<Image
 									alt={content?.headlines?.basic}
 									src={imageSrc}
-									data-aspect-ratio={imageRatio?.replace(":", "/")}
+									aspectRatio={imageRatio}
 									resizedOptions={resizeImage ? { auth: imageAuthToken } : {}}
 									responsiveImages={[100, 500]}
 									resizerURL={resizeImage ? RESIZER_URL : null}
-									sizes={[
-										{
-											isDefault: true,
-											sourceSizeValue: "100px",
-										},
-										{
-											sourceSizeValue: "500px",
-											mediaCondition: "(min-width: 48rem)",
-										},
-									]}
 								/>
 								{labelIconName ? (
 									<div className={`${BLOCK_CLASS_NAME}__icon_label`}>

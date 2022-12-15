@@ -145,3 +145,19 @@ export const shortHeadlineLongDescription = () => {
 
 	return <MediumManualPromo customFields={customFields} />;
 };
+
+export const twoPromos = () => {
+	const customFields = {
+		...sampleData,
+		showHeadline: true,
+		showImage: true,
+		showDescription: true,
+	};
+
+	return (
+		<>
+			<MediumManualPromo customFields={customFields} />
+			<MediumManualPromo customFields={customFields} />
+		</>
+	);
+};

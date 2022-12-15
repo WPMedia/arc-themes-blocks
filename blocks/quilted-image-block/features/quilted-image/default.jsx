@@ -175,7 +175,7 @@ function QuiltedImage({ customFields }) {
 						buttonText={button3Text}
 						buttonVariant={button3Variant}
 						className={fullWidthImage === "bottom" ? `${BLOCK_CLASS_NAME}__wrapper-bottom` : ""}
-						fieldId="1"
+						fieldId="3"
 						itemAction={item3Action}
 						imageAlt={image3Alt}
 						imageAspectRatio={image3AspectRatio}

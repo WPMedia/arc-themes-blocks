@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { RESIZER_APP_VERSION } from "fusion:environment";
-import { useContent } from "fusion:content";
+import { RESIZER_URL } from "fusion:environment";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 
@@ -11,6 +10,7 @@ import {
 	Button,
 	Heading,
 	HeadingSection,
+	imageANSToImageSrc,
 	Paragraph,
 	Picture,
 	Stack,
@@ -25,11 +25,12 @@ function Hero({ customFields }) {
 		description,
 		headline,
 		imageId,
-		imageAuth,
-		mobileImageAuth,
-		imageURLDesktop,
-		mobileImageId,
-		imageURLMobile,
+		imageMobileId,
+		imageDesktopAuth,
+		imageMobileAuth,
+		imageDesktopURL,
+		imageMobileAlt,
+		imageMobileURL,
 		link1Action,
 		link1Text,
 		link1Type,
@@ -37,82 +38,54 @@ function Hero({ customFields }) {
 		link2Text,
 		link2Type,
 		subHeadline,
-		// targetFallbackImage,
+		resizerAppVersion,
 		variant = "dark",
 	} = customFields;
 	const { arcSite } = useFusionContext();
-	const { fallbackImage, resizerURL } = getProperties(arcSite);
+	const { fallbackImage } = getProperties(arcSite);
 	const classes = [
 		BLOCK_CLASS_NAME,
 		`${BLOCK_CLASS_NAME}--${layout}`,
 		variant === "dark" ? `${BLOCK_CLASS_NAME}--dark` : `${BLOCK_CLASS_NAME}--light`,
 	].join(" ");
 	const alt = headline || description || null;
-	const imageAuthToken = useContent(
-		!imageAuth && imageId
-			? {
-					source: "signing-service",
-					query: { id: imageId },
-			  }
-			: {}
-	);
-	const mobileImageAuthToken = useContent(
-		!mobileImageAuth && mobileImageId
-			? {
-					source: "signing-service",
-					query: { id: mobileImageId },
-			  }
-			: {}
-	);
-	const imageAuthTokenObj = {};
-	if (imageAuthToken?.hash) {
-		imageAuthToken[RESIZER_APP_VERSION] = imageAuthToken.hash;
-	}
-	const mobileImageAuthTokenObj = {};
-	if (mobileImageAuthToken?.hash) {
-		mobileImageAuthToken[RESIZER_APP_VERSION] = mobileImageAuthToken.hash;
-	}
 	const desktopImageParams =
-		imageId && imageURLDesktop
+		imageId && imageDesktopURL
 			? {
-					ansImage: {
+					src: imageANSToImageSrc({
 						_id: imageId,
-						url: imageURLDesktop,
-						auth: imageAuth ? JSON.parse(imageAuth) : imageAuthTokenObj,
-					},
-					src: imageURLDesktop,
-					alt,
+						url: imageDesktopURL,
+					}),
 					resizedOptions: {
+						auth: imageDesktopAuth ? JSON.parse(imageDesktopAuth)[resizerAppVersion] : {},
 						smart: true,
 					},
-					responsiveImages: [600, 800, 1200, 1600, 1800],
-					width: 600,
-					resizerURL,
+					width: 1200,
+					height: 600,
+					resizerURL: RESIZER_URL,
 			  }
 			: {
 					src: fallbackImage,
-					alt,
 			  };
 
 	const mobileImageParams =
-		mobileImageId && imageURLMobile
+		imageMobileId && imageMobileURL
 			? {
 					ansImage: {
-						_id: mobileImageId,
-						url: imageURLMobile,
-						auth: mobileImageAuth ? JSON.parse(mobileImageAuth) : mobileImageAuthTokenObj,
+						_id: imageMobileId,
+						url: imageMobileURL,
+						auth: imageMobileAuth ? JSON.parse(imageMobileAuth) : {},
 					},
 					alt,
 					resizedOptions: {
 						smart: true,
 					},
-					responsiveImages: [200, 400, 600, 800, 1200],
 					width: 600,
-					resizerURL,
+					height: 600,
 			  }
 			: {
 					src: fallbackImage,
-					alt,
+					alt: imageMobileAlt,
 			  };
 	const HeadingWrapper = headline ? HeadingSection : Fragment;
 	return (
@@ -184,20 +157,39 @@ Hero.propTypes = {
 			label: "Content Style",
 			description: "Select a light or dark theme for the content area.",
 		}),
-		imageURLDesktop: PropTypes.string.tag({
+		imageId: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageDesktopURL: PropTypes.string.tag({
 			label: "Image URL for Desktop",
 			description: "Select an image appropriate for desktop sized screens.",
 			searchable: "image",
 		}),
-		imageURLMobile: PropTypes.string.tag({
+		imageDesktopWidth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageDesktopHeight: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageDesktopAuth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageMobileURL: PropTypes.string.tag({
 			label: "Image URL for Mobile",
 			description: "Select an image appropriate for mobile sized screens.",
 			searchable: "image",
 		}),
-		imageAltText: PropTypes.string.tag({
+		imageMobileAuth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageMobileId: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageMobileAlt: PropTypes.string.tag({
 			defaultValue: "",
 			description: "The alt text that will be applied for both the mobile and desktop image.",
 			label: "Image alt text",
+			hidden: true,
 		}),
 		headline: PropTypes.string.tag({
 			label: "Headline Text",

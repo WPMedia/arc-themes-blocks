@@ -220,6 +220,6 @@ describe("Hero", () => {
 				}}
 			/>
 		);
-		expect(container.querySelector("img").getAttribute("alt")).toBe("My Headline");
+		expect(container.querySelector("img").getAttribute("src")).toBe("placeholder.jpg");
 	});
 });

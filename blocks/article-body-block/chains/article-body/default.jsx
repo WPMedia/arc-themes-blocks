@@ -63,7 +63,13 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		}
 
 		case "divider": {
-			return <hr className={`${BLOCK_CLASS_NAME}__divider`} key={`${type}_${index}_${key}`} />;
+			return (
+				<Divider
+					assistiveHidden={false}
+					className={`${BLOCK_CLASS_NAME}__divider`}
+					key={`${type}_${index}_${key}`}
+				/>
+			);
 		}
 
 		case "image": {

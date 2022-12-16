@@ -1,0 +1,6 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-divider {
+	@include scss.block-components("divider");
+	@include scss.block-properties("divider");
+}

@@ -7,6 +7,7 @@ import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
 	Carousel,
 	Conditional,
+	Divider,
 	formatCredits,
 	Heading,
 	HeadingSection,

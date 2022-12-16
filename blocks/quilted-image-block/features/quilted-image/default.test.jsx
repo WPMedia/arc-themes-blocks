@@ -1,8 +1,16 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
+import { useContent } from "fusion:content";
 
 import QuiltedImage from "./default";
+
+jest.mock("fusion:content", () => ({
+	useContent: jest.fn(() => {}),
+	useEditableContent: jest.fn(() => ({
+		searchableField: () => {},
+	})),
+}));
 
 const FILLED_IN_CUSTOM_FIELDS = {
 	headline: "Quilted Image Block Headline",
@@ -10,6 +18,9 @@ const FILLED_IN_CUSTOM_FIELDS = {
 	image1URL:
 		"https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/JYSH6R3ZKBCLLM7UYN73CVLZ24.jpg",
 	image1AspectRatio: "4/3",
+	image1Auth: '{"2":"IMAGE_1_AUTH_TOKEN"}',
+	image1Id: "IMAGE_1_ID",
+	image1Alt: "Image 1 alt text",
 	overlay1Text: "Overlay Text 1",
 	overlay1TextVariant: "dark",
 	button1Text: "Button 1 Text",
@@ -18,6 +29,9 @@ const FILLED_IN_CUSTOM_FIELDS = {
 	image2URL:
 		"https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/ELOVKBWQ7FB7PAJ74GUL7ZW4NU.jpg",
 	image2AspectRatio: "4/3",
+	image2Auth: '{"2":"IMAGE_2_AUTH_TOKEN"}',
+	image2Id: "IMAGE_2_ID",
+	image2Alt: "Image 2 alt text",
 	overlay2Text: "Overlay Text 2",
 	overlay2TextVariant: "dark",
 	button2Text: "Button 2 Text",
@@ -26,6 +40,9 @@ const FILLED_IN_CUSTOM_FIELDS = {
 	image3URL:
 		"https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/QLMIYN6QXRFC7MEQXCLYIUASZI.jpg",
 	image3AspectRatio: "16/9",
+	image3Auth: '{"2":"IMAGE_3_AUTH_TOKEN"}',
+	image3Id: "IMAGE_3_ID",
+	image3Alt: "Image 3 alt text",
 	overlay3Text: "Overlay Text 3",
 	overlay3TextVariant: "dark",
 	button3Text: "Button 3 Text",
@@ -61,7 +78,7 @@ describe("Quilted Image", () => {
 		);
 		const firstLinkElement = container.querySelectorAll("a")[0];
 		expect(firstLinkElement.getAttribute("class")).toBe(
-			"c-link b-quilted-image__media-panel  b-quilted-image__wrapper-top"
+			"c-link b-quilted-image__media-panel b-quilted-image__wrapper-top"
 		);
 		const thirdLinkElement = container.querySelectorAll("a")[2];
 		expect(thirdLinkElement.getAttribute("class")).toBe("c-link b-quilted-image__media-panel ");
@@ -71,7 +88,7 @@ describe("Quilted Image", () => {
 			<QuiltedImage customFields={{ ...FILLED_IN_CUSTOM_FIELDS, fullWidthImage: "bottom" }} />
 		);
 		const linkElement1 = container.querySelectorAll("a")[0];
-		expect(linkElement1.getAttribute("class")).toBe("c-link b-quilted-image__media-panel  ");
+		expect(linkElement1.getAttribute("class")).toBe("c-link b-quilted-image__media-panel ");
 		const linkElement3 = container.querySelectorAll("a")[2];
 		expect(linkElement3.getAttribute("class")).toBe(
 			"c-link b-quilted-image__media-panel b-quilted-image__wrapper-bottom"
@@ -122,5 +139,37 @@ describe("Quilted Image", () => {
 		);
 		const linkElements = container.querySelectorAll("p.c-paragraph");
 		expect(linkElements.length).toBe(0);
+	});
+
+	it("should render images when needing to fetch the auth tokens via content source", () => {
+		useContent.mockReturnValue({
+			hash: "SIGNING_SERVICE_AUTH_TOKEN",
+		});
+		render(
+			<QuiltedImage
+				customFields={{
+					...FILLED_IN_CUSTOM_FIELDS,
+					image1Auth: "",
+					image2Auth: "",
+					image3Auth: "",
+				}}
+			/>
+		);
+		expect(screen.queryAllByRole("img")).toHaveLength(3);
+		useContent.mockClear();
+	});
+
+	it("should render images when only urls are provided", () => {
+		render(
+			<QuiltedImage
+				customFields={{
+					...FILLED_IN_CUSTOM_FIELDS,
+					image1Id: "",
+					image2Id: "",
+					image3Id: "",
+				}}
+			/>
+		);
+		expect(screen.queryAllByRole("img")).toHaveLength(3);
 	});
 });

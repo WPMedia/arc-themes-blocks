@@ -2105,7 +2105,7 @@ describe("article-body chain", () => {
 					<span>3</span>
 				</ArticleBodyChain>
 			);
-			expect(wrapper.find(".b-article-body__divider").length).toEqual(4);
+			expect(wrapper.find("Divider").length).toEqual(2);
 		});
 	});
 

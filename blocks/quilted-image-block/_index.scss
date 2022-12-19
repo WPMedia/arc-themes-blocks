@@ -46,6 +46,7 @@
 .b-quilted-image__media-panel {
 	display: grid;
 	grid-template-areas: "overlay";
+	position: relative;
 
 	> * {
 		grid-area: overlay;

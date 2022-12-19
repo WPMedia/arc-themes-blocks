@@ -1916,10 +1916,14 @@
 					margin: 0 0 var(--global-spacing-5) 0,
 				),
 				right-rail-main: (
-					gap: var(--global-spacing-6),
 					max-width: calc(var(--content-max-width) * 1px),
 					width: var(--content-scale-width),
 					margin: auto,
+					components: (
+						stack: (
+							gap: var(--global-spacing-6),
+						),
+					),
 				),
 				right-rail-full-width-2: (
 					margin: var(--global-spacing-6) 0 0 0,
@@ -3065,6 +3069,7 @@
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/date-block";
 @use "../../blocks/double-chain-block";
+@use "../../blocks/divider-block";
 @use "../../blocks/footer-block";
 @use "../../blocks/extra-large-manual-promo-block";
 @use "../../blocks/extra-large-promo-block";

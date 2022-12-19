@@ -74,6 +74,7 @@ class AdTaboola extends Component {
 			return;
 		}
 		const head = document.getElementsByTagName("head")[0];
+		// istanbul ignore next
 		if (!head) {
 			return;
 		}
@@ -96,6 +97,7 @@ class AdTaboola extends Component {
 			return;
 		}
 		const body = document.getElementsByTagName("body")[0];
+		// istanbul ignore next
 		if (!body) {
 			return;
 		}
@@ -123,7 +125,6 @@ class AdTaboola extends Component {
 						<small>Taboola widget&nbsp;</small>
 						<strong>{placement}</strong>
 					</div>
-					<hr />
 				</>
 			);
 		}
@@ -141,7 +142,6 @@ class AdTaboola extends Component {
 		return (
 			<>
 				<div id={`${container}`} />
-				<hr />
 				<script type="text/javascript" dangerouslySetInnerHTML={{ __html: scriptString }} />
 			</>
 		);

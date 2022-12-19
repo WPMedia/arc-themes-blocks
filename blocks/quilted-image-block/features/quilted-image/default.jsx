@@ -310,7 +310,7 @@ QuiltedImage.propTypes = {
 		}).isRequired,
 		image3AspectRatio: PropTypes.oneOf(Object.keys(ASPECT_RATIO_MAP)).tag({
 			labels: ASPECT_RATIO_MAP,
-			defaultValue: "16/9",
+			defaultValue: "4/3",
 			hidden: true,
 			group: "Image 3",
 		}),

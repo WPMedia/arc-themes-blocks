@@ -1,0 +1,31 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-search-results-list {
+	&__field {
+		&-wrapper {
+			@include scss.block-properties("search-results-list-field-wrapper");
+			@include scss.block-components("search-results-list-field-wrapper");
+		}
+
+		@include scss.block-components("search-results-list-field");
+		@include scss.block-properties("search-results-list-field");
+	}
+
+	&__results {
+		&-item {
+			&--show-image {
+				@include scss.block-properties("search-results-list-results-item-show-image");
+				@include scss.block-components("search-results-list-results-item-show-image");
+			}
+
+			@include scss.block-properties("search-results-list-results-item");
+			@include scss.block-components("search-results-list-results-item");
+		}
+
+		@include scss.block-components("search-results-list-results");
+		@include scss.block-properties("search-results-list-results");
+	}
+
+	@include scss.block-components("search-results-list");
+	@include scss.block-properties("search-results-list");
+}

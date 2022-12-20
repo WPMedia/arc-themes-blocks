@@ -1,130 +1,139 @@
 /* eslint-disable prefer-arrow-callback, camelcase, dot-notation  */
-
 import React from "react";
-import { mount } from "enzyme";
+import { render, screen } from "@testing-library/react";
 
-import { oneListItem, LineItemWithOutDescription } from "../mock-data";
 import SearchResult from "./search-result";
 
-jest.mock("@wpmedia/date-block", () => ({
-	__esModule: true,
-	default: function ArticleDate() {
-		return <div />;
+const singleListItem = {
+	credits: {
+		by: [],
 	},
-}));
+	description: { basic: "Basic Description 1" },
+	headlines: { basic: "Basic Headline Text" },
+	promo_items: {
+		basic: {
+			_id: "QQUBBHAFJRDH7IVNHAI4IBEQVY",
+			auth: {
+				2: "ea391c022766c61dfadf9c6778efa43a8c31b87db157dc7d5db888562ff3150e",
+			},
+			type: "image",
+			url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/QQUBBHAFJRDH7IVNHAI4IBEQVY.jpg",
+		},
+	},
+	websites: {
+		"test-site": {
+			website_url: "https://test.url",
+		},
+	},
+};
 
-jest.mock("fusion:themes", () => jest.fn(() => ({})));
-
-jest.mock("fusion:properties", () =>
-	jest.fn(() => ({
-		fallbackImage: "placeholder.jpg",
-		resizerURL: "http://example.com",
-	}))
-);
-
-jest.mock("fusion:context", () => ({
-	useAppContext: jest.fn(() => ({})),
-	useFusionContext: jest.fn(() => ({
-		arcSite: "the-sun",
-	})),
-}));
-
-jest.mock("@wpmedia/shared-styles", () => ({
-	__esModule: true,
-	Byline: () => <div />,
-	SecondaryFont: ({ children }) => <p className="description-text">{children}</p>,
-	Heading: ({ children }) => <>{children}</>,
-}));
+const singleItemWithoutDescription = {
+	credits: {
+		by: [
+			{
+				type: "author",
+				name: "Test Author",
+				url: "#",
+			},
+		],
+	},
+	display_date: "2022-01-01T00:00:00.000Z",
+	headlines: { basic: "Basic Headline Text" },
+	websites: {
+		"test-site": {
+			website_url: "https://test.url",
+		},
+	},
+};
 
 describe("The search results", () => {
 	describe("renders one list item correctly", () => {
-		const element = oneListItem.data[0];
-		if (element?.["promo_items"]?.basic) {
-			element.promo_items.basic.resized_params = { "274x154": "" };
-		}
 		const fullElements = {
 			showHeadline: true,
+			showOverline: true,
 			showImage: true,
 			showDescription: true,
 			showByline: true,
 			showDate: true,
 		};
 
-		const wrapper = mount(
-			<SearchResult
-				element={element}
-				arcSite="the-sun"
-				targetFallbackImage="/resource/example.jpg"
-				promoElements={fullElements}
-			/>
-		);
-
 		it("should render one list item as its child", () => {
-			expect(wrapper.find(".list-item").length).toEqual(1);
-		});
-
-		it("should render one image wrapped in an anchor tag", () => {
-			expect(wrapper.find(".list-item").find(".list-anchor").length).toEqual(2);
-			expect(wrapper.find(".list-item").find(".list-anchor").find("Image").length).toEqual(1);
-		});
-
-		it("should render an anchor and an image with the correct url", () => {
-			expect(wrapper.find(".list-item").find(".list-anchor").at(0).find("a").prop("href")).toEqual(
-				"/arts/2019/12/18/article-with-a-youtube-embed-in-it/"
+			render(
+				<SearchResult
+					className="test"
+					content={singleListItem}
+					arcSite="test-site"
+					promoElements={fullElements}
+				/>
 			);
+			expect(screen.getAllByRole("article").length).toBe(1);
 		});
 
-		it("should render a parent for headline and a description", () => {
+		it("should render a image, headline/link, and description", () => {
+			render(
+				<SearchResult
+					className="test"
+					content={singleListItem}
+					arcSite="test-site"
+					promoElements={fullElements}
+				/>
+			);
+
+			expect(screen.getByRole("figure")).toBeDefined();
 			expect(
-				wrapper.find(".list-item").find(".results-list--description-author-container").length
-			).toEqual(1);
+				screen.getByRole("heading", { description: "Basic Headline Text", exact: false })
+			).toBeDefined();
+			expect(
+				screen.getByRole("link", { description: "Basic Headline Text", exact: false })
+			).toBeDefined();
+			expect(screen.getByText("Basic Description 1", { exact: false })).toBeDefined();
+			expect(screen.queryByRole("link", { name: "Test Author" })).toBe(null);
+			expect(screen.queryByText("January", { exact: false })).toBe(null);
 		});
 
-		it("should render a headline and a description", () => {
-			expect(
-				wrapper.find(".list-item").find(".results-list--description-author-container").length
-			).toEqual(1);
-			expect(
-				wrapper.find(".list-item").find(".results-list--headline-container").find(".list-anchor")
-					.length
-			).toEqual(1);
-			expect(
-				wrapper
-					.find(".list-item")
-					.find(".results-list--headline-container")
-					.find(".list-anchor")
-					.find("Heading")
-					.text()
-			).toEqual("Article with a YouTube embed in it");
-			expect(
-				wrapper
-					.find(".list-item")
-					.find(".results-list--description-author-container")
-					.find("p.description-text")
-					.text()
-			).toEqual("Test article for YouTube responsiveness");
+		it("should not render an image if showImage is false", () => {
+			render(
+				<SearchResult
+					className="test"
+					content={singleListItem}
+					arcSite="test-site"
+					promoElements={{ ...fullElements, showImage: false }}
+				/>
+			);
+
+			expect(screen.queryByRole("figure")).toBe(null);
 		});
 
-		it("should render an author and a publish date section", () => {
-			expect(wrapper.find(".list-item").find(".results-list--author-date").length).toEqual(1);
-		});
+		it("should not render a headline if showHeadline is false", () => {
+			render(
+				<SearchResult
+					className="test"
+					content={singleListItem}
+					arcSite="test-site"
+					promoElements={{ ...fullElements, showHeadline: false }}
+				/>
+			);
 
-		it("should render a byline with separator", () => {
-			expect(wrapper.find(".list-item").find("Byline").prop("separator")).toEqual(true);
-		});
-
-		it("should render a publish date", () => {
 			expect(
-				wrapper.find(".list-item").find(".results-list--author-date").find("ArticleDate").length
-			).toEqual(1);
+				screen.queryByRole("heading", { description: "Basic Headline Text", exact: false })
+			).toBe(null);
+		});
+
+		it("should not render a description if showDescription is false", () => {
+			render(
+				<SearchResult
+					className="test"
+					content={singleListItem}
+					arcSite="test-site"
+					promoElements={{ ...fullElements, showDescription: false }}
+				/>
+			);
+
+			expect(screen.queryByText("Basic Description 1", { exact: false })).toBe(null);
 		});
 	});
 
 	describe("renders one list item correctly when description is missing", () => {
-		const element = LineItemWithOutDescription.data[0];
-		if (element?.["promo_items"]?.basic) {
-			element.promo_items.basic.resized_params = { "274x154": "" };
-		}
 		const fullElements = {
 			showHeadline: true,
 			showImage: true,
@@ -133,232 +142,77 @@ describe("The search results", () => {
 			showDate: true,
 		};
 
-		const wrapper = mount(
-			<SearchResult
-				element={element}
-				arcSite="the-sun"
-				targetFallbackImage="/resource/example.jpg"
-				promoElements={fullElements}
-			/>
-		);
-
-		it("should render a parent for headline and a description", () => {
-			expect(
-				wrapper.find(".list-item").find(".results-list--description-author-container").length
-			).toEqual(1);
-		});
-
-		it("should render a headline", () => {
-			expect(
-				wrapper.find(".list-item").find(".results-list--description-author-container").length
-			).toEqual(1);
-			expect(
-				wrapper.find(".list-item").find(".results-list--headline-container").find(".list-anchor")
-					.length
-			).toEqual(1);
-			expect(
-				wrapper
-					.find(".list-item")
-					.find(".results-list--headline-container")
-					.find(".list-anchor")
-					.find(".headline-text").length
-			).toEqual(1);
-			expect(
-				wrapper
-					.find(".list-item")
-					.find(".results-list--headline-container")
-					.find(".list-anchor")
-					.find(".headline-text")
-					.text()
-			).toEqual("Article with a YouTube embed in it");
-		});
-
-		it("should not render a description", () => {
-			expect(
-				wrapper
-					.find(".list-item")
-					.find(".results-list--headline-container")
-					.find(".list-anchor")
-					.find("p.description-text").length
-			).toEqual(0);
-		});
-	});
-
-	describe("renders results items on demand", () => {
-		const element = oneListItem.data[0];
-		if (element?.["promo_items"]?.basic) {
-			element.promo_items.basic.resized_params = { "274x154": "" };
-		}
-
-		it("should not render promo elements", () => {
-			const promoElements = {
-				showHeadline: false,
-				showImage: false,
-				showDescription: false,
-				showByline: false,
-				showDate: false,
-			};
-
-			const wrapper = mount(
+		it("should render a image, headline, author, and no description", () => {
+			render(
 				<SearchResult
-					element={element}
-					arcSite="the-sun"
-					targetFallbackImage="/resource/example.jpg"
-					promoElements={promoElements}
+					className="test"
+					content={singleItemWithoutDescription}
+					arcSite="test-site"
+					promoElements={fullElements}
 				/>
 			);
 
-			expect(wrapper.find(".list-item").length).toEqual(1);
-			expect(wrapper.find(".list-item").children().length).toEqual(0);
+			expect(screen.getByRole("figure")).toBeDefined();
+			expect(
+				screen.getByRole("heading", { description: "Basic Headline Text", exact: false })
+			).toBeDefined();
+			expect(screen.queryByText("Basic Description 1")).toBe(null);
+			expect(screen.getByRole("link", { name: "Test Author" })).toBeDefined();
+			expect(screen.getByText("January", { exact: false })).toBeDefined();
 		});
 
-		it("should render only headline", () => {
-			const promoElements = {
-				showHeadline: true,
-				showImage: false,
-				showDescription: false,
-				showByline: false,
-				showDate: false,
-			};
-
-			const wrapper = mount(
+		it("should not render an image if showImage is false", () => {
+			render(
 				<SearchResult
-					element={element}
-					arcSite="the-sun"
-					targetFallbackImage="/resource/example.jpg"
-					promoElements={promoElements}
+					className="test"
+					content={singleListItem}
+					arcSite="test-site"
+					promoElements={{ ...fullElements, showImage: false }}
 				/>
 			);
 
-			const headline = wrapper.find(".list-item").find(".results-list--headline-container");
-			expect(headline.length).toEqual(1);
-			expect(headline.find(".list-anchor").length).toEqual(1);
-			expect(headline.find(".headline-text").length).toEqual(1);
-			expect(headline.text()).toEqual("Article with a YouTube embed in it");
+			expect(screen.queryByRole("figure")).toBe(null);
 		});
 
-		it("should render only image", () => {
-			const promoElements = {
-				showHeadline: false,
-				showImage: true,
-				showDescription: false,
-				showByline: false,
-				showDate: false,
-			};
-
-			const wrapper = mount(
+		it("should not render a headline if showHeadline is false", () => {
+			render(
 				<SearchResult
-					element={element}
-					arcSite="the-sun"
-					targetFallbackImage="/resource/example.jpg"
-					promoElements={promoElements}
+					className="test"
+					content={singleListItem}
+					arcSite="test-site"
+					promoElements={{ ...fullElements, showHeadline: false }}
 				/>
 			);
 
-			const image = wrapper.find(".list-item").find(".results-list--image-container");
-			expect(image.length).toEqual(1);
-			expect(image.find(".list-anchor").length).toEqual(1);
-			expect(image.find("Image").length).toEqual(1);
-			expect(image.find("Image").prop("alt")).toEqual("Article with a YouTube embed in it");
+			expect(
+				screen.queryByRole("heading", { description: "Basic Headline Text", exact: false })
+			).toBe(null);
 		});
 
-		it("should render only description", () => {
-			const promoElements = {
-				showHeadline: false,
-				showImage: false,
-				showDescription: true,
-				showByline: false,
-				showDate: false,
-			};
-
-			const wrapper = mount(
+		it("should not render an author if showByline is false", () => {
+			render(
 				<SearchResult
-					element={element}
-					arcSite="the-sun"
-					targetFallbackImage="/resource/example.jpg"
-					promoElements={promoElements}
+					className="test"
+					content={singleListItem}
+					arcSite="test-site"
+					promoElements={{ ...fullElements, showByline: false }}
 				/>
 			);
 
-			const desc = wrapper.find(".list-item").find(".results-list--description-author-container");
-			expect(desc.length).toEqual(1);
-			expect(desc.find("p.description-text").length).toEqual(1);
-			expect(desc.find("p.description-text").text()).toEqual(
-				"Test article for YouTube responsiveness"
-			);
-			// check missing internal items
+			expect(screen.queryByRole("link", { name: "Test Author" })).toBe(null);
 		});
 
-		it("should render only byline", () => {
-			const promoElements = {
-				showHeadline: false,
-				showImage: false,
-				showDescription: false,
-				showByline: true,
-				showDate: false,
-			};
-
-			const wrapper = mount(
+		it("should not render a date if showDate is false", () => {
+			render(
 				<SearchResult
-					element={element}
-					arcSite="the-sun"
-					targetFallbackImage="/resource/example.jpg"
-					promoElements={promoElements}
+					className="test"
+					content={singleItemWithoutDescription}
+					arcSite="test-site"
+					promoElements={{ ...fullElements, showDate: false }}
 				/>
 			);
 
-			const desc = wrapper.find(".list-item").find(".results-list--description-author-container");
-			expect(desc.length).toEqual(1);
-			expect(desc.find("Byline").length).toEqual(1);
-			// check internal items
-		});
-
-		it("should render only date", () => {
-			const promoElements = {
-				showHeadline: false,
-				showImage: false,
-				showDescription: false,
-				showByline: false,
-				showDate: true,
-			};
-
-			const wrapper = mount(
-				<SearchResult
-					element={element}
-					arcSite="the-sun"
-					targetFallbackImage="/resource/example.jpg"
-					promoElements={promoElements}
-				/>
-			);
-
-			const desc = wrapper.find(".list-item").find(".results-list--description-author-container");
-			expect(desc.length).toEqual(1);
-			expect(desc.find("ArticleDate").length).toEqual(1);
-			// check internal items
-		});
-	});
-
-	describe("handles missing webbsites object", () => {
-		const element = {};
-		const fullElements = {
-			showHeadline: true,
-			showImage: true,
-			showDescription: true,
-			showByline: true,
-			showDate: true,
-		};
-
-		const wrapper = mount(
-			<SearchResult
-				element={element}
-				arcSite="the-sun"
-				targetFallbackImage="/resource/example.jpg"
-				promoElements={fullElements}
-			/>
-		);
-
-		it("should render one list item as its child", () => {
-			expect(wrapper.find(".list-item").length).toEqual(0);
+			expect(screen.queryByText("January", { exact: false })).toBe(null);
 		});
 	});
 });

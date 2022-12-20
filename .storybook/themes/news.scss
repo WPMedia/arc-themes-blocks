@@ -2002,6 +2002,98 @@
 				right-rail-advanced-main-right-rail-bottom: (
 					grid-area: main-right-rail-bottom,
 				),
+				search-results-list: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				search-results-list-field: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				search-results-list-field-wrapper: (
+					display: grid,
+					gap: var(--global-spacing-4),
+					grid-template: "icon input search" 1fr / var(--global-spacing-7) 1fr auto,
+					components: (
+						button: (
+							grid-area: search,
+						),
+						icon: (
+							align-self: center,
+							grid-area: icon,
+							height: var(--global-spacing-5),
+							justify-self: center,
+							width: var(--global-spacing-5),
+							z-index: 1,
+						),
+						input: (
+							gap: 0,
+							grid-area: icon / icon / input / input,
+						),
+						input-input: (
+							font-family: var(--font-family-primary),
+							font-weight: var(--global-font-weight-7),
+							padding-left: var(--global-spacing-7),
+							width: 100%,
+						),
+					),
+				),
+				search-results-list-results: (
+					components: (
+						button: (
+							margin: var(--global-spacing-2) auto 0,
+							width: auto,
+						),
+					),
+				),
+				search-results-list-results-item: (
+					components: (
+						attribution: (
+							display: block,
+							margin-top: var(--global-spacing-4),
+						),
+						heading: (
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
+							margin-bottom: var(--global-spacing-4),
+						),
+						media-item: (
+							float: right,
+							max-width: 100px,
+						),
+						overline: (
+							font-weight: var(--heading-level-4-font-weight),
+							font-size: var(--heading-level-5-font-size),
+							line-height: var(--heading-level-5-line-height),
+						),
+						paragraph: (
+							display: block,
+						),
+						separator: (
+							padding: 0 var(--global-spacing-2),
+						),
+						link: (
+							position: relative,
+						),
+					),
+				),
+				search-results-list-results-item-show-image: (
+					components: (
+						heading: (
+							width: 68%,
+						),
+						overline: (
+							font-size: var(--body-font-size),
+						),
+					),
+				),
 				section-title: (
 					gap: var(--global-spacing-4),
 					components: (
@@ -2772,6 +2864,39 @@
 					padding: 0 var(--global-spacing-6) 0 0,
 					display: flex,
 				),
+				search-results-list-results-item: (
+					components: (
+						attribution: (
+							display: block,
+						),
+						media-item: (
+							float: left,
+							margin: 0,
+							max-width: 33%,
+						),
+						paragraph: (
+							display: block,
+						),
+					),
+				),
+				search-results-list-results-item-show-image: (
+					components: (
+						attribution: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+						),
+						heading: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+							width: auto,
+						),
+						overline: (
+							margin-left: var(--global-spacing-6),
+							font-size: var(--heading-level-5-font-size),
+						),
+						paragraph: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+						),
+					),
+				),
 				share-bar: (
 					display: flex,
 				),
@@ -2968,6 +3093,7 @@
 @use "../../blocks/results-list-block";
 @use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
+@use "../../blocks/search-results-list-block";
 @use "../../blocks/section-title-block";
 @use "../../blocks/share-bar-block";
 @use "../../blocks/simple-list-block";

@@ -54,8 +54,6 @@ const customFieldGroups = Array(MAX_SLIDES)
 const mergeObjectArray = (accumulator, item) => ({ ...accumulator, ...item });
 
 const CategoryImage = ({ imageAlt, imageAuth, imageId, imageUrl }) => {
-	console.log("imageAuth", imageAuth);
-
 	const imageAuthToken = useContent(
 		!imageAuth && imageId
 			? {

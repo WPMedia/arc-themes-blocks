@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
-import { useComponentContext } from "fusion:context";
-
+import { useFusionContext } from "fusion:context";
+import { useContent, useEditableContent } from "fusion:content";
+import { RESIZER_APP_VERSION } from "fusion:environment";
 import PropTypes from "@arc-fusion/prop-types";
 import {
 	Carousel,
@@ -27,6 +28,15 @@ const customFieldGroups = Array(MAX_SLIDES)
 			group: `Category ${index + 1}${index < minimum ? " (required)" : ""}`,
 			required: index < minimum,
 		}),
+		[`imageAlt_${index}`]: PropTypes.string.tag({
+			hidden: true,
+		}),
+		[`imageAuth_${index}`]: PropTypes.string.tag({
+			hidden: true,
+		}),
+		[`imageId_${index}`]: PropTypes.string.tag({
+			hidden: true,
+		}),
 		[`label_${index}`]: PropTypes.string.tag({
 			label: "Label",
 			description: "Enter a category label for this item.",
@@ -43,20 +53,63 @@ const customFieldGroups = Array(MAX_SLIDES)
 
 const mergeObjectArray = (accumulator, item) => ({ ...accumulator, ...item });
 
+const CategoryImage = ({ imageAlt, imageAuth, imageId, imageUrl }) => {
+	console.log("imageAuth", imageAuth);
+
+	const imageAuthToken = useContent(
+		!imageAuth && imageId
+			? {
+					source: "signing-service",
+					query: { id: imageId },
+			  }
+			: {}
+	);
+
+	const imageAuthTokenObj = {};
+	if (imageAuthToken?.hash) {
+		imageAuthTokenObj[RESIZER_APP_VERSION] = imageAuthToken.hash;
+	}
+
+	const imageParams =
+		imageId && imageUrl
+			? {
+					ansImage: {
+						_id: imageId,
+						url: imageUrl,
+						auth: imageAuth ? JSON.parse(imageAuth) : imageAuthTokenObj,
+					},
+					alt: imageAlt,
+					aspectRatio: "3:2",
+					resizedOptions: {
+						smart: true,
+					},
+					responsiveImages: [200, 400],
+					width: 400,
+			  }
+			: {
+					src: imageUrl,
+					alt: imageAlt,
+			  };
+
+	return <Image {...imageParams} />;
+};
+
 function CategoryCarousel({ customFields }) {
 	const { headerText } = customFields;
-
-	const { id } = useComponentContext();
+	const { searchableField } = useEditableContent();
+	const { id, isAdmin } = useFusionContext();
 	const phrases = usePhrases();
 	const Wrapper = headerText ? HeadingSection : Fragment;
 
 	const validCategoryData = customFieldGroups
-		.map((fieldDefinition) =>
-			Object.keys(fieldDefinition)
+		.map((fieldDefinition, index) => {
+			const categoryData = Object.keys(fieldDefinition)
 				.map((field) => ({ [field.replace(/_\d+$/, "")]: customFields[field] }))
-				.reduce(mergeObjectArray)
-		)
-		.filter((fields) => fields.imageUrl && fields.label && fields.linkUrl);
+				.reduce(mergeObjectArray);
+			categoryData.origIndex = index;
+			return categoryData;
+		})
+		.filter((fields) => (fields.imageUrl || isAdmin) && fields.label && fields.linkUrl);
 
 	return validCategoryData.length >= MIN_SLIDES ? (
 		<Wrapper>
@@ -78,30 +131,49 @@ function CategoryCarousel({ customFields }) {
 						</Carousel.Button>
 					}
 				>
-					{validCategoryData.map(({ imageUrl, label, linkUrl }, index, allItems) => (
-						<Carousel.Item
-							label={`${phrases.t("category-carousel.slide-indicator", {
-								current: index + 1,
-								maximum: allItems.length,
-							})}`}
-							key={`${imageUrl}_${label}_${linkUrl}`}
-						>
-							{({ viewable }) => (
-								<Link
-									className={`${BLOCK_CLASS_NAME}__slide`}
-									href={linkUrl}
-									assistiveHidden={viewable ? null : true}
-								>
-									<Stack>
-										<Image src={imageUrl} alt="" />
-										<HeadingSection>
-											<Heading className={`${BLOCK_CLASS_NAME}__slide-title`}>{label}</Heading>
-										</HeadingSection>
-									</Stack>
-								</Link>
-							)}
-						</Carousel.Item>
-					))}
+					{validCategoryData.map(
+						(
+							{ imageUrl, imageAlt, imageAuth, imageId, label, linkUrl, origIndex },
+							index,
+							allItems
+						) => (
+							<Carousel.Item
+								label={`${phrases.t("category-carousel.slide-indicator", {
+									current: index + 1,
+									maximum: allItems.length,
+								})}`}
+								key={`${imageUrl}_${label}_${linkUrl}`}
+							>
+								{({ viewable }) => (
+									<Link
+										className={`${BLOCK_CLASS_NAME}__slide`}
+										href={linkUrl}
+										assistiveHidden={viewable ? null : true}
+									>
+										<Stack
+											{...searchableField({
+												[`imageUrl_${origIndex}`]: "url",
+												[`imageId_${origIndex}`]: "_id",
+												[`imageAuth_${origIndex}`]: "auth",
+												[`imageAlt_${origIndex}`]: "alt_text",
+											})}
+											suppressContentEditableWarning
+										>
+											<CategoryImage
+												imageAlt={imageAlt || label}
+												imageAuth={imageAuth}
+												imageId={imageId}
+												imageUrl={imageUrl}
+											/>
+											<HeadingSection>
+												<Heading className={`${BLOCK_CLASS_NAME}__slide-title`}>{label}</Heading>
+											</HeadingSection>
+										</Stack>
+									</Link>
+								)}
+							</Carousel.Item>
+						)
+					)}
 				</Carousel>
 			</Stack>
 		</Wrapper>

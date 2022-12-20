@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node with 12
         uses: actions/setup-node@v1
         with:
-          node-version: "12"
+          node-version-file: .nvmrc
           registry-url: "https://npm.pkg.github.com"
 
       - name: Cache Node Modules

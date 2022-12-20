@@ -54,7 +54,7 @@ jobs:
       - name: Setup Node and NPM
         uses: actions/setup-node@v1
         with:
-          node-version: "12"
+          node-version-file: .nvmrc
           registry-url: "https://npm.pkg.github.com"
 
       # See confluence pages https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2983788608/How+To+Do+Product-Facing+Tag+Release and https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/3013541978/Github+Actions+for+NodeJS+Standards+Best+Practices for documentation

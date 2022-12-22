@@ -40,10 +40,12 @@ class GlobalSearchResultsList extends React.Component {
 
 	handleSearch() {
 		const { value } = this.state;
-		if (this.customSearchAction && value.length > 0) {
-			this.customSearchAction(value);
-		} else if (value.length > 0) {
-			window.location.href = `/search/${encodeURI(value)}`;
+		if (value.length > 0) {
+			if (this.customSearchAction) {
+				this.customSearchAction(value);
+			} else {
+				window.location.href = `/search/${encodeURI(value)}`;
+			}
 		}
 	}
 
@@ -99,7 +101,7 @@ class GlobalSearchResultsList extends React.Component {
 				<SearchField
 					className={`${BLOCK_CLASS_NAME}__field`}
 					defaultValue={value}
-					onChange={(event) => this.setState({ value: event.target.value })}
+					onChange={(event) => this.setState({ value: event.value })}
 					onSearch={() => this.handleSearch()}
 					searchTerm={query}
 					showResultsStats={content?.length > 0}

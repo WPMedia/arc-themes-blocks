@@ -81,7 +81,7 @@ class CustomSearchResultsList extends React.Component {
 			<Stack className={BLOCK_CLASS_NAME}>
 				<SearchField
 					className={`${BLOCK_CLASS_NAME}__field`}
-					onChange={(event) => this.setState({ value: event.target.value })}
+					onChange={(event) => this.setState({ value: event.value })}
 					onSearch={() => this.fetchStories(false)}
 					searchTerm={searchTerm}
 					showResultsStats={data?.length > 0}

@@ -1,11 +1,6 @@
 # `@wpmedia/author-content-source-block`
 
-Fusion News Theme author API content source block
-_Please provide a 1-2 sentence description of what the block is and what it does._
-
-## Acceptance Criteria
-
-- Add AC relevant to the block
+Author Content Source Block
 
 ## Endpoint
 
@@ -59,7 +54,3 @@ _Please provide a 1-2 sentence description of what the block is and what it does
 ## TTL
 
 - `300`
-
-## Additional Considerations
-
-_This is optional. Please add an additional context that would be important to know in order to use this block._

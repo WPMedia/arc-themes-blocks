@@ -7,6 +7,7 @@ import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
 	Carousel,
 	Conditional,
+	Divider,
 	formatCredits,
 	Heading,
 	HeadingSection,
@@ -63,7 +64,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		}
 
 		case "divider": {
-			return <hr className={`${BLOCK_CLASS_NAME}__divider`} key={`${type}_${index}_${key}`} />;
+			return <Divider assistiveHidden={false} key={`${type}_${index}_${key}`} />;
 		}
 
 		case "image": {

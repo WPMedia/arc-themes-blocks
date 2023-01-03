@@ -67,7 +67,7 @@ describe("the links bar feature for the default output type", () => {
 		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav aria-label=\\"More Links\\" class=\\"c-stack b-links-bar\\" data-style-direction=\\"row\\" data-style-justification=\\"center\\" data-style-alignment=\\"unset\\" data-style-inline=\\"false\\" data-style-wrap=\\"wrap\\"><a class=\\"c-link\\" href=\\"id_1\\">test link 1</a></nav><hr/>"`
+			`"<nav aria-label=\\"More Links\\" class=\\"c-stack b-links-bar\\" data-style-direction=\\"row\\" data-style-justification=\\"center\\" data-style-alignment=\\"unset\\" data-style-inline=\\"false\\" data-style-wrap=\\"wrap\\"><a class=\\"c-link\\" href=\\"id_1\\">test link 1</a></nav><hr class=\\"c-divider\\"/>"`
 		);
 	});
 
@@ -96,7 +96,7 @@ describe("the links bar feature for the default output type", () => {
 		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav aria-label=\\"More Links\\" class=\\"c-stack b-links-bar\\" data-style-direction=\\"row\\" data-style-justification=\\"center\\" data-style-alignment=\\"unset\\" data-style-inline=\\"false\\" data-style-wrap=\\"wrap\\"><a class=\\"c-link\\" href=\\"id_1\\">test link 1</a><span class=\\"c-separator\\"></span><a class=\\"c-link\\" href=\\"id_2\\">test link 2</a><span class=\\"c-separator\\"></span><a class=\\"c-link\\" href=\\"/\\">Link Text</a></nav><hr/>"`
+			`"<nav aria-label=\\"More Links\\" class=\\"c-stack b-links-bar\\" data-style-direction=\\"row\\" data-style-justification=\\"center\\" data-style-alignment=\\"unset\\" data-style-inline=\\"false\\" data-style-wrap=\\"wrap\\"><a class=\\"c-link\\" href=\\"id_1\\">test link 1</a><span class=\\"c-separator\\"></span><a class=\\"c-link\\" href=\\"id_2\\">test link 2</a><span class=\\"c-separator\\"></span><a class=\\"c-link\\" href=\\"/\\">Link Text</a></nav><hr class=\\"c-divider\\"/>"`
 		);
 	});
 

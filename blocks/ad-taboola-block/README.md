@@ -1,6 +1,8 @@
 # `@wpmedia/ad-taboola-block`
 
-_Block that implement a [Taboola Block](https://www.taboola.com/)._
+A wrapper for [Taboola](https://www.taboola.com/) - an ad block for use across different page types.
+
+Makes use of a page's meta tag - `page-type` to pass to taboola the value.
 
 ## Props
 
@@ -43,5 +45,5 @@ This properties will be defined on each block added to the page.
 
 ## Additional Considerations
 
-The block will not render inside PageBuilder editor. Inside the editor, when the block has his properties correctly configured, will show a dummy block with the placement name.
+The block will not render fully within PageBuilder editor. Inside the editor, when the block has properties correctly configured, will show a dummy block with the placement name.
 To see the block working, need to publish the page and on the preview url add the parameter `&taboola_sim_domain=XXX`, replacing XXX with the domain provided by Taboola for testing.

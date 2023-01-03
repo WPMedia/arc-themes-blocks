@@ -1,12 +1,13 @@
 {
-  "name": "@wpmedia/ad-taboola-block",
-  "version": "5.16.0",
-  "description": "Taboola Ad Block",
+  "name": "@wpmedia/divider-block",
+  "version": "0.1.0",
+  "description": "Divider Block",
   "author": "Arc XP - Themes",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
-  "license": "CC-BY-NC-ND",
+  "license": "CC-BY-NC-ND-4.0",
   "main": "",
   "files": [
+    "_index.scss",
     "features"
   ],
   "publishConfig": {
@@ -16,7 +17,9 @@
   "repository": {
     "type": "git",
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
-    "directory": "blocks/ad-taboola-block"
+    "directory": "blocks/divider-block"
   },
-  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
+  "peerDependencies": {
+    "@wpmedia/arc-themes-components": "*"
+  }
 }

@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-
+import { useContent, useEditableContent } from "fusion:content";
+import { useFusionContext } from "fusion:context";
+import { RESIZER_APP_VERSION } from "fusion:environment";
 // Arc Themes Components - Base set of components used to compose blocks
 // https://github.com/WPMedia/arc-themes-components/
 import {
@@ -21,12 +23,94 @@ const ASPECT_RATIO_MAP = {
 const OVERLAY_TEXT_VARIANTS = ["dark", "light"];
 const BUTTON_VARIANTS = ["primary", "secondary"];
 
+const ImageItem = ({
+	buttonText,
+	buttonVariant,
+	className,
+	fieldId,
+	imageAlt,
+	imageAspectRatio,
+	imageAuth,
+	imageId,
+	imageURL,
+	itemAction,
+	overlayText,
+	overlayTextVariant,
+}) => {
+	const { isAdmin } = useFusionContext();
+	const { searchableField } = useEditableContent();
+	const imageAuthToken = useContent(
+		!imageAuth && imageId
+			? {
+					source: "signing-service",
+					query: { id: imageId },
+			  }
+			: {}
+	);
+
+	const imageAuthTokenObj = {};
+	if (imageAuthToken?.hash) {
+		imageAuthTokenObj[RESIZER_APP_VERSION] = imageAuthToken.hash;
+	}
+
+	const imageParams =
+		imageId && imageURL
+			? {
+					ansImage: {
+						_id: imageId,
+						url: imageURL,
+						auth: imageAuth ? JSON.parse(imageAuth) : imageAuthTokenObj,
+					},
+					alt: imageAlt,
+					aspectRatio: ASPECT_RATIO_MAP[imageAspectRatio],
+					resizedOptions: {
+						smart: true,
+					},
+					responsiveImages: [200, 400, 600, 800, 1000],
+					width: 600,
+			  }
+			: {
+					src: imageURL,
+					alt: overlayText,
+			  };
+
+	if ((imageURL && itemAction && overlayText && buttonText) || isAdmin) {
+		return (
+			<Link href={itemAction} className={`${BLOCK_CLASS_NAME}__media-panel ${className}`}>
+				<Image {...imageParams} />
+				<Stack
+					className={`${BLOCK_CLASS_NAME}__overlay`}
+					inline
+					{...searchableField({
+						[`image${fieldId}URL`]: "url",
+						[`image${fieldId}Id`]: "_id",
+						[`image${fieldId}Auth`]: "auth",
+						[`image${fieldId}Alt`]: "alt_text",
+					})}
+					suppressContentEditableWarning
+				>
+					<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlayTextVariant}`}>
+						{overlayText}
+					</Paragraph>
+					<Button variant={buttonVariant} size="small" assistiveHidden>
+						{buttonText}
+					</Button>
+				</Stack>
+			</Link>
+		);
+	}
+	return null;
+};
+
 function QuiltedImage({ customFields }) {
 	const {
 		headline,
 		fullWidthImage,
 		image1URL,
 		image1AspectRatio,
+		image1Auth,
+		image1Id,
+		image1Alt,
 		overlay1Text,
 		overlay1TextVariant,
 		button1Text,
@@ -34,6 +118,9 @@ function QuiltedImage({ customFields }) {
 		button1Variant,
 		image2URL,
 		image2AspectRatio,
+		image2Auth,
+		image2Id,
+		image2Alt,
 		overlay2Text,
 		overlay2TextVariant,
 		button2Text,
@@ -41,6 +128,9 @@ function QuiltedImage({ customFields }) {
 		button2Variant,
 		image3URL,
 		image3AspectRatio,
+		image3Auth,
+		image3Id,
+		image3Alt,
 		overlay3Text,
 		overlay3TextVariant,
 		button3Text,
@@ -53,55 +143,48 @@ function QuiltedImage({ customFields }) {
 			<HeadingSection>
 				{headline ? <Heading>{headline}</Heading> : null}
 				<div className={`${BLOCK_CLASS_NAME}__wrapper`}>
-					{image1URL && item1Action && overlay1Text && button1Text ? (
-						<Link
-							href={item1Action}
-							className={`${BLOCK_CLASS_NAME}__media-panel  ${
-								fullWidthImage === "top" ? `${BLOCK_CLASS_NAME}__wrapper-top` : ""
-							}`}
-						>
-							<Image src={image1URL} style={{ aspectRatio: image1AspectRatio }} />
-							<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
-								<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlay1TextVariant}`}>
-									{overlay1Text}
-								</Paragraph>
-								<Button variant={button1Variant} size="small" assistiveHidden>
-									{button1Text}
-								</Button>
-							</Stack>
-						</Link>
-					) : null}
-					{image2URL && item2Action && overlay2Text && button2Text ? (
-						<Link href={item2Action} className={`${BLOCK_CLASS_NAME}__media-panel`}>
-							<Image src={image2URL} style={{ aspectRatio: image2AspectRatio }} />
-							<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
-								<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlay2TextVariant}`}>
-									{overlay2Text}
-								</Paragraph>
-								<Button variant={button2Variant} size="small" assistiveHidden>
-									{button2Text}
-								</Button>
-							</Stack>
-						</Link>
-					) : null}
-					{image3URL && item3Action && overlay3Text && button3Text ? (
-						<Link
-							href={item3Action}
-							className={`${BLOCK_CLASS_NAME}__media-panel ${
-								fullWidthImage === "bottom" ? `${BLOCK_CLASS_NAME}__wrapper-bottom` : ""
-							}`}
-						>
-							<Image src={image3URL} style={{ aspectRatio: image3AspectRatio }} />
-							<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
-								<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlay3TextVariant}`}>
-									{overlay3Text}
-								</Paragraph>
-								<Button variant={button3Variant} size="small" assistiveHidden>
-									{button3Text}
-								</Button>
-							</Stack>
-						</Link>
-					) : null}
+					<ImageItem
+						buttonText={button1Text}
+						buttonVariant={button1Variant}
+						className={fullWidthImage === "top" ? `${BLOCK_CLASS_NAME}__wrapper-top` : ""}
+						fieldId="1"
+						itemAction={item1Action}
+						imageAlt={image1Alt}
+						imageAspectRatio={image1AspectRatio}
+						imageAuth={image1Auth}
+						imageId={image1Id}
+						imageURL={image1URL}
+						overlayText={overlay1Text}
+						overlayTextVariant={overlay1TextVariant}
+					/>
+					<ImageItem
+						buttonText={button2Text}
+						buttonVariant={button2Variant}
+						className=""
+						fieldId="2"
+						itemAction={item2Action}
+						imageAlt={image2Alt}
+						imageAspectRatio={image2AspectRatio}
+						imageAuth={image2Auth}
+						imageId={image2Id}
+						imageURL={image2URL}
+						overlayText={overlay2Text}
+						overlayTextVariant={overlay2TextVariant}
+					/>
+					<ImageItem
+						buttonText={button3Text}
+						buttonVariant={button3Variant}
+						className={fullWidthImage === "bottom" ? `${BLOCK_CLASS_NAME}__wrapper-bottom` : ""}
+						fieldId="3"
+						itemAction={item3Action}
+						imageAlt={image3Alt}
+						imageAspectRatio={image3AspectRatio}
+						imageAuth={image3Auth}
+						imageId={image3Id}
+						imageURL={image3URL}
+						overlayText={overlay3Text}
+						overlayTextVariant={overlay3TextVariant}
+					/>
 				</div>
 			</HeadingSection>
 		</div>
@@ -134,6 +217,15 @@ QuiltedImage.propTypes = {
 			defaultValue: "4/3",
 			hidden: true,
 			group: "Image 1",
+		}),
+		image1Auth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		image1Id: PropTypes.string.tag({
+			hidden: true,
+		}),
+		image1Alt: PropTypes.string.tag({
+			hidden: true,
 		}),
 		overlay1Text: PropTypes.string.tag({
 			label: "Overlay Text",
@@ -174,6 +266,15 @@ QuiltedImage.propTypes = {
 			hidden: true,
 			group: "Image 2",
 		}),
+		image2Auth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		image2Id: PropTypes.string.tag({
+			hidden: true,
+		}),
+		image2Alt: PropTypes.string.tag({
+			hidden: true,
+		}),
 		overlay2Text: PropTypes.string.tag({
 			label: "Overlay Text",
 			description: "Overlay text appearing within the image.",
@@ -209,9 +310,18 @@ QuiltedImage.propTypes = {
 		}).isRequired,
 		image3AspectRatio: PropTypes.oneOf(Object.keys(ASPECT_RATIO_MAP)).tag({
 			labels: ASPECT_RATIO_MAP,
-			defaultValue: "16/9",
+			defaultValue: "4/3",
 			hidden: true,
 			group: "Image 3",
+		}),
+		image3Auth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		image3Id: PropTypes.string.tag({
+			hidden: true,
+		}),
+		image3Alt: PropTypes.string.tag({
+			hidden: true,
 		}),
 		overlay3Text: PropTypes.string.tag({
 			label: "Overlay Text",

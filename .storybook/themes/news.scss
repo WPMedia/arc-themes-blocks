@@ -1653,12 +1653,35 @@
 							width: auto,
 							max-height: 75vh,
 						),
+						button: (
+							position: fixed,
+							top: var(--global-spacing-6),
+							right: var(--global-spacing-6),
+						),
+						icon: (
+							fill: var(--global-white),
+							height: var(--global-spacing-6),
+							width: var(--global-spacing-6),
+						),
 					),
 				),
 				lead-art-carousel-track-icon: (
 					fill: var(--global-white),
 					height: var(--global-spacing-8),
 					width: var(--global-spacing-8),
+				),
+				lead-art-carousel-close-icon: (
+					position: fixed,
+					top: var(--global-spacing-6),
+					right: var(--global-spacing-6),
+					background-color: transparent,
+					components: (
+						icon: (
+							fill: var(--global-white),
+							height: var(--global-spacing-6),
+							width: var(--global-spacing-6),
+						),
+					),
 				),
 				links-bar: (
 					gap: var(--global-spacing-2),

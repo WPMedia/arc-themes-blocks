@@ -2,7 +2,7 @@
 import React, { useState, useRef } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
+import { RESIZER_URL, RESIZER_APP_VERSION } from "fusion:environment";
 import getProperties from "fusion:properties";
 import Static from "fusion:static";
 import {
@@ -142,6 +142,11 @@ export const LeadArtPresentation = (props) => {
 							resizedOptions={{ auth: lead_art.auth[RESIZER_APP_VERSION], smart: true }}
 							resizerURL={RESIZER_URL}
 						/>
+						{isOpen ? (
+							<Button type="button" onClick={toggleFullScreen}>
+								<Icon name="Close" />
+							</Button>
+						) : null}
 					</div>
 				</MediaItem>
 			);
@@ -179,7 +184,7 @@ export const LeadArtPresentation = (props) => {
 						</button>
 					}
 					fullScreenMinimizeButton={
-						<button type="button">
+						<button type="button" className={`${BLOCK_CLASS_NAME}__carousel-close-icon`}>
 							<Icon name="Close" />
 						</button>
 					}

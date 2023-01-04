@@ -121,7 +121,7 @@ export const LeadArtPresentation = (props) => {
 				>
 					<Button
 						iconLeft={<Icon name="Fullscreen" fill="#6B6B6B" />}
-						label={
+						accessibilityLabel={
 							!isOpen
 								? phrases.t("lead-art-block.fullscreen-enter")
 								: phrases.t("lead-art-block.fullscreen-exit")
@@ -139,11 +139,15 @@ export const LeadArtPresentation = (props) => {
 							width={800}
 							height={450}
 							responsiveImages={[800, 1600]}
-							resizedOptions={{ auth: lead_art.auth[RESIZER_APP_VERSION], smart: true }}
+							resizedOptions={{ auth: lead_art.auth[2], smart: true }}
 							resizerURL={RESIZER_URL}
 						/>
 						{isOpen ? (
-							<Button type="button" onClick={toggleFullScreen}>
+							<Button
+								type="button"
+								onClick={toggleFullScreen}
+								accessibilityLabel={phrases.t("lead-art-block.fullscreen-exit")}
+							>
 								<Icon name="Close" />
 							</Button>
 						) : null}

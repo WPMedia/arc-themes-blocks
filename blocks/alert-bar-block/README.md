@@ -1,6 +1,6 @@
 # `@wpmedia/alert-bar-block`
 
-_This is the alert bar block that feeds from the `alert-bar-content-source-block`. It will refresh every 30 seconds by default, but the content source will return cached results every two minutes. This is to not overwhelm the content API with simultaneous refreshes for any less intervals._
+Alert bar block that feeds from the `alert-bar-content-source-block`. It will refresh every 30 seconds by default, but the content source will return cached results every two minutes. This is to not overwhelm the content API with simultaneous refreshes for any less intervals.
 
 ## Acceptance Criteria
 

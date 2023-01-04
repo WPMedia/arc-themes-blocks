@@ -40,7 +40,7 @@ const customFields = {
 	button2Variant: "primary",
 	image3URL:
 		"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/Y3STKUZ2CVHUBN4CLLFKP4JRQU.jpg",
-	image3AspectRatio: "16/9",
+	image3AspectRatio: "4/3",
 	image3Id: "Y3STKUZ2CVHUBN4CLLFKP4JRQU",
 	image3Auth: '{"2":"e1ee90266f0068204492e7212dc50cf4a7f9a05a21480ec1821346511a09b65b"}',
 	image3Alt: "Smiling dog",
@@ -58,8 +58,6 @@ export const fullWidthImageOnTop = () => (
 		customFields={{
 			...customFields,
 			fullWidthImage: "top",
-			image1AspectRatio: "16/9",
-			image3AspectRatio: "4/3",
 		}}
 	/>
 );

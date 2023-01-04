@@ -1,6 +1,6 @@
 # `@wpmedia/results-list-block`
 
-Results List block for Fusion News Theme. Displays a results list where each result card will have a description, headline, byline block and publish date.
+Displays a results list where each result card will have a description, headline, byline block and publish date.
 
 ## Props
 

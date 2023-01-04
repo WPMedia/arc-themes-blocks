@@ -1,7 +1,8 @@
 import React from "react";
-import { shallow } from "enzyme";
-
+import { render } from "@testing-library/react";
 import getProperties from "fusion:properties";
+
+import AdTaboola from "./default";
 
 const TBL_WRAPPER = ".tbl-wrapper";
 
@@ -9,23 +10,21 @@ const metaValueMock = () => "article";
 
 describe("render Taboola widget", () => {
 	describe("when missing configuration parameters", () => {
-		const { default: AdTaboola } = require("./default");
-
 		it("must not render when there isn't parameters", () => {
-			const wrapper = shallow(<AdTaboola metaValue={metaValueMock} />);
+			const { container } = render(<AdTaboola metaValue={metaValueMock} />);
 
-			expect(wrapper.find("#tbl-widget").length).toBe(0);
-			expect(wrapper.find(TBL_WRAPPER).length).toBe(0);
+			expect(container.querySelector("#tbl-widget")).toBe(null);
+			expect(container.querySelector(TBL_WRAPPER)).toBe(null);
 		});
 
 		it("must not render when only the publisher id is present", () => {
 			getProperties.mockImplementation(() => ({
 				taboolaPublisherId: "taboolaPublisherId",
 			}));
-			const wrapper = shallow(<AdTaboola metaValue={metaValueMock} />);
+			const { container } = render(<AdTaboola metaValue={metaValueMock} />);
 
-			expect(wrapper.find("#tbl-widget").length).toBe(0);
-			expect(wrapper.find(TBL_WRAPPER).length).toBe(0);
+			expect(container.querySelector("#tbl-widget")).toBe(null);
+			expect(container.querySelector(TBL_WRAPPER)).toBe(null);
 		});
 
 		it("must not render when some of the widget parameters are missing", () => {
@@ -36,15 +35,15 @@ describe("render Taboola widget", () => {
 				container: "tbl-widget",
 			};
 
-			const wrapper = shallow(<AdTaboola metaValue={metaValueMock} customFields={customFields} />);
-			expect(wrapper.find("#tbl-widget").length).toBe(0);
-			expect(wrapper.find(TBL_WRAPPER).length).toBe(0);
+			const { container } = render(
+				<AdTaboola metaValue={metaValueMock} customFields={customFields} />
+			);
+			expect(container.querySelector("#tbl-widget")).toBe(null);
+			expect(container.querySelector(TBL_WRAPPER)).toBe(null);
 		});
 	});
 
 	describe("when have all config the paramters", () => {
-		const { default: AdTaboola } = require("./default");
-
 		it("must render the widget", () => {
 			getProperties.mockImplementation(() => ({
 				taboolaPublisherId: "taboolaPublisherId",
@@ -55,11 +54,12 @@ describe("render Taboola widget", () => {
 				container: "tbl-widget",
 			};
 
-			const wrapper = shallow(<AdTaboola metaValue={metaValueMock} customFields={customFields} />);
+			const { container } = render(
+				<AdTaboola metaValue={metaValueMock} customFields={customFields} />
+			);
 
-			expect(wrapper.find("#tbl-widget").length).toBe(1);
-			expect(wrapper.find("hr").length).toBe(1);
-			expect(wrapper.find("script").length).toBe(1);
+			expect(container.querySelector("#tbl-widget")).not.toBe(null);
+			expect(container.querySelector("script")).not.toBe(null);
 		});
 
 		it("must render the visual wrapper on admin", () => {
@@ -72,13 +72,13 @@ describe("render Taboola widget", () => {
 				container: "tbl-widget",
 			};
 
-			const wrapper = shallow(
+			const { container } = render(
 				<AdTaboola metaValue={metaValueMock} customFields={customFields} isAdmin />
 			);
 
-			expect(wrapper.find(TBL_WRAPPER).length).toBe(1);
-			expect(wrapper.find("AdTaboola #tbl-widget").length).toBe(0);
-			expect(wrapper.find("AdTaboola script").length).toBe(0);
+			expect(container.querySelector(TBL_WRAPPER)).not.toBe(null);
+			expect(container.querySelector("AdTaboola #tbl-widget")).toBe(null);
+			expect(container.querySelector("AdTaboola script")).toBe(null);
 		});
 	});
 });

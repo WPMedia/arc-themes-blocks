@@ -56,7 +56,7 @@
     "@storybook/react": "^6.5.15",
     "@stripe/react-stripe-js": "^1.7.0",
     "@stripe/stripe-js": "^1.26.0",
-    "@testing-library/jest-dom": "^5.16.3",
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.4",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
     "@wpmedia/arc-themes-components": "arc-themes-release-version-2.0.3",

@@ -2761,7 +2761,7 @@
 					),
 				),
 				lead-art-carousel-close-icon: (
-					right: calc(100% - 48px),
+					right: calc(100% - var(--global-spacing-4)),
 					left: var(--global-spacing-4),
 				),
 				lead-art-carousel-image-wrapper: (

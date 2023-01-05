@@ -1659,8 +1659,9 @@
 							right: 0,
 						),
 						button-medium: (
-							padding: 0,
-							top: var(--global-spacing-1),
+							padding: var(--global-spacing-4) 0 var(--global-spacing-4) 0,
+							top: var(--global-spacing-4),
+							right: var(--global-spacing-4),
 						),
 						icon: (
 							fill: var(--global-white),
@@ -1676,8 +1677,8 @@
 				),
 				lead-art-carousel-close-icon: (
 					position: fixed,
-					top: var(--global-spacing-1),
-					right: var(--global-spacing-1),
+					top: var(--global-spacing-4),
+					right: var(--global-spacing-4),
 					background-color: transparent,
 					components: (
 						icon: (
@@ -2761,12 +2762,12 @@
 				),
 				lead-art-carousel-close-icon: (
 					right: calc(100% - 48px),
+					left: var(--global-spacing-4),
 				),
 				lead-art-carousel-image-wrapper: (
 					components: (
 						button-medium: (
-							left: 0,
-							top: var(--global-spacing-1),
+							left: var(--global-spacing-4),
 						),
 					),
 				),

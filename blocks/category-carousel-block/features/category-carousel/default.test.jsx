@@ -1,8 +1,15 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-
+import { useContent } from "fusion:content";
 import CategoryCarousel from "./default";
+
+jest.mock("fusion:content", () => ({
+	useContent: jest.fn(() => {}),
+	useEditableContent: jest.fn(() => ({
+		searchableField: () => {},
+	})),
+}));
 
 describe("Category Carousel", () => {
 	it("should render", () => {
@@ -155,6 +162,77 @@ describe("Category Carousel", () => {
 		expect(screen.queryByText("Test 11")).toBeInTheDocument();
 		expect(screen.queryByText("Test 12")).toBeInTheDocument();
 		expect(screen.queryByText("Test Fail")).not.toBeInTheDocument();
+		unmount();
+	});
+
+	it("should render with image Ids and auth tokens", () => {
+		const { unmount } = render(
+			<CategoryCarousel
+				customFields={{
+					imageUrl_0: "#",
+					imageId_0: "IMAGE_1",
+					imageAuth_0: '{"1":"IMAGE_1_AUTH_TOKEN"}',
+					label_0: "Test 1",
+					linkUrl_0: "#",
+					imageUrl_1: "#",
+					imageId_1: "IMAGE_2",
+					imageAuth_1: '{"1":"IMAGE_2_AUTH_TOKEN"}',
+					label_1: "Test 2",
+					linkUrl_1: "#",
+					imageUrl_2: "#",
+					imageId_2: "IMAGE_3",
+					imageAuth_2: '{"1":"IMAGE_3_AUTH_TOKEN"}',
+					label_2: "Test 3",
+					linkUrl_2: "#",
+					imageUrl_3: "#",
+					imageId_3: "IMAGE_4",
+					imageAuth_3: '{"1":"IMAGE_4_AUTH_TOKEN"}',
+					label_3: "Test 4",
+					linkUrl_3: "#",
+				}}
+			/>
+		);
+		expect(screen.queryByText("Test 1")).toBeInTheDocument();
+		expect(screen.queryByText("Test 2")).toBeInTheDocument();
+		expect(screen.queryByText("Test 3")).toBeInTheDocument();
+		expect(screen.queryByText("Test 4")).toBeInTheDocument();
+		unmount();
+	});
+
+	it("should render with image Ids and no auth tokens", () => {
+		useContent.mockReturnValue({
+			hash: "SIGNING_SERVICE_AUTH_TOKEN",
+		});
+		const { unmount } = render(
+			<CategoryCarousel
+				customFields={{
+					imageUrl_0: "#",
+					imageId_0: "IMAGE_1",
+					imageAuth_0: "",
+					label_0: "Test 1",
+					linkUrl_0: "#",
+					imageUrl_1: "#",
+					imageId_1: "IMAGE_2",
+					imageAuth_1: "",
+					label_1: "Test 2",
+					linkUrl_1: "#",
+					imageUrl_2: "#",
+					imageId_2: "IMAGE_3",
+					imageAuth_2: "",
+					label_2: "Test 3",
+					linkUrl_2: "#",
+					imageUrl_3: "#",
+					imageId_3: "IMAGE_4",
+					imageAuth_3: "",
+					label_3: "Test 4",
+					linkUrl_3: "#",
+				}}
+			/>
+		);
+		expect(screen.queryByText("Test 1")).toBeInTheDocument();
+		expect(screen.queryByText("Test 2")).toBeInTheDocument();
+		expect(screen.queryByText("Test 3")).toBeInTheDocument();
+		expect(screen.queryByText("Test 4")).toBeInTheDocument();
 		unmount();
 	});
 });

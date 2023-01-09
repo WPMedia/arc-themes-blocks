@@ -188,7 +188,7 @@ export const LeadArtPresentation = (props) => {
 						</button>
 					}
 					fullScreenMinimizeButton={
-						<button type="button" className={`${BLOCK_CLASS_NAME}__carousel-close-icon`}>
+						<button type="button" className={`${BLOCK_CLASS_NAME}__close-icon`}>
 							<Icon name="Close" />
 						</button>
 					}

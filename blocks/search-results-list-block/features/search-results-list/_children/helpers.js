@@ -5,6 +5,7 @@ const resolveDefaultPromoElements = (customFields = {}) => {
 		showDescription: true,
 		showByline: true,
 		showDate: true,
+		imageRatio: "16:9",
 	};
 	const fieldKeys = Object.keys(fields);
 	return fieldKeys.reduce((acc, key) => {

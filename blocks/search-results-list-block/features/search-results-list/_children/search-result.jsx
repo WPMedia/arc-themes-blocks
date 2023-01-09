@@ -30,6 +30,7 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 	}
 
 	const {
+		imageRatio,
 		overlineURL,
 		showByline,
 		showDate,
@@ -58,6 +59,7 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 		content && ansImage
 			? {
 					ansImage,
+					aspectRatio: imageRatio,
 					responsiveImages: [200, 400, 800],
 					sizes: [
 						{
@@ -69,6 +71,7 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 							mediaCondition: "(min-width: 48rem)",
 						},
 					],
+					width: 500,
 			  }
 			: {
 					src: fallbackImage,

@@ -55,12 +55,17 @@ SearchResultsListContainer.icon = "arc-list";
 
 SearchResultsListContainer.propTypes = {
 	customFields: PropTypes.shape({
-		searchContentConfig: PropTypes.contentConfig().tag({
-			group: "Configure Content",
-			label: "Display Content Info",
+		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
+			defaultValue: "16:9",
+			label: "Image ratio",
+			group: "Art",
 		}),
 		inheritGlobalContent: PropTypes.bool.tag({
 			group: "Configure Content",
+		}),
+		searchContentConfig: PropTypes.contentConfig().tag({
+			group: "Configure Content",
+			label: "Display Content Info",
 		}),
 		showHeadline: PropTypes.bool.tag({
 			label: "Show headline",

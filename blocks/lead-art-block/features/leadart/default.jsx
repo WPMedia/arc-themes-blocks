@@ -2,7 +2,6 @@
 import React, { useState, useRef } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import { RESIZER_URL, RESIZER_APP_VERSION } from "fusion:environment";
 import getProperties from "fusion:properties";
 import Static from "fusion:static";
 import {
@@ -12,7 +11,6 @@ import {
 	formatPowaVideoEmbed,
 	Icon,
 	Image,
-	imageANSToImageSrc,
 	MediaItem,
 	usePhrases,
 	Video,
@@ -83,25 +81,25 @@ export const LeadArtPresentation = (props) => {
 		AdBlock = () => <p>Ad block not found</p>;
 	}
 
-	const getLeadArtContent = (lead_art) => {
-		if (lead_art.type === "raw_html") {
+	const getLeadArtContent = (leadArt) => {
+		if (leadArt.type === "raw_html") {
 			return (
-				<Static id={`${BLOCK_CLASS_NAME}-${lead_art._id}`}>
-					<div dangerouslySetInnerHTML={{ __html: lead_art.content }} />
+				<Static id={`${BLOCK_CLASS_NAME}-${leadArt._id}`}>
+					<div dangerouslySetInnerHTML={{ __html: leadArt.content }} />
 				</Static>
 			);
 		}
 
-		if (lead_art.type === "video") {
-			const embedMarkup = formatPowaVideoEmbed(lead_art?.embed_html, {
+		if (leadArt.type === "video") {
+			const embedMarkup = formatPowaVideoEmbed(leadArt?.embed_html, {
 				autoplay: customFields?.enableAutoplay,
 				playthrough: customFields?.playthrough,
 			});
 			return (
 				<MediaItem
-					caption={!hideCaption ? lead_art?.description?.basic : null}
-					credit={!hideCredits ? formatCredits(lead_art.credits) : null}
-					title={!hideTitle ? lead_art?.headlines?.basic : null}
+					caption={!hideCaption ? leadArt?.description?.basic : null}
+					credit={!hideCredits ? formatCredits(leadArt.credits) : null}
+					title={!hideTitle ? leadArt?.headlines?.basic : null}
 				>
 					<Video
 						aspectRatio="16 / 9"
@@ -112,12 +110,12 @@ export const LeadArtPresentation = (props) => {
 			);
 		}
 
-		if (lead_art.type === "image") {
+		if (leadArt.type === "image") {
 			return (
 				<MediaItem
-					caption={!hideCaption ? lead_art.caption : null}
-					credit={!hideCredits ? formatCredits(lead_art.credits) : null}
-					title={!hideTitle ? lead_art.subtitle : null}
+					caption={!hideCaption ? leadArt.caption : null}
+					credit={!hideCredits ? formatCredits(leadArt.credits) : null}
+					title={!hideTitle ? leadArt.subtitle : null}
 				>
 					<Button
 						iconLeft={<Icon name="Fullscreen" fill="#6B6B6B" />}
@@ -132,15 +130,14 @@ export const LeadArtPresentation = (props) => {
 					</Button>
 					<div className={`${BLOCK_CLASS_NAME}__image-wrapper`} ref={imgRef}>
 						<Image
-							src={imageANSToImageSrc(lead_art)}
-							alt={lead_art.alt_text}
+							alt={leadArt.alt_text}
 							loading={imageLoadingStrategy}
 							// 16:9 aspect ratio
 							width={800}
 							height={450}
 							responsiveImages={[800, 1600]}
-							resizedOptions={{ auth: lead_art.auth[2], smart: true }}
-							resizerURL={RESIZER_URL}
+							resizedOptions={{ smart: true }}
+							ansImage={leadArt}
 						/>
 						{isOpen ? (
 							<Button
@@ -156,15 +153,15 @@ export const LeadArtPresentation = (props) => {
 			);
 		}
 
-		if (lead_art.type === "gallery") {
+		if (leadArt.type === "gallery") {
 			const galleryCubeClicks = getProperties(arcSite)?.galleryCubeClicks;
 			const interstitialClicks = parseInt(galleryCubeClicks, 10);
 
 			return (
 				<Carousel
-					id={`${BLOCK_CLASS_NAME}-${lead_art._id}`}
+					id={`${BLOCK_CLASS_NAME}-${leadArt._id}`}
 					showLabel
-					label={lead_art?.headlines?.basic}
+					label={leadArt?.headlines?.basic}
 					slidesToShow={1}
 					showAdditionalSlideControls
 					pageCountPhrase={
@@ -196,7 +193,7 @@ export const LeadArtPresentation = (props) => {
 					adInterstitialClicks={interstitialClicks}
 					nextButton={
 						<Carousel.Button
-							id={`${BLOCK_CLASS_NAME}-${lead_art._id}`}
+							id={`${BLOCK_CLASS_NAME}-${leadArt._id}`}
 							label={phrases.t("global.gallery-next-label")}
 						>
 							<Icon
@@ -208,18 +205,18 @@ export const LeadArtPresentation = (props) => {
 					}
 					previousButton={
 						<Carousel.Button
-							id={`${BLOCK_CLASS_NAME}-${lead_art._id}`}
+							id={`${BLOCK_CLASS_NAME}-${leadArt._id}`}
 							label={phrases.t("global.gallery-previous-label")}
 						>
 							<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} name="ChevronLeft" />
 						</Carousel.Button>
 					}
 				>
-					{lead_art.content_elements.map((galleryItem, itemIndex) => (
+					{leadArt.content_elements.map((galleryItem, itemIndex) => (
 						<Carousel.Item
 							label={phrases.t("global.gallery-page-count-text", {
 								current: itemIndex + 1,
-								total: lead_art.content_elements.length,
+								total: leadArt.content_elements.length,
 							})}
 							key={`gallery-item-${galleryItem.url}`}
 						>
@@ -234,9 +231,8 @@ export const LeadArtPresentation = (props) => {
 							>
 								<div className={`${BLOCK_CLASS_NAME}__image-wrapper`}>
 									<Image
-										src={imageANSToImageSrc(galleryItem)}
-										resizerURL={RESIZER_URL}
-										resizedOptions={{ auth: galleryItem.auth[RESIZER_APP_VERSION], smart: true }}
+										ansImage={galleryItem}
+										resizedOptions={{ smart: true }}
 										// 16:9 aspect ratio
 										width={800}
 										height={450}

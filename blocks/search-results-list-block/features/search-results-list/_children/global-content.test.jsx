@@ -45,11 +45,8 @@ const mockData = {
 describe("The search results list - global content", () => {
 	describe("renders a search bar", () => {
 		const { default: SearchResultsList } = require("./global-content");
-		SearchResultsList.prototype.fetchStories = jest.fn();
-		SearchResultsList.prototype.onChange = jest.fn();
-		SearchResultsList.prototype.fetchContent = jest.fn();
 		const wrapper = shallow(<SearchResultsList arcSite="test-site" />);
-		wrapper.setState({ resultList: mockData, searchTerm: "test" }, () => {
+		wrapper.setState({ resultList: mockData }, () => {
 			wrapper.update();
 
 			it("should render a search field", () => {
@@ -59,6 +56,17 @@ describe("The search results list - global content", () => {
 			it("should render a results list", () => {
 				expect(wrapper.find("ResultsList").length).toEqual(1);
 			});
+		});
+	});
+
+	describe("renders a search bar with the query text properly decoded", () => {
+		const { default: SearchResultsList } = require("./global-content");
+		const wrapper = shallow(
+			<SearchResultsList arcSite="test-site" globalContent={{ metadata: { q: "test%20value" } }} />
+		);
+		it("should render a search field", () => {
+			expect(wrapper.find("SearchField").length).toEqual(1);
+			expect(wrapper.find("SearchField").prop("defaultValue")).toEqual("test value");
 		});
 	});
 });

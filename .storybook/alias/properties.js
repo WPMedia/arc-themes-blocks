@@ -15,7 +15,7 @@ export default () => ({
 	dateLocalization: {
 		language: "en",
 		timeZone: "America/New_York",
-		dateTimeFormat: "%B %d, %Y at %l:%M %P %Z",
+		dateTimeFormat: "%B %d, %Y at %l:%M%p %Z",
 		dateFormat: "%B %d, %Y",
 	},
 	api: {

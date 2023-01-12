@@ -17,7 +17,7 @@ const fetch = ({ "arc-site": site, page = "1", query }, { cachedCall }) => {
 
 	const urlSearch = new URLSearchParams({
 		page,
-		q: encodeURIComponent(decodeURIComponent(query)),
+		q: decodeURIComponent(query),
 		...(SEARCH_KEY ? { key: SEARCH_KEY } : {}),
 		...(site ? { website_id: site } : {}),
 	});

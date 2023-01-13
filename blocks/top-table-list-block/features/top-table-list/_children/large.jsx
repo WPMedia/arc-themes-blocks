@@ -56,7 +56,7 @@ const Large = (props) => {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
 			timeZone: "GMT",
-			dateTimeFormat: "%B %d, %Y at %l:%M %P %Z",
+			dateTimeFormat: "%B %d, %Y at %l:%M%p %Z",
 		},
 	} = getProperties(arcSite);
 

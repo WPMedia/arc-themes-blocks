@@ -11,13 +11,13 @@ describe("Given the display time from ANS, it should convert to the proper timez
 			dateLocalization: {
 				language: "en",
 				timeZone: "America/New_York",
-				dateTimeFormat: "%B %d, %Y at %l:%M %P %Z",
+				dateTimeFormat: "%B %d, %Y at %l:%M%p %Z",
 			},
 		});
 		useAppContext.mockReturnValue({ globalContent: { display_date: "2019-08-11T16:45:33.209Z" } });
 		render(<ArticleDate />);
 
-		expect(screen.queryByText("August 11, 2019 at 12:45 pm EDT")).not.toBeNull();
+		expect(screen.queryByText("August 11, 2019 at 12:45PM EDT")).not.toBeNull();
 	});
 
 	it("should use default localization values", () => {
@@ -26,20 +26,20 @@ describe("Given the display time from ANS, it should convert to the proper timez
 
 		render(<ArticleDate />);
 
-		expect(screen.queryByText("August 11, 2019 at 4:45 pm UTC")).not.toBeNull();
+		expect(screen.queryByText("August 11, 2019 at 4:45PM UTC")).not.toBeNull();
 	});
 
 	it("should not output date if display_date is value", () => {
 		useAppContext.mockReturnValue({ globalContent: { display_date: "9-08-11T16:45:33.209Z" } });
 		render(<ArticleDate />);
 
-		expect(screen.queryByText("August 11, 2019 at 12:45 pm EDT")).toBeNull();
+		expect(screen.queryByText("August 11, 2019 at 12:45PM EDT")).toBeNull();
 	});
 
 	it("should not output date", () => {
 		useAppContext.mockReturnValue({});
 		render(<ArticleDate />);
 
-		expect(screen.queryByText("August 11, 2019 at 12:45 pm EDT")).toBeNull();
+		expect(screen.queryByText("August 11, 2019 at 12:45PM EDT")).toBeNull();
 	});
 });

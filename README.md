@@ -107,7 +107,7 @@ Please see the [release notes in Confluence](https://arcpublishing.atlassian.net
 
 This package has been published with a number of dist-tags meant for different purposes:
 
-- `arc-themes-release-version-X.XX` - These are versioned versions of all blocks for a given release cycle in the [Theme Manifest repo](https://github.com/WPMedia/arc-themes-manifests)
+- `arc-themes-release-version-X.XX` - These are versioned versions of all blocks for a given release cycle in the [Theme Manifest repo](https://github.com/WPMedia/arc-themes-manifests).
 
 ## License
 

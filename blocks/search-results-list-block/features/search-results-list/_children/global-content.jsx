@@ -18,7 +18,7 @@ class GlobalSearchResultsList extends React.Component {
 			storedList: {},
 			resultList: {},
 			page: 1,
-			value: decodeURI(props?.globalContent?.metadata?.q) || "",
+			value: decodeURI(props?.globalContent?.metadata?.q || ""),
 			focusItem: 0,
 		};
 

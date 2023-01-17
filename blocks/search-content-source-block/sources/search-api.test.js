@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import contentSource from "./search-api";
 
 jest.mock("fusion:environment", () => ({
@@ -26,6 +28,19 @@ jest.mock("axios", () => ({
 	}),
 }));
 
+expect.extend({
+	stringContainingAll: (string, arrayOfStrings) =>
+		arrayOfStrings.every((currentString) => string.includes(currentString))
+			? {
+					pass: true,
+					message: `expected ${string} not to contain any of ${JSON.stringify(arrayOfStrings)}`,
+			  }
+			: {
+					pass: false,
+					message: `expected ${string} to contain all of ${JSON.stringify(arrayOfStrings)}`,
+			  },
+});
+
 describe("the search content source block", () => {
 	it("should use the proper param types", () => {
 		expect(contentSource.params).toEqual({
@@ -36,6 +51,10 @@ describe("the search content source block", () => {
 	});
 
 	describe("when a query is provided", () => {
+		beforeEach(() => {
+			axios.mockClear();
+		});
+
 		it("should build the correct url", async () => {
 			const contentSourceFetch = await contentSource.fetch(
 				{
@@ -58,7 +77,7 @@ describe("the search content source block", () => {
 		});
 
 		it("should encode the query value", async () => {
-			const contentSourceFetch = await contentSource.fetch(
+			await contentSource.fetch(
 				{
 					query: "vidèo",
 					"arc-site": "the-sun",
@@ -66,12 +85,9 @@ describe("the search content source block", () => {
 				{ cachedCall: () => {} }
 			);
 
-			expect(contentSourceFetch.request.url.searchObject).toEqual(
+			expect(axios).toHaveBeenCalledWith(
 				expect.objectContaining({
-					key: "ABCDEF",
-					page: "1",
-					q: "vid%C3%A8o",
-					website_id: "the-sun",
+					url: expect.stringContainingAll(["q=vid%C3%A8o", "website_id=the-sun"]),
 				})
 			);
 		});

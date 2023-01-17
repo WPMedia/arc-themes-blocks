@@ -1653,12 +1653,40 @@
 							width: auto,
 							max-height: 75vh,
 						),
+						button: (
+							position: fixed,
+							top: var(--global-spacing-6),
+							right: 0,
+						),
+						button-medium: (
+							padding: var(--global-spacing-4) 0 var(--global-spacing-4) 0,
+							top: var(--global-spacing-4),
+							right: var(--global-spacing-4),
+						),
+						icon: (
+							fill: var(--global-white),
+							height: var(--global-spacing-6),
+							width: var(--global-spacing-6),
+						),
 					),
 				),
 				lead-art-carousel-track-icon: (
 					fill: var(--global-white),
 					height: var(--global-spacing-8),
 					width: var(--global-spacing-8),
+				),
+				lead-art-close-icon: (
+					position: fixed,
+					top: var(--global-spacing-4),
+					right: var(--global-spacing-4),
+					background-color: transparent,
+					components: (
+						icon: (
+							fill: var(--global-white),
+							height: var(--global-spacing-6),
+							width: var(--global-spacing-6),
+						),
+					),
 				),
 				links-bar: (
 					gap: var(--global-spacing-2),
@@ -2729,6 +2757,17 @@
 							display: flex,
 							gap: var(--global-spacing-2),
 							padding: 0 0 0 var(--global-spacing-2),
+						),
+					),
+				),
+				lead-art-close-icon: (
+					right: calc(100% - var(--global-spacing-4)),
+					left: var(--global-spacing-4),
+				),
+				lead-art-carousel-image-wrapper: (
+					components: (
+						button-medium: (
+							left: var(--global-spacing-4),
 						),
 					),
 				),

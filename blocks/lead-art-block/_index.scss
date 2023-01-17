@@ -10,6 +10,11 @@
 		@include scss.block-components("lead-art-carousel-image-wrapper");
 		@include scss.block-properties("lead-art-carousel-image-wrapper");
 	}
+
+	&__close-icon {
+		@include scss.block-components("lead-art-close-icon");
+		@include scss.block-properties("lead-art-close-icon");
+	}
 	@include scss.block-components("lead-art");
 	@include scss.block-properties("lead-art");
 }

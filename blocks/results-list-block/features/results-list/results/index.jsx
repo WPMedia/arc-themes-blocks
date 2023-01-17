@@ -21,6 +21,7 @@ const Results = ({
 	showHeadline = false,
 	showImage = false,
 	showItemOverline = false,
+	imageRatio,
 	targetFallbackImage,
 }) => {
 	const [queryOffset, setQueryOffset] = useState(configuredOffset);
@@ -206,6 +207,7 @@ const Results = ({
 						showImage={showImage}
 						showItemOverline={showItemOverline}
 						targetFallbackImage={targetFallbackImage}
+						imageRatio={imageRatio}
 					/>
 				))}
 				{isThereMore && (

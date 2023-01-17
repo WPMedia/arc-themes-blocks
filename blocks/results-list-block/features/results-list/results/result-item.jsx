@@ -32,6 +32,7 @@ const ResultItem = React.memo(
 			{
 				arcSite,
 				element,
+				imageRatio,
 				targetFallbackImage,
 				showByline,
 				showDate,
@@ -110,6 +111,7 @@ const ResultItem = React.memo(
 									alt={headlineText}
 									resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
 									resizerURL={RESIZER_URL}
+									aspectRatio={imageRatio}
 									sizes={[
 										{
 											isDefault: true,

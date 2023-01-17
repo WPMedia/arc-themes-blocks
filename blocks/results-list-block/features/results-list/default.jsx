@@ -14,6 +14,7 @@ const ResultsList = ({ customFields }) => {
 	const {
 		lazyLoad,
 		listContentConfig: { contentService, contentConfigValues },
+		aspectRatio,
 	} = customFields;
 	const { fallbackImage } = getProperties(arcSite);
 	const targetFallbackImage = !fallbackImage.includes("http")
@@ -44,6 +45,7 @@ const ResultsList = ({ customFields }) => {
 					showDescription={promoElements.showDescription}
 					showHeadline={promoElements.showHeadline}
 					showImage={promoElements.showImage}
+					imageRatio={aspectRatio}
 					showItemOverline={promoElements.showItemOverline}
 					targetFallbackImage={targetFallbackImage}
 				/>
@@ -58,6 +60,17 @@ ResultsList.icon = "arc-list";
 
 ResultsList.propTypes = {
 	customFields: PropTypes.shape({
+		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
+			defaultValue: "16:9",
+			label: "Image ratio",
+			group: "Art",
+		}),
+		lazyLoad: PropTypes.bool.tag({
+			name: "Lazy Load block?",
+			defaultValue: false,
+			description:
+				"Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.",
+		}),
 		listContentConfig: PropTypes.contentConfig("ans-feed").tag({
 			group: "Configure Content",
 			label: "Display Content Info",
@@ -91,12 +104,6 @@ ResultsList.propTypes = {
 			label: "Show date",
 			defaultValue: true,
 			group: "Show promo elements",
-		}),
-		lazyLoad: PropTypes.bool.tag({
-			name: "Lazy Load block?",
-			defaultValue: false,
-			description:
-				"Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.",
 		}),
 	}),
 };

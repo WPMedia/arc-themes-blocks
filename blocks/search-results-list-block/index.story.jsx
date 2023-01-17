@@ -86,6 +86,7 @@ export const allFields = () => {
 		showDescription: true,
 		showByline: true,
 		showDate: true,
+		imageRatio: "16:9",
 	};
 
 	return (

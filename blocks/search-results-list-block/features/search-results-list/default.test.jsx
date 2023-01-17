@@ -24,6 +24,7 @@ const defaultPromos = {
 	showDescription: true,
 	showHeadline: true,
 	showImage: true,
+	imageRatio: "16:9",
 };
 
 const globalContent = {

@@ -14,7 +14,7 @@ const ResultsList = ({ customFields }) => {
 	const {
 		lazyLoad,
 		listContentConfig: { contentService, contentConfigValues },
-		aspectRatio,
+		imageRatio,
 	} = customFields;
 	const { fallbackImage } = getProperties(arcSite);
 	const targetFallbackImage = !fallbackImage.includes("http")
@@ -45,7 +45,7 @@ const ResultsList = ({ customFields }) => {
 					showDescription={promoElements.showDescription}
 					showHeadline={promoElements.showHeadline}
 					showImage={promoElements.showImage}
-					imageRatio={aspectRatio}
+					imageRatio={imageRatio}
 					showItemOverline={promoElements.showItemOverline}
 					targetFallbackImage={targetFallbackImage}
 				/>

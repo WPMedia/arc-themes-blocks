@@ -109,7 +109,7 @@ const ResultItem = React.memo(
 								<Image
 									src={imageURL !== null ? imageURL : targetFallbackImage}
 									alt={headlineText}
-									resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
+									resizedOptions={{ auth: auth[RESIZER_APP_VERSION], smart: true }}
 									resizerURL={RESIZER_URL}
 									aspectRatio={imageRatio}
 									sizes={[

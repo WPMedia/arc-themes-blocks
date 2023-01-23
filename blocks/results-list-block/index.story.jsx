@@ -26,7 +26,7 @@ const sampleData = {
 	showHeadline: false,
 	showImage: false,
 	showItemOverline: false,
-	aspectRatio: "3:2",
+	aspectRatio: "16:9",
 };
 
 export const withLazyLoadAndAllEnabled = () => {

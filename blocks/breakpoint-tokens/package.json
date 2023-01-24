@@ -1,0 +1,21 @@
+{
+	"name": "@wpmedia/breakpoint-tokens",
+	"version": "2.0.0",
+	"description": "Arc XP Themes default breakpoint tokens",
+	"author": "Arc XP Themes",
+	"homepage": "https://github.com/WPMedia/arc-themes-blocks",
+	"license": "CC-BY-NC-ND-4.0",
+	"main": "",
+	"files": [
+		"themes"
+	],
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/",
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
+		"directory": "blocks/breakpoint-tokens"
+	}
+}

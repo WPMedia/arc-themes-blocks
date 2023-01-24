@@ -147,7 +147,11 @@ const Large = (props) => {
 							assistiveHidden
 						>
 							{embedMarkup ? (
-								<Video embedMarkup={embedMarkup} viewportPercentage={65} />
+								<Video
+									embedMarkup={embedMarkup}
+									aspectRatio={imageRatioLG}
+									viewportPercentage={65}
+								/>
 							) : (
 								<>
 									<Image {...imageParams} />

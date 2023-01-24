@@ -152,10 +152,10 @@ const ResultItem = React.memo(
 						<Attribution>
 							<Join separator={Separator}>
 								{hasAuthors ? (
-									<Join separator={() => " "}>
-										{phrases.t("global.by-text")}
+									<>
+										{phrases.t("global.by-text")}&nbsp;
 										{formatAuthors(credits?.by, phrases.t("global.and-text"))}
-									</Join>
+									</>
 								) : null}
 								{showDate ? (
 									<DateComponent dateTime={displayDate} dateString={formattedDate} />

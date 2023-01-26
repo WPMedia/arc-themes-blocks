@@ -113,7 +113,7 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 		? contentSource?.description?.basic
 		: (title && description) || contentSource?.description?.basic;
 
-	const aspectRatio = 16 / 9;
+	const aspectRatio = "16:9";
 
 	const renderVideoLayout = videoLayouts[displayStyle];
 	const powaMarkup = contentSource?.embed_html || embedMarkup;
@@ -128,7 +128,7 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 				embedMarkup: formatPowaVideoEmbed(powaMarkup, {
 					autoplay,
 					playthrough,
-					"aspect-ratio": 1 / aspectRatio, // format aspect is reversed
+					"aspect-ratio": "0.562", // format aspect is reversed
 				}),
 				captionTitle,
 				hideVideoTitle,

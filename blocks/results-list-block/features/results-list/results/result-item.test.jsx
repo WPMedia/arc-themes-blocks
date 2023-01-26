@@ -157,18 +157,41 @@ describe("Result parts", () => {
 		unmount();
 	});
 
-	it("should show overline if showItemOverline", () => {
+	it("should show overline if showItemOverline is true", () => {
 		const { unmount } = render(
 			<ResultItem
 				arcSite="the-sun"
-				element={element}
+				element={{
+					...element,
+					owner: { sponsored: true },
+					label: { basic: { text: "overline sample text" } },
+				}}
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
 				placeholderResizedImageOptions={{}}
 				showItemOverline
 			/>
 		);
-		expect(screen.getByText(/Section/i)).toBeInTheDocument();
+		expect(screen.getByText(/overline sample text/i)).toBeInTheDocument();
+
+		unmount();
+	});
+
+	it("should show overlineText if labelDisplay is true", () => {
+		const { unmount } = render(
+			<ResultItem
+				arcSite="the-sun"
+				element={{
+					...element,
+					label: { basic: { text: "overline basic sample text", display: true } },
+				}}
+				imageProperties={imageProperties}
+				targetFallbackImage={fallbackImage}
+				placeholderResizedImageOptions={{}}
+				showItemOverline
+			/>
+		);
+		expect(screen.getByText(/overline basic sample text/i)).toBeInTheDocument();
 
 		unmount();
 	});

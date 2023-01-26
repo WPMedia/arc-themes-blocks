@@ -14,7 +14,6 @@ const ResultsList = ({ customFields }) => {
 	const {
 		lazyLoad,
 		listContentConfig: { contentService, contentConfigValues },
-		imageRatio,
 	} = customFields;
 	const { fallbackImage } = getProperties(arcSite);
 	const targetFallbackImage = !fallbackImage.includes("http")
@@ -45,7 +44,6 @@ const ResultsList = ({ customFields }) => {
 					showDescription={promoElements.showDescription}
 					showHeadline={promoElements.showHeadline}
 					showImage={promoElements.showImage}
-					imageRatio={imageRatio}
 					showItemOverline={promoElements.showItemOverline}
 					targetFallbackImage={targetFallbackImage}
 				/>
@@ -60,11 +58,6 @@ ResultsList.icon = "arc-list";
 
 ResultsList.propTypes = {
 	customFields: PropTypes.shape({
-		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
-			defaultValue: "16:9",
-			label: "Image ratio",
-			group: "Art",
-		}),
 		lazyLoad: PropTypes.bool.tag({
 			name: "Lazy Load block?",
 			defaultValue: false,

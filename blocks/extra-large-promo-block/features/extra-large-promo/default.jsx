@@ -229,7 +229,7 @@ const ExtraLargePromo = ({ customFields }) => {
 								suppressContentEditableWarning
 							>
 								{embedMarkup ? (
-									<Video embedMarkup={embedMarkup} />
+									<Video embedMarkup={embedMarkup} aspectRatio={imageRatio} />
 								) : (
 									<Conditional
 										component={Link}

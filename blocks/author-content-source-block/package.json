@@ -19,7 +19,7 @@
 		"directory": "blocks/author-content-source-block"
 	},
 	"dependencies": {
-		"axios": "^0.26.0"
+		"axios": "^1.2.5"
 	},
 	"peerDependencies": {
 		"@wpmedia/arc-themes-components": "*",

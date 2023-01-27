@@ -3,4 +3,14 @@
 .b-xl-promo {
 	@include scss.block-properties("xl-promo");
 	@include scss.block-components("xl-promo");
+
+	&__icon_label {
+		@include scss.block-components("xl-promo-icon-label");
+		@include scss.block-properties("large-promo-icon-label");
+	}
+
+	&__label {
+		@include scss.block-components("xl-promo-label");
+		@include scss.block-properties("xl-promo-label");
+	}
 }

@@ -86,3 +86,24 @@ export const imageAndDescription = () => {
 
 	return <Promo customFields={updatedCustomFields} />;
 };
+
+export const withGalleryLabelAndImage = () => {
+	const updatedCustomFields = {
+		...allCustomFields,
+		showImage: true,
+		videoOrGalleryContentType: "gallery",
+	};
+
+	return <Promo customFields={updatedCustomFields} />;
+};
+
+export const withVideoLabelAndImage = () => {
+	const updatedCustomFields = {
+		...allCustomFields,
+		showImage: true,
+		videoOrGalleryContentType: "video",
+		playVideoInplace: false,
+	};
+
+	return <Promo customFields={updatedCustomFields} />;
+};

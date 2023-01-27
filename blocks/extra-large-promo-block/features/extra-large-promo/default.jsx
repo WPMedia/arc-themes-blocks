@@ -15,6 +15,7 @@ import {
 	getVideoFromANS,
 	Heading,
 	HeadingSection,
+	Icon,
 	Image,
 	Join,
 	isServerSide,
@@ -31,6 +32,8 @@ import {
 import { LazyLoad, localizeDateTime } from "@wpmedia/engine-theme-sdk";
 
 const BLOCK_CLASS_NAME = "b-xl-promo";
+
+// const getType = (type, content) => (content?.type === type ? content : undefined);
 
 const ExtraLargePromo = ({ customFields }) => {
 	const { arcSite, isAdmin } = useFusionContext();
@@ -58,6 +61,7 @@ const ExtraLargePromo = ({ customFields }) => {
 		showHeadline,
 		showImage,
 		showOverline,
+		viewportPercentage,
 	} = customFields;
 
 	const content =
@@ -153,6 +157,12 @@ const ExtraLargePromo = ({ customFields }) => {
 		: "";
 	const hasDate = showDate && formattedDate;
 
+	// const videoOrGalleryContent =
+	// 	getType("video", content) ||
+	// 	getType("gallery", content) ||
+	// 	getType("video", content?.promo_items?.lead_art) ||
+	// 	getType("gallery", content?.promo_items?.lead_art);
+
 	const { display: labelDisplay, url: labelUrl, text: labelText } = content?.label?.basic || {};
 
 	const shouldUseLabel = !!labelDisplay;
@@ -175,10 +185,11 @@ const ExtraLargePromo = ({ customFields }) => {
 	const contentDescription = showDescription ? content?.description?.basic : null;
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
-	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
+	const embedMarkup = getVideoFromANS(content);
 	const hasAuthors = showByline && content?.credits?.by.length > 0;
 	const imageParams =
-		imageOverrideURL || (content && getImageFromANS(content))
+		showImage &&
+		(imageOverrideURL || (content && getImageFromANS(content))
 			? {
 					ansImage: imageOverrideURL
 						? {
@@ -197,7 +208,26 @@ const ExtraLargePromo = ({ customFields }) => {
 			  }
 			: {
 					src: fallbackImage,
-			  };
+			  });
+	let videoOrGalleryContentType;
+
+	if (showImage) {
+		videoOrGalleryContentType = "gallery";
+	}
+
+	if (embedMarkup) {
+		videoOrGalleryContentType = "video";
+	}
+
+	const labelIconName = {
+		gallery: "Camera",
+		video: "Play",
+	}[videoOrGalleryContentType];
+
+	const labelIconText = {
+		gallery: phrases.t("global.gallery-text"),
+		video: phrases.t("global.video-text"),
+	}[videoOrGalleryContentType];
 
 	return hasOverline ||
 		contentHeading ||
@@ -208,7 +238,12 @@ const ExtraLargePromo = ({ customFields }) => {
 		<LazyLoad enabled={shouldLazyLoad}>
 			<article className={BLOCK_CLASS_NAME}>
 				{hasOverline ? <Overline href={overlineUrl}>{overlineText}</Overline> : null}
-				{contentHeading || showImage || contentDescription || hasAuthors || hasDate ? (
+				{contentHeading ||
+				showImage ||
+				contentDescription ||
+				hasAuthors ||
+				hasDate ||
+				embedMarkup ? (
 					<Stack>
 						{contentHeading ? (
 							<HeadingSection>
@@ -229,17 +264,29 @@ const ExtraLargePromo = ({ customFields }) => {
 								suppressContentEditableWarning
 							>
 								{embedMarkup ? (
-									<Video embedMarkup={embedMarkup} />
+									<Video
+										aspectRatio={imageRatio}
+										embedMarkup={embedMarkup}
+										viewportPercentage={viewportPercentage}
+									/>
 								) : (
-									<Conditional
-										component={Link}
-										condition={contentUrl}
-										href={contentUrl}
-										assistiveHidden
-									>
-										<Image {...imageParams} />
-									</Conditional>
+									<>
+										<Conditional
+											component={Link}
+											condition={contentUrl}
+											href={contentUrl}
+											assistiveHidden
+										>
+											<Image {...imageParams} />
+										</Conditional>
+									</>
 								)}
+								{labelIconName && !playVideoInPlace ? (
+									<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
+										<Icon name={labelIconName} />
+										<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
+									</div>
+								) : null}
 							</MediaItem>
 						) : null}
 						{contentDescription ? <Paragraph>{contentDescription}</Paragraph> : null}
@@ -329,6 +376,16 @@ ExtraLargePromo.propTypes = {
 			description:
 				"Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.",
 			name: "Lazy Load block?",
+		}),
+		viewportPercentage: PropTypes.number.tag({
+			name: "Percentage of viewport height",
+			description:
+				"With Shrink Video enabled, this determines how much vertical viewport real estate the video will occupy.",
+			min: 0,
+			max: 150,
+			defaultValue: 65,
+			hidden: true,
+			group: "Video Settings",
 		}),
 	}),
 };

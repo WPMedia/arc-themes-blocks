@@ -19,7 +19,7 @@
 		"directory": "blocks/story-feed-sections-content-source-block"
 	},
 	"dependencies": {
-		"axios": "^0.26.0"
+		"axios": "^1.2.6"
 	},
 	"peerDependencies": {
 		"@wpmedia/arc-themes-components": "*",

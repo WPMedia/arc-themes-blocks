@@ -32,7 +32,6 @@ const ResultItem = React.memo(
 			{
 				arcSite,
 				element,
-				imageRatio,
 				targetFallbackImage,
 				showByline,
 				showDate,
@@ -109,9 +108,8 @@ const ResultItem = React.memo(
 								<Image
 									src={imageURL !== null ? imageURL : targetFallbackImage}
 									alt={headlineText}
-									resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
+									resizedOptions={{ auth: auth[RESIZER_APP_VERSION], smart: true }}
 									resizerURL={RESIZER_URL}
-									aspectRatio={imageRatio}
 									sizes={[
 										{
 											isDefault: true,
@@ -124,6 +122,7 @@ const ResultItem = React.memo(
 									]}
 									responsiveImages={[100, 500]}
 									width={500}
+									height={333}
 								/>
 							</Conditional>
 						</MediaItem>
@@ -152,10 +151,10 @@ const ResultItem = React.memo(
 						<Attribution>
 							<Join separator={Separator}>
 								{hasAuthors ? (
-									<Join separator={() => " "}>
-										{phrases.t("global.by-text")}
+									<>
+										{phrases.t("global.by-text")}&nbsp;
 										{formatAuthors(credits?.by, phrases.t("global.and-text"))}
-									</Join>
+									</>
 								) : null}
 								{showDate ? (
 									<DateComponent dateTime={displayDate} dateString={formattedDate} />

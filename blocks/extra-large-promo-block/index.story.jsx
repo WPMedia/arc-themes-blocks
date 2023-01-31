@@ -102,7 +102,6 @@ export const withVideoLabelAndImage = () => {
 		...allCustomFields,
 		showImage: true,
 		videoOrGalleryContentType: "video",
-		playVideoInplace: false,
 	};
 
 	return <Promo customFields={updatedCustomFields} />;

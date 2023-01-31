@@ -61,7 +61,6 @@ const ExtraLargePromo = ({ customFields }) => {
 		showHeadline,
 		showImage,
 		showOverline,
-		viewportPercentage,
 	} = customFields;
 
 	const content =
@@ -263,11 +262,11 @@ const ExtraLargePromo = ({ customFields }) => {
 								})}
 								suppressContentEditableWarning
 							>
-								{embedMarkup ? (
+								{embedMarkup && playVideoInPlace ? (
 									<Video
 										aspectRatio={imageRatio}
 										embedMarkup={embedMarkup}
-										viewportPercentage={viewportPercentage}
+										viewportPercentage={60}
 									/>
 								) : (
 									<>
@@ -278,15 +277,15 @@ const ExtraLargePromo = ({ customFields }) => {
 											assistiveHidden
 										>
 											<Image {...imageParams} />
+											{labelIconName ? (
+												<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
+													<Icon name={labelIconName} />
+													<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
+												</div>
+											) : null}
 										</Conditional>
 									</>
 								)}
-								{labelIconName && !playVideoInPlace ? (
-									<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
-										<Icon name={labelIconName} />
-										<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
-									</div>
-								) : null}
 							</MediaItem>
 						) : null}
 						{contentDescription ? <Paragraph>{contentDescription}</Paragraph> : null}
@@ -376,16 +375,6 @@ ExtraLargePromo.propTypes = {
 			description:
 				"Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.",
 			name: "Lazy Load block?",
-		}),
-		viewportPercentage: PropTypes.number.tag({
-			name: "Percentage of viewport height",
-			description:
-				"With Shrink Video enabled, this determines how much vertical viewport real estate the video will occupy.",
-			min: 0,
-			max: 150,
-			defaultValue: 65,
-			hidden: true,
-			group: "Video Settings",
 		}),
 	}),
 };

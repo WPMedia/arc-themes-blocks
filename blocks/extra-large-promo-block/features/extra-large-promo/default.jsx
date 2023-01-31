@@ -33,8 +33,6 @@ import { LazyLoad, localizeDateTime } from "@wpmedia/engine-theme-sdk";
 
 const BLOCK_CLASS_NAME = "b-xl-promo";
 
-// const getType = (type, content) => (content?.type === type ? content : undefined);
-
 const ExtraLargePromo = ({ customFields }) => {
 	const { arcSite, isAdmin } = useFusionContext();
 	const { searchableField } = useEditableContent();
@@ -155,12 +153,6 @@ const ExtraLargePromo = ({ customFields }) => {
 		? localizeDateTime(new Date(displayDate), dateTimeFormat, language, timeZone)
 		: "";
 	const hasDate = showDate && formattedDate;
-
-	// const videoOrGalleryContent =
-	// 	getType("video", content) ||
-	// 	getType("gallery", content) ||
-	// 	getType("video", content?.promo_items?.lead_art) ||
-	// 	getType("gallery", content?.promo_items?.lead_art);
 
 	const { display: labelDisplay, url: labelUrl, text: labelText } = content?.label?.basic || {};
 

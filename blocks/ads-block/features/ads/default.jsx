@@ -16,19 +16,7 @@ function generateInstanceId(componentId) {
 	return `${componentId}-${Math.floor(Math.random() * 9007199254740991).toString(16)}`;
 }
 
-// eslint-disable-next-line arrow-body-style
-const setAdLabelVisibility = (props) => {
-	// istanbul ignore next
-	return props.displayAdLabel ? "" : "display: none";
-};
-
 const StyledAdUnit = styled.div`
-	.arcad > [id^="google_ads_iframe"]:not(:empty)::before {
-		content: "${(props) => props.adLabel}";
-		display: block;
-		${(props) => setAdLabelVisibility(props)}
-	}
-
 	.arcad > [id^="google_ads_iframe"]:empty[style] {
 		width: 0 !important;
 		height: 0 !important;
@@ -67,13 +55,13 @@ const ArcAd = (props) => {
 		minHeight: reserveSpace ? `${heightWithAdjustments}px` : null,
 	};
 
+	const showAdLabel = !isAdmin && displayAdLabel && !isAMP();
+
 	return (
-		<StyledAdUnit
-			id={`arcad-feature-${instanceId}`}
-			className="arcad-feature"
-			adLabel={siteProperties?.advertisementLabel || phrases.t("ads-block.ad-label")}
-			displayAdLabel={!isAdmin && displayAdLabel && !isAMP()}
-		>
+		<StyledAdUnit id={`arcad-feature-${instanceId}`} className="arcad-feature">
+			{showAdLabel ? (
+				<p>{siteProperties?.advertisementLabel || phrases.t("ads-block.ad-label")}</p>
+			) : null}
 			<div className="arcad-container" style={sizing}>
 				{!isAdmin && !isAMP() && (
 					<LazyLoad

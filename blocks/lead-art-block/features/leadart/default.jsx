@@ -102,7 +102,7 @@ export const LeadArtPresentation = (props) => {
 					title={!hideTitle ? leadArt?.headlines?.basic : null}
 				>
 					<Video
-						aspectRatio="16 / 9"
+						aspectRatio="16:9"
 						embedMarkup={embedMarkup}
 						viewportPercentage={customFields?.viewportPercentage}
 					/>

@@ -128,7 +128,6 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 				embedMarkup: formatPowaVideoEmbed(powaMarkup, {
 					autoplay,
 					playthrough,
-					"aspect-ratio": "0.562", // format aspect is reversed
 				}),
 				captionTitle,
 				hideVideoTitle,

@@ -1759,7 +1759,6 @@
 						paragraph: (
 							display: block,
 							width: 100%,
-							overflow: initial,
 						),
 						separator: (
 							padding: 0 var(--global-spacing-2),
@@ -2788,6 +2787,7 @@
 						),
 						paragraph: (
 							display: block,
+							width: auto,
 						),
 					),
 				),

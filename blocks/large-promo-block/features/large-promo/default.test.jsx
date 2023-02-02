@@ -316,7 +316,7 @@ describe("Large Promo", () => {
 			<LargePromo
 				customFields={{
 					showImage: true,
-					imageRatio: "4:3",
+					aspectRatio: "4:3",
 					playVideoInPlace: true,
 				}}
 			/>

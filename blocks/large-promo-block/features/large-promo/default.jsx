@@ -153,7 +153,6 @@ export const LargePromoPresentation = ({
 
 const LargePromoItem = ({ customFields, arcSite }) => {
 	const {
-		aspectRatio,
 		imageOverrideURL,
 		imageOverrideId,
 		imageRatio,
@@ -342,7 +341,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			  });
 	return (
 		<LargePromoPresentation
-			aspectRatio={aspectRatio}
+			aspectRatio={imageRatio}
 			contentAuthors={contentAuthors}
 			contentDate={contentDate}
 			contentDescription={contentDescription}
@@ -444,7 +443,7 @@ LargePromo.propTypes = {
 			max: 150,
 			defaultValue: 65,
 			hidden: true,
-			group: "Video Settings",
+			group: "Art",
 		}),
 	}),
 };

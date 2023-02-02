@@ -223,7 +223,7 @@ describe("Large Promo", () => {
 		modifiedData.promo_items = {
 			lead_art: {
 				type: "video",
-				embed_html: "embed",
+				embed_html: `<div class="powa">embed</div>`,
 			},
 		};
 		const { container } = render(

@@ -125,7 +125,7 @@ const ExtraLarge = (props) => {
 						{embedMarkup || showImageXL ? (
 							<MediaItem>
 								{embedMarkup ? (
-									<Video embedMarkup={embedMarkup} />
+									<Video embedMarkup={embedMarkup} aspectRatio={imageRatioXL} />
 								) : (
 									<Conditional
 										component={Link}

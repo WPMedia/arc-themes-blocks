@@ -176,7 +176,7 @@ const ExtraLargePromo = ({ customFields }) => {
 	const contentDescription = showDescription ? content?.description?.basic : null;
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
-	const embedMarkup = getVideoFromANS(content);
+	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 	const hasAuthors = showByline && content?.credits?.by.length > 0;
 	const imageParams =
 		showImage &&

@@ -106,8 +106,8 @@ const SampleOutputType = ({
 		resizerURL,
 		facebookAdmins,
 		nativoIntegration,
-		chartBeatAccountId,
-		chartBeatDomain,
+		chartbeatAccountId,
+		chartbeatDomain,
 		fallbackImage,
 		comscoreID,
 		querylyId,
@@ -115,11 +115,11 @@ const SampleOutputType = ({
 		locale = "en",
 	} = getProperties(arcSite);
 
-	const chartBeatInline = `
+	const chartbeatInline = `
     (function() {
       var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
-      _sf_async_config.uid = ${chartBeatAccountId};
-      _sf_async_config.domain = "${chartBeatDomain}";
+      _sf_async_config.uid = ${chartbeatAccountId};
+      _sf_async_config.domain = "${chartbeatDomain}";
       _sf_async_config.useCanonical = true;
       _sf_async_config.useCanonicalDomain = true;
       _sf_async_config.sections = '';
@@ -151,7 +151,7 @@ const SampleOutputType = ({
 	const inlineScripts = [
 		...new Set([
 			...dangerouslyInjectJS,
-			...(chartBeatAccountId && chartBeatDomain ? [chartBeatInline] : []),
+			...(chartbeatAccountId && chartbeatDomain ? [chartbeatInline] : []),
 			...(comscoreID ? [scriptCodeInline] : []),
 			...(gaID ? [gaScriptInline] : []),
 			...(gtmID ? [gtmScriptInline] : []),
@@ -216,7 +216,7 @@ const SampleOutputType = ({
 				{nativoIntegration ? (
 					<script async data-integration="nativo-ad" src="https://s.ntv.io/serve/load.js" />
 				) : null}
-				{chartBeatAccountId && chartBeatDomain ? (
+				{chartbeatAccountId && chartbeatDomain ? (
 					<script
 						async
 						data-integration="chartbeat"

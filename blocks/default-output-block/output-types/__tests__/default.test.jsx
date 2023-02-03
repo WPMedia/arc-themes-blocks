@@ -489,10 +489,10 @@ describe("chartbeat render conditions", () => {
 		expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(0);
 	});
 
-	it("must not render chartbeat code when chartBeatAccountId property is missing", () => {
+	it("must not render chartbeat code when chartbeatAccountId property is missing", () => {
 		jest.mock("fusion:properties", () =>
 			jest.fn(() => ({
-				chartBeatDomain: "example.com",
+				chartbeatDomain: "example.com",
 			}))
 		);
 
@@ -507,10 +507,10 @@ describe("chartbeat render conditions", () => {
 		expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(0);
 	});
 
-	it("must not render chartbeat code when chartBeatDomain property is missing", () => {
+	it("must not render chartbeat code when chartbeatDomain property is missing", () => {
 		jest.mock("fusion:properties", () =>
 			jest.fn(() => ({
-				chartBeatAccountId: 994949,
+				chartbeatAccountId: 994949,
 			}))
 		);
 
@@ -528,8 +528,8 @@ describe("chartbeat render conditions", () => {
 	it("must not render chartbeat code when both properties are empty", () => {
 		jest.mock("fusion:properties", () =>
 			jest.fn(() => ({
-				chartBeatAccountId: "",
-				chartBeatDomain: "",
+				chartbeatAccountId: "",
+				chartbeatDomain: "",
 			}))
 		);
 
@@ -544,11 +544,11 @@ describe("chartbeat render conditions", () => {
 		expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(0);
 	});
 
-	it("must render chartbeat code when chartBeatDomain and chartBeatAccountID properties are present", () => {
+	it("must render chartbeat code when chartbeatDomain and chartbeatAccountID properties are present", () => {
 		jest.mock("fusion:properties", () =>
 			jest.fn(() => ({
-				chartBeatAccountId: 994949,
-				chartBeatDomain: "example.com",
+				chartbeatAccountId: 994949,
+				chartbeatDomain: "example.com",
 			}))
 		);
 

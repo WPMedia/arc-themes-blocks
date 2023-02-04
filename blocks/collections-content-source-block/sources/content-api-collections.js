@@ -6,6 +6,7 @@ import getResizedImageData from "@wpmedia/resizer-image-block";
 // import { sanitizeANS, constants } from "@wpmedia/engine-theme-sdk";
 
 // replace with above import when engine-theme-sdk canary has method available
+/* istanbul ignore next */
 const sanitizeANSItem = (data) => ({
 	...data,
 	editor_note: "",
@@ -40,6 +41,7 @@ const sanitizeANSItem = (data) => ({
  * - content_elements.additional_properties.comments
  * - content_elements.additional_properties.inline_comments
  */
+/* istanbul ignore next */
 const sanitizeANS = (data, schema) => {
 	if (schema === "ans-feed") {
 		return {

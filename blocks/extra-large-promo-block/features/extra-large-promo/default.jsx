@@ -322,9 +322,6 @@ const ExtraLargePromo = ({ customFields }) => {
 		image: phrases.t("global.gallery-text"),
 		video: phrases.t("global.video-text"),
 	}[videoOrGalleryContentType?.type];
-	console.log("videoOrGalleryContentType", videoOrGalleryContentType);
-	console.log("embedMarkup", embedMarkup);
-	console.log("content---", content);
 
 	return (
 		<ExtraLargePromoPresentation

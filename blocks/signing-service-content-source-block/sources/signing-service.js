@@ -16,17 +16,19 @@ const fetch = ({
 	id,
 	service = SIGNING_SERVICE_DEFAULT_APP,
 	serviceVersion = SIGNING_SERVICE_DEFAULT_VERSION,
-}) =>
-	axios({
-		url: `${CONTENT_BASE}/signing-service/v2/sign/${service}/${serviceVersion}?value=${encodeURIComponent(
-			id
-		)}`,
+}) => {
+	const urlSearch = new URLSearchParams({
+		value: id,
+	});
+	return axios({
+		url: `${CONTENT_BASE}/signing-service/v2/sign/${service}/${serviceVersion}?${urlSearch.toString()}`,
 		headers: {
 			"content-type": "application/json",
 			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
 		},
 		method: "GET",
 	}).then(({ data: content }) => content);
+};
 
 export default {
 	fetch,

@@ -18,7 +18,9 @@ const fetch = ({
 	serviceVersion = SIGNING_SERVICE_DEFAULT_VERSION,
 }) =>
 	axios({
-		url: `${CONTENT_BASE}/signing-service/v1/sign/${service}/${serviceVersion}/${encodeURI(id)}`,
+		url: `${CONTENT_BASE}/signing-service/v2/sign/${service}/${serviceVersion}?value=${encodeURI(
+			id
+		)}`,
 		headers: {
 			"content-type": "application/json",
 			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,

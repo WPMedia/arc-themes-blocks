@@ -18,7 +18,7 @@ const fetch = ({
 	serviceVersion = SIGNING_SERVICE_DEFAULT_VERSION,
 }) =>
 	axios({
-		url: `${CONTENT_BASE}/signing-service/v2/sign/${service}/${serviceVersion}?value=${encodeURI(
+		url: `${CONTENT_BASE}/signing-service/v2/sign/${service}/${serviceVersion}?value=${encodeURIComponent(
 			id
 		)}`,
 		headers: {

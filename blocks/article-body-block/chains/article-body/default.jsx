@@ -34,6 +34,28 @@ const StyledLink = styled.a`
 	color: ${(props) => props.primaryColor};
 `;
 
+const InterstitialLink = ({ key, url, content, arcSite, phrases }) => {
+	// link string will have to be truthy (non-zero length string) to render below
+	if (!(url && content)) return null;
+	const beforeContent = "[&nbsp;";
+	const afterContent = "&nbsp;]";
+
+	return (
+		<Fragment key={key}>
+			<p className="interstitial-link block-margin-bottom">
+				<span dangerouslySetInnerHTML={{ __html: beforeContent }} />
+				<StyledLink
+					href={url}
+					aria-label={phrases.t("article-body-block.interstitial-link-aria-label")}
+					dangerouslySetInnerHTML={{ __html: content }}
+					primaryColor={getThemeStyle(arcSite)["primary-color"]}
+				/>
+				<span dangerouslySetInnerHTML={{ __html: afterContent }} />
+			</p>
+		</Fragment>
+	);
+};
+
 function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 	const { _id: key = index, type, content } = item;
 
@@ -177,25 +199,14 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		}
 
 		case "interstitial_link": {
-			const { url } = item;
-			// link string will have to be truthy (non-zero length string) to render below
-			if (!(url && content)) return null;
-			const beforeContent = "[&nbsp;";
-			const afterContent = "&nbsp;]";
-
 			return (
-				<Fragment key={key}>
-					<p className="interstitial-link block-margin-bottom">
-						<span dangerouslySetInnerHTML={{ __html: beforeContent }} />
-						<StyledLink
-							href={url}
-							aria-label={phrases.t("article-body-block.interstitial-link-aria-label")}
-							dangerouslySetInnerHTML={{ __html: content }}
-							primaryColor={getThemeStyle(arcSite)["primary-color"]}
-						/>
-						<span dangerouslySetInnerHTML={{ __html: afterContent }} />
-					</p>
-				</Fragment>
+				<InterstitialLink
+					key={key}
+					url={item?.url}
+					content={item?.content}
+					arcSite={arcSite}
+					phrases={phrases}
+				/>
 			);
 		}
 
@@ -248,6 +259,17 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 			) : null;
 
 		case "oembed_response": {
+			if (item.subtype === "twitter" && !item?.raw_oembed?.html?.includes(item?.raw_oembed?.url)) {
+				return (
+					<InterstitialLink
+						key={key}
+						url={item?.raw_oembed?.url}
+						content={item?.raw_oembed?.url}
+						arcSite={arcSite}
+						phrases={phrases}
+					/>
+				);
+			}
 			return item.raw_oembed ? <Oembed key={key} element={item} /> : null;
 		}
 

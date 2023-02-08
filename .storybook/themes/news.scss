@@ -1797,6 +1797,7 @@
 				medium-promo-label: (
 					margin-left: var(--global-spacing-2),
 					color: var(--global-white),
+					display: none,
 				),
 				medium-manual-promo: (
 					clear: both,
@@ -2829,6 +2830,9 @@
 							margin-left: calc(33% + var(--global-spacing-6)),
 						),
 					),
+				),
+				medium-promo-label: (
+					display: inline,
 				),
 				medium-manual-promo: (
 					components: (

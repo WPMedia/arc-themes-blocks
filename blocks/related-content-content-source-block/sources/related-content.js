@@ -16,6 +16,7 @@ const fetch = ({ _id, "arc-site": site }, { cachedCall }) => {
 	const urlSearch = new URLSearchParams({
 		_id,
 		website: site,
+		themes: "v2",
 	});
 
 	return axios({

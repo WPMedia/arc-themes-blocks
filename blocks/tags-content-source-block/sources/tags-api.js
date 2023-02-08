@@ -6,7 +6,10 @@ const params = {
 };
 
 const fetch = ({ slug: slugs = "" }) => {
-	const urlSearch = new URLSearchParams({ slugs });
+	const urlSearch = new URLSearchParams({
+		slugs,
+		themes: "v2",
+	});
 
 	return axios({
 		url: `${CONTENT_BASE}/tags/v2/slugs?${urlSearch.toString()}`,

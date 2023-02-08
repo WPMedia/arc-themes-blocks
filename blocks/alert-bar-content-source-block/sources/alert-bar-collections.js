@@ -10,6 +10,7 @@ const fetch = ({ "arc-site": website }) => {
 		published: true,
 		size: 1,
 		...(website ? { website } : {}),
+		themes: "v2",
 	});
 
 	return (

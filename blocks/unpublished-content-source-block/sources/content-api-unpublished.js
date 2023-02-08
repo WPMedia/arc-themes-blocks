@@ -13,6 +13,7 @@ const fetch = ({ _id, "arc-site": website }, { cachedCall }) => {
 		_id,
 		published: "false",
 		website,
+		themes: "v2",
 	});
 
 	return axios({

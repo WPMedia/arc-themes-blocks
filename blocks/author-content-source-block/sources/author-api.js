@@ -11,6 +11,7 @@ const params = {
 const fetch = ({ slug }, { cachedCall }) => {
 	const urlSearch = new URLSearchParams({
 		slug,
+		themes: "v2",
 	});
 
 	return axios({

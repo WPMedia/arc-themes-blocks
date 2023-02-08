@@ -20,6 +20,7 @@ const fetch = (
 		size,
 		sort: "display_date:desc",
 		website,
+		themes: "v2",
 	});
 
 	return axios({

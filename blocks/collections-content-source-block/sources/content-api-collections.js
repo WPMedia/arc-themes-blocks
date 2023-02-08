@@ -25,6 +25,7 @@ const fetch = (
 		published: true,
 		...(site ? { website: site } : {}),
 		...(size ? { size: constrainedSize } : {}),
+		themes: "v2",
 	});
 
 	return axios({

@@ -20,6 +20,7 @@ const fetch = ({ "arc-site": site, page = "1", query }, { cachedCall }) => {
 		q: decodeURIComponent(query),
 		...(SEARCH_KEY ? { key: SEARCH_KEY } : {}),
 		...(site ? { website_id: site } : {}),
+		themes: "v2",
 	});
 
 	return axios({

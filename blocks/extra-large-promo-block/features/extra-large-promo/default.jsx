@@ -15,6 +15,7 @@ import {
 	getVideoFromANS,
 	Heading,
 	HeadingSection,
+	Icon,
 	Image,
 	Join,
 	isServerSide,
@@ -31,6 +32,106 @@ import {
 import { LazyLoad, localizeDateTime } from "@wpmedia/engine-theme-sdk";
 
 const BLOCK_CLASS_NAME = "b-xl-promo";
+
+const getType = (type, content) => (content?.type === type ? content : undefined);
+
+export const ExtraLargePromoPresentation = ({
+	hasOverline,
+	contentHeading,
+	showImage,
+	contentDescription,
+	hasDate,
+	shouldLazyLoad,
+	overlineUrl,
+	overlineText,
+	embedMarkup,
+	contentUrl,
+	imageParams,
+	searchableField,
+	imageRatio,
+	labelIconName,
+	labelIconText,
+	contentAuthors,
+	translationByText,
+	displayDate,
+	formattedDate,
+}) =>
+	hasOverline || contentHeading || showImage || contentDescription || contentAuthors || hasDate ? (
+		<LazyLoad enabled={shouldLazyLoad}>
+			<article className={BLOCK_CLASS_NAME}>
+				{hasOverline ? <Overline href={overlineUrl}>{overlineText}</Overline> : null}
+				{contentHeading ||
+				showImage ||
+				contentDescription ||
+				contentAuthors ||
+				hasDate ||
+				embedMarkup ? (
+					<Stack>
+						{contentHeading ? (
+							<HeadingSection>
+								<Heading>
+									<Conditional component={Link} condition={contentUrl} href={contentUrl}>
+										{contentHeading}
+									</Conditional>
+								</Heading>
+							</HeadingSection>
+						) : null}
+						{embedMarkup || imageParams ? (
+							<MediaItem
+								{...searchableField({
+									imageOverrideURL: "url",
+									imageOverrideId: "_id",
+									imageOverrideAuth: "auth",
+								})}
+								suppressContentEditableWarning
+							>
+								{embedMarkup ? (
+									<Video
+										aspectRatio={imageRatio}
+										embedMarkup={embedMarkup}
+										viewportPercentage={60}
+									/>
+								) : (
+									<>
+										<Conditional
+											component={Link}
+											condition={contentUrl}
+											href={contentUrl}
+											assistiveHidden
+										>
+											<Image {...imageParams} />
+											{labelIconName ? (
+												<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
+													<Icon name={labelIconName} />
+													<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
+												</div>
+											) : null}
+										</Conditional>
+									</>
+								)}
+							</MediaItem>
+						) : null}
+						{contentDescription ? <Paragraph>{contentDescription}</Paragraph> : null}
+						{contentAuthors || hasDate ? (
+							<Attribution>
+								<Join separator={Separator}>
+									{contentAuthors ? (
+										<Join separator={() => " "}>
+											{translationByText}
+											{contentAuthors}
+										</Join>
+									) : null}
+									{hasDate ? (
+										<DateComponent dateTime={displayDate} dateString={formattedDate} />
+									) : null}
+								</Join>
+							</Attribution>
+						) : null}
+					</Stack>
+				) : null}
+			</article>
+		</LazyLoad>
+	) : null;
 
 const ExtraLargePromo = ({ customFields }) => {
 	const { arcSite, isAdmin } = useFusionContext();
@@ -176,15 +277,19 @@ const ExtraLargePromo = ({ customFields }) => {
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
 	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
-	const hasAuthors = showByline && content?.credits?.by.length > 0;
+	const contentAuthors =
+		showByline && content?.credits?.by?.length > 0
+			? formatAuthors(content.credits.by, phrases.t("global.and-text"))
+			: null;
 	const imageParams =
-		imageOverrideURL || (content && getImageFromANS(content))
+		showImage &&
+		(imageOverrideURL || (content && getImageFromANS(content))
 			? {
 					ansImage: imageOverrideURL
 						? {
 								_id: imageOverrideId,
 								url: imageOverrideURL,
-								auth: imageOverrideAuth ? JSON.parse(imageOverrideAuth) : {},
+								auth: imageOverrideAuth ? JSON.parse(imageOverrideAuth) : null,
 						  }
 						: getImageFromANS(content),
 					alt: content?.headlines?.basic || "",
@@ -197,72 +302,50 @@ const ExtraLargePromo = ({ customFields }) => {
 			  }
 			: {
 					src: fallbackImage,
-			  };
+			  });
+	const videoOrGalleryContentType =
+		getType("video", content) ||
+		getType("gallery", content) ||
+		getType("image", content) ||
+		getType("video", content?.promo_items?.lead_art) ||
+		getType("gallery", content?.promo_items?.lead_art) ||
+		getType("image", content?.promo_items?.lead_art);
 
-	return hasOverline ||
-		contentHeading ||
-		showImage ||
-		contentDescription ||
-		hasAuthors ||
-		hasDate ? (
-		<LazyLoad enabled={shouldLazyLoad}>
-			<article className={BLOCK_CLASS_NAME}>
-				{hasOverline ? <Overline href={overlineUrl}>{overlineText}</Overline> : null}
-				{contentHeading || showImage || contentDescription || hasAuthors || hasDate ? (
-					<Stack>
-						{contentHeading ? (
-							<HeadingSection>
-								<Heading>
-									<Conditional component={Link} condition={contentUrl} href={contentUrl}>
-										{contentHeading}
-									</Conditional>
-								</Heading>
-							</HeadingSection>
-						) : null}
-						{embedMarkup || showImage ? (
-							<MediaItem
-								{...searchableField({
-									imageOverrideURL: "url",
-									imageOverrideId: "_id",
-									imageOverrideAuth: "auth",
-								})}
-								suppressContentEditableWarning
-							>
-								{embedMarkup ? (
-									<Video embedMarkup={embedMarkup} aspectRatio={imageRatio} />
-								) : (
-									<Conditional
-										component={Link}
-										condition={contentUrl}
-										href={contentUrl}
-										assistiveHidden
-									>
-										<Image {...imageParams} />
-									</Conditional>
-								)}
-							</MediaItem>
-						) : null}
-						{contentDescription ? <Paragraph>{contentDescription}</Paragraph> : null}
-						{hasAuthors || hasDate ? (
-							<Attribution>
-								<Join separator={Separator}>
-									{hasAuthors ? (
-										<Join separator={() => " "}>
-											{phrases.t("global.by-text")}
-											{formatAuthors(content?.credits?.by, phrases.t("global.and-text"))}
-										</Join>
-									) : null}
-									{hasDate ? (
-										<DateComponent dateTime={displayDate} dateString={formattedDate} />
-									) : null}
-								</Join>
-							</Attribution>
-						) : null}
-					</Stack>
-				) : null}
-			</article>
-		</LazyLoad>
-	) : null;
+	const labelIconName = {
+		gallery: "Camera",
+		video: "Play",
+		image: "Camera",
+	}[videoOrGalleryContentType?.type];
+
+	const labelIconText = {
+		gallery: phrases.t("global.gallery-text"),
+		image: phrases.t("global.gallery-text"),
+		video: phrases.t("global.video-text"),
+	}[videoOrGalleryContentType?.type];
+
+	return (
+		<ExtraLargePromoPresentation
+			hasOverline={hasOverline}
+			contentHeading={contentHeading}
+			showImage={showImage}
+			contentDescription={contentDescription}
+			hasDate={hasDate}
+			shouldLazyLoad={shouldLazyLoad}
+			overlineUrl={overlineUrl}
+			overlineText={overlineText}
+			embedMarkup={embedMarkup}
+			contentUrl={contentUrl}
+			imageParams={imageParams}
+			searchableField={searchableField}
+			imageRatio={imageRatio}
+			labelIconName={labelIconName}
+			contentAuthors={contentAuthors}
+			displayDate={displayDate}
+			labelIconText={labelIconText}
+			formattedDate={formattedDate}
+			translationByText={phrases.t("global.by-text")}
+		/>
+	);
 };
 
 ExtraLargePromo.propTypes = {

@@ -14,10 +14,12 @@ jest.mock("axios", () => ({
 describe("Test Signing Service content source", () => {
 	it("should build the correct url", async () => {
 		const key = {
-			id: "test-id",
+			id: "test://id",
 		};
 		const contentSourceRequest = await contentSource.fetch(key);
 
-		expect(contentSourceRequest.url).toEqual(`/signing-service/v1/sign/resizer/1/test-id`);
+		expect(contentSourceRequest.url).toEqual(
+			`/signing-service/v2/sign/resizer/1?value=test%3A%2F%2Fid`
+		);
 	});
 });

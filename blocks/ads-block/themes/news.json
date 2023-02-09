@@ -1,0 +1,37 @@
+{
+	"ads-block": {
+		"styles": {
+			"default": {
+				"components": {
+					"paragraph": {
+						"font-family": "$alias.font-family-primary",
+						"font-size": "$alias.body-font-size-small",
+						"line-height": "$alias.body-line-height-small",
+						"font-weight": "$alias.body-font-weight-small",
+						"color": "$global.neutral-7"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"ads-block-admin": {
+		"styles": {
+			"default": {
+				"background-color": "$global.neutral-7",
+				"padding": "$global.spacing-4",
+				"border-radius": "$alias.border-radius",
+				"components": {
+					"stack": {
+						"gap": "$global.spacing-4",
+						"padding-bottom": "$global.spacing-5"
+					},
+					"paragraph": {
+						"color": "$global.white"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	}
+}

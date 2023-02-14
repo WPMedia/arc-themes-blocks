@@ -1566,12 +1566,12 @@
 );
 
 @use "../../blocks/alert-bar-block";
+@use "../../blocks/article-body-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/date-block";
 @use "../../blocks/default-output-block";
-@use "../../blocks/header-nav-chain-block";
 @use "../../blocks/hero-block";
-@use "../../blocks/large-promo-block";
+@use "../../blocks/lead-art-block";
 @use "../../blocks/product-assortment-carousel-block";
 @use "../../blocks/product-content-block";
 @use "../../blocks/product-featured-image-block";
@@ -1580,6 +1580,6 @@
 @use "../../blocks/quilted-image-block";
 @use "../../blocks/right-rail-block";
 @use "../../blocks/single-column-layout-block";
-@use "../../blocks/small-promo-block";
 @use "../../blocks/story-carousel-block";
+@use "../../blocks/subheadline-block";
 @use "../../blocks/video-player-block";

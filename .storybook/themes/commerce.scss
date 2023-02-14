@@ -62,39 +62,22 @@
 		"neutral-9": #10151c,
 		"neutral-10": #000000,
 
-		// 4px
 		"spacing-1": 0.25rem,
-		// 8px
 		"spacing-2": 0.5rem,
-		// 12px
 		"spacing-3": 0.75rem,
-		// 16px
 		"spacing-4": 1rem,
-		// 24px
 		"spacing-5": 1.5rem,
-		// 32px
 		"spacing-6": 2rem,
-		// 40px
 		"spacing-7": 2.5rem,
-		// 48px
 		"spacing-8": 3rem,
-		// 56px
 		"spacing-9": 3.5rem,
-		// 64px
 		"spacing-10": 4rem,
-		// 72px
 		"spacing-11": 4.5rem,
-		// 80px
 		"spacing-12": 5rem,
-		// 88px
 		"spacing-13": 5.5rem,
-		// 96px
 		"spacing-14": 6rem,
-		// 104px
 		"spacing-15": 6.5rem,
-		// 112px
 		"spacing-16": 7rem,
-		// 120px
 		"spacing-17": 7.5rem,
 
 		"font-weight-1": 100,
@@ -107,35 +90,20 @@
 		"font-weight-8": 800,
 		"font-weight-9": 900,
 
-		// 10px
 		"font-size-1": 0.625rem,
-		// 12px
 		"font-size-2": 0.75rem,
-		// 14px
 		"font-size-3": 0.875rem,
-		// 16px
 		"font-size-4": 1rem,
-		// 18px
 		"font-size-5": 1.125rem,
-		// 19px
 		"font-size-6": 1.1875rem,
-		// 20px
 		"font-size-7": 1.25rem,
-		// 22px
 		"font-size-8": 1.375rem,
-		// 24px
 		"font-size-9": 1.5rem,
-		// 28px
 		"font-size-10": 1.75rem,
-		// 32px
 		"font-size-11": 2rem,
-		// 36px
 		"font-size-12": 2.25rem,
-		// 41px
 		"font-size-13": 2.56rem,
-		// 48px
 		"font-size-14": 3rem,
-		// 52px
 		"font-size-15": 3.25rem,
 
 		"line-height-1": 1,
@@ -162,11 +130,8 @@
 	$tokens: (
 		default: (
 			alias: (
-				// Font families
 				"font-family-primary": "Inter",
 				"font-family-secondary": "Lora",
-
-				// Colors
 				"color-primary": var(--global-black),
 				"text-color": var(--global-neutral-8),
 				"text-color-subtle": var(--global-neutral-5),
@@ -185,54 +150,38 @@
 				"status-color-danger-subtle": var(--global-red-1),
 				"status-color-info": var(--global-blue-5),
 				"status-color-info-subtle": var(--global-blue-1),
-				// Border Radius
 				"border-radius": var(--global-border-radius-1),
 				"border-radius-pill": var(--global-border-radius-2),
 				"border-radius-circle": var(--global-border-radius-3),
-				// Typography
-				// headings
-				// heading-level-1 : 36px fs -> 43.2px lh
 				"heading-level-1-font-size": var(--global-font-size-12),
 				"heading-level-1-line-height": var(--global-line-height-3),
 				"heading-level-1-font-weight": var(--global-font-weight-7),
-				// heading-level-2 : 32px fs -> 41.6px lh
 				"heading-level-2-font-size": var(--global-font-size-11),
 				"heading-level-2-line-height": var(--global-line-height-4),
 				"heading-level-2-font-weight": var(--global-font-weight-7),
-				// heading-level-3 : 28px fs -> 36.4px lh
 				"heading-level-3-font-size": var(--global-font-size-10),
 				"heading-level-3-line-height": var(--global-line-height-4),
 				"heading-level-3-font-weight": var(--global-font-weight-7),
-				// heading-level-4 : 24px fs -> 33.6px lh
 				"heading-level-4-font-size": var(--global-font-size-9),
 				"heading-level-4-line-height": var(--global-line-height-5),
 				"heading-level-4-font-weight": var(--global-font-weight-7),
-				// heading-level-5 : 20px fs -> 28px lh
 				"heading-level-5-font-size": var(--global-font-size-7),
 				"heading-level-5-line-height": var(--global-line-height-5),
 				"heading-level-5-font-weight": var(--global-font-weight-7),
-				// heading-level-6 : 18px fs -> 25.2px lh
 				"heading-level-6-font-size": var(--global-font-size-5),
 				"heading-level-6-line-height": var(--global-line-height-5),
 				"heading-level-6-font-weight": var(--global-font-weight-7),
-				// body : 16px fs -> 24px lh
 				"body-font-weight": var(--global-font-weight-4),
 				"body-font-size": var(--global-font-size-4),
 				"body-line-height": var(--global-line-height-6),
-				// body-small : 14px fs -> 21px lh
 				"body-font-weight-small": var(--global-font-weight-4),
 				"body-font-size-small": var(--global-font-size-3),
 				"body-line-height-small": var(--global-line-height-6),
-				// body-tiny : 12px fs -> 18px lh
 				"body-font-weight-tiny": var(--global-font-weight-4),
 				"body-font-size-tiny": var(--global-font-size-2),
 				"body-line-height-tiny": var(--global-line-height-6),
-				// Layout
 				"layout-max-width": 1440,
 				"content-max-width": 1216,
-				//
-				// --content-scale-width identifies the inner document width for header and content
-				//
 				"content-scale-width": calc(var(--content-max-width) / var(--layout-max-width) * 100%),
 			),
 			components: (
@@ -584,6 +533,273 @@
 						),
 					),
 				),
+				article-body: (
+					font-family: var(--font-family-secondary),
+					font-size: var(--body-font-size),
+					components: (
+						link: (
+							color: var(--color-primary),
+						),
+						paragraph: (
+							display: block,
+							overflow: initial,
+						),
+						carousel-actions: (
+							display: flex,
+						),
+						carousel-track: (
+							gap: initial,
+							max-width: initial,
+						),
+						carousel-button-next: (
+							background-color: transparent,
+						),
+						carousel-button-previous: (
+							background-color: transparent,
+						),
+					),
+				),
+				article-body-blockquote: (
+					box-shadow: inset 5px 0 0 0 var(--global-neutral-4),
+					font-style: italic,
+					gap: var(--global-spacing-2),
+					padding: var(--global-spacing-4) 0 var(--global-spacing-4) var(--global-spacing-5),
+					text-align: left,
+					components: (
+						paragraph: (
+							font-size: var(--heading-level-6-font-size),
+							line-height: var(--heading-level-6-line-height),
+						),
+					),
+				),
+				article-body-children: (
+					margin-bottom: var(--global-spacing-5),
+				),
+				article-body-citation: (
+					font-family: var(--font-family-primary),
+					font-style: normal,
+					font-size: var(--body-font-size),
+				),
+				article-body-correction: (
+					box-shadow: inset 0 -1px 0 0 var(--border-color),
+					font-style: italic,
+					padding-bottom: var(--global-spacing-6),
+					components: (
+						heading: (
+							font-size: var(--heading-level-6-font-size),
+							text-transform: uppercase,
+						),
+						paragraph: (
+							color: var(--global-neutral-6),
+						),
+					),
+				),
+				article-body-divider: (
+					background-color: var(--border-color),
+					height: 1px,
+				),
+				article-body-embed-responsive: (
+					aspect-ratio: 16 / 9,
+					width: 100%,
+				),
+				article-body-embed-responsive-item: (
+					aspect-ratio: 16 / 9,
+					height: auto,
+					width: 100%,
+				),
+				article-body-full-screen-icon: (
+					fill: var(--text-color),
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+				),
+				article-body-gallery: (
+					components: (
+						icon: (
+							fill: var(--global-white),
+							height: var(--global-spacing-8),
+							width: var(--global-spacing-8),
+						),
+						carousel-button: (
+							background-color: transparent,
+							box-shadow: none,
+						),
+						carousel-expand-autoplay-container: (
+							gap: var(--global-spacing-4),
+						),
+						carousel-button-enter-full-screen: (
+							background-color: transparent,
+							border: none,
+							box-shadow: none,
+							color: var(--text-color),
+							font-size: var(--body-font-size-small),
+							height: auto,
+							width: auto,
+						),
+						carousel-button-toggle-auto-play: (
+							background-color: transparent,
+							box-shadow: none,
+							color: var(--text-color),
+							font-size: var(--body-font-size-small),
+							height: auto,
+							width: auto,
+						),
+						carousel-image-counter: (
+							font-size: var(--body-font-size-small),
+						),
+						media-item: (
+							background-color: var(--global-neutral-9),
+							gap: 0,
+							justify-content: center,
+							width: 100%,
+						),
+						media-item-fig-caption: (
+							background-color: var(--global-white),
+							padding-top: var(--global-spacing-2),
+						),
+					),
+				),
+				article-body-gallery-additional-next: (
+					border: none,
+					display: none,
+					height: var(--global-spacing-6),
+					width: var(--global-spacing-6),
+					components: (
+						icon: (
+							fill: var(--text-color),
+							height: var(--global-spacing-4),
+							width: var(--global-spacing-4),
+						),
+					),
+				),
+				article-body-gallery-additional-previous: (
+					border: none,
+					display: none,
+					height: var(--global-spacing-6),
+					width: var(--global-spacing-6),
+					components: (
+						icon: (
+							fill: var(--text-color),
+							height: var(--global-spacing-4),
+							width: var(--global-spacing-4),
+						),
+					),
+				),
+				article-body-h2: (
+					font-size: var(--heading-level-2-font-size),
+					line-height: var(--heading-level-2-line-height),
+				),
+				article-body-h3: (
+					font-size: var(--heading-level-3-font-size),
+					line-height: var(--heading-level-3-line-height),
+				),
+				article-body-h4: (
+					font-size: var(--heading-level-4-font-size),
+					line-height: var(--heading-level-4-line-height),
+				),
+				article-body-h5: (
+					font-size: var(--heading-level-5-font-size),
+					line-height: var(--heading-level-5-line-height),
+				),
+				article-body-h6: (
+					font-size: var(--heading-level-6-font-size),
+					line-height: var(--heading-level-6-line-height),
+				),
+				article-body-image: (
+					components: (
+						image: (
+							max-width: 100%,
+						),
+					),
+				),
+				article-body-image-float-left: (
+					width: 50%,
+					float: left,
+					margin-right: var(--global-spacing-5),
+				),
+				article-body-image-float-right: (
+					width: 50%,
+					float: right,
+					margin-left: var(--global-spacing-5),
+				),
+				article-body-image-wrapper: (
+					align-items: center,
+					display: flex,
+					justify-content: center,
+					max-height: 75vh,
+					components: (
+						image: (
+							height: auto,
+							max-height: 75vh,
+							max-width: 100%,
+						),
+					),
+				),
+				article-body-interstitial-link: (
+					font-family: var(--font-family-secondary),
+					font-style: italic,
+					components: (
+						link: (
+							border-bottom: 1px solid var(--color-primary),
+							color: var(--color-primary),
+						),
+					),
+				),
+				article-body-link: (
+					color: var(--color-primary),
+				),
+				article-body-ol: (
+					font-size: var(--body-font-size),
+					line-height: var(--body-line-height),
+					list-style-position: inside,
+					list-style-type: decimal,
+				),
+				article-body-pullquote: (
+					box-shadow: (
+						inset 0 -5px 0 0 var(--border-color),
+						inset 0 5px 0 0 var(--border-color),
+					),
+					gap: var(--global-spacing-4),
+					padding: var(--global-spacing-6) 0 var(--global-spacing-5),
+					text-align: center,
+					components: (
+						paragraph: (
+							font-style: italic,
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--heading-level-5-line-height),
+						),
+					),
+				),
+				article-body-start-icon: (
+					fill: var(--text-color),
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+				),
+				article-body-stop-icon: (
+					fill: var(--text-color),
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+				),
+				article-body-table: (
+					font-family: var(--font-family-primary),
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-small),
+					text-align: center,
+					width: 100%,
+				),
+				article-body-table-td: (
+					border: 1px solid var(--border-color),
+					padding: var(--global-spacing-1) var(--global-spacing-2),
+				),
+				article-body-table-th: (
+					border: 1px solid var(--border-color),
+					font-weight: var(--global-font-weight-7),
+					padding: var(--global-spacing-1) var(--global-spacing-2),
+				),
+				article-body-table-thead: (
+					background-color: var(--global-neutral-4),
+					border: 2px solid var(--border-color),
+				),
 				category-carousel: (
 					gap: var(--global-spacing-2),
 					components: (
@@ -685,6 +901,114 @@
 							font-size: var(--heading-level-5-font-size),
 							font-weight: var(--heading-level-5-font-weight),
 							line-height: var(--heading-level-5-line-height),
+						),
+					),
+				),
+				lead-art: (
+					margin-bottom: var(--global-spacing-5),
+					components: (
+						button: (
+							border-style: none,
+							box-shadow: none,
+							height: var(--global-spacing-4),
+						),
+						carousel-controls: (
+							padding: 0 0 var(--global-spacing-2) 0,
+						),
+						carousel-actions: (
+							display: flex,
+						),
+						carousel-track: (
+							gap: initial,
+							max-width: initial,
+						),
+						carousel-button: (
+							border: none,
+							box-shadow: none,
+							height: var(--global-spacing-4),
+						),
+						carousel-button-enter-full-screen: (
+							padding: 0,
+							font-size: var(--body-font-size-tiny),
+							line-height: var(--body-line-height-tiny),
+						),
+						carousel-additional-controls: (
+							display: none,
+						),
+						carousel-button-toggle-auto-play: (
+							padding: 0 var(--global-spacing-4),
+							font-size: var(--body-font-size-tiny),
+							line-height: var(--body-line-height-tiny),
+						),
+						carousel-image-counter: (
+							font-size: var(--body-font-size-tiny),
+							line-height: var(--body-line-height-tiny),
+						),
+						carousel-button-next: (
+							background-color: transparent,
+						),
+						carousel-button-previous: (
+							background-color: transparent,
+						),
+						carousel-button-additional-previous: (
+							padding: 0,
+						),
+						carousel-button-additional-next: (
+							padding: 0,
+						),
+						icon: (
+							fill: var(--text-color),
+							height: var(--global-spacing-4),
+							width: var(--global-spacing-4),
+						),
+						image: (
+							width: 100%,
+						),
+					),
+				),
+				lead-art-carousel-image-wrapper: (
+					align-items: center,
+					display: flex,
+					justify-content: center,
+					max-height: 75vh,
+					background-color: var(--global-black),
+					components: (
+						image: (
+							width: auto,
+							max-height: 75vh,
+						),
+						button: (
+							position: fixed,
+							top: var(--global-spacing-6),
+							right: 0,
+						),
+						button-medium: (
+							padding: var(--global-spacing-4) 0 var(--global-spacing-4) 0,
+							top: var(--global-spacing-4),
+							right: var(--global-spacing-4),
+						),
+						icon: (
+							fill: var(--global-white),
+							height: var(--global-spacing-6),
+							width: var(--global-spacing-6),
+						),
+					),
+				),
+				lead-art-carousel-track-icon: (
+					fill: var(--global-white),
+					height: var(--global-spacing-8),
+					width: var(--global-spacing-8),
+				),
+				lead-art-close-icon: (
+					position: fixed,
+					top: var(--global-spacing-4),
+					right: var(--global-spacing-4),
+					background-color: transparent,
+					components: (
+						icon: (
+							fill: var(--global-white),
+							height: var(--global-spacing-6),
+							width: var(--global-spacing-6),
 						),
 					),
 				),
@@ -792,7 +1116,6 @@
 							--carousel-slide-width: 100%,
 						),
 						carousel-actions: (
-							// hide the actions on desktop and mobile
 							display: none,
 						),
 						carousel-track: (
@@ -808,7 +1131,6 @@
 					width: var(--global-spacing-7),
 				),
 				product-gallery-featured-slide: (
-					// for featured enabled, this will apply for the desktop growing to expand full width. On mobile, it doesn't hurt.
 					flex-basis: 100%,
 				),
 				product-gallery-focus-view: (
@@ -989,7 +1311,6 @@
 					components: (
 						carousel-actions: (
 							margin-top: 0,
-							// Need to have the setting here so desktop gets included
 						),
 						icon: (
 							height: var(--global-font-size-9),
@@ -1022,6 +1343,11 @@
 						),
 					),
 					gap: var(--global-spacing-1),
+				),
+				subheadline: (
+					font-size: var(--heading-level-3-font-size),
+					font-weight: var(--heading-level-3-font-weight),
+					line-height: var(--heading-level-3-line-height),
 				),
 				video-player: (
 					gap: var(--global-spacing-4),
@@ -1093,6 +1419,15 @@
 						),
 					),
 				),
+				article-body: (
+					font-size: var(--heading-level-6-font-size),
+				),
+				article-body-gallery-additional-next: (
+					display: block,
+				),
+				article-body-gallery-additional-previous: (
+					display: block,
+				),
 				category-carousel-slide-title: (
 					font-size: var(--body-font-size-small),
 				),
@@ -1119,6 +1454,26 @@
 						),
 					),
 				),
+				lead-art: (
+					components: (
+						carousel-additional-controls: (
+							display: flex,
+							gap: var(--global-spacing-2),
+							padding: 0 0 0 var(--global-spacing-2),
+						),
+					),
+				),
+				lead-art-close-icon: (
+					right: calc(100% - var(--global-spacing-4)),
+					left: var(--global-spacing-4),
+				),
+				lead-art-carousel-image-wrapper: (
+					components: (
+						button-medium: (
+							left: var(--global-spacing-4),
+						),
+					),
+				),
 				product-content: (
 					max-width: 100%,
 				),
@@ -1128,13 +1483,10 @@
 				product-gallery: (
 					components: (
 						carousel: (
-							// the slides that are not featured are half the width of the screen
-							// will be 50% accounting for the gap
 							--slides: 2,
 							--carousel-slide-width: 50%,
 						),
 						carousel-track: (
-							// slides should flow down rather than be hidden off to the side
 							flex-wrap: wrap,
 						),
 						carousel-indicator-dots-container: (
@@ -1214,9 +1566,12 @@
 );
 
 @use "../../blocks/alert-bar-block";
+@use "../../blocks/article-body-block";
 @use "../../blocks/category-carousel-block";
+@use "../../blocks/date-block";
 @use "../../blocks/default-output-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/lead-art-block";
 @use "../../blocks/product-assortment-carousel-block";
 @use "../../blocks/product-content-block";
 @use "../../blocks/product-featured-image-block";
@@ -1226,4 +1581,5 @@
 @use "../../blocks/right-rail-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/story-carousel-block";
+@use "../../blocks/subheadline-block";
 @use "../../blocks/video-player-block";

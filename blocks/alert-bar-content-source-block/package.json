@@ -19,7 +19,7 @@
 		"directory": "blocks/alert-bar-content-source-block"
 	},
 	"dependencies": {
-		"axios": "^0.26.0"
+		"axios": "^1.3.3"
 	},
 	"gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

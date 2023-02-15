@@ -27,10 +27,24 @@ jest.mock("axios", () => ({
 
 describe("the content api source block", () => {
 	it("should use the proper param types", () => {
-		expect(contentApi.params).toEqual({
-			_id: "text",
-			website_url: "text",
-		});
+		expect(contentApi.params).toEqual([
+			{
+				displayName: "_id",
+				name: "_id",
+				type: "text",
+			},
+			{
+				displayName: "website_url",
+				name: "website_url",
+				type: "text",
+			},
+			{
+				default: "2",
+				displayName: "Themes Version",
+				name: "themes",
+				type: "text",
+			},
+		]);
 	});
 
 	describe("when a site is provided", () => {

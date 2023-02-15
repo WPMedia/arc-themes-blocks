@@ -4,14 +4,32 @@ import { ARC_ACCESS_TOKEN, CONTENT_BASE, RESIZER_APP_VERSION } from "fusion:envi
 import signImagesInANSObject from "@wpmedia/arc-themes-components/src/utils/sign-images-in-ans-object";
 import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
 
-const params = {
-	authorSlug: "text",
-	feedOffset: "number",
-	feedSize: "number",
-};
+const params = [
+	{
+		displayName: "authorSlug",
+		name: "authorSlug",
+		type: "text",
+	},
+	{
+		displayName: "feedOffset",
+		name: "feedOffset",
+		type: "number",
+	},
+	{
+		displayName: "feedSize",
+		name: "feedSize",
+		type: "number",
+	},
+	{
+		default: "2",
+		displayName: "Themes Version",
+		name: "themes",
+		type: "text",
+	},
+];
 
 const fetch = (
-	{ authorSlug, feedOffset: from = 0, feedSize: size = 8, "arc-site": website },
+	{ authorSlug, feedOffset: from = 0, feedSize: size = 8, themes, "arc-site": website },
 	{ cachedCall }
 ) => {
 	const urlSearch = new URLSearchParams({
@@ -20,7 +38,7 @@ const fetch = (
 		sort: "display_date:desc",
 		size,
 		website,
-		themes: "v2",
+		themes,
 	});
 
 	return axios({

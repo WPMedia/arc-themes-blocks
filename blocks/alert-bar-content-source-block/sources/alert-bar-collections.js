@@ -1,15 +1,23 @@
 import axios from "axios";
 import { ARC_ACCESS_TOKEN, CONTENT_BASE } from "fusion:environment";
 
-const params = {};
+const params = [
+	{
+		default: "2",
+		displayName: "Themes Version",
+		name: "themes",
+		type: "text",
+	},
+];
 
-const fetch = ({ "arc-site": website }) => {
+const fetch = ({ themes, "arc-site": website }) => {
 	const urlSearch = new URLSearchParams({
 		content_alias: "alert-bar",
 		from: 0,
 		published: true,
 		size: 1,
 		...(website ? { website } : {}),
+		themes,
 	});
 
 	return (

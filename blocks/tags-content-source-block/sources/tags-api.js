@@ -1,12 +1,25 @@
 import axios from "axios";
 import { ARC_ACCESS_TOKEN, CONTENT_BASE } from "fusion:environment";
 
-const params = {
-	slug: "text",
-};
+const params = [
+	{
+		displayName: "slug",
+		name: "slug",
+		type: "text",
+	},
+	{
+		default: "2",
+		displayName: "Themes Version",
+		name: "themes",
+		type: "text",
+	},
+];
 
-const fetch = ({ slug: slugs = "" }) => {
-	const urlSearch = new URLSearchParams({ slugs });
+const fetch = ({ slug: slugs = "", themes }) => {
+	const urlSearch = new URLSearchParams({
+		slugs,
+		themes,
+	});
 
 	return axios({
 		url: `${CONTENT_BASE}/tags/v2/slugs?${urlSearch.toString()}`,

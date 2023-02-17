@@ -1,15 +1,16 @@
+import axios from "axios";
 import contentSource from "./content-api-collections";
 
 jest.mock("fusion:environment", () => ({
 	CONTENT_BASE: "",
 }));
 
-jest.mock("axios", () => ({
-	__esModule: true,
-	default: jest.fn((data) => Promise.resolve({ data })),
-}));
+jest.mock("axios");
 
 describe("the collections content source block", () => {
+	beforeEach(() => {
+		axios.mockImplementation(jest.fn((data) => Promise.resolve({ data })));
+	});
 	it("should use the proper param types", () => {
 		expect(contentSource.params).toEqual({
 			_id: "text",
@@ -134,5 +135,17 @@ describe("the collections content source block", () => {
 				"/content/v4/collections?content_alias=undefined&published=true"
 			);
 		});
+	});
+
+	describe("when an error occurs in the response or request", () => {
+		it("handles errors with the response", async () => {
+			axios.mockRejectedValue({ response: { status: "404" } });
+			const consoleSpy = jest.spyOn(console, "error");
+			await contentSource.fetch({});
+			expect(consoleSpy).toHaveBeenCalledWith(
+				"The response from the server was an error with the status code 404"
+			);
+		});
+		// Add tests for other cases.
 	});
 });

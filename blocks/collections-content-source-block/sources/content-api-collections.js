@@ -9,6 +9,18 @@ const params = {
 	size: "text",
 };
 
+const handleError = (error) => {
+	if (error?.response) {
+		console.error(
+			`The response from the server was an error with the status code ${error?.response?.status}`
+		);
+	} else if (error?.request) {
+		console.error("The request to the server failed with no response.");
+	} else {
+		console.error("An error occured creating the request.");
+	}
+};
+
 const fetch = (key = {}) => {
 	const { "arc-site": site, _id, content_alias: contentAlias, from, size, getNext = "false" } = key;
 	let updatedSize = size;
@@ -28,32 +40,36 @@ const fetch = (key = {}) => {
 			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
 		},
 		method: "GET",
-	}).then(({ data: content }) => {
-		if (getNext === "false") {
-			return content;
-		}
+	})
+		.then(({ data: content }) => {
+			if (getNext === "false") {
+				return content;
+			}
 
-		const existingData = content;
+			const existingData = content;
 
-		return axios({
-			url: `${CONTENT_BASE}/content/v4/collections?${
-				_id ? `_id=${_id}` : `content_alias=${contentAlias}`
-			}${site ? `&website=${site}` : ""}&from=${updatedSize}${
-				size ? `&size=${updatedSize}` : ""
-			}&published=true`,
-			headers: {
-				"content-type": "application/json",
-				Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
-			},
-			method: "GET",
-		}).then(({ data: nextContent }) => {
-			existingData.content_elements = [
-				...existingData.content_elements,
-				...nextContent?.content_elements,
-			];
-			return existingData;
-		});
-	});
+			return axios({
+				url: `${CONTENT_BASE}/content/v4/collections?${
+					_id ? `_id=${_id}` : `content_alias=${contentAlias}`
+				}${site ? `&website=${site}` : ""}&from=${updatedSize}${
+					size ? `&size=${updatedSize}` : ""
+				}&published=true`,
+				headers: {
+					"content-type": "application/json",
+					Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+				},
+				method: "GET",
+			})
+				.then(({ data: nextContent }) => {
+					existingData.content_elements = [
+						...existingData.content_elements,
+						...nextContent?.content_elements,
+					];
+					return existingData;
+				})
+				.catch(handleError);
+		})
+		.catch(handleError);
 };
 
 export default {

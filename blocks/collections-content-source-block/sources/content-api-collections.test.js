@@ -5,12 +5,12 @@ jest.mock("fusion:environment", () => ({
 	CONTENT_BASE: "",
 }));
 
-jest.mock("axios");
+jest.mock("axios", () => ({
+	__esModule: true,
+	default: jest.fn((data) => Promise.resolve({ data })),
+}));
 
 describe("the collections content source block", () => {
-	beforeEach(() => {
-		axios.mockImplementation(jest.fn((data) => Promise.resolve({ data })));
-	});
 	it("should use the proper param types", () => {
 		expect(contentSource.params).toEqual({
 			_id: "text",

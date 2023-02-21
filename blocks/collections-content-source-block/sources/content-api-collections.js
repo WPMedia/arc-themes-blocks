@@ -4,42 +4,16 @@ import { CONTENT_BASE, ARC_ACCESS_TOKEN, RESIZER_APP_VERSION } from "fusion:envi
 import signImagesInANSObject from "@wpmedia/arc-themes-components/src/utils/sign-images-in-ans-object";
 import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
 
-const params = [
-	{
-		displayName: "_id",
-		name: "_id",
-		type: "text",
-	},
-	{
-		displayName: "content_alias",
-		name: "content_alias",
-		type: "text",
-	},
-	{
-		displayName: "from",
-		name: "from",
-		type: "text",
-	},
-	{
-		displayName: "getNext",
-		name: "getNext",
-		type: "text",
-	},
-	{
-		displayName: "size",
-		name: "size",
-		type: "text",
-	},
-	{
-		default: "2",
-		displayName: "Themes Version",
-		name: "themes",
-		type: "text",
-	},
-];
-
+const params = {
+	_id: "text",
+	content_alias: "text",
+	from: "text",
+	getNext: "text",
+	size: "text",
+};
+// test
 const fetch = (
-	{ _id, "arc-site": site, content_alias: contentAlias, from, getNext = "false", size, themes },
+	{ _id, "arc-site": site, content_alias: contentAlias, from, getNext = "false", size },
 	{ cachedCall }
 ) => {
 	// Max collection size is 20
@@ -51,7 +25,6 @@ const fetch = (
 		published: true,
 		...(site ? { website: site } : {}),
 		...(size ? { size: constrainedSize } : {}),
-		themes,
 	});
 
 	return axios({

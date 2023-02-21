@@ -12,7 +12,7 @@ const params = {
 const handleError = (error) => {
 	if (error?.response) {
 		console.error(
-			`The response from the server was an error with the status code ${error?.response?.status}`
+			`The response from the server was an error with the status code ${error?.response?.status}.`
 		);
 	} else if (error?.request) {
 		console.error("The request to the server failed with no response.");

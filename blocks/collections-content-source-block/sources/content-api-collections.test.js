@@ -143,9 +143,22 @@ describe("the collections content source block", () => {
 			const consoleSpy = jest.spyOn(console, "error");
 			await contentSource.fetch({});
 			expect(consoleSpy).toHaveBeenCalledWith(
-				"The response from the server was an error with the status code 404"
+				"The response from the server was an error with the status code 404."
 			);
 		});
-		// Add tests for other cases.
+
+		it("handles errors with the request", async () => {
+			axios.mockRejectedValue({ request: {} });
+			const consoleSpy = jest.spyOn(console, "error");
+			await contentSource.fetch({});
+			expect(consoleSpy).toHaveBeenCalledWith("The request to the server failed with no response.");
+		});
+
+		it("handles errors creating the request", async () => {
+			axios.mockRejectedValue({});
+			const consoleSpy = jest.spyOn(console, "error");
+			await contentSource.fetch({});
+			expect(consoleSpy).toHaveBeenCalledWith("An error occured creating the request.");
+		});
 	});
 });

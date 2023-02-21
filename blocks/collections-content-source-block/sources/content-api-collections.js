@@ -11,12 +11,15 @@ const params = {
 
 const handleError = (error) => {
 	if (error?.response) {
+		// eslint-disable-next-line no-console
 		console.error(
 			`The response from the server was an error with the status code ${error?.response?.status}.`
 		);
 	} else if (error?.request) {
+		// eslint-disable-next-line no-console
 		console.error("The request to the server failed with no response.");
 	} else {
+		// eslint-disable-next-line no-console
 		console.error("An error occured creating the request.");
 	}
 };

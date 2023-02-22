@@ -12,34 +12,12 @@ import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-b
 export const itemsToArray = (itemString = "") =>
 	itemString.split(",").map((item) => item.trim().replace(/"/g, ""));
 
-const params = [
-	{
-		displayName: "excludeSections",
-		name: "excludeSections",
-		type: "text",
-	},
-	{
-		displayName: "feedOffset",
-		name: "feedOffset",
-		type: "number",
-	},
-	{
-		displayName: "feedSize",
-		name: "feedSize",
-		type: "number",
-	},
-	{
-		displayName: "includeSections",
-		name: "includeSections",
-		type: "text",
-	},
-	{
-		default: "2",
-		displayName: "Themes Version",
-		name: "themes",
-		type: "text",
-	},
-];
+const params = {
+	excludeSections: "text",
+	feedOffset: "number",
+	feedSize: "number",
+	includeSections: "text",
+};
 
 const fetch = (
 	{
@@ -47,7 +25,6 @@ const fetch = (
 		feedOffset: from = 0,
 		feedSize: size = 10,
 		includeSections,
-		themes,
 		"arc-site": website,
 	},
 	{ cachedCall }
@@ -120,7 +97,6 @@ const fetch = (
 		size,
 		sort: "display_date:desc",
 		website,
-		themes,
 	});
 
 	return axios({

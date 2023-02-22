@@ -43,29 +43,11 @@ expect.extend({
 
 describe("the search content source block", () => {
 	it("should use the proper param types", () => {
-		expect(contentSource.params).toEqual([
-			{
-				displayName: "_id",
-				name: "_id",
-				type: "text",
-			},
-			{
-				displayName: "page",
-				name: "page",
-				type: "text",
-			},
-			{
-				displayName: "query",
-				name: "query",
-				type: "text",
-			},
-			{
-				default: "2",
-				displayName: "Themes Version",
-				name: "themes",
-				type: "text",
-			},
-		]);
+		expect(contentSource.params).toEqual({
+			_id: "text",
+			page: "text",
+			query: "text",
+		});
 	});
 
 	describe("when a query is provided", () => {

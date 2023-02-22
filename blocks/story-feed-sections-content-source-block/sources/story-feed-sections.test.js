@@ -85,34 +85,12 @@ const body = {
 
 describe("story-feed-author-content-source-block", () => {
 	it("should use the proper param types", () => {
-		expect(contentSource.params).toEqual([
-			{
-				displayName: "excludeSections",
-				name: "excludeSections",
-				type: "text",
-			},
-			{
-				displayName: "feedOffset",
-				name: "feedOffset",
-				type: "number",
-			},
-			{
-				displayName: "feedSize",
-				name: "feedSize",
-				type: "number",
-			},
-			{
-				displayName: "includeSections",
-				name: "includeSections",
-				type: "text",
-			},
-			{
-				default: "2",
-				displayName: "Themes Version",
-				name: "themes",
-				type: "text",
-			},
-		]);
+		expect(contentSource.params).toEqual({
+			excludeSections: "text",
+			feedOffset: "number",
+			feedSize: "number",
+			includeSections: "text",
+		});
 	});
 
 	it("should build the correct url", async () => {

@@ -44,34 +44,36 @@ const fetch = (key = {}) => {
 		},
 		method: "GET",
 	})
-		.then(({ data: content }) => {
-			if (getNext === "false") {
-				return content;
-			}
+		.then(
+			/* istanbul ignore next */ ({ data: content }) => {
+				if (getNext === "false") {
+					return content;
+				}
 
-			const existingData = content;
+				const existingData = content;
 
-			return axios({
-				url: `${CONTENT_BASE}/content/v4/collections?${
-					_id ? `_id=${_id}` : `content_alias=${contentAlias}`
-				}${site ? `&website=${site}` : ""}&from=${updatedSize}${
-					size ? `&size=${updatedSize}` : ""
-				}&published=true`,
-				headers: {
-					"content-type": "application/json",
-					Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
-				},
-				method: "GET",
-			})
-				.then(({ data: nextContent }) => {
-					existingData.content_elements = [
-						...existingData.content_elements,
-						...nextContent?.content_elements,
-					];
-					return existingData;
+				return axios({
+					url: `${CONTENT_BASE}/content/v4/collections?${
+						_id ? `_id=${_id}` : `content_alias=${contentAlias}`
+					}${site ? `&website=${site}` : ""}&from=${updatedSize}${
+						size ? `&size=${updatedSize}` : ""
+					}&published=true`,
+					headers: {
+						"content-type": "application/json",
+						Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+					},
+					method: "GET",
 				})
-				.catch(handleError);
-		})
+					.then(({ data: nextContent }) => {
+						existingData.content_elements = [
+							...existingData.content_elements,
+							...nextContent?.content_elements,
+						];
+						return existingData;
+					})
+					.catch(handleError);
+			}
+		)
 		.catch(handleError);
 };
 

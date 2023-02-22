@@ -42,7 +42,7 @@ const RightRailLayout = ({ children }) => {
 				</Grid>
 
 				{featureList["4"] > 0 ? (
-					<div className={`${LAYOUT_CLASS_NAME}__full-width-2`}>{fullWidth2}</div>
+					<Stack className={`${LAYOUT_CLASS_NAME}__full-width-2`}>{fullWidth2}</Stack>
 				) : null}
 			</section>
 			{footer ? (

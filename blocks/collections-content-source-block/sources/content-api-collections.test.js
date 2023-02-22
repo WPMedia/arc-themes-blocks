@@ -129,7 +129,7 @@ describe("the collections content source block", () => {
 
 	describe("when an id and website are NOT provided", () => {
 		it("should not build a url with an id and website", async () => {
-			const contentSourceRequest = await contentSource.fetch({});
+			const contentSourceRequest = await contentSource.fetch();
 
 			expect(contentSourceRequest.url).toEqual(
 				"/content/v4/collections?content_alias=undefined&published=true"

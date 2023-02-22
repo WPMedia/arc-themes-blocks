@@ -12,12 +12,34 @@ import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-b
 export const itemsToArray = (itemString = "") =>
 	itemString.split(",").map((item) => item.trim().replace(/"/g, ""));
 
-const params = {
-	excludeSections: "text",
-	feedOffset: "number",
-	feedSize: "number",
-	includeSections: "text",
-};
+const params = [
+	{
+		displayName: "excludeSections",
+		name: "excludeSections",
+		type: "text",
+	},
+	{
+		displayName: "feedOffset",
+		name: "feedOffset",
+		type: "number",
+	},
+	{
+		displayName: "feedSize",
+		name: "feedSize",
+		type: "number",
+	},
+	{
+		displayName: "includeSections",
+		name: "includeSections",
+		type: "text",
+	},
+	{
+		default: "2",
+		displayName: "Themes Version",
+		name: "themes",
+		type: "text",
+	},
+];
 
 const fetch = (
 	{

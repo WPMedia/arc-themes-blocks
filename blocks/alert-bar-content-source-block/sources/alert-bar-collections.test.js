@@ -35,7 +35,14 @@ jest.mock("axios", () => ({
 
 describe("the author api content source block", () => {
 	it("should use the proper param types", () => {
-		expect(contentSource.params).toEqual({});
+		expect(contentSource.params).toEqual([
+			{
+				default: "2",
+				displayName: "Themes Version",
+				name: "themes",
+				type: "text",
+			},
+		]);
 	});
 
 	it("should build the correct url", async () => {

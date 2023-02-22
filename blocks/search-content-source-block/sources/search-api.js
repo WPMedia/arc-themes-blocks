@@ -4,11 +4,29 @@ import { ARC_ACCESS_TOKEN, RESIZER_APP_VERSION, searchKey as SEARCH_KEY } from "
 import signImagesInANSObject from "@wpmedia/arc-themes-components/src/utils/sign-images-in-ans-object";
 import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
 
-const params = {
-	_id: "text",
-	page: "text",
-	query: "text",
-};
+const params = [
+	{
+		displayName: "_id",
+		name: "_id",
+		type: "text",
+	},
+	{
+		displayName: "page",
+		name: "page",
+		type: "text",
+	},
+	{
+		displayName: "query",
+		name: "query",
+		type: "text",
+	},
+	{
+		default: "2",
+		displayName: "Themes Version",
+		name: "themes",
+		type: "text",
+	},
+];
 
 const fetch = ({ "arc-site": site, page = "1", query }, { cachedCall }) => {
 	if (!query) {

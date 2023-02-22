@@ -599,11 +599,11 @@
 					height: 1px,
 				),
 				article-body-embed-responsive: (
-					aspect-ratio: 16 / 9,
+					aspect-ratio: calc(16 / 9),
 					width: 100%,
 				),
 				article-body-embed-responsive-item: (
-					aspect-ratio: 16 / 9,
+					aspect-ratio: calc(16 / 9),
 					height: auto,
 					width: 100%,
 				),

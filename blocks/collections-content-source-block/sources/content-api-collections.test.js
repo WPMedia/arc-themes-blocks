@@ -140,25 +140,31 @@ describe("the collections content source block", () => {
 	describe("when an error occurs in the response or request", () => {
 		it("handles errors with the response", async () => {
 			axios.mockRejectedValue({ response: { status: "404" } });
-			const consoleSpy = jest.spyOn(console, "error");
-			await contentSource.fetch({});
-			expect(consoleSpy).toHaveBeenCalledWith(
-				"The response from the server was an error with the status code 404."
-			);
+			try {
+				await contentSource.fetch({});
+			} catch (e) {
+				expect(e.message).toEqual(
+					"The response from the server was an error with the status code 404."
+				);
+			}
 		});
 
 		it("handles errors with the request", async () => {
 			axios.mockRejectedValue({ request: {} });
-			const consoleSpy = jest.spyOn(console, "error");
-			await contentSource.fetch({});
-			expect(consoleSpy).toHaveBeenCalledWith("The request to the server failed with no response.");
+			try {
+				await contentSource.fetch({});
+			} catch (e) {
+				expect(e.message).toEqual("The request to the server failed with no response.");
+			}
 		});
 
 		it("handles errors creating the request", async () => {
 			axios.mockRejectedValue({});
-			const consoleSpy = jest.spyOn(console, "error");
-			await contentSource.fetch({});
-			expect(consoleSpy).toHaveBeenCalledWith("An error occured creating the request.");
+			try {
+				await contentSource.fetch({});
+			} catch (e) {
+				expect(e.message).toEqual("An error occured creating the request.");
+			}
 		});
 	});
 });

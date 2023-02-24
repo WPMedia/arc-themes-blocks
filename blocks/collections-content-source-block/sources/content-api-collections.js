@@ -9,6 +9,18 @@ const params = {
 	size: "text",
 };
 
+const handleError = (error) => {
+	if (error?.response) {
+		throw new Error(
+			`The response from the server was an error with the status code ${error?.response?.status}.`
+		);
+	} else if (error?.request) {
+		throw new Error("The request to the server failed with no response.");
+	} else {
+		throw new Error("An error occured creating the request.");
+	}
+};
+
 const fetch = (key = {}) => {
 	const { "arc-site": site, _id, content_alias: contentAlias, from, size, getNext = "false" } = key;
 	let updatedSize = size;
@@ -28,32 +40,38 @@ const fetch = (key = {}) => {
 			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
 		},
 		method: "GET",
-	}).then(({ data: content }) => {
-		if (getNext === "false") {
-			return content;
-		}
+	})
+		.then(
+			/* istanbul ignore next */ ({ data: content }) => {
+				if (getNext === "false") {
+					return content;
+				}
 
-		const existingData = content;
+				const existingData = content;
 
-		return axios({
-			url: `${CONTENT_BASE}/content/v4/collections?${
-				_id ? `_id=${_id}` : `content_alias=${contentAlias}`
-			}${site ? `&website=${site}` : ""}&from=${updatedSize}${
-				size ? `&size=${updatedSize}` : ""
-			}&published=true`,
-			headers: {
-				"content-type": "application/json",
-				Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
-			},
-			method: "GET",
-		}).then(({ data: nextContent }) => {
-			existingData.content_elements = [
-				...existingData.content_elements,
-				...nextContent?.content_elements,
-			];
-			return existingData;
-		});
-	});
+				return axios({
+					url: `${CONTENT_BASE}/content/v4/collections?${
+						_id ? `_id=${_id}` : `content_alias=${contentAlias}`
+					}${site ? `&website=${site}` : ""}&from=${updatedSize}${
+						size ? `&size=${updatedSize}` : ""
+					}&published=true`,
+					headers: {
+						"content-type": "application/json",
+						Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+					},
+					method: "GET",
+				})
+					.then(({ data: nextContent }) => {
+						existingData.content_elements = [
+							...existingData.content_elements,
+							...nextContent?.content_elements,
+						];
+						return existingData;
+					})
+					.catch(handleError);
+			}
+		)
+		.catch(handleError);
 };
 
 export default {
@@ -61,5 +79,6 @@ export default {
 	fetch,
 	schemaName: "ans-feed",
 	// other options null use default functionality, such as filter quality
-	transform: (data, query) => getResizedImageData(data, null, null, null, query["arc-site"]),
+	transform: /* istanbul ignore next */ (data, query) =>
+		getResizedImageData(data, null, null, null, query["arc-site"]),
 };

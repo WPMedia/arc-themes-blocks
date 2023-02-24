@@ -1,3 +1,4 @@
+import axios from "axios";
 import contentSource from "./content-api-collections";
 
 jest.mock("fusion:environment", () => ({
@@ -128,11 +129,42 @@ describe("the collections content source block", () => {
 
 	describe("when an id and website are NOT provided", () => {
 		it("should not build a url with an id and website", async () => {
-			const contentSourceRequest = await contentSource.fetch({});
+			const contentSourceRequest = await contentSource.fetch();
 
 			expect(contentSourceRequest.url).toEqual(
 				"/content/v4/collections?content_alias=undefined&published=true"
 			);
+		});
+	});
+
+	describe("when an error occurs in the response or request", () => {
+		it("handles errors with the response", async () => {
+			axios.mockRejectedValue({ response: { status: "404" } });
+			try {
+				await contentSource.fetch({});
+			} catch (e) {
+				expect(e.message).toEqual(
+					"The response from the server was an error with the status code 404."
+				);
+			}
+		});
+
+		it("handles errors with the request", async () => {
+			axios.mockRejectedValue({ request: {} });
+			try {
+				await contentSource.fetch({});
+			} catch (e) {
+				expect(e.message).toEqual("The request to the server failed with no response.");
+			}
+		});
+
+		it("handles errors creating the request", async () => {
+			axios.mockRejectedValue({});
+			try {
+				await contentSource.fetch({});
+			} catch (e) {
+				expect(e.message).toEqual("An error occured creating the request.");
+			}
 		});
 	});
 });

@@ -27,11 +27,29 @@ jest.mock("axios", () => ({
 
 describe("story-feed-author-content-source-block", () => {
 	it("should use the proper param types", () => {
-		expect(contentSource.params).toEqual({
-			authorSlug: "text",
-			feedOffset: "number",
-			feedSize: "number",
-		});
+		expect(contentSource.params).toEqual([
+			{
+				displayName: "authorSlug",
+				name: "authorSlug",
+				type: "text",
+			},
+			{
+				displayName: "feedOffset",
+				name: "feedOffset",
+				type: "number",
+			},
+			{
+				displayName: "feedSize",
+				name: "feedSize",
+				type: "number",
+			},
+			{
+				default: "2",
+				displayName: "Themes Version",
+				name: "themes",
+				type: "text",
+			},
+		]);
 	});
 
 	it("should build the correct url", async () => {

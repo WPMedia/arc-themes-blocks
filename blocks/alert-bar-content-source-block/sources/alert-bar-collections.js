@@ -1,7 +1,14 @@
 import axios from "axios";
 import { ARC_ACCESS_TOKEN, CONTENT_BASE } from "fusion:environment";
 
-const params = {};
+const params = [
+	{
+		default: "2",
+		displayName: "Themes Version",
+		name: "themes",
+		type: "text",
+	},
+];
 
 const fetch = ({ "arc-site": website }) => {
 	const urlSearch = new URLSearchParams({

@@ -1,0 +1,11 @@
+{
+	"divider": {
+		"styles": {
+			"default": {
+				"background-color": "var(--border-color)",
+				"height": "1px"
+			},
+			"desktop": {}
+		}
+	}
+}

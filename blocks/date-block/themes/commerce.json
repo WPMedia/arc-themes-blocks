@@ -1,0 +1,11 @@
+{
+	"date": {
+		"styles": {
+			"default": {
+				"font-size": "var(--body-font-size-small)",
+				"line-height": "var(--body-line-height-small)"
+			},
+			"desktop": {}
+		}
+	}
+}

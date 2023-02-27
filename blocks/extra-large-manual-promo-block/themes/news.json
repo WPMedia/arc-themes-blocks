@@ -1,0 +1,36 @@
+{
+	"xl-manual-promo": {
+		"styles": {
+			"default": {
+				"components": {
+					"link": {
+						"font-family": "inherit",
+						"font-size": "inherit",
+						"font-weight": "inherit",
+						"line-height": "inherit"
+					},
+					"stack": {
+						"gap": "var(--global-spacing-4)"
+					}
+				}
+			},
+			"desktop": {
+				"components": {
+					"heading": {
+						"align-self": "center",
+						"font-size": "var(--heading-level-1-font-size)",
+						"justify-content": "center",
+						"line-height": "var(--heading-level-1-line-height)"
+					},
+					"overline": {
+						"display": "flex",
+						"justify-content": "center"
+					},
+					"stack": {
+						"gap": "var(--global-spacing-5)"
+					}
+				}
+			}
+		}
+	}
+}

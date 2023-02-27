@@ -1,0 +1,14 @@
+{
+	"article-tag": {
+		"styles": {
+			"default": {
+				"components": {
+					"stack": {
+						"gap": "var(--global-spacing-4)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	}
+}

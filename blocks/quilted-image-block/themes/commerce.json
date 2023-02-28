@@ -1,0 +1,110 @@
+{
+	"quilted-image": {
+		"styles": {
+			"default": {
+				"margin-left": "auto",
+				"margin-right": "auto",
+				"width": "100%",
+				"components": {
+					"heading": {
+						"font-size": "var(--heading-level-5-font-size)",
+						"font-weight": "var(--heading-level-5-font-weight)",
+						"line-height": "var(--heading-level-5-line-height)",
+						"margin-left": "auto",
+						"margin-right": "auto",
+						"margin-bottom": "var(--global-spacing-2)",
+						"max-width": "var(--content-scale-width)",
+						"width": "100%"
+					}
+				}
+			},
+			"desktop": {
+				"max-width": "var(--content-scale-width)",
+				"width": "100%",
+				"components": {
+					"heading": {
+						"font-size": "var(--heading-level-5-font-size)",
+						"line-height": "var(--heading-level-5-line-height)"
+					}
+				}
+			}
+		}
+	},
+	"quilted-image__media-panel": {
+		"styles": {
+			"default": {
+				"text-decoration": "none"
+			},
+			"desktop": {}
+		}
+	},
+	"quilted-image__overlay": {
+		"styles": {
+			"default": {
+				"align-self": "end",
+				"margin-bottom": "var(--global-spacing-4)",
+				"margin-left": "auto",
+				"margin-right": "auto",
+				"max-width": "var(--content-scale-width)",
+				"width": "100%",
+				"components": {
+					"paragraph": {
+						"font-weight": "var(--heading-level-5-font-weight)",
+						"line-height": "var(--heading-level-5-line-height)",
+						"font-size": "var(--heading-level-5-font-size)"
+					},
+					"stack": {
+						"gap": "var(--global-spacing-4)",
+						"align-items": "start"
+					}
+				}
+			},
+			"desktop": {
+				"margin-left": "var(--global-spacing-6)",
+				"margin-bottom": "var(--global-spacing-6)",
+				"max-width": "100%",
+				"components": {
+					"paragraph": {
+						"font-size": "var(--heading-level-5-font-size)"
+					},
+					"stack": {
+						"gap": "var(--global-spacing-4)"
+					}
+				}
+			}
+		}
+	},
+	"quilted-image__overlay-text--light": {
+		"styles": {
+			"default": {
+				"color": "var(--global-white)"
+			},
+			"desktop": {}
+		}
+	},
+	"quilted-image__overlay-text--dark": {
+		"styles": {
+			"default": {
+				"color": "var(--global-black)"
+			},
+			"desktop": {}
+		}
+	},
+	"quilted-image__wrapper": {
+		"styles": {
+			"default": {
+				"gap": "var(--global-spacing-6)",
+				"grid-template-areas": "'top' 'middle' 'bottom'",
+				"grid-auto-flow": "column",
+				"margin": "0auto",
+				"width": "100%",
+				"max-width": "100%"
+			},
+			"desktop": {
+				"grid-template-areas": "'top top' 'bottom bottom'",
+				"max-width": "var(--content-scale-width)",
+				"width": "100%"
+			}
+		}
+	}
+}

@@ -1,0 +1,56 @@
+{
+	"numbered-list": {
+		"styles": {
+			"default": {
+				"gap": "var(--global-spacing-4)",
+				"components": {
+					"heading": {
+						"font-size": "var(--heading-level-6-font-size)",
+						"line-height": "var(--heading-level-6-line-height)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"numbered-list-items": {
+		"styles": {
+			"default": {
+				"gap": "var(--global-spacing-4)"
+			},
+			"desktop": {}
+		}
+	},
+	"numbered-list-item": {
+		"styles": {
+			"default": {
+				"gap": "var(--global-spacing-5)",
+				"components": {
+					"heading": {
+						"font-size": "var(--body-font-size)",
+						"font-weight": "var(--body-font-weight)",
+						"line-height": "var(--body-line-height)"
+					},
+					"link": {
+						"flex": 1
+					},
+					"paragraph": {
+						"font-family": "var(--font-family-secondary)",
+						"font-size": "var(--heading-level-6-font-size)",
+						"font-weight": "var(--heading-level-6-font-weight)",
+						"line-height": "var(--heading-level-6-line-height)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"numbered-list-item-image": {
+		"styles": {
+			"default": {
+				"max-width": "25%"
+			},
+			"desktop": {}
+		}
+	}
+}

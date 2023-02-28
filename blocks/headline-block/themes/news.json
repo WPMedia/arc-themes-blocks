@@ -1,0 +1,12 @@
+{
+	"headline": {
+		"styles": {
+			"default": {
+				"font-size": "var(--heading-level-1-font-size)",
+				"font-weight": "var(--heading-level-1-font-weight)",
+				"line-height": "var(--heading-level-1-line-height)"
+			},
+			"desktop": {}
+		}
+	}
+}

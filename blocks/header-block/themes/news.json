@@ -1,0 +1,49 @@
+{
+	"header": {
+		"styles": {
+			"default": {
+				"font-weight": "var(--global-font-weight-7)"
+			},
+			"desktop": {}
+		}
+	},
+	"header-extra-large": {
+		"styles": {
+			"default": {
+				"font-size": "var(--heading-level-4-font-size)",
+				"line-height": "var(--heading-level-4-line-height)"
+			},
+			"desktop": {}
+		}
+	},
+	"header-large": {
+		"styles": {
+			"default": {
+				"font-size": "var(--heading-level-5-font-size)",
+				"line-height": "var(--heading-level-5-line-height)"
+			},
+			"desktop": {}
+		}
+	},
+	"header-medium": {
+		"styles": {
+			"default": {
+				"font-size": "var(--heading-level-6-font-size)",
+				"line-height": "var(--heading-level-6-line-height)"
+			},
+			"desktop": {}
+		}
+	},
+	"header-small": {
+		"styles": {
+			"default": {
+				"font-size": "var(--body-font-size-small)",
+				"line-height": "var(--body-line-height-small)"
+			},
+			"desktop": {
+				"font-size": "var(--body-font-size)",
+				"line-height": "var(--body-line-height)"
+			}
+		}
+	}
+}

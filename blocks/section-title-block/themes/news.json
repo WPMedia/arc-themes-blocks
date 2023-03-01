@@ -1,0 +1,21 @@
+{
+	"section-title": {
+		"styles": {
+			"default": {
+				"gap": "var(--global-spacing-4)",
+				"components": {
+					"heading": {
+						"font-family": "var(--font-family-primary)",
+						"font-size": "var(--heading-level-1-font-size)",
+						"font-weight": "var(--heading-level-1-font-weight)",
+						"line-height": "var(--heading-level-1-line-height)"
+					},
+					"separator": {
+						"margin": "0var(--global-spacing-4)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	}
+}

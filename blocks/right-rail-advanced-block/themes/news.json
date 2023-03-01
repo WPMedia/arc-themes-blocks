@@ -127,7 +127,7 @@
 	"right-rail-advanced-rail-container": {
 		"styles": {
 			"default": {
-				"grid-template-areas": "'main-right-rail-top' 'main-interior-item-1' 'main-right-rail-middle' 'main-interior-item-2' 'main-right-rail-bottom'",
+				"grid-template-areas": "\"main-right-rail-top\" \"main-interior-item-1\" \"main-right-rail-middle\" \"main-interior-item-2\" \"main-right-rail-bottom\"",
 				"grid-template-columns": "initial",
 				"grid-template-rows": "1fr",
 				"grid-auto-rows": "auto",

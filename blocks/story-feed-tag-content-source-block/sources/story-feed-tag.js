@@ -4,11 +4,29 @@ import { ARC_ACCESS_TOKEN, CONTENT_BASE, RESIZER_APP_VERSION } from "fusion:envi
 import signImagesInANSObject from "@wpmedia/arc-themes-components/src/utils/sign-images-in-ans-object";
 import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
 
-const params = {
-	feedOffset: "number",
-	feedSize: "number",
-	tagSlug: "text",
-};
+const params = [
+	{
+		displayName: "feedOffset",
+		name: "feedOffset",
+		type: "number",
+	},
+	{
+		displayName: "feedSize",
+		name: "feedSize",
+		type: "number",
+	},
+	{
+		displayName: "tagSlug",
+		name: "tagSlug",
+		type: "text",
+	},
+	{
+		default: "2",
+		displayName: "Themes Version",
+		name: "themes",
+		type: "text",
+	},
+];
 
 const fetch = (
 	{ feedSize: size = 10, feedOffset: from = 0, tagSlug, "arc-site": website },

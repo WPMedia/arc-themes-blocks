@@ -28,13 +28,39 @@ jest.mock("axios", () => ({
 
 describe("the collections content source block", () => {
 	it("should use the proper param types", () => {
-		expect(contentSource.params).toEqual({
-			_id: "text",
-			content_alias: "text",
-			from: "text",
-			getNext: "text",
-			size: "text",
-		});
+		expect(contentSource.params).toEqual([
+			{
+				displayName: "_id",
+				name: "_id",
+				type: "text",
+			},
+			{
+				displayName: "content_alias",
+				name: "content_alias",
+				type: "text",
+			},
+			{
+				displayName: "from",
+				name: "from",
+				type: "text",
+			},
+			{
+				displayName: "getNext",
+				name: "getNext",
+				type: "text",
+			},
+			{
+				displayName: "size",
+				name: "size",
+				type: "text",
+			},
+			{
+				default: "2",
+				displayName: "Themes Version",
+				name: "themes",
+				type: "text",
+			},
+		]);
 	});
 
 	it("should be associated with the ans-feed schema", () => {

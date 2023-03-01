@@ -1,0 +1,50 @@
+{
+	"video-player": {
+		"styles": {
+			"default": {
+				"gap": "var(--global-spacing-4)",
+				"components": {
+					"heading": {
+						"font-size": "var(--heading-level-3-font-size)",
+						"line-height": "var(--heading-level-3-line-height)"
+					},
+					"media-item": {
+						"width": "100%",
+						"margin": "auto"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"video-player-feature": {
+		"styles": {
+			"default": {
+				"gap": "var(--global-spacing-6)",
+				"components": {
+					"media-item-fig-caption": {
+						"margin-bottom": 0,
+						"margin-left": "var(--global-spacing-4)",
+						"margin-right": "var(--global-spacing-4)",
+						"margin-top": 0
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"video-player-feature-meta": {
+		"styles": {
+			"default": {
+				"margin": "auto",
+				"width": "var(--content-scale-width)",
+				"components": {
+					"stack": {
+						"gap": "var(--global-spacing-4)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"tag-title": {
+		"styles": {
+			"default": {
+				"components": {
+					"heading": {
+						"font-size": "var(--heading-level-1-font-size)",
+						"line-height": "var(--heading-level-1-line-height)"
+					},
+					"stack": {
+						"gap": "var(--global-spacing-2)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	}
+}

@@ -1,0 +1,113 @@
+{
+	"medium-promo": {
+		"styles": {
+			"default": {
+				"clear": "both",
+				"display": "table",
+				"width": "100%",
+				"components": {
+					"attribution": {
+						"display": "block",
+						"margin-top": "var(--global-spacing-4)"
+					},
+					"media-item": {
+						"float": "right",
+						"max-width": "100px"
+					},
+					"heading": {
+						"font-size": "var(--heading-level-5-font-size)",
+						"font-weight": "var(--heading-level-5-font-weight)",
+						"line-height": "var(--heading-level-5-line-height)",
+						"margin-bottom": "var(--global-spacing-4)"
+					},
+					"paragraph": {
+						"display": "block",
+						"width": "100%"
+					},
+					"separator": {
+						"padding": "0var(--global-spacing-2)"
+					},
+					"link": {
+						"position": "relative"
+					}
+				}
+			},
+			"desktop": {
+				"components": {
+					"attribution": {
+						"display": "block"
+					},
+					"media-item": {
+						"float": "left",
+						"margin": 0,
+						"max-width": "33%"
+					},
+					"paragraph": {
+						"display": "block",
+						"width": "auto"
+					}
+				}
+			}
+		}
+	},
+	"medium-promo-show-image": {
+		"styles": {
+			"default": {
+				"components": {
+					"heading": {
+						"width": "68%"
+					}
+				}
+			},
+			"desktop": {
+				"components": {
+					"attribution": {
+						"margin-left": "calc(33% + var(--global-spacing-6))"
+					},
+					"heading": {
+						"margin-left": "calc(33% + var(--global-spacing-6))",
+						"width": "auto"
+					},
+					"paragraph": {
+						"margin-left": "calc(33% + var(--global-spacing-6))"
+					}
+				}
+			}
+		}
+	},
+	"medium-promo-icon-label": {
+		"styles": {
+			"default": {
+				"align-items": "center",
+				"padding": "var(--global-spacing-2)",
+				"background-color": "var(--color-primary)",
+				"border": 0,
+				"border-radius": "var(--global-spacing-2)",
+				"bottom": "var(--global-spacing-2)",
+				"margin-left": "var(--global-spacing-2)",
+				"position": "absolute",
+				"z-index": 1,
+				"components": {
+					"icon": {
+						"fill": "var(--global-white)",
+						"height": "var(--global-spacing-4)",
+						"width": "var(--global-spacing-4)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"medium-promo-label": {
+		"styles": {
+			"default": {
+				"margin-left": "var(--global-spacing-2)",
+				"color": "var(--global-white)",
+				"display": "none"
+			},
+			"desktop": {
+				"display": "inline"
+			}
+		}
+	}
+}

@@ -1,0 +1,107 @@
+{
+	"card-list": {
+		"styles": {
+			"default": {
+				"box-shadow": "var(--global-box-shadow-1)",
+				"border-radius": "0var(--border-radius) var(--border-radius) 0",
+				"background-color": "var(--background-color)",
+				"padding": "var(--global-spacing-4) 0",
+				"components": {
+					"heading": {
+						"font-size": "var(--heading-level-5-font-size)",
+						"font-weight": "var(--heading-level-5-font-weight)",
+						"line-height": "var(--heading-level-5-line-height)"
+					},
+					"stack": {
+						"gap": "var(--global-spacing-4)"
+					},
+					"separator": {
+						"padding": "0var(--global-spacing-2)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"card-list-list": {
+		"styles": {
+			"default": {
+				"padding": "0var(--global-spacing-4)"
+			},
+			"desktop": {}
+		}
+	},
+	"card-list-main-item-image-link": {
+		"styles": {
+			"default": {
+				"components": {
+					"image": {
+						"max-height": "40vh",
+						"object-fit": "cover",
+						"width": "100%"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"card-list-main-item-text-container": {
+		"styles": {
+			"default": {
+				"gap": "var(--global-spacing-2)",
+				"components": {
+					"heading": {
+						"font-size": "var(--heading-level-6-font-size)",
+						"font-weight": "var(--heading-level-6-font-weight)",
+						"line-height": "var(--heading-level-6-line-height)"
+					},
+					"overline": {
+						"font-size": "var(--body-font-size)",
+						"line-height": "var(--body-line-height)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"card-list-secondary-item": {
+		"styles": {
+			"default": {
+				"components": {
+					"heading": {
+						"font-size": "var(--body-font-size)",
+						"font-weight": "var(--body-font-weight)",
+						"line-height": "var(--body-line-height)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"card-list-secondary-item-heading-link": {
+		"styles": {
+			"default": {
+				"width": "100%"
+			},
+			"desktop": {}
+		}
+	},
+	"card-list-secondary-item-image-link": {
+		"styles": {
+			"default": {
+				"max-width": "105px"
+			},
+			"desktop": {}
+		}
+	},
+	"card-list-title": {
+		"styles": {
+			"default": {
+				"padding": "0var(--global-spacing-4)",
+				"font-size": "var(--heading-level-5-font-size)",
+				"line-height": "var(--heading-level-5-line-height)"
+			},
+			"desktop": {}
+		}
+	}
+}

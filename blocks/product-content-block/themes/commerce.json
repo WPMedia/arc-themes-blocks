@@ -1,0 +1,30 @@
+{
+	"product-content": {
+		"styles": {
+			"default": {
+				"margin": "0auto",
+				"max-width": "var(--content-scale-width)",
+				"width": "100%"
+			},
+			"desktop": {}
+		}
+	},
+	"product-content-ul": {
+		"styles": {
+			"default": {
+				"list-style": "disc",
+				"margin-left": "var(--global-spacing-4)"
+			},
+			"desktop": {}
+		}
+	},
+	"product-content-ol": {
+		"styles": {
+			"default": {
+				"list-style": "decimal",
+				"margin-left": "var(--global-spacing-4)"
+			},
+			"desktop": {}
+		}
+	}
+}

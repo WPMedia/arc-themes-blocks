@@ -3,7 +3,7 @@
 .b-xl-promo {
 	&__icon_label {
 		@include scss.block-components("xl-promo-icon-label");
-		@include scss.block-properties("large-promo-icon-label");
+		@include scss.block-properties("xl-promo-icon-label");
 	}
 
 	&__label {

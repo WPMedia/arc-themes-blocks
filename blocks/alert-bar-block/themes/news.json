@@ -1,0 +1,46 @@
+{
+	"alert-bar": {
+		"styles": {
+			"default": {
+				"align-items": "flex-start",
+				"background-color": "var(--global-red-5)",
+				"display": "flex",
+				"flex-wrap": "nowrap",
+				"justify-content": "space-between",
+				"word-break": "break-word",
+				"components": {
+					"button-default": {
+						"background": "none",
+						"border": "none",
+						"flex": "00 auto"
+					},
+					"button-large": {
+						"margin-bottom": "var(--global-spacing-1)",
+						"margin-top": "var(--global-spacing-1)"
+					},
+					"link": {
+						"color": "var(--global-white)",
+						"font-family": "var(--font-family-primary)",
+						"font-size": "var(--body-font-size-small)",
+						"font-weight": "var(--global-font-weight-7)",
+						"padding-bottom": "var(--global-spacing-5)",
+						"padding-left": "var(--global-spacing-4)",
+						"padding-right": "var(--global-spacing-5)",
+						"padding-top": "var(--global-spacing-5)",
+						"text-decoration": "none"
+					},
+					"icon": {
+						"fill": "var(--global-white)"
+					}
+				}
+			},
+			"desktop": {
+				"components": {
+					"link": {
+						"font-size": "var(--body-font-size)"
+					}
+				}
+			}
+		}
+	}
+}

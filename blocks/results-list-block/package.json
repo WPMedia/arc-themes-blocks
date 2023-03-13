@@ -14,7 +14,8 @@
   "files": [
     "features",
     "_index.scss",
-    "intl.json"
+    "intl.json",
+    "themes"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",

@@ -56,7 +56,7 @@ The base lint command that runs `eslint` on all `.js` and `.jsx` files in `block
 
 ### `npm run lint:fix`
 
-Fixes any lint issues that can be fixed automatically from the files mentioned in `npm run lint`.
+Fixes any lint issues that can be automatically fixed from the files mentioned in `npm run lint`.
 
 ### `npm run lint:styles`
 

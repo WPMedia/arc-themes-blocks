@@ -94,6 +94,4 @@ OR
 
 This block does not emit any events.
 
-## Additional Considerations
-
-_Optional_
+## Additional Consideration

@@ -8,7 +8,8 @@
   "main": "index.js",
   "files": [
     "_index.scss",
-    "chains"
+    "chains",
+    "themes"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",

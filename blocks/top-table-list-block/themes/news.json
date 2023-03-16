@@ -201,9 +201,12 @@
 		"styles": {
 			"default": {
 				"margin-left": "var(--global-spacing-2)",
-				"color": "var(--global-white)"
+				"color": "var(--global-white)",
+				"display": "none"
 			},
-			"desktop": {}
+			"desktop": {
+				"display": "inline"
+			}
 		}
 	},
 	"top-table-list-medium-show-image": {

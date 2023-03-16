@@ -78,7 +78,7 @@ const LargePromoPresentation = ({
 											promoSize="LG"
 											promoLabelSize="large"
 											imageRatio={imageRatio}
-											lazyLoad={content && lazyLoad}
+											lazyLoad={lazyLoad}
 											alt={headline}
 										/>
 									</div>

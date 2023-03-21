@@ -19,7 +19,7 @@
 .editable-form-input--label-text {
 	font-size: calculateRem(16px);
 	line-height: 1.5;
-	margin: map-get($spacers, "xxs") 0;
+	margin: 0.25rem 0;
 	font-weight: bold;
 	flex: 1;
 }

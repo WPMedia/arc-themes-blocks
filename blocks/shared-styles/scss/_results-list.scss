@@ -3,7 +3,7 @@
 }
 
 .list-item {
-	box-shadow: inset 0 -1px 0 0 $ui-light-gray;
+	box-shadow: inset 0 -1px 0 0 #dadada;
 	column-gap: 12px;
 	display: grid;
 	grid-template-areas:
@@ -11,19 +11,19 @@
 		"description description";
 	grid-template-columns: 1fr minmax(0, max-content);
 	grid-template-rows: auto;
-	padding: map-get($spacers, "md") 0 map-get($spacers, "md") 0;
+	padding: 1.5rem 0 1.5rem 0;
 
 	.description-text {
 		font-size: calculateRem(18px);
 		line-height: 1.78;
-		margin-bottom: map-get($spacers, "sm");
+		margin-bottom: 1rem;
 	}
 
 	.headline-text {
 		font-size: calculateRem(19px);
 		font-weight: bold;
 		line-height: 1.26;
-		margin-bottom: map-get($spacers, "sm");
+		margin-bottom: 1rem;
 	}
 
 	.results-list--author-date {
@@ -31,7 +31,7 @@
 		line-height: calculateRem(16px);
 
 		.story-date {
-			color: $ui-primary-font-color;
+			color: #191919;
 			display: inline;
 			font-size: calculateRem(14px);
 			line-height: calculateRem(16px);
@@ -39,15 +39,15 @@
 	}
 
 	a {
-		color: $ui-primary-font-color;
+		color: #191919;
 		text-decoration: none;
-		@include link-color-active-hover($ui-primary-font-color);
+		@include link-color-active-hover(#191919);
 	}
 
 	a,
 	h2,
 	p {
-		color: $ui-primary-font-color;
+		color: #191919;
 	}
 
 	picture {
@@ -68,7 +68,7 @@
 	width: 99px;
 }
 
-@media screen and (min-width: map-get($grid-breakpoints, "lg")) {
+@media screen and (min-width: 64rem) {
 	.list-item {
 		column-gap: map-get($spacers, "lg");
 		grid-template-areas:
@@ -76,7 +76,7 @@
 			"image description";
 		grid-template-columns: minmax(0, calc(35%)) 1fr;
 		grid-template-rows: min-content 1fr;
-		padding: map-get($spacers, "sm") 0 map-get($spacers, "sm") 0;
+		padding: 1rem 0 1rem 0;
 
 		&.no-image {
 			grid-template-areas:
@@ -89,13 +89,13 @@
 			font-size: calculateRem(26px);
 			font-weight: bold;
 			line-height: calculateRem(32px);
-			margin-bottom: map-get($spacers, "xs");
+			margin-bottom: 0.5rem;
 		}
 
 		.description-text {
 			font-size: calculateRem(16px);
 			line-height: calculateRem(24px);
-			margin-bottom: map-get($spacers, "xs");
+			margin-bottom: 0.5rem;
 		}
 
 		.results-list--author-date {
@@ -119,8 +119,8 @@
 }
 
 .see-more {
-	margin-bottom: map-get($spacers, "xl");
-	margin-top: map-get($spacers, "xl");
+	margin-bottom: 3rem;
+	margin-top: 3rem;
 	text-align: center;
 	display: flex;
 	justify-content: center;

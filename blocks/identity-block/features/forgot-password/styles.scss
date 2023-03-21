@@ -1,7 +1,17 @@
+$spacers: (
+	xxs: 0.25rem,
+	xs: 0.5rem,
+	sm: 1rem,
+	md: 1.5rem,
+	lg: 2rem,
+	xl: 3rem,
+	xxl: 4rem,
+) !default;
+
 .xpmedia-forgot-password-headline,
 .xpmedia-forgot-password-instruction {
-	padding-bottom: map-get($spacers, "sm");
-	margin-bottom: map-get($spacers, "sm");
+	padding-bottom: 1rem;
+	margin-bottom: 1rem;
 	text-align: center;
 	width: 100%;
 }

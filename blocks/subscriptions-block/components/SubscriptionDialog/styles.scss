@@ -1,26 +1,26 @@
 .xpmedia-subscription-dialog {
 	display: grid;
-	grid-template-columns: map-get($spacers, "md") repeat(10, 1fr) map-get($spacers, "md");
+	grid-template-columns: 1.5rem repeat(10, 1fr) 1.5rem;
 	grid-template-rows: auto;
-	margin: map-get($spacers, "xxl") auto;
+	margin: 4rem auto;
 	text-align: center;
-	@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+	@media screen and (min-width: 48rem) {
 		grid-template-columns: repeat(12, 1fr);
-		margin: map-get($spacers, "xl") auto;
+		margin: 3rem auto;
 	}
 
 	.xpmedia-subscription-dialog-reason-prompt,
 	.xpmedia-subscription-dialog-link-prompt {
-		color: $ui-medium-gray;
+		color: #575757;
 		grid-column: 3/11;
 		line-height: 1rem;
 		font-size: 0.875rem;
-		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+		@media screen and (min-width: 48rem) {
 			font-size: 1rem;
 			grid-column: 4/10;
 			line-height: 1.5rem;
 		}
-		@media screen and (min-width: map-get($grid-breakpoints, "lg")) {
+		@media screen and (min-width: 64rem) {
 			grid-column: 5/9;
 		}
 	}
@@ -49,12 +49,12 @@
 		font-size: 1.75rem;
 		line-height: 2rem;
 		grid-column: 2/12;
-		margin: map-get($spacers, "sm") 0 0 0;
-		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+		margin: 1rem 0 0 0;
+		@media screen and (min-width: 48rem) {
 			font-size: 2.5rem;
 			line-height: 3rem;
 		}
-		@media screen and (min-width: map-get($grid-breakpoints, "lg")) {
+		@media screen and (min-width: 64rem) {
 			grid-column: 4/10;
 		}
 	}
@@ -63,22 +63,22 @@
 		font-size: 1rem;
 		line-height: 1.5rem;
 		grid-column: 2/12;
-		margin: map-get($spacers, "sm") 0 0 0;
-		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+		margin: 1rem 0 0 0;
+		@media screen and (min-width: 48rem) {
 			font-size: 1.25rem;
 		}
-		@media screen and (min-width: map-get($grid-breakpoints, "lg")) {
+		@media screen and (min-width: 64rem) {
 			grid-column: 4/10;
 		}
 	}
 
 	.xpmedia-button {
 		grid-column: 2/12;
-		margin-top: map-get($spacers, "lg");
-		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+		margin-top: 2rem;
+		@media screen and (min-width: 48rem) {
 			grid-column: 4/10;
 		}
-		@media screen and (min-width: map-get($grid-breakpoints, "lg")) {
+		@media screen and (min-width: 64rem) {
 			grid-column: 5/9;
 		}
 	}

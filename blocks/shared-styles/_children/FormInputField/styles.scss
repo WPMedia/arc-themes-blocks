@@ -1,5 +1,5 @@
 .xpmedia-form-field {
-	color: $ui-primary-font-color;
+	color: #191919;
 	display: block;
 	font-size: calculateRem(20px);
 }
@@ -9,7 +9,7 @@
 .xpmedia-form-field-tip {
 	font-size: calculateRem(16px);
 	line-height: 1.5;
-	margin: map-get($spacers, "xxs") 0;
+	margin: 0.25rem 0;
 }
 
 .xpmedia-form-field-label {
@@ -17,24 +17,24 @@
 }
 
 .xpmedia-form-field-input {
-	border: solid 1px $border-rule-color;
+	border: solid 1px #dadada;
 	border-radius: calculateRem(4px);
 	display: block;
 	outline: none;
-	padding: map-get($spacers, "xs");
+	padding: 0.5rem;
 	width: 100%;
 
 	&--error {
-		border-color: $danger-color;
-		color: $danger-color;
+		border-color: #db0a07;
+		color: #db0a07;
 	}
 }
 
 .xpmedia-form-field-tip {
-	color: $ui-medium-gray;
+	color: #575757;
 
 	&--error {
-		color: $danger-color;
+		color: #db0a07;
 	}
 }
 

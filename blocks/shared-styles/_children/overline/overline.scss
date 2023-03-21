@@ -1,13 +1,18 @@
 .overline {
-	color: $ui-primary-font-color;
+	color: #191919;
 	display: inline-block;
 	font-size: calculateRem(20px);
 	font-weight: bold;
 	line-height: calculateRem(24px);
-	padding-bottom: map-get($spacers, "xs");
+	padding-bottom: 0.5rem;
 	text-decoration: none;
 
 	&--link {
-		@include link-color-active-hover($ui-primary-font-color);
+		transition: #191919 0.3s ease;
+
+		&:active,
+		&:hover {
+			color: lighten(#191919, 40%);
+		}
 	}
 }

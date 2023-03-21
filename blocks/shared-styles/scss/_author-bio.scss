@@ -1,9 +1,9 @@
 .author-bio {
-	@media screen and (min-width: map-get($grid-breakpoints, "sm")) {
-		margin-top: map-get($spacers, "md");
+	@media screen and (min-width: 0rem) {
+		margin-top: 1.5rem;
 	}
-	@media screen and (min-width: map-get($grid-breakpoints, "md")) {
-		margin-top: map-get($spacers, "sm");
+	@media screen and (min-width: 48rem) {
+		margin-top: 1rem;
 	}
 
 	@include block-margin-bottom;

@@ -1,5 +1,5 @@
 .account-management-layout > * + * {
-	margin-top: map-get($spacers, "xs");
+	margin-top: 0.5rem;
 }
 
 // applies margin to the second child and any further children

@@ -1,13 +1,13 @@
 .xpmedia-subscription-offer-card {
 	align-items: center;
-	border: 1px solid $ui-light-gray;
+	border: 1px solid #dadada;
 	border-radius: 4px;
 	display: flex;
 	flex-direction: column;
-	padding: map-get($spacers, "xl") map-get($spacers, "lg") map-get($spacers, "lg");
+	padding: 3rem 2rem 2rem;
 
 	> * {
-		margin-bottom: map-get($spacers, "sm");
+		margin-bottom: 1rem;
 	}
 
 	&--headline {
@@ -15,7 +15,7 @@
 	}
 
 	&--subheadline {
-		color: $ui-medium-gray;
+		color: #575757;
 		font-size: calculateRem(20px);
 		font-weight: 400;
 		text-align: center;
@@ -26,7 +26,7 @@
 		font-size: calculateRem(14px);
 
 		> * + * {
-			margin-top: map-get($spacers, "sm");
+			margin-top: 1rem;
 		}
 	}
 
@@ -37,7 +37,7 @@
 
 	&--feature-item-icon {
 		display: flex;
-		margin-right: map-get($spacers, "sm");
+		margin-right: 1rem;
 
 		svg,
 		path {

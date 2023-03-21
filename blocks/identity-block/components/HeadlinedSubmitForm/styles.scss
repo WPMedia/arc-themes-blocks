@@ -1,36 +1,36 @@
 .xpmedia-form-headline {
-	border-bottom: 1px solid $border-rule-color;
-	padding-bottom: map-get($spacers, "sm");
-	margin-bottom: map-get($spacers, "sm");
+	border-bottom: 1px solid #dadada;
+	padding-bottom: 1rem;
+	margin-bottom: 1rem;
 	text-align: center;
 	width: 100%;
 }
 
 .xpmedia-form-submittable {
-	border-bottom: 1px solid $border-rule-color;
-	margin-bottom: map-get($spacers, "sm");
+	border-bottom: 1px solid #dadada;
+	margin-bottom: 1rem;
 
 	.xpmedia-form-field {
-		margin: map-get($spacers, "md") 0;
+		margin: 1.5rem 0;
 
 		&:first-of-type {
-			margin-top: map-get($spacers, "sm");
+			margin-top: 1rem;
 		}
 
 		&:last-of-type {
-			margin-bottom: map-get($spacers, "sm");
+			margin-bottom: 1rem;
 		}
 	}
 
 	.xpmedia-button {
-		margin: map-get($spacers, "md") 0;
+		margin: 1.5rem 0;
 	}
 }
 
 .xpmedia-form-error {
-	color: $danger-color;
+	color: #db0a07;
 	font-size: calculateRem(16px);
-	margin: map-get($spacers, "md") 0;
+	margin: 1.5rem 0;
 
 	p {
 		display: flex;

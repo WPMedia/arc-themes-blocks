@@ -1,16 +1,3 @@
-$arrow-size: calculateRem(10px);
-$border-color-dull: rgba(255, 255, 255, 0.5);
-$border-color-bright: rgba(255, 255, 255, 1);
-$border-width: 1px;
-$btn-size: calculateRem(32px);
-$btn-padding: calculateRem(8px);
-$nav-search-border-color: $ui-light-gray;
-$overlay-z-index: 2;
-$section-bg: #292929;
-$section-width: 329px;
-$top-nav-stylistic-margin: 13px;
-$mouseover-link-preview-safe-area-height: 40px;
-
 body.nav-open {
 	overflow-y: hidden;
 
@@ -22,18 +9,18 @@ body.nav-open {
 .section-menu--bottom-placeholder {
 	// on desktop, on the left, the bottom link
 	// is not visible on hover over other links
-	height: $mouseover-link-preview-safe-area-height;
-	background-color: $section-bg;
+	height: 40px;
+	background-color: #292929;
 
 	// need to hide that hover and active color
 	&:hover,
 	&:active {
 		// keep the same color unlike other list items
-		background: $section-bg !important;
+		background: #292929 !important;
 	}
 }
 
-@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+@media screen and (max-width: 48rem) {
 	.section-menu--bottom-placeholder {
 		// ensure bottom item is visible on mobile
 		// height handles biggest notch on iphone 12 pro
@@ -47,11 +34,11 @@ body.nav-open {
 .nav-btn {
 	align-items: center;
 	border: 0;
-	height: $btn-size;
+	height: calculateRem(32px);
 	position: relative;
 	white-space: nowrap;
-	padding-left: $btn-padding;
-	padding-right: $btn-padding;
+	padding-left: calculateRem(8px);
+	padding-right: calculateRem(8px);
 
 	&.border {
 		transition: border 100ms linear;
@@ -63,36 +50,36 @@ body.nav-open {
 
 	&-dark {
 		span {
-			color: $ui-btn-white-color;
+			color: #fff;
 		}
 
 		svg > path {
-			fill: $ui-btn-white-color;
+			fill: #fff;
 		}
 
 		&.border {
-			border: $border-width solid $border-color-dull;
+			border: 1px solid rgba(255, 255, 255, 0.5);
 
 			&:hover {
-				border: $border-width solid $border-color-bright;
+				border: 1px solid rgba(255, 255, 255, 1);
 			}
 		}
 	}
 
 	&-light {
 		span {
-			color: $ui-medium-gray;
+			color: #575757;
 		}
 
 		svg > path {
-			fill: $ui-medium-gray;
+			fill: #575757;
 		}
 
 		&.border {
-			border: $border-width solid $ui-light-gray;
+			border: 1px solid #dadada;
 
 			&:hover {
-				border: $border-width solid $ui-medium-gray;
+				border: 1px solid #575757;
 			}
 		}
 	}
@@ -118,9 +105,9 @@ body.nav-open {
 	&.open {
 		input {
 			font-size: 16px;
-			height: $btn-size;
+			height: calculateRem(32px);
 			line-height: 24px;
-			padding: 4px $btn-size 4px 11px;
+			padding: 4px calculateRem(32px) 4px 11px;
 			width: 100%;
 		}
 
@@ -130,11 +117,11 @@ body.nav-open {
 		}
 
 		&.dark input {
-			border: $border-width solid $border-color-bright;
+			border: 1px solid rgba(255, 255, 255, 1);
 		}
 
 		&.light input {
-			border: $border-width solid $ui-light-gray;
+			border: 1px solid #dadada;
 		}
 	}
 }
@@ -148,7 +135,7 @@ body.nav-open {
 	flex-shrink: 0;
 
 	&.light {
-		border-bottom: $border-width solid $border-rule-color;
+		border-bottom: 1px solid #dadada;
 	}
 
 	* {
@@ -179,7 +166,7 @@ body.nav-open {
 			align-items: center;
 		}
 
-		@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+		@media screen and (max-width: 48rem) {
 			.nav-components--mobile {
 				display: inherit;
 			}
@@ -244,7 +231,7 @@ body.nav-open {
 			.nav-logo {
 				justify-content: flex-start;
 
-				@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+				@media screen and (max-width: 48rem) {
 					flex: 1;
 				}
 
@@ -275,18 +262,18 @@ body.nav-open {
 		display: none;
 	}
 
-	@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+	@media screen and (max-width: 48rem) {
 		.subsection-container {
 			display: none;
 		}
 	}
 
 	.inner-drawer-nav {
-		background-color: $section-bg;
+		background-color: #292929;
 		display: flex;
 		flex-direction: column;
 		transition: transform 300ms ease-in-out;
-		width: $section-width;
+		width: 329px;
 
 		.nav-menu {
 			.nav-widget {
@@ -326,7 +313,7 @@ body.nav-open {
 					display: inherit;
 				}
 
-				@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+				@media screen and (max-width: 48rem) {
 					&--desktop {
 						display: none;
 					}
@@ -340,14 +327,14 @@ body.nav-open {
 	}
 
 	.section-menu {
-		margin-top: $top-nav-stylistic-margin;
+		margin-top: 13px;
 		padding: 0;
 
 		> li {
 			font-weight: bold;
 			list-style: none;
 			position: relative;
-			background-color: $section-bg;
+			background-color: #292929;
 
 			> a {
 				padding: 0 16px 0 20px;
@@ -366,7 +353,7 @@ body.nav-open {
 
 			&:hover,
 			&:active {
-				background: $ui-medium-gray;
+				background: #575757;
 			}
 		}
 	}
@@ -379,9 +366,9 @@ body.nav-open {
 		transform: translate(0, 0);
 		width: 100%;
 
-		@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+		@media screen and (max-width: 48rem) {
 			// on mobile, show dark background everywhere
-			background: $section-bg;
+			background: #292929;
 
 			.inner-drawer-nav {
 				width: 100vw;
@@ -398,7 +385,7 @@ body.nav-open {
 		}
 
 		.inner-drawer-nav {
-			transform: translate(-$section-width, 0);
+			transform: translate(-329px, 0);
 		}
 	}
 
@@ -420,7 +407,7 @@ body.nav-open {
 
 		> li {
 			> a {
-				color: $ui-medium-gray;
+				color: #575757;
 				display: block;
 				font-size: 16px;
 				font-weight: bold;
@@ -429,7 +416,7 @@ body.nav-open {
 				text-decoration: none;
 
 				&:hover {
-					background-color: $ui-light-gray;
+					background-color: #dadada;
 				}
 			}
 		}
@@ -473,7 +460,7 @@ body.nav-open {
 		display: flex;
 
 		path {
-			fill: $ui-medium-gray;
+			fill: #575757;
 		}
 	}
 }

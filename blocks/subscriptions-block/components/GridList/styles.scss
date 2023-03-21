@@ -1,10 +1,10 @@
 .xpmedia-subscription-grid-list {
 	display: grid;
-	grid-gap: map-get($spacers, "lg");
+	grid-gap: 2rem;
 	grid-template-columns: 1fr;
 	justify-content: center;
 
-	@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+	@media screen and (min-width: 48rem) {
 		&--1 {
 			grid-template-columns: minmax(auto, 600px);
 		}

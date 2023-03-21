@@ -1,3 +1,5 @@
+$ui-primary-font-color: #191919 !default;
+
 .ts-byline {
 	$self: &;
 	color: #191919;
@@ -6,7 +8,7 @@
 
 	margin-bottom: 0;
 
-	@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+	@media screen and (min-width: 48rem) {
 		font-size: 1.25rem;
 		line-height: 2.5rem;
 	}
@@ -31,7 +33,7 @@
 	}
 
 	a {
-		color: $ui-primary-font-color;
+		color: #191919;
 		text-decoration: none;
 	}
 

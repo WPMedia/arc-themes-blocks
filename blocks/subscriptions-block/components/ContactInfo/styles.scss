@@ -1,8 +1,8 @@
 .xpmedia-subscriptions-contact-info {
-	margin-top: map-get($spacers, "lg");
+	margin-top: 2rem;
 
 	&-title {
-		margin-bottom: map-get($spacers, "md");
+		margin-bottom: 1.5rem;
 	}
 
 	.identity-row {
@@ -41,15 +41,15 @@
 	}
 
 	.row {
-		margin-bottom: map-get($spacers, "md");
+		margin-bottom: 1.5rem;
 	}
 
 	.row:last-of-type {
-		padding-bottom: map-get($spacers, "md");
-		border-bottom: 1px solid $border-rule-color;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid #dadada;
 	}
 
 	.checkout-btn {
-		margin-top: map-get($spacers, "md");
+		margin-top: 1.5rem;
 	}
 }

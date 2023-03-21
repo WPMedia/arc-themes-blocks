@@ -11,13 +11,13 @@
 		margin: calculateRem(8px);
 	}
 
-	@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+	@media screen and (max-width: 48rem) {
 		display: none;
 	}
 }
 
 .xpmedia-subs-header--mobile-header {
-	@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+	@media screen and (min-width: 48rem) {
 		display: none;
 	}
 }

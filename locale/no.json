@@ -65,10 +65,10 @@
 		"global.gallery-autoplay-label-start": "Start automatisk lysbildevisning",
 		"global.gallery-autoplay-label-stop": "Stopp automatisk lysbildevisning",
 		"global.gallery-expand-button": "Utvid",
-		"global.gallery-next-label": "Next Slide",
+		"global.gallery-next-label": "Neste slide",
 		"global.gallery-page-count-text": "<span class='visually-hidden'>Bilde<\/span> %{current} av %{total}",
 		"global.gallery-pause-autoplay-button": "Sett automatisk avspilling på pause",
-		"global.gallery-previous-label": "Previous Slide",
+		"global.gallery-previous-label": "Forrige slide",
 		"global.gallery-text": "Bildegalleri",
 		"global.opens-in-new-window": "(Åpnes i et nytt vindu)",
 		"global.see-more-button": "Se mer",
@@ -162,8 +162,8 @@
 		"identity-block.username": "Username"
 	},
 	"lead-art-block": {
-		"lead-art-block.fullscreen-enter": "Enter full screen mode displaying the lead image",
-		"lead-art-block.fullscreen-exit": "Exit full screen mode displaying the lead image"
+		"lead-art-block.fullscreen-enter": "Åpne fullskjermsvisning av hovedbildet",
+		"lead-art-block.fullscreen-exit": "Avslutt fullskjermsvisning av hovedbildet"
 	},
 	"links-bar-block": {
 		"links-bar-block.element-aria-label": "Flere lenker"
@@ -182,10 +182,10 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "Products",
-		"product-gallery.focus-close": "Close",
-		"product-gallery.focus-thumbnail-next": "Next Image",
-		"product-gallery.focus-thumbnail-previous": "Previous Image",
-		"product-gallery.go-to-slide": "Go to slide %{slideNumber}",
+		"product-gallery.focus-close": "Avslutt",
+		"product-gallery.focus-thumbnail-next": "Neste bilde",
+		"product-gallery.focus-thumbnail-previous": "Forrige bilde",
+		"product-gallery.go-to-slide": "Gå til slide %{slideNumber}",
 		"product-gallery.left-arrow-label": "Previous",
 		"product-gallery.right-arrow-label": "Next",
 		"product-gallery.slide-indicator": "Slide %{current} of %{maximum}"

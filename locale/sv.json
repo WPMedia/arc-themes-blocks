@@ -65,10 +65,10 @@
 		"global.gallery-autoplay-label-start": "Start automatic slide show",
 		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
 		"global.gallery-expand-button": "Förstora",
-		"global.gallery-next-label": "Next Slide",
+		"global.gallery-next-label": "Nästa bild",
 		"global.gallery-page-count-text": "%{current} av %{total}",
 		"global.gallery-pause-autoplay-button": "Pausa",
-		"global.gallery-previous-label": "Previous Slide",
+		"global.gallery-previous-label": "Föregående bild",
 		"global.gallery-text": "Bildspel",
 		"global.opens-in-new-window": "(Öppnas i nytt fönster)",
 		"global.see-more-button": "Fler artiklar",
@@ -162,8 +162,8 @@
 		"identity-block.username": "Username"
 	},
 	"lead-art-block": {
-		"lead-art-block.fullscreen-enter": "Enter full screen mode displaying the lead image",
-		"lead-art-block.fullscreen-exit": "Exit full screen mode displaying the lead image"
+		"lead-art-block.fullscreen-enter": "Gå in i helskärmsläge och visa huvudbilden",
+		"lead-art-block.fullscreen-exit": "Avsluta helskärmsläge med visning av huvudbilden"
 	},
 	"links-bar-block": {
 		"links-bar-block.element-aria-label": "Fler länkar"
@@ -182,10 +182,10 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "Products",
-		"product-gallery.focus-close": "Close",
-		"product-gallery.focus-thumbnail-next": "Next Image",
-		"product-gallery.focus-thumbnail-previous": "Previous Image",
-		"product-gallery.go-to-slide": "Go to slide %{slideNumber}",
+		"product-gallery.focus-close": "Stäng",
+		"product-gallery.focus-thumbnail-next": "Nästa bild",
+		"product-gallery.focus-thumbnail-previous": "Föregående bild",
+		"product-gallery.go-to-slide": "Gå till bild %{slideNumber}",
 		"product-gallery.left-arrow-label": "Previous",
 		"product-gallery.right-arrow-label": "Next",
 		"product-gallery.slide-indicator": "Slide %{current} of %{maximum}"

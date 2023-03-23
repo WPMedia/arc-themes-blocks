@@ -66,15 +66,15 @@
 		"sv": "Förstora"
 	},
 	"global.gallery-next-label": {
-		"de": "Next Slide",
+		"de": "Nächste Folie",
 		"en": "Next Slide",
-		"es": "Next Slide",
-		"fr": "Next Slide",
-		"ja": "Next Slide",
-		"ko": "Next Slide",
-		"no": "Next Slide",
-		"pt": "Next Slide",
-		"sv": "Next Slide"
+		"es": "Siguiente diapositiva",
+		"fr": "Diapositive suivante",
+		"ja": "次のスライド",
+		"ko": "다음 슬라이드",
+		"no": "Neste slide",
+		"pt": "Próximo diapositivo",
+		"sv": "Nästa bild"
 	},
 	"global.gallery-page-count-text": {
 		"de": "%{current} von %{total}",
@@ -99,15 +99,15 @@
 		"sv": "Pausa"
 	},
 	"global.gallery-previous-label": {
-		"de": "Previous Slide",
+		"de": "Vorherige Folie",
 		"en": "Previous Slide",
-		"es": "Previous Slide",
-		"fr": "Previous Slide",
-		"ja": "Previous Slide",
-		"ko": "Previous Slide",
-		"no": "Previous Slide",
-		"pt": "Previous Slide",
-		"sv": "Previous Slide"
+		"es": "Diapositiva anterior",
+		"fr": "Diapositive précédente",
+		"ja": "前のスライド",
+		"ko": "이전 슬라이드",
+		"no": "Forrige slide",
+		"pt": "Diapositivo anterior",
+		"sv": "Föregående bild"
 	},
 	"global.gallery-text": {
 		"de": "Galerie",

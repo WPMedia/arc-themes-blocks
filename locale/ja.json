@@ -65,10 +65,10 @@
 		"global.gallery-autoplay-label-start": "Start automatic slide show",
 		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
 		"global.gallery-expand-button": "展開",
-		"global.gallery-next-label": "Next Slide",
+		"global.gallery-next-label": "次のスライド",
 		"global.gallery-page-count-text": "%{current} \/ %{total}",
 		"global.gallery-pause-autoplay-button": "自動再生の一時停止",
-		"global.gallery-previous-label": "Previous Slide",
+		"global.gallery-previous-label": "前のスライド",
 		"global.gallery-text": "ギャラリー",
 		"global.opens-in-new-window": "（新しいウィンドウで開きます）",
 		"global.see-more-button": "詳細",
@@ -162,8 +162,8 @@
 		"identity-block.username": "ユーザー名"
 	},
 	"lead-art-block": {
-		"lead-art-block.fullscreen-enter": "Enter full screen mode displaying the lead image",
-		"lead-art-block.fullscreen-exit": "Exit full screen mode displaying the lead image"
+		"lead-art-block.fullscreen-enter": "リード画像を表示する全画面表示モードに入る",
+		"lead-art-block.fullscreen-exit": "リード画像を表示する全画面表示モードを終了"
 	},
 	"links-bar-block": {
 		"links-bar-block.element-aria-label": "その他のリンク"
@@ -182,10 +182,10 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "Products",
-		"product-gallery.focus-close": "Close",
-		"product-gallery.focus-thumbnail-next": "Next Image",
-		"product-gallery.focus-thumbnail-previous": "Previous Image",
-		"product-gallery.go-to-slide": "Go to slide %{slideNumber}",
+		"product-gallery.focus-close": "閉じる",
+		"product-gallery.focus-thumbnail-next": "次の画像",
+		"product-gallery.focus-thumbnail-previous": "前の画像",
+		"product-gallery.go-to-slide": "スライド%{slideNumber}に移動",
 		"product-gallery.left-arrow-label": "Previous",
 		"product-gallery.right-arrow-label": "Next",
 		"product-gallery.slide-indicator": "Slide %{current} of %{maximum}"

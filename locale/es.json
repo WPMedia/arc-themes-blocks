@@ -65,10 +65,10 @@
 		"global.gallery-autoplay-label-start": "Start automatic slide show",
 		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
 		"global.gallery-expand-button": "Expandir",
-		"global.gallery-next-label": "Next Slide",
+		"global.gallery-next-label": "Siguiente diapositiva",
 		"global.gallery-page-count-text": "%{current} de %{total}",
 		"global.gallery-pause-autoplay-button": "Pausar reproducción automática",
-		"global.gallery-previous-label": "Previous Slide",
+		"global.gallery-previous-label": "Diapositiva anterior",
 		"global.gallery-text": "Galería",
 		"global.opens-in-new-window": "(Se abre en una nueva ventana)",
 		"global.see-more-button": "Ver más",
@@ -162,8 +162,8 @@
 		"identity-block.username": "Nombre de usuario"
 	},
 	"lead-art-block": {
-		"lead-art-block.fullscreen-enter": "Enter full screen mode displaying the lead image",
-		"lead-art-block.fullscreen-exit": "Exit full screen mode displaying the lead image"
+		"lead-art-block.fullscreen-enter": "Entrar en el modo de pantalla completa mostrando la imagen principal",
+		"lead-art-block.fullscreen-exit": "Salir del modo de pantalla completa mostrando la imagen principal"
 	},
 	"links-bar-block": {
 		"links-bar-block.element-aria-label": "Más enlaces"
@@ -182,10 +182,10 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "Products",
-		"product-gallery.focus-close": "Close",
-		"product-gallery.focus-thumbnail-next": "Next Image",
-		"product-gallery.focus-thumbnail-previous": "Previous Image",
-		"product-gallery.go-to-slide": "Go to slide %{slideNumber}",
+		"product-gallery.focus-close": "Cerrar",
+		"product-gallery.focus-thumbnail-next": "Siguiente imagen",
+		"product-gallery.focus-thumbnail-previous": "Imagen anterior",
+		"product-gallery.go-to-slide": "Ir a la diapositiva %{slideNumber}",
 		"product-gallery.left-arrow-label": "Previous",
 		"product-gallery.right-arrow-label": "Next",
 		"product-gallery.slide-indicator": "Slide %{current} of %{maximum}"

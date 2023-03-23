@@ -65,10 +65,10 @@
 		"global.gallery-autoplay-label-start": "Start automatic slide show",
 		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
 		"global.gallery-expand-button": "Erweitern",
-		"global.gallery-next-label": "Next Slide",
+		"global.gallery-next-label": "Nächste Folie",
 		"global.gallery-page-count-text": "%{current} von %{total}",
 		"global.gallery-pause-autoplay-button": "Automatische Wiedergabe anhalten",
-		"global.gallery-previous-label": "Previous Slide",
+		"global.gallery-previous-label": "Vorherige Folie",
 		"global.gallery-text": "Galerie",
 		"global.opens-in-new-window": "(Wird in einem neuen Fenster geöffnet)",
 		"global.see-more-button": "Mehr anzeigen",
@@ -162,8 +162,8 @@
 		"identity-block.username": "Benutzername"
 	},
 	"lead-art-block": {
-		"lead-art-block.fullscreen-enter": "Enter full screen mode displaying the lead image",
-		"lead-art-block.fullscreen-exit": "Exit full screen mode displaying the lead image"
+		"lead-art-block.fullscreen-enter": "Vollbildmodus mit Anzeige des Hauptbildes öffnen",
+		"lead-art-block.fullscreen-exit": "Vollbildmodus mit Anzeige des Hauptbildes beenden"
 	},
 	"links-bar-block": {
 		"links-bar-block.element-aria-label": "Weitere Links"
@@ -182,10 +182,10 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "Products",
-		"product-gallery.focus-close": "Close",
-		"product-gallery.focus-thumbnail-next": "Next Image",
-		"product-gallery.focus-thumbnail-previous": "Previous Image",
-		"product-gallery.go-to-slide": "Go to slide %{slideNumber}",
+		"product-gallery.focus-close": "Schließen",
+		"product-gallery.focus-thumbnail-next": "Nächstes Bild",
+		"product-gallery.focus-thumbnail-previous": "Vorheriges Bild",
+		"product-gallery.go-to-slide": "Zu Folie %{slideNumber}",
 		"product-gallery.left-arrow-label": "Previous",
 		"product-gallery.right-arrow-label": "Next",
 		"product-gallery.slide-indicator": "Slide %{current} of %{maximum}"

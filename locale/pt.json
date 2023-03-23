@@ -65,10 +65,10 @@
 		"global.gallery-autoplay-label-start": "Iniciar apresentação automática de diapositivos",
 		"global.gallery-autoplay-label-stop": "Parar apresentação automática de diapositivos",
 		"global.gallery-expand-button": "Expandir",
-		"global.gallery-next-label": "Next Slide",
+		"global.gallery-next-label": "Próximo diapositivo",
 		"global.gallery-page-count-text": "<span class='visually-hidden'>Imagem<\/span> %{current} de %{total}",
 		"global.gallery-pause-autoplay-button": "Colocar a reprodução automática em pausa",
-		"global.gallery-previous-label": "Previous Slide",
+		"global.gallery-previous-label": "Diapositivo anterior",
 		"global.gallery-text": "Galeria",
 		"global.opens-in-new-window": "(Abre numa nova janela)",
 		"global.see-more-button": "Veja mais",
@@ -162,8 +162,8 @@
 		"identity-block.username": "Username"
 	},
 	"lead-art-block": {
-		"lead-art-block.fullscreen-enter": "Enter full screen mode displaying the lead image",
-		"lead-art-block.fullscreen-exit": "Exit full screen mode displaying the lead image"
+		"lead-art-block.fullscreen-enter": "Entrar no modo de ecrã completo mostrando a imagem principal",
+		"lead-art-block.fullscreen-exit": "Sair do modo de ecrã completo mostrando a imagem principal"
 	},
 	"links-bar-block": {
 		"links-bar-block.element-aria-label": "Mais ligações"
@@ -182,10 +182,10 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "Products",
-		"product-gallery.focus-close": "Close",
-		"product-gallery.focus-thumbnail-next": "Next Image",
-		"product-gallery.focus-thumbnail-previous": "Previous Image",
-		"product-gallery.go-to-slide": "Go to slide %{slideNumber}",
+		"product-gallery.focus-close": "Fechar",
+		"product-gallery.focus-thumbnail-next": "Próxima imagem",
+		"product-gallery.focus-thumbnail-previous": "Imagem anterior",
+		"product-gallery.go-to-slide": "Ir para o diapositivo %{slideNumber}",
 		"product-gallery.left-arrow-label": "Previous",
 		"product-gallery.right-arrow-label": "Next",
 		"product-gallery.slide-indicator": "Slide %{current} of %{maximum}"

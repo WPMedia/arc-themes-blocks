@@ -65,10 +65,10 @@
 		"global.gallery-autoplay-label-start": "Start automatic slide show",
 		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
 		"global.gallery-expand-button": "더보기",
-		"global.gallery-next-label": "Next Slide",
+		"global.gallery-next-label": "다음 슬라이드",
 		"global.gallery-page-count-text": "%{current}\/%개 보는 %{total}",
 		"global.gallery-pause-autoplay-button": "자동 재생 일시 중지",
-		"global.gallery-previous-label": "Previous Slide",
+		"global.gallery-previous-label": "이전 슬라이드",
 		"global.gallery-text": "갤러리",
 		"global.opens-in-new-window": "(새 창에서 열기)",
 		"global.see-more-button": "자세히 보기",
@@ -162,8 +162,8 @@
 		"identity-block.username": "사용자 이름"
 	},
 	"lead-art-block": {
-		"lead-art-block.fullscreen-enter": "Enter full screen mode displaying the lead image",
-		"lead-art-block.fullscreen-exit": "Exit full screen mode displaying the lead image"
+		"lead-art-block.fullscreen-enter": "리드 이미지를 표시하는 전체 화면 모드 종료",
+		"lead-art-block.fullscreen-exit": "리드 이미지를 표시하는 전체 화면 모드 종료"
 	},
 	"links-bar-block": {
 		"links-bar-block.element-aria-label": "링크 더 보기"
@@ -182,10 +182,10 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "Products",
-		"product-gallery.focus-close": "Close",
-		"product-gallery.focus-thumbnail-next": "Next Image",
-		"product-gallery.focus-thumbnail-previous": "Previous Image",
-		"product-gallery.go-to-slide": "Go to slide %{slideNumber}",
+		"product-gallery.focus-close": "닫기",
+		"product-gallery.focus-thumbnail-next": "다음 이미지",
+		"product-gallery.focus-thumbnail-previous": "이전 이미지",
+		"product-gallery.go-to-slide": "슬라이드 %{slideNumber}(으)로 이동",
 		"product-gallery.left-arrow-label": "Previous",
 		"product-gallery.right-arrow-label": "Next",
 		"product-gallery.slide-indicator": "Slide %{current} of %{maximum}"

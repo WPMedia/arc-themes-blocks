@@ -1,16 +1,20 @@
 .payment-form--form {
-	margin-top: calculateRem(24px);
+	margin-top: 24px;
 }
 
 .payment-form--container {
-	margin-top: calculateRem(24px);
+	margin-top: 24px;
 }
 
 .payment-form--hr {
-	margin-top: calculateRem(32px);
-	margin-bottom: calculateRem(32px);
+	margin-top: 32px;
+	margin-bottom: 32px;
+	color: #000;
+	font-family: "Lato", sans-serif;
+	font-weight: 400;
+	line-height: 1.5;
 }
 
 .payment-form--stripe-input-container {
-	margin: calculateRem(8px) calculateRem(4px) calculateRem(4px) calculateRem(4px);
+	margin: 8px 4px 4px 4px;
 }

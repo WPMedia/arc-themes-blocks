@@ -1,14 +1,3 @@
-$arrow-size: calculateRem(10px);
-$border-color-dull: rgba(255, 255, 255, 0.5);
-$border-color-bright: rgba(255, 255, 255, 1);
-$border-width: 1px;
-$btn-size: calculateRem(32px);
-$nav-search-border-color: $ui-light-gray;
-$overlay-z-index: 2;
-$section-bg: $ui-medium-gray;
-$section-width: 315px;
-$submenu-link-color: $ui-dark-gray;
-
 .nav-block-search {
 	display: flex;
 	justify-content: center;
@@ -19,14 +8,14 @@ $submenu-link-color: $ui-dark-gray;
 	}
 
 	&.open.light {
-		border: $border-width solid $ui-light-gray;
+		border: 1px solid #dadada;
 	}
 
 	&.open {
 		input {
-			height: $btn-size;
+			height: 2rem;
 			padding: 4px;
-			padding-right: $btn-size;
+			padding-right: 2rem;
 			width: 200px;
 		}
 
@@ -57,7 +46,7 @@ $submenu-link-color: $ui-dark-gray;
 }
 
 .news-theme-navigation-container {
-	@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+	@media screen and (max-width: 48rem) {
 		.nav-block-search {
 			display: none;
 		}
@@ -85,11 +74,11 @@ $submenu-link-color: $ui-dark-gray;
 	}
 
 	&.closed {
-		transform: translate(-$section-width, 0);
+		transform: translate(-315px, 0);
 		width: 0;
 	}
 
-	@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+	@media screen and (min-width: 48rem) {
 		.nav-block-search {
 			display: none;
 		}
@@ -99,7 +88,7 @@ $submenu-link-color: $ui-dark-gray;
 		}
 	}
 
-	@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+	@media screen and (max-width: 48rem) {
 		.submenu-caret,
 		.subsection-container {
 			display: none;
@@ -111,14 +100,14 @@ $submenu-link-color: $ui-dark-gray;
 	}
 
 	.inner-drawer-nav {
-		background-color: $section-bg;
+		background-color: #575757;
 		display: flex;
 		flex-direction: column;
-		width: $section-width;
+		width: 315px;
 	}
 
 	.nav-block-search {
-		border-bottom: $border-width solid $nav-search-border-color;
+		border-bottom: 1px solid #dadada;
 		margin: 16px 20px 0;
 		padding-bottom: 16px;
 
@@ -151,13 +140,13 @@ $submenu-link-color: $ui-dark-gray;
 				padding: 14px 0;
 				text-decoration: none;
 
-				@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+				@media screen and (max-width: 48rem) {
 					padding: 12px 0;
 				}
 			}
 
 			&:hover {
-				background: darken($section-bg, 20%);
+				background: darken(#575757, 20%);
 
 				.subsection-container {
 					opacity: 1;
@@ -174,15 +163,15 @@ $submenu-link-color: $ui-dark-gray;
 		visibility: hidden;
 
 		.arrow-left {
-			border-bottom: $arrow-size solid transparent;
-			border-right: $arrow-size solid #fff;
-			border-top: $arrow-size solid transparent;
+			border-bottom: 0.625rem solid transparent;
+			border-right: 0.625rem solid #fff;
+			border-top: 0.625rem solid transparent;
 			height: 0;
-			left: -$arrow-size;
+			left: -0.625rem;
 			position: absolute;
 			top: 15px;
 			width: 0;
-			z-index: ($overlay-z-index + 2);
+			z-index: 4;
 		}
 	}
 
@@ -201,11 +190,11 @@ $submenu-link-color: $ui-dark-gray;
 
 		> li {
 			> a {
-				color: $submenu-link-color;
+				color: #191919;
 				padding: 8px 0;
 
 				&:hover {
-					color: darken($submenu-link-color, 20%);
+					color: darken(#191919, 20%);
 				}
 			}
 

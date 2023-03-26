@@ -1,13 +1,13 @@
 .xpmedia-form-field {
 	color: #191919;
 	display: block;
-	font-size: calculateRem(20px);
+	font-size: 20px;
 }
 
 .xpmedia-form-field-input,
 .xpmedia-form-field-label,
 .xpmedia-form-field-tip {
-	font-size: calculateRem(16px);
+	font-size: 16px;
 	line-height: 1.5;
 	margin: 0.25rem 0;
 }
@@ -18,7 +18,7 @@
 
 .xpmedia-form-field-input {
 	border: solid 1px #dadada;
-	border-radius: calculateRem(4px);
+	border-radius: 4px;
 	display: block;
 	outline: none;
 	padding: 0.5rem;

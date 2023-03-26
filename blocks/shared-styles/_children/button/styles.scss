@@ -9,14 +9,14 @@
 	text-decoration: none;
 
 	// override nav header
-	border-radius: calculateRem(4px) !important;
-	font-size: calculateRem(14px);
+	border-radius: 4px !important;
+	font-size: 14px;
 	font-weight: bold;
 	line-height: 1.5;
 
 	// border color managed in styled component
 	border-style: solid;
-	border-width: calculateRem(1px);
+	border-width: 1px;
 
 	&:hover {
 		// darkens all nested elements on hover
@@ -31,28 +31,28 @@
 
 .xpmedia-button--left-icon-container {
 	display: flex;
-	padding-right: calculateRem(8px);
+	padding-right: 8px;
 }
 
 .xpmedia-button--right-icon-container {
 	display: flex;
-	padding-left: calculateRem(8px);
+	padding-left: 8px;
 }
 
 .xpmedia-button--small {
-	padding: calculateRem(8px);
+	padding: 8px;
 	// 2 rem
-	height: calculateRem(32px);
+	height: 32px;
 }
 
 .xpmedia-button--medium {
-	padding: calculateRem(12px);
+	padding: 12px;
 	// 3 rem
-	height: calculateRem(48px);
+	height: 48px;
 }
 
 .xpmedia-button--large {
-	padding: calculateRem(16px);
+	padding: 16px;
 	// 3.5 rem
-	height: calculateRem(56px);
+	height: 56px;
 }

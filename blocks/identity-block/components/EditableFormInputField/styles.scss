@@ -17,7 +17,7 @@
 }
 
 .editable-form-input--label-text {
-	font-size: calculateRem(16px);
+	font-size: 16px;
 	line-height: 1.5;
 	margin: 0.25rem 0;
 	font-weight: bold;
@@ -25,7 +25,7 @@
 }
 
 .editable-form-input--value-text {
-	font-size: calculateRem(16px);
+	font-size: 16px;
 	line-height: 1.5;
 }
 
@@ -33,7 +33,7 @@
 	background: none;
 	border: 0;
 	padding: 0;
-	font-size: calculateRem(16px);
+	font-size: 16px;
 	line-height: 1.5;
 	text-decoration: underline;
 	cursor: pointer;

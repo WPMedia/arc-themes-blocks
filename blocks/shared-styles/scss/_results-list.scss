@@ -1,5 +1,9 @@
 .results-list-container {
-	@include block-margin-bottom;
+	margin-bottom: 1rem;
+
+	@media screen and (min-width: 48rem) {
+		margin-bottom: 1.5rem;
+	}
 }
 
 .list-item {
@@ -14,34 +18,39 @@
 	padding: 1.5rem 0 1.5rem 0;
 
 	.description-text {
-		font-size: calculateRem(18px);
+		font-size: 18px;
 		line-height: 1.78;
 		margin-bottom: 1rem;
 	}
 
 	.headline-text {
-		font-size: calculateRem(19px);
+		font-size: 19px;
 		font-weight: bold;
 		line-height: 1.26;
 		margin-bottom: 1rem;
 	}
 
 	.results-list--author-date {
-		font-size: calculateRem(14px);
-		line-height: calculateRem(16px);
+		font-size: 14px;
+		line-height: 16px;
 
 		.story-date {
 			color: #191919;
 			display: inline;
-			font-size: calculateRem(14px);
-			line-height: calculateRem(16px);
+			font-size: 14px;
+			line-height: 16px;
 		}
 	}
 
 	a {
 		color: #191919;
 		text-decoration: none;
-		@include link-color-active-hover(#191919);
+		transition: color 0.3s ease;
+
+		&:active,
+		&:hover {
+			color: lighten(#191919, 40%);
+		}
 	}
 
 	a,
@@ -86,21 +95,21 @@
 		}
 
 		.headline-text {
-			font-size: calculateRem(26px);
+			font-size: 26px;
 			font-weight: bold;
-			line-height: calculateRem(32px);
+			line-height: 32px;
 			margin-bottom: 0.5rem;
 		}
 
 		.description-text {
-			font-size: calculateRem(16px);
-			line-height: calculateRem(24px);
+			font-size: 16px;
+			line-height: 24px;
 			margin-bottom: 0.5rem;
 		}
 
 		.results-list--author-date {
-			font-size: calculateRem(10px);
-			line-height: calculateRem(16px);
+			font-size: 10px;
+			line-height: 16px;
 		}
 	}
 

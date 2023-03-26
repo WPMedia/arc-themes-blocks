@@ -17,16 +17,16 @@
 
 .xpmedia-subscriptions-cart-item {
 	color: $ui-medium-gray;
-	font-size: calculateRem(16px);
+	font-size: 16px;
 	margin: 0 0.25rem;
 	padding: 0.25rem 0;
 
 	&--name {
-		font-size: calculateRem(20px);
+		font-size: 20px;
 		font-weight: bold;
 	}
 
 	&--info {
-		font-size: calculateRem(12px);
+		font-size: 12px;
 	}
 }

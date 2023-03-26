@@ -34,11 +34,11 @@ body.nav-open {
 .nav-btn {
 	align-items: center;
 	border: 0;
-	height: calculateRem(32px);
+	height: 32px;
 	position: relative;
 	white-space: nowrap;
-	padding-left: calculateRem(8px);
-	padding-right: calculateRem(8px);
+	padding-left: 8px;
+	padding-right: 8px;
 
 	&.border {
 		transition: border 100ms linear;
@@ -93,7 +93,7 @@ body.nav-open {
 
 	input {
 		border: 0;
-		border-radius: calculateRem(4px) !important;
+		border-radius: 4px !important;
 		box-shadow: none;
 		font-size: 0.9em;
 		line-height: 20px;
@@ -105,9 +105,9 @@ body.nav-open {
 	&.open {
 		input {
 			font-size: 16px;
-			height: calculateRem(32px);
+			height: 32px;
 			line-height: 24px;
-			padding: 4px calculateRem(32px) 4px 11px;
+			padding: 4px 32px 4px 11px;
 			width: 100%;
 		}
 
@@ -146,7 +146,7 @@ body.nav-open {
 		align-items: center;
 		display: flex;
 		text-align: center;
-		margin-right: calculateRem(16px);
+		margin-right: 16px;
 
 		&:last-child {
 			margin-right: 0;
@@ -177,7 +177,7 @@ body.nav-open {
 		}
 
 		.nav-widget {
-			margin-right: calculateRem(16px);
+			margin-right: 16px;
 		}
 
 		.nav-widget:last-child {
@@ -220,7 +220,7 @@ body.nav-open {
 
 	&.logo {
 		&-center .nav-logo {
-			margin: 0 calculateRem(16px) 0 calculateRem(16px);
+			margin: 0 16px 0 16px;
 
 			a {
 				justify-content: center;
@@ -286,7 +286,7 @@ body.nav-open {
 
 					&.open {
 						input {
-							height: calculateRem(48px);
+							height: 48px;
 						}
 
 						&.dark {
@@ -300,7 +300,7 @@ body.nav-open {
 				&--mobile,
 				&--desktop {
 					& > .nav-widget {
-						margin-top: calculateRem(16px);
+						margin-top: 16px;
 						padding: 0 20px;
 					}
 				}

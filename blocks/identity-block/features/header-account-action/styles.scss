@@ -8,7 +8,7 @@
 	// uses a tags
 	> a {
 		// should be 16px between buttons
-		margin: calculateRem(8px);
+		margin: 8px;
 	}
 
 	@media screen and (max-width: 48rem) {
@@ -25,10 +25,10 @@
 .xpmedia-subs-header-dropdown--open {
 	top: calc(100%);
 	position: absolute;
-	padding: calculateRem(16px);
+	padding: 16px;
 	background-color: #fff;
-	border: calculateRem(1px) solid #dadada;
-	border-radius: calculateRem(4px);
+	border: 1px solid #dadada;
+	border-radius: 4px;
 	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
 	display: flex;
 	flex-direction: column;
@@ -37,16 +37,16 @@
 // this is dependent upon the classnames of the parent navs in the header-nav-chain
 // if parent is nav-right, then the dropdown should be right aligned
 .nav-right .xpmedia-subs-header-dropdown--open {
-	right: calculateRem(16px);
+	right: 16px;
 }
 
 // if parent is nav-left, then the dropdown should be left aligned
 .nav-left .xpmedia-subs-header-dropdown--open {
-	left: calculateRem(16px);
+	left: 16px;
 }
 
 .xpmedia-subs-header-dropdown-list-item {
-	padding-bottom: calculateRem(8px);
+	padding-bottom: 8px;
 }
 
 .xpmedia-subs-header-dropdown-list-item:last-of-type {

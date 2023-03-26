@@ -2,7 +2,7 @@
 	background: none;
 	border: 0;
 	padding: 0;
-	font-size: calculateRem(16px);
+	font-size: 16px;
 	line-height: 1.5;
 	cursor: pointer;
 	text-decoration: underline;
@@ -10,5 +10,5 @@
 
 .social-field--connected-label-text {
 	line-height: 1.5;
-	font-size: calculateRem(16px);
+	font-size: 16px;
 }

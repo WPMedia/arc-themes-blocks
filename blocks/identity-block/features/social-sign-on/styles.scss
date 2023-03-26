@@ -8,7 +8,7 @@
 
 .xpmedia-social-sign-on-error {
 	color: $danger-color;
-	font-size: calculateRem(16px);
+	font-size: 16px;
 	margin: map-get($spacers, "md") 0;
 
 	p {

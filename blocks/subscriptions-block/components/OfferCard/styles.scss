@@ -12,18 +12,25 @@
 
 	&--headline {
 		text-align: center;
+		font-size: 24px;
+		font-weight: bold;
+
+		@media (min-width: 48rem) {
+			font-size: 36px;
+			line-height: 40px;
+		}
 	}
 
 	&--subheadline {
 		color: #575757;
-		font-size: calculateRem(20px);
+		font-size: 20px;
 		font-weight: 400;
 		text-align: center;
 	}
 
 	&--features {
 		align-self: baseline;
-		font-size: calculateRem(14px);
+		font-size: 14px;
 
 		> * + * {
 			margin-top: 1rem;

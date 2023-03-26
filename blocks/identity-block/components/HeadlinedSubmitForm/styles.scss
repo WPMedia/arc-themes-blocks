@@ -1,5 +1,7 @@
 .xpmedia-form-headline {
 	border-bottom: 1px solid #dadada;
+	font-size: 1.5rem;
+	font-weight: bold;
 	padding-bottom: 1rem;
 	margin-bottom: 1rem;
 	text-align: center;
@@ -29,7 +31,7 @@
 
 .xpmedia-form-error {
 	color: #db0a07;
-	font-size: calculateRem(16px);
+	font-size: 16px;
 	margin: 1.5rem 0;
 
 	p {

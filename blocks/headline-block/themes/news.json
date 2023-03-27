@@ -4,7 +4,8 @@
 			"default": {
 				"font-size": "var(--heading-level-1-font-size)",
 				"font-weight": "var(--heading-level-1-font-weight)",
-				"line-height": "var(--heading-level-1-line-height)"
+				"line-height": "var(--heading-level-1-line-height)",
+				"font-family": "var(--font-family-primary)"
 			},
 			"desktop": {}
 		}

@@ -1,13 +1,13 @@
 .xpmedia-forgot-password-headline {
 	font-size: var(--heading-level-4-font-size);
-	line-height: 2rem;
+	line-height: var(--heading-level-4-line-height);
 	font-weight: 600;
 	margin: 0;
 	padding: 0;
 
 	@media (min-width: 48rem) {
 		font-size: var(--heading-level-1-font-size);
-		line-height: 2.5rem;
+		line-height: var(--heading-level-1-line-height);
 	}
 }
 

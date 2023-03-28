@@ -1,15 +1,15 @@
 .xpmedia-form-field {
 	color: #191919;
 	display: block;
-	font-size: 20px;
+	font-size: var(--heading-level-5-font-size);
 }
 
 .xpmedia-form-field-input,
 .xpmedia-form-field-label,
 .xpmedia-form-field-tip {
-	font-size: 16px;
+	font-size: var(--body-font-size);
 	line-height: 1.5;
-	margin: 0.25rem 0;
+	margin: var(--global-spacing-1) 0;
 }
 
 .xpmedia-form-field-label {
@@ -18,10 +18,10 @@
 
 .xpmedia-form-field-input {
 	border: solid 1px #dadada;
-	border-radius: 4px;
+	border-radius: var(--border-radius);
 	display: block;
 	outline: none;
-	padding: 0.5rem;
+	padding: var(--global-spacing-2);
 	width: 100%;
 
 	&--error {

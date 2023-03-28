@@ -1,6 +1,6 @@
 .xpmedia-subscription-grid-list {
 	display: grid;
-	grid-gap: 2rem;
+	grid-gap: var(--global-spacing-6);
 	grid-template-columns: 1fr;
 	justify-content: center;
 

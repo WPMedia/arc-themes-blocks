@@ -1,4 +1,4 @@
-body.nav-open {
+.body.nav-open {
 	overflow-y: hidden;
 
 	.main {
@@ -37,8 +37,8 @@ body.nav-open {
 	height: 32px;
 	position: relative;
 	white-space: nowrap;
-	padding-left: 8px;
-	padding-right: 8px;
+	padding-left: var(--global-spacing-2);
+	padding-right: var(--global-spacing-2);
 
 	&.border {
 		transition: border 100ms linear;
@@ -50,11 +50,11 @@ body.nav-open {
 
 	&-dark {
 		span {
-			color: #fff;
+			color: var(--background-color);
 		}
 
 		svg > path {
-			fill: #fff;
+			fill: var(--background-color);
 		}
 
 		&.border {
@@ -93,10 +93,10 @@ body.nav-open {
 
 	input {
 		border: 0;
-		border-radius: 4px !important;
+		border-radius: var(--border-radius) !important;
 		box-shadow: none;
 		font-size: 0.9em;
-		line-height: 20px;
+		line-height: 1.25rem;
 		margin: 0;
 		padding: 0;
 		width: 0;
@@ -104,10 +104,11 @@ body.nav-open {
 
 	&.open {
 		input {
-			font-size: 16px;
+			font-size: var(--body-font-size);
 			height: 32px;
 			line-height: 24px;
-			padding: 4px 32px 4px 11px;
+			padding: var(--global-spacing-1) var(--global-spacing-6) var(--global-spacing-1)
+				var(--global-spacing-3);
 			width: 100%;
 		}
 
@@ -130,7 +131,7 @@ body.nav-open {
 	align-items: center;
 	display: flex;
 	justify-content: space-between;
-	padding: 8px 20px;
+	padding: var(--global-spacing-2) 20px;
 	position: relative;
 	flex-shrink: 0;
 
@@ -146,7 +147,7 @@ body.nav-open {
 		align-items: center;
 		display: flex;
 		text-align: center;
-		margin-right: 16px;
+		margin-right: var(--global-spacing-4);
 
 		&:last-child {
 			margin-right: 0;
@@ -177,7 +178,7 @@ body.nav-open {
 		}
 
 		.nav-widget {
-			margin-right: 16px;
+			margin-right: var(--global-spacing-4);
 		}
 
 		.nav-widget:last-child {
@@ -220,7 +221,7 @@ body.nav-open {
 
 	&.logo {
 		&-center .nav-logo {
-			margin: 0 16px 0 16px;
+			margin: 0 var(--global-spacing-4);
 
 			a {
 				justify-content: center;
@@ -300,7 +301,7 @@ body.nav-open {
 				&--mobile,
 				&--desktop {
 					& > .nav-widget {
-						margin-top: 16px;
+						margin-top: var(--global-spacing-4);
 						padding: 0 20px;
 					}
 				}
@@ -345,9 +346,9 @@ body.nav-open {
 				align-items: center;
 				color: #fff;
 				display: block;
-				font-size: 16px;
+				font-size: var(--body-font-size);
 				justify-content: space-between;
-				line-height: 40px;
+				line-height: 2.5rem;
 				text-decoration: none;
 			}
 
@@ -400,18 +401,18 @@ body.nav-open {
 	}
 
 	.subsection-menu {
-		background: #fff;
+		background: var(--background-color);
 		list-style: none;
 		margin: 0;
-		padding: 4px 0;
+		padding: var(--global-spacing-1) 0;
 
 		> li {
 			> a {
 				color: #575757;
 				display: block;
-				font-size: 16px;
+				font-size: var(--body-font-size);
 				font-weight: bold;
-				line-height: 24px;
+				line-height: 1.5rem;
 				padding: 8px 16px 8px 20px;
 				text-decoration: none;
 
@@ -441,13 +442,13 @@ body.nav-open {
 			}
 
 			path {
-				fill: #fff;
+				fill: var(--background-color);
 			}
 		}
 
 		&:hover {
 			path {
-				fill: #fff;
+				fill: var(--background-color);
 			}
 		}
 	}

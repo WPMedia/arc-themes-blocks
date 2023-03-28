@@ -1,32 +1,32 @@
 .xpmedia-subscriptions-cart {
-	margin-top: 2rem;
+	margin-top: var(--global-spacing-6);
 
 	&-title {
-		margin-bottom: 1.5rem;
+		margin-bottom: var(--global-spacing-5);
 	}
 }
 
 .xpmedia-subscriptions-cart-items {
-	border: 1px solid $border-rule-color;
-	padding: 0.5rem;
+	border: 1px solid #dadada;
+	padding: var(--global-spacing-2);
 
 	> * + * {
-		border-top: 1px solid $border-rule-color;
+		border-top: 1px solid #dadada;
 	}
 }
 
 .xpmedia-subscriptions-cart-item {
 	color: $ui-medium-gray;
-	font-size: 16px;
-	margin: 0 0.25rem;
-	padding: 0.25rem 0;
+	font-size: var(--body-font-size);
+	margin: 0 var(--global-spacing-1);
+	padding: var(--global-spacing-1) 0;
 
 	&--name {
-		font-size: 20px;
+		font-size: var(--heading-level-5-font-size);
 		font-weight: bold;
 	}
 
 	&--info {
-		font-size: 12px;
+		font-size: var(--body-font-size-tiny);
 	}
 }

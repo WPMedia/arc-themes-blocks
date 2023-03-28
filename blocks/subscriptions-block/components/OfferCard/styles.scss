@@ -1,39 +1,39 @@
 .xpmedia-subscription-offer-card {
 	align-items: center;
 	border: 1px solid #dadada;
-	border-radius: 4px;
+	border-radius: var(--border-radius);
 	display: flex;
 	flex-direction: column;
-	padding: 3rem 2rem 2rem;
+	padding: var(--global-spacing-8) var(--global-spacing-6) var(--global-spacing-6);
 
 	> * {
-		margin-bottom: 1rem;
+		margin-bottom: var(--global-spacing-4);
 	}
 
 	&--headline {
 		text-align: center;
-		font-size: 24px;
+		font-size: var(--heading-level-4-font-size);
 		font-weight: bold;
 
 		@media (min-width: 48rem) {
-			font-size: 36px;
-			line-height: 40px;
+			font-size: var(--heading-level-1-font-size);
+			line-height: 2.5rem;
 		}
 	}
 
 	&--subheadline {
 		color: #575757;
-		font-size: 20px;
+		font-size: var(--heading-level-5-font-size);
 		font-weight: 400;
 		text-align: center;
 	}
 
 	&--features {
 		align-self: baseline;
-		font-size: 14px;
+		font-size: var(--body-font-size-small);
 
 		> * + * {
-			margin-top: 1rem;
+			margin-top: var(--global-spacing-4);
 		}
 	}
 
@@ -44,7 +44,7 @@
 
 	&--feature-item-icon {
 		display: flex;
-		margin-right: 1rem;
+		margin-right: var(--global-spacing-4);
 
 		svg,
 		path {

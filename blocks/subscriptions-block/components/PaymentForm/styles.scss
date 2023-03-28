@@ -1,19 +1,19 @@
 .payment-form--title {
-	font-size: 24px;
+	font-size: var(--heading-level-4-font-size);
 	font-weight: bold;
 }
 
 .payment-form--form {
-	margin-top: 24px;
+	margin-top: var(--global-spacing-5);
 }
 
 .payment-form--container {
-	margin-top: 24px;
+	margin-top: var(--global-spacing-5);
 }
 
 .payment-form--hr {
-	margin-top: 32px;
-	margin-bottom: 32px;
+	margin-top: var(--global-spacing-6);
+	margin-bottom: var(--global-spacing-6);
 	color: #000;
 	font-family: "Lato", sans-serif;
 	font-weight: 400;
@@ -21,5 +21,5 @@
 }
 
 .payment-form--stripe-input-container {
-	margin: 8px 4px 4px 4px;
+	margin: var(--global-spacing-2) var(--global-spacing-1) var(--global-spacing-1);
 }

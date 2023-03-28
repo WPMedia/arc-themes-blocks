@@ -1,12 +1,12 @@
 .xpmedia-subscription-dialog {
 	display: grid;
-	grid-template-columns: 1.5rem repeat(10, 1fr) 1.5rem;
+	grid-template-columns: var(--global-spacing-5) repeat(10, 1fr) var(--global-spacing-5);
 	grid-template-rows: auto;
-	margin: 4rem auto;
+	margin: var(--global-spacing-10) auto;
 	text-align: center;
 	@media screen and (min-width: 48rem) {
 		grid-template-columns: repeat(12, 1fr);
-		margin: 3rem auto;
+		margin: var(--global-spacing-8) auto;
 	}
 
 	.xpmedia-subscription-dialog-reason-prompt,
@@ -16,7 +16,7 @@
 		line-height: 1rem;
 		font-size: 0.875rem;
 		@media screen and (min-width: 48rem) {
-			font-size: 1rem;
+			font-size: var(--body-font-size);
 			grid-column: 4/10;
 			line-height: 1.5rem;
 		}
@@ -46,13 +46,13 @@
 	}
 
 	.xpmedia-subscription-dialog-headline {
-		font-size: 1.75rem;
+		font-size: var(--heading-level-3-font-size);
 		font-weight: bold;
 		line-height: 2rem;
 		grid-column: 2/12;
-		margin: 1rem 0 0 0;
+		margin: 1rem 0 0;
 		@media screen and (min-width: 48rem) {
-			font-size: 2.5rem;
+			font-size: var(--heading-level-1-font-size);
 			line-height: 3rem;
 		}
 		@media screen and (min-width: 64rem) {
@@ -61,13 +61,13 @@
 	}
 
 	.xpmedia-subscription-dialog-subheadline {
-		font-size: 1rem;
+		font-size: var(--body-font-size);
 		font-weight: bold;
 		line-height: 1.5rem;
 		grid-column: 2/12;
-		margin: 1rem 0 0 0;
+		margin: var(--global-spacing-4) 0 0;
 		@media screen and (min-width: 48rem) {
-			font-size: 1.25rem;
+			font-size: var(--heading-level-6-font-size);
 		}
 		@media screen and (min-width: 64rem) {
 			grid-column: 4/10;
@@ -76,7 +76,7 @@
 
 	.xpmedia-button {
 		grid-column: 2/12;
-		margin-top: 2rem;
+		margin-top: var(--global-spacing-6);
 		@media screen and (min-width: 48rem) {
 			grid-column: 4/10;
 		}

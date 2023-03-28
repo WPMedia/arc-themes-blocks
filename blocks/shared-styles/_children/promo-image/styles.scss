@@ -14,10 +14,10 @@
 
 	.promo-label {
 		.label {
-			color: #fff;
-			margin-left: 8px;
+			color: var(--background-color);
+			margin-left: var(--global-spacing-2);
 			flex-grow: 0;
-			font-size: 12px;
+			font-size: var(--body-font-size-tiny);
 			font-weight: bold;
 			font-stretch: normal;
 			font-style: normal;

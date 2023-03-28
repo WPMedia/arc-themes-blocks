@@ -28,10 +28,10 @@
 		"author-bio-block.social-youtube": "YouTubeで接続"
 	},
 	"category-carousel-block": {
-		"category-carousel.aria-label": "Categories",
-		"category-carousel.left-arrow-label": "Previous",
-		"category-carousel.right-arrow-label": "Next",
-		"category-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+		"category-carousel.aria-label": "カテゴリ",
+		"category-carousel.left-arrow-label": "前",
+		"category-carousel.right-arrow-label": "次",
+		"category-carousel.slide-indicator": "スライド（%{current}\/%{maximum}）"
 	},
 	"default-output-block": {
 		"default-output-block.skip-main": "メインコンテンツにスキップ"
@@ -62,8 +62,8 @@
 		"global.and-text": "및",
 		"global.by-text": "担当者：",
 		"global.gallery-autoplay-button": "自動再生",
-		"global.gallery-autoplay-label-start": "Start automatic slide show",
-		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
+		"global.gallery-autoplay-label-start": "自動スライドショーを開始",
+		"global.gallery-autoplay-label-stop": "自動スライド ショーを停止",
 		"global.gallery-expand-button": "展開",
 		"global.gallery-next-label": "次のスライド",
 		"global.gallery-page-count-text": "%{current} \/ %{total}",
@@ -84,7 +84,7 @@
 		"global.social-pinterest": "Pinterest",
 		"global.social-pinterest-connect": "Pinterestで接続",
 		"global.social-reddit-connect": "Redditで接続",
-		"global.social-rss": "Subscribe to %{authorName} RSS feed",
+		"global.social-rss": "%{authorName}のRSSフィードを登録",
 		"global.social-rss-connect": "%{authorName}のRSSフィードを登録",
 		"global.social-snapchat-connect": "Snapchatで接続",
 		"global.social-soundcloud-connect": "SoundCloudで%{authorName}を聞く",
@@ -169,30 +169,30 @@
 		"links-bar-block.element-aria-label": "その他のリンク"
 	},
 	"product-assortment-carousel-block": {
-		"product-assortment-carousel.aria-label": "Products",
-		"product-assortment-carousel.left-arrow-label": "Previous",
-		"product-assortment-carousel.right-arrow-label": "Next",
-		"product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+		"product-assortment-carousel.aria-label": "製品",
+		"product-assortment-carousel.left-arrow-label": "前",
+		"product-assortment-carousel.right-arrow-label": "次",
+		"product-assortment-carousel.slide-indicator": "スライド（%{current}\/%{maximum}）"
 	},
 	"product-content-block": {
-		"product-content.description": "Description",
-		"product-content.details": "Details",
-		"product-content.shipping-and-returns": "Shipping & Returns",
-		"product-content.size-and-fit": "Size & Fit"
+		"product-content.description": "説明",
+		"product-content.details": "詳細",
+		"product-content.shipping-and-returns": "配送および返品",
+		"product-content.size-and-fit": "サイズおよびフィット"
 	},
 	"product-gallery-block": {
-		"product-gallery.aria-label": "Products",
+		"product-gallery.aria-label": "製品",
 		"product-gallery.focus-close": "閉じる",
 		"product-gallery.focus-thumbnail-next": "次の画像",
 		"product-gallery.focus-thumbnail-previous": "前の画像",
 		"product-gallery.go-to-slide": "スライド%{slideNumber}に移動",
-		"product-gallery.left-arrow-label": "Previous",
-		"product-gallery.right-arrow-label": "Next",
-		"product-gallery.slide-indicator": "Slide %{current} of %{maximum}"
+		"product-gallery.left-arrow-label": "前",
+		"product-gallery.right-arrow-label": "次",
+		"product-gallery.slide-indicator": "スライド（%{current}\/%{maximum}）"
 	},
 	"product-information-block": {
-		"product-information.list-price": "List Price %{price}",
-		"product-information.sale-price": "Sale Price %{price}"
+		"product-information.list-price": "定価%{price}",
+		"product-information.sale-price": "販売価格%{price}"
 	},
 	"results-list-block": {
 		"results-list-block.see-more-button": "詳細",
@@ -215,10 +215,10 @@
 		"promo-label.video-text": "ビデオ"
 	},
 	"story-carousel-block": {
-		"story-carousel.aria-label": "Stories",
-		"story-carousel.left-arrow-label": "Previous",
-		"story-carousel.right-arrow-label": "Next",
-		"story-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+		"story-carousel.aria-label": "記事",
+		"story-carousel.left-arrow-label": "前",
+		"story-carousel.right-arrow-label": "次",
+		"story-carousel.slide-indicator": "スライド（%{current}\/%{maximum}）"
 	},
 	"subscriptions-block": {
 		"checkout-block.Afghanistan": "Afghanistan",
@@ -411,7 +411,7 @@
 		"checkout-block.San-Marino": "San Marino",
 		"checkout-block.Sao-Tome-and-Principe": "Sao Tome and Principe",
 		"checkout-block.Saudi-Arabia": "Saudi Arabia",
-		"checkout-block.Select-Country": "Select Country",
+		"checkout-block.Select-Country": "国を選択",
 		"checkout-block.Senegal": "Senegal",
 		"checkout-block.Serbia-and-Montenegro": "Serbia and Montenegro",
 		"checkout-block.Seychelles": "Seychelles",
@@ -464,29 +464,29 @@
 		"checkout-block.Yemen": "Yemen",
 		"checkout-block.Zambia": "Zambia",
 		"checkout-block.Zimbabwe": "Zimbabwe",
-		"checkout-block.back-to-offer-page": "Back to subscription selection",
-		"checkout-block.contact-info": "Contact Info",
-		"checkout-block.continue-to-checkout": "Continue to Checkout",
-		"checkout-block.country": "Country or region",
-		"checkout-block.country-requirements": "Please select country or region",
-		"checkout-block.due-today": "Due today",
-		"checkout-block.email": "Email address",
-		"checkout-block.email-requirements": "Please enter a valid email address",
-		"checkout-block.empty-cart-message": "Select from one of our offers",
-		"checkout-block.first-name": "First name",
-		"checkout-block.first-name-requirements": "Please enter first name",
-		"checkout-block.headline": "Review Subscription Order",
-		"checkout-block.identity-email": "Signed in as %{email}",
-		"checkout-block.identity-sign-out": "Sign out",
-		"checkout-block.identity-social": "Connected",
-		"checkout-block.last-name": "Last name",
-		"checkout-block.last-name-requirements": "Please enter last name",
-		"checkout-block.order-summary": "Order Summary",
-		"checkout-block.plus-sales-tax": "Plus applicable sales tax",
+		"checkout-block.back-to-offer-page": "サブスクリプションの選択に戻る",
+		"checkout-block.contact-info": "連絡先情報",
+		"checkout-block.continue-to-checkout": "チェックアウトに進む",
+		"checkout-block.country": "国または地域",
+		"checkout-block.country-requirements": "国または地域を選択してください",
+		"checkout-block.due-today": "本日締め切り",
+		"checkout-block.email": "メールアドレス",
+		"checkout-block.email-requirements": "有効なメールアドレスを入力してください",
+		"checkout-block.empty-cart-message": "オファーのいずれかを選択",
+		"checkout-block.first-name": "名",
+		"checkout-block.first-name-requirements": "名を入力してください",
+		"checkout-block.headline": "サブスクリプションの注文を確認",
+		"checkout-block.identity-email": "%{email}としてサインイン済み",
+		"checkout-block.identity-sign-out": "サインアウト",
+		"checkout-block.identity-social": "接続済み",
+		"checkout-block.last-name": "姓",
+		"checkout-block.last-name-requirements": "姓を入力してください",
+		"checkout-block.order-summary": "注文の概要",
+		"checkout-block.plus-sales-tax": "さらに消費税がかかります",
 		"checkout-block.Åland-Islands": "Åland Islands",
-		"subscriptions-block.credit-card-information": "Payment Method and Information",
-		"subscriptions-block.payment-error": "There was an error processing your payment.",
-		"subscriptions-block.payment-information": "Credit card information",
-		"subscriptions-block.submit-payment": "Purchase Subscription"
+		"subscriptions-block.credit-card-information": "支払い方法および情報",
+		"subscriptions-block.payment-error": "支払い処理中にエラーが発生しました。",
+		"subscriptions-block.payment-information": "クレジットカード情報",
+		"subscriptions-block.submit-payment": "サブスクリプションを購入"
 	}
 }

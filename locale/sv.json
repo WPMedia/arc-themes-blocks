@@ -28,10 +28,10 @@
 		"author-bio-block.social-youtube": "Kontakta via YouTube"
 	},
 	"category-carousel-block": {
-		"category-carousel.aria-label": "Categories",
-		"category-carousel.left-arrow-label": "Previous",
-		"category-carousel.right-arrow-label": "Next",
-		"category-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+		"category-carousel.aria-label": "Kategorier",
+		"category-carousel.left-arrow-label": "Föregående",
+		"category-carousel.right-arrow-label": "Nästa",
+		"category-carousel.slide-indicator": "Bild %{current} av %{maximum}"
 	},
 	"default-output-block": {
 		"default-output-block.skip-main": "Gå vidare till huvudinnehåll"
@@ -62,8 +62,8 @@
 		"global.and-text": "och",
 		"global.by-text": "Av",
 		"global.gallery-autoplay-button": "Spela upp",
-		"global.gallery-autoplay-label-start": "Start automatic slide show",
-		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
+		"global.gallery-autoplay-label-start": "Starta automatiskt bildspel",
+		"global.gallery-autoplay-label-stop": "Stoppa automatiskt bildspel",
 		"global.gallery-expand-button": "Förstora",
 		"global.gallery-next-label": "Nästa bild",
 		"global.gallery-page-count-text": "%{current} av %{total}",
@@ -84,7 +84,7 @@
 		"global.social-pinterest": "Pinterest",
 		"global.social-pinterest-connect": "Kontakta via Pinterest",
 		"global.social-reddit-connect": "Kontakta via Reddit",
-		"global.social-rss": "Subscribe to %{authorName} RSS feed",
+		"global.social-rss": "Prenumerera på %{authorName} RSS-flöde",
 		"global.social-rss-connect": "Prenumerera på %{authorName}s RSS-kanal",
 		"global.social-snapchat-connect": "Kontakta via Snapchat",
 		"global.social-soundcloud-connect": "Lyssna på %{authorName} på SoundCloud",
@@ -169,30 +169,30 @@
 		"links-bar-block.element-aria-label": "Fler länkar"
 	},
 	"product-assortment-carousel-block": {
-		"product-assortment-carousel.aria-label": "Products",
-		"product-assortment-carousel.left-arrow-label": "Previous",
-		"product-assortment-carousel.right-arrow-label": "Next",
-		"product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+		"product-assortment-carousel.aria-label": "Produkter",
+		"product-assortment-carousel.left-arrow-label": "Föregående",
+		"product-assortment-carousel.right-arrow-label": "Nästa",
+		"product-assortment-carousel.slide-indicator": "Bild %{current} av %{maximum}"
 	},
 	"product-content-block": {
-		"product-content.description": "Description",
-		"product-content.details": "Details",
-		"product-content.shipping-and-returns": "Shipping & Returns",
-		"product-content.size-and-fit": "Size & Fit"
+		"product-content.description": "Beskrivning",
+		"product-content.details": "Information",
+		"product-content.shipping-and-returns": "Leverans och retur",
+		"product-content.size-and-fit": "Storlek och passform"
 	},
 	"product-gallery-block": {
-		"product-gallery.aria-label": "Products",
+		"product-gallery.aria-label": "Produkter",
 		"product-gallery.focus-close": "Stäng",
 		"product-gallery.focus-thumbnail-next": "Nästa bild",
 		"product-gallery.focus-thumbnail-previous": "Föregående bild",
 		"product-gallery.go-to-slide": "Gå till bild %{slideNumber}",
-		"product-gallery.left-arrow-label": "Previous",
-		"product-gallery.right-arrow-label": "Next",
-		"product-gallery.slide-indicator": "Slide %{current} of %{maximum}"
+		"product-gallery.left-arrow-label": "Föregående",
+		"product-gallery.right-arrow-label": "Nästa",
+		"product-gallery.slide-indicator": "Bild %{current} av %{maximum}"
 	},
 	"product-information-block": {
-		"product-information.list-price": "List Price %{price}",
-		"product-information.sale-price": "Sale Price %{price}"
+		"product-information.list-price": "Listpris %{price}",
+		"product-information.sale-price": "Försäljningspris %{price}"
 	},
 	"results-list-block": {
 		"results-list-block.see-more-button": "Fler artiklar",
@@ -215,10 +215,10 @@
 		"promo-label.video-text": "Video"
 	},
 	"story-carousel-block": {
-		"story-carousel.aria-label": "Stories",
-		"story-carousel.left-arrow-label": "Previous",
-		"story-carousel.right-arrow-label": "Next",
-		"story-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+		"story-carousel.aria-label": "Berättelser",
+		"story-carousel.left-arrow-label": "Föregående",
+		"story-carousel.right-arrow-label": "Nästa",
+		"story-carousel.slide-indicator": "Bild %{current} av %{maximum}"
 	},
 	"subscriptions-block": {
 		"checkout-block.Afghanistan": "Afghanistan",
@@ -411,7 +411,7 @@
 		"checkout-block.San-Marino": "San Marino",
 		"checkout-block.Sao-Tome-and-Principe": "Sao Tome and Principe",
 		"checkout-block.Saudi-Arabia": "Saudi Arabia",
-		"checkout-block.Select-Country": "Select Country",
+		"checkout-block.Select-Country": "Välj land",
 		"checkout-block.Senegal": "Senegal",
 		"checkout-block.Serbia-and-Montenegro": "Serbia and Montenegro",
 		"checkout-block.Seychelles": "Seychelles",
@@ -464,29 +464,29 @@
 		"checkout-block.Yemen": "Yemen",
 		"checkout-block.Zambia": "Zambia",
 		"checkout-block.Zimbabwe": "Zimbabwe",
-		"checkout-block.back-to-offer-page": "Back to subscription selection",
-		"checkout-block.contact-info": "Contact Info",
-		"checkout-block.continue-to-checkout": "Continue to Checkout",
-		"checkout-block.country": "Country or region",
-		"checkout-block.country-requirements": "Please select country or region",
-		"checkout-block.due-today": "Due today",
-		"checkout-block.email": "Email address",
-		"checkout-block.email-requirements": "Please enter a valid email address",
-		"checkout-block.empty-cart-message": "Select from one of our offers",
-		"checkout-block.first-name": "First name",
-		"checkout-block.first-name-requirements": "Please enter first name",
-		"checkout-block.headline": "Review Subscription Order",
-		"checkout-block.identity-email": "Signed in as %{email}",
-		"checkout-block.identity-sign-out": "Sign out",
-		"checkout-block.identity-social": "Connected",
-		"checkout-block.last-name": "Last name",
-		"checkout-block.last-name-requirements": "Please enter last name",
-		"checkout-block.order-summary": "Order Summary",
-		"checkout-block.plus-sales-tax": "Plus applicable sales tax",
+		"checkout-block.back-to-offer-page": "Tillbaka till prenumerationsval",
+		"checkout-block.contact-info": "Kontaktuppgifter",
+		"checkout-block.continue-to-checkout": "Fortsätt till kassan",
+		"checkout-block.country": "Land eller region",
+		"checkout-block.country-requirements": "Ange ditt land eller din region",
+		"checkout-block.due-today": "Förfaller idag",
+		"checkout-block.email": "E-postadress",
+		"checkout-block.email-requirements": "Ange en giltig e-postadress",
+		"checkout-block.empty-cart-message": "Välj ett av våra erbjudanden",
+		"checkout-block.first-name": "Förnamn",
+		"checkout-block.first-name-requirements": "Ange förnamn",
+		"checkout-block.headline": "Granska prenumerationsbeställning",
+		"checkout-block.identity-email": "Inloggad som %{email}",
+		"checkout-block.identity-sign-out": "Logga ut",
+		"checkout-block.identity-social": "Ansluten",
+		"checkout-block.last-name": "Efternamn",
+		"checkout-block.last-name-requirements": "Ange efternamn",
+		"checkout-block.order-summary": "Beställningsöversikt",
+		"checkout-block.plus-sales-tax": "Plus moms",
 		"checkout-block.Åland-Islands": "Åland Islands",
-		"subscriptions-block.credit-card-information": "Payment Method and Information",
-		"subscriptions-block.payment-error": "There was an error processing your payment.",
-		"subscriptions-block.payment-information": "Credit card information",
-		"subscriptions-block.submit-payment": "Purchase Subscription"
+		"subscriptions-block.credit-card-information": "Betalningsmetod och betalningsuppgifter",
+		"subscriptions-block.payment-error": "Ett fel uppstod när din betalning skulle behandlas.",
+		"subscriptions-block.payment-information": "Kreditkortsuppgifter",
+		"subscriptions-block.submit-payment": "Köp prenumeration"
 	}
 }

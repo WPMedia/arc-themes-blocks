@@ -28,10 +28,10 @@
 		"author-bio-block.social-youtube": "Oppnå kontakt på YouTube"
 	},
 	"category-carousel-block": {
-		"category-carousel.aria-label": "Categories",
-		"category-carousel.left-arrow-label": "Previous",
-		"category-carousel.right-arrow-label": "Next",
-		"category-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+		"category-carousel.aria-label": "Kategorier",
+		"category-carousel.left-arrow-label": "Forrige",
+		"category-carousel.right-arrow-label": "Neste",
+		"category-carousel.slide-indicator": "Slide %{current} av %{maximum}"
 	},
 	"default-output-block": {
 		"default-output-block.skip-main": "Hopp til hovedinnhold"
@@ -84,7 +84,7 @@
 		"global.social-pinterest": "Pinterest",
 		"global.social-pinterest-connect": "Oppnå kontakt på Pinterest",
 		"global.social-reddit-connect": "Oppnå kontakt på Reddit",
-		"global.social-rss": "Subscribe to %{authorName} RSS feed",
+		"global.social-rss": "Abonner på RSS-feeden til %{authorName}",
 		"global.social-rss-connect": "Abonner på %{authorName}s RSS-feed",
 		"global.social-snapchat-connect": "Oppnå kontakt på Snapchat",
 		"global.social-soundcloud-connect": "Lytt til %{authorName} på SoundCloud",
@@ -169,30 +169,30 @@
 		"links-bar-block.element-aria-label": "Flere lenker"
 	},
 	"product-assortment-carousel-block": {
-		"product-assortment-carousel.aria-label": "Products",
-		"product-assortment-carousel.left-arrow-label": "Previous",
-		"product-assortment-carousel.right-arrow-label": "Next",
-		"product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+		"product-assortment-carousel.aria-label": "Produkter",
+		"product-assortment-carousel.left-arrow-label": "Forrige",
+		"product-assortment-carousel.right-arrow-label": "Neste",
+		"product-assortment-carousel.slide-indicator": "Slide %{current} av %{maximum}"
 	},
 	"product-content-block": {
-		"product-content.description": "Description",
-		"product-content.details": "Details",
-		"product-content.shipping-and-returns": "Shipping & Returns",
-		"product-content.size-and-fit": "Size & Fit"
+		"product-content.description": "Beskrivelse",
+		"product-content.details": "Detaljer",
+		"product-content.shipping-and-returns": "Frakt og returer",
+		"product-content.size-and-fit": "Størrelse og passform"
 	},
 	"product-gallery-block": {
-		"product-gallery.aria-label": "Products",
+		"product-gallery.aria-label": "Produkter",
 		"product-gallery.focus-close": "Avslutt",
 		"product-gallery.focus-thumbnail-next": "Neste bilde",
 		"product-gallery.focus-thumbnail-previous": "Forrige bilde",
 		"product-gallery.go-to-slide": "Gå til slide %{slideNumber}",
-		"product-gallery.left-arrow-label": "Previous",
-		"product-gallery.right-arrow-label": "Next",
-		"product-gallery.slide-indicator": "Slide %{current} of %{maximum}"
+		"product-gallery.left-arrow-label": "Forrige",
+		"product-gallery.right-arrow-label": "Neste",
+		"product-gallery.slide-indicator": "Slide %{current} av %{maximum}"
 	},
 	"product-information-block": {
-		"product-information.list-price": "List Price %{price}",
-		"product-information.sale-price": "Sale Price %{price}"
+		"product-information.list-price": "Listepris %{price}",
+		"product-information.sale-price": "Salgspris %{price}"
 	},
 	"results-list-block": {
 		"results-list-block.see-more-button": "Se mer",
@@ -215,10 +215,10 @@
 		"promo-label.video-text": "Video"
 	},
 	"story-carousel-block": {
-		"story-carousel.aria-label": "Stories",
-		"story-carousel.left-arrow-label": "Previous",
-		"story-carousel.right-arrow-label": "Next",
-		"story-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+		"story-carousel.aria-label": "Historier",
+		"story-carousel.left-arrow-label": "Forrige",
+		"story-carousel.right-arrow-label": "Neste",
+		"story-carousel.slide-indicator": "Slide %{current} av %{maximum}"
 	},
 	"subscriptions-block": {
 		"checkout-block.Afghanistan": "Afghanistan",
@@ -411,7 +411,7 @@
 		"checkout-block.San-Marino": "San Marino",
 		"checkout-block.Sao-Tome-and-Principe": "Sao Tome and Principe",
 		"checkout-block.Saudi-Arabia": "Saudi Arabia",
-		"checkout-block.Select-Country": "Select Country",
+		"checkout-block.Select-Country": "Velg land",
 		"checkout-block.Senegal": "Senegal",
 		"checkout-block.Serbia-and-Montenegro": "Serbia and Montenegro",
 		"checkout-block.Seychelles": "Seychelles",
@@ -464,29 +464,29 @@
 		"checkout-block.Yemen": "Yemen",
 		"checkout-block.Zambia": "Zambia",
 		"checkout-block.Zimbabwe": "Zimbabwe",
-		"checkout-block.back-to-offer-page": "Back to subscription selection",
-		"checkout-block.contact-info": "Contact Info",
-		"checkout-block.continue-to-checkout": "Continue to Checkout",
-		"checkout-block.country": "Country or region",
-		"checkout-block.country-requirements": "Please select country or region",
-		"checkout-block.due-today": "Due today",
-		"checkout-block.email": "Email address",
-		"checkout-block.email-requirements": "Please enter a valid email address",
-		"checkout-block.empty-cart-message": "Select from one of our offers",
-		"checkout-block.first-name": "First name",
-		"checkout-block.first-name-requirements": "Please enter first name",
-		"checkout-block.headline": "Review Subscription Order",
-		"checkout-block.identity-email": "Signed in as %{email}",
-		"checkout-block.identity-sign-out": "Sign out",
-		"checkout-block.identity-social": "Connected",
-		"checkout-block.last-name": "Last name",
-		"checkout-block.last-name-requirements": "Please enter last name",
-		"checkout-block.order-summary": "Order Summary",
-		"checkout-block.plus-sales-tax": "Plus applicable sales tax",
+		"checkout-block.back-to-offer-page": "Tilbake til abonnementsvalg",
+		"checkout-block.contact-info": "Kontaktinformasjon",
+		"checkout-block.continue-to-checkout": "Fortsett til kassen",
+		"checkout-block.country": "Land eller område",
+		"checkout-block.country-requirements": "Velg land eller område",
+		"checkout-block.due-today": "Forfaller i dag",
+		"checkout-block.email": "E-postadresse",
+		"checkout-block.email-requirements": "Skriv inn en gyldig e-postadresse",
+		"checkout-block.empty-cart-message": "Velg fra ett av tilbudene våre",
+		"checkout-block.first-name": "Fornavn",
+		"checkout-block.first-name-requirements": "Skriv inn fornavn",
+		"checkout-block.headline": "Se gjennom abonnementsordre",
+		"checkout-block.identity-email": "Logget inn som %{email}",
+		"checkout-block.identity-sign-out": "Logg ut",
+		"checkout-block.identity-social": "Tilknyttet",
+		"checkout-block.last-name": "Etternavn",
+		"checkout-block.last-name-requirements": "Skriv inn etternavn",
+		"checkout-block.order-summary": "Ordresammendrag",
+		"checkout-block.plus-sales-tax": "I tillegg til gjeldende salgsavgift",
 		"checkout-block.Åland-Islands": "Åland Islands",
-		"subscriptions-block.credit-card-information": "Payment Method and Information",
-		"subscriptions-block.payment-error": "There was an error processing your payment.",
-		"subscriptions-block.payment-information": "Credit card information",
-		"subscriptions-block.submit-payment": "Purchase Subscription"
+		"subscriptions-block.credit-card-information": "Betalingsmetode og -informasjon",
+		"subscriptions-block.payment-error": "Det oppstod en feil under behandlingen av betalingen.",
+		"subscriptions-block.payment-information": "Kredittkortopplysninger",
+		"subscriptions-block.submit-payment": "Kjøp abonnement"
 	}
 }

@@ -33,26 +33,26 @@
 		"sv": "Spela upp"
 	},
 	"global.gallery-autoplay-label-start": {
-		"de": "Start automatic slide show",
+		"de": "Automatische Diashow starten",
 		"en": "Start automatic slide show",
-		"es": "Start automatic slide show",
-		"fr": "Start automatic slide show",
-		"ja": "Start automatic slide show",
-		"ko": "Start automatic slide show",
+		"es": "Detener presentación automática de diapositivas",
+		"fr": "Démarrer le diaporama automatique",
+		"ja": "自動スライドショーを開始",
+		"ko": "자동 슬라이드 쇼 시작",
 		"no": "Start automatisk lysbildevisning",
 		"pt": "Iniciar apresentação automática de diapositivos",
-		"sv": "Start automatic slide show"
+		"sv": "Starta automatiskt bildspel"
 	},
 	"global.gallery-autoplay-label-stop": {
-		"de": "Stop automatic slide show",
+		"de": "Automatische Diashow anhalten",
 		"en": "Stop automatic slide show",
-		"es": "Stop automatic slide show",
-		"fr": "Stop automatic slide show",
-		"ja": "Stop automatic slide show",
-		"ko": "Stop automatic slide show",
+		"es": "Detener presentación automática de diapositivas",
+		"fr": "Arrêter le diaporama automatique",
+		"ja": "自動スライド ショーを停止",
+		"ko": "자동 슬라이드 쇼 중지",
 		"no": "Stopp automatisk lysbildevisning",
 		"pt": "Parar apresentação automática de diapositivos",
-		"sv": "Stop automatic slide show"
+		"sv": "Stoppa automatiskt bildspel"
 	},
 	"global.gallery-expand-button": {
 		"de": "Erweitern",
@@ -275,15 +275,15 @@
 		"sv": "Kontakta via Reddit"
 	},
 	"global.social-rss": {
-		"de": "Subscribe to %{authorName} RSS feed",
+		"de": "RSS Feed von %{authorName} abonnieren",
 		"en": "Subscribe to %{authorName} RSS feed",
-		"es": "Subscribe to %{authorName} RSS feed",
-		"fr": "Subscribe to %{authorName} RSS feed",
-		"ja": "Subscribe to %{authorName} RSS feed",
-		"ko": "Subscribe to %{authorName} RSS feed",
-		"no": "Subscribe to %{authorName} RSS feed",
-		"pt": "Subscribe to %{authorName} RSS feed",
-		"sv": "Subscribe to %{authorName} RSS feed"
+		"es": "Suscríbase a la fuente RSS de %{authorName}",
+		"fr": "S'abonner au flux RSS de %{authorName}",
+		"ja": "%{authorName}のRSSフィードを登録",
+		"ko": "%{authorName} RSS 피드 구독",
+		"no": "Abonner på RSS-feeden til %{authorName}",
+		"pt": "Subscrever o feed RSS %{authorName}",
+		"sv": "Prenumerera på %{authorName} RSS-flöde"
 	},
 	"global.social-rss-connect": {
 		"de": "RSS Feed von %{authorName} abonnieren",

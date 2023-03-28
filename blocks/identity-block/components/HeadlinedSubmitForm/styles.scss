@@ -1,43 +1,43 @@
 .xpmedia-form-headline {
 	border-bottom: 1px solid #dadada;
-	font-size: 1.5rem;
+	font-size: var(--heading-level-4-font-size);
 	font-weight: 700;
 	line-height: 2rem;
-	padding-bottom: 1rem;
-	margin-bottom: 1rem;
+	padding-bottom: var(--global-spacing-4);
+	margin-bottom: var(--global-spacing-4);
 	text-align: center;
 	width: 100%;
 }
 
 .xpmedia-form-submittable {
 	border-bottom: 1px solid #dadada;
-	margin-bottom: 1rem;
+	margin-bottom: var(--global-spacing-4);
 
 	.xpmedia-form-field {
-		margin: 1.5rem 0;
+		margin: var(--global-spacing-5) 0;
 
 		&:first-of-type {
-			margin-top: 1rem;
+			margin-top: var(--global-spacing-4);
 		}
 
 		&:last-of-type {
-			margin-bottom: 1rem;
+			margin-bottom: var(--global-spacing-4);
 		}
 	}
 
 	.xpmedia-button {
-		margin: 1.5rem 0;
+		margin: var(--global-spacing-5) 0;
 	}
 }
 
 .xpmedia-form-error {
 	color: #db0a07;
-	font-size: 16px;
-	margin: 1.5rem 0;
+	font-size: var(--body-font-size);
+	margin: var(--global-spacing-5) 0;
 
 	p {
 		display: flex;
-		line-height: 1.5;
+		line-height: var(--body-line-height);
 
 		svg {
 			display: block;

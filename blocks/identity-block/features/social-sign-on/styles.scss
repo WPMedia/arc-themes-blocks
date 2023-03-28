@@ -7,14 +7,14 @@
 }
 
 .xpmedia-social-sign-on-error {
-	color: $danger-color;
-	font-size: 16px;
-	margin: map-get($spacers, "md") 0;
+	color: #db0a07;
+	font-size: var(--body-font-size);
+	margin: var(--global-spacing-5) 0;
 
 	p {
 		display: flex;
 		justify-content: center;
-		line-height: 1.5;
+		line-height: var(--body-line-height);
 
 		svg {
 			display: block;

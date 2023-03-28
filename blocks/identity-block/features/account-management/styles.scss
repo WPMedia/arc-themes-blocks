@@ -1,9 +1,9 @@
 .account-management-layout > * + * {
-	margin-top: 0.5rem;
+	margin-top: var(--global-spacing-2);
 }
 
 // applies margin to the second child and any further children
 // doesn't apply to the first element to avoid negative margin hacks
 .account-management-layout--wrapper > * + * {
-	margin-top: 24px;
+	margin-top: var(--global-spacing-5);
 }

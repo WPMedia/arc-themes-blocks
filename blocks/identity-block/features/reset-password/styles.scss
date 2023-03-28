@@ -1,7 +1,7 @@
 .xpmedia-reset-password-headline,
 .xpmedia-reset-password-instruction {
-	padding-bottom: 1rem;
-	margin-bottom: 1rem;
+	padding-bottom: var(--global-spacing-4);
+	margin-bottom: var(--global-spacing-4);
 	text-align: center;
 	width: 100%;
 }

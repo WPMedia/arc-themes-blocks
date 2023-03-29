@@ -16,16 +16,17 @@
 		font-weight: bold;
 
 		@media (min-width: 48rem) {
-			font-size: var(--heading-level-1-font-size);
+			font-size: 36px;
 			line-height: 2.5rem;
 		}
 	}
 
 	&--subheadline {
 		color: #575757;
-		font-size: var(--heading-level-5-font-size);
+		font-size: 20px;
 		font-weight: 400;
 		text-align: center;
+		line-height: 1.875rem;
 	}
 
 	&--features {

@@ -1,7 +1,11 @@
 .xpmedia-forgot-password-headline {
-	font-size: var(--heading-level-4-font-size);
+	font-size: var(--body-font-size);
 	line-height: var(--heading-level-4-line-height);
 	font-weight: 600;
+	padding-bottom: var(--global-spacing-4);
+	margin-bottom: var(--global-spacing-4);
+	text-align: center;
+	width: 100%;
 	margin: 0;
 	padding: 0;
 
@@ -11,7 +15,6 @@
 	}
 }
 
-.xpmedia-forgot-password-headline,
 .xpmedia-forgot-password-instruction {
 	padding-bottom: var(--global-spacing-4);
 	margin-bottom: var(--global-spacing-4);

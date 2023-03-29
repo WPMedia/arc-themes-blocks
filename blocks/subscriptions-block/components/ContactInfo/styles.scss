@@ -3,7 +3,17 @@
 
 	&-title {
 		margin-bottom: var(--global-spacing-5);
+		font-size: var(--heading-level-4-font-size);
+		font-weight: var(--heading-level-4-font-weight);
+		line-height: 40px;
 	}
+
+	// .row {
+	// 	grid-column-gap: 1rem;
+	// 	display: grid;
+	// 	grid-auto-flow: dense;
+	// 	grid-template-columns: 1fr 1fr;
+	// }
 
 	.identity-row {
 		width: 100%;

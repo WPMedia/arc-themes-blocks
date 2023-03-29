@@ -212,6 +212,7 @@ class LeadArt extends Component {
 						displayTitle={!hideTitle}
 						displayCaption={!hideCaption}
 						displayCredits={!hideCredits}
+						eagerLoadFirstImage
 					/>
 				);
 			}

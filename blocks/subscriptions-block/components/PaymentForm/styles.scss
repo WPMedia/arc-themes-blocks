@@ -1,7 +1,11 @@
 .payment-form--title {
 	font-size: var(--heading-level-4-font-size);
 	font-weight: bold;
-	line-height: 2.5rem;
+	line-height: 2rem;
+
+	@media (min-width: 48rem) {
+		line-height: 2.5rem;
+	}
 }
 
 .payment-form--form {

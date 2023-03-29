@@ -23,5 +23,7 @@
 }
 
 .xpmedia-form-field {
-	font-size: var(--heading-level-6-font-size);
+	@media (min-width: 48rem) {
+		font-size: var(--heading-level-6-font-size);
+	}
 }

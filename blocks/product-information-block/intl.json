@@ -1,24 +1,24 @@
 {
 	"product-information.list-price": {
-		"de": "List Price %{price}",
+		"de": "Listenpreis %{price}",
 		"en": "List Price %{price}",
-		"es": "List Price %{price}",
-		"fr": "List Price %{price}",
-		"ja": "List Price %{price}",
-		"ko": "List Price %{price}",
-		"no": "List Price %{price}",
-		"pt": "List Price %{price}",
-		"sv": "List Price %{price}"
+		"es": "Precio de venta %{price}",
+		"fr": "Prix catalogue %{price}",
+		"ja": "定価%{price}",
+		"ko": "정가 %{price}",
+		"no": "Listepris %{price}",
+		"pt": "Preço de tabela %{price}",
+		"sv": "Listpris %{price}"
 	},
 	"product-information.sale-price": {
-		"de": "Sale Price %{price}",
+		"de": "Verkaufspreis %{price}",
 		"en": "Sale Price %{price}",
-		"es": "Sale Price %{price}",
-		"fr": "Sale Price %{price}",
-		"ja": "Sale Price %{price}",
-		"ko": "Sale Price %{price}",
-		"no": "Sale Price %{price}",
-		"pt": "Sale Price %{price}",
-		"sv": "Sale Price %{price}"
+		"es": "Precio reducido %{price}",
+		"fr": "Prix de vente %{price}",
+		"ja": "販売価格%{price}",
+		"ko": "판매 가격 %{price}",
+		"no": "Salgspris %{price}",
+		"pt": "Preço de venda %{price}",
+		"sv": "Försäljningspris %{price}"
 	}
 }

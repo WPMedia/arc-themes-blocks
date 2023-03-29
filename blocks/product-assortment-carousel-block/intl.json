@@ -1,46 +1,46 @@
 {
 	"product-assortment-carousel.aria-label": {
-		"de": "Products",
+		"de": "Produkte",
 		"en": "Products",
-		"es": "Products",
-		"fr": "Products",
-		"ja": "Products",
-		"ko": "Products",
-		"no": "Products",
-		"pt": "Products",
-		"sv": "Products"
+		"es": "Productos",
+		"fr": "Produits",
+		"ja": "製品",
+		"ko": "상품",
+		"no": "Produkter",
+		"pt": "Produtos",
+		"sv": "Produkter"
 	},
 	"product-assortment-carousel.left-arrow-label": {
-		"de": "Previous",
+		"de": "Vorheriges",
 		"en": "Previous",
-		"es": "Previous",
-		"fr": "Previous",
-		"ja": "Previous",
-		"ko": "Previous",
-		"no": "Previous",
-		"pt": "Previous",
-		"sv": "Previous"
+		"es": "Anterior",
+		"fr": "Précédent",
+		"ja": "前",
+		"ko": "이전",
+		"no": "Forrige",
+		"pt": "Anterior",
+		"sv": "Föregående"
 	},
 	"product-assortment-carousel.right-arrow-label": {
-		"de": "Next",
+		"de": "Nächstes",
 		"en": "Next",
-		"es": "Next",
-		"fr": "Next",
-		"ja": "Next",
-		"ko": "Next",
-		"no": "Next",
-		"pt": "Next",
-		"sv": "Next"
+		"es": "Siguiente",
+		"fr": "Suivant",
+		"ja": "次",
+		"ko": "다음",
+		"no": "Neste",
+		"pt": "Seguinte",
+		"sv": "Nästa"
 	},
 	"product-assortment-carousel.slide-indicator": {
-		"de": "Slide %{current} of %{maximum}",
+		"de": "Bild %{current} von %{maximum}",
 		"en": "Slide %{current} of %{maximum}",
-		"es": "Slide %{current} of %{maximum}",
-		"fr": "Slide %{current} of %{maximum}",
-		"ja": "Slide %{current} of %{maximum}",
-		"ko": "Slide %{current} of %{maximum}",
-		"no": "Slide %{current} of %{maximum}",
-		"pt": "Slide %{current} of %{maximum}",
-		"sv": "Slide %{current} of %{maximum}"
+		"es": "Diapositiva %{current} de %{maximum}",
+		"fr": "Diapositive %{current} sur %{maximum}",
+		"ja": "スライド（%{current}/%{maximum}）",
+		"ko": "%{maximum} 중 %{current} 슬라이드",
+		"no": "Slide %{current} av %{maximum}",
+		"pt": "Slide %{current} de %{maximum}",
+		"sv": "Bild %{current} av %{maximum}"
 	}
 }

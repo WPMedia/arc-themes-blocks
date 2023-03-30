@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ARC_ACCESS_TOKEN, CONTENT_BASE } from "fusion:environment";
+import { handleFetchError } from "@wpmedia/arc-themes-components";
 
 const params = [
 	{
@@ -34,6 +35,7 @@ const fetch = ({ "arc-site": website }) => {
 				...data,
 				content_elements: data.content_elements.filter((element) => !element.referent),
 			}))
+			.catch(handleFetchError)
 	);
 };
 

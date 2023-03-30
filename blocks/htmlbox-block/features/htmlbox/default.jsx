@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useFusionContext } from "fusion:context";
 import Static from "fusion:static";
+import "../../styles.scss";
 
 const HTMLBox = ({ id }) => {
 	let htmlbox = null;

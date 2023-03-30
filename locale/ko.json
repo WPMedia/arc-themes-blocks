@@ -28,10 +28,10 @@
 		"author-bio-block.social-youtube": "YouTube에서 연결"
 	},
 	"category-carousel-block": {
-		"category-carousel.aria-label": "Categories",
-		"category-carousel.left-arrow-label": "Previous",
-		"category-carousel.right-arrow-label": "Next",
-		"category-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+		"category-carousel.aria-label": "범주",
+		"category-carousel.left-arrow-label": "이전",
+		"category-carousel.right-arrow-label": "다음",
+		"category-carousel.slide-indicator": "%{maximum} 중 %{current} 슬라이드"
 	},
 	"default-output-block": {
 		"default-output-block.skip-main": "메인 콘텐츠로 건너뛰기"
@@ -62,13 +62,13 @@
 		"global.and-text": "및",
 		"global.by-text": "저작자",
 		"global.gallery-autoplay-button": "자동 재생",
-		"global.gallery-autoplay-label-start": "Start automatic slide show",
-		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
+		"global.gallery-autoplay-label-start": "자동 슬라이드 쇼 시작",
+		"global.gallery-autoplay-label-stop": "자동 슬라이드 쇼 중지",
 		"global.gallery-expand-button": "더보기",
-		"global.gallery-next-label": "Next Slide",
+		"global.gallery-next-label": "다음 슬라이드",
 		"global.gallery-page-count-text": "%{current}\/%개 보는 %{total}",
 		"global.gallery-pause-autoplay-button": "자동 재생 일시 중지",
-		"global.gallery-previous-label": "Previous Slide",
+		"global.gallery-previous-label": "이전 슬라이드",
 		"global.gallery-text": "갤러리",
 		"global.opens-in-new-window": "(새 창에서 열기)",
 		"global.see-more-button": "자세히 보기",
@@ -84,7 +84,7 @@
 		"global.social-pinterest": "Pinterest",
 		"global.social-pinterest-connect": "Pinterest에서 연결",
 		"global.social-reddit-connect": "Reddit에서 연결",
-		"global.social-rss": "Subscribe to %{authorName} RSS feed",
+		"global.social-rss": "%{authorName} RSS 피드 구독",
 		"global.social-rss-connect": "%{authorName} RSS 피드 구독",
 		"global.social-snapchat-connect": "Snapchat에서 연결",
 		"global.social-soundcloud-connect": "SoundCloud에서 %{authorName} 듣기",
@@ -162,37 +162,37 @@
 		"identity-block.username": "사용자 이름"
 	},
 	"lead-art-block": {
-		"lead-art-block.fullscreen-enter": "Enter full screen mode displaying the lead image",
-		"lead-art-block.fullscreen-exit": "Exit full screen mode displaying the lead image"
+		"lead-art-block.fullscreen-enter": "리드 이미지를 표시하는 전체 화면 모드 종료",
+		"lead-art-block.fullscreen-exit": "리드 이미지를 표시하는 전체 화면 모드 종료"
 	},
 	"links-bar-block": {
 		"links-bar-block.element-aria-label": "링크 더 보기"
 	},
 	"product-assortment-carousel-block": {
-		"product-assortment-carousel.aria-label": "Products",
-		"product-assortment-carousel.left-arrow-label": "Previous",
-		"product-assortment-carousel.right-arrow-label": "Next",
-		"product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+		"product-assortment-carousel.aria-label": "상품",
+		"product-assortment-carousel.left-arrow-label": "이전",
+		"product-assortment-carousel.right-arrow-label": "다음",
+		"product-assortment-carousel.slide-indicator": "%{maximum} 중 %{current} 슬라이드"
 	},
 	"product-content-block": {
-		"product-content.description": "Description",
-		"product-content.details": "Details",
-		"product-content.shipping-and-returns": "Shipping & Returns",
-		"product-content.size-and-fit": "Size & Fit"
+		"product-content.description": "설명",
+		"product-content.details": "세부 정보",
+		"product-content.shipping-and-returns": "배송 및 반품",
+		"product-content.size-and-fit": "크기 및 핏"
 	},
 	"product-gallery-block": {
-		"product-gallery.aria-label": "Products",
-		"product-gallery.focus-close": "Close",
-		"product-gallery.focus-thumbnail-next": "Next Image",
-		"product-gallery.focus-thumbnail-previous": "Previous Image",
-		"product-gallery.go-to-slide": "Go to slide %{slideNumber}",
-		"product-gallery.left-arrow-label": "Previous",
-		"product-gallery.right-arrow-label": "Next",
-		"product-gallery.slide-indicator": "Slide %{current} of %{maximum}"
+		"product-gallery.aria-label": "상품",
+		"product-gallery.focus-close": "닫기",
+		"product-gallery.focus-thumbnail-next": "다음 이미지",
+		"product-gallery.focus-thumbnail-previous": "이전 이미지",
+		"product-gallery.go-to-slide": "슬라이드 %{slideNumber}(으)로 이동",
+		"product-gallery.left-arrow-label": "이전",
+		"product-gallery.right-arrow-label": "다음",
+		"product-gallery.slide-indicator": "%{maximum} 중 %{current} 슬라이드"
 	},
 	"product-information-block": {
-		"product-information.list-price": "List Price %{price}",
-		"product-information.sale-price": "Sale Price %{price}"
+		"product-information.list-price": "정가 %{price}",
+		"product-information.sale-price": "판매 가격 %{price}"
 	},
 	"results-list-block": {
 		"results-list-block.see-more-button": "자세히 보기",
@@ -215,10 +215,10 @@
 		"promo-label.video-text": "비디오"
 	},
 	"story-carousel-block": {
-		"story-carousel.aria-label": "Stories",
-		"story-carousel.left-arrow-label": "Previous",
-		"story-carousel.right-arrow-label": "Next",
-		"story-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+		"story-carousel.aria-label": "스토리",
+		"story-carousel.left-arrow-label": "이전",
+		"story-carousel.right-arrow-label": "다음",
+		"story-carousel.slide-indicator": "%{maximum} 중 %{current} 슬라이드"
 	},
 	"subscriptions-block": {
 		"checkout-block.Afghanistan": "Afghanistan",
@@ -411,7 +411,7 @@
 		"checkout-block.San-Marino": "San Marino",
 		"checkout-block.Sao-Tome-and-Principe": "Sao Tome and Principe",
 		"checkout-block.Saudi-Arabia": "Saudi Arabia",
-		"checkout-block.Select-Country": "Select Country",
+		"checkout-block.Select-Country": "국가 선택",
 		"checkout-block.Senegal": "Senegal",
 		"checkout-block.Serbia-and-Montenegro": "Serbia and Montenegro",
 		"checkout-block.Seychelles": "Seychelles",
@@ -464,29 +464,29 @@
 		"checkout-block.Yemen": "Yemen",
 		"checkout-block.Zambia": "Zambia",
 		"checkout-block.Zimbabwe": "Zimbabwe",
-		"checkout-block.back-to-offer-page": "Back to subscription selection",
-		"checkout-block.contact-info": "Contact Info",
-		"checkout-block.continue-to-checkout": "Continue to Checkout",
-		"checkout-block.country": "Country or region",
-		"checkout-block.country-requirements": "Please select country or region",
-		"checkout-block.due-today": "Due today",
-		"checkout-block.email": "Email address",
-		"checkout-block.email-requirements": "Please enter a valid email address",
-		"checkout-block.empty-cart-message": "Select from one of our offers",
-		"checkout-block.first-name": "First name",
-		"checkout-block.first-name-requirements": "Please enter first name",
-		"checkout-block.headline": "Review Subscription Order",
-		"checkout-block.identity-email": "Signed in as %{email}",
-		"checkout-block.identity-sign-out": "Sign out",
-		"checkout-block.identity-social": "Connected",
-		"checkout-block.last-name": "Last name",
-		"checkout-block.last-name-requirements": "Please enter last name",
-		"checkout-block.order-summary": "Order Summary",
-		"checkout-block.plus-sales-tax": "Plus applicable sales tax",
+		"checkout-block.back-to-offer-page": "구독 선택으로 돌아가기",
+		"checkout-block.contact-info": "연락처 정보",
+		"checkout-block.continue-to-checkout": "결제 계속하기",
+		"checkout-block.country": "국가 또는 지역",
+		"checkout-block.country-requirements": "국가 또는 지역을 선택하십시오",
+		"checkout-block.due-today": "오늘까지",
+		"checkout-block.email": "이메일 주소",
+		"checkout-block.email-requirements": "유효한 이메일 주소를 입력하십시오",
+		"checkout-block.empty-cart-message": "오퍼 중 하나를 선택하십시오",
+		"checkout-block.first-name": "이름",
+		"checkout-block.first-name-requirements": "이름을 입력하십시오",
+		"checkout-block.headline": "구독 주문 검토",
+		"checkout-block.identity-email": "%{email}(으)로 로그인됨",
+		"checkout-block.identity-sign-out": "로그아웃",
+		"checkout-block.identity-social": "연결됨",
+		"checkout-block.last-name": "성",
+		"checkout-block.last-name-requirements": "성을 입력하십시오",
+		"checkout-block.order-summary": "주문 요약",
+		"checkout-block.plus-sales-tax": "해당 판매세 별도",
 		"checkout-block.Åland-Islands": "Åland Islands",
-		"subscriptions-block.credit-card-information": "Payment Method and Information",
-		"subscriptions-block.payment-error": "There was an error processing your payment.",
-		"subscriptions-block.payment-information": "Credit card information",
-		"subscriptions-block.submit-payment": "Purchase Subscription"
+		"subscriptions-block.credit-card-information": "결제 방법 및 정보",
+		"subscriptions-block.payment-error": "결제를 처리하는 중 오류가 발생했습니다.",
+		"subscriptions-block.payment-information": "신용카드 정보",
+		"subscriptions-block.submit-payment": "구독 구입"
 	}
 }

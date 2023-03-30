@@ -28,10 +28,10 @@
 		"author-bio-block.social-youtube": "Auf YouTube verbinden"
 	},
 	"category-carousel-block": {
-		"category-carousel.aria-label": "Categories",
-		"category-carousel.left-arrow-label": "Previous",
-		"category-carousel.right-arrow-label": "Next",
-		"category-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+		"category-carousel.aria-label": "Kategorien",
+		"category-carousel.left-arrow-label": "Vorheriges",
+		"category-carousel.right-arrow-label": "Nächstes",
+		"category-carousel.slide-indicator": "Bild %{current} von %{maximum}"
 	},
 	"default-output-block": {
 		"default-output-block.skip-main": "Zum Hauptinhalt springen"
@@ -62,13 +62,13 @@
 		"global.and-text": "und",
 		"global.by-text": "Von",
 		"global.gallery-autoplay-button": "Automatische Wiedergabe",
-		"global.gallery-autoplay-label-start": "Start automatic slide show",
-		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
+		"global.gallery-autoplay-label-start": "Automatische Diashow starten",
+		"global.gallery-autoplay-label-stop": "Automatische Diashow anhalten",
 		"global.gallery-expand-button": "Erweitern",
-		"global.gallery-next-label": "Next Slide",
+		"global.gallery-next-label": "Nächste Folie",
 		"global.gallery-page-count-text": "%{current} von %{total}",
 		"global.gallery-pause-autoplay-button": "Automatische Wiedergabe anhalten",
-		"global.gallery-previous-label": "Previous Slide",
+		"global.gallery-previous-label": "Vorherige Folie",
 		"global.gallery-text": "Galerie",
 		"global.opens-in-new-window": "(Wird in einem neuen Fenster geöffnet)",
 		"global.see-more-button": "Mehr anzeigen",
@@ -84,7 +84,7 @@
 		"global.social-pinterest": "Pinterest",
 		"global.social-pinterest-connect": "Auf Pinterest verbinden",
 		"global.social-reddit-connect": "Auf Reddit verbinden",
-		"global.social-rss": "Subscribe to %{authorName} RSS feed",
+		"global.social-rss": "RSS Feed von %{authorName} abonnieren",
 		"global.social-rss-connect": "RSS Feed von %{authorName} abonnieren",
 		"global.social-snapchat-connect": "Auf Snapchat verbinden",
 		"global.social-soundcloud-connect": "%{authorName} auf SoundCloud anhören",
@@ -162,37 +162,37 @@
 		"identity-block.username": "Benutzername"
 	},
 	"lead-art-block": {
-		"lead-art-block.fullscreen-enter": "Enter full screen mode displaying the lead image",
-		"lead-art-block.fullscreen-exit": "Exit full screen mode displaying the lead image"
+		"lead-art-block.fullscreen-enter": "Vollbildmodus mit Anzeige des Hauptbildes öffnen",
+		"lead-art-block.fullscreen-exit": "Vollbildmodus mit Anzeige des Hauptbildes beenden"
 	},
 	"links-bar-block": {
 		"links-bar-block.element-aria-label": "Weitere Links"
 	},
 	"product-assortment-carousel-block": {
-		"product-assortment-carousel.aria-label": "Products",
-		"product-assortment-carousel.left-arrow-label": "Previous",
-		"product-assortment-carousel.right-arrow-label": "Next",
-		"product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+		"product-assortment-carousel.aria-label": "Produkte",
+		"product-assortment-carousel.left-arrow-label": "Vorheriges",
+		"product-assortment-carousel.right-arrow-label": "Nächstes",
+		"product-assortment-carousel.slide-indicator": "Bild %{current} von %{maximum}"
 	},
 	"product-content-block": {
-		"product-content.description": "Description",
+		"product-content.description": "Beschreibung",
 		"product-content.details": "Details",
-		"product-content.shipping-and-returns": "Shipping & Returns",
-		"product-content.size-and-fit": "Size & Fit"
+		"product-content.shipping-and-returns": "Versand und Rückgabe",
+		"product-content.size-and-fit": "Größe und Passform"
 	},
 	"product-gallery-block": {
-		"product-gallery.aria-label": "Products",
-		"product-gallery.focus-close": "Close",
-		"product-gallery.focus-thumbnail-next": "Next Image",
-		"product-gallery.focus-thumbnail-previous": "Previous Image",
-		"product-gallery.go-to-slide": "Go to slide %{slideNumber}",
-		"product-gallery.left-arrow-label": "Previous",
-		"product-gallery.right-arrow-label": "Next",
-		"product-gallery.slide-indicator": "Slide %{current} of %{maximum}"
+		"product-gallery.aria-label": "Produkte",
+		"product-gallery.focus-close": "Schließen",
+		"product-gallery.focus-thumbnail-next": "Nächstes Bild",
+		"product-gallery.focus-thumbnail-previous": "Vorheriges Bild",
+		"product-gallery.go-to-slide": "Zu Folie %{slideNumber}",
+		"product-gallery.left-arrow-label": "Vorheriges",
+		"product-gallery.right-arrow-label": "Nächstes",
+		"product-gallery.slide-indicator": "Bild %{current} von %{maximum}"
 	},
 	"product-information-block": {
-		"product-information.list-price": "List Price %{price}",
-		"product-information.sale-price": "Sale Price %{price}"
+		"product-information.list-price": "Listenpreis %{price}",
+		"product-information.sale-price": "Verkaufspreis %{price}"
 	},
 	"results-list-block": {
 		"results-list-block.see-more-button": "Mehr anzeigen",
@@ -215,10 +215,10 @@
 		"promo-label.video-text": "Video"
 	},
 	"story-carousel-block": {
-		"story-carousel.aria-label": "Stories",
-		"story-carousel.left-arrow-label": "Previous",
-		"story-carousel.right-arrow-label": "Next",
-		"story-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+		"story-carousel.aria-label": "Storys",
+		"story-carousel.left-arrow-label": "Vorheriges",
+		"story-carousel.right-arrow-label": "Nächstes",
+		"story-carousel.slide-indicator": "Bild %{current} von %{maximum}"
 	},
 	"subscriptions-block": {
 		"checkout-block.Afghanistan": "Afghanistan",
@@ -411,7 +411,7 @@
 		"checkout-block.San-Marino": "San Marino",
 		"checkout-block.Sao-Tome-and-Principe": "Sao Tome and Principe",
 		"checkout-block.Saudi-Arabia": "Saudi Arabia",
-		"checkout-block.Select-Country": "Select Country",
+		"checkout-block.Select-Country": "Land auswählen",
 		"checkout-block.Senegal": "Senegal",
 		"checkout-block.Serbia-and-Montenegro": "Serbia and Montenegro",
 		"checkout-block.Seychelles": "Seychelles",
@@ -464,29 +464,29 @@
 		"checkout-block.Yemen": "Yemen",
 		"checkout-block.Zambia": "Zambia",
 		"checkout-block.Zimbabwe": "Zimbabwe",
-		"checkout-block.back-to-offer-page": "Back to subscription selection",
-		"checkout-block.contact-info": "Contact Info",
-		"checkout-block.continue-to-checkout": "Continue to Checkout",
-		"checkout-block.country": "Country or region",
-		"checkout-block.country-requirements": "Please select country or region",
-		"checkout-block.due-today": "Due today",
-		"checkout-block.email": "Email address",
-		"checkout-block.email-requirements": "Please enter a valid email address",
-		"checkout-block.empty-cart-message": "Select from one of our offers",
-		"checkout-block.first-name": "First name",
-		"checkout-block.first-name-requirements": "Please enter first name",
-		"checkout-block.headline": "Review Subscription Order",
-		"checkout-block.identity-email": "Signed in as %{email}",
-		"checkout-block.identity-sign-out": "Sign out",
-		"checkout-block.identity-social": "Connected",
-		"checkout-block.last-name": "Last name",
-		"checkout-block.last-name-requirements": "Please enter last name",
-		"checkout-block.order-summary": "Order Summary",
-		"checkout-block.plus-sales-tax": "Plus applicable sales tax",
+		"checkout-block.back-to-offer-page": "Zurück zur Auswahl der Abonnements",
+		"checkout-block.contact-info": "Kontaktinformationen",
+		"checkout-block.continue-to-checkout": "Weiter zur Kasse",
+		"checkout-block.country": "Land oder Region",
+		"checkout-block.country-requirements": "Bitte ein Land oder eine Region auswählen",
+		"checkout-block.due-today": "Heute fällig",
+		"checkout-block.email": "E-Mail-Adresse",
+		"checkout-block.email-requirements": "Bitte eine gültige E-Mail-Adresse eingeben",
+		"checkout-block.empty-cart-message": "Aus einem unserer Angebote auswählen",
+		"checkout-block.first-name": "Vorname",
+		"checkout-block.first-name-requirements": "Bitte Vornamen eingeben",
+		"checkout-block.headline": "Abonnementauftrag prüfen",
+		"checkout-block.identity-email": "Angemeldet als %{email}",
+		"checkout-block.identity-sign-out": "Abmelden",
+		"checkout-block.identity-social": "Verbunden",
+		"checkout-block.last-name": "Nachname",
+		"checkout-block.last-name-requirements": "Bitte Nachname eingeben",
+		"checkout-block.order-summary": "Zusammenfassung der Bestellung",
+		"checkout-block.plus-sales-tax": "Zuzüglich der geltenden Umsatzsteuer",
 		"checkout-block.Åland-Islands": "Åland Islands",
-		"subscriptions-block.credit-card-information": "Payment Method and Information",
-		"subscriptions-block.payment-error": "There was an error processing your payment.",
-		"subscriptions-block.payment-information": "Credit card information",
-		"subscriptions-block.submit-payment": "Purchase Subscription"
+		"subscriptions-block.credit-card-information": "Zahlungsmethode und Informationen",
+		"subscriptions-block.payment-error": "Bei der Bearbeitung Ihrer Zahlung ist ein Fehler aufgetreten.",
+		"subscriptions-block.payment-information": "Kreditkarteninformationen",
+		"subscriptions-block.submit-payment": "Abonnement kaufen"
 	}
 }

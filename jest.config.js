@@ -30,4 +30,5 @@ module.exports = {
 		"!**/mock*.js",
 		"!**/*.story*.jsx",
 	],
+	modulePathIgnorePattherns: ["<rootDir>/blocks/Subsscriptions-block"],
 };

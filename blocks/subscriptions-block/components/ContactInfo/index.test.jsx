@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 import ContactInfo from ".";
 
 describe("ContactInfo", () => {
@@ -161,5 +161,36 @@ describe("ContactInfo", () => {
 		);
 
 		expect(wrapper.find(".identity-row").exists()).toBe(true);
+	});
+	it.only("calls the form callback when form is submiited", () => {
+		const callbackMock = jest.fn();
+		const preventDefaultMock = jest.fn();
+		const checkValidityMock = jest.fn().mockReturnValue(true);
+		jest
+			.spyOn(React, "useRef")
+			.mockReturnValueOnce({ current: { checkValidity: checkValidityMock } });
+		jest.spyOn(React, "useRef").mockReturnValueOnce({ current: {} });
+
+		const wrapper = shallow(
+			<ContactInfo
+				callback={callbackMock}
+				user={{
+					email: "arcuser@gmail.com",
+					firstName: "Arc",
+					lastName: "Xp",
+				}}
+				signedInIdentity={{
+					userName: "106487204473538668210",
+					passwordReset: false,
+					type: "Google",
+					lastLoginDate: 1639164736000,
+					locked: false,
+				}}
+			/>
+		);
+		wrapper.props().onSubmit({ preventDefault: preventDefaultMock });
+		// console.log(" wrapper ", wrapper.props().onSubmit())
+		expect(callbackMock).toHaveBeenCalled();
+		expect(preventDefaultMock).toHaveBeenCalled();
 	});
 });

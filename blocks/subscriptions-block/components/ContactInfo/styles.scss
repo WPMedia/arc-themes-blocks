@@ -59,6 +59,14 @@
 		border-bottom: 1px solid #dadada;
 	}
 
+	.row.grid-row {
+		@media screen and (min-width: 48rem) {
+			display: grid;
+			gap: 16px;
+			grid-template-columns: auto auto;
+		}
+	}
+
 	.checkout-btn {
 		margin-top: var(--global-spacing-5);
 	}

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 
 import { usePhrases } from "@wpmedia/arc-themes-components";
 import {
@@ -16,8 +16,8 @@ import FacebookIcon from "./facebook.svg";
 import "./styles.scss";
 
 const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback }) => {
-	const formRef = useRef();
-	const entriesRef = useRef({});
+	const formRef = React.useRef();
+	const entriesRef = React.useRef({});
 
 	if (user) {
 		entriesRef.current.email = user.email ? user.email : "";
@@ -137,7 +137,7 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback }) => {
 					{identityInfo()}
 				</div>
 			</div>
-			<div className="row">
+			<div className="row grid-row">
 				<div className="col-md-xl-6 col-sm-12">
 					<FormInputField
 						label={phrases.t("checkout-block.first-name")}

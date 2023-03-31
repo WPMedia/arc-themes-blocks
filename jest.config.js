@@ -30,5 +30,5 @@ module.exports = {
 		"!**/mock*.js",
 		"!**/*.story*.jsx",
 	],
-	modulePathIgnorePatterns: ["<rootDir>/blocks/subscriptions-block/components/ContactInfo "],
+	coveragePathIgnorePatterns: ["<rootDir>/blocks/subscriptions-block/components/ContactInfo "],
 };

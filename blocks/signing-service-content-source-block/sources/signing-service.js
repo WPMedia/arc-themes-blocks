@@ -5,6 +5,7 @@ import {
 	SIGNING_SERVICE_DEFAULT_APP,
 	SIGNING_SERVICE_DEFAULT_VERSION,
 } from "fusion:environment";
+import { handleFetchError } from "@wpmedia/arc-themes-components";
 
 const params = {
 	id: "text",
@@ -27,7 +28,9 @@ const fetch = ({
 			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
 		},
 		method: "GET",
-	}).then(({ data: content }) => content);
+	})
+		.then(({ data: content }) => content)
+		.catch(handleFetchError);
 };
 
 export default {

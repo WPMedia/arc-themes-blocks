@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ARC_ACCESS_TOKEN, CONTENT_BASE } from "fusion:environment";
+import { handleFetchError } from "@wpmedia/arc-themes-components";
 
 const params = {
 	hierarchy: "text",
@@ -19,7 +20,9 @@ const fetch = ({ hierarchy, sectionId, "arc-site": website }) => {
 			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
 		},
 		method: "GET",
-	}).then(({ data }) => data);
+	})
+		.then(({ data }) => data)
+		.catch(handleFetchError);
 };
 
 export default {

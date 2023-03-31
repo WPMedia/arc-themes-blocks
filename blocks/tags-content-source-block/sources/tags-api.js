@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ARC_ACCESS_TOKEN, CONTENT_BASE } from "fusion:environment";
+import { handleFetchError } from "@wpmedia/arc-themes-components";
 
 const params = [
 	{
@@ -25,15 +26,17 @@ const fetch = ({ slug: slugs = "" }) => {
 			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
 		},
 		method: "GET",
-	}).then(({ data }) => {
-		if (data?.Payload?.some((ele) => !!ele)) {
-			return data;
-		}
+	})
+		.then(({ data }) => {
+			if (data?.Payload?.some((ele) => !!ele)) {
+				return data;
+			}
 
-		const error = new Error("Not found");
-		error.statusCode = 404;
-		return Promise.reject(error);
-	});
+			const error = new Error("Not found");
+			error.statusCode = 404;
+			return Promise.reject(error);
+		})
+		.catch(handleFetchError);
 };
 
 export default {

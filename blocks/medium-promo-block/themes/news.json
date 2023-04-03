@@ -25,7 +25,7 @@
 						"width": "100%"
 					},
 					"separator": {
-						"padding": "0var(--global-spacing-2)"
+						"padding": "var(--global-spacing-2)"
 					},
 					"link": {
 						"position": "relative"

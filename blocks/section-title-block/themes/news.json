@@ -11,7 +11,7 @@
 						"line-height": "var(--heading-level-1-line-height)"
 					},
 					"separator": {
-						"margin": "0var(--global-spacing-4)"
+						"margin": "var(--global-spacing-4)"
 					}
 				}
 			},

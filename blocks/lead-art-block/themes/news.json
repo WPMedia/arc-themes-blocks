@@ -33,7 +33,7 @@
 						"display": "none"
 					},
 					"carousel-button-toggle-auto-play": {
-						"padding": "0var(--global-spacing-4)",
+						"padding": "var(--global-spacing-4)",
 						"font-size": "var(--body-font-size-tiny)",
 						"line-height": "var(--body-line-height-tiny)"
 					},

@@ -10,7 +10,7 @@
 						"line-height": "inherit"
 					},
 					"separator": {
-						"padding": "0var(--global-spacing-2)"
+						"padding": "var(--global-spacing-2)"
 					},
 					"stack": {
 						"gap": "var(--global-spacing-4)"

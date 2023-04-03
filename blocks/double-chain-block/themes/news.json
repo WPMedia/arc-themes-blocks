@@ -30,7 +30,7 @@
 			},
 			"desktop": {
 				"grid-template-columns": "1fr 1fr",
-				"gap": "var(--global-spacing-5)"
+				"gap": "0 var(--global-spacing-5)"
 			}
 		}
 	},

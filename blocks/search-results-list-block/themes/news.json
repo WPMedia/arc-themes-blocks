@@ -96,7 +96,7 @@
 						"display": "block"
 					},
 					"separator": {
-						"padding": "var(--global-spacing-2)"
+						"padding": "0 var(--global-spacing-2)"
 					},
 					"link": {
 						"position": "relative"

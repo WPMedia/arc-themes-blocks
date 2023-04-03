@@ -54,7 +54,7 @@
 			},
 			"desktop": {
 				"border-right": "1px solid #dadada",
-				"padding": "var(--global-spacing-6) 0 0"
+				"padding": "0 var(--global-spacing-6) 0 0"
 			}
 		}
 	},

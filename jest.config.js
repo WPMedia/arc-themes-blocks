@@ -10,7 +10,6 @@ module.exports = {
 		// Jest doesn't have an option to ignore those errors.
 	],
 	coverageDirectory: "<rootDir>/coverage",
-	coveragePathIgnorePatterns: ["<rootDir>/blocks/subscriptions-block/components/ContactInfo "],
 	coverageThreshold: {
 		global: {
 			statements: 85,

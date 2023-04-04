@@ -10,7 +10,7 @@
 						"height": "var(--global-spacing-4)"
 					},
 					"carousel-controls": {
-						"padding": "00 var(--global-spacing-2) 0"
+						"padding": "0 0 var(--global-spacing-2) 0"
 					},
 					"carousel-actions": {
 						"display": "flex"
@@ -68,7 +68,7 @@
 					"carousel-additional-controls": {
 						"display": "flex",
 						"gap": "var(--global-spacing-2)",
-						"padding": "00 0 var(--global-spacing-2)"
+						"padding": "0 0 0 var(--global-spacing-2)"
 					}
 				}
 			}

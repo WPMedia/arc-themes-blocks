@@ -18,7 +18,7 @@
 	"right-rail-advanced-full-width-1": {
 		"styles": {
 			"default": {
-				"margin": "00 var(--global-spacing-5) 0"
+				"margin": "0 0 var(--global-spacing-5) 0"
 			},
 			"desktop": {}
 		}
@@ -81,7 +81,7 @@
 				"display": "contents"
 			},
 			"desktop": {
-				"padding": "00 0 var(--global-spacing-6)",
+				"padding": "0 0 0 var(--global-spacing-6)",
 				"display": "flex"
 			}
 		}
@@ -117,10 +117,10 @@
 				"top": 0,
 				"width": "100%",
 				"z-index": 9,
-				"margin": "00 var(--global-spacing-5) 0"
+				"margin": "0 0 var(--global-spacing-5) 0"
 			},
 			"desktop": {
-				"padding": "00 var(--global-spacing-8) 0"
+				"padding": "0 0 var(--global-spacing-8) 0"
 			}
 		}
 	},

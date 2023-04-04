@@ -12,7 +12,7 @@
 					"button-default": {
 						"background": "none",
 						"border": "none",
-						"flex": "00 auto"
+						"flex": "0 0 auto"
 					},
 					"button-large": {
 						"margin-bottom": "var(--global-spacing-1)",

@@ -39,7 +39,7 @@
 	"simple-list-item-anchor": {
 		"styles": {
 			"default": {
-				"flex": "00 33%"
+				"flex": "0 0 33%"
 			},
 			"desktop": {}
 		}

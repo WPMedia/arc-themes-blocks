@@ -12,7 +12,7 @@
 						"max-height": "75vh"
 					},
 					"carousel-controls": {
-						"padding": "00 var(--global-spacing-2) 0"
+						"padding": "0 0 var(--global-spacing-2) 0"
 					},
 					"carousel-actions": {
 						"display": "flex"
@@ -35,7 +35,7 @@
 						"display": "none"
 					},
 					"carousel-button-toggle-auto-play": {
-						"padding": "0var(--global-spacing-4)",
+						"padding": "0 var(--global-spacing-4)",
 						"font-size": "var(--body-font-size-tiny)",
 						"line-height": "var(--body-line-height-tiny)"
 					},
@@ -62,7 +62,7 @@
 					"carousel-additional-controls": {
 						"display": "flex",
 						"gap": "var(--global-spacing-2)",
-						"padding": "00 0 var(--global-spacing-2)"
+						"padding": "0 0 0 var(--global-spacing-2)"
 					}
 				}
 			}

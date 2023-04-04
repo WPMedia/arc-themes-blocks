@@ -9,6 +9,7 @@ import CardList from "./default";
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
+	LazyLoad: ({ children }) => <>{children}</>,
 }));
 
 jest.mock("fusion:content", () => ({
@@ -24,7 +25,6 @@ jest.mock("fusion:context", () => ({
 }));
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	LazyLoad: ({ children }) => <>{children}</>,
 	localizeDate: jest.fn(() => "date"),
 }));
 

@@ -6,13 +6,10 @@ import ArticleTags from "./default";
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn().mockReturnValue(true),
+	LazyLoad: ({ children }) => <>{children}</>,
 }));
 
 describe("the article tag block", () => {
-	jest.mock("@wpmedia/engine-theme-sdk", () => ({
-		LazyLoad: ({ children }) => <>{children}f</>,
-	}));
-
 	describe("when the global content has an array of tags in its taxonomy", () => {
 		const mockReturnData = {
 			arcSite: "the-sun",

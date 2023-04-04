@@ -8,14 +8,12 @@ jest.mock("./_children/custom-content", () => class CustomContentSearchResultsLi
 jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({})),
 }));
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	...jest.requireActual("@wpmedia/engine-theme-sdk"),
-	LazyLoad: ({ children }) => <>{children}</>,
-}));
+
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	HeadingSection: ({ children }) => <>{children}</>,
 	isServerSide: () => true,
+	LazyLoad: ({ children }) => <>{children}</>,
 }));
 
 const defaultPromos = {

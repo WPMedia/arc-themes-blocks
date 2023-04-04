@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
-
 import {
 	Carousel,
 	Conditional,
@@ -14,6 +12,7 @@ import {
 	Icon,
 	Image,
 	isServerSide,
+	LazyLoad,
 	Link,
 	MediaItem,
 	Paragraph,

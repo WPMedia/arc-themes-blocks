@@ -4,7 +4,6 @@ import { useContent } from "fusion:content";
 import { useFusionContext, useAppContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
 	Carousel,
 	formatCredits,
@@ -12,6 +11,7 @@ import {
 	Image,
 	imageANSToImageSrc,
 	isServerSide,
+	LazyLoad,
 	MediaItem,
 	usePhrases,
 } from "@wpmedia/arc-themes-components";

@@ -3,8 +3,7 @@ import PropTypes from "@arc-fusion/prop-types";
 
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { isServerSide, HeadingSection } from "@wpmedia/arc-themes-components";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import { isServerSide, LazyLoad, HeadingSection } from "@wpmedia/arc-themes-components";
 
 import { resolveDefaultPromoElements } from "./results/helpers";
 import Results from "./results";

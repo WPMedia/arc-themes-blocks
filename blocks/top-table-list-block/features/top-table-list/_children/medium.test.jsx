@@ -4,14 +4,10 @@ import mockData from "../../../mock-data";
 
 import Medium from "./medium";
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	...jest.requireActual("@wpmedia/engine-theme-sdk"),
-	LazyLoad: ({ children }) => <>{children}</>,
-}));
-
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
+	LazyLoad: ({ children }) => <>{children}</>,
 	Video: () => "video embed",
 }));
 

@@ -10,11 +10,11 @@ import {
 	HeadingSection,
 	Image,
 	isServerSide,
+	LazyLoad,
 	Link,
 	MediaItem,
 	Grid,
 } from "@wpmedia/arc-themes-components";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
 const BLOCK_CLASS_NAME = "b-small-manual-promo";
 

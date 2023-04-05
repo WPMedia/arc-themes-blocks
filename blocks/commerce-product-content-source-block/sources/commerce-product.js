@@ -1,6 +1,6 @@
 import axios from "axios";
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from "fusion:environment";
-import { handleFetchError } from "@wpmedia/arc-themes-components";
+import handleFetchError from "@wpmedia/arc-themes-components/src/utils/handle-fetch-error";
 import { mockProductData } from "./mock-data";
 
 const params = {

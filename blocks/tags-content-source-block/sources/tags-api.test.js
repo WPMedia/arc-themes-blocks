@@ -85,6 +85,6 @@ describe("the tags content source block", () => {
 				},
 				{ cachedCall: () => {} }
 			)
-		).rejects.toEqual(new Error("Not found"));
+		).rejects.toEqual(new Error("An error occured creating the request."));
 	});
 });

@@ -5,7 +5,7 @@ import {
 	SIGNING_SERVICE_DEFAULT_APP,
 	SIGNING_SERVICE_DEFAULT_VERSION,
 } from "fusion:environment";
-import { handleFetchError } from "@wpmedia/arc-themes-components";
+import handleFetchError from "@wpmedia/arc-themes-components/src/utils/handle-fetch-error";
 
 const params = {
 	id: "text",

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ARC_ACCESS_TOKEN, CONTENT_BASE, RESIZER_APP_VERSION } from "fusion:environment";
-
-import { handleFetchError, signImagesInANSObject } from "@wpmedia/arc-themes-components";
+import signImagesInANSObject from "@wpmedia/arc-themes-components/src/utils/sign-images-in-ans-object";
+import handleFetchError from "@wpmedia/arc-themes-components/src/utils/handle-fetch-error";
 import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
 
 /**

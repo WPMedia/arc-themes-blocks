@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ARC_ACCESS_TOKEN, CONTENT_BASE } from "fusion:environment";
-import { handleFetchError } from "@wpmedia/arc-themes-components";
+import handleFetchError from "@wpmedia/arc-themes-components/src/utils/handle-fetch-error";
 
 const params = {
 	hierarchy: "text",

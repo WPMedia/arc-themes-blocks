@@ -1,5 +1,5 @@
 import React from "react";
-import { RESIZER_APP_VERSION } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import PropTypes from "@arc-fusion/prop-types";
 import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
@@ -66,7 +66,7 @@ const SmallPromo = ({ customFields }) => {
 				type
 				url
 				auth {
-					${RESIZER_APP_VERSION}
+					${RESIZER_TOKEN_VERSION}
 				}
 			}
 			basic {
@@ -74,7 +74,7 @@ const SmallPromo = ({ customFields }) => {
 				type
 				url
 				auth {
-					${RESIZER_APP_VERSION}
+					${RESIZER_TOKEN_VERSION}
 				}
 			}
 		}

@@ -3,7 +3,7 @@ import {
 	ARC_ACCESS_TOKEN,
 	CONTENT_BASE,
 	SIGNING_SERVICE_DEFAULT_APP,
-	SIGNING_SERVICE_DEFAULT_VERSION,
+	RESIZER_TOKEN_VERSION,
 } from "fusion:environment";
 import handleFetchError from "@wpmedia/arc-themes-components/src/utils/handle-fetch-error";
 
@@ -16,7 +16,7 @@ const params = {
 const fetch = ({
 	id,
 	service = SIGNING_SERVICE_DEFAULT_APP,
-	serviceVersion = SIGNING_SERVICE_DEFAULT_VERSION,
+	serviceVersion = RESIZER_TOKEN_VERSION,
 }) => {
 	const urlSearch = new URLSearchParams({
 		value: id,

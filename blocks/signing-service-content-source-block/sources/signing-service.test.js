@@ -3,7 +3,7 @@ import contentSource from "./signing-service";
 jest.mock("fusion:environment", () => ({
 	CONTENT_BASE: "",
 	SIGNING_SERVICE_DEFAULT_APP: "resizer",
-	SIGNING_SERVICE_DEFAULT_VERSION: 1,
+	RESIZER_TOKEN_VERSION: 1,
 }));
 
 jest.mock("axios", () => ({

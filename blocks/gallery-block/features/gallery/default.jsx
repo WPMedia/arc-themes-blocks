@@ -3,7 +3,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext, useAppContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
 	Carousel,
@@ -166,7 +166,7 @@ const GalleryFeature = ({ customFields = {} }) => {
 				arcSite={arcSite}
 				customFields={customFields}
 				globalContent={globalContent}
-				resizerAppVersion={RESIZER_APP_VERSION}
+				resizerAppVersion={RESIZER_TOKEN_VERSION}
 				resizerURL={RESIZER_URL}
 			/>
 		</LazyLoad>

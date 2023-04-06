@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { RESIZER_APP_VERSION } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import { useComponentContext, useFusionContext } from "fusion:context";
 import { useContent, useEditableContent } from "fusion:content";
 import getProperties from "fusion:properties";
@@ -60,7 +60,7 @@ const ExtraLargeManualPromo = ({ customFields }) => {
 
 	const imageAuthTokenObj = {};
 	if (imageAuthToken?.hash) {
-		imageAuthToken[RESIZER_APP_VERSION] = imageAuthToken.hash;
+		imageAuthToken[RESIZER_TOKEN_VERSION] = imageAuthToken.hash;
 	}
 
 	const alt = headline || description || null;

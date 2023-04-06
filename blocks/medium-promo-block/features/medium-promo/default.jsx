@@ -2,7 +2,7 @@ import React from "react";
 
 import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
-import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
 import getProperties from "fusion:properties";
 import PropTypes from "@arc-fusion/prop-types";
 import { LazyLoad, localizeDateTime } from "@wpmedia/engine-theme-sdk";
@@ -95,14 +95,14 @@ const MediumPromo = ({ customFields }) => {
 				lead_art {
 					_id
 					auth {
-						${RESIZER_APP_VERSION}
+						${RESIZER_TOKEN_VERSION}
 					}
 					type
 					promo_items {
 						basic {
 							_id
 							auth {
-								${RESIZER_APP_VERSION}
+								${RESIZER_TOKEN_VERSION}
 							}
 							type
 							url
@@ -112,7 +112,7 @@ const MediumPromo = ({ customFields }) => {
 				basic {
 					_id
 					auth {
-						${RESIZER_APP_VERSION}
+						${RESIZER_TOKEN_VERSION}
 					}
 					type
 					url
@@ -154,7 +154,7 @@ const MediumPromo = ({ customFields }) => {
 
 	// Image logic
 	const promoImageData = getImageFromANS(content);
-	const imageAuthToken = promoImageData?.auth?.[RESIZER_APP_VERSION] || null;
+	const imageAuthToken = promoImageData?.auth?.[RESIZER_TOKEN_VERSION] || null;
 	let resizeImage = false;
 	let imageSrc = imageOverrideURL || fallbackImage;
 	if (!imageOverrideURL) {

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
-import { Paragraph, Stack, usePhrases } from "@wpmedia/arc-themes-components";
+import { LazyLoad, Paragraph, Stack, usePhrases } from "@wpmedia/arc-themes-components";
 import adMap from "./ad-mapping";
 import AdUnit from "./_children/AdUnit";
 import ArcAdminAd from "./_children/ArcAdminAd";

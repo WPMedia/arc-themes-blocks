@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 
-import { HeadingSection, isServerSide } from "@wpmedia/arc-themes-components";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import { HeadingSection, isServerSide, LazyLoad } from "@wpmedia/arc-themes-components";
 
 import CustomSearchResultsList from "./_children/custom-content";
 import GlobalContentSearch from "./_children/global-content";

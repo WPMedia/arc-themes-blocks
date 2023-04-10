@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
 	Conditional,
 	formatSocialURL,
@@ -10,6 +9,7 @@ import {
 	Icon,
 	Image,
 	isServerSide,
+	LazyLoad,
 	Link,
 	Paragraph,
 	Stack,

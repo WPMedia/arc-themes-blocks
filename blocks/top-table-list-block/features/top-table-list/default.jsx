@@ -5,9 +5,8 @@ import PropTypes from "@arc-fusion/prop-types";
 import { RESIZER_APP_VERSION } from "fusion:environment";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import getProperties from "fusion:properties";
-import { Grid, isServerSide } from "@wpmedia/arc-themes-components";
+import { Grid, isServerSide, LazyLoad } from "@wpmedia/arc-themes-components";
 import imageRatioCustomField from "./shared/imageRatioCustomField";
 import { EXTRA_LARGE, LARGE, MEDIUM, SMALL } from "./shared/storySizeConstants";
 

@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import { isServerSide, Pill, Stack } from "@wpmedia/arc-themes-components";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import { isServerSide, LazyLoad, Pill, Stack } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-article-tag";
 

@@ -5,7 +5,6 @@ import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import { RESIZER_APP_VERSION } from "fusion:environment";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
 	getImageFromANS,
 	Stack,
@@ -13,6 +12,7 @@ import {
 	Heading,
 	HeadingSection,
 	Image,
+	LazyLoad,
 	Link,
 } from "@wpmedia/arc-themes-components";
 

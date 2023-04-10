@@ -5,13 +5,10 @@ import { isServerSide } from "@wpmedia/arc-themes-components";
 
 import LargeManualPromo from "./default";
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	LazyLoad: ({ children }) => <>{children}</>,
-}));
-
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
+	LazyLoad: ({ children }) => <>{children}</>,
 }));
 
 jest.mock("fusion:context", () => ({

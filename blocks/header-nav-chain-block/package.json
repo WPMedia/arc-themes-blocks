@@ -27,8 +27,8 @@
     "@wpmedia/engine-theme-sdk": "*"
   },
   "dependencies": {
-    "focus-trap-react": "^8.4.2",
-    "use-debounce": "^3.4.3"
+    "focus-trap-react": "^10.1.1",
+    "use-debounce": "^9.0.4"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

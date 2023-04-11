@@ -11,7 +11,8 @@ jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => mockContextObj),
 }));
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
 	localizeDate: jest.fn(() => new Date().toDateString()),
 }));
 

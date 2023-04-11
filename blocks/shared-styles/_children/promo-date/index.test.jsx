@@ -14,8 +14,9 @@ jest.mock("fusion:properties", () =>
 	}))
 );
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	localizeDateTime: jest.fn((x) => new Date(x).toDateString()),
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	localizeDateTime: jest.fn((date) => new Date(date).toDateString()),
 }));
 
 jest.mock("fusion:themes", () => jest.fn(() => ({})));

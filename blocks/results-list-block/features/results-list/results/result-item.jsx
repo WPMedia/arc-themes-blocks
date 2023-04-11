@@ -3,24 +3,23 @@ import { useEditableContent } from "fusion:content";
 import { useComponentContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
-import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
-
 import {
 	Attribution,
-	Separator,
-	Heading,
-	Overline,
-	Image,
-	Link,
+	Conditional,
 	Date as DateComponent,
 	formatAuthors,
-	Paragraph,
-	Join,
 	formatURL,
-	MediaItem,
-	Conditional,
 	getImageFromANS,
+	Heading,
+	Image,
 	imageANSToImageSrc,
+	Join,
+	Link,
+	localizeDateTime,
+	MediaItem,
+	Overline,
+	Paragraph,
+	Separator,
 	usePhrases,
 } from "@wpmedia/arc-themes-components";
 

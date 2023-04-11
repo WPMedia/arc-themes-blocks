@@ -13,14 +13,13 @@ import {
 	Image,
 	Join,
 	Link,
+	localizeDateTime,
 	MediaItem,
 	Paragraph,
 	Separator,
 	usePhrases,
 	Overline,
 } from "@wpmedia/arc-themes-components";
-
-import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
 
 const SearchResult = ({ arcSite, className, content, promoElements }) => {
 	const phrases = usePhrases();

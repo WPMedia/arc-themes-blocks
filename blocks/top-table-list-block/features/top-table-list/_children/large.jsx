@@ -2,7 +2,6 @@ import React from "react";
 import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
 
-import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
 import {
 	Conditional,
 	Grid,
@@ -11,6 +10,7 @@ import {
 	Image,
 	Join,
 	Link,
+	localizeDateTime,
 	MediaItem,
 	Stack,
 	formatURL,

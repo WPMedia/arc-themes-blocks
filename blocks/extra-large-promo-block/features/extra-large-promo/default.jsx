@@ -21,6 +21,7 @@ import {
 	isServerSide,
 	LazyLoad,
 	Link,
+	localizeDateTime,
 	MediaItem,
 	Overline,
 	Paragraph,
@@ -29,8 +30,6 @@ import {
 	usePhrases,
 	Video,
 } from "@wpmedia/arc-themes-components";
-
-import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
 
 const BLOCK_CLASS_NAME = "b-xl-promo";
 

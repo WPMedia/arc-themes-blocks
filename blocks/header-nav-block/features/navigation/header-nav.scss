@@ -8,7 +8,7 @@
 	}
 
 	&.open.light {
-		border: 1px solid #dadada;
+		border: 1px solid var(--global-neutral-2);
 	}
 
 	&.open {
@@ -100,14 +100,14 @@
 	}
 
 	.inner-drawer-nav {
-		background-color: #575757;
+		background-color: var(--global-neutral-6);
 		display: flex;
 		flex-direction: column;
 		width: 315px;
 	}
 
 	.nav-block-search {
-		border-bottom: 1px solid #dadada;
+		border-bottom: 1px solid var(--global-neutral-2);
 		margin: 16px 20px 0;
 		padding-bottom: 16px;
 
@@ -146,7 +146,7 @@
 			}
 
 			&:hover {
-				background: darken(#575757, 20%);
+				background: darken(var(--global-neutral-6), 20%);
 
 				.subsection-container {
 					opacity: 1;

@@ -1,5 +1,5 @@
 .xpmedia-form-headline {
-	border-bottom: 1px solid #dadada;
+	border-bottom: 1px solid var(--global-neutral-2);
 	font-size: var(--heading-level-4-font-size);
 	font-weight: 700;
 	line-height: 2rem;
@@ -15,7 +15,7 @@
 }
 
 .xpmedia-form-submittable {
-	border-bottom: 1px solid #dadada;
+	border-bottom: 1px solid var(--global-neutral-2);
 	margin-bottom: var(--global-spacing-4);
 
 	.xpmedia-form-field {
@@ -36,7 +36,7 @@
 }
 
 .xpmedia-form-error {
-	color: #db0a07;
+	color: var(--global-red-4);
 	font-size: var(--body-font-size);
 	margin: var(--global-spacing-5) 0;
 

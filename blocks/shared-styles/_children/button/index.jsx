@@ -38,9 +38,9 @@ export const BUTTON_TYPES = {
 };
 
 // names based on zeplin docs
-const UI_WHITE_COLOR = "#fff";
-const UI_LIGHT_GRAY_COLOR = "#dadada";
-const UI_DARK_GRAY_COLOR = "#191919";
+const UI_WHITE_COLOR = "var(--global-white)";
+const UI_LIGHT_GRAY_COLOR = "var(--global-neutral-2)";
+const UI_DARK_GRAY_COLOR = "var(--global-neutral-9)";
 
 const iconTypeStringToIconTypeComponent = (
 	iconTypeString,

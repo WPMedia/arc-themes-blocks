@@ -56,7 +56,7 @@
 
 	.row:last-of-type {
 		padding-bottom: var(--global-spacing-5);
-		border-bottom: 1px solid #dadada;
+		border-bottom: 1px solid var(--global-neutral-2);
 	}
 
 	.row.grid-row {

@@ -9,7 +9,7 @@ import "./styles.scss";
 const CARD_ELEMENT_OPTIONS = {
 	style: {
 		base: {
-			color: "#575757",
+			color: "var(--global-neutral-6)",
 			fontSize: "16px",
 		},
 	},

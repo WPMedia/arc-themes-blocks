@@ -11,7 +11,7 @@
 
 	.xpmedia-subscription-dialog-reason-prompt,
 	.xpmedia-subscription-dialog-link-prompt {
-		color: #575757;
+		color: var(--global-neutral-6);
 		grid-column: 3/11;
 		line-height: 1rem;
 		font-size: 0.875rem;

@@ -1,5 +1,5 @@
 .xpmedia-form-field {
-	color: #191919;
+	color: var(--global-neutral-9);
 	display: block;
 	font-size: var(--heading-level-5-font-size);
 	line-height: 30px;
@@ -18,7 +18,7 @@
 }
 
 .xpmedia-form-field-input {
-	border: solid 1px #dadada;
+	border: solid 1px var(--global-neutral-2);
 	border-radius: var(--border-radius);
 	display: block;
 	outline: none;
@@ -26,16 +26,16 @@
 	width: 100%;
 
 	&--error {
-		border-color: #db0a07;
-		color: #db0a07;
+		border-color: var(--global-red-4);
+		color: var(--global-red-4);
 	}
 }
 
 .xpmedia-form-field-tip {
-	color: #575757;
+	color: var(--global-neutral-6);
 
 	&--error {
-		color: #db0a07;
+		color: var(--global-red-4);
 	}
 }
 

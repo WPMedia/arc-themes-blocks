@@ -10,13 +10,13 @@
 	// on desktop, on the left, the bottom link
 	// is not visible on hover over other links
 	height: 40px;
-	background-color: #292929;
+	background-color: var(--global-neutral-7);
 
 	// need to hide that hover and active color
 	&:hover,
 	&:active {
 		// keep the same color unlike other list items
-		background: #292929 !important;
+		background: var(--global-neutral-7) !important;
 	}
 }
 
@@ -68,18 +68,18 @@
 
 	&-light {
 		span {
-			color: #575757;
+			color: var(--global-neutral-6);
 		}
 
 		svg > path {
-			fill: #575757;
+			fill: var(--global-neutral-6);
 		}
 
 		&.border {
-			border: 1px solid #dadada;
+			border: 1px solid var(--global-neutral-2);
 
 			&:hover {
-				border: 1px solid #575757;
+				border: 1px solid var(--global-neutral-6);
 			}
 		}
 	}
@@ -106,7 +106,7 @@
 		input {
 			font-size: var(--body-font-size);
 			height: 32px;
-			line-height: 24px;
+			line-height: 1.5;
 			padding: var(--global-spacing-1) var(--global-spacing-6) var(--global-spacing-1)
 				var(--global-spacing-3);
 			width: 100%;
@@ -122,7 +122,7 @@
 		}
 
 		&.light input {
-			border: 1px solid #dadada;
+			border: 1px solid var(--global-neutral-2);
 		}
 	}
 }
@@ -136,7 +136,7 @@
 	flex-shrink: 0;
 
 	&.light {
-		border-bottom: 1px solid #dadada;
+		border-bottom: 1px solid var(--global-neutral-2);
 	}
 
 	* {
@@ -270,7 +270,7 @@
 	}
 
 	.inner-drawer-nav {
-		background-color: #292929;
+		background-color: var(--global-neutral-7);
 		display: flex;
 		flex-direction: column;
 		transition: transform 300ms ease-in-out;
@@ -335,7 +335,7 @@
 			font-weight: bold;
 			list-style: none;
 			position: relative;
-			background-color: #292929;
+			background-color: var(--global-neutral-7);
 
 			> a {
 				padding: 0 16px 0 20px;
@@ -354,7 +354,7 @@
 
 			&:hover,
 			&:active {
-				background: #575757;
+				background: var(--global-neutral-6);
 			}
 		}
 	}
@@ -369,7 +369,7 @@
 
 		@media screen and (max-width: 48rem) {
 			// on mobile, show dark background everywhere
-			background: #292929;
+			background: var(--global-neutral-7);
 
 			.inner-drawer-nav {
 				width: 100vw;
@@ -408,7 +408,7 @@
 
 		> li {
 			> a {
-				color: #575757;
+				color: var(--global-neutral-6);
 				display: block;
 				font-size: var(--body-font-size);
 				font-weight: bold;
@@ -417,7 +417,7 @@
 				text-decoration: none;
 
 				&:hover {
-					background-color: #dadada;
+					background-color: var(--global-neutral-2);
 				}
 			}
 		}
@@ -461,7 +461,7 @@
 		display: flex;
 
 		path {
-			fill: #575757;
+			fill: var(--global-neutral-6);
 		}
 	}
 }

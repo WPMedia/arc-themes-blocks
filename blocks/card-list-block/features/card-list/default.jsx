@@ -5,7 +5,7 @@ import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import { RESIZER_APP_VERSION } from "fusion:environment";
-import { LazyLoad, localizeDate } from "@wpmedia/engine-theme-sdk";
+import { localizeDate } from "@wpmedia/engine-theme-sdk";
 import {
 	Attribution,
 	Date,
@@ -16,6 +16,7 @@ import {
 	HeadingSection,
 	Image,
 	isServerSide,
+	LazyLoad,
 	Link,
 	Overline,
 	Separator,

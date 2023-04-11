@@ -3,6 +3,11 @@ import { useFusionContext } from "fusion:context";
 import { mount } from "enzyme";
 import ArcAd from "./default";
 
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	LazyLoad: ({ children }) => <>{children}</>,
+}));
+
 const SITE_PROPS_MOCK = {
 	breakpoints: {
 		small: 0,

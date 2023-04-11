@@ -1,7 +1,7 @@
 import getResizeParamsFromANSImage from "./get-resize-params-from-ans-image";
 
 jest.mock("fusion:environment", () => ({
-	RESIZER_APP_VERSION: 2,
+	RESIZER_TOKEN_VERSION: 2,
 	RESIZER_URL: "https://image.url",
 }));
 

@@ -58,10 +58,10 @@
 		}
 
 		&.border {
-			border: 1px solid rgba(255, 255, 255, 0.5);
+			border: 1px solid var(--global-neutral-2);
 
 			&:hover {
-				border: 1px solid rgba(255, 255, 255, 1);
+				border: 1px solid var(--global-white);
 			}
 		}
 	}
@@ -344,7 +344,7 @@
 			.subsection-anchor a,
 			> a {
 				align-items: center;
-				color: #fff;
+				color: var(--global-white);
 				display: block;
 				font-size: var(--body-font-size);
 				justify-content: space-between;

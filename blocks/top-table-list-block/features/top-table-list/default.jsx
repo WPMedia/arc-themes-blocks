@@ -2,7 +2,7 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 
-import { RESIZER_APP_VERSION } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
@@ -149,7 +149,7 @@ const TopTableListWrapper = ({ customFields }) => {
             type
             url
 				auth {
-					${RESIZER_APP_VERSION}
+					${RESIZER_TOKEN_VERSION}
 				}
           }
           lead_art {
@@ -162,7 +162,7 @@ const TopTableListWrapper = ({ customFields }) => {
                 type
                 url
 					 auth {
-						${RESIZER_APP_VERSION}
+						${RESIZER_TOKEN_VERSION}
 					}
               }
             }

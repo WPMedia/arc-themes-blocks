@@ -6,7 +6,7 @@ import { isServerSide } from "@wpmedia/arc-themes-components";
 import ArticleBodyChain from "./default";
 
 jest.mock("fusion:environment", () => ({
-	RESIZER_APP_VERSION: 2,
+	RESIZER_TOKEN_VERSION: 2,
 	RESIZER_URL: "http://some.url",
 }));
 

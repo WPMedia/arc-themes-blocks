@@ -1,5 +1,5 @@
 import React, { createRef, useCallback, useEffect, useReducer, useState } from "react";
-import { RESIZER_APP_VERSION } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import { useContent } from "fusion:content";
 import { Button, Divider, Join, Stack, usePhrases } from "@wpmedia/arc-themes-components";
 
@@ -107,7 +107,7 @@ const Results = ({
           basic {
 			_id
             auth {
-				${RESIZER_APP_VERSION}
+				${RESIZER_TOKEN_VERSION}
 			}
             type
             url
@@ -117,7 +117,7 @@ const Results = ({
               basic {
 				_id
 				auth {
-					${RESIZER_APP_VERSION}
+					${RESIZER_TOKEN_VERSION}
 				}
                 type
                 url

@@ -3,8 +3,7 @@ import React from "react";
 import { useFusionContext } from "fusion:context";
 
 import PropTypes from "@arc-fusion/prop-types";
-import { isServerSide } from "@wpmedia/arc-themes-components";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import { isServerSide, LazyLoad } from "@wpmedia/arc-themes-components";
 
 import Presentation from "./_children/Presentation";
 

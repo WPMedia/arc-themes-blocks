@@ -104,10 +104,9 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
 	Icon: ({ name }) => <div data-testid={name} />,
-}));
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
 	LazyLoad: ({ children }) => <>{children}</>,
 }));
+
 jest.mock("fusion:content", () => ({
 	useContent: jest.fn(() => mockPayload),
 }));

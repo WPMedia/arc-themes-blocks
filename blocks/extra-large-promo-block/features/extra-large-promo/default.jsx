@@ -19,6 +19,7 @@ import {
 	Image,
 	Join,
 	isServerSide,
+	LazyLoad,
 	Link,
 	MediaItem,
 	Overline,
@@ -29,7 +30,7 @@ import {
 	Video,
 } from "@wpmedia/arc-themes-components";
 
-import { LazyLoad, localizeDateTime } from "@wpmedia/engine-theme-sdk";
+import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
 
 const BLOCK_CLASS_NAME = "b-xl-promo";
 

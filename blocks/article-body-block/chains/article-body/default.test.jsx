@@ -16,13 +16,10 @@ jest.mock("fusion:properties", () =>
 	}))
 );
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	LazyLoad: ({ children }) => <>{children}</>,
-}));
-
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(),
+	LazyLoad: ({ children }) => <>{children}</>,
 }));
 
 describe("article-body chain", () => {

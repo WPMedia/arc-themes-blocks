@@ -9,6 +9,7 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	__esModule: true,
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn().mockReturnValue(true),
+	LazyLoad: ({ children }) => <>{children}</>,
 }));
 
 jest.mock("fusion:themes", () =>
@@ -16,10 +17,6 @@ jest.mock("fusion:themes", () =>
 		"primary-color": "blue",
 	}))
 );
-
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	LazyLoad: ({ children }) => <>{children}</>,
-}));
 
 jest.mock("fusion:context", () => ({
 	useFusionContext: () => ({ isAdmin: false, globalContent: { credits: {} } }),

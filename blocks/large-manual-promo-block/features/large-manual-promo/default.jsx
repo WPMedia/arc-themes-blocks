@@ -4,7 +4,6 @@ import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import { useComponentContext, useFusionContext } from "fusion:context";
 import { useContent, useEditableContent } from "fusion:content";
 import getProperties from "fusion:properties";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
 	Conditional,
 	Image,
@@ -13,6 +12,7 @@ import {
 	Grid,
 	Heading,
 	HeadingSection,
+	LazyLoad,
 	Link,
 	MediaItem,
 	Overline,

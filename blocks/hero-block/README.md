@@ -8,11 +8,11 @@ contexts should provide the clarity to the message that is being conveyed.
 
 ## ANS Schema
 
-- No ANS schema is used in this block
+- No ANS schema is used in this block.
 
 ### ANS Fields
 
-- No ANS fields are used in this block
+- No ANS fields are used in this block.
 
 ## Events
 

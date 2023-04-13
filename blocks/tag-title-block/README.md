@@ -1,6 +1,6 @@
 # `@wpmedia/tag-title-block`
 
-_The Tag Title block displays the name and description of a tag and is intended to be used as a header feature on an Tags page._
+_The Tag Title block displays the name and description of a tag and is intended to be used as a header feature on a Tags page._
 
 ## Props
 

@@ -1,6 +1,6 @@
 # `@wpmedia/masthead-block`
 
-_Arc XP Themes masthead block is a relatively simple feature that is typically only used on newspaper homepages. It displays the logo, the date, a tag line, and an optional link (usually to a Weather page but could be to other pages)._
+_Arc XP Themes masthead block is a relatively simple feature that is typically only used on newspaper homepages. It displays the logo, the date, a tag line, and an optional link (usually to a weather page but could be to other pages)._
 
 ## PageBuilder Custom Fields
 

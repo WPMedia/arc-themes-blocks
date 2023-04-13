@@ -25,7 +25,7 @@ _Fusion News Theme video player block. Provides a feature to play videos._
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
+Outline any schema information requirements necessary to know for ths block.
 
 ### ANS Fields
 

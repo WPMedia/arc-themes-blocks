@@ -1,10 +1,10 @@
 # `@wpmedia/section-title-block`
 
-A block that can display the section title and links from Site SErvice
+A block that can display the section title and links from Site Service.
 
 ## ANS Schema
 
-This block relies on the Site Service ANS schema to diplay section title and section links if any
+This block relies on the Site Service ANS schema to diplay section title and section links, if any.
 
 ### Example output for section
 

@@ -16,7 +16,7 @@ _Fusion News Theme headline block. Please provide a 1-2 sentence description of 
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
+Outline any schema information requirements necessary to know for this block.
 
 ### ANS Fields
 
@@ -24,7 +24,7 @@ Outline any schema information requirements necessary to know for ths block
 
 ## Internationalization fields
 
-- Add all internationalization fields used in the block
+- Add all internationalization fields used in the block.
 
 ## Events
 

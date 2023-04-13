@@ -98,7 +98,7 @@ describe("Result parts", () => {
 			/>
 		);
 
-		expect(screen.getAllByText(/January 01, 2021 at 12:01 am UTC/i)).toHaveLength(1);
+		expect(screen.getAllByText(/January 01, 2021 at 12:01AM UTC/i)).toHaveLength(1);
 
 		unmount();
 	});

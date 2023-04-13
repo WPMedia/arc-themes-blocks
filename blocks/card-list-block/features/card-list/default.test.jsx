@@ -10,6 +10,7 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
 	LazyLoad: ({ children }) => <>{children}</>,
+	localizeDate: jest.fn(() => "date"),
 }));
 
 jest.mock("fusion:content", () => ({
@@ -22,10 +23,6 @@ jest.mock("fusion:context", () => ({
 		arcSite: "the-sun",
 		deployment: jest.fn(() => {}),
 	})),
-}));
-
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	localizeDate: jest.fn(() => "date"),
 }));
 
 describe("Card list", () => {

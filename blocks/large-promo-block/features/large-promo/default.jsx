@@ -5,7 +5,6 @@ import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
 
-import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
 import {
 	Conditional,
 	Grid,
@@ -15,6 +14,7 @@ import {
 	Join,
 	LazyLoad,
 	Link,
+	localizeDateTime,
 	MediaItem,
 	Stack,
 	formatURL,

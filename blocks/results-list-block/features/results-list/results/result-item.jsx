@@ -2,7 +2,8 @@ import React from "react";
 import { useEditableContent } from "fusion:content";
 import { useComponentContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
+
 import {
 	Attribution,
 	Conditional,
@@ -107,7 +108,7 @@ const ResultItem = React.memo(
 								<Image
 									src={imageURL !== null ? imageURL : targetFallbackImage}
 									alt={headlineText}
-									resizedOptions={{ auth: auth[RESIZER_APP_VERSION], smart: true }}
+									resizedOptions={{ auth: auth[RESIZER_TOKEN_VERSION], smart: true }}
 									resizerURL={RESIZER_URL}
 									sizes={[
 										{

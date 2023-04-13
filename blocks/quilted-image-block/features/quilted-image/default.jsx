@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useContent, useEditableContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
-import { RESIZER_APP_VERSION } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 // Arc Themes Components - Base set of components used to compose blocks
 // https://github.com/WPMedia/arc-themes-components/
 import {
@@ -50,7 +50,7 @@ const ImageItem = ({
 
 	const imageAuthTokenObj = {};
 	if (imageAuthToken?.hash) {
-		imageAuthTokenObj[RESIZER_APP_VERSION] = imageAuthToken.hash;
+		imageAuthTokenObj[RESIZER_TOKEN_VERSION] = imageAuthToken.hash;
 	}
 
 	const imageParams =

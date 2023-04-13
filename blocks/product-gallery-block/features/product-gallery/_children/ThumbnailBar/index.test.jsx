@@ -15,7 +15,7 @@ import ThumbnailBar from "./index";
 import mockData from "../../mock-data";
 
 jest.mock("fusion:environment", () => ({
-	RESIZER_APP_VERSION: 1,
+	RESIZER_TOKEN_VERSION: 1,
 	RESIZER_URL: "https://resizer.com/",
 }));
 

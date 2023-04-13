@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext, useComponentContext } from "fusion:context";
-import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
 
 import { Carousel, Image, imageANSToImageSrc, usePhrases } from "@wpmedia/arc-themes-components";
 
@@ -142,7 +142,7 @@ function ProductGallery({ customFields }) {
 			carouselItems={carouselItems}
 			id={id}
 			isFeaturedImageEnabled={isFeaturedImageEnabled}
-			resizerAppVersion={RESIZER_APP_VERSION}
+			resizerAppVersion={RESIZER_TOKEN_VERSION}
 			resizerURL={RESIZER_URL}
 			indicatorType={indicatorType}
 		/>

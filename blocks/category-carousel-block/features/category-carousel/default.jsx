@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { useFusionContext } from "fusion:context";
 import { useContent, useEditableContent } from "fusion:content";
-import { RESIZER_APP_VERSION } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import PropTypes from "@arc-fusion/prop-types";
 import {
 	Carousel,
@@ -65,7 +65,7 @@ const CategoryImage = ({ imageAlt, imageAuth, imageId, imageUrl }) => {
 
 	const imageAuthTokenObj = {};
 	if (imageAuthToken?.hash) {
-		imageAuthTokenObj[RESIZER_APP_VERSION] = imageAuthToken.hash;
+		imageAuthTokenObj[RESIZER_TOKEN_VERSION] = imageAuthToken.hash;
 	}
 
 	const imageParams =

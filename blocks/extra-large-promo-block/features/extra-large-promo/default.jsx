@@ -1,6 +1,6 @@
 import React from "react";
 
-import { RESIZER_APP_VERSION } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import { useContent, useEditableContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
@@ -215,7 +215,7 @@ const ExtraLargePromo = ({ customFields }) => {
 								type
 								url
 								auth {
-									${RESIZER_APP_VERSION}
+									${RESIZER_TOKEN_VERSION}
 								}
 							}
 						}
@@ -225,7 +225,7 @@ const ExtraLargePromo = ({ customFields }) => {
 						type
 						url
 						auth {
-							${RESIZER_APP_VERSION}
+							${RESIZER_TOKEN_VERSION}
 						}
 					}
 				}

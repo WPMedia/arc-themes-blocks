@@ -1,6 +1,6 @@
 # @wpmedia/single-column-layout-block
 
-Basic single column layout with a standard confined width of 90rem(1440px) that has three Page Builder sections (navigation, fullWidth, body, and footer).
+Basic single column layout with a standard confined width of 90rem(1440px) that has three PageBuilder sections (navigation, fullWidth, body, and footer).
 
 ## Props
 

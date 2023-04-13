@@ -1,6 +1,6 @@
 # `@wpmedia/overline-block`
 
-_Fusion News Theme Overline block. Text usually displayed over the headline. By default will use the ANS fields Label or Web Site Section if they exist or optionally a custom text and url can be used._
+_Fusion News Theme Overline block. Text usually displayed over the headline. By default will use the ANS fields Label or Web Site Section if they exist or optionally a custom text and URL can be used._
 
 ## Props
 

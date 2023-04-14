@@ -1,6 +1,7 @@
 h1 {
 	font-size: 28px;
 	line-height: 32px;
+	font-weight: 700;
 
 	@media (min-width: 48rem) {
 		font-size: 41px;
@@ -10,6 +11,7 @@ h1 {
 h2 {
 	font-size: 24px;
 	line-height: 32px;
+	font-weight: 700;
 
 	@media (min-width: 48rem) {
 		font-size: 36px;
@@ -19,6 +21,7 @@ h2 {
 h3 {
 	font-size: 22px;
 	line-height: 24px;
+	font-weight: 700;
 
 	@media (min-width: 48rem) {
 		font-size: 30px;
@@ -28,6 +31,7 @@ h3 {
 h4 {
 	font-size: 19px;
 	line-height: 1.2;
+	font-weight: 700;
 
 	@media (min-width: 48rem) {
 		font-size: 26px;
@@ -37,6 +41,7 @@ h4 {
 h5 {
 	font-size: 16px;
 	line-height: 1.2;
+	font-weight: 700;
 
 	@media (min-width: 48rem) {
 		font-size: 20px;
@@ -45,6 +50,7 @@ h5 {
 h6 {
 	font-size: 13px;
 	line-height: 24px;
+	font-weight: 700;
 
 	@media (min-width: 48rem) {
 		font-size: 17px;

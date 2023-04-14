@@ -5,7 +5,7 @@ This is the share bar block for displaying icons to allow the page to be shared,
 1. email
 2. Facebook
 3. Pinterest
-4. Linkedin
+4. LinkedIn
 5. Twitter
 
 Clicking on each button will open up a new window for the respective share type.

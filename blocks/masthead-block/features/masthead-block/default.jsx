@@ -2,9 +2,8 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
-import { localizeDate } from "@wpmedia/engine-theme-sdk";
 
-import { Link, Paragraph, Stack } from "@wpmedia/arc-themes-components";
+import { Link, localizeDate, Paragraph, Stack } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-masthead";
 

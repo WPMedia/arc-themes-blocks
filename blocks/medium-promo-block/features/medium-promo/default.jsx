@@ -5,7 +5,6 @@ import { useComponentContext, useFusionContext } from "fusion:context";
 import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
 import getProperties from "fusion:properties";
 import PropTypes from "@arc-fusion/prop-types";
-import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
 import {
 	Attribution,
 	Conditional,
@@ -23,6 +22,7 @@ import {
 	Join,
 	LazyLoad,
 	Link,
+	localizeDateTime,
 	MediaItem,
 	Paragraph,
 	Separator,

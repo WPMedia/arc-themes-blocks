@@ -1,6 +1,6 @@
 # `@wpmedia/links-bar-block`
 
-The block has links with separators between them. The block takes in display name and destination of the links.
+This block has links with separators between them. The block takes in display name and destination of the links.
 
 Uses the Link, Separator, and Stack components from Arc Themes Components.
 

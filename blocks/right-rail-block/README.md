@@ -4,7 +4,7 @@ _Please provide a 1-2 sentence description of what the block is and what it does
 
 ## Acceptance Criteria
 
-- Add AC relevant to the block
+- Add AC relevant to the block.
 
 ## Props
 
@@ -16,7 +16,7 @@ _Please provide a 1-2 sentence description of what the block is and what it does
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
+Outline any schema information requirements necessary to know for this block.
 
 ### ANS Fields
 
@@ -37,10 +37,6 @@ Blocks can emit events. The following is a list of events that are emitted by th
 | **eventName**  | Describe the event |
 
 ### Event Listening
-
-Include block specific instructions for event listening.
-
-OR
 
 This block does not emit any events.
 

@@ -16,7 +16,7 @@ _Fusion News Theme sub-headline block. Please provide a 1-2 sentence description
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
+Outline any schema information requirements necessary to know for ths block.
 
 ### ANS Fields
 

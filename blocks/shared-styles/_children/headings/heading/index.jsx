@@ -5,6 +5,7 @@ import LevelContext from "../context";
 
 import PrimaryFont from "../../primary-font";
 import SecondaryFont from "../../secondary-font";
+import "./styles.scss";
 
 const FONT = "Secondary";
 

@@ -22,7 +22,6 @@ const layoutItemStyles = {
 		height: "500px",
 	},
 	default: {
-		width: "100%",
 		backgroundColor: "rgb(230 230 230)",
 		textAlign: "center",
 	},

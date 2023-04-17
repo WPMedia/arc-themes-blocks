@@ -1,13 +1,13 @@
 .xpmedia-single-column-layout {
 	// Designs show XL spacing, but due to spacing applied at
 	// default output type md + md = xl (24 + 24 = 48)
-	margin: var(--global-spacing-6) auto;
+	margin: var(--global-spacing-5) auto;
 	max-width: 590px;
 }
 @media (max-width: 48rem) {
 	.main {
 		.container {
-			margin: 0 var(--global-spacing-4);
+			margin: var(--global-spacing-6) var(--global-spacing-4);
 		}
 	}
 }

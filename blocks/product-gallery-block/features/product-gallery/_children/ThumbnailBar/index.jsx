@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
+import { useFusionContext } from "fusion:context";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
+import getProperties from "fusion:properties";
 
 import {
 	Button,
@@ -17,6 +19,8 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 	const [viewableItems, setViewableItems] = useState([...Array(3).keys()]);
 
 	const phrases = usePhrases();
+	const { arcSite } = useFusionContext();
+	const { resizerURL } = getProperties(arcSite);
 
 	const upButtonRef = useRef();
 	const downButtonRef = useRef();
@@ -131,7 +135,7 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 										onImageSelect(getImageIndexById(image._id));
 									}}
 									resizedOptions={{ auth: image.auth[RESIZER_TOKEN_VERSION] }}
-									resizerURL={RESIZER_URL}
+									resizerURL={resizerURL}
 									responsiveImages={[120]}
 									src={imageANSToImageSrc(image)}
 									width={100}

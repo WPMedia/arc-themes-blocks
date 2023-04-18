@@ -16,7 +16,6 @@ import mockData from "../../mock-data";
 
 jest.mock("fusion:environment", () => ({
 	RESIZER_TOKEN_VERSION: 1,
-	RESIZER_URL: "https://resizer.com/",
 }));
 
 describe("Thumbnail Bar", () => {

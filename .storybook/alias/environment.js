@@ -1,5 +1,4 @@
 const RESIZER_TOKEN_VERSION = 2;
 
-export default {
-	RESIZER_TOKEN_VERSION,
-};
+// eslint-disable-next-line import/prefer-default-export
+export { RESIZER_TOKEN_VERSION };

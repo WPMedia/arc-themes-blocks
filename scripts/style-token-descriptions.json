@@ -1,0 +1,1076 @@
+{
+	"ads-block": {
+		"ads-block-admin": {
+			"description": "The container for the administrative view of the ads block."
+		},
+		"ads-block": {
+			"description": "The container for the advertisement slot."
+		}
+	},
+	"alert-bar-block": {
+		"alert-bar": {
+			"description": "The container for the alert bar content."
+		}
+	},
+	"article-body-block": {
+		"article-body-children": {
+			"description": "The container for the child elements in the article body block."
+		},
+		"article-body-link": {
+			"description": "A hyperlink within the article body block."
+		},
+		"article-body-h2": {
+			"description": "A level 2 heading within the article body block."
+		},
+		"article-body-h3": {
+			"description": "A level 3 heading within the article body block."
+		},
+		"article-body-h4": {
+			"description": "A level 4 heading within the article body block."
+		},
+		"article-body-h5": {
+			"description": "A level 5 heading within the article body block."
+		},
+		"article-body-h6": {
+			"description": "A level 6 heading within the article body block."
+		},
+		"article-body-ul": {
+			"description": "An unordered list within the article body block."
+		},
+		"article-body-ol": {
+			"description": "An ordered list within the article body block."
+		},
+		"article-body-blockquote": {
+			"description": "A block quotation within the article body block."
+		},
+		"article-body-citation": {
+			"description": "A citation for a quote or other material in the article body block."
+		},
+		"article-body-correction": {
+			"description": "A correction for an error in the article body block."
+		},
+		"article-body-copyright": {
+			"description": "A statement of copyright within the article body block."
+		},
+		"article-body-divider": {
+			"description": "A divider or horizontal rule within the article body block."
+		},
+		"article-body-gallery": {
+			"description": "A gallery of images within the article body block."
+		},
+		"article-body-gallery-additional-next": {
+			"description": "The button for the next image in a gallery within the article body block."
+		},
+		"article-body-gallery-additional-previous": {
+			"description": "The button for the previous image in a gallery within the article body block."
+		},
+		"article-body-full-screen-icon": {
+			"description": "The icon to enable full screen mode for a media element within the article body block."
+		},
+		"article-body-start-icon": {
+			"description": "The icon to start playing a media element within the article body block."
+		},
+		"article-body-stop-icon": {
+			"description": "The icon to stop playing a media element within the article body block."
+		},
+		"article-body-image-wrapper": {
+			"description": "The container for an image within the article body block."
+		},
+		"article-body-embed-responsive-item": {
+			"description": "An embedded item within a responsive container in the article body block."
+		},
+		"article-body-embed-responsive": {
+			"description": "A responsive container for an embedded item in the article body block."
+		},
+		"article-body-image": {
+			"description": "An image within the article body block."
+		},
+		"article-body-image-float-left": {
+			"description": "An image with left float within the article body block."
+		},
+		"article-body-image-float-right": {
+			"description": "An image with right float within the article body block."
+		},
+		"article-body-interstitial-link": {
+			"description": "A link to an interstitial page within the article body block."
+		},
+		"article-body-pullquote": {
+			"description": "A visually distinct quotation within the article body block that is meant to draw attention."
+		},
+		"article-body-table-thead": {
+			"description": "The header row(s) of a table within the article body block."
+		},
+		"article-body-table-th": {
+			"description": "A header cell in a table within the article body block."
+		},
+		"article-body-table-td": {
+			"description": "A data cell in a table within the article body block."
+		},
+		"article-body-table": {
+			"description": "A table within the article body block."
+		},
+		"article-body": {
+			"description": "The container for the article body content."
+		}
+	},
+	"article-tag-block": {
+		"article-tag": {
+			"description": "The container for the tags associated with an article."
+		}
+	},
+	"author-bio-block": {
+		"author-bio-author": {
+			"description": "The container for the author's name, image, and bio."
+		},
+		"author-bio-author-name": {
+			"description": "The name of the author."
+		},
+		"author-bio-author-description": {
+			"description": "A brief description or bio of the author."
+		},
+		"author-bio-social-link-hover": {
+			"description": "The hover state of a social media link for the author."
+		},
+		"author-bio-social-link-wrapper": {
+			"description": "The container for social media links for the author."
+		},
+		"author-bio": {
+			"description": "The container for all authors in the author bio block."
+		}
+	},
+	"byline-block": {
+		"byline-by": {
+			"description": "The text 'by' in a byline."
+		},
+		"byline-names": {
+			"description": "The container for the author names in a byline."
+		},
+		"byline": {
+			"description": "The container for the byline block."
+		}
+	},
+	"card-list-block": {
+		"card-list-title": {
+			"description": "The title of the card list."
+		},
+		"card-list-list": {
+			"description": "The container for all card items in the card list."
+		},
+		"card-list-main-item": {
+			"description": "The main card item in the card list."
+		},
+		"card-list-main-item-text-container": {
+			"description": "The container for the text content in the main card item."
+		},
+		"card-list-main-item-image-link": {
+			"description": "The image link in the main card item."
+		},
+		"card-list-secondary-item": {
+			"description": "The secondary card item in the card list."
+		},
+		"card-list-secondary-item-image-link": {
+			"description": "The image link in the secondary card item."
+		},
+		"card-list-secondary-item-heading-link": {
+			"description": "The heading link in the secondary card item."
+		},
+		"card-list": {
+			"description": "The container for the entire card list block."
+		}
+	},
+	"category-carousel-block": {
+		"category-carousel-slide": {
+			"description": "An individual slide in the carousel."
+		},
+		"category-carousel-slide-title": {
+			"description": "The title of a slide in the carousel."
+		},
+		"category-carousel-title": {
+			"description": "The title of the entire carousel."
+		},
+		"category-carousel": {
+			"description": "The container for the entire category carousel block."
+		}
+	},
+	"date-block": {
+		"date": {
+			"description": "The date element."
+		}
+	},
+	"default-output-block": {
+		"application": {
+			"description": "The main application container."
+		}
+	},
+	"divider-block": {
+		"divider": {
+			"description": "A horizontal line used to visually separate content."
+		}
+	},
+	"double-chain-block": {
+		"double-chain-heading": {
+			"description": "The heading of the double chain block."
+		},
+		"double-chain-children-grid": {
+			"description": "The grid container for the child items in the double chain block."
+		},
+		"double-chain-child-item-empty": {
+			"description": "The empty child item in the double chain block, which appears when there are no child items to show."
+		},
+		"double-chain-child-item": {
+			"description": "The child item in the double chain block, which appears when there is at least one child item to show."
+		},
+		"double-chain": {
+			"description": "The double chain block, which contains the heading and child items."
+		}
+	},
+	"extra-large-manual-promo-block": {
+		"xl-manual-promo": {
+			"description": "A manual story promo block in extra-large size. This element accepts a user input instead of fetching a story from a data source."
+		}
+	},
+	"extra-large-promo-block": {
+		"xl-promo-icon-label": {
+			"description": "An icon and label that represents the type of content being promoted in the promo block"
+		},
+		"xl-promo-label": {
+			"description": "A label that describes the content being promoted in the promo block"
+		},
+		"xl-promo": {
+			"description": "The promo block container that displays the content being promoted"
+		}
+	},
+	"footer-block": {
+		"footer-links-group-list-item": {
+			"description": "An item in a list of links within a footer links group."
+		},
+		"footer-links-group-list": {
+			"description": "A list of links within a footer links group."
+		},
+		"footer-links-group": {
+			"description": "A group of links in the footer."
+		},
+		"footer-links": {
+			"description": "A collection of footer links."
+		},
+		"footer-social-links-container": {
+			"description": "A container for social links in the footer."
+		},
+		"footer-social-links-first": {
+			"description": "The first social link in the footer."
+		},
+		"footer-social-links-last": {
+			"description": "The last social link in the footer."
+		},
+		"footer-social-links": {
+			"description": "A collection of social links in the footer."
+		},
+		"footer-top-container": {
+			"description": "A container for the top section of the footer."
+		},
+		"footer": {
+			"description": "The entire footer section."
+		}
+	},
+	"full-author-bio-block": {
+		"full-author-bio-text": {
+			"description": "The text describing the author's bio."
+		},
+		"full-author-bio-identification": {
+			"description": "Container for the author's name and role."
+		},
+		"full-author-bio-name-link": {
+			"description": "The link to the author's page."
+		},
+		"full-author-bio-name": {
+			"description": "The name of the author."
+		},
+		"full-author-bio-role": {
+			"description": "The role or job of the author."
+		},
+		"full-author-bio-social": {
+			"description": "Container for the author's social media icons."
+		},
+		"full-author-bio-social-header": {
+			"description": "Header for the author's social media icons."
+		},
+		"full-author-bio-social-icons": {
+			"description": "Container for the author's social media icons."
+		},
+		"full-author-bio-social-link-hover": {
+			"description": "The hover state for a social media icon."
+		},
+		"full-author-bio-social-link": {
+			"description": "The link to the author's social media account."
+		},
+		"full-author-bio": {
+			"description": "The entire block containing the author's bio."
+		}
+	},
+	"gallery-block": {
+		"gallery-track-icon": {
+			"description": "The icon that appears to the left and right of the gallery, which the user can click to move between images."
+		},
+		"gallery-image-wrapper": {
+			"description": "The container for an individual image in the gallery."
+		},
+		"gallery": {
+			"description": "The entire gallery block that displays a set of images with navigation arrows."
+		}
+	},
+	"header-block": {
+		"header-extra-large": {
+			"description": "A header with an extra-large size."
+		},
+		"header-large": {
+			"description": "A header with a large size."
+		},
+		"header-medium": {
+			"description": "A header with a medium size."
+		},
+		"header-small": {
+			"description": "A header with a small size."
+		},
+		"header": {
+			"description": "A standard header."
+		}
+	},
+	"header-nav-chain-block": {
+		"header-nav-chain-nav-search-input": {
+			"description": "The input element used for search in the header navigation chain block."
+		},
+		"header-nav-chain-nav-search-input-open": {
+			"description": "The input element used for search in the header navigation chain block when it is expanded."
+		},
+		"header-nav-chain-nav-search-button": {
+			"description": "The button element used for search in the header navigation chain block."
+		},
+		"header-nav-chain-nav-search": {
+			"description": "The container element for search in the header navigation chain block."
+		},
+		"header-nav-chain-flyout-overlay-scrollbar": {
+			"description": "The scrollbar element used in the flyout overlay of the header navigation chain block."
+		},
+		"header-nav-chain-flyout-overlay-open": {
+			"description": "The flyout overlay element in the header navigation chain block when it is expanded."
+		},
+		"header-nav-chain-flyout-overlay-closed": {
+			"description": "The flyout overlay element in the header navigation chain block when it is collapsed."
+		},
+		"header-nav-chain-flyout-overlay": {
+			"description": "The overlay element that appears when a flyout menu is open in the header navigation chain block."
+		},
+		"header-nav-chain-top-nav-left": {
+			"description": "The left side of the top navigation section in the header navigation chain block."
+		},
+		"header-nav-chain-top-nav-right": {
+			"description": "The right side of the top navigation section in the header navigation chain block."
+		},
+		"header-nav-chain-top-nav-components-mobile": {
+			"description": "The mobile version of the components in the top navigation section of the header navigation chain block."
+		},
+		"header-nav-chain-top-nav-components-desktop": {
+			"description": "The desktop version of the components in the top navigation section of the header navigation chain block."
+		},
+		"header-nav-chain-flyout-nav-wrapper-open": {
+			"description": "The wrapper element for flyout menus in the header navigation chain block when they are expanded."
+		},
+		"header-nav-chain-flyout-nav-wrapper-closed": {
+			"description": "The wrapper element for flyout menus in the header navigation chain block when they are collapsed."
+		},
+		"header-nav-chain-flyout-nav-widgets": {
+			"description": "The container element for widgets in the flyout menu of the header navigation chain block."
+		},
+		"header-nav-chain-flyout-nav-menu": {
+			"description": "The container element for menus in the flyout menu of the header navigation chain block."
+		},
+		"header-nav-chain-flyout-nav-components-mobile": {
+			"description": "The mobile version of the components in the flyout menu of the header navigation chain block."
+		},
+		"header-nav-chain-flyout-nav-components-desktop": {
+			"description": "The desktop version of the components in the flyout menu of the header navigation chain block."
+		},
+		"header-nav-chain-flyout-nav-wrapper": {
+			"description": "The wrapper element for flyout menus in the header navigation chain block."
+		},
+		"header-nav-chain-flyout-nav-item-hover-active": {
+			"description": "The flyout navigation item that is currently selected in the header navigation chain block."
+		},
+		"header-nav-chain-flyout-nav-item": {
+			"description": "The navigation item in the flyout menu of the header navigation chain block."
+		},
+		"header-nav-chain-flyout-nav": {
+			"description": "The flyout menu element in the header navigation chain block."
+		},
+		"header-nav-chain-nav-search-box-svg": {
+			"description": "SVG icon used for the search box in the header navigation chain"
+		},
+		"header-nav-chain-nav-search-box-position": {
+			"description": "CSS position for the search box in the header navigation chain"
+		},
+		"header-nav-chain-flyout-nav-subsection-caret-open": {
+			"description": "SVG icon used for open flyout nav subsection carets in the header navigation chain"
+		},
+		"header-nav-chain-flyout-nav-subsection-caret": {
+			"description": "SVG icon used for closed flyout nav subsection carets in the header navigation chain"
+		},
+		"header-nav-chain-flyout-nav-subsection-anchor": {
+			"description": "Link anchor element used for flyout nav subsections in the header navigation chain"
+		},
+		"header-nav-chain-flyout-nav-subsection-container-open": {
+			"description": "CSS class used for open flyout nav subsection container in the header navigation chain"
+		},
+		"header-nav-chain-flyout-nav-subsection-container": {
+			"description": "Flyout nav subsection container element in the header navigation chain"
+		},
+		"header-nav-chain-flyout-nav-subsection-menu": {
+			"description": "Flyout nav subsection menu element in the header navigation chain"
+		},
+		"header-nav-chain-top-layout": {
+			"description": "Top layout container element in the header navigation chain"
+		},
+		"header-nav-chain-logo-center": {
+			"description": "CSS class used for centering the logo element in the header navigation chain"
+		},
+		"header-nav-chain-logo-show": {
+			"description": "CSS class used for showing the logo element in the header navigation chain"
+		},
+		"header-nav-chain-logo-hidden": {
+			"description": "CSS class used for hiding the logo element in the header navigation chain"
+		},
+		"header-nav-chain-logo-image": {
+			"description": "Image element used for the logo in the header navigation chain"
+		},
+		"header-nav-chain-logo": {
+			"description": "Logo container element in the header navigation chain"
+		},
+		"header-nav-chain-links-list-item": {
+			"description": "List item element used for a link in the header navigation chain"
+		},
+		"header-nav-chain-links-list": {
+			"description": "List element used for links in the header navigation chain"
+		},
+		"header-nav-chain-scrolled-flyout-nav": {
+			"description": "CSS class used for a scrolled flyout nav in the header navigation chain"
+		},
+		"header-nav-chain-scrolled-flyout-overlay": {
+			"description": "CSS class used for the scrolled flyout nav overlay in the header navigation chain"
+		},
+		"header-nav-chain-scrolled": {
+			"description": "CSS class used for the header navigation chain when scrolled"
+		},
+		"header-nav-chain": {
+			"description": "Header navigation chain container element"
+		}
+	},
+	"headline-block": {
+		"headline": {
+			"description": "The h1 heading or title of a page or section."
+		}
+	},
+	"hero-block": {
+		"hero": {
+			"description": "The main hero image or video."
+		},
+		"info": {
+			"description": "Additional information that accompanies the hero, such as a title or caption."
+		},
+		"hero-stacked": {
+			"description": "A hero layout where the information is stacked on top of the hero image or video."
+		},
+		"hero-light": {
+			"description": "A hero variant with a light background."
+		},
+		"hero-dark": {
+			"description": "A hero variant with a dark background."
+		},
+		"hero-text-overlay": {
+			"description": "Text that appears over the hero image or video."
+		},
+		"hero-text-stacked": {
+			"description": "A hero text layout where the text is stacked on top of the hero image or video."
+		},
+		"hero-text-left": {
+			"description": "A hero text layout where the text is aligned to the left of the hero image or video."
+		},
+		"hero-text-center": {
+			"description": "A hero text layout where the text is centered on the hero image or video."
+		},
+		"hero-subheadline": {
+			"description": "A secondary heading or subtitle that accompanies the hero."
+		},
+		"hero-buttonrow": {
+			"description": "A row of buttons or links that appear with the hero image or video."
+		}
+	},
+	"large-manual-promo-block": {
+		"large-manual-promo-text": {
+			"description": "The text content of the manual promo block."
+		},
+		"large-manual-promo": {
+			"description": "The container for the manual promo block."
+		}
+	},
+	"large-promo-block": {
+		"large-promo-text": {
+			"description": "The text content of the large promo block."
+		},
+		"large-promo-icon-label": {
+			"description": "The icon and label section of the large promo block."
+		},
+		"large-promo-label": {
+			"description": "The label section of the large promo block."
+		},
+		"large-promo": {
+			"description": "The main container of the large promo block."
+		}
+	},
+	"lead-art-block": {
+		"lead-art-carousel-track-icon": {
+			"description": "The icon used to represent the carousel track in the lead art block."
+		},
+		"lead-art-carousel-image-wrapper": {
+			"description": "The wrapper element for the image carousel in the lead art block."
+		},
+		"lead-art-close-icon": {
+			"description": "The icon used to represent the close button in the lead art block."
+		},
+		"lead-art": {
+			"description": "The main container element for the lead art block."
+		}
+	},
+	"links-bar-block": {
+		"links-bar": {
+			"description": "A horizontal bar containing a list of links."
+		}
+	},
+	"masthead-block": {
+		"masthead-logo-image": {
+			"description": "The image element for the site logo in the masthead."
+		},
+		"masthead-logo": {
+			"description": "The container element for the site logo in the masthead."
+		},
+		"masthead-content": {
+			"description": "The container element for the masthead's text content."
+		},
+		"masthead-date": {
+			"description": "The element for the date display in the masthead."
+		},
+		"masthead-tagline": {
+			"description": "The element for the tagline or subheading text in the masthead."
+		},
+		"masthead-link": {
+			"description": "The element for a link in the masthead."
+		},
+		"masthead-divider": {
+			"description": "The element for a divider in the masthead."
+		},
+		"masthead": {
+			"description": "The container element for the entire masthead."
+		}
+	},
+	"medium-manual-promo-block": {
+		"medium-manual-promo-show-image": {
+			"description": "The image container for the promo block."
+		},
+		"medium-manual-promo": {
+			"description": "The container for the manual promo block."
+		}
+	},
+	"medium-promo-block": {
+		"medium-promo-show-image": {
+			"description": "The image element of the promo block"
+		},
+		"medium-promo-icon-label": {
+			"description": "The label for the icon on the promo block"
+		},
+		"medium-promo-label": {
+			"description": "The main label for the promo block"
+		},
+		"medium-promo": {
+			"description": "The entire promo block container"
+		}
+	},
+	"numbered-list-block": {
+		"numbered-list-items": {
+			"description": "The container for all numbered list items."
+		},
+		"numbered-list-item": {
+			"description": "A single item in the numbered list."
+		},
+		"numbered-list-item-image": {
+			"description": "An image associated with the numbered list item."
+		},
+		"numbered-list": {
+			"description": "The container for the entire numbered list."
+		}
+	},
+	"overline-block": {
+		"overline": {
+			"description": "An element to display label text."
+		}
+	},
+	"product-assortment-carousel-block": {
+		"product-assortment-carousel-title": {
+			"description": "The title for the product assortment carousel"
+		},
+		"product-assortment-carousel-product": {
+			"description": "A product tile within the product assortment carousel"
+		},
+		"product-assortment-carousel-product-single-price": {
+			"description": "The price of a single product within the product assortment carousel"
+		},
+		"product-assortment-carousel": {
+			"description": "The container element for the entire product assortment carousel"
+		}
+	},
+	"product-content-block": {
+		"product-content-ul": {
+			"description": "Unordered list of items related to the product"
+		},
+		"product-content-ol": {
+			"description": "Ordered list of items related to the product"
+		},
+		"product-content": {
+			"description": "Block of content related to the product"
+		}
+	},
+	"product-featured-image-block": {
+		"product-featured-image": {
+			"description": "The main product image that is prominently featured on the product detail page."
+		}
+	},
+	"product-gallery-block": {
+		"product-gallery-featured-slide": {
+			"description": "The featured slide in the product gallery."
+		},
+		"product-gallery-thumbnail": {
+			"description": "The thumbnail image in the product gallery."
+		},
+		"product-gallery-focus-view": {
+			"description": "The focus view of the product gallery."
+		},
+		"product-gallery-focus-view-main-image": {
+			"description": "The main image in the focus view of the product gallery."
+		},
+		"product-gallery-focus-view-main-images": {
+			"description": "The list of main images in the focus view of the product gallery."
+		},
+		"product-gallery-focus-view-thumbnail-bar": {
+			"description": "The thumbnail bar in the focus view of the product gallery."
+		},
+		"product-gallery-focus-view-thumbnail-bar-indicator": {
+			"description": "The indicator that shows which thumbnail image is currently selected in the thumbnail bar of the focus view in the product gallery."
+		},
+		"product-gallery-focus-view-thumbnail-bar-images": {
+			"description": "The list of thumbnail images in the thumbnail bar of the focus view in the product gallery."
+		},
+		"product-gallery-focus-view-thumbnail-image": {
+			"description": "A thumbnail image in the thumbnail bar of the focus view in the product gallery."
+		},
+		"product-gallery-focus-view-thumbnail-image-selected": {
+			"description": "A selected thumbnail image in the thumbnail bar of the focus view in the product gallery."
+		},
+		"product-gallery-focus-view-close": {
+			"description": "The close button in the focus view of the product gallery."
+		},
+		"product-gallery": {
+			"description": "The product gallery component."
+		}
+	},
+	"product-information-block": {
+		"product-information-single-price": {
+			"description": "The element that displays the price of the product."
+		},
+		"product-information": {
+			"description": "The container element that displays the product information."
+		}
+	},
+	"quad-chain-block": {
+		"quad-chain-heading": {
+			"description": "The heading of the quad chain block."
+		},
+		"quad-chain-children-grid": {
+			"description": "The grid that displays the child items in the quad chain block."
+		},
+		"quad-chain-child-item-empty": {
+			"description": "The placeholder that appears in the quad chain block when there are no child items."
+		},
+		"quad-chain-child-item": {
+			"description": "Each child item in the quad chain block."
+		},
+		"quad-chain": {
+			"description": "The container for the quad chain block."
+		}
+	},
+	"quilted-image-block": {
+		"quilted-image": {
+			"description": "An image element with quilted overlay"
+		},
+		"quilted-image__wrapper-bottom": {
+			"description": "The bottom wrapper element for the quilted image"
+		},
+		"quilted-image__wrapper-top": {
+			"description": "The top wrapper element for the quilted image"
+		},
+		"quilted-image__wrapper": {
+			"description": "The wrapper element for the quilted image"
+		},
+		"quilted-image__overlay-text--light": {
+			"description": "The light overlay text for the quilted image"
+		},
+		"quilted-image__overlay-text--dark": {
+			"description": "The dark overlay text for the quilted image"
+		},
+		"overlay": {
+			"description": "The overlay element for the quilted image"
+		},
+		"quilted-image__media-panel": {
+			"description": "The media panel element for the quilted image"
+		},
+		"quilted-image__overlay": {
+			"description": "The overlay element for the quilted image"
+		}
+	},
+	"results-list-block": {
+		"results-list-wrapper": {
+			"description": "The wrapper for the results list"
+		},
+		"results-list-show-image": {
+			"description": "The button to show the image of the result"
+		},
+		"results-list-see-more": {
+			"description": "The button to see more details of the result"
+		},
+		"results-list-label": {
+			"description": "The label of the result"
+		},
+		"results-list": {
+			"description": "The list of results"
+		}
+	},
+	"right-rail-advanced-block": {
+		"right-rail-advanced-navigation": {
+			"description": "Navigation for right-rail advanced layout"
+		},
+		"right-rail-advanced-full-width-1": {
+			"description": "Full width content section above right-rail?"
+		},
+		"right-rail-advanced-main": {
+			"description": "Main content area of right-rail"
+		},
+		"right-rail-advanced-footer": {
+			"description": "Footer section at the bottom of the right-rail"
+		},
+		"right-rail-advanced-full-width-2": {
+			"description": "Full width content section below right-rail"
+		},
+		"right-rail-advanced-main-interior-item": {
+			"description": "Item within main content area of right-rail"
+		},
+		"right-rail-advanced-main-right-rail": {
+			"description": "Column of content on the right-rail"
+		},
+		"right-rail-advanced-rail-container": {
+			"description": "Container for content within the right-rail column"
+		},
+		"right-rail-advanced-main-interior-item-1": {
+			"description": "First item within main content area of right-rail"
+		},
+		"right-rail-advanced-main-interior-item-2": {
+			"description": "Second item within main content area of right-rail"
+		},
+		"right-rail-advanced-main-right-rail-top": {
+			"description": "Top portion of the right-rail column"
+		},
+		"right-rail-advanced-main-right-rail-middle": {
+			"description": "Middle portion of the right-rail column"
+		},
+		"right-rail-advanced-main-right-rail-bottom": {
+			"description": "Bottom portion of the right-rail column"
+		},
+		"right-rail-advanced": {
+			"description": "Right-rail container"
+		}
+	},
+	"right-rail-block": {
+		"right-rail-navigation": {
+			"description": "Navigation for right-rail layout"
+		},
+		"right-rail-full-width-1": {
+			"description": "A full width content section for content in the right rail."
+		},
+		"right-rail-main": {
+			"description": "The main container for content in the right rail."
+		},
+		"right-rail-footer": {
+			"description": "The footer element for the right rail."
+		},
+		"right-rail-main-interior-item": {
+			"description": "An item in the main container for content in the right rail."
+		},
+		"right-rail-main-right-rail": {
+			"description": "The right rail container in the main container for content in the right rail."
+		},
+		"right-rail-full-width-2": {
+			"description": "A second full width content section for content in the right rail."
+		},
+		"right-rail-rail-container": {
+			"description": "A container for the right rail content."
+		},
+		"right-rail": {
+			"description": "The right rail element, containing all the right rail content."
+		}
+	},
+	"search-results-list-block": {
+		"search-results-list-field-wrapper": {
+			"description": "Wrapper for the search input field in the search results list block."
+		},
+		"search-results-list-field": {
+			"description": "Search input field in the search results list block."
+		},
+		"search-results-list-results-item-show-image": {
+			"description": "Toggle button for showing or hiding images in the search results list items."
+		},
+		"search-results-list-results-item": {
+			"description": "An item in the search results list."
+		},
+		"search-results-list-results": {
+			"description": "Container for all search results list items."
+		},
+		"search-results-list": {
+			"description": "The search results list block."
+		}
+	},
+	"section-title-block": {
+		"section-title-links": {
+			"description": "A container for links that relate to the section title"
+		},
+		"section-title": {
+			"description": "The main title of a section"
+		}
+	},
+	"share-bar-block": {
+		"share-bar": {
+			"description": "Container element for the share bar"
+		},
+		"share-bar-facebook": {
+			"description": "Button for sharing on Facebook"
+		},
+		"share-bar-linkedin": {
+			"description": "Button for sharing on LinkedIn"
+		},
+		"share-bar-pinterest": {
+			"description": "Button for sharing on Pinterest"
+		},
+		"share-bar-twitter": {
+			"description": "Button for sharing on Twitter"
+		},
+		"share-bar-email": {
+			"description": "Button for sharing via email"
+		}
+	},
+	"simple-list-block": {
+		"simple-list-item": {
+			"description": "Represents a single item in a simple list."
+		},
+		"simple-list-items": {
+			"description": "A container for a collection of simple list items."
+		},
+		"simple-list-item-anchor": {
+			"description": "An anchor link associated with a simple list item."
+		},
+		"simple-list": {
+			"description": "A simple list of items."
+		}
+	},
+	"single-chain-block": {
+		"single-chain-heading": {
+			"description": "The heading element for the single chain block"
+		},
+		"single-chain-children-stack": {
+			"description": "The stack of child elements in the single chain block"
+		},
+		"single-chain": {
+			"description": "The single chain block that contains the heading and child elements"
+		}
+	},
+	"single-column-layout-block": {
+		"single-column-regular-navigation": {
+			"description": "The navigation section of the single column layout."
+		},
+		"single-column-regular-main": {
+			"description": "The main content section of the single column layout."
+		},
+		"single-column-regular-full-width": {
+			"description": "A full width section within the single column layout."
+		},
+		"single-column-regular-body": {
+			"description": "The body section of the single column layout."
+		},
+		"single-column-regular-footer": {
+			"description": "The footer section of the single column layout."
+		},
+		"single-column-regular": {
+			"description": "The entire single column layout."
+		}
+	},
+	"small-manual-promo-block": {
+		"small-manual-promo-above": {
+			"description": "Promo displayed above the main content."
+		},
+		"small-manual-promo-below": {
+			"description": "Promo displayed below the main content."
+		},
+		"small-manual-promo-left": {
+			"description": "Promo displayed to the left of the main content."
+		},
+		"small-manual-promo-right": {
+			"description": "Promo displayed to the right of the main content."
+		},
+		"small-manual-promo": {
+			"description": "Promo container."
+		}
+	},
+	"small-promo-block": {
+		"small-promo-above": {
+			"description": "Promo displayed above the main content."
+		},
+		"small-promo-below": {
+			"description": "Promo displayed below the main content."
+		},
+		"small-promo-left": {
+			"description": "Promo displayed to the left of the main content."
+		},
+		"small-promo-right": {
+			"description": "Promo displayed to the right of the main content."
+		},
+		"small-promo": {
+			"description": "Promo container."
+		}
+	},
+	"story-carousel-block": {
+		"story-carousel-title": {
+			"description": "The title element of a story carousel"
+		},
+		"story-carousel-card": {
+			"description": "A card element within a story carousel containing information about a single story"
+		},
+		"story-carousel": {
+			"description": "The main container element for a story carousel"
+		}
+	},
+	"subheadline-block": {
+		"subheadline": {
+			"description": "A short headline or subheading that provides additional context or information about the main headline or story."
+		}
+	},
+	"tag-title-block": {
+		"tag-title": {
+			"description": "The heading or title of a tag page."
+		}
+	},
+	"top-table-list-block": {
+		"top-table-list-small-container-1": {
+			"description": "Container for a small top table list with one column"
+		},
+		"top-table-list-small-container-2": {
+			"description": "Container for a small top table list with two columns"
+		},
+		"top-table-list-small-container-3": {
+			"description": "Container for a small top table list with three columns"
+		},
+		"top-table-list-small-container-4": {
+			"description": "Container for a small top table list with four columns"
+		},
+		"top-table-list-small-container": {
+			"description": "Container for a small top table list item"
+		},
+		"top-table-list-medium-container": {
+			"description": "Container for a medium top table list item"
+		},
+		"top-table-list-large-container": {
+			"description": "Container for a large top table list item"
+		},
+		"top-table-list-xl-container": {
+			"description": "Container for an extra large top table list item"
+		},
+		"top-table-list-xl": {
+			"description": "Extra large top table list item"
+		},
+		"top-table-list-large-text": {
+			"description": "Large text on a top table list item"
+		},
+		"top-table-list-large-icon-label": {
+			"description": "Icon and label on a large top table list item"
+		},
+		"top-table-list-large-label": {
+			"description": "Label on a large top table list item"
+		},
+		"top-table-list-large": {
+			"description": "Large top table list item"
+		},
+		"top-table-list-medium-show-image": {
+			"description": "Image shown on a medium top table list item"
+		},
+		"top-table-list-medium-icon-label": {
+			"description": "Icon and label on a medium top table list item"
+		},
+		"top-table-list-medium-label": {
+			"description": "Label on a medium top table list item"
+		},
+		"top-table-list-medium": {
+			"description": "Medium top table list item"
+		},
+		"top-table-list-small-below": {
+			"description": "Small top table list item positioned below"
+		},
+		"top-table-list-small-above": {
+			"description": "Small top table list item positioned above"
+		},
+		"top-table-list-small-right": {
+			"description": "Small top table list item positioned to the right"
+		},
+		"top-table-list-small-left": {
+			"description": "Small top table list item positioned to the left"
+		},
+		"top-table-list-small": {
+			"description": "Small top table list item"
+		},
+		"top-table-list": {
+			"description": "Top table list"
+		}
+	},
+	"triple-chain-block": {
+		"triple-chain-heading": {
+			"description": "The heading of the triple chain block."
+		},
+		"triple-chain-children-grid": {
+			"description": "The grid container that holds the child items of the triple chain block."
+		},
+		"quad-chain-child-item-empty": {
+			"description": "An empty placeholder for a quad chain child item."
+		},
+		"triple-chain-child-item": {
+			"description": "A child item of the triple chain block."
+		},
+		"triple-chain": {
+			"description": "The triple chain block that holds the child items."
+		}
+	},
+	"video-player-block": {
+		"video-player-inline": {
+			"description": "The inline video player component."
+		},
+		"video-player-feature-meta": {
+			"description": "The meta data section of the video player, containing the title, description, and other details about the video."
+		},
+		"video-player-feature": {
+			"description": "The main feature area of the video player, containing the video itself and any associated controls or features."
+		},
+		"video-player": {
+			"description": "The video player component, which combines the meta data and feature areas to create a complete video player experience."
+		}
+	}
+}

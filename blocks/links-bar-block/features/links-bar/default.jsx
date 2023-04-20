@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
-import { Link, Stack, Separator, usePhrases } from "@wpmedia/arc-themes-components";
+import { Divider, Link, Stack, Separator, usePhrases } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-links-bar";
 
@@ -52,7 +52,7 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 							</React.Fragment>
 						))}
 					</Stack>
-					<hr />
+					<Divider />
 				</>
 			)}
 		</>

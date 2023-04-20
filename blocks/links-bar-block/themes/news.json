@@ -1,0 +1,10 @@
+{
+	"links-bar": {
+		"styles": {
+			"default": {
+				"gap": "var(--global-spacing-2)"
+			},
+			"desktop": {}
+		}
+	}
+}

@@ -1,17 +1,43 @@
 import axios from "axios";
-import { CONTENT_BASE, ARC_ACCESS_TOKEN, RESIZER_APP_VERSION } from "fusion:environment";
-
+import { CONTENT_BASE, ARC_ACCESS_TOKEN, RESIZER_TOKEN_VERSION } from "fusion:environment";
 import signImagesInANSObject from "@wpmedia/arc-themes-components/src/utils/sign-images-in-ans-object";
+import handleFetchError from "@wpmedia/arc-themes-components/src/utils/handle-fetch-error";
 import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
 
-const params = {
-	_id: "text",
-	content_alias: "text",
-	from: "text",
-	getNext: "text",
-	size: "text",
-};
-// test
+const params = [
+	{
+		displayName: "_id",
+		name: "_id",
+		type: "text",
+	},
+	{
+		displayName: "content_alias",
+		name: "content_alias",
+		type: "text",
+	},
+	{
+		displayName: "from",
+		name: "from",
+		type: "text",
+	},
+	{
+		displayName: "getNext",
+		name: "getNext",
+		type: "text",
+	},
+	{
+		displayName: "size",
+		name: "size",
+		type: "text",
+	},
+	{
+		default: "2",
+		displayName: "Themes Version",
+		name: "themes",
+		type: "text",
+	},
+];
+
 const fetch = (
 	{ _id, "arc-site": site, content_alias: contentAlias, from, getNext = "false", size },
 	{ cachedCall }
@@ -35,7 +61,7 @@ const fetch = (
 		},
 		method: "GET",
 	})
-		.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_APP_VERSION))
+		.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_TOKEN_VERSION))
 		.then(({ data }) => {
 			if (getNext === "false") {
 				return data;
@@ -49,7 +75,7 @@ const fetch = (
 				},
 				method: "GET",
 			})
-				.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_APP_VERSION))
+				.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_TOKEN_VERSION))
 				.then(({ data: next }) => ({
 					...data,
 					...(data?.content_elements || next?.content_elements
@@ -61,7 +87,8 @@ const fetch = (
 						  }
 						: {}),
 				}));
-		});
+		})
+		.catch(handleFetchError);
 };
 
 export default {

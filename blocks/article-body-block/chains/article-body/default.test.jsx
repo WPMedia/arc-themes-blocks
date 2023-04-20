@@ -6,7 +6,7 @@ import { isServerSide } from "@wpmedia/arc-themes-components";
 import ArticleBodyChain from "./default";
 
 jest.mock("fusion:environment", () => ({
-	RESIZER_APP_VERSION: 2,
+	RESIZER_TOKEN_VERSION: 2,
 	RESIZER_URL: "http://some.url",
 }));
 
@@ -16,13 +16,10 @@ jest.mock("fusion:properties", () =>
 	}))
 );
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	LazyLoad: ({ children }) => <>{children}</>,
-}));
-
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(),
+	LazyLoad: ({ children }) => <>{children}</>,
 }));
 
 describe("article-body chain", () => {
@@ -2105,7 +2102,7 @@ describe("article-body chain", () => {
 					<span>3</span>
 				</ArticleBodyChain>
 			);
-			expect(wrapper.find(".b-article-body__divider").length).toEqual(2);
+			expect(wrapper.find("Divider").length).toEqual(2);
 		});
 	});
 

@@ -3,8 +3,9 @@ import {
 	ARC_ACCESS_TOKEN,
 	CONTENT_BASE,
 	SIGNING_SERVICE_DEFAULT_APP,
-	SIGNING_SERVICE_DEFAULT_VERSION,
+	RESIZER_TOKEN_VERSION,
 } from "fusion:environment";
+import handleFetchError from "@wpmedia/arc-themes-components/src/utils/handle-fetch-error";
 
 const params = {
 	id: "text",
@@ -15,16 +16,22 @@ const params = {
 const fetch = ({
 	id,
 	service = SIGNING_SERVICE_DEFAULT_APP,
-	serviceVersion = SIGNING_SERVICE_DEFAULT_VERSION,
-}) =>
-	axios({
-		url: `${CONTENT_BASE}/signing-service/v1/sign/${service}/${serviceVersion}/${encodeURI(id)}`,
+	serviceVersion = RESIZER_TOKEN_VERSION,
+}) => {
+	const urlSearch = new URLSearchParams({
+		value: id,
+	});
+	return axios({
+		url: `${CONTENT_BASE}/signing-service/v2/sign/${service}/${serviceVersion}?${urlSearch.toString()}`,
 		headers: {
 			"content-type": "application/json",
 			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
 		},
 		method: "GET",
-	}).then(({ data: content }) => content);
+	})
+		.then(({ data: content }) => content)
+		.catch(handleFetchError);
+};
 
 export default {
 	fetch,

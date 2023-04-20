@@ -4,8 +4,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { RESIZER_APP_VERSION } from "fusion:environment";
-import { LazyLoad, localizeDate } from "@wpmedia/engine-theme-sdk";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import {
 	Attribution,
 	Date,
@@ -16,7 +15,9 @@ import {
 	HeadingSection,
 	Image,
 	isServerSide,
+	LazyLoad,
 	Link,
+	localizeDate,
 	Overline,
 	Separator,
 	Stack,
@@ -86,7 +87,7 @@ const CardListItems = (props) => {
 				type
 				url
 				auth {
-					${RESIZER_APP_VERSION}
+					${RESIZER_TOKEN_VERSION}
 				}
 			 }
 			 lead_art {
@@ -96,7 +97,7 @@ const CardListItems = (props) => {
 					type
 					url
 					auth {
-						${RESIZER_APP_VERSION}
+						${RESIZER_TOKEN_VERSION}
 					}
 				  }
 				}

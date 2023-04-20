@@ -2,7 +2,6 @@ import React from "react";
 import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
 
-import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
 import {
 	Conditional,
 	Grid,
@@ -11,6 +10,7 @@ import {
 	Image,
 	Join,
 	Link,
+	localizeDateTime,
 	MediaItem,
 	Stack,
 	formatURL,
@@ -56,7 +56,7 @@ const Large = (props) => {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
 			timeZone: "GMT",
-			dateTimeFormat: "%B %d, %Y at %l:%M %P %Z",
+			dateTimeFormat: "%B %d, %Y at %l:%M%p %Z",
 		},
 	} = getProperties(arcSite);
 
@@ -147,7 +147,11 @@ const Large = (props) => {
 							assistiveHidden
 						>
 							{embedMarkup ? (
-								<Video embedMarkup={embedMarkup} viewportPercentage={65} />
+								<Video
+									embedMarkup={embedMarkup}
+									aspectRatio={imageRatioLG}
+									viewportPercentage={65}
+								/>
 							) : (
 								<>
 									<Image {...imageParams} />

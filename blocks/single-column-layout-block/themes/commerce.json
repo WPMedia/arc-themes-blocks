@@ -1,0 +1,20 @@
+{
+	"single-column-regular-main": {
+		"styles": {
+			"default": {
+				"components": {
+					"stack": {
+						"gap": "var(--global-spacing-11)"
+					}
+				}
+			},
+			"desktop": {
+				"components": {
+					"stack": {
+						"gap": "var(--global-spacing-16)"
+					}
+				}
+			}
+		}
+	}
+}

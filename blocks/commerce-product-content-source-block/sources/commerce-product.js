@@ -1,5 +1,6 @@
 import axios from "axios";
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from "fusion:environment";
+import handleFetchError from "@wpmedia/arc-themes-components/src/utils/handle-fetch-error";
 import { mockProductData } from "./mock-data";
 
 const params = {
@@ -21,7 +22,9 @@ const fetch = (key) => {
 			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
 		},
 		method: "GET",
-	}).then(({ data: content }) => content);
+	})
+		.then(({ data: content }) => content)
+		.catch(handleFetchError);
 };
 
 export default {

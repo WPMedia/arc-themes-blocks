@@ -1,5 +1,5 @@
 import React from "react";
-import { RESIZER_APP_VERSION } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import PropTypes from "@arc-fusion/prop-types";
 import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
@@ -10,13 +10,13 @@ import {
 	HeadingSection,
 	Image,
 	isServerSide,
+	LazyLoad,
 	Link,
 	MediaItem,
 	Grid,
 	getImageFromANS,
 	Conditional,
 } from "@wpmedia/arc-themes-components";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
 const BLOCK_CLASS_NAME = "b-small-promo";
 
@@ -66,7 +66,7 @@ const SmallPromo = ({ customFields }) => {
 				type
 				url
 				auth {
-					${RESIZER_APP_VERSION}
+					${RESIZER_TOKEN_VERSION}
 				}
 			}
 			basic {
@@ -74,7 +74,7 @@ const SmallPromo = ({ customFields }) => {
 				type
 				url
 				auth {
-					${RESIZER_APP_VERSION}
+					${RESIZER_TOKEN_VERSION}
 				}
 			}
 		}

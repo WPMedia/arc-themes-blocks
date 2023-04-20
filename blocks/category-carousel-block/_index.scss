@@ -4,6 +4,7 @@
 	&__slide {
 		text-decoration: none;
 		color: inherit;
+		position: relative;
 
 		@include scss.block-components("category-carousel-slide");
 		@include scss.block-properties("category-carousel-slide");

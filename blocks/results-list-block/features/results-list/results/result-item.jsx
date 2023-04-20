@@ -2,25 +2,25 @@ import React from "react";
 import { useEditableContent } from "fusion:content";
 import { useComponentContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
-import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
+import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
 
 import {
 	Attribution,
-	Separator,
-	Heading,
-	Overline,
-	Image,
-	Link,
+	Conditional,
 	Date as DateComponent,
 	formatAuthors,
-	Paragraph,
-	Join,
 	formatURL,
-	MediaItem,
-	Conditional,
 	getImageFromANS,
+	Heading,
+	Image,
 	imageANSToImageSrc,
+	Join,
+	Link,
+	localizeDateTime,
+	MediaItem,
+	Overline,
+	Paragraph,
+	Separator,
 	usePhrases,
 } from "@wpmedia/arc-themes-components";
 
@@ -108,7 +108,7 @@ const ResultItem = React.memo(
 								<Image
 									src={imageURL !== null ? imageURL : targetFallbackImage}
 									alt={headlineText}
-									resizedOptions={{ auth: auth[RESIZER_APP_VERSION] }}
+									resizedOptions={{ auth: auth[RESIZER_TOKEN_VERSION], smart: true }}
 									resizerURL={RESIZER_URL}
 									sizes={[
 										{
@@ -122,6 +122,7 @@ const ResultItem = React.memo(
 									]}
 									responsiveImages={[100, 500]}
 									width={500}
+									height={333}
 								/>
 							</Conditional>
 						</MediaItem>
@@ -150,10 +151,10 @@ const ResultItem = React.memo(
 						<Attribution>
 							<Join separator={Separator}>
 								{hasAuthors ? (
-									<Join separator={() => " "}>
-										{phrases.t("global.by-text")}
+									<>
+										{phrases.t("global.by-text")}&nbsp;
 										{formatAuthors(credits?.by, phrases.t("global.and-text"))}
-									</Join>
+									</>
 								) : null}
 								{showDate ? (
 									<DateComponent dateTime={displayDate} dateString={formattedDate} />

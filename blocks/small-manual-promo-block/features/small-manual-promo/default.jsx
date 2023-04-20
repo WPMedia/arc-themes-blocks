@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { RESIZER_APP_VERSION } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
@@ -10,11 +10,11 @@ import {
 	HeadingSection,
 	Image,
 	isServerSide,
+	LazyLoad,
 	Link,
 	MediaItem,
 	Grid,
 } from "@wpmedia/arc-themes-components";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
 const BLOCK_CLASS_NAME = "b-small-manual-promo";
 
@@ -53,7 +53,7 @@ const SmallManualPromo = ({ customFields }) => {
 
 	const imageAuthTokenObj = {};
 	if (imageAuthToken?.hash) {
-		imageAuthToken[RESIZER_APP_VERSION] = imageAuthToken.hash;
+		imageAuthToken[RESIZER_TOKEN_VERSION] = imageAuthToken.hash;
 	}
 
 	const alt = headline || null;

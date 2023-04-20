@@ -4,14 +4,14 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { RESIZER_APP_VERSION } from "fusion:environment";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import {
 	getImageFromANS,
 	isServerSide,
 	Heading,
 	HeadingSection,
 	Image,
+	LazyLoad,
 	Link,
 	Paragraph,
 	Stack,
@@ -55,7 +55,7 @@ const NumberedList = (props) => {
           basic {
 			_id
 			auth {
-				${RESIZER_APP_VERSION}
+				${RESIZER_TOKEN_VERSION}
 			}
             type
             url
@@ -65,7 +65,7 @@ const NumberedList = (props) => {
               basic {
 				_id
 				auth {
-					${RESIZER_APP_VERSION}
+					${RESIZER_TOKEN_VERSION}
 				}
                 type
                 url

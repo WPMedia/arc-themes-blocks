@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
 import { Image, imageANSToImageSrc } from "@wpmedia/arc-themes-components";
 
 function useOnScreen(ref) {
@@ -35,7 +35,7 @@ const MainImage = ({ image, loading, onVisible }) => {
 				alt=""
 				className={`${BLOCK_CLASS_NAME}__focus-view-main-image`}
 				loading={loading || (isVisible ? "eager" : "lazy")}
-				resizedOptions={{ auth: image.auth[RESIZER_APP_VERSION] }}
+				resizedOptions={{ auth: image.auth[RESIZER_TOKEN_VERSION] }}
 				resizerURL={RESIZER_URL}
 				responsiveImages={[150, 375, 500, 1500, 2000]}
 				src={imageANSToImageSrc(image)}

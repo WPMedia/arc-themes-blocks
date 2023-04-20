@@ -176,14 +176,14 @@ export const imageAndDescription = () => {
 
 export const withGalleryLabelAndImage = () => (
 	<LargePromoPresentation
-		aspectRatio={16 / 9}
+		aspectRatio="16:9"
 		imageSearchField="imageURL"
 		labelIconName="Camera"
 		labelIconText="Gallery"
 		promoImageParams={{
 			src: MOCK_CONTENT.promo_items.basic.url,
 			responsiveImages: [400, 600, 800, 1200],
-			aspectRation: "16/9",
+			aspectRatio: "16/9",
 			width: 377,
 		}}
 		contentUrl="/2019/12/02/baby-panda-born-at-the-zoo/"
@@ -195,11 +195,11 @@ export const withGalleryLabelAndImage = () => (
 
 export const withVideoLabelAndImage = () => (
 	<LargePromoPresentation
-		aspectRatio={16 / 9}
+		aspectRatio="16:9"
 		promoImageParams={{
 			src: MOCK_CONTENT.promo_items.basic.url,
 			responsiveImages: [400, 600, 800, 1200],
-			aspectRation: "16/9",
+			aspectRatio: "16/9",
 			width: 377,
 		}}
 		contentUrl="/2019/12/02/baby-panda-born-at-the-zoo/"
@@ -214,7 +214,7 @@ export const withVideoLabelAndImage = () => (
 
 export const playVideoInPlaceOfImage = () => (
 	<LargePromoPresentation
-		aspectRatio={16 / 9}
+		aspectRatio="16:9"
 		embedMarkup={MOCK_CONTENT.embed_html}
 		contentUrl="/2019/12/02/baby-panda-born-at-the-zoo/"
 		imageSearchField="imageURL"

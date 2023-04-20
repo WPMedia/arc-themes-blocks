@@ -1,0 +1,47 @@
+{
+	"simple-list": {
+		"styles": {
+			"default": {
+				"gap": "var(--global-spacing-4)",
+				"components": {
+					"heading": {
+						"font-size": "var(--heading-level-6-font-size)",
+						"line-height": "var(--heading-level-6-line-height)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"simple-list-items": {
+		"styles": {
+			"default": {
+				"components": {
+					"heading": {
+						"line-height": "var(--body-line-height)",
+						"font-size": "var(--body-font-size)",
+						"font-weight": "var(--body-font-weight)"
+					}
+				},
+				"gap": "var(--global-spacing-4)"
+			},
+			"desktop": {}
+		}
+	},
+	"simple-list-item": {
+		"styles": {
+			"default": {
+				"gap": "var(--global-spacing-6)"
+			},
+			"desktop": {}
+		}
+	},
+	"simple-list-item-anchor": {
+		"styles": {
+			"default": {
+				"flex": "0 0 33%"
+			},
+			"desktop": {}
+		}
+	}
+}

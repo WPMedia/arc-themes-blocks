@@ -1,33 +1,30 @@
 {
-  "name": "@wpmedia/search-results-list-block",
-  "version": "5.18.0",
-  "description": "Fusion News Theme search results list block",
-  "author": "Beltran Caliz <beltran.caliz@washpost.com>",
-  "homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
-  "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
-  "files": [
-    "features",
-    "intl.json"
-  ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
-    "directory": "blocks/search-results-list-block"
-  },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
-  },
-  "peerDependencies": {
-    "@wpmedia/date-block": "*",
-    "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/global-phrases-block": "*",
-    "@wpmedia/shared-styles": "*"
-  },
-  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
+	"name": "@wpmedia/search-results-list-block",
+	"version": "5.18.0",
+	"description": "Fusion News Theme search results list block",
+	"author": "Arc XP - Themes",
+	"homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
+	"license": "CC-BY-NC-ND-4.0",
+	"main": "",
+	"files": [
+		"_index.scss",
+		"features",
+		"intl.json",
+		"themes"
+	],
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/",
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
+		"directory": "blocks/search-results-list-block"
+	},
+	"peerDependencies": {
+		"@arc-fusion/prop-types": "^0.1.5",
+		"@wpmedia/arc-themes-components": "*",
+		"@wpmedia/engine-theme-sdk": "*"
+	},
+	"gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

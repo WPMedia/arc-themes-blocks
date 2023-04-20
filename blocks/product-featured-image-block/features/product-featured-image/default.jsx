@@ -2,7 +2,7 @@ import React from "react";
 
 import { useFusionContext } from "fusion:context";
 import { imageANSToImageSrc, Image } from "@wpmedia/arc-themes-components";
-import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
 
 const BLOCK_CLASS_NAME = "b-product-featured-image";
 
@@ -30,7 +30,7 @@ function ProductFeaturedImage() {
 	return featuredImage ? (
 		<ProductFeaturedImageDisplay
 			featuredImage={featuredImage}
-			resizerAppVersion={RESIZER_APP_VERSION}
+			resizerAppVersion={RESIZER_TOKEN_VERSION}
 			resizerURL={RESIZER_URL}
 		/>
 	) : null;

@@ -7,14 +7,10 @@ import ExtraLargePromo from "./default";
 import mockData from "./mock-data";
 import mockDataSponsoredVideo from "./mock-data-sponsored";
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	...jest.requireActual("@wpmedia/engine-theme-sdk"),
-	LazyLoad: ({ children }) => <>{children}</>,
-}));
-
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
+	LazyLoad: ({ children }) => <>{children}</>,
 	Video: () => "video embed",
 }));
 
@@ -62,6 +58,11 @@ describe("the extra large promo feature", () => {
 			imageOverrideURL: "#",
 			imageRatio: "4:3",
 			showImage: true,
+			imageOverrideAuth: JSON.stringify({
+				auth: {
+					2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf",
+				},
+			}),
 		};
 		render(<ExtraLargePromo customFields={config} />);
 		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();

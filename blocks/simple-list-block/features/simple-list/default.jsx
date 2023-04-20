@@ -4,8 +4,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { RESIZER_APP_VERSION } from "fusion:environment";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import {
 	getImageFromANS,
 	Stack,
@@ -13,6 +12,7 @@ import {
 	Heading,
 	HeadingSection,
 	Image,
+	LazyLoad,
 	Link,
 } from "@wpmedia/arc-themes-components";
 
@@ -88,7 +88,7 @@ const SimpleList = (props) => {
 					type
 					url
 					auth {
-						${RESIZER_APP_VERSION}
+						${RESIZER_TOKEN_VERSION}
 					}
 			 	}
 				lead_art {
@@ -98,7 +98,7 @@ const SimpleList = (props) => {
 							type
 							url
 							auth {
-								${RESIZER_APP_VERSION}
+								${RESIZER_TOKEN_VERSION}
 							}
 						}
 					}

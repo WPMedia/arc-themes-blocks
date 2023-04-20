@@ -1,7 +1,7 @@
 import React from "react";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
+import { localizeDateTime } from "@wpmedia/arc-themes-components";
 import PrimaryFont from "../primary-font";
 
 import "./index.scss";

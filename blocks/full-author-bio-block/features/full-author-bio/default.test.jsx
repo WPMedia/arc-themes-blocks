@@ -6,14 +6,10 @@ import getProperties from "fusion:properties";
 
 import FullAuthorBio from "./default";
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	...jest.requireActual("@wpmedia/engine-theme-sdk"),
-	LazyLoad: ({ children }) => children,
-}));
-
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
+	LazyLoad: ({ children }) => children,
 }));
 
 const authors = [

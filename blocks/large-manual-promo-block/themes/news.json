@@ -1,0 +1,47 @@
+{
+	"large-manual-promo": {
+		"styles": {
+			"default": {
+				"gap": "var(--global-spacing-4)"
+			},
+			"desktop": {
+				"gap": "var(--global-spacing-6)",
+				"components": {
+					"divider": {
+						"grid-column": "span 2"
+					},
+					"grid": {
+						"gap": "var(--global-spacing-5)"
+					}
+				}
+			}
+		}
+	},
+	"large-manual-promo-text": {
+		"styles": {
+			"default": {
+				"gap": 0,
+				"components": {
+					"overline": {
+						"font-size": "var(--heading-level-6-font-size)",
+						"line-height": "var(--heading-level-6-line-height)"
+					},
+					"paragraph": {
+						"font-size": "var(--body-font-size)"
+					},
+					"stack": {
+						"gap": "var(--global-spacing-4)"
+					}
+				}
+			},
+			"desktop": {
+				"components": {
+					"heading": {
+						"font-size": "var(--heading-level-4-font-size)",
+						"line-height": "var(--heading-level-4-line-height)"
+					}
+				}
+			}
+		}
+	}
+}

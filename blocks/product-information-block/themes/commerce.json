@@ -1,0 +1,49 @@
+{
+	"product-information": {
+		"styles": {
+			"default": {
+				"margin": "0auto",
+				"max-width": "var(--content-scale-width)",
+				"width": "100%",
+				"components": {
+					"heading": {
+						"color": "var(--global-black)",
+						"font-size": "var(--heading-level-5-font-size)",
+						"font-weight": "var(--heading-level-5-font-weight)",
+						"line-height": "var(--heading-level-5-line-height)"
+					},
+					"stack": {
+						"gap": "var(--global-spacing-2)"
+					},
+					"price": {
+						"color": "var(--text-color)",
+						"font-size": "var(--heading-level-6-font-size)",
+						"font-weight": "var(--body-font-weight)",
+						"line-height": "var(--heading-level-6-line-height)",
+						"gap": "var(--global-spacing-2)"
+					},
+					"price-list": {
+						"color": "var(--global-neutral-5)",
+						"text-decoration": "line-through"
+					}
+				}
+			},
+			"desktop": {
+				"max-width": "100%"
+			}
+		}
+	},
+	"product-information-single-price": {
+		"styles": {
+			"default": {
+				"components": {
+					"price-list": {
+						"color": "var(--global-neutral-7)",
+						"text-decoration": "none"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	}
+}

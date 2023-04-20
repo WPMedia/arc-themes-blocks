@@ -1,8 +1,7 @@
 import React from "react";
-import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
 import { useAppContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { Date as DisplayDate } from "@wpmedia/arc-themes-components";
+import { Date as DisplayDate, localizeDateTime } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-date";
 
@@ -12,7 +11,7 @@ const ArticleDate = () => {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
 			timeZone: "GMT",
-			dateTimeFormat: "%B %d, %Y at %l:%M %P %Z",
+			dateTimeFormat: "%B %d, %Y at %l:%M%p %Z",
 		},
 	} = getProperties(arcSite);
 	const formattedDate =

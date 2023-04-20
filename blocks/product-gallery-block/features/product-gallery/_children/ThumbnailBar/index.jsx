@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
 
 import {
 	Button,
@@ -130,7 +130,7 @@ const ThumbnailBar = ({ images, selectedIndex, onImageSelect }) => {
 									onClick={() => {
 										onImageSelect(getImageIndexById(image._id));
 									}}
-									resizedOptions={{ auth: image.auth[RESIZER_APP_VERSION] }}
+									resizedOptions={{ auth: image.auth[RESIZER_TOKEN_VERSION] }}
 									resizerURL={RESIZER_URL}
 									responsiveImages={[120]}
 									src={imageANSToImageSrc(image)}

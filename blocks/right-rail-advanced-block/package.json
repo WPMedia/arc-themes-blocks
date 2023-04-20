@@ -8,7 +8,8 @@
   "main": "",
   "files": [
     "_index.scss",
-    "layouts"
+    "layouts",
+    "themes"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",

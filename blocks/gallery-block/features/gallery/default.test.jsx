@@ -1,16 +1,15 @@
 import { mount } from "enzyme";
 import React from "react";
-import { isServerSide, Carousel, MediaItem } from "@wpmedia/arc-themes-components";
+import { Carousel, isServerSide, LazyLoad, MediaItem } from "@wpmedia/arc-themes-components";
 import { useContent } from "fusion:content";
 import { useAppContext, useFusionContext } from "fusion:context";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
 import Gallery from "./default";
 
 const { Item: CarouselItem } = Carousel;
 window.matchMedia = jest.fn();
 jest.mock("fusion:environment", () => ({
-	RESIZER_APP_VERSION: 2,
+	RESIZER_TOKEN_VERSION: 2,
 	RESIZER_URL: "https://resizer.com",
 }));
 jest.mock("fusion:content", () => ({
@@ -27,6 +26,7 @@ jest.mock("fusion:context", () => ({
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => false),
+	LazyLoad: ({ children }) => children,
 	// mocking format credits to return whatever passed in
 	formatCredits: jest.fn((input) => input),
 }));

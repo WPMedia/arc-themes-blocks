@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import getProperties from "fusion:properties";
-import { RESIZER_APP_VERSION } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
 
-import { LazyLoad, localizeDateTime } from "@wpmedia/engine-theme-sdk";
 import {
 	Conditional,
 	Grid,
@@ -13,7 +12,9 @@ import {
 	Icon,
 	Image,
 	Join,
+	LazyLoad,
 	Link,
+	localizeDateTime,
 	MediaItem,
 	Stack,
 	formatURL,
@@ -153,7 +154,6 @@ export const LargePromoPresentation = ({
 
 const LargePromoItem = ({ customFields, arcSite }) => {
 	const {
-		aspectRatio,
 		imageOverrideURL,
 		imageOverrideId,
 		imageRatio,
@@ -223,7 +223,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 								type
 								url
 								auth {
-									${RESIZER_APP_VERSION}
+									${RESIZER_TOKEN_VERSION}
 								}
 							}
 						}
@@ -233,7 +233,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 						type
 						url
 						auth {
-							${RESIZER_APP_VERSION}
+							${RESIZER_TOKEN_VERSION}
 						}
 					}
 				}
@@ -257,7 +257,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
 			timeZone: "GMT",
-			dateTimeFormat: "%B %d, %Y at %l:%M %P %Z",
+			dateTimeFormat: "%B %d, %Y at %l:%M%p %Z",
 		},
 		fallbackImage,
 	} = getProperties(arcSite);
@@ -342,7 +342,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			  });
 	return (
 		<LargePromoPresentation
-			aspectRatio={aspectRatio}
+			aspectRatio={imageRatio}
 			contentAuthors={contentAuthors}
 			contentDate={contentDate}
 			contentDescription={contentDescription}
@@ -444,7 +444,7 @@ LargePromo.propTypes = {
 			max: 150,
 			defaultValue: 65,
 			hidden: true,
-			group: "Video Settings",
+			group: "Art",
 		}),
 	}),
 };

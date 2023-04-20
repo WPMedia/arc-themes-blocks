@@ -1,0 +1,137 @@
+{
+	"hero": {
+		"styles": {
+			"default": {
+				"color": "var(--global-black)",
+				"components": {
+					"button": {
+						"text-decoration": "none"
+					},
+					"stack": {
+						"gap": "var(--global-spacing-4)"
+					},
+					"heading": {
+						"font-size": "var(--heading-level-2-font-size)",
+						"line-height": "var(--heading-level-2-line-height)"
+					},
+					"image": {
+						"max-height": "100vh"
+					},
+					"paragraph": {
+						"font-family": "var(--font-family-primary)"
+					}
+				}
+			},
+			"desktop": {
+				"components": {
+					"heading": {
+						"font-size": "var(--heading-level-2-font-size)",
+						"line-height": "var(--heading-level-2-line-height)"
+					}
+				}
+			}
+		}
+	},
+	"hero-stacked": {
+		"styles": {
+			"default": {
+				"gap": "var(--global-spacing-5)",
+				"grid-template-rows": "1fr auto",
+				"max-height": "100vh",
+				"components": {
+					"image": {
+						"max-height": "100vh",
+						"object-fit": "cover",
+						"width": "100%"
+					},
+					"picture": {
+						"display": "flex",
+						"overflow": "hidden"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"hero-light": {
+		"styles": {
+			"default": {
+				"color": "var(--global-white)"
+			},
+			"desktop": {}
+		}
+	},
+	"hero-dark": {
+		"styles": {
+			"default": {
+				"color": "var(--global-black)"
+			},
+			"desktop": {}
+		}
+	},
+	"hero-text-overlay": {
+		"styles": {
+			"default": {
+				"margin": "0auto",
+				"max-width": "var(--content-scale-width)",
+				"width": "100%"
+			},
+			"desktop": {}
+		}
+	},
+	"hero-text-left": {
+		"styles": {
+			"default": {
+				"max-width": "var(--content-scale-width)",
+				"width": "100%",
+				"components": {
+					"paragraph": {
+						"align-self": "flex-start"
+					}
+				}
+			},
+			"desktop": {
+				"components": {
+					"paragraph": {
+						"max-width": "65%"
+					}
+				}
+			}
+		}
+	},
+	"hero-text-stacked": {
+		"styles": {
+			"default": {
+				"margin": "0auto",
+				"components": {
+					"paragraph": {
+						"align-self": "center",
+						"max-width": "24rem"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"hero-subheadline": {
+		"styles": {
+			"default": {
+				"components": {
+					"heading": {
+						"font-size": "var(--heading-level-5-font-size)",
+						"font-weight": "var(--heading-level-5-font-weight)",
+						"line-height": "var(--heading-level-5-line-height)"
+					}
+				}
+			},
+			"desktop": {
+				"components": {
+					"heading": {
+						"font-size": "var(--heading-level-5-font-size)",
+						"line-height": "var(--heading-level-5-line-height)"
+					}
+				}
+			}
+		}
+	}
+}

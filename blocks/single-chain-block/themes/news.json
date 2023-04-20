@@ -1,0 +1,30 @@
+{
+	"single-chain": {
+		"styles": {
+			"default": {
+				"components": {
+					"stack": {
+						"gap": "var(--global-spacing-5)"
+					}
+				}
+			},
+			"desktop": {
+				"components": {
+					"stack": {
+						"gap": "var(--global-spacing-5)"
+					}
+				}
+			}
+		}
+	},
+	"single-chain-children-stack": {
+		"styles": {
+			"default": {
+				"gap": "var(--global-spacing-6)"
+			},
+			"desktop": {
+				"gap": "var(--global-spacing-5)"
+			}
+		}
+	}
+}

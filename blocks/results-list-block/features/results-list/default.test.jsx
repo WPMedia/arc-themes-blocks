@@ -10,6 +10,7 @@ import ResultsList from "./default";
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn().mockReturnValue(true),
+	LazyLoad: ({ children }) => <>{children}</>,
 }));
 
 jest.mock("fusion:intl", () => ({

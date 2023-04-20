@@ -42,6 +42,9 @@ export const extraLargePromo = {
 			type: "image",
 			url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
 		},
+		lead_art: {
+			type: "gallery",
+		},
 	},
 	type: "story",
 	website_url: "/test/promo-image-variations/2021/04/23/basic-promo-image/",

@@ -1,6 +1,6 @@
 # `@wpmedia/byline-block`
 
-Byline block for Fusion News Theme
+Byline block for Fusion News Theme.
 
 ## Acceptance Criteria
 

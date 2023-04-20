@@ -1,11 +1,11 @@
 {
   "name": "@wpmedia/ad-taboola-block",
   "version": "5.16.0",
-  "description": "Fusion News Theme Taboola Widget",
-  "author": "nelson fernandez <nelson.fernandez@washpost.com>",
+  "description": "Taboola Ad Block",
+  "author": "Arc XP - Themes",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND",
-  "main": "index.js",
+  "main": "",
   "files": [
     "features"
   ],
@@ -17,10 +17,6 @@
     "type": "git",
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/ad-taboola-block"
-  },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

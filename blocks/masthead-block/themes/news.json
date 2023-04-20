@@ -1,0 +1,90 @@
+{
+	"masthead": {
+		"styles": {
+			"default": {
+				"border-bottom": "2px solid var(--global-neutral-8)",
+				"color": "var(--text-color)",
+				"display": "none",
+				"font-family": "var(--font-family-primary)",
+				"font-size": "var(--body-font-size-small)",
+				"line-height": "var(--body-line-height-tiny)",
+				"gap": "var(--global-spacing-4)"
+			},
+			"desktop": {
+				"display": "flex"
+			}
+		}
+	},
+	"masthead-logo": {
+		"styles": {
+			"default": {
+				"display": "flex",
+				"justify-content": "center"
+			},
+			"desktop": {}
+		}
+	},
+	"masthead-logo-image": {
+		"styles": {
+			"default": {
+				"max-height": "64px",
+				"object-fit": "contain",
+				"vertical-align": "middle"
+			},
+			"desktop": {}
+		}
+	},
+	"masthead-content": {
+		"styles": {
+			"default": {
+				"display": "flex",
+				"justify-content": "space-evenly"
+			},
+			"desktop": {}
+		}
+	},
+	"masthead-date": {
+		"styles": {
+			"default": {
+				"align-items": "flex-end",
+				"display": "flex",
+				"font-weight": "var(--global-font-weight-7)",
+				"justify-content": "flex-start",
+				"flex": "11 0%"
+			},
+			"desktop": {}
+		}
+	},
+	"masthead-tagline": {
+		"styles": {
+			"default": {
+				"display": "flex",
+				"flex": "11 0%",
+				"justify-content": "center",
+				"font-family": "var(--font-family-primary)",
+				"text-align": "center"
+			},
+			"desktop": {}
+		}
+	},
+	"masthead-link": {
+		"styles": {
+			"default": {
+				"align-items": "flex-end",
+				"display": "flex",
+				"justify-content": "flex-end",
+				"flex": "11 0%"
+			},
+			"desktop": {}
+		}
+	},
+	"masthead-divider": {
+		"styles": {
+			"default": {
+				"margin": 0,
+				"padding": 0
+			},
+			"desktop": {}
+		}
+	}
+}

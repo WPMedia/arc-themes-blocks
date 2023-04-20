@@ -4,7 +4,6 @@ import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
 	Grid,
 	Heading,
@@ -12,6 +11,7 @@ import {
 	isServerSide,
 	Icon,
 	Image,
+	LazyLoad,
 	Link,
 	MediaItem,
 	Paragraph,

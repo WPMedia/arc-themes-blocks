@@ -15,6 +15,7 @@ import {
 	Image,
 	Join,
 	Link,
+	localizeDateTime,
 	MediaItem,
 	Overline,
 	Paragraph,
@@ -23,8 +24,6 @@ import {
 	usePhrases,
 	Video,
 } from "@wpmedia/arc-themes-components";
-
-import { localizeDateTime } from "@wpmedia/engine-theme-sdk";
 
 const BLOCK_CLASS_NAME = "b-top-table-list-xl";
 
@@ -49,7 +48,7 @@ const ExtraLarge = (props) => {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
 			timeZone: "GMT",
-			dateTimeFormat: "%B %d, %Y at %l:%M %P %Z",
+			dateTimeFormat: "%B %d, %Y at %l:%M%p %Z",
 		},
 	} = getProperties(arcSite);
 	const phrases = usePhrases();
@@ -125,7 +124,7 @@ const ExtraLarge = (props) => {
 						{embedMarkup || showImageXL ? (
 							<MediaItem>
 								{embedMarkup ? (
-									<Video embedMarkup={embedMarkup} />
+									<Video embedMarkup={embedMarkup} aspectRatio={imageRatioXL} />
 								) : (
 									<Conditional
 										component={Link}

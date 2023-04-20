@@ -4,14 +4,10 @@ import mockData from "../../../mock-data";
 
 import Large from "./large";
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	...jest.requireActual("@wpmedia/engine-theme-sdk"),
-	LazyLoad: ({ children }) => <>{children}</>,
-}));
-
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => false),
+	LazyLoad: ({ children }) => <>{children}</>,
 }));
 
 describe("Large Promo", () => {
@@ -223,7 +219,7 @@ describe("Large Promo", () => {
 		modifiedData.promo_items = {
 			lead_art: {
 				type: "video",
-				embed_html: "embed",
+				embed_html: `<div class="powa">embed</div>`,
 			},
 		};
 		const { container } = render(

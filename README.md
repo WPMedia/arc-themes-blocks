@@ -56,7 +56,7 @@ The base lint command that runs `eslint` on all `.js` and `.jsx` files in `block
 
 ### `npm run lint:fix`
 
-Fixes any lint issues that can be fixed automatically from the files mentioned in `npm run lint`.
+Fixes any lint issues that can be automatically fixed from the files mentioned in `npm run lint`.
 
 ### `npm run lint:styles`
 
@@ -107,14 +107,14 @@ Please see the [release notes in Confluence](https://arcpublishing.atlassian.net
 
 This package has been published with a number of dist-tags meant for different purposes:
 
-- `arc-themes-release-version-X.XX` - These are versioned versions of all blocks for a given release cycle in the [Theme Manifest repo](https://github.com/WPMedia/arc-themes-manifests)
+- `arc-themes-release-version-X.XX` - These are versioned versions of all blocks for a given release cycle in the [Theme Manifest repo](https://github.com/WPMedia/arc-themes-manifests).
 
 ## License
 
 Shield: [![CC BY-NC-ND 4.0][cc-by-shield]][cc-by-nc-nd]
 
 This work is licensed under a
-[Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License][cc-by-nc-nd].
+[Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License][cc-by-nc-nd]
 
 [![CC BY-NC-ND 4.0][cc-by-image]][cc-by-nc-nd]
 

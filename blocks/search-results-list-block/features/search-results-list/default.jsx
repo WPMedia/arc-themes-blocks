@@ -1,36 +1,35 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { useAppContext, useFusionContext } from "fusion:context";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { HeadingSection } from "@wpmedia/shared-styles";
+import PropTypes from "@arc-fusion/prop-types";
+import { useFusionContext } from "fusion:context";
+
+import { HeadingSection, isServerSide, LazyLoad } from "@wpmedia/arc-themes-components";
+
 import CustomSearchResultsList from "./_children/custom-content";
 import GlobalContentSearch from "./_children/global-content";
 import { resolveDefaultPromoElements } from "./_children/helpers";
 
 const SearchResultsListContainer = ({ customFields = {}, customSearchAction = null } = {}) => {
-	const { arcSite } = useAppContext();
-	const { isAdmin } = useFusionContext();
-	const { inheritGlobalContent, lazyLoad = false } = customFields;
-	let showGlobalContent;
+	const { arcSite, isAdmin } = useFusionContext();
+	const { inheritGlobalContent, lazyLoad } = customFields;
 
-	if (lazyLoad && isServerSide() && !isAdmin) {
-		// On Server
+	const lazyLoadNonPagebuilder = lazyLoad && !isAdmin;
+	const showGlobalContent =
+		(typeof inheritGlobalContent === "undefined" && typeof searchContentConfig === "undefined") ||
+		inheritGlobalContent;
+
+	if (isServerSide() && lazyLoadNonPagebuilder) {
 		return null;
-	}
-
-	if (typeof inheritGlobalContent === "undefined") {
-		showGlobalContent = typeof searchContentConfig === "undefined";
-	} else {
-		showGlobalContent = inheritGlobalContent;
 	}
 
 	if (showGlobalContent) {
 		return (
-			<LazyLoad enabled={lazyLoad && !isAdmin}>
+			<LazyLoad enabled={lazyLoadNonPagebuilder}>
 				<HeadingSection>
+					{/* The globalContent line is only for testing/storybook, the Consumer decorator injects this in prod */}
 					<GlobalContentSearch
 						arcSite={arcSite}
 						customSearchAction={customSearchAction}
+						{...(customFields?.globalContent ? { globalContent: customFields.globalContent } : {})}
 						promoElements={resolveDefaultPromoElements(customFields)}
 					/>
 				</HeadingSection>
@@ -38,7 +37,7 @@ const SearchResultsListContainer = ({ customFields = {}, customSearchAction = nu
 		);
 	}
 	return (
-		<LazyLoad enabled={lazyLoad && !isAdmin}>
+		<LazyLoad enabled={lazyLoadNonPagebuilder}>
 			<HeadingSection>
 				<CustomSearchResultsList
 					arcSite={arcSite}
@@ -55,12 +54,17 @@ SearchResultsListContainer.icon = "arc-list";
 
 SearchResultsListContainer.propTypes = {
 	customFields: PropTypes.shape({
-		searchContentConfig: PropTypes.contentConfig().tag({
-			group: "Configure Content",
-			label: "Display Content Info",
+		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
+			defaultValue: "16:9",
+			label: "Image ratio",
+			group: "Art",
 		}),
 		inheritGlobalContent: PropTypes.bool.tag({
 			group: "Configure Content",
+		}),
+		searchContentConfig: PropTypes.contentConfig().tag({
+			group: "Configure Content",
+			label: "Display Content Info",
 		}),
 		showHeadline: PropTypes.bool.tag({
 			label: "Show headline",

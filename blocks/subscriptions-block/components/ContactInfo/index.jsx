@@ -167,7 +167,7 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback }) => {
 					/>
 				</div>
 			</div>
-			<div className="row">
+			<div className="row country">
 				<div className="col-sm-xl-12">
 					<FormInputField
 						label={phrases.t("checkout-block.country")}

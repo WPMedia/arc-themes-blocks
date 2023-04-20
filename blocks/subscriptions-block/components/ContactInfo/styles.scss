@@ -5,7 +5,10 @@
 		margin-bottom: var(--global-spacing-5);
 		font-size: var(--heading-level-4-font-size);
 		font-weight: var(--heading-level-4-font-weight);
-		line-height: 40px;
+		line-height: 2rem;
+		@media screen and (min-width: 48rem) {
+			line-height: 40px;
+		}
 	}
 
 	// .row {
@@ -51,7 +54,10 @@
 	}
 
 	.row {
-		margin-bottom: var(--global-spacing-5);
+		margin-bottom: 28px;
+		&.country {
+			margin-bottom: 1.5rem;
+		}
 	}
 
 	.row:last-of-type {
@@ -62,8 +68,14 @@
 	.row.grid-row {
 		@media screen and (min-width: 48rem) {
 			display: grid;
-			gap: 16px;
-			grid-template-columns: auto auto;
+			gap: 2rem;
+			grid-auto-flow: dense;
+			margin-bottom: 1.5rem;
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+			.col-md-xl-6.col-sm-12 {
+				grid-column-start: span 6;
+				width: 100%;
+			}
 		}
 	}
 

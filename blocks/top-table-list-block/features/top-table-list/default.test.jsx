@@ -8,12 +8,6 @@ import { isServerSide } from "@wpmedia/arc-themes-components";
 import TopTableListWrapper from "./default";
 import mockData from "../../mock-data";
 
-jest.mock("fusion:properties", () =>
-	jest.fn(() => ({
-		fallbackImage: "placeholder.jpg",
-	}))
-);
-
 jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({
 		arcSite: "the-sun",

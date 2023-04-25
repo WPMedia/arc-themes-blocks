@@ -348,7 +348,7 @@
 	"article-body-pullquote": {
 		"styles": {
 			"default": {
-				"box-shadow": "inset 0 -5px 0 0 var(--border-color), inset 0 5px 0 0 var(--border-color)",
+				"box-shadow": "(inset 0 -5px 0 0 var(--border-color), inset 0 5px 0 0 var(--border-color))",
 				"gap": "var(--global-spacing-4)",
 				"padding": "var(--global-spacing-6) 0 var(--global-spacing-5)",
 				"text-align": "center",

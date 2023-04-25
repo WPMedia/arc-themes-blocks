@@ -135,7 +135,7 @@
 		"styles": {
 			"default": {
 				"opacity": 0,
-				"transition": "opacity 0.8s ease, visibility 0s ease 0s",
+				"transition": "(opacity 0.8s ease, visibility 0s ease 0s)",
 				"visibility": "hidden"
 			},
 			"desktop": {}
@@ -145,7 +145,7 @@
 		"styles": {
 			"default": {
 				"opacity": 1,
-				"transition": "opacity 0.8s ease, visibility 0s ease 0s",
+				"transition": "(opacity 0.8s ease, visibility 0s ease 0s)",
 				"visibility": "visible"
 			},
 			"desktop": {}

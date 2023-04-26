@@ -41,7 +41,6 @@ function Hero({ customFields }) {
 	const { fallbackImage } = getProperties(arcSite);
 	const imageId = imageDesktopURL && imageDesktopURL.split("/").pop().split(".").shift();
 	const imageMobileId = imageMobileURL && imageMobileURL.split("/").pop().split(".").shift();
-	// console.log("imageDesktopAuth ", imageDesktopAuth, imageId);
 	const desktopAuth = useContent(
 		imageId
 			? {
@@ -50,7 +49,6 @@ function Hero({ customFields }) {
 			  }
 			: {}
 	);
-	// console.log("imageMobileAuth ", imageMobileAuth, imageMobileId);
 	const mobileAuth = useContent(
 		imageMobileId
 			? {

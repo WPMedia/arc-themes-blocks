@@ -57,7 +57,6 @@ function Hero({ customFields }) {
 			  }
 			: {}
 	);
-	console.log("mobile auth ", mobileAuth);
 	// const imageDesktopAuthTokenObj = {};
 	// if (desktopAuth?.hash) {
 	// 	desktopAuth[resizerAppVersion] = desktopAuth.hash;
@@ -113,7 +112,6 @@ function Hero({ customFields }) {
 					alt: imageMobileAlt,
 			  };
 	const HeadingWrapper = headline ? HeadingSection : Fragment;
-	console.log("mobileImageParams ", mobileImageParams, desktopImageParams);
 	return (
 		<div className={classes}>
 			<Picture>

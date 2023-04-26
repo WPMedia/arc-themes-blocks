@@ -12,6 +12,7 @@ jest.mock("fusion:properties", () =>
 	jest.fn(() => ({
 		fallbackImage: "placeholder.jpg",
 		primaryLogoAlt: "test",
+		resizerURL: "http://url.com/",
 	}))
 );
 

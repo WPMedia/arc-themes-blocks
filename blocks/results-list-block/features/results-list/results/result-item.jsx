@@ -2,7 +2,7 @@ import React from "react";
 import { useEditableContent } from "fusion:content";
 import { useComponentContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 
 import {
 	Attribution,
@@ -57,6 +57,7 @@ const ResultItem = React.memo(
 					timeZone: "GMT",
 					dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 				},
+				resizerURL,
 			} = getProperties(arcSite);
 
 			const {
@@ -109,7 +110,7 @@ const ResultItem = React.memo(
 									src={imageURL !== null ? imageURL : targetFallbackImage}
 									alt={headlineText}
 									resizedOptions={{ auth: auth[RESIZER_TOKEN_VERSION], smart: true }}
-									resizerURL={RESIZER_URL}
+									resizerURL={resizerURL}
 									sizes={[
 										{
 											isDefault: true,

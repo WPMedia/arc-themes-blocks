@@ -3,7 +3,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext, useAppContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import {
 	Carousel,
 	formatCredits,
@@ -29,7 +29,6 @@ export const GalleryPresentation = ({
 	},
 	globalContent = {},
 	resizerAppVersion,
-	resizerURL,
 }) => {
 	let AdBlock;
 
@@ -48,7 +47,7 @@ export const GalleryPresentation = ({
 		AdBlock = () => <p>Ad block not found</p>;
 	}
 
-	const { galleryCubeClicks } = getProperties(arcSite);
+	const { galleryCubeClicks, resizerURL } = getProperties(arcSite);
 	const phrases = usePhrases();
 	const content = useContent(
 		galleryContentConfig
@@ -167,7 +166,6 @@ const GalleryFeature = ({ customFields = {} }) => {
 				customFields={customFields}
 				globalContent={globalContent}
 				resizerAppVersion={RESIZER_TOKEN_VERSION}
-				resizerURL={RESIZER_URL}
 			/>
 		</LazyLoad>
 	);

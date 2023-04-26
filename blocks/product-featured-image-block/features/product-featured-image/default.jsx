@@ -1,8 +1,8 @@
 import React from "react";
-
 import { useFusionContext } from "fusion:context";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
+import getProperties from "fusion:properties";
 import { imageANSToImageSrc, Image } from "@wpmedia/arc-themes-components";
-import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
 
 const BLOCK_CLASS_NAME = "b-product-featured-image";
 
@@ -23,7 +23,8 @@ export const ProductFeaturedImageDisplay = ({ featuredImage, resizerAppVersion, 
 };
 
 function ProductFeaturedImage() {
-	const { globalContent = {} } = useFusionContext();
+	const { arcSite, globalContent = {} } = useFusionContext();
+	const { resizerURL } = getProperties(arcSite);
 	const featuredImage = globalContent?.schema?.featuredImage?.value.find(
 		({ type }) => type === "image"
 	);
@@ -31,7 +32,7 @@ function ProductFeaturedImage() {
 		<ProductFeaturedImageDisplay
 			featuredImage={featuredImage}
 			resizerAppVersion={RESIZER_TOKEN_VERSION}
-			resizerURL={RESIZER_URL}
+			resizerURL={resizerURL}
 		/>
 	) : null;
 }

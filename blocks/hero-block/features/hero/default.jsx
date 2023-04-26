@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { RESIZER_URL } from "fusion:environment";
 import { useFusionContext } from "fusion:context";
+import { useContent } from "fusion:content";
 import getProperties from "fusion:properties";
 
 // Arc Themes Components - Base set of components used to compose blocks
@@ -24,10 +25,6 @@ function Hero({ customFields }) {
 		alignment = "center",
 		description,
 		headline,
-		imageId,
-		imageMobileId,
-		imageDesktopAuth,
-		imageMobileAuth,
 		imageDesktopURL,
 		imageMobileAlt,
 		imageMobileURL,
@@ -38,16 +35,46 @@ function Hero({ customFields }) {
 		link2Text,
 		link2Type,
 		subHeadline,
-		resizerAppVersion,
 		variant = "dark",
 	} = customFields;
 	const { arcSite } = useFusionContext();
 	const { fallbackImage } = getProperties(arcSite);
+	const imageId = imageDesktopURL && imageDesktopURL.split("/").pop().split(".").shift();
+	const imageMobileId = imageMobileURL && imageMobileURL.split("/").pop().split(".").shift();
+	// console.log("imageDesktopAuth ", imageDesktopAuth, imageId);
+	const desktopAuth = useContent(
+		imageId
+			? {
+					source: "signing-service",
+					query: { id: imageId },
+			  }
+			: {}
+	);
+	// console.log("imageMobileAuth ", imageMobileAuth, imageMobileId);
+	const mobileAuth = useContent(
+		imageMobileId
+			? {
+					source: "signing-service",
+					query: { id: imageMobileId },
+			  }
+			: {}
+	);
+	console.log("mobile auth ", mobileAuth);
+	// const imageDesktopAuthTokenObj = {};
+	// if (desktopAuth?.hash) {
+	// 	desktopAuth[resizerAppVersion] = desktopAuth.hash;
+	// }
+
+	// // const imageMobileAuthTokenObj = {};
+	// if (mobileAuth?.hash) {
+	// 	mobileAuth[resizerAppVersion] = mobileAuth.hash;
+	// }
 	const classes = [
 		BLOCK_CLASS_NAME,
 		`${BLOCK_CLASS_NAME}--${layout}`,
 		variant === "dark" ? `${BLOCK_CLASS_NAME}--dark` : `${BLOCK_CLASS_NAME}--light`,
 	].join(" ");
+
 	const alt = headline || description || null;
 	const desktopImageParams =
 		imageId && imageDesktopURL
@@ -57,7 +84,7 @@ function Hero({ customFields }) {
 						url: imageDesktopURL,
 					}),
 					resizedOptions: {
-						auth: imageDesktopAuth ? JSON.parse(imageDesktopAuth)[resizerAppVersion] : {},
+						auth: desktopAuth ? JSON.parse(desktopAuth) : {},
 						smart: true,
 					},
 					width: 1200,
@@ -74,7 +101,7 @@ function Hero({ customFields }) {
 					ansImage: {
 						_id: imageMobileId,
 						url: imageMobileURL,
-						auth: imageMobileAuth ? JSON.parse(imageMobileAuth) : {},
+						auth: mobileAuth ? JSON.parse(mobileAuth) : {},
 					},
 					alt,
 					resizedOptions: {
@@ -88,6 +115,7 @@ function Hero({ customFields }) {
 					alt: imageMobileAlt,
 			  };
 	const HeadingWrapper = headline ? HeadingSection : Fragment;
+	console.log("mobileImageParams ", mobileImageParams, desktopImageParams);
 	return (
 		<div className={classes}>
 			<Picture>

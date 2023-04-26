@@ -30,7 +30,7 @@ const NavLogo = ({ imageAltText, imageSource, blockClassName, logoAlignment }) =
 		}
 	};
 
-	const [onScrollDebounced] = useDebouncedCallback(onScrollEvent, 100);
+	const onScrollDebounced = useDebouncedCallback(onScrollEvent, 100);
 
 	useEffect(() => {
 		const mastHead = document.querySelector(".b-masthead .b-masthead__logo");

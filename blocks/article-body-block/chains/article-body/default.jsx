@@ -99,6 +99,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 							<Image
 								{...getResizeParamsFromANSImage(
 									item,
+									arcSite,
 									allowedFloatValue ? 400 : 800,
 									[274, 400, 768, 1024, 1440].map((w) => (allowedFloatValue ? w / 2 : w))
 								)}
@@ -279,7 +280,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 								>
 									<div className={`${BLOCK_CLASS_NAME}__image-wrapper`}>
 										<Image
-											{...getResizeParamsFromANSImage(i, 800, [400, 600, 800, 1600])}
+											{...getResizeParamsFromANSImage(i, arcSite, 800, [400, 600, 800, 1600])}
 											alt={i.alt_text}
 										/>
 									</div>

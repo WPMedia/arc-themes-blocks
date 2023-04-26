@@ -22,6 +22,7 @@ jest.mock("fusion:context", () => ({
 	useComponentContext: jest.fn(() => ({
 		registerSuccessEvent: jest.fn(),
 	})),
+	useFusionContext: jest.fn(() => ({})),
 }));
 
 const fallbackImage = "http://test/resources/fallback.jpg";

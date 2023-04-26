@@ -2,7 +2,7 @@ import React from "react";
 
 import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
-import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import getProperties from "fusion:properties";
 import PropTypes from "@arc-fusion/prop-types";
 import {
@@ -42,6 +42,7 @@ const MediumPromo = ({ customFields }) => {
 			dateTimeFormat: "%B %d, %Y at %l:%M%p %Z",
 		},
 		fallbackImage,
+		resizerURL,
 	} = getProperties(arcSite);
 	const phrases = usePhrases();
 
@@ -188,7 +189,7 @@ const MediumPromo = ({ customFields }) => {
 									aspectRatio={imageRatio}
 									resizedOptions={resizeImage ? { auth: imageAuthToken } : {}}
 									responsiveImages={[100, 500]}
-									resizerURL={resizeImage ? RESIZER_URL : null}
+									resizerURL={resizeImage ? resizerURL : null}
 								/>
 								{labelIconName ? (
 									<div className={`${BLOCK_CLASS_NAME}__icon_label`}>

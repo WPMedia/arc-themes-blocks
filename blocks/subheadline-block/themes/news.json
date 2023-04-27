@@ -1,0 +1,12 @@
+{
+	"subheadline": {
+		"styles": {
+			"default": {
+				"font-size": "var(--heading-level-3-font-size)",
+				"font-weight": "var(--heading-level-3-font-weight)",
+				"line-height": "var(--heading-level-3-line-height)"
+			},
+			"desktop": {}
+		}
+	}
+}

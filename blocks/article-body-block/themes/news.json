@@ -221,7 +221,8 @@
 			"default": {
 				"font-size": "var(--heading-level-2-font-size)",
 				"line-height": "var(--heading-level-2-line-height)",
-				"font-family": "var(--font-family-primary)"
+				"font-family": "var(--font-family-primary)",
+				"font-weight": "bold"
 			},
 			"desktop": {}
 		}
@@ -231,7 +232,8 @@
 			"default": {
 				"font-size": "var(--heading-level-3-font-size)",
 				"line-height": "var(--heading-level-3-line-height)",
-				"font-family": "var(--font-family-primary)"
+				"font-family": "var(--font-family-primary)",
+				"font-weight": "bold"
 			},
 			"desktop": {}
 		}
@@ -241,7 +243,8 @@
 			"default": {
 				"font-size": "var(--heading-level-4-font-size)",
 				"line-height": "var(--heading-level-4-line-height)",
-				"font-family": "var(--font-family-primary)"
+				"font-family": "var(--font-family-primary)",
+				"font-weight": "bold"
 			},
 			"desktop": {}
 		}
@@ -251,7 +254,8 @@
 			"default": {
 				"font-size": "var(--heading-level-5-font-size)",
 				"line-height": "var(--heading-level-5-line-height)",
-				"font-family": "var(--font-family-primary)"
+				"font-family": "var(--font-family-primary)",
+				"font-weight": "bold"
 			},
 			"desktop": {}
 		}
@@ -261,7 +265,8 @@
 			"default": {
 				"font-size": "var(--heading-level-6-font-size)",
 				"line-height": "var(--heading-level-6-line-height)",
-				"font-family": "var(--font-family-primary)"
+				"font-family": "var(--font-family-primary)",
+				"font-weight": "bold"
 			},
 			"desktop": {}
 		}

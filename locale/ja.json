@@ -153,9 +153,6 @@
 		"search-results-block.see-more-button-aria-label": "このトピックに関するその他の記事を表示",
 		"search-results-blocks.search-input-placeholder": "検索語句を入力"
 	},
-	"share-bar-block": {
-		"share-bar-block.share-button-aria-label": "現在の記事を%{socialType}で共有"
-	},
 	"story-carousel-block": {
 		"story-carousel.aria-label": "記事",
 		"story-carousel.left-arrow-label": "前",

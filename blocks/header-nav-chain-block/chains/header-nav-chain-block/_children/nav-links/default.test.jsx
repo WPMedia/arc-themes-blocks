@@ -7,11 +7,6 @@ jest.mock("@wpmedia/engine-theme-sdk", () => ({
 	formatURL: jest.fn((input) => input.toString()),
 }));
 
-jest.mock("@wpmedia/shared-styles", () => ({
-	__esModule: true,
-	PrimaryFont: (props) => <span {...props} />,
-}));
-
 jest.mock("fusion:properties", () =>
 	jest.fn(() => ({
 		locale: "en",

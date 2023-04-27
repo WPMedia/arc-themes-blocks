@@ -173,7 +173,9 @@
     "@wpmedia/top-table-list-block": "file:blocks/top-table-list-block",
     "@wpmedia/triple-chain-block": "file:blocks/triple-chain-block",
     "@wpmedia/unpublished-content-source-block": "file:blocks/unpublished-content-source-block",
-    "@wpmedia/video-player-block": "file:blocks/video-player-block"
+    "@wpmedia/video-player-block": "file:blocks/video-player-block",
+    "focus-trap-react": "^10.1.1",
+    "use-debounce": "^9.0.4"
   },
   "browserslist": [
     "defaults",

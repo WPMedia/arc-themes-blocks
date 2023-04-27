@@ -11,7 +11,7 @@ const HTMLBox = ({ id }) => {
 	} = useFusionContext();
 	if (HTML) {
 		htmlbox = (
-			<Static id={`html-block-${id}`}>
+			<Static className="b-html-box" id={`html-block-${id}`}>
 				<div dangerouslySetInnerHTML={{ __html: HTML }} />
 			</Static>
 		);

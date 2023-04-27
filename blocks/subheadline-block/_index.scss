@@ -1,6 +1,0 @@
-@use "@wpmedia/arc-themes-components/scss";
-
-.b-subheadline {
-	@include scss.block-components("subheadline");
-	@include scss.block-properties("subheadline");
-}

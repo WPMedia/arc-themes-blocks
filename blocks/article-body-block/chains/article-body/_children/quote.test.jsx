@@ -3,12 +3,6 @@ import { mount } from "enzyme";
 
 import Quote from "./quote";
 
-jest.mock("@wpmedia/shared-styles", () => ({
-	__esModule: true,
-	PrimaryFont: (props) => <span {...props} />,
-	SecondaryFont: (props) => <p {...props} />,
-}));
-
 describe("the article body Blockquote component", () => {
 	it("should not render a quote when it is not provided with the necessary data", () => {
 		const blockquote = {

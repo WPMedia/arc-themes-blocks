@@ -122,7 +122,6 @@
     "@wpmedia/default-output-block": "file:blocks/default-output-block",
     "@wpmedia/double-chain-block": "file:blocks/double-chain-block",
     "@wpmedia/divider-block": "file:blocks/divider-block",
-    "@wpmedia/event-tester-block": "file:blocks/event-tester-block",
     "@wpmedia/extra-large-manual-promo-block": "file:blocks/extra-large-manual-promo-block",
     "@wpmedia/extra-large-promo-block": "file:blocks/extra-large-promo-block",
     "@wpmedia/footer-block": "file:blocks/footer-block",

@@ -26,8 +26,8 @@
 	width: 100%;
 
 	&--error {
-		border-color: var(--global-red-4);
-		color: var(--global-red-4);
+		border-color: var(--status-color-warning);
+		color: var(--status-color-warning);
 	}
 }
 
@@ -35,7 +35,7 @@
 	color: var(--global-neutral-6);
 
 	&--error {
-		color: var(--global-red-4);
+		color: var(--text-color);
 	}
 }
 

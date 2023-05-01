@@ -2,8 +2,13 @@ import getResizeParamsFromANSImage from "./get-resize-params-from-ans-image";
 
 jest.mock("fusion:environment", () => ({
 	RESIZER_TOKEN_VERSION: 2,
-	RESIZER_URL: "https://image.url",
 }));
+
+jest.mock("fusion:properties", () =>
+	jest.fn(() => ({
+		resizerURL: "https://image.url",
+	}))
+);
 
 describe("get-resize-params-from-ans-image", () => {
 	it("should return an object with appropriate resizer parameters for the Image component", () => {
@@ -16,6 +21,7 @@ describe("get-resize-params-from-ans-image", () => {
 					url: "https://unresized.img/IMAGE_FILE_NAME.jpg",
 					width: 10000,
 				},
+				"the-sun",
 				500,
 				[100, 200, 300, 400, 500]
 			)
@@ -41,6 +47,7 @@ describe("get-resize-params-from-ans-image", () => {
 					url: "https://unresized.img/IMAGE_FILE_NAME.jpg",
 					width: 10000,
 				},
+				"the-sun",
 				800
 			)
 		).toEqual(

@@ -1,5 +1,5 @@
 export default () => ({
-	resizerURL: "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer",
+	resizerURL: "https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/",
 	websiteDomain: "",
 	websiteName: "",
 	facebookPage: "https://www.facebook.com/ArcXP",

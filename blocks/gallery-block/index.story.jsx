@@ -79,7 +79,6 @@ export const noContent = () => {
 			globalContent={mockContextGlobalContent}
 			customFields={mockCustomFields}
 			resizerAppVersion={2}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };
@@ -101,7 +100,6 @@ export const withPassedInContent = () => {
 			globalContent={mockGlobalContent}
 			customFields={mockCustomFields}
 			resizerAppVersion={2}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };
@@ -124,7 +122,6 @@ export const hideCaption = () => {
 			globalContent={mockGlobalContent}
 			customFields={mockCustomFields}
 			resizerAppVersion={2}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };
@@ -147,7 +144,6 @@ export const hideCredits = () => {
 			globalContent={mockGlobalContent}
 			customFields={mockCustomFields}
 			resizerAppVersion={2}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };
@@ -170,7 +166,6 @@ export const hideTitle = () => {
 			globalContent={mockGlobalContent}
 			customFields={mockCustomFields}
 			resizerAppVersion={2}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };
@@ -194,7 +189,6 @@ export const hideTitleAndCaption = () => {
 			globalContent={mockGlobalContent}
 			customFields={mockCustomFields}
 			resizerAppVersion={2}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };
@@ -218,7 +212,6 @@ export const hideCaptionAndCredits = () => {
 			globalContent={mockGlobalContent}
 			customFields={mockCustomFields}
 			resizerAppVersion={2}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };
@@ -243,7 +236,6 @@ export const hideCaptionAndCreditsAndTitle = () => {
 			globalContent={mockGlobalContent}
 			customFields={mockCustomFields}
 			resizerAppVersion={2}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };

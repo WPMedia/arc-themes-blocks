@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext, useComponentContext } from "fusion:context";
-import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
+import getProperties from "fusion:properties";
 
 import { Carousel, Image, imageANSToImageSrc, usePhrases } from "@wpmedia/arc-themes-components";
 
@@ -119,7 +120,8 @@ function ProductGallery({ customFields }) {
 	const { isFeaturedImageEnabled, indicatorType } = customFields;
 	const { id } = useComponentContext();
 
-	const { globalContent = {} } = useFusionContext();
+	const { arcSite, globalContent = {} } = useFusionContext();
+	const { resizerURL } = getProperties(arcSite);
 
 	if (!Object.keys(globalContent).length) {
 		return null;
@@ -143,7 +145,7 @@ function ProductGallery({ customFields }) {
 			id={id}
 			isFeaturedImageEnabled={isFeaturedImageEnabled}
 			resizerAppVersion={RESIZER_TOKEN_VERSION}
-			resizerURL={RESIZER_URL}
+			resizerURL={resizerURL}
 			indicatorType={indicatorType}
 		/>
 	);

@@ -7,7 +7,6 @@ import ArticleBodyChain from "./default";
 
 jest.mock("fusion:environment", () => ({
 	RESIZER_TOKEN_VERSION: 2,
-	RESIZER_URL: "http://some.url",
 }));
 
 jest.mock("fusion:properties", () =>

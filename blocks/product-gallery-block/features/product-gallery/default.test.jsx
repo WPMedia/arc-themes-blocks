@@ -7,7 +7,6 @@ import ProductGallery from "./default";
 
 jest.mock("fusion:environment", () => ({
 	RESIZER_TOKEN_VERSION: 2,
-	RESIZER_URL: "https://resizer.com",
 }));
 
 window.HTMLElement.prototype.scrollIntoView = jest.fn();

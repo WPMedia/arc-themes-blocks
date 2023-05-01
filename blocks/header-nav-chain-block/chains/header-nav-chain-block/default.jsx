@@ -244,7 +244,7 @@ const Nav = (props) => {
 	const handleScroll = () => {
 		setIsScrolled(window.pageYOffset > 0);
 	};
-	const [onScrollDebounced] = useDebouncedCallback(handleScroll, 100);
+	const onScrollDebounced = useDebouncedCallback(handleScroll, 100);
 
 	// on scroll, change the class of the nav to make it the scrolled height
 	// it can never go back

@@ -27,7 +27,10 @@ describe("LeadArt", () => {
 	});
 
 	beforeEach(() => {
-		getProperties.mockImplementation(() => ({ locale: [] }));
+		getProperties.mockImplementation(() => ({
+			locale: [],
+			resizerURL: "http://url.com/",
+		}));
 	});
 
 	it("renders html lead art type", () => {

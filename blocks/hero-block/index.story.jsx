@@ -39,6 +39,7 @@ export const showOverlayCenter = () => (
 			link2Text: "Shop Women",
 			link2Type: "secondary",
 			resizerAppVersion: 2,
+			resizerURL: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/",
 		}}
 	/>
 );
@@ -68,6 +69,7 @@ export const showOverlayLeft = () => (
 			link2Text: "Shop Women",
 			link2Type: "secondary",
 			resizerAppVersion: 2,
+			resizerURL: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/",
 		}}
 	/>
 );
@@ -97,6 +99,7 @@ export const showButtonVariants = () => (
 			link2Text: "Shop Women",
 			link2Type: "secondary",
 			resizerAppVersion: 2,
+			resizerURL: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/",
 		}}
 	/>
 );
@@ -123,6 +126,7 @@ export const showOnlyOneButton = () => (
 			link1Text: "Shop Men",
 			link1Type: "primary",
 			resizerAppVersion: 2,
+			resizerURL: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/",
 		}}
 	/>
 );
@@ -152,6 +156,7 @@ export const showStackedCenter = () => (
 			link2Text: "Shop Women",
 			link2Type: "primary",
 			resizerAppVersion: 2,
+			resizerURL: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/",
 		}}
 	/>
 );
@@ -181,6 +186,7 @@ export const showStackedLeft = () => (
 			link2Text: "Shop Women",
 			link2Type: "primary",
 			resizerAppVersion: 2,
+			resizerURL: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/",
 		}}
 	/>
 );

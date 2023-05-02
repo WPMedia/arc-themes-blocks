@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { RESIZER_URL } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
 import { useFusionContext } from "fusion:context";
 import { useContent } from "fusion:content";
 import getProperties from "fusion:properties";
@@ -26,8 +26,13 @@ function Hero({ customFields }) {
 		description,
 		headline,
 		imageDesktopURL,
+		imageId: desktopImgId,
+		imageDesktopAuth,
+		imageMobileId: imgMobileId,
 		imageMobileAlt,
+		imageMobileAuth,
 		imageMobileURL,
+		resizerURL,
 		link1Action,
 		link1Text,
 		link1Type,
@@ -39,9 +44,15 @@ function Hero({ customFields }) {
 	} = customFields;
 	const { arcSite } = useFusionContext();
 	const { fallbackImage } = getProperties(arcSite);
-	const imageId = imageDesktopURL && imageDesktopURL.split("/").pop().split(".").shift();
-	const imageMobileId = imageMobileURL && imageMobileURL.split("/").pop().split(".").shift();
-	const desktopAuth = useContent(
+	const imageId = imageDesktopURL
+		? imageDesktopURL.split("/").pop().split(".").shift()
+		: desktopImgId;
+	console.log("imageId>>>> ", imageId);
+	console.log("Resizer>>>> ", RESIZER_URL);
+	const imageMobileId = imageMobileURL
+		? imageMobileURL.split("/").pop().split(".").shift()
+		: imgMobileId;
+	let desktopAuth = useContent(
 		imageId
 			? {
 					source: "signing-service",
@@ -49,7 +60,16 @@ function Hero({ customFields }) {
 			  }
 			: {}
 	);
-	const mobileAuth = useContent(
+	const imageAuthTokenObj = {};
+	if (desktopAuth?.hash) {
+		desktopAuth[RESIZER_TOKEN_VERSION] = desktopAuth.hash;
+	}
+	if (!Object.keys(desktopAuth).length) {
+		desktopAuth = imageDesktopAuth;
+	}
+	console.log("desktopAuth>>>> ", desktopAuth);
+	console.log("imageAuthTokenObj>>> ", imageAuthTokenObj);
+	let mobileAuth = useContent(
 		imageMobileId
 			? {
 					source: "signing-service",
@@ -57,15 +77,9 @@ function Hero({ customFields }) {
 			  }
 			: {}
 	);
-	// const imageDesktopAuthTokenObj = {};
-	// if (desktopAuth?.hash) {
-	// 	desktopAuth[resizerAppVersion] = desktopAuth.hash;
-	// }
-
-	// // const imageMobileAuthTokenObj = {};
-	// if (mobileAuth?.hash) {
-	// 	mobileAuth[resizerAppVersion] = mobileAuth.hash;
-	// }
+	if (!Object.keys(mobileAuth).length) {
+		mobileAuth = imageMobileAuth;
+	}
 	const classes = [
 		BLOCK_CLASS_NAME,
 		`${BLOCK_CLASS_NAME}--${layout}`,
@@ -73,6 +87,8 @@ function Hero({ customFields }) {
 	].join(" ");
 
 	const alt = headline || description || null;
+	console.log("imageDesktopURL>>>> ", imageDesktopURL);
+	console.log("resizerURL xii", resizerURL);
 	const desktopImageParams =
 		imageId && imageDesktopURL
 			? {
@@ -81,12 +97,12 @@ function Hero({ customFields }) {
 						url: imageDesktopURL,
 					}),
 					resizedOptions: {
-						auth: desktopAuth ? JSON.parse(desktopAuth) : {},
+						auth: desktopAuth ? JSON.parse(desktopAuth) : imageAuthTokenObj,
 						smart: true,
 					},
 					width: 1200,
 					height: 600,
-					resizerURL: RESIZER_URL,
+					resizerURL: RESIZER_URL || resizerURL,
 			  }
 			: {
 					src: fallbackImage,

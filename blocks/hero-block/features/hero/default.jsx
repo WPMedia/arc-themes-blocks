@@ -73,6 +73,10 @@ function Hero({ customFields }) {
 			  }
 			: {}
 	);
+	const imageMobileAuthTokenObj = {};
+	if (mobileAuth?.hash) {
+		mobileAuth[RESIZER_TOKEN_VERSION] = mobileAuth.hash;
+	}
 	if (!Object.keys(mobileAuth).length) {
 		mobileAuth = imageMobileAuth;
 	}
@@ -108,7 +112,7 @@ function Hero({ customFields }) {
 					ansImage: {
 						_id: imageMobileId,
 						url: imageMobileURL,
-						auth: mobileAuth ? JSON.parse(mobileAuth) : {},
+						auth: mobileAuth ? JSON.parse(mobileAuth) : imageMobileAuthTokenObj,
 					},
 					alt,
 					resizedOptions: {

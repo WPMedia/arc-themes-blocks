@@ -47,8 +47,6 @@ function Hero({ customFields }) {
 	const imageId = imageDesktopURL
 		? imageDesktopURL.split("/").pop().split(".").shift()
 		: desktopImgId;
-	console.log("imageId>>>> ", imageId);
-	console.log("Resizer>>>> ", RESIZER_URL);
 	const imageMobileId = imageMobileURL
 		? imageMobileURL.split("/").pop().split(".").shift()
 		: imgMobileId;
@@ -67,8 +65,6 @@ function Hero({ customFields }) {
 	if (!Object.keys(desktopAuth).length) {
 		desktopAuth = imageDesktopAuth;
 	}
-	console.log("desktopAuth>>>> ", desktopAuth);
-	console.log("imageAuthTokenObj>>> ", imageAuthTokenObj);
 	let mobileAuth = useContent(
 		imageMobileId
 			? {
@@ -87,8 +83,6 @@ function Hero({ customFields }) {
 	].join(" ");
 
 	const alt = headline || description || null;
-	console.log("imageDesktopURL>>>> ", imageDesktopURL);
-	console.log("resizerURL xii", resizerURL);
 	const desktopImageParams =
 		imageId && imageDesktopURL
 			? {

@@ -27,10 +27,10 @@ function Hero({ customFields }) {
 		headline,
 		imageDesktopURL,
 		imageId: desktopImgId,
-		imageDesktopAuth = {},
+		imageDesktopAuth,
 		imageMobileId: imgMobileId,
 		imageMobileAlt,
-		imageMobileAuth = {},
+		imageMobileAuth,
 		imageMobileURL,
 		resizerURL,
 		link1Action,
@@ -62,7 +62,7 @@ function Hero({ customFields }) {
 	if (desktopAuth?.hash) {
 		desktopAuth[RESIZER_TOKEN_VERSION] = desktopAuth.hash;
 	}
-	if (!Object.keys(desktopAuth).length) {
+	if (desktopAuth && !Object.keys(desktopAuth).length) {
 		desktopAuth = imageDesktopAuth;
 	}
 	let mobileAuth = useContent(
@@ -77,7 +77,7 @@ function Hero({ customFields }) {
 	if (mobileAuth?.hash) {
 		mobileAuth[RESIZER_TOKEN_VERSION] = mobileAuth.hash;
 	}
-	if (!Object.keys(mobileAuth).length) {
+	if (mobileAuth && !Object.keys(mobileAuth).length) {
 		mobileAuth = imageMobileAuth;
 	}
 	const classes = [
@@ -95,7 +95,7 @@ function Hero({ customFields }) {
 						url: imageDesktopURL,
 					}),
 					resizedOptions: {
-						auth: desktopAuth ? JSON.parse(desktopAuth) : imageAuthTokenObj,
+						auth: desktopAuth || imageAuthTokenObj,
 						smart: true,
 					},
 					width: 1200,
@@ -105,14 +105,13 @@ function Hero({ customFields }) {
 			: {
 					src: fallbackImage,
 			  };
-
 	const mobileImageParams =
 		imageMobileId && imageMobileURL
 			? {
 					ansImage: {
 						_id: imageMobileId,
 						url: imageMobileURL,
-						auth: mobileAuth ? JSON.parse(mobileAuth) : imageMobileAuthTokenObj,
+						auth: mobileAuth || imageMobileAuthTokenObj,
 					},
 					alt,
 					resizedOptions: {
@@ -120,6 +119,7 @@ function Hero({ customFields }) {
 					},
 					width: 600,
 					height: 600,
+					resizerURL: RESIZER_URL || resizerURL,
 			  }
 			: {
 					src: fallbackImage,

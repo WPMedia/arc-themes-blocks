@@ -1,11 +1,12 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
+import * as fusionContent from "fusion:content";
 
 import Hero from "./default";
 
 jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => '{ "hash": "2cc3c2b3" }'),
+	useContent: jest.fn(() => ({ hash: "2cc3c2b3" })),
 }));
 
 describe("Hero", () => {
@@ -201,6 +202,7 @@ describe("Hero", () => {
 	});
 
 	it("should set correct alt text for the image", () => {
+		jest.spyOn(fusionContent, "useContent").mockImplementation(() => ({}));
 		const { container } = render(
 			<Hero
 				customFields={{
@@ -212,9 +214,12 @@ describe("Hero", () => {
 					description: "My description",
 					link1Action: "#",
 					imageMobileId: "EM5DTGYGABDJZODV7YVFOC2DOM",
+					imageDesktopURL:
+						"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
 					imageMobileURL:
 						"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
 					imageMobileAlt: "Picture of man in the forest",
+					resizerURL: "https://cloudfront-us-east-1.images",
 					link1Text: "For Him",
 					link1Type: "secondary",
 					link2Action: "#",

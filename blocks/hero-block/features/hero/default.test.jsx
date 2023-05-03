@@ -5,7 +5,7 @@ import "@testing-library/jest-dom/extend-expect";
 import Hero from "./default";
 
 jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => ({ hash: "2cc3c2b3" })),
+	useContent: jest.fn(() => '{ "hash": "2cc3c2b3" }'),
 }));
 
 describe("Hero", () => {

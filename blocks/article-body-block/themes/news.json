@@ -99,7 +99,7 @@
 	"article-body-embed-responsive": {
 		"styles": {
 			"default": {
-				"aspect-ratio": "16/ 9",
+				"aspect-ratio": "calc(16 / 9)",
 				"width": "100%"
 			},
 			"desktop": {}
@@ -108,7 +108,7 @@
 	"article-body-embed-responsive-item": {
 		"styles": {
 			"default": {
-				"aspect-ratio": "16 / 9",
+				"aspect-ratio": "calc(16 / 9)",
 				"height": "auto",
 				"width": "100%"
 			},

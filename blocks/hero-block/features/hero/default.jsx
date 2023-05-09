@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import { useFusionContext } from "fusion:context";
 import { useContent } from "fusion:content";
 import getProperties from "fusion:properties";
@@ -32,7 +32,6 @@ function Hero({ customFields }) {
 		imageMobileAlt,
 		imageMobileAuth,
 		imageMobileURL,
-		resizerURL,
 		link1Action,
 		link1Text,
 		link1Type,
@@ -43,7 +42,7 @@ function Hero({ customFields }) {
 		variant = "dark",
 	} = customFields;
 	const { arcSite } = useFusionContext();
-	const { fallbackImage } = getProperties(arcSite);
+	const { fallbackImage, resizerURL } = getProperties(arcSite);
 	const imageId = imageDesktopURL
 		? imageDesktopURL.split("/").pop().split(".").shift()
 		: desktopImgId;
@@ -95,12 +94,12 @@ function Hero({ customFields }) {
 						url: imageDesktopURL,
 					}),
 					resizedOptions: {
-						auth: desktopAuth || imageAuthTokenObj,
+						auth: (desktopAuth && JSON.parse(desktopAuth).hash) || imageAuthTokenObj,
 						smart: true,
 					},
 					width: 1200,
 					height: 600,
-					resizerURL: RESIZER_URL || resizerURL,
+					resizerURL,
 			  }
 			: {
 					src: fallbackImage,
@@ -111,7 +110,7 @@ function Hero({ customFields }) {
 					ansImage: {
 						_id: imageMobileId,
 						url: imageMobileURL,
-						auth: mobileAuth || imageMobileAuthTokenObj,
+						auth: (mobileAuth && JSON.parse(mobileAuth)) || imageMobileAuthTokenObj,
 					},
 					alt,
 					resizedOptions: {
@@ -119,7 +118,7 @@ function Hero({ customFields }) {
 					},
 					width: 600,
 					height: 600,
-					resizerURL: RESIZER_URL || resizerURL,
+					resizerURL,
 			  }
 			: {
 					src: fallbackImage,

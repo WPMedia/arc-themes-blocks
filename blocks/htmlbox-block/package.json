@@ -8,7 +8,7 @@
   "main": "index.js",
   "files": [
     "features",
-		"styles.scss"
+    "styles.scss"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",

@@ -42,15 +42,6 @@ module.exports = {
 					"css-loader",
 					{
 						loader: "sass-loader",
-						options: {
-							additionalData: `
-              @import '~@wpmedia/news-theme-css/scss';
-
-              // Should look for a better way to do this ->
-              // This should be defaulted in the news-theme-css repo too!
-              $theme-primary-font-family: $primary-font-family !default;
-            `,
-						},
 					},
 				],
 				include: path.resolve(__dirname, "../"),

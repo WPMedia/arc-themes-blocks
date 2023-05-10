@@ -2,7 +2,7 @@
 	"article-body": {
 		"styles": {
 			"default": {
-				"font-family": "var(--font-family-secondary)",
+				"font-family": "var(--font-family-primary)",
 				"font-size": "var(--body-font-size)",
 				"components": {
 					"link": {
@@ -220,7 +220,9 @@
 		"styles": {
 			"default": {
 				"font-size": "var(--heading-level-2-font-size)",
-				"line-height": "var(--heading-level-2-line-height)"
+				"line-height": "var(--heading-level-2-line-height)",
+				"font-family": "var(--font-family-primary)",
+				"font-weight": "bold"
 			},
 			"desktop": {}
 		}
@@ -229,7 +231,9 @@
 		"styles": {
 			"default": {
 				"font-size": "var(--heading-level-3-font-size)",
-				"line-height": "var(--heading-level-3-line-height)"
+				"line-height": "var(--heading-level-3-line-height)",
+				"font-family": "var(--font-family-primary)",
+				"font-weight": "bold"
 			},
 			"desktop": {}
 		}
@@ -238,7 +242,9 @@
 		"styles": {
 			"default": {
 				"font-size": "var(--heading-level-4-font-size)",
-				"line-height": "var(--heading-level-4-line-height)"
+				"line-height": "var(--heading-level-4-line-height)",
+				"font-family": "var(--font-family-primary)",
+				"font-weight": "bold"
 			},
 			"desktop": {}
 		}
@@ -247,7 +253,9 @@
 		"styles": {
 			"default": {
 				"font-size": "var(--heading-level-5-font-size)",
-				"line-height": "var(--heading-level-5-line-height)"
+				"line-height": "var(--heading-level-5-line-height)",
+				"font-family": "var(--font-family-primary)",
+				"font-weight": "bold"
 			},
 			"desktop": {}
 		}
@@ -256,7 +264,9 @@
 		"styles": {
 			"default": {
 				"font-size": "var(--heading-level-6-font-size)",
-				"line-height": "var(--heading-level-6-line-height)"
+				"line-height": "var(--heading-level-6-line-height)",
+				"font-family": "var(--font-family-primary)",
+				"font-weight": "bold"
 			},
 			"desktop": {}
 		}
@@ -314,7 +324,7 @@
 	"article-body-interstitial-link": {
 		"styles": {
 			"default": {
-				"font-family": "var(--font-family-secondary)",
+				"font-family": "var(--font-family-primary)",
 				"font-style": "italic",
 				"components": {
 					"link": {

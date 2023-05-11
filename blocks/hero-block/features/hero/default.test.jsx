@@ -45,10 +45,10 @@ describe("Hero", () => {
 					description: "My description",
 					imageId: "P5EYZ",
 					imageURLDesktop: "https://www.google.com",
-					imageAuth: '{"2":"2dd3c2a2"}',
+					imageDesktopAuth: { 2: "2dd3c2a2" },
 					mobileImageId: "P5EYZ",
 					imageURLMobile: "https://www.google.com",
-					mobileImageAuth: '{"2":"2cc3c2b3"}',
+					mobileImageAuth: { 2: "2cc3c2b3" },
 				}}
 			/>
 		);

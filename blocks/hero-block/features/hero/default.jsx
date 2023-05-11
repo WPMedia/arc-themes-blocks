@@ -46,6 +46,7 @@ function Hero({ customFields }) {
 	const imageId = imageDesktopURL
 		? imageDesktopURL.split("/").pop().split(".").shift()
 		: desktopImgId;
+
 	const imageMobileId = imageMobileURL
 		? imageMobileURL.split("/").pop().split(".").shift()
 		: imgMobileId;
@@ -57,7 +58,7 @@ function Hero({ customFields }) {
 			  }
 			: {}
 	);
-	const imageAuthTokenObj = {};
+
 	if (desktopAuth?.hash) {
 		desktopAuth[RESIZER_TOKEN_VERSION] = desktopAuth.hash;
 	}
@@ -72,7 +73,6 @@ function Hero({ customFields }) {
 			  }
 			: {}
 	);
-	const imageMobileAuthTokenObj = {};
 	if (mobileAuth?.hash) {
 		mobileAuth[RESIZER_TOKEN_VERSION] = mobileAuth.hash;
 	}
@@ -94,7 +94,7 @@ function Hero({ customFields }) {
 						url: imageDesktopURL,
 					}),
 					resizedOptions: {
-						auth: (desktopAuth && JSON.parse(desktopAuth).hash) || imageAuthTokenObj,
+						auth: desktopAuth?.hash || {},
 						smart: true,
 					},
 					width: 1200,
@@ -110,7 +110,7 @@ function Hero({ customFields }) {
 					ansImage: {
 						_id: imageMobileId,
 						url: imageMobileURL,
-						auth: (mobileAuth && JSON.parse(mobileAuth)) || imageMobileAuthTokenObj,
+						auth: mobileAuth || {},
 					},
 					alt,
 					resizedOptions: {

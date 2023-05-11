@@ -51,7 +51,7 @@ function Hero({ customFields }) {
 		? imageMobileURL.split("/").pop().split(".").shift()
 		: imgMobileId;
 	let desktopAuth = useContent(
-		imageId
+		!imageDesktopAuth && imageId
 			? {
 					source: "signing-service",
 					query: { id: imageId },
@@ -66,7 +66,7 @@ function Hero({ customFields }) {
 		desktopAuth = imageDesktopAuth;
 	}
 	let mobileAuth = useContent(
-		imageMobileId
+		!imageMobileAuth && imageMobileId
 			? {
 					source: "signing-service",
 					query: { id: imageMobileId },

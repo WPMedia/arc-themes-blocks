@@ -243,6 +243,18 @@ const ExtraLargePromo = ({ customFields }) => {
 			}`,
 		}) || null;
 
+	const resizedImage =
+		imageOverrideId && imageOverrideAuth && imageOverrideURL.includes(imageOverrideId);
+	let resizedAuth = useContent(
+		resizedImage ? {} : { source: "signing-service", query: { id: imageOverrideURL } }
+	);
+	if (imageOverrideAuth && !resizedAuth) {
+		resizedAuth = JSON.parse(imageOverrideAuth);
+	}
+	if (resizedAuth?.hash && !resizedAuth[RESIZER_TOKEN_VERSION]) {
+		resizedAuth[RESIZER_TOKEN_VERSION] = resizedAuth.hash;
+	}
+
 	const shouldLazyLoad = lazyLoad && !isAdmin;
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
@@ -287,9 +299,9 @@ const ExtraLargePromo = ({ customFields }) => {
 			? {
 					ansImage: imageOverrideURL
 						? {
-								_id: imageOverrideId,
+								_id: resizedImage && imageOverrideId,
 								url: imageOverrideURL,
-								auth: imageOverrideAuth ? JSON.parse(imageOverrideAuth) : null,
+								auth: resizedAuth || {},
 						  }
 						: getImageFromANS(content),
 					alt: content?.headlines?.basic || "",

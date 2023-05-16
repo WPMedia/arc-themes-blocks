@@ -251,6 +251,18 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			}`,
 		}) || null;
 
+	const resizedImage =
+		imageOverrideId && imageOverrideAuth && imageOverrideURL.includes(imageOverrideId);
+	let resizedAuth = useContent(
+		resizedImage ? {} : { source: "signing-service", query: { id: imageOverrideURL } }
+	);
+	if (imageOverrideAuth && !resizedAuth) {
+		resizedAuth = JSON.parse(imageOverrideAuth);
+	}
+	if (resizedAuth?.hash && !resizedAuth[RESIZER_TOKEN_VERSION]) {
+		resizedAuth[RESIZER_TOKEN_VERSION] = resizedAuth.hash;
+	}
+
 	const { editableContent, searchableField } = useEditableContent();
 	const { registerSuccessEvent } = useComponentContext();
 	const {
@@ -324,9 +336,9 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			? {
 					ansImage: imageOverrideURL
 						? {
-								_id: imageOverrideId,
+								_id: resizedImage && imageOverrideId,
 								url: imageOverrideURL,
-								auth: imageOverrideAuth ? JSON.parse(imageOverrideAuth) : null,
+								auth: resizedAuth || {},
 						  }
 						: getImageFromANS(content),
 					alt: content?.headlines?.basic || "",

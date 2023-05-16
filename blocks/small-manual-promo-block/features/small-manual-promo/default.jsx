@@ -38,22 +38,25 @@ const SmallManualPromo = ({ customFields }) => {
 	const { fallbackImage } = getProperties(arcSite);
 	const shouldLazyLoad = lazyLoad && !isAdmin;
 
-	const imageAuthToken = useContent(
-		!imageAuth && imageId
-			? {
+	const resizedImage = imageId && imageAuth && imageURL?.includes(imageId);
+
+	let resizedAuth = useContent(
+		resizedImage
+			? {}
+			: {
 					source: "signing-service",
-					query: { id: imageId },
+					query: { id: imageURL },
 			  }
-			: {}
 	);
+	if (imageAuth && !resizedAuth) {
+		resizedAuth = JSON.parse(imageAuth);
+	}
+	if (resizedAuth?.hash && !resizedAuth[RESIZER_TOKEN_VERSION]) {
+		resizedAuth[RESIZER_TOKEN_VERSION] = resizedAuth.hash;
+	}
 
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
-	}
-
-	const imageAuthTokenObj = {};
-	if (imageAuthToken?.hash) {
-		imageAuthToken[RESIZER_TOKEN_VERSION] = imageAuthToken.hash;
 	}
 
 	const alt = headline || null;
@@ -61,9 +64,9 @@ const SmallManualPromo = ({ customFields }) => {
 		imageId && imageURL
 			? {
 					ansImage: {
-						_id: imageId,
+						_id: resizedImage && imageId,
 						url: imageURL,
-						auth: imageAuth ? JSON.parse(imageAuth) : imageAuthTokenObj,
+						auth: resizedAuth || {},
 					},
 					alt,
 					aspectRatio: imageRatio,

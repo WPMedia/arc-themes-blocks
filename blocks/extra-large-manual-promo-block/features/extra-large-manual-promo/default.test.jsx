@@ -137,7 +137,7 @@ describe("the extra large promo feature", () => {
 
 	it("should make a call to the signing-service if the image is not from PhotoCenter", () => {
 		const config = {
-			imageAuth: "",
+			imageAuth: "test hash",
 			imageURL: "test_id=123",
 			imageId: "abc",
 			imageRatio: "4:3",

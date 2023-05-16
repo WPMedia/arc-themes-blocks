@@ -14,7 +14,6 @@ import {
 	getImageFromANS,
 	getPromoType,
 	Heading,
-	imageANSToImageSrc,
 	HeadingSection,
 	Icon,
 	Image,
@@ -42,13 +41,14 @@ const MediumPromo = ({ customFields }) => {
 			dateTimeFormat: "%B %d, %Y at %l:%M%p %Z",
 		},
 		fallbackImage,
-		resizerURL,
 	} = getProperties(arcSite);
 	const phrases = usePhrases();
 
 	const {
 		imageRatio,
+		imageOverrideAuth,
 		imageOverrideURL,
+		imageOverrideId,
 		lazyLoad,
 		showByline,
 		showDate,
@@ -128,6 +128,18 @@ const MediumPromo = ({ customFields }) => {
 		}`,
 		}) || null;
 
+	const resizedImage =
+		imageOverrideId && imageOverrideAuth && imageOverrideURL?.includes(imageOverrideId);
+	let resizedAuth = useContent(
+		resizedImage ? {} : { source: "signing-service", query: { id: imageOverrideURL } }
+	);
+	if (imageOverrideAuth && !resizedAuth) {
+		resizedAuth = JSON.parse(imageOverrideAuth);
+	}
+	if (resizedAuth?.hash && !resizedAuth[RESIZER_TOKEN_VERSION]) {
+		resizedAuth[RESIZER_TOKEN_VERSION] = resizedAuth.hash;
+	}
+
 	const shouldLazyLoad = lazyLoad && !isAdmin;
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
@@ -154,19 +166,41 @@ const MediumPromo = ({ customFields }) => {
 		video: phrases.t("global.video-text"),
 	}[promoType];
 
-	// Image logic
-	const promoImageData = getImageFromANS(content);
-	const imageAuthToken = promoImageData?.auth?.[RESIZER_TOKEN_VERSION] || null;
-	let resizeImage = false;
-	let imageSrc = imageOverrideURL || fallbackImage;
-	if (!imageOverrideURL) {
-		if (promoType === "video") {
-			imageSrc = promoImageData.url;
-		} else if (promoImageData) {
-			imageSrc = imageANSToImageSrc(promoImageData);
-			resizeImage = true;
-		}
-	}
+	// // Image logic
+	// const promoImageData = getImageFromANS(content);
+	// const imageAuthToken = promoImageData?.auth?.[RESIZER_TOKEN_VERSION] || null;
+	// let resizeImage = false;
+	// let imageSrc = imageOverrideURL || fallbackImage;
+	// if (!imageOverrideURL) {
+	// 	if (promoType === "video") {
+	// 		imageSrc = promoImageData.url;
+	// 	} else if (promoImageData) {
+	// 		imageSrc = imageANSToImageSrc(promoImageData);
+	// 		resizeImage = true;
+	// 	}
+	// }
+
+	const imageParams =
+		imageOverrideURL || (content && getImageFromANS(content))
+			? {
+					ansImage: imageOverrideURL
+						? {
+								_id: resizedImage && imageOverrideId,
+								url: imageOverrideURL,
+								auth: resizedAuth || {},
+						  }
+						: getImageFromANS(content),
+					alt: content?.headlines?.basic || "",
+					aspectRatio: imageRatio,
+					resizedOptions: {
+						smart: true,
+					},
+					responsiveImages: [200, 400, 600, 800, 1200],
+					width: 600,
+			  }
+			: {
+					src: fallbackImage,
+			  };
 
 	return showHeadline || showImage || showDescription || showByline || showDate ? (
 		<LazyLoad enabled={shouldLazyLoad}>
@@ -175,7 +209,14 @@ const MediumPromo = ({ customFields }) => {
 					className={`${BLOCK_CLASS_NAME}${showImage ? ` ${BLOCK_CLASS_NAME}--show-image` : ""}`}
 				>
 					{showImage ? (
-						<MediaItem {...searchableField("imageOverrideURL")} suppressContentEditableWarning>
+						<MediaItem
+							{...searchableField({
+								imageOverrideURL: "url",
+								imageOverrideId: "_id",
+								imageOverrideAuth: "auth",
+							})}
+							suppressContentEditableWarning
+						>
 							<Conditional
 								component={Link}
 								condition={contentUrl}
@@ -183,14 +224,7 @@ const MediumPromo = ({ customFields }) => {
 								onClick={registerSuccessEvent}
 								assistiveHidden
 							>
-								<Image
-									alt={content?.headlines?.basic}
-									src={imageSrc}
-									aspectRatio={imageRatio}
-									resizedOptions={resizeImage ? { auth: imageAuthToken } : {}}
-									responsiveImages={[100, 500]}
-									resizerURL={resizeImage ? resizerURL : null}
-								/>
+								<Image alt={content?.headlines?.basic} {...imageParams} />
 								{labelIconName ? (
 									<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
 										<Icon name={labelIconName} />
@@ -267,10 +301,18 @@ MediumPromo.propTypes = {
 			label: "Show date",
 			group: "Show promo elements",
 		}),
+		imageOverrideAuth: PropTypes.string.tag({
+			group: "Image",
+			hidden: true,
+		}),
 		imageOverrideURL: PropTypes.string.tag({
 			label: "Image URL",
 			group: "Image",
 			searchable: "image",
+		}),
+		imageOverrideId: PropTypes.string.tag({
+			group: "Image",
+			hidden: true,
 		}),
 		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
 			defaultValue: "16:9",

@@ -46,7 +46,7 @@ const LargeManualPromo = ({ customFields }) => {
 	const { searchableField } = useEditableContent();
 	const shouldLazyLoad = lazyLoad && !isAdmin;
 
-	const resizedImage = imageId && imageAuth && imageURL.includes(imageId);
+	const resizedImage = imageId && imageAuth && imageURL?.includes(imageId);
 
 	let resizedAuth = useContent(
 		resizedImage

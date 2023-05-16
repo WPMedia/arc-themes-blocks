@@ -117,21 +117,41 @@ describe("the small manual promo feature", () => {
 		expect(stack.firstChild).toBe(figure);
 	});
 
-	it("should use content source to get image auth", () => {
-		useContent.mockReturnValueOnce({ hash: 123 });
-		render(
-			<SmallManualPromo
-				customFields={{
-					...customFields,
-					imagePosition: "left",
-					linkURL: undefined,
-					imageAuth: undefined,
-					imageId: 123,
-				}}
-			/>
-		);
-		expect(useContent).toHaveBeenCalled();
-		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+	it("should return a fallback image if showImage is true and imageId is not valid", () => {
+		const config = {
+			headline: "This is a headline text",
+			showImage: true,
+			imageId: null,
+		};
+		render(<SmallManualPromo customFields={config} />);
+		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
+	});
+
+	it("should make a blank call to the signing-service if the image is from PhotoCenter and has an Auth value", () => {
+		const config = {
+			imageAuth: `{"2": "abc123"}`,
+			imageURL: "test_id=123",
+			imageId: "123",
+			imageRatio: "4:3",
+			showImage: true,
+		};
+		render(<SmallManualPromo customFields={config} />);
+		expect(useContent).toHaveBeenCalledWith({});
+	});
+
+	it("should make a call to the signing-service if the image is from PhotoCenter but does not have an Auth value", () => {
+		const config = {
+			imageAuth: "",
+			imageURL: "test_id=123",
+			imageId: "123",
+			imageRatio: "4:3",
+			showImage: true,
+		};
+		render(<SmallManualPromo customFields={config} />);
+		expect(useContent).toHaveBeenCalledWith({
+			source: "signing-service",
+			query: { id: "test_id=123" },
+		});
 	});
 
 	it("should render heading first when imagePosition is set to right", () => {

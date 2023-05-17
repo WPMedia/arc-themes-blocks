@@ -81,7 +81,8 @@ const ResultItem = React.memo(
 			const imageURL = imageANSToImageSrc(getImageFromANS(element)) || null;
 			const auth = getImageFromANS(element)?.auth || {};
 			const { searchableField } = useEditableContent();
-			const hasAuthors = showByline ? credits?.by && credits?.by.length : null;
+			const hasSomeAuthorName = credits?.by.some((author) => author.name && author?.name !== "");
+			const hasAuthors = showByline ? credits?.by && credits?.by.length && hasSomeAuthorName : null;
 			const contentHeading = showHeadline ? headlineText : null;
 			const formattedDate = Date.parse(displayDate)
 				? localizeDateTime(new Date(displayDate), dateTimeFormat, language, timeZone)

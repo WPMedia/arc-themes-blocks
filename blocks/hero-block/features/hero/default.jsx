@@ -116,8 +116,8 @@ function Hero({ customFields }) {
 					resizedOptions: {
 						smart: true,
 					},
-					width: 600,
-					height: 600,
+					width: 320,
+					height: 400,
 					resizerURL,
 			  }
 			: {

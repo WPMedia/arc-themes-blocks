@@ -38,7 +38,7 @@ const SmallManualPromo = ({ customFields }) => {
 	const { fallbackImage } = getProperties(arcSite);
 	const shouldLazyLoad = lazyLoad && !isAdmin;
 
-	const resizedImage = imageId && imageAuth && imageURL?.includes(imageId);
+	const resizedImage = imageId && imageAuth && imageAuth !== "{}" && imageURL?.includes(imageId);
 
 	let resizedAuth = useContent(
 		resizedImage

@@ -252,7 +252,11 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		}) || null;
 
 	const resizedImage =
-		imageOverrideId && imageOverrideAuth && imageOverrideURL?.includes(imageOverrideId);
+		imageOverrideId &&
+		imageOverrideAuth &&
+		imageOverrideAuth !== "{}" &&
+		imageOverrideURL?.includes(imageOverrideId);
+
 	let resizedAuth = useContent(
 		resizedImage ? {} : { source: "signing-service", query: { id: imageOverrideURL } }
 	);

@@ -62,11 +62,17 @@ const SmallPromo = ({ customFields }) => {
 			type
 			url
 			lead_art {
-				_id
+				embed_html
 				type
-				url
-				auth {
-					${RESIZER_TOKEN_VERSION}
+				promo_items {
+					basic {
+						_id
+						type
+						url
+						auth {
+							${RESIZER_TOKEN_VERSION}
+						}
+					}
 				}
 			}
 			basic {

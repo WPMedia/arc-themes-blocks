@@ -73,7 +73,7 @@ const ExtraLargeManualPromo = ({ customFields }) => {
 					ansImage: {
 						_id: resizedImage ? imageId : "",
 						url: imageURL,
-						auth: resizedAuth || {},
+						auth: resizedAuth,
 					},
 					alt,
 					aspectRatio: imageRatio,

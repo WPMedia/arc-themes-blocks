@@ -61,10 +61,10 @@ const SmallManualPromo = ({ customFields }) => {
 
 	const alt = headline || null;
 	const imageParams =
-		imageId && imageURL
+		imageURL && resizedAuth
 			? {
 					ansImage: {
-						_id: resizedImage && imageId,
+						_id: resizedImage ? imageId : "",
 						url: imageURL,
 						auth: resizedAuth || {},
 					},

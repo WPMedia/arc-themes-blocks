@@ -63,10 +63,10 @@ const MediumManualPromo = ({ customFields }) => {
 
 	const alt = headline || description || null;
 	const imageParams =
-		imageId && imageURL
+		imageURL && resizedAuth
 			? {
 					ansImage: {
-						_id: resizedImage && imageId,
+						_id: resizedImage ? imageId : "",
 						url: imageURL,
 						auth: resizedAuth || {},
 					},

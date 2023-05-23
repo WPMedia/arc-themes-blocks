@@ -117,7 +117,7 @@ const SmallPromo = ({ customFields }) => {
 				? {
 						ansImage: imageOverrideURL
 							? {
-									_id: resizedImage && imageOverrideId,
+									_id: resizedImage ? imageOverrideId : "",
 									url: imageOverrideURL,
 									auth: resizedAuth || {},
 							  }

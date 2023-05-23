@@ -2,12 +2,6 @@
 
 _HTML Box for block for Fusion News Theme. Please provide a 1-2 sentence description of what the block is and what it does._
 
-// TODO: add badge for passing/failing tests
-
-## Acceptance Criteria
-
-- Add AC relevant to the block
-
 ## Props
 
 | **Prop**                  | **Required** | **Type** | **Description**                                     |
@@ -18,7 +12,7 @@ _HTML Box for block for Fusion News Theme. Please provide a 1-2 sentence descrip
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
+Outline any schema information requirements necessary to know for ths block.
 
 ### ANS Fields
 
@@ -50,4 +44,4 @@ This block does not emit any events.
 
 _It expects the `HTML` custom field to be filled out with an embed link. The box will not have the id tag in the custom field._
 
-_If the `HTML` custom field is not populated then nothing will be rendered.._
+_If the `HTML` custom field is not populated then nothing will be rendered._

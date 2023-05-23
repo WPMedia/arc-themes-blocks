@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useFusionContext } from "fusion:context";
 import Static from "fusion:static";
+import "../../styles.scss";
 
 const HTMLBox = ({ id }) => {
 	let htmlbox = null;
@@ -10,7 +11,7 @@ const HTMLBox = ({ id }) => {
 	} = useFusionContext();
 	if (HTML) {
 		htmlbox = (
-			<Static id={`html-block-${id}`}>
+			<Static className="b-html-box" id={`html-block-${id}`}>
 				<div dangerouslySetInnerHTML={{ __html: HTML }} />
 			</Static>
 		);

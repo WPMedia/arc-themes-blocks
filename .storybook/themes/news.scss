@@ -2463,12 +2463,12 @@
 				top-table-list-xl: (
 					components: (
 						heading: (
-							align-self: center,
-							justify-content: center,
+							align-self: left,
+							justify-content: left,
 						),
 						overline: (
 							display: flex,
-							justify-content: center,
+							justify-content: left,
 						),
 						separator: (
 							padding: 0 var(--global-spacing-2),
@@ -3066,9 +3066,13 @@
 				top-table-list-xl: (
 					components: (
 						heading: (
+							align-self: center,
 							font-size: var(--heading-level-1-font-size),
 							justify-content: center,
 							line-height: var(--heading-level-1-line-height),
+						),
+						overline: (
+							justify-content: center,
 						),
 						stack: (
 							gap: var(--global-spacing-5),

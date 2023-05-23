@@ -351,15 +351,15 @@
 	"top-table-list-xl": {
 		"styles": {
 			"default": {
+				"heading": {
+					"align-self": "left",
+					"justify-content": "left"
+				},
+				"overline": {
+					"display": "flex",
+					"justify-content": "left"
+				},
 				"components": {
-					"heading": {
-						"align-self": "center",
-						"justify-content": "center"
-					},
-					"overline": {
-						"display": "flex",
-						"justify-content": "center"
-					},
 					"separator": {
 						"padding": "0 var(--global-spacing-2)"
 					},
@@ -371,9 +371,13 @@
 			"desktop": {
 				"components": {
 					"heading": {
+						"align-self": "center",
 						"font-size": "var(--heading-level-1-font-size)",
 						"justify-content": "center",
 						"line-height": "var(--heading-level-1-line-height)"
+					},
+					"overline": {
+						"justify-content": "center"
 					},
 					"stack": {
 						"gap": "var(--global-spacing-5)"

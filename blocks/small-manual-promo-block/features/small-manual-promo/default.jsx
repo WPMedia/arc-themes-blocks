@@ -41,7 +41,7 @@ const SmallManualPromo = ({ customFields }) => {
 	const resizedImage = imageId && imageAuth && imageAuth !== "{}" && imageURL?.includes(imageId);
 
 	let resizedAuth = useContent(
-		resizedImage
+		resizedImage || !imageURL
 			? {}
 			: {
 					source: "signing-service",

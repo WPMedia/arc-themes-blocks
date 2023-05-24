@@ -169,20 +169,6 @@ const MediumPromo = ({ customFields }) => {
 		video: phrases.t("global.video-text"),
 	}[promoType];
 
-	// // Image logic
-	// const promoImageData = getImageFromANS(content);
-	// const imageAuthToken = promoImageData?.auth?.[RESIZER_TOKEN_VERSION] || null;
-	// let resizeImage = false;
-	// let imageSrc = imageOverrideURL || fallbackImage;
-	// if (!imageOverrideURL) {
-	// 	if (promoType === "video") {
-	// 		imageSrc = promoImageData.url;
-	// 	} else if (promoImageData) {
-	// 		imageSrc = imageANSToImageSrc(promoImageData);
-	// 		resizeImage = true;
-	// 	}
-	// }
-
 	const imageParams =
 		imageOverrideURL || (content && getImageFromANS(content))
 			? {

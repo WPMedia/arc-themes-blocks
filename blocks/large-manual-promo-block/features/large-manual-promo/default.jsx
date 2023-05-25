@@ -56,7 +56,7 @@ const LargeManualPromo = ({ customFields }) => {
 					query: { id: imageURL },
 			  }
 	);
-	if (imageAuth && (!resizedAuth || !Object.keys(resizedAuth).length)) {
+	if (imageAuth && !resizedAuth) {
 		resizedAuth = JSON.parse(imageAuth);
 	}
 	if (resizedAuth?.hash && !resizedAuth[RESIZER_TOKEN_VERSION]) {

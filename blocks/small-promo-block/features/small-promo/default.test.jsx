@@ -83,6 +83,48 @@ describe("Small Promo", () => {
 		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
 	});
 
+	it("should make a blank call to the signing-service if the image is from PhotoCenter and has an Auth value", () => {
+		const config = {
+			imageOverrideAuth: "test hash",
+			imageOverrideURL: "test_id=123",
+			imageOverrideId: "123",
+			imageRatio: "4:3",
+			showImage: true,
+		};
+		render(<SmallPromo customFields={config} />);
+		expect(useContent).toHaveBeenCalledWith({});
+	});
+
+	it("should make a call to the signing-service if the image is from PhotoCenter but does not have an Auth value", () => {
+		const config = {
+			imageOverrideAuth: "",
+			imageOverrideURL: "test_id=123",
+			imageOverrideId: "123",
+			imageRatio: "4:3",
+			showImage: true,
+		};
+		render(<SmallPromo customFields={config} />);
+		expect(useContent).toHaveBeenCalledWith({
+			source: "signing-service",
+			query: { id: "test_id=123" },
+		});
+	});
+
+	it("should make a call to the signing-service if the image is not from PhotoCenter", () => {
+		const config = {
+			imageOverrideAuth: "",
+			imageOverrideURL: "test_id=123",
+			imageOverrideId: "abc",
+			imageRatio: "4:3",
+			showImage: true,
+		};
+		render(<SmallPromo customFields={config} />);
+		expect(useContent).toHaveBeenCalledWith({
+			source: "signing-service",
+			query: { id: "test_id=123" },
+		});
+	});
+
 	it("should display a fallback image if showImage and no content", () => {
 		const config = {
 			itemContentConfig: { contentService: "ans-item", contentConfigValues: { test: 123 } },

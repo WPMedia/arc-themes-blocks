@@ -149,8 +149,8 @@
 	$tokens: (
 		default: (
 			alias: (
-				"font-family-primary": "Abel",
-				"font-family-secondary": "Georgia",
+				"font-family-primary": "Inter",
+				"font-family-secondary": "Lora",
 				"color-primary": var(--global-black),
 				"color-primary-hover": var(--global-neutral-7),
 				"text-color": var(--global-neutral-8),
@@ -2230,6 +2230,7 @@
 					components: (
 						heading: (
 							font-size: var(--body-font-size),
+							font-weight: var(--body-font-weight),
 							line-height: var(--body-line-height),
 						),
 					),
@@ -2255,6 +2256,7 @@
 					components: (
 						heading: (
 							font-size: var(--body-font-size),
+							font-weight: var(--body-font-weight),
 							line-height: var(--body-line-height),
 						),
 					),
@@ -3072,6 +3074,7 @@
 							line-height: var(--heading-level-1-line-height),
 						),
 						overline: (
+							display: flex,
 							justify-content: center,
 						),
 						stack: (

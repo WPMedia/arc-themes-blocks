@@ -360,6 +360,14 @@
 					"justify-content": "left"
 				},
 				"components": {
+					"heading": {
+						"align-self": "left",
+						"justify-content": "left"
+					},
+					"overline": {
+						"display": "flex",
+						"justify-content": "left"
+					},
 					"separator": {
 						"padding": "0 var(--global-spacing-2)"
 					},
@@ -377,6 +385,7 @@
 						"line-height": "var(--heading-level-1-line-height)"
 					},
 					"overline": {
+						"display": "flex",
 						"justify-content": "center"
 					},
 					"stack": {

@@ -33,7 +33,7 @@ export const useEditableContent = () => ({
 
 export const useContent = ({ query }) => {
 	if (!query) {
-		return {};
+		return undefined;
 	}
 
 	if (query.noData) {

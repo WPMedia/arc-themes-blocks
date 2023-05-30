@@ -4,10 +4,10 @@
 			"default": {
 				"components": {
 					"paragraph": {
-						"font-family": "$alias.font-family-primary",
-						"font-size": "$alias.body-font-size-small",
-						"line-height": "$alias.body-line-height-small",
-						"font-weight": "$alias.body-font-weight-small",
+						"font-family": "var(--font-family-primary)",
+						"font-size": "var(--body-font-size-small)",
+						"line-height": "var(--body-line-height-small)",
+						"font-weight": "var(--body-font-weight-small)",
 						"color": "$global.neutral-7"
 					}
 				}
@@ -20,7 +20,7 @@
 			"default": {
 				"background-color": "$global.neutral-7",
 				"padding": "$global.spacing-4",
-				"border-radius": "$alias.border-radius",
+				"border-radius": "var(--border-radius)",
 				"components": {
 					"stack": {
 						"gap": "$global.spacing-4",

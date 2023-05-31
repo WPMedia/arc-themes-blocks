@@ -1,8 +1,13 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
+import * as fusionContent from "fusion:content";
 
 import Hero from "./default";
+
+jest.mock("fusion:content", () => ({
+	useContent: jest.fn(() => ({ hash: "2cc3c2b3" })),
+}));
 
 describe("Hero", () => {
 	it("should render", () => {
@@ -38,6 +43,12 @@ describe("Hero", () => {
 					headline: "My Headline",
 					subHeadline: "My Sub Headline",
 					description: "My description",
+					imageId: "P5EYZ",
+					imageURLDesktop: "https://www.google.com",
+					imageDesktopAuth: { 2: "2dd3c2a2" },
+					mobileImageId: "P5EYZ",
+					imageURLMobile: "https://www.google.com",
+					mobileImageAuth: { 2: "2cc3c2b3" },
 				}}
 			/>
 		);
@@ -191,6 +202,7 @@ describe("Hero", () => {
 	});
 
 	it("should set correct alt text for the image", () => {
+		jest.spyOn(fusionContent, "useContent").mockImplementation(() => ({}));
 		const { container } = render(
 			<Hero
 				customFields={{
@@ -201,6 +213,13 @@ describe("Hero", () => {
 					subHeadline: "My Sub Headline",
 					description: "My description",
 					link1Action: "#",
+					imageMobileId: "EM5DTGYGABDJZODV7YVFOC2DOM",
+					imageDesktopURL:
+						"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
+					imageMobileURL:
+						"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
+					imageMobileAlt: "Picture of man in the forest",
+					resizerURL: "https://cloudfront-us-east-1.images",
 					link1Text: "For Him",
 					link1Type: "secondary",
 					link2Action: "#",
@@ -210,6 +229,6 @@ describe("Hero", () => {
 				}}
 			/>
 		);
-		expect(container.querySelector("img").getAttribute("alt")).toBe("¿Dónde está la biblioteca?");
+		expect(container.querySelector("img").getAttribute("alt")).toBe("My Headline");
 	});
 });

@@ -20,9 +20,17 @@ export const showOverlayCenter = () => (
 			layout: "overlay",
 			alignment: "center",
 			variant: "light",
-			imageURLDesktop: "/hero_desktop-progressive.jpeg",
-			imageURLMobile: "/hero_mobile-progressive.jpeg",
-			imageAltText: "Picture of man in the forest",
+			imageId: "P5EYZSWH6FBEHDIQMV7H35ENWM",
+			imageDesktopURL:
+				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/P5EYZSWH6FBEHDIQMV7H35ENWM.jpg",
+			imageDesktopAuth: {
+				hash: "2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade",
+			},
+			imageMobileId: "EM5DTGYGABDJZODV7YVFOC2DOM",
+			imageMobileURL:
+				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
+			imageMobileAuth: { 2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf" },
+			imageMobileAlt: "Picture of man in the forest",
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
 			description: "Versatile. Slightly-cooler temps and light layers.",
@@ -32,6 +40,8 @@ export const showOverlayCenter = () => (
 			link2Action: "/womans",
 			link2Text: "Shop Women",
 			link2Type: "secondary",
+			resizerAppVersion: 2,
+			resizerURL: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/",
 		}}
 	/>
 );
@@ -42,9 +52,17 @@ export const showOverlayLeft = () => (
 			layout: "overlay",
 			alignment: "left",
 			variant: "light",
-			imageURLDesktop: "/hero_desktop-progressive.jpeg",
-			imageURLMobile: "/hero_mobile-progressive.jpeg",
-			imageAltText: "Picture of man in the forest",
+			imageId: "P5EYZSWH6FBEHDIQMV7H35ENWM",
+			imageDesktopURL:
+				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/P5EYZSWH6FBEHDIQMV7H35ENWM.jpg",
+			imageDesktopAuth: {
+				hash: "2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade",
+			},
+			imageMobileId: "EM5DTGYGABDJZODV7YVFOC2DOM",
+			imageMobileURL:
+				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
+			imageMobileAuth: { 2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf" },
+			imageMobileAlt: "Picture of man in the forest",
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
 			description: "Versatile. Slightly-cooler temps and light layers.",
@@ -54,6 +72,8 @@ export const showOverlayLeft = () => (
 			link2Action: "/womans",
 			link2Text: "Shop Women",
 			link2Type: "secondary",
+			resizerAppVersion: 2,
+			resizerURL: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/",
 		}}
 	/>
 );
@@ -64,9 +84,17 @@ export const showButtonVariants = () => (
 			layout: "overlay",
 			alignment: "left",
 			variant: "light",
-			imageURLDesktop: "/hero_desktop-progressive.jpeg",
-			imageURLMobile: "/hero_mobile-progressive.jpeg",
-			imageAltText: "Picture of man in the forest",
+			imageId: "P5EYZSWH6FBEHDIQMV7H35ENWM",
+			imageDesktopURL:
+				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/P5EYZSWH6FBEHDIQMV7H35ENWM.jpg",
+			imageDesktopAuth: {
+				hash: "2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade",
+			},
+			imageMobileId: "EM5DTGYGABDJZODV7YVFOC2DOM",
+			imageMobileURL:
+				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
+			imageMobileAuth: { 2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf" },
+			imageMobileAlt: "Picture of man in the forest",
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
 			description: "Versatile. Slightly-cooler temps and light layers.",
@@ -76,6 +104,8 @@ export const showButtonVariants = () => (
 			link2Action: "/womans",
 			link2Text: "Shop Women",
 			link2Type: "secondary",
+			resizerAppVersion: 2,
+			resizerURL: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/",
 		}}
 	/>
 );
@@ -86,15 +116,25 @@ export const showOnlyOneButton = () => (
 			layout: "overlay",
 			alignment: "left",
 			variant: "light",
-			imageURLDesktop: "/hero_desktop-progressive.jpeg",
-			imageURLMobile: "/hero_mobile-progressive.jpeg",
-			imageAltText: "Picture of man in the forest",
+			imageId: "P5EYZSWH6FBEHDIQMV7H35ENWM",
+			imageDesktopURL:
+				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/P5EYZSWH6FBEHDIQMV7H35ENWM.jpg",
+			imageDesktopAuth: {
+				hash: "2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade",
+			},
+			imageMobileId: "EM5DTGYGABDJZODV7YVFOC2DOM",
+			imageMobileURL:
+				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
+			imageMobileAuth: { 2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf" },
+			imageMobileAlt: "Picture of man in the forest",
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
 			description: "Versatile. Slightly-cooler temps and light layers.",
 			link1Action: "/mens",
 			link1Text: "Shop Men",
 			link1Type: "primary",
+			resizerAppVersion: 2,
+			resizerURL: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/",
 		}}
 	/>
 );
@@ -105,9 +145,17 @@ export const showStackedCenter = () => (
 			layout: "stacked",
 			alignment: "center",
 			variant: "dark",
-			imageURLDesktop: "/hero_desktop-progressive.jpeg",
-			imageURLMobile: "/hero_mobile-progressive.jpeg",
-			imageAltText: "Picture of man in the forest",
+			imageId: "P5EYZSWH6FBEHDIQMV7H35ENWM",
+			imageDesktopURL:
+				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/P5EYZSWH6FBEHDIQMV7H35ENWM.jpg",
+			imageDesktopAuth: {
+				hash: "2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade",
+			},
+			imageMobileId: "EM5DTGYGABDJZODV7YVFOC2DOM",
+			imageMobileURL:
+				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
+			imageMobileAuth: { 2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf" },
+			imageMobileAlt: "Picture of man in the forest",
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
 			description: "Versatile. Slightly-cooler temps and light layers.",
@@ -117,6 +165,8 @@ export const showStackedCenter = () => (
 			link2Action: "/womans",
 			link2Text: "Shop Women",
 			link2Type: "primary",
+			resizerAppVersion: 2,
+			resizerURL: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/",
 		}}
 	/>
 );
@@ -127,9 +177,17 @@ export const showStackedLeft = () => (
 			layout: "stacked",
 			alignment: "left",
 			variant: "dark",
-			imageURLDesktop: "/hero_desktop-progressive.jpeg",
-			imageURLMobile: "/hero_mobile-progressive.jpeg",
-			imageAltText: "Picture of man in the forest",
+			imageId: "P5EYZSWH6FBEHDIQMV7H35ENWM",
+			imageDesktopURL:
+				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/P5EYZSWH6FBEHDIQMV7H35ENWM.jpg",
+			imageDesktopAuth: {
+				hash: "2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade",
+			},
+			imageMobileId: "EM5DTGYGABDJZODV7YVFOC2DOM",
+			imageMobileURL:
+				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
+			imageMobileAuth: { 2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf" },
+			imageMobileAlt: "Picture of man in the forest",
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
 			description: "Versatile. Slightly-cooler temps and light layers.",
@@ -139,6 +197,8 @@ export const showStackedLeft = () => (
 			link2Action: "/womans",
 			link2Text: "Shop Women",
 			link2Type: "primary",
+			resizerAppVersion: 2,
+			resizerURL: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/",
 		}}
 	/>
 );

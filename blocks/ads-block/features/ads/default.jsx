@@ -97,7 +97,6 @@ const ArcAd = (props) => {
 			isAdmin={isAdmin}
 			isAMP={isAMP}
 			lazyLoad={lazyLoad}
-			phrases={phrases}
 			propsWithContext={propsWithContext}
 			sizing={sizing}
 			adLabel={adLabel}

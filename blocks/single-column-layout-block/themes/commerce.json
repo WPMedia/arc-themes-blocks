@@ -16,5 +16,14 @@
 				}
 			}
 		}
+	},
+	"single-column-regular-body": {
+		"styles": {
+			"default": {
+				"padding": "var(--global-spacing-5)",
+				"gap": "var(--global-spacing-5)",
+				"max-width": "39.875rem"
+			}
+		}
 	}
 }

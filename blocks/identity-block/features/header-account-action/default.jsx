@@ -3,17 +3,9 @@ import PropTypes from "@arc-fusion/prop-types";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { useFusionContext } from "fusion:context";
-import {
-	Button,
-	BUTTON_SIZES,
-	BUTTON_TYPES,
-	getNavSpecificSecondaryButtonTheme,
-	getNavSpecificPrimaryButtonTheme,
-} from "@wpmedia/shared-styles";
+import { Button } from "@wpmedia/arc-themes-components";
 import useIdentity from "../../components/Identity";
 import DropDownLinkListItem from "./_children/DropDownLinkListItem";
-
-import "./styles.scss";
 
 const HeaderAccountAction = ({ customFields }) => {
 	const { createAccountURL, loginURL, logoutURL, manageAccountURL } = customFields;

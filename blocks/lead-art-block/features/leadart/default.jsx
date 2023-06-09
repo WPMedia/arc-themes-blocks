@@ -232,7 +232,6 @@ export const LeadArtPresentation = (props) => {
 								<div className={`${BLOCK_CLASS_NAME}__image-wrapper`}>
 									<Image
 										ansImage={galleryItem}
-										resizedOptions={{ smart: true }}
 										// 16:9 aspect ratio
 										width={800}
 										height={450}

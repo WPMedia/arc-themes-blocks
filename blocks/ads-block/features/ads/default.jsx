@@ -42,10 +42,7 @@ export const ArcAdDisplay = (props) => {
 						offsetLeft={0}
 						offsetRight={0}
 						offsetTop={200}
-						renderPlaceholder={(ref) => (
-							// istanbul ignore next
-							<div ref={ref} />
-						)}
+						renderPlaceholder={(ref) => <div ref={ref} />}
 					>
 						<AdUnit adConfig={config} featureConfig={propsWithContext} />
 					</LazyLoad>

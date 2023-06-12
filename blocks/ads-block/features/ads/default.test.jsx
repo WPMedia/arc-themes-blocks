@@ -5,7 +5,8 @@ import ArcAd from "./default";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
-	LazyLoad: ({ children }) => <>{children}</>,
+	LazyLoad: ({ children, enabled, renderPlaceholder }) =>
+		enabled ? renderPlaceholder() : children,
 }));
 
 const SITE_PROPS_MOCK = {

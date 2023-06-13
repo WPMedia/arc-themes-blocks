@@ -7,6 +7,9 @@ import Hero from "./default";
 
 jest.mock("fusion:content", () => ({
 	useContent: jest.fn(() => ({ hash: "2cc3c2b3" })),
+	useEditableContent: jest.fn(() => ({
+		searchableField: () => {},
+	})),
 }));
 
 describe("Hero", () => {

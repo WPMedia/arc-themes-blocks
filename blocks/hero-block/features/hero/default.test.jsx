@@ -6,7 +6,7 @@ import * as fusionContent from "fusion:content";
 import Hero from "./default";
 
 jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => ({ hash: "2cc3c2b3" })),
+	useContent: jest.fn(() => JSON.stringify({ 2: "2cc3c2b3" })),
 	useEditableContent: jest.fn(() => ({
 		searchableField: () => {},
 	})),
@@ -48,7 +48,7 @@ describe("Hero", () => {
 					description: "My description",
 					imageId: "P5EYZ",
 					imageURLDesktop: "https://www.google.com",
-					imageDesktopAuth: { 2: "2dd3c2a2" },
+					imageDesktopAuth: JSON.stringify({ 2: "2dd3c2a2" }),
 					mobileImageId: "P5EYZ",
 					imageURLMobile: "https://www.google.com",
 					mobileImageAuth: { 2: "2cc3c2b3" },

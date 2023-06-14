@@ -14,6 +14,10 @@ export default {
 	},
 };
 
+const imageDesktopAuth = JSON.stringify({
+	2: "2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade",
+});
+
 export const showOverlayCenter = () => (
 	<Hero
 		customFields={{
@@ -23,9 +27,7 @@ export const showOverlayCenter = () => (
 			imageId: "P5EYZSWH6FBEHDIQMV7H35ENWM",
 			imageDesktopURL:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/P5EYZSWH6FBEHDIQMV7H35ENWM.jpg",
-			imageDesktopAuth: {
-				hash: "2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade",
-			},
+			imageDesktopAuth,
 			imageMobileId: "EM5DTGYGABDJZODV7YVFOC2DOM",
 			imageMobileURL:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
@@ -34,7 +36,6 @@ export const showOverlayCenter = () => (
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
 			description: "Versatile. Slightly-cooler temps and light layers.",
-			itemAction: "https://www.arcxp.com/products/content/",
 			link1Action: "/mens",
 			link1Text: "Shop Men",
 			link1Type: "secondary",
@@ -56,9 +57,7 @@ export const showOverlayLeft = () => (
 			imageId: "P5EYZSWH6FBEHDIQMV7H35ENWM",
 			imageDesktopURL:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/P5EYZSWH6FBEHDIQMV7H35ENWM.jpg",
-			imageDesktopAuth: {
-				hash: "2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade",
-			},
+			imageDesktopAuth,
 			imageMobileId: "EM5DTGYGABDJZODV7YVFOC2DOM",
 			imageMobileURL:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
@@ -67,7 +66,6 @@ export const showOverlayLeft = () => (
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
 			description: "Versatile. Slightly-cooler temps and light layers.",
-			itemAction: "https://www.arcxp.com/products/content/",
 			link1Action: "/mens",
 			link1Text: "Shop Men",
 			link1Type: "secondary",
@@ -89,9 +87,7 @@ export const showButtonVariants = () => (
 			imageId: "P5EYZSWH6FBEHDIQMV7H35ENWM",
 			imageDesktopURL:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/P5EYZSWH6FBEHDIQMV7H35ENWM.jpg",
-			imageDesktopAuth: {
-				hash: "2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade",
-			},
+			imageDesktopAuth,
 			imageMobileId: "EM5DTGYGABDJZODV7YVFOC2DOM",
 			imageMobileURL:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
@@ -100,7 +96,6 @@ export const showButtonVariants = () => (
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
 			description: "Versatile. Slightly-cooler temps and light layers.",
-			itemAction: "https://www.arcxp.com/products/content/",
 			link1Action: "/mens",
 			link1Text: "Shop Men",
 			link1Type: "primary",
@@ -122,9 +117,7 @@ export const showOnlyOneButton = () => (
 			imageId: "P5EYZSWH6FBEHDIQMV7H35ENWM",
 			imageDesktopURL:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/P5EYZSWH6FBEHDIQMV7H35ENWM.jpg",
-			imageDesktopAuth: {
-				hash: "2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade",
-			},
+			imageDesktopAuth,
 			imageMobileId: "EM5DTGYGABDJZODV7YVFOC2DOM",
 			imageMobileURL:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
@@ -133,7 +126,6 @@ export const showOnlyOneButton = () => (
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
 			description: "Versatile. Slightly-cooler temps and light layers.",
-			itemAction: "https://www.arcxp.com/products/content/",
 			link1Action: "/mens",
 			link1Text: "Shop Men",
 			link1Type: "primary",
@@ -152,9 +144,7 @@ export const showStackedCenter = () => (
 			imageId: "P5EYZSWH6FBEHDIQMV7H35ENWM",
 			imageDesktopURL:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/P5EYZSWH6FBEHDIQMV7H35ENWM.jpg",
-			imageDesktopAuth: {
-				hash: "2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade",
-			},
+			imageDesktopAuth,
 			imageMobileId: "EM5DTGYGABDJZODV7YVFOC2DOM",
 			imageMobileURL:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
@@ -163,7 +153,6 @@ export const showStackedCenter = () => (
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
 			description: "Versatile. Slightly-cooler temps and light layers.",
-			itemAction: "https://www.arcxp.com/products/content/",
 			link1Action: "/mens",
 			link1Text: "Shop Men",
 			link1Type: "primary",
@@ -185,9 +174,7 @@ export const showStackedLeft = () => (
 			imageId: "P5EYZSWH6FBEHDIQMV7H35ENWM",
 			imageDesktopURL:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/P5EYZSWH6FBEHDIQMV7H35ENWM.jpg",
-			imageDesktopAuth: {
-				hash: "2dd3c2a210c92684c52c3fd991646cc7119f623a92e65a3513a6c1086d41cade",
-			},
+			imageDesktopAuth,
 			imageMobileId: "EM5DTGYGABDJZODV7YVFOC2DOM",
 			imageMobileURL:
 				"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
@@ -196,7 +183,6 @@ export const showStackedLeft = () => (
 			headline: "All The Fall Things",
 			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
 			description: "Versatile. Slightly-cooler temps and light layers.",
-			itemAction: "https://www.arcxp.com/products/content/",
 			link1Action: "/mens",
 			link1Text: "Shop Men",
 			link1Type: "primary",

@@ -12,7 +12,6 @@ import {
 	Heading,
 	HeadingSection,
 	imageANSToImageSrc,
-	Link,
 	Paragraph,
 	Picture,
 	Stack,
@@ -29,7 +28,6 @@ function Hero({ customFields }) {
 		imageDesktopURL,
 		imageId: desktopImgId,
 		imageDesktopAuth,
-		imageDesktopAlt,
 		imageMobileId: imgMobileId,
 		imageMobileAlt,
 		imageMobileAuth,
@@ -42,7 +40,6 @@ function Hero({ customFields }) {
 		link2Type,
 		subHeadline,
 		variant = "dark",
-		itemAction = "",
 	} = customFields;
 	const { arcSite } = useFusionContext();
 	const { searchableField } = useEditableContent();
@@ -63,12 +60,14 @@ function Hero({ customFields }) {
 			: {}
 	);
 
-	if (desktopAuth?.hash) {
-		desktopAuth[RESIZER_TOKEN_VERSION] = desktopAuth.hash;
-	}
-	if (desktopAuth && !Object.keys(desktopAuth).length) {
+	if (!desktopAuth || (desktopAuth && !Object.keys(desktopAuth).length)) {
 		desktopAuth = imageDesktopAuth;
 	}
+
+	if (desktopAuth) {
+		desktopAuth = JSON.parse(desktopAuth)[RESIZER_TOKEN_VERSION];
+	}
+
 	let mobileAuth = useContent(
 		!imageMobileAuth && imageMobileId
 			? {
@@ -98,7 +97,7 @@ function Hero({ customFields }) {
 						url: imageDesktopURL,
 					}),
 					resizedOptions: {
-						auth: desktopAuth?.hash || {},
+						auth: desktopAuth || {},
 						smart: true,
 					},
 					width: 1200,
@@ -107,7 +106,6 @@ function Hero({ customFields }) {
 			  }
 			: {
 					src: fallbackImage,
-					alt: imageDesktopAlt,
 			  };
 	const mobileImageParams =
 		imageMobileId && imageMobileURL
@@ -131,26 +129,26 @@ function Hero({ customFields }) {
 			  };
 	const HeadingWrapper = headline ? HeadingSection : Fragment;
 	return (
-		<Link href={itemAction} className={classes}>
-			<Picture
-				inline
-				{...searchableField({
-					[`imageDesktopURL`]: "url",
-					[`imageId`]: "_id",
-					[`imageDesktopAuth`]: "auth",
-					[`imageMobileAlt`]: "alt_text",
-				})}
-				suppressContentEditableWarning
-			>
+		<div className={classes}>
+			<Picture>
 				<Picture.Source {...{ media: "(min-width:600px)", ...desktopImageParams }} />
 				<Picture.Image {...mobileImageParams} />
 			</Picture>
+
 			<Stack
 				className={`${BLOCK_CLASS_NAME}__text--${layout} ${
 					alignment === "left"
 						? `${BLOCK_CLASS_NAME}__text--left`
 						: `${BLOCK_CLASS_NAME}__text--center`
 				}`}
+				inline
+				{...searchableField({
+					[`imageDesktopURL`]: "url",
+					[`desktopImgId`]: "_id",
+					[`imageDesktopAuth`]: "auth",
+					[`imageAlt`]: "alt_text",
+				})}
+				suppressContentEditableWarning
 			>
 				<HeadingWrapper>
 					{headline ? <Heading>{headline}</Heading> : null}
@@ -181,7 +179,7 @@ function Hero({ customFields }) {
 					) : null}
 				</HeadingWrapper>
 			</Stack>
-		</Link>
+		</div>
 	);
 }
 
@@ -191,31 +189,23 @@ Hero.icon = "picture-double-shapes";
 
 Hero.propTypes = {
 	customFields: PropTypes.shape({
+		layout: PropTypes.oneOf(["overlay", "stacked"]).tag({
+			defaultValue: "overlay",
+			description: "Overlay is text on top of the image and stacked is the text under the image.",
+			label: "Layout configuration",
+		}),
 		alignment: PropTypes.oneOf(["center", "left"]).tag({
 			defaultValue: "center",
 			description:
 				"How the content should be aligned over the image. Applies to overlay layout only.",
 			label: "Content Alignment",
 		}),
-		description: PropTypes.string.tag({
-			label: "Description Text",
-			description: "The description for the text area of the hero block.",
+		variant: PropTypes.oneOf(["dark", "light"]).tag({
+			defaultValue: "dark",
+			label: "Content Style",
+			description: "Select a light or dark theme for the content area.",
 		}),
-		headline: PropTypes.string.tag({
-			label: "Headline Text",
-			description: "The headline for the text area of the hero block.",
-			required: true,
-		}),
-		imageDesktopAlt: PropTypes.string.tag({
-			defaultValue: "",
-			description: "The alt text that will be applied for desktop image.",
-			label: "Image alt text",
-			hidden: true,
-		}),
-		imageDesktopAuth: PropTypes.string.tag({
-			hidden: true,
-		}),
-		imageDesktopHeight: PropTypes.string.tag({
+		imageId: PropTypes.string.tag({
 			hidden: true,
 		}),
 		imageDesktopURL: PropTypes.string.tag({
@@ -226,19 +216,10 @@ Hero.propTypes = {
 		imageDesktopWidth: PropTypes.string.tag({
 			hidden: true,
 		}),
-		imageId: PropTypes.string.tag({
+		imageDesktopHeight: PropTypes.string.tag({
 			hidden: true,
 		}),
-		imageMobileAlt: PropTypes.string.tag({
-			defaultValue: "",
-			description: "The alt text that will be applied for mobile image.",
-			label: "Image alt text",
-			hidden: true,
-		}),
-		imageMobileAuth: PropTypes.string.tag({
-			hidden: true,
-		}),
-		imageMobileId: PropTypes.string.tag({
+		imageDesktopAuth: PropTypes.string.tag({
 			hidden: true,
 		}),
 		imageMobileURL: PropTypes.string.tag({
@@ -246,16 +227,30 @@ Hero.propTypes = {
 			description: "Select an image appropriate for mobile sized screens.",
 			searchable: "image",
 		}),
-		itemAction: PropTypes.string.tag({
-			label: "Button Click URL",
-			description: "Destination URL when image's button is clicked.",
-			defaultValue: "",
-			group: "Image",
+		imageMobileAuth: PropTypes.string.tag({
+			hidden: true,
 		}),
-		layout: PropTypes.oneOf(["overlay", "stacked"]).tag({
-			defaultValue: "overlay",
-			description: "Overlay is text on top of the image and stacked is the text under the image.",
-			label: "Layout configuration",
+		imageMobileId: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageMobileAlt: PropTypes.string.tag({
+			defaultValue: "",
+			description: "The alt text that will be applied for both the mobile and desktop image.",
+			label: "Image alt text",
+			hidden: true,
+		}),
+		headline: PropTypes.string.tag({
+			label: "Headline Text",
+			description: "The headline for the text area of the hero block.",
+			required: true,
+		}),
+		subHeadline: PropTypes.string.tag({
+			label: "Sub-Headline Text",
+			description: "The sub-headline for the text area of the hero block.",
+		}),
+		description: PropTypes.string.tag({
+			label: "Description Text",
+			description: "The description for the text area of the hero block.",
 		}),
 		link1Action: PropTypes.string.tag({
 			group: "Button 1",
@@ -291,15 +286,6 @@ Hero.propTypes = {
 			defaultValue: "secondary",
 			label: "Button #2 Type",
 			description: "Select a style for this button.",
-		}),
-		subHeadline: PropTypes.string.tag({
-			label: "Sub-Headline Text",
-			description: "The sub-headline for the text area of the hero block.",
-		}),
-		variant: PropTypes.oneOf(["dark", "light"]).tag({
-			defaultValue: "dark",
-			label: "Content Style",
-			description: "Select a light or dark theme for the content area.",
 		}),
 	}),
 };

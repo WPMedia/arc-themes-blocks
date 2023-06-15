@@ -7,6 +7,8 @@ import { Button } from "@wpmedia/arc-themes-components";
 import useIdentity from "../../components/Identity";
 import DropDownLinkListItem from "./_children/DropDownLinkListItem";
 
+const BLOCK_CLASS_NAME = "b-header-account-action";
+
 const HeaderAccountAction = ({ customFields }) => {
 	const { createAccountURL, loginURL, logoutURL, manageAccountURL } = customFields;
 	const { arcSite } = useFusionContext();

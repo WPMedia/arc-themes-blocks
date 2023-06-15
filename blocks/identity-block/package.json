@@ -7,11 +7,13 @@
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
+    "_index.scss",
     "features",
     "sources",
     "chains",
     "components",
     "utils",
+    "themes",
     "intl.json"
   ],
   "publishConfig": {

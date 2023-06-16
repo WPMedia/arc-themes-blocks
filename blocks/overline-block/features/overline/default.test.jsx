@@ -18,7 +18,7 @@ const mockContextObj = {
 	},
 };
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
+jest.mock("@wpmedia/arc-themes-components", () => ({
 	formatURL: jest.fn((input) => input.toString()),
 }));
 

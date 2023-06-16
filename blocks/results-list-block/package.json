@@ -28,7 +28,6 @@
   },
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/global-phrases-block": "*",
     "@wpmedia/arc-themes-components": "*"
   },

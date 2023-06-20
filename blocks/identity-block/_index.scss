@@ -1,0 +1,31 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-header-account-action {
+	&__header {
+		@include scss.block-components("header-account-action-header");
+		@include scss.block-properties("header-account-action-header");
+	}
+
+	&__desktop-header {
+		@include scss.block-components("header-account-action-desktop-header");
+		@include scss.block-properties("header-account-action-desktop-header");
+	}
+
+	&__mobile-header {
+		@include scss.block-components("header-account-action-mobile-header");
+		@include scss.block-properties("header-account-action-mobile-header");
+	}
+
+	&__dropdown-open {
+		@include scss.block-components("header-account-action-dropdown-open");
+		@include scss.block-properties("header-account-action-dropdown-open");
+	}
+
+	&__dropdown-list-item {
+		@include scss.block-components("header-account-action-dropdown-list-item");
+		@include scss.block-properties("header-account-action-dropdown-list-item");
+	}
+
+	@include scss.block-components("header-account-action");
+	@include scss.block-properties("header-account-action");
+}

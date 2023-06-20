@@ -1,0 +1,38 @@
+{
+	"header-account-action": {
+		"styles": {
+			"default": {},
+			"desktop": {}
+		}
+	},
+	"header-account-action-header": {
+		"styles": {
+			"default": {},
+			"desktop": {}
+		}
+	},
+	"header-account-action-desktop-header": {
+		"styles": {
+			"default": {},
+			"desktop": {}
+		}
+	},
+	"header-account-action-mobile-header": {
+		"styles": {
+			"default": {},
+			"desktop": {}
+		}
+	},
+	"header-account-action-dropdown-open": {
+		"styles": {
+			"default": {},
+			"desktop": {}
+		}
+	},
+	"header-account-action-dropdown-list-item": {
+		"styles": {
+			"default": {},
+			"desktop": {}
+		}
+	}
+}

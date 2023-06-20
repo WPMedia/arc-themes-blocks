@@ -17,19 +17,13 @@ const StyledLinkWithHover = styled.a`
 
 function DropDownLinkListItem(props) {
 	const { arcSite } = useFusionContext();
-	const { text, href } = props;
+	const { text, href, blockClassName } = props;
 	const primaryColor = getThemeStyle(arcSite)["primary-color"];
 	const font = getThemeStyle(arcSite)["primary-font-family"];
 
 	return (
-		<li className="xpmedia-subs-header-dropdown-list-item">
-			<StyledLinkWithHover
-				className="xpmedia-subs-header-dropdown-list-item-link"
-				href={href}
-				primaryColor={primaryColor}
-				font={font}
-				{...props}
-			>
+		<li className={`${blockClassName}__dropdown-list-item`}>
+			<StyledLinkWithHover href={href} primaryColor={primaryColor} font={font} {...props}>
 				{text}
 			</StyledLinkWithHover>
 		</li>

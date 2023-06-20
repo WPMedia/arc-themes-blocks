@@ -74,8 +74,8 @@ const HeaderAccountAction = ({ customFields }) => {
 
 	if (user && !error) {
 		return (
-			<div className="xpmedia-subs-header--header">
-				<div className="xpmedia-subs-header--desktop-header">
+			<div className={`${BLOCK_CLASS_NAME}__header`}>
+				<div className={`${BLOCK_CLASS_NAME}__desktop-header`}>
 					<Button
 						aria-expanded={isAccountMenuOpen}
 						as="button"
@@ -89,7 +89,7 @@ const HeaderAccountAction = ({ customFields }) => {
 						type="button"
 					/>
 				</div>
-				<div className="xpmedia-subs-header--mobile-header">
+				<div className={`${BLOCK_CLASS_NAME}__mobile-header`}>
 					<Button
 						aria-expanded={isAccountMenuOpen}
 						as="button"
@@ -103,15 +103,17 @@ const HeaderAccountAction = ({ customFields }) => {
 					/>
 				</div>
 				{isAccountMenuOpen && (
-					<ul className="xpmedia-subs-header-dropdown--open">
+					<ul className={`${BLOCK_CLASS_NAME}__dropdown-open`}>
 						<DropDownLinkListItem
 							href={manageAccountURL}
 							text={phrases.t("identity-block.manage-account")}
+							blockClassName={BLOCK_CLASS_NAME}
 						/>
 						<DropDownLinkListItem
 							href={logoutURL}
 							onClick={handleLogout}
 							text={phrases.t("identity-block.log-out")}
+							blockClassName={BLOCK_CLASS_NAME}
 						/>
 					</ul>
 				)}
@@ -122,7 +124,7 @@ const HeaderAccountAction = ({ customFields }) => {
 	// What do we want to happen if there is an error?
 	return (
 		<>
-			<div className="xpmedia-subs-header--desktop-header">
+			<div className={`${BLOCK_CLASS_NAME}__desktop-header`}>
 				{createAccountURL ? (
 					<Button
 						// should be an a tag if it's a link
@@ -147,7 +149,7 @@ const HeaderAccountAction = ({ customFields }) => {
 					/>
 				) : null}
 			</div>
-			<div className="xpmedia-subs-header--mobile-header">
+			<div className={`${BLOCK_CLASS_NAME}__mobile-header`}>
 				<Button
 					// should be button if toggleable
 					as="button"
@@ -162,7 +164,7 @@ const HeaderAccountAction = ({ customFields }) => {
 					type="button"
 				/>
 				{isAccountMenuOpen && (
-					<ul className="xpmedia-subs-header-dropdown--open">
+					<ul className={`${BLOCK_CLASS_NAME}__dropdown-open`}>
 						{createAccountURL ? (
 							<DropDownLinkListItem
 								href={createAccountURL}

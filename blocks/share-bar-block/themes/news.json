@@ -31,7 +31,7 @@
 	"share-bar-facebook": {
 		"styles": {
 			"default": {
-				"fill": "#415993"
+				"fill": "var(--global-black)"
 			},
 			"desktop": {}
 		}
@@ -39,7 +39,7 @@
 	"share-bar-linkedin": {
 		"styles": {
 			"default": {
-				"fill": "#3076b0"
+				"fill": "var(--global-black)"
 			},
 			"desktop": {}
 		}
@@ -47,7 +47,7 @@
 	"share-bar-pinterest": {
 		"styles": {
 			"default": {
-				"fill": "#ad2526"
+				"fill": "var(--global-black)"
 			},
 			"desktop": {}
 		}
@@ -55,7 +55,7 @@
 	"share-bar-twitter": {
 		"styles": {
 			"default": {
-				"fill": "#6baae8"
+				"fill": "var(--global-black)"
 			},
 			"desktop": {}
 		}
@@ -63,7 +63,7 @@
 	"share-bar-email": {
 		"styles": {
 			"default": {
-				"fill": "#b61818"
+				"fill": "var(--global-black)"
 			},
 			"desktop": {}
 		}

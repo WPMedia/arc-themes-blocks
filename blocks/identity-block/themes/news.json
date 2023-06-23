@@ -31,7 +31,16 @@
 	},
 	"header-account-action-dropdown-list-item": {
 		"styles": {
-			"default": {},
+			"default": {
+				"components": {
+					"link": {
+						"font-family": "var(--font-family-primary)"
+					},
+					"link-hover": {
+						"color": "var(--color-primary-hover)"
+					}
+				}
+			},
 			"desktop": {}
 		}
 	}

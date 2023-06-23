@@ -3,7 +3,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { useFusionContext } from "fusion:context";
-import { Button } from "@wpmedia/arc-themes-components";
+import { Button, Icon } from "@wpmedia/arc-themes-components";
 import useIdentity from "../../components/Identity";
 import DropDownLinkListItem from "./_children/DropDownLinkListItem";
 
@@ -72,6 +72,8 @@ const HeaderAccountAction = ({ customFields }) => {
 	// display their name.
 	// Should we display anything on first pass?
 
+	const userIcon = <Icon name="User" />;
+
 	if (user && !error) {
 		return (
 			<div className={`${BLOCK_CLASS_NAME}__header`}>
@@ -79,10 +81,9 @@ const HeaderAccountAction = ({ customFields }) => {
 					<Button
 						aria-expanded={isAccountMenuOpen}
 						as="button"
-						buttonSize={BUTTON_SIZES.SMALL}
-						buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
-						buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
-						iconType="user"
+						size="small"
+						variant=""
+						iconLeft={userIcon}
 						secondaryIconType={isAccountMenuOpen ? "chevron-up" : "chevron-down"}
 						onClick={() => setAccountMenu(!isAccountMenuOpen)}
 						text={phrases.t("identity-block.account")}
@@ -93,10 +94,9 @@ const HeaderAccountAction = ({ customFields }) => {
 					<Button
 						aria-expanded={isAccountMenuOpen}
 						as="button"
-						buttonSize={BUTTON_SIZES.SMALL}
-						buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
-						buttonType={BUTTON_TYPES.ICON_ONLY}
-						iconType="user"
+						size="small"
+						variant=""
+						iconLeft={userIcon}
 						onClick={() => setAccountMenu(!isAccountMenuOpen)}
 						text={phrases.t("identity-block.login-options")}
 						type="button"
@@ -129,7 +129,7 @@ const HeaderAccountAction = ({ customFields }) => {
 					<Button
 						// should be an a tag if it's a link
 						as="a"
-						buttonSize={BUTTON_SIZES.SMALL}
+						size="small"
 						buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
 						buttonType={BUTTON_TYPES.LABEL_ONLY}
 						href={createAccountURL}
@@ -140,7 +140,7 @@ const HeaderAccountAction = ({ customFields }) => {
 					<Button
 						// should be an a tag if it's a link
 						as="a"
-						buttonSize={BUTTON_SIZES.SMALL}
+						size="small"
 						buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
 						buttonType={BUTTON_TYPES.LABEL_AND_ICON}
 						href={loginURL}

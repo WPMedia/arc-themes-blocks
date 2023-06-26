@@ -20,6 +20,12 @@
 					},
 					"button-medium": {
 						"padding": "0 var(--global-spacing-3)"
+					},
+					"icon": {
+						"fill": "var(--global-black)"
+					},
+					"icon-hover": {
+						"fill": "var(--global-neutral-7)"
 					}
 				}
 			},
@@ -28,43 +34,33 @@
 			}
 		}
 	},
+	"share-bar-email": {
+		"styles": {
+			"default": {},
+			"desktop": {}
+		}
+	},
 	"share-bar-facebook": {
 		"styles": {
-			"default": {
-				"fill": "#415993"
-			},
+			"default": {},
 			"desktop": {}
 		}
 	},
 	"share-bar-linkedin": {
 		"styles": {
-			"default": {
-				"fill": "#3076b0"
-			},
+			"default": {},
 			"desktop": {}
 		}
 	},
 	"share-bar-pinterest": {
 		"styles": {
-			"default": {
-				"fill": "#ad2526"
-			},
+			"default": {},
 			"desktop": {}
 		}
 	},
 	"share-bar-twitter": {
 		"styles": {
-			"default": {
-				"fill": "#6baae8"
-			},
-			"desktop": {}
-		}
-	},
-	"share-bar-email": {
-		"styles": {
-			"default": {
-				"fill": "#b61818"
-			},
+			"default": {},
 			"desktop": {}
 		}
 	}

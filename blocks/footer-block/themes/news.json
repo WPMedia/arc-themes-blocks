@@ -57,11 +57,14 @@
 				"list-style": "none",
 				"components": {
 					"link": {
-						"color": "var(--text-color-subtle)",
+						"color": "var(--global-neutral-5)",
 						"font-family": "var(--font-family-primary)",
 						"font-size": "var(--body-font-size-small)",
 						"font-weight": "var(--global-font-weight-4)",
 						"line-height": "var(--body-line-height-small)"
+					},
+					"link-hover": {
+						"color": "var(--global-neutral-8)"
 					}
 				}
 			},

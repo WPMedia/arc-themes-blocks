@@ -52,6 +52,7 @@
 				"padding-block-end": "var(--global-spacing-2)",
 				"components": {
 					"link": {
+						"font-size": "var(--global-font-size-3)",
 						"font-family": "var(--font-family-primary)"
 					},
 					"link-hover": {

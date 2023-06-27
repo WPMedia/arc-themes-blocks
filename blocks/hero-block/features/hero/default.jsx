@@ -19,6 +19,21 @@ import {
 
 const BLOCK_CLASS_NAME = "b-hero";
 
+const isMobile = () => {
+	if (
+		navigator.userAgent.match(/Android/i) ||
+		navigator.userAgent.match(/webOS/i) ||
+		navigator.userAgent.match(/iPhone/i) ||
+		navigator.userAgent.match(/iPad/i) ||
+		navigator.userAgent.match(/iPod/i) ||
+		navigator.userAgent.match(/BlackBerry/i) ||
+		navigator.userAgent.match(/Windows Phone/i)
+	) {
+		return true;
+	}
+	return false;
+};
+
 function Hero({ customFields }) {
 	const {
 		layout = "overlay",
@@ -79,8 +94,8 @@ function Hero({ customFields }) {
 	if (mobileAuth?.hash) {
 		mobileAuth[RESIZER_TOKEN_VERSION] = mobileAuth.hash;
 	}
-	if (mobileAuth && !Object.keys(mobileAuth).length) {
-		mobileAuth = imageMobileAuth;
+	if (!mobileAuth && imageMobileAuth) {
+		mobileAuth = JSON.parse(imageMobileAuth);
 	}
 	const classes = [
 		BLOCK_CLASS_NAME,
@@ -127,7 +142,24 @@ function Hero({ customFields }) {
 					src: fallbackImage,
 					alt: imageMobileAlt,
 			  };
+
 	const HeadingWrapper = headline ? HeadingSection : Fragment;
+
+	let searchableFieldProps = {
+		[`imageDesktopURL`]: "url",
+		[`desktopImgId`]: "_id",
+		[`imageDesktopAuth`]: "auth",
+		[`imageAlt`]: "alt_text",
+	};
+
+	if (isMobile() && imageMobileId && imageMobileURL) {
+		searchableFieldProps = {
+			[`imageMobileURL`]: "url",
+			[`imgMobileId`]: "_id",
+			[`mobileAuth`]: "auth",
+			[`imageMobileAlt`]: "alt_text",
+		};
+	}
 	return (
 		<div className={classes}>
 			<Picture>
@@ -142,12 +174,7 @@ function Hero({ customFields }) {
 						: `${BLOCK_CLASS_NAME}__text--center`
 				}`}
 				inline
-				{...searchableField({
-					[`imageDesktopURL`]: "url",
-					[`desktopImgId`]: "_id",
-					[`imageDesktopAuth`]: "auth",
-					[`imageAlt`]: "alt_text",
-				})}
+				{...searchableField(searchableFieldProps)}
 				suppressContentEditableWarning
 			>
 				<HeadingWrapper>

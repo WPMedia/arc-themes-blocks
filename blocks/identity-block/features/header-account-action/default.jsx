@@ -14,7 +14,7 @@ const HeaderAccountAction = ({ customFields }) => {
 	const { arcSite } = useFusionContext();
 
 	const { Identity, isInitialized } = useIdentity();
-	const { locale, navColor = "dark", navBarBackground } = getProperties(arcSite);
+	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
 	const [loggedIn, setIsLoggedIn] = useState(false);
@@ -76,31 +76,31 @@ const HeaderAccountAction = ({ customFields }) => {
 
 	if (user && !error) {
 		return (
-			<div className={`${BLOCK_CLASS_NAME}__header`}>
+			<div className={`${BLOCK_CLASS_NAME}`}>
 				<div className={`${BLOCK_CLASS_NAME}__desktop-header`}>
 					<Button
 						aria-expanded={isAccountMenuOpen}
-						as="button"
 						size="small"
-						variant=""
+						variant="default"
 						iconLeft={userIcon}
 						secondaryIconType={isAccountMenuOpen ? "chevron-up" : "chevron-down"}
 						onClick={() => setAccountMenu(!isAccountMenuOpen)}
-						text={phrases.t("identity-block.account")}
 						type="button"
-					/>
+					>
+						<span>{phrases.t("identity-block.account")}</span>
+					</Button>
 				</div>
 				<div className={`${BLOCK_CLASS_NAME}__mobile-header`}>
 					<Button
 						aria-expanded={isAccountMenuOpen}
-						as="button"
 						size="small"
-						variant=""
+						variant="default"
 						iconLeft={userIcon}
 						onClick={() => setAccountMenu(!isAccountMenuOpen)}
-						text={phrases.t("identity-block.login-options")}
 						type="button"
-					/>
+					>
+						<span>{phrases.t("identity-block.login-options")}</span>
+					</Button>
 				</div>
 				{isAccountMenuOpen && (
 					<ul className={`${BLOCK_CLASS_NAME}__dropdown-open`}>
@@ -130,39 +130,30 @@ const HeaderAccountAction = ({ customFields }) => {
 						// should be an a tag if it's a link
 						as="a"
 						size="small"
-						buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
-						buttonType={BUTTON_TYPES.LABEL_ONLY}
+						variant="primary"
+						type="button"
 						href={createAccountURL}
-						text={phrases.t("identity-block.sign-up")}
-					/>
+					>
+						<span>{phrases.t("identity-block.sign-up")}</span>
+					</Button>
 				) : null}
 				{loginURL ? (
-					<Button
-						// should be an a tag if it's a link
-						as="a"
-						size="small"
-						buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
-						buttonType={BUTTON_TYPES.LABEL_AND_ICON}
-						href={loginURL}
-						iconType="user"
-						text={phrases.t("identity-block.log-in")}
-					/>
+					<Button size="small" variant="default" type="button" href={loginURL} iconLeft={userIcon}>
+						<span>{phrases.t("identity-block.log-in")}</span>
+					</Button>
 				) : null}
 			</div>
 			<div className={`${BLOCK_CLASS_NAME}__mobile-header`}>
 				<Button
-					// should be button if toggleable
-					as="button"
 					aria-expanded={isAccountMenuOpen}
-					buttonSize={BUTTON_SIZES.SMALL}
-					buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
-					buttonType={BUTTON_TYPES.ICON_ONLY}
+					size="small"
+					variant="default"
 					iconType="user"
 					onClick={() => setAccountMenu(!isAccountMenuOpen)}
-					text={phrases.t("identity-block.login-options")}
-					// for button accessibility
 					type="button"
-				/>
+				>
+					<span>{phrases.t("identity-block.login-options")}</span>
+				</Button>
 				{isAccountMenuOpen && (
 					<ul className={`${BLOCK_CLASS_NAME}__dropdown-open`}>
 						{createAccountURL ? (

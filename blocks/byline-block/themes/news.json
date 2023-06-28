@@ -4,12 +4,16 @@
 			"default": {
 				"font-size": "var(--body-font-weight)",
 				"line-height": "var(--body-line-height)",
+				"color": "var(--global-neutral-8)",
+				"text-decoration": "none",
 				"components": {
 					"link": {
-						"text-decoration": "none"
+						"color": "var(--global-neutral-8)",
+						"text-decoration": "underline"
 					},
 					"link-hover": {
-						"text-decoration": "underline"
+						"color": "var(--global-neutral-5)",
+						"text-decoration": "none"
 					}
 				}
 			},

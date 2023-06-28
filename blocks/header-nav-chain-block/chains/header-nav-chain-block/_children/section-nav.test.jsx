@@ -94,10 +94,6 @@ const items = [
 	},
 ];
 
-jest.mock("@wpmedia/arc-themes-components", () => ({
-	formatURL: jest.fn((input) => input.toString()),
-}));
-
 describe("the SectionNav component", () => {
 	it("should render children", () => {
 		const wrapper = shallow(

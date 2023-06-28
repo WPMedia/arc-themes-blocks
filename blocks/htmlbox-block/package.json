@@ -23,8 +23,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
-  "peerDependencies": {
-    "@wpmedia/news-theme-css": "*",
+  "peerDependencies":{
     "styled-components": "^4.4.0"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"

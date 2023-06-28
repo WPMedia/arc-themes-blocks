@@ -27,11 +27,6 @@ getProperties.mockReturnValue({
 	breakpoints: {},
 });
 
-jest.mock("@wpmedia/resizer-image-block", () => ({
-	extractResizedParams: jest.fn(),
-	extractImageFromStory: jest.fn(),
-}));
-
 jest.mock("./results", () => ({
 	__esModule: true,
 	default: (params) => (

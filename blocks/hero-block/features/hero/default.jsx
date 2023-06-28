@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import { useFusionContext } from "fusion:context";
-import { useContent } from "fusion:content";
+import { useContent, useEditableContent } from "fusion:content";
 import getProperties from "fusion:properties";
 
 // Arc Themes Components - Base set of components used to compose blocks
@@ -42,6 +42,7 @@ function Hero({ customFields }) {
 		variant = "dark",
 	} = customFields;
 	const { arcSite } = useFusionContext();
+	const { searchableField } = useEditableContent();
 	const { fallbackImage, resizerURL } = getProperties(arcSite);
 	const imageId = imageDesktopURL
 		? imageDesktopURL.split("/").pop().split(".").shift()
@@ -59,12 +60,14 @@ function Hero({ customFields }) {
 			: {}
 	);
 
-	if (desktopAuth?.hash) {
-		desktopAuth[RESIZER_TOKEN_VERSION] = desktopAuth.hash;
-	}
-	if (desktopAuth && !Object.keys(desktopAuth).length) {
+	if (!desktopAuth || (desktopAuth && !Object.keys(desktopAuth).length)) {
 		desktopAuth = imageDesktopAuth;
 	}
+
+	if (desktopAuth) {
+		desktopAuth = JSON.parse(desktopAuth)[RESIZER_TOKEN_VERSION];
+	}
+
 	let mobileAuth = useContent(
 		!imageMobileAuth && imageMobileId
 			? {
@@ -94,7 +97,7 @@ function Hero({ customFields }) {
 						url: imageDesktopURL,
 					}),
 					resizedOptions: {
-						auth: desktopAuth?.hash || {},
+						auth: desktopAuth || {},
 						smart: true,
 					},
 					width: 1200,
@@ -138,6 +141,14 @@ function Hero({ customFields }) {
 						? `${BLOCK_CLASS_NAME}__text--left`
 						: `${BLOCK_CLASS_NAME}__text--center`
 				}`}
+				inline
+				{...searchableField({
+					[`imageDesktopURL`]: "url",
+					[`desktopImgId`]: "_id",
+					[`imageDesktopAuth`]: "auth",
+					[`imageAlt`]: "alt_text",
+				})}
+				suppressContentEditableWarning
 			>
 				<HeadingWrapper>
 					{headline ? <Heading>{headline}</Heading> : null}

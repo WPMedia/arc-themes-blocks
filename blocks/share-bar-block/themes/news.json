@@ -33,35 +33,5 @@
 				"display": "flex"
 			}
 		}
-	},
-	"share-bar-email": {
-		"styles": {
-			"default": {},
-			"desktop": {}
-		}
-	},
-	"share-bar-facebook": {
-		"styles": {
-			"default": {},
-			"desktop": {}
-		}
-	},
-	"share-bar-linkedin": {
-		"styles": {
-			"default": {},
-			"desktop": {}
-		}
-	},
-	"share-bar-pinterest": {
-		"styles": {
-			"default": {},
-			"desktop": {}
-		}
-	},
-	"share-bar-twitter": {
-		"styles": {
-			"default": {},
-			"desktop": {}
-		}
 	}
 }

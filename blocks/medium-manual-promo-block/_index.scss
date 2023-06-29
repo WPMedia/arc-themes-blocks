@@ -1,6 +1,12 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-medium-manual-promo {
+	&__headline {
+		&:hover {
+			@include scss.block-properties("medium-manual-promo-headline-hover");
+			@include scss.block-components("medium-manual-promo-headline-hover");
+		}
+	}
 	&--show-image {
 		@include scss.block-properties("medium-manual-promo-show-image");
 		@include scss.block-components("medium-manual-promo-show-image");

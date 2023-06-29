@@ -166,7 +166,7 @@ const SmallPromo = ({ customFields }) => {
 
 	const PromoHeading = () =>
 		showHeadline && headline ? (
-			<Heading>
+			<Heading className={`${BLOCK_CLASS_NAME}__headline`}>
 				<Conditional
 					component={Link}
 					condition={linkURL}

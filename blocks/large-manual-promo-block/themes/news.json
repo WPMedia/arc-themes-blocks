@@ -2,7 +2,12 @@
 	"large-manual-promo": {
 		"styles": {
 			"default": {
-				"gap": "var(--global-spacing-4)"
+				"gap": "var(--global-spacing-4)",
+				"components": {
+					"image": {
+						"opacity": 0.8
+					}
+				}
 			},
 			"desktop": {
 				"gap": "var(--global-spacing-6)",
@@ -22,7 +27,11 @@
 			"default": {
 				"gap": 0,
 				"components": {
+					"heading": {
+						"color": "var(--text-color)"
+					},
 					"overline": {
+						"color": "var(--text-color)",
 						"font-size": "var(--heading-level-6-font-size)",
 						"line-height": "var(--heading-level-6-line-height)"
 					},
@@ -42,6 +51,22 @@
 					}
 				}
 			}
+		}
+	},
+	"large-manual-promo-overline-hover": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color-subtle)"
+			},
+			"desktop": {}
+		}
+	},
+	"large-manual-promo-headline-hover": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color-subtle)"
+			},
+			"desktop": {}
 		}
 	}
 }

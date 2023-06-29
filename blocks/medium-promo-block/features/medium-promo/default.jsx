@@ -227,7 +227,7 @@ const MediumPromo = ({ customFields }) => {
 					) : null}
 
 					{contentHeading ? (
-						<Heading>
+						<Heading className={`${BLOCK_CLASS_NAME}__headline`}>
 							<Conditional
 								component={Link}
 								condition={contentUrl}

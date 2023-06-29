@@ -1,6 +1,18 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-large-manual-promo {
+	&__overline {
+		&:hover {
+			@include scss.block-properties("large-manual-promo-overline-hover");
+			@include scss.block-components("large-manual-promo-overline-hover");
+		}
+	}
+	&__headline {
+		&:hover {
+			@include scss.block-properties("large-manual-promo-headline-hover");
+			@include scss.block-components("large-manual-promo-headline-hover");
+		}
+	}
 	&__text {
 		@include scss.block-components("large-manual-promo-text");
 		@include scss.block-properties("large-manual-promo-text");

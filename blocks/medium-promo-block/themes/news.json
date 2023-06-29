@@ -29,6 +29,9 @@
 					},
 					"link": {
 						"position": "relative"
+					},
+					"image": {
+						"opacity": 0.8
 					}
 				}
 			},
@@ -55,6 +58,7 @@
 			"default": {
 				"components": {
 					"heading": {
+						"color": "var(--text-color)",
 						"width": "68%"
 					}
 				}
@@ -108,6 +112,14 @@
 			"desktop": {
 				"display": "inline"
 			}
+		}
+	},
+	"medium-promo-headline-hover": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color-subtle)"
+			},
+			"desktop": {}
 		}
 	}
 }

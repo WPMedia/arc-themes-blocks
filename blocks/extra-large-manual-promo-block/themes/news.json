@@ -3,14 +3,23 @@
 		"styles": {
 			"default": {
 				"components": {
+					"heading": {
+						"color": "var(--text-color)"
+					},
 					"link": {
 						"font-family": "inherit",
 						"font-size": "inherit",
 						"font-weight": "inherit",
 						"line-height": "inherit"
 					},
+					"overline": {
+						"color": "var(--text-color)"
+					},
 					"stack": {
 						"gap": "var(--global-spacing-4)"
+					},
+					"image": {
+						"opacity": 0.8
 					}
 				}
 			},
@@ -31,6 +40,22 @@
 					}
 				}
 			}
+		}
+	},
+	"xl-manual-promo-overline-hover": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color-subtle)"
+			},
+			"desktop": {}
+		}
+	},
+	"xl-manual-promo-headline-hover": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color-subtle)"
+			},
+			"desktop": {}
 		}
 	}
 }

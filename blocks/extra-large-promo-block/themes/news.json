@@ -3,11 +3,17 @@
 		"styles": {
 			"default": {
 				"components": {
+					"heading": {
+						"color": "var(--text-color)"
+					},
 					"link": {
 						"font-family": "inherit",
 						"font-size": "inherit",
 						"font-weight": "inherit",
 						"line-height": "inherit"
+					},
+					"overline": {
+						"color": "var(--text-color)"
 					},
 					"separator": {
 						"padding": "0 var(--global-spacing-2)"
@@ -17,6 +23,9 @@
 					},
 					"media-item": {
 						"position": "relative"
+					},
+					"image": {
+						"opacity": 0.8
 					}
 				}
 			},
@@ -70,6 +79,23 @@
 			"default": {
 				"margin-left": "var(--global-spacing-2)",
 				"color": "var(--global-white)"
+			},
+			"desktop": {}
+		}
+	},
+	"xl-promo-overline-hover": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color-subtle)"
+			},
+			"desktop": {}
+		}
+	},
+
+	"xl-promo-headline-hover": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color-subtle)"
 			},
 			"desktop": {}
 		}

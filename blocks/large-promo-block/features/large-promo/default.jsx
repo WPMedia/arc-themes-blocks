@@ -108,12 +108,14 @@ export const LargePromoPresentation = ({
 				contentDate ? (
 					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
 						{contentOverline ? (
-							<Overline href={contentOverlineURL}>{contentOverline}</Overline>
+							<Overline className={`${BLOCK_CLASS_NAME}__overline`} href={contentOverlineURL}>
+								{contentOverline}
+							</Overline>
 						) : null}
 						{contentHeading || contentDescription || contentAuthors || contentDate ? (
 							<Stack>
 								{contentHeading ? (
-									<Heading>
+									<Heading className={`${BLOCK_CLASS_NAME}__headline`}>
 										<Conditional
 											component={Link}
 											condition={contentUrl}

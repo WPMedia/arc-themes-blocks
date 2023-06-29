@@ -112,7 +112,7 @@ const MediumManualPromo = ({ customFields }) => {
 					) : null}
 
 					{showHeadline && headline ? (
-						<Heading>
+						<Heading className={`${BLOCK_CLASS_NAME}__headline`}>
 							<Conditional
 								component={Link}
 								condition={linkURL}

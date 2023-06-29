@@ -110,7 +110,7 @@ const SmallManualPromo = ({ customFields }) => {
 
 	const PromoHeading = () =>
 		showHeadline && headline ? (
-			<Heading>
+			<Heading className={`${BLOCK_CLASS_NAME}__headline`}>
 				{linkURL ? (
 					<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
 						{headline}

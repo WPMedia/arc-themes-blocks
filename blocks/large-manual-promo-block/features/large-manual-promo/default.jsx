@@ -92,9 +92,13 @@ const LargeManualPromo = ({ customFields }) => {
 	const PromoOverline = () => {
 		if (showOverline && overline) {
 			if (overlineURL) {
-				return <Overline href={overlineURL}>{overline}</Overline>;
+				return (
+					<Overline className={`${BLOCK_CLASS_NAME}__overline`} href={overlineURL}>
+						{overline}
+					</Overline>
+				);
 			}
-			return <Overline>{overline}</Overline>;
+			return <Overline className={`${BLOCK_CLASS_NAME}__overline`}>{overline}</Overline>;
 		}
 		return null;
 	};
@@ -129,7 +133,7 @@ const LargeManualPromo = ({ customFields }) => {
 						{showDescription || showHeadline ? (
 							<Stack>
 								{showHeadline && headline ? (
-									<Heading>
+									<Heading className={`${BLOCK_CLASS_NAME}__headline`}>
 										<Conditional
 											component={Link}
 											condition={linkURL}

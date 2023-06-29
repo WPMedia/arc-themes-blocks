@@ -59,7 +59,11 @@ export const ExtraLargePromoPresentation = ({
 	hasOverline || contentHeading || showImage || contentDescription || contentAuthors || hasDate ? (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<article className={BLOCK_CLASS_NAME}>
-				{hasOverline ? <Overline href={overlineUrl}>{overlineText}</Overline> : null}
+				{hasOverline ? (
+					<Overline className={`${BLOCK_CLASS_NAME}__overline`} href={overlineUrl}>
+						{overlineText}
+					</Overline>
+				) : null}
 				{contentHeading ||
 				showImage ||
 				contentDescription ||
@@ -69,7 +73,7 @@ export const ExtraLargePromoPresentation = ({
 					<Stack>
 						{contentHeading ? (
 							<HeadingSection>
-								<Heading>
+								<Heading className={`${BLOCK_CLASS_NAME}__headline`}>
 									<Conditional component={Link} condition={contentUrl} href={contentUrl}>
 										{contentHeading}
 									</Conditional>

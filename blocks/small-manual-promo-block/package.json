@@ -21,8 +21,7 @@
     "directory": "blocks/small-manual-promo-block"
   },
   "peerDependencies": {
-    "@arc-fusion/prop-types": "^0.1.5",
-    "@wpmedia/engine-theme-sdk": "*"
+    "@arc-fusion/prop-types": "^0.1.5"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

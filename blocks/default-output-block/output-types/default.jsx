@@ -1,8 +1,7 @@
 import React, { Fragment } from "react";
 import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
-import { MetaData } from "@wpmedia/engine-theme-sdk";
-import { Stack, usePhrases } from "@wpmedia/arc-themes-components";
+import { MetaData, Stack, usePhrases } from "@wpmedia/arc-themes-components";
 
 import blocks from "~/blocks.json";
 

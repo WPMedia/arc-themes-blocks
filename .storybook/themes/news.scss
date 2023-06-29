@@ -1688,6 +1688,14 @@
 				),
 				links-bar: (
 					gap: var(--global-spacing-2),
+					components: (
+						link: (
+							color: var(--text-color),
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				masthead: (
 					border-bottom: 2px solid var(--global-neutral-8),

@@ -72,7 +72,7 @@ The following is a list of events that are emitted by this block.
 
 If you want to listen to these events, the first thing is to import the EventEmitter object
 into your code:
-`import { EventEmitter } from '@wpmedia/engine-theme-sdk'`
+`import { EventEmitter } from '@wpmedia/arc-themes-components'`
 
 Then create a callback function such as:
 

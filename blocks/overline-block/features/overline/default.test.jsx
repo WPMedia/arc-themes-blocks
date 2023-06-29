@@ -18,10 +18,6 @@ const mockContextObj = {
 	},
 };
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	formatURL: jest.fn((input) => input.toString()),
-}));
-
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
 jest.mock("fusion:themes", () => jest.fn(() => ({})));
 jest.mock("fusion:context", () => ({

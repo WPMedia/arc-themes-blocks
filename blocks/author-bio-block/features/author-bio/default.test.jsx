@@ -1,10 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
 
-jest.mock("@wpmedia/news-theme-css", () => ({
-	lightenDarkenColor: () => "blue",
-}));
-
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	__esModule: true,
 	...jest.requireActual("@wpmedia/arc-themes-components"),

@@ -2,7 +2,15 @@
 	"links-bar": {
 		"styles": {
 			"default": {
-				"gap": "var(--global-spacing-2)"
+				"gap": "var(--global-spacing-2)",
+				"components": {
+					"link": {
+						"color": "var(--text-color)"
+					},
+					"link-hover": {
+						"color": "var(--text-color-subtle)"
+					}
+				}
 			},
 			"desktop": {}
 		}

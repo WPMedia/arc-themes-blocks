@@ -893,6 +893,19 @@
 						separator: (
 							padding: 0 var(--global-spacing-2),
 						),
+						image: (
+							transition: opacity 0.4s ease,
+						),
+						image-hover: (
+							cursor: pointer,
+							opacity: 0.8,
+						),
+						link: (
+							color: var(--text-color),
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
+						),
 					),
 				),
 				card-list-title: (
@@ -1698,6 +1711,14 @@
 				),
 				links-bar: (
 					gap: var(--global-spacing-2),
+					components: (
+						link: (
+							color: var(--text-color),
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				masthead: (
 					border-bottom: 2px solid var(--global-neutral-8),
@@ -2302,6 +2323,19 @@
 					components: (
 						grid: (
 							gap: var(--global-spacing-5),
+						),
+						image: (
+							transition: opacity 0.4s ease,
+						),
+						image-hover: (
+							cursor: pointer,
+							opacity: 0.8,
+						),
+						link: (
+							color: var(--text-color),
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
 						),
 					),
 				),

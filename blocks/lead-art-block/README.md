@@ -47,7 +47,7 @@ Blocks can emit events. When the LeadArt component is functioning as a Gallery, 
 <br /><br />
 If you want to listen to these events, the first thing is to import the EventEmitter object
 into your code:<br /><br />
-`import { EventEmitter } from '@wpmedia/engine-theme-sdk'`
+`import { EventEmitter } from '@wpmedia/arc-themes-components'`
 <br /><br />
 Then create a callback function such as:
 <br /><br />

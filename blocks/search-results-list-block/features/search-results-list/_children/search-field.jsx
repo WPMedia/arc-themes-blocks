@@ -8,7 +8,7 @@ const SearchField = ({
 	onChange,
 	onSearch,
 	searchTerm,
-	showResultsStats = true,
+	showResultsStats,
 	totalItems,
 }) => {
 	const phrases = usePhrases();

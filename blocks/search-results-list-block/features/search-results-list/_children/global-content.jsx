@@ -104,7 +104,6 @@ class GlobalSearchResultsList extends React.Component {
 					onChange={(event) => this.setState({ value: event.value })}
 					onSearch={() => this.handleSearch()}
 					searchTerm={query}
-					showResultsStats={content?.length > 0}
 					totalItems={totalHits}
 				/>
 				<ResultsList

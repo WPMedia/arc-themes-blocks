@@ -1,5 +1,6 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 
 import DropdownLinkListItem from "./DropDownLinkListItem";
 
@@ -10,7 +11,7 @@ jest.mock("fusion:context", () => ({
 }));
 
 it("renders list item text and href", () => {
-	const wrapper = mount(<DropdownLinkListItem href="http://www.google.com" text="Google" />);
-	expect(wrapper.find("a").text()).toEqual("Google");
-	expect(wrapper.find("a").prop("href")).toEqual("http://www.google.com");
+	render(<DropdownLinkListItem href="http://www.google.com" text="Google" />);
+	expect(screen.getByRole("link")).toHaveTextContent("Google");
+	expect(screen.getByRole("link")).toHaveAttribute("href", "http://www.google.com");
 });

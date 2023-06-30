@@ -1,8 +1,7 @@
 import React from "react";
-import { mount } from "enzyme";
-
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 import IdentityObject from "@arc-publishing/sdk-identity";
-
 import useIdentity from "./Identity";
 
 jest.mock("@arc-publishing/sdk-identity", () => ({
@@ -38,7 +37,7 @@ describe("Identity useIdentity Hook", () => {
 			expect(Identity).toBe(IdentityObject);
 			return <div />;
 		};
-		mount(<Test />);
+		render(<Test />);
 		expect(IdentityObject.options).toHaveBeenLastCalledWith({
 			apiOrigin: "http://origin/",
 		});
@@ -53,7 +52,7 @@ describe("Identity useIdentity Hook", () => {
 			return <div />;
 		};
 
-		mount(<Test />);
+		render(<Test />);
 
 		expect(testInitialization).toHaveBeenCalledWith(false);
 		expect(testInitialization).toHaveBeenLastCalledWith(true);
@@ -81,11 +80,11 @@ describe("Identity useIdentity Hook", () => {
 		const Test = () => {
 			const { getSignedInIdentity } = useIdentity();
 			const getCurrent = getSignedInIdentity(testUser);
-			return <div className={`${getCurrent.type}`} />;
+			return <div>{getCurrent.type}</div>;
 		};
 
-		const wrapper = mount(<Test />);
+		render(<Test />);
 
-		expect(wrapper.find(".Google").exists()).toBe(true);
+		expect(screen.getByText("Google")).toBeInTheDocument();
 	});
 });

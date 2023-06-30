@@ -94,11 +94,6 @@ const items = [
 	},
 ];
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	formatURL: jest.fn((input) => input.toString()),
-	ChevronRightIcon: jest.fn(() => <span />),
-}));
-
 describe("the SectionNav component", () => {
 	it("should render children", () => {
 		const wrapper = shallow(

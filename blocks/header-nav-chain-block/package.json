@@ -23,8 +23,7 @@
   },
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@wpmedia/arc-themes-components": "*",
-    "@wpmedia/engine-theme-sdk": "*"
+    "@wpmedia/arc-themes-components": "*"
   },
   "dependencies": {
     "focus-trap-react": "^10.1.1",

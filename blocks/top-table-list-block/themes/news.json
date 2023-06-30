@@ -8,6 +8,19 @@
 				"components": {
 					"grid": {
 						"gap": "var(--global-spacing-5)"
+					},
+					"image": {
+						"transition": "opacity 0.4s ease"
+					},
+					"image-hover": {
+						"cursor": "pointer",
+						"opacity": "0.8"
+					},
+					"link": {
+						"color": "var(--text-color)"
+					},
+					"link-hover": {
+						"color": "var(--text-color-subtle)"
 					}
 				}
 			},

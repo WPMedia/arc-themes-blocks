@@ -3,9 +3,6 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 
 jest.mock("fusion:themes", () => jest.fn(() => ({})));
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	formatURL: jest.fn((input) => input.toString()),
-}));
 
 jest.mock("fusion:properties", () =>
 	jest.fn(() => ({

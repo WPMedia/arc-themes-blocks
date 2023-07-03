@@ -10,8 +10,8 @@ import { usePhrases } from '@wpmedia/arc-themes-components';
 // icons and other utilities can be found in the engine theme sdk storybook
 // https://beta--5eed0506faad4f0022fedf95.chromatic.com/
 import {
-  EnvelopeIcon,
-} from '@wpmedia/engine-theme-sdk';
+  Icon,
+} from '@wpmedia/arc-themes-components';
 
 function <%= h.changeCase.pascal(feature_name) %>({ customFields }) {
   // for intro material on consuming react props
@@ -25,7 +25,7 @@ function <%= h.changeCase.pascal(feature_name) %>({ customFields }) {
   return (
     <div>
       <p>{phrases.t('<%= h.inflection.dasherize(feature_name) %>-block.hello-text')}</p>
-      {showIcon && <EnvelopeIcon />}
+      {showIcon && <Icon name="EnvelopeIcon" />}
     </div>
   );
 }

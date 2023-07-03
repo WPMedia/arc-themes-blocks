@@ -1,5 +1,6 @@
 import React from "react";
-import { mount } from "enzyme";
+import { fireEvent, render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 import { useFusionContext } from "fusion:context";
 
 import HeaderAccountAction from "./default";
@@ -17,11 +18,9 @@ describe("Subscriptions HeaderAccountAction", () => {
 		useFusionContext.mockReturnValueOnce({
 			arcSite: "arcxp",
 		});
-		const wrapper = mount(
-			<HeaderAccountAction customFields={{ loginURL: "", createAccountURL: "" }} />
-		);
+		render(<HeaderAccountAction customFields={{ loginURL: "", createAccountURL: "" }} />);
 
-		expect(wrapper.html()).not.toBe(null);
+		expect(screen.getAllByRole("button")).not.toBe(null);
 	});
 
 	it("should not render if not initialized", () => {
@@ -32,11 +31,9 @@ describe("Subscriptions HeaderAccountAction", () => {
 		useFusionContext.mockReturnValueOnce({
 			arcSite: "arcxp",
 		});
-		const wrapper = mount(
-			<HeaderAccountAction customFields={{ loginURL: "", createAccountURL: "" }} />
-		);
+		render(<HeaderAccountAction customFields={{ loginURL: "", createAccountURL: "" }} />);
 
-		expect(wrapper.html()).toBe(null);
+		expect(screen.queryAllByRole("button")).toEqual([]);
 	});
 
 	it("shows sign in url and create account url", () => {
@@ -44,17 +41,19 @@ describe("Subscriptions HeaderAccountAction", () => {
 			arcSite: "arcxp",
 		});
 
-		const wrapper = mount(
+		render(
 			<HeaderAccountAction
 				customFields={{
-					loginURL: "https://www.google.com",
-					createAccountURL: "https://www.google.com",
+					loginURL: "/login",
+					createAccountURL: "/create-account",
 				}}
 			/>
 		);
-
-		expect(wrapper.html()).not.toBe(null);
-		expect(wrapper.find("div.xpmedia-subs-header--desktop-header")).toHaveLength(1);
+		const links = screen.queryAllByRole("link");
+		expect(links).not.toBe(null);
+		expect(links).toHaveLength(2);
+		expect(links[0]).toHaveAttribute("href", "/create-account");
+		expect(links[1]).toHaveAttribute("href", "/login");
 	});
 
 	it("toggles the submenu when clicking on the mobile header button", () => {
@@ -62,7 +61,7 @@ describe("Subscriptions HeaderAccountAction", () => {
 			arcSite: "arcxp",
 		});
 
-		const wrapper = mount(
+		render(
 			<HeaderAccountAction
 				customFields={{
 					loginURL: "https://www.google.com",
@@ -70,11 +69,12 @@ describe("Subscriptions HeaderAccountAction", () => {
 				}}
 			/>
 		);
+		fireEvent.click(screen.getByRole("button"));
+		// 4 total links with the mobile submenu open.
+		expect(screen.queryAllByRole("link").length).toBe(4);
 
-		wrapper.find(".xpmedia-subs-header--mobile-header button").simulate("click");
-		expect(wrapper.find(".xpmedia-subs-header-dropdown--open").length).toBe(1);
-
-		wrapper.find(".xpmedia-subs-header--mobile-header button").simulate("click");
-		expect(wrapper.find(".xpmedia-subs-header-dropdown--open").length).toBe(0);
+		fireEvent.click(screen.getByRole("button"));
+		// Only 2 links when submenu is closed.
+		expect(screen.queryAllByRole("link").length).toBe(2);
 	});
 });

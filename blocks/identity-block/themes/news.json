@@ -2,29 +2,34 @@
 	"header-account-action": {
 		"styles": {
 			"default": {
-				"display": "flex"
+				"display": "flex",
+				"font-family": "var(--font-family-primary)"
 			},
 			"desktop": {}
 		}
 	},
-	"header-account-action-desktop-header": {
+	"header-account-action-desktop": {
 		"styles": {
 			"default": {
-				"display": "none"
+				"align-items": "center",
+				"display": "none",
+				"gap": "var(--global-spacing-2)"
 			},
 			"desktop": {
 				"display": "flex",
 				"components": {
 					"button": {
-						"margin": "var(--global-spacing-2)"
+						"text-decoration": "none"
 					}
 				}
 			}
 		}
 	},
-	"header-account-action-mobile-header": {
+	"header-account-action-mobile": {
 		"styles": {
-			"default": {},
+			"default": {
+				"display": "flex"
+			},
 			"desktop": {
 				"display": "none"
 			}
@@ -49,11 +54,11 @@
 	"header-account-action-dropdown-list-item": {
 		"styles": {
 			"default": {
+				"list-style": "none",
 				"padding-block-end": "var(--global-spacing-2)",
 				"components": {
 					"link": {
-						"font-size": "var(--global-font-size-3)",
-						"font-family": "var(--font-family-primary)"
+						"font-size": "var(--global-font-size-3)"
 					},
 					"link-hover": {
 						"color": "var(--color-primary-hover)"

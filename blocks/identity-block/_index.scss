@@ -1,14 +1,14 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-header-account-action {
-	&__desktop-header {
-		@include scss.block-components("header-account-action-desktop-header");
-		@include scss.block-properties("header-account-action-desktop-header");
+	&__desktop {
+		@include scss.block-components("header-account-action-desktop");
+		@include scss.block-properties("header-account-action-desktop");
 	}
 
-	&__mobile-header {
-		@include scss.block-components("header-account-action-mobile-header");
-		@include scss.block-properties("header-account-action-mobile-header");
+	&__mobile {
+		@include scss.block-components("header-account-action-mobile");
+		@include scss.block-properties("header-account-action-mobile");
 	}
 
 	&__dropdown-open {
@@ -20,7 +20,7 @@
 		@include scss.block-components("header-account-action-dropdown-list-item");
 		@include scss.block-properties("header-account-action-dropdown-list-item");
 
-		> *:last-of-type {
+		&:last-of-type {
 			@include scss.block-components("header-account-action-dropdown-list-item-last");
 			@include scss.block-properties("header-account-action-dropdown-list-item-last");
 		}

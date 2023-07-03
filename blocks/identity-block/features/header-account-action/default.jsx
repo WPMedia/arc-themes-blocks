@@ -77,11 +77,11 @@ const HeaderAccountAction = ({ customFields }) => {
 	if (user && !error) {
 		return (
 			<div className={`${BLOCK_CLASS_NAME}`}>
-				<div className={`${BLOCK_CLASS_NAME}__desktop-header`}>
+				<div className={`${BLOCK_CLASS_NAME}__desktop`}>
 					<Button
 						aria-expanded={isAccountMenuOpen}
 						size="small"
-						variant="default"
+						variant="secondary-reverse"
 						iconLeft={userIcon}
 						secondaryIconType={isAccountMenuOpen ? "chevron-up" : "chevron-down"}
 						onClick={() => setAccountMenu(!isAccountMenuOpen)}
@@ -90,11 +90,11 @@ const HeaderAccountAction = ({ customFields }) => {
 						<span>{phrases.t("identity-block.account")}</span>
 					</Button>
 				</div>
-				<div className={`${BLOCK_CLASS_NAME}__mobile-header`}>
+				<div className={`${BLOCK_CLASS_NAME}__mobile`}>
 					<Button
 						aria-expanded={isAccountMenuOpen}
 						size="small"
-						variant="default"
+						variant="secondary-reverse"
 						iconLeft={userIcon}
 						onClick={() => setAccountMenu(!isAccountMenuOpen)}
 						type="button"
@@ -123,14 +123,14 @@ const HeaderAccountAction = ({ customFields }) => {
 
 	// What do we want to happen if there is an error?
 	return (
-		<>
-			<div className={`${BLOCK_CLASS_NAME}__desktop-header`}>
+		<div className={`${BLOCK_CLASS_NAME}`}>
+			<div className={`${BLOCK_CLASS_NAME}__desktop`}>
 				{createAccountURL ? (
 					<Button
 						// should be an a tag if it's a link
 						as="a"
 						size="small"
-						variant="primary"
+						variant="secondary-reverse"
 						type="button"
 						href={createAccountURL}
 					>
@@ -138,16 +138,22 @@ const HeaderAccountAction = ({ customFields }) => {
 					</Button>
 				) : null}
 				{loginURL ? (
-					<Button size="small" variant="default" type="button" href={loginURL} iconLeft={userIcon}>
+					<Button
+						size="small"
+						variant="secondary-reverse"
+						type="button"
+						href={loginURL}
+						iconLeft={userIcon}
+					>
 						<span>{phrases.t("identity-block.log-in")}</span>
 					</Button>
 				) : null}
 			</div>
-			<div className={`${BLOCK_CLASS_NAME}__mobile-header`}>
+			<div className={`${BLOCK_CLASS_NAME}__mobile`}>
 				<Button
 					aria-expanded={isAccountMenuOpen}
 					size="small"
-					variant="default"
+					variant="secondary-reverse"
 					iconType="user"
 					onClick={() => setAccountMenu(!isAccountMenuOpen)}
 					type="button"
@@ -160,15 +166,20 @@ const HeaderAccountAction = ({ customFields }) => {
 							<DropDownLinkListItem
 								href={createAccountURL}
 								text={phrases.t("identity-block.sign-up")}
+								blockClassName={BLOCK_CLASS_NAME}
 							/>
 						) : null}
 						{loginURL ? (
-							<DropDownLinkListItem href={loginURL} text={phrases.t("identity-block.log-in")} />
+							<DropDownLinkListItem
+								href={loginURL}
+								text={phrases.t("identity-block.log-in")}
+								blockClassName={BLOCK_CLASS_NAME}
+							/>
 						) : null}
 					</ul>
 				)}
 			</div>
-		</>
+		</div>
 	);
 };
 

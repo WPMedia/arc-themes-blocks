@@ -5,6 +5,7 @@
 				"align-items": "flex-start",
 				"background-color": "var(--global-red-5)",
 				"display": "flex",
+				"filter": "drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0))",
 				"flex-wrap": "nowrap",
 				"justify-content": "space-between",
 				"word-break": "break-word",
@@ -12,14 +13,17 @@
 					"button-default": {
 						"background": "none",
 						"border": "none",
+						"filter": "drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0))",
 						"flex": "0 0 auto"
 					},
 					"button-large": {
 						"margin-bottom": "var(--global-spacing-1)",
-						"margin-top": "var(--global-spacing-1)"
+						"margin-top": "var(--global-spacing-1)",
+						"filter": "drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0))"
 					},
 					"link": {
 						"color": "var(--global-white)",
+						"filter": "drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0))",
 						"font-family": "var(--font-family-primary)",
 						"font-size": "var(--body-font-size-small)",
 						"font-weight": "var(--global-font-weight-7)",
@@ -29,8 +33,12 @@
 						"padding-top": "var(--global-spacing-5)",
 						"text-decoration": "none"
 					},
+					"link-hover": {
+						"color": "var(--text-color)"
+					},
 					"icon": {
-						"fill": "var(--global-white)"
+						"fill": "var(--global-white)",
+						"filter": "drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0))"
 					}
 				}
 			},

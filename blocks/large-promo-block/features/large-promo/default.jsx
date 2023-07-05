@@ -89,7 +89,10 @@ export const LargePromoPresentation = ({
 								/>
 							) : (
 								<>
-									<Image {...promoImageParams} />
+									<Image
+										className={`${contentUrl ? `${BLOCK_CLASS_NAME}__imgWithLink` : ""}`}
+										{...promoImageParams}
+									/>
 									{labelIconName ? (
 										<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
 											<Icon name={labelIconName} />

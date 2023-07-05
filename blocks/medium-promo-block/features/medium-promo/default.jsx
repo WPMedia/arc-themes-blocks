@@ -215,7 +215,11 @@ const MediumPromo = ({ customFields }) => {
 								onClick={registerSuccessEvent}
 								assistiveHidden
 							>
-								<Image alt={content?.headlines?.basic} {...imageParams} />
+								<Image
+									className={`${contentUrl ? `${BLOCK_CLASS_NAME}__imgWithLink` : ""}`}
+									alt={content?.headlines?.basic}
+									{...imageParams}
+								/>
 								{labelIconName ? (
 									<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
 										<Icon name={labelIconName} />

@@ -1509,11 +1509,6 @@
 				),
 				large-manual-promo: (
 					gap: var(--global-spacing-4),
-					components: (
-						image: (
-							opacity: 0.8,
-						),
-					),
 				),
 				large-manual-promo-text: (
 					gap: 0,
@@ -1540,14 +1535,14 @@
 				large-manual-promo-headline-hover: (
 					color: var(--text-color-subtle),
 				),
+				large-manual-promo-img-with-link: (
+					opacity: 0.8,
+				),
 				large-promo: (
 					gap: var(--global-spacing-4),
 					components: (
 						link: (
 							position: relative,
-						),
-						image: (
-							opacity: 0.8,
 						),
 					),
 				),
@@ -1603,6 +1598,9 @@
 				),
 				large-promo-headline-hover: (
 					color: var(--text-color-subtle),
+				),
+				large-promo-img-with-link: (
+					opacity: 0.8,
 				),
 				lead-art: (
 					margin-bottom: var(--global-spacing-5),
@@ -1791,9 +1789,6 @@
 						link: (
 							position: relative,
 						),
-						image: (
-							opacity: 0.8,
-						),
 					),
 				),
 				medium-promo-show-image: (
@@ -1830,6 +1825,9 @@
 				medium-promo-headline-hover: (
 					color: var(--text-color-subtle),
 				),
+				medium-promo-img-with-link: (
+					opacity: 0.8,
+				),
 				medium-manual-promo: (
 					clear: both,
 					display: table,
@@ -1856,9 +1854,6 @@
 							font-size: var(--body-font-size),
 							line-height: var(--body-line-height),
 						),
-						image: (
-							opacity: 0.8,
-						),
 					),
 				),
 				medium-manual-promo-show-image: (
@@ -1871,6 +1866,9 @@
 				),
 				medium-manual-promo-headline-hover: (
 					color: var(--text-color-subtle),
+				),
+				medium-manual-promo-img-with-link: (
+					opacity: 0.8,
 				),
 				numbered-list: (
 					gap: var(--global-spacing-4),
@@ -2274,9 +2272,6 @@
 							font-weight: var(--body-font-weight),
 							line-height: var(--body-line-height),
 						),
-						image: (
-							opacity: 0.8,
-						),
 					),
 				),
 				small-manual-promo-above: (
@@ -2296,6 +2291,9 @@
 				small-manual-promo-headline-hover: (
 					color: var(--text-color-subtle),
 				),
+				small-manual-promo-img-with-link: (
+					opacity: 0.8,
+				),
 				small-promo: (
 					display: grid,
 					gap: var(--global-spacing-5),
@@ -2306,9 +2304,6 @@
 							font-size: var(--body-font-size),
 							font-weight: var(--body-font-weight),
 							line-height: var(--body-line-height),
-						),
-						image: (
-							opacity: 0.8,
 						),
 					),
 				),
@@ -2322,6 +2317,9 @@
 				),
 				small-promo-headline-hover: (
 					color: var(--text-color-subtle),
+				),
+				small-promo-img-with-link: (
+					opacity: 0.8,
 				),
 				subheadline: (
 					font-size: var(--heading-level-6-font-size),
@@ -2606,9 +2604,6 @@
 						stack: (
 							gap: var(--global-spacing-4),
 						),
-						image: (
-							opacity: 0.8,
-						),
 					),
 				),
 				xl-manual-promo-overline-hover: (
@@ -2616,6 +2611,9 @@
 				),
 				xl-manual-promo-headline-hover: (
 					color: var(--text-color-subtle),
+				),
+				xl-manual-promo-img-with-link: (
+					opacity: 0.8,
 				),
 				xl-promo: (
 					components: (
@@ -2640,9 +2638,6 @@
 						media-item: (
 							position: relative,
 						),
-						image: (
-							opacity: 0.8,
-						),
 					),
 				),
 				xl-promo-overline-hover: (
@@ -2650,6 +2645,9 @@
 				),
 				xl-promo-headline-hover: (
 					color: var(--text-color-subtle),
+				),
+				xl-promo-img-with-link: (
+					opacity: 0.8,
 				),
 				xl-promo-icon-label: (
 					align-items: center,

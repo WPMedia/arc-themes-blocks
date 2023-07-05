@@ -11,9 +11,6 @@
 						"font-size": "var(--body-font-size)",
 						"font-weight": "var(--body-font-weight)",
 						"line-height": "var(--body-line-height)"
-					},
-					"image": {
-						"opacity": 0.8
 					}
 				}
 			},
@@ -58,6 +55,14 @@
 		"styles": {
 			"default": {
 				"color": "var(--text-color-subtle)"
+			},
+			"desktop": {}
+		}
+	},
+	"small-manual-promo-img-with-link": {
+		"styles": {
+			"default": {
+				"opacity": 0.8
 			},
 			"desktop": {}
 		}

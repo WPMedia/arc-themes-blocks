@@ -97,13 +97,17 @@ export const ExtraLargePromoPresentation = ({
 									/>
 								) : (
 									<>
+										{console.log("contentUrl", contentUrl)}
 										<Conditional
 											component={Link}
 											condition={contentUrl}
 											href={contentUrl}
 											assistiveHidden
 										>
-											<Image {...imageParams} />
+											<Image
+												className={`${contentUrl ? `${BLOCK_CLASS_NAME}__imgWithLink` : ""}`}
+												{...imageParams}
+											/>
 											{labelIconName ? (
 												<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
 													<Icon name={labelIconName} />
@@ -293,7 +297,7 @@ const ExtraLargePromo = ({ customFields }) => {
 	}
 
 	const hasOverline = showOverline && overlineText;
-
+	console.log("content ", content, arcSite);
 	const contentDescription = showDescription ? content?.description?.basic : null;
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;

@@ -2,12 +2,7 @@
 	"large-manual-promo": {
 		"styles": {
 			"default": {
-				"gap": "var(--global-spacing-4)",
-				"components": {
-					"image": {
-						"opacity": 0.8
-					}
-				}
+				"gap": "var(--global-spacing-4)"
 			},
 			"desktop": {
 				"gap": "var(--global-spacing-6)",
@@ -65,6 +60,14 @@
 		"styles": {
 			"default": {
 				"color": "var(--text-color-subtle)"
+			},
+			"desktop": {}
+		}
+	},
+	"large-manual-promo-img-with-link": {
+		"styles": {
+			"default": {
+				"opacity": 0.8
 			},
 			"desktop": {}
 		}

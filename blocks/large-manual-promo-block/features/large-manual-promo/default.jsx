@@ -124,7 +124,10 @@ const LargeManualPromo = ({ customFields }) => {
 								onClick={registerSuccessEvent}
 								assistiveHidden={showHeadline && showDescription}
 							>
-								<Image {...imageParams} />
+								<Image
+									className={`${linkURL ? `${BLOCK_CLASS_NAME}__imgWithLink` : ""}`}
+									{...imageParams}
+								/>
 							</Conditional>
 						</MediaItem>
 					) : null}

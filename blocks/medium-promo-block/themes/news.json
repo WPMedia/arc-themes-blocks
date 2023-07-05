@@ -29,9 +29,6 @@
 					},
 					"link": {
 						"position": "relative"
-					},
-					"image": {
-						"opacity": 0.8
 					}
 				}
 			},
@@ -118,6 +115,14 @@
 		"styles": {
 			"default": {
 				"color": "var(--text-color-subtle)"
+			},
+			"desktop": {}
+		}
+	},
+	"medium-promo-img-with-link": {
+		"styles": {
+			"default": {
+				"opacity": 0.8
 			},
 			"desktop": {}
 		}

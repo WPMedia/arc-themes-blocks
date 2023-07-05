@@ -493,30 +493,40 @@
 					align-items: flex-start,
 					background-color: var(--global-red-5),
 					display: flex,
+					filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0)),
 					flex-wrap: nowrap,
 					justify-content: space-between,
 					word-break: break-word,
 					components: (
 						button-default: (
 							background: none,
-							border-width: 0,
+							border: none,
+							filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0)),
 							flex: 0 0 auto,
 						),
 						button-large: (
 							margin-bottom: var(--global-spacing-1),
 							margin-top: var(--global-spacing-1),
+							filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0)),
 						),
 						link: (
 							color: var(--global-white),
+							filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0)),
 							font-family: var(--font-family-primary),
 							font-size: var(--body-font-size-small),
 							font-weight: var(--global-font-weight-7),
-							padding: var(--global-spacing-5) var(--global-spacing-5) var(--global-spacing-5)
-								var(--global-spacing-4),
+							padding-bottom: var(--global-spacing-5),
+							padding-left: var(--global-spacing-4),
+							padding-right: var(--global-spacing-5),
+							padding-top: var(--global-spacing-5),
 							text-decoration: none,
+						),
+						link-hover: (
+							color: var(--text-color),
 						),
 						icon: (
 							fill: var(--global-white),
+							filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0)),
 						),
 					),
 				),
@@ -882,6 +892,19 @@
 						),
 						separator: (
 							padding: 0 var(--global-spacing-2),
+						),
+						image: (
+							transition: opacity 0.4s ease,
+						),
+						image-hover: (
+							cursor: pointer,
+							opacity: 0.8,
+						),
+						link: (
+							color: var(--text-color),
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
 						),
 					),
 				),
@@ -1712,6 +1735,14 @@
 				),
 				links-bar: (
 					gap: var(--global-spacing-2),
+					components: (
+						link: (
+							color: var(--text-color),
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				masthead: (
 					border-bottom: 2px solid var(--global-neutral-8),
@@ -2344,6 +2375,19 @@
 					components: (
 						grid: (
 							gap: var(--global-spacing-5),
+						),
+						image: (
+							transition: opacity 0.4s ease,
+						),
+						image-hover: (
+							cursor: pointer,
+							opacity: 0.8,
+						),
+						link: (
+							color: var(--text-color),
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
 						),
 					),
 				),

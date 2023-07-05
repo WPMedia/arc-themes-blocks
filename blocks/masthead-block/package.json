@@ -16,8 +16,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@wpmedia/arc-themes-components": "*",
-    "@wpmedia/engine-theme-sdk": "*"
+    "@wpmedia/arc-themes-components": "*"
   },
   "repository": {
     "type": "git",

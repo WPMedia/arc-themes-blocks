@@ -9,7 +9,8 @@
 						"width": "var(--global-spacing-4)"
 					},
 					"image": {
-						"max-height": "75vh"
+						"max-height": "100%",
+						"object-fit": "contain"
 					},
 					"carousel-controls": {
 						"padding": "0 0 var(--global-spacing-2) 0"
@@ -72,12 +73,16 @@
 		"styles": {
 			"default": {
 				"align-items": "center",
+				"aspect-ratio": "calc(16/9)",
+				"background-color": "var(--global-black)",
 				"display": "flex",
 				"justify-content": "center",
-				"max-height": "75vh",
-				"background-color": "var(--global-black)"
+				"max-height": "unset",
+				"overflow": "auto"
 			},
-			"desktop": {}
+			"desktop": {
+				"max-height": "75vh"
+			}
 		}
 	},
 	"gallery-track-icon": {

@@ -12,6 +12,7 @@ jest.mock("../../components/Identity", () => ({
 		Identity: {
 			isLoggedIn: jest.fn(() => true),
 			getUserProfile: jest.fn(() => Promise.resolve()),
+			logout: jest.fn(() => Promise.resolve()),
 		},
 		isInitialized: true,
 	})),
@@ -33,7 +34,8 @@ describe("Subscriptions HeaderAccountAction", () => {
 		useIdentity.mockReturnValueOnce(() => ({
 			Identity: {
 				isLoggedIn: jest.fn(() => true),
-				getUserProfile: jest.fn(),
+				getUserProfile: jest.fn(() => Promise.resolve()),
+				logout: jest.fn(() => Promise.resolve()),
 			},
 			isInitialized: false,
 		}));

@@ -97,7 +97,6 @@ export const ExtraLargePromoPresentation = ({
 									/>
 								) : (
 									<>
-										{console.log("contentUrl", contentUrl)}
 										<Conditional
 											component={Link}
 											condition={contentUrl}
@@ -297,7 +296,6 @@ const ExtraLargePromo = ({ customFields }) => {
 	}
 
 	const hasOverline = showOverline && overlineText;
-	console.log("content ", content, arcSite);
 	const contentDescription = showDescription ? content?.description?.basic : null;
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;

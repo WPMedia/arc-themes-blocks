@@ -8,7 +8,13 @@ import useIdentity from "../../components/Identity";
 
 jest.mock("../../components/Identity", () => ({
 	__esModule: true,
-	default: jest.fn(() => ({ isInitialized: true, isLoggedIn: true })),
+	default: jest.fn(() => ({
+		Identity: {
+			isLoggedIn: jest.fn(() => true),
+			getUserProfile: jest.fn(() => Promise.resolve()),
+		},
+		isInitialized: true,
+	})),
 }));
 
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
@@ -25,8 +31,11 @@ describe("Subscriptions HeaderAccountAction", () => {
 
 	it("should not render if not initialized", () => {
 		useIdentity.mockReturnValueOnce(() => ({
+			Identity: {
+				isLoggedIn: jest.fn(() => true),
+				getUserProfile: jest.fn(),
+			},
 			isInitialized: false,
-			isLoggedIn: true,
 		}));
 		useFusionContext.mockReturnValueOnce({
 			arcSite: "arcxp",

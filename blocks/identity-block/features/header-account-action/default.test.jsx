@@ -67,6 +67,88 @@ describe("Subscriptions HeaderAccountAction", () => {
 		expect(links[1]).toHaveAttribute("href", "/login");
 	});
 
+	it("shows account manage url and logout url", async () => {
+		useIdentity.mockImplementation(
+			jest.fn(() => ({
+				Identity: {
+					isLoggedIn: jest.fn(() => true),
+					getUserProfile: jest.fn(() => Promise.resolve({ username: "test" })),
+					logout: jest.fn(() => Promise.resolve()),
+				},
+				isInitialized: true,
+			}))
+		);
+		useFusionContext.mockReturnValueOnce({
+			arcSite: "arcxp",
+		});
+
+		await render(
+			<HeaderAccountAction
+				customFields={{
+					manageAccountURL: "/manage",
+					logoutURL: "/logout",
+				}}
+			/>
+		);
+		// Open user menu with desktop button
+		await fireEvent.click(screen.getAllByRole("button")[0]);
+		let links = screen.queryAllByRole("link");
+		expect(links).not.toBe(null);
+		expect(links).toHaveLength(4);
+		// Desktop links
+		expect(links[0]).toHaveAttribute("href", "/manage");
+		expect(links[1]).toHaveAttribute("href", "/logout");
+		// Mobile links
+		expect(links[2]).toHaveAttribute("href", "/manage");
+		expect(links[3]).toHaveAttribute("href", "/logout");
+		// Close user menu with desktop button
+		await fireEvent.click(screen.getAllByRole("button")[0]);
+		links = screen.queryAllByRole("link");
+		expect(links).toHaveLength(0);
+
+		// Open user menu with mobile button
+		await fireEvent.click(screen.getAllByRole("button")[1]);
+		links = screen.queryAllByRole("link");
+		expect(links).toHaveLength(4);
+		// Close user menu with mobile button
+		await fireEvent.click(screen.getAllByRole("button")[1]);
+		links = screen.queryAllByRole("link");
+		expect(links).toHaveLength(0);
+		useIdentity.mockClear();
+	});
+
+	it("calls the logout function", async () => {
+		const logoutMock = jest.fn(() => Promise.resolve());
+		useIdentity.mockImplementation(
+			jest.fn(() => ({
+				Identity: {
+					isLoggedIn: jest.fn(() => true),
+					getUserProfile: jest.fn(() => Promise.resolve({ username: "test" })),
+					logout: logoutMock,
+				},
+				isInitialized: true,
+			}))
+		);
+		useFusionContext.mockReturnValueOnce({
+			arcSite: "arcxp",
+		});
+
+		await render(
+			<HeaderAccountAction
+				customFields={{
+					manageAccountURL: "/manage",
+					logoutURL: "/logout",
+				}}
+			/>
+		);
+		// Open user menu with desktop button
+		await fireEvent.click(screen.getAllByRole("button")[0]);
+		const links = screen.queryAllByRole("link");
+		await fireEvent.click(links[1]);
+		expect(logoutMock).toHaveBeenCalled();
+		useIdentity.mockClear();
+	});
+
 	it("toggles the submenu when clicking on the mobile header button", () => {
 		useFusionContext.mockReturnValueOnce({
 			arcSite: "arcxp",

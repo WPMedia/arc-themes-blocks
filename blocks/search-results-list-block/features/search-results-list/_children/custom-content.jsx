@@ -84,7 +84,7 @@ class CustomSearchResultsList extends React.Component {
 					onChange={(event) => this.setState({ value: event.value })}
 					onSearch={() => this.fetchStories(false)}
 					searchTerm={searchTerm}
-					showResultsStats={data?.length > 0}
+					showResultsStats={searchTerm !== ""}
 					totalItems={totalHits}
 				/>
 				<ResultsList

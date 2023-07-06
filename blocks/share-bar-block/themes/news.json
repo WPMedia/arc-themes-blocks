@@ -20,52 +20,18 @@
 					},
 					"button-medium": {
 						"padding": "0 var(--global-spacing-3)"
+					},
+					"icon": {
+						"fill": "var(--color-primary)"
+					},
+					"icon-hover": {
+						"fill": "var(--color-primary-hover)"
 					}
 				}
 			},
 			"desktop": {
 				"display": "flex"
 			}
-		}
-	},
-	"share-bar-facebook": {
-		"styles": {
-			"default": {
-				"fill": "#415993"
-			},
-			"desktop": {}
-		}
-	},
-	"share-bar-linkedin": {
-		"styles": {
-			"default": {
-				"fill": "#3076b0"
-			},
-			"desktop": {}
-		}
-	},
-	"share-bar-pinterest": {
-		"styles": {
-			"default": {
-				"fill": "#ad2526"
-			},
-			"desktop": {}
-		}
-	},
-	"share-bar-twitter": {
-		"styles": {
-			"default": {
-				"fill": "#6baae8"
-			},
-			"desktop": {}
-		}
-	},
-	"share-bar-email": {
-		"styles": {
-			"default": {
-				"fill": "#b61818"
-			},
-			"desktop": {}
 		}
 	}
 }

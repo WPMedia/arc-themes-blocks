@@ -90,30 +90,18 @@ describe("Subscriptions HeaderAccountAction", () => {
 				}}
 			/>
 		);
-		// Open user menu with desktop button
-		await fireEvent.click(screen.getAllByRole("button")[0]);
+		// Open user menu
+		await fireEvent.click(screen.getByRole("button"));
 		let links = screen.queryAllByRole("link");
 		expect(links).not.toBe(null);
-		expect(links).toHaveLength(4);
-		// Desktop links
+		expect(links).toHaveLength(2);
 		expect(links[0]).toHaveAttribute("href", "/manage");
 		expect(links[1]).toHaveAttribute("href", "/logout");
-		// Mobile links
-		expect(links[2]).toHaveAttribute("href", "/manage");
-		expect(links[3]).toHaveAttribute("href", "/logout");
-		// Close user menu with desktop button
-		await fireEvent.click(screen.getAllByRole("button")[0]);
+		// Close user menu
+		await fireEvent.click(screen.getByRole("button"));
 		links = screen.queryAllByRole("link");
 		expect(links).toHaveLength(0);
 
-		// Open user menu with mobile button
-		await fireEvent.click(screen.getAllByRole("button")[1]);
-		links = screen.queryAllByRole("link");
-		expect(links).toHaveLength(4);
-		// Close user menu with mobile button
-		await fireEvent.click(screen.getAllByRole("button")[1]);
-		links = screen.queryAllByRole("link");
-		expect(links).toHaveLength(0);
 		useIdentity.mockClear();
 	});
 

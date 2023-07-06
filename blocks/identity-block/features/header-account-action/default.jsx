@@ -75,49 +75,33 @@ const HeaderAccountAction = ({ customFields }) => {
 	const userIcon = <Icon name="User" />;
 
 	if (user && !error) {
-		const manageAccountMenu = (
-			<ul className={`${BLOCK_CLASS_NAME}__dropdown-open`}>
-				<DropDownLinkListItem
-					href={manageAccountURL}
-					text={phrases.t("identity-block.manage-account")}
-					blockClassName={BLOCK_CLASS_NAME}
-				/>
-				<DropDownLinkListItem
-					href={logoutURL}
-					onClick={handleLogout}
-					text={phrases.t("identity-block.log-out")}
-					blockClassName={BLOCK_CLASS_NAME}
-				/>
-			</ul>
-		);
 		return (
 			<div className={`${BLOCK_CLASS_NAME}`}>
-				<div className={`${BLOCK_CLASS_NAME}__desktop`}>
-					<Button
-						aria-expanded={isAccountMenuOpen}
-						size="small"
-						variant="secondary-reverse"
-						iconLeft={userIcon}
-						onClick={() => setAccountMenu(!isAccountMenuOpen)}
-						type="button"
-					>
-						<span>{phrases.t("identity-block.account")}</span>
-					</Button>
-					{isAccountMenuOpen && manageAccountMenu}
-				</div>
-				<div className={`${BLOCK_CLASS_NAME}__mobile`}>
-					<Button
-						aria-expanded={isAccountMenuOpen}
-						size="small"
-						variant="secondary-reverse"
-						iconLeft={userIcon}
-						onClick={() => setAccountMenu(!isAccountMenuOpen)}
-						type="button"
-					>
-						<span>{phrases.t("identity-block.login-options")}</span>
-					</Button>
-					{isAccountMenuOpen && manageAccountMenu}
-				</div>
+				<Button
+					aria-expanded={isAccountMenuOpen}
+					size="small"
+					variant="secondary-reverse"
+					iconLeft={userIcon}
+					onClick={() => setAccountMenu(!isAccountMenuOpen)}
+					type="button"
+				>
+					<span>{phrases.t("identity-block.account")}</span>
+				</Button>
+				{isAccountMenuOpen && (
+					<ul className={`${BLOCK_CLASS_NAME}__dropdown-open`}>
+						<DropDownLinkListItem
+							href={manageAccountURL}
+							text={phrases.t("identity-block.manage-account")}
+							blockClassName={BLOCK_CLASS_NAME}
+						/>
+						<DropDownLinkListItem
+							href={logoutURL}
+							onClick={handleLogout}
+							text={phrases.t("identity-block.log-out")}
+							blockClassName={BLOCK_CLASS_NAME}
+						/>
+					</ul>
+				)}
 			</div>
 		);
 	}

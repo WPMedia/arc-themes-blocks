@@ -232,6 +232,23 @@ describe("root html layout", () => {
 
 		expect(wrapper.find("html").prop("lang")).toBe("fr");
 	});
+
+	it("must have a dir attribute in the HTML tag", () => {
+		jest.mock("fusion:properties", () =>
+			jest.fn(() => ({
+				textDirection: "ltr",
+			}))
+		);
+		const { default: DefaultOutputType } = require("../default");
+		const wrapper = shallow(
+			<DefaultOutputType
+				deployment={jest.fn()}
+				metaValue={jest.fn().mockReturnValue("article")}
+				{...mockFuntions}
+			/>
+		);
+		expect(wrapper.find("html").prop("dir")).toBe("ltr");
+	});
 });
 
 describe("head content", () => {

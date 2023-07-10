@@ -280,7 +280,7 @@
 					color: var(--global-white),
 				),
 				button-primary-hover: (
-					background-color: var(--global-neutral-7),
+					background-color: var(--color-primary-hover),
 				),
 				button-primary-reverse: (
 					background-color: transparent,
@@ -288,16 +288,19 @@
 					color: var(--color-primary),
 				),
 				button-primary-reverse-hover: (
-					border-color: var(--global-neutral-7),
-					color: var(--global-neutral-7),
+					border-color: var(--color-primary-hover),
+					color: var(--color-primary-hover),
 				),
 				button-secondary: (
 					background-color: var(--global-white),
-					color: var(--global-black),
+					color: var
+						(
+							--global-black,
+						),
 				),
 				button-secondary-hover: (
-					background-color: var(--global-neutral-7),
-					color: var(--global-white),
+					background-color: var(--global-neutral-2),
+					color: var(--global-neutral-6),
 				),
 				button-secondary-reverse: (
 					background-color: transparent,
@@ -305,8 +308,8 @@
 					color: var(--global-white),
 				),
 				button-secondary-reverse-hover: (
-					border-color: var(--global-neutral-7),
-					color: var(--global-neutral-7),
+					border-color: var(--global-neutral-3),
+					color: var(--global-neutral-3),
 				),
 				carousel: (
 					--slides: 1,
@@ -1313,6 +1316,15 @@
 				header-nav-chain-logo-image: (
 					max-width: 240px,
 					max-height: var(--header-nav-chain-height),
+					transition: (
+						opacity 0.4s ease,
+					),
+				),
+				header-nav-chain-logo-image-hover: (
+					opacity: 0.7,
+					transition: (
+						opacity 0.4s ease,
+					),
 				),
 				header-nav-chain-nav-search: (
 					align-items: center,

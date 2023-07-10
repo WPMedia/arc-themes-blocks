@@ -183,6 +183,13 @@
 			@include scss.block-properties("header-nav-chain-logo-image");
 		}
 
+		&:hover {
+			img {
+				@include scss.block-components("header-nav-chain-logo-image-hover");
+				@include scss.block-properties("header-nav-chain-logo-image-hover");
+			}
+		}
+
 		@include scss.block-components("header-nav-chain-logo");
 		@include scss.block-properties("header-nav-chain-logo");
 	}

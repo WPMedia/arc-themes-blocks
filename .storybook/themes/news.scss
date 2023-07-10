@@ -1045,6 +1045,9 @@
 						icon: (
 							fill: var(--color-primary),
 						),
+						icon-hover: (
+							fill: var(--color-primary-hover),
+						),
 						link: (
 							border-right: 1px solid var(--color-primary),
 							padding: var(--global-spacing-2),
@@ -2191,13 +2194,22 @@
 						button-medium: (
 							padding: 0 var(--global-spacing-3),
 						),
-						icon: (
-							fill: var(--color-primary),
-						),
-						icon-hover: (
-							fill: var(--color-primary-hover),
-						),
 					),
+				),
+				share-bar-facebook: (
+					fill: #415993,
+				),
+				share-bar-linkedin: (
+					fill: #3076b0,
+				),
+				share-bar-pinterest: (
+					fill: #ad2526,
+				),
+				share-bar-twitter: (
+					fill: #6baae8,
+				),
+				share-bar-email: (
+					fill: #b61818,
 				),
 				simple-list: (
 					gap: var(--global-spacing-4),

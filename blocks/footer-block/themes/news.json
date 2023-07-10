@@ -79,9 +79,6 @@
 					"icon": {
 						"fill": "var(--color-primary)"
 					},
-					"icon-hover": {
-						"fill": "var(--color-primary-hover)"
-					},
 					"link": {
 						"border-right": "1px solid var(--color-primary)",
 						"padding": "var(--global-spacing-2)"
@@ -89,6 +86,17 @@
 				}
 			},
 			"desktop": {}
+		}
+	},
+	"footer-social-links-hover": {
+		"styles": {
+			"default": {
+				"components": {
+					"icon": {
+						"fill": "var(--color-primary-hover)"
+					}
+				}
+			}
 		}
 	},
 	"footer-social-links-container": {

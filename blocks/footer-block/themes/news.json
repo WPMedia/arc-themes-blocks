@@ -96,7 +96,8 @@
 						"fill": "var(--color-primary-hover)"
 					}
 				}
-			}
+			},
+			"desktop": {}
 		}
 	},
 	"footer-social-links-container": {

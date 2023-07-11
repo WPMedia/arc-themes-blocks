@@ -157,7 +157,7 @@ const SampleOutputType = ({
 	const phrases = usePhrases();
 
 	return (
-		<html lang={locale} dir={textDirection}>
+		<html lang={locale} dir={textDirection || "ltr"}>
 			<head>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link

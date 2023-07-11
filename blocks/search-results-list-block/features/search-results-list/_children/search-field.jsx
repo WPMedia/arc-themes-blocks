@@ -29,7 +29,7 @@ const SearchField = ({
 					{phrases.t("search-results-block.search-button")}
 				</Button>
 			</Stack>
-			{showResultsStats ? (
+			{showResultsStats && typeof searchTerm === "string" ? (
 				<Paragraph>
 					{phrases.t("search-results-block.search-result-number", {
 						smart_count: totalItems,

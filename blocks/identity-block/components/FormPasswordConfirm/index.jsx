@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Input } from "@wpmedia/arc-themes-components";
 
 const FormPasswordConfirm = ({
 	autoComplete,
@@ -37,20 +38,20 @@ const FormPasswordConfirm = ({
 
 	return (
 		<>
-			<FormInputField
+			<Input
 				{...fieldParameters}
 				label={label}
 				name={name}
 				onChange={({ value }) => setPassword(value)}
 				required
-				type={FIELD_TYPES.PASSWORD}
+				type="password"
 			/>
-			<FormInputField
+			<Input
 				{...confirmFieldParameters}
 				label={confirmLabel}
 				name={`${name}-confirmation`}
 				required
-				type={FIELD_TYPES.PASSWORD}
+				type="password"
 				validationPattern={`^${password}$`}
 			/>
 		</>

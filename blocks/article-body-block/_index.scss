@@ -66,31 +66,16 @@
 	&__gallery {
 		@include scss.block-components("article-body-gallery");
 		@include scss.block-properties("article-body-gallery");
-	}
 
-	&__gallery-additional-next {
-		@include scss.block-components("article-body-gallery-additional-next");
-		@include scss.block-properties("article-body-gallery-additional-next");
-	}
+		&:fullscreen {
+			@include scss.block-components("article-body-gallery-fullscreen");
+			@include scss.block-properties("article-body-gallery-fullscreen");
+		}
 
-	&__gallery-additional-previous {
-		@include scss.block-components("article-body-gallery-additional-previous");
-		@include scss.block-properties("article-body-gallery-additional-previous");
-	}
-
-	&__full-screen-icon {
-		@include scss.block-components("article-body-full-screen-icon");
-		@include scss.block-properties("article-body-full-screen-icon");
-	}
-
-	&__start-icon {
-		@include scss.block-components("article-body-start-icon");
-		@include scss.block-properties("article-body-start-icon");
-	}
-
-	&__stop-icon {
-		@include scss.block-components("article-body-stop-icon");
-		@include scss.block-properties("article-body-stop-icon");
+		&__track-button {
+			@include scss.block-components("article-body-gallery-track-button");
+			@include scss.block-properties("article-body-gallery-track-button");
+		}
 	}
 
 	&__image-wrapper {

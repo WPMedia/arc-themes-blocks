@@ -5,6 +5,7 @@ import { useFusionContext, useAppContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import {
+	Button,
 	Carousel,
 	formatCredits,
 	Icon,
@@ -76,11 +77,10 @@ export const GalleryPresentation = ({
 	return (
 		<Carousel
 			id={_id}
-			className={BLOCK_CLASS_NAME}
+			className={`${BLOCK_CLASS_NAME}`}
 			showLabel
 			label={headlines?.basic ? headlines.basic : ""}
 			slidesToShow={1}
-			showAdditionalSlideControls
 			pageCountPhrase={
 				/* istanbul ignore next */ (current, total) =>
 					phrases.t("global.gallery-page-count-text", { current, total })
@@ -96,26 +96,38 @@ export const GalleryPresentation = ({
 			}}
 			enableFullScreen
 			fullScreenShowButton={
-				<button type="button">
+				<Carousel.Button label={phrases.t("global.gallery-expand-button")}>
 					<Icon name="Fullscreen" />
 					{phrases.t("global.gallery-expand-button")}
-				</button>
+				</Carousel.Button>
 			}
 			fullScreenMinimizeButton={
-				<button type="button">
+				<Button
+					variant="secondary-reverse"
+					type="button"
+					className={`${BLOCK_CLASS_NAME}__close-button`}
+				>
 					<Icon name="Close" />
-				</button>
+				</Button>
 			}
 			adElement={/* istanbul ignore next */ <AdBlock />}
 			adInterstitialClicks={interstitialClicks}
 			nextButton={
-				<Carousel.Button id={_id} label={phrases.t("global.gallery-next-label")}>
-					<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} fill="white" name="ChevronRight" />
+				<Carousel.Button
+					id={_id}
+					label={phrases.t("global.gallery-next-label")}
+					className={`${BLOCK_CLASS_NAME}__track-button`}
+				>
+					<Icon fill="white" name="ChevronRight" />
 				</Carousel.Button>
 			}
 			previousButton={
-				<Carousel.Button id={_id} label={phrases.t("global.gallery-previous-label")}>
-					<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} name="ChevronLeft" />
+				<Carousel.Button
+					id={_id}
+					label={phrases.t("global.gallery-previous-label")}
+					className={`${BLOCK_CLASS_NAME}__track-button`}
+				>
+					<Icon name="ChevronLeft" />
 				</Carousel.Button>
 			}
 		>

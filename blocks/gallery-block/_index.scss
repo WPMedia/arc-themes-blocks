@@ -10,6 +10,22 @@
 		@include scss.block-components("gallery-image-wrapper");
 		@include scss.block-properties("gallery-image-wrapper");
 	}
+
+	&__track-button {
+		@include scss.block-components("gallery-track-button");
+		@include scss.block-properties("gallery-track-button");
+	}
+
+	&__close-button {
+		@include scss.block-components("gallery-close-button");
+		@include scss.block-properties("gallery-close-button");
+	}
+
+	&:fullscreen {
+		@include scss.block-components("gallery-fullscreen");
+		@include scss.block-properties("gallery-fullscreen");
+	}
+
 	@include scss.block-components("gallery");
 	@include scss.block-properties("gallery");
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
+import { EventEmitter } from "@wpmedia/arc-themes-components";
 import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
 import LeadArt from "./default";
@@ -196,7 +197,12 @@ describe("LeadArt", () => {
 			},
 		};
 		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
-		const { queryByRole, queryByText } = render(<LeadArt customFields={{}} />);
+		const testRender = render(<LeadArt customFields={{}} />);
+		const { queryByRole, queryByText } = testRender;
+
+		EventEmitter.dispatch("galleryExpandEnter");
+		EventEmitter.dispatch("galleryExpandExit");
+
 		expect(queryByRole("region", { name: "test headline" })).not.toBeNull();
 		expect(queryByText("Caption")).not.toBeNull();
 		expect(queryByText("Subtitle")).not.toBeNull();

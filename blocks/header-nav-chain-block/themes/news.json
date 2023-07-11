@@ -155,7 +155,17 @@
 		"styles": {
 			"default": {
 				"max-width": "240px",
-				"max-height": "var(--header-nav-chain-height)"
+				"max-height": "var(--header-nav-chain-height)",
+				"transition": "(opacity 0.4s ease)"
+			},
+			"desktop": {}
+		}
+	},
+	"header-nav-chain-logo-image-hover": {
+		"styles": {
+			"default": {
+				"opacity": "0.7",
+				"transition": "(opacity 0.4s ease)"
 			},
 			"desktop": {}
 		}

@@ -1,9 +1,6 @@
 import React, { useRef } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { Button, BUTTON_STYLES, BUTTON_SIZES, PrimaryFont } from "@wpmedia/shared-styles";
-import { ErrorIcon } from "@wpmedia/engine-theme-sdk";
-
-import "./styles.scss";
+import { Button, Icon } from "@wpmedia/arc-themes-components";
 
 const HeadlinedSubmitForm = ({
 	children,

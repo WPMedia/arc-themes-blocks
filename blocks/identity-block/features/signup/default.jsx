@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { isServerSide } from "@wpmedia/engine-theme-sdk";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { FormInputField, FIELD_TYPES } from "@wpmedia/shared-styles";
+import { Input, isServerSide } from "@wpmedia/arc-themes-components";
 import useIdentity from "../../components/Identity";
 import HeadlinedSubmitForm from "../../components/HeadlinedSubmitForm";
 import FormPasswordConfirm from "../../components/FormPasswordConfirm";
@@ -123,13 +122,13 @@ const SignUp = ({ customFields, arcSite }) => {
 			}
 			formErrorText={error}
 		>
-			<FormInputField
+			<Input
 				autoComplete="off"
 				label={phrases.t("identity-block.email")}
 				name="email"
 				required
 				showDefaultError={false}
-				type={FIELD_TYPES.EMAIL}
+				type="email"
 				validationErrorMessage={phrases.t("identity-block.email-requirements")}
 			/>
 			<FormPasswordConfirm

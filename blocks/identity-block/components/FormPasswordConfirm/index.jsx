@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import { FormInputField, FIELD_TYPES } from "@wpmedia/shared-styles";
-
 const FormPasswordConfirm = ({
 	autoComplete,
 	confirmLabel,

@@ -106,7 +106,7 @@ const SampleOutputType = ({
 		querylyId,
 		querylyOrg,
 		locale,
-		textDirection,
+		textDirection = "ltr",
 	} = getProperties(arcSite);
 
 	const chartbeatInline = `
@@ -157,7 +157,7 @@ const SampleOutputType = ({
 	const phrases = usePhrases();
 
 	return (
-		<html lang={locale} dir={textDirection || "ltr"}>
+		<html lang={locale} dir={textDirection}>
 			<head>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link

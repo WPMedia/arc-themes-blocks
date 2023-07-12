@@ -67,7 +67,7 @@ const NavLogo = ({ imageAltText, imageSource, blockClassName, logoAlignment }) =
 
 	const isLogoSVG = !!imageSource && String(imageSource).endsWith(".svg");
 
-	// This replaces: logoAlignment === "center" ? `${blockClassName}__logo--center` : ``
+	// Assign the respective CSS class based on the desired logo alignment
 	let logoAlignmentCssClass = "";
 	switch (logoAlignment) {
 		case "center":

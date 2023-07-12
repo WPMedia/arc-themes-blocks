@@ -80,7 +80,6 @@ const NavLogo = ({ imageAltText, imageSource, blockClassName, logoAlignment }) =
 			logoAlignmentCssClass = ``;
 			break;
 	}
-	console.log(`Logo alignment: ${logoAlignmentCssClass}`);
 
 	return (
 		<Link

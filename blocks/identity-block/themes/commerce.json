@@ -1,0 +1,79 @@
+{
+	"header-account-action": {
+		"styles": {
+			"default": {
+				"display": "flex",
+				"font-family": "var(--font-family-primary)"
+			},
+			"desktop": {}
+		}
+	},
+	"header-account-action-desktop": {
+		"styles": {
+			"default": {
+				"align-items": "center",
+				"display": "none",
+				"gap": "var(--global-spacing-2)"
+			},
+			"desktop": {
+				"display": "flex",
+				"components": {
+					"button": {
+						"text-decoration": "none"
+					}
+				}
+			}
+		}
+	},
+	"header-account-action-mobile": {
+		"styles": {
+			"default": {
+				"display": "flex"
+			},
+			"desktop": {
+				"display": "none"
+			}
+		}
+	},
+	"header-account-action-dropdown-open": {
+		"styles": {
+			"default": {
+				"top": "100%",
+				"position": "absolute",
+				"padding": "var(--global-spacing-4)",
+				"background-color": "var(--global-white)",
+				"border": "1px solid var(--border-color)",
+				"border-radius": "var(--global-spacing-1)",
+				"box-shadow": "0 0 4px 0 rgba(0, 0, 0, 0.25)",
+				"display": "flex",
+				"flex-direction": "column"
+			},
+			"desktop": {}
+		}
+	},
+	"header-account-action-dropdown-list-item": {
+		"styles": {
+			"default": {
+				"list-style": "none",
+				"padding-block-end": "var(--global-spacing-2)",
+				"components": {
+					"link": {
+						"font-size": "var(--global-font-size-3)"
+					},
+					"link-hover": {
+						"color": "var(--color-primary-hover)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"header-account-action-dropdown-list-item-last": {
+		"styles": {
+			"default": {
+				"padding-block-end": "0"
+			},
+			"desktop": {}
+		}
+	}
+}

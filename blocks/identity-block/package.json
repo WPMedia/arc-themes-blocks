@@ -1,0 +1,35 @@
+{
+  "name": "@wpmedia/identity-block",
+  "version": "5.20.0",
+  "description": "Fusion themes identity block.",
+  "author": "Arc XP - Themes",
+  "homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "",
+  "files": [
+    "_index.scss",
+    "features",
+    "sources",
+    "chains",
+    "components",
+    "utils",
+    "themes",
+    "intl.json"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
+    "directory": "blocks/identity-block"
+  },
+  "peerDependencies": {
+    "@wpmedia/arc-themes-components": "*"
+  },
+  "dependencies": {
+    "@arc-fusion/prop-types": "^0.1.5",
+    "@arc-publishing/sdk-identity": "^1.55.0"
+  }
+}

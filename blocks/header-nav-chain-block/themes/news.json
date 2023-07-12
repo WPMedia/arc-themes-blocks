@@ -134,7 +134,8 @@
 	"header-nav-chain-logo-right": {
 		"styles": {
 			"default": {
-				"margin-left": "auto"
+				"margin-left": "auto",
+				"margin-right": 0
 			},
 			"desktop": {}
 		}

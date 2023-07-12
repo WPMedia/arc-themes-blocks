@@ -153,7 +153,7 @@ export function PresentationalNav(props) {
 					</FocusTrap>
 				</Stack>
 			</nav>
-			{horizontalLinksHierarchy && logoAlignment !== "left" && isAdmin ? (
+			{horizontalLinksHierarchy && logoAlignment === "center" && isAdmin ? (
 				<Stack>In order to render horizontal links, the logo must be aligned to the left.</Stack>
 			) : null}
 		</>

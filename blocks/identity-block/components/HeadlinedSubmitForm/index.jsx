@@ -3,12 +3,12 @@ import PropTypes from "@arc-fusion/prop-types";
 import { Button, Heading, HeadingSection, Icon, Paragraph } from "@wpmedia/arc-themes-components";
 
 const HeadlinedSubmitForm = ({
-	children,
-	headline,
 	buttonLabel,
-	formErrorText,
-	onSubmit = () => {},
+	children,
 	className,
+	formErrorText,
+	headline,
+	onSubmit = () => {},
 }) => {
 	const formRef = useRef();
 

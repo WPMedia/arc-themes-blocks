@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Input, isServerSide } from "@wpmedia/arc-themes-components";
+import { Input, isServerSide, Paragraph } from "@wpmedia/arc-themes-components";
 import useIdentity from "../../components/Identity";
 import HeadlinedSubmitForm from "../../components/HeadlinedSubmitForm";
 import FormPasswordConfirm from "../../components/FormPasswordConfirm";
@@ -13,7 +13,7 @@ const BLOCK_CLASS_NAME = "b-sign-up";
 
 const SignUp = ({ customFields, arcSite }) => {
 	let { redirectURL } = customFields;
-	const { redirectToPreviousPage } = customFields;
+	const { privacyURL, redirectToPreviousPage, termsURL } = customFields;
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
@@ -149,6 +149,11 @@ const SignUp = ({ customFields, arcSite }) => {
 				confirmLabel={phrases.t("identity-block.confirm-password")}
 				confirmValidationErrorMessage={phrases.t("identity-block.confirm-password-error")}
 			/>
+			<Paragraph
+				dangerouslySetInnerHTML={{
+					__html: phrases.t("identity-block.terms-privacy-text", { privacyURL, termsURL }),
+				}}
+			/>
 		</HeadlinedSubmitForm>
 	);
 };
@@ -169,9 +174,11 @@ SignUp.propTypes = {
 		}),
 		termsURL: PropTypes.string.tag({
 			name: "Terms and Conditions URL",
+			defaultValue: "/terms-and-conditions/",
 		}),
 		privacyURL: PropTypes.string.tag({
 			name: "Privacy Policy URL",
+			defaultValue: "/privacy-policy/",
 		}),
 	}),
 };

@@ -36,6 +36,14 @@ export function PresentationalNav(props) {
 		primaryLogoAlt,
 	} = props;
 
+	// Set the links bar justification based on the logoAlignment
+	let linksBarJustification = "";
+	if (logoAlignment === "left") {
+		linksBarJustification = "start";
+	} else if (logoAlignment === "right") {
+		linksBarJustification = "end";
+	}
+
 	return (
 		<>
 			<nav
@@ -67,6 +75,7 @@ export function PresentationalNav(props) {
 							showHorizontalSeperatorDots={showDotSeparators}
 							ariaLabel={ariaLabelLink}
 							blockClassName={BLOCK_CLASS_NAME}
+							justification={linksBarJustification}
 						/>
 					) : null}
 					{logoAlignment === "right" ? (

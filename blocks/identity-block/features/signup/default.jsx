@@ -9,6 +9,8 @@ import FormPasswordConfirm from "../../components/FormPasswordConfirm";
 import validatePasswordPattern from "../../utils/validate-password-pattern";
 import passwordValidationMessage from "../../utils/password-validation-message";
 
+const BLOCK_CLASS_NAME = "b-sign-up";
+
 const SignUp = ({ customFields, arcSite }) => {
 	let { redirectURL } = customFields;
 	const { redirectToPreviousPage } = customFields;
@@ -121,6 +123,7 @@ const SignUp = ({ customFields, arcSite }) => {
 					.catch(() => setError(phrases.t("identity-block.sign-up-form-error")))
 			}
 			formErrorText={error}
+			className={BLOCK_CLASS_NAME}
 		>
 			<Input
 				autoComplete="off"
@@ -163,6 +166,12 @@ SignUp.propTypes = {
 			defaultValue: true,
 			description:
 				"Do you wish for the user to be redirected to the page they entered from before signing up? This overrides redirect URL",
+		}),
+		termsURL: PropTypes.string.tag({
+			name: "Terms and Conditions URL",
+		}),
+		privacyURL: PropTypes.string.tag({
+			name: "Privacy Policy URL",
 		}),
 	}),
 };

@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { Button, Icon } from "@wpmedia/arc-themes-components";
+import { Button, Heading, HeadingSection, Icon, Paragraph } from "@wpmedia/arc-themes-components";
 
 const HeadlinedSubmitForm = ({
 	children,
@@ -8,6 +8,7 @@ const HeadlinedSubmitForm = ({
 	buttonLabel,
 	formErrorText,
 	onSubmit = () => {},
+	className,
 }) => {
 	const formRef = useRef();
 
@@ -30,30 +31,21 @@ const HeadlinedSubmitForm = ({
 	};
 
 	return (
-		<section>
-			<PrimaryFont as="h2" className="xpmedia-form-headline">
-				{headline}
-			</PrimaryFont>
-			<form
-				aria-label={headline}
-				className="xpmedia-form-submittable"
-				onSubmit={handleSubmit}
-				ref={formRef}
-			>
+		<section className={className}>
+			<HeadingSection>
+				<Heading>{headline}</Heading>
+			</HeadingSection>
+			<form aria-label={headline} onSubmit={handleSubmit} ref={formRef}>
 				{children}
-				<Button
-					buttonSize={BUTTON_SIZES.MEDIUM}
-					buttonStyle={BUTTON_STYLES.PRIMARY}
-					fullWidth
-					text={buttonLabel}
-					type="submit"
-				/>
+				<Button size="medium" variant="primary" fullWidth type="submit">
+					{buttonLabel}
+				</Button>
 				{formErrorText ? (
-					<section className="xpmedia-form-error" role="alert">
-						<PrimaryFont as="p">
-							<ErrorIcon />
+					<section role="alert">
+						<Paragraph>
+							<Icon name="Error" />
 							{formErrorText}
-						</PrimaryFont>
+						</Paragraph>
 					</section>
 				) : null}
 			</form>
@@ -65,6 +57,7 @@ HeadlinedSubmitForm.propTypes = {
 	headline: PropTypes.string.isRequired,
 	buttonLabel: PropTypes.string.isRequired,
 	onSubmit: PropTypes.func,
+	className: PropTypes.string,
 };
 
 export default HeadlinedSubmitForm;

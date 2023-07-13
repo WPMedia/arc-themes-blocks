@@ -43,6 +43,11 @@ const NavLinksBar = ({
 		return null;
 	}
 
+	// Reverse the array if it's right aligned (justification === "end")
+	if (justification === "end") {
+		menuItems.reverse();
+	}
+
 	return (
 		<Stack
 			key={id}

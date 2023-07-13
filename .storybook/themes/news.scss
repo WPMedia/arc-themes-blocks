@@ -1055,6 +1055,13 @@
 						),
 					),
 				),
+				footer-social-links-hover: (
+					components: (
+						icon: (
+							fill: var(--color-primary-hover),
+						),
+					),
+				),
 				footer-social-links-container: (
 					border-bottom: 1px solid var(--global-neutral-4),
 					width: 100%,
@@ -2207,13 +2214,37 @@
 						button-medium: (
 							padding: 0 var(--global-spacing-3),
 						),
-						icon: (
-							fill: var(--color-primary),
-						),
-						icon-hover: (
-							fill: var(--color-primary-hover),
-						),
 					),
+				),
+				share-bar-facebook: (
+					fill: #415993,
+				),
+				share-bar-facebook-hover: (
+					fill: #5d6f9a,
+				),
+				share-bar-linkedin: (
+					fill: #3076b0,
+				),
+				share-bar-linkedin-hover: (
+					fill: #6baae8,
+				),
+				share-bar-pinterest: (
+					fill: #ad2526,
+				),
+				share-bar-pinterest-hover: (
+					fill: #b44c4c,
+				),
+				share-bar-twitter: (
+					fill: #6baae8,
+				),
+				share-bar-twitter-hover: (
+					fill: #91c4f6,
+				),
+				share-bar-email: (
+					fill: #b61818,
+				),
+				share-bar-email-hover: (
+					fill: #c66565,
 				),
 				simple-list: (
 					gap: var(--global-spacing-4),

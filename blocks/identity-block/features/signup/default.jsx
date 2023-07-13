@@ -153,6 +153,7 @@ const SignUp = ({ customFields, arcSite }) => {
 				dangerouslySetInnerHTML={{
 					__html: phrases.t("identity-block.terms-privacy-text", { privacyURL, termsURL }),
 				}}
+				className={`${BLOCK_CLASS_NAME}__tos-container`}
 			/>
 		</HeadlinedSubmitForm>
 	);

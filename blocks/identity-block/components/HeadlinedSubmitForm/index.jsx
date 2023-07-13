@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { Button, Heading, HeadingSection, Icon, Paragraph } from "@wpmedia/arc-themes-components";
+import { Button, Heading, HeadingSection, Paragraph } from "@wpmedia/arc-themes-components";
 
 const HeadlinedSubmitForm = ({
 	buttonLabel,
@@ -42,10 +42,7 @@ const HeadlinedSubmitForm = ({
 				</Button>
 				{formErrorText ? (
 					<section role="alert">
-						<Paragraph>
-							<Icon name="Error" />
-							{formErrorText}
-						</Paragraph>
+						<Paragraph>{formErrorText}</Paragraph>
 					</section>
 				) : null}
 			</form>

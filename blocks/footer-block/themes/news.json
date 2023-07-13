@@ -88,6 +88,18 @@
 			"desktop": {}
 		}
 	},
+	"footer-social-links-hover": {
+		"styles": {
+			"default": {
+				"components": {
+					"icon": {
+						"fill": "var(--color-primary-hover)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
 	"footer-social-links-container": {
 		"styles": {
 			"default": {

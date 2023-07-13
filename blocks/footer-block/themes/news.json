@@ -4,7 +4,7 @@
 			"default": {
 				"width": "var(--content-scale-width)",
 				"gap": "var(--global-spacing-6)",
-				"margin": "0auto",
+				"margin": "0 auto",
 				"max-width": "calc(var(--content-max-width) * 1px)",
 				"components": {
 					"image": {

@@ -56,7 +56,7 @@ export function PresentationalNav(props) {
 						blockClassName={BLOCK_CLASS_NAME}
 						customFields={customFields}
 						menuButtonClickAction={menuButtonClickAction}
-						side="left"
+						side={logoAlignment !== "right" ? "left" : "right"}
 						signInOrder={signInOrder}
 					>
 						{children}
@@ -90,7 +90,7 @@ export function PresentationalNav(props) {
 						blockClassName={BLOCK_CLASS_NAME}
 						customFields={customFields}
 						menuButtonClickAction={menuButtonClickAction}
-						side="right"
+						side={logoAlignment !== "right" ? "right" : "left"}
 						signInOrder={signInOrder}
 					>
 						{children}

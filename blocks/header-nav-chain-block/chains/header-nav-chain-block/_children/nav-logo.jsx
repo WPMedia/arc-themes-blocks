@@ -77,6 +77,7 @@ const NavLogo = ({ imageAltText, imageSource, blockClassName, logoAlignment }) =
 			logoAlignmentCssClass = `${blockClassName}__logo--right`;
 			break;
 		default:
+			// Left-aligned logos don't have a special CSS class, so this field is blank
 			logoAlignmentCssClass = ``;
 			break;
 	}

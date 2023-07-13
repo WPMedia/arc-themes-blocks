@@ -38,7 +38,7 @@ const NavLinksBar = ({
 		showHorizontalSeparatorDots
 	);
 
-	// don't show menu items container if there are no menu items
+	// Don't show menu items container if there are no menu items
 	if (menuItems.length === 0) {
 		return null;
 	}

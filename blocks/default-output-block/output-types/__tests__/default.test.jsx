@@ -232,6 +232,35 @@ describe("root html layout", () => {
 
 		expect(wrapper.find("html").prop("lang")).toBe("fr");
 	});
+
+	it("must have a default dir attribute of ltr in the HTML tag", () => {
+		const { default: DefaultOutputType } = require("../default");
+		const wrapper = shallow(
+			<DefaultOutputType
+				deployment={jest.fn()}
+				metaValue={jest.fn().mockReturnValue("article")}
+				{...mockFuntions}
+			/>
+		);
+		expect(wrapper.find("html").prop("dir")).toBe("ltr");
+	});
+
+	it("must use the textDirection property in the HTML tag", () => {
+		jest.mock("fusion:properties", () =>
+			jest.fn(() => ({
+				textDirection: "rtl",
+			}))
+		);
+		const { default: DefaultOutputType } = require("../default");
+		const wrapper = shallow(
+			<DefaultOutputType
+				deployment={jest.fn()}
+				metaValue={jest.fn().mockReturnValue("article")}
+				{...mockFuntions}
+			/>
+		);
+		expect(wrapper.find("html").prop("dir")).toBe("rtl");
+	});
 });
 
 describe("head content", () => {

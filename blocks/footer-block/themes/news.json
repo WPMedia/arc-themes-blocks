@@ -4,7 +4,7 @@
 			"default": {
 				"width": "var(--content-scale-width)",
 				"gap": "var(--global-spacing-6)",
-				"margin": "0auto",
+				"margin": "0 auto",
 				"max-width": "calc(var(--content-max-width) * 1px)",
 				"components": {
 					"image": {
@@ -82,6 +82,18 @@
 					"link": {
 						"border-right": "1px solid var(--color-primary)",
 						"padding": "var(--global-spacing-2)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"footer-social-links-hover": {
+		"styles": {
+			"default": {
+				"components": {
+					"icon": {
+						"fill": "var(--color-primary-hover)"
 					}
 				}
 			},

@@ -27,6 +27,11 @@
 			@include scss.block-properties("footer-social-links-container");
 		}
 
+		> *:hover {
+			@include scss.block-components("footer-social-links-hover");
+			@include scss.block-properties("footer-social-links-hover");
+		}
+
 		> *:first-child {
 			@include scss.block-components("footer-social-links-first");
 			@include scss.block-properties("footer-social-links-first");

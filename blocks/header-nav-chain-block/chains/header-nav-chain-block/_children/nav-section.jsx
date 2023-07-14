@@ -5,6 +5,7 @@ import WidgetList from "./widget-list";
 const NavSection = ({
 	children,
 	customFields,
+	justification,
 	menuButtonClickAction,
 	side,
 	signInOrder,
@@ -29,6 +30,7 @@ const NavSection = ({
 									breakpoint={breakpoint}
 									customFields={customFields}
 									id={side}
+									justification={justification}
 									menuButtonClickAction={menuButtonClickAction}
 									placement={PLACEMENT_AREAS.NAV_BAR}
 								>

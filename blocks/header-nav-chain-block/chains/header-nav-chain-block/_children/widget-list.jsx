@@ -12,6 +12,7 @@ const WidgetList = ({
 	children,
 	customFields,
 	id,
+	justification,
 	menuButtonClickAction,
 	placement,
 }) => {
@@ -27,6 +28,7 @@ const WidgetList = ({
 			widgetList.push(
 				<React.Fragment key={`${id}_${breakpoint}_${i}`}>
 					<NavWidget
+						justification={justification}
 						menuButtonClickAction={menuButtonClickAction}
 						placement={placement}
 						position={customFields[cFieldIndexKey]}

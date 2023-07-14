@@ -3,7 +3,7 @@ import React from "react";
 import { NAV_BREAKPOINTS, PLACEMENT_AREAS } from "../nav-helper";
 import WidgetList from "./widget-list";
 
-const MenuWidgets = ({ children, customFields, menuButtonClickAction }) => (
+const MenuWidgets = ({ children, customFields, justification, menuButtonClickAction }) => (
 	<div key="menu" className="nav-menu">
 		{NAV_BREAKPOINTS.map((breakpoint) => (
 			<Stack key={breakpoint} className={`nav-components--${breakpoint}`}>
@@ -11,6 +11,7 @@ const MenuWidgets = ({ children, customFields, menuButtonClickAction }) => (
 					breakpoint={breakpoint}
 					customFields={customFields}
 					id="menu"
+					justification={justification}
 					menuButtonClickAction={menuButtonClickAction}
 					placement={PLACEMENT_AREAS.SECTION_MENU}
 				>

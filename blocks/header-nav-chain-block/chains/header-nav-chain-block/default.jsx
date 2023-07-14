@@ -55,6 +55,7 @@ export function PresentationalNav(props) {
 					<NavSection
 						blockClassName={BLOCK_CLASS_NAME}
 						customFields={customFields}
+						justification={logoAlignment}
 						menuButtonClickAction={menuButtonClickAction}
 						side={logoAlignment !== "right" ? "left" : "right"}
 						signInOrder={signInOrder}

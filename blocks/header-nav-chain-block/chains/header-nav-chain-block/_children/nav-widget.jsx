@@ -7,6 +7,7 @@ import { WIDGET_CONFIG, PLACEMENT_AREAS } from "../nav-helper";
 const NavWidget = ({
 	breakpoint,
 	children = [],
+	justification,
 	menuButtonClickAction,
 	placement = PLACEMENT_AREAS.NAV_BAR,
 	position = 0,
@@ -33,7 +34,16 @@ const NavWidget = ({
 			<Button
 				aria-label={phrases.t("header-nav-chain-block.sections-button")}
 				onClick={menuButtonClickAction}
-				iconRight={<Icon name="HamburgerMenu" />}
+				iconLeft={
+					justification === "left" || justification === "center" ? (
+						<Icon name="HamburgerMenu" />
+					) : null
+				}
+				iconRight={
+					justification === "left" || justification === "center" ? null : (
+						<Icon name="HamburgerMenu" />
+					)
+				}
 				variant="secondary-reverse"
 				size="small"
 			>

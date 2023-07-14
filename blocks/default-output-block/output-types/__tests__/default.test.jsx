@@ -232,6 +232,70 @@ describe("root html layout", () => {
 
 		expect(wrapper.find("html").prop("lang")).toBe("fr");
 	});
+
+	it("must have a default dir attribute of ltr in the HTML tag", () => {
+		const { default: DefaultOutputType } = require("../default");
+		const wrapper = shallow(
+			<DefaultOutputType
+				deployment={jest.fn()}
+				metaValue={jest.fn().mockReturnValue("article")}
+				{...mockFuntions}
+			/>
+		);
+		expect(wrapper.find("html").prop("dir")).toBe("ltr");
+	});
+
+	it("must use the textDirection property in the HTML tag", () => {
+		jest.mock("fusion:properties", () =>
+			jest.fn(() => ({
+				textDirection: "rtl",
+			}))
+		);
+		const { default: DefaultOutputType } = require("../default");
+		const wrapper = shallow(
+			<DefaultOutputType
+				deployment={jest.fn()}
+				metaValue={jest.fn().mockReturnValue("article")}
+				{...mockFuntions}
+			/>
+		);
+		expect(wrapper.find("html").prop("dir")).toBe("rtl");
+	});
+
+	it("must have a style tag in the page head with writing-mode of horizontal-tb", () => {
+		const { default: DefaultOutputType } = require("../default");
+		const wrapper = shallow(
+			<DefaultOutputType
+				deployment={jest.fn()}
+				metaValue={jest.fn().mockReturnValue("article")}
+				{...mockFuntions}
+			/>
+		);
+		const styleElement = wrapper.find("head style");
+		const styleText = styleElement.text();
+
+		expect(styleText).toContain("body { writing-mode: horizontal-tb; }");
+	});
+
+	it("must use the textFlow property as the writing-mode in the style tag in the page head", () => {
+		jest.mock("fusion:properties", () =>
+			jest.fn(() => ({
+				textFlow: "vertical-rl",
+			}))
+		);
+		const { default: DefaultOutputType } = require("../default");
+		const wrapper = shallow(
+			<DefaultOutputType
+				deployment={jest.fn()}
+				metaValue={jest.fn().mockReturnValue("article")}
+				{...mockFuntions}
+			/>
+		);
+		const styleElement = wrapper.find("head style");
+		const styleText = styleElement.text();
+
+		expect(styleText).toContain("body { writing-mode: vertical-rl; }");
+	});
 });
 
 describe("head content", () => {

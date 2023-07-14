@@ -1,27 +1,25 @@
 import React from "react";
-import { mount } from "enzyme";
-
+import { fireEvent, render, screen } from "@testing-library/react";
 import HeadlinedSubmitForm from ".";
 
 describe("Headlined Submit Form", () => {
 	it("renders with required items", () => {
-		const wrapper = mount(<HeadlinedSubmitForm headline="Sign Up" buttonLabel="Submit" />);
+		render(<HeadlinedSubmitForm headline="Sign Up" buttonLabel="Submit" />);
 
-		expect(wrapper.find("form").at(0)).not.toBeNull();
-		expect(wrapper.find('form[aria-label="Sign Up"]').at(0)).not.toBeNull();
-		expect(wrapper.find("button").at(0)).not.toBeNull();
+		expect(screen.getByRole("form")).not.toBeNull();
+		expect(screen.getByRole("button")).not.toBeNull();
 	});
 
 	it("does not submit if the input is invalid", () => {
 		const callback = jest.fn();
 
-		const wrapper = mount(
+		render(
 			<HeadlinedSubmitForm headline="Sign Up" buttonLabel="Submit" onSubmit={callback}>
 				<input name="inputField" type="email" defaultValue="invalid" />
 			</HeadlinedSubmitForm>
 		);
 
-		wrapper.find("form").simulate("submit");
+		fireEvent.click(screen.getByRole("button"));
 
 		expect(callback).not.toHaveBeenCalled();
 	});
@@ -29,13 +27,13 @@ describe("Headlined Submit Form", () => {
 	it("does submit if the input is valid", () => {
 		const callback = jest.fn();
 
-		const wrapper = mount(
+		render(
 			<HeadlinedSubmitForm headline="Sign Up" buttonLabel="Submit" onSubmit={callback}>
 				<input name="inputField" type="email" defaultValue="valid@email.com" />
 			</HeadlinedSubmitForm>
 		);
 
-		wrapper.find("form").simulate("submit");
+		fireEvent.click(screen.getByRole("button"));
 
 		expect(callback).toHaveBeenCalledWith({
 			inputField: "valid@email.com",
@@ -43,7 +41,7 @@ describe("Headlined Submit Form", () => {
 	});
 
 	it("shows a form error is text is passed in", () => {
-		const wrapper = mount(
+		render(
 			<HeadlinedSubmitForm
 				headline="Sign Up"
 				buttonLabel="Submit"
@@ -53,12 +51,6 @@ describe("Headlined Submit Form", () => {
 			</HeadlinedSubmitForm>
 		);
 
-		expect(
-			wrapper
-				.find(".xpmedia-form-error")
-				.at(0)
-				.text()
-				.includes("This should show up in the error field")
-		);
+		expect(screen.getByText("This should show up in the error field")).not.toBeNull();
 	});
 });

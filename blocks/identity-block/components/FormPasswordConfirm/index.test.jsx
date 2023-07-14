@@ -1,21 +1,17 @@
 import React from "react";
-import { mount } from "enzyme";
-
+import { fireEvent, render, screen } from "@testing-library/react";
 import FormPasswordConfirm from ".";
 
 describe("Form Password Confirm", () => {
 	it("renders with required items", () => {
-		const wrapper = mount(
-			<FormPasswordConfirm confirmLabel="Confirm" label="Password" name="field1" />
-		);
+		render(<FormPasswordConfirm confirmLabel="Confirm" label="Password" name="field1" />);
 
-		expect(wrapper.find('input[name="field1"]').at(0)).not.toBeNull();
-		expect(wrapper.find("label").at(0).text().includes("Password")).toBe(true);
-		expect(wrapper.find("label").at(1).text().includes("Confirm")).toBe(true);
+		expect(screen.getByLabelText("Password")).not.toBeNull();
+		expect(screen.getByLabelText("Confirm")).not.toBeNull();
 	});
 
 	it("renders with an error if the password is empty", () => {
-		const wrapper = mount(
+		render(
 			<FormPasswordConfirm
 				confirmLabel="Confirm"
 				label="Password"
@@ -24,13 +20,13 @@ describe("Form Password Confirm", () => {
 			/>
 		);
 
-		wrapper.find('input[name="field1"]').at(0).simulate("blur");
+		fireEvent.blur(screen.getByLabelText("Password"));
 
-		expect(wrapper.text().includes("Please enter something")).toBe(true);
+		expect(screen.getByText("Please enter something")).not.toBeNull();
 	});
 
 	it("renders with an error if the password confirm is not matching", () => {
-		const wrapper = mount(
+		render(
 			<FormPasswordConfirm
 				confirmLabel="Confirm"
 				confirmValidationErrorMessage="Must match password"
@@ -38,23 +34,16 @@ describe("Form Password Confirm", () => {
 				name="field1"
 			/>
 		);
-
-		wrapper.find("input").at(0).instance().value = "thisIsNotMyPassword";
-		wrapper
-			.find("input")
-			.at(0)
-			.simulate("change", { target: { value: "thisIsMyPassword" } });
-		wrapper
-			.find("input")
-			.at(1)
-			.simulate("change", { target: { value: "thisIsMyPassword!" } });
-		wrapper.find("input").at(1).simulate("blur");
-
-		expect(wrapper.text().includes("Must match password")).toBe(true);
+		const passwordInput = screen.getByLabelText("Password");
+		const confirmInput = screen.getByLabelText("Confirm");
+		fireEvent.change(passwordInput, { target: { value: "thisIsMyPassword" } });
+		fireEvent.change(confirmInput, { target: { value: "thisIsMyPassword!" } });
+		fireEvent.blur(confirmInput);
+		expect(screen.getByText("Must match password")).not.toBeNull();
 	});
 
 	it("renders with placeholders", () => {
-		const wrapper = mount(
+		render(
 			<FormPasswordConfirm
 				confirmLabel="Confirm"
 				confirmPlaceholder="Confirm Password"
@@ -64,12 +53,12 @@ describe("Form Password Confirm", () => {
 			/>
 		);
 
-		expect(wrapper.find('input[placeholder="Enter Password"]').length).toBe(1);
-		expect(wrapper.find('input[placeholder="Confirm Password"]').length).toBe(1);
+		expect(screen.getByPlaceholderText("Enter Password")).not.toBeNull();
+		expect(screen.getByPlaceholderText("Confirm Password")).not.toBeNull();
 	});
 
 	it("renders with tips", () => {
-		const wrapper = mount(
+		render(
 			<FormPasswordConfirm
 				confirmLabel="Confirm"
 				confirmTip="Confirm Tip"
@@ -79,16 +68,12 @@ describe("Form Password Confirm", () => {
 			/>
 		);
 
-		expect(wrapper.find("div.xpmedia-form-field-tip").at(0).text().includes("Password Tip")).toBe(
-			true
-		);
-		expect(wrapper.find("div.xpmedia-form-field-tip").at(1).text().includes("Confirm Tip")).toBe(
-			true
-		);
+		expect(screen.getByText("Password Tip")).not.toBeNull();
+		expect(screen.getByText("Confirm Tip")).not.toBeNull();
 	});
 
 	it("renders errors if showDefaultError", () => {
-		const wrapper = mount(
+		render(
 			<FormPasswordConfirm
 				confirmLabel="Confirm"
 				confirmValidationErrorMessage="Must match password"
@@ -99,16 +84,12 @@ describe("Form Password Confirm", () => {
 			/>
 		);
 
-		expect(
-			wrapper.find("div.xpmedia-form-field-tip").at(0).text().includes("Please enter something")
-		).toBe(true);
-		expect(
-			wrapper.find("div.xpmedia-form-field-tip").at(1).text().includes("Must match password")
-		).toBe(true);
+		expect(screen.getByText("Please enter something")).not.toBeNull();
+		expect(screen.getByText("Must match password")).not.toBeNull();
 	});
 
 	it("renders errors if validation pattern is not met", () => {
-		const wrapper = mount(
+		render(
 			<FormPasswordConfirm
 				confirmLabel="Confirm"
 				confirmValidationErrorMessage="Must match password"
@@ -120,14 +101,9 @@ describe("Form Password Confirm", () => {
 			/>
 		);
 
-		wrapper.find("input").at(0).instance().value = "thisIsMyPassword";
-		wrapper.find("input").at(0).simulate("blur");
-		expect(
-			wrapper
-				.find("div.xpmedia-form-field-tip")
-				.at(0)
-				.text()
-				.includes("Please enter something good")
-		).toBe(true);
+		const passwordInput = screen.getByLabelText("Password");
+		fireEvent.change(passwordInput, { target: { value: "thisIsMyPassword" } });
+		fireEvent.blur(passwordInput);
+		expect(screen.getByText("Please enter something good")).not.toBeNull();
 	});
 });

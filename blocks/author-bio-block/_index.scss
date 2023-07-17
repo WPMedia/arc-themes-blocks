@@ -26,9 +26,6 @@
 			@include scss.block-properties("author-bio-social-link-wrapper");
 			@include scss.block-components("author-bio-social-link-wrapper");
 		}
-
-		@include scss.block-properties("author-bio-social-link");
-		@include scss.block-components("author-bio-social-link");
 	}
 	@include scss.block-components("author-bio");
 	@include scss.block-properties("author-bio");

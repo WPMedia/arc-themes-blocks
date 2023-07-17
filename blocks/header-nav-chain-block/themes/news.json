@@ -430,7 +430,14 @@
 	"header-nav-chain-flyout-nav-item": {
 		"styles": {
 			"default": {
-				"background-color": "var(--global-black)"
+				"background-color": "var(--global-black)",
+				"components": {
+					"link": {
+						"padding-top": "var(--global-spacing-3)",
+						"padding-left": "var(--global-spacing-5)",
+						"padding-bottom": "var(--global-spacing-3)"
+					}
+				}
 			},
 			"desktop": {}
 		}
@@ -521,7 +528,10 @@
 						"font-size": "var(--global-spacing-4)",
 						"font-weight": "var(--global-font-weight-7)",
 						"line-height": "var(--global-line-height-4)",
-						"padding": "var(--global-spacing-2) var(--global-spacing-4) var(--global-spacing-2)\n\t\t\t\t\t\t\t\tvar(--global-spacing-5)",
+						"padding-top": "var(--global-spacing-2)",
+						"padding-right": "var(--global-spacing-5)",
+						"padding-left": "var(--global-spacing-5)",
+						"padding-bottom": "var(--global-spacing-2)",
 						"text-decoration": "none"
 					},
 					"link-hover": {

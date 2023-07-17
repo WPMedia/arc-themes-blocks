@@ -55,12 +55,24 @@
 			"desktop": {}
 		}
 	},
+	"author-bio-social-link": {
+		"styles": {
+			"default": {
+				"components": {
+					"icon": {
+						"fill": "var(--global-green-5)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
 	"author-bio-social-link-hover": {
 		"styles": {
 			"default": {
 				"components": {
 					"icon": {
-						"fill": "var(--color-primary-hover)"
+						"fill": "var(--global-green-3)"
 					}
 				}
 			},

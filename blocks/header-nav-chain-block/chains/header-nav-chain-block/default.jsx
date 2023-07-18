@@ -90,6 +90,7 @@ export function PresentationalNav(props) {
 					<NavSection
 						blockClassName={BLOCK_CLASS_NAME}
 						customFields={customFields}
+						justification={logoAlignment}
 						menuButtonClickAction={menuButtonClickAction}
 						side="right"
 						signInOrder={signInOrder}

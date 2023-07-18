@@ -516,6 +516,17 @@
 		"pt": "There's been an error creating your account",
 		"sv": "There's been an error creating your account"
 	},
+	"identity-block.terms-privacy-text": {
+		"de": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>.",
+		"en": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>.",
+		"es": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>.",
+		"fr": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>.",
+		"ja": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>.",
+		"ko": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>.",
+		"no": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>.",
+		"pt": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>.",
+		"sv": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>."
+	},
 	"identity-block.update-email-error": {
 		"de": "There's been an error updating your email address",
 		"en": "There's been an error updating your email address",

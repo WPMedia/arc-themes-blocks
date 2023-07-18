@@ -22,6 +22,7 @@ const NavWidget = ({
 				iconSize={WIDGET_CONFIG[placement]?.iconSize}
 				placeholderText={phrases.t("header-nav-chain-block.search-text")}
 				alwaysOpen={WIDGET_CONFIG[placement]?.expandSearch}
+				justification={justification}
 			/>
 		) : null) ||
 		(type === "queryly" ? (

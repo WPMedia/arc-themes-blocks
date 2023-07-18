@@ -190,11 +190,32 @@
 			"desktop": {}
 		}
 	},
+	"header-nav-chain-nav-search-right": {
+		"styles": {
+			"default": {
+				"align-items": "center",
+				"display": "flex",
+				"justify-content": "center",
+				"position": "relative"
+			},
+			"desktop": {}
+		}
+	},
 	"header-nav-chain-nav-search-input": {
 		"styles": {
 			"default": {
 				"padding": 0,
 				"width": 0
+			},
+			"desktop": {}
+		}
+	},
+	"header-nav-chain-nav-search-right-input": {
+		"styles": {
+			"default": {
+				"padding": 0,
+				"width": 0,
+				"text-align": "right"
 			},
 			"desktop": {}
 		}
@@ -206,6 +227,18 @@
 				"height": "var(--global-spacing-7)",
 				"line-height": "var(--global-line-height-4)",
 				"padding": "4px 24px 4px 11px",
+				"width": "100%"
+			},
+			"desktop": {}
+		}
+	},
+	"header-nav-chain-nav-search-right-input-open": {
+		"styles": {
+			"default": {
+				"font-size": "var(--body-font-size)",
+				"height": "var(--global-spacing-7)",
+				"line-height": "var(--global-line-height-4)",
+				"padding": "4px 11px 4px 24px",
 				"width": "100%"
 			},
 			"desktop": {}
@@ -226,6 +259,15 @@
 			"default": {
 				"position": "absolute",
 				"right": 0
+			},
+			"desktop": {}
+		}
+	},
+	"header-nav-chain-nav-search-box-position-left": {
+		"styles": {
+			"default": {
+				"position": "absolute",
+				"left": 0
 			},
 			"desktop": {}
 		}

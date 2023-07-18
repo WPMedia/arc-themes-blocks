@@ -23,6 +23,28 @@
 		@include scss.block-properties("header-nav-chain-nav-search");
 	}
 
+	.nav-search-right {
+		input {
+			@include scss.block-components("header-nav-chain-nav-search-right-input");
+			@include scss.block-properties("header-nav-chain-nav-search-right-input");
+		}
+
+		&.open {
+			input {
+				@include scss.block-components("header-nav-chain-nav-search-right-input-open");
+				@include scss.block-properties("header-nav-chain-nav-search-right-input-open");
+			}
+
+			button {
+				@include scss.block-components("header-nav-chain-nav-search-button");
+				@include scss.block-properties("header-nav-chain-nav-search-button");
+			}
+		}
+
+		@include scss.block-components("header-nav-chain-nav-search-right");
+		@include scss.block-properties("header-nav-chain-nav-search-right");
+	}
+
 	&__flyout-overlay {
 		&::-webkit-scrollbar {
 			@include scss.block-components("header-nav-chain-flyout-overlay-scrollbar");
@@ -126,6 +148,15 @@
 		}
 		@include scss.block-components("header-nav-chain-nav-search-box-position");
 		@include scss.block-properties("header-nav-chain-nav-search-box-position");
+	}
+
+	.search-box--left-absolute-positioned {
+		svg {
+			@include scss.block-components("header-nav-chain-nav-search-box-svg");
+			@include scss.block-properties("header-nav-chain-nav-search-box-svg");
+		}
+		@include scss.block-components("header-nav-chain-nav-search-box-position-left");
+		@include scss.block-properties("header-nav-chain-nav-search-box-position-left");
 	}
 
 	&__subsection-anchor {

@@ -1,7 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Icon, usePhrases } from "@wpmedia/arc-themes-components";
 
-export default ({ alwaysOpen = false, placeholderText, customSearchAction = null }) => {
+export default ({
+	alwaysOpen = false,
+	placeholderText,
+	customSearchAction = null,
+	justification,
+}) => {
 	const phrases = usePhrases();
 
 	const [shouldSearchOpen, setShouldSearchOpen] = useState(false);
@@ -56,7 +61,19 @@ export default ({ alwaysOpen = false, placeholderText, customSearchAction = null
 	};
 
 	const isSearchBarOpen = shouldSearchOpen || alwaysOpen;
-	const navClassNames = `nav-search${isSearchBarOpen ? " open " : ""}`;
+	const navClassNames = `nav-search${justification === "right" ? "-right" : ""}${
+		isSearchBarOpen ? " open " : ""
+	}`;
+
+	// Set the class name for the search button. It will be empty if the search bar is not open
+	let buttonClassName = "";
+	if (isSearchBarOpen && justification !== "right") {
+		buttonClassName = "search-box--right-absolute-positioned";
+	} else if (isSearchBarOpen && justification === "right") {
+		buttonClassName = "search-box--left-absolute-positioned";
+	} else {
+		buttonClassName = "";
+	}
 
 	return (
 		<div className={navClassNames}>
@@ -71,7 +88,7 @@ export default ({ alwaysOpen = false, placeholderText, customSearchAction = null
 			/>
 			<Button
 				accessibilityLabel={phrases.t("header-nav-chain-block.search-text")}
-				className={isSearchBarOpen ? "search-box--right-absolute-positioned" : ""}
+				className={buttonClassName}
 				variant="secondary-reverse"
 				size="small"
 				onClick={handleClick}

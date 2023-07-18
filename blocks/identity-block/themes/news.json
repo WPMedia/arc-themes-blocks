@@ -40,7 +40,10 @@
 			"default": {
 				"top": "100%",
 				"position": "absolute",
-				"padding": "var(--global-spacing-4)",
+				"padding-block-end": "var(--global-spacing-4)",
+				"padding-block-start": "var(--global-spacing-4)",
+				"padding-inline-end": "var(--global-spacing-4)",
+				"padding-inline-start": "var(--global-spacing-4)",
 				"background-color": "var(--global-white)",
 				"border": "1px solid var(--border-color)",
 				"border-radius": "var(--global-spacing-1)",
@@ -72,6 +75,76 @@
 		"styles": {
 			"default": {
 				"padding-block-end": "0"
+			},
+			"desktop": {}
+		}
+	},
+	"sign-up": {
+		"styles": {
+			"default": {
+				"inline-size": "calc(100% - var(--global-spacing-6))",
+				"margin": "auto",
+				"font-family": "var(--font-family-primary)",
+				"max-inline-size": "none",
+				"components": {
+					"button": {
+						"font-size": "var(--global-font-size-4)"
+					},
+					"heading": {
+						"border-block-end-color": "var(--border-color)",
+						"border-block-end-style": "var(--global-border-style-1)",
+						"border-block-end-width": "var(--global-border-width-1)",
+						"font-size": "var(--global-font-size-9)",
+						"margin-block-end": "var(--global-spacing-4)",
+						"margin-bottom": "var(--global-spacing-4)",
+						"padding-block-end": "var(--global-spacing-2)",
+						"text-align": "center"
+					},
+					"input": {
+						"margin-block-end": "var(--global-spacing-5)"
+					},
+					"input-error-tip": {
+						"color": "var(--status-color-danger)"
+					},
+					"input-input": {
+						"inline-size": "100%",
+						"width": "100%",
+						"padding-block-end": "var(--global-spacing-2)",
+						"padding-block-start": "var(--global-spacing-2)",
+						"padding-inline-end": "var(--global-spacing-2)",
+						"padding-inline-start": "var(--global-spacing-2)",
+						"padding-left": "var(--global-spacing-2)"
+					},
+					"paragraph": {
+						"font-family": "var(--font-family-primary)",
+						"margin-block-end": "var(--global-spacing-5)"
+					}
+				}
+			},
+			"desktop": {
+				"max-inline-size": "37rem",
+				"components": {
+					"heading": {
+						"font-size": "var(--global-font-size-12)",
+						"padding-block-end": "var(--global-spacing-4)"
+					}
+				}
+			}
+		}
+	},
+	"sign-up-tos-link": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color)",
+				"text-decoration": "none"
+			},
+			"desktop": {}
+		}
+	},
+	"sign-up-tos-link-hover": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color-subtle)"
 			},
 			"desktop": {}
 		}

@@ -1294,6 +1294,10 @@
 				header-nav-chain-logo: (
 					margin-right: auto,
 				),
+				header-nav-chain-logo-right: (
+					margin-left: auto,
+					margin-right: 0,
+				),
 				header-nav-chain-logo-center: (
 					margin-right: 0,
 				),
@@ -1326,6 +1330,12 @@
 						opacity 0.4s ease,
 					),
 				),
+				header-nav-chain-nav-search-right: (
+					align-items: center,
+					display: flex,
+					justify-content: center,
+					position: relative,
+				),
 				header-nav-chain-nav-search: (
 					align-items: center,
 					display: flex,
@@ -1336,11 +1346,23 @@
 					padding: 0,
 					width: 0,
 				),
+				header-nav-chain-nav-search-right-input: (
+					padding: 0,
+					width: 0,
+					text-align: right,
+				),
 				header-nav-chain-nav-search-input-open: (
 					font-size: var(--body-font-size),
 					height: var(--global-spacing-7),
 					line-height: var(--global-line-height-4),
 					padding: 4px 24px 4px 11px,
+					width: 100%,
+				),
+				header-nav-chain-nav-search-right-input-open: (
+					font-size: var(--body-font-size),
+					height: var(--global-spacing-7),
+					line-height: var(--global-line-height-4),
+					padding: 4px 11px 4px 24px,
 					width: 100%,
 				),
 				header-nav-chain-nav-search-button: (
@@ -1351,6 +1373,10 @@
 				header-nav-chain-nav-search-box-position: (
 					position: absolute,
 					right: 0,
+				),
+				header-nav-chain-nav-search-box-position-left: (
+					position: absolute,
+					left: 0,
 				),
 				header-nav-chain-nav-search-box-svg: (
 					fill: #191919,

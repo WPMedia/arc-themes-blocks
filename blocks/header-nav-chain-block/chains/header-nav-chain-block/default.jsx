@@ -165,7 +165,9 @@ export function PresentationalNav(props) {
 				</Stack>
 			</nav>
 			{horizontalLinksHierarchy && logoAlignment === "center" && isAdmin ? (
-				<Stack>In order to render horizontal links, the logo must be aligned to the left.</Stack>
+				<Stack>
+					In order to render horizontal links, the logo must be aligned to the left or right.
+				</Stack>
 			) : null}
 		</>
 	);

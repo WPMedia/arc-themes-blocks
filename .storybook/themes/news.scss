@@ -874,11 +874,11 @@
 					color: var(--text-color),
 					text-decoration: none,
 					components: (
-						link: (
+						attribution-link: (
 							color: var(--text-color),
 							text-decoration: underline,
 						),
-						link-hover: (
+						attribution-link-hover: (
 							color: var(--text-color-subtle),
 							text-decoration: none,
 						),

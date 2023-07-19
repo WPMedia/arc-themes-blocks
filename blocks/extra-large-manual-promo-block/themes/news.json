@@ -63,10 +63,10 @@
 			"desktop": {}
 		}
 	},
-	"xl-manual-promo-img-with-link": {
+	"xl-manual-promo-img": {
 		"styles": {
 			"default": {
-				"image": {
+				"link-hover": {
 					"opacity": 0.8
 				}
 			},

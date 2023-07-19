@@ -91,10 +91,7 @@ const SmallManualPromo = ({ customFields }) => {
 				})}
 				suppressContentEditableWarning
 			>
-				<Image
-					className={`${linkURL ? `${BLOCK_CLASS_NAME}__imgWithLink` : ""}`}
-					{...imageParams}
-				/>
+				<Image className={`${BLOCK_CLASS_NAME}__img`} {...imageParams} />
 			</MediaItem>
 		) : null;
 		return showImage && linkURL ? (

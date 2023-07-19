@@ -1,9 +1,9 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-small-promo {
-	&__imgWithLink {
-		@include scss.block-properties("small-promo-img-with-link");
-		@include scss.block-components("small-promo-img-with-link");
+	&__img {
+		@include scss.block-properties("small-promo-img");
+		@include scss.block-components("small-promo-img");
 	}
 	&__headline {
 		@include scss.block-properties("small-promo-headline-hover");

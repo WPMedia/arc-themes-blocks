@@ -1,9 +1,9 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-xl-promo {
-	&__imgWithLink {
-		@include scss.block-properties("xl-promo-img-with-link");
-		@include scss.block-components("xl-promo-img-with-link");
+	&__img {
+		@include scss.block-properties("xl-promo-img");
+		@include scss.block-components("xl-promo-img");
 	}
 	&__overline {
 		@include scss.block-properties("xl-promo-overline-hover");

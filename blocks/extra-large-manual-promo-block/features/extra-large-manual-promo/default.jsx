@@ -131,7 +131,7 @@ const ExtraLargeManualPromo = ({ customFields }) => {
 									component={Link}
 									condition={linkURL}
 									href={formatURL(linkURL)}
-									className={`${linkURL ? `${BLOCK_CLASS_NAME}__imgWithLink` : ""}`}
+									className={`${BLOCK_CLASS_NAME}__img`}
 									openInNewTab={newTab}
 									onClick={registerSuccessEvent}
 									assistiveHidden={showHeadline && showDescription}

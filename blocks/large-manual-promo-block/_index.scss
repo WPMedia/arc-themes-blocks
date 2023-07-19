@@ -1,9 +1,9 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-large-manual-promo {
-	&__imgWithLink {
-		@include scss.block-properties("large-manual-promo-img-with-link");
-		@include scss.block-components("large-manual-promo-img-with-link");
+	&__img {
+		@include scss.block-properties("large-manual-promo-img");
+		@include scss.block-components("large-manual-promo-img");
 	}
 	&__overline {
 		@include scss.block-properties("large-manual-promo-overline-hover");

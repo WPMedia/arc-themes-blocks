@@ -76,7 +76,7 @@ export const LargePromoPresentation = ({
 					>
 						<Conditional
 							component={Link}
-							className={`${contentUrl ? `${BLOCK_CLASS_NAME}__imgWithLink` : ""}`}
+							className={`${BLOCK_CLASS_NAME}__img}`}
 							condition={contentUrl}
 							href={formatURL(contentUrl)}
 							onClick={registerSuccessEvent}

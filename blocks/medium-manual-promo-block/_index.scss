@@ -1,9 +1,9 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-medium-manual-promo {
-	&__imgWithLink {
-		@include scss.block-properties("medium-manual-promo-img-with-link");
-		@include scss.block-components("medium-manual-promo-img-with-link");
+	&__img {
+		@include scss.block-properties("medium-manual-promo-img");
+		@include scss.block-components("medium-manual-promo-img");
 	}
 	&__headline {
 		@include scss.block-properties("medium-manual-promo-headline-hover");

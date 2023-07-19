@@ -1,9 +1,9 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-large-promo {
-	&__imgWithLink {
-		@include scss.block-properties("large-promo-img-with-link");
-		@include scss.block-components("large-promo-img-with-link");
+	&__img {
+		@include scss.block-properties("large-promo-img");
+		@include scss.block-components("large-promo-img");
 	}
 	&__overline {
 		@include scss.block-properties("large-promo-overline-hover");

@@ -4,16 +4,12 @@
 	@include scss.block-properties("xl-manual-promo");
 	@include scss.block-components("xl-manual-promo");
 	&__overline {
-		&:hover {
-			@include scss.block-properties("xl-manual-promo-overline-hover");
-			@include scss.block-components("xl-manual-promo-overline-hover");
-		}
+		@include scss.block-properties("xl-manual-promo-overline-hover");
+		@include scss.block-components("xl-manual-promo-overline-hover");
 	}
 	&__headline {
-		&:hover {
-			@include scss.block-properties("xl-manual-promo-headline-hover");
-			@include scss.block-components("xl-manual-promo-headline-hover");
-		}
+		@include scss.block-properties("xl-manual-promo-headline-hover");
+		@include scss.block-components("xl-manual-promo-headline-hover");
 	}
 	&__imgWithLink {
 		@include scss.block-properties("xl-manual-promo-img-with-link");

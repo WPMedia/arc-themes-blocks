@@ -38,7 +38,11 @@
 	"small-promo-headline-hover": {
 		"styles": {
 			"default": {
-				"color": "var(--text-color-subtle)"
+				"components": {
+					"heading": {
+						"color": "var(--text-color-subtle)"
+					}
+				}
 			},
 			"desktop": {}
 		}
@@ -46,7 +50,9 @@
 	"small-promo-img-with-link": {
 		"styles": {
 			"default": {
-				"opacity": 0.8
+				"image": {
+					"opacity": 0.8
+				}
 			},
 			"desktop": {}
 		}

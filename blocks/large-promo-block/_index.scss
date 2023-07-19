@@ -6,16 +6,12 @@
 		@include scss.block-components("large-promo-img-with-link");
 	}
 	&__overline {
-		&:hover {
-			@include scss.block-properties("large-promo-overline-hover");
-			@include scss.block-components("large-promo-overline-hover");
-		}
+		@include scss.block-properties("large-promo-overline-hover");
+		@include scss.block-components("large-promo-overline-hover");
 	}
 	&__headline {
-		&:hover {
-			@include scss.block-properties("large-promo-headline-hover");
-			@include scss.block-components("large-promo-headline-hover");
-		}
+		@include scss.block-properties("large-promo-headline-hover");
+		@include scss.block-components("large-promo-headline-hover");
 	}
 	&__text {
 		@include scss.block-components("large-promo-text");

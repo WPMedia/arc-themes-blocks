@@ -1576,13 +1576,25 @@
 					),
 				),
 				large-manual-promo-overline-hover: (
-					color: var(--text-color-subtle),
+					components: (
+						overline-hover: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				large-manual-promo-headline-hover: (
-					color: var(--text-color-subtle),
+					components: (
+						heading: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				large-manual-promo-img-with-link: (
-					opacity: 0.8,
+					components: (
+						image: (
+							opacity: 0.8,
+						),
+					),
 				),
 				large-promo: (
 					gap: var(--global-spacing-4),
@@ -1640,13 +1652,25 @@
 					),
 				),
 				large-promo-overline-hover: (
-					color: var(--text-color-subtle),
+					components: (
+						overline-hover: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				large-promo-headline-hover: (
-					color: var(--text-color-subtle),
+					components: (
+						heading: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				large-promo-img-with-link: (
-					opacity: 0.8,
+					components: (
+						image: (
+							opacity: 0.8,
+						),
+					),
 				),
 				lead-art: (
 					margin-bottom: var(--global-spacing-5),
@@ -1877,10 +1901,18 @@
 					display: none,
 				),
 				medium-promo-headline-hover: (
-					color: var(--text-color-subtle),
+					components: (
+						heading: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				medium-promo-img-with-link: (
-					opacity: 0.8,
+					components: (
+						image: (
+							opacity: 0.8,
+						),
+					),
 				),
 				medium-manual-promo: (
 					clear: both,
@@ -1919,10 +1951,18 @@
 					),
 				),
 				medium-manual-promo-headline-hover: (
-					color: var(--text-color-subtle),
+					components: (
+						heading: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				medium-manual-promo-img-with-link: (
-					opacity: 0.8,
+					components: (
+						image: (
+							opacity: 0.8,
+						),
+					),
 				),
 				numbered-list: (
 					gap: var(--global-spacing-4),
@@ -2358,10 +2398,18 @@
 					grid-template-columns: 2fr 1fr,
 				),
 				small-manual-promo-headline-hover: (
-					color: var(--text-color-subtle),
+					components: (
+						heading: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				small-manual-promo-img-with-link: (
-					opacity: 0.8,
+					components: (
+						image: (
+							opacity: 0.8,
+						),
+					),
 				),
 				small-promo: (
 					display: grid,
@@ -2385,10 +2433,18 @@
 					grid-template-columns: 2fr 1fr,
 				),
 				small-promo-headline-hover: (
-					color: var(--text-color-subtle),
+					components: (
+						heading: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				small-promo-img-with-link: (
-					opacity: 0.8,
+					components: (
+						image: (
+							opacity: 0.8,
+						),
+					),
 				),
 				subheadline: (
 					font-size: var(--heading-level-6-font-size),
@@ -2689,13 +2745,25 @@
 					),
 				),
 				xl-manual-promo-overline-hover: (
-					color: var(--text-color-subtle),
+					components: (
+						overline-hover: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				xl-manual-promo-headline-hover: (
-					color: var(--text-color-subtle),
+					components: (
+						heading: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				xl-manual-promo-img-with-link: (
-					opacity: 0.8,
+					components: (
+						image: (
+							opacity: 0.8,
+						),
+					),
 				),
 				xl-promo: (
 					components: (
@@ -2723,13 +2791,25 @@
 					),
 				),
 				xl-promo-overline-hover: (
-					color: var(--text-color-subtle),
+					components: (
+						overline-hover: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				xl-promo-headline-hover: (
-					color: var(--text-color-subtle),
+					components: (
+						heading: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				xl-promo-img-with-link: (
-					opacity: 0.8,
+					components: (
+						image: (
+							opacity: 0.8,
+						),
+					),
 				),
 				xl-promo-icon-label: (
 					align-items: center,

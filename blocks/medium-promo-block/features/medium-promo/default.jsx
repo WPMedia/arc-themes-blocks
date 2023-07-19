@@ -209,17 +209,14 @@ const MediumPromo = ({ customFields }) => {
 							suppressContentEditableWarning
 						>
 							<Conditional
+								className={`${contentUrl ? `${BLOCK_CLASS_NAME}__imgWithLink` : ""}`}
 								component={Link}
 								condition={contentUrl}
 								href={formatURL(contentUrl)}
 								onClick={registerSuccessEvent}
 								assistiveHidden
 							>
-								<Image
-									className={`${contentUrl ? `${BLOCK_CLASS_NAME}__imgWithLink` : ""}`}
-									alt={content?.headlines?.basic}
-									{...imageParams}
-								/>
+								<Image alt={content?.headlines?.basic} {...imageParams} />
 								{labelIconName ? (
 									<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
 										<Icon name={labelIconName} />

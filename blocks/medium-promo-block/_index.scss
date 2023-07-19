@@ -6,10 +6,8 @@
 		@include scss.block-components("medium-promo-img-with-link");
 	}
 	&__headline {
-		&:hover {
-			@include scss.block-properties("medium-promo-headline-hover");
-			@include scss.block-components("medium-promo-headline-hover");
-		}
+		@include scss.block-properties("medium-promo-headline-hover");
+		@include scss.block-components("medium-promo-headline-hover");
 	}
 	&--show-image {
 		@include scss.block-properties("medium-promo-show-image");

@@ -98,15 +98,13 @@ export const ExtraLargePromoPresentation = ({
 								) : (
 									<>
 										<Conditional
+											className={`${contentUrl ? `${BLOCK_CLASS_NAME}__imgWithLink` : ""}`}
 											component={Link}
 											condition={contentUrl}
 											href={contentUrl}
 											assistiveHidden
 										>
-											<Image
-												className={`${contentUrl ? `${BLOCK_CLASS_NAME}__imgWithLink` : ""}`}
-												{...imageParams}
-											/>
+											<Image {...imageParams} />
 											{labelIconName ? (
 												<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
 													<Icon name={labelIconName} />

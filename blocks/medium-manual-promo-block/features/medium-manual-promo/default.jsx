@@ -99,6 +99,7 @@ const MediumManualPromo = ({ customFields }) => {
 							suppressContentEditableWarning
 						>
 							<Conditional
+								className={`${linkURL ? `${BLOCK_CLASS_NAME}__imgWithLink` : ""}`}
 								component={Link}
 								condition={linkURL}
 								href={formatURL(linkURL)}
@@ -106,10 +107,7 @@ const MediumManualPromo = ({ customFields }) => {
 								onClick={registerSuccessEvent}
 								assistiveHidden={showHeadline && showDescription}
 							>
-								<Image
-									className={`${linkURL ? `${BLOCK_CLASS_NAME}__imgWithLink` : ""}`}
-									{...imageParams}
-								/>
+								<Image {...imageParams} />
 							</Conditional>
 						</MediaItem>
 					) : null}

@@ -84,7 +84,6 @@ describe("Identity useIdentity Hook", () => {
 		};
 
 		render(<Test />);
-
 		expect(screen.getByText("Google")).toBeInTheDocument();
 	});
 });

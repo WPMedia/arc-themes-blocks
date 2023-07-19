@@ -10,6 +10,9 @@
 						"font-weight": "var(--heading-level-1-font-weight)",
 						"line-height": "var(--heading-level-1-line-height)"
 					},
+					"link": {
+						"font-family": "var(--font-family-primary)"
+					},
 					"separator": {
 						"margin": "0 var(--global-spacing-4)"
 					}

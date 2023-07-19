@@ -427,6 +427,7 @@
 				),
 				overline: (
 					color: var(--text-color),
+					font-family: var(--font-family-primary),
 					font-size: var(--heading-level-6-font-size),
 					font-weight: var(--heading-level-6-font-weight),
 					line-height: var(--heading-level-6-line-height),
@@ -2193,6 +2194,9 @@
 							font-size: var(--heading-level-1-font-size),
 							font-weight: var(--heading-level-1-font-weight),
 							line-height: var(--heading-level-1-line-height),
+						),
+						link: (
+							font-family: var(--font-family-primary),
 						),
 						separator: (
 							margin: 0 var(--global-spacing-4),

@@ -29,3 +29,20 @@
 	@include scss.block-components("header-account-action");
 	@include scss.block-properties("header-account-action");
 }
+
+.b-sign-up {
+	&__tos-container {
+		a {
+			@include scss.block-components("sign-up-tos-link");
+			@include scss.block-properties("sign-up-tos-link");
+
+			&:hover {
+				@include scss.block-components("sign-up-tos-link-hover");
+				@include scss.block-properties("sign-up-tos-link-hover");
+			}
+		}
+	}
+
+	@include scss.block-components("sign-up");
+	@include scss.block-properties("sign-up");
+}

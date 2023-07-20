@@ -4,10 +4,12 @@ import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 
-import { FormInputField, FIELD_TYPES } from "@wpmedia/shared-styles";
+import { Input } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/HeadlinedSubmitForm";
 import useIdentity from "../../components/Identity";
 import useLogin from "../../components/Login";
+
+const BLOCK_CLASS_NAME = "b-login-form";
 
 const Login = ({ customFields }) => {
 	const { redirectURL, redirectToPreviousPage, loggedInPageLocation } = customFields;
@@ -33,8 +35,10 @@ const Login = ({ customFields }) => {
 
 	return (
 		<HeadlinedSubmitForm
-			headline={phrases.t("identity-block.log-in")}
 			buttonLabel={phrases.t("identity-block.log-in")}
+			className={BLOCK_CLASS_NAME}
+			formErrorText={error}
+			headline={phrases.t("identity-block.log-in")}
 			onSubmit={({ email, password }) =>
 				Identity.login(email, password)
 					.then(() => {
@@ -42,24 +46,23 @@ const Login = ({ customFields }) => {
 					})
 					.catch(() => setError(phrases.t("identity-block.login-form-error")))
 			}
-			formErrorText={error}
 		>
-			<FormInputField
+			<Input
 				autoComplete="email"
 				label={phrases.t("identity-block.email")}
 				name="email"
 				required
 				showDefaultError={false}
-				type={FIELD_TYPES.EMAIL}
+				type="email"
 				validationErrorMessage={phrases.t("identity-block.email-requirements")}
 			/>
-			<FormInputField
+			<Input
 				autoComplete="current-password"
 				label={phrases.t("identity-block.password")}
 				name="password"
 				required
 				showDefaultError={false}
-				type={FIELD_TYPES.PASSWORD}
+				type="password"
 			/>
 		</HeadlinedSubmitForm>
 	);

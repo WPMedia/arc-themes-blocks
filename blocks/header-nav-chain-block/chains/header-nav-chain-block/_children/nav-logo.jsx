@@ -67,13 +67,27 @@ const NavLogo = ({ imageAltText, imageSource, blockClassName, logoAlignment }) =
 
 	const isLogoSVG = !!imageSource && String(imageSource).endsWith(".svg");
 
+	// This replaces: logoAlignment === "center" ? `${blockClassName}__logo--center` : ``
+	let logoAlignmentCssClass = "";
+	switch (logoAlignment) {
+		case "center":
+			logoAlignmentCssClass = `${blockClassName}__logo--center`;
+			break;
+		case "right":
+			logoAlignmentCssClass = `${blockClassName}__logog--right`;
+			break;
+		default:
+			logoAlignmentCssClass = ``;
+			break;
+	}
+
 	return (
 		<Link
 			href="/"
 			title={imageAltText}
-			className={`${blockClassName}__logo ${
-				logoAlignment === "center" ? `${blockClassName}__logo--center` : ``
-			} ${isLogoVisible ? "nav-logo-show" : "nav-logo-hidden"} ${isLogoSVG ? "svg-logo" : ""}`}
+			className={`${blockClassName}__logo ${logoAlignmentCssClass} ${
+				isLogoVisible ? "nav-logo-show" : "nav-logo-hidden"
+			} ${isLogoSVG ? "svg-logo" : ""}`}
 			assistiveHidden={!isLogoVisible}
 		>
 			{imageSource ? (

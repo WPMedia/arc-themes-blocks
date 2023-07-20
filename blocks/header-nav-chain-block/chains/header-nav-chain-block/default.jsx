@@ -53,18 +53,28 @@ export function PresentationalNav(props) {
 					>
 						{children}
 					</NavSection>
-					<NavLogo
-						blockClassName={BLOCK_CLASS_NAME}
-						logoAlignment={logoAlignment}
-						imageSource={primaryLogoPath}
-						imageAltText={primaryLogoAlt}
-					/>
+					{logoAlignment !== "right" ? (
+						<NavLogo
+							blockClassName={BLOCK_CLASS_NAME}
+							logoAlignment={logoAlignment}
+							imageSource={primaryLogoPath}
+							imageAltText={primaryLogoAlt}
+						/>
+					) : null}
 					{displayLinks ? (
 						<NavLinksBar
 							hierarchy={horizontalLinksHierarchy}
 							showHorizontalSeperatorDots={showDotSeparators}
 							ariaLabel={ariaLabelLink}
 							blockClassName={BLOCK_CLASS_NAME}
+						/>
+					) : null}
+					{logoAlignment === "right" ? (
+						<NavLogo
+							blockClassName={BLOCK_CLASS_NAME}
+							logoAlignment={logoAlignment}
+							imageSource={primaryLogoPath}
+							imageAltText={primaryLogoAlt}
 						/>
 					) : null}
 					<NavSection
@@ -176,7 +186,7 @@ const Nav = (props) => {
 		ariaLabelLink,
 	} = customFields;
 
-	const displayLinks = horizontalLinksHierarchy && logoAlignment === "left";
+	const displayLinks = horizontalLinksHierarchy && logoAlignment !== "center";
 
 	const showDotSeparators = showHorizontalSeperatorDots ?? true;
 

@@ -295,7 +295,7 @@ Nav.propTypes = {
 		signInOrder: PropTypes.number.tag({
 			hidden: true,
 		}),
-		logoAlignment: PropTypes.oneOf(["center", "left"]).tag({
+		logoAlignment: PropTypes.oneOf(["center", "left", "right"]).tag({
 			label: "Logo alignment",
 			group: "Logo",
 			defaultValue: "center",

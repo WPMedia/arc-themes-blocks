@@ -74,7 +74,7 @@ const NavLogo = ({ imageAltText, imageSource, blockClassName, logoAlignment }) =
 			logoAlignmentCssClass = `${blockClassName}__logo--center`;
 			break;
 		case "right":
-			logoAlignmentCssClass = `${blockClassName}__logog--right`;
+			logoAlignmentCssClass = `${blockClassName}__logo--right`;
 			break;
 		default:
 			logoAlignmentCssClass = ``;

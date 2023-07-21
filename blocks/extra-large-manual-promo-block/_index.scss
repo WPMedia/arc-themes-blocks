@@ -3,16 +3,4 @@
 .b-xl-manual-promo {
 	@include scss.block-properties("xl-manual-promo");
 	@include scss.block-components("xl-manual-promo");
-	&__overline {
-		@include scss.block-properties("xl-manual-promo-overline-hover");
-		@include scss.block-components("xl-manual-promo-overline-hover");
-	}
-	&__headline {
-		@include scss.block-properties("xl-manual-promo-headline-hover");
-		@include scss.block-components("xl-manual-promo-headline-hover");
-	}
-	&__img {
-		@include scss.block-properties("xl-manual-promo-img");
-		@include scss.block-components("xl-manual-promo-img");
-	}
 }

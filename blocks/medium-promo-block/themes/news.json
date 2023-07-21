@@ -57,6 +57,10 @@
 					"heading": {
 						"color": "var(--text-color)",
 						"width": "68%"
+					},
+					"link-hover": {
+						"color": "var(--text-color-subtle)",
+						"opacity": 0.8
 					}
 				}
 			},
@@ -109,28 +113,6 @@
 			"desktop": {
 				"display": "inline"
 			}
-		}
-	},
-	"medium-promo-headline-hover": {
-		"styles": {
-			"default": {
-				"components": {
-					"heading": {
-						"color": "var(--text-color-subtle)"
-					}
-				}
-			},
-			"desktop": {}
-		}
-	},
-	"medium-promo-img": {
-		"styles": {
-			"default": {
-				"image": {
-					"opacity": 0.8
-				}
-			},
-			"desktop": {}
 		}
 	}
 }

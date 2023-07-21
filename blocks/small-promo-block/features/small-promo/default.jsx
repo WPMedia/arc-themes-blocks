@@ -158,7 +158,7 @@ const SmallPromo = ({ customFields }) => {
 					})}
 					suppressContentEditableWarning
 				>
-					<Image className={`${BLOCK_CLASS_NAME}__img`} {...imageParams} />
+					<Image {...imageParams} />
 				</MediaItem>
 			</Conditional>
 		) : null;
@@ -166,7 +166,7 @@ const SmallPromo = ({ customFields }) => {
 
 	const PromoHeading = () =>
 		showHeadline && headline ? (
-			<Heading className={`${BLOCK_CLASS_NAME}__headline`}>
+			<Heading>
 				<Conditional
 					component={Link}
 					condition={linkURL}

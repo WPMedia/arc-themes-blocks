@@ -11,6 +11,10 @@
 						"font-size": "var(--body-font-size)",
 						"font-weight": "var(--body-font-weight)",
 						"line-height": "var(--body-line-height)"
+					},
+					"link-hover": {
+						"color": "var(--text-color-subtle)",
+						"opacity": 0.8
 					}
 				}
 			},
@@ -47,28 +51,6 @@
 			"default": {
 				"gap": "var(--global-spacing-6)",
 				"grid-template-columns": "2fr 1fr"
-			},
-			"desktop": {}
-		}
-	},
-	"small-manual-promo-headline-hover": {
-		"styles": {
-			"default": {
-				"components": {
-					"heading": {
-						"color": "var(--text-color-subtle)"
-					}
-				}
-			},
-			"desktop": {}
-		}
-	},
-	"small-manual-promo-img": {
-		"styles": {
-			"default": {
-				"image": {
-					"opacity": 0.8
-				}
 			},
 			"desktop": {}
 		}

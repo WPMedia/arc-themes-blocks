@@ -28,49 +28,22 @@
 						"justify-content": "center",
 						"line-height": "var(--heading-level-1-line-height)"
 					},
+					"link-hover": {
+						"color": "var(--text-color-subtle)",
+						"opacity": 0.8
+					},
 					"overline": {
 						"display": "flex",
 						"justify-content": "center"
+					},
+					"overline-hover": {
+						"color": "var(--text-color-subtle)"
 					},
 					"stack": {
 						"gap": "var(--global-spacing-5)"
 					}
 				}
 			}
-		}
-	},
-	"xl-manual-promo-overline-hover": {
-		"styles": {
-			"default": {
-				"components": {
-					"overline-hover": {
-						"color": "var(--text-color-subtle)"
-					}
-				}
-			},
-			"desktop": {}
-		}
-	},
-	"xl-manual-promo-headline-hover": {
-		"styles": {
-			"default": {
-				"components": {
-					"heading": {
-						"color": "var(--text-color-subtle)"
-					}
-				}
-			},
-			"desktop": {}
-		}
-	},
-	"xl-manual-promo-img": {
-		"styles": {
-			"default": {
-				"link-hover": {
-					"opacity": 0.8
-				}
-			},
-			"desktop": {}
 		}
 	}
 }

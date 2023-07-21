@@ -91,7 +91,7 @@ const SmallManualPromo = ({ customFields }) => {
 				})}
 				suppressContentEditableWarning
 			>
-				<Image className={`${BLOCK_CLASS_NAME}__img`} {...imageParams} />
+				<Image {...imageParams} />
 			</MediaItem>
 		) : null;
 		return showImage && linkURL ? (
@@ -110,7 +110,7 @@ const SmallManualPromo = ({ customFields }) => {
 
 	const PromoHeading = () =>
 		showHeadline && headline ? (
-			<Heading className={`${BLOCK_CLASS_NAME}__headline`}>
+			<Heading>
 				{linkURL ? (
 					<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
 						{headline}

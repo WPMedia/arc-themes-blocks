@@ -1556,6 +1556,12 @@
 				),
 				large-manual-promo: (
 					gap: var(--global-spacing-4),
+					components: (
+						link-hover: (
+							color: var(--text-color-subtle),
+							opacity: 0.8,
+						),
+					),
 				),
 				large-manual-promo-text: (
 					gap: 0,
@@ -1568,6 +1574,9 @@
 							font-size: var(--heading-level-6-font-size),
 							line-height: var(--heading-level-6-line-height),
 						),
+						overline-hover: (
+							color: var(--text-color-subtle),
+						),
 						paragraph: (
 							font-size: var(--body-font-size),
 						),
@@ -1576,32 +1585,15 @@
 						),
 					),
 				),
-				large-manual-promo-overline-hover: (
-					components: (
-						overline-hover: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				large-manual-promo-headline-hover: (
-					components: (
-						heading: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				large-manual-promo-img: (
-					components: (
-						image: (
-							opacity: 0.8,
-						),
-					),
-				),
 				large-promo: (
 					gap: var(--global-spacing-4),
 					components: (
 						link: (
 							position: relative,
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
+							opacity: 0.8,
 						),
 					),
 				),
@@ -1640,6 +1632,9 @@
 							font-size: var(--heading-level-6-font-size),
 							line-height: var(--heading-level-6-line-height),
 						),
+						overline-hover: (
+							color: var(--text-color-subtle),
+						),
 						paragraph: (
 							font-size: var(--body-font-size),
 							line-height: var(--body-line-height),
@@ -1649,27 +1644,6 @@
 						),
 						separator: (
 							margin: 0 var(--global-spacing-2) 0 var(--global-spacing-2),
-						),
-					),
-				),
-				large-promo-overline-hover: (
-					components: (
-						overline-hover: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				large-promo-headline-hover: (
-					components: (
-						heading: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				large-promo-img: (
-					components: (
-						image: (
-							opacity: 0.8,
 						),
 					),
 				),
@@ -1868,6 +1842,10 @@
 						link: (
 							position: relative,
 						),
+						link-hover: (
+							color: var(--text-color-subtle),
+							opacity: 0.8,
+						),
 					),
 				),
 				medium-promo-show-image: (
@@ -1901,20 +1879,6 @@
 					color: var(--global-white),
 					display: none,
 				),
-				medium-promo-headline-hover: (
-					components: (
-						heading: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				medium-promo-img: (
-					components: (
-						image: (
-							opacity: 0.8,
-						),
-					),
-				),
 				medium-manual-promo: (
 					clear: both,
 					display: table,
@@ -1932,6 +1896,10 @@
 							line-height: var(--heading-level-5-line-height),
 							margin-bottom: var(--global-spacing-4),
 						),
+						link-hover: (
+							color: var(--text-color-subtle),
+							opacity: 0.8,
+						),
 						media-item: (
 							float: right,
 							max-width: 100px,
@@ -1948,20 +1916,6 @@
 						heading: (
 							// hard-coded based on previous implementation and product requirements for such
 							width: 68%,
-						),
-					),
-				),
-				medium-manual-promo-headline-hover: (
-					components: (
-						heading: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				medium-manual-promo-img: (
-					components: (
-						image: (
-							opacity: 0.8,
 						),
 					),
 				),
@@ -2385,6 +2339,10 @@
 							font-weight: var(--body-font-weight),
 							line-height: var(--body-line-height),
 						),
+						link-hover: (
+							color: var(--text-color-subtle),
+							opacity: 0.8,
+						),
 					),
 				),
 				small-manual-promo-above: (
@@ -2401,20 +2359,6 @@
 					gap: var(--global-spacing-6),
 					grid-template-columns: 2fr 1fr,
 				),
-				small-manual-promo-headline-hover: (
-					components: (
-						heading: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				small-manual-promo-img: (
-					components: (
-						image: (
-							opacity: 0.8,
-						),
-					),
-				),
 				small-promo: (
 					display: grid,
 					gap: var(--global-spacing-5),
@@ -2426,6 +2370,10 @@
 							font-weight: var(--body-font-weight),
 							line-height: var(--body-line-height),
 						),
+						link-hover: (
+							color: var(--text-color-subtle),
+							opacity: 0.8,
+						),
 					),
 				),
 				small-promo-left: (
@@ -2435,20 +2383,6 @@
 				small-promo-right: (
 					gap: var(--global-spacing-6),
 					grid-template-columns: 2fr 1fr,
-				),
-				small-promo-headline-hover: (
-					components: (
-						heading: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				small-promo-img: (
-					components: (
-						image: (
-							opacity: 0.8,
-						),
-					),
 				),
 				subheadline: (
 					font-size: var(--heading-level-6-font-size),
@@ -2743,28 +2677,14 @@
 						overline: (
 							color: var(--text-color),
 						),
-						stack: (
-							gap: var(--global-spacing-4),
-						),
-					),
-				),
-				xl-manual-promo-overline-hover: (
-					components: (
 						overline-hover: (
 							color: var(--text-color-subtle),
 						),
-					),
-				),
-				xl-manual-promo-headline-hover: (
-					components: (
-						heading: (
-							color: var(--text-color-subtle),
+						stack: (
+							gap: var(--global-spacing-4),
 						),
-					),
-				),
-				xl-manual-promo-img: (
-					components: (
-						image: (
+						link-hover: (
+							color: var(--text-color-subtle),
 							opacity: 0.8,
 						),
 					),
@@ -2783,6 +2703,9 @@
 						overline: (
 							color: var(--text-color),
 						),
+						overline-hover: (
+							color: var(--text-color-subtle),
+						),
 						separator: (
 							padding: 0 var(--global-spacing-2),
 						),
@@ -2792,25 +2715,8 @@
 						media-item: (
 							position: relative,
 						),
-					),
-				),
-				xl-promo-overline-hover: (
-					components: (
-						overline-hover: (
+						link-hover: (
 							color: var(--text-color-subtle),
-						),
-					),
-				),
-				xl-promo-headline-hover: (
-					components: (
-						heading: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				xl-promo-img: (
-					components: (
-						image: (
 							opacity: 0.8,
 						),
 					),

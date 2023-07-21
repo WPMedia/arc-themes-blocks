@@ -1,18 +1,6 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-xl-promo {
-	&__img {
-		@include scss.block-properties("xl-promo-img");
-		@include scss.block-components("xl-promo-img");
-	}
-	&__overline {
-		@include scss.block-properties("xl-promo-overline-hover");
-		@include scss.block-components("xl-promo-overline-hover");
-	}
-	&__headline {
-		@include scss.block-properties("xl-promo-headline-hover");
-		@include scss.block-components("xl-promo-headline-hover");
-	}
 	&__icon_label {
 		@include scss.block-components("xl-promo-icon-label");
 		@include scss.block-properties("xl-promo-icon-label");

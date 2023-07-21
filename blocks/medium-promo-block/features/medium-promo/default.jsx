@@ -209,7 +209,6 @@ const MediumPromo = ({ customFields }) => {
 							suppressContentEditableWarning
 						>
 							<Conditional
-								className={`${BLOCK_CLASS_NAME}__img`}
 								component={Link}
 								condition={contentUrl}
 								href={formatURL(contentUrl)}
@@ -228,7 +227,7 @@ const MediumPromo = ({ customFields }) => {
 					) : null}
 
 					{contentHeading ? (
-						<Heading className={`${BLOCK_CLASS_NAME}__headline`}>
+						<Heading>
 							<Conditional
 								component={Link}
 								condition={contentUrl}

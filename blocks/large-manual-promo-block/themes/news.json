@@ -2,7 +2,13 @@
 	"large-manual-promo": {
 		"styles": {
 			"default": {
-				"gap": "var(--global-spacing-4)"
+				"gap": "var(--global-spacing-4)",
+				"components": {
+					"link-hover": {
+						"color": "var(--text-color-subtle)",
+						"opacity": 0.8
+					}
+				}
 			},
 			"desktop": {
 				"gap": "var(--global-spacing-6)",
@@ -30,6 +36,9 @@
 						"font-size": "var(--heading-level-6-font-size)",
 						"line-height": "var(--heading-level-6-line-height)"
 					},
+					"overline-hover": {
+						"color": "var(--text-color-subtle)"
+					},
 					"paragraph": {
 						"font-size": "var(--body-font-size)"
 					},
@@ -46,40 +55,6 @@
 					}
 				}
 			}
-		}
-	},
-	"large-manual-promo-overline-hover": {
-		"styles": {
-			"default": {
-				"components": {
-					"overline-hover": {
-						"color": "var(--text-color-subtle)"
-					}
-				}
-			},
-			"desktop": {}
-		}
-	},
-	"large-manual-promo-headline-hover": {
-		"styles": {
-			"default": {
-				"components": {
-					"heading": {
-						"color": "var(--text-color-subtle)"
-					}
-				}
-			},
-			"desktop": {}
-		}
-	},
-	"large-manual-promo-img": {
-		"styles": {
-			"default": {
-				"image": {
-					"opacity": 0.8
-				}
-			},
-			"desktop": {}
 		}
 	}
 }

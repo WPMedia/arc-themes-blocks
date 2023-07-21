@@ -6,6 +6,10 @@
 				"components": {
 					"link": {
 						"position": "relative"
+					},
+					"link-hover": {
+						"color": "var(--text-color-subtle)",
+						"opacity": 0.8
 					}
 				}
 			},
@@ -66,6 +70,9 @@
 						"font-size": "var(--heading-level-6-font-size)",
 						"line-height": "var(--heading-level-6-line-height)"
 					},
+					"overline-hover": {
+						"color": "var(--text-color-subtle)"
+					},
 					"paragraph": {
 						"font-size": "var(--body-font-size)",
 						"line-height": "var(--body-line-height)"
@@ -86,40 +93,6 @@
 					}
 				}
 			}
-		}
-	},
-	"large-promo-overline-hover": {
-		"styles": {
-			"default": {
-				"components": {
-					"overline-hover": {
-						"color": "var(--text-color-subtle)"
-					}
-				}
-			},
-			"desktop": {}
-		}
-	},
-	"large-promo-headline-hover": {
-		"styles": {
-			"default": {
-				"components": {
-					"heading": {
-						"color": "var(--text-color-subtle)"
-					}
-				}
-			},
-			"desktop": {}
-		}
-	},
-	"large-promo-img": {
-		"styles": {
-			"default": {
-				"image": {
-					"opacity": 0.8
-				}
-			},
-			"desktop": {}
 		}
 	}
 }

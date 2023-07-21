@@ -96,16 +96,12 @@ const ExtraLargeManualPromo = ({ customFields }) => {
 	return availableOverline || availableHeadline || availableImageURL || availableDescription ? (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<article className={BLOCK_CLASS_NAME}>
-				{availableOverline ? (
-					<Overline href={overlineURL} className={`${BLOCK_CLASS_NAME}__overline`}>
-						{availableOverline}
-					</Overline>
-				) : null}
+				{availableOverline ? <Overline href={overlineURL}>{availableOverline}</Overline> : null}
 				{availableHeadline || availableImageURL || availableDescription ? (
 					<Stack>
 						{availableHeadline ? (
 							<HeadingSection>
-								<Heading className={`${BLOCK_CLASS_NAME}__headline`}>
+								<Heading>
 									<Conditional
 										component={Link}
 										condition={linkURL}
@@ -131,7 +127,6 @@ const ExtraLargeManualPromo = ({ customFields }) => {
 									component={Link}
 									condition={linkURL}
 									href={formatURL(linkURL)}
-									className={`${BLOCK_CLASS_NAME}__img`}
 									openInNewTab={newTab}
 									onClick={registerSuccessEvent}
 									assistiveHidden={showHeadline && showDescription}

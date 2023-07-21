@@ -55,6 +55,18 @@
 			"desktop": {}
 		}
 	},
+	"author-bio-social-link": {
+		"styles": {
+			"default": {
+				"components": {
+					"icon": {
+						"fill": "var(--color-primary)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
 	"author-bio-social-link-hover": {
 		"styles": {
 			"default": {

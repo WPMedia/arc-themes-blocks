@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useIdentity from "./Identity";
+import useIdentity from "../identity";
 
 const useLogin = ({ isAdmin, redirectURL, redirectToPreviousPage, loggedInPageLocation }) => {
 	const { Identity } = useIdentity();

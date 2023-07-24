@@ -1,11 +1,11 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import Signup from "./default";
-import useIdentity from "../../components/Identity";
+import useIdentity from "../../components/identity";
 
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
 
-jest.mock("../../components/Identity");
+jest.mock("../../components/identity");
 
 describe("With unintialized identity", () => {
 	it("renders nothing if identity not initialized", () => {

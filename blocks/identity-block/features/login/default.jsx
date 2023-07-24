@@ -5,9 +5,9 @@ import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 
 import { Input } from "@wpmedia/arc-themes-components";
-import HeadlinedSubmitForm from "../../components/HeadlinedSubmitForm";
-import useIdentity from "../../components/Identity";
-import useLogin from "../../components/Login";
+import HeadlinedSubmitForm from "../../components/headlined-submit-form";
+import useIdentity from "../../components/identity";
+import useLogin from "../../components/login";
 
 const BLOCK_CLASS_NAME = "b-login-form";
 

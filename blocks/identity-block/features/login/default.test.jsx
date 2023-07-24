@@ -2,9 +2,9 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import Login from "./default";
 
-import useIdentity from "../../components/Identity";
+import useIdentity from "../../components/identity";
 
-jest.mock("../../components/Identity");
+jest.mock("../../components/identity");
 
 const defaultCustomFields = {
 	redirectURL: "",

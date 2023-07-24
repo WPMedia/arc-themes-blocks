@@ -131,6 +131,15 @@
 			"desktop": {}
 		}
 	},
+	"header-nav-chain-logo-right": {
+		"styles": {
+			"default": {
+				"margin-inline-start": "auto",
+				"margin-inline-end": 0
+			},
+			"desktop": {}
+		}
+	},
 	"header-nav-chain-logo-hidden": {
 		"styles": {
 			"default": {

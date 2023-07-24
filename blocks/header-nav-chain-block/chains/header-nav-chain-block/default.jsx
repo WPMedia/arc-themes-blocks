@@ -36,6 +36,14 @@ export function PresentationalNav(props) {
 		primaryLogoAlt,
 	} = props;
 
+	// Set the links bar justification based on the logoAlignment
+	let linksBarJustification = "center"; // Default value if logoAlignment === "center", it won't be used
+	if (logoAlignment === "left") {
+		linksBarJustification = "start";
+	} else if (logoAlignment === "right") {
+		linksBarJustification = "end";
+	}
+
 	return (
 		<>
 			<nav
@@ -53,18 +61,29 @@ export function PresentationalNav(props) {
 					>
 						{children}
 					</NavSection>
-					<NavLogo
-						blockClassName={BLOCK_CLASS_NAME}
-						logoAlignment={logoAlignment}
-						imageSource={primaryLogoPath}
-						imageAltText={primaryLogoAlt}
-					/>
+					{logoAlignment !== "right" ? (
+						<NavLogo
+							blockClassName={BLOCK_CLASS_NAME}
+							logoAlignment={logoAlignment}
+							imageSource={primaryLogoPath}
+							imageAltText={primaryLogoAlt}
+						/>
+					) : null}
 					{displayLinks ? (
 						<NavLinksBar
 							hierarchy={horizontalLinksHierarchy}
 							showHorizontalSeperatorDots={showDotSeparators}
 							ariaLabel={ariaLabelLink}
 							blockClassName={BLOCK_CLASS_NAME}
+							justification={linksBarJustification}
+						/>
+					) : null}
+					{logoAlignment === "right" ? (
+						<NavLogo
+							blockClassName={BLOCK_CLASS_NAME}
+							logoAlignment={logoAlignment}
+							imageSource={primaryLogoPath}
+							imageAltText={primaryLogoAlt}
 						/>
 					) : null}
 					<NavSection
@@ -143,8 +162,10 @@ export function PresentationalNav(props) {
 					</FocusTrap>
 				</Stack>
 			</nav>
-			{horizontalLinksHierarchy && logoAlignment !== "left" && isAdmin ? (
-				<Stack>In order to render horizontal links, the logo must be aligned to the left.</Stack>
+			{horizontalLinksHierarchy && logoAlignment === "center" && isAdmin ? (
+				<Stack>
+					In order to render horizontal links, the logo must be aligned to the left or right.
+				</Stack>
 			) : null}
 		</>
 	);
@@ -176,7 +197,7 @@ const Nav = (props) => {
 		ariaLabelLink,
 	} = customFields;
 
-	const displayLinks = horizontalLinksHierarchy && logoAlignment === "left";
+	const displayLinks = horizontalLinksHierarchy && logoAlignment !== "center";
 
 	const showDotSeparators = showHorizontalSeperatorDots ?? true;
 
@@ -295,7 +316,7 @@ Nav.propTypes = {
 		signInOrder: PropTypes.number.tag({
 			hidden: true,
 		}),
-		logoAlignment: PropTypes.oneOf(["center", "left"]).tag({
+		logoAlignment: PropTypes.oneOf(["center", "left", "right"]).tag({
 			label: "Logo alignment",
 			group: "Logo",
 			defaultValue: "center",

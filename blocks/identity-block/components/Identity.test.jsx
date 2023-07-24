@@ -82,7 +82,6 @@ describe("Identity useIdentity Hook", () => {
 			const getCurrent = getSignedInIdentity(testUser);
 			return <div>{getCurrent.type}</div>;
 		};
-
 		render(<Test />);
 		expect(screen.getByText("Google")).toBeInTheDocument();
 	});

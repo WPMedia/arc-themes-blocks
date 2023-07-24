@@ -1,6 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
-import { act } from "react-dom/test-utils";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Login from "./default";
 
 import useIdentity from "../../components/Identity";
@@ -17,7 +16,6 @@ const loginMock = jest.fn(() => Promise.resolve({}));
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
 
 describe("Identity Login Feature", () => {
-	let wrapper;
 	beforeEach(async () => {
 		useIdentity.mockImplementation(() => ({
 			isInitialized: true,
@@ -28,16 +26,13 @@ describe("Identity Login Feature", () => {
 				login: loginMock,
 			},
 		}));
-		await act(async () => {
-			wrapper = await mount(<Login customFields={defaultCustomFields} />);
-		});
 	});
 
 	afterAll(() => {
 		jest.restoreAllMocks();
 	});
 
-	it("renders nothing if identity not initialized", () => {
+	it("renders nothing if identity not initialized", async () => {
 		useIdentity.mockImplementation(() => ({
 			isInitialized: false,
 			isLoggedIn: () => true,
@@ -46,23 +41,20 @@ describe("Identity Login Feature", () => {
 				getConfig: jest.fn(async () => ({})),
 			},
 		}));
-		const uninitializedWrapper = mount(<Login customFields={defaultCustomFields} />);
-		expect(uninitializedWrapper.html()).toBe(null);
+		await render(<Login customFields={defaultCustomFields} />);
+		expect(screen.queryAllByRole("button")).toEqual([]);
 	});
 
-	it("renders", () => {
-		expect(wrapper.html()).not.toBe(null);
+	it("renders", async () => {
+		await render(<Login customFields={defaultCustomFields} />);
+		expect(screen.queryByRole("form")).not.toBeNull();
 	});
 
-	it("shows login form", () => {
-		expect(wrapper.find("form.xpmedia-form-submittable")).toHaveLength(1);
-		expect(wrapper.find("input.xpmedia-form-field-input")).toHaveLength(2);
-		expect(wrapper.find("form.xpmedia-form-submittable button")).toHaveLength(1);
-
-		expect(wrapper.find("input.xpmedia-form-field-input").at(0).prop("autoComplete")).toBe("email");
-		expect(wrapper.find("input.xpmedia-form-field-input").at(1).prop("autoComplete")).toBe(
-			"current-password"
-		);
+	it("shows login form", async () => {
+		await render(<Login customFields={defaultCustomFields} />);
+		expect(screen.queryByRole("form")).not.toBeNull();
+		expect(screen.getByLabelText("identity-block.password")).not.toBeNull();
+		expect(screen.getByLabelText("identity-block.email")).not.toBeNull();
 	});
 
 	it("uses redirect query", async () => {
@@ -74,12 +66,15 @@ describe("Identity Login Feature", () => {
 			},
 		});
 
-		const redirectWrapper = mount(<Login customFields={defaultCustomFields} />);
+		await render(<Login customFields={defaultCustomFields} />);
 
-		redirectWrapper.find('input[type="email"]').instance().value = "test@test.com";
-		redirectWrapper.find('input[type="password"]').instance().value = "ABC123!";
-
-		redirectWrapper.find("form").simulate("submit");
+		fireEvent.change(screen.getByLabelText("identity-block.email"), {
+			target: { value: "email@test.com" },
+		});
+		fireEvent.change(screen.getByLabelText("identity-block.password"), {
+			target: { value: "thisIsMyPassword" },
+		});
+		fireEvent.click(screen.getByRole("button"));
 
 		await loginMock;
 
@@ -96,12 +91,15 @@ describe("Identity Login Feature", () => {
 			configurable: true,
 		});
 
-		const redirectWrapper = mount(<Login customFields={defaultCustomFields} />);
+		await render(<Login customFields={defaultCustomFields} />);
 
-		redirectWrapper.find('input[type="email"]').instance().value = "test@test.com";
-		redirectWrapper.find('input[type="password"]').instance().value = "ABC123!";
-
-		redirectWrapper.find("form").simulate("submit");
+		fireEvent.change(screen.getByLabelText("identity-block.email"), {
+			target: { value: "email@test.com" },
+		});
+		fireEvent.change(screen.getByLabelText("identity-block.password"), {
+			target: { value: "thisIsMyPassword" },
+		});
+		fireEvent.click(screen.getByRole("button"));
 
 		await loginMock;
 

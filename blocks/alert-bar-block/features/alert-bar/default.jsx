@@ -14,7 +14,9 @@ const BLOCK_CLASS_NAME = "b-alert-bar";
 export const AlertBarPresentational = forwardRef(
 	({ barAriaLabel, closeAriaLabel, hideAlertHandler, url, linkText }, ref) => (
 		<nav aria-label={barAriaLabel} className={BLOCK_CLASS_NAME} ref={ref}>
-			<Link href={url}>{linkText}</Link>
+			<Link href={url} className={`${BLOCK_CLASS_NAME}__link`}>
+				{linkText}
+			</Link>
 			<Button accessibilityLabel={closeAriaLabel} onClick={hideAlertHandler} size="large">
 				<Icon name="Close" />
 			</Button>

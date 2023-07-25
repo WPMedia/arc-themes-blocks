@@ -1,0 +1,48 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-header-account-action {
+	&__desktop {
+		@include scss.block-components("header-account-action-desktop");
+		@include scss.block-properties("header-account-action-desktop");
+	}
+
+	&__mobile {
+		@include scss.block-components("header-account-action-mobile");
+		@include scss.block-properties("header-account-action-mobile");
+	}
+
+	&__dropdown-open {
+		@include scss.block-components("header-account-action-dropdown-open");
+		@include scss.block-properties("header-account-action-dropdown-open");
+	}
+
+	&__dropdown-list-item {
+		@include scss.block-components("header-account-action-dropdown-list-item");
+		@include scss.block-properties("header-account-action-dropdown-list-item");
+
+		&:last-of-type {
+			@include scss.block-components("header-account-action-dropdown-list-item-last");
+			@include scss.block-properties("header-account-action-dropdown-list-item-last");
+		}
+	}
+
+	@include scss.block-components("header-account-action");
+	@include scss.block-properties("header-account-action");
+}
+
+.b-sign-up {
+	&__tos-container {
+		a {
+			@include scss.block-components("sign-up-tos-link");
+			@include scss.block-properties("sign-up-tos-link");
+
+			&:hover {
+				@include scss.block-components("sign-up-tos-link-hover");
+				@include scss.block-properties("sign-up-tos-link-hover");
+			}
+		}
+	}
+
+	@include scss.block-components("sign-up");
+	@include scss.block-properties("sign-up");
+}

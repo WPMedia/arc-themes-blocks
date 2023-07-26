@@ -94,6 +94,7 @@ export const ExtraLargePromoPresentation = ({
 								) : (
 									<>
 										<Conditional
+											className={`${BLOCK_CLASS_NAME}__img`}
 											component={Link}
 											condition={contentUrl}
 											href={contentUrl}

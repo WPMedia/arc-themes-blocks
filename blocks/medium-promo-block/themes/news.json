@@ -114,5 +114,17 @@
 				"display": "inline"
 			}
 		}
+	},
+	"medium-promo-img": {
+		"styles": {
+			"default": {
+				"components": {
+					"link-hover": {
+						"opacity": 0.8
+					}
+				}
+			},
+			"desktop": {}
+		}
 	}
 }

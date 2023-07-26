@@ -1592,6 +1592,13 @@
 						),
 					),
 				),
+				large-manual-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
+						),
+					),
+				),
 				large-promo: (
 					gap: var(--global-spacing-4),
 					components: (
@@ -1651,6 +1658,13 @@
 						),
 						separator: (
 							margin: 0 var(--global-spacing-2) 0 var(--global-spacing-2),
+						),
+					),
+				),
+				large-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
 						),
 					),
 				),
@@ -1886,6 +1900,13 @@
 					color: var(--global-white),
 					display: none,
 				),
+				medium-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
+						),
+					),
+				),
 				medium-manual-promo: (
 					clear: both,
 					display: table,
@@ -1923,6 +1944,13 @@
 						heading: (
 							// hard-coded based on previous implementation and product requirements for such
 							width: 68%,
+						),
+					),
+				),
+				medium-manual-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
 						),
 					),
 				),
@@ -2366,6 +2394,13 @@
 					gap: var(--global-spacing-6),
 					grid-template-columns: 2fr 1fr,
 				),
+				small-manual-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
+						),
+					),
+				),
 				small-promo: (
 					display: grid,
 					gap: var(--global-spacing-5),
@@ -2390,6 +2425,13 @@
 				small-promo-right: (
 					gap: var(--global-spacing-6),
 					grid-template-columns: 2fr 1fr,
+				),
+				small-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
+						),
+					),
 				),
 				subheadline: (
 					font-size: var(--heading-level-6-font-size),
@@ -2696,6 +2738,13 @@
 						),
 					),
 				),
+				xl-manual-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
+						),
+					),
+				),
 				xl-promo: (
 					components: (
 						link: (
@@ -2749,6 +2798,13 @@
 				xl-promo-label: (
 					margin-left: var(--global-spacing-2),
 					color: var(--global-white),
+				),
+				xl-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
+						),
+					),
 				),
 			),
 		),

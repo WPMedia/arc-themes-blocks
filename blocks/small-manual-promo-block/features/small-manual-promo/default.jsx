@@ -96,6 +96,7 @@ const SmallManualPromo = ({ customFields }) => {
 		) : null;
 		return showImage && linkURL ? (
 			<Link
+				className={`${BLOCK_CLASS_NAME}__img`}
 				href={formatURL(linkURL)}
 				openInNewTab={newTab}
 				onClick={registerSuccessEvent}

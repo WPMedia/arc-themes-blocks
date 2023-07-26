@@ -29,8 +29,7 @@
 						"line-height": "var(--heading-level-1-line-height)"
 					},
 					"link-hover": {
-						"color": "var(--text-color-subtle)",
-						"opacity": 0.8
+						"color": "var(--text-color-subtle)"
 					},
 					"overline": {
 						"display": "flex",
@@ -44,6 +43,18 @@
 					}
 				}
 			}
+		}
+	},
+	"xl-manual-promo-img": {
+		"styles": {
+			"default": {
+				"components": {
+					"link-hover": {
+						"opacity": 0.8
+					}
+				}
+			},
+			"desktop": {}
 		}
 	}
 }

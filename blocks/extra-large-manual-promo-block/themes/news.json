@@ -12,8 +12,14 @@
 						"font-weight": "inherit",
 						"line-height": "inherit"
 					},
+					"link-hover": {
+						"color": "var(--text-color-subtle)"
+					},
 					"overline": {
 						"color": "var(--text-color)"
+					},
+					"overline-hover": {
+						"color": "var(--text-color-subtle)"
 					},
 					"stack": {
 						"gap": "var(--global-spacing-4)"
@@ -28,15 +34,9 @@
 						"justify-content": "center",
 						"line-height": "var(--heading-level-1-line-height)"
 					},
-					"link-hover": {
-						"color": "var(--text-color-subtle)"
-					},
 					"overline": {
 						"display": "flex",
 						"justify-content": "center"
-					},
-					"overline-hover": {
-						"color": "var(--text-color-subtle)"
 					},
 					"stack": {
 						"gap": "var(--global-spacing-5)"

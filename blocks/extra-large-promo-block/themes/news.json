@@ -13,8 +13,7 @@
 						"line-height": "inherit"
 					},
 					"link-hover": {
-						"color": "var(--text-color-subtle)",
-						"opacity": 0.8
+						"color": "var(--text-color-subtle)"
 					},
 					"overline": {
 						"color": "var(--text-color)"

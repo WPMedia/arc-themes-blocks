@@ -13,13 +13,15 @@ const validateURL = (url) => {
 
 const useLogin = ({ isAdmin, redirectURL, redirectToPreviousPage, loggedInPageLocation }) => {
 	const { Identity } = useIdentity();
-	const [redirectToURL, setRedirectToURL] = useState(validateURL(redirectURL));
+	const validatedRedirectURL = validateURL(redirectURL);
+	const [redirectToURL, setRedirectToURL] = useState(validatedRedirectURL);
 	const [redirectQueryParam, setRedirectQueryParam] = useState(null);
 
 	useEffect(() => {
 		if (window?.location?.search) {
 			const searchParams = new URLSearchParams(window.location.search.substring(1));
-			setRedirectQueryParam(validateURL(searchParams.get("redirect")));
+			const validatedRedirectParam = validateURL(searchParams.get("redirect"));
+			setRedirectQueryParam(validatedRedirectParam);
 		}
 
 		if (redirectToPreviousPage && document?.referrer) {
@@ -41,8 +43,9 @@ const useLogin = ({ isAdmin, redirectURL, redirectToPreviousPage, loggedInPageLo
 	useEffect(() => {
 		const checkLoggedInStatus = async () => {
 			const isLoggedIn = await Identity.isLoggedIn();
+			const validatedLoggedInPageLoc = validateURL(loggedInPageLocation);
 			if (isLoggedIn) {
-				window.location = redirectQueryParam || validateURL(loggedInPageLocation);
+				window.location = redirectQueryParam || validatedLoggedInPageLoc;
 			}
 		};
 		if (Identity && !isAdmin) {

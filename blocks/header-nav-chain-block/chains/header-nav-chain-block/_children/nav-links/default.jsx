@@ -8,6 +8,7 @@ const NavLinksBar = ({
 	showHorizontalSeperatorDots: showHorizontalSeparatorDots,
 	ariaLabel,
 	blockClassName,
+	justification,
 }) => {
 	const { id } = useFusionContext();
 	const phrases = usePhrases();
@@ -50,6 +51,7 @@ const NavLinksBar = ({
 			className={`${blockClassName}__links-list`}
 			alignment="center"
 			wrap="wrap"
+			justification={justification}
 			aria-label={ariaLabel || phrases.t("header-nav-chain-block.links-element-aria-label")}
 		>
 			{menuItems.map((item, index) => (

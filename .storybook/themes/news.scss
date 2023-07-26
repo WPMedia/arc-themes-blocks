@@ -1156,7 +1156,8 @@
 							width: var(--global-spacing-4),
 						),
 						image: (
-							max-height: 75vh,
+							max-height: 100%,
+							object-fit: contain,
 						),
 						carousel-controls: (
 							padding: 0 0 var(--global-spacing-2) 0,
@@ -1206,10 +1207,12 @@
 				),
 				gallery-image-wrapper: (
 					align-items: center,
+					aspect-ratio: calc(16 / 9),
+					background-color: var(--global-black),
 					display: flex,
 					justify-content: center,
-					max-height: 75vh,
-					background-color: var(--global-black),
+					max-height: unset,
+					overflow: auto,
 				),
 				gallery-track-icon: (
 					fill: var(--global-white),
@@ -1311,6 +1314,10 @@
 				),
 				header-nav-chain-logo-center: (
 					margin-right: 0,
+				),
+				header-nav-chain-logo-right: (
+					margin-inline-start: auto,
+					margin-inline-end: 0,
 				),
 				header-nav-chain-logo-hidden: (
 					opacity: 0,
@@ -1487,6 +1494,13 @@
 				),
 				header-nav-chain-flyout-nav-item: (
 					background-color: var(--global-black),
+					components: (
+						link: (
+							padding-top: var(--global-spacing-3),
+							padding-left: var(--global-spacing-5),
+							padding-bottom: var(--global-spacing-3),
+						),
+					),
 				),
 				header-nav-chain-flyout-nav-item-hover-active: (
 					background-color: var(--global-neutral-7),
@@ -1542,8 +1556,10 @@
 							font-size: var(--global-spacing-4),
 							font-weight: var(--global-font-weight-7),
 							line-height: var(--global-line-height-4),
-							padding: var(--global-spacing-2) var(--global-spacing-4) var(--global-spacing-2)
-								var(--global-spacing-5),
+							padding-top: var(--global-spacing-2),
+							padding-right: var(--global-spacing-5),
+							padding-left: var(--global-spacing-5),
+							padding-bottom: var(--global-spacing-2),
 							text-decoration: none,
 						),
 						link-hover: (
@@ -2931,6 +2947,9 @@
 							padding: 0 0 0 var(--global-spacing-2),
 						),
 					),
+				),
+				gallery-image-wrapper: (
+					max-height: 75vh,
 				),
 				header-small: (
 					font-size: var(--body-font-size),

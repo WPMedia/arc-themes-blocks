@@ -1,15 +1,25 @@
 import { useEffect, useState } from "react";
 import useIdentity from "../identity";
 
+const validateURL = (url) => {
+	if (!url) return null;
+	const validationRegEx = /^\/[^/].*$/;
+	const valid = validationRegEx.test(url);
+	if (valid) {
+		return url;
+	}
+	return "/";
+};
+
 const useLogin = ({ isAdmin, redirectURL, redirectToPreviousPage, loggedInPageLocation }) => {
 	const { Identity } = useIdentity();
-	const [redirectToURL, setRedirectToURL] = useState(redirectURL);
+	const [redirectToURL, setRedirectToURL] = useState(validateURL(redirectURL));
 	const [redirectQueryParam, setRedirectQueryParam] = useState(null);
 
 	useEffect(() => {
 		if (window?.location?.search) {
 			const searchParams = new URLSearchParams(window.location.search.substring(1));
-			setRedirectQueryParam(searchParams.get("redirect"));
+			setRedirectQueryParam(validateURL(searchParams.get("redirect")));
 		}
 
 		if (redirectToPreviousPage && document?.referrer) {
@@ -32,7 +42,7 @@ const useLogin = ({ isAdmin, redirectURL, redirectToPreviousPage, loggedInPageLo
 		const checkLoggedInStatus = async () => {
 			const isLoggedIn = await Identity.isLoggedIn();
 			if (isLoggedIn) {
-				window.location = redirectQueryParam || loggedInPageLocation;
+				window.location = redirectQueryParam || validateURL(loggedInPageLocation);
 			}
 		};
 		if (Identity && !isAdmin) {

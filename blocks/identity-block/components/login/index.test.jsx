@@ -12,8 +12,11 @@ const defaultParams = {
 	loggedInPageLocation: "/account-2/",
 };
 
-const Test = () => {
-	const { loginRedirect } = useLogin(defaultParams);
+const Test = (props) => {
+	const { loginRedirect } = useLogin({
+		...defaultParams,
+		...props,
+	});
 	return (
 		<div>
 			<button
@@ -56,12 +59,12 @@ describe("useLogin()", () => {
 		Object.defineProperty(window, "location", {
 			writable: true,
 			value: {
-				search: "?test=123&redirect=https://arcxp.com",
+				search: "?test=123&redirect=/new-account/",
 			},
 		});
 		await render(<Test />);
 		fireEvent.click(screen.getByRole("button"));
-		expect(window.location).toBe("https://arcxp.com");
+		expect(window.location).toBe("/new-account/");
 	});
 
 	it("uses document referrer", async () => {
@@ -86,5 +89,35 @@ describe("useLogin()", () => {
 		}));
 		await render(<Test />);
 		expect(window.location).toBe(defaultParams.loggedInPageLocation);
+	});
+
+	it("replaces potentially unsafe URLs in query param", async () => {
+		Object.defineProperty(window, "location", {
+			writable: true,
+			value: {
+				search: "?test=123&redirect=https://somewhere.com",
+			},
+		});
+		await render(<Test />);
+		fireEvent.click(screen.getByRole("button"));
+		expect(window.location).toBe("/");
+	});
+
+	it("replaces potentially unsafe URLs in redirectURL parameter", async () => {
+		await render(<Test redirectURL="https://somewhere.com" />);
+		fireEvent.click(screen.getByRole("button"));
+		expect(window.location).toBe("/");
+	});
+
+	it("replaces potentially unsafe URLs in loggedInPageLocation parameter", async () => {
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			Identity: {
+				isLoggedIn: jest.fn(() => true),
+				getConfig: jest.fn(() => ({})),
+			},
+		}));
+		await render(<Test loggedInPageLocation="https://somewhere.com" />);
+		expect(window.location).toBe("/");
 	});
 });

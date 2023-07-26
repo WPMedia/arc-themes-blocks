@@ -2,8 +2,8 @@
 
 .b-xl-promo {
 	&__img {
-		@include scss.block-properties("xl-manual-promo-img");
-		@include scss.block-components("xl-manual-promo-img");
+		@include scss.block-properties("xl-promo-img");
+		@include scss.block-components("xl-promo-img");
 	}
 	&__icon_label {
 		@include scss.block-components("xl-promo-icon-label");

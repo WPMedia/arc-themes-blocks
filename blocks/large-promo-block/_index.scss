@@ -2,8 +2,8 @@
 
 .b-large-promo {
 	&__img {
-		@include scss.block-properties("xl-manual-promo-img");
-		@include scss.block-components("xl-manual-promo-img");
+		@include scss.block-properties("large-promo-img");
+		@include scss.block-components("large-promo-img");
 	}
 	&__text {
 		@include scss.block-components("large-promo-text");

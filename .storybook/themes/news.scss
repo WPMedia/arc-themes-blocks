@@ -1246,7 +1246,6 @@
 					line-height: var(--body-line-height),
 					transform: translateZ(0),
 					min-height: var(--header-nav-chain-height),
-					// Hardware acceleration performance on height adjustments
 					justify-content: center,
 					display: flex,
 					align-items: center,
@@ -1403,6 +1402,11 @@
 				header-nav-chain-links-list-item: (
 					display: flex,
 					gap: var(--global-spacing-2),
+					components: (
+						link-hover: (
+							color: var(--global-neutral-3),
+						),
+					),
 				),
 				header-nav-chain-scrolled-flyout-overlay: (
 					margin-top: var(--header-nav-chain-height-scrolled),
@@ -1427,7 +1431,6 @@
 					width: 100%,
 				),
 				header-nav-chain-flyout-overlay-closed: (
-					// hide vertical overflow when closed
 					overflow-y: hidden,
 					width: 0,
 				),

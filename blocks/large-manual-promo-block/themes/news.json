@@ -2,7 +2,12 @@
 	"large-manual-promo": {
 		"styles": {
 			"default": {
-				"gap": "var(--global-spacing-4)"
+				"gap": "var(--global-spacing-4)",
+				"components": {
+					"link-hover": {
+						"color": "var(--text-color-subtle)"
+					}
+				}
 			},
 			"desktop": {
 				"gap": "var(--global-spacing-6)",
@@ -22,9 +27,16 @@
 			"default": {
 				"gap": 0,
 				"components": {
+					"heading": {
+						"color": "var(--text-color)"
+					},
 					"overline": {
+						"color": "var(--text-color)",
 						"font-size": "var(--heading-level-6-font-size)",
 						"line-height": "var(--heading-level-6-line-height)"
+					},
+					"overline-hover": {
+						"color": "var(--text-color-subtle)"
 					},
 					"paragraph": {
 						"font-size": "var(--body-font-size)"
@@ -42,6 +54,18 @@
 					}
 				}
 			}
+		}
+	},
+	"large-manual-promo-img": {
+		"styles": {
+			"default": {
+				"components": {
+					"link-hover": {
+						"opacity": 0.8
+					}
+				}
+			},
+			"desktop": {}
 		}
 	}
 }

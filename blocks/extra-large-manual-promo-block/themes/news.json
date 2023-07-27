@@ -3,11 +3,23 @@
 		"styles": {
 			"default": {
 				"components": {
+					"heading": {
+						"color": "var(--text-color)"
+					},
 					"link": {
 						"font-family": "inherit",
 						"font-size": "inherit",
 						"font-weight": "inherit",
 						"line-height": "inherit"
+					},
+					"link-hover": {
+						"color": "var(--text-color-subtle)"
+					},
+					"overline": {
+						"color": "var(--text-color)"
+					},
+					"overline-hover": {
+						"color": "var(--text-color-subtle)"
 					},
 					"stack": {
 						"gap": "var(--global-spacing-4)"
@@ -31,6 +43,18 @@
 					}
 				}
 			}
+		}
+	},
+	"xl-manual-promo-img": {
+		"styles": {
+			"default": {
+				"components": {
+					"link-hover": {
+						"opacity": 0.8
+					}
+				}
+			},
+			"desktop": {}
 		}
 	}
 }

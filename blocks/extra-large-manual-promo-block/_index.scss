@@ -1,6 +1,10 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-xl-manual-promo {
+	&__img {
+		@include scss.block-properties("xl-manual-promo-img");
+		@include scss.block-components("xl-manual-promo-img");
+	}
 	@include scss.block-properties("xl-manual-promo");
 	@include scss.block-components("xl-manual-promo");
 }

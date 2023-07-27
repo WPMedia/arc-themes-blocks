@@ -25,5 +25,9 @@ export const smallPromoMock = {
 			website_url:
 				"/local/2020/01/14/in-albania-age-old-traditions-and-mediterranean-beaches-on-the-cheap/",
 		},
+		"story-book": {
+			website_url:
+				"/local/2020/01/14/in-albania-age-old-traditions-and-mediterranean-beaches-on-the-cheap/",
+		},
 	},
 };

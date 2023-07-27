@@ -8,6 +8,19 @@
 				"components": {
 					"grid": {
 						"gap": "var(--global-spacing-5)"
+					},
+					"image": {
+						"transition": "opacity 0.4s ease"
+					},
+					"image-hover": {
+						"cursor": "pointer",
+						"opacity": "0.8"
+					},
+					"link": {
+						"color": "var(--text-color)"
+					},
+					"link-hover": {
+						"color": "var(--text-color-subtle)"
 					}
 				}
 			},
@@ -353,12 +366,12 @@
 			"default": {
 				"components": {
 					"heading": {
-						"align-self": "center",
-						"justify-content": "center"
+						"align-self": "left",
+						"justify-content": "left"
 					},
 					"overline": {
 						"display": "flex",
-						"justify-content": "center"
+						"justify-content": "left"
 					},
 					"separator": {
 						"padding": "0 var(--global-spacing-2)"
@@ -371,9 +384,14 @@
 			"desktop": {
 				"components": {
 					"heading": {
+						"align-self": "center",
 						"font-size": "var(--heading-level-1-font-size)",
 						"justify-content": "center",
 						"line-height": "var(--heading-level-1-line-height)"
+					},
+					"overline": {
+						"display": "flex",
+						"justify-content": "center"
 					},
 					"stack": {
 						"gap": "var(--global-spacing-5)"

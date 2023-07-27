@@ -26,7 +26,7 @@ export const sizeMapBreakpoints = [
     [ [adWidth, adHeight], [adWidth, adHeight] ], // mobile ad sizes
   ]
 */
-const sz0x0 = [0, 0];
+const sz0x0 = [];
 const sz1x1 = [1, 1];
 const sz300x250 = [300, 250];
 const sz300x600 = [300, 600];

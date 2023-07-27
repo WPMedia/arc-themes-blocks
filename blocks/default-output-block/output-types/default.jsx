@@ -1,8 +1,7 @@
 import React, { Fragment } from "react";
 import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
-import { MetaData } from "@wpmedia/engine-theme-sdk";
-import { Stack, usePhrases } from "@wpmedia/arc-themes-components";
+import { MetaData, Stack, usePhrases } from "@wpmedia/arc-themes-components";
 
 import blocks from "~/blocks.json";
 
@@ -107,6 +106,8 @@ const SampleOutputType = ({
 		querylyId,
 		querylyOrg,
 		locale,
+		textDirection = "ltr",
+		textFlow = "horizontal-tb",
 	} = getProperties(arcSite);
 
 	const chartbeatInline = `
@@ -157,7 +158,7 @@ const SampleOutputType = ({
 	const phrases = usePhrases();
 
 	return (
-		<html lang={locale}>
+		<html lang={locale} dir={textDirection}>
 			<head>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link
@@ -192,6 +193,7 @@ const SampleOutputType = ({
 				{fontUrlLink(fontUrl)}
 				<CssLinks />
 				<Libs />
+				<style>{`body { writing-mode: ${textFlow}; }`}</style>
 				<script
 					async
 					src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CElement.prototype.prepend%2CElement.prototype.remove%2CArray.prototype.find%2CArray.prototype.includes"

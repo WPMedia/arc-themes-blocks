@@ -6,26 +6,51 @@
 }
 
 .b-share-bar__facebook {
+	> *:hover {
+		@include scss.block-properties("share-bar-facebook-hover");
+		@include scss.block-components("share-bar-facebook-hover");
+	}
+
 	@include scss.block-properties("share-bar-facebook");
 	@include scss.block-components("share-bar-facebook");
 }
 
 .b-share-bar__linkedin {
+	> *:hover {
+		@include scss.block-properties("share-bar-linkedin-hover");
+		@include scss.block-components("share-bar-linkedin-hover");
+	}
+
 	@include scss.block-properties("share-bar-linkedin");
 	@include scss.block-components("share-bar-linkedin");
 }
 
 .b-share-bar__pinterest {
+	> *:hover {
+		@include scss.block-properties("share-bar-pinterest-hover");
+		@include scss.block-components("share-bar-pinterest-hover");
+	}
+
 	@include scss.block-properties("share-bar-pinterest");
 	@include scss.block-components("share-bar-pinterest");
 }
 
 .b-share-bar__twitter {
+	> *:hover {
+		@include scss.block-properties("share-bar-twitter-hover");
+		@include scss.block-components("share-bar-twitter-hover");
+	}
+
 	@include scss.block-properties("share-bar-twitter");
 	@include scss.block-components("share-bar-twitter");
 }
 
 .b-share-bar__email {
+	> *:hover {
+		@include scss.block-properties("share-bar-email-hover");
+		@include scss.block-components("share-bar-email-hover");
+	}
+
 	@include scss.block-properties("share-bar-email");
 	@include scss.block-components("share-bar-email");
 }

@@ -196,4 +196,46 @@ describe("the large promo feature", () => {
 		render(<LargeManualPromo customFields={config} />);
 		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
 	});
+
+	it("should make a blank call to the signing-service if the image is from PhotoCenter and has an Auth value", () => {
+		const config = {
+			imageAuth: '{"2":"1d2390c4cc8df2265924631d707ead2490865f17830bfbb52c8541b8696bf573"}',
+			imageURL: "test_id=123",
+			imageId: "123",
+			imageRatio: "4:3",
+			showImage: true,
+		};
+		render(<LargeManualPromo customFields={config} />);
+		expect(useContent).toHaveBeenCalledWith({});
+	});
+
+	it("should make a call to the signing-service if the image is from PhotoCenter but does not have an Auth value", () => {
+		const config = {
+			imageAuth: "",
+			imageURL: "test_id=123",
+			imageId: "123",
+			imageRatio: "4:3",
+			showImage: true,
+		};
+		render(<LargeManualPromo customFields={config} />);
+		expect(useContent).toHaveBeenCalledWith({
+			source: "signing-service",
+			query: { id: "test_id=123" },
+		});
+	});
+
+	it("should make a call to the signing-service if the image is not from PhotoCenter", () => {
+		const config = {
+			imageAuth: "",
+			imageURL: "test_id=123",
+			imageId: "abc",
+			imageRatio: "4:3",
+			showImage: true,
+		};
+		render(<LargeManualPromo customFields={config} />);
+		expect(useContent).toHaveBeenCalledWith({
+			source: "signing-service",
+			query: { id: "test_id=123" },
+		});
+	});
 });

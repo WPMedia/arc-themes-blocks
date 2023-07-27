@@ -168,6 +168,11 @@
 			@include scss.block-properties("header-nav-chain-logo-center");
 		}
 
+		&--right {
+			@include scss.block-components("header-nav-chain-logo-right");
+			@include scss.block-properties("header-nav-chain-logo-right");
+		}
+
 		&.nav-logo-show {
 			@include scss.block-components("header-nav-chain-logo-show");
 			@include scss.block-properties("header-nav-chain-logo-show");
@@ -181,6 +186,13 @@
 		img {
 			@include scss.block-components("header-nav-chain-logo-image");
 			@include scss.block-properties("header-nav-chain-logo-image");
+		}
+
+		&:hover {
+			img {
+				@include scss.block-components("header-nav-chain-logo-image-hover");
+				@include scss.block-properties("header-nav-chain-logo-image-hover");
+			}
 		}
 
 		@include scss.block-components("header-nav-chain-logo");

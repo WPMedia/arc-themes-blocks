@@ -1,5 +1,9 @@
 import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
+import { useFusionContext } from "fusion:context";
+import { useContent, useEditableContent } from "fusion:content";
+import getProperties from "fusion:properties";
 
 // Arc Themes Components - Base set of components used to compose blocks
 // https://github.com/WPMedia/arc-themes-components/
@@ -7,6 +11,7 @@ import {
 	Button,
 	Heading,
 	HeadingSection,
+	imageANSToImageSrc,
 	Paragraph,
 	Picture,
 	Stack,
@@ -14,17 +19,19 @@ import {
 
 const BLOCK_CLASS_NAME = "b-hero";
 
-const DESKTOP_PHOTO_BREAKPOINT = "(min-width: 700px)";
-
 function Hero({ customFields }) {
 	const {
 		layout = "overlay",
 		alignment = "center",
 		description,
 		headline,
-		imageURLDesktop,
-		imageURLMobile,
-		imageAltText,
+		imageDesktopURL,
+		imageId: desktopImgId,
+		imageDesktopAuth,
+		imageMobileId: imgMobileId,
+		imageMobileAlt,
+		imageMobileAuth,
+		imageMobileURL,
 		link1Action,
 		link1Text,
 		link1Type,
@@ -34,20 +41,98 @@ function Hero({ customFields }) {
 		subHeadline,
 		variant = "dark",
 	} = customFields;
+	const { arcSite } = useFusionContext();
+	const { searchableField } = useEditableContent();
+	const { fallbackImage, resizerURL } = getProperties(arcSite);
+	const imageId = imageDesktopURL
+		? imageDesktopURL.split("/").pop().split(".").shift()
+		: desktopImgId;
 
+	const imageMobileId = imageMobileURL
+		? imageMobileURL.split("/").pop().split(".").shift()
+		: imgMobileId;
+	let desktopAuth = useContent(
+		!imageDesktopAuth && imageId
+			? {
+					source: "signing-service",
+					query: { id: imageId },
+			  }
+			: {}
+	);
+
+	if (!desktopAuth || (desktopAuth && !Object.keys(desktopAuth).length)) {
+		desktopAuth = imageDesktopAuth;
+	}
+
+	if (desktopAuth) {
+		desktopAuth = JSON.parse(desktopAuth)[RESIZER_TOKEN_VERSION];
+	}
+
+	let mobileAuth = useContent(
+		!imageMobileAuth && imageMobileId
+			? {
+					source: "signing-service",
+					query: { id: imageMobileId },
+			  }
+			: {}
+	);
+	if (mobileAuth?.hash) {
+		mobileAuth[RESIZER_TOKEN_VERSION] = mobileAuth.hash;
+	}
+	if (mobileAuth && !Object.keys(mobileAuth).length) {
+		mobileAuth = imageMobileAuth;
+	}
 	const classes = [
 		BLOCK_CLASS_NAME,
 		`${BLOCK_CLASS_NAME}--${layout}`,
 		variant === "dark" ? `${BLOCK_CLASS_NAME}--dark` : `${BLOCK_CLASS_NAME}--light`,
 	].join(" ");
 
+	const alt = headline || description || null;
+	const desktopImageParams =
+		imageId && imageDesktopURL
+			? {
+					src: imageANSToImageSrc({
+						_id: imageId,
+						url: imageDesktopURL,
+					}),
+					resizedOptions: {
+						auth: desktopAuth || {},
+						smart: true,
+					},
+					width: 1200,
+					height: 800,
+					resizerURL,
+			  }
+			: {
+					src: fallbackImage,
+			  };
+	const mobileImageParams =
+		imageMobileId && imageMobileURL
+			? {
+					ansImage: {
+						_id: imageMobileId,
+						url: imageMobileURL,
+						auth: mobileAuth || {},
+					},
+					alt,
+					resizedOptions: {
+						smart: true,
+					},
+					width: 320,
+					height: 400,
+					resizerURL,
+			  }
+			: {
+					src: fallbackImage,
+					alt: imageMobileAlt,
+			  };
 	const HeadingWrapper = headline ? HeadingSection : Fragment;
-
 	return (
 		<div className={classes}>
 			<Picture>
-				<Picture.Source src={imageURLDesktop} media={DESKTOP_PHOTO_BREAKPOINT} />
-				<Picture.Image src={imageURLMobile} alt={imageAltText} />
+				<Picture.Source {...{ media: "(min-width:600px)", ...desktopImageParams }} />
+				<Picture.Image {...mobileImageParams} />
 			</Picture>
 
 			<Stack
@@ -56,6 +141,14 @@ function Hero({ customFields }) {
 						? `${BLOCK_CLASS_NAME}__text--left`
 						: `${BLOCK_CLASS_NAME}__text--center`
 				}`}
+				inline
+				{...searchableField({
+					[`imageDesktopURL`]: "url",
+					[`desktopImgId`]: "_id",
+					[`imageDesktopAuth`]: "auth",
+					[`imageAlt`]: "alt_text",
+				})}
+				suppressContentEditableWarning
 			>
 				<HeadingWrapper>
 					{headline ? <Heading>{headline}</Heading> : null}
@@ -112,20 +205,39 @@ Hero.propTypes = {
 			label: "Content Style",
 			description: "Select a light or dark theme for the content area.",
 		}),
-		imageURLDesktop: PropTypes.string.tag({
+		imageId: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageDesktopURL: PropTypes.string.tag({
 			label: "Image URL for Desktop",
 			description: "Select an image appropriate for desktop sized screens.",
 			searchable: "image",
 		}),
-		imageURLMobile: PropTypes.string.tag({
+		imageDesktopWidth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageDesktopHeight: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageDesktopAuth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageMobileURL: PropTypes.string.tag({
 			label: "Image URL for Mobile",
 			description: "Select an image appropriate for mobile sized screens.",
 			searchable: "image",
 		}),
-		imageAltText: PropTypes.string.tag({
+		imageMobileAuth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageMobileId: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageMobileAlt: PropTypes.string.tag({
 			defaultValue: "",
 			description: "The alt text that will be applied for both the mobile and desktop image.",
 			label: "Image alt text",
+			hidden: true,
 		}),
 		headline: PropTypes.string.tag({
 			label: "Headline Text",

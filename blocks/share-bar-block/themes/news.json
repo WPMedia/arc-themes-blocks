@@ -36,10 +36,26 @@
 			"desktop": {}
 		}
 	},
+	"share-bar-facebook-hover": {
+		"styles": {
+			"default": {
+				"fill": "#5d6f9a"
+			},
+			"desktop": {}
+		}
+	},
 	"share-bar-linkedin": {
 		"styles": {
 			"default": {
 				"fill": "#3076b0"
+			},
+			"desktop": {}
+		}
+	},
+	"share-bar-linkedin-hover": {
+		"styles": {
+			"default": {
+				"fill": "#6baae8"
 			},
 			"desktop": {}
 		}
@@ -52,6 +68,14 @@
 			"desktop": {}
 		}
 	},
+	"share-bar-pinterest-hover": {
+		"styles": {
+			"default": {
+				"fill": "#b44c4c"
+			},
+			"desktop": {}
+		}
+	},
 	"share-bar-twitter": {
 		"styles": {
 			"default": {
@@ -60,10 +84,26 @@
 			"desktop": {}
 		}
 	},
+	"share-bar-twitter-hover": {
+		"styles": {
+			"default": {
+				"fill": "#91c4f6"
+			},
+			"desktop": {}
+		}
+	},
 	"share-bar-email": {
 		"styles": {
 			"default": {
 				"fill": "#b61818"
+			},
+			"desktop": {}
+		}
+	},
+	"share-bar-email-hover": {
+		"styles": {
+			"default": {
+				"fill": "#c66565"
 			},
 			"desktop": {}
 		}

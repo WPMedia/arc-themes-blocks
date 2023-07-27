@@ -4,12 +4,16 @@
 			"default": {
 				"font-size": "var(--body-font-weight)",
 				"line-height": "var(--body-line-height)",
+				"color": "var(--text-color)",
+				"text-decoration": "none",
 				"components": {
-					"link": {
-						"text-decoration": "none"
-					},
-					"link-hover": {
+					"attribution-link": {
+						"color": "var(--text-color)",
 						"text-decoration": "underline"
+					},
+					"attribution-link-hover": {
+						"color": "var(--text-color-subtle)",
+						"text-decoration": "none"
 					}
 				}
 			},

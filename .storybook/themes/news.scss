@@ -149,8 +149,8 @@
 	$tokens: (
 		default: (
 			alias: (
-				"font-family-primary": "Abel",
-				"font-family-secondary": "Georgia",
+				"font-family-primary": "Inter",
+				"font-family-secondary": "Lora",
 				"color-primary": var(--global-black),
 				"color-primary-hover": var(--global-neutral-7),
 				"text-color": var(--global-neutral-8),
@@ -280,7 +280,7 @@
 					color: var(--global-white),
 				),
 				button-primary-hover: (
-					background-color: var(--global-neutral-7),
+					background-color: var(--color-primary-hover),
 				),
 				button-primary-reverse: (
 					background-color: transparent,
@@ -288,16 +288,19 @@
 					color: var(--color-primary),
 				),
 				button-primary-reverse-hover: (
-					border-color: var(--global-neutral-7),
-					color: var(--global-neutral-7),
+					border-color: var(--color-primary-hover),
+					color: var(--color-primary-hover),
 				),
 				button-secondary: (
 					background-color: var(--global-white),
-					color: var(--global-black),
+					color: var
+						(
+							--global-black,
+						),
 				),
 				button-secondary-hover: (
-					background-color: var(--global-neutral-7),
-					color: var(--global-white),
+					background-color: var(--global-neutral-2),
+					color: var(--global-neutral-6),
 				),
 				button-secondary-reverse: (
 					background-color: transparent,
@@ -305,8 +308,8 @@
 					color: var(--global-white),
 				),
 				button-secondary-reverse-hover: (
-					border-color: var(--global-neutral-7),
-					color: var(--global-neutral-7),
+					border-color: var(--global-neutral-3),
+					color: var(--global-neutral-3),
 				),
 				carousel: (
 					--slides: 1,
@@ -424,6 +427,7 @@
 				),
 				overline: (
 					color: var(--text-color),
+					font-family: var(--font-family-primary),
 					font-size: var(--heading-level-6-font-size),
 					font-weight: var(--heading-level-6-font-weight),
 					line-height: var(--heading-level-6-line-height),
@@ -493,30 +497,40 @@
 					align-items: flex-start,
 					background-color: var(--global-red-5),
 					display: flex,
+					filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0)),
 					flex-wrap: nowrap,
 					justify-content: space-between,
 					word-break: break-word,
 					components: (
 						button-default: (
 							background: none,
-							border-width: 0,
+							border: none,
+							filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0)),
 							flex: 0 0 auto,
 						),
 						button-large: (
 							margin-bottom: var(--global-spacing-1),
 							margin-top: var(--global-spacing-1),
+							filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0)),
 						),
 						link: (
 							color: var(--global-white),
+							filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0)),
 							font-family: var(--font-family-primary),
 							font-size: var(--body-font-size-small),
 							font-weight: var(--global-font-weight-7),
-							padding: var(--global-spacing-5) var(--global-spacing-5) var(--global-spacing-5)
-								var(--global-spacing-4),
+							padding-bottom: var(--global-spacing-5),
+							padding-left: var(--global-spacing-4),
+							padding-right: var(--global-spacing-5),
+							padding-top: var(--global-spacing-5),
 							text-decoration: none,
+						),
+						link-hover: (
+							color: var(--text-color),
 						),
 						icon: (
 							fill: var(--global-white),
+							filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0)),
 						),
 					),
 				),
@@ -831,6 +845,13 @@
 						),
 					),
 				),
+				author-bio-social-link: (
+					components: (
+						icon: (
+							fill: var(--color-primary),
+						),
+					),
+				),
 				author-bio-social-link-wrapper: (
 					gap: var(--global-spacing-4),
 					margin-top: 0,
@@ -857,12 +878,16 @@
 				byline: (
 					font-size: var(--body-font-weight),
 					line-height: var(--body-line-height),
+					color: var(--text-color),
+					text-decoration: none,
 					components: (
-						link: (
-							text-decoration: none,
-						),
-						link-hover: (
+						attribution-link: (
+							color: var(--text-color),
 							text-decoration: underline,
+						),
+						attribution-link-hover: (
+							color: var(--text-color-subtle),
+							text-decoration: none,
 						),
 					),
 				),
@@ -882,6 +907,19 @@
 						),
 						separator: (
 							padding: 0 var(--global-spacing-2),
+						),
+						image: (
+							transition: opacity 0.4s ease,
+						),
+						image-hover: (
+							cursor: pointer,
+							opacity: 0.8,
+						),
+						link: (
+							color: var(--text-color),
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
 						),
 					),
 				),
@@ -1024,6 +1062,13 @@
 						),
 					),
 				),
+				footer-social-links-hover: (
+					components: (
+						icon: (
+							fill: var(--color-primary-hover),
+						),
+					),
+				),
 				footer-social-links-container: (
 					border-bottom: 1px solid var(--global-neutral-4),
 					width: 100%,
@@ -1111,7 +1156,8 @@
 							width: var(--global-spacing-4),
 						),
 						image: (
-							max-height: 75vh,
+							max-height: 100%,
+							object-fit: contain,
 						),
 						carousel-controls: (
 							padding: 0 0 var(--global-spacing-2) 0,
@@ -1161,10 +1207,12 @@
 				),
 				gallery-image-wrapper: (
 					align-items: center,
+					aspect-ratio: calc(16 / 9),
+					background-color: var(--global-black),
 					display: flex,
 					justify-content: center,
-					max-height: 75vh,
-					background-color: var(--global-black),
+					max-height: unset,
+					overflow: auto,
 				),
 				gallery-track-icon: (
 					fill: var(--global-white),
@@ -1267,6 +1315,10 @@
 				header-nav-chain-logo-center: (
 					margin-right: 0,
 				),
+				header-nav-chain-logo-right: (
+					margin-inline-start: auto,
+					margin-inline-end: 0,
+				),
 				header-nav-chain-logo-hidden: (
 					opacity: 0,
 					transition: (
@@ -1286,6 +1338,15 @@
 				header-nav-chain-logo-image: (
 					max-width: 240px,
 					max-height: var(--header-nav-chain-height),
+					transition: (
+						opacity 0.4s ease,
+					),
+				),
+				header-nav-chain-logo-image-hover: (
+					opacity: 0.7,
+					transition: (
+						opacity 0.4s ease,
+					),
 				),
 				header-nav-chain-nav-search: (
 					align-items: center,
@@ -1433,6 +1494,13 @@
 				),
 				header-nav-chain-flyout-nav-item: (
 					background-color: var(--global-black),
+					components: (
+						link: (
+							padding-top: var(--global-spacing-3),
+							padding-left: var(--global-spacing-5),
+							padding-bottom: var(--global-spacing-3),
+						),
+					),
 				),
 				header-nav-chain-flyout-nav-item-hover-active: (
 					background-color: var(--global-neutral-7),
@@ -1488,8 +1556,10 @@
 							font-size: var(--global-spacing-4),
 							font-weight: var(--global-font-weight-7),
 							line-height: var(--global-line-height-4),
-							padding: var(--global-spacing-2) var(--global-spacing-4) var(--global-spacing-2)
-								var(--global-spacing-5),
+							padding-top: var(--global-spacing-2),
+							padding-right: var(--global-spacing-5),
+							padding-left: var(--global-spacing-5),
+							padding-bottom: var(--global-spacing-2),
 							text-decoration: none,
 						),
 						link-hover: (
@@ -1688,6 +1758,14 @@
 				),
 				links-bar: (
 					gap: var(--global-spacing-2),
+					components: (
+						link: (
+							color: var(--text-color),
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				masthead: (
 					border-bottom: 2px solid var(--global-neutral-8),
@@ -2131,6 +2209,9 @@
 							font-weight: var(--heading-level-1-font-weight),
 							line-height: var(--heading-level-1-line-height),
 						),
+						link: (
+							font-family: var(--font-family-primary),
+						),
 						separator: (
 							margin: 0 var(--global-spacing-4),
 						),
@@ -2161,17 +2242,32 @@
 				share-bar-facebook: (
 					fill: #415993,
 				),
+				share-bar-facebook-hover: (
+					fill: #5d6f9a,
+				),
 				share-bar-linkedin: (
 					fill: #3076b0,
+				),
+				share-bar-linkedin-hover: (
+					fill: #6baae8,
 				),
 				share-bar-pinterest: (
 					fill: #ad2526,
 				),
+				share-bar-pinterest-hover: (
+					fill: #b44c4c,
+				),
 				share-bar-twitter: (
 					fill: #6baae8,
 				),
+				share-bar-twitter-hover: (
+					fill: #91c4f6,
+				),
 				share-bar-email: (
 					fill: #b61818,
+				),
+				share-bar-email-hover: (
+					fill: #c66565,
 				),
 				simple-list: (
 					gap: var(--global-spacing-4),
@@ -2230,6 +2326,7 @@
 					components: (
 						heading: (
 							font-size: var(--body-font-size),
+							font-weight: var(--body-font-weight),
 							line-height: var(--body-line-height),
 						),
 					),
@@ -2255,6 +2352,7 @@
 					components: (
 						heading: (
 							font-size: var(--body-font-size),
+							font-weight: var(--body-font-weight),
 							line-height: var(--body-line-height),
 						),
 					),
@@ -2268,9 +2366,9 @@
 					grid-template-columns: 2fr 1fr,
 				),
 				subheadline: (
-					font-size: var(--heading-level-3-font-size),
-					font-weight: var(--heading-level-3-font-weight),
-					line-height: var(--heading-level-3-line-height),
+					font-size: var(--heading-level-6-font-size),
+					font-weight: var(--heading-level-6-font-weight),
+					line-height: var(--heading-level-6-line-height),
 				),
 				tag-title: (
 					components: (
@@ -2290,6 +2388,19 @@
 					components: (
 						grid: (
 							gap: var(--global-spacing-5),
+						),
+						image: (
+							transition: opacity 0.4s ease,
+						),
+						image-hover: (
+							cursor: pointer,
+							opacity: 0.8,
+						),
+						link: (
+							color: var(--text-color),
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
 						),
 					),
 				),
@@ -2463,12 +2574,12 @@
 				top-table-list-xl: (
 					components: (
 						heading: (
-							align-self: center,
-							justify-content: center,
+							align-self: left,
+							justify-content: left,
 						),
 						overline: (
 							display: flex,
-							justify-content: center,
+							justify-content: left,
 						),
 						separator: (
 							padding: 0 var(--global-spacing-2),
@@ -2712,6 +2823,9 @@
 							padding: 0 0 0 var(--global-spacing-2),
 						),
 					),
+				),
+				gallery-image-wrapper: (
+					max-height: 75vh,
 				),
 				header-small: (
 					font-size: var(--body-font-size),
@@ -3066,9 +3180,14 @@
 				top-table-list-xl: (
 					components: (
 						heading: (
+							align-self: center,
 							font-size: var(--heading-level-1-font-size),
 							justify-content: center,
 							line-height: var(--heading-level-1-line-height),
+						),
+						overline: (
+							display: flex,
+							justify-content: center,
 						),
 						stack: (
 							gap: var(--global-spacing-5),

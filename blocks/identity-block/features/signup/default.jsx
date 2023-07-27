@@ -3,9 +3,9 @@ import PropTypes from "@arc-fusion/prop-types";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { Input, isServerSide, Paragraph } from "@wpmedia/arc-themes-components";
-import useIdentity from "../../components/Identity";
-import HeadlinedSubmitForm from "../../components/HeadlinedSubmitForm";
-import FormPasswordConfirm from "../../components/FormPasswordConfirm";
+import useIdentity from "../../components/identity";
+import HeadlinedSubmitForm from "../../components/headlined-submit-form";
+import FormPasswordConfirm from "../../components/form-password-confirm";
 import validatePasswordPattern from "../../utils/validate-password-pattern";
 import passwordValidationMessage from "../../utils/password-validation-message";
 

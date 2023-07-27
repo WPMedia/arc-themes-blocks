@@ -30,6 +30,11 @@
 	@include scss.block-properties("header-account-action");
 }
 
+.b-login-form {
+	@include scss.block-components("login-form");
+	@include scss.block-properties("login-form");
+}
+
 .b-sign-up {
 	&__tos-container {
 		a {

@@ -137,7 +137,7 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 		const aspectWidth = width / divisor;
 		const aspectHeight = height / divisor;
 
-		// Reassign aspectRatio to the correct value
+		// Assign the calculated value to aspectRatio
 		aspectRatio = `${aspectWidth}:${aspectHeight}`;
 	}
 

@@ -46,6 +46,22 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		hideVideoCredits = false,
 	} = customFields;
 
+	// Helper function to find the Greatest Common Denominator (GCD) of two numbers. This is used to calculate the aspect ratio
+	const gcd = (valA, valB) => {
+		let a = Math.abs(valA);
+		let b = Math.abs(valB);
+		while (b) {
+			const temp = b;
+			b = a % b;
+			a = temp;
+		}
+
+		return a;
+	};
+
+	// This is up here to prevent a lexical declaration in a case block (which throws an error). It goes with the "video" case
+	let aspectRatio = "16:9"; // Default to 16:9
+
 	switch (type) {
 		case "text": {
 			return content && content.length > 0 ? (
@@ -210,7 +226,19 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 			}
 
 		case "video":
-			// TODO: The aspect ratios are wrong because no aspect ratio is passed in (so 16:9 is used by default)
+			// Calculate the aspect ratio for the item. If the item doesn't have any promo items, then 16:9 is used as a fallback
+			if (item && item.promo_items && item.promo_items.basic) {
+				// Get the width and height of the promo item and calculate the aspect ratio
+				const width = item?.promo_items.basic.width;
+				const height = item?.promo_items.basic.height;
+				const divisor = gcd(width, height);
+				const aspectWidth = width / divisor;
+				const aspectHeight = height / divisor;
+
+				// Assign the new value to aspectRatio
+				aspectRatio = `${aspectWidth}:${aspectHeight}`;
+			}
+
 			return (
 				<MediaItem
 					key={`${type}_${index}_${key}`}
@@ -218,7 +246,11 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 					credit={!hideVideoCredits ? formatCredits(item.credits) : null}
 					title={!hideVideoTitle ? item?.headlines?.basic : null}
 				>
-					<Video className="video-container" embedMarkup={item.embed_html} />
+					<Video
+						aspectRatio={aspectRatio}
+						className="video-container"
+						embedMarkup={item.embed_html}
+					/>
 				</MediaItem>
 			);
 		case "gallery": {

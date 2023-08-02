@@ -96,9 +96,34 @@ export const LeadArtPresentation = (props) => {
 				playthrough: customFields?.playthrough,
 			});
 
-			// Calculate the aspect ratio of the video using the
+			// Helper function to find the Greatest Common Denominator (GCD) of two numbers. This is used to calculate the aspect ratio
+			const gcd = (valA, valB) => {
+				let a = Math.abs(valA);
+				let b = Math.abs(valB);
+				while (b) {
+					const temp = b;
+					b = a % b;
+					a = temp;
+				}
 
-			// TODO: Similarly, lead art is messed up because no calculated aspect ratio is pased in
+				return a;
+			};
+
+			let aspectRatio = "16:9"; // Default to 16:9
+
+			// Make sure that the content source exists and has an existing promo item
+			if (leadArt && leadArt.promo_items && leadArt.promo_items.basic) {
+				// Get the width and height of the promo item and calculate the aspect ratio
+				const width = leadArt?.promo_items.basic.width;
+				const height = leadArt?.promo_items.basic.height;
+				const divisor = gcd(width, height);
+				const aspectWidth = width / divisor;
+				const aspectHeight = height / divisor;
+
+				// Assign the calculated value to aspectRatio
+				aspectRatio = `${aspectWidth}:${aspectHeight}`;
+			}
+
 			return (
 				<MediaItem
 					caption={!hideCaption ? leadArt?.description?.basic : null}
@@ -106,7 +131,7 @@ export const LeadArtPresentation = (props) => {
 					title={!hideTitle ? leadArt?.headlines?.basic : null}
 				>
 					<Video
-						aspectRatio="9:16"
+						aspectRatio={aspectRatio}
 						embedMarkup={embedMarkup}
 						viewportPercentage={customFields?.viewportPercentage}
 					/>

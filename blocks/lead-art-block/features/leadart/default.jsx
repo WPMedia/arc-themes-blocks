@@ -95,6 +95,10 @@ export const LeadArtPresentation = (props) => {
 				autoplay: customFields?.enableAutoplay,
 				playthrough: customFields?.playthrough,
 			});
+
+			// Calculate the aspect ratio of the video using the
+
+			// TODO: Similarly, lead art is messed up because no calculated aspect ratio is pased in
 			return (
 				<MediaItem
 					caption={!hideCaption ? leadArt?.description?.basic : null}
@@ -102,7 +106,7 @@ export const LeadArtPresentation = (props) => {
 					title={!hideTitle ? leadArt?.headlines?.basic : null}
 				>
 					<Video
-						aspectRatio="16:9"
+						aspectRatio="9:16"
 						embedMarkup={embedMarkup}
 						viewportPercentage={customFields?.viewportPercentage}
 					/>

@@ -113,7 +113,33 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 		? contentSource?.description?.basic
 		: (title && description) || contentSource?.description?.basic;
 
-	const aspectRatio = "16:9";
+	// Helper function to find the Greatest Common Denominator (GCD) of two numbers. This is used to calculate the aspect ratio
+	const gcd = (valA, valB) => {
+		let a = Math.abs(valA);
+		let b = Math.abs(valB);
+		while (b) {
+			const temp = b;
+			b = a % b;
+			a = temp;
+		}
+
+		return a;
+	};
+
+	let aspectRatio = "16:9"; // Default to 16:9
+
+	// Make sure that the content source exists and has an existing promo item
+	if (contentSource && contentSource.promo_items && contentSource.promo_items.basic) {
+		// Get the width and height of the promo item and calculate the aspect ratio
+		const width = contentSource?.promo_items.basic.width;
+		const height = contentSource?.promo_items.basic.height;
+		const divisor = gcd(width, height);
+		const aspectWidth = width / divisor;
+		const aspectHeight = height / divisor;
+
+		// Reassign aspectRatio to the correct value
+		aspectRatio = `${aspectWidth}:${aspectHeight}`;
+	}
 
 	const renderVideoLayout = videoLayouts[displayStyle];
 	const powaMarkup = contentSource?.embed_html || embedMarkup;

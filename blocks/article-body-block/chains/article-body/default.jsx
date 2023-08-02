@@ -210,6 +210,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 			}
 
 		case "video":
+			// TODO: The aspect ratios are wrong because no aspect ratio is passed in (so 16:9 is used by default)
 			return (
 				<MediaItem
 					key={`${type}_${index}_${key}`}

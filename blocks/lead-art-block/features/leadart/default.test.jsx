@@ -2,13 +2,20 @@ import React from "react";
 import { render } from "@testing-library/react";
 import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
+import { useContent } from "fusion:content";
 import LeadArt from "./default";
+
+const { mount } = require("enzyme");
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	usePhrases: jest.fn(() => ({
 		t: jest.fn().mockReturnValue("gallery-expand"),
 	})),
+}));
+
+jest.mock("fusion:content", () => ({
+	useContent: jest.fn(() => ({})),
 }));
 
 Object.defineProperty(global.window, "matchMedia", {
@@ -279,5 +286,29 @@ describe("LeadArt", () => {
 		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
 		const { container } = render(<LeadArt customFields={{}} />);
 		expect(container.firstChild).toBeNull();
+	});
+
+	it("correctly calculates the aspect ratio of a vertical video", () => {
+		const globalContent = {
+			promo_items: {
+				lead_art: {
+					type: "video",
+					promo_items: {
+						basic: {
+							width: 1080,
+							height: 1920,
+						},
+					},
+				},
+			},
+		};
+
+		useFusionContext.mockImplementation(() => ({ globalContent }));
+		useContent.mockImplementation(() => globalContent);
+		const wrapper = mount(<LeadArt customFields={{}} />);
+
+		expect(useContent).toHaveBeenCalledTimes(0);
+		expect(wrapper.find("Video")).toExist();
+		expect(wrapper.find("Video").prop("aspectRatio")).toEqual("9:16");
 	});
 });

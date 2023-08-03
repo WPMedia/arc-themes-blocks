@@ -2238,7 +2238,7 @@ describe("article-body chain", () => {
 	});
 
 	describe("Renders Video type", () => {
-		it("should render Vidoe type", () => {
+		it("should render Video type", () => {
 			useFusionContext.mockImplementation(() => ({
 				globalContent: {
 					_id: "NGGXZJ4HAJH5DI3SS65EVBMEMQ",
@@ -2263,6 +2263,40 @@ describe("article-body chain", () => {
 			const wrapper = mount(<ArticleBodyChain />);
 
 			expect(wrapper.find("Video").length).toEqual(1);
+		});
+
+		it("correctly calculates the aspect ratio of a vertical video", () => {
+			useFusionContext.mockImplementation(() => ({
+				globalContent: {
+					_id: "NGGXZJ4HAJH5DI3SS65EVBMEMQ",
+					type: "story",
+					version: "0.10.6",
+					content_elements: [
+						{
+							_id: "TLF25CWTCBBOHOVFPK4C2RR5JA",
+							type: "video",
+							headlines: {
+								basic: "Title",
+							},
+							description: {
+								basic: "Caption",
+							},
+							promo_items: {
+								basic: {
+									width: 1000,
+									height: 500,
+								},
+							},
+						},
+					],
+				},
+				arcSite: "the-sun",
+			}));
+
+			const wrapper = mount(<ArticleBodyChain />);
+
+			expect(wrapper.find("Video")).toExist();
+			expect(wrapper.find("Video").prop("aspectRatio")).toEqual("2:1");
 		});
 	});
 

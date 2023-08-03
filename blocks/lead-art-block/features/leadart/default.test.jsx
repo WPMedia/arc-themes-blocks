@@ -295,8 +295,8 @@ describe("LeadArt", () => {
 					type: "video",
 					promo_items: {
 						basic: {
-							width: 1080,
-							height: 1920,
+							width: 49,
+							height: 49,
 						},
 					},
 				},
@@ -309,6 +309,6 @@ describe("LeadArt", () => {
 
 		expect(useContent).toHaveBeenCalledTimes(0);
 		expect(wrapper.find("Video")).toExist();
-		expect(wrapper.find("Video").prop("aspectRatio")).toEqual("9:16");
+		expect(wrapper.find("Video").prop("aspectRatio")).toEqual("1:1");
 	});
 });

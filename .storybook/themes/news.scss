@@ -403,7 +403,7 @@
 					outline-color: var(--status-color-warning),
 				),
 				link: (
-					color: var(--color-primary),
+					color: var(--text-color),
 				),
 				link-active: (
 					text-decoration: none,
@@ -1582,13 +1582,25 @@
 				),
 				large-manual-promo: (
 					gap: var(--global-spacing-4),
+					components: (
+						link-hover: (
+							color: var(--text-color-subtle),
+						),
+					),
 				),
 				large-manual-promo-text: (
 					gap: 0,
 					components: (
+						heading: (
+							color: var(--text-color),
+						),
 						overline: (
+							color: var(--text-color),
 							font-size: var(--heading-level-6-font-size),
 							line-height: var(--heading-level-6-line-height),
+						),
+						overline-hover: (
+							color: var(--text-color-subtle),
 						),
 						paragraph: (
 							font-size: var(--body-font-size),
@@ -1598,11 +1610,21 @@
 						),
 					),
 				),
+				large-manual-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
+						),
+					),
+				),
 				large-promo: (
 					gap: var(--global-spacing-4),
 					components: (
 						link: (
 							position: relative,
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
 						),
 					),
 				),
@@ -1632,12 +1654,17 @@
 					gap: 0,
 					components: (
 						heading: (
+							color: var(--text-color),
 							font-size: var(--heading-level-3-font-size),
 							line-height: var(--heading-level-3-line-height),
 						),
 						overline: (
+							color: var(--text-color),
 							font-size: var(--heading-level-6-font-size),
 							line-height: var(--heading-level-6-line-height),
+						),
+						overline-hover: (
+							color: var(--text-color-subtle),
 						),
 						paragraph: (
 							font-size: var(--body-font-size),
@@ -1648,6 +1675,13 @@
 						),
 						separator: (
 							margin: 0 var(--global-spacing-2) 0 var(--global-spacing-2),
+						),
+					),
+				),
+				large-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
 						),
 					),
 				),
@@ -1830,6 +1864,7 @@
 							max-width: 100px,
 						),
 						heading: (
+							color: var(--text-color),
 							font-size: var(--heading-level-5-font-size),
 							font-weight: var(--heading-level-5-font-weight),
 							line-height: var(--heading-level-5-line-height),
@@ -1844,6 +1879,9 @@
 						),
 						link: (
 							position: relative,
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
 						),
 					),
 				),
@@ -1878,6 +1916,13 @@
 					color: var(--global-white),
 					display: none,
 				),
+				medium-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
+						),
+					),
+				),
 				medium-manual-promo: (
 					clear: both,
 					display: table,
@@ -1889,10 +1934,14 @@
 							line-height: var(--body-line-height-small),
 						),
 						heading: (
+							color: var(--text-color),
 							font-size: var(--heading-level-5-font-size),
 							font-weight: var(--heading-level-5-font-weight),
 							line-height: var(--heading-level-5-line-height),
 							margin-bottom: var(--global-spacing-4),
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
 						),
 						media-item: (
 							float: right,
@@ -1910,6 +1959,13 @@
 						heading: (
 							// hard-coded based on previous implementation and product requirements for such
 							width: 68%,
+						),
+					),
+				),
+				medium-manual-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
 						),
 					),
 				),
@@ -2328,9 +2384,13 @@
 					grid-template-columns: 1fr,
 					components: (
 						heading: (
+							color: var(--text-color),
 							font-size: var(--body-font-size),
 							font-weight: var(--body-font-weight),
 							line-height: var(--body-line-height),
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
 						),
 					),
 				),
@@ -2348,15 +2408,26 @@
 					gap: var(--global-spacing-6),
 					grid-template-columns: 2fr 1fr,
 				),
+				small-manual-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
+						),
+					),
+				),
 				small-promo: (
 					display: grid,
 					gap: var(--global-spacing-5),
 					grid-template-columns: 1fr,
 					components: (
 						heading: (
+							color: var(--text-color),
 							font-size: var(--body-font-size),
 							font-weight: var(--body-font-weight),
 							line-height: var(--body-line-height),
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
 						),
 					),
 				),
@@ -2367,6 +2438,13 @@
 				small-promo-right: (
 					gap: var(--global-spacing-6),
 					grid-template-columns: 2fr 1fr,
+				),
+				small-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
+						),
+					),
 				),
 				subheadline: (
 					font-size: var(--heading-level-6-font-size),
@@ -2649,14 +2727,33 @@
 				),
 				xl-manual-promo: (
 					components: (
+						heading: (
+							color: var(--text-color),
+						),
 						link: (
 							font-family: inherit,
 							font-size: inherit,
 							font-weight: inherit,
 							line-height: inherit,
 						),
+						overline: (
+							color: var(--text-color),
+						),
+						overline-hover: (
+							color: var(--text-color-subtle),
+						),
 						stack: (
 							gap: var(--global-spacing-4),
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
+						),
+					),
+				),
+				xl-manual-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
 						),
 					),
 				),
@@ -2668,6 +2765,15 @@
 							font-weight: inherit,
 							line-height: inherit,
 						),
+						heading: (
+							color: var(--text-color),
+						),
+						overline: (
+							color: var(--text-color),
+						),
+						overline-hover: (
+							color: var(--text-color-subtle),
+						),
 						separator: (
 							padding: 0 var(--global-spacing-2),
 						),
@@ -2676,6 +2782,9 @@
 						),
 						media-item: (
 							position: relative,
+						),
+						link-hover: (
+							color: var(--text-color-subtle),
 						),
 					),
 				),
@@ -2700,6 +2809,13 @@
 				xl-promo-label: (
 					margin-left: var(--global-spacing-2),
 					color: var(--global-white),
+				),
+				xl-promo-img: (
+					components: (
+						link-hover: (
+							opacity: 0.8,
+						),
+					),
 				),
 			),
 		),

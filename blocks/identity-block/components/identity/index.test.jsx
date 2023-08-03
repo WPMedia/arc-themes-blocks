@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import IdentityObject from "@arc-publishing/sdk-identity";
-import useIdentity from "./Identity";
+import useIdentity from ".";
 
 jest.mock("@arc-publishing/sdk-identity", () => ({
 	__esModule: true,
@@ -82,7 +82,6 @@ describe("Identity useIdentity Hook", () => {
 			const getCurrent = getSignedInIdentity(testUser);
 			return <div>{getCurrent.type}</div>;
 		};
-
 		render(<Test />);
 		expect(screen.getByText("Google")).toBeInTheDocument();
 	});

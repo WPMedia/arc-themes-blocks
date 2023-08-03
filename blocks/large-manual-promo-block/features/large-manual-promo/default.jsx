@@ -113,6 +113,7 @@ const LargeManualPromo = ({ customFields }) => {
 							suppressContentEditableWarning
 						>
 							<Conditional
+								className={`${BLOCK_CLASS_NAME}__img`}
 								component={Link}
 								condition={linkURL}
 								href={formatURL(linkURL)}

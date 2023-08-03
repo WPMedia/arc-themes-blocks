@@ -2265,7 +2265,7 @@ describe("article-body chain", () => {
 			expect(wrapper.find("Video").length).toEqual(1);
 		});
 
-		it("correctly calculates the aspect ratio of a vertical video", () => {
+		it("correctly calculates the aspect ratio of a video", () => {
 			useFusionContext.mockImplementation(() => ({
 				globalContent: {
 					_id: "NGGXZJ4HAJH5DI3SS65EVBMEMQ",

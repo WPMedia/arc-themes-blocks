@@ -8,6 +8,9 @@ import HeadlinedSubmitForm from "../../components/headlined-submit-form";
 import useIdentity from "../../components/identity";
 import passwordValidationMessage from "../../utils/password-validation-message";
 import validatePasswordPattern from "../../utils/validate-password-pattern";
+import validateURL from "../../utils/validate-redirect-url";
+
+const BLOCK_CLASS_NAME = "b-reset-password";
 
 const defaultSuccessURL = "/account/login/";
 
@@ -100,7 +103,8 @@ export const ResetPasswordPresentation = ({ isAdmin = false, phrases, successAct
 					headline={phrases.t("identity-block.reset-password-headline-submitted")}
 					buttonLabel={phrases.t("identity-block.reset-password-submit-submitted")}
 					onSubmit={() => {
-						window.location.assign(successActionURL);
+						const redirect = validateURL(successActionURL);
+						window.location.assign(redirect);
 					}}
 				>
 					<Paragraph>{phrases.t("identity-block.reset-password-instruction-submitted")}</Paragraph>
@@ -110,8 +114,10 @@ export const ResetPasswordPresentation = ({ isAdmin = false, phrases, successAct
 
 		return (
 			<HeadlinedSubmitForm
-				headline={phrases.t("identity-block.reset-password-headline")}
 				buttonLabel={phrases.t("identity-block.reset-password-submit")}
+				className={BLOCK_CLASS_NAME}
+				formErrorText={error}
+				headline={phrases.t("identity-block.reset-password-headline")}
 				onSubmit={({ newPassword }) => {
 					if (!isAdmin) {
 						Identity.resetPassword(nonce, newPassword)
@@ -121,7 +127,6 @@ export const ResetPasswordPresentation = ({ isAdmin = false, phrases, successAct
 							.catch(() => setError(phrases.t("identity-block.reset-password-error")));
 					}
 				}}
-				formErrorText={error}
 			>
 				<Paragraph>{phrases.t("identity-block.reset-password-instruction")}</Paragraph>
 				<FormPasswordConfirm

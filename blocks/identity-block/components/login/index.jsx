@@ -1,15 +1,6 @@
 import { useEffect, useState } from "react";
 import useIdentity from "../identity";
-
-const validateURL = (url) => {
-	if (!url) return null;
-	const validationRegEx = /^\/[^/].*$/;
-	const valid = validationRegEx.test(url);
-	if (valid) {
-		return url;
-	}
-	return "/";
-};
+import validateURL from "../../utils/validate-redirect-url";
 
 const useLogin = ({ isAdmin, redirectURL, redirectToPreviousPage, loggedInPageLocation }) => {
 	const { Identity } = useIdentity();

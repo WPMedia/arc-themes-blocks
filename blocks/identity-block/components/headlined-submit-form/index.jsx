@@ -11,7 +11,7 @@ const HeadlinedSubmitForm = ({
 	onSubmit = () => {},
 }) => {
 	const formRef = useRef();
-
+	console.log("formtexterror", formErrorText);
 	const handleSubmit = (event) => {
 		event.preventDefault();
 

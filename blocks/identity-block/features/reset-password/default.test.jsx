@@ -43,7 +43,7 @@ describe("Identity Password Reset Feature - unInitialized", () => {
 		jest.clearAllMocks();
 	});
 
-	it("renders nothing if identity not initialized", async () => {
+	it("renders nothing if identity not initialized", () => {
 		render(<ResetPassword customFields={{ successActionURL }} />);
 		expect(screen.queryByRole("form")).toBeNull();
 	});
@@ -69,12 +69,12 @@ describe("Identity Password Reset Feature", () => {
 		jest.clearAllMocks();
 	});
 
-	it("renders", async () => {
+	it("renders", () => {
 		render(<ResetPassword customFields={{ successActionURL }} />);
 		expect(screen.getByRole("form")).not.toBeNull();
 	});
 
-	it("shows submit form", async () => {
+	it("shows submit form", () => {
 		render(<ResetPassword customFields={{ successActionURL }} />);
 		expect(screen.getByText("identity-block.reset-password-headline")).not.toBeNull();
 		expect(screen.getByText("identity-block.reset-password-instruction")).not.toBeNull();
@@ -83,8 +83,8 @@ describe("Identity Password Reset Feature", () => {
 
 	it("updates the page on submit and redirects the user to login when done", async () => {
 		render(<ResetPassword customFields={{ successActionURL }} />);
-		fireEvent.click(screen.getByRole("button"));
-		await expect(resetPasswordMock).toHaveBeenCalled();
+		await fireEvent.click(screen.getByRole("button"));
+		expect(resetPasswordMock).toHaveBeenCalled();
 		expect(screen.getByText("identity-block.reset-password-headline-submitted")).not.toBeNull();
 		expect(screen.getByText("identity-block.reset-password-instruction-submitted")).not.toBeNull();
 		expect(screen.getByText("identity-block.reset-password-submit-submitted")).not.toBeNull();

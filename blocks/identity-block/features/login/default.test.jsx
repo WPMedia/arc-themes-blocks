@@ -4,58 +4,61 @@ import Login from "./default";
 import useIdentity from "../../components/identity";
 
 jest.mock("../../components/identity");
+jest.mock("fusion:properties", () => jest.fn(() => ({})));
 
 const defaultCustomFields = {
 	redirectURL: "",
 	redirectToPreviousPage: true,
 };
 
-const loginMock = jest.fn(() => Promise.resolve({}));
+const loginMock = jest.fn(() => Promise.resolve());
+const loginMockFail = jest.fn(() => Promise.reject());
 
-jest.mock("fusion:properties", () => jest.fn(() => ({})));
+const IdentityDefaults = {
+	isLoggedIn: jest.fn(() => false),
+	getConfig: jest.fn(() => ({})),
+	login: loginMock,
+};
 
 describe("Identity Login Feature", () => {
-	beforeEach(async () => {
+	beforeEach(() => {
 		useIdentity.mockImplementation(() => ({
 			isInitialized: true,
 			Identity: {
-				isLoggedIn: jest.fn(async () => false),
-				getConfig: jest.fn(async () => ({})),
-				login: loginMock,
+				...IdentityDefaults,
 			},
 		}));
 	});
 
-	afterAll(() => {
-		jest.restoreAllMocks();
+	afterEach(() => {
+		jest.clearAllMocks();
 	});
 
-	it("renders nothing if identity not initialized", async () => {
+	it("renders nothing if identity not initialized", () => {
 		useIdentity.mockImplementation(() => ({
 			isInitialized: false,
 			Identity: {
-				isLoggedIn: jest.fn(async () => false),
-				getConfig: jest.fn(async () => ({})),
+				...IdentityDefaults,
 			},
 		}));
-		await render(<Login customFields={defaultCustomFields} />);
+		render(<Login customFields={defaultCustomFields} />);
 		expect(screen.queryAllByRole("button")).toEqual([]);
 	});
 
-	it("renders", async () => {
-		await render(<Login customFields={defaultCustomFields} />);
+	it("renders", () => {
+		render(<Login customFields={defaultCustomFields} />);
 		expect(screen.queryByRole("form")).not.toBeNull();
 	});
 
-	it("shows login form", async () => {
-		await render(<Login customFields={defaultCustomFields} />);
+	it("shows login form", () => {
+		render(<Login customFields={defaultCustomFields} />);
 		expect(screen.queryByRole("form")).not.toBeNull();
 		expect(screen.getByLabelText("identity-block.password")).not.toBeNull();
 		expect(screen.getByLabelText("identity-block.email")).not.toBeNull();
 	});
 
-	it("submits the login form", async () => {
-		await render(<Login customFields={defaultCustomFields} />);
+	it("submits the login form", () => {
+		render(<Login customFields={defaultCustomFields} />);
 
 		fireEvent.change(screen.getByLabelText("identity-block.email"), {
 			target: { value: "email@test.com" },
@@ -65,8 +68,28 @@ describe("Identity Login Feature", () => {
 		});
 		fireEvent.click(screen.getByRole("button"));
 
-		await loginMock;
-
 		expect(loginMock).toHaveBeenCalled();
+	});
+
+	it("rejects the login", async () => {
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			Identity: {
+				...IdentityDefaults,
+				login: loginMockFail,
+			},
+		}));
+
+		render(<Login customFields={defaultCustomFields} />);
+
+		fireEvent.change(screen.getByLabelText("identity-block.email"), {
+			target: { value: "email@test.com" },
+		});
+		fireEvent.change(screen.getByLabelText("identity-block.password"), {
+			target: { value: "thisNotIsMyPassword" },
+		});
+		await fireEvent.click(screen.getByRole("button"));
+		await expect(loginMockFail).toHaveBeenCalled();
+		expect(screen.getByText("identity-block.login-form-error")).not.toBeNull();
 	});
 });

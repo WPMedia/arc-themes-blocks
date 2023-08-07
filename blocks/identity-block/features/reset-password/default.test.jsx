@@ -1,6 +1,5 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
-
 import ResetPassword from "./default";
 import FormPasswordConfirm from "../../components/form-password-confirm";
 import useIdentity from "../../components/identity";
@@ -45,14 +44,14 @@ describe("Identity Password Reset Feature - unInitialized", () => {
 	});
 
 	it("renders nothing if identity not initialized", async () => {
-		await render(<ResetPassword customFields={{ successActionURL }} />);
+		render(<ResetPassword customFields={{ successActionURL }} />);
 		expect(screen.queryByRole("form")).toBeNull();
 	});
 });
 
 describe("Identity Password Reset Feature", () => {
 	const assignMock = jest.fn();
-	beforeAll(async () => {
+	beforeAll(() => {
 		useIdentity.mockImplementation(() => ({
 			isInitialized: true,
 			Identity,
@@ -71,22 +70,21 @@ describe("Identity Password Reset Feature", () => {
 	});
 
 	it("renders", async () => {
-		await render(<ResetPassword customFields={{ successActionURL }} />);
+		render(<ResetPassword customFields={{ successActionURL }} />);
 		expect(screen.getByRole("form")).not.toBeNull();
 	});
 
 	it("shows submit form", async () => {
-		await render(<ResetPassword customFields={{ successActionURL }} />);
+		render(<ResetPassword customFields={{ successActionURL }} />);
 		expect(screen.getByText("identity-block.reset-password-headline")).not.toBeNull();
 		expect(screen.getByText("identity-block.reset-password-instruction")).not.toBeNull();
 		expect(screen.getByText("identity-block.reset-password-submit")).not.toBeNull();
 	});
 
 	it("updates the page on submit and redirects the user to login when done", async () => {
-		await render(<ResetPassword customFields={{ successActionURL }} />);
+		render(<ResetPassword customFields={{ successActionURL }} />);
 		fireEvent.click(screen.getByRole("button"));
-		await resetPasswordMock;
-		expect(resetPasswordMock).toHaveBeenCalled();
+		await expect(resetPasswordMock).toHaveBeenCalled();
 		expect(screen.getByText("identity-block.reset-password-headline-submitted")).not.toBeNull();
 		expect(screen.getByText("identity-block.reset-password-instruction-submitted")).not.toBeNull();
 		expect(screen.getByText("identity-block.reset-password-submit-submitted")).not.toBeNull();
@@ -96,7 +94,7 @@ describe("Identity Password Reset Feature", () => {
 });
 
 describe("Identity Password Reset Feature - Failing reset request", () => {
-	beforeAll(async () => {
+	beforeAll(() => {
 		useIdentity.mockImplementation(() => ({
 			isInitialized: true,
 			Identity: {
@@ -111,10 +109,9 @@ describe("Identity Password Reset Feature - Failing reset request", () => {
 	});
 
 	it("updates the page on submit to failing state", async () => {
-		await render(<ResetPassword customFields={{ successActionURL }} />);
-		fireEvent.click(screen.getByRole("button"));
-		await resetPasswordMockFail;
-		expect(resetPasswordMockFail).toHaveBeenCalled();
+		render(<ResetPassword customFields={{ successActionURL }} />);
+		await fireEvent.click(screen.getByRole("button"));
+		await expect(resetPasswordMockFail).toHaveBeenCalled();
 		expect(screen.getByText("identity-block.reset-password-error")).not.toBeNull();
 	});
 });

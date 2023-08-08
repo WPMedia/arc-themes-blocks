@@ -132,6 +132,21 @@
 			}
 		}
 	},
+	"login-links": {
+		"styles": {
+			"default": {
+				"components": {
+					"link": {
+						"text-align": "center"
+					},
+					"link-hover": {
+						"color": "var(--text-color-subtle)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
 	"reset-password": {
 		"styles": {
 			"default": {

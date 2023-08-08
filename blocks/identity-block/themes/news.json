@@ -178,7 +178,7 @@
 					},
 					"paragraph": {
 						"font-family": "var(--font-family-primary)",
-						"margin-block-end": "var(--global-spacing-5)",
+						"margin-block-end": "var(--global-spacing-4)",
 						"text-align": "center"
 					}
 				}

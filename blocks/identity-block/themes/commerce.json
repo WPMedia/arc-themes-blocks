@@ -82,10 +82,7 @@
 	"login-form": {
 		"styles": {
 			"default": {
-				"inline-size": "calc(100% - var(--global-spacing-6))",
-				"margin": "auto",
 				"font-family": "var(--font-family-primary)",
-				"max-inline-size": "none",
 				"components": {
 					"button": {
 						"font-size": "var(--global-font-size-4)"
@@ -122,7 +119,6 @@
 				}
 			},
 			"desktop": {
-				"max-inline-size": "37rem",
 				"components": {
 					"heading": {
 						"font-size": "var(--global-font-size-12)",
@@ -182,7 +178,7 @@
 					},
 					"paragraph": {
 						"font-family": "var(--font-family-primary)",
-						"margin-block-end": "var(--global-spacing-5)",
+						"margin-block-end": "var(--global-spacing-4)",
 						"text-align": "center"
 					}
 				}
@@ -200,10 +196,7 @@
 	"sign-up": {
 		"styles": {
 			"default": {
-				"inline-size": "calc(100% - var(--global-spacing-6))",
-				"margin": "auto",
 				"font-family": "var(--font-family-primary)",
-				"max-inline-size": "none",
 				"components": {
 					"button": {
 						"font-size": "var(--global-font-size-4)"
@@ -240,7 +233,6 @@
 				}
 			},
 			"desktop": {
-				"max-inline-size": "37rem",
 				"components": {
 					"heading": {
 						"font-size": "var(--global-font-size-12)",

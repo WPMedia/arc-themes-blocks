@@ -1,4 +1,16 @@
 {
+	"single-column-regular-body": {
+		"styles": {
+			"default": {
+				"inline-size": "calc(100% - var(--global-spacing-6))",
+				"margin": "auto",
+				"max-inline-size": "none"
+			},
+			"desktop": {
+				"max-inline-size": "37rem"
+			}
+		}
+	},
 	"single-column-regular-main": {
 		"styles": {
 			"default": {
@@ -9,17 +21,11 @@
 						"line-height": "var(--heading-level-3-line-height)"
 					},
 					"stack": {
-						"gap": "var(--global-spacing-11)"
+						"gap": "var(--global-spacing-5)"
 					}
 				}
 			},
-			"desktop": {
-				"components": {
-					"stack": {
-						"gap": "var(--global-spacing-16)"
-					}
-				}
-			}
+			"desktop": {}
 		}
 	},
 	"single-column-regular-footer": {

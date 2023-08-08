@@ -254,7 +254,7 @@
 	},
 	"identity-block.login-links-forgot": {
 		"de": "Forgot Password?",
-		"en": "Forgot Password?",
+		"en": "Forgot your password?",
 		"es": "Forgot Password?",
 		"fr": "Forgot Password?",
 		"ja": "Forgot Password?",
@@ -265,7 +265,7 @@
 	},
 	"identity-block.login-links-login": {
 		"de": "Already have an account? Log in.",
-		"en": "Already have an account? Log in.",
+		"en": "Already have an account? Log in",
 		"es": "Already have an account? Log in.",
 		"fr": "Already have an account? Log in.",
 		"ja": "Already have an account? Log in.",
@@ -276,7 +276,7 @@
 	},
 	"identity-block.login-links-signup": {
 		"de": "Sign up for an account.",
-		"en": "Sign up for an account.",
+		"en": "Don't have an account? Sign up",
 		"es": "Sign up for an account.",
 		"fr": "Sign up for an account.",
 		"ja": "Sign up for an account.",

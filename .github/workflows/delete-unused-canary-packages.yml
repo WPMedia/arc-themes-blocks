@@ -84,7 +84,6 @@ jobs:
             subheadline-block
             tag-title-block
             text-output-block
-            textfile-block
             top-table-list-block
             triple-chain-block
             video-player-block

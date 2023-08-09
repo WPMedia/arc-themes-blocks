@@ -82,10 +82,7 @@
 	"login-form": {
 		"styles": {
 			"default": {
-				"inline-size": "calc(100% - var(--global-spacing-6))",
-				"margin": "auto",
 				"font-family": "var(--font-family-primary)",
-				"max-inline-size": "none",
 				"components": {
 					"button": {
 						"font-size": "var(--global-font-size-4)"
@@ -122,7 +119,6 @@
 				}
 			},
 			"desktop": {
-				"max-inline-size": "37rem",
 				"components": {
 					"heading": {
 						"font-size": "var(--global-font-size-12)",
@@ -132,13 +128,25 @@
 			}
 		}
 	},
+	"login-links": {
+		"styles": {
+			"default": {
+				"components": {
+					"link": {
+						"text-align": "center"
+					},
+					"link-hover": {
+						"color": "var(--text-color-subtle)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
 	"sign-up": {
 		"styles": {
 			"default": {
-				"inline-size": "calc(100% - var(--global-spacing-6))",
-				"margin": "auto",
 				"font-family": "var(--font-family-primary)",
-				"max-inline-size": "none",
 				"components": {
 					"button": {
 						"font-size": "var(--global-font-size-4)"
@@ -175,7 +183,6 @@
 				}
 			},
 			"desktop": {
-				"max-inline-size": "37rem",
 				"components": {
 					"heading": {
 						"font-size": "var(--global-font-size-12)",

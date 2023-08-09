@@ -60,7 +60,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 	};
 
 	// This is up here to prevent a lexical declaration in a case block (which throws an error). It goes with the "video" case
-	let aspectRatio = "16:9"; // Default to 16:9
+	let videoAspectRatio = "16:9"; // Default to 16:9
 
 	switch (type) {
 		case "text": {
@@ -235,8 +235,8 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 				const aspectWidth = width / divisor;
 				const aspectHeight = height / divisor;
 
-				// Assign the new value to aspectRatio
-				aspectRatio = `${aspectWidth}:${aspectHeight}`;
+				// Assign the new value to videoAspectRatio
+				videoAspectRatio = `${aspectWidth}:${aspectHeight}`;
 			}
 
 			return (
@@ -247,7 +247,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 					title={!hideVideoTitle ? item?.headlines?.basic : null}
 				>
 					<Video
-						aspectRatio={aspectRatio}
+						aspectRatio={videoAspectRatio}
 						className="video-container"
 						embedMarkup={item.embed_html}
 					/>

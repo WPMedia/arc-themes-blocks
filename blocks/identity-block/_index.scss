@@ -35,6 +35,11 @@
 	@include scss.block-properties("login-form");
 }
 
+.b-login-links {
+	@include scss.block-components("login-links");
+	@include scss.block-properties("login-links");
+}
+
 .b-sign-up {
 	&__tos-container {
 		a {

@@ -262,7 +262,6 @@ export const LeadArtPresentation = (props) => {
 									<Image
 										ansImage={galleryItem}
 										// 16:9 aspect ratio
-										width={800}
 										height={450}
 										responsiveImages={[800, 1600]}
 										alt={galleryItem.alt_text}

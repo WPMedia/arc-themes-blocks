@@ -1743,21 +1743,20 @@
 							width: var(--global-spacing-4),
 						),
 						image: (
-							width: 100%,
+							max-height: 100%,
+							object-fit: contain,
 						),
 					),
 				),
 				lead-art-carousel-image-wrapper: (
 					align-items: center,
+					aspect-ratio: calc(16 / 9),
+					background-color: var(--global-black),
 					display: flex,
 					justify-content: center,
-					max-height: 75vh,
-					background-color: var(--global-black),
+					max-height: unset,
+					overflow: auto,
 					components: (
-						image: (
-							width: auto,
-							max-height: 75vh,
-						),
 						button: (
 							position: fixed,
 							top: var(--global-spacing-6),
@@ -3023,6 +3022,7 @@
 					left: var(--global-spacing-4),
 				),
 				lead-art-carousel-image-wrapper: (
+					max-height: 75vh,
 					components: (
 						button-medium: (
 							left: var(--global-spacing-4),

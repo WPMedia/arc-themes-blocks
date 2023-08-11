@@ -18,6 +18,33 @@ jest.mock("fusion:properties", () =>
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(),
+	getAspectRatio: (width, height) => {
+		// This arrow function is equivalent to what is in @wpmedia/arc-themes-components/src/utils/get-aspect-ratio/utils.js
+		// Helper function to find GCD
+		const gcd = (valA, valB) => {
+			let a = Math.abs(valA);
+			let b = Math.abs(valB);
+			while (b) {
+				const temp = b;
+				b = a % b;
+				a = temp;
+			}
+
+			return a;
+		};
+
+		// Return undefined if height === 0, so there is no division by zero error
+		if (height === 0) {
+			return undefined;
+		}
+
+		// Calculate the aspect ratio
+		const divisor = gcd(width, height);
+		const aspectWidth = width / divisor;
+		const aspectHeight = height / divisor;
+
+		return `${aspectWidth}:${aspectHeight}`;
+	},
 	LazyLoad: ({ children }) => <>{children}</>,
 }));
 

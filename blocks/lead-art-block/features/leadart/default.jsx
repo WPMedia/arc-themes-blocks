@@ -9,6 +9,7 @@ import {
 	Carousel,
 	formatCredits,
 	formatPowaVideoEmbed,
+	getAspectRatio,
 	Icon,
 	Image,
 	MediaItem,
@@ -96,19 +97,6 @@ export const LeadArtPresentation = (props) => {
 				playthrough: customFields?.playthrough,
 			});
 
-			// Helper function to find the Greatest Common Denominator (GCD) of two numbers. This is used to calculate the aspect ratio
-			const gcd = (valA, valB) => {
-				let a = Math.abs(valA);
-				let b = Math.abs(valB);
-				while (b) {
-					const temp = b;
-					b = a % b;
-					a = temp;
-				}
-
-				return a;
-			};
-
 			let aspectRatio = "16:9"; // Default to 16:9
 
 			// Make sure that the content source exists and has an existing promo item
@@ -116,12 +104,9 @@ export const LeadArtPresentation = (props) => {
 				// Get the width and height of the promo item and calculate the aspect ratio
 				const width = leadArt?.promo_items.basic.width;
 				const height = leadArt?.promo_items.basic.height;
-				const divisor = gcd(width, height);
-				const aspectWidth = width / divisor;
-				const aspectHeight = height / divisor;
 
-				// Assign the calculated value to aspectRatio
-				aspectRatio = `${aspectWidth}:${aspectHeight}`;
+				// Assign the calculated value to aspectRatio if it is non-null, otherwise assign default 16:9
+				aspectRatio = getAspectRatio(width, height) || "16:9";
 			}
 
 			return (

@@ -7,6 +7,7 @@ import {
 	Conditional,
 	Divider,
 	formatCredits,
+	getAspectRatio,
 	Heading,
 	HeadingSection,
 	Icon,
@@ -45,19 +46,6 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		hideVideoCaption = false,
 		hideVideoCredits = false,
 	} = customFields;
-
-	// Helper function to find the Greatest Common Denominator (GCD) of two numbers. This is used to calculate the aspect ratio
-	const gcd = (valA, valB) => {
-		let a = Math.abs(valA);
-		let b = Math.abs(valB);
-		while (b) {
-			const temp = b;
-			b = a % b;
-			a = temp;
-		}
-
-		return a;
-	};
 
 	// This is up here to prevent a lexical declaration in a case block (which throws an error). It goes with the "video" case
 	let videoAspectRatio = "16:9"; // Default to 16:9
@@ -231,12 +219,9 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 				// Get the width and height of the promo item and calculate the aspect ratio
 				const width = item?.promo_items.basic.width;
 				const height = item?.promo_items.basic.height;
-				const divisor = gcd(width, height);
-				const aspectWidth = width / divisor;
-				const aspectHeight = height / divisor;
 
-				// Assign the new value to videoAspectRatio
-				videoAspectRatio = `${aspectWidth}:${aspectHeight}`;
+				// Assign the calculated value to aspectRatio if it is non-null, otherwise assign default 16:9
+				videoAspectRatio = getAspectRatio(width, height) || "16:9";
 			}
 
 			return (

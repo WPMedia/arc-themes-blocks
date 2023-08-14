@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import ForgotPassword from "./default";
 import useIdentity from "../../components/identity";
 
-jest.mock("../../components/Identity");
+jest.mock("../../components/identity");
 
 const resetMock = jest.fn(() => Promise.resolve());
 const resetFailMock = jest.fn(() => Promise.reject());

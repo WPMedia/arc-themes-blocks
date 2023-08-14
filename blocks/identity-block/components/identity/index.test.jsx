@@ -37,6 +37,7 @@ describe("Identity useIdentity Hook", () => {
 			expect(Identity).toBe(IdentityObject);
 			return <div />;
 		};
+
 		render(<Test />);
 		expect(IdentityObject.options).toHaveBeenLastCalledWith({
 			apiOrigin: "http://origin/",

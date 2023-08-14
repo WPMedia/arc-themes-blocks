@@ -319,8 +319,11 @@
 				),
 				carousel-actions: (
 					display: none,
-					padding-left: var(--global-spacing-4),
-					padding-right: var(--global-spacing-4),
+					padding-left: var(--global-spacing-5),
+					padding-right: var(--global-spacing-5),
+				),
+				carousel-additional-controls: (
+					display: flex,
 				),
 				carousel-button: (
 					align-items: center,
@@ -335,38 +338,43 @@
 					padding: 0 var(--global-spacing-2),
 					width: auto,
 				),
+				carousel-button-enter-full-screen: (
+					padding-left: 0,
+				),
 				carousel-button-full-screen: (
 					color: var(--global-white),
 				),
 				carousel-button-full-screen-hover: (
 					color: var(--global-neutral-3),
 				),
-				carousel-button-previous: (
-					color: var(--global-white),
-				),
 				carousel-button-next: (
 					color: var(--global-white),
 				),
-				carousel-track: (
-					gap: initial,
-					max-width: initial,
-					width: 100%,
+				carousel-button-previous: (
+					color: var(--global-white),
 				),
 				carousel-controls: (
 					display: flex,
 					padding: 0 0 var(--global-spacing-2) 0,
 				),
-				carousel-additional-controls: (
-					display: flex,
-				),
 				carousel-fullscreen: (
 					color: var(--global-white),
-					padding: var(--global-spacing-5),
+				),
+				carousel-fullscreen-controls: (
+					padding-top: var(--global-spacing-5),
+					padding-right: var(--global-spacing-5),
+					padding-bottom: 0,
+					padding-left: var(--global-spacing-5),
 				),
 				carousel-icon: (
 					fill: currentColor,
 					height: var(--global-spacing-4),
 					width: var(--global-spacing-4),
+				),
+				carousel-track: (
+					gap: initial,
+					max-width: initial,
+					width: 100%,
 				),
 				date: (
 					font-size: var(--body-font-size-small),
@@ -572,6 +580,13 @@
 							display: block,
 							overflow: initial,
 						),
+						media-item-fig-caption: (
+							background-color: var(--global-white),
+							line-height: var(--body-line-height-5),
+						),
+						icon: (
+							fill: currentColor,
+						),
 					),
 				),
 				article-body-blockquote: (
@@ -622,22 +637,10 @@
 					height: auto,
 					width: 100%,
 				),
-				article-body-full-screen-icon: (
-					fill: var(--text-color),
-					height: var(--global-spacing-4),
-					width: var(--global-spacing-4),
-				),
-				article-body-gallery: (
+				article-body-gallery-fullscreen: (
 					components: (
-						media-item: (
-							background-color: var(--global-neutral-9),
-							gap: 0,
-							justify-content: center,
-							width: 100%,
-						),
 						media-item-fig-caption: (
-							background-color: var(--global-white),
-							padding-top: var(--global-spacing-2),
+							padding: 0 var(--global-spacing-5),
 						),
 					),
 				),
@@ -684,13 +687,6 @@
 					font-family: var(--font-family-primary),
 					font-weight: bold,
 				),
-				article-body-image: (
-					components: (
-						image: (
-							max-width: 100%,
-						),
-					),
-				),
 				article-body-image-float-left: (
 					width: 50%,
 					float: left,
@@ -703,6 +699,7 @@
 				),
 				article-body-image-wrapper: (
 					align-items: center,
+					background-color: var(--global-black),
 					display: flex,
 					justify-content: center,
 					max-height: 75vh,
@@ -1109,35 +1106,9 @@
 				),
 				gallery: (
 					components: (
-						image: (
-							max-height: 100%,
-							object-fit: contain,
-						),
 						media-item-fig-caption: (
-							color: var(--global-white),
-							margin: var(--global-spacing-2) var(--global-spacing-4),
-						),
-					),
-				),
-				gallery-image-wrapper: (
-					align-items: center,
-					aspect-ratio: calc(16 / 9),
-					background-color: var(--global-black),
-					display: flex,
-					justify-content: center,
-					max-height: unset,
-					overflow: auto,
-				),
-				gallery-track-button: (
-					color: var(--global-white),
-					components: (
-						button-hover: (
-							color: var(--global-neutral-3),
-						),
-						icon: (
-							fill: currentColor,
-							height: var(--global-spacing-8),
-							width: var(--global-spacing-8),
+							background-color: var(--global-white),
+							line-height: var(--body-line-height-5),
 						),
 					),
 				),
@@ -1151,6 +1122,40 @@
 							fill: currentColor,
 							height: var(--global-spacing-6),
 							width: var(--global-spacing-6),
+						),
+					),
+				),
+				gallery-fullscreen: (
+					components: (
+						media-item-fig-caption: (
+							padding: 0 var(--global-spacing-5),
+						),
+					),
+				),
+				gallery-image-wrapper: (
+					align-items: center,
+					background-color: var(--global-black),
+					display: flex,
+					justify-content: center,
+					max-height: 75vh,
+					components: (
+						image: (
+							height: auto,
+							max-height: 75vh,
+							max-width: 100%,
+						),
+					),
+				),
+				gallery-track-button: (
+					color: var(--global-white),
+					components: (
+						button-hover: (
+							color: var(--global-neutral-3),
+						),
+						icon: (
+							fill: currentColor,
+							height: var(--global-spacing-8),
+							width: var(--global-spacing-8),
 						),
 					),
 				),
@@ -1621,11 +1626,31 @@
 					),
 				),
 				lead-art: (
-					margin-bottom: var(--global-spacing-5),
 					components: (
-						image: (
-							max-height: 100%,
-							object-fit: contain,
+						media-item-fig-caption: (
+							background-color: var(--global-white),
+							line-height: var(--body-line-height-5),
+							margin: var(--global-spacing-2) 0,
+						),
+					),
+				),
+				lead-art-carousel-close-button: (
+					color: var(--global-white),
+					components: (
+						button-hover: (
+							color: var(--global-neutral-3),
+						),
+						icon: (
+							fill: currentColor,
+							height: var(--global-spacing-6),
+							width: var(--global-spacing-6),
+						),
+					),
+				),
+				lead-art-carousel-fullscreen: (
+					components: (
+						media-item-fig-caption: (
+							padding: 0 var(--global-spacing-5),
 						),
 					),
 				),
@@ -1635,27 +1660,18 @@
 					background-color: var(--global-black),
 					display: flex,
 					justify-content: center,
-					max-height: unset,
+					max-height: 75vh,
 					overflow: auto,
 					components: (
-						button: (
-							position: fixed,
-							top: var(--global-spacing-6),
-							right: 0,
-						),
-						button-medium: (
-							padding: var(--global-spacing-4) 0 var(--global-spacing-4) 0,
-							top: var(--global-spacing-4),
-							right: var(--global-spacing-4),
-						),
-						icon: (
-							fill: var(--global-white),
-							height: var(--global-spacing-6),
-							width: var(--global-spacing-6),
+						image: (
+							height: auto,
+							max-height: 100%,
+							max-width: 100%,
+							object-fit: contain,
 						),
 					),
 				),
-				lead-art-track-button: (
+				lead-art-carousel-track-button: (
 					color: var(--global-white),
 					components: (
 						button-hover: (
@@ -1665,19 +1681,6 @@
 							fill: currentColor,
 							height: var(--global-spacing-8),
 							width: var(--global-spacing-8),
-						),
-					),
-				),
-				lead-art-close-button: (
-					color: var(--global-white),
-					components: (
-						button-hover: (
-							color: var(--global-neutral-3),
-						),
-						icon: (
-							fill: currentColor,
-							height: var(--global-spacing-6),
-							width: var(--global-spacing-6),
 						),
 					),
 				),

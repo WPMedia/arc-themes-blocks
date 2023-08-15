@@ -5,6 +5,7 @@
 		@include scss.block-properties("xl-promo-img");
 		@include scss.block-components("xl-promo-img");
 	}
+
 	&__icon_label {
 		@include scss.block-components("xl-promo-icon-label");
 		@include scss.block-properties("xl-promo-icon-label");

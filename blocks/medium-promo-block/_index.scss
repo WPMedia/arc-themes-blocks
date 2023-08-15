@@ -5,6 +5,7 @@
 		@include scss.block-properties("medium-promo-img");
 		@include scss.block-components("medium-promo-img");
 	}
+
 	&--show-image {
 		@include scss.block-properties("medium-promo-show-image");
 		@include scss.block-components("medium-promo-show-image");

@@ -1,5 +1,10 @@
 @use "@wpmedia/arc-themes-components/scss";
 
+.b-forgot-password {
+	@include scss.block-components("forgot-password");
+	@include scss.block-properties("forgot-password");
+}
+
 .b-header-account-action {
 	&__desktop {
 		@include scss.block-components("header-account-action-desktop");
@@ -17,13 +22,12 @@
 	}
 
 	&__dropdown-list-item {
-		@include scss.block-components("header-account-action-dropdown-list-item");
-		@include scss.block-properties("header-account-action-dropdown-list-item");
-
 		&:last-of-type {
 			@include scss.block-components("header-account-action-dropdown-list-item-last");
 			@include scss.block-properties("header-account-action-dropdown-list-item-last");
 		}
+		@include scss.block-components("header-account-action-dropdown-list-item");
+		@include scss.block-properties("header-account-action-dropdown-list-item");
 	}
 
 	@include scss.block-components("header-account-action");
@@ -40,16 +44,20 @@
 	@include scss.block-properties("login-links");
 }
 
+.b-reset-password {
+	@include scss.block-components("reset-password");
+	@include scss.block-properties("reset-password");
+}
+
 .b-sign-up {
 	&__tos-container {
 		a {
-			@include scss.block-components("sign-up-tos-link");
-			@include scss.block-properties("sign-up-tos-link");
-
 			&:hover {
 				@include scss.block-components("sign-up-tos-link-hover");
 				@include scss.block-properties("sign-up-tos-link-hover");
 			}
+			@include scss.block-components("sign-up-tos-link");
+			@include scss.block-properties("sign-up-tos-link");
 		}
 	}
 

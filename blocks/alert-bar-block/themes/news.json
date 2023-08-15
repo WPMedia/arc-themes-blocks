@@ -21,37 +21,33 @@
 						"margin-top": "var(--global-spacing-1)",
 						"filter": "drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0))"
 					},
+					"link": {
+						"color": "var(--global-white)",
+						"filter": "drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0))",
+						"font-family": "var(--font-family-primary)",
+						"font-size": "var(--body-font-size-small)",
+						"font-weight": "var(--global-font-weight-7)",
+						"padding-bottom": "var(--global-spacing-5)",
+						"padding-left": "var(--global-spacing-4)",
+						"padding-right": "var(--global-spacing-5)",
+						"padding-top": "var(--global-spacing-5)",
+						"text-decoration": "none"
+					},
+					"link-hover": {
+						"color": "var(--text-color)"
+					},
 					"icon": {
 						"fill": "var(--global-white)",
 						"filter": "drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0))"
 					}
 				}
-			}
-		}
-	},
-	"alert-bar-link": {
-		"styles": {
-			"default": {
-				"color": "var(--global-white)",
-				"filter": "drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0))",
-				"font-family": "var(--font-family-primary)",
-				"font-size": "var(--body-font-size-small)",
-				"font-weight": "var(--global-font-weight-7)",
-				"padding-bottom": "var(--global-spacing-5)",
-				"padding-left": "var(--global-spacing-4)",
-				"padding-right": "var(--global-spacing-5)",
-				"padding-top": "var(--global-spacing-5)",
-				"text-decoration": "none"
 			},
 			"desktop": {
-				"font-size": "var(--body-font-size)"
-			}
-		}
-	},
-	"alert-bar-link-hover": {
-		"styles": {
-			"default": {
-				"color": "var(--text-color)"
+				"components": {
+					"link": {
+						"font-size": "var(--body-font-size)"
+					}
+				}
 			}
 		}
 	}

@@ -3,12 +3,4 @@
 .b-alert-bar {
 	@include scss.block-components("alert-bar");
 	@include scss.block-properties("alert-bar");
-
-	&__link {
-		@include scss.block-properties("alert-bar-link");
-
-		&:hover {
-			@include scss.block-properties("alert-bar-link-hover");
-		}
-	}
 }

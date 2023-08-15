@@ -36,6 +36,16 @@
 			"desktop": {}
 		}
 	},
+	"byline-container": {
+		"styles": {
+			"default": {
+				"display": "flex",
+				"flex-direction": "row",
+				"flex-wrap": "wrap",
+				"justify-content": "flex-start"
+			}
+		}
+	},
 	"card-list-list": {
 		"styles": {
 			"default": {

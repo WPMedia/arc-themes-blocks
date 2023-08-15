@@ -104,6 +104,7 @@ describe("Gallery feature parent block", () => {
 				}}
 			/>
 		);
+
 		expect(wrapper.find(Carousel)).toHaveLength(1);
 		expect(wrapper.find(CarouselItem)).toHaveLength(1);
 	});

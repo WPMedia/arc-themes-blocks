@@ -196,7 +196,9 @@ describe("LeadArt", () => {
 			},
 		};
 		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
-		const { queryByRole, queryByText } = render(<LeadArt customFields={{}} />);
+		const testRender = render(<LeadArt customFields={{}} />);
+		const { queryByRole, queryByText } = testRender;
+
 		expect(queryByRole("region", { name: "test headline" })).not.toBeNull();
 		expect(queryByText("Caption")).not.toBeNull();
 		expect(queryByText("Subtitle")).not.toBeNull();

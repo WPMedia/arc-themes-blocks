@@ -3,94 +3,80 @@
 		"styles": {
 			"default": {
 				"components": {
-					"icon": {
-						"fill": "var(--text-color)",
-						"height": "var(--global-spacing-4)",
-						"width": "var(--global-spacing-4)"
-					},
-					"image": {
-						"max-height": "100%",
-						"object-fit": "contain"
-					},
-					"carousel-controls": {
-						"padding": "0 0 var(--global-spacing-2) 0"
-					},
-					"carousel-actions": {
-						"display": "flex"
-					},
-					"carousel-track": {
-						"gap": "initial",
-						"max-width": "initial"
-					},
-					"carousel-button": {
-						"border": "none",
-						"box-shadow": "none",
-						"height": "var(--global-spacing-4)"
-					},
-					"carousel-button-enter-full-screen": {
-						"padding": 0,
-						"font-size": "var(--body-font-size-tiny)",
-						"line-height": "var(--body-line-height-tiny)"
-					},
-					"carousel-additional-controls": {
-						"display": "none"
-					},
-					"carousel-button-toggle-auto-play": {
-						"padding": "0 var(--global-spacing-4)",
-						"font-size": "var(--body-font-size-tiny)",
-						"line-height": "var(--body-line-height-tiny)"
-					},
-					"carousel-image-counter": {
-						"font-size": "var(--body-font-size-tiny)",
-						"line-height": "var(--body-line-height-tiny)"
-					},
-					"carousel-button-next": {
-						"background-color": "transparent"
-					},
-					"carousel-button-previous": {
-						"background-color": "transparent"
-					},
-					"carousel-button-additional-previous": {
-						"padding": 0
-					},
-					"carousel-button-additional-next": {
-						"padding": 0
+					"media-item-fig-caption": {
+						"background-color": "var(--global-white)",
+						"line-height": "var(--body-line-height-5)"
 					}
 				}
 			},
-			"desktop": {
+			"desktop": {}
+		}
+	},
+	"gallery-fullscreen": {
+		"styles": {
+			"default": {
 				"components": {
-					"carousel-additional-controls": {
-						"display": "flex",
-						"gap": "var(--global-spacing-2)",
-						"padding": "0 0 0 var(--global-spacing-2)"
+					"media-item-fig-caption": {
+						"padding": "0 var(--global-spacing-5)"
 					}
 				}
-			}
+			},
+			"desktop": {}
 		}
 	},
 	"gallery-image-wrapper": {
 		"styles": {
 			"default": {
 				"align-items": "center",
-				"aspect-ratio": "calc(16/9)",
 				"background-color": "var(--global-black)",
 				"display": "flex",
 				"justify-content": "center",
-				"max-height": "unset",
-				"overflow": "auto"
+				"max-height": "75vh",
+				"components": {
+					"image": {
+						"height": "auto",
+						"max-height": "75vh",
+						"max-width": "100%"
+					}
+				}
 			},
 			"desktop": {
 				"max-height": "75vh"
 			}
 		}
 	},
-	"gallery-track-icon": {
+	"gallery-track-button": {
 		"styles": {
 			"default": {
-				"fill": "var(--global-white)",
-				"height": "var(--global-spacing-8)",
-				"width": "var(--global-spacing-8)"
+				"color": "var(--global-white)",
+				"components": {
+					"button-hover": {
+						"color": "var(--global-neutral-3)"
+					},
+					"icon": {
+						"fill": "currentColor",
+						"height": "var(--global-spacing-8)",
+						"width": "var(--global-spacing-8)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"gallery-close-button": {
+		"styles": {
+			"default": {
+				"color": "var(--global-white)",
+				"components": {
+					"button-hover": {
+						"color": "var(--global-neutral-3)"
+					},
+					"icon": {
+						"fill": "currentColor",
+						"height": "var(--global-spacing-6)",
+						"width": "var(--global-spacing-6)"
+					}
+				}
 			},
 			"desktop": {}
 		}

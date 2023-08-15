@@ -36,7 +36,7 @@
 			"desktop": {}
 		}
 	},
-	"byline-container": {
+	"card-list-byline-container": {
 		"styles": {
 			"default": {
 				"display": "flex",

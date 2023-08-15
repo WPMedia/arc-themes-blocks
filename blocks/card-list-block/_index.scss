@@ -2,8 +2,8 @@
 
 .b-card-list {
 	&__byline-container {
-		@include scss.block-components("byline-container");
-		@include scss.block-properties("byline-container");
+		@include scss.block-components("card-list-byline-container");
+		@include scss.block-properties("card-list-byline-container");
 	}
 
 	&__title {

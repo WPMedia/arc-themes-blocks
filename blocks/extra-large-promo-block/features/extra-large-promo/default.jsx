@@ -94,6 +94,7 @@ export const ExtraLargePromoPresentation = ({
 								) : (
 									<>
 										<Conditional
+											className={`${BLOCK_CLASS_NAME}__img`}
 											component={Link}
 											condition={contentUrl}
 											href={contentUrl}
@@ -289,7 +290,6 @@ const ExtraLargePromo = ({ customFields }) => {
 	}
 
 	const hasOverline = showOverline && overlineText;
-
 	const contentDescription = showDescription ? content?.description?.basic : null;
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;

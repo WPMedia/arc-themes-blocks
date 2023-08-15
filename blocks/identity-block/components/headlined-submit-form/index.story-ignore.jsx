@@ -2,7 +2,7 @@ import React from "react";
 
 import { FormInputField, FIELD_TYPES } from "@wpmedia/shared-styles";
 import HeadlinedSubmitForm from ".";
-import FormPasswordConfirm from "../FormPasswordConfirm";
+import FormPasswordConfirm from "../form-password-confirm";
 
 export default {
 	title: "Blocks/Identity/Components/HeadlinedSubmitForm",

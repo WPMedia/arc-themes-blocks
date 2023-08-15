@@ -75,6 +75,7 @@ export const LargePromoPresentation = ({
 						suppressContentEditableWarning
 					>
 						<Conditional
+							className={`${BLOCK_CLASS_NAME}__img`}
 							component={Link}
 							condition={contentUrl}
 							href={formatURL(contentUrl)}

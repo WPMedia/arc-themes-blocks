@@ -1,6 +1,11 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-small-promo {
+	&__img {
+		@include scss.block-properties("small-promo-img");
+		@include scss.block-components("small-promo-img");
+	}
+
 	&--above {
 		@include scss.block-properties("small-promo-above");
 		@include scss.block-components("small-promo-above");

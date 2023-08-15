@@ -56,5 +56,12 @@ export const extraLargePromo = {
 			},
 			website_url: "/test/promo-image-variations/2021/04/23/basic-promo-image/",
 		},
+		"story-book": {
+			website_section: {
+				_id: "/test/promo-image-variations",
+				name: "Promo image variations",
+			},
+			website_url: "/test/promo-image-variations/2021/04/23/basic-promo-image/",
+		},
 	},
 };

@@ -35,7 +35,7 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 					<Stack
 						className={BLOCK_CLASS_NAME}
 						justification="center"
-						direction="row"
+						direction="horizontal"
 						as="nav"
 						key={id}
 						aria-label={ariaLabel || phrases.t("links-bar-block.element-aria-label")}

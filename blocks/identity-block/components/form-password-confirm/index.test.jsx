@@ -5,7 +5,6 @@ import FormPasswordConfirm from ".";
 describe("Form Password Confirm", () => {
 	it("renders with required items", () => {
 		render(<FormPasswordConfirm confirmLabel="Confirm" label="Password" name="field1" />);
-
 		expect(screen.getByLabelText("Password")).not.toBeNull();
 		expect(screen.getByLabelText("Confirm")).not.toBeNull();
 	});

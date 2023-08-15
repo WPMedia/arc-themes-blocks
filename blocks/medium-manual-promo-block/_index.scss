@@ -1,6 +1,11 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-medium-manual-promo {
+	&__img {
+		@include scss.block-properties("medium-manual-promo-img");
+		@include scss.block-components("medium-manual-promo-img");
+	}
+
 	&--show-image {
 		@include scss.block-properties("medium-manual-promo-show-image");
 		@include scss.block-components("medium-manual-promo-show-image");

@@ -272,7 +272,12 @@
 		"styles": {
 			"default": {
 				"display": "flex",
-				"gap": "var(--global-spacing-2)"
+				"gap": "var(--global-spacing-2)",
+				"components": {
+					"link-hover": {
+						"color": "var(--global-neutral-3)"
+					}
+				}
 			},
 			"desktop": {}
 		}

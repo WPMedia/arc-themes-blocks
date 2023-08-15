@@ -4,9 +4,9 @@ import "@testing-library/jest-dom/extend-expect";
 import { useFusionContext } from "fusion:context";
 
 import HeaderAccountAction from "./default";
-import useIdentity from "../../components/Identity";
+import useIdentity from "../../components/identity";
 
-jest.mock("../../components/Identity", () => ({
+jest.mock("../../components/identity", () => ({
 	__esModule: true,
 	default: jest.fn(() => ({
 		Identity: {

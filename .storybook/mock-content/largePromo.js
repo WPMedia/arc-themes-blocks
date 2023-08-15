@@ -76,5 +76,12 @@ export const largePromoMock = {
 			},
 			website_url: "/2019/12/02/baby-panda-born-at-the-zoo/",
 		},
+		"story-book": {
+			website_section: {
+				_id: "/health",
+				name: "Health",
+			},
+			website_url: "/2019/12/02/baby-panda-born-at-the-zoo/",
+		},
 	},
 };

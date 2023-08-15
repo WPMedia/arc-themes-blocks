@@ -1,6 +1,11 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-large-manual-promo {
+	&__img {
+		@include scss.block-properties("large-manual-promo-img");
+		@include scss.block-components("large-manual-promo-img");
+	}
+
 	&__text {
 		@include scss.block-components("large-manual-promo-text");
 		@include scss.block-properties("large-manual-promo-text");

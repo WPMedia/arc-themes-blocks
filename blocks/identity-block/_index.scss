@@ -1,5 +1,10 @@
 @use "@wpmedia/arc-themes-components/scss";
 
+.b-forgot-password {
+	@include scss.block-components("forgot-password");
+	@include scss.block-properties("forgot-password");
+}
+
 .b-header-account-action {
 	&__desktop {
 		@include scss.block-components("header-account-action-desktop");
@@ -37,6 +42,11 @@
 .b-login-links {
 	@include scss.block-components("login-links");
 	@include scss.block-properties("login-links");
+}
+
+.b-reset-password {
+	@include scss.block-components("reset-password");
+	@include scss.block-properties("reset-password");
 }
 
 .b-sign-up {

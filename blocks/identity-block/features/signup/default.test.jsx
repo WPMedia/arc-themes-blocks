@@ -60,4 +60,39 @@ describe("With initialized identity", () => {
 			}
 		);
 	});
+
+	it("rejects the form", async () => {
+		const signUpMock = jest.fn(() => Promise.reject());
+		useIdentity.mockImplementation(
+			jest.fn(() => ({
+				Identity: {
+					getConfig: jest.fn(() => Promise.resolve()),
+					signUp: signUpMock,
+				},
+				isInitialized: true,
+			}))
+		);
+		render(<Signup customFields={{ redirectURL: "/sign-up", redirectToPreviousPage: true }} />);
+
+		fireEvent.change(screen.getByLabelText("identity-block.email"), {
+			target: { value: "email-already-exists@test.com" },
+		});
+		fireEvent.change(screen.getByLabelText("identity-block.password"), {
+			target: { value: "thisIsMyPassword" },
+		});
+		fireEvent.change(screen.getByLabelText("identity-block.confirm-password"), {
+			target: { value: "thisIsMyPassword" },
+		});
+		await fireEvent.click(screen.getByRole("button"));
+		await expect(signUpMock).toHaveBeenCalledWith(
+			{
+				userName: "email-already-exists@test.com",
+				credentials: "thisIsMyPassword",
+			},
+			{
+				email: "email-already-exists@test.com",
+			}
+		);
+		expect(screen.getByText("identity-block.sign-up-form-error")).not.toBeNull();
+	});
 });

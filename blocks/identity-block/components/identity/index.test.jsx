@@ -37,6 +37,7 @@ describe("Identity useIdentity Hook", () => {
 			expect(Identity).toBe(IdentityObject);
 			return <div />;
 		};
+
 		render(<Test />);
 		expect(IdentityObject.options).toHaveBeenLastCalledWith({
 			apiOrigin: "http://origin/",
@@ -57,6 +58,7 @@ describe("Identity useIdentity Hook", () => {
 		expect(testInitialization).toHaveBeenCalledWith(false);
 		expect(testInitialization).toHaveBeenLastCalledWith(true);
 	});
+
 	it("The getSignedInIdentity utility function returns the current signed in identity", () => {
 		const testUser = {
 			identities: [
@@ -84,5 +86,34 @@ describe("Identity useIdentity Hook", () => {
 		};
 		render(<Test />);
 		expect(screen.getByText("Google")).toBeInTheDocument();
+	});
+
+	it("The getSignedInIdentity utility function returns the current signed in identity when timestamps are not in order", () => {
+		const testUser = {
+			identities: [
+				{
+					userName: "93284374387433",
+					passwordReset: false,
+					type: "Facebook",
+					lastLoginDate: 1639164736000,
+					locked: false,
+				},
+				{
+					userName: "106487204473538668210",
+					passwordReset: false,
+					type: "Google",
+					lastLoginDate: 1639164734000,
+					locked: false,
+				},
+			],
+		};
+
+		const Test = () => {
+			const { getSignedInIdentity } = useIdentity();
+			const getCurrent = getSignedInIdentity(testUser);
+			return <div>{getCurrent.type}</div>;
+		};
+		render(<Test />);
+		expect(screen.getByText("Facebook")).toBeInTheDocument();
 	});
 });

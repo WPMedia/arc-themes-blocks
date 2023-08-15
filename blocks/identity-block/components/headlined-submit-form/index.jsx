@@ -11,7 +11,6 @@ const HeadlinedSubmitForm = ({
 	onSubmit = () => {},
 }) => {
 	const formRef = useRef();
-
 	const handleSubmit = (event) => {
 		event.preventDefault();
 

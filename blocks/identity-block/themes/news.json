@@ -1,4 +1,54 @@
 {
+	"forgot-password": {
+		"styles": {
+			"default": {
+				"font-family": "var(--font-family-primary)",
+				"components": {
+					"button": {
+						"font-size": "var(--global-font-size-4)"
+					},
+					"heading": {
+						"border-block-end-color": "var(--border-color)",
+						"border-block-end-style": "var(--global-border-style-1)",
+						"border-block-end-width": "var(--global-border-width-1)",
+						"font-size": "var(--global-font-size-9)",
+						"margin-block-end": "var(--global-spacing-4)",
+						"margin-bottom": "var(--global-spacing-4)",
+						"padding-block-end": "var(--global-spacing-2)",
+						"text-align": "center"
+					},
+					"input": {
+						"margin-block-end": "var(--global-spacing-5)"
+					},
+					"input-error-tip": {
+						"color": "var(--status-color-danger)"
+					},
+					"input-input": {
+						"inline-size": "100%",
+						"width": "100%",
+						"padding-block-end": "var(--global-spacing-2)",
+						"padding-block-start": "var(--global-spacing-2)",
+						"padding-inline-end": "var(--global-spacing-2)",
+						"padding-inline-start": "var(--global-spacing-2)",
+						"padding-left": "var(--global-spacing-2)"
+					},
+					"paragraph": {
+						"font-family": "var(--font-family-primary)",
+						"margin-block-end": "var(--global-spacing-4)",
+						"text-align": "center"
+					}
+				}
+			},
+			"desktop": {
+				"components": {
+					"heading": {
+						"font-size": "var(--global-font-size-12)",
+						"padding-block-end": "var(--global-spacing-4)"
+					}
+				}
+			}
+		}
+	},
 	"header-account-action": {
 		"styles": {
 			"default": {

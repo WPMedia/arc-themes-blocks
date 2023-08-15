@@ -45,6 +45,11 @@
 	@include scss.block-properties("login-links");
 }
 
+.b-reset-password {
+	@include scss.block-components("reset-password");
+	@include scss.block-properties("reset-password");
+}
+
 .b-sign-up {
 	&__tos-container {
 		a {

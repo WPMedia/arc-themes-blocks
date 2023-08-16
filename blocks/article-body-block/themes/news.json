@@ -12,18 +12,12 @@
 						"display": "block",
 						"overflow": "initial"
 					},
-					"carousel-actions": {
-						"display": "flex"
+					"media-item-fig-caption": {
+						"background-color": "var(--global-white)",
+						"line-height": "var(--body-line-height-5)"
 					},
-					"carousel-track": {
-						"gap": "initial",
-						"max-width": "initial"
-					},
-					"carousel-button-next": {
-						"background-color": "transparent"
-					},
-					"carousel-button-previous": {
-						"background-color": "transparent"
+					"icon": {
+						"fill": "currentColor"
 					}
 				}
 			},
@@ -115,105 +109,34 @@
 			"desktop": {}
 		}
 	},
-	"article-body-full-screen-icon": {
+	"article-body-gallery-fullscreen": {
 		"styles": {
 			"default": {
-				"fill": "var(--text-color)",
-				"height": "var(--global-spacing-4)",
-				"width": "var(--global-spacing-4)"
+				"components": {
+					"media-item-fig-caption": {
+						"padding": "0 var(--global-spacing-5)"
+					}
+				}
 			},
 			"desktop": {}
 		}
 	},
-	"article-body-gallery": {
+	"article-body-gallery-track-button": {
 		"styles": {
 			"default": {
+				"color": "var(--global-white)",
 				"components": {
+					"button-hover": {
+						"color": "var(--global-neutral-3)"
+					},
 					"icon": {
-						"fill": "var(--global-white)",
+						"fill": "currentColor",
 						"height": "var(--global-spacing-8)",
 						"width": "var(--global-spacing-8)"
-					},
-					"carousel-button": {
-						"background-color": "transparent",
-						"box-shadow": "none"
-					},
-					"carousel-expand-autoplay-container": {
-						"gap": "var(--global-spacing-4)"
-					},
-					"carousel-button-enter-full-screen": {
-						"background-color": "transparent",
-						"border": "none",
-						"box-shadow": "none",
-						"color": "var(--text-color)",
-						"font-size": "var(--body-font-size-small)",
-						"height": "auto",
-						"width": "auto"
-					},
-					"carousel-button-toggle-auto-play": {
-						"background-color": "transparent",
-						"box-shadow": "none",
-						"color": "var(--text-color)",
-						"font-size": "var(--body-font-size-small)",
-						"height": "auto",
-						"width": "auto"
-					},
-					"carousel-image-counter": {
-						"font-size": "var(--body-font-size-small)"
-					},
-					"media-item": {
-						"background-color": "var(--global-neutral-9)",
-						"gap": 0,
-						"justify-content": "center",
-						"width": "100%"
-					},
-					"media-item-fig-caption": {
-						"background-color": "var(--global-white)",
-						"padding-top": "var(--global-spacing-2)"
 					}
 				}
 			},
 			"desktop": {}
-		}
-	},
-	"article-body-gallery-additional-next": {
-		"styles": {
-			"default": {
-				"border": "none",
-				"display": "none",
-				"height": "var(--global-spacing-6)",
-				"width": "var(--global-spacing-6)",
-				"components": {
-					"icon": {
-						"fill": "var(--text-color)",
-						"height": "var(--global-spacing-4)",
-						"width": "var(--global-spacing-4)"
-					}
-				}
-			},
-			"desktop": {
-				"display": "block"
-			}
-		}
-	},
-	"article-body-gallery-additional-previous": {
-		"styles": {
-			"default": {
-				"border": "none",
-				"display": "none",
-				"height": "var(--global-spacing-6)",
-				"width": "var(--global-spacing-6)",
-				"components": {
-					"icon": {
-						"fill": "var(--text-color)",
-						"height": "var(--global-spacing-4)",
-						"width": "var(--global-spacing-4)"
-					}
-				}
-			},
-			"desktop": {
-				"display": "block"
-			}
 		}
 	},
 	"article-body-h2": {
@@ -271,18 +194,6 @@
 			"desktop": {}
 		}
 	},
-	"article-body-image": {
-		"styles": {
-			"default": {
-				"components": {
-					"image": {
-						"max-width": "100%"
-					}
-				}
-			},
-			"desktop": {}
-		}
-	},
 	"article-body-image-float-left": {
 		"styles": {
 			"default": {
@@ -307,6 +218,7 @@
 		"styles": {
 			"default": {
 				"align-items": "center",
+				"background-color": "var(--global-black)",
 				"display": "flex",
 				"justify-content": "center",
 				"max-height": "75vh",
@@ -370,26 +282,6 @@
 						"line-height": "var(--heading-level-5-line-height)"
 					}
 				}
-			},
-			"desktop": {}
-		}
-	},
-	"article-body-start-icon": {
-		"styles": {
-			"default": {
-				"fill": "var(--text-color)",
-				"height": "var(--global-spacing-4)",
-				"width": "var(--global-spacing-4)"
-			},
-			"desktop": {}
-		}
-	},
-	"article-body-stop-icon": {
-		"styles": {
-			"default": {
-				"fill": "var(--text-color)",
-				"height": "var(--global-spacing-4)",
-				"width": "var(--global-spacing-4)"
 			},
 			"desktop": {}
 		}

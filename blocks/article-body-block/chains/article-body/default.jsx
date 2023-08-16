@@ -3,6 +3,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 
 import {
+	Button,
 	Carousel,
 	Conditional,
 	Divider,
@@ -230,14 +231,23 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 						label={item?.description?.basic || "Gallery"}
 						slidesToShow={1}
 						additionalNextButton={
-							<button type="button" className={`${BLOCK_CLASS_NAME}__gallery-additional-next`}>
+							<Carousel.Button type="button">
 								<Icon name="ChevronRight" />
-							</button>
+							</Carousel.Button>
+						}
+						fullScreenMinimizeButton={
+							<Button
+								variant="secondary-reverse"
+								type="button"
+								className={`${BLOCK_CLASS_NAME}__carousel__close-button`}
+							>
+								<Icon name="Close" />
+							</Button>
 						}
 						additionalPreviousButton={
-							<button type="button" className={`${BLOCK_CLASS_NAME}__gallery-additional-previous`}>
+							<Carousel.Button type="button">
 								<Icon name="ChevronLeft" />
-							</button>
+							</Carousel.Button>
 						}
 						autoplayPhraseLabels={{
 							start: phrases.t("global.gallery-autoplay-label-start"),
@@ -246,24 +256,31 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 						enableAutoplay
 						enableFullScreen
 						fullScreenShowButton={
-							<button type="button">
-								<Icon name="Fullscreen" className={`${BLOCK_CLASS_NAME}__full-screen-icon`} />
+							<Carousel.Button type="button">
+								<Icon name="Fullscreen" />
 								{phrases.t("global.gallery-expand-button")}
-							</button>
+							</Carousel.Button>
 						}
-						showAdditionalSlideControls
 						showLabel
-						startAutoplayIcon={<Icon name="Play" className={`${BLOCK_CLASS_NAME}__start-icon`} />}
+						startAutoplayIcon={<Icon name="Play" />}
 						startAutoplayText={phrases.t("global.gallery-autoplay-button")}
-						stopAutoplayIcon={<Icon name="Pause" className={`${BLOCK_CLASS_NAME}__stop-icon`} />}
+						stopAutoplayIcon={<Icon name="Pause" />}
 						stopAutoplayText={phrases.t("global.gallery-pause-autoplay-button")}
 						nextButton={
-							<Carousel.Button id={key} label="Next Slide">
+							<Carousel.Button
+								id={key}
+								label="Next Slide"
+								className={`${BLOCK_CLASS_NAME}__gallery__track-button`}
+							>
 								<Icon name="ChevronRight" />
 							</Carousel.Button>
 						}
 						previousButton={
-							<Carousel.Button id={key} label="Previous Slide">
+							<Carousel.Button
+								id={key}
+								label="Previous Slide"
+								className={`${BLOCK_CLASS_NAME}__gallery__track-button`}
+							>
 								<Icon name="ChevronLeft" />
 							</Carousel.Button>
 						}

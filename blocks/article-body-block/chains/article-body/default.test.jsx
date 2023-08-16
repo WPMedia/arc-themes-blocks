@@ -2,7 +2,6 @@ import React from "react";
 import { mount } from "enzyme";
 import { useFusionContext } from "fusion:context";
 import { isServerSide } from "@wpmedia/arc-themes-components";
-
 import ArticleBodyChain from "./default";
 
 jest.mock("fusion:environment", () => ({

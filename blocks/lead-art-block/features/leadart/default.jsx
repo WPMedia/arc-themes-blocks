@@ -109,7 +109,6 @@ export const LeadArtPresentation = (props) => {
 				</MediaItem>
 			);
 		}
-		console.log("strategy", imageLoadingStrategy);
 
 		if (leadArt.type === "image") {
 			return (

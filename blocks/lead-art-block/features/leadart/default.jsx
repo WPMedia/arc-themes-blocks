@@ -132,7 +132,7 @@ export const LeadArtPresentation = (props) => {
 					title={!hideTitle ? leadArt.subtitle : null}
 				>
 					<Button
-						iconLeft={<Icon name="Fullscreen" fill="#6B6B6B" />}
+						iconLeft={<Icon name="Fullscreen" />}
 						accessibilityLabel={
 							!isOpen
 								? phrases.t("lead-art-block.fullscreen-enter")
@@ -173,11 +173,11 @@ export const LeadArtPresentation = (props) => {
 
 			return (
 				<Carousel
+					className={`${BLOCK_CLASS_NAME}__carousel`}
 					id={`${BLOCK_CLASS_NAME}-${leadArt._id}`}
 					showLabel
 					label={leadArt?.headlines?.basic}
 					slidesToShow={1}
-					showAdditionalSlideControls
 					pageCountPhrase={
 						/* istanbul ignore next */ (current, total) =>
 							phrases.t("global.gallery-page-count-text", { current, total })
@@ -193,15 +193,19 @@ export const LeadArtPresentation = (props) => {
 					}}
 					enableFullScreen
 					fullScreenShowButton={
-						<button type="button">
+						<Carousel.Button label={phrases.t("global.gallery-expand-button")}>
 							<Icon name="Fullscreen" />
 							{phrases.t("global.gallery-expand-button")}
-						</button>
+						</Carousel.Button>
 					}
 					fullScreenMinimizeButton={
-						<button type="button" className={`${BLOCK_CLASS_NAME}__close-icon`}>
+						<Button
+							variant="secondary-reverse"
+							type="button"
+							className={`${BLOCK_CLASS_NAME}__carousel__close-button`}
+						>
 							<Icon name="Close" />
-						</button>
+						</Button>
 					}
 					adElement={/* istanbul ignore next */ <AdBlock />}
 					adInterstitialClicks={interstitialClicks}
@@ -209,20 +213,18 @@ export const LeadArtPresentation = (props) => {
 						<Carousel.Button
 							id={`${BLOCK_CLASS_NAME}-${leadArt._id}`}
 							label={phrases.t("global.gallery-next-label")}
+							className={`${BLOCK_CLASS_NAME}__carousel__track-button`}
 						>
-							<Icon
-								className={`${BLOCK_CLASS_NAME}__track-icon`}
-								fill="white"
-								name="ChevronRight"
-							/>
+							<Icon fill="white" name="ChevronRight" />
 						</Carousel.Button>
 					}
 					previousButton={
 						<Carousel.Button
 							id={`${BLOCK_CLASS_NAME}-${leadArt._id}`}
 							label={phrases.t("global.gallery-previous-label")}
+							className={`${BLOCK_CLASS_NAME}__carousel__track-button`}
 						>
-							<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} name="ChevronLeft" />
+							<Icon name="ChevronLeft" />
 						</Carousel.Button>
 					}
 				>

@@ -9,6 +9,7 @@ import {
 	Carousel,
 	formatCredits,
 	formatPowaVideoEmbed,
+	getAspectRatio,
 	Icon,
 	Image,
 	MediaItem,
@@ -95,6 +96,19 @@ export const LeadArtPresentation = (props) => {
 				autoplay: customFields?.enableAutoplay,
 				playthrough: customFields?.playthrough,
 			});
+
+			let aspectRatio = "16:9"; // Default to 16:9
+
+			// Make sure that the content source exists and has an existing promo item
+			if (leadArt && leadArt.promo_items && leadArt.promo_items.basic) {
+				// Get the width and height of the promo item and calculate the aspect ratio
+				const width = leadArt?.promo_items.basic.width;
+				const height = leadArt?.promo_items.basic.height;
+
+				// Assign the calculated value to aspectRatio if it is non-null, otherwise assign default 16:9
+				aspectRatio = getAspectRatio(width, height) || "16:9";
+			}
+
 			return (
 				<MediaItem
 					caption={!hideCaption ? leadArt?.description?.basic : null}
@@ -102,7 +116,7 @@ export const LeadArtPresentation = (props) => {
 					title={!hideTitle ? leadArt?.headlines?.basic : null}
 				>
 					<Video
-						aspectRatio="16:9"
+						aspectRatio={aspectRatio}
 						embedMarkup={embedMarkup}
 						viewportPercentage={customFields?.viewportPercentage}
 					/>

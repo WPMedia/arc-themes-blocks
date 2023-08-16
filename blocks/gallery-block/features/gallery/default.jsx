@@ -148,6 +148,7 @@ export const GalleryPresentation = ({
 								src={imageANSToImageSrc(galleryItem)}
 								resizerURL={resizerURL}
 								resizedOptions={{ auth: galleryItem.auth[resizerAppVersion] }}
+								loading="eager"
 								// 16:9 aspect ratio
 								height={281.25}
 								alt={galleryItem.alt_text}

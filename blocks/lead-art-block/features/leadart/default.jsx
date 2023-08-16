@@ -109,6 +109,7 @@ export const LeadArtPresentation = (props) => {
 				</MediaItem>
 			);
 		}
+		console.log("strategy", imageLoadingStrategy);
 
 		if (leadArt.type === "image") {
 			return (
@@ -234,6 +235,7 @@ export const LeadArtPresentation = (props) => {
 								<div className={`${BLOCK_CLASS_NAME}__image-wrapper`}>
 									<Image
 										ansImage={galleryItem}
+										loading={imageLoadingStrategy}
 										// 16:9 aspect ratio
 										height={450}
 										responsiveImages={[800, 1600]}

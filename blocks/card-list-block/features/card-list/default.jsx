@@ -212,7 +212,7 @@ const CardListItems = (props) => {
 											<span className={`${BLOCK_CLASS_NAME}__by-text`}>
 												{phrases.t("global.by-text")}
 											</span>
-											<span>{bylineNodes}</span>
+											<div>{bylineNodes}</div>
 											<Separator />
 											<Date dateTime={sourceContent.display_date} dateString={displayDate} />
 										</div>

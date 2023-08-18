@@ -1,6 +1,11 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-card-list {
+	&__by-text {
+		@include scss.block-components("card-list-by-text");
+		@include scss.block-properties("card-list-by-text");
+	}
+
 	&__byline-container {
 		@include scss.block-components("card-list-byline-container");
 		@include scss.block-properties("card-list-byline-container");

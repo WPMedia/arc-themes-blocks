@@ -209,9 +209,10 @@ const CardListItems = (props) => {
 								<Attribution>
 									{hasAuthor ? (
 										<div className={`${BLOCK_CLASS_NAME}__byline-container`}>
-											<span>
-												{phrases.t("global.by-text")} {bylineNodes}
+											<span className={`${BLOCK_CLASS_NAME}__by-text`}>
+												{phrases.t("global.by-text")}
 											</span>
+											<span>{bylineNodes}</span>
 											<Separator />
 											<Date dateTime={sourceContent.display_date} dateString={displayDate} />
 										</div>

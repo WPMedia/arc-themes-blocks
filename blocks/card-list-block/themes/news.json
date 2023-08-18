@@ -36,6 +36,13 @@
 			"desktop": {}
 		}
 	},
+	"card-list-by-text": {
+		"styles": {
+			"default": {
+				"margin-inline-end": "var(--global-spacing-1)"
+			}
+		}
+	},
 	"card-list-byline-container": {
 		"styles": {
 			"default": {

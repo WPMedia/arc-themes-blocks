@@ -12,6 +12,33 @@ jest.mock("@wpmedia/arc-themes-components", () => {
 		...original,
 		formatCredits: (value) => value,
 		formatPowaVideoEmbed: (value) => value,
+		getAspectRatio: (width, height) => {
+			// This arrow function is equivalent to what is in @wpmedia/arc-themes-components/src/utils/get-aspect-ratio/utils.js
+			// Helper function to find GCD
+			const gcd = (valA, valB) => {
+				let a = Math.abs(valA);
+				let b = Math.abs(valB);
+				while (b) {
+					const temp = b;
+					b = a % b;
+					a = temp;
+				}
+
+				return a;
+			};
+
+			// Return undefined if height === 0, so there is no division by zero error
+			if (height === 0) {
+				return undefined;
+			}
+
+			// Calculate the aspect ratio
+			const divisor = gcd(width, height);
+			const aspectWidth = width / divisor;
+			const aspectHeight = height / divisor;
+
+			return `${aspectWidth}:${aspectHeight}`;
+		},
 		Video: ({ embedMarkup }) => <div dangerouslySetInnerHTML={{ __html: embedMarkup }} />,
 	};
 });
@@ -306,5 +333,75 @@ describe("VideoPlayer", () => {
 		const wrapper = mount(<VideoPlayer />);
 
 		expect(wrapper).toBeEmptyRender();
+	});
+
+	it("confirms that a vertical video's aspect ratio is not changed", () => {
+		const testEmbed =
+			'<div class="powa" id="powa-3509db8e-aaea-4264-8efa-b9fe039af027"' +
+			' data-org="themesinternal" data-env="sandbox" data-uuid="3509db8e-aaea-4264-8efa-b9fe039af027"' +
+			' data-aspect-ratio="1.778" data-api="sandbox"><script src="//d3jmjg29t4jdhz.cloudfront.net/' +
+			'sandbox/powaBoot.js?org=themesinternal"></script></div>';
+
+		useFusionContext.mockImplementation(() => ({}));
+		useContent.mockImplementation(() => ({ embed_html: testEmbed }));
+
+		const wrapper = mount(
+			<VideoPlayer
+				customFields={{
+					displayStyle: "inlineVideo",
+					inheritGlobalContent: false,
+					itemContentConfig: {
+						contentConfigValues: "query",
+						contentService: "source",
+					},
+				}}
+			/>
+		);
+
+		const expectedEmbed =
+			'<div class="powa" id="powa-3509db8e-aaea-4264-8efa-b9fe039af027"' +
+			' data-org="themesinternal" data-env="sandbox" data-uuid="3509db8e-aaea-4264-8efa-b9fe039af027"' +
+			' data-aspect-ratio="1.778" data-api="sandbox"><script src="//d3jmjg29t4jdhz.cloudfront.net/' +
+			'sandbox/powaBoot.js?org=themesinternal"></script></div>';
+
+		expect(useContent).toHaveBeenCalledWith({ query: "query", source: "source" });
+		expect(wrapper.find("Video").prop("embedMarkup")).toEqual(expectedEmbed);
+	});
+
+	it("makes sure a vertical video has its aspect ratio calculated correctly (9:16)", () => {
+		const testEmbed =
+			'<div class="powa" id="powa-3509db8e-aaea-4264-8efa-b9fe039af027"' +
+			' data-org="themesinternal" data-env="sandbox" data-uuid="3509db8e-aaea-4264-8efa-b9fe039af027"' +
+			' data-aspect-ratio="1.778" data-api="sandbox"><script src="//d3jmjg29t4jdhz.cloudfront.net/' +
+			'sandbox/powaBoot.js?org=themesinternal"></script></div>';
+		const testContentSource = {
+			promo_items: {
+				basic: {
+					width: 1080,
+					height: 1920,
+				},
+			},
+			embed_html: testEmbed,
+		};
+
+		useFusionContext.mockImplementation(() => ({ testContentSource }));
+		useContent.mockImplementation(() => testContentSource);
+
+		const wrapper = mount(
+			<VideoPlayer
+				customFields={{
+					displayStyle: "inlineVideo",
+					inheritGlobalContent: false,
+					itemContentConfig: {
+						contentConfigValues: "query",
+						contentService: "source",
+					},
+				}}
+			/>
+		);
+
+		expect(useContent).toHaveBeenCalledWith({ query: "query", source: "source" });
+		expect(wrapper.find("Video")).toExist();
+		expect(wrapper.find("Video").prop("aspectRatio")).toEqual("9:16");
 	});
 });

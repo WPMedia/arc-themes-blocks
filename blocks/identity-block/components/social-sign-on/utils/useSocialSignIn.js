@@ -1,11 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import useIdentity from "../../identity";
 
 function useSocialSignIn(redirectURL, onError = () => {}) {
 	const { Identity } = useIdentity();
 	const [config, setConfig] = useState(() => Identity?.configOptions ?? {});
-
-	const isGoogleReset = useRef(false);
 
 	useEffect(() => {
 		window.onFacebookSignOn = async () => {
@@ -27,28 +25,6 @@ function useSocialSignIn(redirectURL, onError = () => {}) {
 			fetchConfig();
 		}
 	}, [Identity]);
-
-	useEffect(() => {
-		const initializeGoogle = async () => {
-			await Identity.initGoogleLogin(null, {
-				width: 300,
-				height: 48,
-				onSuccess: () => {
-					if (!isGoogleReset.current) {
-						isGoogleReset.current = true;
-					} else {
-						window.location = redirectURL;
-					}
-				},
-				onFailure: () => {
-					onError();
-				},
-			});
-		};
-		if (config.googleClientId) {
-			initializeGoogle();
-		}
-	}, [Identity, config.googleClientId, onError, redirectURL]);
 
 	useEffect(() => {
 		const initializeFacebook = async () => {

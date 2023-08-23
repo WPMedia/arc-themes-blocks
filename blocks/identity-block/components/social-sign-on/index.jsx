@@ -10,7 +10,7 @@ const SocialSignOn = ({ onError, redirectURL }) => {
 
 	return (
 		<section>
-			{googleClientId ? <GoogleSignIn /> : null}
+			{googleClientId ? <GoogleSignIn onError={onError} redirectURL={redirectURL} /> : null}
 			{facebookAppId ? <FacebookSignIn /> : null}
 		</section>
 	);

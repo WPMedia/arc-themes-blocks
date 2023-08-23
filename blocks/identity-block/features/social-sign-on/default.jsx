@@ -8,6 +8,8 @@ import SocialSignOn from "../../components/social-sign-on";
 import useLogin from "../../components/login";
 import useIdentity from "../../components/identity";
 
+const BLOCK_CLASS_NAME = "b-social-sign-on";
+
 const SocialSignOnBlock = ({ customFields }) => {
 	const { redirectURL, redirectToPreviousPage, loggedInPageLocation } = customFields;
 
@@ -31,7 +33,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 	}
 
 	return (
-		<section>
+		<section className={BLOCK_CLASS_NAME}>
 			<SocialSignOn
 				onError={() => {
 					setError(phrases.t("identity-block.login-form-error"));

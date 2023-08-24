@@ -5,11 +5,11 @@ import GoogleSignIn from "./_children/GoogleSignIn";
 
 import useSocialSignIn from "./utils/useSocialSignIn";
 
-const SocialSignOn = ({ onError, redirectURL }) => {
+const SocialSignOn = ({ className, onError, redirectURL }) => {
 	const { facebookAppId, googleClientId } = useSocialSignIn(redirectURL, onError);
 
 	return (
-		<section>
+		<section className={className}>
 			{googleClientId ? <GoogleSignIn onError={onError} redirectURL={redirectURL} /> : null}
 			{facebookAppId ? <FacebookSignIn /> : null}
 		</section>

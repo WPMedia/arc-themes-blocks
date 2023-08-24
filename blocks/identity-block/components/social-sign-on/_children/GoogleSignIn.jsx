@@ -9,7 +9,7 @@ const GoogleSignInButton = () => (
 			type: "standard",
 			theme: "outline",
 			size: "large",
-			text: "signin_with",
+			text: "continue_with",
 			shape: "rectangular",
 			logo_alignment: "left",
 			width: "300",

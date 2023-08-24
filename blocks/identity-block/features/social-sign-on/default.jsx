@@ -35,6 +35,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 	return (
 		<section className={BLOCK_CLASS_NAME}>
 			<SocialSignOn
+				className={`${BLOCK_CLASS_NAME}__button-container`}
 				onError={() => {
 					setError(phrases.t("identity-block.login-form-error"));
 				}}

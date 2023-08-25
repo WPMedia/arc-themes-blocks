@@ -1,9 +1,9 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import SocialSignOn from "./index";
-import useIdentity from "../Identity";
+import useIdentity from "../identity";
 
-jest.mock("../Identity");
+jest.mock("../identity");
 
 describe("Subscriptions Social Login Component", () => {
 	it("renders nothing if config settings are false", () => {

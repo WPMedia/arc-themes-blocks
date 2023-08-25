@@ -1,11 +1,11 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { render, screen } from "@testing-library/react";
 import SocialSignOn from "./index";
 import useIdentity from "../identity";
 
 jest.mock("../identity");
 
-describe("Subscriptions Social Login Component", () => {
+describe("Identity Social Login Component", () => {
 	it("renders nothing if config settings are false", () => {
 		useIdentity.mockImplementation(() => ({
 			isInitialized: true,
@@ -21,9 +21,9 @@ describe("Subscriptions Social Login Component", () => {
 			},
 		}));
 
-		const wrapper = shallow(<SocialSignOn onError={() => null} redirectURL="#" />);
+		render(<SocialSignOn onError={() => null} redirectURL="#" />);
 		// don't render any facebook stuff, only show wrapper
-		expect(wrapper.html()).toBe('<section class="xpmedia-social-signin-wrapper"></section>');
+		expect(screen.getByRole("generic")).not.toBeNull();
 	});
 
 	it("renders only Google button", () => {

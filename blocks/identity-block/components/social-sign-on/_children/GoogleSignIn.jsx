@@ -1,6 +1,6 @@
 import React from "react";
-import ArcSiwgContextProvider from "@arcxp/react-sign-in-with-google/lib/esm/ArcSiwgProvider";
-import ArcSiwgButton from "@arcxp/react-sign-in-with-google/lib/esm/ArcSiwgButton";
+import ArcSiwgContextProvider from "@arcxp/react-sign-in-with-google/lib/ArcSiwgProvider";
+import ArcSiwgButton from "@arcxp/react-sign-in-with-google/lib/ArcSiwgButton";
 import useIdentity from "../../identity";
 
 const GoogleSignInButton = () => (

@@ -20,7 +20,7 @@ describe("Identity Social Login Component", () => {
 			},
 		}));
 
-		render(<SocialSignOn onError={() => null} redirectURL="#" />);
+		render(<SocialSignOn />);
 		// don't render any facebook stuff, only show wrapper
 		expect(screen.getByRole("generic")).not.toBeNull();
 	});
@@ -71,8 +71,11 @@ describe("Identity Social Login Component", () => {
 			isInitialized: true,
 			isLoggedIn: () => true,
 			Identity: {
-				isLoggedIn: jest.fn(async () => false),
-				getConfig: jest.fn(async () =>
+				configOptions: {
+					googleClientId: true,
+					facebookAppId: true,
+				},
+				getConfig: jest.fn(() =>
 					Promise.resolve({
 						signinRecaptcha: false,
 						recaptchaSiteKey: "6LdXKVQcAAAAAO2tv3GdUbSK-1vcgujX6cP0IgF_",
@@ -80,10 +83,7 @@ describe("Identity Social Login Component", () => {
 				),
 				initFacebookLogin: () => {},
 				initializeFacebook: () => {},
-				configOptions: {
-					googleClientId: true,
-					facebookAppId: true,
-				},
+				isLoggedIn: jest.fn(() => false),
 			},
 		}));
 
@@ -91,5 +91,72 @@ describe("Identity Social Login Component", () => {
 
 		expect(container.querySelector("#arc-siwg-button")).not.toBeNull();
 		expect(container.querySelector(".fb-login-button")).not.toBeNull();
+	});
+
+	it("calls getConfig if the options are missing", () => {
+		const getConfigMock = jest.fn(() => Promise.resolve());
+		useIdentity.mockImplementation(() => ({
+			Identity: {
+				getConfig: getConfigMock,
+				initFacebookLogin: () => {},
+				initializeFacebook: () => {},
+				isLoggedIn: jest.fn(() => false),
+			},
+			isInitialized: true,
+			isLoggedIn: () => true,
+		}));
+
+		render(<SocialSignOn onError={() => null} redirectURL="#" />);
+
+		expect(getConfigMock).toHaveBeenCalled();
+	});
+
+	it("calls facebookSignOn", () => {
+		const facebookSignOnMock = jest.fn(() => Promise.resolve());
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			isLoggedIn: () => true,
+			Identity: {
+				configOptions: {
+					googleClientId: true,
+					facebookAppId: true,
+				},
+				facebookSignOn: facebookSignOnMock,
+				getConfig: () => {},
+				initFacebookLogin: () => {},
+				initializeFacebook: () => {},
+				isLoggedIn: jest.fn(() => false),
+			},
+		}));
+
+		render(<SocialSignOn onError={() => null} redirectURL="#" />);
+		window.onFacebookSignOn();
+		expect(facebookSignOnMock).toHaveBeenCalled();
+	});
+
+	it("calls onError when login fails", () => {
+		const facebookSignOnMock = jest.fn(() => {
+			throw new Error();
+		});
+		const onErrorMock = jest.fn();
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			isLoggedIn: () => true,
+			Identity: {
+				configOptions: {
+					googleClientId: true,
+					facebookAppId: true,
+				},
+				facebookSignOn: facebookSignOnMock,
+				getConfig: () => {},
+				initFacebookLogin: () => {},
+				initializeFacebook: () => {},
+				isLoggedIn: jest.fn(() => false),
+			},
+		}));
+
+		render(<SocialSignOn onError={onErrorMock} redirectURL="#" />);
+		window.onFacebookSignOn();
+		expect(onErrorMock).toHaveBeenCalled();
 	});
 });

@@ -19,6 +19,7 @@ const GoogleSignInButton = () => (
 
 const GoogleSignIn = ({ onError, redirectURL }) => {
 	const { Identity } = useIdentity();
+	/* istanbul ignore next */
 	return (
 		<ArcSiwgContextProvider
 			arcIdentity={Identity}

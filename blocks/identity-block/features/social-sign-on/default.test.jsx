@@ -1,12 +1,13 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
-import { act } from "react-dom/test-utils";
+import { render, screen } from "@testing-library/react";
+import SocialSignOn from "../../components/social-sign-on";
+import useIdentity from "../../components/identity";
 import SocialSignOnBlock from "./default";
-import useIdentity from "../../components/Identity";
 
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
 
-jest.mock("../../components/Identity");
+jest.mock("../../components/social-sign-on");
+jest.mock("../../components/identity");
 
 const defaultCustomFields = {
 	redirectURL: "",
@@ -14,51 +15,26 @@ const defaultCustomFields = {
 };
 
 describe("Subscriptions Social Login Feature", () => {
+	SocialSignOn.mockImplementation(() => <div />);
+
 	it("renders nothing if identity not initialized", () => {
 		useIdentity.mockImplementation(() => ({ isInitialized: false }));
 
-		const uninitializedWrapper = shallow(<SocialSignOnBlock customFields={defaultCustomFields} />);
-		expect(uninitializedWrapper.html()).toBe(null);
+		render(<SocialSignOnBlock customFields={defaultCustomFields} />);
+		expect(screen.queryByTestId("social-sign-on-container")).toBeNull();
 	});
 	it("renders", () => {
 		useIdentity.mockImplementation(() => ({ isInitialized: true }));
 
-		const uninitializedWrapper = shallow(<SocialSignOnBlock customFields={defaultCustomFields} />);
-		expect(uninitializedWrapper.html()).not.toBe(null);
+		render(<SocialSignOnBlock customFields={defaultCustomFields} />);
+		expect(screen.queryByTestId("social-sign-on-container")).not.toBeNull();
 	});
-	it("renders SocialSignOn Component", () => {
-		let wrapper;
-		useIdentity.mockImplementation(() => ({
-			isInitialized: true,
-			isLoggedIn: () => true,
-			Identity: {
-				isLoggedIn: jest.fn(async () => false),
-				getConfig: jest.fn(async () =>
-					Promise.resolve({
-						signinRecaptcha: false,
-						recaptchaSiteKey: "6LdXKVQcAAAAAO2tv3GdUbSK-1vcgujX6cP0IgF_",
-					})
-				),
-				initGoogleLogin: jest.fn(async () =>
-					Promise.resolve({
-						init: true,
-					})
-				),
-				initializeFacebook: jest.fn(async () =>
-					Promise.resolve({
-						init: true,
-					})
-				),
-				configOptions: {
-					googleClientId: true,
-					facebookAppId: true,
-				},
-			},
-		}));
-		act(() => {
-			wrapper = mount(<SocialSignOnBlock customFields={defaultCustomFields} />);
-			expect(wrapper.html()).not.toBe(null);
-			expect(wrapper.find(".xpmedia-subs-social-sign-on")).toHaveLength(1);
+	it("shows an error", () => {
+		SocialSignOn.mockImplementation(({ onError }) => {
+			onError();
+			return <div />;
 		});
+		render(<SocialSignOnBlock customFields={defaultCustomFields} />);
+		expect(screen.getByText("identity-block.login-form-error")).not.toBeNull();
 	});
 });

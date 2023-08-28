@@ -16,6 +16,7 @@ const getSignedInIdentity = (user) =>
 const useIdentity = () => {
 	const { arcSite } = useFusionContext();
 	const { api } = getProperties(arcSite);
+
 	const [isInit, setIsInit] = useState(!!Identity.apiOrigin);
 
 	if (!isInit && arcSite && api?.identity?.origin) {

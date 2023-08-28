@@ -33,7 +33,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 	}
 
 	return (
-		<section className={BLOCK_CLASS_NAME}>
+		<section className={BLOCK_CLASS_NAME} data-testid="social-sign-on-container">
 			<SocialSignOn
 				className={`${BLOCK_CLASS_NAME}__button-container`}
 				onError={() => {

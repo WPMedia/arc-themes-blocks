@@ -15,7 +15,6 @@ describe("Identity Social Login Component", () => {
 					googleClientId: false,
 					facebookAppId: false,
 				},
-				initGoogleLogin: () => {},
 				initFacebookLogin: () => {},
 				initializeFacebook: () => {},
 			},
@@ -35,15 +34,16 @@ describe("Identity Social Login Component", () => {
 					googleClientId: true,
 					facebookAppId: false,
 				},
-				initGoogleLogin: () => {},
 				initFacebookLogin: () => {},
 				initializeFacebook: () => {},
 			},
 		}));
 
-		const wrapper = mount(<SocialSignOn onError={() => null} redirectURL="#" />);
-		expect(wrapper.find("#google-sign-in-button")).toHaveLength(1);
-		expect(wrapper.find(".fb-login-button")).toHaveLength(0);
+		const { container } = render(<SocialSignOn onError={() => null} redirectURL="#" />);
+		// Yes this is testing implementation, but it is all we have since the
+		// third party buttons will only actually render client side in a browser.
+		expect(container.querySelector("#arc-siwg-button")).not.toBeNull();
+		expect(container.querySelector(".fb-login-button")).toBeNull();
 	});
 
 	it("renders only Facebook button", () => {
@@ -55,15 +55,15 @@ describe("Identity Social Login Component", () => {
 					googleClientId: false,
 					facebookAppId: true,
 				},
-				initGoogleLogin: () => {},
 				initFacebookLogin: () => {},
 				initializeFacebook: () => {},
 			},
 		}));
 
-		const wrapper = mount(<SocialSignOn onError={() => null} redirectURL="#" />);
-		expect(wrapper.find("#google-sign-in-button")).toHaveLength(0);
-		expect(wrapper.find(".fb-login-button")).toHaveLength(1);
+		const { container } = render(<SocialSignOn onError={() => null} redirectURL="#" />);
+
+		expect(container.querySelector("#arc-siwg-button")).toBeNull();
+		expect(container.querySelector(".fb-login-button")).not.toBeNull();
 	});
 
 	it("renders", () => {
@@ -78,7 +78,6 @@ describe("Identity Social Login Component", () => {
 						recaptchaSiteKey: "6LdXKVQcAAAAAO2tv3GdUbSK-1vcgujX6cP0IgF_",
 					})
 				),
-				initGoogleLogin: () => {},
 				initFacebookLogin: () => {},
 				initializeFacebook: () => {},
 				configOptions: {
@@ -88,40 +87,9 @@ describe("Identity Social Login Component", () => {
 			},
 		}));
 
-		const wrapper = mount(<SocialSignOn onError={() => null} redirectURL="#" />);
-		expect(wrapper.html()).not.toBe(null);
-	});
+		const { container } = render(<SocialSignOn onError={() => null} redirectURL="#" />);
 
-	it("renders placeholders for Google and Facebook sign-in buttons", () => {
-		useIdentity.mockImplementation(() => ({
-			isInitialized: true,
-			isLoggedIn: () => true,
-			Identity: {
-				isLoggedIn: jest.fn(async () => false),
-				getConfig: jest.fn(async () =>
-					Promise.resolve({
-						signinRecaptcha: false,
-						recaptchaSiteKey: "6LdXKVQcAAAAAO2tv3GdUbSK-1vcgujX6cP0IgF_",
-					})
-				),
-				initGoogleLogin: jest.fn(async () =>
-					Promise.resolve({
-						init: true,
-					})
-				),
-				initializeFacebook: jest.fn(async () =>
-					Promise.resolve({
-						init: true,
-					})
-				),
-				configOptions: {
-					googleClientId: true,
-					facebookAppId: true,
-				},
-			},
-		}));
-		const wrapper = mount(<SocialSignOn onError={() => null} redirectURL="#" />);
-		expect(wrapper.find("#google-sign-in-button")).toHaveLength(1);
-		expect(wrapper.find(".fb-login-button")).toHaveLength(1);
+		expect(container.querySelector("#arc-siwg-button")).not.toBeNull();
+		expect(container.querySelector(".fb-login-button")).not.toBeNull();
 	});
 });

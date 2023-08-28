@@ -1,20 +1,28 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-lead-art {
-	&__track-icon {
-		@include scss.block-components("lead-art-carousel-track-icon");
-		@include scss.block-properties("lead-art-carousel-track-icon");
-	}
-
 	&__image-wrapper {
 		@include scss.block-components("lead-art-carousel-image-wrapper");
 		@include scss.block-properties("lead-art-carousel-image-wrapper");
 	}
 
-	&__close-icon {
-		@include scss.block-components("lead-art-close-icon");
-		@include scss.block-properties("lead-art-close-icon");
+	&__carousel {
+		&:fullscreen {
+			@include scss.block-components("lead-art-carousel-fullscreen");
+			@include scss.block-properties("lead-art-carousel-fullscreen");
+		}
+
+		&__track-button {
+			@include scss.block-components("lead-art-carousel-track-button");
+			@include scss.block-properties("lead-art-carousel-track-button");
+		}
+
+		&__close-button {
+			@include scss.block-components("lead-art-carousel-close-button");
+			@include scss.block-properties("lead-art-carousel-close-button");
+		}
 	}
+
 	@include scss.block-components("lead-art");
 	@include scss.block-properties("lead-art");
 }

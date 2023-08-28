@@ -5,6 +5,7 @@
 		@include scss.block-properties("small-manual-promo-img");
 		@include scss.block-components("small-manual-promo-img");
 	}
+
 	&--above {
 		@include scss.block-properties("small-manual-promo-above");
 		@include scss.block-components("small-manual-promo-above");

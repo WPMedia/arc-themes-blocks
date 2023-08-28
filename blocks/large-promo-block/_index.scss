@@ -5,6 +5,7 @@
 		@include scss.block-properties("large-promo-img");
 		@include scss.block-components("large-promo-img");
 	}
+
 	&__text {
 		@include scss.block-components("large-promo-text");
 		@include scss.block-properties("large-promo-text");

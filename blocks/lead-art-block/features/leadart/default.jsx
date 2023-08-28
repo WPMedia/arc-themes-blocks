@@ -248,7 +248,7 @@ export const LeadArtPresentation = (props) => {
 								<div className={`${BLOCK_CLASS_NAME}__image-wrapper`}>
 									<Image
 										ansImage={galleryItem}
-										loading={imageLoadingStrategy}
+										loading={itemIndex === 0 ? imageLoadingStrategy : "lazy"}
 										// 16:9 aspect ratio
 										height={450}
 										responsiveImages={[800, 1600]}

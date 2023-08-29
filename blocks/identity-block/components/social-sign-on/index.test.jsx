@@ -40,8 +40,7 @@ describe("Identity Social Login Component", () => {
 		}));
 
 		const { container } = render(<SocialSignOn onError={() => null} redirectURL="#" />);
-		// Yes this is testing implementation, but it is all we have since the
-		// third party buttons will only actually render client side in a browser.
+
 		expect(container.querySelector("#arc-siwg-button")).not.toBeNull();
 		expect(container.querySelector(".fb-login-button")).toBeNull();
 	});

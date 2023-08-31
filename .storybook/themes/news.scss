@@ -637,10 +637,23 @@
 					height: auto,
 					width: 100%,
 				),
+				article-body-gallery-close-button: (
+					color: var(--global-white),
+					components: (
+						button-hover: (
+							color: var(--global-neutral-3),
+						),
+						icon: (
+							fill: currentColor,
+							height: var(--global-spacing-6),
+							width: var(--global-spacing-6),
+						),
+					),
+				),
 				article-body-gallery-fullscreen: (
 					components: (
 						media-item-fig-caption: (
-							padding: 0 var(--global-spacing-5),
+							padding: 0 var(--global-spacing-2),
 						),
 					),
 				),
@@ -699,15 +712,18 @@
 				),
 				article-body-image-wrapper: (
 					align-items: center,
+					aspect-ratio: calc(16 / 9),
 					background-color: var(--global-black),
 					display: flex,
 					justify-content: center,
 					max-height: 75vh,
+					overflow: auto,
 					components: (
 						image: (
 							height: auto,
-							max-height: 75vh,
+							max-height: 100%,
 							max-width: 100%,
+							object-fit: contain,
 						),
 					),
 				),
@@ -1131,21 +1147,24 @@
 				gallery-fullscreen: (
 					components: (
 						media-item-fig-caption: (
-							padding: 0 var(--global-spacing-5),
+							padding: 0 var(--global-spacing-2),
 						),
 					),
 				),
 				gallery-image-wrapper: (
 					align-items: center,
+					aspect-ratio: calc(16 / 9),
 					background-color: var(--global-black),
 					display: flex,
 					justify-content: center,
 					max-height: 75vh,
+					overflow: auto,
 					components: (
 						image: (
 							height: auto,
-							max-height: 75vh,
+							max-height: 100%,
 							max-width: 100%,
+							object-fit: contain,
 						),
 					),
 				),
@@ -1656,7 +1675,7 @@
 				lead-art-carousel-fullscreen: (
 					components: (
 						media-item-fig-caption: (
-							padding: 0 var(--global-spacing-5),
+							padding: 0 var(--global-spacing-2),
 						),
 					),
 				),
@@ -2742,6 +2761,24 @@
 				carousel-actions: (
 					display: flex,
 				),
+				carousel-additional-controls: (
+					gap: var(--global-spacing-2),
+					padding: 0 0 0 var(--global-spacing-2),
+				),
+				carousel-fullscreen: (
+					padding: var(--global-spacing-5) 0,
+				),
+				carousel-fullscreen-button-toggle-auto-play: (
+					display: flex,
+				),
+				carousel-fullscreen-controls: (
+					flex-direction: initial,
+					padding-top: var(--global-spacing-5),
+					padding-right: var(--global-spacing-5),
+					padding-bottom: var(--global-spacing-5),
+					padding-left: var(--global-spacing-5),
+					place-self: flex-start,
+				),
 				carousel-track: (
 					gap: var(--global-spacing-6),
 				),
@@ -2757,11 +2794,15 @@
 				article-body: (
 					font-size: var(--heading-level-6-font-size),
 				),
-				article-body-gallery-additional-next: (
-					display: block,
+				article-body-gallery-fullscreen: (
+					components: (
+						media-item-fig-caption: (
+							padding: 0 var(--global-spacing-5),
+						),
+					),
 				),
-				article-body-gallery-additional-previous: (
-					display: block,
+				article-body-image-wrapper: (
+					max-height: 75vh,
 				),
 				author-bio-social-link-wrapper: (
 					margin-top: var(--global-spacing-4),
@@ -2831,12 +2872,10 @@
 				full-author-bio-social-icons: (
 					justify-content: flex-start,
 				),
-				gallery: (
+				gallery-fullscreen: (
 					components: (
-						carousel-additional-controls: (
-							display: flex,
-							gap: var(--global-spacing-2),
-							padding: 0 0 0 var(--global-spacing-2),
+						media-item-fig-caption: (
+							padding: 0 var(--global-spacing-5),
 						),
 					),
 				),
@@ -2906,26 +2945,15 @@
 						),
 					),
 				),
-				lead-art: (
+				lead-art-carousel-fullscreen: (
 					components: (
-						carousel-additional-controls: (
-							display: flex,
-							gap: var(--global-spacing-2),
-							padding: 0 0 0 var(--global-spacing-2),
+						media-item-fig-caption: (
+							padding: 0 var(--global-spacing-5),
 						),
 					),
-				),
-				lead-art-close-icon: (
-					right: calc(100% - var(--global-spacing-4)),
-					left: var(--global-spacing-4),
 				),
 				lead-art-carousel-image-wrapper: (
 					max-height: 75vh,
-					components: (
-						button-medium: (
-							left: var(--global-spacing-4),
-						),
-					),
 				),
 				masthead: (
 					display: flex,

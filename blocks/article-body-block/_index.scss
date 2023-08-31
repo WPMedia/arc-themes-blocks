@@ -76,6 +76,11 @@
 			@include scss.block-components("article-body-gallery-track-button");
 			@include scss.block-properties("article-body-gallery-track-button");
 		}
+
+		&__close-button {
+			@include scss.block-components("article-body-gallery-close-button");
+			@include scss.block-properties("article-body-gallery-close-button");
+		}
 	}
 
 	&__image-wrapper {

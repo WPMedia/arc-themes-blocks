@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           #  0 indicates all history for all branches and tags
           fetch-depth: 0
@@ -31,7 +31,7 @@ jobs:
 
       - name: Cache Node Modules
         id: cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}

@@ -22,13 +22,13 @@ const fetch = ({ hierarchy, sectionId, "arc-site": website }) => {
 		method: "GET",
 	})
 		.then(({ data }) => {
-			if (data?.Payload?.some((ele) => !!ele)) {
-				return data;
+			if (hierarchy && sectionId !== data._id) {
+				const error = new Error("Not found");
+				error.statusCode = 404;
+				throw error;
 			}
 
-			const error = new Error("Not found");
-			error.statusCode = 404;
-			return Promise.reject(error);
+			return data;
 		})
 		.catch(handleFetchError);
 };

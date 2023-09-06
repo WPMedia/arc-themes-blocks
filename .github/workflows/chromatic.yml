@@ -23,7 +23,7 @@ jobs:
 
       - name: Create npmrc
         env:
-          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.WPMEDIA_PUBLIC_REPO_ARCXP_PACKAGE_TOKEN }}
         run: |
           touch .npmrc
           echo @wpmedia:registry=https://npm.pkg.github.com/ >> .npmrc

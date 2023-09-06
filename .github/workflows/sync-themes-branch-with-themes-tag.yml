@@ -49,7 +49,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.WPMEDIA_PUBLIC_REPO_ARCXP_PACKAGE_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run all tests
         run: npm run test
@@ -61,4 +61,4 @@ jobs:
           git config --local user.name "$GITHUB_ACTOR"
           npx lerna publish --dist-tag ${{ env.SYNCED_RELEASE_TAG }} --canary --preid ${{ env.SYNCED_RELEASE_TAG }} -y
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.WPMEDIA_PUBLIC_REPO_ARCXP_PACKAGE_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

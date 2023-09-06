@@ -15,7 +15,7 @@ jobs:
       - name: Checkout Rep
         uses: actions/checkout@v1
 
-      - name: Setup Node with 12
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version-file: .nvmrc
@@ -32,12 +32,12 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.WPMEDIA_PUBLIC_REPO_ARCXP_PACKAGE_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: stylelint
         uses: reviewdog/action-stylelint@v1
         with:
-          github_token: ${{ secrets.WPMEDIA_PUBLIC_REPO_ARCXP_PACKAGE_TOKEN }}
+          github_token: ${{ secrets.github_token }}
           fail_on_error: true
           reporter: github-pr-review
           filter_mode: "diff_context"

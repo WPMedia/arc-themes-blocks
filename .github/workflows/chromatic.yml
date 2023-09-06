@@ -21,12 +21,19 @@ jobs:
         with:
           fetch-depth: 0 # 👈 Required to retrieve git history
 
+      - name: Create NPMRC
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.WPMEDIA_PUBLIC_REPO_ARCXP_PACKAGE_TOKEN }}
+        run: |
+          touch .npmrc
+          echo @wpmedia:registry=https://npm.pkg.github.com/ >> .npmrc
+          echo @arcxp:registry=https://npm.pkg.github.com/ >> .npmrc
+          echo //npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN >> .npmrc
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version-file: .nvmrc
-          registry-url: "https://npm.pkg.github.com"
-          scope: "@arcxp"
 
       - name: Cache Node Modules
         id: cache
@@ -38,8 +45,6 @@ jobs:
       - name: Clean install (CI) dependencies if lockfile (above) changed
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.WPMEDIA_PUBLIC_REPO_ARCXP_PACKAGE_TOKEN }}
 
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
@@ -47,7 +52,7 @@ jobs:
 
         # Chromatic GitHub Action options
         with:
-          token: ${{ secrets.WPMEDIA_PUBLIC_REPO_ARCXP_PACKAGE_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 

@@ -61,4 +61,4 @@ jobs:
       - name: Get version of target tag and point the new tag to that version
         run: npx lerna exec --stream --no-bail --concurrency 1 -- 'PKG_VERSION=$(npm view ${LERNA_PACKAGE_NAME}@${{ env.TARGET_RELEASE_TAG }} version); [ -n "$PKG_VERSION" ] && (npm dist-tag add ${LERNA_PACKAGE_NAME}@${PKG_VERSION} ${{ env.NEW_RELEASE_TAG }}) || exit 0'
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.WPMEDIA_PUBLIC_REPO_ARCXP_PACKAGE_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

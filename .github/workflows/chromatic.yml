@@ -21,14 +21,14 @@ jobs:
         with:
           fetch-depth: 0 # 👈 Required to retrieve git history
 
-      - name: Create NPMRC
+      - name: Create npmrc
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           touch .npmrc
           echo @wpmedia:registry=https://npm.pkg.github.com/ >> .npmrc
           echo @arcxp:registry=https://npm.pkg.github.com/ >> .npmrc
-          echo //npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN >> .npmrc
+          echo //npm.pkg.github.com/:_authToken=$NPM_AUTH_TOKEN >> .npmrc
 
       - name: Setup Node
         uses: actions/setup-node@v3

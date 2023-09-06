@@ -43,7 +43,6 @@ jobs:
           key: node-modules-${{ hashFiles('package-lock.json') }}
 
       - name: Clean install (CI) dependencies if lockfile (above) changed
-        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
 
         # 👇 Adds Chromatic as a step in the workflow

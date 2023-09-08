@@ -18,6 +18,13 @@
 			"default": {
 				"components": {
 					"media-item-fig-caption": {
+						"padding": "0 var(--global-spacing-2)"
+					}
+				}
+			},
+			"desktop": {
+				"components": {
+					"media-item-fig-caption": {
 						"padding": "0 var(--global-spacing-5)"
 					}
 				}
@@ -44,10 +51,7 @@
 				}
 			},
 			"desktop": {
-				"max-height": "75vh",
-				"components": {
-					"max-height": "75vh"
-				}
+				"max-height": "75vh"
 			}
 		}
 	},

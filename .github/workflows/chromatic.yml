@@ -28,7 +28,7 @@ jobs:
         run: |
           touch .npmrc
           echo @wpmedia:registry=https://npm.pkg.github.com/ >> .npmrc
-          echo //npm.pkg.github.com:443/:_authToken=$WPMEDIA_AUTH_TOKEN >> .npmrc
+          echo //npm.pkg.github.com/:_authToken=$WPMEDIA_AUTH_TOKEN >> .npmrc
           echo @arcxp:registry=https://npm.pkg.github.com:443 >> .npmrc
           echo //npm.pkg.github.com:443/:_authToken=$ARCXP_AUTH_TOKEN >> .npmrc
 

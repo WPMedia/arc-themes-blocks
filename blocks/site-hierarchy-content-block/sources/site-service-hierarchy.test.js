@@ -15,7 +15,7 @@ jest.mock("axios", () => ({
 		};
 		return Promise.resolve({
 			data: {
-				content_elements: [{ url }],
+				_id: "/sports",
 				request: {
 					...request,
 					url,
@@ -33,7 +33,7 @@ describe("the site-service-hierarchy content source block", () => {
 		});
 	});
 
-	it("should build the correct url", async () => {
+	it("should return the correct data", async () => {
 		const contentSourceFetch = await contentSource.fetch(
 			{
 				hierarchy: "footer",
@@ -53,94 +53,33 @@ describe("the site-service-hierarchy content source block", () => {
 		);
 	});
 
-	it("should build the correct url with only hierarchy", async () => {
-		const contentSourceFetch = await contentSource.fetch(
-			{
+	it("should throw a 404 if only hierarchy is provided", async () => {
+		await expect(
+			contentSource.fetch({
 				hierarchy: "footer",
 				"arc-site": "the-site",
-			},
-			{ cachedCall: () => {} }
-		);
-
-		expect(contentSourceFetch.request.url.searchObject).toEqual(
-			expect.objectContaining({
-				hierarchy: "footer",
 			})
-		);
+		).rejects.toEqual(new Error("Not found"));
 	});
 
-	it("should build the correct url with only sectionId", async () => {
-		const contentSourceFetch = await contentSource.fetch(
-			{
+	it("should throw a 404 if only sectionId is provided", async () => {
+		await expect(
+			contentSource.fetch({
 				sectionId: "/sports",
 				"arc-site": "the-site",
-			},
-			{ cachedCall: () => {} }
-		);
-
-		expect(contentSourceFetch.request.url.searchObject).toEqual(
-			expect.objectContaining({
-				_id: "/sports",
 			})
-		);
-	});
-
-	it("should build the correct url without anything", async () => {
-		const contentSourceFetch = await contentSource.fetch(
-			{
-				"arc-site": "the-site",
-			},
-			{ cachedCall: () => {} }
-		);
-
-		expect(contentSourceFetch.request.url.searchObject).toEqual({});
-	});
-
-	it("when a hierarchy and sectionId are provided it should return data", () => {
-		const data = contentSource.transform(
-			{ _id: "/" },
-			{ hierarchy: "hierarchy", sectionId: "/sectionId" }
-		);
-
-		expect(data._id).toEqual("/");
-	});
-
-	it("when a hierarchy is provided and no sectionId", () => {
-		const data = contentSource.transform(
-			{ _id: "/" },
-			{ hierarchy: "links-bar", uri: "/test/test" }
-		);
-
-		expect(data._id).toEqual("/");
-	});
-
-	it("when a hierarchy is not provided and sectionId is provided that matches the API data then the data is returned", () => {
-		const data = contentSource.transform(
-			{ _id: "/sectionId" },
-			{ hierarchy: "", sectionId: "/sectionId" }
-		);
-
-		expect(data._id).toEqual("/sectionId");
-	});
-
-	it("when a hierarchy is not provided and sectionId is provided that does not match the API data a 404 is thrown", async () => {
-		await expect(() =>
-			contentSource.transform({ _id: "/" }, { hierarchy: "", sectionId: "/sectionId" })
 		).rejects.toEqual(new Error("Not found"));
 	});
 
-	it("when a uri does not match section a 404 is thrown", async () => {
-		await expect(() =>
-			contentSource.transform({ _id: "/" }, { hierarchy: "", sectionId: "/sectionId", uri: "/" })
-		).rejects.toEqual(new Error("Not found"));
+	it("should throw a 404 if with no hierarchy or sectionId", async () => {
+		await expect(contentSource.fetch({ "arc-site": "the-site" })).rejects.toEqual(
+			new Error("Not found")
+		);
 	});
 
-	it("when uri and section match return data", () => {
-		const data = contentSource.transform(
-			{ _id: "/sectionId" },
-			{ hierarchy: "hierarchy", sectionId: "/sectionId", uri: "/sectionId" }
-		);
-
-		expect(data._id).toEqual("/sectionId");
+	it("should throw a 404 when a hierarchy is provided and sectionId is provided that does not match the API data", async () => {
+		await expect(() =>
+			contentSource.fetch({ hierarchy: "", sectionId: "/sectionIdTest" })
+		).rejects.toEqual(new Error("Not found"));
 	});
 });

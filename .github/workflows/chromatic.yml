@@ -14,6 +14,13 @@ jobs:
   chromatic-deployment:
     # Operating System
     runs-on: ubuntu-latest
+
+    permissions:
+      packages: read
+      contents: read
+      id-token: write
+      deployments: write
+    
     # Job steps
     steps:
       - name: Checkout repository

@@ -24,13 +24,11 @@ jobs:
       - name: Create npmrc
         env:
           ARCXP_AUTH_TOKEN: ${{ secrets.WPMEDIA_PUBLIC_REPO_ARCXP_PACKAGE_TOKEN }}
-          WPMEDIA_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           touch .npmrc
           echo @wpmedia:registry=https://npm.pkg.github.com/ >> .npmrc
-          echo //npm.pkg.github.com/:_authToken=$WPMEDIA_AUTH_TOKEN >> .npmrc
-          echo @arcxp:registry=https://npm.pkg.github.com:443 >> .npmrc
-          echo //npm.pkg.github.com:443/:_authToken=$ARCXP_AUTH_TOKEN >> .npmrc
+          echo @arcxp:registry=https://npm.pkg.github.com/ >> .npmrc
+          echo //npm.pkg.github.com/:_authToken=$ARCXP_AUTH_TOKEN >> .npmrc
 
       - name: Setup Node
         uses: actions/setup-node@v3

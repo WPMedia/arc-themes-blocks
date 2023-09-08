@@ -13,6 +13,20 @@ jest.mock("axios", () => ({
 			pathname: requestUrl.pathname,
 			searchObject: Object.fromEntries(requestUrl.searchParams),
 		};
+		if (request.url.includes("302Mode")) {
+			return Promise.resolve({
+				data: {
+					type: "story",
+					related_content: {
+						redirect: [{ redirect_url: "test_url" }],
+					},
+					request: {
+						...request,
+						url,
+					},
+				},
+			});
+		}
 		return Promise.resolve({
 			data: {
 				content_elements: [{ url }],
@@ -132,6 +146,14 @@ describe("the content api source block", () => {
 					website_url: "undefined",
 				})
 			);
+		});
+	});
+
+	describe("When a redirect is set", () => {
+		it("should throw a 302", async () => {
+			await expect(() =>
+				contentApi.fetch({ _id: "302Mode" }, { cachedCall: () => {} })
+			).rejects.toEqual(new Error("Redirect"));
 		});
 	});
 });

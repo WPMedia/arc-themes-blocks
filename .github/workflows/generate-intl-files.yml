@@ -16,10 +16,20 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+
+      - name: Create npmrc
+        env:
+          ARCXP_AUTH_TOKEN: ${{ secrets.WPMEDIA_PUBLIC_REPO_ARCXP_PACKAGE_TOKEN }}
+        run: |
+          touch .npmrc
+          echo @wpmedia:registry=https://npm.pkg.github.com/ >> .npmrc
+          echo @arcxp:registry=https://npm.pkg.github.com/ >> .npmrc
+          echo //npm.pkg.github.com/:_authToken=$ARCXP_AUTH_TOKEN >> .npmrc
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
           node-version-file: .nvmrc
-          registry-url: "https://npm.pkg.github.com"
 
       - name: Cache Node Modules
         id: cache
@@ -31,8 +41,6 @@ jobs:
       - name: Clean install (CI) dependencies if lockfile (above) changed
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run Generate intl
         run: npm run generate:intl

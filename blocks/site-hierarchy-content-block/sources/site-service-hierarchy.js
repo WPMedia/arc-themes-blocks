@@ -22,7 +22,7 @@ const fetch = ({ hierarchy, sectionId, "arc-site": website }) => {
 		method: "GET",
 	})
 		.then(({ data }) => {
-			if (!hierarchy || (hierarchy && sectionId !== data._id)) {
+			if (sectionId && sectionId !== data._id) {
 				const error = new Error("Not found");
 				error.statusCode = 404;
 				throw error;

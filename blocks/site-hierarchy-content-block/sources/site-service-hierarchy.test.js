@@ -53,27 +53,37 @@ describe("the site-service-hierarchy content source block", () => {
 		);
 	});
 
-	it("should throw a 404 if only hierarchy is provided", async () => {
-		await expect(
-			contentSource.fetch({
+	it("should return data if only hierarchy is provided", async () => {
+		const contentSourceFetch = await contentSource.fetch(
+			{
 				hierarchy: "footer",
 				"arc-site": "the-site",
+			},
+			{ cachedCall: () => {} }
+		);
+
+		expect(contentSourceFetch.request.url.pathname).toEqual("/site/v3/navigation/the-site");
+		expect(contentSourceFetch.request.url.searchObject).toEqual(
+			expect.objectContaining({
+				hierarchy: "footer",
 			})
-		).rejects.toEqual(new Error("Not found"));
+		);
 	});
 
 	it("should throw a 404 if only sectionId is provided", async () => {
-		await expect(
-			contentSource.fetch({
+		const contentSourceFetch = await contentSource.fetch(
+			{
 				sectionId: "/sports",
 				"arc-site": "the-site",
-			})
-		).rejects.toEqual(new Error("Not found"));
-	});
+			},
+			{ cachedCall: () => {} }
+		);
 
-	it("should throw a 404 if with no hierarchy or sectionId", async () => {
-		await expect(contentSource.fetch({ "arc-site": "the-site" })).rejects.toEqual(
-			new Error("Not found")
+		expect(contentSourceFetch.request.url.pathname).toEqual("/site/v3/navigation/the-site");
+		expect(contentSourceFetch.request.url.searchObject).toEqual(
+			expect.objectContaining({
+				_id: "/sports",
+			})
 		);
 	});
 

@@ -54,8 +54,8 @@
 		"layout-max-width": 1600,
 		"content-max-width": 1440,
 		"content-scale-width": "calc(var(--content-max-width) / var(--layout-max-width) * 100%)",
-		"header-nav-chain-height": "56px",
-		"header-nav-chain-height-scrolled": "56px",
+		"header-nav-chain-height": "80px",
+		"header-nav-chain-height-scrolled": "80px",
 		"header-nav-chain-overlay-background-color": "rgba(25, 25, 25, 0.5)"
 	},
 	"desktop": {

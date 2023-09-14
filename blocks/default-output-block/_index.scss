@@ -4,6 +4,10 @@
 	@include scss.block-properties("application");
 }
 
+.nav-open {
+	overflow: hidden;
+}
+
 // do not delete this as it's used to inject scss
 .skip-main {
 	left: -999px;

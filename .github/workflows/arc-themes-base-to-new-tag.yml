@@ -49,7 +49,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node and NPM
         uses: actions/setup-node@v3

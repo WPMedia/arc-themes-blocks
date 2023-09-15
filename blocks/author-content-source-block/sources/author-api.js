@@ -30,7 +30,14 @@ const fetch = ({ slug }, { cachedCall }) => {
 		method: "GET",
 	})
 		.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_TOKEN_VERSION))
-		.then(({ data }) => data)
+		.then(({ data }) => {
+			if (!data.authors.length > 0) {
+				const error = new Error("Not found");
+				error.statusCode = 404;
+				throw error;
+			}
+			return data;
+		})
 		.catch(handleFetchError);
 };
 

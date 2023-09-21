@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { GoogleSignInContext } from "./googleContext";
 import useIdentity from "../../identity";
 
 function useSocialSignIn(redirectURL, onError = () => {}) {
 	const { Identity } = useIdentity();
+	const { isGoogleLoaded } = useContext(GoogleSignInContext);
 	const [config, setConfig] = useState(() => Identity?.configOptions ?? {});
 
 	useEffect(() => {
@@ -25,6 +27,35 @@ function useSocialSignIn(redirectURL, onError = () => {}) {
 			fetchConfig();
 		}
 	}, [Identity]);
+
+	useEffect(() => {
+		if (isGoogleLoaded && config.googleClientId) {
+			const googleClientId = config.googleClientId.split(",")?.[0];
+			const googleIdConfig = {
+				client_id: googleClientId,
+				callback: (credentialResponse) => Identity.signInWithGoogle(credentialResponse),
+				auto_select: true,
+			};
+
+			window.google.accounts.id.initialize(googleIdConfig);
+
+			window.google.accounts.id.renderButton(document.getElementById("google-sign-in-button"), {
+				type: "standard",
+				theme: "outline",
+				size: "large",
+				text: "continue_with",
+				shape: "rectangular",
+				logo_alignment: "left",
+				width: "300",
+			});
+
+			Identity.isLoggedIn().then((isLoggedIn) => {
+				if (!isLoggedIn) {
+					window.google.accounts.id.prompt();
+				}
+			});
+		}
+	}, [config.googleClientId, Identity, isGoogleLoaded]);
 
 	useEffect(() => {
 		const initializeFacebook = async () => {

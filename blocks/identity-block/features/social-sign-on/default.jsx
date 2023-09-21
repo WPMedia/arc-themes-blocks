@@ -7,6 +7,7 @@ import { Paragraph } from "@wpmedia/arc-themes-components";
 import SocialSignOn from "../../components/social-sign-on";
 import useLogin from "../../components/login";
 import useIdentity from "../../components/identity";
+import { GoogleSignInProvider } from "../../components/social-sign-on/utils/googleContext";
 
 const BLOCK_CLASS_NAME = "b-social-sign-on";
 
@@ -34,13 +35,15 @@ const SocialSignOnBlock = ({ customFields }) => {
 
 	return (
 		<section className={BLOCK_CLASS_NAME} data-testid="social-sign-on-container">
-			<SocialSignOn
-				className={`${BLOCK_CLASS_NAME}__button-container`}
-				onError={() => {
-					setError(phrases.t("identity-block.login-form-error"));
-				}}
-				redirectURL={loginRedirect}
-			/>
+			<GoogleSignInProvider>
+				<SocialSignOn
+					className={`${BLOCK_CLASS_NAME}__button-container`}
+					onError={() => {
+						setError(phrases.t("identity-block.login-form-error"));
+					}}
+					redirectURL={loginRedirect}
+				/>
+			</GoogleSignInProvider>
 			{error ? (
 				<section role="alert">
 					<Paragraph>{error}</Paragraph>

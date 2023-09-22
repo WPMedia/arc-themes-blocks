@@ -6,6 +6,7 @@ const { Provider } = GoogleSignInContext;
 
 export const GoogleSignInProvider = ({ children }) => {
 	const [isLoaded, setIsLoaded] = useState(false);
+	// istanbul ignore next
 	useEffect(() => {
 		const script = document.createElement("script");
 		script.src = "https://accounts.google.com/gsi/client";

@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import SocialSignOn from "./index";
 import useIdentity from "../identity";
+import { GoogleSignInProvider } from "./utils/googleContext";
 
 jest.mock("../identity");
 
@@ -20,7 +21,11 @@ describe("Identity Social Login Component", () => {
 			},
 		}));
 
-		render(<SocialSignOn />);
+		render(
+			<GoogleSignInProvider>
+				<SocialSignOn />
+			</GoogleSignInProvider>
+		);
 		// don't render any facebook stuff, only show wrapper
 		expect(screen.getByRole("generic")).not.toBeNull();
 	});
@@ -39,9 +44,13 @@ describe("Identity Social Login Component", () => {
 			},
 		}));
 
-		const { container } = render(<SocialSignOn onError={() => null} redirectURL="#" />);
+		const { container } = render(
+			<GoogleSignInProvider>
+				<SocialSignOn onError={() => null} redirectURL="#" />
+			</GoogleSignInProvider>
+		);
 
-		expect(container.querySelector("#arc-siwg-button")).not.toBeNull();
+		expect(container.querySelector("#google-sign-in-button")).not.toBeNull();
 		expect(container.querySelector(".fb-login-button")).toBeNull();
 	});
 
@@ -59,9 +68,13 @@ describe("Identity Social Login Component", () => {
 			},
 		}));
 
-		const { container } = render(<SocialSignOn onError={() => null} redirectURL="#" />);
+		const { container } = render(
+			<GoogleSignInProvider>
+				<SocialSignOn onError={() => null} redirectURL="#" />
+			</GoogleSignInProvider>
+		);
 
-		expect(container.querySelector("#arc-siwg-button")).toBeNull();
+		expect(container.querySelector("#google-sign-in-button")).toBeNull();
 		expect(container.querySelector(".fb-login-button")).not.toBeNull();
 	});
 
@@ -86,9 +99,13 @@ describe("Identity Social Login Component", () => {
 			},
 		}));
 
-		const { container } = render(<SocialSignOn onError={() => null} redirectURL="#" />);
+		const { container } = render(
+			<GoogleSignInProvider>
+				<SocialSignOn onError={() => null} redirectURL="#" />
+			</GoogleSignInProvider>
+		);
 
-		expect(container.querySelector("#arc-siwg-button")).not.toBeNull();
+		expect(container.querySelector("#google-sign-in-button")).not.toBeNull();
 		expect(container.querySelector(".fb-login-button")).not.toBeNull();
 	});
 
@@ -105,7 +122,11 @@ describe("Identity Social Login Component", () => {
 			isLoggedIn: () => true,
 		}));
 
-		render(<SocialSignOn onError={() => null} redirectURL="#" />);
+		render(
+			<GoogleSignInProvider>
+				<SocialSignOn onError={() => null} redirectURL="#" />
+			</GoogleSignInProvider>
+		);
 
 		expect(getConfigMock).toHaveBeenCalled();
 	});
@@ -128,7 +149,11 @@ describe("Identity Social Login Component", () => {
 			},
 		}));
 
-		render(<SocialSignOn onError={() => null} redirectURL="#" />);
+		render(
+			<GoogleSignInProvider>
+				<SocialSignOn onError={() => null} redirectURL="#" />
+			</GoogleSignInProvider>
+		);
 		window.onFacebookSignOn();
 		expect(facebookSignOnMock).toHaveBeenCalled();
 	});
@@ -154,7 +179,11 @@ describe("Identity Social Login Component", () => {
 			},
 		}));
 
-		render(<SocialSignOn onError={onErrorMock} redirectURL="#" />);
+		render(
+			<GoogleSignInProvider>
+				<SocialSignOn onError={onErrorMock} redirectURL="#" />
+			</GoogleSignInProvider>
+		);
 		window.onFacebookSignOn();
 		expect(onErrorMock).toHaveBeenCalled();
 	});

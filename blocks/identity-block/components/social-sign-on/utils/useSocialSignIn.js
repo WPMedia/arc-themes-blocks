@@ -29,6 +29,7 @@ function useSocialSignIn(redirectURL, onError = () => {}) {
 	}, [Identity]);
 
 	useEffect(() => {
+		// istanbul ignore next
 		if (isGoogleLoaded && config.googleClientId) {
 			const googleClientId = config.googleClientId.split(",")?.[0];
 			const googleIdConfig = {

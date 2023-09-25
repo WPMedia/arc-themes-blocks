@@ -1,6 +1,6 @@
 # `@wpmedia/author-content-source-block`
 
-Author Content Source Block
+Content source block for getting Author information from the API by slug.
 
 ## Endpoint
 

@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@arc-publishing/sdk-identity": "^1.55.0"
+    "@arc-publishing/sdk-identity": "^1.77.0",
+    "@arcxp/react-sign-in-with-google": "^1.72.0-prerelease.2"
   }
 }

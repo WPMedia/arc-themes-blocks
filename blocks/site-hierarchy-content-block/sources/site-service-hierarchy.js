@@ -21,7 +21,15 @@ const fetch = ({ hierarchy, sectionId, "arc-site": website }) => {
 		},
 		method: "GET",
 	})
-		.then(({ data }) => data)
+		.then(({ data }) => {
+			if (sectionId && sectionId !== data._id) {
+				const error = new Error("Not found");
+				error.statusCode = 404;
+				throw error;
+			}
+
+			return data;
+		})
 		.catch(handleFetchError);
 };
 
@@ -29,14 +37,4 @@ export default {
 	fetch,
 	params,
 	schemaName: "navigation-hierarchy",
-	transform: (data, query) => {
-		if (query.sectionId && query.sectionId !== data._id) {
-			if (!query.hierarchy || query.uri) {
-				const error = new Error("Not found");
-				error.statusCode = 404;
-				return Promise.reject(error);
-			}
-		}
-		return data;
-	},
 };

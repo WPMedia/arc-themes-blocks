@@ -13,9 +13,20 @@ jest.mock("axios", () => ({
 			pathname: requestUrl.pathname,
 			searchObject: Object.fromEntries(requestUrl.searchParams),
 		};
+		if (request.url.includes("404Mode")) {
+			return Promise.resolve({
+				data: {
+					authors: [],
+					request: {
+						...request,
+						url,
+					},
+				},
+			});
+		}
 		return Promise.resolve({
 			data: {
-				content_elements: [{ url }],
+				authors: [{ _id: "test-author" }],
 				request: {
 					...request,
 					url,
@@ -56,5 +67,16 @@ describe("the author api content source block", () => {
 		expect(contentSourceFetch.request.url.searchObject).toEqual(
 			expect.objectContaining({ slug: "slug" })
 		);
+	});
+
+	it("should throw a 404 if no authors are returned", async () => {
+		await expect(
+			contentSource.fetch(
+				{
+					slug: "404Mode",
+				},
+				{ cachedCall: () => {} }
+			)
+		).rejects.toEqual(new Error("Not found"));
 	});
 });

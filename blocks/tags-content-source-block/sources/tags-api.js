@@ -32,9 +32,12 @@ const fetch = ({ slug: slugs = "" }) => {
 				return data;
 			}
 
-			const error = new Error("Not found");
-			error.statusCode = 404;
-			return Promise.reject(error);
+			const NotFoundError = (message = "Not found") => {
+				const err = new Error(message);
+				err.statusCode = 404;
+				return err;
+			};
+			throw NotFoundError();
 		})
 		.catch(handleFetchError);
 };

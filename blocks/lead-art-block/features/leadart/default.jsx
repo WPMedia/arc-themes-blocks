@@ -9,6 +9,7 @@ import {
 	Carousel,
 	formatCredits,
 	formatPowaVideoEmbed,
+	getAspectRatio,
 	Icon,
 	Image,
 	MediaItem,
@@ -95,6 +96,19 @@ export const LeadArtPresentation = (props) => {
 				autoplay: customFields?.enableAutoplay,
 				playthrough: customFields?.playthrough,
 			});
+
+			let aspectRatio = "16:9"; // Default to 16:9
+
+			// Make sure that the content source exists and has an existing promo item
+			if (leadArt && leadArt.promo_items && leadArt.promo_items.basic) {
+				// Get the width and height of the promo item and calculate the aspect ratio
+				const width = leadArt?.promo_items.basic.width;
+				const height = leadArt?.promo_items.basic.height;
+
+				// Assign the calculated value to aspectRatio if it is non-null, otherwise assign default 16:9
+				aspectRatio = getAspectRatio(width, height) || "16:9";
+			}
+
 			return (
 				<MediaItem
 					caption={!hideCaption ? leadArt?.description?.basic : null}
@@ -102,7 +116,7 @@ export const LeadArtPresentation = (props) => {
 					title={!hideTitle ? leadArt?.headlines?.basic : null}
 				>
 					<Video
-						aspectRatio="16:9"
+						aspectRatio={aspectRatio}
 						embedMarkup={embedMarkup}
 						viewportPercentage={customFields?.viewportPercentage}
 					/>
@@ -118,7 +132,7 @@ export const LeadArtPresentation = (props) => {
 					title={!hideTitle ? leadArt.subtitle : null}
 				>
 					<Button
-						iconLeft={<Icon name="Fullscreen" fill="#6B6B6B" />}
+						iconLeft={<Icon name="Fullscreen" />}
 						accessibilityLabel={
 							!isOpen
 								? phrases.t("lead-art-block.fullscreen-enter")
@@ -159,11 +173,11 @@ export const LeadArtPresentation = (props) => {
 
 			return (
 				<Carousel
+					className={`${BLOCK_CLASS_NAME}__carousel`}
 					id={`${BLOCK_CLASS_NAME}-${leadArt._id}`}
 					showLabel
 					label={leadArt?.headlines?.basic}
 					slidesToShow={1}
-					showAdditionalSlideControls
 					pageCountPhrase={
 						/* istanbul ignore next */ (current, total) =>
 							phrases.t("global.gallery-page-count-text", { current, total })
@@ -179,15 +193,19 @@ export const LeadArtPresentation = (props) => {
 					}}
 					enableFullScreen
 					fullScreenShowButton={
-						<button type="button">
+						<Carousel.Button label={phrases.t("global.gallery-expand-button")}>
 							<Icon name="Fullscreen" />
 							{phrases.t("global.gallery-expand-button")}
-						</button>
+						</Carousel.Button>
 					}
 					fullScreenMinimizeButton={
-						<button type="button" className={`${BLOCK_CLASS_NAME}__close-icon`}>
+						<Button
+							variant="secondary-reverse"
+							type="button"
+							className={`${BLOCK_CLASS_NAME}__carousel__close-button`}
+						>
 							<Icon name="Close" />
-						</button>
+						</Button>
 					}
 					adElement={/* istanbul ignore next */ <AdBlock />}
 					adInterstitialClicks={interstitialClicks}
@@ -195,20 +213,18 @@ export const LeadArtPresentation = (props) => {
 						<Carousel.Button
 							id={`${BLOCK_CLASS_NAME}-${leadArt._id}`}
 							label={phrases.t("global.gallery-next-label")}
+							className={`${BLOCK_CLASS_NAME}__carousel__track-button`}
 						>
-							<Icon
-								className={`${BLOCK_CLASS_NAME}__track-icon`}
-								fill="white"
-								name="ChevronRight"
-							/>
+							<Icon fill="white" name="ChevronRight" />
 						</Carousel.Button>
 					}
 					previousButton={
 						<Carousel.Button
 							id={`${BLOCK_CLASS_NAME}-${leadArt._id}`}
 							label={phrases.t("global.gallery-previous-label")}
+							className={`${BLOCK_CLASS_NAME}__carousel__track-button`}
 						>
-							<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} name="ChevronLeft" />
+							<Icon name="ChevronLeft" />
 						</Carousel.Button>
 					}
 				>
@@ -232,6 +248,7 @@ export const LeadArtPresentation = (props) => {
 								<div className={`${BLOCK_CLASS_NAME}__image-wrapper`}>
 									<Image
 										ansImage={galleryItem}
+										loading={itemIndex === 0 ? imageLoadingStrategy : "lazy"}
 										// 16:9 aspect ratio
 										height={450}
 										responsiveImages={[800, 1600]}

@@ -1,6 +1,5 @@
 import React from "react";
-import { PrimaryFont } from "@wpmedia/shared-styles";
-import "./social-editable-field-styles.scss";
+import { Button } from "@wpmedia/arc-themes-components";
 
 function SocialEditableFieldContainer({
 	text,
@@ -10,24 +9,14 @@ function SocialEditableFieldContainer({
 }) {
 	return (
 		<div>
-			<PrimaryFont
-				as="span"
-				fontColor="primary-color"
-				className="social-field--connected-label-text"
-			>
+			<span>
 				{text}
 				{showDisconnectButton ? " " : ""}
-			</PrimaryFont>
+			</span>
 			{showDisconnectButton ? (
-				<PrimaryFont
-					as="button"
-					className="social-field--disconnect-link"
-					type="button"
-					onClick={onDisconnectFunction}
-					fontColor="primary-color"
-				>
+				<Button size="small" variant="default" type="submit" onClick={onDisconnectFunction}>
 					{disconnectText}
-				</PrimaryFont>
+				</Button>
 			) : null}
 		</div>
 	);

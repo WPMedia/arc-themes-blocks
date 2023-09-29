@@ -46,8 +46,8 @@ function EmailEditableFieldContainer({ email, setEmail }) {
 			formErrorText={formErrorText}
 			cancelEdit={handleCancelEdit}
 		>
-			<FormInputField
-				type={FIELD_TYPES.EMAIL}
+			<Input
+				type="email"
 				label={formEmailLabel}
 				defaultValue={email}
 				showDefaultError={false}

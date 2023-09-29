@@ -119,8 +119,8 @@ function PasswordEditableFieldContainer({ email, hasPassword, setHasPassword }) 
 		>
 			{hasPassword ? (
 				<>
-					<FormInputField
-						type={FIELD_TYPES.PASSWORD}
+					<Input
+						type="password"
 						label={phrases.t("identity-block.current-password")}
 						showDefaultError={false}
 						required

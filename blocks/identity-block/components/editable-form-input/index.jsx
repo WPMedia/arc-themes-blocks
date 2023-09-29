@@ -64,18 +64,19 @@ function EditableFieldPresentational({
 							) : null}
 							<div>
 								<Button
-									variant=""
 									onClick={() => {
 										if (cancelEdit) {
 											cancelEdit();
 										}
 										setIsEditable(false);
 									}}
-									type="button"
+									size="small"
+									type="submit"
+									variant="default"
 								>
 									<span>{cancelText}</span>
 								</Button>
-								<Button variant="" type="submit">
+								<Button size="small" type="submit" variant="default">
 									<span>{saveText}</span>
 								</Button>
 							</div>
@@ -84,7 +85,12 @@ function EditableFieldPresentational({
 						<>
 							<div>
 								<p>{label}</p>
-								<Button type="button" onClick={() => setIsEditable(true)}>
+								<Button
+									onClick={() => setIsEditable(true)}
+									size="small"
+									type="button"
+									variant="secondary"
+								>
 									<span>{editText}</span>
 								</Button>
 							</div>

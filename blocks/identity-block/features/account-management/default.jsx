@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { PrimaryFont } from "@wpmedia/shared-styles";
-import { useIdentity } from "../..";
+import { Heading } from "@wpmedia/arc-themes-components";
+import useIdentity from "../../components/identity";
 import EmailEditableFieldContainer from "./_children/EmailEditableFieldContainer";
 import PasswordEditableFieldContainer from "./_children/PasswordEditableFieldContainer";
 import SocialEditableSection from "./_children/SocialEditableSection";
 
-import "./styles.scss";
+const BLOCK_CLASS_NAME = "b-account-management";
 
 export function AccountManagementPresentational({ header, children }) {
 	return (
-		<div className="account-management-layout">
-			<PrimaryFont as="h2">{header}</PrimaryFont>
+		<div className={BLOCK_CLASS_NAME}>
+			<Heading>{header}</Heading>
 			{children}
 		</div>
 	);

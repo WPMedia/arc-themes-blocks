@@ -69,3 +69,13 @@
 	@include scss.block-components("sign-up");
 	@include scss.block-properties("sign-up");
 }
+
+.b-social-sign-on {
+	&__button-container {
+		@include scss.block-components("social-sign-on-button-container");
+		@include scss.block-properties("social-sign-on-button-container");
+	}
+
+	@include scss.block-components("social-sign-on");
+	@include scss.block-properties("social-sign-on");
+}

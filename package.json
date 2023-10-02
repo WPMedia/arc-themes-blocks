@@ -41,7 +41,7 @@
   "license": "CC-BY-NC-ND-4.0",
   "devDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@arc-publishing/sdk-identity": "^1.64.0",
+    "@arc-publishing/sdk-identity": "^1.77.0",
     "@babel/core": "^7.17.8",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-proposal-decorators": "^7.17.8",

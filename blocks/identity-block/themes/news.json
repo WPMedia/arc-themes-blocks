@@ -357,5 +357,30 @@
 			},
 			"desktop": {}
 		}
+	},
+	"social-sign-on": {
+		"styles": {
+			"default": {
+				"inline-size": "300px",
+				"margin-inline": "auto",
+				"components": {
+					"paragraph": {
+						"color": "var(--status-color-danger)",
+						"font-family": "var(--font-family-primary)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"social-sign-on-button-container": {
+		"styles": {
+			"default": {
+				"display": "flex",
+				"flex-direction": "column",
+				"gap": "var(--global-spacing-4)"
+			},
+			"desktop": {}
+		}
 	}
 }

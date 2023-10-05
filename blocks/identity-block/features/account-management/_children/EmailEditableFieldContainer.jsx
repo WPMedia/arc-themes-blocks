@@ -39,7 +39,7 @@ function EmailEditableFieldContainer({ blockClassName, email, setEmail }) {
 		<EditableFieldPresentational
 			cancelEdit={handleCancelEdit}
 			cancelText={cancelText}
-			className={`${blockClassName}__edit`}
+			blockClassName={blockClassName}
 			editText={editText}
 			formErrorText={formErrorText}
 			initialValue={email}

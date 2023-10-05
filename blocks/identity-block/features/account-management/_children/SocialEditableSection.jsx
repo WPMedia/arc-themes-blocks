@@ -36,7 +36,7 @@ function SocialEditableSection({
 	return (
 		<>
 			{googleClientId ? (
-				<div className={`${blockClassName}__edit`}>
+				<div className={`${blockClassName}__social-edit`}>
 					<div>
 						<GoogleSignIn />
 					</div>
@@ -51,7 +51,7 @@ function SocialEditableSection({
 				</div>
 			) : null}
 			{facebookAppId ? (
-				<div className={`${blockClassName}__edit`}>
+				<div className={`${blockClassName}__social-edit`}>
 					<div>
 						<FacebookSignIn />
 					</div>

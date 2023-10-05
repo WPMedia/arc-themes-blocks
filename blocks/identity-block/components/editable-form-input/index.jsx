@@ -35,10 +35,10 @@ export function ConditionalFormContainer({ showForm, children, onSubmit, setIsEd
 }
 
 function EditableFieldPresentational({
+	blockClassName,
 	cancelEdit,
 	cancelText,
 	children,
-	className,
 	editText,
 	formErrorText,
 	initialValue,
@@ -48,7 +48,7 @@ function EditableFieldPresentational({
 }) {
 	const [isEditable, setIsEditable] = useState(!!formErrorText);
 	return (
-		<section className={className}>
+		<section className={`${blockClassName}__edit`}>
 			<ConditionalFormContainer
 				onSubmit={onSubmit}
 				showForm={isEditable}
@@ -73,25 +73,19 @@ function EditableFieldPresentational({
 									}}
 									size="small"
 									type="submit"
-									variant="default"
 								>
 									<span>{cancelText}</span>
 								</Button>
-								<Button size="small" type="submit" variant="default">
+								<Button size="small" type="submit">
 									<span>{saveText}</span>
 								</Button>
 							</div>
 						</>
 					) : (
 						<>
-							<div>
-								<p>{label}</p>
-								<Button
-									onClick={() => setIsEditable(true)}
-									size="small"
-									type="button"
-									variant="secondary"
-								>
+							<div className={`${blockClassName}__edit-label`}>
+								<Paragraph>{label}</Paragraph>
+								<Button onClick={() => setIsEditable(true)} size="small" type="button">
 									<span>{editText}</span>
 								</Button>
 							</div>

@@ -6,9 +6,19 @@
 		@include scss.block-properties("account-management-edit");
 	}
 
+	&__edit-label {
+		@include scss.block-components("account-management-edit-label");
+		@include scss.block-properties("account-management-edit-label");
+	}
+
 	&__section {
 		@include scss.block-components("account-management-section");
 		@include scss.block-properties("account-management-section");
+	}
+
+	&__social-edit {
+		@include scss.block-components("account-management-social-edit");
+		@include scss.block-properties("account-management-social-edit");
 	}
 
 	@include scss.block-components("account-management");

@@ -108,7 +108,7 @@ function PasswordEditableFieldContainer({ blockClassName, email, hasPassword, se
 
 	return (
 		<EditableFieldPresentational
-			className={`${blockClassName}__edit`}
+			blockClassName={blockClassName}
 			initialValue={passwordValue}
 			label={phrases.t("identity-block.password")}
 			editText={phrases.t("identity-block.edit")}

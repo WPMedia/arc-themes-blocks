@@ -14,7 +14,12 @@ function SocialEditableFieldContainer({
 				{showDisconnectButton ? " " : ""}
 			</span>
 			{showDisconnectButton ? (
-				<Button size="small" variant="default" type="submit" onClick={onDisconnectFunction}>
+				<Button
+					size="medium"
+					variant="primary-reverse"
+					type="submit"
+					onClick={onDisconnectFunction}
+				>
 					{disconnectText}
 				</Button>
 			) : null}

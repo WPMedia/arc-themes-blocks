@@ -1,6 +1,16 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-account-management {
+	&__edit {
+		@include scss.block-components("account-management-edit");
+		@include scss.block-properties("account-management-edit");
+	}
+
+	&__section {
+		@include scss.block-components("account-management-section");
+		@include scss.block-properties("account-management-section");
+	}
+
 	@include scss.block-components("account-management");
 	@include scss.block-properties("account-management");
 }

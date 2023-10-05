@@ -14,7 +14,7 @@ const BLOCK_CLASS_NAME = "b-account-management";
 
 export function AccountManagementPresentational({ header, children }) {
 	return (
-		<div className={BLOCK_CLASS_NAME}>
+		<div className={`${BLOCK_CLASS_NAME}__section`}>
 			<Heading>{header}</Heading>
 			{children}
 		</div>
@@ -98,26 +98,34 @@ function AccountManagement({ customFields }) {
 
 	// if logged in, return account info
 	return (
-		<div className="account-management-layout--wrapper">
+		<div className={BLOCK_CLASS_NAME}>
 			<AccountManagementPresentational header={header}>
-				{showEmail && <EmailEditableFieldContainer email={email} setEmail={setEmail} />}
-				{showPassword ? (
+				{showEmail && (
+					<EmailEditableFieldContainer
+						blockClassName={BLOCK_CLASS_NAME}
+						email={email}
+						setEmail={setEmail}
+					/>
+				)}
+				{showPassword && (
 					<PasswordEditableFieldContainer
+						blockClassName={BLOCK_CLASS_NAME}
 						email={email}
 						hasPassword={hasPassword}
 						setHasPassword={setHasPassword}
 					/>
-				) : null}
+				)}
 			</AccountManagementPresentational>
 			{showSocialProfile ? (
 				<AccountManagementPresentational header={socialProfileHeader}>
 					<GoogleSignInProvider>
 						<SocialEditableSection
-							hasGoogle={hasGoogle}
+							blockClassName={BLOCK_CLASS_NAME}
 							hasFacebook={hasFacebook}
+							hasGoogle={hasGoogle}
+							hasPasswordAccount={hasPassword}
 							unlinkFacebook={unlinkFacebook}
 							unlinkGoogle={unlinkGoogle}
-							hasPasswordAccount={hasPassword}
 						/>
 					</GoogleSignInProvider>
 				</AccountManagementPresentational>

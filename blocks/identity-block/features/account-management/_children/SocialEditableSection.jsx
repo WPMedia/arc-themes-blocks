@@ -8,6 +8,7 @@ import GoogleSignIn from "../../../components/social-sign-on/_children/GoogleSig
 import SocialEditableFieldContainer from "./SocialEditableFieldContainer";
 
 function SocialEditableSection({
+	blockClassName,
 	hasFacebook,
 	hasGoogle,
 	hasPasswordAccount,
@@ -35,11 +36,11 @@ function SocialEditableSection({
 	return (
 		<>
 			{googleClientId ? (
-				<div className="social-editable-section--container">
-					<div className="social-editable-section--item">
+				<div className={`${blockClassName}__edit`}>
+					<div>
 						<GoogleSignIn />
 					</div>
-					<div className="social-editable-section--item">
+					<div>
 						<SocialEditableFieldContainer
 							onDisconnectFunction={unlinkGoogle}
 							text={hasGoogle ? socialText : googleConnectText}
@@ -50,11 +51,11 @@ function SocialEditableSection({
 				</div>
 			) : null}
 			{facebookAppId ? (
-				<div className="social-editable-section--container">
-					<div className="social-editable-section--item">
+				<div className={`${blockClassName}__edit`}>
+					<div>
 						<FacebookSignIn />
 					</div>
-					<div className="social-editable-section--item">
+					<div>
 						<SocialEditableFieldContainer
 							onDisconnectFunction={unlinkFacebook}
 							text={hasFacebook ? socialText : facebookConnectText}

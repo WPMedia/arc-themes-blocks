@@ -35,22 +35,23 @@ export function ConditionalFormContainer({ showForm, children, onSubmit, setIsEd
 }
 
 function EditableFieldPresentational({
+	cancelEdit,
+	cancelText,
+	children,
+	className,
+	editText,
+	formErrorText,
 	initialValue,
 	label,
-	children,
-	editText,
 	onSubmit,
-	cancelEdit,
-	formErrorText,
-	cancelText,
 	saveText,
 }) {
 	const [isEditable, setIsEditable] = useState(!!formErrorText);
 	return (
-		<section>
+		<section className={className}>
 			<ConditionalFormContainer
-				showForm={isEditable}
 				onSubmit={onSubmit}
+				showForm={isEditable}
 				setIsEditable={setIsEditable}
 			>
 				<div>

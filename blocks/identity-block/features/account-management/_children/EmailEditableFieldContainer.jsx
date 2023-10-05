@@ -6,7 +6,7 @@ import { Input } from "@wpmedia/arc-themes-components";
 import useIdentity from "../../../components/identity";
 import EditableFieldPresentational from "../../../components/editable-form-input";
 
-function EmailEditableFieldContainer({ email, setEmail }) {
+function EmailEditableFieldContainer({ blockClassName, email, setEmail }) {
 	const [formErrorText, setFormErrorText] = useState(null);
 
 	const { arcSite } = useFusionContext();
@@ -37,14 +37,15 @@ function EmailEditableFieldContainer({ email, setEmail }) {
 
 	return (
 		<EditableFieldPresentational
+			cancelEdit={handleCancelEdit}
+			cancelText={cancelText}
+			className={`${blockClassName}__edit`}
+			editText={editText}
+			formErrorText={formErrorText}
 			initialValue={email}
 			label={formEmailLabel}
-			editText={editText}
 			onSubmit={handleEmailUpdate}
 			saveText={saveText}
-			cancelText={cancelText}
-			formErrorText={formErrorText}
-			cancelEdit={handleCancelEdit}
 		>
 			<Input
 				type="email"

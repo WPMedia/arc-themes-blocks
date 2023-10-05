@@ -9,7 +9,7 @@ import FormPasswordConfirm from "../../../components/form-password-confirm";
 import passwordValidationMessage from "../../../utils/password-validation-message";
 import validatePasswordPattern from "../../../utils/validate-password-pattern";
 
-function PasswordEditableFieldContainer({ email, hasPassword, setHasPassword }) {
+function PasswordEditableFieldContainer({ blockClassName, email, hasPassword, setHasPassword }) {
 	const [error, setError] = useState(false);
 	const [passwordRequirements, setPasswordRequirements] = useState({});
 	const [configStatus, setConfigStatus] = useState("loading");
@@ -108,6 +108,7 @@ function PasswordEditableFieldContainer({ email, hasPassword, setHasPassword }) 
 
 	return (
 		<EditableFieldPresentational
+			className={`${blockClassName}__edit`}
 			initialValue={passwordValue}
 			label={phrases.t("identity-block.password")}
 			editText={phrases.t("identity-block.edit")}

@@ -5,6 +5,7 @@ import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { Heading } from "@wpmedia/arc-themes-components";
 import useIdentity from "../../components/identity";
+import { GoogleSignInProvider } from "../../components/social-sign-on/utils/googleContext";
 import EmailEditableFieldContainer from "./_children/EmailEditableFieldContainer";
 import PasswordEditableFieldContainer from "./_children/PasswordEditableFieldContainer";
 import SocialEditableSection from "./_children/SocialEditableSection";
@@ -110,20 +111,22 @@ function AccountManagement({ customFields }) {
 			</AccountManagementPresentational>
 			{showSocialProfile ? (
 				<AccountManagementPresentational header={socialProfileHeader}>
-					<SocialEditableSection
-						hasGoogle={hasGoogle}
-						hasFacebook={hasFacebook}
-						unlinkFacebook={unlinkFacebook}
-						unlinkGoogle={unlinkGoogle}
-						hasPasswordAccount={hasPassword}
-					/>
+					<GoogleSignInProvider>
+						<SocialEditableSection
+							hasGoogle={hasGoogle}
+							hasFacebook={hasFacebook}
+							unlinkFacebook={unlinkFacebook}
+							unlinkGoogle={unlinkGoogle}
+							hasPasswordAccount={hasPassword}
+						/>
+					</GoogleSignInProvider>
 				</AccountManagementPresentational>
 			) : null}
 		</div>
 	);
 }
 
-AccountManagement.label = "Account Management - Profile";
+AccountManagement.label = "Identity Account Management – Arc Block";
 
 AccountManagement.icon = "monitor-user";
 

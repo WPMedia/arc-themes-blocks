@@ -2,12 +2,10 @@ import React from "react";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import useSocialSignIn from "../../../components/SocialSignOn/utils/useSocialSignIn";
-import FacebookSignIn from "../../../components/SocialSignOn/_children/FacebookSignIn";
-import GoogleSignIn from "../../../components/SocialSignOn/_children/GoogleSignIn";
+import useSocialSignIn from "../../../components/social-sign-on/utils/useSocialSignIn";
+import FacebookSignIn from "../../../components/social-sign-on/_children/FacebookSignIn";
+import GoogleSignIn from "../../../components/social-sign-on/_children/GoogleSignIn";
 import SocialEditableFieldContainer from "./SocialEditableFieldContainer";
-
-import "./social-editable-section-styles.scss";
 
 function SocialEditableSection({
 	hasFacebook,

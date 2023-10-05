@@ -1,7 +1,7 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import { act } from "react-dom/test-utils";
-import useIdentity from "../../components/Identity";
+import useIdentity from "../../components/identity";
 import AccountManagement, { AccountManagementPresentational } from "./default";
 
 jest.mock("fusion:properties", () =>

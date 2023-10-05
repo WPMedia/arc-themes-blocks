@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import { act } from "react-dom/test-utils";
-import useIdentity from "../../../components/Identity";
+import useIdentity from "../../../components/identity";
 import PasswordEditableFieldContainer from "./PasswordEditableFieldContainer";
 
 jest.mock("fusion:properties", () =>

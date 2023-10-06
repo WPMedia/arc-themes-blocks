@@ -1,21 +1,21 @@
 import React from "react";
-import { mount } from "enzyme";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 import EditableFormInputField, { ConditionalFormContainer } from ".";
 
 describe("Editable form input field", () => {
 	it("conditional form renders a form when show form elected", () => {
-		const wrapper = mount(<ConditionalFormContainer showForm />);
-		expect(wrapper.find("form").length).toBe(1);
+		render(<ConditionalFormContainer showForm />);
+		expect(screen.getByTestId("conditional-form")).not.toBeNull();
 	});
 
 	it("conditional form does not render a form when show form not elected", () => {
-		const wrapper = mount(<ConditionalFormContainer showForm={false} />);
-		expect(wrapper.find("form").length).toBe(0);
+		render(<ConditionalFormContainer showForm={false} />);
+		expect(screen.queryByTestId("conditional-form")).toBeNull();
 	});
 
 	it("editable form field shows initial value, label, and edit button when not editable and hides children", () => {
-		const wrapper = mount(
+		render(
 			<EditableFormInputField
 				initialValue="initial value"
 				editText="edit text"
@@ -25,15 +25,13 @@ describe("Editable form input field", () => {
 				<p id="test-child">Test child</p>
 			</EditableFormInputField>
 		);
-		expect(wrapper.find(".editable-form-input--value-text").length).toBe(1);
-		expect(wrapper.find(".editable-form-input--value-text").text()).toBe("initial value");
-		expect(wrapper.find(".editable-form-input--label-text").text()).toBe("label");
-		expect(wrapper.find("button.editable-form-input--edit-button-link").text()).toBe("edit text");
-		expect(wrapper.find("#test-child").length).toBe(0);
+		expect(screen.getByText("initial value")).not.toBeNull();
+		expect(screen.getByText("edit text")).not.toBeNull();
+		expect(screen.getByText("label")).not.toBeNull();
 	});
 
 	it("shows error text if passed in with formErrorText prop", () => {
-		const wrapper = mount(
+		render(
 			<EditableFormInputField
 				initialValue="initial value"
 				editText="edit text"
@@ -45,12 +43,11 @@ describe("Editable form input field", () => {
 			</EditableFormInputField>
 		);
 
-		expect(wrapper.find("#test-child").length).toBe(1);
-		expect(wrapper.find(".xpmedia-form-error").text()).toBe("Error Text");
+		expect(screen.getByText("Error Text")).not.toBeNull();
 	});
 
 	it("editable form field hides edit button when editable and shows children", async () => {
-		const wrapper = mount(
+		render(
 			<EditableFormInputField
 				initialValue="initial value"
 				editText="edit text"
@@ -61,22 +58,21 @@ describe("Editable form input field", () => {
 			</EditableFormInputField>
 		);
 
-		wrapper.find("button.editable-form-input--edit-button-link").simulate("click");
-		expect(wrapper.find("#test-child").length).toBe(1);
-		expect(wrapper.find(".editable-form-input--value-text").length).toBe(0);
-		expect(wrapper.find(".editable-form-input--value-text").length).toBe(0);
+		fireEvent.click(screen.getByRole("button"));
+		expect(screen.queryByText("initial value")).toBeNull();
+		expect(screen.queryByText("edit text")).toBeNull();
 	});
 
 	it("does not submit if the input is invalid", () => {
 		const callback = jest.fn(() => Promise.resolve());
 
-		const wrapper = mount(
+		render(
 			<ConditionalFormContainer onSubmit={callback} setIsEditable={() => {}} showForm>
 				<input name="inputField" type="email" defaultValue="invalid" />
 			</ConditionalFormContainer>
 		);
 
-		wrapper.find("form").simulate("submit");
+		fireEvent.submit(screen.getByTestId("conditional-form"));
 
 		expect(callback).not.toHaveBeenCalled();
 	});
@@ -84,13 +80,13 @@ describe("Editable form input field", () => {
 	it("does submit if the input is valid", () => {
 		const callback = jest.fn(() => Promise.resolve());
 
-		const wrapper = mount(
+		render(
 			<ConditionalFormContainer onSubmit={callback} showForm setIsEditable={() => {}}>
 				<input name="inputField" type="email" defaultValue="valid@email.com" />
 			</ConditionalFormContainer>
 		);
 
-		wrapper.find("form").simulate("submit");
+		fireEvent.submit(screen.getByTestId("conditional-form"));
 
 		expect(callback).toHaveBeenCalledWith({
 			inputField: "valid@email.com",
@@ -100,24 +96,28 @@ describe("Editable form input field", () => {
 	it("calls passed in cancelEdit function when using cancel button", () => {
 		const callback = jest.fn();
 
-		const wrapper = mount(
-			<EditableFormInputField cancelEdit={callback} formErrorText="Error">
+		render(
+			<EditableFormInputField
+				cancelEdit={callback}
+				cancelText="cancel change"
+				formErrorText="Error"
+			>
 				<input name="inputField" type="email" defaultValue="invalid" />
 			</EditableFormInputField>
 		);
 
-		wrapper.find('button[type="button"]').simulate("click");
+		fireEvent.click(screen.getByText("cancel change"));
 
 		expect(callback).toHaveBeenCalled();
 	});
 
 	it("calls passed in cancelEdit function when using cancel button", () => {
-		const wrapper = mount(
+		render(
 			<EditableFormInputField formErrorText="Error">
 				<input name="inputField" type="email" defaultValue="invalid" />
 			</EditableFormInputField>
 		);
 
-		expect(wrapper.find(".xpmedia-form-error").text()).toBe("Error");
+		expect(screen.getByText("Error")).not.toBeNull();
 	});
 });

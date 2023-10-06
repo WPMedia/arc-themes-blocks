@@ -26,7 +26,7 @@ export function ConditionalFormContainer({ showForm, children, onSubmit, setIsEd
 	};
 
 	return showForm ? (
-		<form onSubmit={handleSubmit} ref={formRef}>
+		<form data-testid="conditional-form" onSubmit={handleSubmit} ref={formRef}>
 			{children}
 		</form>
 	) : (
@@ -89,7 +89,7 @@ function EditableFieldPresentational({
 									<span>{editText}</span>
 								</Button>
 							</div>
-							<p>{initialValue}</p>
+							<Paragraph>{initialValue}</Paragraph>
 						</>
 					)}
 				</div>

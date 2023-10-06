@@ -24,6 +24,7 @@ const videoLayouts = {
 	inlineVideo: ({
 		alertBadge,
 		aspectRatio,
+		viewportPercentage,
 		caption,
 		credit,
 		description,
@@ -40,7 +41,12 @@ const videoLayouts = {
 				</HeadingSection>
 			) : null}
 			<MediaItem caption={caption} credit={credit} title={!hideVideoTitle && captionTitle}>
-				<Video aspectRatio={aspectRatio} className="video-container" embedMarkup={embedMarkup} />
+				<Video
+					aspectRatio={aspectRatio}
+					viewportPercentage={viewportPercentage}
+					className="video-container"
+					embedMarkup={embedMarkup}
+				/>
 			</MediaItem>
 			{description ? <Paragraph>{description}</Paragraph> : null}
 		</Stack>
@@ -48,6 +54,7 @@ const videoLayouts = {
 	featureVideo: ({
 		alertBadge,
 		aspectRatio,
+		viewportPercentage,
 		caption,
 		credit,
 		description,
@@ -58,7 +65,12 @@ const videoLayouts = {
 	}) => (
 		<Stack className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}__feature`}>
 			<MediaItem caption={caption} credit={credit} title={!hideVideoTitle && captionTitle}>
-				<Video aspectRatio={aspectRatio} className="video-container" embedMarkup={embedMarkup} />
+				<Video
+					aspectRatio={aspectRatio}
+					viewportPercentage={viewportPercentage}
+					className="video-container"
+					embedMarkup={embedMarkup}
+				/>
 			</MediaItem>
 			<Stack className={`${BLOCK_CLASS_NAME}__feature-meta`}>
 				{alertBadge ? <Badge variant="danger">{alertBadge}</Badge> : null}
@@ -77,6 +89,8 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 	const {
 		alertBadge,
 		autoplay,
+		aspectRatio: videoAspectRatio,
+		viewportPercentage = 65,
 		description,
 		displayStyle = "inlineVideo",
 		hideVideoCaption,
@@ -114,10 +128,15 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 		? contentSource?.description?.basic
 		: (title && description) || contentSource?.description?.basic;
 
-	let aspectRatio = "16:9"; // Default to 16:9 aspect ratio for videos
+	let aspectRatio = videoAspectRatio;
 
 	// Make sure that the content source exists and has an existing promo item
-	if (contentSource && contentSource.promo_items && contentSource.promo_items.basic) {
+	if (
+		!aspectRatio &&
+		contentSource &&
+		contentSource.promo_items &&
+		contentSource.promo_items.basic
+	) {
 		// Get the width and height of the promo item and calculate the aspect ratio
 		const width = contentSource?.promo_items.basic.width;
 		const height = contentSource?.promo_items.basic.height;
@@ -133,6 +152,7 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 		? renderVideoLayout({
 				alertBadge,
 				aspectRatio,
+				viewportPercentage,
 				caption: !hideVideoCaption ? captionDescription : null,
 				credit: !hideVideoCredits ? formatCredits(contentSource?.credits) : null,
 				description,
@@ -190,6 +210,22 @@ VideoPlayer.propTypes = {
 			label: "Hide Credits",
 			defaultValue: false,
 			group: "Video Subtext Options",
+		}),
+		aspectRatio: PropTypes.oneOf(["16:9", "9:16", "1:1", "4:3"]).tag({
+			label: "Player Aspect Ratio",
+			defaultValue: "16:9",
+			group: "Display settings",
+			labels: {
+				"16:9": "16:9",
+				"9:16": "9:16",
+				"1:1": "1:1",
+				"4:3": "4:3",
+			},
+		}),
+		viewportPercentage: PropTypes.number.tag({
+			label: "View height percentage",
+			defaultValue: 65,
+			group: "Display settings",
 		}),
 		title: PropTypes.string.tag({
 			label: "Title",

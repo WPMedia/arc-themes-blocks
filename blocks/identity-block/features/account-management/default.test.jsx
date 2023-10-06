@@ -1,5 +1,6 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 import { act } from "react-dom/test-utils";
 import useIdentity from "../../components/identity";
 import AccountManagement, { AccountManagementPresentational } from "./default";
@@ -10,11 +11,15 @@ jest.mock("fusion:properties", () =>
 	}))
 );
 
-jest.mock("../../components/Identity");
+jest.mock("../../components/identity");
 
 jest.mock("./_children/PasswordEditableFieldContainer", () => () => {
 	const MockName = "password-editable-field-container-mock";
-	return <MockName />;
+	return (
+		<MockName>
+			<span>Password</span>
+		</MockName>
+	);
 });
 
 jest.mock("fusion:intl", () => ({
@@ -34,8 +39,8 @@ describe("Account management", () => {
 	});
 
 	it("renders header text", () => {
-		const wrapper = mount(<AccountManagementPresentational header="header" />);
-		expect(wrapper.find("h2").text()).toEqual("header");
+		render(<AccountManagementPresentational header="header" />);
+		expect(screen.getByText("header")).not.toBeNull();
 	});
 
 	it("should render account management if logged in and initialized", async () => {
@@ -49,14 +54,12 @@ describe("Account management", () => {
 			},
 		}));
 
-		let wrapper;
 		await act(async () => {
-			wrapper = await mount(<AccountManagement customFields={{}} />);
+			await render(<AccountManagement customFields={{}} />);
 		});
 		await userProfileMock;
-		wrapper.update();
 
-		expect(wrapper.find("h2").text()).toEqual("Account Information");
+		expect(screen.getByText("Account Information")).not.toBeNull();
 	});
 
 	it("should not render if not logged in and not initialized", async () => {
@@ -68,13 +71,11 @@ describe("Account management", () => {
 				getConfig: jest.fn(async () => ({})),
 			},
 		}));
-
-		let wrapper;
+		let container;
 		await act(async () => {
-			wrapper = await mount(<AccountManagement customFields={{}} />);
+			({ container } = await render(<AccountManagement customFields={{}} />));
 		});
-		wrapper.update();
-		expect(wrapper.html()).toBe(null);
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("shows email input editable field if showing email", async () => {
@@ -88,18 +89,16 @@ describe("Account management", () => {
 			},
 		}));
 
-		let wrapper;
 		await act(async () => {
-			wrapper = await mount(<AccountManagement customFields={{ showEmail: true }} />);
+			await render(<AccountManagement customFields={{ showEmail: true }} />);
 		});
 		await userProfileMock;
-		wrapper.update();
-		expect(wrapper.find("EmailEditableFieldContainer").length).toBe(1);
+		expect(screen.getByText("Email address")).not.toBeNull();
 	});
 
 	it("hides email input editable field if showing email", () => {
-		const wrapper = shallow(<AccountManagement customFields={{ showEmail: false }} />);
-		expect(wrapper.find("EmailEditableFieldContainer").length).toBe(0);
+		render(<AccountManagement customFields={{ showEmail: false }} />);
+		expect(screen.queryByText("Email address")).toBeNull();
 	});
 
 	it("shows password input editable field if showing password", async () => {
@@ -113,17 +112,15 @@ describe("Account management", () => {
 			},
 		}));
 
-		let wrapper;
 		await act(async () => {
-			wrapper = await mount(<AccountManagement customFields={{ showPassword: true }} />);
+			await render(<AccountManagement customFields={{ showPassword: true }} />);
 		});
 		await userProfileMock;
-		wrapper.update();
-		expect(wrapper.find("password-editable-field-container-mock").length).toBe(1);
+		expect(screen.getByText("Password")).not.toBeNull();
 	});
 
 	it("hides password input editable field if showing password", () => {
-		const wrapper = shallow(<AccountManagement customFields={{ showPassword: false }} />);
-		expect(wrapper.find("PasswordEditableFieldContainer").length).toBe(0);
+		render(<AccountManagement customFields={{ showPassword: false }} />);
+		expect(screen.queryByText("Password")).toBeNull();
 	});
 });

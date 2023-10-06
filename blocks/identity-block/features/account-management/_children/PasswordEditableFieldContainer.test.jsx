@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import useIdentity from "../../../components/identity";
 import PasswordEditableFieldContainer from "./PasswordEditableFieldContainer";
@@ -10,7 +10,7 @@ jest.mock("fusion:properties", () =>
 	}))
 );
 
-jest.mock("../../../components/Identity");
+jest.mock("../../../components/identity");
 
 jest.mock("fusion:intl", () => ({
 	__esModule: true,
@@ -41,13 +41,11 @@ describe("PasswordEditableFieldContainer", () => {
 			},
 		}));
 
-		let wrapper;
 		await act(async () => {
-			wrapper = await mount(<PasswordEditableFieldContainer />);
+			await render(<PasswordEditableFieldContainer />);
 		});
 		await getConfigMock;
-		wrapper.update();
-		expect(wrapper.find(".editable-form-input--value-text").text()).toBe("Add Password");
+		expect(screen.getByText("Add Password")).not.toBeNull();
 	});
 
 	it("should render component with password placeholder label", async () => {
@@ -57,13 +55,11 @@ describe("PasswordEditableFieldContainer", () => {
 			},
 		}));
 
-		let wrapper;
 		await act(async () => {
-			wrapper = await mount(<PasswordEditableFieldContainer hasPassword />);
+			await render(<PasswordEditableFieldContainer hasPassword />);
 		});
 		await getConfigMock;
-		wrapper.update();
-		expect(wrapper.find(".editable-form-input--value-text").text()).toBe("**********");
+		expect(screen.getByText("**********")).not.toBeNull();
 	});
 
 	it("renders current password field and password confirm fields when hasPassword and editing", async () => {
@@ -73,15 +69,15 @@ describe("PasswordEditableFieldContainer", () => {
 			},
 		}));
 
-		let wrapper;
 		await act(async () => {
-			wrapper = await mount(<PasswordEditableFieldContainer hasPassword />);
+			await render(<PasswordEditableFieldContainer hasPassword />);
 		});
 		await getConfigMock;
-		wrapper.update();
-		expect(wrapper.find(".editable-form-input--value-text").text()).toBe("**********");
-		wrapper.find("button").simulate("click");
-		expect(wrapper.find("input").length).toBe(3);
+		expect(screen.getByText("**********")).not.toBeNull();
+		fireEvent.click(screen.getByRole("button"));
+		expect(screen.getByLabelText("Current Password")).not.toBeNull();
+		expect(screen.getByLabelText("New Password")).not.toBeNull();
+		expect(screen.getByLabelText("Confirm password")).not.toBeNull();
 	});
 
 	it("renders only password confirm fields when NOT hasPassword and editing", async () => {
@@ -91,14 +87,13 @@ describe("PasswordEditableFieldContainer", () => {
 			},
 		}));
 
-		let wrapper;
 		await act(async () => {
-			wrapper = await mount(<PasswordEditableFieldContainer />);
+			await render(<PasswordEditableFieldContainer />);
 		});
 		await getConfigMock;
-		wrapper.update();
-		expect(wrapper.find(".editable-form-input--value-text").text()).toBe("Add Password");
-		wrapper.find("button").simulate("click");
-		expect(wrapper.find("input").length).toBe(2);
+		expect(screen.getByText("Add Password")).not.toBeNull();
+		fireEvent.click(screen.getByRole("button"));
+		expect(screen.getByLabelText("New Password")).not.toBeNull();
+		expect(screen.getByLabelText("Confirm password")).not.toBeNull();
 	});
 });

@@ -1,10 +1,10 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render, screen } from "@testing-library/react";
 import SocialEditableFieldContainer from "./SocialEditableFieldContainer";
 
 describe("SocialEditableFieldContainer", () => {
 	it("should render with disconnect option when connected", () => {
-		const wrapper = mount(
+		render(
 			<SocialEditableFieldContainer
 				text="Connected user"
 				onDisconnectFunction={() => {}}
@@ -12,13 +12,13 @@ describe("SocialEditableFieldContainer", () => {
 				disconnectText="disconnect test"
 			/>
 		);
-		expect(wrapper.find("button").text()).toBe("disconnect test");
+		expect(screen.getByText("disconnect test")).not.toBeNull();
 
 		// added space is for formatting with the disconenct button
-		expect(wrapper.find("span").text()).toBe("Connected user ");
+		expect(screen.getByText(/Connected user/i)).not.toBeNull();
 	});
 	it("should render without disconnect when disconnected", () => {
-		const wrapper = mount(
+		render(
 			<SocialEditableFieldContainer
 				text="Disconnected user"
 				onDisconnectFunction={() => {}}
@@ -27,8 +27,8 @@ describe("SocialEditableFieldContainer", () => {
 			/>
 		);
 
-		expect(wrapper.find("button").length).toBe(0);
+		expect(screen.queryByRole("button")).toBeNull();
 		// no added space is for formatting without the disconenct button
-		expect(wrapper.find("span").text()).toBe("Disconnected user");
+		expect(screen.getByText("Disconnected user")).not.toBeNull();
 	});
 });

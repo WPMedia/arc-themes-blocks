@@ -1,10 +1,10 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { render, screen } from "@testing-library/react";
 
 import SocialEditableSection from "./SocialEditableSection";
-import useSocialSignIn from "../../../components/SocialSignOn/utils/useSocialSignIn";
+import useSocialSignIn from "../../../components/social-sign-on/utils/useSocialSignIn";
 
-jest.mock("../../../components/SocialSignOn/utils/useSocialSignIn");
+jest.mock("../../../components/social-sign-on/utils/useSocialSignIn");
 
 jest.mock("fusion:properties", () =>
 	jest.fn(() => ({
@@ -26,9 +26,8 @@ describe("SocialEditableSection", () => {
 			googleClientId: "456",
 		}));
 
-		const wrapper = shallow(<SocialEditableSection />);
-		expect(wrapper.find("FacebookSignIn")).toHaveLength(1);
-		expect(wrapper.find("GoogleSignIn")).toHaveLength(1);
+		render(<SocialEditableSection />);
+		expect(screen.getAllByText("Connect %{platform}")).toHaveLength(2);
 	});
 	it("should not render facebook and google without id", () => {
 		useSocialSignIn.mockImplementation(() => ({
@@ -36,9 +35,8 @@ describe("SocialEditableSection", () => {
 			googleClientId: "",
 		}));
 
-		const wrapper = shallow(<SocialEditableSection />);
-		expect(wrapper.find("FacebookSignIn")).toHaveLength(0);
-		expect(wrapper.find("GoogleSignIn")).toHaveLength(0);
+		render(<SocialEditableSection />);
+		expect(screen.queryAllByText("Connect %{platform}")).toHaveLength(0);
 	});
 	it("should render facebook only with google no id", () => {
 		useSocialSignIn.mockImplementation(() => ({
@@ -46,9 +44,8 @@ describe("SocialEditableSection", () => {
 			googleClientId: "",
 		}));
 
-		const wrapper = mount(<SocialEditableSection />);
-		expect(wrapper.find("FacebookSignIn")).toHaveLength(1);
-		expect(wrapper.find("GoogleSignIn")).toHaveLength(0);
+		render(<SocialEditableSection />);
+		expect(screen.getAllByText("Connect %{platform}")).toHaveLength(1);
 	});
 
 	it("should show text based on hasGoogle and hasFacebook props", () => {
@@ -59,7 +56,7 @@ describe("SocialEditableSection", () => {
 			googleClientId: "456",
 		}));
 
-		const wrapper = mount(<SocialEditableSection hasFacebook hasGoogle hasPasswordAccount />);
-		expect(wrapper.find("span").at(0).text()).toEqual("Connected ");
+		render(<SocialEditableSection hasFacebook hasGoogle hasPasswordAccount />);
+		expect(screen.getAllByText(/Connected/i)).toHaveLength(2);
 	});
 });

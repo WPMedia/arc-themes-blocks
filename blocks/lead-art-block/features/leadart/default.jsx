@@ -97,7 +97,7 @@ export const LeadArtPresentation = (props) => {
 				playthrough: customFields?.playthrough,
 			});
 
-			let aspectRatio = "16:9"; // Default to 16:9
+			let aspectRatio = customFields?.aspectRatio;
 
 			// Make sure that the content source exists and has an existing promo item
 			if (leadArt && leadArt.promo_items && leadArt.promo_items.basic) {
@@ -106,7 +106,7 @@ export const LeadArtPresentation = (props) => {
 				const height = leadArt?.promo_items.basic.height;
 
 				// Assign the calculated value to aspectRatio if it is non-null, otherwise assign default 16:9
-				aspectRatio = getAspectRatio(width, height) || "16:9";
+				aspectRatio = aspectRatio || getAspectRatio(width, height) || "16:9";
 			}
 
 			return (
@@ -303,6 +303,25 @@ LeadArt.propTypes = {
 			label: "Playthrough",
 			defaultValue: false,
 			group: "Video",
+		}),
+		viewportPercentage: PropTypes.number.tag({
+			description: "Percentage of vertical space the player should grab (defaults to 65%)",
+			label: "View height percentage",
+			defaultValue: 65,
+			group: "Video",
+		}),
+		aspectRatio: PropTypes.oneOf(["16:9", "9:16", "1:1", "4:3"]).tag({
+			description:
+				"Aspect ratio to use in player (Defaults to the aspect ratio of the resolved video)",
+			label: "Player Aspect Ratio",
+			defaultValue: "16:9",
+			group: "Video",
+			labels: {
+				"16:9": "16:9",
+				"9:16": "9:16",
+				"1:1": "1:1",
+				"4:3": "4:3",
+			},
 		}),
 		hideTitle: PropTypes.bool.tag({
 			description:

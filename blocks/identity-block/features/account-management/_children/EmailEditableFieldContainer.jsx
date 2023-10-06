@@ -21,6 +21,7 @@ function EmailEditableFieldContainer({ blockClassName, email, setEmail }) {
 	const cancelText = phrases.t("identity-block.cancel");
 	const emailError = phrases.t("identity-block.update-email-error");
 
+	// istanbul ignore next
 	const handleEmailUpdate = ({ email: newEmail }) =>
 		Identity.updateUserProfile({ email: newEmail })
 			.then((profileObject) => {

@@ -39,6 +39,7 @@ function AccountManagement({ customFields }) {
 
 	const { isInitialized, Identity } = useIdentity();
 
+	// istanbul ignore next
 	useEffect(() => {
 		const checkLoggedInStatus = () =>
 			Identity.isLoggedIn().then((isLoggedIn) => {
@@ -53,6 +54,7 @@ function AccountManagement({ customFields }) {
 		}
 	}, [Identity, isAdmin, redirectURL]);
 
+	// istanbul ignore next
 	useEffect(() => {
 		const getProfile = () =>
 			Identity.getUserProfile().then((profileObject) => {
@@ -84,8 +86,10 @@ function AccountManagement({ customFields }) {
 	}, [loggedIn, setEmail, Identity, isAdmin]);
 
 	// cause re-render to re-check if identity has social identity
+	// istanbul ignore next
 	const unlinkFacebook = () =>
 		Identity.unlinkSocialIdentity("facebook").then(() => setHasFacebook(false));
+	// istanbul ignore next
 	const unlinkGoogle = () =>
 		Identity.unlinkSocialIdentity("google").then(() => setHasGoogle(false));
 

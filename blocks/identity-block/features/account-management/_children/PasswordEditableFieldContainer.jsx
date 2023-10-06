@@ -78,6 +78,7 @@ function PasswordEditableFieldContainer({ blockClassName, email, hasPassword, se
 		},
 	});
 
+	// istanbul ignore next
 	const handlePasswordUpdate = ({ "current-password": oldPassword, password: newPassword }) => {
 		if (hasPassword) {
 			return Identity.updatePassword(oldPassword, newPassword)

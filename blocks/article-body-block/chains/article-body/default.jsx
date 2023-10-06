@@ -46,6 +46,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		hideVideoTitle = false,
 		hideVideoCaption = false,
 		hideVideoCredits = false,
+		viewportPercentage = 65,
 	} = customFields;
 
 	// This is up here to prevent a lexical declaration in a case block (which throws an error). It goes with the "video" case
@@ -234,6 +235,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 				>
 					<Video
 						aspectRatio={videoAspectRatio}
+						viewportPercentage={viewportPercentage}
 						className="video-container"
 						embedMarkup={item.embed_html}
 					/>
@@ -462,6 +464,22 @@ ArticleBodyChain.propTypes = {
 			label: "Hide Credits",
 			defaultValue: false,
 			group: "Gallery Display Options",
+		}),
+		aspectRatio: PropTypes.oneOf(["16:9", "9:16", "1:1", "4:3"]).tag({
+			label: "Player Aspect Ratio",
+			defaultValue: "16:9",
+			group: "Video Display Options",
+			labels: {
+				"16:9": "16:9",
+				"9:16": "9:16",
+				"1:1": "1:1",
+				"4:3": "4:3",
+			},
+		}),
+		viewportPercentage: PropTypes.number.tag({
+			label: "View height percentage",
+			defaultValue: 65,
+			group: "Video Display Options",
 		}),
 		hideVideoTitle: PropTypes.bool.tag({
 			description: "This display option applies to all Videos in the Article Body",

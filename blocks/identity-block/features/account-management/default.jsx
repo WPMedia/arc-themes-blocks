@@ -71,14 +71,9 @@ function AccountManagement({ customFields }) {
 				setHasPassword(passwordProfile?.length > 0);
 				setHasGoogle(identities.filter(({ type }) => type === "Google").length > 0);
 				setHasFacebook(identities.filter(({ type }) => type === "Facebook").length > 0);
-				// todo: in future ticket, handle errors
-				// else {
-				//   setError('No email found');
-				// }
 
 				setIsLoading(false);
 			});
-		// .catch((e) => setError(e.message));
 
 		if (!isAdmin && loggedIn) {
 			getProfile();

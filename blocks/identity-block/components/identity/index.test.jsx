@@ -78,7 +78,6 @@ describe("Identity useIdentity Hook", () => {
 				},
 			],
 		};
-
 		const Test = () => {
 			const { getSignedInIdentity } = useIdentity();
 			const getCurrent = getSignedInIdentity(testUser);

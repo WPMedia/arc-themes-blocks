@@ -20,7 +20,6 @@ describe("Identity Social Login Component", () => {
 				initializeFacebook: () => {},
 			},
 		}));
-
 		render(
 			<GoogleSignInProvider>
 				<SocialSignOn />

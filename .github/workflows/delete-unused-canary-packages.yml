@@ -83,7 +83,6 @@ jobs:
             small-promo-block
             subheadline-block
             tag-title-block
-            text-output-block
             top-table-list-block
             triple-chain-block
             video-player-block

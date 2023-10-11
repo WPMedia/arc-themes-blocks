@@ -169,7 +169,6 @@
     "@wpmedia/subscriptions-block": "file:blocks/subscriptions-block",
     "@wpmedia/tag-title-block": "file:blocks/tag-title-block",
     "@wpmedia/tags-content-source-block": "file:blocks/tags-content-source-block",
-    "@wpmedia/text-output-block": "file:blocks/text-output-block",
     "@wpmedia/top-table-list-block": "file:blocks/top-table-list-block",
     "@wpmedia/triple-chain-block": "file:blocks/triple-chain-block",
     "@wpmedia/unpublished-content-source-block": "file:blocks/unpublished-content-source-block",

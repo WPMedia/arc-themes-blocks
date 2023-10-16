@@ -229,7 +229,8 @@ VideoPlayer.propTypes = {
 			},
 		}),
 		viewportPercentage: PropTypes.number.tag({
-			label: "View height percentage",
+			description:
+				"Percentage of vertical space the player grabs of the viewport (Applies only for 9:16 videos)",
 			defaultValue: 65,
 			group: "Display settings",
 		}),

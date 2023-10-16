@@ -32,6 +32,7 @@ const videoLayouts = {
 		captionTitle,
 		hideVideoTitle,
 		title,
+		borderRadius,
 	}) => (
 		<Stack className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}__inline`}>
 			{alertBadge ? <Badge variant="danger">{alertBadge}</Badge> : null}
@@ -46,6 +47,7 @@ const videoLayouts = {
 					viewportPercentage={viewportPercentage}
 					className="video-container"
 					embedMarkup={embedMarkup}
+					borderRadius={borderRadius}
 				/>
 			</MediaItem>
 			{description ? <Paragraph>{description}</Paragraph> : null}
@@ -62,6 +64,7 @@ const videoLayouts = {
 		captionTitle,
 		hideVideoTitle,
 		title,
+		borderRadius,
 	}) => (
 		<Stack className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}__feature`}>
 			<MediaItem caption={caption} credit={credit} title={!hideVideoTitle && captionTitle}>
@@ -70,6 +73,7 @@ const videoLayouts = {
 					viewportPercentage={viewportPercentage}
 					className="video-container"
 					embedMarkup={embedMarkup}
+					borderRadius={borderRadius}
 				/>
 			</MediaItem>
 			<Stack className={`${BLOCK_CLASS_NAME}__feature-meta`}>
@@ -98,6 +102,7 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 		hideVideoTitle,
 		inheritGlobalContent,
 		playthrough,
+		borderRadius,
 		title,
 		websiteURL,
 	} = customFields;
@@ -163,6 +168,7 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 				captionTitle,
 				hideVideoTitle,
 				title,
+				borderRadius,
 		  })
 		: null;
 }
@@ -246,6 +252,11 @@ VideoPlayer.propTypes = {
 				inlineVideo: "Inline Video",
 				featureVideo: "Feature Video",
 			},
+			group: "Display settings",
+		}),
+		borderRadius: PropTypes.bool.tag({
+			label: "Round player edges",
+			defaultValue: false,
 			group: "Display settings",
 		}),
 	}),

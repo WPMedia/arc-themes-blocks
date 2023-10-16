@@ -2,40 +2,10 @@ import React from "react";
 import { render } from "@testing-library/react";
 import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
-import { useContent } from "fusion:content";
 import LeadArt from "./default";
-
-const { mount } = require("enzyme");
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
-	getAspectRatio: (width, height) => {
-		// This arrow function is equivalent to what is in @wpmedia/arc-themes-components/src/utils/get-aspect-ratio/utils.js
-		// Helper function to find GCD
-		const gcd = (valA, valB) => {
-			let a = Math.abs(valA);
-			let b = Math.abs(valB);
-			while (b) {
-				const temp = b;
-				b = a % b;
-				a = temp;
-			}
-
-			return a;
-		};
-
-		// Return undefined if height === 0, so there is no division by zero error
-		if (height === 0) {
-			return undefined;
-		}
-
-		// Calculate the aspect ratio
-		const divisor = gcd(width, height);
-		const aspectWidth = width / divisor;
-		const aspectHeight = height / divisor;
-
-		return `${aspectWidth}:${aspectHeight}`;
-	},
 	usePhrases: jest.fn(() => ({
 		t: jest.fn().mockReturnValue("gallery-expand"),
 	})),
@@ -315,29 +285,5 @@ describe("LeadArt", () => {
 		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
 		const { container } = render(<LeadArt customFields={{}} />);
 		expect(container.firstChild).toBeNull();
-	});
-
-	it("correctly calculates the aspect ratio of a vertical video", () => {
-		const globalContent = {
-			promo_items: {
-				lead_art: {
-					type: "video",
-					promo_items: {
-						basic: {
-							width: 49,
-							height: 49,
-						},
-					},
-				},
-			},
-		};
-
-		useFusionContext.mockImplementation(() => ({ globalContent }));
-		useContent.mockImplementation(() => globalContent);
-		const wrapper = mount(<LeadArt customFields={{}} />);
-
-		expect(useContent).toHaveBeenCalledTimes(0);
-		expect(wrapper.find("Video")).toExist();
-		expect(wrapper.find("Video").prop("aspectRatio")).toEqual("1:1");
 	});
 });

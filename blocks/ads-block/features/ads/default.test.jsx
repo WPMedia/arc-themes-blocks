@@ -1,6 +1,6 @@
 import React from "react";
 import { useFusionContext } from "fusion:context";
-import { mount } from "enzyme";
+import { render, screen } from "@testing-library/react";
 import ArcAd from "./default";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
@@ -45,14 +45,9 @@ describe("<ArcAd>", () => {
 		});
 
 		it("renders no ad unit in admin dashboard", () => {
-			const wrapper = mount(<ArcAd {...AD_PROPS_MOCK} />);
-			expect(wrapper).toBeDefined();
-			const arcAdminAd = wrapper.find("ArcAdminAd");
-			expect(arcAdminAd.prop("adClass")).toEqual(AD_PROPS_MOCK.customFields.adType);
-			expect(arcAdminAd.prop("adType")).toEqual("cube");
-			expect(arcAdminAd.prop("slotName")).toEqual("news");
-			expect(typeof arcAdminAd.prop("dimensions")).toEqual("object");
-			expect(wrapper.find("AdUnit")).toHaveLength(0);
+			render(<ArcAd {...AD_PROPS_MOCK} />);
+			expect(screen.getByText("cube")).not.toBeNull();
+			expect(screen.queryByText(/ads-block.ad-label/)).toBeNull();
 		});
 	});
 
@@ -67,15 +62,8 @@ describe("<ArcAd>", () => {
 
 		describe("when lazy loading is disabled", () => {
 			it("renders ad unit with disabled lazy-load container", () => {
-				const wrapper = mount(<ArcAd {...AD_PROPS_MOCK} />);
-				expect(wrapper).toBeDefined();
-				const lazyLoaderEl = wrapper.find("LazyLoad");
-				expect(lazyLoaderEl).toHaveLength(1);
-				expect(lazyLoaderEl.prop("enabled")).toBe(false);
-				const adUnitEl = lazyLoaderEl.find("AdUnit");
-				expect(adUnitEl).toHaveLength(1);
-				expect(typeof adUnitEl.prop("adConfig")).toEqual("object");
-				expect(typeof adUnitEl.prop("featureConfig")).toEqual("object");
+				render(<ArcAd {...AD_PROPS_MOCK} />);
+				expect(screen.getByText(/ads-block.ad-label/)).not.toBeNull();
 			});
 		});
 
@@ -87,11 +75,8 @@ describe("<ArcAd>", () => {
 						lazyLoad: true,
 					},
 				};
-				const wrapper = mount(<ArcAd {...adProps} />);
-				expect(wrapper).toBeDefined();
-				const lazyLoaderEl = wrapper.find("LazyLoad");
-				expect(lazyLoaderEl).toHaveLength(1);
-				expect(lazyLoaderEl.prop("enabled")).toBe(true);
+				render(<ArcAd {...adProps} />);
+				expect(screen.getByTestId("lazy-load-placeholder")).not.toBeNull();
 			});
 		});
 	});

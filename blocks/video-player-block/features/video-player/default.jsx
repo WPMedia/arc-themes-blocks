@@ -217,11 +217,14 @@ VideoPlayer.propTypes = {
 			defaultValue: false,
 			group: "Video Subtext Options",
 		}),
-		aspectRatio: PropTypes.oneOf(["16:9", "9:16", "1:1", "4:3"]).tag({
+		aspectRatio: PropTypes.oneOf(["--", "16:9", "9:16", "1:1", "4:3"]).isRequired.tag({
+			description:
+				"Aspect ratio to use in player (Defaults to the aspect ratio of the resolved video)",
 			label: "Player Aspect Ratio",
-			defaultValue: "16:9",
-			group: "Display settings",
+			defaultValue: "--",
+			group: "Video Display Options",
 			labels: {
+				"--": "Video Source",
 				"16:9": "16:9",
 				"9:16": "9:16",
 				"1:1": "1:1",

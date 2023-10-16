@@ -119,6 +119,7 @@ export const LeadArtPresentation = (props) => {
 						aspectRatio={aspectRatio}
 						embedMarkup={embedMarkup}
 						viewportPercentage={customFields?.viewportPercentage}
+						borderRadius={customFields?.borderRadius}
 					/>
 				</MediaItem>
 			);
@@ -343,6 +344,11 @@ LeadArt.propTypes = {
 			label: "Hide Credits",
 			defaultValue: false,
 			group: "Display Options",
+		}),
+		borderRadius: PropTypes.bool.tag({
+			label: "Round player edges",
+			defaultValue: false,
+			group: "Video",
 		}),
 		imageLoadingStrategy: PropTypes.oneOf(["lazy", "eager"]).tag({
 			label: "Image Loading Strategy",

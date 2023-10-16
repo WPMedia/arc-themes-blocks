@@ -47,6 +47,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		hideVideoCaption = false,
 		hideVideoCredits = false,
 		viewportPercentage = 65,
+		borderRadius = false,
 	} = customFields;
 
 	// This is up here to prevent a lexical declaration in a case block (which throws an error). It goes with the "video" case
@@ -238,6 +239,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 						viewportPercentage={viewportPercentage}
 						className="video-container"
 						embedMarkup={item.embed_html}
+						borderRadius={borderRadius}
 					/>
 				</MediaItem>
 			);
@@ -479,6 +481,12 @@ ArticleBodyChain.propTypes = {
 		viewportPercentage: PropTypes.number.tag({
 			label: "View height percentage",
 			defaultValue: 65,
+			group: "Video Display Options",
+		}),
+		borderRadius: PropTypes.bool.tag({
+			description: "Only valid for videos in 9:16",
+			label: "Round player edges",
+			defaultValue: false,
 			group: "Video Display Options",
 		}),
 		hideVideoTitle: PropTypes.bool.tag({

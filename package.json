@@ -175,6 +175,26 @@
     "@wpmedia/video-player-block": "file:blocks/video-player-block",
     "@wpmedia/video-promo-block": "file:blocks/video-promo-block"
   },
+  "overrides": {
+    "@storybook/components": {
+      "react": "$react"
+    },
+    "react-oembed-container": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    },
+    "react-popper": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    },
+    "react-popper-tooltip": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    },
+    "stylelint-config-prettier": {
+      "stylelint": "$stylelint"
+    }
+  },
   "browserslist": [
     "defaults",
     "not op_mini all",

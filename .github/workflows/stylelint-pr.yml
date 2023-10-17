@@ -16,17 +16,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Rep
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
 
-      - name: Setup Node with 12
-        uses: actions/setup-node@v1
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
 
       - name: Cache Node Modules
         id: cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}

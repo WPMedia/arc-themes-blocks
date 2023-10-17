@@ -25,7 +25,7 @@
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/placeholder-image-block": "*",
     "@wpmedia/resizer-image-block": "*",
-    "styled-components": "^4.4.0"
+    "styled-components": "^6.1.0"
   },
   "scripts": {},
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"

@@ -28,7 +28,7 @@
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/shared-styles": "*",
-    "styled-components": "^4.4.0"
+    "styled-components": "^6.1.0"
   },
   "dependencies": {
     "focus-trap-react": "^8.4.2",

@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render } from "@testing-library/react";
 import AdUnit from "./index";
 import ArcAdsInstance from "../ArcAdsInstance";
 import { setPageTargeting } from "../../ad-helper";
@@ -79,11 +79,12 @@ describe("<AdUnit/>", () => {
 	});
 
 	it("renders and registers ad unit on published page", () => {
-		const wrapper = mount(<AdUnit adConfig={AD_CONFIG_MOCK} featureConfig={FEATURE_CONFIG_MOCK} />);
-		expect(wrapper).toBeDefined();
+		const { container } = render(
+			<AdUnit adConfig={AD_CONFIG_MOCK} featureConfig={FEATURE_CONFIG_MOCK} />
+		);
 		// id with the ad config
-		const adUnitEl = wrapper.find(`#${AD_CONFIG_MOCK_ID}`);
-		expect(adUnitEl).toHaveLength(1);
+		const adUnitEl = container.querySelector(`#${AD_CONFIG_MOCK_ID}`);
+		expect(adUnitEl).not.toBeNull();
 
 		expect(ArcAdsInstance.getInstance).toHaveBeenCalledTimes(1);
 		expect(setPageTargeting).toBeCalledWith(expect.objectContaining(FEATURE_CONFIG_MOCK));

@@ -212,7 +212,7 @@ describe("ad-helper", () => {
 	});
 
 	describe("getTags()", () => {
-		it('returns empty string with invalid "globalContent"', () => {
+		it("returns empty string with invalid 'globalContent'", () => {
 			const tags = getTags();
 			expect(tags).toBeDefined();
 			expect(tags).toBe("");
@@ -223,6 +223,17 @@ describe("ad-helper", () => {
 			STORY_MOCK.taxonomy.tags.forEach((tag) => {
 				expect(tags).toContain(tag.slug);
 			});
+		});
+		it("returns empty sting when tags are empty", () => {
+			const tags = getTags({
+				globalContent: {
+					taxonomy: {
+						tags: [{}, {}],
+					},
+				},
+			});
+			expect(tags).toBeDefined();
+			expect(tags).toBe("");
 		});
 	});
 

@@ -19,10 +19,6 @@
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/header-nav-chain-block"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
-  },
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/engine-theme-sdk": "*",
@@ -33,6 +29,9 @@
   "dependencies": {
     "focus-trap-react": "^8.4.2",
     "use-debounce": "^3.4.3"
+  },
+  "overrides": {
+    "styled-components": "^6.1.0"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

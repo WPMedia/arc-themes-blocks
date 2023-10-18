@@ -27,6 +27,8 @@
     "@wpmedia/resizer-image-block": "*",
     "styled-components": "^6.1.0"
   },
-  "scripts": {},
+  "overrides": {
+    "styled-components": "^6.1.0"
+  },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

@@ -22,10 +22,6 @@
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/article-body-block"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
-  },
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/engine-theme-sdk": "*",
@@ -33,9 +29,12 @@
     "@wpmedia/video-player-block": "*",
     "styled-components": "^6.1.0"
   },
+  "overrides": {
+    "styled-components": "^6.1.0"
+  },
   "dependencies": {
-    "react-oembed-container": "^1.0.0",
-    "sanitize-html": "^1.18.2"
+    "react-oembed-container": "^1.0.1",
+    "sanitize-html": "^2.11.0"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

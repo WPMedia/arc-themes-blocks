@@ -191,6 +191,7 @@
       "react": "$react",
       "react-dom": "$react-dom"
     },
+    "styled-components": "^6.1.0",
     "stylelint-config-prettier": {
       "stylelint": "$stylelint"
     }

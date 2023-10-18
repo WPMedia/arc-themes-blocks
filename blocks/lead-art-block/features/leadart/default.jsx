@@ -294,7 +294,7 @@ LeadArt.propTypes = {
 		}),
 		viewportPercentage: PropTypes.number.tag({
 			description:
-				"Percentage of vertical space the player grabs of the viewport (Applies only for 9:16 videos)",
+				"Height percentage the player takes from viewport (Applies only for 9:16 videos)",
 			label: "View height percentage",
 			defaultValue: 65,
 			group: "Video",
@@ -304,9 +304,9 @@ LeadArt.propTypes = {
 				"Aspect ratio to use in player (Defaults to the aspect ratio of the resolved video)",
 			label: "Player Aspect Ratio",
 			defaultValue: "--",
-			group: "Video Display Options",
-			"--": "Video Source",
+			group: "Video",
 			labels: {
+				"--": "Video Source",
 				"16:9": "16:9",
 				"9:16": "9:16",
 				"1:1": "1:1",
@@ -335,7 +335,8 @@ LeadArt.propTypes = {
 			group: "Display Options",
 		}),
 		borderRadius: PropTypes.bool.tag({
-			label: "Round player edges",
+			label: "Round player corners",
+			description: "Applies only for 9:16 videos",
 			defaultValue: false,
 			group: "Video",
 		}),

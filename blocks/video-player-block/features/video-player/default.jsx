@@ -222,7 +222,7 @@ VideoPlayer.propTypes = {
 				"Aspect ratio to use in player (Defaults to the aspect ratio of the resolved video)",
 			label: "Player Aspect Ratio",
 			defaultValue: "--",
-			group: "Video Display Options",
+			group: "Display Settings",
 			labels: {
 				"--": "Video Source",
 				"16:9": "16:9",
@@ -232,22 +232,23 @@ VideoPlayer.propTypes = {
 			},
 		}),
 		viewportPercentage: PropTypes.number.tag({
+			label: "View height percentage",
 			description:
-				"Percentage of vertical space the player grabs of the viewport (Applies only for 9:16 videos)",
+				"Height percentage the player takes from viewport (Applies only for 9:16 videos)",
 			defaultValue: 65,
-			group: "Display settings",
+			group: "Display Settings",
 		}),
 		title: PropTypes.string.tag({
 			label: "Title",
-			group: "Display settings",
+			group: "Display Settings",
 		}),
 		description: PropTypes.string.tag({
 			label: "Description",
-			group: "Display settings",
+			group: "Display Settings",
 		}),
 		alertBadge: PropTypes.string.tag({
 			label: "Alert Badge",
-			group: "Display settings",
+			group: "Display Settings",
 		}),
 		displayStyle: PropTypes.oneOf(Object.keys(videoLayouts)).tag({
 			defaultValue: "inlineVideo",
@@ -256,12 +257,13 @@ VideoPlayer.propTypes = {
 				inlineVideo: "Inline Video",
 				featureVideo: "Feature Video",
 			},
-			group: "Display settings",
+			group: "Display Settings",
 		}),
 		borderRadius: PropTypes.bool.tag({
-			label: "Round player edges",
+			label: "Round player corners",
+			description: "Applies only for 9:16 videos",
 			defaultValue: false,
-			group: "Display settings",
+			group: "Display Settings",
 		}),
 	}),
 	embedMarkup: PropTypes.string,

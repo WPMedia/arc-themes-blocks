@@ -469,14 +469,14 @@ ArticleBodyChain.propTypes = {
 		}),
 		viewportPercentage: PropTypes.number.tag({
 			description:
-				"Percentage of vertical space the player grabs of the viewport (Applies only for 9:16 videos)",
+				"Height percentage the player takes from viewport (Applies only for 9:16 videos)",
 			label: "View height percentage",
 			defaultValue: 65,
 			group: "Video Display Options",
 		}),
 		borderRadius: PropTypes.bool.tag({
-			description: "Only valid for videos in 9:16",
-			label: "Round player edges",
+			description: "Applies only for 9:16 videos",
+			label: "Round player corners",
 			defaultValue: false,
 			group: "Video Display Options",
 		}),

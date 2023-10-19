@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render, screen } from "@testing-library/react";
 import ArcAdminAd from "./index";
 
 const defaults = {
@@ -17,13 +17,8 @@ const defaults = {
 
 describe("<ArcAdminAd>", () => {
 	it("renders with ad name", () => {
-		const wrapper = mount(<ArcAdminAd {...defaults.props} />);
-		expect(wrapper).toBeDefined();
-		const container = wrapper.find("div.b-ads-block--admin");
-		expect(container).toHaveLength(1);
-		const adNameEl = container.find("p").at(0);
-		expect(adNameEl).toHaveLength(1);
-		expect(adNameEl.text()).toEqual("test-ad-name");
+		render(<ArcAdminAd {...defaults.props} />);
+		expect(screen.getByText("test-ad-name")).not.toBeNull();
 	});
 
 	it("renders with default ad name", () => {
@@ -31,12 +26,7 @@ describe("<ArcAdminAd>", () => {
 			...defaults.props,
 			adType: undefined,
 		};
-		const wrapper = mount(<ArcAdminAd {...adProps} />);
-		expect(wrapper).toBeDefined();
-		const container = wrapper.find("div.b-ads-block--admin");
-		expect(container).toHaveLength(1);
-		const adNameEl = container.find("p").at(0);
-
-		expect(adNameEl.text()).toEqual("Ad Name N/A");
+		render(<ArcAdminAd {...adProps} />);
+		expect(screen.getByText("Ad Name N/A")).not.toBeNull();
 	});
 });

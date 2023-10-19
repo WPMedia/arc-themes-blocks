@@ -42,7 +42,7 @@ export const ArcAdDisplay = (props) => {
 						offsetLeft={0}
 						offsetRight={0}
 						offsetTop={200}
-						renderPlaceholder={(ref) => <div ref={ref} />}
+						renderPlaceholder={(ref) => <div data-testid="lazy-load-placeholder" ref={ref} />}
 					>
 						<AdUnit adConfig={config} featureConfig={propsWithContext} />
 					</LazyLoad>

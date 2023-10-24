@@ -28,7 +28,10 @@
 				"grid-template-columns": "1fr",
 				"gap": "var(--global-spacing-6) 0"
 			},
-			"desktop": {}
+			"desktop": {
+				"grid-template-columns": "1fr 1fr 1fr 1fr",
+				"gap": "0 var(--global-spacing-5)"
+			}
 		}
 	},
 	"quad-chain-child-item": {
@@ -36,10 +39,7 @@
 			"default": {
 				"gap": "var(--global-spacing-6) 0"
 			},
-			"desktop": {
-				"grid-template-columns": "1fr 1fr 1fr 1fr",
-				"gap": "0 var(--global-spacing-5)"
-			}
+			"desktop": {}
 		}
 	},
 	"quad-chain-child-item-empty": {

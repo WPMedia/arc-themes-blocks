@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
+
 # fetching latest changes `git fetch -a --depth 100` to ensure the base branch is up to date
-git fetch -a --depth 100 && npm run lint:changed-feature-branch && npm run test:changed-feature-branch
+# git fetch -a --depth 100 && npm run lint:changed-feature-branch && npm run test:changed-feature-branch

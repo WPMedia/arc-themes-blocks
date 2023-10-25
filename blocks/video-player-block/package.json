@@ -24,7 +24,7 @@
     "@wpmedia/arc-themes-components": "*"
   },
   "dependencies": {
-    "react-oembed-container": "^1.0.0"
+    "react-oembed-container": "^1.0.1"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

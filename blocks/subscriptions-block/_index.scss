@@ -1,6 +1,8 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-checkout {
+	@include scss.block-components("checkout");
+	@include scss.block-properties("checkout");
 	&__cart {
 		@include scss.block-components("checkout-cart");
 		@include scss.block-properties("checkout-cart");
@@ -49,8 +51,6 @@
 			}
 		}
 	}
-	@include scss.block-components("checkout");
-	@include scss.block-properties("checkout");
 }
 
 .b-offer {

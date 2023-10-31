@@ -34,10 +34,11 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, classNa
 
 	const phrases = usePhrases();
 
-	const getTranslatedCountries = countryCodes.map((entry) => ({
-		code: entry.code,
-		name: phrases.t(entry.key),
-	}));
+	// TO-DO: Uncomment once Select component is done
+	// const getTranslatedCountries = countryCodes.map((entry) => ({
+	// 	code: entry.code,
+	// 	name: phrases.t(entry.key),
+	// }));
 
 	const signOutBtn = (
 		<Button onClick={handleLogout}>{phrases.t("checkout-block.identity-sign-out")}</Button>

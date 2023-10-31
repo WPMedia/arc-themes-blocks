@@ -72,11 +72,7 @@ const Checkout = ({ customFields }) => {
 			Identity.updateUserProfile({ firstName, lastName });
 		}
 
-		const cart = await Sales.getCart();
-		console.log(cart);
-		console.log(
-			"TO-DO-Laura: Check, what should be the behavior if cart is empty. If cart is empty, Sales.createNewOrder is returning an error back"
-		);
+		// TO-DO: Check, what should be the behavior if cart is empty. If cart is empty, Sales.createNewOrder is returning an error back
 
 		Sales.createNewOrder({ country }, email).then((order) => {
 			setOrderNumber(order.orderNumber);

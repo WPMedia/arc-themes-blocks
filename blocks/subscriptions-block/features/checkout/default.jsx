@@ -11,7 +11,7 @@ import PaymentInfo from "./_children/PaymentInfo";
 
 const BLOCK_CLASS_NAME = "b-checkout";
 
-//TO-DO: Unable to grab this function from useIdentity
+// TO-DO: Unable to grab this function from useIdentity
 const getSignedInIdentity = (user) =>
 	user?.identities?.reduce((prev, current) =>
 		prev.lastLoginDate > current.lastLoginDate ? prev : current

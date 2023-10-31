@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 
 import { usePhrases, Heading, Input, Button, Stack, Image } from "@wpmedia/arc-themes-components";
 
-//import countryCodes from "./countryCodes";
 import GoogleIcon from "./google.svg";
 import FacebookIcon from "./facebook.svg";
 

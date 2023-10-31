@@ -104,9 +104,6 @@ function PaymentForm({
 		}
 	};
 
-	console.log("hhh");
-	console.log(className);
-
 	return (
 		<section className={`${className}__payment`}>
 			<HeadingSection>

@@ -23,13 +23,6 @@ const Offer = ({ customFields }) => {
 		campaignCode: selectedCampaignCode,
 	});
 
-	const temp = useOffer({ campaignCode: selectedCampaignCode });
-
-	console.log("offer!!!");
-	console.log(selectedCampaignCode);
-	console.log(temp);
-	console.log(offer);
-
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	const getIsLoggedIn = async () => {

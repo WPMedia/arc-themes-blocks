@@ -2,16 +2,18 @@
   "name": "@wpmedia/subscriptions-block",
   "version": "5.20.0",
   "description": "Fusion themes subscriptions block.",
-  "author": "ARC XP",
+  "author": "Arc XP - Themes",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
   "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
+  "main": "",
   "files": [
+    "_index.scss",
     "features",
     "sources",
     "chains",
     "components",
     "utils",
+    "themes",
     "intl.json"
   ],
   "publishConfig": {
@@ -23,12 +25,9 @@
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/subscriptions-block"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
-  },
   "peerDependencies": {
-    "@wpmedia/identity-block": "*"
+    "@wpmedia/identity-block": "*",
+    "@wpmedia/arc-themes-components": "*"
   },
   "dependencies": {
     "@arc-fusion/prop-types": "^0.1.5",

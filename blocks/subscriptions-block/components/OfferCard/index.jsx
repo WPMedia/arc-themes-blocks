@@ -1,56 +1,40 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { CheckIcon } from "@wpmedia/engine-theme-sdk";
+import { Heading, Button, Stack, Paragraph, Icon } from "@wpmedia/arc-themes-components";
 
-import { Button, BUTTON_SIZES, BUTTON_STYLES, PrimaryFont } from "@wpmedia/shared-styles";
+const OfferCard = ({
+	headline,
+	subHeadline,
+	actionText,
+	actionEvent,
+	features = [],
+	className,
+}) => (
+	<Stack as="div" className={`${className}__card`}>
+		{headline ? <Heading dangerouslySetInnerHTML={{ __html: headline }} /> : null}
 
-import "./styles.scss";
-
-const OfferCard = ({ headline, subHeadline, actionText, actionEvent, features = [] }) => (
-	<PrimaryFont as="div" className="xpmedia-subscription-offer-card">
-		{headline ? (
-			<PrimaryFont
-				as="h2"
-				className="xpmedia-subscription-offer-card--headline"
-				dangerouslySetInnerHTML={{ __html: headline }}
-			/>
-		) : null}
-
-		{subHeadline ? (
-			<PrimaryFont
-				as="h3"
-				className="xpmedia-subscription-offer-card--subheadline"
-				dangerouslySetInnerHTML={{ __html: subHeadline }}
-			/>
-		) : null}
+		{subHeadline ? <Paragraph dangerouslySetInnerHTML={{ __html: subHeadline }} /> : null}
 
 		{actionText && actionEvent ? (
-			<Button
-				buttonSize={BUTTON_SIZES.LARGE}
-				buttonStyle={BUTTON_STYLES.PRIMARY}
-				fullWidth
-				text={actionText}
-				isHTMLText
-				onClick={actionEvent}
-			/>
+			<Button size="large" variant="primary" fullWidth onClick={actionEvent}>
+				<span dangerouslySetInnerHTML={{ __html: actionText }} />
+			</Button>
 		) : null}
 
 		{features.length ? (
-			<ul className="xpmedia-subscription-offer-card--features">
+			<ul className={`${className}__card--features`}>
 				{features.map((feat) => (
 					<li
-						className="xpmedia-subscription-offer-card--feature-item"
+						className={`${className}__card--features--feature-item`}
 						key={`feat-${feat.featureText}`}
 					>
-						<span className="xpmedia-subscription-offer-card--feature-item-icon">
-							<CheckIcon width="16" height="16" />
-						</span>
+						<Icon name="ChevronRight" />
 						<span dangerouslySetInnerHTML={{ __html: feat.featureText }} />
 					</li>
 				))}
 			</ul>
 		) : null}
-	</PrimaryFont>
+	</Stack>
 );
 
 OfferCard.propTypes = {

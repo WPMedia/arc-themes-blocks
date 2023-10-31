@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { isServerSide } from "@wpmedia/engine-theme-sdk";
+import { isServerSide } from "@wpmedia/arc-themes-components";
 
 const offerService = ({ origin, campaignCode = "default", endpoint }) =>
 	fetch(`${origin}${endpoint}${campaignCode || "default"}`, {}).then((res) => res.json());

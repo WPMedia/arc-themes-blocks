@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import Sales from "@arc-publishing/sdk-sales";
 import { CardElement, useElements } from "@stripe/react-stripe-js";
-import { ErrorIcon } from "@wpmedia/engine-theme-sdk";
-import { PrimaryFont, Button, BUTTON_SIZES, BUTTON_STYLES } from "@wpmedia/shared-styles";
-
-import "./styles.scss";
+import { Button, Heading, HeadingSection, Paragraph } from "@wpmedia/arc-themes-components";
 
 const CARD_ELEMENT_OPTIONS = {
 	style: {
@@ -32,6 +29,7 @@ function PaymentForm({
 	formLabel,
 	submitText,
 	formErrorText,
+	className,
 }) {
 	const [formStatus, setFormStatus] = useState(FORM_STATUS.IDLE);
 
@@ -106,35 +104,35 @@ function PaymentForm({
 		}
 	};
 
+	console.log("hhh");
+	console.log(className);
+
 	return (
-		<PrimaryFont as="div" className="payment-form--container">
-			<PrimaryFont as="h2" className="payment-form--title">
-				{formTitle}
-			</PrimaryFont>
-			<form onSubmit={handleSubmit} className="payment-form--form">
-				<label className="xpmedia-form-field-label">{formLabel}</label>
-				<div className="payment-form--stripe-input-container">
+		<section className={`${className}__payment`}>
+			<HeadingSection>
+				<Heading>{formTitle}</Heading>
+			</HeadingSection>
+			<form onSubmit={handleSubmit} className={`${className}__payment-form`}>
+				<Paragraph>{formLabel}</Paragraph>
+				<div className={`${className}__payment-form--stripe-input-container`}>
 					<CardElement options={CARD_ELEMENT_OPTIONS} name="card" />
 				</div>
-				<hr className="payment-form--hr" />
 				<Button
-					buttonSize={BUTTON_SIZES.MEDIUM}
-					buttonStyle={BUTTON_STYLES.PRIMARY}
+					size="medium"
+					variant="primary"
 					fullWidth
-					text={submitText}
 					type="submit"
 					disabled={formStatus === FORM_STATUS.PROCESSING || formStatus === FORM_STATUS.SUCCESS}
-				/>
+				>
+					{submitText}
+				</Button>
 				{formStatus === FORM_STATUS.ERROR ? (
-					<section className="xpmedia-form-error" role="alert">
-						<PrimaryFont as="p">
-							<ErrorIcon />
-							{formErrorText}
-						</PrimaryFont>
+					<section role="alert">
+						<Paragraph>{formErrorText}</Paragraph>
 					</section>
 				) : null}
 			</form>
-		</PrimaryFont>
+		</section>
 	);
 }
 

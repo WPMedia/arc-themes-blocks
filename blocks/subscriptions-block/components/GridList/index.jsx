@@ -1,17 +1,12 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 
-import "./styles.scss";
-
-const GridList = ({ children }) => {
-	const childCount = React.Children.count(children);
-	const additionalClass = childCount ? `xpmedia-subscription-grid-list--${childCount}` : "";
-
+const GridList = ({ children, className }) => {
 	if (!children) {
 		return null;
 	}
 
-	return <div className={`xpmedia-subscription-grid-list ${additionalClass}`}>{children}</div>;
+	return <div className={`${className}__grid-list`}>{children}</div>;
 };
 
 GridList.propTypes = {

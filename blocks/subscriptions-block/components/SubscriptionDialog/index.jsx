@@ -9,8 +9,6 @@ import {
 	PrimaryFont,
 } from "@wpmedia/shared-styles";
 
-import "./styles.scss";
-
 const SubscriptionDialog = ({
 	actionText,
 	actionUrl,

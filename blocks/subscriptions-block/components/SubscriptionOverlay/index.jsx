@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as ReactDOM from "react-dom";
-import "./styles.scss";
 import { isServerSide } from "@wpmedia/engine-theme-sdk";
 
 export const Portal = ({ children }) => {

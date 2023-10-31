@@ -1,20 +1,11 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import Sales from "@arc-publishing/sdk-sales";
-import Identity from "@arc-publishing/sdk-identity";
+import useSales from "../useSales";
 import GridList from "../GridList";
 import OfferCard from "../OfferCard";
 
-const OfferToProductList = ({ offer, isLoggedIn, checkoutURL, loginURL }) => {
-	const { arcSite } = useFusionContext();
-	const { api } = getProperties(arcSite);
-
-	Sales.options({
-		apiOrigin: api?.retail?.origin || "",
-		Identity,
-	});
+const OfferToProductList = ({ offer, isLoggedIn, checkoutURL, loginURL, className }) => {
+	const { Sales } = useSales();
 
 	const buildOffers = () => {
 		const offers = [];
@@ -69,7 +60,7 @@ const OfferToProductList = ({ offer, isLoggedIn, checkoutURL, loginURL }) => {
 	const builtOffers = buildOffers();
 
 	return (
-		<GridList>
+		<GridList className={className}>
 			{builtOffers.map((builtOffer) => (
 				<OfferCard
 					key={builtOffer.key}
@@ -78,6 +69,7 @@ const OfferToProductList = ({ offer, isLoggedIn, checkoutURL, loginURL }) => {
 					actionText={builtOffer.actionText}
 					actionEvent={builtOffer.actionEvent}
 					features={builtOffer.features}
+					className={className}
 				/>
 			))}
 		</GridList>

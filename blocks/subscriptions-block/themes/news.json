@@ -1,0 +1,259 @@
+{
+	"checkout": {
+		"styles": {
+			"default": {
+				"font-family": "var(--font-family-primary)",
+				"margin-bottom": "var(--global-spacing-6)",
+				"components": {
+					"heading": {
+						"font-size": "var(--global-font-size-12)"
+					},
+					"link": {
+						"color": "var(--color-primary)",
+						"border-bottom": "1px solid var(--color-primary)"
+					},
+					"link-hover": {
+						"color": "var(--color-primary-hover)",
+						"border-bottom": "1px solid var(--color-primary-hover)"
+					}
+				}
+			}
+		}
+	},
+	"checkout-cart": {
+		"styles": {
+			"default": {
+				"margin-top": "var(--global-spacing-6)",
+				"components": {
+					"heading": {
+						"margin-bottom": "var(--global-spacing-5)",
+						"font-size": "var(--global-font-size-11)"
+					}
+				}
+			}
+		}
+	},
+	"checkout-cart-items": {
+		"styles": {
+			"default": {
+				"border": "1px solid var(--global-neutral-3)"
+			}
+		}
+	},
+	"checkout-cart-item": {
+		"styles": {
+			"default": {
+				"color": "$global.neutral-6",
+				"font-size": "var(--global-font-size-4)",
+				"margin": "0 var(--global-spacing-2)",
+				"padding": "var(--global-spacing-2) 0"
+			}
+		}
+	},
+	"checkout-cart-item--name": {
+		"styles": {
+			"default": {
+				"font-size": "var(--global-font-size-7)",
+				"font-weight": "bold"
+			}
+		}
+	},
+	"checkout-cart-item--info": {
+		"styles": {
+			"default": {
+				"font-size": "var(--global-font-size-2)"
+			}
+		}
+	},
+	"checkout-contact-info": {
+		"styles": {
+			"default": {
+				"margin-top": "var(--global-spacing-6)",
+				"components": {
+					"heading": {
+						"margin-bottom": "var(--global-spacing-5)",
+						"font-size": "var(--global-font-size-11)"
+					},
+					"input": {
+						"margin-block-end": "var(--global-spacing-5)"
+					},
+					"input-error-tip": {
+						"color": "var(--status-color-danger)"
+					},
+					"input-input": {
+						"inline-size": "100%",
+						"width": "100%",
+						"padding-block-end": "var(--global-spacing-2)",
+						"padding-block-start": "var(--global-spacing-2)",
+						"padding-inline-end": "var(--global-spacing-2)",
+						"padding-inline-start": "var(--global-spacing-2)"
+					}
+				}
+			}
+		}
+	},
+	"checkout-contact-info-profile": {
+		"styles": {
+			"default": {
+				"display": "grid",
+				"width": "100%",
+				"grid-template-columns": "repeat(2, 1fr)",
+				"column-gap": "var(--global-spacing-5)"
+			}
+		}
+	},
+	"checkout-identity-row": {
+		"styles": {
+			"default": {
+				"width": "100%",
+				"display": "inline-flex",
+				"align-items": "center",
+				"line-height": "var(--global-line-height-4)",
+				"components": {
+					"image": {
+						"width": "var(--global-spacing-4)",
+						"height": "var(--global-spacing-4)",
+						"margin": "0 var(--global-spacing-2) 0 0"
+					}
+				}
+			}
+		}
+	},
+	"checkout-payment": {
+		"styles": {
+			"default": {
+				"margin-top": "var(--global-font-size-11)"
+			}
+		}
+	},
+	"checkout-payment-form": {
+		"styles": {
+			"default": {
+				"margin-top": "var(--global-font-size-11)"
+			}
+		}
+	},
+	"checkout-payment-form--stripe-input-container": {
+		"styles": {
+			"default": {
+				"margin": "var(--global-spacing-2) var(--global-spacing-1) var(--global-spacing-1) var(--global-spacing-1)"
+			}
+		}
+	},
+	"offer": {
+		"styles": {
+			"default": {
+				"display": "flex",
+				"flex-direction": "column",
+				"justify-content": "center",
+				"align-items": "center"
+			}
+		}
+	},
+	"offer-headings": {
+		"styles": {
+			"default": {
+				"margin-top": "var(--global-spacing-9)",
+				"max-width": "40%",
+				"display": "flex",
+				"flex-direction": "column",
+				"justify-content": "center",
+				"align-items": "center",
+				"text-align": "center"
+			}
+		}
+	},
+	"offer-title": {
+		"styles": {
+			"default": {
+				"font-weight": "var(--global-font-weight-7)",
+				"font-size": "var(--global-font-size-15)",
+				"line-height": "var(--global-line-height-6)",
+				"margin-bottom": "var(--global-spacing-4)"
+			}
+		}
+	},
+	"offer-subtitle": {
+		"styles": {
+			"default": {
+				"font-size": "var(--global-font-size-10)",
+				"line-height": "var(--global-line-height-4)"
+			}
+		}
+	},
+	"offer-wrapper": {
+		"styles": {
+			"default": {
+				"margin-top": "var(--global-spacing-5)",
+				"margin-bottom": "var(--global-spacing-6)"
+			}
+		}
+	},
+	"offer-grid-list": {
+		"styles": {
+			"default": {
+				"display": "grid",
+				"gap": "var(--global-spacing-5)",
+				"grid-template-columns": "1fr",
+				"justify-content": "center"
+			}
+		}
+	},
+	"offer-card": {
+		"styles": {
+			"default": {
+				"align-items": "center",
+				"border": "1px solid var(--global-neutral-3)",
+				"border-radius": "var(--global-border-radius-1)",
+				"display": "flex",
+				"flex-direction": "column",
+				"padding-top": "var(--global-spacing-8)",
+				"padding-right": "var(--global-spacing-6)",
+				"padding-bottom": "var(--global-spacing-6)",
+				"padding-left": "var(--global-spacing-6)",
+				"components": {
+					"heading": {
+						"font-size": "var(--global-font-size-9)",
+						"text-align": "center",
+						"margin-bottom": "var(--global-spacing-4)",
+						"font-weight": "var(--global-font-weight-7)",
+						"line-height": "var(--global-line-height-6)"
+					},
+					"paragraph": {
+						"font-size": "var(--global-font-size-7)",
+						"font-weight": "var(--global-font-weight-4)",
+						"text-align": "center",
+						"margin-bottom": "var(--global-spacing-4)"
+					},
+					"button-large": {
+						"margin-bottom": "var(--global-spacing-4)"
+					}
+				}
+			}
+		}
+	},
+	"offer-card-features": {
+		"styles": {
+			"default": {
+				"align-self": "baseline"
+			}
+		}
+	},
+	"offer-card-features--feature-item": {
+		"styles": {
+			"default": {
+				"align-items": "center",
+				"display": "flex",
+				"margin-block-end": "var(--global-spacing-4)",
+				"components": {
+					"icon": {
+						"display": "flex",
+						"width": "var(--global-spacing-4)",
+						"height": "var(--global-spacing-4)",
+						"margin": "0 var(--global-spacing-2) 0 0"
+					}
+				}
+			}
+		}
+	}
+}

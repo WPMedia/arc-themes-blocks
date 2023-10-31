@@ -1,20 +1,18 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { PrimaryFont } from "@wpmedia/shared-styles";
+import { Stack } from "@wpmedia/arc-themes-components";
 
-const Item = ({ name, description, additionalInfo }) => (
-	<PrimaryFont as="div" className="xpmedia-subscriptions-cart-item">
-		<p className="xpmedia-subscriptions-cart-item--name">{name}</p>
+const Item = ({ name, description, additionalInfo, className }) => (
+	<Stack as="div" className={`${className}__cart-item`}>
+		<p className={`${className}__cart-item--name`}>{name}</p>
 		{description ? (
 			<p
-				className="xpmedia-subscriptions-cart-item--description"
+				className={`${className}__cart-item--description`}
 				dangerouslySetInnerHTML={{ __html: description }}
 			/>
 		) : null}
-		{additionalInfo ? (
-			<p className="xpmedia-subscriptions-cart-item--info">{additionalInfo}</p>
-		) : null}
-	</PrimaryFont>
+		{additionalInfo ? <p className={`${className}__cart-item--info`}>{additionalInfo}</p> : null}
+	</Stack>
 );
 
 Item.propTypes = {

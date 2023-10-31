@@ -6,10 +6,10 @@ import { usePhrases } from "@wpmedia/arc-themes-components";
 
 import PaymentForm from "../../../../components/PaymentForm";
 
-const PaymentInfo = ({ orderNumber, paymentDetails, paymentMethodID, successURL }) => {
+const PaymentInfo = ({ orderNumber, paymentDetails, paymentMethodID, successURL, className }) => {
 	const [stripeInstance, setStripeInstance] = useState(null);
 
-	// initialized payment doc https://redirector.arcpublishing.com/alc/docs/api/arc-sdks/interfaces/_sdk_sales_src_sdk_order_.initializedpayment.html
+	// initialized payment doc https://redirector.arcpublishing.com/alc/en/arc-xp-subscriptions-sdks?id=kb_article_view&sys_kb_id=7770d58747447990eee38788436d4362&spa=1
 	const { parameter2: stripeKey, parameter1: clientSecret } = paymentDetails;
 
 	const phrases = usePhrases();
@@ -39,6 +39,7 @@ const PaymentInfo = ({ orderNumber, paymentDetails, paymentMethodID, successURL 
 					stripeInstance={stripeInstance}
 					submitText={submitText}
 					successURL={successURL}
+					className={className}
 				/>
 			</Elements>
 		);

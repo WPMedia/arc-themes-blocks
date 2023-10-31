@@ -4,8 +4,8 @@ import PropTypes from "@arc-fusion/prop-types";
 
 import { useFusionContext } from "fusion:context";
 
-import PaywallOffer from "../../components/PaywallOffer";
-import RegwallOffer from "../../components/RegwallOffer";
+// import PaywallOffer from "../../components/PaywallOffer";
+// import RegwallOffer from "../../components/RegwallOffer";
 import usePaywall from "../../components/usePaywall";
 
 const Paywall = ({ customFields }) => {
@@ -32,32 +32,30 @@ const Paywall = ({ customFields }) => {
 
 	if (!isServerSide()) {
 		if ((!isAdmin && isRegisterwalled) || (isAdmin && adminViewState === "showRegwall")) {
-			return (
-				<RegwallOffer
-					actionText={registerActionText}
-					actionUrl={registerActionUrl}
-					displayMode={displayMode}
-					headlineText={registerHeaderText}
-					linkPrompt={registerLinkPrompt}
-					linkText={linkText}
-					linkUrl={linkUrl}
-					reasonPrompt={registerReasonPrompt}
-					subheadlineText={registerSubHeaderText}
-				/>
-			);
+			return null;
+			// <RegwallOffer
+			// 	actionText={registerActionText}
+			// 	actionUrl={registerActionUrl}
+			// 	displayMode={displayMode}
+			// 	headlineText={registerHeaderText}
+			// 	linkPrompt={registerLinkPrompt}
+			// 	linkText={linkText}
+			// 	linkUrl={linkUrl}
+			// 	reasonPrompt={registerReasonPrompt}
+			// 	subheadlineText={registerSubHeaderText}
+			// />
 		}
 		if ((!isAdmin && isPaywalled) || (isAdmin && adminViewState === "showPaywall")) {
-			return (
-				<PaywallOffer
-					actionText={payActionText}
-					actionUrl={payActionUrl}
-					displayMode={displayMode}
-					linkPrompt={payLinkPrompt}
-					linkText={linkText}
-					linkUrl={linkUrl}
-					reasonPrompt={payReasonPrompt}
-				/>
-			);
+			return null;
+			// <PaywallOffer
+			// 	actionText={payActionText}
+			// 	actionUrl={payActionUrl}
+			// 	displayMode={displayMode}
+			// 	linkPrompt={payLinkPrompt}
+			// 	linkText={linkText}
+			// 	linkUrl={linkUrl}
+			// 	reasonPrompt={payReasonPrompt}
+			// />
 		}
 	}
 	return null;

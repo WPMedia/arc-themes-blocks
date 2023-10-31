@@ -1,21 +1,12 @@
 import React, { useRef } from "react";
 
-import { usePhrases } from "@wpmedia/arc-themes-components";
-import {
-	Button,
-	BUTTON_SIZES,
-	BUTTON_STYLES,
-	FIELD_TYPES,
-	FormInputField,
-	PrimaryFont,
-} from "@wpmedia/shared-styles";
+import { usePhrases, Heading, Input, Button, Stack, Image } from "@wpmedia/arc-themes-components";
 
 import countryCodes from "./countryCodes";
 import GoogleIcon from "./google.svg";
 import FacebookIcon from "./facebook.svg";
-import "./styles.scss";
 
-const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback }) => {
+const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, className }) => {
 	const formRef = useRef();
 	const entriesRef = useRef({});
 
@@ -49,9 +40,7 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback }) => {
 	}));
 
 	const signOutBtn = (
-		<button type="button" className="sign-out-btn" onClick={handleLogout}>
-			{phrases.t("checkout-block.identity-sign-out")}
-		</button>
+		<Button onClick={handleLogout}>{phrases.t("checkout-block.identity-sign-out")}</Button>
 	);
 
 	const identityInfo = () => {
@@ -60,14 +49,8 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback }) => {
 			switch (type) {
 				case "google":
 					return (
-						<div className="identity-row">
-							<img
-								alt="Google"
-								title="Google"
-								className="identity-icon"
-								src={GoogleIcon}
-								data-testid="google-icon"
-							/>
+						<div className={`${className}__identity-row`}>
+							<Image alt="Google" title="Google" src={GoogleIcon} />
 							<span>
 								{phrases.t("checkout-block.identity-social", {
 									email: user.email,
@@ -78,14 +61,8 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback }) => {
 					);
 				case "facebook":
 					return (
-						<div className="identity-row">
-							<img
-								alt="Facebook"
-								title="Facebook"
-								className="identity-icon"
-								src={FacebookIcon}
-								data-testid="facebook-icon"
-							/>
+						<div className={`${className}__identity-row`}>
+							<Image alt="Facebook" title="Facebook" src={FacebookIcon} />
 							<span>
 								{phrases.t("checkout-block.identity-social", {
 									email: user.email,
@@ -96,7 +73,7 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback }) => {
 					);
 				case "password":
 					return (
-						<div className="identity-row">
+						<div className={`${className}__identity-row`}>
 							<span>
 								{phrases.t("checkout-block.identity-email", {
 									email: user.email,
@@ -113,88 +90,65 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback }) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} ref={formRef} className="xpmedia-subscriptions-contact-info">
-			<PrimaryFont as="h2" className="xpmedia-subscriptions-contact-info-title">
-				{phrases.t("checkout-block.contact-info")}
-			</PrimaryFont>
-
-			<div className="row">
-				<div className="col-sm-xl-12">
-					<FormInputField
-						autoComplete="email"
-						label={phrases.t("checkout-block.email")}
-						name="email"
-						defaultValue={user && user.email ? user.email : ""}
-						hidden={!!(user && user.email)}
-						required
-						onChange={(value) => {
-							handleInputChange("email", value);
-						}}
-						showDefaultError={false}
-						type={FIELD_TYPES.EMAIL}
-						validationErrorMessage={phrases.t("checkout-block.email-requirements")}
-					/>
-					{identityInfo()}
-				</div>
+		<form onSubmit={handleSubmit} ref={formRef} className={`${className}__contact-info`}>
+			<Heading>{phrases.t("checkout-block.contact-info")}</Heading>
+			<Stack>
+				<Input
+					autoComplete="email"
+					label={phrases.t("checkout-block.email")}
+					name="email"
+					defaultValue={user && user.email ? user.email : ""}
+					hidden={!!(user && user.email)}
+					required
+					onChange={(value) => {
+						handleInputChange("email", value);
+					}}
+					showDefaultError={false}
+					type="email"
+					validationErrorMessage={phrases.t("checkout-block.email-requirements")}
+				/>
+				{identityInfo()}
+			</Stack>
+			<div className={`${className}__contact-info-profile`}>
+				<Input
+					label={phrases.t("checkout-block.first-name")}
+					name="firstName"
+					defaultValue={user && user.firstName ? user.firstName : ""}
+					required
+					onChange={(value) => {
+						handleInputChange("firstName", value);
+					}}
+					showDefaultError={false}
+					type="text"
+					validationErrorMessage={phrases.t("checkout-block.first-name-requirements")}
+				/>
+				<Input
+					label={phrases.t("checkout-block.last-name")}
+					name="lastName"
+					defaultValue={user && user.lastName ? user.lastName : ""}
+					required
+					onChange={(value) => {
+						handleInputChange("lastName", value);
+					}}
+					showDefaultError={false}
+					type="text"
+					validationErrorMessage={phrases.t("checkout-block.last-name-requirements")}
+				/>
 			</div>
-			<div className="row">
-				<div className="col-md-xl-6 col-sm-12">
-					<FormInputField
-						label={phrases.t("checkout-block.first-name")}
-						name="firstName"
-						defaultValue={user && user.firstName ? user.firstName : ""}
-						required
-						onChange={(value) => {
-							handleInputChange("firstName", value);
-						}}
-						showDefaultError={false}
-						type={FIELD_TYPES.TEXT}
-						validationErrorMessage={phrases.t("checkout-block.first-name-requirements")}
-					/>
-				</div>
-				<div className="col-md-xl-6 col-sm-12">
-					<FormInputField
-						label={phrases.t("checkout-block.last-name")}
-						name="lastName"
-						defaultValue={user && user.lastName ? user.lastName : ""}
-						required
-						onChange={(value) => {
-							handleInputChange("lastName", value);
-						}}
-						showDefaultError={false}
-						type={FIELD_TYPES.TEXT}
-						validationErrorMessage={phrases.t("checkout-block.last-name-requirements")}
-					/>
-				</div>
-			</div>
-			<div className="row">
-				<div className="col-sm-xl-12">
-					<FormInputField
-						label={phrases.t("checkout-block.country")}
-						name="country"
-						required
-						onChange={(value) => {
-							handleInputChange("country", value);
-						}}
-						options={getTranslatedCountries}
-						optionValueKey="code"
-						optionLabelKey="name"
-						defaultValue=""
-						showDefaultError={false}
-						type={FIELD_TYPES.SELECT}
-						validationErrorMessage={phrases.t("checkout-block.country-requirements")}
-					/>
-				</div>
-			</div>
-
-			<Button
-				data-testid="contact-form-submit-btn"
-				buttonSize={BUTTON_SIZES.MEDIUM}
-				buttonStyle={BUTTON_STYLES.PRIMARY}
-				fullWidth
-				text={phrases.t("checkout-block.continue-to-checkout")}
-				type="submit"
+			<Input
+				label={phrases.t("checkout-block.country")}
+				name="country"
+				required
+				onChange={(value) => {
+					handleInputChange("country", value);
+				}}
+				showDefaultError={false}
+				type="text"
+				validationErrorMessage={phrases.t("checkout-block.country-requirements")}
 			/>
+			<Button size="medium" variant="primary" fullWidth type="submit">
+				<span>{phrases.t("checkout-block.continue-to-checkout")}</span>
+			</Button>
 		</form>
 	);
 };

@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 
-import { usePhrases } from "@wpmedia/arc-themes-components";
-import useIdentity from "@wpmedia/identity-block/components/Identity";
-import { PrimaryFont } from "@wpmedia/shared-styles";
+import { usePhrases, Heading, Link } from "@wpmedia/arc-themes-components";
+import { useIdentity } from "@wpmedia/identity-block";
 
 import useSales from "../../components/useSales";
 import Cart from "../../components/Cart";
 import ContactInfo from "../../components/ContactInfo";
 import PaymentInfo from "./_children/PaymentInfo";
 
-import "./styles.scss";
+const BLOCK_CLASS_NAME = "b-checkout";
+
+console.log("TO-DO-Laura: Unable to grab this function from useIdentity -- remove later");
+const getSignedInIdentity = (user) =>
+	user?.identities?.reduce((prev, current) =>
+		prev.lastLoginDate > current.lastLoginDate ? prev : current
+	) || null;
 
 const Checkout = ({ customFields }) => {
 	const { offerURL, successURL } = customFields;
@@ -22,7 +27,7 @@ const Checkout = ({ customFields }) => {
 	const [payment, setPayment] = useState();
 	const [paymentMethodID, setPaymentMethodID] = useState();
 
-	const { Identity, getSignedInIdentity } = useIdentity();
+	const { Identity } = useIdentity();
 	const { Sales } = useSales();
 	const phrases = usePhrases();
 
@@ -55,17 +60,24 @@ const Checkout = ({ customFields }) => {
 			isActive = false;
 			return null;
 		};
-	}, [Identity, getSignedInIdentity, loggedIn]);
+	}, [Identity, loggedIn]);
 
 	const logoutCallback = () => {
 		Identity.logout().then(() => {
 			setUser(false);
 		});
 	};
-	const createNewOrder = ({ email, firstName, lastName, country }) => {
+	const createNewOrder = async ({ email, firstName, lastName, country }) => {
 		if (user) {
 			Identity.updateUserProfile({ firstName, lastName });
 		}
+
+		const cart = await Sales.getCart();
+		console.log(cart);
+		console.log(
+			"TO-DO-Laura: Check, what should be the behavior if cart is empty. If cart is empty, Sales.createNewOrder is returning an error back"
+		);
+
 		Sales.createNewOrder({ country }, email).then((order) => {
 			setOrderNumber(order.orderNumber);
 			Sales.getPaymentOptions().then((paymentOptions) => {
@@ -82,13 +94,11 @@ const Checkout = ({ customFields }) => {
 	};
 
 	return (
-		<PrimaryFont as="div" className="xpmedia-subscriptions-checkout">
-			<PrimaryFont as="h1">{phrases.t("checkout-block.headline")}</PrimaryFont>
-			<a href={offerURL} className="xpmedia-subscriptions-checkout--backlink">
-				{phrases.t("checkout-block.back-to-offer-page")}
-			</a>
+		<section className={BLOCK_CLASS_NAME}>
+			<Heading>{phrases.t("checkout-block.headline")}</Heading>
+			<Link href={offerURL}>{phrases.t("checkout-block.back-to-offer-page")}</Link>
 
-			<Cart offerURL={offerURL} />
+			<Cart offerURL={offerURL} className={BLOCK_CLASS_NAME} />
 
 			{!showPaymentScreen ? (
 				<ContactInfo
@@ -96,6 +106,7 @@ const Checkout = ({ customFields }) => {
 					user={user}
 					signedInIdentity={signedInIdentity}
 					logoutCallback={logoutCallback}
+					className={BLOCK_CLASS_NAME}
 				/>
 			) : (
 				<PaymentInfo
@@ -103,16 +114,12 @@ const Checkout = ({ customFields }) => {
 					paymentDetails={payment}
 					paymentMethodID={paymentMethodID}
 					successURL={successURL}
+					className={BLOCK_CLASS_NAME}
 				/>
 			)}
-		</PrimaryFont>
+		</section>
 	);
 };
-
-Checkout.label = "Checkout - Arc Block";
-
-Checkout.icon = "shop-cart";
-
 Checkout.propTypes = {
 	customFields: PropTypes.shape({
 		offerURL: PropTypes.string.tag({
@@ -124,5 +131,8 @@ Checkout.propTypes = {
 		}),
 	}),
 };
+
+Checkout.label = "Checkout - Arc Block";
+Checkout.icon = "shop-cart";
 
 export default Checkout;

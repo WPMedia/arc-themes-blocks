@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { isServerSide } from "@wpmedia/engine-theme-sdk";
 import PropTypes from "@arc-fusion/prop-types";
-import Identity from "@arc-publishing/sdk-identity";
-import { PrimaryFont, SecondaryFont } from "@wpmedia/shared-styles";
+import { Identity } from "@arc-publishing/sdk-identity";
+import { Heading, Paragraph, isServerSide } from "@wpmedia/arc-themes-components";
 import useOffer from "../../components/useOffer";
 import OfferToProductList from "../../components/OfferToProductList";
-import "./styles.scss";
+
+const BLOCK_CLASS_NAME = "b-offer";
 
 const Offer = ({ customFields }) => {
 	const { campaignCode, loginURL, checkoutURL } = customFields;
@@ -23,6 +23,13 @@ const Offer = ({ customFields }) => {
 		campaignCode: selectedCampaignCode,
 	});
 
+	const temp = useOffer({ campaignCode: selectedCampaignCode });
+
+	console.log("offer!!!");
+	console.log(selectedCampaignCode);
+	console.log(temp);
+	console.log(offer);
+
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	const getIsLoggedIn = async () => {
@@ -39,20 +46,26 @@ const Offer = ({ customFields }) => {
 	}
 
 	return (
-		<div className="xpmedia-subscription-offer-wrapper layout-section wrap-bottom">
+		<div className={BLOCK_CLASS_NAME}>
 			{!isFetching && offer ? (
 				<>
-					<div className="xpmedia-subscription-offer-headings">
-						<PrimaryFont dangerouslySetInnerHTML={{ __html: offer.pageTitle }} as="h1" />
-						<SecondaryFont dangerouslySetInnerHTML={{ __html: offer.pageSubTitle }} as="h2" />
-					</div>
-
-					<div className="margin-md-top">
+					<section className={`${BLOCK_CLASS_NAME}__headings`}>
+						<Heading
+							className={`${BLOCK_CLASS_NAME}__title`}
+							dangerouslySetInnerHTML={{ __html: offer.pageTitle }}
+						/>
+						<Paragraph
+							className={`${BLOCK_CLASS_NAME}__subtitle`}
+							dangerouslySetInnerHTML={{ __html: offer.pageSubTitle }}
+						/>
+					</section>
+					<div className={`${BLOCK_CLASS_NAME}__wrapper`}>
 						<OfferToProductList
 							offer={offer}
 							isLoggedIn={isLoggedIn}
 							checkoutURL={checkoutURL}
 							loginURL={loginURL}
+							className={BLOCK_CLASS_NAME}
 						/>
 					</div>
 				</>
@@ -60,8 +73,6 @@ const Offer = ({ customFields }) => {
 		</div>
 	);
 };
-
-Offer.label = "Offer - Arc Block";
 
 Offer.propTypes = {
 	customFields: PropTypes.shape({
@@ -77,4 +88,5 @@ Offer.propTypes = {
 	}),
 };
 
+Offer.label = "Offer - Arc Block";
 export default Offer;

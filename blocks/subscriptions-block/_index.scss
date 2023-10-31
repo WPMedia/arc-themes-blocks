@@ -1,0 +1,91 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-checkout {
+	&__cart {
+		@include scss.block-components("checkout-cart");
+		@include scss.block-properties("checkout-cart");
+	}
+	&__cart-items {
+		@include scss.block-components("checkout-cart-items");
+		@include scss.block-properties("checkout-cart-items");
+	}
+	&__cart-item {
+		@include scss.block-components("checkout-cart-item");
+		@include scss.block-properties("checkout-cart-item");
+		&--name {
+			@include scss.block-components("checkout-cart-item--name");
+			@include scss.block-properties("checkout-cart-item--name");
+		}
+		&--info {
+			@include scss.block-components("checkout-cart-item--info");
+			@include scss.block-properties("checkout-cart-item--info");
+		}
+	}
+	&__contact-info {
+		@include scss.block-components("checkout-contact-info");
+		@include scss.block-properties("checkout-contact-info");
+		&-profile {
+			@include scss.block-components("checkout-contact-info-profile");
+			@include scss.block-properties("checkout-contact-info-profile");
+		}
+	}
+	&__identity-row {
+		@include scss.block-components("checkout-identity-row");
+		@include scss.block-properties("checkout-identity-row");
+	}
+	&__identity-icon {
+		@include scss.block-components("checkout-identity-icon");
+		@include scss.block-properties("checkout-identity-icon");
+	}
+	&__payment {
+		@include scss.block-components("checkout-payment");
+		@include scss.block-properties("checkout-payment");
+		&-form {
+			@include scss.block-components("checkout-payment-form");
+			@include scss.block-properties("checkout-payment-form");
+			&--stripe-input-container {
+				@include scss.block-components("checkout-payment-form--stripe-input-container");
+				@include scss.block-properties("checkout-payment-form--stripe-input-container");
+			}
+		}
+	}
+	@include scss.block-components("checkout");
+	@include scss.block-properties("checkout");
+}
+
+.b-offer {
+	&__headings {
+		@include scss.block-components("offer-headings");
+		@include scss.block-properties("offer-headings");
+	}
+	&__title {
+		@include scss.block-components("offer-title");
+		@include scss.block-properties("offer-title");
+	}
+	&__subtitle {
+		@include scss.block-components("offer-subtitle");
+		@include scss.block-properties("offer-subtitle");
+	}
+	&__wrapper {
+		@include scss.block-components("offer-wrapper");
+		@include scss.block-properties("offer-wrapper");
+	}
+	&__grid-list {
+		@include scss.block-components("offer-grid-list");
+		@include scss.block-properties("offer-grid-list");
+	}
+	&__card {
+		@include scss.block-components("offer-card");
+		@include scss.block-properties("offer-card");
+	}
+	&__card--features {
+		@include scss.block-components("offer-card-features");
+		@include scss.block-properties("offer-card-features");
+	}
+	&__card--features--feature-item {
+		@include scss.block-components("offer-card-features--feature-item");
+		@include scss.block-properties("offer-card-features--feature-item");
+	}
+	@include scss.block-components("offer");
+	@include scss.block-properties("offer");
+}

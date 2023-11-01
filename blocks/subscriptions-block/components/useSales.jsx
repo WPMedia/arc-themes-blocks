@@ -7,13 +7,19 @@ import getProperties from "fusion:properties";
 const useSales = () => {
 	const { arcSite } = useFusionContext();
 	const { api } = getProperties(arcSite);
-	const [isInit, setIsInit] = useState(!!Identity.apiOrigin);
+	const [isInit, setIsInit] = useState(!!Sales.apiOrigin);
+	const isIdentityInit = !!Identity.apiOrigin;
 
-	if (!isInit && arcSite && api?.identity?.origin) {
-		Identity.options({ apiOrigin: api.identity.origin });
+	const identityApiOrigin = api?.identity?.origin ?? api?.sales?.origin ?? api?.retail?.origin;
+	const salesApiOrigin = api?.sales?.origin ?? api?.identity?.origin ?? api?.retail?.origin;
 
+	if (!isIdentityInit && arcSite && identityApiOrigin) {
+		Identity.options({ apiOrigin: identityApiOrigin });
+	}
+
+	if (!isInit && arcSite && salesApiOrigin) {
 		Sales.options({
-			apiOrigin: api?.retail?.origin,
+			apiOrigin: salesApiOrigin,
 			Identity,
 		});
 

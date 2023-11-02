@@ -32,10 +32,6 @@ const Checkout = ({ customFields }) => {
 	const { Sales } = useSales();
 	const phrases = usePhrases();
 
-	console.log("Testing")
-	console.log(useIdentity());
-	console.log(useOffer("default"));
-
 	useEffect(() => {
 		const isLoggedIn = async () => {
 			setIsLoggedIn(await Identity.isLoggedIn());

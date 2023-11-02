@@ -11,12 +11,6 @@ import PaymentInfo from "./_children/PaymentInfo";
 
 const BLOCK_CLASS_NAME = "b-checkout";
 
-// TO-DO: Unable to grab this function from useIdentity
-const getSignedInIdentity = (user) =>
-	user?.identities?.reduce((prev, current) =>
-		prev.lastLoginDate > current.lastLoginDate ? prev : current
-	) || null;
-
 const Checkout = ({ customFields }) => {
 	const { offerURL, successURL } = customFields;
 	const [loggedIn, setIsLoggedIn] = useState(false);
@@ -71,8 +65,6 @@ const Checkout = ({ customFields }) => {
 		if (user) {
 			Identity.updateUserProfile({ firstName, lastName });
 		}
-
-		// TO-DO: Check, what should be the behavior if cart is empty. If cart is empty, Sales.createNewOrder is returning an error back
 
 		Sales.createNewOrder({ country }, email).then((order) => {
 			setOrderNumber(order.orderNumber);

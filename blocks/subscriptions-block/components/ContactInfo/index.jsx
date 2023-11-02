@@ -40,7 +40,9 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, classNa
 	// }));
 
 	const signOutBtn = (
-		<Button onClick={handleLogout}>{phrases.t("checkout-block.identity-sign-out")}</Button>
+		<Button variant="secondary" size="medium" onClick={handleLogout}>
+			{phrases.t("checkout-block.identity-sign-out")}
+		</Button>
 	);
 
 	const identityInfo = () => {

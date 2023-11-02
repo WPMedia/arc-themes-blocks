@@ -1,6 +1,6 @@
 import React from "react";
 
-import { isServerSide } from "@wpmedia/engine-theme-sdk";
+import { isServerSide } from "@wpmedia/arc-themes-components";
 import SubscriptionOverlay from "../SubscriptionOverlay";
 import SubscriptionDialog from "../SubscriptionDialog";
 

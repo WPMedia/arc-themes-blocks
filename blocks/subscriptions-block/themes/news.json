@@ -3,7 +3,7 @@
 		"styles": {
 			"default": {
 				"font-family": "var(--font-family-primary)",
-				"margin-bottom": "var(--global-spacing-6)",
+				"margin-bottom": "var(--global-spacing-5)",
 				"components": {
 					"heading": {
 						"font-size": "var(--global-font-size-12)"
@@ -196,6 +196,48 @@
 				"gap": "var(--global-spacing-5)",
 				"grid-template-columns": "1fr",
 				"justify-content": "center"
+			}
+		}
+	},
+	"offer-grid-list-1": {
+		"styles": {
+			"default": {
+				"grid-template-columns": "minmax(auto, 600px)"
+			}
+		}
+	},
+	"offer-grid-list-2": {
+		"styles": {
+			"default": {
+				"grid-template-columns": "repeat(2, 1fr)"
+			}
+		}
+	},
+	"offer-grid-list-3": {
+		"styles": {
+			"default": {
+				"grid-template-columns": "repeat(3, 1fr)"
+			}
+		}
+	},
+	"offer-grid-list-4": {
+		"styles": {
+			"default": {
+				"grid-template-columns": "1fr 1fr"
+			}
+		}
+	},
+	"offer-grid-list-5": {
+		"styles": {
+			"default": {
+				"grid-template-columns": "repeat(6, 1fr)"
+			}
+		}
+	},
+	"offer-grid-list-5-children": {
+		"styles": {
+			"default": {
+				"grid-column": "span 2"
 			}
 		}
 	},

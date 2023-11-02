@@ -5,6 +5,8 @@ import useSales from "../useSales";
 
 import Cart from "./index";
 
+const BLOCK_CLASS_NAME = "b-checkout";
+
 jest.mock("fusion:properties", () => jest.fn(() => ({ api: { retail: { origin: "" } } })));
 
 jest.mock("fusion:intl", () => ({
@@ -142,12 +144,13 @@ describe("Cart", () => {
 		});
 
 		await act(async () => {
-			wrapper = await mount(<Cart offerURL="/" />);
+			wrapper = await mount(<Cart className={BLOCK_CLASS_NAME} offerURL="/" />);
 		});
 		wrapper.update();
 
-		expect(wrapper.find(".xpmedia-subscriptions-cart").exists()).toBe(true);
-		expect(wrapper.find(".xpmedia-subscriptions-cart-title").exists()).toBe(true);
+		const title = wrapper.find(".b-checkout__cart h1");
+		expect(wrapper.find(".b-checkout__cart").exists()).toBe(true);
+		expect(title.text()).toEqual("checkout-block.order-summary");
 		expect(wrapper.find("Item").exists()).toBe(true);
 	});
 });

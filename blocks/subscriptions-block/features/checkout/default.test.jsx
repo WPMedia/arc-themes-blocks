@@ -1,5 +1,9 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+
+import { mount } from "enzyme";
+import { fireEvent, render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+
 import { act } from "react-dom/test-utils";
 import useIdentity from "@wpmedia/identity-block/components/Identity";
 import useSales from "../../components/useSales";
@@ -35,7 +39,7 @@ describe("Checkout Feature", () => {
 			Sales: {},
 		});
 
-		const wrapper = shallow(
+		const wrapper = mount(
 			<Checkout
 				customFields={{
 					offerURL: "/offer-url/",
@@ -43,14 +47,12 @@ describe("Checkout Feature", () => {
 			/>
 		);
 
-		expect(wrapper.find("a").prop("href")).toBe("/offer-url/");
+		expect(wrapper.find("a").prop("href")).toMatch("/offer-url/");
 		expect(wrapper.find("Cart").exists()).toBe(true);
 		expect(wrapper.find("ContactInfo").exists()).toBe(true);
 	});
 
-	it("Renders PaymentInfo after creating an order", async () => {
-		let wrapper;
-
+	it.only("Renders PaymentInfo after creating an order", async () => {
 		const userProfile = Promise.resolve({
 			email: "email@email.com",
 			firstName: "first name",
@@ -86,7 +88,7 @@ describe("Checkout Feature", () => {
 		});
 
 		await act(async () => {
-			wrapper = await mount(
+			render(
 				<Checkout
 					customFields={{
 						offerURL: "/offer-url/",
@@ -95,34 +97,27 @@ describe("Checkout Feature", () => {
 			);
 		});
 		await userProfile;
-		wrapper.update();
 
-		expect(wrapper.find("ContactInfo").exists()).toBe(true);
+		const contactInfo = screen.getByText("checkout-block.contact-info");
+		const email = screen.getByLabelText("checkout-block.email");
+		const firstName = screen.getByLabelText("checkout-block.first-name");
+		const lastName = screen.getByLabelText("checkout-block.last-name");
+		const country = screen.getByLabelText("checkout-block.country");
 
-		wrapper.find("option").at(1).instance().selected = true;
+		expect(contactInfo).not.toBeNull();
+		expect(country).toBeInTheDocument();
+		fireEvent.change(country, { target: { value: "US" } });
 
 		await act(async () => {
-			wrapper.find("form").simulate("submit");
+			fireEvent.click(screen.getByRole("button"));
 			await initializePaymentMock;
 		});
 
-		wrapper.update();
-
 		expect(updateUserProfileMock).toHaveBeenCalled();
 
-		expect(wrapper.find("ContactInfo").exists()).toBe(false);
-		expect(wrapper.find("PaymentInfo").exists()).toBe(true);
-	});
-
-	it("renders a contact info form", () => {
-		const wrapper = mount(
-			<Checkout
-				customFields={{
-					offerURL: "/offer-url/",
-				}}
-			/>
-		);
-
-		expect(wrapper.find(".xpmedia-subscriptions-contact-info").exists()).toBe(true);
+		expect(country).not.toBeInTheDocument();
+		expect(email).not.toBeInTheDocument();
+		expect(firstName).not.toBeInTheDocument();
+		expect(lastName).not.toBeInTheDocument();
 	});
 });

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { isServerSide } from "@wpmedia/engine-theme-sdk";
+import { isServerSide } from "@wpmedia/arc-themes-components";
 import isUrl from "is-url";
 import useOffer from "../useOffer";
 import SubscriptionOverlay from "../SubscriptionOverlay";

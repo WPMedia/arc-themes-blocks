@@ -73,6 +73,30 @@
 	&__grid-list {
 		@include scss.block-components("offer-grid-list");
 		@include scss.block-properties("offer-grid-list");
+		&--1 {
+			@include scss.block-components("offer-grid-list-1");
+			@include scss.block-properties("offer-grid-list-1");
+		}
+		&--2 {
+			@include scss.block-components("offer-grid-list-2");
+			@include scss.block-properties("offer-grid-list-2");
+		}
+		&--3 {
+			@include scss.block-components("offer-grid-list-3");
+			@include scss.block-properties("offer-grid-list-3");
+		}
+		&--4 {
+			@include scss.block-components("offer-grid-list-4");
+			@include scss.block-properties("offer-grid-list-4");
+		}
+		&--5 {
+			@include scss.block-components("offer-grid-list-5");
+			@include scss.block-properties("offer-grid-list-5");
+			> * {
+				@include scss.block-components("offer-grid-list-5-children");
+				@include scss.block-properties("offer-grid-list-5-children");
+			}
+		}
 	}
 	&__card {
 		@include scss.block-components("offer-card");

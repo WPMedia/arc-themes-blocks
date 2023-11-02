@@ -13,37 +13,39 @@ const props = {
 	],
 };
 
+const BLOCK_CLASS_NAME = "b-offer";
+
 describe("OfferCard", () => {
 	it("renders all fields", () => {
-		const wrapper = mount(<OfferCard {...props} />);
-		expect(wrapper.find("h2.xpmedia-subscription-offer-card--headline").text()).toEqual(
-			props.headline
-		);
-		expect(wrapper.find("h3.xpmedia-subscription-offer-card--subheadline").text()).toEqual(
-			props.subHeadline
-		);
+		const wrapper = mount(<OfferCard className={BLOCK_CLASS_NAME} {...props} />);
+
+		const headline = wrapper.find(".b-offer__card h1");
+		expect(headline.text()).toEqual(props.headline);
+
+		const subheadline = wrapper.find(".b-offer__card p");
+		expect(subheadline.text()).toEqual(props.subHeadline);
+
 		expect(wrapper.find("button").exists()).toBe(true);
-		expect(wrapper.find(".xpmedia-subscription-offer-card--feature-item").length).toBe(
-			props.features.length
-		);
-		expect(wrapper.find(".xpmedia-subscription-offer-card--feature-item").at(0).text()).toBe(
-			props.features[0].featureText
-		);
-		expect(wrapper.find(".xpmedia-subscription-offer-card--feature-item").at(1).text()).toBe(
-			props.features[1].featureText
-		);
+
+		const features = wrapper.find(".b-offer__card--features li");
+		expect(features.length).toBe(props.features.length);
+
+		expect(features.at(0).text()).toBe(props.features[0].featureText);
+		expect(features.at(1).text()).toBe(props.features[1].featureText);
 	});
 
 	it("does not render headline if not present", () => {
-		const wrapper = mount(<OfferCard {...props} headline={null} />);
+		const wrapper = mount(<OfferCard {...props} className={BLOCK_CLASS_NAME} headline={null} />);
 
-		expect(wrapper.find(".xpmedia-subscription-offer-card--headline").exists()).toBe(false);
+		const headline = wrapper.find(".b-offer__card h1");
+		expect(headline.exists()).toBe(false);
 	});
 
 	it("does not render subHeadline if not present", () => {
-		const wrapper = mount(<OfferCard {...props} subHeadline={null} />);
+		const wrapper = mount(<OfferCard {...props} className={BLOCK_CLASS_NAME} subHeadline={null} />);
 
-		expect(wrapper.find(".xpmedia-subscription-offer-card--subheadline").exists()).toBe(false);
+		const subheadline = wrapper.find(".b-offer__card p");
+		expect(subheadline.exists()).toBe(false);
 	});
 
 	it("does not render button if no actionText and no ActionEvent", () => {
@@ -65,8 +67,9 @@ describe("OfferCard", () => {
 	});
 
 	it("does not render features", () => {
-		const wrapper = mount(<OfferCard headline="Headline" />);
+		const wrapper = mount(<OfferCard className={BLOCK_CLASS_NAME} headline="Headline" />);
 
-		expect(wrapper.find(".xpmedia-subscription-offer-card--feature-item").length).toBe(0);
+		const features = wrapper.find(".b-offer__card--features li");
+		expect(features.length).toBe(0);
 	});
 });

@@ -1,14 +1,17 @@
 import React from "react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { mount } from "enzyme";
-import { isServerSide } from "@wpmedia/engine-theme-sdk";
+
+import { act } from "react-dom/test-utils";
+import { isServerSide } from "@wpmedia/arc-themes-components";
 import Offer from "./default";
 import useOffer from "../../components/useOffer";
 
 jest.spyOn(URLSearchParams.prototype, "get").mockReturnValue("some value");
 jest.spyOn(URLSearchParams.prototype, "has").mockReturnValue(false);
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	...jest.requireActual("@wpmedia/engine-theme-sdk"),
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(),
 }));
 
@@ -211,9 +214,9 @@ describe("The Offer feature", () => {
 				}}
 			/>
 		);
-
-		expect(wrapper.find("div.xpmedia-subscription-offer-card")).toHaveLength(4);
+		expect(wrapper.find(".b-offer__grid-list div")).toHaveLength(4);
 	});
+
 	it("renders sub-headline and subheadline", () => {
 		const wrapper = mount(
 			<Offer
@@ -225,14 +228,13 @@ describe("The Offer feature", () => {
 			/>
 		);
 
-		const headline = wrapper.find(".xpmedia-subscription-offer-headings h1");
-
-		const subHeadline = wrapper.find(".xpmedia-subscription-offer-headings h2");
+		const headline = wrapper.find(".b-offer__headings h1");
+		const subHeadline = wrapper.find(".b-offer__headings p");
 
 		expect(headline.text()).toEqual(HEADLINE_TEXT);
-
 		expect(subHeadline.text()).toEqual(SUBHEADLINE_TEXT);
 	});
+
 	it("uses fallback campaign code", () => {
 		const wrapper = mount(
 			<Offer
@@ -244,8 +246,9 @@ describe("The Offer feature", () => {
 		);
 
 		expect(wrapper.html()).not.toBeNull();
-		expect(wrapper.find("div.xpmedia-subscription-offer-card")).toHaveLength(4);
+		expect(wrapper.find(".b-offer__grid-list div")).toHaveLength(4);
 	});
+
 	it("uses the fallback campaign code if url params does not have campaign present", () => {
 		jest.spyOn(URLSearchParams.prototype, "has").mockReturnValueOnce(true);
 
@@ -260,6 +263,7 @@ describe("The Offer feature", () => {
 
 		expect(wrapper.html()).not.toBeNull();
 	});
+
 	it("is fetching and does not return offers", () => {
 		useOffer.mockReturnValue({
 			isFetching: true,
@@ -277,9 +281,10 @@ describe("The Offer feature", () => {
 			/>
 		);
 
-		expect(wrapper.find("div.xpmedia-subscription-offer-card")).toHaveLength(0);
-		expect(wrapper.find(".xpmedia-subscription-offer-headings")).toHaveLength(0);
+		expect(wrapper.find(".b-offer__grid-list div")).toHaveLength(0);
+		expect(wrapper.find(".b-offer__headings")).toHaveLength(0);
 	});
+
 	it("returns null on serverside", () => {
 		isServerSide.mockReturnValue(true);
 

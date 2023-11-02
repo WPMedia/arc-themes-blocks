@@ -1,8 +1,6 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
 import { mount } from "enzyme";
 
-import { act } from "react-dom/test-utils";
 import { isServerSide } from "@wpmedia/arc-themes-components";
 import Offer from "./default";
 import useOffer from "../../components/useOffer";

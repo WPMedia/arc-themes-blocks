@@ -21,7 +21,7 @@ const Checkout = ({ customFields }) => {
 	const [payment, setPayment] = useState();
 	const [paymentMethodID, setPaymentMethodID] = useState();
 
-	const { Identity } = useIdentity();
+	const { Identity, getSignedInIdentity } = useIdentity();
 	const { Sales } = useSales();
 	const phrases = usePhrases();
 

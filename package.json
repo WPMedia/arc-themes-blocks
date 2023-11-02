@@ -168,6 +168,7 @@
 		"@wpmedia/story-feed-sections-content-source-block": "file:blocks/story-feed-sections-content-source-block",
 		"@wpmedia/story-feed-tag-content-source-block": "file:blocks/story-feed-tag-content-source-block",
 		"@wpmedia/subheadline-block": "file:blocks/subheadline-block",
+		"@wpmedia/subscriptions-block": "file:blocks/subscriptions-block",
 		"@wpmedia/tag-title-block": "file:blocks/tag-title-block",
 		"@wpmedia/tags-content-source-block": "file:blocks/tags-content-source-block",
 		"@wpmedia/top-table-list-block": "file:blocks/top-table-list-block",

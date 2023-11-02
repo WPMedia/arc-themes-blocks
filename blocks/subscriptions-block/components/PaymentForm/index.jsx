@@ -1,0 +1,136 @@
+import React, { useState } from "react";
+import Sales from "@arc-publishing/sdk-sales";
+import { CardElement, useElements } from "@stripe/react-stripe-js";
+import { Button, Heading, HeadingSection, Paragraph } from "@wpmedia/arc-themes-components";
+
+const CARD_ELEMENT_OPTIONS = {
+	style: {
+		base: {
+			color: "#575757",
+			fontSize: "16px",
+		},
+	},
+};
+
+const FORM_STATUS = {
+	IDLE: "idle",
+	PROCESSING: "processing",
+	SUCCESS: "success",
+	ERROR: "error",
+};
+
+function PaymentForm({
+	orderNumber,
+	successURL = "/", // fallback if no successURL is provided
+	paymentMethodID,
+	clientSecret,
+	stripeInstance,
+	formTitle,
+	formLabel,
+	submitText,
+	formErrorText,
+	className,
+}) {
+	const [formStatus, setFormStatus] = useState(FORM_STATUS.IDLE);
+
+	// stripe hooks have to be within Elements wrapper
+	// https://stripe.com/docs/stripe-js/react#useelements-hook
+	const elements = useElements();
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+
+		setFormStatus(FORM_STATUS.PROCESSING);
+		const cardElement = elements.getElement("card");
+
+		const { error, paymentMethod } = await stripeInstance.createPaymentMethod({
+			type: "card",
+			card: cardElement,
+			billing_details: {}, // todo: collect other info? eg. name, email, etc.
+		});
+
+		if (error) {
+			setFormStatus(FORM_STATUS.ERROR);
+			return;
+		}
+
+		let result;
+
+		// if order of $0 there's a different stripe logic
+		const totalOrder = Sales.currentOrder.total;
+
+		if (totalOrder > 0) {
+			result = await stripeInstance.confirmCardPayment(clientSecret, {
+				payment_method: paymentMethod.id,
+			});
+		} else {
+			result = await stripeInstance.confirmCardSetup(clientSecret, {
+				payment_method: paymentMethod.id,
+			});
+		}
+
+		if (result.error) {
+			setFormStatus(FORM_STATUS.ERROR);
+			return;
+		}
+
+		if (totalOrder > 0) {
+			const nonZeroPriceOutput = await Sales.finalizePayment(
+				orderNumber,
+				paymentMethodID,
+				// using paymentIntent here for greater than 0
+				result.paymentIntent.id
+			);
+			if (nonZeroPriceOutput.status === "Paid") {
+				setFormStatus(FORM_STATUS.SUCCESS);
+				window.location.href = successURL;
+			} else {
+				setFormStatus(FORM_STATUS.ERROR);
+			}
+		} else {
+			const zeroPriceOutput = await Sales.finalizePayment(
+				orderNumber,
+				paymentMethodID,
+				// using setupIntent here for 0
+				result.setupIntent.id
+			);
+			// even if no money changes hands, still shows status 'Paid'
+			if (zeroPriceOutput.status === "Paid") {
+				setFormStatus(FORM_STATUS.SUCCESS);
+				window.location.href = successURL;
+			} else {
+				setFormStatus(FORM_STATUS.ERROR);
+			}
+		}
+	};
+
+	return (
+		<section className={`${className}__payment`}>
+			<HeadingSection>
+				<Heading>{formTitle}</Heading>
+			</HeadingSection>
+			<form onSubmit={handleSubmit} className={`${className}__payment-form`}>
+				<Paragraph>{formLabel}</Paragraph>
+				<div className={`${className}__payment-form--stripe-input-container`}>
+					<CardElement options={CARD_ELEMENT_OPTIONS} name="card" />
+				</div>
+				<Button
+					size="medium"
+					variant="primary"
+					fullWidth
+					type="submit"
+					disabled={formStatus === FORM_STATUS.PROCESSING || formStatus === FORM_STATUS.SUCCESS}
+				>
+					{submitText}
+				</Button>
+				{formStatus === FORM_STATUS.ERROR ? (
+					<section role="alert">
+						<Paragraph>{formErrorText}</Paragraph>
+					</section>
+				) : null}
+			</form>
+		</section>
+	);
+}
+
+export default PaymentForm;

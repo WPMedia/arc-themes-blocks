@@ -133,6 +133,7 @@
 		"@wpmedia/header-nav-chain-block": "file:blocks/header-nav-chain-block",
 		"@wpmedia/headline-block": "file:blocks/headline-block",
 		"@wpmedia/htmlbox-block": "file:blocks/htmlbox-block",
+		"@wpmedia/identity-block": "file:blocks/identity-block",
 		"@wpmedia/large-manual-promo-block": "file:blocks/large-manual-promo-block",
 		"@wpmedia/large-promo-block": "file:blocks/large-promo-block",
 		"@wpmedia/lead-art-block": "file:blocks/lead-art-block",

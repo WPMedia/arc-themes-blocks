@@ -5,18 +5,11 @@ import { usePhrases, Heading, Link } from "@wpmedia/arc-themes-components";
 import { useIdentity } from "@wpmedia/identity-block";
 
 import useSales from "../../components/useSales";
-import useOffer from "../../components/useOffer";
 import Cart from "../../components/Cart";
 import ContactInfo from "../../components/ContactInfo";
 import PaymentInfo from "./_children/PaymentInfo";
 
 const BLOCK_CLASS_NAME = "b-checkout";
-
-// TO-DO: Unable to grab getSignedInIdentity() from useIdentity
-const getSignedInIdentity = (user) =>
-	user?.identities?.reduce((prev, current) =>
-		prev.lastLoginDate > current.lastLoginDate ? prev : current
-	) || null;
 
 const Checkout = ({ customFields }) => {
 	const { offerURL, successURL } = customFields;
@@ -28,7 +21,7 @@ const Checkout = ({ customFields }) => {
 	const [payment, setPayment] = useState();
 	const [paymentMethodID, setPaymentMethodID] = useState();
 
-	const { Identity } = useIdentity();
+	const { Identity, getSignedInIdentity } = useIdentity();
 	const { Sales } = useSales();
 	const phrases = usePhrases();
 
@@ -73,18 +66,25 @@ const Checkout = ({ customFields }) => {
 			Identity.updateUserProfile({ firstName, lastName });
 		}
 
-		Sales.createNewOrder({ country }, email).then((order) => {
-			setOrderNumber(order.orderNumber);
-			Sales.getPaymentOptions().then((paymentOptions) => {
-				const newPaymentMethodID = paymentOptions[0].paymentMethodID;
-				Sales.initializePayment(order.orderNumber, paymentOptions[0].paymentMethodID).then(
-					(paymentObject) => {
-						setPayment(paymentObject);
-						setPaymentMethodID(newPaymentMethodID);
-						setShowPaymentScreen(true);
-					}
-				);
-			});
+		Sales.getCart().then((cart) => {
+			if (!cart?.items?.length) {
+				window.location.href = offerURL;
+				return;
+			}else{
+				Sales.createNewOrder({ country }, email).then((order) => {
+					setOrderNumber(order.orderNumber);
+					Sales.getPaymentOptions().then((paymentOptions) => {
+						const newPaymentMethodID = paymentOptions[0].paymentMethodID;
+						Sales.initializePayment(order.orderNumber, paymentOptions[0].paymentMethodID).then(
+							(paymentObject) => {
+								setPayment(paymentObject);
+								setPaymentMethodID(newPaymentMethodID);
+								setShowPaymentScreen(true);
+							},
+						);
+					});
+				});
+			}
 		});
 	};
 
@@ -127,7 +127,7 @@ Checkout.propTypes = {
 	}),
 };
 
-Checkout.label = "Checkout - Arc Block";
+Checkout.label = "Subscriptions Checkout - Arc Block";
 Checkout.icon = "shop-cart";
 
 export default Checkout;

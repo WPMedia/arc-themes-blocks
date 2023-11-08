@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { Identity } from "@arc-publishing/sdk-identity";
+import { useIdentity } from "@wpmedia/identity-block";
 import { Heading, Paragraph, isServerSide } from "@wpmedia/arc-themes-components";
 import useOffer from "../../components/useOffer";
 import OfferToProductList from "../../components/OfferToProductList";
@@ -24,6 +24,7 @@ const Offer = ({ customFields }) => {
 	});
 
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const { Identity } = useIdentity();
 
 	const getIsLoggedIn = async () => {
 		const response = await Identity.isLoggedIn();
@@ -81,5 +82,5 @@ Offer.propTypes = {
 	}),
 };
 
-Offer.label = "Offer - Arc Block";
+Offer.label = "Subscriptions Offer - Arc Block";
 export default Offer;

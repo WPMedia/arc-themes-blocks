@@ -1,5 +1,30 @@
 @use "@wpmedia/arc-themes-components/scss";
 
+.b-account-management {
+	&__edit {
+		@include scss.block-components("account-management-edit");
+		@include scss.block-properties("account-management-edit");
+	}
+
+	&__edit-label {
+		@include scss.block-components("account-management-edit-label");
+		@include scss.block-properties("account-management-edit-label");
+	}
+
+	&__section {
+		@include scss.block-components("account-management-section");
+		@include scss.block-properties("account-management-section");
+	}
+
+	&__social-edit {
+		@include scss.block-components("account-management-social-edit");
+		@include scss.block-properties("account-management-social-edit");
+	}
+
+	@include scss.block-components("account-management");
+	@include scss.block-properties("account-management");
+}
+
 .b-forgot-password {
 	@include scss.block-components("forgot-password");
 	@include scss.block-properties("forgot-password");

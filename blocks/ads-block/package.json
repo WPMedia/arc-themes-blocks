@@ -22,7 +22,7 @@
     "directory": "blocks/ads-block"
   },
   "dependencies": {
-    "arcads": "6.1.1"
+    "arcads": "6.2.0"
   },
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",

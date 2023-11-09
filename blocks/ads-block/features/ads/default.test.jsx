@@ -1,6 +1,6 @@
 import React from "react";
 import { useFusionContext } from "fusion:context";
-import { mount } from "enzyme";
+import { render, screen } from "@testing-library/react";
 import ArcAd from "./default";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
@@ -45,14 +45,9 @@ describe("<ArcAd>", () => {
 		});
 
 		it("renders no ad unit in admin dashboard", () => {
-			const wrapper = mount(<ArcAd {...AD_PROPS_MOCK} />);
-			expect(wrapper).toBeDefined();
-			const arcAdminAd = wrapper.find("ArcAdminAd");
-			expect(arcAdminAd.prop("adClass")).toEqual(AD_PROPS_MOCK.customFields.adType);
-			expect(arcAdminAd.prop("adType")).toEqual("cube");
-			expect(arcAdminAd.prop("slotName")).toEqual("news");
-			expect(typeof arcAdminAd.prop("dimensions")).toEqual("object");
-			expect(wrapper.find("AdUnit")).toHaveLength(0);
+			render(<ArcAd {...AD_PROPS_MOCK} />);
+			expect(screen.getByText("cube")).not.toBeNull();
+			expect(screen.queryByText(/ads-block.ad-label/)).toBeNull();
 		});
 	});
 
@@ -67,15 +62,8 @@ describe("<ArcAd>", () => {
 
 		describe("when lazy loading is disabled", () => {
 			it("renders ad unit with disabled lazy-load container", () => {
-				const wrapper = mount(<ArcAd {...AD_PROPS_MOCK} />);
-				expect(wrapper).toBeDefined();
-				const lazyLoaderEl = wrapper.find("LazyLoad");
-				expect(lazyLoaderEl).toHaveLength(1);
-				expect(lazyLoaderEl.prop("enabled")).toBe(false);
-				const adUnitEl = lazyLoaderEl.find("AdUnit");
-				expect(adUnitEl).toHaveLength(1);
-				expect(typeof adUnitEl.prop("adConfig")).toEqual("object");
-				expect(typeof adUnitEl.prop("featureConfig")).toEqual("object");
+				render(<ArcAd {...AD_PROPS_MOCK} />);
+				expect(screen.getByText(/ads-block.ad-label/)).not.toBeNull();
 			});
 		});
 
@@ -87,58 +75,49 @@ describe("<ArcAd>", () => {
 						lazyLoad: true,
 					},
 				};
-				const wrapper = mount(<ArcAd {...adProps} />);
-				expect(wrapper).toBeDefined();
-				const lazyLoaderEl = wrapper.find("LazyLoad");
-				expect(lazyLoaderEl).toHaveLength(1);
-				expect(lazyLoaderEl.prop("enabled")).toBe(true);
+				render(<ArcAd {...adProps} />);
+				expect(screen.getByTestId("lazy-load-placeholder")).not.toBeNull();
 			});
 		});
-	});
 
-	describe("Reserve Space", () => {
-		it("renders with width only", () => {
-			const adProps = {
-				...AD_PROPS_MOCK,
-				customFields: {
-					reserveSpace: false,
-				},
-			};
-			const wrapper = mount(<ArcAd {...adProps} />);
-			const adContainer = wrapper.find("div.b-ads-block > div");
-			expect(adContainer).toHaveLength(1);
-			expect(adContainer.prop("style").maxWidth).toBeDefined();
-			expect(adContainer.prop("style").minHeight).toBe(null);
+		describe("Reserve Space", () => {
+			it("renders with width only", () => {
+				const adProps = {
+					...AD_PROPS_MOCK,
+					customFields: {
+						reserveSpace: false,
+					},
+				};
+				const { container } = render(<ArcAd {...adProps} />);
+				const adContainer = container.querySelector("div.b-ads-block > div");
+				expect(adContainer.style.maxWidth).not.toBe("");
+				expect(adContainer.style.minHeight).toBe("");
+			});
+
+			it("renders with height and width", () => {
+				const { container } = render(<ArcAd {...AD_PROPS_MOCK} />);
+				const adContainer = container.querySelector("div.b-ads-block > div");
+				expect(adContainer.style.maxWidth).not.toBe("");
+				expect(adContainer.style.minHeight).not.toBe("");
+			});
 		});
 
-		it("renders with height and width", () => {
-			const wrapper = mount(<ArcAd {...AD_PROPS_MOCK} />);
-			const adContainer = wrapper.find("div.b-ads-block > div");
-			expect(adContainer).toHaveLength(1);
-			expect(adContainer.prop("style").maxWidth).toBeDefined();
-			expect(adContainer.prop("style").minHeight).not.toBe(null);
-		});
-	});
+		describe("Advertisement Label", () => {
+			it("renders no advertisement label when disabled", () => {
+				const adProps = {
+					...AD_PROPS_MOCK,
+					customFields: {
+						displayAdLabel: false,
+					},
+				};
+				render(<ArcAd {...adProps} />);
+				expect(screen.queryByText(/ads-block.ad-label/)).toBeNull();
+			});
 
-	describe("Advertisement Label", () => {
-		it("renders no advertisement label when disabled", () => {
-			const adProps = {
-				...AD_PROPS_MOCK,
-				customFields: {
-					displayAdLabel: false,
-				},
-			};
-			const wrapper = mount(<ArcAd {...adProps} />);
-			const container = wrapper.find("div.b-ads-block");
-			expect(container).toHaveLength(1);
-			expect(container.text()).toEqual("");
-		});
-
-		it("renders advertisement label when enabled", () => {
-			const wrapper = mount(<ArcAd {...AD_PROPS_MOCK} />);
-			const container = wrapper.find("div.b-ads-block");
-			expect(container).toHaveLength(1);
-			expect(container.text()).toEqual("ads-block.ad-label");
+			it("renders advertisement label when enabled", () => {
+				render(<ArcAd {...AD_PROPS_MOCK} />);
+				expect(screen.getByText(/ads-block.ad-label/)).not.toBeNull();
+			});
 		});
 	});
 });

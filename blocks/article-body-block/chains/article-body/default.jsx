@@ -8,7 +8,6 @@ import {
 	Conditional,
 	Divider,
 	formatCredits,
-	getAspectRatio,
 	Heading,
 	HeadingSection,
 	Icon,
@@ -46,11 +45,10 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		hideVideoTitle = false,
 		hideVideoCaption = false,
 		hideVideoCredits = false,
+		viewportPercentage = 65,
+		borderRadius = false,
+		aspectRatio,
 	} = customFields;
-
-	// This is up here to prevent a lexical declaration in a case block (which throws an error). It goes with the "video" case
-	let videoAspectRatio = "16:9"; // Default to 16:9
-
 	switch (type) {
 		case "text": {
 			return content && content.length > 0 ? (
@@ -215,16 +213,6 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 			}
 
 		case "video":
-			// Calculate the aspect ratio for the item. If the item doesn't have any promo items, then 16:9 is used as a fallback
-			if (item && item.promo_items && item.promo_items.basic) {
-				// Get the width and height of the promo item and calculate the aspect ratio
-				const width = item?.promo_items.basic.width;
-				const height = item?.promo_items.basic.height;
-
-				// Assign the calculated value to aspectRatio if it is non-null, otherwise assign default 16:9
-				videoAspectRatio = getAspectRatio(width, height) || "16:9";
-			}
-
 			return (
 				<MediaItem
 					key={`${type}_${index}_${key}`}
@@ -233,9 +221,11 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 					title={!hideVideoTitle ? item?.headlines?.basic : null}
 				>
 					<Video
-						aspectRatio={videoAspectRatio}
+						aspectRatio={aspectRatio}
+						viewportPercentage={viewportPercentage}
 						className="video-container"
 						embedMarkup={item.embed_html}
+						borderRadius={borderRadius}
 					/>
 				</MediaItem>
 			);
@@ -462,6 +452,33 @@ ArticleBodyChain.propTypes = {
 			label: "Hide Credits",
 			defaultValue: false,
 			group: "Gallery Display Options",
+		}),
+		aspectRatio: PropTypes.oneOf(["--", "16:9", "9:16", "1:1", "4:3"]).isRequired.tag({
+			description:
+				"Aspect ratio to use in player (Defaults to the aspect ratio of the resolved video)",
+			label: "Player Aspect Ratio",
+			defaultValue: "--",
+			group: "Video Display Options",
+			labels: {
+				"--": "Video Source",
+				"16:9": "16:9",
+				"9:16": "9:16",
+				"1:1": "1:1",
+				"4:3": "4:3",
+			},
+		}),
+		viewportPercentage: PropTypes.number.tag({
+			description:
+				"Height percentage the player takes from viewport (Applies only for 9:16 videos)",
+			label: "View height percentage",
+			defaultValue: 65,
+			group: "Video Display Options",
+		}),
+		borderRadius: PropTypes.bool.tag({
+			description: "Applies only for 9:16 videos",
+			label: "Round player corners",
+			defaultValue: false,
+			group: "Video Display Options",
 		}),
 		hideVideoTitle: PropTypes.bool.tag({
 			description: "This display option applies to all Videos in the Article Body",

@@ -9,7 +9,6 @@ import {
 	Carousel,
 	formatCredits,
 	formatPowaVideoEmbed,
-	getAspectRatio,
 	Icon,
 	Image,
 	MediaItem,
@@ -97,18 +96,6 @@ export const LeadArtPresentation = (props) => {
 				playthrough: customFields?.playthrough,
 			});
 
-			let aspectRatio = "16:9"; // Default to 16:9
-
-			// Make sure that the content source exists and has an existing promo item
-			if (leadArt && leadArt.promo_items && leadArt.promo_items.basic) {
-				// Get the width and height of the promo item and calculate the aspect ratio
-				const width = leadArt?.promo_items.basic.width;
-				const height = leadArt?.promo_items.basic.height;
-
-				// Assign the calculated value to aspectRatio if it is non-null, otherwise assign default 16:9
-				aspectRatio = getAspectRatio(width, height) || "16:9";
-			}
-
 			return (
 				<MediaItem
 					caption={!hideCaption ? leadArt?.description?.basic : null}
@@ -116,9 +103,10 @@ export const LeadArtPresentation = (props) => {
 					title={!hideTitle ? leadArt?.headlines?.basic : null}
 				>
 					<Video
-						aspectRatio={aspectRatio}
+						aspectRatio={customFields?.aspectRatio}
 						embedMarkup={embedMarkup}
 						viewportPercentage={customFields?.viewportPercentage}
+						borderRadius={customFields?.borderRadius}
 					/>
 				</MediaItem>
 			);
@@ -304,6 +292,27 @@ LeadArt.propTypes = {
 			defaultValue: false,
 			group: "Video",
 		}),
+		viewportPercentage: PropTypes.number.tag({
+			description:
+				"Height percentage the player takes from viewport (Applies only for 9:16 videos)",
+			label: "View height percentage",
+			defaultValue: 65,
+			group: "Video",
+		}),
+		aspectRatio: PropTypes.oneOf(["--", "16:9", "9:16", "1:1", "4:3"]).isRequired.tag({
+			description:
+				"Aspect ratio to use in player (Defaults to the aspect ratio of the resolved video)",
+			label: "Player Aspect Ratio",
+			defaultValue: "--",
+			group: "Video",
+			labels: {
+				"--": "Video Source",
+				"16:9": "16:9",
+				"9:16": "9:16",
+				"1:1": "1:1",
+				"4:3": "4:3",
+			},
+		}),
 		hideTitle: PropTypes.bool.tag({
 			description:
 				"This display option applies to Lead Art media types: Images, Gallery, and Video",
@@ -324,6 +333,12 @@ LeadArt.propTypes = {
 			label: "Hide Credits",
 			defaultValue: false,
 			group: "Display Options",
+		}),
+		borderRadius: PropTypes.bool.tag({
+			label: "Round player corners",
+			description: "Applies only for 9:16 videos",
+			defaultValue: false,
+			group: "Video",
 		}),
 		imageLoadingStrategy: PropTypes.oneOf(["lazy", "eager"]).tag({
 			label: "Image Loading Strategy",

@@ -6,8 +6,8 @@ As a Page Builder user, I want to add the Product Gallery - Arc Block to my PDP 
 
 | **Prop**               | **Required** | **Type** | **Description**                                            |
 | ---------------------- | ------------ | -------- | ---------------------------------------------------------- |
-| isFeaturedImageEnabled | no          | boolean  | Display the product’s featured image.                      |
-| indicatorType          | no          | string   | Type of indicator to be displayed, like thumbnail or dots. |
+| isFeaturedImageEnabled | no           | boolean  | Display the product’s featured image.                      |
+| indicatorType          | no           | string   | Type of indicator to be displayed, like thumbnail or dots. |
 
 ## ANS Schema
 

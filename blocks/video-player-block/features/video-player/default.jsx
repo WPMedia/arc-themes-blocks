@@ -24,6 +24,7 @@ const videoLayouts = {
 	inlineVideo: ({
 		alertBadge,
 		aspectRatio,
+		viewportPercentage,
 		caption,
 		credit,
 		description,
@@ -31,6 +32,7 @@ const videoLayouts = {
 		captionTitle,
 		hideVideoTitle,
 		title,
+		borderRadius,
 	}) => (
 		<Stack className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}__inline`}>
 			{alertBadge ? <Badge variant="danger">{alertBadge}</Badge> : null}
@@ -40,7 +42,13 @@ const videoLayouts = {
 				</HeadingSection>
 			) : null}
 			<MediaItem caption={caption} credit={credit} title={!hideVideoTitle && captionTitle}>
-				<Video aspectRatio={aspectRatio} className="video-container" embedMarkup={embedMarkup} />
+				<Video
+					aspectRatio={aspectRatio}
+					viewportPercentage={viewportPercentage}
+					className="video-container"
+					embedMarkup={embedMarkup}
+					borderRadius={borderRadius}
+				/>
 			</MediaItem>
 			{description ? <Paragraph>{description}</Paragraph> : null}
 		</Stack>
@@ -48,6 +56,7 @@ const videoLayouts = {
 	featureVideo: ({
 		alertBadge,
 		aspectRatio,
+		viewportPercentage,
 		caption,
 		credit,
 		description,
@@ -55,10 +64,17 @@ const videoLayouts = {
 		captionTitle,
 		hideVideoTitle,
 		title,
+		borderRadius,
 	}) => (
 		<Stack className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}__feature`}>
 			<MediaItem caption={caption} credit={credit} title={!hideVideoTitle && captionTitle}>
-				<Video aspectRatio={aspectRatio} className="video-container" embedMarkup={embedMarkup} />
+				<Video
+					aspectRatio={aspectRatio}
+					viewportPercentage={viewportPercentage}
+					className="video-container"
+					embedMarkup={embedMarkup}
+					borderRadius={borderRadius}
+				/>
 			</MediaItem>
 			<Stack className={`${BLOCK_CLASS_NAME}__feature-meta`}>
 				{alertBadge ? <Badge variant="danger">{alertBadge}</Badge> : null}
@@ -77,6 +93,8 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 	const {
 		alertBadge,
 		autoplay,
+		aspectRatio: videoAspectRatio,
+		viewportPercentage = 65,
 		description,
 		displayStyle = "inlineVideo",
 		hideVideoCaption,
@@ -84,6 +102,7 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 		hideVideoTitle,
 		inheritGlobalContent,
 		playthrough,
+		borderRadius,
 		title,
 		websiteURL,
 	} = customFields;
@@ -114,10 +133,15 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 		? contentSource?.description?.basic
 		: (title && description) || contentSource?.description?.basic;
 
-	let aspectRatio = "16:9"; // Default to 16:9 aspect ratio for videos
+	let aspectRatio = videoAspectRatio;
 
 	// Make sure that the content source exists and has an existing promo item
-	if (contentSource && contentSource.promo_items && contentSource.promo_items.basic) {
+	if (
+		!aspectRatio &&
+		contentSource &&
+		contentSource.promo_items &&
+		contentSource.promo_items.basic
+	) {
 		// Get the width and height of the promo item and calculate the aspect ratio
 		const width = contentSource?.promo_items.basic.width;
 		const height = contentSource?.promo_items.basic.height;
@@ -133,6 +157,7 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 		? renderVideoLayout({
 				alertBadge,
 				aspectRatio,
+				viewportPercentage,
 				caption: !hideVideoCaption ? captionDescription : null,
 				credit: !hideVideoCredits ? formatCredits(contentSource?.credits) : null,
 				description,
@@ -143,6 +168,7 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 				captionTitle,
 				hideVideoTitle,
 				title,
+				borderRadius,
 		  })
 		: null;
 }
@@ -191,17 +217,38 @@ VideoPlayer.propTypes = {
 			defaultValue: false,
 			group: "Video Subtext Options",
 		}),
+		aspectRatio: PropTypes.oneOf(["--", "16:9", "9:16", "1:1", "4:3"]).isRequired.tag({
+			description:
+				"Aspect ratio to use in player (Defaults to the aspect ratio of the resolved video)",
+			label: "Player Aspect Ratio",
+			defaultValue: "--",
+			group: "Display Settings",
+			labels: {
+				"--": "Video Source",
+				"16:9": "16:9",
+				"9:16": "9:16",
+				"1:1": "1:1",
+				"4:3": "4:3",
+			},
+		}),
+		viewportPercentage: PropTypes.number.tag({
+			label: "View height percentage",
+			description:
+				"Height percentage the player takes from viewport (Applies only for 9:16 videos)",
+			defaultValue: 65,
+			group: "Display Settings",
+		}),
 		title: PropTypes.string.tag({
 			label: "Title",
-			group: "Display settings",
+			group: "Display Settings",
 		}),
 		description: PropTypes.string.tag({
 			label: "Description",
-			group: "Display settings",
+			group: "Display Settings",
 		}),
 		alertBadge: PropTypes.string.tag({
 			label: "Alert Badge",
-			group: "Display settings",
+			group: "Display Settings",
 		}),
 		displayStyle: PropTypes.oneOf(Object.keys(videoLayouts)).tag({
 			defaultValue: "inlineVideo",
@@ -210,7 +257,13 @@ VideoPlayer.propTypes = {
 				inlineVideo: "Inline Video",
 				featureVideo: "Feature Video",
 			},
-			group: "Display settings",
+			group: "Display Settings",
+		}),
+		borderRadius: PropTypes.bool.tag({
+			label: "Round player corners",
+			description: "Applies only for 9:16 videos",
+			defaultValue: false,
+			group: "Display Settings",
 		}),
 	}),
 	embedMarkup: PropTypes.string,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
@@ -12,7 +12,7 @@ import useLogin from "../../components/login";
 const BLOCK_CLASS_NAME = "b-login-form";
 
 const Login = ({ customFields }) => {
-	const { redirectURL, redirectToPreviousPage, loggedInPageLocation } = customFields;
+	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC } = customFields;
 
 	const { isAdmin, arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);
@@ -33,6 +33,48 @@ const Login = ({ customFields }) => {
 		return null;
 	}
 
+	async function handleLogin() {
+    const url_string = window.location.href;
+    const url = new URL(url_string);
+
+    const queryParams = {
+      response_type: url.searchParams.get("response_type"),
+      scope: url.searchParams.get("scope"),
+      state: url.searchParams.get("state"),
+      client_id: url.searchParams.get("client_id"),
+      redirect_uri: url.searchParams.get("redirect_uri"),
+      nonce: url.searchParams.get("nonce"),
+      code_challenge: url.searchParams.get("code_challenge"),
+      code_challengeMethod: url.searchParams.get("code_challenge_method"),
+    }
+
+    const validQueryParams = Object.keys(queryParams).reduce((acc, key)=> {
+      if (queryParams[key]) {
+        acc[key] = queryParams[key]
+      }
+
+      return acc;
+    }, {})
+
+    await Identity.loginWithArcIdentityAsOIDCProvider(
+      validQueryParams,
+    ).catch((err) => {
+      setError(err.message)
+    });
+  }
+
+	useEffect(() => {
+		if (OIDC) {
+			Identity.isLoggedIn().then(isLoggedIn => {
+				if (isLoggedIn) {
+					return handleLogin()
+				}
+			}).catch((err) => {
+				setError(err.message)
+			})
+		}
+  }, [])
+
 	return (
 		<HeadlinedSubmitForm
 			buttonLabel={phrases.t("identity-block.log-in")}
@@ -42,7 +84,11 @@ const Login = ({ customFields }) => {
 			onSubmit={({ email, password }) =>
 				Identity.login(email, password)
 					.then(() => {
-						window.location = loginRedirect;
+						if (OIDC) {
+							handleLogin();
+						} else {
+							window.location = loginRedirect;
+						}
 					})
 					.catch(() => setError(phrases.t("identity-block.login-form-error")))
 			}
@@ -88,6 +134,11 @@ Login.propTypes = {
 			description:
 				"The URL to which a user would be redirected to if visiting a login page when already logged in.",
 		}),
+		OIDC: PropTypes.bool.tag({
+      name: 'Login with OIDC PKCE',
+      defaultValue: false,
+      description: 'Used when authenticating a third party site with OIDC PKCE flow. This will use an ArcXp Org as an auth provider',
+    }),
 	}),
 };
 

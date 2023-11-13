@@ -1,7 +1,7 @@
 @use "@wpmedia/arc-themes-components/scss" with (
 	$breakpoints: (
-		default: "min-width: 0",
-		desktop: "min-width: 48rem",
+		"default": "min-width: 0",
+		"desktop": "min-width: 48rem"
 	),
 	$global: (
 		"black": #000000,
@@ -56,39 +56,22 @@
 		"neutral-8": #232b39,
 		"neutral-9": #10151c,
 		"neutral-10": #000000,
-		// 4px
 		"spacing-1": 0.25rem,
-		// 8px
 		"spacing-2": 0.5rem,
-		// 12px
 		"spacing-3": 0.75rem,
-		// 16px
 		"spacing-4": 1rem,
-		// 24px
 		"spacing-5": 1.5rem,
-		// 32px
 		"spacing-6": 2rem,
-		// 40px
 		"spacing-7": 2.5rem,
-		// 48px
 		"spacing-8": 3rem,
-		// 56px
 		"spacing-9": 3.5rem,
-		// 64px
 		"spacing-10": 4rem,
-		// 72px
 		"spacing-11": 4.5rem,
-		// 80px
 		"spacing-12": 5rem,
-		// 88px
 		"spacing-13": 5.5rem,
-		// 96px
 		"spacing-14": 6rem,
-		// 104px
 		"spacing-15": 6.5rem,
-		// 112px
 		"spacing-16": 7rem,
-		// 120px
 		"spacing-17": 7.5rem,
 		"font-weight-2": 200,
 		"font-weight-3": 300,
@@ -98,35 +81,20 @@
 		"font-weight-7": 700,
 		"font-weight-8": 800,
 		"font-weight-9": 900,
-		// 10px
 		"font-size-1": 0.625rem,
-		// 12px
 		"font-size-2": 0.75rem,
-		// 14px
 		"font-size-3": 0.875rem,
-		// 16px
 		"font-size-4": 1rem,
-		// 18px
 		"font-size-5": 1.125rem,
-		// 19px
 		"font-size-6": 1.1875rem,
-		// 20px
 		"font-size-7": 1.25rem,
-		// 22px
 		"font-size-8": 1.375rem,
-		// 24px
 		"font-size-9": 1.5rem,
-		// 28px
 		"font-size-10": 1.75rem,
-		// 32px
 		"font-size-11": 2rem,
-		// 36px
 		"font-size-12": 2.25rem,
-		// 41px
 		"font-size-13": 2.56rem,
-		// 48px
 		"font-size-14": 3rem,
-		// 52px
 		"font-size-15": 3.25rem,
 		"line-height-1": 1,
 		"line-height-2": 1.1,
@@ -144,13 +112,13 @@
 		"border-radius-2": 20rem,
 		"border-radius-3": 100vmax,
 		"border-style-1": solid,
-		"border-width-1": 1px,
+		"border-width-1": 1px
 	),
 	$tokens: (
-		default: (
-			alias: (
-				"font-family-primary": "Inter",
-				"font-family-secondary": "Lora",
+		"default": (
+			"alias": (
+				"font-family-primary": Inter,
+				"font-family-secondary": Lora,
 				"color-primary": var(--global-blue-6),
 				"color-primary-hover": var(--global-neutral-7),
 				"text-color": var(--global-neutral-8),
@@ -203,3092 +171,3453 @@
 				"layout-max-width": 1600,
 				"content-max-width": 1440,
 				"content-scale-width": calc(var(--content-max-width) / var(--layout-max-width) * 100%),
-				"header-nav-chain-height": 56px,
-				"header-nav-chain-height-scrolled": 56px,
-				"header-nav-chain-overlay-background-color": rgba(25, 25, 25, 0.5),
+				"header-nav-chain-height": 80px,
+				"header-nav-chain-height-scrolled": 80px,
+				"header-nav-chain-overlay-background-color": rgba(25, 25, 25, 0.5)
 			),
-			components: (
-				attribution: (
-					color: var(--text-color),
-					font-size: var(--body-font-size-small),
-					line-height: var(--body-line-height-small),
-				),
-				badge: (
-					align-self: baseline,
-					border-radius: var(--border-radius-pill),
-					color: var(--global-white),
-					font-size: var(--body-font-size-tiny),
-					font-weight: var(--global-font-weight-7),
-					line-height: var(--body-line-height-tiny),
-					padding: var(--global-spacing-1) var(--global-spacing-2),
-				),
-				badge-danger: (
-					background-color: var(--status-color-danger),
-				),
-				badge-default: (
-					background-color: var(--text-color),
-				),
-				badge-light: (
-					background-color: var(--text-color-subtle),
-				),
-				badge-primary: (
-					background-color: var(--color-primary),
-				),
-				badge-success: (
-					background-color: var(--status-color-success),
-				),
-				badge-warning: (
-					background-color: var(--status-color-warning),
-				),
-				body: (
-					color: var(--text-color),
-					font-family: var(--font-family-primary),
-					font-size: var(--body-font-size),
-					line-height: var(--body-line-height),
-				),
-				button: (
-					border-color: transparent,
-					border-style: var(--global-border-style-1),
-					border-width: var(--global-border-width-1),
-					border-radius: var(--border-radius),
-					font-weight: var(--global-font-weight-7),
-					gap: var(--global-spacing-2),
-				),
-				button-small: (
-					font-size: var(--body-font-size-small),
-					line-height: var(--body-line-height-small),
-					padding: var(--global-spacing-1) var(--global-spacing-4),
-				),
-				button-medium: (
-					font-size: var(--body-font-size-small),
-					line-height: var(--body-line-height-small),
-					padding: var(--global-spacing-3) var(--global-spacing-4),
-				),
-				button-large: (
-					font-size: var(--body-font-size),
-					line-height: var(--body-line-height),
-					padding: var(--global-spacing-4),
-				),
-				button-default: (
-					background-color: var(--global-white),
-					border-color: var(--global-neutral-7),
-					border-width: var(--global-border-width-1),
-					color: var(--global-neutral-7),
-				),
-				button-primary: (
-					background-color: var(--color-primary),
-					color: var(--global-white),
-				),
-				button-primary-hover: (
-					background-color: var(--color-primary-hover),
-				),
-				button-primary-reverse: (
-					background-color: transparent,
-					border-color: var(--color-primary),
-					color: var(--color-primary),
-				),
-				button-primary-reverse-hover: (
-					border-color: var(--color-primary-hover),
-					color: var(--color-primary-hover),
-				),
-				button-secondary: (
-					background-color: var(--global-white),
-					color: var
-						(
-							--global-black,
+			"blocks": (
+				"account-management": (
+					"font-family": var(--font-family-primary),
+					"margin-block-start": var(--global-spacing-8),
+					"margin-block-end": var(--global-spacing-2),
+					"margin-inline-start": var(--global-spacing-7),
+					"margin-inline-end": var(--global-spacing-7),
+					"components": (
+						"button": (
+							"font-size": var(--global-font-size-4)
 						),
+						"heading": (
+							"font-size": var(--global-font-size-7),
+							"margin-block-end": var(--global-spacing-2),
+							"margin-bottom": var(--global-spacing-2)
+						),
+						"input": (
+							"margin-block-end": var(--global-spacing-5)
+						),
+						"input-error-tip": (
+							"color": var(--status-color-danger)
+						),
+						"input-input": (
+							"inline-size": 100%,
+							"width": 100%,
+							"padding-block-end": var(--global-spacing-2),
+							"padding-block-start": var(--global-spacing-2),
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2),
+							"padding-left": var(--global-spacing-2)
+						),
+						"paragraph": (
+							"font-family": var(--font-family-primary),
+							"margin-block-end": var(--global-spacing-5)
+						)
+					)
 				),
-				button-secondary-hover: (
-					background-color: var(--global-neutral-2),
-					color: var(--global-neutral-6),
+				"account-management-edit": (
+					"border-color": var(--border-color),
+					"border-radius": var(--border-radius),
+					"border-style": var(--global-border-style-1),
+					"border-width": var(--global-border-width-1),
+					"margin-block-end": var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-4),
+					"padding-block-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4),
+					"padding-inline-end": var(--global-spacing-4),
+					"components": (
+						"button-default": (
+							"color": var(--color-primary),
+							"text-decoration": underline
+						),
+						"button-default-hover": (
+							"color": var(--color-primary-hover)
+						),
+						"paragraph": (
+							"margin-block-end": 0
+						)
+					)
 				),
-				button-secondary-reverse: (
-					background-color: transparent,
-					border-color: var(--global-white),
-					color: var(--global-white),
+				"account-management-edit-label": (
+					"align-items": center,
+					"display": flex,
+					"justify-content": space-between,
+					"components": (
+						"paragraph": (
+							"font-weight": var(--global-font-weight-7)
+						)
+					)
 				),
-				button-secondary-reverse-hover: (
-					border-color: var(--global-neutral-3),
-					color: var(--global-neutral-3),
+				"account-management-section": (
+					"margin-block-end": var(--global-spacing-7)
 				),
-				carousel: (
-					font-family: var(--font-family-primary),
-					font-size: var(--body-font-size-tiny),
-					line-height: var(--body-line-height-tiny),
-					--slides: 1,
+				"account-management-social-edit": (
+					"align-items": center,
+					"border-color": var(--border-color),
+					"border-radius": var(--border-radius),
+					"border-style": var(--global-border-style-1),
+					"border-width": var(--global-border-width-1),
+					"display": flex,
+					"justify-content": space-between,
+					"margin-block-end": var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-4),
+					"padding-block-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4),
+					"padding-inline-end": var(--global-spacing-4)
 				),
-				carousel-actions: (
-					display: none,
-					padding-left: var(--global-spacing-5),
-					padding-right: var(--global-spacing-5),
+				"ads-block": (
+					"components": (
+						"paragraph": (
+							"font-family": var(--font-family-primary),
+							"font-size": var(--body-font-size-small),
+							"line-height": var(--body-line-height-small),
+							"font-weight": var(--body-font-weight-small),
+							"color": "$global.neutral-7"
+						)
+					)
 				),
-				carousel-additional-controls: (
-					display: flex,
+				"ads-block-admin": (
+					"background-color": "$global.neutral-7",
+					"padding": "$global.spacing-4",
+					"border-radius": var(--border-radius),
+					"components": (
+						"stack": (
+							"gap": "$global.spacing-4",
+							"padding-bottom": "$global.spacing-5"
+						),
+						"paragraph": (
+							"color": "$global.white"
+						)
+					)
 				),
-				carousel-button: (
-					align-items: center,
-					background-color: transparent,
-					border: none,
-					box-shadow: none,
-					display: flex,
-					font-size: var(--body-font-size-tiny),
-					gap: var(--global-spacing-2),
-					height: var(--global-spacing-4),
-					line-height: var(--body-line-height-tiny),
-					padding: 0 var(--global-spacing-2),
-					width: auto,
+				"alert-bar": (
+					"align-items": flex-start,
+					"background-color": var(--global-red-5),
+					"display": flex,
+					"filter": drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0)),
+					"flex-wrap": nowrap,
+					"justify-content": space-between,
+					"word-break": break-word,
+					"components": (
+						"button-default": (
+							"background": none,
+							"border": none,
+							"filter": drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0)),
+							"flex": 0 0 auto
+						),
+						"button-large": (
+							"margin-bottom": var(--global-spacing-1),
+							"margin-top": var(--global-spacing-1),
+							"filter": drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0))
+						),
+						"link": (
+							"color": var(--global-white),
+							"filter": drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0)),
+							"font-family": var(--font-family-primary),
+							"font-size": var(--body-font-size-small),
+							"font-weight": var(--global-font-weight-7),
+							"padding-bottom": var(--global-spacing-5),
+							"padding-left": var(--global-spacing-4),
+							"padding-right": var(--global-spacing-5),
+							"padding-top": var(--global-spacing-5),
+							"text-decoration": none
+						),
+						"link-hover": (
+							"color": var(--text-color)
+						),
+						"icon": (
+							"fill": var(--global-white),
+							"filter": drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0))
+						)
+					)
 				),
-				carousel-button-enter-full-screen: (
-					padding-left: 0,
+				"article-body": (
+					"font-family": var(--font-family-primary),
+					"font-size": var(--body-font-size),
+					"components": (
+						"link": (
+							"color": var(--color-primary)
+						),
+						"paragraph": (
+							"display": block,
+							"overflow": initial
+						),
+						"media-item-fig-caption": (
+							"background-color": var(--global-white),
+							"line-height": var(--body-line-height-5)
+						),
+						"icon": (
+							"fill": currentColor
+						)
+					)
 				),
-				carousel-button-full-screen: (
-					color: var(--global-white),
+				"article-body-blockquote": (
+					"box-shadow": inset 5px 0 0 0 var(--global-neutral-4),
+					"font-style": italic,
+					"gap": var(--global-spacing-2),
+					"padding": var(--global-spacing-4) 0 var(--global-spacing-4) var(--global-spacing-5),
+					"text-align": left,
+					"components": (
+						"paragraph": (
+							"font-size": var(--heading-level-6-font-size),
+							"line-height": var(--heading-level-6-line-height)
+						)
+					)
 				),
-				carousel-button-full-screen-hover: (
-					color: var(--global-neutral-3),
+				"article-body-children": (
+					"margin-bottom": var(--global-spacing-5)
 				),
-				carousel-button-next: (
-					color: var(--global-white),
+				"article-body-citation": (
+					"font-family": var(--font-family-primary),
+					"font-style": normal,
+					"font-size": var(--body-font-size)
 				),
-				carousel-button-previous: (
-					color: var(--global-white),
+				"article-body-correction": (
+					"box-shadow": inset 0 -1px 0 0 var(--border-color),
+					"font-style": italic,
+					"padding-bottom": var(--global-spacing-6),
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-6-font-size),
+							"text-transform": uppercase
+						),
+						"paragraph": (
+							"color": var(--global-neutral-6)
+						)
+					)
 				),
-				carousel-controls: (
-					display: flex,
-					padding: 0 0 var(--global-spacing-2) 0,
+				"article-body-divider": (
+					"background-color": var(--border-color),
+					"height": 1px
 				),
-				carousel-fullscreen: (
-					color: var(--global-white),
+				"article-body-embed-responsive": (
+					"aspect-ratio": calc(16 / 9),
+					"width": 100%
 				),
-				carousel-fullscreen-controls: (
-					padding-top: var(--global-spacing-5),
-					padding-right: var(--global-spacing-5),
-					padding-bottom: 0,
-					padding-left: var(--global-spacing-5),
+				"article-body-embed-responsive-item": (
+					"aspect-ratio": calc(16 / 9),
+					"height": auto,
+					"width": 100%
 				),
-				carousel-icon: (
-					fill: currentColor,
-					height: var(--global-spacing-4),
-					width: var(--global-spacing-4),
+				"article-body-gallery-close-button": (
+					"color": var(--global-white),
+					"components": (
+						"button-hover": (
+							"color": var(--global-neutral-3)
+						),
+						"icon": (
+							"fill": currentColor,
+							"height": var(--global-spacing-6),
+							"width": var(--global-spacing-6)
+						)
+					)
 				),
-				carousel-track: (
-					gap: initial,
-					max-width: initial,
-					width: 100%,
+				"article-body-gallery-fullscreen": (
+					"components": (
+						"media-item-fig-caption": (
+							"padding": 0 var(--global-spacing-2)
+						)
+					)
 				),
-				date: (
-					font-size: var(--body-font-size-small),
-					line-height: var(--body-line-height-small),
+				"article-body-gallery-track-button": (
+					"color": var(--global-white),
+					"components": (
+						"button-hover": (
+							"color": var(--global-neutral-3)
+						),
+						"icon": (
+							"fill": currentColor,
+							"height": var(--global-spacing-8),
+							"width": var(--global-spacing-8)
+						)
+					)
 				),
-				divider: (
-					background-color: var(--border-color),
-					height: 1px,
+				"article-body-h2": (
+					"font-size": var(--heading-level-2-font-size),
+					"line-height": var(--heading-level-2-line-height),
+					"font-family": var(--font-family-primary),
+					"font-weight": bold
 				),
-				heading: (
-					font-family: var(--font-family-primary),
-					font-size: var(--heading-level-3-font-size),
-					font-weight: var(--heading-level-3-font-weight),
-					line-height: var(--heading-level-3-line-height),
+				"article-body-h3": (
+					"font-size": var(--heading-level-3-font-size),
+					"line-height": var(--heading-level-3-line-height),
+					"font-family": var(--font-family-primary),
+					"font-weight": bold
 				),
-				icon: (
-					fill: var(--icon-fill-color),
-					height: var(--global-spacing-5),
-					width: var(--global-spacing-5),
+				"article-body-h4": (
+					"font-size": var(--heading-level-4-font-size),
+					"line-height": var(--heading-level-4-line-height),
+					"font-family": var(--font-family-primary),
+					"font-weight": bold
 				),
-				image: (
-					max-width: 100%,
+				"article-body-h5": (
+					"font-size": var(--heading-level-5-font-size),
+					"line-height": var(--heading-level-5-line-height),
+					"font-family": var(--font-family-primary),
+					"font-weight": bold
 				),
-				input: (
-					align-items: flex-start,
-					display: flex,
-					flex-direction: column,
-					gap: var(--global-spacing-1),
+				"article-body-h6": (
+					"font-size": var(--heading-level-6-font-size),
+					"line-height": var(--heading-level-6-line-height),
+					"font-family": var(--font-family-primary),
+					"font-weight": bold
 				),
-				input-input: (
-					border: var(--global-border-width-1) var(--global-border-style-1) var(--form-border-color),
-					border-radius: var(--border-radius),
-					padding: var(--global-spacing-4) var(--global-spacing-2),
+				"article-body-image-float-left": (
+					"width": 50%,
+					"float": left,
+					"margin-right": var(--global-spacing-5)
 				),
-				input-small-input: (
-					padding: var(--global-spacing-1) var(--global-spacing-2),
+				"article-body-image-float-right": (
+					"width": 50%,
+					"float": right,
+					"margin-left": var(--global-spacing-5)
 				),
-				input-input-focus: (
-					outline: solid 2px var(--form-border-color),
-					outline-offset: 1px,
+				"article-body-image-wrapper": (
+					"align-items": center,
+					"aspect-ratio": calc(16/9),
+					"background-color": var(--global-black),
+					"display": flex,
+					"justify-content": center,
+					"max-height": 75vh,
+					"overflow": auto,
+					"components": (
+						"image": (
+							"height": auto,
+							"max-height": 100%,
+							"max-width": 100%,
+							"object-fit": contain
+						)
+					)
 				),
-				input-label: (
-					font-weight: var(--global-font-weight-7),
+				"article-body-interstitial-link": (
+					"font-family": var(--font-family-primary),
+					"font-style": italic,
+					"components": (
+						"link": (
+							"border-bottom": 1px solid var(--color-primary),
+							"color": var(--color-primary)
+						)
+					)
 				),
-				input-error-input: (
-					border-color: var(--status-color-danger),
+				"article-body-link": (
+					"color": var(--color-primary)
 				),
-				input-error-input-focus: (
-					outline-color: var(--status-color-danger),
+				"article-body-ol": (
+					"font-size": var(--body-font-size),
+					"line-height": var(--body-line-height),
+					"list-style-position": inside,
+					"list-style-type": decimal
 				),
-				input-success-input: (
-					border-color: var(--status-color-success),
+				"article-body-pullquote": (
+					"box-shadow": (inset 0 -5px 0 0 var(--border-color), inset 0 5px 0 0 var(--border-color)),
+					"gap": var(--global-spacing-4),
+					"padding": var(--global-spacing-6) 0 var(--global-spacing-5),
+					"text-align": center,
+					"components": (
+						"paragraph": (
+							"font-style": italic,
+							"font-size": var(--heading-level-5-font-size),
+							"font-weight": var(--global-font-weight-7),
+							"line-height": var(--heading-level-5-line-height)
+						)
+					)
 				),
-				input-success-input-focus: (
-					outline-color: var(--status-color-success),
+				"article-body-table": (
+					"font-family": var(--font-family-primary),
+					"font-size": var(--body-font-size-small),
+					"line-height": var(--body-line-height-small),
+					"text-align": center,
+					"width": 100%
 				),
-				input-warning-input: (
-					border-color: var(--status-color-warning),
+				"article-body-table-td": (
+					"border": 1px solid var(--border-color),
+					"padding": var(--global-spacing-1) var(--global-spacing-2)
 				),
-				input-warning-input-focus: (
-					outline-color: var(--status-color-warning),
+				"article-body-table-th": (
+					"border": 1px solid var(--border-color),
+					"font-weight": var(--global-font-weight-7),
+					"padding": var(--global-spacing-1) var(--global-spacing-2)
 				),
-				link: (
-					color: var(--text-color),
+				"article-body-table-thead": (
+					"background-color": var(--global-neutral-4),
+					"border": 2px solid var(--border-color)
 				),
-				link-active: (
-					text-decoration: none,
+				"article-body-ul": (
+					"font-size": var(--body-font-size),
+					"line-height": var(--body-line-height),
+					"list-style-position": inside,
+					"list-style-type": disc
 				),
-				link-hover: (
-					text-decoration: none,
+				"article-tag": (
+					"components": (
+						"stack": (
+							"gap": var(--global-spacing-4)
+						)
+					)
 				),
-				media-item: (
-					align-items: stretch,
-					display: flex,
-					flex-direction: column,
-					gap: var(--global-spacing-2),
+				"author-bio": (
+					"gap": var(--global-spacing-4)
 				),
-				media-item-fig-caption: (
-					color: var(--text-color-subtle),
-					font-size: var(--body-font-size-tiny),
-					line-height: var(--body-line-height-tiny),
+				"author-bio-author": (
+					"gap": var(--global-spacing-4),
+					"components": (
+						"image": (
+							"max-width": var(--global-spacing-13),
+							"max-height": var(--global-spacing-13),
+							"border-radius": var(--border-radius-circle),
+							"height": 100%,
+							"width": 100%,
+							"aspect-ratio": 1,
+							"object-fit": cover
+						),
+						"stack": (
+							"gap": var(--global-spacing-2),
+							"width": 100%
+						)
+					)
 				),
-				media-item-title: (
-					font-weight: var(--global-font-weight-7),
+				"author-bio-author-description": (
+					"font-family": var(--font-family-primary),
+					"font-size": var(--body-font-size-small),
+					"line-height": var(--body-line-height-small),
+					"margin-bottom": 0
 				),
-				overline: (
-					color: var(--text-color),
-					font-family: var(--font-family-primary),
-					font-size: var(--heading-level-6-font-size),
-					font-weight: var(--heading-level-6-font-weight),
-					line-height: var(--heading-level-6-line-height),
-					text-decoration: none,
+				"author-bio-author-name": (
+					"font-family": var(--font-family-primary),
+					"font-size": var(--heading-level-6-font-size),
+					"font-weight": var(--heading-level-6-font-weight),
+					"line-height": var(--heading-level-6-line-height)
 				),
-				paragraph: (
-					font-family: var(--font-family-secondary),
-					font-size: var(--body-font-size),
-					font-weight: var(--body-font-weight),
-					line-height: var(--body-line-height),
+				"author-bio-social-link": (
+					"components": (
+						"icon": (
+							"fill": var(--color-primary)
+						)
+					)
 				),
-				pill: (
-					background-color: var(--color-primary),
-					border-radius: var(--border-radius-pill),
-					color: var(--global-white),
-					font-size: var(--body-font-size-tiny),
-					padding: var(--global-spacing-1) var(--global-spacing-4),
-					text-decoration: none,
+				"author-bio-social-link-hover": (
+					"components": (
+						"icon": (
+							"fill": var(--color-primary-hover)
+						)
+					)
 				),
-				pill-hover: (
-					background-color: var(--global-neutral-7),
+				"author-bio-social-link-wrapper": (
+					"gap": var(--global-spacing-4),
+					"margin-top": 0
 				),
-				stack-divider-vertical: (
-					border-bottom: var(--global-border-width-1) var(--global-border-style-1)
-						var(--border-color),
+				"byline": (
+					"font-size": var(--body-font-weight),
+					"line-height": var(--body-line-height),
+					"color": var(--text-color),
+					"text-decoration": none,
+					"components": (
+						"attribution-link": (
+							"color": var(--text-color),
+							"text-decoration": underline
+						),
+						"attribution-link-hover": (
+							"color": var(--text-color-subtle),
+							"text-decoration": none
+						)
+					)
 				),
-				stack-divider-horizontal: (
-					border: none,
-					border-left: var(--global-border-width-1) var(--global-border-style-1) var(--border-color),
-					width: 1px,
-					height: auto,
+				"card-list": (
+					"box-shadow": var(--global-box-shadow-1),
+					"border-radius": 0 var(--border-radius) var(--border-radius) 0,
+					"background-color": var(--background-color),
+					"padding": var(--global-spacing-4) 0,
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-5-font-size),
+							"font-weight": var(--heading-level-5-font-weight),
+							"line-height": var(--heading-level-5-line-height)
+						),
+						"stack": (
+							"gap": var(--global-spacing-4)
+						),
+						"separator": (
+							"padding": 0 var(--global-spacing-2)
+						),
+						"image": (
+							"transition": opacity 0.4s ease
+						),
+						"image-hover": (
+							"cursor": pointer,
+							"opacity": 0.8
+						),
+						"link": (
+							"color": var(--text-color)
+						),
+						"link-hover": (
+							"color": var(--text-color-subtle)
+						)
+					)
 				),
-				video: (
-					margin: auto,
+				"card-list-list": (
+					"padding": 0 var(--global-spacing-4)
 				),
-				video-frame: (
-					background-color: var(--global-black),
+				"card-list-main-item-image-link": (
+					"components": (
+						"image": (
+							"max-height": 40vh,
+							"object-fit": cover,
+							"width": 100%
+						)
+					)
 				),
+				"card-list-main-item-text-container": (
+					"gap": var(--global-spacing-2),
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-6-font-size),
+							"font-weight": var(--heading-level-6-font-weight),
+							"line-height": var(--heading-level-6-line-height)
+						),
+						"overline": (
+							"font-size": var(--body-font-size),
+							"line-height": var(--body-line-height)
+						)
+					)
+				),
+				"card-list-secondary-item": (
+					"components": (
+						"heading": (
+							"font-size": var(--body-font-size),
+							"font-weight": var(--body-font-weight),
+							"line-height": var(--body-line-height)
+						)
+					)
+				),
+				"card-list-secondary-item-heading-link": (
+					"width": 100%
+				),
+				"card-list-secondary-item-image-link": (
+					"max-width": 105px
+				),
+				"card-list-title": (
+					"padding": 0 var(--global-spacing-4),
+					"font-size": var(--heading-level-5-font-size),
+					"line-height": var(--heading-level-5-line-height)
+				),
+				"double-chain": (
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-3-font-size),
+							"font-weight": var(--heading-level-3-font-weight),
+							"line-height": var(--heading-level-3-line-height)
+						),
+						"stack": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"double-chain-child-item": (
+					"gap": var(--global-spacing-6) 0
+				),
+				"double-chain-child-item-empty": (
+					"display": contents
+				),
+				"double-chain-children-grid": (
+					"grid-template-columns": 1fr,
+					"gap": var(--global-spacing-6) 0
+				),
+				"footer": (
+					"width": var(--content-scale-width),
+					"gap": var(--global-spacing-6),
+					"margin": 0 auto,
+					"max-width": calc(var(--content-max-width) * 1px),
+					"components": (
+						"image": (
+							"margin": auto,
+							"max-height": var(--global-spacing-7)
+						)
+					)
+				),
+				"footer-links": (
+					"gap": var(--global-spacing-6),
+					"grid-auto-flow": row,
+					"grid-template-columns": 1fr,
+					"grid-template-rows": 1fr
+				),
+				"footer-links-group": (
+					"components": (
+						"heading": (
+							"color": var(--text-color),
+							"font-family": var(--font-family-primary),
+							"font-size": var(--body-font-size-small),
+							"line-height": var(--body-line-height-small)
+						)
+					)
+				),
+				"footer-links-group-list-item": (
+					"list-style": none,
+					"components": (
+						"link": (
+							"color": var(--text-color-subtle),
+							"font-family": var(--font-family-primary),
+							"font-size": var(--body-font-size-small),
+							"font-weight": var(--global-font-weight-4),
+							"line-height": var(--body-line-height-small)
+						)
+					)
+				),
+				"footer-social-links": (
+					"border": 1px solid var(--color-primary),
+					"border-radius": var(--border-radius),
+					"margin": var(--global-spacing-2) auto,
+					"width": fit-content,
+					"components": (
+						"icon": (
+							"fill": var(--color-primary)
+						),
+						"link": (
+							"border-right": 1px solid var(--color-primary),
+							"padding-top": var(--global-spacing-2),
+							"padding-right": var(--global-spacing-2),
+							"padding-bottom": var(--global-spacing-2),
+							"padding-left": var(--global-spacing-2)
+						)
+					)
+				),
+				"footer-social-links-container": (
+					"border-bottom": 1px solid var(--global-neutral-4),
+					"width": 100%
+				),
+				"footer-social-links-hover": (
+					"components": (
+						"icon": (
+							"fill": var(--color-primary-hover)
+						)
+					)
+				),
+				"footer-social-links-last": (
+					"components": (
+						"link": (
+							"border-right": none
+						)
+					)
+				),
+				"footer-top-container": (
+					"border-top": 1px solid var(--global-neutral-4),
+					"border-bottom": none,
+					"display": grid,
+					"grid-template-columns": 100%,
+					"grid-template-rows": auto auto,
+					"grid-auto-flow": column,
+					"gap": var(--global-spacing-6),
+					"justify-content": center,
+					"width": 100%,
+					"components": (
+						"paragraph": (
+							"justify-self": center
+						)
+					)
+				),
+				"forgot-password": (
+					"font-family": var(--font-family-primary),
+					"components": (
+						"button": (
+							"font-size": var(--global-font-size-4)
+						),
+						"heading": (
+							"border-block-end-color": var(--border-color),
+							"border-block-end-style": var(--global-border-style-1),
+							"border-block-end-width": var(--global-border-width-1),
+							"font-size": var(--global-font-size-9),
+							"margin-block-end": var(--global-spacing-4),
+							"margin-bottom": var(--global-spacing-4),
+							"padding-block-end": var(--global-spacing-2),
+							"text-align": center
+						),
+						"input": (
+							"margin-block-end": var(--global-spacing-5)
+						),
+						"input-error-tip": (
+							"color": var(--status-color-danger)
+						),
+						"input-input": (
+							"inline-size": 100%,
+							"width": 100%,
+							"padding-block-end": var(--global-spacing-2),
+							"padding-block-start": var(--global-spacing-2),
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2),
+							"padding-left": var(--global-spacing-2)
+						),
+						"paragraph": (
+							"font-family": var(--font-family-primary),
+							"margin-block-end": var(--global-spacing-4),
+							"text-align": center
+						)
+					)
+				),
+				"full-author-bio": (
+					"display": flex,
+					"flex-direction": column,
+					"gap": var(--global-spacing-4),
+					"margin": auto,
+					"components": (
+						"heading": (
+							"color": var(--color-primary),
+							"font-family": var(--font-family-primary)
+						),
+						"image": (
+							"aspect-ratio": 1,
+							"border-radius": var(--border-radius-circle),
+							"margin": auto,
+							"max-height": 9.375rem,
+							"max-width": 9.375rem
+						),
+						"paragraph": (
+							"color": var(--text-color),
+							"font-family": var(--font-family-primary)
+						)
+					)
+				),
+				"full-author-bio-identification": (
+					"gap": 0
+				),
+				"full-author-bio-name": (
+					"font-size": var(--heading-level-3-font-size),
+					"font-weight": var(--heading-level-3-font-weight),
+					"line-height": var(--heading-level-3-line-height)
+				),
+				"full-author-bio-role": (
+					"font-size": var(--heading-level-6-font-size),
+					"font-weight": var(--heading-level-6-font-weight),
+					"line-height": var(--heading-level-6-line-height)
+				),
+				"full-author-bio-social": (
+					"gap": var(--global-spacing-2)
+				),
+				"full-author-bio-social-header": (
+					"text-align": center,
+					"font-size": var(--heading-level-6-font-size),
+					"font-weight": var(--heading-level-6-font-weight),
+					"line-height": var(--heading-level-6-line-height)
+				),
+				"full-author-bio-social-icons": (
+					"display": flex,
+					"flex-wrap": wrap,
+					"justify-content": center,
+					"gap": var(--global-spacing-4)
+				),
+				"full-author-bio-social-link": (
+					"components": (
+						"icon": (
+							"fill": var(--color-primary)
+						)
+					)
+				),
+				"full-author-bio-social-link-hover": (
+					"components": (
+						"icon": (
+							"fill": var(--color-primary-hover)
+						)
+					)
+				),
+				"full-author-bio-text": (
+					"gap": var(--global-spacing-4)
+				),
+				"gallery": (
+					"components": (
+						"media-item-fig-caption": (
+							"background-color": var(--global-white),
+							"line-height": var(--body-line-height-5)
+						)
+					)
+				),
+				"gallery-close-button": (
+					"color": var(--global-white),
+					"components": (
+						"button-hover": (
+							"color": var(--global-neutral-3)
+						),
+						"icon": (
+							"fill": currentColor,
+							"height": var(--global-spacing-6),
+							"width": var(--global-spacing-6)
+						)
+					)
+				),
+				"gallery-fullscreen": (
+					"components": (
+						"media-item-fig-caption": (
+							"padding": 0 var(--global-spacing-2)
+						)
+					)
+				),
+				"gallery-image-wrapper": (
+					"align-items": center,
+					"aspect-ratio": calc(16/9),
+					"background-color": var(--global-black),
+					"display": flex,
+					"justify-content": center,
+					"max-height": 75vh,
+					"overflow": auto,
+					"components": (
+						"image": (
+							"height": auto,
+							"max-height": 100%,
+							"max-width": 100%,
+							"object-fit": contain
+						)
+					)
+				),
+				"gallery-track-button": (
+					"color": var(--global-white),
+					"components": (
+						"button-hover": (
+							"color": var(--global-neutral-3)
+						),
+						"icon": (
+							"fill": currentColor,
+							"height": var(--global-spacing-8),
+							"width": var(--global-spacing-8)
+						)
+					)
+				),
+				"header": (
+					"font-weight": var(--global-font-weight-7)
+				),
+				"header-account-action": (
+					"display": flex,
+					"font-family": var(--font-family-primary)
+				),
+				"header-account-action-desktop": (
+					"align-items": center,
+					"display": none,
+					"gap": var(--global-spacing-2)
+				),
+				"header-account-action-dropdown-list-item": (
+					"list-style": none,
+					"padding-block-end": var(--global-spacing-2),
+					"components": (
+						"link": (
+							"font-size": var(--global-font-size-3)
+						),
+						"link-hover": (
+							"color": var(--color-primary-hover)
+						)
+					)
+				),
+				"header-account-action-dropdown-list-item-last": (
+					"padding-block-end": 0
+				),
+				"header-account-action-dropdown-open": (
+					"top": 100%,
+					"position": absolute,
+					"padding-block-end": var(--global-spacing-4),
+					"padding-block-start": var(--global-spacing-4),
+					"padding-inline-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4),
+					"background-color": var(--global-white),
+					"border": 1px solid var(--border-color),
+					"border-radius": var(--global-spacing-1),
+					"box-shadow": 0 0 4px 0 rgba(0, 0, 0, 0.25),
+					"display": flex,
+					"flex-direction": column
+				),
+				"header-account-action-mobile": (
+					"display": flex
+				),
+				"header-extra-large": (
+					"font-size": var(--heading-level-4-font-size),
+					"line-height": var(--heading-level-4-line-height)
+				),
+				"header-large": (
+					"font-size": var(--heading-level-5-font-size),
+					"line-height": var(--heading-level-5-line-height)
+				),
+				"header-medium": (
+					"font-size": var(--heading-level-6-font-size),
+					"line-height": var(--heading-level-6-line-height)
+				),
+				"header-nav-chain": (
+					"background-color": var(--global-black),
+					"padding": var(--global-spacing-2) var(--global-spacing-4),
+					"font-weight": var(--global-font-weight-7),
+					"font-size": var(--body-font-size),
+					"line-height": var(--body-line-height),
+					"transform": translateZ(0),
+					"min-height": var(--header-nav-chain-height),
+					"justify-content": center,
+					"display": flex,
+					"align-items": center,
+					"width": 100%,
+					"position": sticky,
+					"top": 0px,
+					"margin-bottom": 0px,
+					"z-index": 1,
+					"components": (
+						"icon": (
+							"fill": currentColor,
+							"height": var(--global-spacing-5),
+							"width": var(--global-spacing-5)
+						),
+						"button": (
+							"color": var(--global-white),
+							"height": var(--global-spacing-7),
+							"font-weight": var(--global-font-weight-7),
+							"font-size": var(--body-font-size),
+							"line-height": var(--body-line-height)
+						),
+						"button-small": (
+							"font-weight": var(--global-font-weight-7),
+							"font-size": var(--body-font-size),
+							"line-height": var(--body-line-height),
+							"padding": var(--global-spacing-2)
+						)
+					)
+				),
+				"header-nav-chain-flyout-nav": (
+					"height": calc((100vh - var(--header-nav-chain-height-scrolled))),
+					"gap": 0,
+					"font-weight": var(--global-font-weight-7),
+					"list-style": none,
+					"position": relative,
+					"components": (
+						"link": (
+							"width": 100%,
+							"padding-top": var(--global-spacing-2),
+							"padding-bottom": var(--global-spacing-2),
+							"padding-left": var(--global-spacing-5),
+							"padding-right": var(--global-spacing-5),
+							"align-items": center,
+							"color": var(--global-white),
+							"font-weight": var(--global-font-weight-7),
+							"display": block,
+							"font-size": var(--body-font-size),
+							"justify-content": space-between,
+							"line-height": 1.5,
+							"text-decoration": none
+						),
+						"link-hover": (
+							"color": var(--global-white)
+						)
+					)
+				),
+				"header-nav-chain-flyout-nav-components-desktop": (
+					"display": none,
+					"padding": var(--global-spacing-5),
+					"components": (
+						"button": (
+							"align-self": flex-start
+						)
+					)
+				),
+				"header-nav-chain-flyout-nav-components-mobile": (
+					"display": flex,
+					"padding": var(--global-spacing-5)
+				),
+				"header-nav-chain-flyout-nav-item": (
+					"background-color": var(--global-black),
+					"components": (
+						"link": (
+							"padding-top": var(--global-spacing-3),
+							"padding-left": var(--global-spacing-5),
+							"padding-bottom": var(--global-spacing-3)
+						)
+					)
+				),
+				"header-nav-chain-flyout-nav-item-hover-active": (
+					"background-color": var(--global-neutral-7),
+					"components": (
+						"icon": (
+							"fill": var(--global-white)
+						)
+					)
+				),
+				"header-nav-chain-flyout-nav-menu": (
+					"components": (
+						"stack": (
+							"gap": 1rem
+						)
+					)
+				),
+				"header-nav-chain-flyout-nav-subsection-anchor": (
+					"height": var(--global-spacing-8),
+					"components": (
+						"stack": (
+							"align-content": center,
+							"cursor": pointer,
+							"justify-content": space-between,
+							"line-height": var(--global-line-height-7)
+						)
+					)
+				),
+				"header-nav-chain-flyout-nav-subsection-caret": (
+					"align-self": center,
+					"appearance": none,
+					"background": transparent,
+					"border": 0,
+					"display": flex,
+					"components": (
+						"button-default": (
+							"color": var(--icon-fill-color-subtle)
+						),
+						"button-hover": (
+							"color": var(--color-white)
+						)
+					)
+				),
+				"header-nav-chain-flyout-nav-subsection-caret-open": (
+					"transform": rotate(180deg)
+				),
+				"header-nav-chain-flyout-nav-subsection-container": (
+					"display": none,
+					"flex-direction": column,
+					"position": relative
+				),
+				"header-nav-chain-flyout-nav-subsection-container-open": (
+					"display": flex
+				),
+				"header-nav-chain-flyout-nav-subsection-menu": (
+					"background": var(--global-white),
+					"components": (
+						"link": (
+							"color": var(--global-black),
+							"display": block,
+							"font-size": var(--global-spacing-4),
+							"font-weight": var(--global-font-weight-7),
+							"line-height": var(--global-line-height-4),
+							"padding-top": var(--global-spacing-2),
+							"padding-right": var(--global-spacing-5),
+							"padding-left": var(--global-spacing-5),
+							"padding-bottom": var(--global-spacing-2),
+							"text-decoration": none
+						),
+						"link-hover": (
+							"color": var(--global-white),
+							"background-color": var(--global-neutral-6)
+						),
+						"link-active": (
+							"color": var(--global-white),
+							"background-color": var(--global-neutral-6)
+						)
+					)
+				),
+				"header-nav-chain-flyout-nav-widgets": (
+					"margin-top": var(--global-spacing-3),
+					"padding": var(--global-spacing-1) var(--global-spacing-4) var(--global-spacing-1) var(--global-spacing-5)
+				),
+				"header-nav-chain-flyout-nav-wrapper": (
+					"z-index": 10,
+					"background": var(--global-black),
+					"transition": transform 300ms ease-in-out,
+					"width": 100vw
+				),
+				"header-nav-chain-flyout-nav-wrapper-closed": (
+					"transform": translate(-100vw, 0)
+				),
+				"header-nav-chain-flyout-nav-wrapper-open": (
+					"gap": var(--global-spacing-4)
+				),
+				"header-nav-chain-flyout-overlay": (
+					"margin-top": var(--header-nav-chain-height),
+					"z-index": 8,
+					"background": var(--header-nav-chain-overlay-background-color),
+					"-ms-overflow-style": none,
+					"position": absolute,
+					"scrollbar-width": none,
+					"left": 0,
+					"top": 0
+				),
+				"header-nav-chain-flyout-overlay-closed": (
+					"overflow-y": hidden,
+					"width": 0
+				),
+				"header-nav-chain-flyout-overlay-open": (
+					"background": var(--header-nav-chain-overlay-background-color),
+					"overflow-y": scroll,
+					"transform": translate(0, 0),
+					"width": 100%
+				),
+				"header-nav-chain-flyout-overlay-scrollbar": (
+					"display": none
+				),
+				"header-nav-chain-links-list": (
+					"display": none,
+					"gap": var(--global-spacing-2),
+					"height": var(--global-spacing-5),
+					"flex": 11 auto,
+					"overflow": hidden,
+					"text-align": left,
+					"width": auto,
+					"flex-wrap": wrap,
+					"components": (
+						"link": (
+							"color": var(--global-white),
+							"display": flex,
+							"align-items": center,
+							"height": 100%
+						),
+						"separator": (
+							"color": var(--global-white)
+						)
+					)
+				),
+				"header-nav-chain-links-list-item": (
+					"display": flex,
+					"gap": var(--global-spacing-2),
+					"components": (
+						"link-hover": (
+							"color": var(--global-neutral-3)
+						)
+					)
+				),
+				"header-nav-chain-logo": (
+					"margin-right": auto
+				),
+				"header-nav-chain-logo-center": (
+					"margin-right": 0
+				),
+				"header-nav-chain-logo-hidden": (
+					"opacity": 0,
+					"transition": (opacity 0.8s ease, visibility 0s ease 0s),
+					"visibility": hidden
+				),
+				"header-nav-chain-logo-image": (
+					"max-width": 240px,
+					"max-height": var(--header-nav-chain-height),
+					"transition": (opacity 0.4s ease)
+				),
+				"header-nav-chain-logo-image-hover": (
+					"opacity": 0.7,
+					"transition": (opacity 0.4s ease)
+				),
+				"header-nav-chain-logo-right": (
+					"margin-inline-start": auto,
+					"margin-inline-end": 0
+				),
+				"header-nav-chain-logo-show": (
+					"opacity": 1,
+					"transition": (opacity 0.8s ease, visibility 0s ease 0s),
+					"visibility": visible
+				),
+				"header-nav-chain-nav-search": (
+					"align-items": center,
+					"display": flex,
+					"justify-content": center,
+					"position": relative
+				),
+				"header-nav-chain-nav-search-box-position": (
+					"position": absolute,
+					"right": 0
+				),
+				"header-nav-chain-nav-search-box-svg": (
+					"fill": #191919,
+					"height": 1rem,
+					"width": 1rem
+				),
+				"header-nav-chain-nav-search-button": (
+					"background": transparent,
+					"border": transparent,
+					"cursor": pointer
+				),
+				"header-nav-chain-nav-search-input": (
+					"padding": 0,
+					"width": 0
+				),
+				"header-nav-chain-nav-search-input-open": (
+					"font-size": var(--body-font-size),
+					"height": var(--global-spacing-7),
+					"line-height": var(--global-line-height-4),
+					"padding": 4px 24px 4px 11px,
+					"width": 100%
+				),
+				"header-nav-chain-scrolled": (
+					"min-height": var(--header-nav-chain-height-scrolled)
+				),
+				"header-nav-chain-scrolled-flyout-overlay": (
+					"margin-top": var(--header-nav-chain-height-scrolled)
+				),
+				"header-nav-chain-top-layout": (
+					"align-items": center,
+					"display": flex,
+					"justify-content": space-between,
+					"width": 100%,
+					"gap": var(--global-spacing-5)
+				),
+				"header-nav-chain-top-layout-last-child": (
+					"margin-right": 0,
+					"flex-shrink": 0
+				),
+				"header-nav-chain-top-nav-components-desktop": (
+					"align-items": center,
+					"display": none,
+					"gap": var(--global-spacing-2)
+				),
+				"header-nav-chain-top-nav-components-mobile": (
+					"align-items": center,
+					"display": flex
+				),
+				"header-nav-chain-top-nav-left": (
+					"justify-content": flex-start,
+					"flex-shrink": 0
+				),
+				"header-nav-chain-top-nav-right": (
+					"display": flex,
+					"justify-content": flex-end,
+					"flex-shrink": 0,
+					"margin-right": 0
+				),
+				"header-small": (
+					"font-size": var(--body-font-size-small),
+					"line-height": var(--body-line-height-small)
+				),
+				"headline": (
+					"font-size": var(--heading-level-1-font-size),
+					"font-weight": var(--heading-level-1-font-weight),
+					"line-height": var(--heading-level-1-line-height),
+					"font-family": var(--font-family-primary)
+				),
+				"large-manual-promo": (
+					"gap": var(--global-spacing-4),
+					"components": (
+						"link-hover": (
+							"color": var(--text-color-subtle)
+						)
+					)
+				),
+				"large-manual-promo-img": (
+					"components": (
+						"link-hover": (
+							"opacity": 0.8
+						)
+					)
+				),
+				"large-manual-promo-text": (
+					"gap": 0,
+					"components": (
+						"heading": (
+							"color": var(--text-color)
+						),
+						"overline": (
+							"color": var(--text-color),
+							"font-size": var(--heading-level-6-font-size),
+							"line-height": var(--heading-level-6-line-height)
+						),
+						"overline-hover": (
+							"color": var(--text-color-subtle)
+						),
+						"paragraph": (
+							"font-size": var(--body-font-size)
+						),
+						"stack": (
+							"gap": var(--global-spacing-4)
+						)
+					)
+				),
+				"large-promo": (
+					"gap": var(--global-spacing-4),
+					"components": (
+						"link": (
+							"position": relative
+						),
+						"link-hover": (
+							"color": var(--text-color-subtle)
+						)
+					)
+				),
+				"large-promo-icon-label": (
+					"align-items": center,
+					"padding": var(--global-spacing-2),
+					"background-color": var(--color-primary),
+					"border": 0,
+					"border-radius": var(--global-spacing-2),
+					"bottom": var(--global-spacing-2),
+					"margin-left": var(--global-spacing-2),
+					"position": absolute,
+					"z-index": 1,
+					"components": (
+						"icon": (
+							"fill": var(--global-white),
+							"height": var(--global-spacing-4),
+							"width": var(--global-spacing-4)
+						)
+					)
+				),
+				"large-promo-img": (
+					"components": (
+						"link-hover": (
+							"opacity": 0.8
+						)
+					)
+				),
+				"large-promo-label": (
+					"margin-left": var(--global-spacing-2),
+					"color": var(--global-white)
+				),
+				"large-promo-text": (
+					"gap": 0,
+					"components": (
+						"heading": (
+							"color": var(--text-color),
+							"font-size": var(--heading-level-3-font-size),
+							"line-height": var(--heading-level-3-line-height)
+						),
+						"overline": (
+							"color": var(--text-color),
+							"font-size": var(--heading-level-6-font-size),
+							"line-height": var(--heading-level-6-line-height)
+						),
+						"overline-hover": (
+							"color": var(--text-color-subtle)
+						),
+						"paragraph": (
+							"font-size": var(--body-font-size),
+							"line-height": var(--body-line-height)
+						),
+						"stack": (
+							"gap": var(--global-spacing-4)
+						),
+						"separator": (
+							"margin": 0 var(--global-spacing-2) 0 var(--global-spacing-2)
+						)
+					)
+				),
+				"lead-art": (
+					"components": (
+						"media-item-fig-caption": (
+							"background-color": var(--global-white),
+							"line-height": var(--body-line-height-5),
+							"margin": var(--global-spacing-2) 0
+						)
+					)
+				),
+				"lead-art-carousel-close-button": (
+					"color": var(--global-white),
+					"components": (
+						"button-hover": (
+							"color": var(--global-neutral-3)
+						),
+						"icon": (
+							"fill": currentColor,
+							"height": var(--global-spacing-6),
+							"width": var(--global-spacing-6)
+						)
+					)
+				),
+				"lead-art-carousel-fullscreen": (
+					"components": (
+						"media-item-fig-caption": (
+							"padding": 0 var(--global-spacing-2)
+						)
+					)
+				),
+				"lead-art-carousel-image-wrapper": (
+					"align-items": center,
+					"aspect-ratio": calc(16/9),
+					"background-color": var(--global-black),
+					"display": flex,
+					"justify-content": center,
+					"max-height": 75vh,
+					"overflow": auto,
+					"components": (
+						"image": (
+							"height": auto,
+							"max-height": 100%,
+							"max-width": 100%,
+							"object-fit": contain
+						)
+					)
+				),
+				"lead-art-carousel-track-button": (
+					"color": var(--global-white),
+					"components": (
+						"button-hover": (
+							"color": var(--global-neutral-3)
+						),
+						"icon": (
+							"fill": currentColor,
+							"height": var(--global-spacing-8),
+							"width": var(--global-spacing-8)
+						)
+					)
+				),
+				"links-bar": (
+					"gap": var(--global-spacing-2),
+					"components": (
+						"link": (
+							"color": var(--text-color)
+						),
+						"link-hover": (
+							"color": var(--text-color-subtle)
+						)
+					)
+				),
+				"login-form": (
+					"font-family": var(--font-family-primary),
+					"components": (
+						"button": (
+							"font-size": var(--global-font-size-4)
+						),
+						"heading": (
+							"border-block-end-color": var(--border-color),
+							"border-block-end-style": var(--global-border-style-1),
+							"border-block-end-width": var(--global-border-width-1),
+							"font-size": var(--global-font-size-9),
+							"margin-block-end": var(--global-spacing-4),
+							"margin-bottom": var(--global-spacing-4),
+							"padding-block-end": var(--global-spacing-2),
+							"text-align": center
+						),
+						"input": (
+							"margin-block-end": var(--global-spacing-5)
+						),
+						"input-error-tip": (
+							"color": var(--status-color-danger)
+						),
+						"input-input": (
+							"inline-size": 100%,
+							"width": 100%,
+							"padding-block-end": var(--global-spacing-2),
+							"padding-block-start": var(--global-spacing-2),
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2),
+							"padding-left": var(--global-spacing-2)
+						),
+						"paragraph": (
+							"font-family": var(--font-family-primary),
+							"margin-block-end": var(--global-spacing-5)
+						)
+					)
+				),
+				"login-links": (
+					"components": (
+						"link": (
+							"text-align": center
+						),
+						"link-hover": (
+							"color": var(--text-color-subtle)
+						)
+					)
+				),
+				"masthead": (
+					"border-bottom": 2px solid var(--global-neutral-8),
+					"color": var(--text-color),
+					"display": none,
+					"font-family": var(--font-family-primary),
+					"font-size": var(--body-font-size-small),
+					"line-height": var(--body-line-height-tiny),
+					"gap": var(--global-spacing-4)
+				),
+				"masthead-content": (
+					"display": flex,
+					"justify-content": space-evenly
+				),
+				"masthead-date": (
+					"align-items": flex-end,
+					"display": flex,
+					"font-weight": var(--global-font-weight-7),
+					"justify-content": flex-start,
+					"flex": 11 0%
+				),
+				"masthead-divider": (
+					"margin": 0,
+					"padding": 0
+				),
+				"masthead-link": (
+					"align-items": flex-end,
+					"display": flex,
+					"justify-content": flex-end,
+					"flex": 11 0%
+				),
+				"masthead-logo": (
+					"display": flex,
+					"justify-content": center
+				),
+				"masthead-logo-image": (
+					"max-height": 64px,
+					"object-fit": contain,
+					"vertical-align": middle
+				),
+				"masthead-tagline": (
+					"display": flex,
+					"flex": 11 0%,
+					"justify-content": center,
+					"font-family": var(--font-family-primary),
+					"text-align": center
+				),
+				"medium-manual-promo": (
+					"clear": both,
+					"display": table,
+					"width": 100%,
+					"components": (
+						"attribution": (
+							"color": var(--text-color),
+							"font-size": var(--body-font-size-small),
+							"line-height": var(--body-line-height-small)
+						),
+						"heading": (
+							"color": var(--text-color),
+							"font-size": var(--heading-level-5-font-size),
+							"font-weight": var(--heading-level-5-font-weight),
+							"line-height": var(--heading-level-5-line-height),
+							"margin-bottom": var(--global-spacing-4)
+						),
+						"link-hover": (
+							"color": var(--text-color-subtle)
+						),
+						"media-item": (
+							"float": right,
+							"max-width": 100px
+						),
+						"paragraph": (
+							"display": inline,
+							"font-size": var(--body-font-size),
+							"line-height": var(--body-line-height)
+						)
+					)
+				),
+				"medium-manual-promo-img": (
+					"components": (
+						"link-hover": (
+							"opacity": 0.8
+						)
+					)
+				),
+				"medium-manual-promo-show-image": (
+					"components": (
+						"heading": (
+							"width": 68%
+						)
+					)
+				),
+				"medium-promo": (
+					"clear": both,
+					"display": table,
+					"width": 100%,
+					"components": (
+						"attribution": (
+							"display": block,
+							"margin-top": var(--global-spacing-4)
+						),
+						"media-item": (
+							"float": right,
+							"max-width": 100px
+						),
+						"heading": (
+							"font-size": var(--heading-level-5-font-size),
+							"font-weight": var(--heading-level-5-font-weight),
+							"line-height": var(--heading-level-5-line-height),
+							"margin-bottom": var(--global-spacing-4)
+						),
+						"paragraph": (
+							"display": block,
+							"width": 100%
+						),
+						"separator": (
+							"padding": 0 var(--global-spacing-2)
+						),
+						"link": (
+							"position": relative
+						)
+					)
+				),
+				"medium-promo-icon-label": (
+					"align-items": center,
+					"padding": var(--global-spacing-2),
+					"background-color": var(--color-primary),
+					"border": 0,
+					"border-radius": var(--global-spacing-2),
+					"bottom": var(--global-spacing-2),
+					"margin-left": var(--global-spacing-2),
+					"position": absolute,
+					"z-index": 1,
+					"components": (
+						"icon": (
+							"fill": var(--global-white),
+							"height": var(--global-spacing-4),
+							"width": var(--global-spacing-4)
+						)
+					)
+				),
+				"medium-promo-img": (
+					"components": (
+						"link-hover": (
+							"opacity": 0.8
+						)
+					)
+				),
+				"medium-promo-label": (
+					"margin-left": var(--global-spacing-2),
+					"color": var(--global-white),
+					"display": none
+				),
+				"medium-promo-show-image": (
+					"components": (
+						"heading": (
+							"color": var(--text-color),
+							"width": 68%
+						),
+						"link-hover": (
+							"color": var(--text-color-subtle)
+						)
+					)
+				),
+				"numbered-list": (
+					"gap": var(--global-spacing-4),
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-6-font-size),
+							"line-height": var(--heading-level-6-line-height)
+						)
+					)
+				),
+				"numbered-list-item": (
+					"gap": var(--global-spacing-5),
+					"components": (
+						"heading": (
+							"font-size": var(--body-font-size),
+							"font-weight": var(--body-font-weight),
+							"line-height": var(--body-line-height)
+						),
+						"link": (
+							"flex": 1
+						),
+						"paragraph": (
+							"font-family": var(--font-family-secondary),
+							"font-size": var(--heading-level-6-font-size),
+							"font-weight": var(--heading-level-6-font-weight),
+							"line-height": var(--heading-level-6-line-height)
+						)
+					)
+				),
+				"numbered-list-item-image": (
+					"max-width": 25%
+				),
+				"numbered-list-items": (
+					"gap": var(--global-spacing-4)
+				),
+				"quad-chain": (
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-3-font-size),
+							"font-weight": var(--heading-level-3-font-weight),
+							"line-height": var(--heading-level-3-line-height)
+						),
+						"stack": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"quad-chain-child-item": (
+					"gap": var(--global-spacing-6) 0
+				),
+				"quad-chain-child-item-empty": (
+					"display": contents
+				),
+				"quad-chain-children-grid": (
+					"grid-template-columns": 1fr,
+					"gap": var(--global-spacing-6) 0
+				),
+				"reset-password": (
+					"font-family": var(--font-family-primary),
+					"components": (
+						"button": (
+							"font-size": var(--global-font-size-4)
+						),
+						"heading": (
+							"border-block-end-color": var(--border-color),
+							"border-block-end-style": var(--global-border-style-1),
+							"border-block-end-width": var(--global-border-width-1),
+							"font-size": var(--global-font-size-9),
+							"margin-block-end": var(--global-spacing-4),
+							"margin-bottom": var(--global-spacing-4),
+							"padding-block-end": var(--global-spacing-2),
+							"text-align": center
+						),
+						"input": (
+							"margin-block-end": var(--global-spacing-5)
+						),
+						"input-error-tip": (
+							"color": var(--status-color-danger)
+						),
+						"input-input": (
+							"inline-size": 100%,
+							"width": 100%,
+							"padding-block-end": var(--global-spacing-2),
+							"padding-block-start": var(--global-spacing-2),
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2),
+							"padding-left": var(--global-spacing-2)
+						),
+						"paragraph": (
+							"font-family": var(--font-family-primary),
+							"margin-block-end": var(--global-spacing-4),
+							"text-align": center
+						)
+					)
+				),
+				"results-list": (
+					"components": (
+						"attribution": (
+							"margin-top": var(--global-spacing-4)
+						),
+						"media-item": (
+							"float": right,
+							"max-width": 100px
+						),
+						"overline": (
+							"font-size": var(--body-font-size)
+						),
+						"heading": (
+							"font-size": var(--heading-level-5-font-size),
+							"font-weight": var(--heading-level-5-font-weight),
+							"line-height": var(--heading-level-5-line-height),
+							"margin-bottom": var(--global-spacing-4)
+						),
+						"button": (
+							"gap": var(--global-spacing-6)
+						),
+						"separator": (
+							"padding": 0 var(--global-spacing-2)
+						)
+					)
+				),
+				"results-list-see-more": (
+					"margin-top": var(--global-spacing-2)
+				),
+				"results-list-show-image": (
+					"components": (
+						"heading": (
+							"width": 68%
+						),
+						"overline": (
+							"font-size": var(--body-font-size)
+						)
+					)
+				),
+				"results-list-wrapper": (
+					"gap": var(--global-spacing-5)
+				),
+				"right-rail": (
+					"gap": var(--global-spacing-5)
+				),
+				"right-rail-advanced": (
+					"gap": var(--global-spacing-6)
+				),
+				"right-rail-advanced-footer": (
+					"margin": var(--global-spacing-10) 0 var(--global-spacing-8) 0
+				),
+				"right-rail-advanced-full-width-1": (
+					"margin": 0 0 var(--global-spacing-5) 0
+				),
+				"right-rail-advanced-full-width-2": (
+					"margin": var(--global-spacing-6) 0 0 0
+				),
+				"right-rail-advanced-main": (
+					"gap": var(--global-spacing-6),
+					"max-width": calc(var(--content-max-width) * 1px),
+					"width": var(--content-scale-width),
+					"margin": auto
+				),
+				"right-rail-advanced-main-interior-item": (
+					"padding": initial,
+					"border-right": initial,
+					"gap": var(--global-spacing-5),
+					"display": contents
+				),
+				"right-rail-advanced-main-interior-item-1": (
+					"grid-area": main-interior-item-1
+				),
+				"right-rail-advanced-main-interior-item-2": (
+					"grid-area": main-interior-item-2
+				),
+				"right-rail-advanced-main-right-rail": (
+					"padding": initial,
+					"gap": var(--global-spacing-5),
+					"display": contents
+				),
+				"right-rail-advanced-main-right-rail-bottom": (
+					"grid-area": main-right-rail-bottom
+				),
+				"right-rail-advanced-main-right-rail-middle": (
+					"grid-area": main-right-rail-middle
+				),
+				"right-rail-advanced-main-right-rail-top": (
+					"grid-area": main-right-rail-top
+				),
+				"right-rail-advanced-navigation": (
+					"position": sticky,
+					"top": 0,
+					"width": 100%,
+					"z-index": 9,
+					"margin": 0 0 var(--global-spacing-5) 0
+				),
+				"right-rail-advanced-rail-container": (
+					"grid-template-areas": "main-right-rail-top" "main-interior-item-1" "main-right-rail-middle" "main-interior-item-2" "main-right-rail-bottom",
+					"grid-template-columns": initial,
+					"grid-template-rows": 1fr,
+					"grid-auto-rows": auto,
+					"gap": var(--global-spacing-6)
+				),
+				"right-rail-footer": (
+					"margin": var(--global-spacing-10) 0 var(--global-spacing-8) 0
+				),
+				"right-rail-full-width-1": (
+					"margin": 0 0 var(--global-spacing-5) 0
+				),
+				"right-rail-full-width-2": (
+					"margin": var(--global-spacing-6) 0 0 0
+				),
+				"right-rail-main": (
+					"max-width": calc(var(--content-max-width) * 1px),
+					"width": var(--content-scale-width),
+					"margin": auto,
+					"components": (
+						"stack": (
+							"gap": var(--global-spacing-6)
+						)
+					)
+				),
+				"right-rail-main-interior-item": (
+					"padding": initial,
+					"border-right": initial
+				),
+				"right-rail-main-right-rail": (
+					"padding": initial
+				),
+				"right-rail-navigation": (
+					"position": sticky,
+					"top": 0,
+					"width": 100%,
+					"z-index": 9,
+					"margin": 0 0 var(--global-spacing-5) 0
+				),
+				"right-rail-rail-container": (
+					"grid-template-columns": initial,
+					"grid-template-rows": 1fr,
+					"gap": var(--global-spacing-6)
+				),
+				"search-results-list": (
+					"components": (
+						"stack": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"search-results-list-field": (
+					"components": (
+						"stack": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"search-results-list-field-wrapper": (
+					"display": grid,
+					"gap": var(--global-spacing-4),
+					"grid-template": "icon input search" 1fr / var(--global-spacing-7) 1fr auto,
+					"components": (
+						"button": (
+							"grid-area": search
+						),
+						"icon": (
+							"align-self": center,
+							"grid-area": icon,
+							"height": var(--global-spacing-5),
+							"justify-self": center,
+							"width": var(--global-spacing-5),
+							"z-index": 1
+						),
+						"input": (
+							"gap": 0,
+							"grid-area": icon / icon / input / input
+						),
+						"input-input": (
+							"font-family": var(--font-family-primary),
+							"font-weight": var(--global-font-weight-7),
+							"padding-left": var(--global-spacing-7),
+							"width": 100%
+						)
+					)
+				),
+				"search-results-list-results": (
+					"components": (
+						"button": (
+							"margin": var(--global-spacing-2) auto 0,
+							"width": auto
+						)
+					)
+				),
+				"search-results-list-results-item": (
+					"components": (
+						"attribution": (
+							"display": block,
+							"margin-top": var(--global-spacing-4)
+						),
+						"heading": (
+							"font-size": var(--heading-level-5-font-size),
+							"font-weight": var(--heading-level-5-font-weight),
+							"line-height": var(--heading-level-5-line-height),
+							"margin-bottom": var(--global-spacing-4)
+						),
+						"media-item": (
+							"float": right,
+							"max-width": 100px
+						),
+						"overline": (
+							"font-weight": var(--heading-level-4-font-weight),
+							"font-size": var(--heading-level-5-font-size),
+							"line-height": var(--heading-level-5-line-height)
+						),
+						"paragraph": (
+							"display": block
+						),
+						"separator": (
+							"padding": 0 var(--global-spacing-2)
+						),
+						"link": (
+							"position": relative
+						)
+					)
+				),
+				"search-results-list-results-item-show-image": (
+					"components": (
+						"heading": (
+							"width": 68%
+						),
+						"overline": (
+							"font-size": var(--body-font-size)
+						)
+					)
+				),
+				"section-title": (
+					"gap": var(--global-spacing-4),
+					"components": (
+						"heading": (
+							"font-family": var(--font-family-primary),
+							"font-size": var(--heading-level-1-font-size),
+							"font-weight": var(--heading-level-1-font-weight),
+							"line-height": var(--heading-level-1-line-height)
+						),
+						"link": (
+							"font-family": var(--font-family-primary)
+						),
+						"separator": (
+							"margin": 0 var(--global-spacing-4)
+						)
+					)
+				),
+				"share-bar": (
+					"background": var(--background-color),
+					"box-shadow": var(--global-box-shadow-1),
+					"border-radius": 0 var(--border-radius) var(--border-radius) 0,
+					"display": none,
+					"gap": var(--global-spacing-2),
+					"left": 0,
+					"padding": var(--global-spacing-4) 0,
+					"position": fixed,
+					"top": 200px,
+					"components": (
+						"button": (
+							"background-color": transparent
+						),
+						"button-default": (
+							"border-width": 0
+						),
+						"button-medium": (
+							"padding": 0 var(--global-spacing-3)
+						)
+					)
+				),
+				"share-bar-email": (
+					"fill": #b61818
+				),
+				"share-bar-email-hover": (
+					"fill": #c66565
+				),
+				"share-bar-facebook": (
+					"fill": #415993
+				),
+				"share-bar-facebook-hover": (
+					"fill": #5d6f9a
+				),
+				"share-bar-linkedin": (
+					"fill": #3076b0
+				),
+				"share-bar-linkedin-hover": (
+					"fill": #6baae8
+				),
+				"share-bar-pinterest": (
+					"fill": #ad2526
+				),
+				"share-bar-pinterest-hover": (
+					"fill": #b44c4c
+				),
+				"share-bar-twitter": (
+					"fill": #6baae8
+				),
+				"share-bar-twitter-hover": (
+					"fill": #91c4f6
+				),
+				"sign-up": (
+					"font-family": var(--font-family-primary),
+					"components": (
+						"button": (
+							"font-size": var(--global-font-size-4)
+						),
+						"heading": (
+							"border-block-end-color": var(--border-color),
+							"border-block-end-style": var(--global-border-style-1),
+							"border-block-end-width": var(--global-border-width-1),
+							"font-size": var(--global-font-size-9),
+							"margin-block-end": var(--global-spacing-4),
+							"margin-bottom": var(--global-spacing-4),
+							"padding-block-end": var(--global-spacing-2),
+							"text-align": center
+						),
+						"input": (
+							"margin-block-end": var(--global-spacing-5)
+						),
+						"input-error-tip": (
+							"color": var(--status-color-danger)
+						),
+						"input-input": (
+							"inline-size": 100%,
+							"width": 100%,
+							"padding-block-end": var(--global-spacing-2),
+							"padding-block-start": var(--global-spacing-2),
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2),
+							"padding-left": var(--global-spacing-2)
+						),
+						"paragraph": (
+							"font-family": var(--font-family-primary),
+							"margin-block-end": var(--global-spacing-5)
+						)
+					)
+				),
+				"sign-up-tos-link": (
+					"color": var(--text-color),
+					"text-decoration": none
+				),
+				"sign-up-tos-link-hover": (
+					"color": var(--text-color-subtle)
+				),
+				"simple-list": (
+					"gap": var(--global-spacing-4),
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-6-font-size),
+							"line-height": var(--heading-level-6-line-height)
+						)
+					)
+				),
+				"simple-list-item": (
+					"gap": var(--global-spacing-6)
+				),
+				"simple-list-item-anchor": (
+					"flex": 0 0 33%
+				),
+				"simple-list-items": (
+					"components": (
+						"heading": (
+							"line-height": var(--body-line-height),
+							"font-size": var(--body-font-size),
+							"font-weight": var(--body-font-weight)
+						)
+					),
+					"gap": var(--global-spacing-4)
+				),
+				"single-chain": (
+					"components": (
+						"stack": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"single-chain-children-stack": (
+					"gap": var(--global-spacing-6)
+				),
+				"single-column-regular-body": (
+					"inline-size": calc(100% - var(--global-spacing-6)),
+					"margin": auto,
+					"max-inline-size": none
+				),
+				"single-column-regular-footer": (
+					"width": 100%
+				),
+				"single-column-regular-main": (
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-3-font-size),
+							"font-weight": var(--heading-level-3-font-weight),
+							"line-height": var(--heading-level-3-line-height)
+						),
+						"stack": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"small-manual-promo": (
+					"display": grid,
+					"gap": var(--global-spacing-5),
+					"grid-template-columns": 1fr,
+					"components": (
+						"heading": (
+							"color": var(--text-color),
+							"font-size": var(--body-font-size),
+							"font-weight": var(--body-font-weight),
+							"line-height": var(--body-line-height)
+						),
+						"link-hover": (
+							"color": var(--text-color-subtle)
+						)
+					)
+				),
+				"small-manual-promo-above": (
+					"grid-template-columns": 1fr
+				),
+				"small-manual-promo-below": (
+					"grid-template-columns": 1fr
+				),
+				"small-manual-promo-img": (
+					"components": (
+						"link-hover": (
+							"opacity": 0.8
+						)
+					)
+				),
+				"small-manual-promo-left": (
+					"gap": var(--global-spacing-6),
+					"grid-template-columns": 1fr 2fr
+				),
+				"small-manual-promo-right": (
+					"gap": var(--global-spacing-6),
+					"grid-template-columns": 2fr 1fr
+				),
+				"small-promo": (
+					"display": grid,
+					"gap": var(--global-spacing-5),
+					"grid-template-columns": 1fr,
+					"components": (
+						"heading": (
+							"color": var(--text-color),
+							"font-size": var(--body-font-size),
+							"font-weight": var(--body-font-weight),
+							"line-height": var(--body-line-height)
+						),
+						"link-hover": (
+							"color": var(--text-color-subtle)
+						)
+					)
+				),
+				"small-promo-img": (
+					"components": (
+						"link-hover": (
+							"opacity": 0.8
+						)
+					)
+				),
+				"small-promo-left": (
+					"gap": var(--global-spacing-6),
+					"grid-template-columns": 1fr 2fr
+				),
+				"small-promo-right": (
+					"gap": var(--global-spacing-6),
+					"grid-template-columns": 2fr 1fr
+				),
+				"social-sign-on": (
+					"inline-size": 300px,
+					"margin-inline": auto,
+					"components": (
+						"paragraph": (
+							"color": var(--status-color-danger),
+							"font-family": var(--font-family-primary)
+						)
+					)
+				),
+				"social-sign-on-button-container": (
+					"display": flex,
+					"flex-direction": column,
+					"gap": var(--global-spacing-4)
+				),
+				"subheadline": (
+					"font-size": var(--heading-level-6-font-size),
+					"font-weight": var(--heading-level-6-font-weight),
+					"line-height": var(--heading-level-6-line-height)
+				),
+				"tag-title": (
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-1-font-size),
+							"line-height": var(--heading-level-1-line-height)
+						),
+						"stack": (
+							"gap": var(--global-spacing-2)
+						)
+					)
+				),
+				"top-table-list": (
+					"grid-template-columns": 1fr,
+					"grid-template-rows": auto,
+					"gap": var(--global-spacing-5),
+					"components": (
+						"grid": (
+							"gap": var(--global-spacing-5)
+						),
+						"image": (
+							"transition": opacity 0.4s ease
+						),
+						"image-hover": (
+							"cursor": pointer,
+							"opacity": 0.8
+						),
+						"link": (
+							"color": var(--text-color)
+						),
+						"link-hover": (
+							"color": var(--text-color-subtle)
+						)
+					)
+				),
+				"top-table-list-large": (
+					"gap": var(--global-spacing-4),
+					"components": (
+						"link": (
+							"position": relative
+						)
+					)
+				),
+				"top-table-list-large-container": (
+					"grid-template-columns": 1fr
+				),
+				"top-table-list-large-icon-label": (
+					"align-items": center,
+					"padding": var(--global-spacing-2),
+					"background-color": var(--color-primary),
+					"border": 0,
+					"border-radius": var(--global-spacing-2),
+					"bottom": var(--global-spacing-2),
+					"margin-left": var(--global-spacing-2),
+					"position": absolute,
+					"z-index": 1,
+					"components": (
+						"icon": (
+							"fill": var(--global-white),
+							"height": var(--global-spacing-4),
+							"width": var(--global-spacing-4)
+						)
+					)
+				),
+				"top-table-list-large-label": (
+					"margin-left": var(--global-spacing-2),
+					"color": var(--global-white)
+				),
+				"top-table-list-large-text": (
+					"gap": 0,
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-3-font-size),
+							"line-height": var(--heading-level-3-line-height)
+						),
+						"overline": (
+							"font-size": var(--heading-level-6-font-size),
+							"line-height": var(--heading-level-6-line-height)
+						),
+						"paragraph": (
+							"font-size": var(--body-font-size),
+							"line-height": var(--body-line-height)
+						),
+						"stack": (
+							"gap": var(--global-spacing-4)
+						),
+						"separator": (
+							"margin": 0 var(--global-spacing-2) 0 var(--global-spacing-2)
+						)
+					)
+				),
+				"top-table-list-medium": (
+					"components": (
+						"attribution": (
+							"display": block,
+							"margin-top": var(--global-spacing-4)
+						),
+						"divider": (
+							"clear": both,
+							"margin-top": var(--global-spacing-5)
+						),
+						"media-item": (
+							"float": right,
+							"margin": 0 0 var(--global-spacing-5) 0,
+							"max-width": 100px
+						),
+						"heading": (
+							"font-size": var(--heading-level-5-font-size),
+							"font-weight": var(--heading-level-5-font-weight),
+							"line-height": var(--heading-level-5-line-height),
+							"margin-bottom": var(--global-spacing-4)
+						),
+						"paragraph": (
+							"display": block
+						),
+						"separator": (
+							"padding": 0 var(--global-spacing-2)
+						),
+						"link": (
+							"position": relative
+						)
+					)
+				),
+				"top-table-list-medium-container": (
+					"grid-template-columns": 1fr,
+					"grid-template-rows": auto,
+					"gap": var(--global-spacing-8)
+				),
+				"top-table-list-medium-icon-label": (
+					"align-items": center,
+					"padding": var(--global-spacing-2),
+					"background-color": var(--color-primary),
+					"border": 0,
+					"border-radius": var(--global-spacing-2),
+					"bottom": var(--global-spacing-2),
+					"margin-left": var(--global-spacing-2),
+					"position": absolute,
+					"z-index": 1,
+					"components": (
+						"icon": (
+							"fill": var(--global-white),
+							"height": var(--global-spacing-4),
+							"width": var(--global-spacing-4)
+						)
+					)
+				),
+				"top-table-list-medium-label": (
+					"margin-left": var(--global-spacing-2),
+					"color": var(--global-white),
+					"display": none
+				),
+				"top-table-list-medium-show-image": (
+					"components": (
+						"heading": (
+							"width": 68%
+						)
+					)
+				),
+				"top-table-list-small": (
+					"display": grid,
+					"gap": var(--global-spacing-5) var(--global-spacing-6),
+					"grid-template-columns": 1fr,
+					"components": (
+						"heading": (
+							"font-size": var(--body-font-size),
+							"line-height": var(--body-line-height)
+						)
+					)
+				),
+				"top-table-list-small-above": (
+					"components": (
+						"divider": (
+							"grid-column": span 1
+						)
+					)
+				),
+				"top-table-list-small-below": (
+					"components": (
+						"divider": (
+							"grid-column": span 1
+						)
+					)
+				),
+				"top-table-list-small-left": (
+					"grid-template-columns": 1fr 2fr,
+					"components": (
+						"divider": (
+							"grid-column": span 2
+						)
+					)
+				),
+				"top-table-list-small-right": (
+					"grid-template-columns": 2fr 1fr,
+					"components": (
+						"divider": (
+							"grid-column": span 2
+						)
+					)
+				),
+				"top-table-list-xl": (
+					"components": (
+						"heading": (
+							"align-self": left,
+							"justify-content": left
+						),
+						"overline": (
+							"display": flex,
+							"justify-content": left
+						),
+						"separator": (
+							"padding": 0 var(--global-spacing-2)
+						),
+						"stack": (
+							"gap": var(--global-spacing-4)
+						)
+					)
+				),
+				"top-table-list-xl-container": (
+					"grid-template-columns": 1fr
+				),
+				"triple-chain": (
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-3-font-size),
+							"font-weight": var(--heading-level-3-font-weight),
+							"line-height": var(--heading-level-3-line-height)
+						),
+						"stack": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"triple-chain-child-item": (
+					"gap": var(--global-spacing-6) 0
+				),
+				"triple-chain-child-item-empty": (
+					"display": contents
+				),
+				"triple-chain-children-grid": (
+					"grid-template-columns": 1fr,
+					"gap": var(--global-spacing-6) 0
+				),
+				"video-player": (
+					"gap": var(--global-spacing-4),
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-3-font-size),
+							"line-height": var(--heading-level-3-line-height)
+						),
+						"media-item": (
+							"width": 100%,
+							"margin": auto
+						)
+					)
+				),
+				"video-player-feature": (
+					"gap": var(--global-spacing-6),
+					"components": (
+						"media-item-fig-caption": (
+							"margin-bottom": 0,
+							"margin-left": var(--global-spacing-4),
+							"margin-right": var(--global-spacing-4),
+							"margin-top": 0
+						)
+					)
+				),
+				"video-player-feature-meta": (
+					"margin": auto,
+					"width": var(--content-scale-width),
+					"components": (
+						"stack": (
+							"gap": var(--global-spacing-4)
+						)
+					)
+				),
+				"xl-manual-promo": (
+					"components": (
+						"heading": (
+							"color": var(--text-color)
+						),
+						"link": (
+							"font-family": inherit,
+							"font-size": inherit,
+							"font-weight": inherit,
+							"line-height": inherit
+						),
+						"link-hover": (
+							"color": var(--text-color-subtle)
+						),
+						"overline": (
+							"color": var(--text-color)
+						),
+						"overline-hover": (
+							"color": var(--text-color-subtle)
+						),
+						"stack": (
+							"gap": var(--global-spacing-4)
+						)
+					)
+				),
+				"xl-manual-promo-img": (
+					"components": (
+						"link-hover": (
+							"opacity": 0.8
+						)
+					)
+				),
+				"xl-promo": (
+					"components": (
+						"heading": (
+							"color": var(--text-color)
+						),
+						"link": (
+							"font-family": inherit,
+							"font-size": inherit,
+							"font-weight": inherit,
+							"line-height": inherit
+						),
+						"link-hover": (
+							"color": var(--text-color-subtle)
+						),
+						"overline": (
+							"color": var(--text-color)
+						),
+						"overline-hover": (
+							"color": var(--text-color-subtle)
+						),
+						"separator": (
+							"padding": 0 var(--global-spacing-2)
+						),
+						"stack": (
+							"gap": var(--global-spacing-4)
+						),
+						"media-item": (
+							"position": relative
+						)
+					)
+				),
+				"xl-promo-icon-label": (
+					"align-items": center,
+					"padding": var(--global-spacing-2),
+					"background-color": var(--color-primary),
+					"border": 0,
+					"border-radius": var(--global-spacing-2),
+					"bottom": var(--global-spacing-2),
+					"margin-left": var(--global-spacing-2),
+					"position": absolute,
+					"z-index": 1,
+					"components": (
+						"icon": (
+							"fill": var(--global-white),
+							"height": var(--global-spacing-4),
+							"width": var(--global-spacing-4)
+						)
+					)
+				),
+				"xl-promo-img": (
+					"components": (
+						"link-hover": (
+							"opacity": 0.8
+						)
+					)
+				),
+				"xl-promo-label": (
+					"margin-left": var(--global-spacing-2),
+					"color": var(--global-white)
+				)
 			),
-			blocks: (
-				ads-block: (
-					components: (
-						paragraph: (
-							font-family: var(--font-family-primary),
-							font-size: var(--body-font-size-small),
-							line-height: var(--body-line-height-small),
-							font-weight: var(--body-font-weight-small),
-							color: var(--global-neutral-7),
-						),
-					),
-				),
-				ads-block-admin: (
-					background-color: var(--global-neutral-7),
-					padding: var(--global-spacing-4),
-					border-radius: var(--border-radius),
-					components: (
-						stack: (
-							gap: var(--global-spacing-4),
-							padding-bottom: var(--global-spacing-5),
-						),
-						paragraph: (
-							color: var(--global-white),
-						),
-					),
-				),
-				alert-bar: (
-					align-items: flex-start,
-					background-color: var(--global-red-5),
-					display: flex,
-					filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0)),
-					flex-wrap: nowrap,
-					justify-content: space-between,
-					word-break: break-word,
-					components: (
-						button-default: (
-							background: none,
-							border: none,
-							filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0)),
-							flex: 0 0 auto,
-						),
-						button-large: (
-							margin-bottom: var(--global-spacing-1),
-							margin-top: var(--global-spacing-1),
-							filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0)),
-						),
-						link: (
-							color: var(--global-white),
-							filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0)),
-							font-family: var(--font-family-primary),
-							font-size: var(--body-font-size-small),
-							font-weight: var(--global-font-weight-7),
-							padding-bottom: var(--global-spacing-5),
-							padding-left: var(--global-spacing-4),
-							padding-right: var(--global-spacing-5),
-							padding-top: var(--global-spacing-5),
-							text-decoration: none,
-						),
-						link-hover: (
-							color: var(--text-color),
-						),
-						icon: (
-							fill: var(--global-white),
-							filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0)),
-						),
-					),
-				),
-				article-body: (
-					font-family: var(--font-family-primary),
-					font-size: var(--body-font-size),
-					components: (
-						link: (
-							color: var(--color-primary),
-						),
-						paragraph: (
-							display: block,
-							overflow: initial,
-						),
-						media-item-fig-caption: (
-							background-color: var(--global-white),
-							line-height: var(--body-line-height-5),
-						),
-						icon: (
-							fill: currentColor,
-						),
-					),
-				),
-				article-body-blockquote: (
-					box-shadow: inset 5px 0 0 0 var(--global-neutral-4),
-					font-style: italic,
-					gap: var(--global-spacing-2),
-					padding: var(--global-spacing-4) 0 var(--global-spacing-4) var(--global-spacing-5),
-					text-align: left,
-					components: (
-						paragraph: (
-							font-size: var(--heading-level-6-font-size),
-							line-height: var(--heading-level-6-line-height),
-						),
-					),
-				),
-				article-body-children: (
-					margin-bottom: var(--global-spacing-5),
-				),
-				article-body-citation: (
-					font-family: var(--font-family-primary),
-					font-style: normal,
-					font-size: var(--body-font-size),
-				),
-				article-body-correction: (
-					box-shadow: inset 0 -1px 0 0 var(--border-color),
-					font-style: italic,
-					padding-bottom: var(--global-spacing-6),
-					components: (
-						heading: (
-							font-size: var(--heading-level-6-font-size),
-							text-transform: uppercase,
-						),
-						paragraph: (
-							color: var(--global-neutral-6),
-						),
-					),
-				),
-				article-body-divider: (
-					background-color: var(--border-color),
-					height: 1px,
-				),
-				article-body-embed-responsive: (
-					aspect-ratio: calc(16 / 9),
-					width: 100%,
-				),
-				article-body-embed-responsive-item: (
-					aspect-ratio: calc(16 / 9),
-					height: auto,
-					width: 100%,
-				),
-				article-body-gallery-close-button: (
-					color: var(--global-white),
-					components: (
-						button-hover: (
-							color: var(--global-neutral-3),
-						),
-						icon: (
-							fill: currentColor,
-							height: var(--global-spacing-6),
-							width: var(--global-spacing-6),
-						),
-					),
-				),
-				article-body-gallery-fullscreen: (
-					components: (
-						media-item-fig-caption: (
-							padding: 0 var(--global-spacing-2),
-						),
-					),
-				),
-				article-body-gallery-track-button: (
-					color: var(--global-white),
-					components: (
-						button-hover: (
-							color: var(--global-neutral-3),
-						),
-						icon: (
-							fill: currentColor,
-							height: var(--global-spacing-8),
-							width: var(--global-spacing-8),
-						),
-					),
-				),
-				article-body-h2: (
-					font-size: var(--heading-level-2-font-size),
-					line-height: var(--heading-level-2-line-height),
-					font-family: var(--font-family-primary),
-					font-weight: bold,
-				),
-				article-body-h3: (
-					font-size: var(--heading-level-3-font-size),
-					line-height: var(--heading-level-3-line-height),
-					font-family: var(--font-family-primary),
-					font-weight: bold,
-				),
-				article-body-h4: (
-					font-size: var(--heading-level-4-font-size),
-					line-height: var(--heading-level-4-line-height),
-					font-family: var(--font-family-primary),
-					font-weight: bold,
-				),
-				article-body-h5: (
-					font-size: var(--heading-level-5-font-size),
-					line-height: var(--heading-level-5-line-height),
-					font-family: var(--font-family-primary),
-					font-weight: bold,
-				),
-				article-body-h6: (
-					font-size: var(--heading-level-6-font-size),
-					line-height: var(--heading-level-6-line-height),
-					font-family: var(--font-family-primary),
-					font-weight: bold,
-				),
-				article-body-image-float-left: (
-					width: 50%,
-					float: left,
-					margin-right: var(--global-spacing-5),
-				),
-				article-body-image-float-right: (
-					width: 50%,
-					float: right,
-					margin-left: var(--global-spacing-5),
-				),
-				article-body-image-wrapper: (
-					align-items: center,
-					aspect-ratio: calc(16 / 9),
-					background-color: var(--global-black),
-					display: flex,
-					justify-content: center,
-					max-height: 75vh,
-					overflow: auto,
-					components: (
-						image: (
-							height: auto,
-							max-height: 100%,
-							max-width: 100%,
-							object-fit: contain,
-						),
-					),
-				),
-				article-body-interstitial-link: (
-					font-family: var(--font-family-primary),
-					font-style: italic,
-					components: (
-						link: (
-							border-bottom: 1px solid var(--color-primary),
-							color: var(--color-primary),
-						),
-					),
-				),
-				article-body-link: (
-					color: var(--color-primary),
-				),
-				article-body-ol: (
-					font-size: var(--body-font-size),
-					line-height: var(--body-line-height),
-					list-style-position: inside,
-					list-style-type: decimal,
-				),
-				article-body-pullquote: (
-					box-shadow: (
-						inset 0 -5px 0 0 var(--border-color),
-						inset 0 5px 0 0 var(--border-color),
-					),
-					gap: var(--global-spacing-4),
-					padding: var(--global-spacing-6) 0 var(--global-spacing-5),
-					text-align: center,
-					components: (
-						paragraph: (
-							font-style: italic,
-							font-size: var(--heading-level-5-font-size),
-							font-weight: var(--global-font-weight-7),
-							line-height: var(--heading-level-5-line-height),
-						),
-					),
-				),
-				article-body-table: (
-					font-family: var(--font-family-primary),
-					font-size: var(--body-font-size-small),
-					line-height: var(--body-line-height-small),
-					text-align: center,
-					width: 100%,
-				),
-				article-body-table-td: (
-					border: 1px solid var(--border-color),
-					padding: var(--global-spacing-1) var(--global-spacing-2),
-				),
-				article-body-table-th: (
-					border: 1px solid var(--border-color),
-					font-weight: var(--global-font-weight-7),
-					padding: var(--global-spacing-1) var(--global-spacing-2),
-				),
-				article-body-table-thead: (
-					background-color: var(--global-neutral-4),
-					border: 2px solid var(--border-color),
-				),
-				article-body-ul: (
-					font-size: var(--body-font-size),
-					line-height: var(--body-line-height),
-					list-style-position: inside,
-					list-style-type: disc,
-				),
-				article-tag: (
-					components: (
-						stack: (
-							gap: var(--global-spacing-4),
-						),
-					),
-				),
-				author-bio: (
-					gap: var(--global-spacing-4),
-				),
-				author-bio-author: (
-					gap: var(--global-spacing-4),
-					components: (
-						image: (
-							max-width: var(--global-spacing-13),
-							max-height: var(--global-spacing-13),
-							border-radius: var(--border-radius-circle),
-							height: 100%,
-							width: 100%,
-							aspect-ratio: 1,
-							object-fit: cover,
-						),
-						stack: (
-							gap: var(--global-spacing-2),
-							width: 100%,
-						),
-					),
-				),
-				author-bio-social-link: (
-					components: (
-						icon: (
-							fill: var(--color-primary),
-						),
-					),
-				),
-				author-bio-social-link-wrapper: (
-					gap: var(--global-spacing-4),
-					margin-top: 0,
-				),
-				author-bio-social-link-hover: (
-					components: (
-						icon: (
-							fill: var(--color-primary-hover),
-						),
-					),
-				),
-				author-bio-author-name: (
-					font-family: var(--font-family-primary),
-					font-size: var(--heading-level-6-font-size),
-					font-weight: var(--heading-level-6-font-weight),
-					line-height: var(--heading-level-6-line-height),
-				),
-				author-bio-author-description: (
-					font-family: var(--font-family-primary),
-					font-size: var(--body-font-size-small),
-					line-height: var(--body-line-height-small),
-					margin-bottom: 0,
-				),
-				byline: (
-					font-size: var(--body-font-weight),
-					line-height: var(--body-line-height),
-					color: var(--text-color),
-					text-decoration: none,
-					components: (
-						attribution-link: (
-							color: var(--text-color),
-							text-decoration: underline,
-						),
-						attribution-link-hover: (
-							color: var(--text-color-subtle),
-							text-decoration: none,
-						),
-					),
-				),
-				card-list: (
-					box-shadow: var(--global-box-shadow-1),
-					border-radius: 0 var(--border-radius) var(--border-radius) 0,
-					background-color: var(--background-color),
-					padding: var(--global-spacing-4) 0,
-					components: (
-						heading: (
-							font-size: var(--heading-level-5-font-size),
-							font-weight: var(--heading-level-5-font-weight),
-							line-height: var(--heading-level-5-line-height),
-						),
-						stack: (
-							gap: var(--global-spacing-4),
-						),
-						separator: (
-							padding: 0 var(--global-spacing-2),
-						),
-						image: (
-							transition: opacity 0.4s ease,
-						),
-						image-hover: (
-							cursor: pointer,
-							opacity: 0.8,
-						),
-						link: (
-							color: var(--text-color),
-						),
-						link-hover: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				card-list-title: (
-					padding: 0 var(--global-spacing-4),
-					font-size: var(--heading-level-5-font-size),
-					line-height: var(--heading-level-5-line-height),
-				),
-				card-list-list: (
-					padding: 0 var(--global-spacing-4),
-				),
-				card-list-main-item-image-link: (
-					components: (
-						image: (
-							max-height: 40vh,
-							object-fit: cover,
-							width: 100%,
-						),
-					),
-				),
-				card-list-main-item-text-container: (
-					gap: var(--global-spacing-2),
-					components: (
-						heading: (
-							font-size: var(--heading-level-6-font-size),
-							font-weight: var(--heading-level-6-font-weight),
-							line-height: var(--heading-level-6-line-height),
-						),
-						overline: (
-							font-size: var(--body-font-size),
-							line-height: var(--body-line-height),
-						),
-					),
-				),
-				card-list-secondary-item: (
-					components: (
-						heading: (
-							font-size: var(--body-font-size),
-							font-weight: var(--body-font-weight),
-							line-height: var(--body-line-height),
-						),
-					),
-				),
-				card-list-secondary-item-heading-link: (
-					width: 100%,
-				),
-				card-list-secondary-item-image-link: (
-					max-width: 105px,
-				),
-				double-chain: (
-					components: (
-						heading: (
-							font-size: var(--heading-level-3-font-size),
-							font-weight: var(--heading-level-3-font-weight),
-							line-height: var(--heading-level-3-line-height),
-						),
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				double-chain-children-grid: (
-					grid-template-columns: 1fr,
-					gap: var(--global-spacing-6) 0,
-				),
-				double-chain-child-item: (
-					gap: var(--global-spacing-6) 0,
-				),
-				double-chain-child-item-empty: (
-					display: contents,
-				),
-				footer: (
-					width: var(--content-scale-width),
-					gap: var(--global-spacing-6),
-					margin: 0 auto,
-					max-width: calc(var(--content-max-width) * 1px),
-					components: (
-						image: (
-							margin: auto,
-							max-height: var(--global-spacing-7),
-						),
-					),
-				),
-				footer-links: (
-					gap: var(--global-spacing-6),
-					grid-auto-flow: row,
-					grid-template-columns: 1fr,
-					grid-template-rows: 1fr,
-				),
-				footer-links-group: (
-					components: (
-						heading: (
-							color: var(--text-color),
-							font-family: var(--font-family-primary),
-							font-size: var(--body-font-size-small),
-							line-height: var(--body-line-height-small),
-						),
-					),
-				),
-				footer-links-group-list-item: (
-					list-style: none,
-					components: (
-						link: (
-							color: var(--text-color-subtle),
-							font-family: var(--font-family-primary),
-							font-size: var(--body-font-size-small),
-							font-weight: var(--global-font-weight-4),
-							line-height: var(--body-line-height-small),
-						),
-					),
-				),
-				footer-top-container: (
-					border-top: 1px solid var(--global-neutral-4),
-					border-bottom: none,
-					display: grid,
-					grid-template-columns: 100%,
-					grid-template-rows: auto auto,
-					grid-auto-flow: column,
-					gap: var(--global-spacing-6),
-					justify-content: center,
-					width: 100%,
-					components: (
-						paragraph: (
-							justify-self: center,
-						),
-					),
-				),
-				footer-social-links: (
-					border: 1px solid var(--color-primary),
-					border-radius: var(--border-radius),
-					margin: var(--global-spacing-2) auto,
-					width: fit-content,
-					components: (
-						icon: (
-							fill: var(--color-primary),
-						),
-						link: (
-							border-right: 1px solid var(--color-primary),
-							padding-top: var(--global-spacing-2),
-							padding-right: var(--global-spacing-2),
-							padding-bottom: var(--global-spacing-2),
-							padding-left: var(--global-spacing-2),
-						),
-					),
-				),
-				footer-social-links-hover: (
-					components: (
-						icon: (
-							fill: var(--color-primary-hover),
-						),
-					),
-				),
-				footer-social-links-container: (
-					border-bottom: 1px solid var(--global-neutral-4),
-					width: 100%,
-				),
-				footer-social-links-last: (
-					components: (
-						link: (
-							border-right: none,
-						),
-					),
-				),
-				full-author-bio: (
-					display: flex,
-					flex-direction: column,
-					gap: var(--global-spacing-4),
-					margin: auto,
-					components: (
-						heading: (
-							color: var(--color-primary),
-							font-family: var(--font-family-primary),
-						),
-						image: (
-							aspect-ratio: 1,
-							border-radius: var(--border-radius-circle),
-							margin: auto,
-							max-height: 9.375rem,
-							max-width: 9.375rem,
-						),
-						paragraph: (
-							color: var(--text-color),
-							font-family: var(--font-family-primary),
-						),
-					),
-				),
-				full-author-bio-identification: (
-					gap: 0,
-				),
-				full-author-bio-name: (
-					font-size: var(--heading-level-3-font-size),
-					font-weight: var(--heading-level-3-font-weight),
-					line-height: var(--heading-level-3-line-height),
-				),
-				full-author-bio-role: (
-					font-size: var(--heading-level-6-font-size),
-					font-weight: var(--heading-level-6-font-weight),
-					line-height: var(--heading-level-6-line-height),
-				),
-				full-author-bio-social: (
-					gap: var(--global-spacing-2),
-				),
-				full-author-bio-social-header: (
-					text-align: center,
-					font-size: var(--heading-level-6-font-size),
-					font-weight: var(--heading-level-6-font-weight),
-					line-height: var(--heading-level-6-line-height),
-				),
-				full-author-bio-social-icons: (
-					display: flex,
-					flex-wrap: wrap,
-					justify-content: center,
-					gap: var(--global-spacing-4),
-				),
-				full-author-bio-social-link: (
-					components: (
-						icon: (
-							fill: var(--color-primary),
-						),
-					),
-				),
-				full-author-bio-social-link-hover: (
-					components: (
-						icon: (
-							fill: var(--color-primary-hover),
-						),
-					),
-				),
-				full-author-bio-text: (
-					gap: var(--global-spacing-4),
-				),
-				gallery: (
-					components: (
-						media-item-fig-caption: (
-							background-color: var(--global-white),
-							line-height: var(--body-line-height-5),
-						),
-					),
-				),
-				gallery-close-button: (
-					color: var(--global-white),
-					components: (
-						button-hover: (
-							color: var(--global-neutral-3),
-						),
-						icon: (
-							fill: currentColor,
-							height: var(--global-spacing-6),
-							width: var(--global-spacing-6),
-						),
-					),
-				),
-				gallery-fullscreen: (
-					components: (
-						media-item-fig-caption: (
-							padding: 0 var(--global-spacing-2),
-						),
-					),
-				),
-				gallery-image-wrapper: (
-					align-items: center,
-					aspect-ratio: calc(16 / 9),
-					background-color: var(--global-black),
-					display: flex,
-					justify-content: center,
-					max-height: 75vh,
-					overflow: auto,
-					components: (
-						image: (
-							height: auto,
-							max-height: 100%,
-							max-width: 100%,
-							object-fit: contain,
-						),
-					),
-				),
-				gallery-track-button: (
-					color: var(--global-white),
-					components: (
-						button-hover: (
-							color: var(--global-neutral-3),
-						),
-						icon: (
-							fill: currentColor,
-							height: var(--global-spacing-8),
-							width: var(--global-spacing-8),
-						),
-					),
-				),
-				header: (
-					font-weight: var(--global-font-weight-7),
-				),
-				header-extra-large: (
-					font-size: var(--heading-level-4-font-size),
-					line-height: var(--heading-level-4-line-height),
-				),
-				header-large: (
-					font-size: var(--heading-level-5-font-size),
-					line-height: var(--heading-level-5-line-height),
-				),
-				header-medium: (
-					font-size: var(--heading-level-6-font-size),
-					line-height: var(--heading-level-6-line-height),
-				),
-				header-small: (
-					font-size: var(--body-font-size-small),
-					line-height: var(--body-line-height-small),
-				),
-				header-nav-chain: (
-					background-color: var(--global-black),
-					padding: var(--global-spacing-2) var(--global-spacing-4),
-					font-weight: var(--global-font-weight-7),
-					font-size: var(--body-font-size),
-					line-height: var(--body-line-height),
-					transform: translateZ(0),
-					min-height: var(--header-nav-chain-height),
-					justify-content: center,
-					display: flex,
-					align-items: center,
-					width: 100%,
-					position: sticky,
-					top: 0px,
-					margin-bottom: 0px,
-					z-index: 1,
-					components: (
-						icon: (
-							fill: currentColor,
-							height: var(--global-spacing-5),
-							width: var(--global-spacing-5),
-						),
-						button: (
-							color: var(--global-white),
-							height: var(--global-spacing-7),
-							font-weight: var(--global-font-weight-7),
-							font-size: var(--body-font-size),
-							line-height: var(--body-line-height),
-						),
-						button-small: (
-							font-weight: var(--global-font-weight-7),
-							font-size: var(--body-font-size),
-							line-height: var(--body-line-height),
-							padding: var(--global-spacing-2),
-						),
-					),
-				),
-				header-nav-chain-scrolled: (
-					min-height: var(--header-nav-chain-height-scrolled),
-				),
-				header-nav-chain-top-layout: (
-					align-items: center,
-					display: flex,
-					justify-content: space-between,
-					width: 100%,
-					gap: var(--global-spacing-5),
-				),
-				header-nav-chain-top-layout-last-child: (
-					margin-right: 0,
-					flex-shrink: 0,
-				),
-				header-nav-chain-top-nav-left: (
-					justify-content: flex-start,
-					flex-shrink: 0,
-				),
-				header-nav-chain-top-nav-right: (
-					display: flex,
-					justify-content: flex-end,
-					flex-shrink: 0,
-					margin-right: 0,
-				),
-				header-nav-chain-top-nav-components-mobile: (
-					align-items: center,
-					display: flex,
-				),
-				header-nav-chain-top-nav-components-desktop: (
-					align-items: center,
-					display: none,
-					gap: var(--global-spacing-2),
-				),
-				header-nav-chain-logo: (
-					margin-right: auto,
-				),
-				header-nav-chain-logo-center: (
-					margin-right: 0,
-				),
-				header-nav-chain-logo-right: (
-					margin-inline-start: auto,
-					margin-inline-end: 0,
-				),
-				header-nav-chain-logo-hidden: (
-					opacity: 0,
-					transition: (
-						opacity 0.8s ease,
-						visibility 0s ease 0s,
-					),
-					visibility: hidden,
-				),
-				header-nav-chain-logo-show: (
-					opacity: 1,
-					transition: (
-						opacity 0.8s ease,
-						visibility 0s ease 0s,
-					),
-					visibility: visible,
-				),
-				header-nav-chain-logo-image: (
-					max-width: 240px,
-					max-height: var(--header-nav-chain-height),
-					transition: (
-						opacity 0.4s ease,
-					),
-				),
-				header-nav-chain-logo-image-hover: (
-					opacity: 0.7,
-					transition: (
-						opacity 0.4s ease,
-					),
-				),
-				header-nav-chain-nav-search: (
-					align-items: center,
-					display: flex,
-					justify-content: center,
-					position: relative,
-				),
-				header-nav-chain-nav-search-input: (
-					padding: 0,
-					width: 0,
-				),
-				header-nav-chain-nav-search-input-open: (
-					font-size: var(--body-font-size),
-					height: var(--global-spacing-7),
-					line-height: var(--global-line-height-4),
-					padding: 4px 24px 4px 11px,
-					width: 100%,
-				),
-				header-nav-chain-nav-search-button: (
-					background: transparent,
-					border: transparent,
-					cursor: pointer,
-				),
-				header-nav-chain-nav-search-box-position: (
-					position: absolute,
-					right: 0,
-				),
-				header-nav-chain-nav-search-box-svg: (
-					fill: #191919,
-					height: 1rem,
-					width: 1rem,
-				),
-				header-nav-chain-links-list: (
-					display: none,
-					gap: var(--global-spacing-2),
-					height: var(--global-spacing-5),
-					flex: 1 1 auto,
-					overflow: hidden,
-					text-align: left,
-					width: auto,
-					flex-wrap: wrap,
-					components: (
-						link: (
-							color: var(--global-white),
-							display: flex,
-							align-items: center,
-							height: 100%,
-						),
-						separator: (
-							color: var(--global-white),
-						),
-					),
-				),
-				header-nav-chain-links-list-item: (
-					display: flex,
-					gap: var(--global-spacing-2),
-					components: (
-						link-hover: (
-							color: var(--global-neutral-3),
-						),
-					),
-				),
-				header-nav-chain-scrolled-flyout-overlay: (
-					margin-top: var(--header-nav-chain-height-scrolled),
-				),
-				header-nav-chain-flyout-overlay: (
-					margin-top: var(--header-nav-chain-height),
-					z-index: 8,
-					background: var(--header-nav-chain-overlay-background-color),
-					-ms-overflow-style: none,
-					position: absolute,
-					scrollbar-width: none,
-					left: 0,
-					top: 0,
-				),
-				header-nav-chain-flyout-overlay-scrollbar: (
-					display: none,
-				),
-				header-nav-chain-flyout-overlay-open: (
-					background: var(--header-nav-chain-overlay-background-color),
-					overflow-y: scroll,
-					transform: translate(0, 0),
-					width: 100%,
-				),
-				header-nav-chain-flyout-overlay-closed: (
-					overflow-y: hidden,
-					width: 0,
-				),
-				header-nav-chain-flyout-nav-wrapper: (
-					z-index: 10,
-					background: var(--global-black),
-					transition: transform 300ms ease-in-out,
-					width: 100vw,
-				),
-				header-nav-chain-flyout-nav-wrapper-open: (
-					gap: var(--global-spacing-4),
-				),
-				header-nav-chain-flyout-nav-wrapper-closed: (
-					transform: translate(-100vw, 0),
-				),
-				header-nav-chain-flyout-nav-widgets: (
-					margin-top: var(--global-spacing-3),
-					padding: var(--global-spacing-1) var(--global-spacing-4) var(--global-spacing-1)
-						var(--global-spacing-5),
-				),
-				header-nav-chain-flyout-nav-menu: (
-					components: (
-						stack: (
-							gap: 1rem,
-						),
-					),
-				),
-				header-nav-chain-flyout-nav-components-mobile: (
-					display: flex,
-					padding: var(--global-spacing-5),
-				),
-				header-nav-chain-flyout-nav-components-desktop: (
-					display: none,
-					padding: var(--global-spacing-5),
-					components: (
-						button: (
-							align-self: flex-start,
-						),
-					),
-				),
-				header-nav-chain-flyout-nav: (
-					height: calc((100vh - var(--header-nav-chain-height-scrolled))),
-					gap: 0,
-					font-weight: var(--global-font-weight-7),
-					list-style: none,
-					position: relative,
-					components: (
-						link: (
-							width: 100%,
-							padding-top: var(--global-spacing-2),
-							padding-bottom: var(--global-spacing-2),
-							padding-left: var(--global-spacing-5),
-							padding-right: var(--global-spacing-5),
-							align-items: center,
-							color: var(--global-white),
-							font-weight: var(--global-font-weight-7),
-							display: block,
-							font-size: var(--body-font-size),
-							justify-content: space-between,
-							line-height: 1.5,
-							text-decoration: none,
-						),
-						link-hover: (
-							color: var(--global-white),
-						),
-					),
-				),
-				header-nav-chain-flyout-nav-item: (
-					background-color: var(--global-black),
-					components: (
-						link: (
-							padding-top: var(--global-spacing-3),
-							padding-left: var(--global-spacing-5),
-							padding-bottom: var(--global-spacing-3),
-						),
-					),
-				),
-				header-nav-chain-flyout-nav-item-hover-active: (
-					background-color: var(--global-neutral-7),
-					components: (
-						icon: (
-							fill: var(--global-white),
-						),
-					),
-				),
-				header-nav-chain-flyout-nav-subsection-anchor: (
-					height: var(--global-spacing-8),
-					components: (
-						stack: (
-							align-content: center,
-							cursor: pointer,
-							justify-content: space-between,
-							line-height: var(--global-line-height-7),
-						),
-					),
-				),
-				header-nav-chain-flyout-nav-subsection-caret: (
-					align-self: center,
-					appearance: none,
-					background: transparent,
-					border: 0,
-					display: flex,
-					components: (
-						button-default: (
-							color: var(--icon-fill-color-subtle),
-						),
-						button-hover: (
-							color: var(--color-white),
-						),
-					),
-				),
-				header-nav-chain-flyout-nav-subsection-caret-open: (
-					transform: rotate(180deg),
-				),
-				header-nav-chain-flyout-nav-subsection-container: (
-					display: none,
-					flex-direction: column,
-					position: relative,
-				),
-				header-nav-chain-flyout-nav-subsection-container-open: (
-					display: flex,
-				),
-				header-nav-chain-flyout-nav-subsection-menu: (
-					background: var(--global-white),
-					components: (
-						link: (
-							color: var(--global-black),
-							display: block,
-							font-size: var(--global-spacing-4),
-							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-4),
-							padding-top: var(--global-spacing-2),
-							padding-right: var(--global-spacing-5),
-							padding-left: var(--global-spacing-5),
-							padding-bottom: var(--global-spacing-2),
-							text-decoration: none,
-						),
-						link-hover: (
-							color: var(--global-white),
-							background-color: var(--global-neutral-6),
-						),
-						link-active: (
-							color: var(--global-white),
-							background-color: var(--global-neutral-6),
-						),
-					),
-				),
-				headline: (
-					font-size: var(--heading-level-1-font-size),
-					font-weight: var(--heading-level-1-font-weight),
-					line-height: var(--heading-level-1-line-height),
-				),
-				large-manual-promo: (
-					gap: var(--global-spacing-4),
-					components: (
-						link-hover: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				large-manual-promo-text: (
-					gap: 0,
-					components: (
-						heading: (
-							color: var(--text-color),
-						),
-						overline: (
-							color: var(--text-color),
-							font-size: var(--heading-level-6-font-size),
-							line-height: var(--heading-level-6-line-height),
-						),
-						overline-hover: (
-							color: var(--text-color-subtle),
-						),
-						paragraph: (
-							font-size: var(--body-font-size),
-						),
-						stack: (
-							gap: var(--global-spacing-4),
-						),
-					),
-				),
-				large-manual-promo-img: (
-					components: (
-						link-hover: (
-							opacity: 0.8,
-						),
-					),
-				),
-				large-promo: (
-					gap: var(--global-spacing-4),
-					components: (
-						link: (
-							position: relative,
-						),
-						link-hover: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				large-promo-icon-label: (
-					align-items: center,
-					padding: var(--global-spacing-2),
-					background-color: var(--color-primary),
-					border: 0,
-					border-radius: var(--global-spacing-2),
-					bottom: var(--global-spacing-2),
-					margin-left: var(--global-spacing-2),
-					position: absolute,
-					z-index: 1,
-					components: (
-						icon: (
-							fill: var(--global-white),
-							height: var(--global-spacing-4),
-							width: var(--global-spacing-4),
-						),
-					),
-				),
-				large-promo-label: (
-					margin-left: var(--global-spacing-2),
-					color: var(--global-white),
-				),
-				large-promo-text: (
-					gap: 0,
-					components: (
-						heading: (
-							color: var(--text-color),
-							font-size: var(--heading-level-3-font-size),
-							line-height: var(--heading-level-3-line-height),
-						),
-						overline: (
-							color: var(--text-color),
-							font-size: var(--heading-level-6-font-size),
-							line-height: var(--heading-level-6-line-height),
-						),
-						overline-hover: (
-							color: var(--text-color-subtle),
-						),
-						paragraph: (
-							font-size: var(--body-font-size),
-							line-height: var(--body-line-height),
-						),
-						stack: (
-							gap: var(--global-spacing-4),
-						),
-						separator: (
-							margin: 0 var(--global-spacing-2) 0 var(--global-spacing-2),
-						),
-					),
-				),
-				large-promo-img: (
-					components: (
-						link-hover: (
-							opacity: 0.8,
-						),
-					),
-				),
-				lead-art: (
-					components: (
-						media-item-fig-caption: (
-							background-color: var(--global-white),
-							line-height: var(--body-line-height-5),
-							margin: var(--global-spacing-2) 0,
-						),
-					),
-				),
-				lead-art-carousel-close-button: (
-					color: var(--global-white),
-					components: (
-						button-hover: (
-							color: var(--global-neutral-3),
-						),
-						icon: (
-							fill: currentColor,
-							height: var(--global-spacing-6),
-							width: var(--global-spacing-6),
-						),
-					),
-				),
-				lead-art-carousel-fullscreen: (
-					components: (
-						media-item-fig-caption: (
-							padding: 0 var(--global-spacing-2),
-						),
-					),
-				),
-				lead-art-carousel-image-wrapper: (
-					align-items: center,
-					aspect-ratio: calc(16 / 9),
-					background-color: var(--global-black),
-					display: flex,
-					justify-content: center,
-					max-height: 75vh,
-					overflow: auto,
-					components: (
-						image: (
-							height: auto,
-							max-height: 100%,
-							max-width: 100%,
-							object-fit: contain,
-						),
-					),
-				),
-				lead-art-carousel-track-button: (
-					color: var(--global-white),
-					components: (
-						button-hover: (
-							color: var(--global-neutral-3),
-						),
-						icon: (
-							fill: currentColor,
-							height: var(--global-spacing-8),
-							width: var(--global-spacing-8),
-						),
-					),
-				),
-				links-bar: (
-					gap: var(--global-spacing-2),
-					components: (
-						link: (
-							color: var(--text-color),
-						),
-						link-hover: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				masthead: (
-					border-bottom: 2px solid var(--global-neutral-8),
-					color: var(--text-color),
-					display: none,
-					font-family: var(--font-family-primary),
-					font-size: var(--body-font-size-small),
-					line-height: var(--body-line-height-tiny),
-					gap: var(--global-spacing-4),
-				),
-				masthead-logo: (
-					display: flex,
-					justify-content: center,
-				),
-				masthead-logo-image: (
-					max-height: 64px,
-					object-fit: contain,
-					vertical-align: middle,
-				),
-				masthead-content: (
-					display: flex,
-					justify-content: space-evenly,
-				),
-				masthead-date: (
-					align-items: flex-end,
-					display: flex,
-					font-weight: var(--global-font-weight-7),
-					justify-content: flex-start,
-					flex: 1 1 0%,
-				),
-				masthead-tagline: (
-					display: flex,
-					flex: 1 1 0%,
-					justify-content: center,
-					font-family: var(--font-family-primary),
-					text-align: center,
-				),
-				masthead-link: (
-					align-items: flex-end,
-					display: flex,
-					justify-content: flex-end,
-					flex: 1 1 0%,
-				),
-				masthead-divider: (
-					margin: 0,
-					padding: 0,
-				),
-				medium-promo: (
-					clear: both,
-					display: table,
-					width: 100%,
-					components: (
-						attribution: (
-							display: block,
-							margin-top: var(--global-spacing-4),
-						),
-						media-item: (
-							float: right,
-							max-width: 100px,
-						),
-						heading: (
-							color: var(--text-color),
-							font-size: var(--heading-level-5-font-size),
-							font-weight: var(--heading-level-5-font-weight),
-							line-height: var(--heading-level-5-line-height),
-							margin-bottom: var(--global-spacing-4),
-						),
-						paragraph: (
-							display: block,
-							width: 100%,
-						),
-						separator: (
-							padding: 0 var(--global-spacing-2),
-						),
-						link: (
-							position: relative,
-						),
-						link-hover: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				medium-promo-show-image: (
-					components: (
-						heading: (
-							// hard-coded based on previous implementation and product requirements for such
-							width: 68%,
-						),
-					),
-				),
-				medium-promo-icon-label: (
-					align-items: center,
-					padding: var(--global-spacing-2),
-					background-color: var(--color-primary),
-					border: 0,
-					border-radius: var(--global-spacing-2),
-					bottom: var(--global-spacing-2),
-					margin-left: var(--global-spacing-2),
-					position: absolute,
-					z-index: 1,
-					components: (
-						icon: (
-							fill: var(--global-white),
-							height: var(--global-spacing-4),
-							width: var(--global-spacing-4),
-						),
-					),
-				),
-				medium-promo-label: (
-					margin-left: var(--global-spacing-2),
-					color: var(--global-white),
-					display: none,
-				),
-				medium-promo-img: (
-					components: (
-						link-hover: (
-							opacity: 0.8,
-						),
-					),
-				),
-				medium-manual-promo: (
-					clear: both,
-					display: table,
-					width: 100%,
-					components: (
-						attribution: (
-							color: var(--text-color),
-							font-size: var(--body-font-size-small),
-							line-height: var(--body-line-height-small),
-						),
-						heading: (
-							color: var(--text-color),
-							font-size: var(--heading-level-5-font-size),
-							font-weight: var(--heading-level-5-font-weight),
-							line-height: var(--heading-level-5-line-height),
-							margin-bottom: var(--global-spacing-4),
-						),
-						link-hover: (
-							color: var(--text-color-subtle),
-						),
-						media-item: (
-							float: right,
-							max-width: 100px,
-						),
-						paragraph: (
-							display: inline,
-							font-size: var(--body-font-size),
-							line-height: var(--body-line-height),
-						),
-					),
-				),
-				medium-manual-promo-show-image: (
-					components: (
-						heading: (
-							// hard-coded based on previous implementation and product requirements for such
-							width: 68%,
-						),
-					),
-				),
-				medium-manual-promo-img: (
-					components: (
-						link-hover: (
-							opacity: 0.8,
-						),
-					),
-				),
-				numbered-list: (
-					gap: var(--global-spacing-4),
-					components: (
-						heading: (
-							font-size: var(--heading-level-6-font-size),
-							line-height: var(--heading-level-6-line-height),
-						),
-					),
-				),
-				numbered-list-items: (
-					gap: var(--global-spacing-4),
-				),
-				numbered-list-item: (
-					gap: var(--global-spacing-5),
-					components: (
-						heading: (
-							font-size: var(--body-font-size),
-							font-weight: var(--body-font-weight),
-							line-height: var(--body-line-height),
-						),
-						link: (
-							flex: 1,
-						),
-						paragraph: (
-							font-family: var(--font-family-secondary),
-							font-size: var(--heading-level-6-font-size),
-							font-weight: var(--heading-level-6-font-weight),
-							line-height: var(--heading-level-6-line-height),
-						),
-					),
-				),
-				numbered-list-item-image: (
-					max-width: 25%,
-				),
-				quad-chain: (
-					components: (
-						heading: (
-							font-size: var(--heading-level-3-font-size),
-							font-weight: var(--heading-level-3-font-weight),
-							line-height: var(--heading-level-3-line-height),
-						),
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				quad-chain-children-grid: (
-					grid-template-columns: 1fr,
-					gap: var(--global-spacing-6) 0,
-				),
-				quad-chain-child-item: (
-					gap: var(--global-spacing-6) 0,
-				),
-				quad-chain-child-item-empty: (
-					display: contents,
-				),
-				results-list-wrapper: (
-					gap: var(--global-spacing-5),
-				),
-				results-list-see-more: (
-					margin-top: var(--global-spacing-2),
-				),
-				results-list: (
-					components: (
-						attribution: (
-							margin-top: var(--global-spacing-4),
-						),
-						media-item: (
-							float: right,
-							max-width: 100px,
-						),
-						overline: (
-							font-size: var(--body-font-size),
-						),
-						heading: (
-							font-size: var(--heading-level-5-font-size),
-							font-weight: var(--heading-level-5-font-weight),
-							line-height: var(--heading-level-5-line-height),
-							margin-bottom: var(--global-spacing-4),
-						),
-						button: (
-							gap: var(--global-spacing-6),
-						),
-						separator: (
-							padding: 0 var(--global-spacing-2),
-						),
-					),
-				),
-				results-list-show-image: (
-					components: (
-						heading: (
-							width: 68%,
-						),
-						overline: (
-							font-size: var(--body-font-size),
-						),
-					),
-				),
-				right-rail: (
-					gap: var(--global-spacing-5),
-				),
-				right-rail-navigation: (
-					position: sticky,
-					top: 0,
-					width: 100%,
-					z-index: 9,
-					margin: 0 0 var(--global-spacing-5) 0,
-				),
-				right-rail-full-width-1: (
-					margin: 0 0 var(--global-spacing-5) 0,
-				),
-				right-rail-main: (
-					max-width: calc(var(--content-max-width) * 1px),
-					width: var(--content-scale-width),
-					margin: auto,
-					components: (
-						stack: (
-							gap: var(--global-spacing-6),
-						),
-					),
-				),
-				right-rail-full-width-2: (
-					margin: var(--global-spacing-6) 0 0 0,
-				),
-				right-rail-rail-container: (
-					grid-template-columns: initial,
-					grid-template-rows: 1fr,
-					gap: var(--global-spacing-6),
-				),
-				right-rail-main-right-rail: (
-					padding: initial,
-				),
-				right-rail-main-interior-item: (
-					padding: initial,
-					border-right: initial,
-				),
-				right-rail-footer: (
-					margin: var(--global-spacing-10) 0 var(--global-spacing-8) 0,
-				),
-				right-rail-advanced: (
-					gap: var(--global-spacing-6),
-				),
-				right-rail-advanced-navigation: (
-					position: sticky,
-					top: 0,
-					width: 100%,
-					z-index: 9,
-					margin: 0 0 var(--global-spacing-5) 0,
-				),
-				right-rail-advanced-full-width-1: (
-					margin: 0 0 var(--global-spacing-5) 0,
-				),
-				right-rail-advanced-main: (
-					gap: var(--global-spacing-6),
-					max-width: calc(var(--content-max-width) * 1px),
-					width: var(--content-scale-width),
-					margin: auto,
-				),
-				right-rail-advanced-full-width-2: (
-					margin: var(--global-spacing-6) 0 0 0,
-				),
-				right-rail-advanced-rail-container: (
-					grid-template-areas: "main-right-rail-top" "main-interior-item-1" "main-right-rail-middle"
-						"main-interior-item-2" "main-right-rail-bottom",
-					grid-template-columns: initial,
-					grid-template-rows: 1fr,
-					grid-auto-rows: auto,
-					gap: var(--global-spacing-6),
-				),
-				right-rail-advanced-main-right-rail: (
-					padding: initial,
-					gap: var(--global-spacing-5),
-					display: contents,
-				),
-				right-rail-advanced-main-interior-item: (
-					padding: initial,
-					border-right: initial,
-					gap: var(--global-spacing-5),
-					display: contents,
-				),
-				right-rail-advanced-footer: (
-					margin: var(--global-spacing-10) 0 var(--global-spacing-8) 0,
-				),
-				right-rail-advanced-main-interior-item-1: (
-					grid-area: main-interior-item-1,
-				),
-				right-rail-advanced-main-interior-item-2: (
-					grid-area: main-interior-item-2,
-				),
-				right-rail-advanced-main-right-rail-top: (
-					grid-area: main-right-rail-top,
-				),
-				right-rail-advanced-main-right-rail-middle: (
-					grid-area: main-right-rail-middle,
-				),
-				right-rail-advanced-main-right-rail-bottom: (
-					grid-area: main-right-rail-bottom,
-				),
-				search-results-list: (
-					components: (
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				search-results-list-field: (
-					components: (
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				search-results-list-field-wrapper: (
-					display: grid,
-					gap: var(--global-spacing-4),
-					grid-template: "icon input search" 1fr / var(--global-spacing-7) 1fr auto,
-					components: (
-						button: (
-							grid-area: search,
-						),
-						icon: (
-							align-self: center,
-							grid-area: icon,
-							height: var(--global-spacing-5),
-							justify-self: center,
-							width: var(--global-spacing-5),
-							z-index: 1,
-						),
-						input: (
-							gap: 0,
-							grid-area: icon / icon / input / input,
-						),
-						input-input: (
-							font-family: var(--font-family-primary),
-							font-weight: var(--global-font-weight-7),
-							padding-left: var(--global-spacing-7),
-							width: 100%,
-						),
-					),
-				),
-				search-results-list-results: (
-					components: (
-						button: (
-							margin: var(--global-spacing-2) auto 0,
-							width: auto,
-						),
-					),
-				),
-				search-results-list-results-item: (
-					components: (
-						attribution: (
-							display: block,
-							margin-top: var(--global-spacing-4),
-						),
-						heading: (
-							font-size: var(--heading-level-5-font-size),
-							font-weight: var(--heading-level-5-font-weight),
-							line-height: var(--heading-level-5-line-height),
-							margin-bottom: var(--global-spacing-4),
-						),
-						media-item: (
-							float: right,
-							max-width: 100px,
-						),
-						overline: (
-							font-weight: var(--heading-level-4-font-weight),
-							font-size: var(--heading-level-5-font-size),
-							line-height: var(--heading-level-5-line-height),
-						),
-						paragraph: (
-							display: block,
-						),
-						separator: (
-							padding: 0 var(--global-spacing-2),
-						),
-						link: (
-							position: relative,
-						),
-					),
-				),
-				search-results-list-results-item-show-image: (
-					components: (
-						heading: (
-							width: 68%,
-						),
-						overline: (
-							font-size: var(--body-font-size),
-						),
-					),
-				),
-				section-title: (
-					gap: var(--global-spacing-4),
-					components: (
-						heading: (
-							font-family: var(--font-family-primary),
-							font-size: var(--heading-level-1-font-size),
-							font-weight: var(--heading-level-1-font-weight),
-							line-height: var(--heading-level-1-line-height),
-						),
-						link: (
-							font-family: var(--font-family-primary),
-						),
-						separator: (
-							margin: 0 var(--global-spacing-4),
-						),
-					),
-				),
-				share-bar: (
-					background: var(--background-color),
-					box-shadow: var(--global-box-shadow-1),
-					border-radius: 0 var(--border-radius) var(--border-radius) 0,
-					display: none,
-					gap: var(--global-spacing-2),
-					left: 0,
-					padding: var(--global-spacing-4) 0,
-					position: fixed,
-					top: 200px,
-					components: (
-						button: (
-							background-color: transparent,
-						),
-						button-default: (
-							border-width: 0,
-						),
-						button-medium: (
-							padding: 0 var(--global-spacing-3),
-						),
-					),
-				),
-				share-bar-facebook: (
-					fill: #415993,
-				),
-				share-bar-facebook-hover: (
-					fill: #5d6f9a,
-				),
-				share-bar-linkedin: (
-					fill: #3076b0,
-				),
-				share-bar-linkedin-hover: (
-					fill: #6baae8,
-				),
-				share-bar-pinterest: (
-					fill: #ad2526,
-				),
-				share-bar-pinterest-hover: (
-					fill: #b44c4c,
-				),
-				share-bar-twitter: (
-					fill: #6baae8,
-				),
-				share-bar-twitter-hover: (
-					fill: #91c4f6,
-				),
-				share-bar-email: (
-					fill: #b61818,
-				),
-				share-bar-email-hover: (
-					fill: #c66565,
-				),
-				simple-list: (
-					gap: var(--global-spacing-4),
-					components: (
-						heading: (
-							font-size: var(--heading-level-6-font-size),
-							line-height: var(--heading-level-6-line-height),
-						),
-					),
-				),
-				simple-list-items: (
-					components: (
-						heading: (
-							line-height: var(--body-line-height),
-							font-size: var(--body-font-size),
-							font-weight: var(--body-font-weight),
-						),
-					),
-					gap: var(--global-spacing-4),
-				),
-				simple-list-item: (
-					gap: var(--global-spacing-6),
-				),
-				simple-list-item-anchor: (
-					flex: 0 0 33%,
-				),
-				single-column-regular-main: (
-					components: (
-						heading: (
-							font-size: var(--heading-level-3-font-size),
-							font-weight: var(--heading-level-3-font-weight),
-							line-height: var(--heading-level-3-line-height),
-						),
-						stack: (
-							gap: var(--global-spacing-11),
-						),
-					),
-				),
-				single-column-regular-footer: (
-					width: 100%,
-				),
-				single-chain: (
-					components: (
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				single-chain-children-stack: (
-					gap: var(--global-spacing-6),
-				),
-				small-manual-promo: (
-					display: grid,
-					gap: var(--global-spacing-5),
-					grid-template-columns: 1fr,
-					components: (
-						heading: (
-							color: var(--text-color),
-							font-size: var(--body-font-size),
-							font-weight: var(--body-font-weight),
-							line-height: var(--body-line-height),
-						),
-						link-hover: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				small-manual-promo-above: (
-					grid-template-columns: 1fr,
-				),
-				small-manual-promo-below: (
-					grid-template-columns: 1fr,
-				),
-				small-manual-promo-left: (
-					gap: var(--global-spacing-6),
-					grid-template-columns: 1fr 2fr,
-				),
-				small-manual-promo-right: (
-					gap: var(--global-spacing-6),
-					grid-template-columns: 2fr 1fr,
-				),
-				small-manual-promo-img: (
-					components: (
-						link-hover: (
-							opacity: 0.8,
-						),
-					),
-				),
-				small-promo: (
-					display: grid,
-					gap: var(--global-spacing-5),
-					grid-template-columns: 1fr,
-					components: (
-						heading: (
-							color: var(--text-color),
-							font-size: var(--body-font-size),
-							font-weight: var(--body-font-weight),
-							line-height: var(--body-line-height),
-						),
-						link-hover: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				small-promo-left: (
-					gap: var(--global-spacing-6),
-					grid-template-columns: 1fr 2fr,
-				),
-				small-promo-right: (
-					gap: var(--global-spacing-6),
-					grid-template-columns: 2fr 1fr,
-				),
-				small-promo-img: (
-					components: (
-						link-hover: (
-							opacity: 0.8,
-						),
-					),
-				),
-				subheadline: (
-					font-size: var(--heading-level-6-font-size),
-					font-weight: var(--heading-level-6-font-weight),
-					line-height: var(--heading-level-6-line-height),
-				),
-				tag-title: (
-					components: (
-						heading: (
-							font-size: var(--heading-level-1-font-size),
-							line-height: var(--heading-level-1-line-height),
-						),
-						stack: (
-							gap: var(--global-spacing-2),
-						),
-					),
-				),
-				top-table-list: (
-					grid-template-columns: 1fr,
-					grid-template-rows: auto,
-					gap: var(--global-spacing-5),
-					components: (
-						grid: (
-							gap: var(--global-spacing-5),
-						),
-						image: (
-							transition: opacity 0.4s ease,
-						),
-						image-hover: (
-							cursor: pointer,
-							opacity: 0.8,
-						),
-						link: (
-							color: var(--text-color),
-						),
-						link-hover: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				top-table-list-xl-container: (
-					grid-template-columns: 1fr,
-				),
-				top-table-list-large-container: (
-					grid-template-columns: 1fr,
-				),
-				top-table-list-medium-container: (
-					grid-template-columns: 1fr,
-					grid-template-rows: auto,
-					gap: var(--global-spacing-8),
-				),
-				top-table-list-small: (
-					display: grid,
-					gap: var(--global-spacing-5) var(--global-spacing-6),
-					grid-template-columns: 1fr,
-					components: (
-						heading: (
-							font-size: var(--body-font-size),
-							line-height: var(--body-line-height),
-						),
-					),
-				),
-				top-table-list-small-below: (
-					components: (
-						divider: (
-							grid-column: span 1,
-						),
-					),
-				),
-				top-table-list-small-above: (
-					components: (
-						divider: (
-							grid-column: span 1,
-						),
-					),
-				),
-				top-table-list-small-left: (
-					grid-template-columns: 1fr 2fr,
-					components: (
-						divider: (
-							grid-column: span 2,
-						),
-					),
-				),
-				top-table-list-small-right: (
-					grid-template-columns: 2fr 1fr,
-					components: (
-						divider: (
-							grid-column: span 2,
-						),
-					),
-				),
-				top-table-list-medium: (
-					components: (
-						attribution: (
-							display: block,
-							margin-top: var(--global-spacing-4),
-						),
-						divider: (
-							clear: both,
-							margin-top: var(--global-spacing-5),
-						),
-						media-item: (
-							float: right,
-							margin: 0 0 var(--global-spacing-5) 0,
-							max-width: 100px,
-						),
-						heading: (
-							font-size: var(--heading-level-5-font-size),
-							font-weight: var(--heading-level-5-font-weight),
-							line-height: var(--heading-level-5-line-height),
-							margin-bottom: var(--global-spacing-4),
-						),
-						paragraph: (
-							display: block,
-						),
-						separator: (
-							padding: 0 var(--global-spacing-2),
-						),
-						link: (
-							position: relative,
-						),
-					),
-				),
-				top-table-list-medium-show-image: (
-					components: (
-						heading: (
-							// hard-coded based on previous implementation and product requirements for such
-							width: 68%,
-						),
-					),
-				),
-				top-table-list-medium-icon-label: (
-					align-items: center,
-					padding: var(--global-spacing-2),
-					background-color: var(--color-primary),
-					border: 0,
-					border-radius: var(--global-spacing-2),
-					bottom: var(--global-spacing-2),
-					margin-left: var(--global-spacing-2),
-					position: absolute,
-					z-index: 1,
-					components: (
-						icon: (
-							fill: var(--global-white),
-							height: var(--global-spacing-4),
-							width: var(--global-spacing-4),
-						),
-					),
-				),
-				top-table-list-medium-label: (
-					margin-left: var(--global-spacing-2),
-					color: var(--global-white),
-				),
-				top-table-list-large: (
-					gap: var(--global-spacing-4),
-					components: (
-						link: (
-							position: relative,
-						),
-					),
-				),
-				top-table-list-large-icon-label: (
-					align-items: center,
-					padding: var(--global-spacing-2),
-					background-color: var(--color-primary),
-					border: 0,
-					border-radius: var(--global-spacing-2),
-					bottom: var(--global-spacing-2),
-					margin-left: var(--global-spacing-2),
-					position: absolute,
-					z-index: 1,
-					components: (
-						icon: (
-							fill: var(--global-white),
-							height: var(--global-spacing-4),
-							width: var(--global-spacing-4),
-						),
-					),
-				),
-				top-table-list-large-label: (
-					margin-left: var(--global-spacing-2),
-					color: var(--global-white),
-				),
-				top-table-list-large-text: (
-					gap: 0,
-					components: (
-						heading: (
-							font-size: var(--heading-level-3-font-size),
-							line-height: var(--heading-level-3-line-height),
-						),
-						overline: (
-							font-size: var(--heading-level-6-font-size),
-							line-height: var(--heading-level-6-line-height),
-						),
-						paragraph: (
-							font-size: var(--body-font-size),
-							line-height: var(--body-line-height),
-						),
-						stack: (
-							gap: var(--global-spacing-4),
-						),
-						separator: (
-							margin: 0 var(--global-spacing-2) 0 var(--global-spacing-2),
-						),
-					),
-				),
-				top-table-list-xl: (
-					components: (
-						heading: (
-							align-self: left,
-							justify-content: left,
-						),
-						overline: (
-							display: flex,
-							justify-content: left,
-						),
-						separator: (
-							padding: 0 var(--global-spacing-2),
-						),
-						stack: (
-							gap: var(--global-spacing-4),
-						),
-					),
-				),
-				triple-chain: (
-					components: (
-						heading: (
-							font-size: var(--heading-level-3-font-size),
-							font-weight: var(--heading-level-3-font-weight),
-							line-height: var(--heading-level-3-line-height),
-						),
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				triple-chain-children-grid: (
-					grid-template-columns: 1fr,
-					gap: var(--global-spacing-6) 0,
-				),
-				triple-chain-child-item: (
-					gap: var(--global-spacing-6) 0,
-				),
-				triple-chain-child-item-empty: (
-					display: contents,
-				),
-				video-player: (
-					gap: var(--global-spacing-4),
-					components: (
-						heading: (
-							font-size: var(--heading-level-3-font-size),
-							line-height: var(--heading-level-3-line-height),
-						),
-						media-item: (
-							width: 100%,
-							margin: auto,
-						),
-					),
-				),
-				video-player-feature: (
-					gap: var(--global-spacing-6),
-					components: (
-						media-item-fig-caption: (
-							margin-bottom: 0,
-							margin-left: var(--global-spacing-4),
-							margin-right: var(--global-spacing-4),
-							margin-top: 0,
-						),
-					),
-				),
-				video-player-feature-meta: (
-					margin: auto,
-					width: var(--content-scale-width),
-					components: (
-						stack: (
-							gap: var(--global-spacing-4),
-						),
-					),
-				),
-				xl-manual-promo: (
-					components: (
-						heading: (
-							color: var(--text-color),
-						),
-						link: (
-							font-family: inherit,
-							font-size: inherit,
-							font-weight: inherit,
-							line-height: inherit,
-						),
-						overline: (
-							color: var(--text-color),
-						),
-						overline-hover: (
-							color: var(--text-color-subtle),
-						),
-						stack: (
-							gap: var(--global-spacing-4),
-						),
-						link-hover: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				xl-manual-promo-img: (
-					components: (
-						link-hover: (
-							opacity: 0.8,
-						),
-					),
-				),
-				xl-promo: (
-					components: (
-						link: (
-							font-family: inherit,
-							font-size: inherit,
-							font-weight: inherit,
-							line-height: inherit,
-						),
-						heading: (
-							color: var(--text-color),
-						),
-						overline: (
-							color: var(--text-color),
-						),
-						overline-hover: (
-							color: var(--text-color-subtle),
-						),
-						separator: (
-							padding: 0 var(--global-spacing-2),
-						),
-						stack: (
-							gap: var(--global-spacing-4),
-						),
-						media-item: (
-							position: relative,
-						),
-						link-hover: (
-							color: var(--text-color-subtle),
-						),
-					),
-				),
-				xl-promo-icon-label: (
-					align-items: center,
-					padding: var(--global-spacing-2),
-					background-color: var(--color-primary),
-					border: 0,
-					border-radius: var(--global-spacing-2),
-					bottom: var(--global-spacing-2),
-					margin-left: var(--global-spacing-2),
-					position: absolute,
-					z-index: 1,
-					components: (
-						icon: (
-							fill: var(--global-white),
-							height: var(--global-spacing-4),
-							width: var(--global-spacing-4),
-						),
-					),
-				),
-				xl-promo-label: (
-					margin-left: var(--global-spacing-2),
-					color: var(--global-white),
-				),
-				xl-promo-img: (
-					components: (
-						link-hover: (
-							opacity: 0.8,
-						),
-					),
-				),
-			),
+			"components": (
+				"attribution": (
+					"color": var(--text-color),
+					"font-size": var(--body-font-size-small),
+					"line-height": var(--body-line-height-small)
+				),
+				"attribution-link": (
+					"color": var(--text-color),
+					"cursor": pointer
+				),
+				"attribution-link-hover": (
+					"color": var(--text-color-subtle),
+					"text-decoration": underline
+				),
+				"badge": (
+					"align-self": baseline,
+					"border-radius": var(--border-radius-pill),
+					"color": var(--global-white),
+					"font-size": var(--body-font-size-tiny),
+					"font-weight": var(--global-font-weight-7),
+					"line-height": var(--body-line-height-tiny),
+					"padding": var(--global-spacing-1) var(--global-spacing-2)
+				),
+				"badge-danger": (
+					"background-color": var(--status-color-danger)
+				),
+				"badge-default": (
+					"background-color": var(--text-color)
+				),
+				"badge-light": (
+					"background-color": var(--text-color-subtle)
+				),
+				"badge-primary": (
+					"background-color": var(--color-primary)
+				),
+				"badge-success": (
+					"background-color": var(--status-color-success)
+				),
+				"badge-warning": (
+					"background-color": var(--status-color-warning)
+				),
+				"button": (
+					"border-color": transparent,
+					"border-style": var(--global-border-style-1),
+					"border-width": var(--global-border-width-1),
+					"border-radius": var(--border-radius),
+					"font-weight": var(--global-font-weight-7),
+					"gap": var(--global-spacing-2)
+				),
+				"button-default": (
+					"background-color": var(--global-white),
+					"border-color": var(--global-neutral-7),
+					"border-width": var(--global-border-width-1),
+					"color": var(--global-neutral-7)
+				),
+				"button-large": (
+					"font-size": var(--body-font-size),
+					"line-height": var(--body-line-height),
+					"padding": var(--global-spacing-4)
+				),
+				"button-medium": (
+					"font-size": var(--body-font-size-small),
+					"line-height": var(--body-line-height-small),
+					"padding": var(--global-spacing-3) var(--global-spacing-4)
+				),
+				"button-primary": (
+					"background-color": var(--color-primary),
+					"color": var(--global-white)
+				),
+				"button-primary-hover": (
+					"background-color": var(--color-primary-hover)
+				),
+				"button-primary-reverse": (
+					"background-color": transparent,
+					"border-color": var(--color-primary),
+					"color": var(--color-primary)
+				),
+				"button-primary-reverse-hover": (
+					"border-color": var(--color-primary-hover),
+					"color": var(--color-primary-hover)
+				),
+				"button-secondary": (
+					"background-color": var(--global-white),
+					"color": var (--global-black)
+				),
+				"button-secondary-hover": (
+					"background-color": var(--global-neutral-2),
+					"color": var(--global-neutral-6)
+				),
+				"button-secondary-reverse": (
+					"background-color": transparent,
+					"border-color": var(--global-white),
+					"color": var(--global-white)
+				),
+				"button-secondary-reverse-hover": (
+					"border-color": var(--global-neutral-3),
+					"color": var(--global-neutral-3)
+				),
+				"button-small": (
+					"font-size": var(--body-font-size-small),
+					"line-height": var(--body-line-height-small),
+					"padding": var(--global-spacing-1) var(--global-spacing-4)
+				),
+				"carousel": (
+					"font-family": var(--font-family-primary),
+					"font-size": var(--body-font-size-tiny),
+					"line-height": var(--body-line-height-tiny),
+					"--slides": 1
+				),
+				"carousel-actions": (
+					"display": none,
+					"padding-left": var(--global-spacing-5),
+					"padding-right": var(--global-spacing-5)
+				),
+				"carousel-additional-controls": (
+					"display": flex
+				),
+				"carousel-button": (
+					"align-items": center,
+					"background-color": transparent,
+					"border": none,
+					"box-shadow": none,
+					"display": flex,
+					"font-size": var(--body-font-size-tiny),
+					"gap": var(--global-spacing-2),
+					"height": var(--global-spacing-4),
+					"line-height": var(--body-line-height-tiny),
+					"padding": 0 var(--global-spacing-2),
+					"width": auto
+				),
+				"carousel-button-enter-full-screen": (
+					"padding-left": 0
+				),
+				"carousel-button-exit-full-screen": (
+					"padding-left": 0,
+					"padding-right": 0
+				),
+				"carousel-button-full-screen": (
+					"color": var(--global-white)
+				),
+				"carousel-button-full-screen-hover": (
+					"color": var(--global-neutral-3)
+				),
+				"carousel-button-next": (
+					"color": var(--global-white)
+				),
+				"carousel-button-previous": (
+					"color": var(--global-white)
+				),
+				"carousel-controls": (
+					"margin-bottom": var(--global-spacing-2)
+				),
+				"carousel-fullscreen": (
+					"color": var(--global-white),
+					"padding": var(--global-spacing-2) 0
+				),
+				"carousel-fullscreen-button-toggle-auto-play": (
+					"display": none
+				),
+				"carousel-fullscreen-controls": (
+					"align-items": flex-end,
+					"flex-direction": column,
+					"padding-top": var(--global-spacing-2),
+					"padding-right": var(--global-spacing-2),
+					"padding-bottom": var(--global-spacing-2),
+					"padding-left": var(--global-spacing-2),
+					"place-self": initial
+				),
+				"carousel-icon": (
+					"fill": currentColor,
+					"height": var(--global-spacing-4),
+					"width": var(--global-spacing-4)
+				),
+				"carousel-track": (
+					"gap": initial,
+					"max-width": initial,
+					"width": 100%
+				),
+				"date": (
+					"color": var(--text-color),
+					"font-size": var(--body-font-size-small),
+					"line-height": var(--body-line-height-small)
+				),
+				"divider": (
+					"background-color": var(--border-color),
+					"height": 1px
+				),
+				"heading": (
+					"font-family": var(--font-family-primary),
+					"font-size": var(--heading-level-3-font-size),
+					"font-weight": var(--heading-level-3-font-weight),
+					"line-height": var(--heading-level-3-line-height)
+				),
+				"icon": (
+					"fill": var(--icon-fill-color),
+					"height": var(--global-spacing-5),
+					"width": var(--global-spacing-5)
+				),
+				"image": (
+					"max-width": 100%
+				),
+				"image-hover": (
+					"opacity": 1
+				),
+				"input": (
+					"align-items": flex-start,
+					"display": flex,
+					"flex-direction": column,
+					"gap": var(--global-spacing-1)
+				),
+				"input-error-input": (
+					"border-color": var(--status-color-danger)
+				),
+				"input-error-input-focus": (
+					"outline-color": var(--status-color-danger)
+				),
+				"input-input": (
+					"border": var(--global-border-width-1) var(--global-border-style-1) var(--form-border-color),
+					"border-radius": var(--border-radius),
+					"padding-block-end": var(--global-spacing-4),
+					"padding-block-start": var(--global-spacing-4),
+					"padding-inline-end": var(--global-spacing-2),
+					"padding-inline-start": var(--global-spacing-2)
+				),
+				"input-input-focus": (
+					"outline": solid 2px var(--form-border-color),
+					"outline-offset": 1px
+				),
+				"input-label": (
+					"font-weight": var(--global-font-weight-7)
+				),
+				"input-small-input": (
+					"padding": var(--global-spacing-1) var(--global-spacing-2)
+				),
+				"input-success-input": (
+					"border-color": var(--status-color-success)
+				),
+				"input-success-input-focus": (
+					"outline-color": var(--status-color-success)
+				),
+				"input-warning-input": (
+					"border-color": var(--status-color-warning)
+				),
+				"input-warning-input-focus": (
+					"outline-color": var(--status-color-warning)
+				),
+				"link": (
+					"color": var(--text-color),
+					"font-family": var(--font-family-primary)
+				),
+				"link-active": (
+					"text-decoration": none
+				),
+				"link-hover": (
+					"text-decoration": none
+				),
+				"media-item": (
+					"align-items": stretch,
+					"display": flex,
+					"flex-direction": column,
+					"gap": var(--global-spacing-2)
+				),
+				"media-item-fig-caption": (
+					"color": var(--text-color-subtle),
+					"font-size": var(--body-font-size-tiny),
+					"line-height": var(--body-line-height-tiny)
+				),
+				"media-item-fig-caption-fullscreen": (
+					"padding-left": var(--global-spacing-5),
+					"padding-right": var(--global-spacing-5)
+				),
+				"media-item-title": (
+					"font-weight": var(--global-font-weight-7)
+				),
+				"overline": (
+					"color": var(--text-color),
+					"font-family": var(--font-family-primary),
+					"font-size": var(--heading-level-6-font-size),
+					"font-weight": var(--heading-level-6-font-weight),
+					"line-height": var(--heading-level-6-line-height),
+					"text-decoration": none
+				),
+				"paragraph": (
+					"font-family": var(--font-family-secondary),
+					"font-size": var(--body-font-size),
+					"font-weight": var(--body-font-weight),
+					"line-height": var(--body-line-height)
+				),
+				"pill": (
+					"background-color": var(--color-primary),
+					"border-radius": var(--border-radius-pill),
+					"color": var(--global-white),
+					"font-size": var(--body-font-size-tiny),
+					"padding": var(--global-spacing-1) var(--global-spacing-4),
+					"text-decoration": none
+				),
+				"pill-hover": (
+					"background-color": var(--global-neutral-7)
+				),
+				"stack-divider-horizontal": (
+					"border": none,
+					"border-left": var(--global-border-width-1) var(--global-border-style-1) var(--border-color),
+					"width": 1px,
+					"height": auto
+				),
+				"stack-divider-vertical": (
+					"border-bottom": var(--global-border-width-1) var(--global-border-style-1) var(--border-color)
+				),
+				"video": (
+					"margin": auto
+				),
+				"video-frame": (
+					"background-color": transparent
+				)
+			)
 		),
-		desktop: (
-			alias: (
-				// heading-level-1 : 52px fs -> 62.4px lh
+		"desktop": (
+			"alias": (
 				"heading-level-1-font-size": var(--global-font-size-15),
-				// heading-level-2 : 48px fs -> 57.6px lh
 				"heading-level-2-font-size": var(--global-font-size-14),
 				"heading-level-2-line-height": var(--global-line-height-3),
-				// heading-level-3 : 40.96px fs -> 49.152px lh
 				"heading-level-3-font-size": var(--global-font-size-13),
 				"heading-level-3-line-height": var(--global-line-height-3),
-				// heading-level-4 : 36px fs -> 43.2px lh
 				"heading-level-4-font-size": var(--global-font-size-12),
 				"heading-level-4-line-height": var(--global-line-height-3),
-				// heading-level-5 : 32px fs -> 41.6px lh
 				"heading-level-5-font-size": var(--global-font-size-11),
 				"heading-level-5-line-height": var(--global-line-height-4),
-				// heading-level-6 : 20px fs -> 28px lh
-				"heading-level-6-font-size": var(--global-font-size-7),
+				"heading-level-6-font-size": var(--global-font-size-7)
 			),
-			components: (
-				carousel: (
-					--slides: 4,
+			"blocks": (
+				"alert-bar": (
+					"components": (
+						"link": (
+							"font-size": var(--body-font-size)
+						)
+					)
 				),
-				carousel-actions: (
-					display: flex,
+				"article-body": (
+					"font-size": var(--heading-level-6-font-size)
 				),
-				carousel-additional-controls: (
-					gap: var(--global-spacing-2),
-					padding: 0 0 0 var(--global-spacing-2),
+				"article-body-gallery-fullscreen": (
+					"components": (
+						"media-item-fig-caption": (
+							"padding": 0 var(--global-spacing-5)
+						)
+					)
 				),
-				carousel-fullscreen: (
-					padding: var(--global-spacing-5) 0,
+				"article-body-image-wrapper": (
+					"max-height": 75vh
 				),
-				carousel-fullscreen-button-toggle-auto-play: (
-					display: flex,
+				"author-bio-author-description": (
+					"font-size": var(--body-font-size),
+					"line-height": var(--body-line-height)
 				),
-				carousel-fullscreen-controls: (
-					flex-direction: initial,
-					padding-top: var(--global-spacing-5),
-					padding-right: var(--global-spacing-5),
-					padding-bottom: var(--global-spacing-5),
-					padding-left: var(--global-spacing-5),
-					place-self: flex-start,
+				"author-bio-social-link-wrapper": (
+					"margin-top": var(--global-spacing-4)
 				),
-				carousel-track: (
-					gap: var(--global-spacing-6),
+				"double-chain": (
+					"components": (
+						"stack": (
+							"gap": var(--global-spacing-5)
+						)
+					)
 				),
+				"double-chain-child-item-empty": (
+					"display": initial
+				),
+				"double-chain-children-grid": (
+					"grid-template-columns": 1fr 1fr,
+					"gap": 0 var(--global-spacing-5)
+				),
+				"footer": (
+					"components": (
+						"image": (
+							"max-height": var(--global-spacing-10)
+						)
+					)
+				),
+				"footer-links": (
+					"grid-auto-flow": column,
+					"grid-template-columns": 1fr 1fr 1fr 1fr
+				),
+				"footer-social-links-container": (
+					"border-bottom": none,
+					"width": max-content
+				),
+				"footer-top-container": (
+					"border-bottom": 1px solid var(--global-neutral-4),
+					"grid-auto-flow": column,
+					"grid-template-columns": 1fr auto 1fr,
+					"grid-template-rows": auto,
+					"components": (
+						"paragraph": (
+							"display": block,
+							"align-self": center,
+							"text-align": center
+						)
+					)
+				),
+				"forgot-password": (
+					"components": (
+						"heading": (
+							"font-size": var(--global-font-size-12),
+							"padding-block-end": var(--global-spacing-4)
+						)
+					)
+				),
+				"full-author-bio": (
+					"flex-direction": row,
+					"gap": var(--global-spacing-5),
+					"margin": 0,
+					"max-width": auto,
+					"components": (
+						"image": (
+							"margin": 0,
+							"max-height": 11.25rem,
+							"max-width": 11.25rem
+						)
+					)
+				),
+				"full-author-bio-social-header": (
+					"text-align": left
+				),
+				"full-author-bio-social-icons": (
+					"justify-content": flex-start
+				),
+				"gallery-fullscreen": (
+					"components": (
+						"media-item-fig-caption": (
+							"padding": 0 var(--global-spacing-5)
+						)
+					)
+				),
+				"gallery-image-wrapper": (
+					"max-height": 75vh
+				),
+				"header-account-action-desktop": (
+					"display": flex,
+					"components": (
+						"button": (
+							"text-decoration": none
+						)
+					)
+				),
+				"header-account-action-mobile": (
+					"display": none
+				),
+				"header-nav-chain": (
+					"padding": var(--global-spacing-3) var(--global-spacing-5)
+				),
+				"header-nav-chain-flyout-nav-components-desktop": (
+					"display": flex
+				),
+				"header-nav-chain-flyout-nav-components-mobile": (
+					"display": none
+				),
+				"header-nav-chain-flyout-nav-wrapper": (
+					"width": 315px
+				),
+				"header-nav-chain-flyout-nav-wrapper-closed": (
+					"transform": translate(-315px, 0)
+				),
+				"header-nav-chain-links-list": (
+					"display": flex
+				),
+				"header-nav-chain-top-nav-components-desktop": (
+					"display": flex
+				),
+				"header-nav-chain-top-nav-components-mobile": (
+					"display": none
+				),
+				"header-small": (
+					"font-size": var(--body-font-size),
+					"line-height": var(--body-line-height)
+				),
+				"large-manual-promo": (
+					"gap": var(--global-spacing-6),
+					"components": (
+						"divider": (
+							"grid-column": span 2
+						),
+						"grid": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"large-manual-promo-text": (
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-4-font-size),
+							"line-height": var(--heading-level-4-line-height)
+						)
+					)
+				),
+				"large-promo": (
+					"gap": var(--global-spacing-6),
+					"components": (
+						"grid": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"large-promo-text": (
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-4-font-size),
+							"line-height": var(--heading-level-4-line-height)
+						)
+					)
+				),
+				"lead-art-carousel-fullscreen": (
+					"components": (
+						"media-item-fig-caption": (
+							"padding": 0 var(--global-spacing-5)
+						)
+					)
+				),
+				"lead-art-carousel-image-wrapper": (
+					"max-height": 75vh
+				),
+				"login-form": (
+					"components": (
+						"heading": (
+							"font-size": var(--global-font-size-12),
+							"padding-block-end": var(--global-spacing-4)
+						)
+					)
+				),
+				"masthead": (
+					"display": flex
+				),
+				"medium-manual-promo": (
+					"components": (
+						"media-item": (
+							"float": left,
+							"margin": 0,
+							"max-width": 33%
+						),
+						"paragraph": (
+							"display": block
+						)
+					)
+				),
+				"medium-manual-promo-show-image": (
+					"components": (
+						"paragraph": (
+							"margin-left": calc(33% + var(--global-spacing-6))
+						),
+						"heading": (
+							"margin-left": calc(33% + var(--global-spacing-6)),
+							"width": auto
+						)
+					)
+				),
+				"medium-promo": (
+					"components": (
+						"attribution": (
+							"display": block
+						),
+						"media-item": (
+							"float": left,
+							"margin": 0,
+							"max-width": 33%
+						),
+						"paragraph": (
+							"display": block,
+							"width": auto
+						)
+					)
+				),
+				"medium-promo-label": (
+					"display": inline
+				),
+				"medium-promo-show-image": (
+					"components": (
+						"attribution": (
+							"margin-left": calc(33% + var(--global-spacing-6))
+						),
+						"heading": (
+							"margin-left": calc(33% + var(--global-spacing-6)),
+							"width": auto
+						),
+						"paragraph": (
+							"margin-left": calc(33% + var(--global-spacing-6))
+						)
+					)
+				),
+				"quad-chain": (
+					"components": (
+						"stack": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"quad-chain-child-item-empty": (
+					"display": initial
+				),
+				"quad-chain-children-grid": (
+					"grid-template-columns": 1fr 1fr 1fr 1fr,
+					"gap": 0 var(--global-spacing-5)
+				),
+				"reset-password": (
+					"components": (
+						"heading": (
+							"font-size": var(--global-font-size-12),
+							"padding-block-end": var(--global-spacing-4)
+						)
+					)
+				),
+				"results-list": (
+					"components": (
+						"media-item": (
+							"float": left,
+							"margin": 0,
+							"max-width": 33%
+						),
+						"overline": (
+							"font-size": var(--global-font-size-7)
+						)
+					)
+				),
+				"results-list-show-image": (
+					"components": (
+						"attribution": (
+							"display": block,
+							"margin-left": calc(33% + var(--global-spacing-6))
+						),
+						"heading": (
+							"margin-left": calc(33% + var(--global-spacing-6)),
+							"width": auto
+						),
+						"paragraph": (
+							"margin-left": calc(33% + var(--global-spacing-6))
+						),
+						"overline": (
+							"margin-left": var(--global-spacing-6),
+							"font-size": var(--global-font-size-7)
+						)
+					)
+				),
+				"right-rail-advanced-main-interior-item": (
+					"border-right": 1px solid #dadada,
+					"padding": 0 var(--global-spacing-6) 0 0,
+					"display": flex
+				),
+				"right-rail-advanced-main-right-rail": (
+					"padding": 0 0 0 var(--global-spacing-6),
+					"display": flex
+				),
+				"right-rail-advanced-navigation": (
+					"padding": 0 0 var(--global-spacing-8) 0
+				),
+				"right-rail-advanced-rail-container": (
+					"grid-template-columns": 2fr 1fr,
+					"gap": 0,
+					"grid-template-rows": initial
+				),
+				"right-rail-main-interior-item": (
+					"border-right": 1px solid #dadada,
+					"padding": 0 var(--global-spacing-6) 0 0
+				),
+				"right-rail-main-right-rail": (
+					"padding": 0 0 0 var(--global-spacing-6)
+				),
+				"right-rail-navigation": (
+					"padding": 0 0 var(--global-spacing-8) 0
+				),
+				"right-rail-rail-container": (
+					"grid-template-columns": 2fr 1fr,
+					"gap": 0,
+					"grid-template-rows": initial
+				),
+				"search-results-list-results-item": (
+					"components": (
+						"attribution": (
+							"display": block
+						),
+						"media-item": (
+							"float": left,
+							"margin": 0,
+							"max-width": 33%
+						),
+						"paragraph": (
+							"display": block
+						)
+					)
+				),
+				"search-results-list-results-item-show-image": (
+					"components": (
+						"attribution": (
+							"margin-left": calc(33% + var(--global-spacing-6))
+						),
+						"heading": (
+							"margin-left": calc(33% + var(--global-spacing-6)),
+							"width": auto
+						),
+						"overline": (
+							"margin-left": var(--global-spacing-6),
+							"font-size": var(--heading-level-5-font-size)
+						),
+						"paragraph": (
+							"margin-left": calc(33% + var(--global-spacing-6))
+						)
+					)
+				),
+				"share-bar": (
+					"display": flex
+				),
+				"sign-up": (
+					"components": (
+						"heading": (
+							"font-size": var(--global-font-size-12),
+							"padding-block-end": var(--global-spacing-4)
+						)
+					)
+				),
+				"single-chain": (
+					"components": (
+						"stack": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"single-chain-children-stack": (
+					"gap": var(--global-spacing-5)
+				),
+				"single-column-regular-body": (
+					"max-inline-size": 37rem
+				),
+				"top-table-list-large": (
+					"gap": var(--global-spacing-6),
+					"components": (
+						"divider": (
+							"grid-column": span 2
+						),
+						"grid": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"top-table-list-large-text": (
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-4-font-size),
+							"line-height": var(--heading-level-4-line-height)
+						)
+					)
+				),
+				"top-table-list-medium": (
+					"components": (
+						"attribution": (
+							"display": block
+						),
+						"media-item": (
+							"float": left,
+							"max-width": 33%
+						),
+						"paragraph": (
+							"display": block
+						)
+					)
+				),
+				"top-table-list-medium-container": (
+					"gap": var(--global-spacing-5)
+				),
+				"top-table-list-medium-label": (
+					"display": inline
+				),
+				"top-table-list-medium-show-image": (
+					"components": (
+						"attribution": (
+							"margin-left": calc(33% + var(--global-spacing-6))
+						),
+						"heading": (
+							"margin-left": calc(33% + var(--global-spacing-6)),
+							"width": auto
+						),
+						"paragraph": (
+							"margin-left": calc(33% + var(--global-spacing-6))
+						)
+					)
+				),
+				"top-table-list-small-container-1": (
+					"components": (
+						"grid": (
+							"template-columns": 1fr
+						)
+					)
+				),
+				"top-table-list-small-container-2": (
+					"components": (
+						"grid": (
+							"template-columns": repeat(2, minmax(5rem, 1fr))
+						)
+					)
+				),
+				"top-table-list-small-container-3": (
+					"components": (
+						"grid": (
+							"template-columns": repeat(3, minmax(5rem, 1fr))
+						)
+					)
+				),
+				"top-table-list-small-container-4": (
+					"components": (
+						"grid": (
+							"template-columns": repeat(4, minmax(5rem, 1fr))
+						)
+					)
+				),
+				"top-table-list-xl": (
+					"components": (
+						"heading": (
+							"align-self": center,
+							"font-size": var(--heading-level-1-font-size),
+							"justify-content": center,
+							"line-height": var(--heading-level-1-line-height)
+						),
+						"overline": (
+							"display": flex,
+							"justify-content": center
+						),
+						"stack": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"triple-chain": (
+					"components": (
+						"stack": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"triple-chain-child-item-empty": (
+					"display": initial
+				),
+				"triple-chain-children-grid": (
+					"grid-template-columns": 1fr 1fr 1fr,
+					"gap": 0 var(--global-spacing-5)
+				),
+				"xl-manual-promo": (
+					"components": (
+						"heading": (
+							"align-self": center,
+							"font-size": var(--heading-level-1-font-size),
+							"justify-content": center,
+							"line-height": var(--heading-level-1-line-height)
+						),
+						"overline": (
+							"display": flex,
+							"justify-content": center
+						),
+						"stack": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"xl-promo": (
+					"components": (
+						"heading": (
+							"align-self": center,
+							"font-size": var(--heading-level-1-font-size),
+							"justify-content": center,
+							"line-height": var(--heading-level-1-line-height)
+						),
+						"overline": (
+							"display": flex,
+							"justify-content": center
+						),
+						"stack": (
+							"gap": var(--global-spacing-5)
+						)
+					)
+				),
+				"xl-promo-icon-label": (
+					"margin-left": var(--global-spacing-2),
+					"color": var(--global-white)
+				)
 			),
-			blocks: (
-				alert-bar: (
-					components: (
-						link: (
-							font-size: var(--body-font-size),
-						),
-					),
-				),
-				article-body: (
-					font-size: var(--heading-level-6-font-size),
-				),
-				article-body-gallery-fullscreen: (
-					components: (
-						media-item-fig-caption: (
-							padding: 0 var(--global-spacing-5),
-						),
-					),
-				),
-				article-body-image-wrapper: (
-					max-height: 75vh,
-				),
-				author-bio-social-link-wrapper: (
-					margin-top: var(--global-spacing-4),
-				),
-				author-bio-author-description: (
-					font-size: var(--body-font-size),
-					line-height: var(--body-line-height),
-				),
-				double-chain: (
-					components: (
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				double-chain-children-grid: (
-					grid-template-columns: 1fr 1fr,
-					gap: 0 var(--global-spacing-5),
-				),
-				double-chain-child-item-empty: (
-					display: initial,
-				),
-				footer: (
-					components: (
-						image: (
-							max-height: var(--global-spacing-10),
-						),
-					),
-				),
-				footer-links: (
-					grid-auto-flow: column,
-					grid-template-columns: 1fr 1fr 1fr 1fr,
-				),
-				footer-social-links-container: (
-					border-bottom: none,
-					width: max-content,
-				),
-				footer-top-container: (
-					border-bottom: 1px solid var(--global-neutral-4),
-					grid-auto-flow: column,
-					grid-template-columns: 1fr auto 1fr,
-					grid-template-rows: auto,
-					components: (
-						paragraph: (
-							display: block,
-							align-self: center,
-							text-align: center,
-						),
-					),
-				),
-				full-author-bio: (
-					flex-direction: row,
-					gap: var(--global-spacing-5),
-					margin: 0,
-					max-width: auto,
-					components: (
-						image: (
-							margin: 0,
-							max-height: 11.25rem,
-							max-width: 11.25rem,
-						),
-					),
-				),
-				full-author-bio-social-header: (
-					text-align: left,
-				),
-				full-author-bio-social-icons: (
-					justify-content: flex-start,
-				),
-				gallery-fullscreen: (
-					components: (
-						media-item-fig-caption: (
-							padding: 0 var(--global-spacing-5),
-						),
-					),
-				),
-				gallery-image-wrapper: (
-					max-height: 75vh,
-				),
-				header-small: (
-					font-size: var(--body-font-size),
-					line-height: var(--body-line-height),
-				),
-				header-nav-chain: (
-					padding: var(--global-spacing-3) var(--global-spacing-5),
-				),
-				header-nav-chain-top-nav-components-mobile: (
-					display: none,
-				),
-				header-nav-chain-top-nav-components-desktop: (
-					display: flex,
-				),
-				header-nav-chain-links-list: (
-					display: flex,
-				),
-				header-nav-chain-flyout-nav-wrapper: (
-					width: 315px,
-				),
-				header-nav-chain-flyout-nav-wrapper-closed: (
-					transform: translate(-315px, 0),
-				),
-				header-nav-chain-flyout-nav-components-mobile: (
-					display: none,
-				),
-				header-nav-chain-flyout-nav-components-desktop: (
-					display: flex,
-				),
-				large-manual-promo: (
-					gap: var(--global-spacing-6),
-					components: (
-						divider: (
-							grid-column: span 2,
-						),
-						grid: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				large-manual-promo-text: (
-					components: (
-						heading: (
-							font-size: var(--heading-level-4-font-size),
-							line-height: var(--heading-level-4-line-height),
-						),
-					),
-				),
-				large-promo: (
-					gap: var(--global-spacing-6),
-					components: (
-						grid: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				large-promo-text: (
-					components: (
-						heading: (
-							font-size: var(--heading-level-4-font-size),
-							line-height: var(--heading-level-4-line-height),
-						),
-					),
-				),
-				lead-art-carousel-fullscreen: (
-					components: (
-						media-item-fig-caption: (
-							padding: 0 var(--global-spacing-5),
-						),
-					),
-				),
-				lead-art-carousel-image-wrapper: (
-					max-height: 75vh,
-				),
-				masthead: (
-					display: flex,
-				),
-				medium-promo: (
-					components: (
-						attribution: (
-							display: block,
-						),
-						media-item: (
-							float: left,
-							margin: 0,
-							max-width: 33%,
-						),
-						paragraph: (
-							display: block,
-							width: auto,
-						),
-					),
-				),
-				medium-promo-show-image: (
-					components: (
-						attribution: (
-							margin-left: calc(33% + var(--global-spacing-6)),
-						),
-						heading: (
-							margin-left: calc(33% + var(--global-spacing-6)),
-							width: auto,
-						),
-						paragraph: (
-							margin-left: calc(33% + var(--global-spacing-6)),
-						),
-					),
-				),
-				medium-promo-label: (
-					display: inline,
-				),
-				medium-manual-promo: (
-					components: (
-						media-item: (
-							float: left,
-							margin: 0,
-							max-width: 33%,
-						),
-						paragraph: (
-							display: block,
-						),
-					),
-				),
-				medium-manual-promo-show-image: (
-					components: (
-						paragraph: (
-							margin-left: calc(33% + var(--global-spacing-6)),
-						),
-						heading: (
-							margin-left: calc(33% + var(--global-spacing-6)),
-							width: auto,
-						),
-					),
-				),
-				quad-chain: (
-					components: (
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				quad-chain-children-grid: (
-					grid-template-columns: 1fr 1fr 1fr 1fr,
-					gap: 0 var(--global-spacing-5),
-				),
-				quad-chain-child-item-empty: (
-					display: initial,
-				),
-				results-list: (
-					components: (
-						media-item: (
-							float: left,
-							margin: 0,
-							max-width: 33%,
-						),
-						overline: (
-							font-size: var(--heading-level-6-font-size),
-						),
-					),
-				),
-				results-list-show-image: (
-					components: (
-						attribution: (
-							display: block,
-							margin-left: calc(33% + var(--global-spacing-6)),
-						),
-						heading: (
-							margin-left: calc(33% + var(--global-spacing-6)),
-							width: auto,
-						),
-						paragraph: (
-							margin-left: calc(33% + var(--global-spacing-6)),
-						),
-						overline: (
-							margin-left: var(--global-spacing-6),
-							font-size: var(--heading-level-6-font-size),
-						),
-					),
-				),
-				right-rail-navigation: (
-					padding: 0 0 var(--global-spacing-8) 0,
-				),
-				right-rail-rail-container: (
-					grid-template-columns: 2fr 1fr,
-					gap: 0,
-					grid-template-rows: initial,
-				),
-				right-rail-main-right-rail: (
-					padding: 0 0 0 var(--global-spacing-6),
-				),
-				right-rail-main-interior-item: (
-					border-right: 1px solid #dadada,
-					padding: 0 var(--global-spacing-6) 0 0,
-				),
-				right-rail-advanced-navigation: (
-					padding: 0 0 var(--global-spacing-8) 0,
-				),
-				right-rail-advanced-rail-container: (
-					grid-template-columns: 2fr 1fr,
-					gap: 0,
-					grid-template-rows: initial,
-				),
-				right-rail-advanced-main-right-rail: (
-					padding: 0 0 0 var(--global-spacing-6),
-					display: flex,
-				),
-				right-rail-advanced-main-interior-item: (
-					border-right: 1px solid #dadada,
-					padding: 0 var(--global-spacing-6) 0 0,
-					display: flex,
-				),
-				search-results-list-results-item: (
-					components: (
-						attribution: (
-							display: block,
-						),
-						media-item: (
-							float: left,
-							margin: 0,
-							max-width: 33%,
-						),
-						paragraph: (
-							display: block,
-						),
-					),
-				),
-				search-results-list-results-item-show-image: (
-					components: (
-						attribution: (
-							margin-left: calc(33% + var(--global-spacing-6)),
-						),
-						heading: (
-							margin-left: calc(33% + var(--global-spacing-6)),
-							width: auto,
-						),
-						overline: (
-							margin-left: var(--global-spacing-6),
-							font-size: var(--heading-level-5-font-size),
-						),
-						paragraph: (
-							margin-left: calc(33% + var(--global-spacing-6)),
-						),
-					),
-				),
-				share-bar: (
-					display: flex,
-				),
-				single-column-regular-main: (
-					components: (
-						stack: (
-							gap: var(--global-spacing-16),
-						),
-					),
-				),
-				single-chain: (
-					components: (
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				single-chain-children-stack: (
-					gap: var(--global-spacing-5),
-				),
-				top-table-list-small-container-1: (
-					components: (
-						grid: (
-							template-columns: 1fr,
-						),
-					),
-				),
-				top-table-list-small-container-2: (
-					components: (
-						grid: (
-							template-columns: repeat(2, minmax(5rem, 1fr)),
-						),
-					),
-				),
-				top-table-list-small-container-3: (
-					components: (
-						grid: (
-							template-columns: repeat(3, minmax(5rem, 1fr)),
-						),
-					),
-				),
-				top-table-list-small-container-4: (
-					components: (
-						grid: (
-							template-columns: repeat(4, minmax(5rem, 1fr)),
-						),
-					),
-				),
-				top-table-list-medium-container: (
-					gap: var(--global-spacing-5),
-				),
-				top-table-list-medium: (
-					components: (
-						attribution: (
-							display: block,
-						),
-						media-item: (
-							float: left,
-							max-width: 33%,
-						),
-						paragraph: (
-							display: block,
-						),
-					),
-				),
-				top-table-list-medium-show-image: (
-					components: (
-						attribution: (
-							margin-left: calc(33% + var(--global-spacing-6)),
-						),
-						heading: (
-							margin-left: calc(33% + var(--global-spacing-6)),
-							width: auto,
-						),
-						paragraph: (
-							margin-left: calc(33% + var(--global-spacing-6)),
-						),
-					),
-				),
-				top-table-list-large: (
-					gap: var(--global-spacing-6),
-					components: (
-						divider: (
-							grid-column: span 2,
-						),
-						grid: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				top-table-list-large-text: (
-					components: (
-						heading: (
-							font-size: var(--heading-level-4-font-size),
-							line-height: var(--heading-level-4-line-height),
-						),
-					),
-				),
-				top-table-list-xl: (
-					components: (
-						heading: (
-							align-self: center,
-							font-size: var(--heading-level-1-font-size),
-							justify-content: center,
-							line-height: var(--heading-level-1-line-height),
-						),
-						overline: (
-							display: flex,
-							justify-content: center,
-						),
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				triple-chain: (
-					components: (
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				triple-chain-children-grid: (
-					grid-template-columns: 1fr 1fr 1fr,
-					gap: 0 var(--global-spacing-5),
-				),
-				triple-chain-child-item-empty: (
-					display: initial,
-				),
-				xl-manual-promo: (
-					components: (
-						heading: (
-							align-self: center,
-							font-size: var(--heading-level-1-font-size),
-							justify-content: center,
-							line-height: var(--heading-level-1-line-height),
-						),
-						overline: (
-							display: flex,
-							justify-content: center,
-						),
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				xl-promo: (
-					components: (
-						heading: (
-							align-self: center,
-							font-size: var(--heading-level-1-font-size),
-							justify-content: center,
-							line-height: var(--heading-level-1-line-height),
-						),
-						overline: (
-							display: flex,
-							justify-content: center,
-						),
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-			),
-		),
+			"components": (
+				"carousel": (
+					"--slides": 4
+				),
+				"carousel-actions": (
+					"display": flex
+				),
+				"carousel-additional-controls": (
+					"gap": var(--global-spacing-2),
+					"padding": 0 0 0 var(--global-spacing-2)
+				),
+				"carousel-fullscreen": (
+					"padding": var(--global-spacing-5) 0
+				),
+				"carousel-fullscreen-button-toggle-auto-play": (
+					"display": flex
+				),
+				"carousel-fullscreen-controls": (
+					"flex-direction": initial,
+					"padding-top": var(--global-spacing-5),
+					"padding-right": var(--global-spacing-5),
+					"padding-bottom": var(--global-spacing-5),
+					"padding-left": var(--global-spacing-5),
+					"place-self": flex-start
+				),
+				"carousel-track": (
+					"gap": var(--global-spacing-6)
+				),
+				"video-frame": (
+					"background-color": var(--global-black)
+				)
+			)
+		)
 	)
 );
 
@@ -3311,6 +3640,7 @@
 @use "../../blocks/header-nav-chain-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/identity-block";
 @use "../../blocks/large-manual-promo-block";
 @use "../../blocks/large-promo-block";
 @use "../../blocks/lead-art-block";

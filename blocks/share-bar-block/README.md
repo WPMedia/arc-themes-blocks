@@ -16,7 +16,7 @@ _This is the share bar block for the news theme, written as a functional compone
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
+Outline any schema information requirements necessary to know for ths block.
 
 ### ANS Fields
 

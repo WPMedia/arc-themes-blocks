@@ -1,6 +1,5 @@
 import React from "react";
 
-import { mount } from "enzyme";
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
@@ -39,7 +38,7 @@ describe("Checkout Feature", () => {
 			Sales: {},
 		});
 
-		const wrapper = mount(
+		render(
 			<Checkout
 				customFields={{
 					offerURL: "/offer-url/",
@@ -47,9 +46,10 @@ describe("Checkout Feature", () => {
 			/>
 		);
 
-		expect(wrapper.find("a").prop("href")).toMatch("/offer-url/");
-		expect(wrapper.find("Cart").exists()).toBe(true);
-		expect(wrapper.find("ContactInfo").exists()).toBe(true);
+		expect(screen.getByText('Select from one of our offers').closest('a')).toHaveAttribute('href', '/offer-url/')
+		
+		const contactInfo = screen.getByText("checkout-block.contact-info");
+		expect(contactInfo).not.toBeNull();
 	});
 
 	it.only("Renders PaymentInfo after creating an order", async () => {

@@ -1,15 +1,24 @@
 import React, { useState } from "react";
 import Sales from "@arc-publishing/sdk-sales";
-import { CardElement, useElements } from "@stripe/react-stripe-js";
-import { Button, Heading, HeadingSection, Paragraph } from "@wpmedia/arc-themes-components";
+import {
+	useElements,
+	CardNumberElement,
+	CardExpiryElement,
+	CardCvcElement
+} from "@stripe/react-stripe-js";
+import {
+	usePhrases,
+	Button,
+	Heading,
+	HeadingSection,
+	Paragraph,
+	Grid,
+	Input,
+	Stack,
+} from "@wpmedia/arc-themes-components";
 
 const CARD_ELEMENT_OPTIONS = {
-	style: {
-		base: {
-			color: "#575757",
-			fontSize: "16px",
-		},
-	},
+	showIcon: true,
 };
 
 const FORM_STATUS = {
@@ -32,6 +41,9 @@ function PaymentForm({
 	className,
 }) {
 	const [formStatus, setFormStatus] = useState(FORM_STATUS.IDLE);
+	const [cardName, setCardName] = useState("");
+
+	const phrases = usePhrases();
 
 	// stripe hooks have to be within Elements wrapper
 	// https://stripe.com/docs/stripe-js/react#useelements-hook
@@ -41,12 +53,14 @@ function PaymentForm({
 		event.preventDefault();
 
 		setFormStatus(FORM_STATUS.PROCESSING);
-		const cardElement = elements.getElement("card");
+		const cardNumber = elements.getElement("cardNumber");
 
 		const { error, paymentMethod } = await stripeInstance.createPaymentMethod({
 			type: "card",
-			card: cardElement,
-			billing_details: {}, // todo: collect other info? eg. name, email, etc.
+			card: cardNumber,
+			billing_details: {
+				name: cardName,
+			}, // todo: collect other info? eg. name, email, etc.
 		});
 
 		if (error) {
@@ -79,7 +93,7 @@ function PaymentForm({
 				orderNumber,
 				paymentMethodID,
 				// using paymentIntent here for greater than 0
-				result.paymentIntent.id
+				result.paymentIntent.id,
 			);
 			if (nonZeroPriceOutput.status === "Paid") {
 				setFormStatus(FORM_STATUS.SUCCESS);
@@ -92,7 +106,7 @@ function PaymentForm({
 				orderNumber,
 				paymentMethodID,
 				// using setupIntent here for 0
-				result.setupIntent.id
+				result.setupIntent.id,
 			);
 			// even if no money changes hands, still shows status 'Paid'
 			if (zeroPriceOutput.status === "Paid") {
@@ -104,6 +118,8 @@ function PaymentForm({
 		}
 	};
 
+	const additionalClass = `${className}__payment-form--stripe-element`;
+
 	return (
 		<section className={`${className}__payment`}>
 			<HeadingSection>
@@ -111,15 +127,48 @@ function PaymentForm({
 			</HeadingSection>
 			<form onSubmit={handleSubmit} className={`${className}__payment-form`}>
 				<Paragraph>{formLabel}</Paragraph>
-				<div className={`${className}__payment-form--stripe-input-container`}>
-					<CardElement options={CARD_ELEMENT_OPTIONS} name="card" />
-				</div>
+				<Grid className={`${className}__payment-information`}>
+					<Stack>
+						<Input
+							label={phrases.t("checkout-block.cardholderName")}
+							name="cardHolderName"
+							required
+							onChange={({ value }) => {
+								setCardName(value);
+							}}
+							showDefaultError={false}
+							type="text"
+							validationErrorMessage={phrases.t("checkout-block.cardholderName-requirements")}
+						/>
+					</Stack>
+
+					<div className={`${className}__payment-form--stripe-input-container`}>
+						<label className={`${className}__payment-form--stripe-label`}>
+							{phrases.t("checkout-block.cardNumber")}
+						</label>
+						<div className={`${className}__payment-form--stripe-cardDetails`}>
+							<Stack>
+								<div className={`${className}__payment-form--border-bottom ${additionalClass}`}>
+									<CardNumberElement options={CARD_ELEMENT_OPTIONS} />
+								</div>
+							</Stack>
+							<div className={`${className}__payment-form--stripe-row`}>
+								<div className={`${className}__payment-form--border-right ${additionalClass}`}>
+									<CardExpiryElement options={CARD_ELEMENT_OPTIONS} />
+								</div>
+								<div className={additionalClass}>
+									<CardCvcElement options={CARD_ELEMENT_OPTIONS} />
+								</div>
+							</div>
+						</div>
+					</div>
+				</Grid>
 				<Button
 					size="medium"
 					variant="primary"
 					fullWidth
 					type="submit"
-					disabled={formStatus === FORM_STATUS.PROCESSING || formStatus === FORM_STATUS.SUCCESS}
+					disabled={(formStatus === FORM_STATUS.PROCESSING || formStatus === FORM_STATUS.SUCCESS) ? true : null}
 				>
 					{submitText}
 				</Button>

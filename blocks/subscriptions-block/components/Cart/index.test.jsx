@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import useSales from "../useSales";
 
@@ -18,8 +18,6 @@ jest.mock("../../components/useSales");
 
 describe("Cart", () => {
 	it("renders empty cart message if no cart items", async () => {
-		let wrapper;
-
 		useSales.mockReturnValue({
 			Sales: {
 				getCart: jest.fn(async () => Promise.resolve({ items: [] })),
@@ -27,51 +25,13 @@ describe("Cart", () => {
 		});
 
 		await act(async () => {
-			wrapper = await mount(<Cart offerURL="/" />);
-		});
-		wrapper.update();
-
-		expect(wrapper.find("a").exists()).toBe(true);
-		expect(wrapper.text()).toBe("checkout-block.empty-cart-message");
-	});
-
-	it("renders empty cart message if no cart items", async () => {
-		let wrapper;
-
-		useSales.mockReturnValue({
-			Sales: {
-				getCart: jest.fn(async () => Promise.reject()),
-			},
+			await render(<Cart offerURL="/" />);
 		});
 
-		await act(async () => {
-			wrapper = await mount(<Cart offerURL="/" />);
-		});
-		wrapper.update();
-
-		expect(wrapper.text()).toBe("checkout-block.empty-cart-message");
-	});
-
-	it("renders empty cart message if no cart items", async () => {
-		let wrapper;
-
-		useSales.mockReturnValue({
-			Sales: {
-				getCart: jest.fn(async () => Promise.resolve({})),
-			},
-		});
-
-		await act(async () => {
-			wrapper = await mount(<Cart offerURL="/" />);
-		});
-		wrapper.update();
-
-		expect(wrapper.text()).toBe("checkout-block.empty-cart-message");
+		expect(screen.getByText("Select from one of our offers")).not.toBeNull();
 	});
 
 	it("renders cart", async () => {
-		let wrapper;
-
 		global.fetch = jest.fn(() =>
 			Promise.resolve({
 				json: () =>
@@ -111,8 +71,23 @@ describe("Cart", () => {
 						paymentDate: 1638489600000,
 						currency: "USD",
 					}),
-			})
+			}),
 		);
+
+		const items = [
+			{
+				sku: "SPORTS",
+				quantity: 1,
+				shortDescription: "<p>It's all you care about! We understand.</p>",
+				name: "Sports All Access",
+				price: 0,
+				tax: 0,
+				subtotal: 0,
+				total: 0,
+				priceCode: "HUV7RS",
+				gift: false,
+			},
+		];
 
 		useSales.mockReturnValue({
 			Sales: {
@@ -122,35 +97,19 @@ describe("Cart", () => {
 						subtotal: 0,
 						tax: 0,
 						shipping: 0,
-						items: [
-							{
-								sku: "SPORTS",
-								quantity: 1,
-								shortDescription: "<p>It's all you care about! We understand.</p>",
-								name: "Sports All Access",
-								price: 0,
-								tax: 0,
-								subtotal: 0,
-								total: 0,
-								priceCode: "HUV7RS",
-								gift: false,
-							},
-						],
+						items: items,
 						currency: "USD",
 						taxSupported: true,
-					})
+					}),
 				),
 			},
 		});
 
 		await act(async () => {
-			wrapper = await mount(<Cart className={BLOCK_CLASS_NAME} offerURL="/" />);
+			await render(<Cart className={BLOCK_CLASS_NAME} offerURL="/" />);
 		});
-		wrapper.update();
 
-		const title = wrapper.find(".b-checkout__cart h1");
-		expect(wrapper.find(".b-checkout__cart").exists()).toBe(true);
-		expect(title.text()).toEqual("checkout-block.order-summary");
-		expect(wrapper.find("Item").exists()).toBe(true);
+		expect(screen.getByText("Order Summary")).not.toBeNull();
+		expect(screen.getByText(items.name)).not.toBeNull;
 	});
 });

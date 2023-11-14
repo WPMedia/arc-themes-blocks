@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { Heading, Button, Stack, Paragraph, Icon } from "@wpmedia/arc-themes-components";
 
+// TO-DO: Change the Icon <Icon name="ChevronRight" /> to Check <Icon name="Check"/>
 const OfferCard = ({
 	headline,
 	subHeadline,

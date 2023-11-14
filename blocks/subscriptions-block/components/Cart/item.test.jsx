@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render } from "@testing-library/react";
 import Item from "./item";
 
 const BLOCK_CLASS_NAME = "b-checkout";
@@ -11,12 +11,11 @@ describe("Cart Item", () => {
 			description: "Item description",
 			additionalInfo: "Some addtional information for an item",
 		};
-		const wrapper = mount(<Item className={BLOCK_CLASS_NAME} {...props} />);
+		render(<Item className={BLOCK_CLASS_NAME} {...props} />);
 
-		expect(wrapper.find(".b-checkout__cart-item").exists()).toBe(true);
-		expect(wrapper.find(".b-checkout__cart-item--name").text()).toBe(props.name);
-		expect(wrapper.find(".b-checkout__cart-item--description").text()).toBe(props.description);
-		expect(wrapper.find(".b-checkout__cart-item--info").text()).toBe(props.additionalInfo);
+		expect(screen.getByText(props.name)).not.toBeNull();
+		expect(screen.getByText(props.description)).not.toBeNull();
+		expect(screen.getByText(props.additionalInfo)).not.toBeNull();
 	});
 
 	it("renders name, description", () => {
@@ -24,12 +23,11 @@ describe("Cart Item", () => {
 			name: "Name",
 			description: "Item description",
 		};
-		const wrapper = mount(<Item className={BLOCK_CLASS_NAME} {...props} />);
+		render(<Item className={BLOCK_CLASS_NAME} {...props} />);
 
-		expect(wrapper.find(".b-checkout__cart-item").exists()).toBe(true);
-		expect(wrapper.find(".b-checkout__cart-item--name").text()).toBe(props.name);
-		expect(wrapper.find(".b-checkout__cart-item--description").text()).toBe(props.description);
-		expect(wrapper.find(".b-checkout__cart-item--info").exists()).toBe(false);
+		expect(screen.getByText(props.name)).not.toBeNull();
+		expect(screen.getByText(props.description)).not.toBeNull();
+		expect(screen.getByText(props.additionalInfo)).toBeNull();
 	});
 
 	it("renders name only", () => {
@@ -38,9 +36,8 @@ describe("Cart Item", () => {
 		};
 		const wrapper = mount(<Item className={BLOCK_CLASS_NAME} {...props} />);
 
-		expect(wrapper.find(".b-checkout__cart-item").exists()).toBe(true);
-		expect(wrapper.find(".b-checkout__cart-item--name").text()).toBe(props.name);
-		expect(wrapper.find(".b-checkout__cart-item--description").exists()).toBe(false);
-		expect(wrapper.find(".b-checkout__cart-item--info").exists()).toBe(false);
+		expect(screen.getByText(props.name)).not.toBeNull();
+		expect(screen.getByText(props.description)).toBeNull();
+		expect(screen.getByText(props.additionalInfo)).toBeNull();
 	});
 });

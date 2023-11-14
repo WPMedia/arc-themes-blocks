@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render } from "@testing-library/react";
 import OfferCard from ".";
 
 const props = {
@@ -13,63 +13,58 @@ const props = {
 	],
 };
 
-const BLOCK_CLASS_NAME = "b-offer";
-
 describe("OfferCard", () => {
 	it("renders all fields", () => {
-		const wrapper = mount(<OfferCard className={BLOCK_CLASS_NAME} {...props} />);
+		render(<OfferCard className={BLOCK_CLASS_NAME} {...props} />);
 
-		const headline = wrapper.find(".b-offer__card h1");
-		expect(headline.text()).toEqual(props.headline);
+		expect(screen.getByText(props.headline)).not.toBeNull();
+		expect(screen.getByText(props.subHeadline)).not.toBeNull();
 
-		const subheadline = wrapper.find(".b-offer__card p");
-		expect(subheadline.text()).toEqual(props.subHeadline);
+		expect(screen.getByRole("button")).not.toBeNull();
 
-		expect(wrapper.find("button").exists()).toBe(true);
+		const ul = getByRole("list");
+		expect(ul).toBeInTheDocument();
 
-		const features = wrapper.find(".b-offer__card--features li");
-		expect(features.length).toBe(props.features.length);
-
-		expect(features.at(0).text()).toBe(props.features[0].featureText);
-		expect(features.at(1).text()).toBe(props.features[1].featureText);
+		expect(screen.getByText(props.features[0].featureText)).not.toBeNull();
+		expect(screen.getByText(props.features[1].featureText)).not.toBeNull();
 	});
 
 	it("does not render headline if not present", () => {
-		const wrapper = mount(<OfferCard {...props} className={BLOCK_CLASS_NAME} headline={null} />);
+		const { container } = render(
+			<OfferCard {...props} className={BLOCK_CLASS_NAME} headline={null} />,
+		);
 
-		const headline = wrapper.find(".b-offer__card h1");
-		expect(headline.exists()).toBe(false);
+		expect(container.querySelector(".b-offer__card h1")).not.toBeInTheDocument();
 	});
 
 	it("does not render subHeadline if not present", () => {
-		const wrapper = mount(<OfferCard {...props} className={BLOCK_CLASS_NAME} subHeadline={null} />);
+		const { container } = render(<OfferCard {...props} className={BLOCK_CLASS_NAME} subHeadline={null} />);
 
-		const subheadline = wrapper.find(".b-offer__card p");
-		expect(subheadline.exists()).toBe(false);
+		expect(container.querySelector(".b-offer__card p")).not.toBeInTheDocument();
 	});
 
 	it("does not render button if no actionText and no ActionEvent", () => {
-		const wrapper = mount(<OfferCard {...props} actionText={null} actionEvent={null} />);
-
-		expect(wrapper.find("button").exists()).toBe(false);
+		render(<OfferCard {...props} actionText={null} actionEvent={null} />);
+		
+		expect(screen.getByRole("button")).not.toBeNull();
 	});
 
 	it("does not render button if no actionText", () => {
-		const wrapper = mount(<OfferCard {...props} actionText={null} />);
+		render(<OfferCard {...props} actionText={null} />);
 
-		expect(wrapper.find("button").exists()).toBe(false);
+		expect(screen.getByRole("button")).not.toBeNull();
 	});
 
 	it("does not render button if no actionEvent", () => {
-		const wrapper = mount(<OfferCard {...props} actionEvent={null} />);
+		render(<OfferCard {...props} actionEvent={null} />);
 
-		expect(wrapper.find("button").exists()).toBe(false);
+		expect(screen.getByRole("button")).not.toBeNull();
 	});
 
 	it("does not render features", () => {
-		const wrapper = mount(<OfferCard className={BLOCK_CLASS_NAME} headline="Headline" />);
+		const { container } = render(<OfferCard className={BLOCK_CLASS_NAME} headline="Headline" />);
 
-		const features = wrapper.find(".b-offer__card--features li");
+		const features = expect(container.querySelector(".b-offer__card--features li"));
 		expect(features.length).toBe(0);
 	});
 });

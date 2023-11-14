@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render } from "@testing-library/react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -9,7 +9,7 @@ import PaymentForm from "./index";
 const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
 it("renders", () => {
-	const wrapper = mount(
+	render(
 		<Elements stripe={stripePromise}>
 			<PaymentForm
 				formTitle="Payment Method and Information"
@@ -18,7 +18,10 @@ it("renders", () => {
 			/>
 		</Elements>
 	);
-	expect(wrapper.find("button").text()).toBe("Purchase Subscription");
-	expect(wrapper.find("h2").text()).toBe("Payment Method and Information");
-	expect(wrapper.find("label").text()).toBe("Credit card information");
+
+	expect(screen.getByRole("button")).not.toBeNull();
+	expect(screen.getByText("Purchase Subscription")).not.toBeNull();
+
+	expect(screen.getByText("Payment Method and Information")).not.toBeNull();
+	expect(screen.getByText("Credit card information")).not.toBeNull();
 });

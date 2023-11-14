@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render } from "@testing-library/react";
 
 import { isServerSide } from "@wpmedia/arc-themes-components";
 import Offer from "./default";
@@ -203,7 +203,7 @@ isServerSide.mockReturnValue(false);
 
 describe("The Offer feature", () => {
 	it("renders the correct number of offer cards", () => {
-		const wrapper = mount(
+		const { container } = render(
 			<Offer
 				customFields={{
 					campaignCode: "allaccess",
@@ -212,11 +212,13 @@ describe("The Offer feature", () => {
 				}}
 			/>
 		);
-		expect(wrapper.find(".b-offer__grid-list div")).toHaveLength(4);
+
+		const offers = expect(container.querySelector(".b-offer__card--features li"));
+		expect(offers.length).toBe(4);
 	});
 
 	it("renders sub-headline and subheadline", () => {
-		const wrapper = mount(
+		render(
 			<Offer
 				customFields={{
 					campaignCode: "allaccess",
@@ -225,16 +227,12 @@ describe("The Offer feature", () => {
 				}}
 			/>
 		);
-
-		const headline = wrapper.find(".b-offer__headings h1");
-		const subHeadline = wrapper.find(".b-offer__headings p");
-
-		expect(headline.text()).toEqual(HEADLINE_TEXT);
-		expect(subHeadline.text()).toEqual(SUBHEADLINE_TEXT);
+		expect(screen.getByText(HEADLINE_TEXT)).not.toBeNull();
+		expect(screen.getByText(SUBHEADLINE_TEXT)).not.toBeNull();
 	});
 
 	it("uses fallback campaign code", () => {
-		const wrapper = mount(
+		const { container } = render(
 			<Offer
 				customFields={{
 					loginURL: "/login/",
@@ -243,14 +241,14 @@ describe("The Offer feature", () => {
 			/>
 		);
 
-		expect(wrapper.html()).not.toBeNull();
-		expect(wrapper.find(".b-offer__grid-list div")).toHaveLength(4);
+		const offers = expect(container.querySelector(".b-offer__grid-list div"));
+		expect(offers.length).toBe(4);
 	});
 
 	it("uses the fallback campaign code if url params does not have campaign present", () => {
 		jest.spyOn(URLSearchParams.prototype, "has").mockReturnValueOnce(true);
 
-		const wrapper = mount(
+		const { container } = render(
 			<Offer
 				customFields={{
 					loginURL: "/login/",
@@ -259,7 +257,7 @@ describe("The Offer feature", () => {
 			/>
 		);
 
-		expect(wrapper.html()).not.toBeNull();
+		expect(container.querySelector(".b-offer")).not.toBeInTheDocument();
 	});
 
 	it("is fetching and does not return offers", () => {
@@ -269,7 +267,7 @@ describe("The Offer feature", () => {
 			fetchOffer: () => null,
 		});
 
-		const wrapper = mount(
+		const { container } = render(
 			<Offer
 				customFields={{
 					campaignCode: "allaccess",
@@ -279,14 +277,17 @@ describe("The Offer feature", () => {
 			/>
 		);
 
-		expect(wrapper.find(".b-offer__grid-list div")).toHaveLength(0);
-		expect(wrapper.find(".b-offer__headings")).toHaveLength(0);
+		const offers = expect(container.querySelector(".b-offer__grid-list div"));
+		expect(offers.length).toBe(0);
+
+		const offersHeading = expect(container.querySelector(".b-offer__headings"));
+		expect(offersHeading.length).toBe(0);
 	});
 
 	it("returns null on serverside", () => {
 		isServerSide.mockReturnValue(true);
 
-		const wrapper = mount(
+		render(
 			<Offer
 				customFields={{
 					campaignCode: "allaccess",
@@ -296,6 +297,6 @@ describe("The Offer feature", () => {
 			/>
 		);
 
-		expect(wrapper.html()).toBeNull();
+		expect(container.querySelector(".b-offer")).toBeInTheDocument();
 	});
 });

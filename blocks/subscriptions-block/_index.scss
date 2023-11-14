@@ -58,6 +58,66 @@
 				@include scss.block-components("checkout-payment-form--stripe-input-container");
 				@include scss.block-properties("checkout-payment-form--stripe-input-container");
 			}
+
+			&--stripe-label {
+				@include scss.block-components("checkout-payment-form--stripe-label");
+				@include scss.block-properties("checkout-payment-form--stripe-label");
+			}
+
+			&--stripe-element {
+				@include scss.block-components("checkout-payment-form--stripe-element");
+				@include scss.block-properties("checkout-payment-form--stripe-element");
+			}
+
+			&--stripe-cardDetails {
+				@include scss.block-components("checkout-payment-form--stripe-cardDetails");
+				@include scss.block-properties("checkout-payment-form--stripe-cardDetails");
+			}
+
+			&--stripe-countryDetails {
+				@include scss.block-components("checkout-payment-form--stripe-countryDetails");
+				@include scss.block-properties("checkout-payment-form--stripe-countryDetails");
+			}
+
+			&--stripe-row {
+				@include scss.block-components("checkout-payment-form--stripe-row");
+				@include scss.block-properties("checkout-payment-form--stripe-row");
+			}
+
+			&--border-bottom {
+				@include scss.block-components("checkout-payment-form--border-bottom");
+				@include scss.block-properties("checkout-payment-form--border-bottom");
+			}
+
+			&--border-right {
+				@include scss.block-components("checkout-payment-form--border-right");
+				@include scss.block-properties("checkout-payment-form--border-right");
+			}
+		}
+
+		&-information {
+			@include scss.block-components("checkout-payment-information");
+			@include scss.block-properties("checkout-payment-information");
+		}
+	}
+
+	&__test {
+		@include scss.block-components("checkout-payment-test");
+		@include scss.block-properties("checkout-payment-test");
+
+		&-1 {
+			@include scss.block-components("checkout-payment-test-1");
+			@include scss.block-properties("checkout-payment-test-1");
+		}
+
+		&-2 {
+			@include scss.block-components("checkout-payment-test-2");
+			@include scss.block-properties("checkout-payment-test-2");
+		}
+
+		&-row {
+			@include scss.block-components("checkout-payment-test-row");
+			@include scss.block-properties("checkout-payment-test-row");
 		}
 	}
 
@@ -84,6 +144,11 @@
 	&__wrapper {
 		@include scss.block-components("offer-wrapper");
 		@include scss.block-properties("offer-wrapper");
+	}
+
+	&__children-grid {
+		@include scss.block-components("offer-children-grid");
+		@include scss.block-properties("offer-children-grid");
 	}
 
 	&__grid-list {

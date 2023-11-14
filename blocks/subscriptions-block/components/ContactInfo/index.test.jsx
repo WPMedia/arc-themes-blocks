@@ -1,6 +1,4 @@
 import React from "react";
-import { mount } from "enzyme";
-
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { act } from "react-dom/test-utils";
@@ -13,7 +11,7 @@ describe("ContactInfo", () => {
 	it("renders form and associated inputs", () => {
 		const mockCallBack = jest.fn();
 		const mockCallBack2 = jest.fn();
-		const wrapper = mount(
+		render(
 			<ContactInfo
 				className={BLOCK_CLASS_NAME}
 				callback={mockCallBack}
@@ -22,15 +20,14 @@ describe("ContactInfo", () => {
 			/>
 		);
 
-		expect(wrapper.find(".b-checkout__contact-info").exists()).toBe(true);
-		expect(wrapper.find("input").length).toEqual(4);
-		expect(wrapper.find("button").length).toEqual(1);
+		expect(screen.getByRole("input").length).toEqual(4);
+		expect(screen.getByRole("button").length).toEqual(1);
 	});
 
 	it("Does not call form callback when form is not filled out", () => {
 		const mockCallBack = jest.fn();
 		const mockCallBack2 = jest.fn();
-		const wrapper = mount(
+		render(
 			<ContactInfo
 				className={BLOCK_CLASS_NAME}
 				callback={mockCallBack}
@@ -38,8 +35,7 @@ describe("ContactInfo", () => {
 				logoutCallback={mockCallBack2}
 			/>
 		);
-		const btn = wrapper.find("button");
-		btn.simulate("click");
+		fireEvent.click(screen.getByRole("button"));
 		expect(mockCallBack.mock.calls.length).toEqual(0);
 	});
 
@@ -83,7 +79,7 @@ describe("ContactInfo", () => {
 	it("renders text and icon indicating user is signed in through Google", () => {
 		const mockCallBack = jest.fn();
 		const mockCallBack2 = jest.fn();
-		const wrapper = mount(
+		render(
 			<ContactInfo
 				callback={mockCallBack}
 				user={{
@@ -112,14 +108,13 @@ describe("ContactInfo", () => {
 			/>
 		);
 
-		expect(wrapper.find(".b-checkout__identity-row").exists()).toBe(true);
-		expect(wrapper.find(".b-checkout__identity-row img").prop("alt")).toMatch("Google");
+		expect(screen.getByRole("svg")).not.toBeNull();
 	});
 
 	it("renders text and icon indicating user is signed in through Facebook", () => {
 		const mockCallBack = jest.fn();
 		const mockCallBack2 = jest.fn();
-		const wrapper = mount(
+		render(
 			<ContactInfo
 				callback={mockCallBack}
 				user={{
@@ -148,30 +143,32 @@ describe("ContactInfo", () => {
 			/>
 		);
 
-		expect(wrapper.find(".b-checkout__identity-row").exists()).toBe(true);
-		expect(wrapper.find(".b-checkout__identity-row img").prop("alt")).toMatch("Facebook");
+		expect(screen.getByRole("svg")).not.toBeNull();
 	});
 
 	it("renders text indicating user is signed in through password", () => {
 		const mockCallBack = jest.fn();
 		const mockCallBack2 = jest.fn();
-		const wrapper = mount(
+
+		const user = {
+			email: "arcuser@gmail.com",
+			firstName: "Arc",
+			lastName: "Xp",
+			identities: [
+				{
+					userName: "106487204473538668210",
+					passwordReset: false,
+					type: "Password",
+					lastLoginDate: 1639164736000,
+					locked: false,
+				}
+			]
+		};
+
+		render(
 			<ContactInfo
 				callback={mockCallBack}
-				user={{
-					email: "arcuser@gmail.com",
-					firstName: "Arc",
-					lastName: "Xp",
-					identities: [
-						{
-							userName: "106487204473538668210",
-							passwordReset: false,
-							type: "Password",
-							lastLoginDate: 1639164736000,
-							locked: false,
-						},
-					],
-				}}
+				user={user}
 				signedInIdentity={{
 					userName: "106487204473538668210",
 					passwordReset: false,
@@ -184,6 +181,6 @@ describe("ContactInfo", () => {
 			/>
 		);
 
-		expect(wrapper.find(".b-checkout__identity-row").exists()).toBe(true);
+		expect(screen.getByText(`Signed in as ${user.email}`)).not.toBeNull();
 	});
 });

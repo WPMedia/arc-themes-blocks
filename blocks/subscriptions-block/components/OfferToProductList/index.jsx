@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import useSales from "../useSales";
-import GridList from "../GridList";
+import { Grid } from "@wpmedia/arc-themes-components";
 import OfferCard from "../OfferCard";
 
 const OfferToProductList = ({ offer, isLoggedIn, checkoutURL, loginURL, className }) => {
@@ -59,8 +59,11 @@ const OfferToProductList = ({ offer, isLoggedIn, checkoutURL, loginURL, classNam
 
 	const builtOffers = buildOffers();
 
+	const childCount = builtOffers.length;
+	const additionalClass = childCount ? `${className}__grid-list--${childCount}` : "";
+
 	return (
-		<GridList className={className}>
+		<Grid className={`${className}__grid-list ${additionalClass}`}>
 			{builtOffers.map((builtOffer) => (
 				<OfferCard
 					key={builtOffer.key}
@@ -72,7 +75,7 @@ const OfferToProductList = ({ offer, isLoggedIn, checkoutURL, loginURL, classNam
 					className={className}
 				/>
 			))}
-		</GridList>
+			</Grid>
 	);
 };
 

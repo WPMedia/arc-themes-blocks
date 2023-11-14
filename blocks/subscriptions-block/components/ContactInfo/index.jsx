@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
 
-import { usePhrases, Heading, Input, Button, Stack, Image } from "@wpmedia/arc-themes-components";
+import { usePhrases, Heading, Input, Button, Stack, Image, Icon } from "@wpmedia/arc-themes-components";
 
 import GoogleIcon from "./google.svg";
-import FacebookIcon from "./facebook.svg";
 
 const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, className }) => {
 	const formRef = useRef();
@@ -52,6 +51,7 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, classNa
 				case "google":
 					return (
 						<div className={`${className}__identity-row`}>
+							{/* {TO-DO: Change the Icon to Google <Icon name="Google"/> } */}
 							<Image alt="Google" title="Google" src={GoogleIcon} />
 							<span>
 								{phrases.t("checkout-block.identity-social", {
@@ -64,7 +64,7 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, classNa
 				case "facebook":
 					return (
 						<div className={`${className}__identity-row`}>
-							<Image alt="Facebook" title="Facebook" src={FacebookIcon} />
+							<Icon name="Facebook"/>
 							<span>
 								{phrases.t("checkout-block.identity-social", {
 									email: user.email,

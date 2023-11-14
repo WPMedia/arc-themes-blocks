@@ -1,6 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
-import { act } from "@testing-library/react";
+import { act, render } from "@testing-library/react";
 import OfferToProductList from "./index";
 import useOffer from "../useOffer";
 import OfferCard from "../OfferCard";
@@ -190,7 +189,7 @@ useOffer.mockReturnValue({
 
 describe("The OfferToProductList component", () => {
 	it("renders the correct number of offer cards", () => {
-		const wrapper = mount(
+		const { container } =  render(
 			<OfferToProductList
 				isLoggedIn
 				loginURL="/login/"
@@ -200,9 +199,9 @@ describe("The OfferToProductList component", () => {
 		);
 
 		act(() => {
-			wrapper.setProps({});
+			container.setProps({});
 		});
 
-		expect(wrapper.find(OfferCard)).toHaveLength(4);
+		expect(container.find(OfferCard)).toHaveLength(4);
 	});
 });

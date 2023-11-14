@@ -5,6 +5,8 @@ on:
       # only run on branch names that match:
       # arc-themes-release-version-{numbers}.{numbers} per product
       - arc-themes-release-version-[0-9]+\.[0-9]+
+      # arc-themes-release-version-{numbers}.{numbers}.{numbers} per product
+      - arc-themes-release-version-[0-9]+\.[0-9]+\.[0-9]+
     # only run on changes to these files
     paths:
       - "**.js"

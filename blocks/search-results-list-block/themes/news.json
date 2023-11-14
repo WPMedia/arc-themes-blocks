@@ -48,7 +48,7 @@
 					"input-input": {
 						"font-family": "var(--font-family-primary)",
 						"font-weight": "var(--global-font-weight-7)",
-						"padding-left": "var(--global-spacing-7)",
+						"padding-inline-start": "var(--global-spacing-7)",
 						"width": "100%"
 					}
 				}

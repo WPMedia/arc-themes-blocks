@@ -7,8 +7,14 @@ import useSales from "../useSales";
 import currency from "../../utils/currency";
 import Item from "./item";
 
-const getPaymentInfo = ({ origin, endpoint, priceCode }) =>
-	fetch(`${origin}${endpoint}${priceCode}/1/${new Date().getTime()}`, {}).then((res) => res.json());
+const getPaymentInfo = ({ origin, endpoint, priceCode }) => {
+	const dateMidnight = new Date();
+	dateMidnight.setUTCHours(0, 0, 0, 0);
+
+	return fetch(`${origin}${endpoint}${priceCode}/1/${dateMidnight}`, {}).then((res) =>
+		res.json(),
+	);
+};
 
 const Cart = ({ offerURL, className }) => {
 	const { arcSite } = useFusionContext();
@@ -45,8 +51,8 @@ const Cart = ({ offerURL, className }) => {
 					fetchPaymentInfo(item.priceCode).then((priceSummary) => ({
 						...item,
 						priceSummary,
-					}))
-				)
+					})),
+				),
 			).then((results) => {
 				updatedCart.items = results;
 			});
@@ -58,7 +64,7 @@ const Cart = ({ offerURL, className }) => {
 			setCartItems(
 				await Sales.getCart()
 					.then(fetchCartItemSummaries)
-					.catch(() => [])
+					.catch(() => []),
 			);
 			setIsFetching(false);
 		};

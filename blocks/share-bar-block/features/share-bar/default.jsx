@@ -69,7 +69,7 @@ function getLogoComponent(type) {
 		case "pinterest":
 			return <PinterestAltIcon fill="#BD081C" />;
 		case "twitter":
-			return <TwitterIcon fill="#1DA1F2" />;
+			return <TwitterIcon fill="#384355" />;
 		default:
 		case "email":
 			return <EnvelopeIcon fill="#C72A22" />;

@@ -96,8 +96,8 @@ const SignUp = ({ customFields, arcSite }) => {
 			},
 			specialCharacters: {
 				value: pwSpecialCharacters,
-				message: phrases.t("identity-block.password-requirements-uppercase", {
-					requirementCount: pwUppercase,
+				message: phrases.t("identity-block.password-requirements-special", {
+					requirementCount: pwSpecialCharacters,
 				}),
 			},
 		},

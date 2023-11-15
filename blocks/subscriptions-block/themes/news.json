@@ -116,6 +116,7 @@
 						"margin": "0 var(--global-spacing-2) 0 0"
 					},
 					"icon": {
+						"fill": "#415993",
 						"width": "var(--global-spacing-4)",
 						"height": "var(--global-spacing-4)",
 						"margin": "0 var(--global-spacing-2) 0 0"

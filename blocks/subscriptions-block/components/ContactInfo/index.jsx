@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
 import { usePhrases, Heading, Input, Button, Stack, Image, Icon } from "@wpmedia/arc-themes-components";
-
+import countryCodes from "./countryCodes";
 import GoogleIcon from "./google.svg";
 
 const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, className }) => {
@@ -32,11 +32,10 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, classNa
 
 	const phrases = usePhrases();
 
-	// TO-DO: Uncomment once Select component is done
-	// const getTranslatedCountries = countryCodes.map((entry) => ({
-	// 	code: entry.code,
-	// 	name: phrases.t(entry.key),
-	// }));
+	const getTranslatedCountries = countryCodes.map((entry) => ({
+		label: phrases.t(entry.key),
+		value: entry.code,
+	}));
 
 	const signOutBtn = (
 		<Button variant="secondary" size="medium" onClick={handleLogout}>
@@ -144,8 +143,9 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, classNa
 				onChange={(value) => {
 					handleInputChange("country", value);
 				}}
+				options={getTranslatedCountries}
 				showDefaultError={false}
-				type="text"
+				type="select"
 				validationErrorMessage={phrases.t("checkout-block.country-requirements")}
 			/>
 			<Button size="medium" variant="primary" fullWidth type="submit">

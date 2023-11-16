@@ -2,11 +2,10 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { useFusionContext } from "fusion:context";
-
+import { useIdentity } from "@wpmedia/arc-themes-components";
 import HeaderAccountAction from "./default";
-import useIdentity from "../../components/identity";
 
-jest.mock("../../components/identity", () => ({
+jest.mock("@wpmedia/arc-themes-components", () => ({
 	__esModule: true,
 	default: jest.fn(() => ({
 		Identity: {

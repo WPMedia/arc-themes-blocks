@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { act } from "react-dom/test-utils";
-import useIdentity from "../../components/identity";
+import { useIdentity } from "@wpmedia/arc-themes-components";
 import AccountManagement, { AccountManagementPresentational } from "./default";
 
 jest.mock("fusion:properties", () =>
@@ -11,7 +11,7 @@ jest.mock("fusion:properties", () =>
 	}))
 );
 
-jest.mock("../../components/identity");
+jest.mock("@wpmedia/arc-themes-components");
 
 jest.mock("./_children/PasswordEditableFieldContainer", () => () => {
 	const MockName = "password-editable-field-container-mock";

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
+import { useIdentity } from "@wpmedia/arc-themes-components";
 import { GoogleSignInContext } from "./googleContext";
-import useIdentity from "../../identity";
 
 function useSocialSignIn(redirectURL, onError = () => {}) {
 	const { Identity } = useIdentity();

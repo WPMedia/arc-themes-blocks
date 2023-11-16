@@ -1,9 +1,9 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { useIdentity } from "@wpmedia/arc-themes-components";
 import ForgotPassword from "./default";
-import useIdentity from "../../components/identity";
 
-jest.mock("../../components/identity");
+jest.mock("@wpmedia/arc-themes-components");
 
 const resetMock = jest.fn(() => Promise.resolve());
 const resetFailMock = jest.fn(() => Promise.reject());

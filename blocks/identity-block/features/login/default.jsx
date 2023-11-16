@@ -6,6 +6,7 @@ import getTranslatedPhrases from "fusion:intl";
 
 import { Input } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
+
 import useIdentity from "../../components/identity";
 import useLogin from "../../components/login";
 

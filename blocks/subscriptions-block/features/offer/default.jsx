@@ -83,4 +83,5 @@ Offer.propTypes = {
 };
 
 Offer.label = "Subscriptions Offer - Arc Block";
+
 export default Offer;

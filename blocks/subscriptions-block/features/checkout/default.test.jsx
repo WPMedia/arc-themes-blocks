@@ -4,12 +4,12 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
 import { act } from "react-dom/test-utils";
-import useIdentity from "@wpmedia/identity-block/components/Identity";
+import { useIdentity } from "@wpmedia/arc-themes-components";
 import useSales from "../../components/useSales";
 
 import Checkout from "./default";
 
-jest.mock("@wpmedia/identity-block/components/Identity");
+jest.mock("@wpmedia/arc-themes-components");
 
 jest.mock("../../components/useSales");
 

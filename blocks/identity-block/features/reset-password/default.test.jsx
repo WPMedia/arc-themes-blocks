@@ -2,12 +2,12 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import ResetPassword from "./default";
 import FormPasswordConfirm from "../../components/form-password-confirm";
-import useIdentity from "../../components/identity";
+import { useIdentity } from "@wpmedia/arc-themes-components";
 
 const successActionURL = "/account/login/";
 
 jest.mock("../../components/form-password-confirm");
-jest.mock("../../components/identity");
+jest.mock("@wpmedia/arc-themes-components");
 
 jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({

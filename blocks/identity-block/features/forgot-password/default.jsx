@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Heading, Input, Paragraph } from "@wpmedia/arc-themes-components";
+import { Heading, Input, Paragraph, useIdentity } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
-import useIdentity from "../../components/identity";
 
 const BLOCK_CLASS_NAME = "b-forgot-password";
 

@@ -1,13 +1,13 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import SocialSignOn from "../../components/social-sign-on";
-import useIdentity from "../../components/identity";
+import { useIdentity } from "@wpmedia/arc-themes-components";
 import SocialSignOnBlock from "./default";
 
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
 
 jest.mock("../../components/social-sign-on");
-jest.mock("../../components/identity");
+jest.mock("@wpmedia/arc-themes-components");
 
 const defaultCustomFields = {
 	redirectURL: "",

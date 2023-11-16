@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useIdentity from "../identity";
+import { useIdentity } from "@wpmedia/arc-themes-components";
 import validateURL from "../../utils/validate-redirect-url";
 
 const useLogin = ({ isAdmin, redirectURL, redirectToPreviousPage, loggedInPageLocation }) => {

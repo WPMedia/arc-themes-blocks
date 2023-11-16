@@ -1,10 +1,10 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import SocialSignOn from "./index";
-import useIdentity from "../identity";
+import { useIdentity } from "@wpmedia/arc-themes-components";
 import { GoogleSignInProvider } from "./utils/googleContext";
 
-jest.mock("../identity");
+jest.mock("@wpmedia/arc-themes-components");
 
 describe("Identity Social Login Component", () => {
 	it("renders nothing if config settings are false", () => {

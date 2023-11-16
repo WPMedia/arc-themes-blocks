@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-
-import { usePhrases, Heading, Link } from "@wpmedia/arc-themes-components";
-import { useIdentity } from "@wpmedia/identity-block";
-
+import { usePhrases, Heading, Link, useIdentity } from "@wpmedia/arc-themes-components";
 import useSales from "../../components/useSales";
 import Cart from "../../components/Cart";
 import ContactInfo from "../../components/ContactInfo";

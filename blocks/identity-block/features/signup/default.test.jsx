@@ -1,11 +1,11 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { useIdentity } from "@wpmedia/arc-themes-components";
 import Signup from "./default";
-import useIdentity from "../../components/identity";
 
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
 
-jest.mock("../../components/identity");
+jest.mock("@wpmedia/arc-themes-components");
 
 describe("With unintialized identity", () => {
 	it("renders nothing if identity not initialized", () => {

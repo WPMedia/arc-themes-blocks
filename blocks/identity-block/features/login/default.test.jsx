@@ -1,9 +1,9 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import Login from "./default";
-import useIdentity from "../../components/identity";
+import { useIdentity } from "@wpmedia/arc-themes-components";
 
-jest.mock("../../components/identity");
+jest.mock("@wpmedia/arc-themes-components");
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
 
 const defaultCustomFields = {

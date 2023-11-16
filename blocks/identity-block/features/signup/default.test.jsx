@@ -1,7 +1,7 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
-import Signup from "./default";
 import { useIdentity } from "@wpmedia/arc-themes-components";
+import Signup from "./default";
 
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
 

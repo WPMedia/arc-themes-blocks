@@ -1,8 +1,8 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { useIdentity } from "@wpmedia/arc-themes-components";
 import ResetPassword from "./default";
 import FormPasswordConfirm from "../../components/form-password-confirm";
-import { useIdentity } from "@wpmedia/arc-themes-components";
 
 const successActionURL = "/account/login/";
 

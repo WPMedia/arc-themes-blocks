@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import SocialSignOn from "../../components/social-sign-on";
 import { useIdentity } from "@wpmedia/arc-themes-components";
+import SocialSignOn from "../../components/social-sign-on";
 import SocialSignOnBlock from "./default";
 
 jest.mock("fusion:properties", () => jest.fn(() => ({})));

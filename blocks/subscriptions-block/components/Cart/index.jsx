@@ -11,7 +11,7 @@ const getPaymentInfo = ({ origin, endpoint, priceCode }) => {
 	const dateMidnight = new Date();
 	dateMidnight.setUTCHours(0, 0, 0, 0);
 
-	return fetch(`${origin}${endpoint}${priceCode}/1/${dateMidnight}`, {}).then((res) =>
+	return fetch(`${origin}${endpoint}${priceCode}/1/${dateMidnight.getTime()}`, {}).then((res) =>
 		res.json(),
 	);
 };

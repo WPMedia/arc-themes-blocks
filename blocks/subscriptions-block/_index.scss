@@ -204,3 +204,45 @@
 	@include scss.block-components("offer");
 	@include scss.block-properties("offer");
 }
+
+.b-paywall {
+	&__overlay {
+		&-content {
+			@include scss.block-components("paywall-overlay-content");
+			@include scss.block-properties("paywall-overlay-content");
+		}
+
+		@include scss.block-components("paywall-overlay");
+		@include scss.block-properties("paywall-overlay");
+	}
+
+	&__subscription-dialog {
+		&-link-prompt {
+			@include scss.block-components("paywall-subscription-dialog-reason-prompt");
+			@include scss.block-properties("paywall-subscription-dialog-reason-prompt");
+
+			&-pre-link {
+				@include scss.block-components("paywall-subscription-dialog-link-prompt-pre-link");
+				@include scss.block-properties("paywall-subscription-dialog-link-prompt-pre-link");
+			}
+
+			&-link {
+				@include scss.block-components("paywall-subscription-dialog-link-prompt-link");
+				@include scss.block-properties("paywall-subscription-dialog-link-prompt-link");
+			}
+		}
+
+		&-offer-info{
+			@include scss.block-components("paywall-subscription-dialog-offer-info");
+			@include scss.block-properties("paywall-subscription-dialog-offer-info");
+		}
+
+		&-subheadline{
+			@include scss.block-components("paywall-subscription-dialog-subheadline");
+			@include scss.block-properties("paywall-subscription-dialog-subheadline");
+		}
+
+		@include scss.block-components("paywall-subscription-dialog");
+		@include scss.block-properties("paywall-subscription-dialog");
+	}
+}

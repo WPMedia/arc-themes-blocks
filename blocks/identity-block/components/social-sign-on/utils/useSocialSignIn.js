@@ -1,17 +1,24 @@
 import { useContext, useEffect, useState } from "react";
 import { useIdentity } from "@wpmedia/arc-themes-components";
 import { GoogleSignInContext } from "./googleContext";
+import useOIDCLogin from "../../../utils/useOIDCLogin";
 
-function useSocialSignIn(redirectURL, onError = () => {}) {
+function useSocialSignIn(redirectURL, onError = () => {}, isOIDC) {
 	const { Identity } = useIdentity();
 	const { isGoogleLoaded } = useContext(GoogleSignInContext);
 	const [config, setConfig] = useState(() => Identity?.configOptions ?? {});
+	const { loginByOIDC } = useOIDCLogin();
 
 	useEffect(() => {
 		window.onFacebookSignOn = async () => {
 			try {
 				await Identity.facebookSignOn();
-				window.location = redirectURL;
+
+				if (isOIDC) {
+					loginByOIDC();
+				} else {
+					window.location = redirectURL;
+				}
 			} catch (e) {
 				onError();
 			}
@@ -34,7 +41,12 @@ function useSocialSignIn(redirectURL, onError = () => {}) {
 			const googleClientId = config.googleClientId.split(",")?.[0];
 			const googleIdConfig = {
 				client_id: googleClientId,
-				callback: (credentialResponse) => Identity.signInWithGoogle(credentialResponse),
+				callback: (credentialResponse) =>
+					Identity.signInWithGoogle(credentialResponse).then(() => {
+						if (isOIDC) {
+							loginByOIDC();
+						}
+					}),
 				auto_select: true,
 			};
 
@@ -53,6 +65,8 @@ function useSocialSignIn(redirectURL, onError = () => {}) {
 			Identity.isLoggedIn().then((isLoggedIn) => {
 				if (!isLoggedIn) {
 					window.google.accounts.id.prompt();
+				} else if (isLoggedIn && isOIDC) {
+					loginByOIDC();
 				}
 			});
 		}

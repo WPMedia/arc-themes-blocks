@@ -6,72 +6,34 @@ import getTranslatedPhrases from "fusion:intl";
 import { Input, useIdentity } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
 import useLogin from "../../components/login";
+import useOIDCLogin from "../../utils/useOIDCLogin";
 
 const BLOCK_CLASS_NAME = "b-login-form";
 
 const Login = ({ customFields }) => {
 	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC } = customFields;
 
+	const url_string = window.location.href;
+	const url = new URL(url_string);
+
 	const { isAdmin, arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
-
+	const isOIDC = OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
 	const { Identity, isInitialized } = useIdentity();
-
 	const [error, setError] = useState();
-
 	const { loginRedirect } = useLogin({
 		isAdmin,
 		redirectURL,
 		redirectToPreviousPage,
 		loggedInPageLocation,
+		OIDC,
 	});
+	const { loginByOIDC } = useOIDCLogin();
 
 	if (!isInitialized) {
 		return null;
 	}
-
-	async function handleLogin() {
-    const url_string = window.location.href;
-    const url = new URL(url_string);
-
-    const queryParams = {
-      response_type: url.searchParams.get("response_type"),
-      scope: url.searchParams.get("scope"),
-      state: url.searchParams.get("state"),
-      client_id: url.searchParams.get("client_id"),
-      redirect_uri: url.searchParams.get("redirect_uri"),
-      nonce: url.searchParams.get("nonce"),
-      code_challenge: url.searchParams.get("code_challenge"),
-      code_challengeMethod: url.searchParams.get("code_challenge_method"),
-    }
-
-    const validQueryParams = Object.keys(queryParams).reduce((acc, key)=> {
-      if (queryParams[key]) {
-        acc[key] = queryParams[key]
-      }
-
-      return acc;
-    }, {})
-
-    await Identity.loginWithArcIdentityAsOIDCProvider(
-      validQueryParams,
-    ).catch((err) => {
-      setError(err.message)
-    });
-  }
-
-	useEffect(() => {
-		if (OIDC) {
-			Identity.isLoggedIn().then(isLoggedIn => {
-				if (isLoggedIn) {
-					return handleLogin()
-				}
-			}).catch((err) => {
-				setError(err.message)
-			})
-		}
-  }, [])
 
 	return (
 		<HeadlinedSubmitForm
@@ -82,8 +44,8 @@ const Login = ({ customFields }) => {
 			onSubmit={({ email, password }) =>
 				Identity.login(email, password)
 					.then(() => {
-						if (OIDC) {
-							handleLogin();
+						if (isOIDC) {
+							loginByOIDC();
 						} else {
 							window.location = loginRedirect;
 						}

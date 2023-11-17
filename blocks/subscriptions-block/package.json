@@ -26,7 +26,6 @@
     "directory": "blocks/subscriptions-block"
   },
   "peerDependencies": {
-    "@wpmedia/identity-block": "^5.20.0",
     "@wpmedia/arc-themes-components": "*"
   },
   "dependencies": {

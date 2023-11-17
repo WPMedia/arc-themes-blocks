@@ -3,8 +3,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { useFusionContext } from "fusion:context";
-import { Button, Icon } from "@wpmedia/arc-themes-components";
-import useIdentity from "../../components/identity";
+import { Button, Icon, useIdentity } from "@wpmedia/arc-themes-components";
 import DropDownLinkListItem from "./_children/DropDownLinkListItem";
 
 const BLOCK_CLASS_NAME = "b-header-account-action";

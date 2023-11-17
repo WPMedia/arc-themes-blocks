@@ -3,10 +3,9 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Paragraph } from "@wpmedia/arc-themes-components";
+import { Paragraph, useIdentity } from "@wpmedia/arc-themes-components";
 import SocialSignOn from "../../components/social-sign-on";
 import useLogin from "../../components/login";
-import useIdentity from "../../components/identity";
 import { GoogleSignInProvider } from "../../components/social-sign-on/utils/googleContext";
 
 const BLOCK_CLASS_NAME = "b-social-sign-on";

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { useIdentity } from "@wpmedia/identity-block";
-import { Heading, Paragraph, isServerSide } from "@wpmedia/arc-themes-components";
+import { Heading, Paragraph, isServerSide, useIdentity } from "@wpmedia/arc-themes-components";
 import useOffer from "../../components/useOffer";
 import OfferToProductList from "../../components/OfferToProductList";
 

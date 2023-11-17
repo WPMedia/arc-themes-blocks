@@ -7,7 +7,6 @@
   "license": "CC-BY-NC-ND-4.0",
   "main": "",
   "files": [
-    "index.js",
     "_index.scss",
     "features",
     "sources",

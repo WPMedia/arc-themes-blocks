@@ -3,10 +3,8 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-
-import { Input } from "@wpmedia/arc-themes-components";
+import { Input, useIdentity } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
-import useIdentity from "../../components/identity";
 import useLogin from "../../components/login";
 
 const BLOCK_CLASS_NAME = "b-login-form";

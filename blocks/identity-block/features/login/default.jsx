@@ -38,7 +38,7 @@ const Login = ({ customFields }) => {
 			formErrorText={error}
 			headline={phrases.t("identity-block.log-in")}
 			onSubmit={({ email, password }) =>
-				Identity.login(email, password)
+				Identity.login(email, password, {rememberMe: true})
 					.then(() => {
 						window.location = loginRedirect;
 					})

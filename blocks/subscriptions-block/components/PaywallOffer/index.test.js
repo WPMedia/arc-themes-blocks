@@ -80,14 +80,17 @@ describe("The PaywallOffer component ", () => {
 			/>
 		);
 
-        expect(screen.getByText("Subscribe to continue reading.")).not.toBeNull();
-        expect(screen.getByText("Already a subscriber?")).not.toBeNull();
-        expect(screen.getByText('Log In.').closest('a')).toHaveAttribute('href', '/account/login');
+		expect(screen.getByText("Subscribe to continue reading.")).not.toBeNull();
+		expect(screen.getByText("Already a subscriber?")).not.toBeNull();
+		expect(screen.getByText("Log In.").closest("a")).toHaveAttribute("href", "/account/login");
 
-        expect(screen.getByText("this the offer title")).not.toBeNull();
-        expect(screen.getByText("this the offer subtitle")).not.toBeNull();
-        expect(screen.getByText("Subscribe")).not.toBeNull();
-        expect(screen.getByText('Subscribe').closest('a')).toHaveAttribute('href', '/offer/?campaign=defaultish');
+		expect(screen.getByText("this the offer title")).not.toBeNull();
+		expect(screen.getByText("this the offer subtitle")).not.toBeNull();
+		expect(screen.getByText("Subscribe")).not.toBeNull();
+		expect(screen.getByText("Subscribe").closest("a")).toHaveAttribute(
+			"href",
+			"/offer/?campaign=defaultish"
+		);
 	});
 
 	it("renders campaignCode if its a url", () => {
@@ -100,18 +103,20 @@ describe("The PaywallOffer component ", () => {
 				usePortal={false}
 			/>
 		);
-        expect(screen.getByText("Subscribe")).not.toBeNull();
-        expect(screen.getByText("Subscribe").closest('a')).toHaveAttribute('href', '/offer/?campaign=./')
+		expect(screen.getByText("Subscribe")).not.toBeNull();
+		expect(screen.getByText("Subscribe").closest("a")).toHaveAttribute(
+			"href",
+			"/offer/?campaign=./"
+		);
 		isUrl.mockReset();
 	});
 
 	it("renders without a query param if campaignCode is not passed", () => {
 		isUrl.mockReturnValue(true);
-		const wrapper = render(
-			<PaywallOffer actionText="Subscribe" actionUrl="/offer/" usePortal={false} />
-		);
-		expect(wrapper.find(".xpmedia-button").text()).toEqual("Subscribe");
-		expect(wrapper.find(".xpmedia-button").prop("href")).toEqual("/offer/");
+		render(<PaywallOffer actionText="Subscribe" actionUrl="/offer/" usePortal={false} />);
+		expect(screen.getByRole("button")).not.toBeNull();
+		expect(screen.getByText("Subscribe")).not.toBeNull();
+		expect(screen.getByRole("button").toHaveAttribute("href", "/offer/"));
 		isUrl.mockReset();
 	});
 });

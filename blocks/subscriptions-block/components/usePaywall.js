@@ -8,9 +8,9 @@ import { isServerSide } from "@wpmedia/arc-themes-components";
 
 const usePaywall = () => {
 	const { arcSite, globalContent } = useFusionContext();
-	const contentIdentifier = globalContent.canonical_url;
-	const contentRestriction = globalContent.content_restrictions.content_code;
-	const contentType = globalContent.type;
+	const contentIdentifier = globalContent?.canonical_url;
+	const contentRestriction = globalContent?.content_restrictions?.content_code;
+	const contentType = globalContent?.type;
 
 	const { api } = getProperties(arcSite);
 
@@ -46,7 +46,7 @@ const usePaywall = () => {
 						setIsPaywalled(true);
 					},
 					section: globalContent.taxonomy?.primary_section._id,
-				}),
+				})
 			);
 		};
 
@@ -55,7 +55,7 @@ const usePaywall = () => {
 			contentIdentifier &&
 			contentRestriction &&
 			isIdentityInitialized &&
-            !isPaywalled &&
+			!isPaywalled &&
 			!isServerSide()
 		) {
 			runPaywall();
@@ -69,9 +69,9 @@ const usePaywall = () => {
 			const triggeringRule = rules.find(({ id }) => triggerId === id);
 
 			// Rule is bypassed by registered or subscribed users
-            // Registered e: [true], ent:[false]
-            // Subscribed (SKU): e: [true, SKU1,...], ent: [false]
-            // Subscribed (entitlement): e: [false], ent: [true, ENT1, ...]
+			// Registered e: [true], ent:[false]
+			// Subscribed (SKU): e: [true, SKU1,...], ent: [false]
+			// Subscribed (entitlement): e: [false], ent: [true, ENT1, ...]
 			if (triggeringRule?.e?.length === 1 && triggeringRule?.e[0] === true && isLoggedIn) {
 				// we currently only support rule triggers of ['>', count]
 				const triggerableRules = ({ rt: [op, count] }) => op === ">" && triggerCount > count;
@@ -84,14 +84,13 @@ const usePaywall = () => {
 					.find(withRestrictedStatus);
 
 				setTriggeredRule(
-					paywallableRule && paywallableRule !== triggeringRule ? paywallableRule : triggeringRule,
+					paywallableRule && paywallableRule !== triggeringRule ? paywallableRule : triggeringRule
 				);
 			} else {
 				setTriggeredRule(triggeringRule);
 			}
 		}
 	}, [results, rules, isLoggedIn]);
-
 
 	if (isServerSide()) {
 		return {
@@ -105,7 +104,11 @@ const usePaywall = () => {
 		isLoggedIn,
 		campaignCode,
 		isPaywalled,
-		isRegisterwalled: triggeredRule?.e?.length === 1 && triggeredRule?.e[0] === true && triggeredRule?.ent?.length === 1 && triggeredRule?.ent[0] === false,
+		isRegisterwalled:
+			triggeredRule?.e?.length === 1 &&
+			triggeredRule?.e[0] === true &&
+			triggeredRule?.ent?.length === 1 &&
+			triggeredRule?.ent[0] === false,
 	};
 };
 

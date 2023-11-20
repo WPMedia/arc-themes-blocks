@@ -3,7 +3,6 @@ import { render } from "@testing-library/react";
 
 import { isServerSide } from "@wpmedia/arc-themes-components";
 
-
 import RegwallOffer from ".";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
@@ -45,7 +44,7 @@ describe("The RegwallOffer component ", () => {
 	});
 
 	it("renders with correct markup", () => {
-		const wrapper = render(
+		render(
 			<RegwallOffer
 				actionText="Subscribe"
 				actionUrl="/account/signup"
@@ -59,12 +58,12 @@ describe("The RegwallOffer component ", () => {
 			/>
 		);
 
-        expect(screen.getByText("Subscribe to continue reading.")).not.toBeNull();
-        expect(screen.getByText("Already a subscriber?")).not.toBeNull();
-        expect(screen.getByText('Log In.').closest('a')).toHaveAttribute('href', '/account/login');
+		expect(screen.getByText("Subscribe to continue reading.")).not.toBeNull();
+		expect(screen.getByText("Already a subscriber?")).not.toBeNull();
+		expect(screen.getByText("Log In.").closest("a")).toHaveAttribute("href", "/account/login");
 
-        expect(screen.getByText("Headline")).not.toBeNull();
-        expect(screen.getByText("Subheadline")).not.toBeNull();
-        expect(screen.getByText('Subscribe').closest('a')).toHaveAttribute('href', '/account/signup');
+		expect(screen.getByText("Headline")).not.toBeNull();
+		expect(screen.getByText("Subheadline")).not.toBeNull();
+		expect(screen.getByText("Subscribe").closest("a")).toHaveAttribute("href", "/account/signup");
 	});
 });

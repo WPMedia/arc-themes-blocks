@@ -3,7 +3,7 @@ import { useIdentity } from "@wpmedia/arc-themes-components";
 import validateURL from "../../utils/validate-redirect-url";
 import useOIDCLogin from "../../utils/useOIDCLogin";
 
-const useLogin = ({ isAdmin, redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC }) => {
+const useLogin = ({ isAdmin, redirectURL, redirectToPreviousPage, loggedInPageLocation, isOIDC }) => {
 	const { Identity } = useIdentity();
 	const validatedRedirectURL = validateURL(redirectURL);
 	const [redirectToURL, setRedirectToURL] = useState(validatedRedirectURL);

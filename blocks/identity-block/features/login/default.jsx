@@ -7,6 +7,7 @@ import { Input, useIdentity } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
 import useLogin from "../../components/login";
 import useOIDCLogin from "../../utils/useOIDCLogin";
+import validateURL from "../../utils/validate-redirect-url";
 
 const BLOCK_CLASS_NAME = "b-login-form";
 
@@ -19,6 +20,7 @@ const Login = ({ customFields }) => {
 	const { isAdmin, arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
+
 	const isOIDC = OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
 	const { Identity, isInitialized } = useIdentity();
 	const [error, setError] = useState();
@@ -27,7 +29,7 @@ const Login = ({ customFields }) => {
 		redirectURL,
 		redirectToPreviousPage,
 		loggedInPageLocation,
-		OIDC,
+		isOIDC,
 	});
 	const { loginByOIDC } = useOIDCLogin();
 
@@ -47,7 +49,8 @@ const Login = ({ customFields }) => {
 						if (isOIDC) {
 							loginByOIDC();
 						} else {
-							window.location = loginRedirect;
+							const validatedURL = validateURL(loginRedirect);
+							window.location = validateURL;
 						}
 					})
 					.catch(() => setError(phrases.t("identity-block.login-form-error")))

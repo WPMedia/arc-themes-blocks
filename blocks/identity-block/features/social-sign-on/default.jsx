@@ -30,6 +30,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 		redirectURL,
 		redirectToPreviousPage,
 		loggedInPageLocation,
+		isOIDC
 	});
 
 	if (!isInitialized) {

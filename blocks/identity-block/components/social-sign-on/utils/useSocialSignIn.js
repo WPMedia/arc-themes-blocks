@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useIdentity } from "@wpmedia/arc-themes-components";
 import { GoogleSignInContext } from "./googleContext";
 import useOIDCLogin from "../../../utils/useOIDCLogin";
+import validateURL from "../../../utils/validate-redirect-url";
 
 function useSocialSignIn(redirectURL, onError = () => {}, isOIDC) {
 	const { Identity } = useIdentity();
@@ -17,7 +18,8 @@ function useSocialSignIn(redirectURL, onError = () => {}, isOIDC) {
 				if (isOIDC) {
 					loginByOIDC();
 				} else {
-					window.location = redirectURL;
+					const validatedURL = validateURL(redirectURL);
+					window.location = validatedURL;
 				}
 			} catch (e) {
 				onError();

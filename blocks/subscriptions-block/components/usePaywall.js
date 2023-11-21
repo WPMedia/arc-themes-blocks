@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 
-import { useIdentity } from "@wpmedia/identity-block";
-import { isServerSide } from "@wpmedia/arc-themes-components";
+import { isServerSide, useIdentity } from "@wpmedia/arc-themes-components";
 
 const usePaywall = () => {
 	const { arcSite, globalContent } = useFusionContext();

@@ -9,6 +9,8 @@ const CURRECY_MAP = {
 	KRW: "₩",
 	MXN: "$",
 	BRL: "R$",
+	CAD: "CA$",
+	GBP: "£"
 };
 
 const currency = (name) => CURRECY_MAP[name] || null;

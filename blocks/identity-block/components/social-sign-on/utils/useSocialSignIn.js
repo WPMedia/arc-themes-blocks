@@ -47,6 +47,9 @@ function useSocialSignIn(redirectURL, onError = () => {}, isOIDC) {
 					Identity.signInWithGoogle(credentialResponse).then(() => {
 						if (isOIDC) {
 							loginByOIDC();
+						} else {
+							const validatedURL = validateURL(redirectURL);
+							window.location = validatedURL;
 						}
 					}),
 				auto_select: true,

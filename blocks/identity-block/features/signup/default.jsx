@@ -116,7 +116,7 @@ const SignUp = ({ customFields, arcSite }) => {
 						email,
 					},
 					undefined,
-					{ rememberMe: true },
+					true,
 				)
 					.then(() => {
 						window.location = redirectURL;

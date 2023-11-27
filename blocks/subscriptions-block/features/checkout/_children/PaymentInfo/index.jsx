@@ -3,7 +3,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import useSales from "../../../../components/useSales";
 
-import { usePhrases, Button } from "@wpmedia/arc-themes-components";
+import { usePhrases, Button, Paragraph } from "@wpmedia/arc-themes-components";
 
 import PaymentForm from "../../../../components/PaymentForm";
 import PayPal from "../../../../components/PayPal";
@@ -77,9 +77,10 @@ const PaymentInfo = ({ successURL, className, userInfo, offerURL, paypal }) => {
 		}
 	})
 	}
-	console.log(orderNumber);
+
 		return (
-			<>
+			<div className={`${className}__payment-info`}>
+				<Paragraph>{formLabel}</Paragraph>
 			{paypal && <Button onClick={handlePayPal}>PayPal</Button>}
 			{isPayPal && <PayPal orderNumber={orderNumber}/>}
 			{isStripe && stripeInstance ?
@@ -100,7 +101,7 @@ const PaymentInfo = ({ successURL, className, userInfo, offerURL, paypal }) => {
 				</Elements> :
 				<Button onClick={() => setIsStripe(true)}>Stripe</Button>
 			}
-			</>
+			</div>
 		);
 };
 

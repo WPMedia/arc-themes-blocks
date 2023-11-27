@@ -137,7 +137,18 @@
 			"default": {
 				"display": "grid",
 				"margin-top": "var(--global-font-size-11)",
-				"gap": "var(--global-spacing-6)",
+				"gap": "var(--global-spacing-6)"
+			}
+		}
+	},
+	"checkout-payment-info": {
+		"styles": {
+			"default": {
+				"width": "100%",
+				"align-items": "center",
+				"display": "flex",
+				"flex-direction": "column",
+				"background-color": "blue",
 				"components": {
 					"paragraph": {
 						"font-size": "var(--heading-level-6-font-size)",
@@ -398,6 +409,100 @@
 						"margin": "0 var(--global-spacing-2) 0 0"
 					}
 				}
+			}
+		}
+	},
+	"paywall-overlay": {
+		"styles": {
+			"default": {
+				"background-color": "rgba(0, 0, 0, 0.63)",
+				"bottom": 0,
+				"left": 0,
+				"right": 0,
+				"top": 0,
+				"overflow": "auto",
+				"pointer-events": "all",
+				"position": "fixed",
+				"height": "100vh",
+				"z-index": 1
+			}
+		}
+	},
+	"paywall-overlay-content": {
+		"styles": {
+			"default": {
+				"align-items": "center",
+				"justify-content": "center",
+				"background-color": "var(--global-white)",
+				"display": "flex",
+				"flex-direction": "column",
+				"margin-top": "50vh",
+				"max-height": "75vh",
+				"min-height": "50vh",
+				"overflow": "auto",
+				"components": {
+					"stack": {
+						"width": "100%"
+					}
+				}
+			}
+		}
+	},
+	"paywall-subscription-dialog": {
+		"styles": {
+			"default": {
+				"padding": "var(--global-spacing-6)",
+				"align-items": "center",
+				"grid-template-rows": "auto",
+				"gap": "var(--global-spacing-6)",
+				"font-family": "var(--font-family-primary)",
+				"components": {
+					"stack": {
+						"align-items": "center",
+						"grid-template-rows": "auto"
+					}
+				}
+			}
+		}
+	},
+	"paywall-subscription-dialog-reason-prompt": {
+		"styles": {
+			"default": {
+				"font-family": "var(--font-family-primary)"
+			}
+		}
+	},
+	"paywall-subscription-dialog-link-prompt-pre-link": {
+		"styles": {
+			"default": {
+				"margin-right": "var(--global-spacing-2)"
+			}
+		}
+	},
+	"paywall-subscription-dialog-link-prompt-link": {
+		"styles": {
+			"default": {
+				"font-weight": "var(--heading-level-4-font-weight)"
+			}
+		}
+	},
+	"paywall-subscription-dialog-offer-info":{
+		"styles": {
+			"default": {
+				"gap": "var(--global-spacing-4)",
+				"components": {
+					"heading": {
+						"font-size": "var(--heading-level-2-font-size)",
+						"text-align": "center"
+					}
+				}
+			}
+		}
+	},
+	"paywall-subscription-dialog-subheadline":{
+		"styles": {
+			"default": {
+				"font-size": "var(--heading-level-6-font-size)"
 			}
 		}
 	}

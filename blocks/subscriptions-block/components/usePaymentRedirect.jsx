@@ -14,7 +14,6 @@ export const usePaymentRedirect = (
   const [currentMerchantId, setCurrentMerchantId] = useState();
   const [currentOrder, setCurrentOrder] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  console.log(orderNumber);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,14 +21,11 @@ export const usePaymentRedirect = (
         await Sales.getPaymentOptions();
         const option =
           Sales.paymentOptions.find(option => option.paymentMethodType === paymentMethodType) || {};
-          console.log(option);
         setCurrentMerchantId(option.paymentMethodID);
         const loggedIn = await Identity.isLoggedIn();
         setIsLoggedIn(loggedIn);
-        console.log(Sales.currentOrder, token, isLoggedIn);
         if (!Sales.currentOrder && !token && isLoggedIn) {
           const order = await Sales.getOrderDetails(orderNumber);
-          console.log(order);
       
           setCurrentOrder(order);
         } else if (Sales.currentOrder) {
@@ -48,13 +44,11 @@ export const usePaymentRedirect = (
       }
     };
     
-    console.log('fetch');
     fetchData();
   }, []);
 
   useEffect(() => {
   
-    console.log(token, currentMerchantId);
     if (token && currentMerchantId) {
       const finalizePayment = async () => {
     
@@ -71,7 +65,6 @@ export const usePaymentRedirect = (
         finalizePayment();
       }
     } else {
-      console.log(currentOrder);
       const initPayment = async () => {
         const config = await Sales.getConfig();
     
@@ -86,7 +79,6 @@ export const usePaymentRedirect = (
               currentOrder.orderNumber,
               currentMerchantId
             );
-            console.log(payment[redirectURLParameterName]);
             window.location.href = payment[redirectURLParameterName];
           }
         } catch (e) {

@@ -50,6 +50,11 @@
 		@include scss.block-components("checkout-payment");
 		@include scss.block-properties("checkout-payment");
 
+		&-info {
+			@include scss.block-compoents("checkout-payment-info");
+			@include scss.block-properties("checkout-payment-info");
+		}
+
 		&-form {
 			@include scss.block-components("checkout-payment-form");
 			@include scss.block-properties("checkout-payment-form");

@@ -79,7 +79,7 @@ SocialSignOnBlock.propTypes = {
 				"The URL to which a user would be redirected to if logged in an vist a page with the login form on",
 		}),
 		OIDC: PropTypes.bool.tag({
-      name: 'Login with OIDC PKCE',
+      name: 'Login with OIDC',
       defaultValue: false,
       description: 'Used when authenticating a third party site with OIDC PKCE flow. This will use an ArcXp Org as an auth provider',
     }),

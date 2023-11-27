@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import useSales from "../../../../components/useSales";
@@ -6,17 +6,18 @@ import useSales from "../../../../components/useSales";
 import { usePhrases, Button } from "@wpmedia/arc-themes-components";
 
 import PaymentForm from "../../../../components/PaymentForm";
+import PayPal from "../../../../components/PayPal";
 
-const PaymentInfo = ({ successURL, className, userInfo, offerURL }) => {
+const PaymentInfo = ({ successURL, className, userInfo, offerURL, paypal }) => {
 	const {Sales} = useSales();
 
 	const [stripeInstance, setStripeInstance] = useState(null);
 	const [isStripe, setIsStripe] = useState(false);
+	const [isPayPal, setIsPayPal] = useState(false);
 	// initialized payment doc https://redirector.arcpublishing.com/alc/en/arc-xp-subscriptions-sdks?id=kb_article_view&sys_kb_id=7770d58747447990eee38788436d4362&spa=1
 	const [orderNumber, setOrderNumber] = useState();
 	const [payment, setPayment] = useState({});
 	const [paymentMethodID, setPaymentMethodID] = useState();
-	const [paymentOpts, setPaymentOpts] = useState([]);
 	const phrases = usePhrases();
 
 	const formErrorText = phrases.t("subscriptions-block.payment-error");
@@ -26,19 +27,6 @@ const PaymentInfo = ({ successURL, className, userInfo, offerURL }) => {
 
 	// load stripe key via payment details stripe key string
 	const { parameter2: stripeKey, parameter1: clientSecret } = payment;
-
-	useEffect(() => {
-		const getPaymentOptions = async () => {
-			const options = await Sales?.getPaymentOptions();
-			setPaymentOpts(options);
-		}
-		getPaymentOptions();
-	}, []);
-	
-	const paypal = useMemo(
-    () => paymentOpts.find(opt => opt.paymentMethodType === 10),
-    [paymentOpts]
-  );
 
 	useEffect(() => {
 		if(isStripe) {
@@ -75,9 +63,25 @@ const PaymentInfo = ({ successURL, className, userInfo, offerURL }) => {
 		}
 	}, [isStripe, stripeKey])
 
+	const handlePayPal = () => {
+		setIsPayPal(true)
+		Sales.getCart().then((cart) => {
+			if (!cart?.items?.length) {
+				window.location.href = offerURL;
+				return;
+			}else{
+				const {country, email} = userInfo;
+				Sales.createNewOrder({ country }, email).then((order) => {
+					setOrderNumber(order.orderNumber);
+				}).catch(e => console.error(e));
+		}
+	})
+	}
+	console.log(orderNumber);
 		return (
 			<>
-			{paypal && <Button>Paypal</Button>}
+			{paypal && <Button onClick={handlePayPal}>PayPal</Button>}
+			{isPayPal && <PayPal orderNumber={orderNumber}/>}
 			{isStripe && stripeInstance ?
 				<Elements stripe={stripeInstance}>
 

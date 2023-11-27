@@ -29,7 +29,7 @@ const OfferCard = ({
 						className={`${className}__card--features--feature-item`}
 						key={`feat-${feat.featureText}`}
 					>
-						<Icon name="ChevronRight" />
+						<Icon name="Check" />
 						<span dangerouslySetInnerHTML={{ __html: feat.featureText }} />
 					</li>
 				))}

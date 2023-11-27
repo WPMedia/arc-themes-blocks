@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 
 import { usePhrases, Heading, Input, Button, Stack, Image, Icon } from "@wpmedia/arc-themes-components";
 import countryCodes from "./countryCodes";
-import GoogleIcon from "./google.svg";
 
 const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, className }) => {
 	const formRef = useRef();
@@ -50,8 +49,7 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, classNa
 				case "google":
 					return (
 						<div className={`${className}__identity-row`}>
-							{/* {TO-DO: Change the Icon to Google <Icon name="Google"/> } */}
-							<Image alt="Google" title="Google" src={GoogleIcon} />
+							<Icon name="GoogleColor"/>
 							<span>
 								{phrases.t("checkout-block.identity-social", {
 									email: user.email,

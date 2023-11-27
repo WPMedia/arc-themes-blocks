@@ -480,6 +480,7 @@
 		"subscriptions-block.credit-card-information": "Payment Method and Information",
 		"subscriptions-block.payment-error": "There was an error processing your payment.",
 		"subscriptions-block.payment-information": "Credit card information",
-		"subscriptions-block.submit-payment": "Purchase Subscription"
+		"subscriptions-block.submit-payment": "Purchase Subscription",
+		"subscriptions-block.update-payment": "Update Payment Method"
 	}
 }

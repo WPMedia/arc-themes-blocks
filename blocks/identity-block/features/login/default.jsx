@@ -50,7 +50,7 @@ const Login = ({ customFields }) => {
 							loginByOIDC();
 						} else {
 							const validatedURL = validateURL(loginRedirect);
-							window.location = validateURL;
+							window.location = validatedURL;
 						}
 					})
 					.catch(() => setError(phrases.t("identity-block.login-form-error")))

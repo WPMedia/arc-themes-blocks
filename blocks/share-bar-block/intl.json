@@ -1,13 +1,13 @@
 {
 	"share-bar-block.share-button-aria-label": {
-		"de": "Aktuellen Artikel über %{socialType} teilen",
-		"en": "Share current article via %{socialType}",
-		"es": "Compartir el artículo actual mediante %{socialType}",
-		"fr": "Partager l'article en cours via %{socialType}",
-		"ja": "現在の記事を%{socialType}で共有",
-		"ko": "%{socialType}을(를) 통해 현재 기사 공유",
-		"no": "Del gjeldende artikkel via %{socialType}",
+		"sv": "Dela aktuell artikel via %{socialType}",
 		"pt": "Partilhar artigo atual no %{socialType}",
-		"sv": "Dela aktuell artikel via %{socialType}"
+		"no": "Del gjeldende artikkel via %{socialType}",
+		"ko": "%{socialType}을(를) 통해 현재 기사 공유",
+		"ja": "現在の記事を%{socialType}で共有",
+		"fr": "Partager l'article en cours via %{socialType}",
+		"es": "Compartir el artículo actual mediante %{socialType}",
+		"en": "Share current article via %{socialType}",
+		"de": "Aktuellen Artikel über %{socialType} teilen"
 	}
 }

@@ -1,30 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { usePhrases, Heading, Link, useIdentity } from "@wpmedia/arc-themes-components";
 import useSales from "../../components/useSales";
+import usePaymentOptions from "../../components/usePaymentOptions";
 import Cart from "../../components/Cart";
 import ContactInfo from "../../components/ContactInfo";
 import PaymentInfo from "./_children/PaymentInfo";
 
 const BLOCK_CLASS_NAME = "b-checkout";
 
-const Checkout = ({ customFields }) => {
-	const { offerURL, successURL, stripeIntentsID } = customFields;
+const LABEL_ORDER_NUMBER_PAYPAL = "ArcSubs_OrderNumber";
 
-	console.log(customFields);
+const Checkout = ({ customFields }) => {
+	const { Sales } = useSales();
+	const { offerURL, successURL, stripeIntentsID } = customFields;
+	const { stripeIntents, paypal, error } = usePaymentOptions(stripeIntentsID);
 
 	const [loggedIn, setIsLoggedIn] = useState(false);
 	const [user, setUser] = useState(false);
 	const [signedInIdentity, setSignedInIdentity] = useState(false);
 	const [showPaymentScreen, setShowPaymentScreen] = useState(false);
-
 	const [userInfo, setUserInfo] = useState({});
-
-	console.log(`.... ${stripeIntentsID}`);
-	console.log(`!!!!! ${successURL}`);
 
 	const { Identity, getSignedInIdentity } = useIdentity();
 	const phrases = usePhrases();
+
+	const [isInitialized, setIsInitialized] = useState(false);
+
+	const params = new URLSearchParams(window.location.search);
+	const token = params.get("token");
+
+	useEffect(() => {
+		const isOrderNumberInLocalStorage = localStorage.getItem(LABEL_ORDER_NUMBER_PAYPAL);
+		if (isOrderNumberInLocalStorage && token) {
+			setIsInitialized(true);
+		}
+	}, []);
 
 	useEffect(() => {
 		const isLoggedIn = async () => {
@@ -33,6 +44,37 @@ const Checkout = ({ customFields }) => {
 
 		isLoggedIn();
 	}, [Identity]);
+
+	// useEffect(() => {
+	// 	const finalizePayment = async () => {
+
+	// 		await Sales.getPaymentOptions();
+	// 		const option =
+	// 		Sales.paymentOptions.find(option => option.paymentMethodType === 10) || {};
+	// 		if (token && option.paymentMethodID) {
+
+	// 			const currentOrder = await Sales.getOrderDetails(orderNumber);
+
+	// 			const finalizePayment = async () => {
+	// 				try {
+	// 					await Sales.finalizePayment(orderNumber, option.paymentMethodID, token, null);
+	// 					localStorage.removeItem('ArcSubs_OrderNumber');
+	// 					window.location.href = successURL;
+	// 				} catch (e) {
+	// 					console.error(e);
+	// 				}
+	// 			};
+
+	// 			if (currentOrder) {
+	// 				finalizePayment();
+	// 			}
+	// 		}
+	// 	}
+
+	// 	if(token && paypal && orderNumber) {
+	// 		finalizePayment();
+	// 	}
+	// }, [token, paypal, orderNumber]);
 
 	useEffect(() => {
 		let isActive = true;
@@ -62,15 +104,19 @@ const Checkout = ({ customFields }) => {
 			setUser(false);
 		});
 	};
-	
+
 	const setUserInfoAndShowPaymentScreen = async (userInfo) => {
-		const { email, firstName, lastName, country } = userInfo;
+		const { firstName, lastName } = userInfo;
 		setUserInfo(userInfo);
 		if (user) {
 			Identity.updateUserProfile({ firstName, lastName });
 		}
 		setShowPaymentScreen(true);
 	};
+
+	if( isInitialized){
+
+	}
 
 	return (
 		<section className={BLOCK_CLASS_NAME}>
@@ -79,7 +125,7 @@ const Checkout = ({ customFields }) => {
 
 			<Cart offerURL={offerURL} className={BLOCK_CLASS_NAME} />
 
-			{!showPaymentScreen ? (
+			{!showPaymentScreen && !isInitialized ? (
 				<ContactInfo
 					callback={setUserInfoAndShowPaymentScreen}
 					user={user}
@@ -93,7 +139,10 @@ const Checkout = ({ customFields }) => {
 					className={BLOCK_CLASS_NAME}
 					userInfo={userInfo}
 					offerURL={offerURL}
-					stripeIntentID={stripeIntentID}
+					stripeIntents={stripeIntents}
+					paypal={paypal}
+					errorPaymentOptions={error}
+					isInitialized={isInitialized}
 				/>
 			)}
 		</section>
@@ -110,7 +159,8 @@ Checkout.propTypes = {
 		}),
 		stripeIntentsID: PropTypes.number.tag({
 			label: "Stripe Intents - Provider ID",
-			description: "In case you have multiple payment providers for stripe Intents, It determines what is the provider ID to be used by default.",
+			description:
+				"In case you have multiple payment providers for stripe Intents, It determines what is the provider ID to be used by default.",
 		}),
 	}),
 };

@@ -35,7 +35,6 @@ function PaymentForm({
 	clientSecret,
 	stripeInstance,
 	formTitle,
-	formLabel,
 	submitText,
 	formErrorText,
 	isUpdatePaymentMethod,
@@ -147,7 +146,6 @@ function PaymentForm({
 				<Heading>{formTitle}</Heading>
 			</HeadingSection>
 			<form onSubmit={handleSubmit} className={`${className}__payment-form`}>
-				<Paragraph>{formLabel}</Paragraph>
 				<Grid className={`${className}__payment-information`}>
 					<Stack>
 						<Input

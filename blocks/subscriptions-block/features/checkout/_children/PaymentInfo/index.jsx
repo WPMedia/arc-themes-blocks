@@ -1,23 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import useSales from "../../../../components/useSales";
+import PayPal from "../../../../components/PayPal";
 
 import { usePhrases, Button, Paragraph } from "@wpmedia/arc-themes-components";
 
 import PaymentForm from "../../../../components/PaymentForm";
-import PayPal from "../../../../components/PayPal";
 
-const PaymentInfo = ({ successURL, className, userInfo, offerURL, paypal }) => {
-	const {Sales} = useSales();
-
+const PaymentInfo = ({
+	successURL,
+	className,
+	userInfo,
+	offerURL,
+	paypal,
+	stripeIntents,
+	errorPaymentOption,
+	isInitialized,
+	LABEL_ORDER_NUMBER_PAYPAL
+}) => {
+	const { Sales } = useSales();
+	window.Sales = Sales;
 	const [stripeInstance, setStripeInstance] = useState(null);
-	const [isStripe, setIsStripe] = useState(false);
+
+	const [isStripeInitialized, setIsStripeInitialized] = useState(false);
 	const [isPayPal, setIsPayPal] = useState(false);
-	// initialized payment doc https://redirector.arcpublishing.com/alc/en/arc-xp-subscriptions-sdks?id=kb_article_view&sys_kb_id=7770d58747447990eee38788436d4362&spa=1
+
 	const [orderNumber, setOrderNumber] = useState();
+	const [orderNumberPayPal, setOrderNumberPayPal] = useState();
 	const [payment, setPayment] = useState({});
-	const [paymentMethodID, setPaymentMethodID] = useState();
+
+	// load stripe key via payment details stripe key string
+	const { parameter2: stripeKey, parameter1: clientSecret } = payment;
+
 	const phrases = usePhrases();
 
 	const formErrorText = phrases.t("subscriptions-block.payment-error");
@@ -25,84 +40,128 @@ const PaymentInfo = ({ successURL, className, userInfo, offerURL, paypal }) => {
 	const formTitle = phrases.t("subscriptions-block.payment-information");
 	const submitText = phrases.t("subscriptions-block.submit-payment");
 
-	// load stripe key via payment details stripe key string
-	const { parameter2: stripeKey, parameter1: clientSecret } = payment;
-
 	useEffect(() => {
-		if(isStripe) {
-			const STRIPE_PAYMENT_METHOD_ID = 18;
-			Sales.getCart().then((cart) => {
-			if (!cart?.items?.length) {
-				window.location.href = offerURL;
-				return;
-			}else{
-				const {country, email} = userInfo;
-				Sales.createNewOrder({ country }, email).then((order) => {
-					setOrderNumber(order.orderNumber);
-					Sales.getPaymentOptions().then((paymentOptions) => {
-						if(paymentOptions){
-							const stripe = paymentOptions?.find(opts => opts?.paymentMethodType === STRIPE_PAYMENT_METHOD_ID);
-							Sales.initializePayment(order.orderNumber, stripe?.paymentMethodID).then(
-								(paymentObject) => {
-									setPayment(paymentObject);
-									setPaymentMethodID(stripe?.paymentMethodID);
-								},
-							);
-						}
-					});
-				}).catch(e => console.error(e));
+		if (stripeIntents?.paymentMethodID && !errorPaymentOption) {
+				Sales.getCart().then((cart) => {
+					if (!cart?.items?.length) {
+						window.location.href = offerURL;
+						return;
+					} else {
+						const { country, email } = userInfo;
+						Sales.createNewOrder({ country }, email)
+							.then((order) => {
+								setOrderNumber(order.orderNumber);
+								Sales.initializePayment(order.orderNumber, stripeIntents?.paymentMethodID).then(
+									(paymentObject) => {
+										setPayment(paymentObject);
+									},
+								);
+							})
+							.catch((e) => console.error(e));
+					}
+				});
 			}
-		});
-		}
-	}, [isStripe]);
+	}, [stripeIntents, errorPaymentOption]);
 
 	useEffect(() => {
-		if(isStripe && stripeKey) {
+		if (stripeKey && !isStripeInitialized) {
 			// stripe docs https://stripe.com/docs/stripe-js/react#elements-provider
 			loadStripe(stripeKey).then((newStripePromise) => setStripeInstance(newStripePromise));
+			setIsStripeInitialized(true);
 		}
-	}, [isStripe, stripeKey])
+	}, [stripeKey, isStripeInitialized]);
 
-	const handlePayPal = () => {
-		setIsPayPal(true)
-		Sales.getCart().then((cart) => {
-			if (!cart?.items?.length) {
-				window.location.href = offerURL;
-				return;
-			}else{
-				const {country, email} = userInfo;
-				Sales.createNewOrder({ country }, email).then((order) => {
-					setOrderNumber(order.orderNumber);
-				}).catch(e => console.error(e));
+	const handlePayPal = async () => {
+		const isLoggedIn = await Identity.isLoggedIn();
+
+		if (!isLoggedIn) {
+			window.location.href = `${loginURL}?redirect=${checkoutURL}`;
 		}
-	})
-	}
 
-		return (
-			<div className={`${className}__payment-info`}>
-				<Paragraph>{formLabel}</Paragraph>
-			{paypal && <Button onClick={handlePayPal}>PayPal</Button>}
-			{isPayPal && <PayPal orderNumber={orderNumber}/>}
-			{isStripe && stripeInstance ?
+		const { country, email } = userInfo;
+			if (orderNumber) {
+				// Stripe Intents is set up and the payment was initialized already with stripe
+				// ... check is logged In
+				const currentOrder = await Sales.getOrderDetails(orderNumber);
+				if (currentOrder?.items?.length) {
+					Sales.clearCart().then(() => {
+						const items = currentOrder.items.map((item) => {
+							const { sku, priceCode, quantity } = item;
+							return { sku, priceCode, quantity };
+						});
+
+						Sales.addItemToCart(items).then(() => {
+							Sales.createNewOrder({ country }, email).then((newOrder) => {
+								setOrderNumberPayPal(newOrder.orderNumber);
+								setIsPayPal(true);
+							});
+						});
+					});
+				} else {
+					window.location.href = offerURL;
+					return;
+				}
+			} else {
+				//Stripe Intents is not setup, the payment was not initialized already or the cart is empty
+				Sales.getCart().then((cart) => {
+					if (!cart?.items?.length) {
+						window.location.href = offerURL;
+						return;
+					} else {
+						Sales.createNewOrder({ country }, email)
+							.then((order) => {
+								setOrderNumberPayPal(order.orderNumber);
+								setIsPayPal(true);
+							})
+							.catch((e) => console.error(e));
+					}
+				});
+			}
+	};
+
+	return (
+		<div className={`${className}__payment-info`}>
+			<Paragraph>{formLabel}</Paragraph>
+			{paypal && 
+				<div className={`${className}__payment-info-payments`}>
+					<span className={`${className}__payment-info-paypal`}>
+						<button onClick={handlePayPal}><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" border="0" alt="PayPal Logo"/></button>
+						<Paragraph>PayPal</Paragraph>
+					</span>
+				</div>
+			}
+			{(isPayPal || isInitialized) && (
+				<PayPal
+					labelOrderNumber = {LABEL_ORDER_NUMBER_PAYPAL}
+					paypal={paypal}
+					orderNumber={orderNumberPayPal}
+					successURL={successURL}
+					isInitialized={isInitialized}
+				/>
+			)}
+			{stripeInstance && (
 				<Elements stripe={stripeInstance}>
-
 					<PaymentForm
 						clientSecret={clientSecret}
 						formErrorText={formErrorText}
 						formLabel={formLabel}
 						formTitle={formTitle}
 						orderNumber={orderNumber}
-						paymentMethodID={paymentMethodID}
+						paymentMethodID={stripeIntents?.paymentMethodID}
 						stripeInstance={stripeInstance}
-						submitText={submitText}
 						successURL={successURL}
+						submitText={submitText}
 						className={className}
 					/>
-				</Elements> :
-				<Button onClick={() => setIsStripe(true)}>Stripe</Button>
-			}
-			</div>
-		);
+				</Elements>
+			)}
+			{errorPaymentOption && (
+				<section role="alert">
+					<Paragraph>{errorPaymentOption}</Paragraph>
+				</section>
+			)}
+		</div>
+	);
 };
 
 export default PaymentInfo;

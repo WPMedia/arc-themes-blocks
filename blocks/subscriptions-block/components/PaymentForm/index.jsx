@@ -4,7 +4,7 @@ import {
 	useElements,
 	CardNumberElement,
 	CardExpiryElement,
-	CardCvcElement
+	CardCvcElement,
 } from "@stripe/react-stripe-js";
 import {
 	usePhrases,
@@ -66,13 +66,9 @@ function PaymentForm({
 			setFormStatus(FORM_STATUS.ERROR);
 			return;
 		}
-
-		let result;
-
-		// if order of $0 there's a different stripe logic
 		const totalOrder = Sales.currentOrder.total;
-
-		if (totalOrder > 0) {
+		let result;
+		if (totalOrder && totalOrder > 0) {
 			result = await stripeInstance.confirmCardPayment(clientSecret, {
 				payment_method: paymentMethod.id,
 			});

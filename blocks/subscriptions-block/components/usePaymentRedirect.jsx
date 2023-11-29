@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import useSales from "./useSales";
+import { LABEL_ORDER_NUMBER_PAYPAL } from "../features/checkout/default";
 
 export const usePaymentRedirect = (
 	paymentMethodType,
@@ -31,19 +32,12 @@ export const usePaymentRedirect = (
 
 	useEffect(() => {
 		const initPayment = async () => {
-			const config = await Sales.getConfig();
-
 			try {
-				if (
-					currentOrder &&
-					currentOrder.orderNumber
-				) {
-					const payment = await Sales.initializePayment(
-						currentOrder.orderNumber,
-						currentMerchantId,
-					);
-					window.location.href = payment[redirectURLParameterName];
-				}
+				const payment = await Sales.initializePayment(
+					currentOrder.orderNumber,
+					currentMerchantId,
+				);
+				window.location.href = payment[redirectURLParameterName];
 			} catch (e) {
 				setError(e);
 			}
@@ -52,12 +46,13 @@ export const usePaymentRedirect = (
 		const finalizePayment = async () => {
 			try {
 				await Sales.finalizePayment(orderNumber, currentMerchantId, token, null);
+				localStorage.removeItem(LABEL_ORDER_NUMBER_PAYPAL);
 				window.location.href = successURL;
 			} catch (e) {
 				setError(e);
 			}
 		};
-		if (currentOrder && currentMerchantId) {
+		if (currentOrder?.orderNumber && currentMerchantId) {
 			if (!token) {
 				initPayment();
 			}

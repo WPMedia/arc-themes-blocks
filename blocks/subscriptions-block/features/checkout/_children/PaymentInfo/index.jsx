@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import useSales from "../../../../components/useSales";
 import PayPal from "../../../../components/PayPal";
+import { LABEL_ORDER_NUMBER_PAYPAL } from "../../default";
 
 import { usePhrases, Heading, HeadingSection, Paragraph } from "@wpmedia/arc-themes-components";
 
@@ -16,8 +17,7 @@ const PaymentInfo = ({
 	paypal,
 	stripeIntents,
 	errorPaymentOption,
-	isInitialized,
-	LABEL_ORDER_NUMBER_PAYPAL
+	isInitialized
 }) => {
 	const { Sales } = useSales();
 	window.Sales = Sales;
@@ -41,7 +41,7 @@ const PaymentInfo = ({
 	const payWithCardDividerLabel = phrases.t("subscriptions-block.payWithCard-label");
 
 	useEffect(() => {
-		if (stripeIntents?.paymentMethodID && !errorPaymentOption) {
+		if (stripeIntents?.paymentMethodID && !errorPaymentOption && !isInitialized) {
 				Sales.getCart().then((cart) => {
 					if (!cart?.items?.length) {
 						window.location.href = offerURL;

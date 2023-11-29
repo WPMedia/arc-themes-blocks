@@ -1,35 +1,35 @@
 {
 	"footer-block.facebook-link": {
-		"de": "Facebookseite",
-		"en": "Facebook page",
-		"es": "Página de Facebook",
-		"fr": "Page Facebook",
-		"ja": "Facebook ページ",
-		"ko": "Facebook 페이지",
-		"no": "Facebook-side",
+		"sv": "Facebook-sida",
 		"pt": "Página do Facebook",
-		"sv": "Facebook-sida"
+		"no": "Facebook-side",
+		"ko": "Facebook 페이지",
+		"ja": "Facebook ページ",
+		"fr": "Page Facebook",
+		"es": "Página de Facebook",
+		"en": "Facebook page",
+		"de": "Facebookseite"
 	},
 	"footer-block.rss-link": {
-		"de": "RSS Feed",
-		"en": "RSS feed",
-		"es": "Fuente RSS",
-		"fr": "Flux RSS",
-		"ja": "RSS feed",
-		"ko": "RSS 피드",
-		"no": "RSS-feed",
+		"sv": "RSS-kanal",
 		"pt": "Feed RSS",
-		"sv": "RSS-kanal"
+		"no": "RSS-feed",
+		"ko": "RSS 피드",
+		"ja": "RSS feed",
+		"fr": "Flux RSS",
+		"es": "Fuente RSS",
+		"en": "RSS feed",
+		"de": "RSS Feed"
 	},
 	"footer-block.twitter-link": {
-		"de": "Twitter Feed",
-		"en": "Twitter feed",
-		"es": "Fuente Twitter",
-		"fr": "Flux Twitter",
-		"ja": "Twitter フィード",
-		"ko": "Twitter 피드",
-		"no": "Twitter-feed",
+		"sv": "Twitter-flöde",
 		"pt": "Feed do Twitter",
-		"sv": "Twitter-flöde"
+		"no": "Twitter-feed",
+		"ko": "Twitter 피드",
+		"ja": "Twitter フィード",
+		"fr": "Flux Twitter",
+		"es": "Fuente Twitter",
+		"en": "Twitter feed",
+		"de": "Twitter Feed"
 	}
 }

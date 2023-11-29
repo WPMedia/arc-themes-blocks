@@ -2922,7 +2922,6 @@
 		"ja": "クレジットカード情報",
 		"fr": "Informations relatives à la carte de crédit",
 		"es": "Información de la tarjeta de crédito",
-		"en": "Credit card information",
 		"de": "Kreditkarteninformationen"
 	},
 	"subscriptions-block.submit-payment": {
@@ -2944,5 +2943,8 @@
 	},
 	"checkout-block.cardholderName-requirements": {
 		"en": "Please enter name on card"
+	},
+	"subscriptions-block.payWithCard-label": {
+		"en": "Or Pay with card"
 	}
 }

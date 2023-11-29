@@ -4,7 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import useSales from "../../../../components/useSales";
 import PayPal from "../../../../components/PayPal";
 
-import { usePhrases, Button, Paragraph } from "@wpmedia/arc-themes-components";
+import { usePhrases, Heading, HeadingSection, Paragraph } from "@wpmedia/arc-themes-components";
 
 import PaymentForm from "../../../../components/PaymentForm";
 
@@ -37,8 +37,8 @@ const PaymentInfo = ({
 
 	const formErrorText = phrases.t("subscriptions-block.payment-error");
 	const formLabel = phrases.t("subscriptions-block.credit-card-information");
-	const formTitle = phrases.t("subscriptions-block.payment-information");
 	const submitText = phrases.t("subscriptions-block.submit-payment");
+	const payWithCardDividerLabel = phrases.t("subscriptions-block.payWithCard-label");
 
 	useEffect(() => {
 		if (stripeIntents?.paymentMethodID && !errorPaymentOption) {
@@ -121,16 +121,18 @@ const PaymentInfo = ({
 
 	return (
 		<div className={`${className}__payment-info`}>
-			<Paragraph>{formLabel}</Paragraph>
+			<HeadingSection>
+				<Heading>{formLabel}</Heading>
+			</HeadingSection>
 			{paypal && 
 				<div className={`${className}__payment-info-payments`}>
 					<span className={`${className}__payment-info-paypal`}>
-						<button onClick={handlePayPal}><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" border="0" alt="PayPal Logo"/></button>
+						<button className={`${className}__payment-info-paypal-button`} onClick={handlePayPal}><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="Buy now with PayPal" /></button>
 						<Paragraph>PayPal</Paragraph>
 					</span>
 				</div>
 			}
-			{(isPayPal || isInitialized) && (
+			{(paypal && (isPayPal || isInitialized)) && (
 				<PayPal
 					labelOrderNumber = {LABEL_ORDER_NUMBER_PAYPAL}
 					paypal={paypal}
@@ -139,13 +141,18 @@ const PaymentInfo = ({
 					isInitialized={isInitialized}
 				/>
 			)}
+			{paypal && 
+			<div className={`${className}__payment-info-divider-container`} >
+				<hr className={`${className}__payment-info-divider-line`} />
+					<Paragraph>{payWithCardDividerLabel}</Paragraph>
+				<hr className={`${className}__payment-info-divider-line`} />
+			</div>}
 			{stripeInstance && (
 				<Elements stripe={stripeInstance}>
 					<PaymentForm
 						clientSecret={clientSecret}
 						formErrorText={formErrorText}
 						formLabel={formLabel}
-						formTitle={formTitle}
 						orderNumber={orderNumber}
 						paymentMethodID={stripeIntents?.paymentMethodID}
 						stripeInstance={stripeInstance}

@@ -1,13 +1,13 @@
 {
 	"links-bar-block.element-aria-label": {
-		"de": "Weitere Links",
-		"en": "More Links",
-		"es": "Más enlaces",
-		"fr": "Plus de liens",
-		"ja": "その他のリンク",
-		"ko": "링크 더 보기",
-		"no": "Flere lenker",
+		"sv": "Fler länkar",
 		"pt": "Mais ligações",
-		"sv": "Fler länkar"
+		"no": "Flere lenker",
+		"ko": "링크 더 보기",
+		"ja": "その他のリンク",
+		"fr": "Plus de liens",
+		"es": "Más enlaces",
+		"en": "More Links",
+		"de": "Weitere Links"
 	}
 }

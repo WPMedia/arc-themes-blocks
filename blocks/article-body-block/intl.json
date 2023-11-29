@@ -1,35 +1,35 @@
 {
 	"article-body-block.clarification": {
-		"de": "Klarstellung",
-		"en": "Clarification",
-		"es": "Aclaración",
-		"fr": "Précision",
-		"ja": "説明",
-		"ko": "설명",
-		"no": "Avklaring",
+		"sv": "Klargörande",
 		"pt": "Clarificação",
-		"sv": "Klargörande"
+		"no": "Avklaring",
+		"ko": "설명",
+		"ja": "説明",
+		"fr": "Précision",
+		"es": "Aclaración",
+		"en": "Clarification",
+		"de": "Klarstellung"
 	},
 	"article-body-block.correction": {
-		"de": "Korrektur",
-		"en": "Correction",
-		"es": "Corrección",
-		"fr": "Correction",
-		"ja": "修正",
-		"ko": "정정",
-		"no": "Korreksjon",
+		"sv": "Korrektion",
 		"pt": "Correção",
-		"sv": "Korrektion"
+		"no": "Korreksjon",
+		"ko": "정정",
+		"ja": "修正",
+		"fr": "Correction",
+		"es": "Corrección",
+		"en": "Correction",
+		"de": "Korrektur"
 	},
 	"article-body-block.interstitial-link-aria-label": {
-		"de": "Ähnlichen Artikel öffnen",
-		"en": "Open related story",
-		"es": "Abrir historia relacionada",
-		"fr": "Ouvrir un article associé",
-		"ja": "関連記事を開く",
-		"ko": "관련 스토리 열기",
-		"no": "Åpne relatert historie",
+		"sv": "Öppna relaterad artikel",
 		"pt": "Abrir história relacionada",
-		"sv": "Öppna relaterad artikel"
+		"no": "Åpne relatert historie",
+		"ko": "관련 스토리 열기",
+		"ja": "関連記事を開く",
+		"fr": "Ouvrir un article associé",
+		"es": "Abrir historia relacionada",
+		"en": "Open related story",
+		"de": "Ähnlichen Artikel öffnen"
 	}
 }

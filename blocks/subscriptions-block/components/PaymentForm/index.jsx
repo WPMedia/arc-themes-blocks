@@ -9,8 +9,6 @@ import {
 import {
 	usePhrases,
 	Button,
-	Heading,
-	HeadingSection,
 	Paragraph,
 	Grid,
 	Input,
@@ -34,7 +32,6 @@ function PaymentForm({
 	paymentMethodID,
 	clientSecret,
 	stripeInstance,
-	formTitle,
 	submitText,
 	formErrorText,
 	className,
@@ -117,9 +114,6 @@ function PaymentForm({
 
 	return (
 		<section className={`${className}__payment`}>
-			<HeadingSection>
-				<Heading>{formTitle}</Heading>
-			</HeadingSection>
 			<form onSubmit={handleSubmit} className={`${className}__payment-form`}>
 				<Grid className={`${className}__payment-information`}>
 					<Stack>

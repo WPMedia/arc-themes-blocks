@@ -51,8 +51,38 @@
 		@include scss.block-properties("checkout-payment");
 
 		&-info {
-			@include scss.block-compoents("checkout-payment-info");
+			@include scss.block-components("checkout-payment-info");
 			@include scss.block-properties("checkout-payment-info");
+
+			&-payments {
+				@include scss.block-components("checkout-payment-info-payments");
+				@include scss.block-properties("checkout-payment-info-payments");
+			}
+
+			&-paypal {
+				@include scss.block-components("checkout-payment-info-paypal");
+				@include scss.block-properties("checkout-payment-info-paypal");
+
+				&-button {
+					@include scss.block-components("checkout-payment-info-paypal-button");
+					@include scss.block-properties("checkout-payment-info-paypal-button");
+
+					&:hover {
+						@include scss.block-components("checkout-payment-info-paypal-button-hover");
+						@include scss.block-properties("checkout-payment-info-paypal-button-hover");
+					}
+				}
+			}
+
+			&-divider-container {
+				@include scss.block-components("checkout-payment-info-divider-container");
+				@include scss.block-properties("checkout-payment-info-divider-container");
+			}
+
+			&-divider-line {
+				@include scss.block-components("checkout-payment-info-divider-line");
+				@include scss.block-properties("checkout-payment-info-divider-line");
+			}
 		}
 
 		&-form {

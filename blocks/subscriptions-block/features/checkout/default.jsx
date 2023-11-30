@@ -1,20 +1,16 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
+
 import PropTypes from "@arc-fusion/prop-types";
 import { usePhrases, Heading, Link, useIdentity } from "@wpmedia/arc-themes-components";
-import useSales from "../../components/useSales";
-import usePaymentOptions from "../../components/usePaymentOptions";
 import Cart from "../../components/Cart";
 import ContactInfo from "../../components/ContactInfo";
 import PaymentInfo from "./_children/PaymentInfo";
 
 const BLOCK_CLASS_NAME = "b-checkout";
-
 const LABEL_ORDER_NUMBER_PAYPAL = "ArcSubs_OrderNumber";
 
 const Checkout = ({ customFields }) => {
-	const { Sales } = useSales();
 	const { offerURL, successURL, stripeIntentsID } = customFields;
-	const { stripeIntents, paypal, error } = usePaymentOptions(stripeIntentsID);
 
 	const [loggedIn, setIsLoggedIn] = useState(false);
 	const [user, setUser] = useState(false);
@@ -44,37 +40,6 @@ const Checkout = ({ customFields }) => {
 
 		isLoggedIn();
 	}, [Identity]);
-
-	// useEffect(() => {
-	// 	const finalizePayment = async () => {
-
-	// 		await Sales.getPaymentOptions();
-	// 		const option =
-	// 		Sales.paymentOptions.find(option => option.paymentMethodType === 10) || {};
-	// 		if (token && option.paymentMethodID) {
-
-	// 			const currentOrder = await Sales.getOrderDetails(orderNumber);
-
-	// 			const finalizePayment = async () => {
-	// 				try {
-	// 					await Sales.finalizePayment(orderNumber, option.paymentMethodID, token, null);
-	// 					localStorage.removeItem('ArcSubs_OrderNumber');
-	// 					window.location.href = successURL;
-	// 				} catch (e) {
-	// 					console.error(e);
-	// 				}
-	// 			};
-
-	// 			if (currentOrder) {
-	// 				finalizePayment();
-	// 			}
-	// 		}
-	// 	}
-
-	// 	if(token && paypal && orderNumber) {
-	// 		finalizePayment();
-	// 	}
-	// }, [token, paypal, orderNumber]);
 
 	useEffect(() => {
 		let isActive = true;
@@ -114,10 +79,6 @@ const Checkout = ({ customFields }) => {
 		setShowPaymentScreen(true);
 	};
 
-	if( isInitialized){
-
-	}
-
 	return (
 		<section className={BLOCK_CLASS_NAME}>
 			<Heading>{phrases.t("checkout-block.headline")}</Heading>
@@ -139,10 +100,9 @@ const Checkout = ({ customFields }) => {
 					className={BLOCK_CLASS_NAME}
 					userInfo={userInfo}
 					offerURL={offerURL}
-					stripeIntents={stripeIntents}
-					paypal={paypal}
-					errorPaymentOptions={error}
-					isInitialized={isInitialized}
+					stripeIntentsID={stripeIntentsID}
+					isInitialized = {isInitialized}
+					LABEL_ORDER_NUMBER_PAYPAL={LABEL_ORDER_NUMBER_PAYPAL}
 				/>
 			)}
 		</section>

@@ -9,8 +9,6 @@ import {
 import {
 	usePhrases,
 	Button,
-	Heading,
-	HeadingSection,
 	Paragraph,
 	Grid,
 	Input,
@@ -34,14 +32,13 @@ function PaymentForm({
 	paymentMethodID,
 	clientSecret,
 	stripeInstance,
-	formTitle,
 	submitText,
 	formErrorText,
-	isUpdatePaymentMethod,
-	updateText,
-	paymentID,
-	successUpdateURL,
 	className,
+	paymentID,
+	isPaymentMethodUpdate,
+	updateText,
+	successUpdateURL,
 }) {
 	const [formStatus, setFormStatus] = useState(FORM_STATUS.IDLE);
 	const [cardName, setCardName] = useState("");
@@ -73,12 +70,12 @@ function PaymentForm({
 
 		// if order of $0 there's a different stripe logic,
 		let totalOrder;
-		if (!isUpdatePaymentMethod) {
+		if (!isPaymentMethodUpdate) {
 			totalOrder = Sales.currentOrder.total;
 		}
 
 		let result;
-		if (totalOrder && totalOrder > 0 && !isUpdatePaymentMethod) {
+		if (totalOrder && totalOrder > 0 && !isPaymentMethodUpdate) {
 			result = await stripeInstance.confirmCardPayment(clientSecret, {
 				payment_method: paymentMethod.id,
 			});
@@ -94,7 +91,7 @@ function PaymentForm({
 			return;
 		}
 
-		if (!isUpdatePaymentMethod) {
+		if (!isPaymentMethodUpdate) {
 			if (totalOrder > 0) {
 				const nonZeroPriceOutput = await Sales.finalizePayment(
 					orderNumber,
@@ -142,9 +139,6 @@ function PaymentForm({
 
 	return (
 		<section className={`${className}__payment`}>
-			<HeadingSection>
-				<Heading>{formTitle}</Heading>
-			</HeadingSection>
 			<form onSubmit={handleSubmit} className={`${className}__payment-form`}>
 				<Grid className={`${className}__payment-information`}>
 					<Stack>
@@ -193,7 +187,7 @@ function PaymentForm({
 							: null
 					}
 				>
-					{!isUpdatePaymentMethod ? submitText : updateText}
+					{!isPaymentMethodUpdate ? submitText : updateText}
 				</Button>
 				{formStatus === FORM_STATUS.ERROR ? (
 					<section role="alert">

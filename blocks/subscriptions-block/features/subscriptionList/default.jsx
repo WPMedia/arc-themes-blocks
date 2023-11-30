@@ -32,16 +32,12 @@ const SubscriptionList = () => {
 	}, [Identity]);
 
 	useEffect(() => {
-		console.log(`isLoggedIn ${isLoggedIn}`);
 		if (isLoggedIn) {
 			getAllSubscriptions().then((subs) => {
-				console.log(subs);
 				setSubscriptionList(subs);
 			});
 		}
 	}, [isLoggedIn, Identity]);
-
-	console.log(subscriptionList);
 
 	return (
 		<section>

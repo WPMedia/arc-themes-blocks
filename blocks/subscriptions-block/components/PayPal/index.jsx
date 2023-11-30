@@ -1,7 +1,12 @@
 import React from "react";
 import { usePaymentRedirect } from "../usePaymentRedirect";
 
-export const PaypalCheckout = ({ labelOrderNumber, paypal, orderNumber, isUpdatePaymentMethod, successURL, successUpdateURL, isInitialized }) => {
+export const PaypalCheckout = ({
+	labelOrderNumber,
+	paypal,
+	orderNumber,
+	successURL,
+}) => {
 	const params = new URLSearchParams(window.location.search);
 	const token = params.get("token");
 
@@ -11,8 +16,13 @@ export const PaypalCheckout = ({ labelOrderNumber, paypal, orderNumber, isUpdate
 	} else {
 		orderNumber = localStorage[labelOrderNumber];
 	}
-
-	const { error } = usePaymentRedirect(paypal, orderNumber, isUpdatePaymentMethod, token, "parameter1", successURL, successUpdateURL, isInitialized);
+	const { error } = usePaymentRedirect(
+		paypal,
+		orderNumber,
+		token,
+		"parameter1",
+		successURL
+	);
 
 	return (
 		<>

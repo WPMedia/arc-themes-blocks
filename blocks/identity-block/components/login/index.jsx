@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
 import { useIdentity } from "@wpmedia/arc-themes-components";
+import appendURLParams from "../../utils/append-url-params";
 import validateURL from "../../utils/validate-redirect-url";
 import useOIDCLogin from "../../utils/useOIDCLogin";
 
-const useLogin = ({ isAdmin, redirectURL, redirectToPreviousPage, loggedInPageLocation, isOIDC }) => {
+const useLogin = ({
+	isAdmin,
+	redirectURL,
+	redirectToPreviousPage,
+	loggedInPageLocation,
+	isOIDC,
+}) => {
+
 	const { Identity } = useIdentity();
 	const validatedRedirectURL = validateURL(redirectURL);
 	const [redirectToURL, setRedirectToURL] = useState(validatedRedirectURL);
@@ -13,7 +21,18 @@ const useLogin = ({ isAdmin, redirectURL, redirectToPreviousPage, loggedInPageLo
 	useEffect(() => {
 		if (window?.location?.search) {
 			const searchParams = new URLSearchParams(window.location.search.substring(1));
-			const validatedRedirectParam = validateURL(searchParams.get("redirect"));
+
+			//redirectURL could have additional params
+			const params = ["paymentMethodID"];
+			const aditionalParams = params.map((p) => {
+				const paramExist = searchParams.has(p)
+				if(paramExist){
+					return {[p]:searchParams.get(p)}
+				}
+			})
+
+			const fullURL = appendURLParams(searchParams.get("redirect"), aditionalParams);
+			const validatedRedirectParam = validateURL(fullURL);
 			setRedirectQueryParam(validatedRedirectParam);
 		}
 
@@ -49,6 +68,9 @@ const useLogin = ({ isAdmin, redirectURL, redirectToPreviousPage, loggedInPageLo
 			checkLoggedInStatus();
 		}
 	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin]);
+
+	console.log(`redirectQueryParam ${redirectQueryParam}`);
+	console.log(`redirectToURL ${redirectToURL}`);
 
 	return {
 		loginRedirect: redirectQueryParam || redirectToURL,

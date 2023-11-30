@@ -2945,6 +2945,9 @@
 	"checkout-block.cardholderName-requirements": {
 		"en": "Please enter name on card"
 	},
+	"subscriptions-block.payWithCard-label": {
+		"en": "Or Pay with card"
+	},
 	"subscriptions-block.update-payment": {
 		"en": "Update Payment Method"
 	}

@@ -31,7 +31,7 @@ const useLogin = ({
 				}
 			})
 
-			const fullURL = appendURLParams(searchParams.get("redirect"), aditionalParams);
+			const fullURL = searchParams.get("redirect") ? appendURLParams(searchParams.get("redirect"), aditionalParams.filter(item => item !== undefined)) : null;
 			const validatedRedirectParam = validateURL(fullURL);
 			setRedirectQueryParam(validatedRedirectParam);
 		}
@@ -68,9 +68,6 @@ const useLogin = ({
 			checkLoggedInStatus();
 		}
 	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin]);
-
-	console.log(`redirectQueryParam ${redirectQueryParam}`);
-	console.log(`redirectToURL ${redirectToURL}`);
 
 	return {
 		loginRedirect: redirectQueryParam || redirectToURL,

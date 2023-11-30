@@ -24,7 +24,6 @@ export const usePaymentRedirect = (
 		};
 		fetchData();
 	}, []);
-	
 	useEffect(() => {
 		const initPayment = async () => {
 			try {

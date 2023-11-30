@@ -10,8 +10,6 @@ import PayPal from "../../../../components/PayPal";
 import PaymentForm from "../../../../components/PaymentForm";
 import usePaymentOptions from "../../../../components/usePaymentOptions";
 
-const LABEL_IS_UPDATING_PAYMENT_METHOD = "ArcSubs_isUpdatingPaymentMethod";
-
 const PaymentInfo = ({
 	successURL,
 	className,

@@ -29,33 +29,31 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 	const showSeparator = !!(content && content.children && content.children.length > 1);
 
 	return (
-		<>
-			{menuItems.length > 0 && (
-				<>
-					<Stack
-						className={BLOCK_CLASS_NAME}
-						justification="center"
-						direction="horizontal"
-						as="nav"
-						key={id}
-						aria-label={ariaLabel || phrases.t("links-bar-block.element-aria-label")}
-						wrap="wrap"
-					>
-						{menuItems.map((item, index) => (
-							<React.Fragment key={item._id}>
-								{item.node_type === "link" ? (
-									<Link href={item.url}>{item.display_name}</Link>
-								) : (
-									<Link href={item._id}>{item.name}</Link>
-								)}
-								{content.children.length !== index + 1 && showSeparator ? <Separator /> : null}
-							</React.Fragment>
-						))}
-					</Stack>
-					<Divider />
-				</>
-			)}
-		</>
+		menuItems.length > 0 && (
+			<>
+				<Stack
+					className={BLOCK_CLASS_NAME}
+					justification="center"
+					direction="horizontal"
+					as="nav"
+					key={id}
+					aria-label={ariaLabel || phrases.t("links-bar-block.element-aria-label")}
+					wrap="wrap"
+				>
+					{menuItems.map((item, index) => (
+						<React.Fragment key={item._id}>
+							{item.node_type === "link" ? (
+								<Link href={item.url}>{item.display_name}</Link>
+							) : (
+								<Link href={item._id}>{item.name}</Link>
+							)}
+							{content.children.length !== index + 1 && showSeparator ? <Separator /> : null}
+						</React.Fragment>
+					))}
+				</Stack>
+				<Divider />
+			</>
+		)
 	);
 };
 

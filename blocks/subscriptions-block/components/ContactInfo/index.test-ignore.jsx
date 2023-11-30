@@ -1,7 +1,9 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import { act } from "react-dom/test-utils";
+
+jest.mock("./google.svg");
 
 import ContactInfo from ".";
 
@@ -17,7 +19,7 @@ describe("ContactInfo", () => {
 				callback={mockCallBack}
 				user={false}
 				logoutCallback={mockCallBack2}
-			/>
+			/>,
 		);
 
 		expect(screen.getByRole("input").length).toEqual(4);
@@ -33,7 +35,7 @@ describe("ContactInfo", () => {
 				callback={mockCallBack}
 				user={false}
 				logoutCallback={mockCallBack2}
-			/>
+			/>,
 		);
 		fireEvent.click(screen.getByRole("button"));
 		expect(mockCallBack.mock.calls.length).toEqual(0);
@@ -69,7 +71,7 @@ describe("ContactInfo", () => {
 						locked: false,
 					}}
 					logoutCallback={mockCallBack2}
-				/>
+				/>,
 			);
 		});
 		const logOutbutton = screen.getByText("checkout-block.identity-sign-out");
@@ -105,7 +107,7 @@ describe("ContactInfo", () => {
 				}}
 				logoutCallback={mockCallBack2}
 				className={BLOCK_CLASS_NAME}
-			/>
+			/>,
 		);
 
 		expect(screen.getByRole("svg")).not.toBeNull();
@@ -140,7 +142,7 @@ describe("ContactInfo", () => {
 				}}
 				logoutCallback={mockCallBack2}
 				className={BLOCK_CLASS_NAME}
-			/>
+			/>,
 		);
 
 		expect(screen.getByRole("svg")).not.toBeNull();
@@ -161,8 +163,8 @@ describe("ContactInfo", () => {
 					type: "Password",
 					lastLoginDate: 1639164736000,
 					locked: false,
-				}
-			]
+				},
+			],
 		};
 
 		render(
@@ -178,7 +180,7 @@ describe("ContactInfo", () => {
 				}}
 				logoutCallback={mockCallBack2}
 				className={BLOCK_CLASS_NAME}
-			/>
+			/>,
 		);
 
 		expect(screen.getByText(`Signed in as ${user.email}`)).not.toBeNull();

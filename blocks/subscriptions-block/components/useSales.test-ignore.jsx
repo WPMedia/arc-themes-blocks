@@ -32,7 +32,7 @@ jest.mock("fusion:properties", () =>
 				origin: "http://retail-origin/",
 			},
 		},
-	}))
+	})),
 );
 
 jest.mock("fusion:context", () => ({

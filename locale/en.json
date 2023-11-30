@@ -482,7 +482,6 @@
 		"subscriptions-block.submit-payment": "Purchase Subscription",
 		"subscriptions-block.payWithCard-label": "Or Pay with card",
 		"subscriptions-block.paypal-processing": "Processing...",
-		"subscriptions-block.paypal-redirect-label": "Redirecting to paypal page..."
-
+		"subscriptions-block.paypal-redirect-label": "Redirecting to PayPal page..."
 	}
 }

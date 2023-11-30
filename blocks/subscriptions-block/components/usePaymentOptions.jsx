@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import useSales from "./useSales";
 
 const STRIPE_PAYMENT_METHOD_ID = 18;
-const PAYPAL_METOD_ID = 10;
+const PAYPAL_METHOD_ID = 10;
 
 const getPaymentMethodByID = (paymentOptions, paymentMethodTypeID, paymentMethodID) => {
 	const stripeDefault = paymentOptions?.find(
@@ -44,7 +44,7 @@ export const usePaymentOptions = (stripeIntentsDefaultID, paypalDefaultID) => {
 					STRIPE_PAYMENT_METHOD_ID,
 					stripeIntentsDefaultID,
 				);
-				const paypal = getPaymentMethodByID(options, PAYPAL_METOD_ID, paypalDefaultID);
+				const paypal = getPaymentMethodByID(options, PAYPAL_METHOD_ID, paypalDefaultID);
                 setPaymentOpts(options);
                 setPaypal(paypal);
                 setStripeIntents(stripe);

@@ -13,6 +13,8 @@ const props = {
 	],
 };
 
+const BLOCK_CLASS_NAME = "test-block";
+
 describe("OfferCard", () => {
 	it("renders all fields", () => {
 		render(<OfferCard className={BLOCK_CLASS_NAME} {...props} />);
@@ -38,14 +40,16 @@ describe("OfferCard", () => {
 	});
 
 	it("does not render subHeadline if not present", () => {
-		const { container } = render(<OfferCard {...props} className={BLOCK_CLASS_NAME} subHeadline={null} />);
+		const { container } = render(
+			<OfferCard {...props} className={BLOCK_CLASS_NAME} subHeadline={null} />,
+		);
 
 		expect(container.querySelector(".b-offer__card p")).not.toBeInTheDocument();
 	});
 
 	it("does not render button if no actionText and no ActionEvent", () => {
 		render(<OfferCard {...props} actionText={null} actionEvent={null} />);
-		
+
 		expect(screen.getByRole("button")).not.toBeNull();
 	});
 

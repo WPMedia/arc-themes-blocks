@@ -13,6 +13,7 @@ const ForgotPassword = () => {
 	const phrases = getTranslatedPhrases(locale);
 
 	const { Identity, isInitialized } = useIdentity();
+
 	const [submitted, setSubmitted] = useState(false);
 	const [error, setError] = useState();
 

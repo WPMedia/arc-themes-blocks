@@ -1,16 +1,6 @@
-/*
- Enzyme is using an old jsdom that has issues using waitFor on prototype
- methods and this component is using Component constructor and prototypes.
-
- This will set the proper jsdom environment for this specific test need
- until we can convert this away from the component model or update the test.
-
- @jest-environment jsdom-sixteen
-*/
-
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import ProductFocusView from "./index";
 import mockData from "../../mock-data";
 
@@ -35,7 +25,7 @@ describe("Product Focus View", () => {
 				onClose={() => setFocusViewItemId("")}
 				productImages={mockData}
 				initialItemId={mockData[0]._id}
-			/>
+			/>,
 		);
 		expect(screen.queryAllByRole("img")).toHaveLength(10);
 	});

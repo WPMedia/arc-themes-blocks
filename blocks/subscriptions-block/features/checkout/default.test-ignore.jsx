@@ -1,7 +1,7 @@
 import React from "react";
 
 import { fireEvent, render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 
 import { act } from "react-dom/test-utils";
 import { useIdentity } from "@wpmedia/arc-themes-components";
@@ -26,8 +26,8 @@ describe("Checkout Feature", () => {
 			getSignedInIdentity: jest.fn(
 				(user) =>
 					user?.identities?.reduce((prev, current) =>
-						prev.lastLoginDate > current.lastLoginDate ? prev : current
-					) || null
+						prev.lastLoginDate > current.lastLoginDate ? prev : current,
+					) || null,
 			),
 			Identity: {
 				isLoggedIn: jest.fn(async () => false),
@@ -43,16 +43,19 @@ describe("Checkout Feature", () => {
 				customFields={{
 					offerURL: "/offer-url/",
 				}}
-			/>
+			/>,
 		);
 
-		expect(screen.getByText('Select from one of our offers').closest('a')).toHaveAttribute('href', '/offer-url/')
-		
+		expect(screen.getByText("Select from one of our offers").closest("a")).toHaveAttribute(
+			"href",
+			"/offer-url/",
+		);
+
 		const contactInfo = screen.getByText("checkout-block.contact-info");
 		expect(contactInfo).not.toBeNull();
 	});
 
-	it.only("Renders PaymentInfo after creating an order", async () => {
+	it("Renders PaymentInfo after creating an order", async () => {
 		const userProfile = Promise.resolve({
 			email: "email@email.com",
 			firstName: "first name",
@@ -64,8 +67,8 @@ describe("Checkout Feature", () => {
 			getSignedInIdentity: jest.fn(
 				(user) =>
 					user?.identities?.reduce((prev, current) =>
-						prev.lastLoginDate > current.lastLoginDate ? prev : current
-					) || null
+						prev.lastLoginDate > current.lastLoginDate ? prev : current,
+					) || null,
 			),
 			Identity: {
 				isLoggedIn: jest.fn(async () => true),
@@ -93,7 +96,7 @@ describe("Checkout Feature", () => {
 					customFields={{
 						offerURL: "/offer-url/",
 					}}
-				/>
+				/>,
 			);
 		});
 		await userProfile;

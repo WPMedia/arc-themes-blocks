@@ -1,13 +1,28 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+
 import { useIdentity } from "@wpmedia/arc-themes-components";
+
 import ResetPassword from "./default";
 import FormPasswordConfirm from "../../components/form-password-confirm";
 
 const successActionURL = "/account/login/";
 
 jest.mock("../../components/form-password-confirm");
-jest.mock("@wpmedia/arc-themes-components");
+
+const mockLogin = jest.fn(() => Promise.resolve());
+
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	useIdentity: jest.fn(() => ({
+		isInitialized: true,
+		Identity: {
+			isLoggedIn: jest.fn(() => true),
+			getConfig: jest.fn(() => ({})),
+			login: mockLogin,
+		},
+	})),
+}));
 
 jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({
@@ -83,8 +98,9 @@ describe("Identity Password Reset Feature", () => {
 
 	it("updates the page on submit and redirects the user to login when done", async () => {
 		render(<ResetPassword customFields={{ successActionURL }} />);
-		await fireEvent.click(screen.getByRole("button"));
-		expect(resetPasswordMock).toHaveBeenCalled();
+		await waitFor(() => expect(screen.getByRole("button")));
+		fireEvent.click(screen.getByRole("button"));
+		await waitFor(() => expect(resetPasswordMock).toHaveBeenCalled());
 		expect(screen.getByText("identity-block.reset-password-headline-submitted")).not.toBeNull();
 		expect(screen.getByText("identity-block.reset-password-instruction-submitted")).not.toBeNull();
 		expect(screen.getByText("identity-block.reset-password-submit-submitted")).not.toBeNull();
@@ -110,8 +126,9 @@ describe("Identity Password Reset Feature - Failing reset request", () => {
 
 	it("updates the page on submit to failing state", async () => {
 		render(<ResetPassword customFields={{ successActionURL }} />);
-		await fireEvent.click(screen.getByRole("button"));
-		await expect(resetPasswordMockFail).toHaveBeenCalled();
+		await waitFor(() => expect(screen.getByRole("button")));
+		fireEvent.click(screen.getByRole("button"));
+		await waitFor(() => expect(resetPasswordMockFail).toHaveBeenCalled());
 		expect(screen.getByText("identity-block.reset-password-error")).not.toBeNull();
 	});
 });

@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
+import mockConsole from "jest-mock-console";
 
 import ResultItem from "./result-item";
 
@@ -70,6 +71,14 @@ const element = {
 };
 
 describe("Result parts", () => {
+	let restoreConsole;
+	afterAll(() => {
+		restoreConsole?.();
+	});
+	beforeAll(() => {
+		restoreConsole = mockConsole();
+	});
+
 	it("should show byline if showByline", () => {
 		const { unmount } = render(
 			<ResultItem
@@ -79,7 +88,7 @@ describe("Result parts", () => {
 				targetFallbackImage={fallbackImage}
 				placeholderResizedImageOptions={{}}
 				showByline
-			/>
+			/>,
 		);
 
 		expect(screen.getAllByText(/Sample phrases/i)).toHaveLength(1);
@@ -96,7 +105,7 @@ describe("Result parts", () => {
 				targetFallbackImage={fallbackImage}
 				placeholderResizedImageOptions={{}}
 				showDate
-			/>
+			/>,
 		);
 
 		expect(screen.getAllByText(/January 01, 2021 at 12:01AM UTC/i)).toHaveLength(1);
@@ -113,7 +122,7 @@ describe("Result parts", () => {
 				targetFallbackImage={fallbackImage}
 				placeholderResizedImageOptions={{}}
 				showDescription
-			/>
+			/>,
 		);
 
 		expect(screen.getAllByText(/Description 1/i)).toHaveLength(1);
@@ -133,7 +142,7 @@ describe("Result parts", () => {
 				targetFallbackImage={fallbackImage}
 				placeholderResizedImageOptions={{}}
 				showDescription
-			/>
+			/>,
 		);
 
 		expect(screen.queryAllByText(/Font Sample Text - 123/i)).toHaveLength(0);
@@ -150,7 +159,7 @@ describe("Result parts", () => {
 				targetFallbackImage={fallbackImage}
 				placeholderResizedImageOptions={{}}
 				showHeadline
-			/>
+			/>,
 		);
 
 		expect(screen.getAllByText(/test headline/i)).toHaveLength(1);
@@ -171,7 +180,7 @@ describe("Result parts", () => {
 				targetFallbackImage={fallbackImage}
 				placeholderResizedImageOptions={{}}
 				showItemOverline
-			/>
+			/>,
 		);
 		expect(screen.getByText(/overline sample text/i)).toBeInTheDocument();
 
@@ -190,7 +199,7 @@ describe("Result parts", () => {
 				targetFallbackImage={fallbackImage}
 				placeholderResizedImageOptions={{}}
 				showItemOverline
-			/>
+			/>,
 		);
 		expect(screen.getByText(/overline basic sample text/i)).toBeInTheDocument();
 
@@ -209,7 +218,7 @@ describe("Result parts", () => {
 				targetFallbackImage={fallbackImage}
 				placeholderResizedImageOptions={{}}
 				showDescription
-			/>
+			/>,
 		);
 
 		expect(screen.queryAllByText(/test headline/i)).toHaveLength(0);
@@ -225,7 +234,7 @@ describe("Result parts", () => {
 				targetFallbackImage={fallbackImage}
 				// placeholderResizedImageOptions={{}}
 				showImage
-			/>
+			/>,
 		);
 		const imageSrc = screen.getByAltText(/Test headline 1/i);
 		expect(imageSrc.src).toBe("http://test/resources/fallback.jpg");
@@ -250,7 +259,7 @@ describe("Result parts", () => {
 				targetFallbackImage={fallbackImage}
 				placeholderResizedImageOptions={{}}
 				showImage
-			/>
+			/>,
 		);
 
 		expect(screen.getAllByAltText(/Test headline 1/i)).toHaveLength(1);

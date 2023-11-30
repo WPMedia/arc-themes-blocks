@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import { useFusionContext } from "fusion:context";
 import LoginLinks from "./default";
 
@@ -9,7 +9,7 @@ useFusionContext.mockImplementation(
 		siteProperties: {
 			locale: "en",
 		},
-	}))
+	})),
 );
 
 describe("LoginLinks", () => {

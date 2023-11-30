@@ -480,6 +480,9 @@
 		"subscriptions-block.credit-card-information": "Payment Method and Information",
 		"subscriptions-block.payment-error": "There was an error processing your payment.",
 		"subscriptions-block.submit-payment": "Purchase Subscription",
-		"subscriptions-block.payWithCard-label": "Or Pay with card"
+		"subscriptions-block.payWithCard-label": "Or Pay with card",
+		"subscriptions-block.paypal-processing": "Processing...",
+		"subscriptions-block.paypal-redirect-label": "Redirecting to paypal page..."
+
 	}
 }

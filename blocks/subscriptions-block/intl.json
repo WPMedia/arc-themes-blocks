@@ -2946,5 +2946,11 @@
 	},
 	"subscriptions-block.payWithCard-label": {
 		"en": "Or Pay with card"
+	},
+	"subscriptions-block.paypal-processing": {
+		"en": "Processing..."
+	},
+	"subscriptions-block.paypal-redirect-label": {
+		"en": "Redirecting to paypal page..."
 	}
 }

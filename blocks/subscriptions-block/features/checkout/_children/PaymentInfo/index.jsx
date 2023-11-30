@@ -142,11 +142,12 @@ const PaymentInfo = ({
 				/>
 			)}
 			{paypal && 
-			<div className={`${className}__payment-info-divider-container`} >
-				<hr className={`${className}__payment-info-divider-line`} />
-					<Paragraph>{payWithCardDividerLabel}</Paragraph>
-				<hr className={`${className}__payment-info-divider-line`} />
-			</div>}
+				<div className={`${className}__payment-info-divider-container`} >
+					<hr className={`${className}__payment-info-divider-line`} />
+						<Paragraph>{payWithCardDividerLabel}</Paragraph>
+					<hr className={`${className}__payment-info-divider-line`} />
+				</div>
+			}
 			{stripeInstance && (
 				<Elements stripe={stripeInstance}>
 					<PaymentForm

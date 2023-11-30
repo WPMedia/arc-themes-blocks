@@ -1,36 +1,21 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
-import { act } from "react-dom/test-utils";
+import "@testing-library/jest-dom";
 import { useIdentity } from "@wpmedia/arc-themes-components";
 import AccountManagement, { AccountManagementPresentational } from "./default";
 
-jest.mock("fusion:properties", () =>
-	jest.fn(() => ({
-		locale: "en",
-	}))
-);
+import EmailEditableFieldContainer from "./_children/EmailEditableFieldContainer";
+import PasswordEditableFieldContainer from "./_children/PasswordEditableFieldContainer";
+import SocialEditableSection from "./_children/SocialEditableSection";
+
+jest.mock("./_children/EmailEditableFieldContainer", () => () => <div>Email</div>);
+jest.mock("./_children/PasswordEditableFieldContainer", () => () => <div>Password</div>);
+jest.mock("./_children/SocialEditableSection", () => () => <div>Social</div>);
 
 jest.mock("@wpmedia/arc-themes-components");
 
-jest.mock("./_children/PasswordEditableFieldContainer", () => () => {
-	const MockName = "password-editable-field-container-mock";
-	return (
-		<MockName>
-			<span>Password</span>
-		</MockName>
-	);
-});
-
-jest.mock("fusion:intl", () => ({
-	__esModule: true,
-	default: jest.fn((locale) => ({
-		t: jest.fn((phrase) => require("../../intl.json")[phrase][locale]),
-	})),
-}));
-
 const userProfileMock = jest.fn(() =>
-	Promise.resolve({ email: "test@domain.com", identities: [] })
+	Promise.resolve({ email: "test@domain.com", identities: [] }),
 );
 
 describe("Account management", () => {
@@ -38,15 +23,14 @@ describe("Account management", () => {
 		jest.restoreAllMocks();
 	});
 
-	it("renders header text", () => {
+	it("renders header text", async () => {
 		render(<AccountManagementPresentational header="header" />);
-		expect(screen.getByText("header")).not.toBeNull();
+		await expect(screen.findByText("header")).not.toBeNull();
 	});
 
 	it("should render account management if logged in and initialized", async () => {
 		useIdentity.mockImplementation(() => ({
 			isInitialized: true,
-			isLoggedIn: () => true,
 			Identity: {
 				isLoggedIn: jest.fn(async () => true),
 				getConfig: jest.fn(async () => ({})),
@@ -54,34 +38,25 @@ describe("Account management", () => {
 			},
 		}));
 
-		await act(async () => {
-			await render(<AccountManagement customFields={{}} />);
-		});
-		await userProfileMock;
-
-		expect(screen.getByText("Account Information")).not.toBeNull();
+		render(<AccountManagement customFields={{}} />);
+		await expect(screen.findByText("Account Information")).not.toBeNull();
 	});
 
 	it("should not render if not logged in and not initialized", async () => {
 		useIdentity.mockImplementation(() => ({
 			isInitialized: false,
-			isLoggedIn: () => false,
 			Identity: {
 				isLoggedIn: jest.fn(async () => false),
 				getConfig: jest.fn(async () => ({})),
 			},
 		}));
-		let container;
-		await act(async () => {
-			({ container } = await render(<AccountManagement customFields={{}} />));
-		});
+		const { container } = render(<AccountManagement customFields={{}} />);
 		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("shows email input editable field if showing email", async () => {
 		useIdentity.mockImplementation(() => ({
 			isInitialized: true,
-			isLoggedIn: () => true,
 			Identity: {
 				isLoggedIn: jest.fn(async () => true),
 				getConfig: jest.fn(async () => ({})),
@@ -89,22 +64,18 @@ describe("Account management", () => {
 			},
 		}));
 
-		await act(async () => {
-			await render(<AccountManagement customFields={{ showEmail: true }} />);
-		});
-		await userProfileMock;
-		expect(screen.getByText("Email address")).not.toBeNull();
+		render(<AccountManagement customFields={{ showEmail: true }} />);
+		await expect(screen.findByText("Email")).not.toBeNull();
 	});
 
 	it("hides email input editable field if showing email", () => {
 		render(<AccountManagement customFields={{ showEmail: false }} />);
-		expect(screen.queryByText("Email address")).toBeNull();
+		expect(screen.queryByText("Email")).toBeNull();
 	});
 
 	it("shows password input editable field if showing password", async () => {
 		useIdentity.mockImplementation(() => ({
 			isInitialized: true,
-			isLoggedIn: () => true,
 			Identity: {
 				isLoggedIn: jest.fn(async () => true),
 				getConfig: jest.fn(async () => ({})),
@@ -112,15 +83,31 @@ describe("Account management", () => {
 			},
 		}));
 
-		await act(async () => {
-			await render(<AccountManagement customFields={{ showPassword: true }} />);
-		});
-		await userProfileMock;
-		expect(screen.getByText("Password")).not.toBeNull();
+		render(<AccountManagement customFields={{ showPassword: true }} />);
+		await expect(screen.findByText("Password")).not.toBeNull();
 	});
 
-	it("hides password input editable field if showing password", () => {
+	it("hides password input editable field if showing password", async () => {
 		render(<AccountManagement customFields={{ showPassword: false }} />);
+		expect(screen.queryByText("Password")).toBeNull();
+	});
+
+	it("shows social profile if showing social", async () => {
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				getConfig: jest.fn(async () => ({})),
+				getUserProfile: userProfileMock,
+			},
+		}));
+
+		render(<AccountManagement customFields={{ showSocialProfile: true }} />);
+		await expect(screen.findByText("Password")).not.toBeNull();
+	});
+
+	it("hides social profile if showing social", async () => {
+		render(<AccountManagement customFields={{ showSocialProfile: false }} />);
 		expect(screen.queryByText("Password")).toBeNull();
 	});
 });

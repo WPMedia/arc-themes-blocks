@@ -4,7 +4,7 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-content-source-block/featur
 ---
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 
 import <%= h.changeCase.pascal(feature_name) %> from './default';
 

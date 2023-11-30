@@ -6,6 +6,7 @@
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "",
+  "extends": "../../babel.config.js",
   "files": [
     "_index.scss",
     "features",

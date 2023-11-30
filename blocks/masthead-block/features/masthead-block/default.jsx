@@ -10,7 +10,7 @@ const BLOCK_CLASS_NAME = "b-masthead";
 // takes in a date from parent
 export const MastheadPresentational = (props) => {
 	const {
-		customFields: { tagLine, promoLinkURL, promoLinkText, logoURL, showDate },
+		customFields: { tagLine = null, promoLinkURL, promoLinkText, logoURL, showDate },
 		displayDate,
 	} = props;
 
@@ -23,11 +23,9 @@ export const MastheadPresentational = (props) => {
 			) : null}
 			<div className={`${BLOCK_CLASS_NAME}__content`}>
 				<Paragraph className={`${BLOCK_CLASS_NAME}__date`}>
-					{showDate ? <>{displayDate}</> : null}
+					{showDate ? displayDate : null}
 				</Paragraph>
-				<Paragraph className={`${BLOCK_CLASS_NAME}__tagline`}>
-					{tagLine ? <>{tagLine}</> : null}
-				</Paragraph>
+				<Paragraph className={`${BLOCK_CLASS_NAME}__tagline`}>{tagLine}</Paragraph>
 				<div className={`${BLOCK_CLASS_NAME}__link`}>
 					{promoLinkURL && promoLinkText ? (
 						<Link href={promoLinkURL} className="masthead-block--text masthead-block--promo-link">

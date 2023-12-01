@@ -263,7 +263,7 @@
 				"block-size": "var(--global-spacing-5)",
 				"flex": "11 auto",
 				"overflow": "hidden",
-				"text-align": "left",
+				"text-align": "start",
 				"inline-size": "auto",
 				"flex-wrap": "wrap",
 				"components": {

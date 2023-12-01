@@ -201,10 +201,7 @@
 							"inline-size": 100%,
 							"width": 100%,
 							"padding-block-end": var(--global-spacing-2),
-							"padding-block-start": var(--global-spacing-2),
-							"padding-inline-end": var(--global-spacing-2),
-							"padding-inline-start": var(--global-spacing-2),
-							"padding-left": var(--global-spacing-2)
+							"padding-block-start": var(--global-spacing-2)
 						),
 						"paragraph": (
 							"font-family": var(--font-family-primary),
@@ -697,6 +694,171 @@
 					"font-size": var(--heading-level-5-font-size),
 					"line-height": var(--heading-level-5-line-height)
 				),
+				"checkout": (
+					"font-family": var(--font-family-primary),
+					"margin-bottom": var(--global-spacing-5),
+					"components": (
+						"heading": (
+							"font-size": var(--global-font-size-12)
+						),
+						"link": (
+							"color": var(--color-primary),
+							"border-bottom": 1px solid var(--color-primary)
+						),
+						"link-hover": (
+							"color": var(--color-primary-hover),
+							"border-bottom": 1px solid var(--color-primary-hover)
+						)
+					)
+				),
+				"checkout-cart": (
+					"margin-top": var(--global-spacing-6),
+					"components": (
+						"heading": (
+							"margin-bottom": var(--global-spacing-5),
+							"font-size": var(--global-font-size-11)
+						)
+					)
+				),
+				"checkout-cart-item": (
+					"color": "$global.neutral-6",
+					"font-size": var(--global-font-size-4),
+					"margin": 0 var(--global-spacing-2),
+					"padding": var(--global-spacing-2) 0
+				),
+				"checkout-cart-item--info": (
+					"font-size": var(--global-font-size-2)
+				),
+				"checkout-cart-item--name": (
+					"font-size": var(--global-font-size-7),
+					"font-weight": bold
+				),
+				"checkout-cart-items": (
+					"border": 1px solid var(--border-color)
+				),
+				"checkout-contact-info": (
+					"margin-top": var(--global-spacing-6),
+					"components": (
+						"heading": (
+							"margin-bottom": var(--global-spacing-5),
+							"font-size": var(--global-font-size-11)
+						),
+						"input": (
+							"margin-block-end": var(--global-spacing-5)
+						),
+						"input-error-tip": (
+							"color": var(--status-color-danger)
+						),
+						"input-input": (
+							"inline-size": 100%,
+							"width": 100%,
+							"padding-block-end": var(--global-spacing-2),
+							"padding-block-start": var(--global-spacing-2),
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
+						)
+					)
+				),
+				"checkout-contact-info-profile": (
+					"display": grid,
+					"width": 100%,
+					"grid-template-columns": repeat(2, 1fr),
+					"column-gap": var(--global-spacing-5)
+				),
+				"checkout-identity-row": (
+					"width": 100%,
+					"display": inline-flex,
+					"align-items": center,
+					"line-height": var(--global-line-height-4),
+					"components": (
+						"image": (
+							"width": var(--global-spacing-4),
+							"height": var(--global-spacing-4),
+							"margin": 0 var(--global-spacing-2) 0 0
+						),
+						"icon": (
+							"fill": #415993,
+							"width": var(--global-spacing-4),
+							"height": var(--global-spacing-4),
+							"margin": 0 var(--global-spacing-2) 0 0
+						)
+					)
+				),
+				"checkout-payment": (
+					"margin-top": var(--global-font-size-11)
+				),
+				"checkout-payment-form": (
+					"display": grid,
+					"margin-top": var(--global-font-size-11),
+					"gap": var(--global-spacing-6),
+					"components": (
+						"paragraph": (
+							"font-size": var(--heading-level-6-font-size),
+							"font-weight": var(--heading-level-4-font-weight)
+						)
+					)
+				),
+				"checkout-payment-form--border-bottom": (
+					"border-bottom": 1px solid var(--border-color)
+				),
+				"checkout-payment-form--border-right": (
+					"border-right": 1px solid var(--border-color)
+				),
+				"checkout-payment-form--stripe-cardDetails": (
+					"display": grid,
+					"gap": none,
+					"border-radius": var(--border-radius),
+					"border": 1px solid var(--border-color)
+				),
+				"checkout-payment-form--stripe-countryDetails": (
+					"display": grid,
+					"gap": none,
+					"border-radius": var(--border-radius),
+					"border": 1px solid var(--border-color),
+					"input-input": (
+						"padding": 0
+					)
+				),
+				"checkout-payment-form--stripe-element": (
+					"padding": var(--global-spacing-2)
+				),
+				"checkout-payment-form--stripe-input-container": (
+					"display": grid,
+					"gap": var(--global-spacing-1)
+				),
+				"checkout-payment-form--stripe-label": (
+					"font-size": var(--global-font-size-4),
+					"font-weight": var(--global-font-weight-4),
+					"color": var(--global-neutral-7)
+				),
+				"checkout-payment-form--stripe-row": (
+					"display": grid,
+					"width": 100%,
+					"grid-template-columns": repeat(2, 1fr)
+				),
+				"checkout-payment-information": (
+					"width": 100%,
+					"gap": var(--global-spacing-5),
+					"grid-template-columns": 1fr,
+					"components": (
+						"input-error-tip": (
+							"color": var(--status-color-danger)
+						),
+						"input-label": (
+							"font-size": var(--global-font-size-4),
+							"font-weight": var(--global-font-weight-4),
+							"color": var(--global-neutral-7)
+						),
+						"input-input": (
+							"inline-size": 100%,
+							"width": 100%,
+							"padding-block-end": var(--global-spacing-2),
+							"padding-block-start": var(--global-spacing-2),
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
+						)
+					)
+				),
 				"double-chain": (
 					"components": (
 						"heading": (
@@ -720,14 +882,20 @@
 					"gap": var(--global-spacing-6) 0
 				),
 				"footer": (
-					"width": var(--content-scale-width),
+					"inline-size": var(--content-scale-width),
 					"gap": var(--global-spacing-6),
-					"margin": 0 auto,
-					"max-width": calc(var(--content-max-width) * 1px),
+					"margin-block-end": 0,
+					"margin-block-start": 0,
+					"margin-inline-end": auto,
+					"margin-inline-start": auto,
+					"max-inline-size": calc(var(--content-max-width) * 1px),
 					"components": (
 						"image": (
-							"margin": auto,
-							"max-height": var(--global-spacing-7)
+							"margin-block-end": auto,
+							"margin-block-start": auto,
+							"margin-inline-end": auto,
+							"margin-inline-start": auto,
+							"max-block-size": var(--global-spacing-7)
 						)
 					)
 				),
@@ -760,26 +928,32 @@
 					)
 				),
 				"footer-social-links": (
-					"border": 1px solid var(--color-primary),
+					"border-block-end": 1px solid var(--color-primary),
+					"border-block-start": 1px solid var(--color-primary),
+					"border-inline-end": 1px solid var(--color-primary),
+					"border-inline-start": 1px solid var(--color-primary),
 					"border-radius": var(--border-radius),
-					"margin": var(--global-spacing-2) auto,
-					"width": fit-content,
+					"margin-block-end": var(--global-spacing-2),
+					"margin-block-start": var(--global-spacing-2),
+					"margin-inline-end": auto,
+					"margin-inline-start": auto,
+					"inline-size": fit-content,
 					"components": (
 						"icon": (
 							"fill": var(--color-primary)
 						),
 						"link": (
-							"border-right": 1px solid var(--color-primary),
-							"padding-top": var(--global-spacing-2),
-							"padding-right": var(--global-spacing-2),
-							"padding-bottom": var(--global-spacing-2),
-							"padding-left": var(--global-spacing-2)
+							"border-inline-end": 1px solid var(--color-primary),
+							"padding-block-end": var(--global-spacing-2),
+							"padding-block-start": var(--global-spacing-2),
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
 						)
 					)
 				),
 				"footer-social-links-container": (
-					"border-bottom": 1px solid var(--global-neutral-4),
-					"width": 100%
+					"border-block-end": 1px solid var(--global-neutral-4),
+					"inline-size": 100%
 				),
 				"footer-social-links-hover": (
 					"components": (
@@ -791,20 +965,20 @@
 				"footer-social-links-last": (
 					"components": (
 						"link": (
-							"border-right": none
+							"border-inline-end": none
 						)
 					)
 				),
 				"footer-top-container": (
-					"border-top": 1px solid var(--global-neutral-4),
-					"border-bottom": none,
+					"border-block-start": 1px solid var(--global-neutral-4),
+					"border-block-end": none,
 					"display": grid,
 					"grid-template-columns": 100%,
 					"grid-template-rows": auto auto,
 					"grid-auto-flow": column,
 					"gap": var(--global-spacing-6),
 					"justify-content": center,
-					"width": 100%,
+					"inline-size": 100%,
 					"components": (
 						"paragraph": (
 							"justify-self": center
@@ -837,10 +1011,7 @@
 							"inline-size": 100%,
 							"width": 100%,
 							"padding-block-end": var(--global-spacing-2),
-							"padding-block-start": var(--global-spacing-2),
-							"padding-inline-end": var(--global-spacing-2),
-							"padding-inline-start": var(--global-spacing-2),
-							"padding-left": var(--global-spacing-2)
+							"padding-block-start": var(--global-spacing-2)
 						),
 						"paragraph": (
 							"font-family": var(--font-family-primary),
@@ -1571,10 +1742,7 @@
 							"inline-size": 100%,
 							"width": 100%,
 							"padding-block-end": var(--global-spacing-2),
-							"padding-block-start": var(--global-spacing-2),
-							"padding-inline-end": var(--global-spacing-2),
-							"padding-inline-start": var(--global-spacing-2),
-							"padding-left": var(--global-spacing-2)
+							"padding-block-start": var(--global-spacing-2)
 						),
 						"paragraph": (
 							"font-family": var(--font-family-primary),
@@ -1593,7 +1761,7 @@
 					)
 				),
 				"masthead": (
-					"border-bottom": 2px solid var(--global-neutral-8),
+					"border-block-end": 2px solid var(--global-neutral-8),
 					"color": var(--text-color),
 					"display": none,
 					"font-family": var(--font-family-primary),
@@ -1613,8 +1781,14 @@
 					"flex": 11 0%
 				),
 				"masthead-divider": (
-					"margin": 0,
-					"padding": 0
+					"margin-block-end": 0,
+					"margin-block-start": 0,
+					"margin-inline-end": 0,
+					"margin-inline-start": 0,
+					"padding-block-end": 0,
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-inline-start": 0
 				),
 				"masthead-link": (
 					"align-items": flex-end,
@@ -1627,7 +1801,7 @@
 					"justify-content": center
 				),
 				"masthead-logo-image": (
-					"max-height": 64px,
+					"max-block-size": 64px,
 					"object-fit": contain,
 					"vertical-align": middle
 				),
@@ -1789,6 +1963,165 @@
 				"numbered-list-items": (
 					"gap": var(--global-spacing-4)
 				),
+				"offer": (
+					"display": flex,
+					"flex-direction": column,
+					"justify-content": center,
+					"align-items": center
+				),
+				"offer-card": (
+					"align-items": center,
+					"border": 1px solid var(--border-color),
+					"border-radius": var(--border-radius),
+					"display": flex,
+					"flex-direction": column,
+					"padding-top": var(--global-spacing-8),
+					"padding-right": var(--global-spacing-6),
+					"padding-bottom": var(--global-spacing-6),
+					"padding-left": var(--global-spacing-6),
+					"components": (
+						"heading": (
+							"font-size": var(--global-font-size-9),
+							"text-align": center,
+							"margin-bottom": var(--global-spacing-4),
+							"font-weight": var(--global-font-weight-7),
+							"line-height": var(--global-line-height-6)
+						),
+						"paragraph": (
+							"font-size": var(--global-font-size-7),
+							"font-weight": var(--global-font-weight-4),
+							"text-align": center,
+							"margin-bottom": var(--global-spacing-4)
+						),
+						"button-large": (
+							"margin-bottom": var(--global-spacing-4)
+						)
+					)
+				),
+				"offer-card-features": (
+					"align-self": baseline
+				),
+				"offer-card-features--feature-item": (
+					"align-items": center,
+					"display": flex,
+					"margin-block-end": var(--global-spacing-4),
+					"components": (
+						"icon": (
+							"display": flex,
+							"width": var(--global-spacing-4),
+							"height": var(--global-spacing-4),
+							"margin": 0 var(--global-spacing-2) 0 0
+						)
+					)
+				),
+				"offer-grid-list": (
+					"gap": var(--global-spacing-5),
+					"grid-template-columns": 1fr,
+					"justify-content": center
+				),
+				"offer-grid-list-1": (
+					"grid-template-columns": minmax(auto, 600px)
+				),
+				"offer-grid-list-2": (
+					"grid-template-columns": repeat(2, 1fr)
+				),
+				"offer-grid-list-3": (
+					"grid-template-columns": repeat(3, 1fr)
+				),
+				"offer-grid-list-4": (
+					"grid-template-columns": 1fr 1fr
+				),
+				"offer-grid-list-5": (
+					"grid-template-columns": repeat(6, 1fr)
+				),
+				"offer-grid-list-5-children": (
+					"grid-column": span 2
+				),
+				"offer-headings": (
+					"margin-top": var(--global-spacing-9),
+					"max-width": 40%,
+					"display": flex,
+					"flex-direction": column,
+					"justify-content": center,
+					"align-items": center,
+					"text-align": center
+				),
+				"offer-subtitle": (
+					"font-size": var(--global-font-size-10),
+					"line-height": var(--global-line-height-4)
+				),
+				"offer-title": (
+					"font-weight": var(--global-font-weight-7),
+					"font-size": var(--global-font-size-15),
+					"line-height": var(--global-line-height-6),
+					"margin-bottom": var(--global-spacing-4)
+				),
+				"offer-wrapper": (
+					"margin-top": var(--global-spacing-5),
+					"margin-bottom": var(--global-spacing-6)
+				),
+				"paywall-overlay": (
+					"background-color": rgba(0, 0, 0, 0.63),
+					"bottom": 0,
+					"left": 0,
+					"right": 0,
+					"top": 0,
+					"overflow": auto,
+					"pointer-events": all,
+					"position": fixed,
+					"height": 100vh,
+					"z-index": 1
+				),
+				"paywall-overlay-content": (
+					"align-items": center,
+					"justify-content": center,
+					"background-color": var(--global-white),
+					"display": flex,
+					"flex-direction": column,
+					"margin-top": 50vh,
+					"max-height": 75vh,
+					"min-height": 50vh,
+					"overflow": auto,
+					"components": (
+						"stack": (
+							"width": 100%
+						)
+					)
+				),
+				"paywall-subscription-dialog": (
+					"padding": var(--global-spacing-6),
+					"align-items": center,
+					"grid-template-rows": auto,
+					"gap": var(--global-spacing-6),
+					"font-family": var(--font-family-primary),
+					"components": (
+						"stack": (
+							"align-items": center,
+							"grid-template-rows": auto
+						)
+					)
+				),
+				"paywall-subscription-dialog-link-prompt-link": (
+					"font-weight": var(--heading-level-4-font-weight)
+				),
+				"paywall-subscription-dialog-link-prompt-pre-link": (
+					"margin-right": var(--global-spacing-2)
+				),
+				"paywall-subscription-dialog-offer-info": (
+					"gap": var(--global-spacing-4),
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-2-font-size),
+							"text-align": center
+						)
+					)
+				),
+				"paywall-subscription-dialog-reason-prompt": (
+					"font-family": var(--font-family-primary)
+				),
+				"paywall-subscription-dialog-subheadline": (
+					"font-size": var(--heading-level-6-font-size)
+				),
 				"quad-chain": (
 					"components": (
 						"heading": (
@@ -1837,10 +2170,7 @@
 							"inline-size": 100%,
 							"width": 100%,
 							"padding-block-end": var(--global-spacing-2),
-							"padding-block-start": var(--global-spacing-2),
-							"padding-inline-end": var(--global-spacing-2),
-							"padding-inline-start": var(--global-spacing-2),
-							"padding-left": var(--global-spacing-2)
+							"padding-block-start": var(--global-spacing-2)
 						),
 						"paragraph": (
 							"font-family": var(--font-family-primary),
@@ -2027,7 +2357,7 @@
 						"input-input": (
 							"font-family": var(--font-family-primary),
 							"font-weight": var(--global-font-weight-7),
-							"padding-left": var(--global-spacing-7),
+							"padding-inline-start": var(--global-spacing-7),
 							"width": 100%
 						)
 					)
@@ -2177,10 +2507,7 @@
 							"inline-size": 100%,
 							"width": 100%,
 							"padding-block-end": var(--global-spacing-2),
-							"padding-block-start": var(--global-spacing-2),
-							"padding-inline-end": var(--global-spacing-2),
-							"padding-inline-start": var(--global-spacing-2),
-							"padding-left": var(--global-spacing-2)
+							"padding-block-start": var(--global-spacing-2)
 						),
 						"paragraph": (
 							"font-family": var(--font-family-primary),
@@ -2726,7 +3053,10 @@
 					"font-size": var(--body-font-size-tiny),
 					"font-weight": var(--global-font-weight-7),
 					"line-height": var(--body-line-height-tiny),
-					"padding": var(--global-spacing-1) var(--global-spacing-2)
+					"padding-inline-start": var(--global-spacing-2),
+					"padding-inline-end": var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-1),
+					"padding-block-end": var(--global-spacing-1)
 				),
 				"badge-danger": (
 					"background-color": var(--status-color-danger)
@@ -2763,12 +3093,18 @@
 				"button-large": (
 					"font-size": var(--body-font-size),
 					"line-height": var(--body-line-height),
-					"padding": var(--global-spacing-4)
+					"padding-block-start": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4),
+					"padding-block-end": var(--global-spacing-4),
+					"padding-inline-end": var(--global-spacing-4)
 				),
 				"button-medium": (
 					"font-size": var(--body-font-size-small),
 					"line-height": var(--body-line-height-small),
-					"padding": var(--global-spacing-3) var(--global-spacing-4)
+					"padding-block-start": var(--global-spacing-3),
+					"padding-inline-start": var(--global-spacing-4),
+					"padding-block-end": var(--global-spacing-3),
+					"padding-inline-end": var(--global-spacing-4)
 				),
 				"button-primary": (
 					"background-color": var(--color-primary),
@@ -2806,7 +3142,10 @@
 				"button-small": (
 					"font-size": var(--body-font-size-small),
 					"line-height": var(--body-line-height-small),
-					"padding": var(--global-spacing-1) var(--global-spacing-4)
+					"padding-block-start": var(--global-spacing-1),
+					"padding-inline-start": var(--global-spacing-4),
+					"padding-block-end": var(--global-spacing-1),
+					"padding-inline-end": var(--global-spacing-4)
 				),
 				"carousel": (
 					"font-family": var(--font-family-primary),
@@ -2816,8 +3155,8 @@
 				),
 				"carousel-actions": (
 					"display": none,
-					"padding-left": var(--global-spacing-5),
-					"padding-right": var(--global-spacing-5)
+					"padding-inline-start": var(--global-spacing-5),
+					"padding-inline-end": var(--global-spacing-5)
 				),
 				"carousel-additional-controls": (
 					"display": flex
@@ -2830,17 +3169,20 @@
 					"display": flex,
 					"font-size": var(--body-font-size-tiny),
 					"gap": var(--global-spacing-2),
-					"height": var(--global-spacing-4),
+					"block-size": var(--global-spacing-4),
 					"line-height": var(--body-line-height-tiny),
-					"padding": 0 var(--global-spacing-2),
-					"width": auto
+					"padding-block-start": 0,
+					"padding-inline-start": var(--global-spacing-2),
+					"padding-block-end": 0,
+					"padding-inline-end": var(--global-spacing-2),
+					"inline-size": auto
 				),
 				"carousel-button-enter-full-screen": (
-					"padding-left": 0
+					"padding-inline-start": 0
 				),
 				"carousel-button-exit-full-screen": (
-					"padding-left": 0,
-					"padding-right": 0
+					"padding-inline-start": 0,
+					"padding-inline-end": 0
 				),
 				"carousel-button-full-screen": (
 					"color": var(--global-white)
@@ -2855,11 +3197,14 @@
 					"color": var(--global-white)
 				),
 				"carousel-controls": (
-					"margin-bottom": var(--global-spacing-2)
+					"margin-block-end": var(--global-spacing-2)
 				),
 				"carousel-fullscreen": (
 					"color": var(--global-white),
-					"padding": var(--global-spacing-2) 0
+					"padding-block-start": var(--global-spacing-2),
+					"padding-inline-start": 0,
+					"padding-block-end": var(--global-spacing-2),
+					"padding-inline-end": 0
 				),
 				"carousel-fullscreen-button-toggle-auto-play": (
 					"display": none
@@ -2867,21 +3212,21 @@
 				"carousel-fullscreen-controls": (
 					"align-items": flex-end,
 					"flex-direction": column,
-					"padding-top": var(--global-spacing-2),
-					"padding-right": var(--global-spacing-2),
-					"padding-bottom": var(--global-spacing-2),
-					"padding-left": var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-2),
+					"padding-inline-end": var(--global-spacing-2),
+					"padding-block-end": var(--global-spacing-2),
+					"padding-inline-start": var(--global-spacing-2),
 					"place-self": initial
 				),
 				"carousel-icon": (
 					"fill": currentColor,
-					"height": var(--global-spacing-4),
-					"width": var(--global-spacing-4)
+					"block-size": var(--global-spacing-4),
+					"inline-size": var(--global-spacing-4)
 				),
 				"carousel-track": (
 					"gap": initial,
-					"max-width": initial,
-					"width": 100%
+					"max-inline-size": initial,
+					"inline-size": 100%
 				),
 				"date": (
 					"color": var(--text-color),
@@ -2890,7 +3235,7 @@
 				),
 				"divider": (
 					"background-color": var(--border-color),
-					"height": 1px
+					"block-size": 1px
 				),
 				"heading": (
 					"font-family": var(--font-family-primary),
@@ -2900,11 +3245,12 @@
 				),
 				"icon": (
 					"fill": var(--icon-fill-color),
-					"height": var(--global-spacing-5),
-					"width": var(--global-spacing-5)
+					"block-size": var(--global-spacing-5),
+					"inline-size": var(--global-spacing-5)
 				),
 				"image": (
-					"max-width": 100%
+					"block-size": auto,
+					"max-inline-size": 100%
 				),
 				"image-hover": (
 					"opacity": 1
@@ -2922,7 +3268,18 @@
 					"outline-color": var(--status-color-danger)
 				),
 				"input-input": (
-					"border": var(--global-border-width-1) var(--global-border-style-1) var(--form-border-color),
+					"border-block-start-width": var(--global-border-width-1),
+					"border-block-end-width": var(--global-border-width-1),
+					"border-inline-start-width": var(--global-border-width-1),
+					"border-inline-end-width": var(--global-border-width-1),
+					"border-block-start-style": var(--global-border-style-1),
+					"border-block-end-style": var(--global-border-style-1),
+					"border-inline-start-style": var(--global-border-style-1),
+					"border-inline-end-style": var(--global-border-style-1),
+					"border-block-start-color": var(--form-border-color),
+					"border-block-end-color": var(--form-border-color),
+					"border-inline-start-color": var(--form-border-color),
+					"border-inline-end-color": var(--form-border-color),
 					"border-radius": var(--border-radius),
 					"padding-block-end": var(--global-spacing-4),
 					"padding-block-start": var(--global-spacing-4),
@@ -2937,7 +3294,10 @@
 					"font-weight": var(--global-font-weight-7)
 				),
 				"input-small-input": (
-					"padding": var(--global-spacing-1) var(--global-spacing-2)
+					"padding-block-end": var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-2),
+					"padding-inline-end": var(--global-spacing-2),
+					"padding-inline-start": var(--global-spacing-2)
 				),
 				"input-success-input": (
 					"border-color": var(--status-color-success)
@@ -2973,8 +3333,11 @@
 					"line-height": var(--body-line-height-tiny)
 				),
 				"media-item-fig-caption-fullscreen": (
-					"padding-left": var(--global-spacing-5),
-					"padding-right": var(--global-spacing-5)
+					"padding-inline-start": var(--global-spacing-5),
+					"padding-inline-end": var(--global-spacing-5)
+				),
+				"media-item-fig-caption-vertical-video": (
+					"text-align": center
 				),
 				"media-item-title": (
 					"font-weight": var(--global-font-weight-7)
@@ -2998,7 +3361,10 @@
 					"border-radius": var(--border-radius-pill),
 					"color": var(--global-white),
 					"font-size": var(--body-font-size-tiny),
-					"padding": var(--global-spacing-1) var(--global-spacing-4),
+					"padding-block-start": var(--global-spacing-1),
+					"padding-inline-start": var(--global-spacing-4),
+					"padding-block-end": var(--global-spacing-1),
+					"padding-inline-end": var(--global-spacing-4),
 					"text-decoration": none
 				),
 				"pill-hover": (
@@ -3006,15 +3372,25 @@
 				),
 				"stack-divider-horizontal": (
 					"border": none,
-					"border-left": var(--global-border-width-1) var(--global-border-style-1) var(--border-color),
-					"width": 1px,
-					"height": auto
+					"border-inline-start-width": var(--global-border-width-1),
+					"border-inline-start-style": var(--global-border-style-1),
+					"border-inline-start-color": var(--border-color),
+					"inline-size": 1px,
+					"block-size": auto
 				),
 				"stack-divider-vertical": (
-					"border-bottom": var(--global-border-width-1) var(--global-border-style-1) var(--border-color)
+					"border-block-end-width": var(--global-border-width-1),
+					"border-block-end-style": var(--global-border-style-1),
+					"border-block-end-color": var(--border-color)
+				),
+				"vertical-video-frame": (
+					"background-color": transparent
 				),
 				"video": (
-					"margin": auto
+					"margin-block-start": auto,
+					"margin-inline-start": auto,
+					"margin-block-end": auto,
+					"margin-inline-end": auto
 				),
 				"video-frame": (
 					"background-color": transparent
@@ -3079,7 +3455,7 @@
 				"footer": (
 					"components": (
 						"image": (
-							"max-height": var(--global-spacing-10)
+							"max-block-size": var(--global-spacing-10)
 						)
 					)
 				),
@@ -3088,11 +3464,11 @@
 					"grid-template-columns": 1fr 1fr 1fr 1fr
 				),
 				"footer-social-links-container": (
-					"border-bottom": none,
-					"width": max-content
+					"border-block-end": none,
+					"inline-size": max-content
 				),
 				"footer-top-container": (
-					"border-bottom": 1px solid var(--global-neutral-4),
+					"border-block-end": 1px solid var(--global-neutral-4),
 					"grid-auto-flow": column,
 					"grid-template-columns": 1fr auto 1fr,
 					"grid-template-rows": auto,
@@ -3594,20 +3970,26 @@
 				),
 				"carousel-additional-controls": (
 					"gap": var(--global-spacing-2),
-					"padding": 0 0 0 var(--global-spacing-2)
+					"padding-block-start": 0,
+					"padding-inline-start": var(--global-spacing-2),
+					"padding-block-end": 0,
+					"padding-inline-end": 0
 				),
 				"carousel-fullscreen": (
-					"padding": var(--global-spacing-5) 0
+					"padding-block-start": var(--global-spacing-5),
+					"padding-inline-start": 0,
+					"padding-block-end": var(--global-spacing-5),
+					"padding-inline-end": 0
 				),
 				"carousel-fullscreen-button-toggle-auto-play": (
 					"display": flex
 				),
 				"carousel-fullscreen-controls": (
 					"flex-direction": initial,
-					"padding-top": var(--global-spacing-5),
-					"padding-right": var(--global-spacing-5),
-					"padding-bottom": var(--global-spacing-5),
-					"padding-left": var(--global-spacing-5),
+					"padding-block-start": var(--global-spacing-5),
+					"padding-inline-end": var(--global-spacing-5),
+					"padding-block-end": var(--global-spacing-5),
+					"padding-inline-start": var(--global-spacing-5),
 					"place-self": flex-start
 				),
 				"carousel-track": (
@@ -3626,32 +4008,31 @@
 @use "../../blocks/article-body-block";
 @use "../../blocks/article-tag-block";
 @use "../../blocks/author-bio-block";
+@use "../../blocks/byline-block";
 @use "../../blocks/card-list-block";
-@use "../../blocks/category-carousel-block";
 @use "../../blocks/date-block";
-@use "../../blocks/double-chain-block";
+@use "../../blocks/default-output-block";
 @use "../../blocks/divider-block";
-@use "../../blocks/footer-block";
+@use "../../blocks/double-chain-block";
 @use "../../blocks/extra-large-manual-promo-block";
 @use "../../blocks/extra-large-promo-block";
+@use "../../blocks/footer-block";
 @use "../../blocks/full-author-bio-block";
 @use "../../blocks/gallery-block";
 @use "../../blocks/header-block";
 @use "../../blocks/header-nav-chain-block";
 @use "../../blocks/headline-block";
-@use "../../blocks/hero-block";
 @use "../../blocks/identity-block";
 @use "../../blocks/large-manual-promo-block";
 @use "../../blocks/large-promo-block";
 @use "../../blocks/lead-art-block";
 @use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
-@use "../../blocks/medium-promo-block";
 @use "../../blocks/medium-manual-promo-block";
+@use "../../blocks/medium-promo-block";
 @use "../../blocks/numbered-list-block";
 @use "../../blocks/overline-block";
 @use "../../blocks/quad-chain-block";
-@use "../../blocks/quilted-image-block";
 @use "../../blocks/results-list-block";
 @use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
@@ -3664,6 +4045,7 @@
 @use "../../blocks/small-manual-promo-block";
 @use "../../blocks/small-promo-block";
 @use "../../blocks/subheadline-block";
+@use "../../blocks/subscriptions-block";
 @use "../../blocks/tag-title-block";
 @use "../../blocks/top-table-list-block";
 @use "../../blocks/triple-chain-block";

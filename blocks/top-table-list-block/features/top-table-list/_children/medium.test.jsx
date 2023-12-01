@@ -7,7 +7,7 @@ import Medium from "./medium";
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
-	LazyLoad: ({ children }) => <>{children}</>,
+	LazyLoad: ({ children }) => children,
 	Video: () => "video embed",
 }));
 
@@ -56,7 +56,7 @@ describe("the medium promo feature", () => {
 		};
 		render(<Medium element={mockData} customFields={config} />);
 		expect(
-			screen.queryByText("Why does August seem hotter? Maybe it comes from weariness.")
+			screen.queryByText("Why does August seem hotter? Maybe it comes from weariness."),
 		).not.toBeNull();
 	});
 
@@ -66,7 +66,7 @@ describe("the medium promo feature", () => {
 		};
 		const { getByText } = render(<Medium element={mockData} customFields={config} />);
 		expect(
-			getByText("global.by-text Example Author1, Example Author2, global.and-text Example Author3")
+			getByText("global.by-text Example Author1, Example Author2, global.and-text Example Author3"),
 		).not.toBeNull();
 	});
 

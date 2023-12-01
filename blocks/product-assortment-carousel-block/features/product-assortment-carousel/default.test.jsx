@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 
@@ -137,7 +137,7 @@ describe("Product Assortment Carousel", () => {
 		const { container } = render(<ProductAssortmentCarousel />);
 
 		expect(container.querySelectorAll(".b-product-assortment-carousel__main-title")).toHaveLength(
-			0
+			0,
 		);
 		expect(container.querySelectorAll(".b-product-assortment-carousel")).toHaveLength(1);
 	});
@@ -145,11 +145,11 @@ describe("Product Assortment Carousel", () => {
 	it("should render with header content", () => {
 		useContent.mockReturnValue(mockContent);
 		const { container } = render(
-			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />
+			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />,
 		);
 
 		expect(container.querySelectorAll(".b-product-assortment-carousel__main-title")).toHaveLength(
-			1
+			1,
 		);
 		expect(container.querySelectorAll(".b-product-assortment-carousel")).toHaveLength(1);
 	});
@@ -164,8 +164,8 @@ describe("Product Assortment Carousel", () => {
 
 		expect(
 			screen.queryByText(
-				"This feature requires a minimum of 4 products and a maximum of 12 to display."
-			)
+				"This feature requires a minimum of 4 products and a maximum of 12 to display.",
+			),
 		).not.toBeNull();
 	});
 
@@ -185,7 +185,7 @@ describe("Product Assortment Carousel", () => {
 			...mockContent,
 		]);
 		const { queryAllByTestId } = render(
-			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />
+			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />,
 		);
 
 		const priceItemsContainer = queryAllByTestId("price");
@@ -210,7 +210,7 @@ describe("Product Assortment Carousel", () => {
 			...mockContent,
 		]);
 		const { queryAllByTestId } = render(
-			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />
+			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />,
 		);
 
 		const priceItemsContainer = queryAllByTestId("price");
@@ -233,7 +233,7 @@ describe("Product Assortment Carousel", () => {
 		]);
 
 		const { queryAllByTestId } = render(
-			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />
+			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />,
 		);
 		const priceItemsContainer = queryAllByTestId("price");
 
@@ -258,7 +258,7 @@ describe("Product Assortment Carousel", () => {
 			...mockContent,
 		]);
 		const { queryAllByTestId } = render(
-			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />
+			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />,
 		);
 
 		const priceItemsContainer = queryAllByTestId("price");
@@ -340,7 +340,7 @@ describe("Product Assortment Carousel", () => {
 			},
 		]);
 		const { container } = render(
-			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />
+			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />,
 		);
 		expect(container.querySelectorAll("a")[0]).toHaveAttribute("href", mockUrl);
 		expect(container.querySelectorAll("a")[1]).toHaveAttribute("href", "#");

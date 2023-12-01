@@ -114,7 +114,9 @@ const SignUp = ({ customFields, arcSite }) => {
 					},
 					{
 						email,
-					}
+					},
+					undefined,
+					true,
 				)
 					.then(() => {
 						window.location = redirectURL;
@@ -143,7 +145,7 @@ const SignUp = ({ customFields, arcSite }) => {
 					pwMinLength,
 					pwPwNumbers,
 					pwSpecialCharacters,
-					pwUppercase
+					pwUppercase,
 				)}
 				confirmLabel={phrases.t("identity-block.confirm-password")}
 				confirmValidationErrorMessage={phrases.t("identity-block.confirm-password-error")}

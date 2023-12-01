@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import TripleChain from "./default";
 
 describe("the triple chain block", () => {
@@ -22,7 +22,7 @@ describe("the triple chain block", () => {
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</TripleChain>
+			</TripleChain>,
 		);
 		expect(container.querySelectorAll(".b-triple-chain")).toHaveLength(1);
 
@@ -40,7 +40,7 @@ describe("the triple chain block", () => {
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</TripleChain>
+			</TripleChain>,
 		);
 
 		const col1 = container.querySelectorAll(".b-triple-chain__child-item")[0];
@@ -58,7 +58,7 @@ describe("the triple chain block", () => {
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</TripleChain>
+			</TripleChain>,
 		);
 
 		const col1 = container.querySelectorAll(".b-triple-chain__child-item")[0];
@@ -78,7 +78,7 @@ describe("the triple chain block", () => {
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</TripleChain>
+			</TripleChain>,
 		);
 
 		expect(container.querySelectorAll(".b-triple-chain__child-item")).toHaveLength(0);
@@ -94,12 +94,12 @@ describe("the triple chain block", () => {
 			<TripleChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
-			</TripleChain>
+			</TripleChain>,
 		);
 
 		expect(container.querySelectorAll(".b-triple-chain__heading")).toHaveLength(1);
 		expect(container.querySelector(".b-triple-chain__heading").textContent).toBe(
-			"Triple Chain Heading"
+			"Triple Chain Heading",
 		);
 		const col1 = container.querySelectorAll(".b-triple-chain__child-item")[0];
 		const col2 = container.querySelectorAll(".b-triple-chain__child-item")[1];
@@ -113,7 +113,7 @@ describe("the triple chain block", () => {
 			<TripleChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
-			</TripleChain>
+			</TripleChain>,
 		);
 
 		expect(container.querySelectorAll(".b-triple-chain__heading")).toHaveLength(0);

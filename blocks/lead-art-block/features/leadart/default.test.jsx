@@ -101,7 +101,7 @@ describe("LeadArt", () => {
 					hideCaption: true,
 					hideCredits: true,
 				}}
-			/>
+			/>,
 		);
 		expect(queryByText("Title")).toBeNull();
 		expect(queryByText("Description")).toBeNull();
@@ -134,7 +134,7 @@ describe("LeadArt", () => {
 					hideCaption: false,
 					hideCredits: false,
 				}}
-			/>
+			/>,
 		);
 		expect(queryByAltText("a test image")).not.toBeNull();
 		expect(queryByText("Caption")).not.toBeNull();
@@ -168,7 +168,7 @@ describe("LeadArt", () => {
 					hideCaption: true,
 					hideCredits: true,
 				}}
-			/>
+			/>,
 		);
 		expect(queryByAltText("a test image")).not.toBeNull();
 		expect(queryByText("Caption")).toBeNull();
@@ -200,8 +200,7 @@ describe("LeadArt", () => {
 			},
 		};
 		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
-		const testRender = render(<LeadArt customFields={{}} />);
-		const { queryByRole, queryByText } = testRender;
+		const { queryByRole, queryByText } = render(<LeadArt customFields={{}} />);
 
 		expect(queryByRole("region", { name: "test headline" })).not.toBeNull();
 		expect(queryByText("Caption")).not.toBeNull();
@@ -240,7 +239,7 @@ describe("LeadArt", () => {
 					hideCaption: true,
 					hideCredits: true,
 				}}
-			/>
+			/>,
 		);
 		expect(queryByRole("region", { name: "test headline" })).not.toBeNull();
 		expect(queryByText("Caption")).toBeNull();

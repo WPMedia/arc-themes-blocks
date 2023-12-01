@@ -26,10 +26,10 @@ const Footer = () => <div style={styles}>Footer</div>;
 export const oneChildInBody = () => (
 	<SingleColumnRegularLayout>
 		<Navigation />
-		<></>
-		<>
+		<div />
+		<div>
 			<Component>Body 1</Component>
-		</>
+		</div>
 		<Footer />
 	</SingleColumnRegularLayout>
 );
@@ -37,11 +37,11 @@ export const oneChildInBody = () => (
 export const childrenInBody = () => (
 	<SingleColumnRegularLayout>
 		<Navigation />
-		<></>
-		<>
+		<div />
+		<div>
 			<Component>Body 1</Component>
 			<Component>Body 2</Component>
-		</>
+		</div>
 		<Footer />
 	</SingleColumnRegularLayout>
 );
@@ -49,12 +49,12 @@ export const childrenInBody = () => (
 export const oneChildInFullWidthAndBody = () => (
 	<SingleColumnRegularLayout>
 		<Navigation />
-		<>
+		<div>
 			<Component>Full Width 1</Component>
-		</>
-		<>
+		</div>
+		<div>
 			<Component>Body 1</Component>
-		</>
+		</div>
 		<Footer />
 	</SingleColumnRegularLayout>
 );
@@ -62,14 +62,14 @@ export const oneChildInFullWidthAndBody = () => (
 export const childrenInFullWidthAndBody = () => (
 	<SingleColumnRegularLayout>
 		<Navigation />
-		<>
+		<div>
 			<Component>Full Width 1</Component>
 			<Component>Full Width 2</Component>
-		</>
-		<>
+		</div>
+		<div>
 			<Component>Body 1</Component>
 			<Component>Body 2</Component>
-		</>
+		</div>
 		<Footer />
 	</SingleColumnRegularLayout>
 );

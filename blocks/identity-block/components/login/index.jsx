@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useIdentity } from "@wpmedia/arc-themes-components";
 import validateURL from "../../utils/validate-redirect-url";
+import useOIDCLogin from "../../utils/useOIDCLogin";
 
-const useLogin = ({ isAdmin, redirectURL, redirectToPreviousPage, loggedInPageLocation }) => {
+const useLogin = ({ isAdmin, redirectURL, redirectToPreviousPage, loggedInPageLocation, isOIDC }) => {
 	const { Identity } = useIdentity();
 	const validatedRedirectURL = validateURL(redirectURL);
 	const [redirectToURL, setRedirectToURL] = useState(validatedRedirectURL);
 	const [redirectQueryParam, setRedirectQueryParam] = useState(null);
+	const { loginByOIDC } = useOIDCLogin();
 
 	useEffect(() => {
 		if (window?.location?.search) {
@@ -36,7 +38,11 @@ const useLogin = ({ isAdmin, redirectURL, redirectToPreviousPage, loggedInPageLo
 			const isLoggedIn = await Identity.isLoggedIn();
 			const validatedLoggedInPageLoc = validateURL(loggedInPageLocation);
 			if (isLoggedIn) {
-				window.location = redirectQueryParam || validatedLoggedInPageLoc;
+				if (isOIDC) {
+					loginByOIDC();
+				} else {
+					window.location = redirectQueryParam || validatedLoggedInPageLoc;
+				}
 			}
 		};
 		if (Identity && !isAdmin) {

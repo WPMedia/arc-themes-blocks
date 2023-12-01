@@ -7,7 +7,7 @@ import Large from "./large";
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => false),
-	LazyLoad: ({ children }) => <>{children}</>,
+	LazyLoad: ({ children }) => children,
 }));
 
 describe("Large Promo", () => {
@@ -28,7 +28,7 @@ describe("Large Promo", () => {
 					showImageLG: true,
 					showOverlineLG: true,
 				}}
-			/>
+			/>,
 		);
 
 		expect(screen.queryByText(mockData.label.basic.text)).not.toBeNull();
@@ -50,7 +50,7 @@ describe("Large Promo", () => {
 					showImageLG: true,
 					showOverlineLG: false,
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText(mockData.label.basic.text)).toBeNull();
 		expect(screen.queryByText(mockData.headlines.basic)).not.toBeNull();
@@ -71,7 +71,7 @@ describe("Large Promo", () => {
 					showImageLG: true,
 					showOverlineLG: false,
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText(mockData.label.basic.text)).toBeNull();
 		expect(screen.queryByText(mockData.headlines.basic)).not.toBeNull();
@@ -92,7 +92,7 @@ describe("Large Promo", () => {
 					showImageLG: true,
 					showOverlineLG: true,
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText(mockData.label.basic.text)).not.toBeNull();
 		expect(screen.queryByText(mockData.headlines.basic)).not.toBeNull();
@@ -113,7 +113,7 @@ describe("Large Promo", () => {
 					showImageLG: true,
 					showOverlineLG: true,
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText(mockData.label.basic.text)).not.toBeNull();
 		expect(screen.queryByText(mockData.headlines.basic)).toBeNull();
@@ -134,7 +134,7 @@ describe("Large Promo", () => {
 					showImageLG: true,
 					showOverlineLG: true,
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText(mockData.label.basic.text)).not.toBeNull();
 		expect(screen.queryByText(mockData.headlines.basic)).not.toBeNull();
@@ -150,7 +150,7 @@ describe("Large Promo", () => {
 				customFields={{
 					showImageLG: true,
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText(mockData.label.basic.text)).toBeNull();
 		expect(screen.queryByText(mockData.headlines.basic)).toBeNull();
@@ -166,7 +166,7 @@ describe("Large Promo", () => {
 				customFields={{
 					showImageLG: false,
 				}}
-			/>
+			/>,
 		);
 
 		expect(screen.queryByRole("img")).toBeNull();
@@ -189,7 +189,7 @@ describe("Large Promo", () => {
 					showImageLG: false,
 					showOverlineLG: true,
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText(mockData.label.basic.text)).toBeNull();
 		expect(screen.queryByText("global.sponsored-content")).not.toBeNull();
@@ -208,7 +208,7 @@ describe("Large Promo", () => {
 					showImageLG: true,
 					playVideoInPlaceLG: false,
 				}}
-			/>
+			/>,
 		);
 		expect(container.querySelector(".b-top-table-list-large__icon_label")).not.toBeNull();
 	});
@@ -229,7 +229,7 @@ describe("Large Promo", () => {
 					showImageLG: true,
 					playVideoInPlaceLG: true,
 				}}
-			/>
+			/>,
 		);
 		expect(container.querySelector(".c-video__frame")).not.toBeNull();
 	});

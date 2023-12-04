@@ -18,8 +18,8 @@ export const PaypalCheckout = ({ labelOrderNumber, paypal, orderNumber, successU
 
 	return (
 		<>
-			<div>{token ? phrases.t("subscriptions-block.paypal-processing") : phrases.t("subscriptions-block.paypal-redirect-label")}</div>
-			<div>{error && phrases.t("subscriptions-block.payment-error") }</div>
+			<div data-testid="paypal-message-div">{token ? phrases.t("subscriptions-block.paypal-processing") : phrases.t("subscriptions-block.paypal-redirect-label")}</div>
+			<div data-testid="paypal-error-message-div">{error && phrases.t("subscriptions-block.payment-error") }</div>
 		</>
 	);
 };

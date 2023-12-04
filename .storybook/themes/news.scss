@@ -300,8 +300,8 @@
 							"flex": 0 0 auto
 						),
 						"button-large": (
-							"margin-bottom": var(--global-spacing-1),
-							"margin-top": var(--global-spacing-1),
+							"margin-block-end": var(--global-spacing-1),
+							"margin-block-start": var(--global-spacing-1),
 							"filter": drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0))
 						),
 						"link": (
@@ -310,10 +310,10 @@
 							"font-family": var(--font-family-primary),
 							"font-size": var(--body-font-size-small),
 							"font-weight": var(--global-font-weight-7),
-							"padding-bottom": var(--global-spacing-5),
-							"padding-left": var(--global-spacing-4),
-							"padding-right": var(--global-spacing-5),
-							"padding-top": var(--global-spacing-5),
+							"padding-block-end": var(--global-spacing-5),
+							"padding-block-start": var(--global-spacing-5),
+							"padding-inline-end": var(--global-spacing-5),
+							"padding-inline-start": var(--global-spacing-4),
 							"text-decoration": none
 						),
 						"link-hover": (
@@ -882,14 +882,20 @@
 					"gap": var(--global-spacing-6) 0
 				),
 				"footer": (
-					"width": var(--content-scale-width),
+					"inline-size": var(--content-scale-width),
 					"gap": var(--global-spacing-6),
-					"margin": 0 auto,
-					"max-width": calc(var(--content-max-width) * 1px),
+					"margin-block-end": 0,
+					"margin-block-start": 0,
+					"margin-inline-end": auto,
+					"margin-inline-start": auto,
+					"max-inline-size": calc(var(--content-max-width) * 1px),
 					"components": (
 						"image": (
-							"margin": auto,
-							"max-height": var(--global-spacing-7)
+							"margin-block-end": auto,
+							"margin-block-start": auto,
+							"margin-inline-end": auto,
+							"margin-inline-start": auto,
+							"max-block-size": var(--global-spacing-7)
 						)
 					)
 				),
@@ -922,26 +928,32 @@
 					)
 				),
 				"footer-social-links": (
-					"border": 1px solid var(--color-primary),
+					"border-block-end": 1px solid var(--color-primary),
+					"border-block-start": 1px solid var(--color-primary),
+					"border-inline-end": 1px solid var(--color-primary),
+					"border-inline-start": 1px solid var(--color-primary),
 					"border-radius": var(--border-radius),
-					"margin": var(--global-spacing-2) auto,
-					"width": fit-content,
+					"margin-block-end": var(--global-spacing-2),
+					"margin-block-start": var(--global-spacing-2),
+					"margin-inline-end": auto,
+					"margin-inline-start": auto,
+					"inline-size": fit-content,
 					"components": (
 						"icon": (
 							"fill": var(--color-primary)
 						),
 						"link": (
-							"border-right": 1px solid var(--color-primary),
-							"padding-top": var(--global-spacing-2),
-							"padding-right": var(--global-spacing-2),
-							"padding-bottom": var(--global-spacing-2),
-							"padding-left": var(--global-spacing-2)
+							"border-inline-end": 1px solid var(--color-primary),
+							"padding-block-end": var(--global-spacing-2),
+							"padding-block-start": var(--global-spacing-2),
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
 						)
 					)
 				),
 				"footer-social-links-container": (
-					"border-bottom": 1px solid var(--global-neutral-4),
-					"width": 100%
+					"border-block-end": 1px solid var(--global-neutral-4),
+					"inline-size": 100%
 				),
 				"footer-social-links-hover": (
 					"components": (
@@ -953,20 +965,20 @@
 				"footer-social-links-last": (
 					"components": (
 						"link": (
-							"border-right": none
+							"border-inline-end": none
 						)
 					)
 				),
 				"footer-top-container": (
-					"border-top": 1px solid var(--global-neutral-4),
-					"border-bottom": none,
+					"border-block-start": 1px solid var(--global-neutral-4),
+					"border-block-end": none,
 					"display": grid,
 					"grid-template-columns": 100%,
 					"grid-template-rows": auto auto,
 					"grid-auto-flow": column,
 					"gap": var(--global-spacing-6),
 					"justify-content": center,
-					"width": 100%,
+					"inline-size": 100%,
 					"components": (
 						"paragraph": (
 							"justify-self": center
@@ -1755,7 +1767,7 @@
 					)
 				),
 				"masthead": (
-					"border-bottom": 2px solid var(--global-neutral-8),
+					"border-block-end": 2px solid var(--global-neutral-8),
 					"color": var(--text-color),
 					"display": none,
 					"font-family": var(--font-family-primary),
@@ -1775,8 +1787,14 @@
 					"flex": 11 0%
 				),
 				"masthead-divider": (
-					"margin": 0,
-					"padding": 0
+					"margin-block-end": 0,
+					"margin-block-start": 0,
+					"margin-inline-end": 0,
+					"margin-inline-start": 0,
+					"padding-block-end": 0,
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-inline-start": 0
 				),
 				"masthead-link": (
 					"align-items": flex-end,
@@ -1789,7 +1807,7 @@
 					"justify-content": center
 				),
 				"masthead-logo-image": (
-					"max-height": 64px,
+					"max-block-size": 64px,
 					"object-fit": contain,
 					"vertical-align": middle
 				),
@@ -3449,7 +3467,7 @@
 				"footer": (
 					"components": (
 						"image": (
-							"max-height": var(--global-spacing-10)
+							"max-block-size": var(--global-spacing-10)
 						)
 					)
 				),
@@ -3458,11 +3476,11 @@
 					"grid-template-columns": 1fr 1fr 1fr 1fr
 				),
 				"footer-social-links-container": (
-					"border-bottom": none,
-					"width": max-content
+					"border-block-end": none,
+					"inline-size": max-content
 				),
 				"footer-top-container": (
-					"border-bottom": 1px solid var(--global-neutral-4),
+					"border-block-end": 1px solid var(--global-neutral-4),
 					"grid-auto-flow": column,
 					"grid-template-columns": 1fr auto 1fr,
 					"grid-template-rows": auto,

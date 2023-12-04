@@ -1,99 +1,35 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import { useIdentity } from "@wpmedia/arc-themes-components";
+
 import PasswordEditableFieldContainer from "./PasswordEditableFieldContainer";
+import FormPasswordConfirm from "../../../components/form-password-confirm";
 
-jest.mock("fusion:properties", () =>
-	jest.fn(() => ({
-		locale: "en",
-	}))
-);
-
-jest.mock("@wpmedia/arc-themes-components");
-
-jest.mock("fusion:intl", () => ({
-	__esModule: true,
-	default: jest.fn((locale) => ({
-		t: jest.fn((phrase) => require("../../../intl.json")[phrase][locale]),
-	})),
-}));
-
-const responseData = {
-	pwLowercase: "1",
-	pwMinLength: "1",
-	pwPwNumbers: "1",
-	pwSpecialCharacters: "1",
-	pwUppercase: "1",
-};
-
-const getConfigMock = jest.fn(() => Promise.resolve(responseData));
+jest.mock("../../../components/form-password-confirm", () => () => <div>Password Confirm</div>);
 
 describe("PasswordEditableFieldContainer", () => {
-	afterAll(() => {
-		jest.restoreAllMocks();
-	});
-
 	it("should render component with Add Password label", async () => {
-		useIdentity.mockImplementation(() => ({
-			Identity: {
-				getConfig: getConfigMock,
-			},
-		}));
-
-		await act(async () => {
-			await render(<PasswordEditableFieldContainer />);
-		});
-		await getConfigMock;
-		expect(screen.getByText("Add Password")).not.toBeNull();
+		render(<PasswordEditableFieldContainer blockClassName="testClass" email="email" />);
+		expect(await screen.findByText("identity-block.add-password")).not.toBeNull();
 	});
 
 	it("should render component with password placeholder label", async () => {
-		useIdentity.mockImplementation(() => ({
-			Identity: {
-				getConfig: getConfigMock,
-			},
-		}));
-
-		await act(async () => {
-			await render(<PasswordEditableFieldContainer hasPassword />);
-		});
-		await getConfigMock;
-		expect(screen.getByText("**********")).not.toBeNull();
+		render(<PasswordEditableFieldContainer blockClassName="testClass" email="email" hasPassword />);
+		expect(await screen.findByText("identity-block.password-placeholder")).not.toBeNull();
 	});
 
 	it("renders current password field and password confirm fields when hasPassword and editing", async () => {
-		useIdentity.mockImplementation(() => ({
-			Identity: {
-				getConfig: getConfigMock,
-			},
-		}));
-
-		await act(async () => {
-			await render(<PasswordEditableFieldContainer hasPassword />);
-		});
-		await getConfigMock;
-		expect(screen.getByText("**********")).not.toBeNull();
+		render(<PasswordEditableFieldContainer blockClassName="testClass" email="email" hasPassword />);
+		expect(await screen.findByText("identity-block.password-placeholder")).not.toBeNull();
 		fireEvent.click(screen.getByRole("button"));
-		expect(screen.getByLabelText("Current Password")).not.toBeNull();
-		expect(screen.getByLabelText("New Password")).not.toBeNull();
-		expect(screen.getByLabelText("Confirm password")).not.toBeNull();
+		expect(screen.getByLabelText("identity-block.current-password")).not.toBeNull();
+		expect(screen.getByText("Password Confirm")).not.toBeNull();
 	});
 
 	it("renders only password confirm fields when NOT hasPassword and editing", async () => {
-		useIdentity.mockImplementation(() => ({
-			Identity: {
-				getConfig: getConfigMock,
-			},
-		}));
-
-		await act(async () => {
-			await render(<PasswordEditableFieldContainer />);
-		});
-		await getConfigMock;
-		expect(screen.getByText("Add Password")).not.toBeNull();
+		render(<PasswordEditableFieldContainer blockClassName="testClass" email="email" />);
+		expect(await screen.findByText("identity-block.add-password")).not.toBeNull();
 		fireEvent.click(screen.getByRole("button"));
-		expect(screen.getByLabelText("New Password")).not.toBeNull();
-		expect(screen.getByLabelText("Confirm password")).not.toBeNull();
+		expect(screen.getByText("Password Confirm")).not.toBeNull();
 	});
 });

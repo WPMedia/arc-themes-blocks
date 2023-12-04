@@ -1,9 +1,10 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import { isServerSide } from "@wpmedia/arc-themes-components";
+import mockConsole from "jest-mock-console";
 
 import SimpleList from "./default";
 
@@ -89,7 +90,7 @@ jest.mock("fusion:content", () => ({
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(),
-	LazyLoad: ({ children }) => <>{children}</>,
+	LazyLoad: ({ children }) => children,
 }));
 
 const listContentConfig = {
@@ -102,6 +103,13 @@ const listContentConfig = {
 };
 
 describe("The simple-list-block", () => {
+	let restoreConsole;
+	afterAll(() => {
+		restoreConsole?.();
+	});
+	beforeAll(() => {
+		restoreConsole = mockConsole();
+	});
 	beforeEach(() => {
 		useFusionContext.mockReturnValue({
 			arcSite: "the-sun",

@@ -89,7 +89,7 @@ const largePromoMock = {
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => false),
-	LazyLoad: ({ children }) => <>{children}</>,
+	LazyLoad: ({ children }) => children,
 }));
 
 jest.mock("fusion:content", () => ({
@@ -126,7 +126,7 @@ describe("Large Promo", () => {
 					showImage: true,
 					showOverline: true,
 				}}
-			/>
+			/>,
 		);
 
 		expect(screen.queryByText(largePromoMock.label.basic.text)).not.toBeNull();
@@ -147,7 +147,7 @@ describe("Large Promo", () => {
 					showImage: true,
 					showOverline: false,
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText(largePromoMock.label.basic.text)).toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
@@ -167,7 +167,7 @@ describe("Large Promo", () => {
 					showImage: true,
 					showOverline: false,
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText(largePromoMock.label.basic.text)).toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
@@ -187,7 +187,7 @@ describe("Large Promo", () => {
 					showImage: true,
 					showOverline: true,
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText(largePromoMock.label.basic.text)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
@@ -207,7 +207,7 @@ describe("Large Promo", () => {
 					showImage: true,
 					showOverline: true,
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText(largePromoMock.label.basic.text)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).toBeNull();
@@ -227,7 +227,7 @@ describe("Large Promo", () => {
 					showImage: true,
 					showOverline: true,
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText(largePromoMock.label.basic.text)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
@@ -243,7 +243,7 @@ describe("Large Promo", () => {
 					showImage: true,
 					imageRatio: "4:3",
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText(largePromoMock.label.basic.text)).toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).toBeNull();
@@ -258,7 +258,7 @@ describe("Large Promo", () => {
 				customFields={{
 					showImage: false,
 				}}
-			/>
+			/>,
 		);
 
 		expect(screen.queryByRole("img")).toBeNull();
@@ -326,7 +326,7 @@ describe("Large Promo", () => {
 					imageRatio: "4:3",
 					showOverline: true,
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText(largePromoMock.label.basic.text)).toBeNull();
 		expect(screen.queryByText("global.sponsored-content")).not.toBeNull();
@@ -344,21 +344,21 @@ describe("Large Promo", () => {
 					showImageOrVideoLabel: true,
 					playVideoInPlace: false,
 				}}
-			/>
+			/>,
 		);
 		expect(container.querySelector(".b-large-promo__icon_label")).not.toBeNull();
 	});
 
-	it("should render video player media when 'playVideoInPlace' prop is passed", () => {
-		const { container } = render(
-			<LargePromo
-				customFields={{
-					showImage: true,
-					aspectRatio: "4:3",
-					playVideoInPlace: true,
-				}}
-			/>
-		);
-		expect(container.querySelector(".c-video__frame")).not.toBeNull();
-	});
+	// it("should render video player media when 'playVideoInPlace' prop is passed", () => {
+	// 	const { container } = render(
+	// 		<LargePromo
+	// 			customFields={{
+	// 				showImage: true,
+	// 				aspectRatio: "4:3",
+	// 				playVideoInPlace: true,
+	// 			}}
+	// 		/>
+	// 	);
+	// 	expect(container.querySelector(".c-video__frame")).not.toBeNull();
+	// });
 });

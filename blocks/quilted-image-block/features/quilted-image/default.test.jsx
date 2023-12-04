@@ -1,7 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import { useContent } from "fusion:content";
+import mockConsole from "jest-mock-console";
 
 import QuiltedImage from "./default";
 
@@ -51,6 +52,13 @@ const FILLED_IN_CUSTOM_FIELDS = {
 };
 
 describe("Quilted Image", () => {
+	let restoreConsole;
+	afterAll(() => {
+		restoreConsole?.();
+	});
+	beforeAll(() => {
+		restoreConsole = mockConsole();
+	});
 	it("should render all content for custom fields that have been filled in.", () => {
 		render(<QuiltedImage customFields={FILLED_IN_CUSTOM_FIELDS} />);
 		expect(screen.queryAllByRole("img")).toHaveLength(3);
@@ -65,7 +73,7 @@ describe("Quilted Image", () => {
 
 	it("should not have a headline when the 'headline' custom field is an empty string.", () => {
 		const { container } = render(
-			<QuiltedImage customFields={{ ...FILLED_IN_CUSTOM_FIELDS, headline: "" }} />
+			<QuiltedImage customFields={{ ...FILLED_IN_CUSTOM_FIELDS, headline: "" }} />,
 		);
 		const element = container.querySelector(".c-header");
 		expect(element).toBeNull();
@@ -74,24 +82,24 @@ describe("Quilted Image", () => {
 
 	it("should render 'b-quilted-image__wrapper-top' className on the first link when 'top' is selected for 'fullWidthImage' custom field value.", () => {
 		const { container } = render(
-			<QuiltedImage customFields={{ ...FILLED_IN_CUSTOM_FIELDS, fullWidthImage: "top" }} />
+			<QuiltedImage customFields={{ ...FILLED_IN_CUSTOM_FIELDS, fullWidthImage: "top" }} />,
 		);
 		const firstLinkElement = container.querySelectorAll("a")[0];
 		expect(firstLinkElement.getAttribute("class")).toBe(
-			"c-link b-quilted-image__media-panel b-quilted-image__wrapper-top"
+			"c-link b-quilted-image__media-panel b-quilted-image__wrapper-top",
 		);
 		const thirdLinkElement = container.querySelectorAll("a")[2];
 		expect(thirdLinkElement.getAttribute("class")).toBe("c-link b-quilted-image__media-panel ");
 	});
 	it("should render 'b-quilted-image__wrapper-bottom' className for third link when 'bottom' is selected for 'fullWidthImage' custom field value.", () => {
 		const { container } = render(
-			<QuiltedImage customFields={{ ...FILLED_IN_CUSTOM_FIELDS, fullWidthImage: "bottom" }} />
+			<QuiltedImage customFields={{ ...FILLED_IN_CUSTOM_FIELDS, fullWidthImage: "bottom" }} />,
 		);
 		const linkElement1 = container.querySelectorAll("a")[0];
 		expect(linkElement1.getAttribute("class")).toBe("c-link b-quilted-image__media-panel ");
 		const linkElement3 = container.querySelectorAll("a")[2];
 		expect(linkElement3.getAttribute("class")).toBe(
-			"c-link b-quilted-image__media-panel b-quilted-image__wrapper-bottom"
+			"c-link b-quilted-image__media-panel b-quilted-image__wrapper-bottom",
 		);
 	});
 
@@ -104,7 +112,7 @@ describe("Quilted Image", () => {
 					item2Action: "",
 					item3Action: "",
 				}}
-			/>
+			/>,
 		);
 
 		const mediaPanels = container.querySelectorAll("a.b-quilted-image__media-panel");
@@ -120,7 +128,7 @@ describe("Quilted Image", () => {
 					button2Text: "",
 					button3Text: "",
 				}}
-			/>
+			/>,
 		);
 		const linkElements = container.querySelectorAll("p.c-button");
 		expect(linkElements.length).toBe(0);
@@ -135,7 +143,7 @@ describe("Quilted Image", () => {
 					overlay2Text: "",
 					overlay3Text: "",
 				}}
-			/>
+			/>,
 		);
 		const linkElements = container.querySelectorAll("p.c-paragraph");
 		expect(linkElements.length).toBe(0);
@@ -153,7 +161,7 @@ describe("Quilted Image", () => {
 					image2Auth: "",
 					image3Auth: "",
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryAllByRole("img")).toHaveLength(3);
 		useContent.mockClear();
@@ -168,7 +176,7 @@ describe("Quilted Image", () => {
 					image2Id: "",
 					image3Id: "",
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryAllByRole("img")).toHaveLength(3);
 	});

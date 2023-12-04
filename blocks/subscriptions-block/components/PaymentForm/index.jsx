@@ -4,13 +4,11 @@ import {
 	useElements,
 	CardNumberElement,
 	CardExpiryElement,
-	CardCvcElement
+	CardCvcElement,
 } from "@stripe/react-stripe-js";
 import {
 	usePhrases,
 	Button,
-	Heading,
-	HeadingSection,
 	Paragraph,
 	Grid,
 	Input,
@@ -34,8 +32,6 @@ function PaymentForm({
 	paymentMethodID,
 	clientSecret,
 	stripeInstance,
-	formTitle,
-	formLabel,
 	submitText,
 	formErrorText,
 	className,
@@ -67,13 +63,9 @@ function PaymentForm({
 			setFormStatus(FORM_STATUS.ERROR);
 			return;
 		}
-
-		let result;
-
-		// if order of $0 there's a different stripe logic
 		const totalOrder = Sales.currentOrder.total;
-
-		if (totalOrder > 0) {
+		let result;
+		if (totalOrder && totalOrder > 0) {
 			result = await stripeInstance.confirmCardPayment(clientSecret, {
 				payment_method: paymentMethod.id,
 			});
@@ -122,11 +114,7 @@ function PaymentForm({
 
 	return (
 		<section className={`${className}__payment`}>
-			<HeadingSection>
-				<Heading>{formTitle}</Heading>
-			</HeadingSection>
 			<form onSubmit={handleSubmit} className={`${className}__payment-form`}>
-				<Paragraph>{formLabel}</Paragraph>
 				<Grid className={`${className}__payment-information`}>
 					<Stack>
 						<Input

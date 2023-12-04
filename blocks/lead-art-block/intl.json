@@ -1,24 +1,24 @@
 {
 	"lead-art-block.fullscreen-enter": {
-		"de": "Vollbildmodus mit Anzeige des Hauptbildes öffnen",
-		"en": "Enter full screen mode displaying the lead image",
-		"es": "Entrar en el modo de pantalla completa mostrando la imagen principal",
-		"fr": "Entrer dans le mode plein écran en affichant l'image principale",
-		"ja": "リード画像を表示する全画面表示モードに入る",
-		"ko": "리드 이미지를 표시하는 전체 화면 모드 종료",
-		"no": "Åpne fullskjermsvisning av hovedbildet",
+		"sv": "Gå in i helskärmsläge och visa huvudbilden",
 		"pt": "Entrar no modo de ecrã completo mostrando a imagem principal",
-		"sv": "Gå in i helskärmsläge och visa huvudbilden"
+		"no": "Åpne fullskjermsvisning av hovedbildet",
+		"ko": "리드 이미지를 표시하는 전체 화면 모드 종료",
+		"ja": "リード画像を表示する全画面表示モードに入る",
+		"fr": "Entrer dans le mode plein écran en affichant l'image principale",
+		"es": "Entrar en el modo de pantalla completa mostrando la imagen principal",
+		"en": "Enter full screen mode displaying the lead image",
+		"de": "Vollbildmodus mit Anzeige des Hauptbildes öffnen"
 	},
 	"lead-art-block.fullscreen-exit": {
-		"de": "Vollbildmodus mit Anzeige des Hauptbildes beenden",
-		"en": "Exit full screen mode displaying the lead image",
-		"es": "Salir del modo de pantalla completa mostrando la imagen principal",
-		"fr": "Quitter le mode plein écran en affichant l'image principale",
-		"ja": "リード画像を表示する全画面表示モードを終了",
-		"ko": "리드 이미지를 표시하는 전체 화면 모드 종료",
-		"no": "Avslutt fullskjermsvisning av hovedbildet",
+		"sv": "Avsluta helskärmsläge med visning av huvudbilden",
 		"pt": "Sair do modo de ecrã completo mostrando a imagem principal",
-		"sv": "Avsluta helskärmsläge med visning av huvudbilden"
+		"no": "Avslutt fullskjermsvisning av hovedbildet",
+		"ko": "리드 이미지를 표시하는 전체 화면 모드 종료",
+		"ja": "リード画像を表示する全画面表示モードを終了",
+		"fr": "Quitter le mode plein écran en affichant l'image principale",
+		"es": "Salir del modo de pantalla completa mostrando la imagen principal",
+		"en": "Exit full screen mode displaying the lead image",
+		"de": "Vollbildmodus mit Anzeige des Hauptbildes beenden"
 	}
 }

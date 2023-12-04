@@ -1,26 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { usePhrases, Heading, Link, useIdentity } from "@wpmedia/arc-themes-components";
-import useSales from "../../components/useSales";
+import usePaymentOptions from "../../components/usePaymentOptions";
 import Cart from "../../components/Cart";
 import ContactInfo from "../../components/ContactInfo";
 import PaymentInfo from "./_children/PaymentInfo";
 
+export const LABEL_ORDER_NUMBER_PAYPAL = "ArcSubs_OrderNumber"
 const BLOCK_CLASS_NAME = "b-checkout";
 
 const Checkout = ({ customFields }) => {
-	const { offerURL, successURL } = customFields;
+	const { offerURL, successURL, stripeIntentsID } = customFields;
+	const { stripeIntents, paypal, error } = usePaymentOptions(stripeIntentsID);
+
 	const [loggedIn, setIsLoggedIn] = useState(false);
 	const [user, setUser] = useState(false);
 	const [signedInIdentity, setSignedInIdentity] = useState(false);
-	const [orderNumber, setOrderNumber] = useState();
 	const [showPaymentScreen, setShowPaymentScreen] = useState(false);
-	const [payment, setPayment] = useState();
-	const [paymentMethodID, setPaymentMethodID] = useState();
+	const [userInfo, setUserInfo] = useState({});
 
 	const { Identity, getSignedInIdentity } = useIdentity();
-	const { Sales } = useSales();
 	const phrases = usePhrases();
+
+	const [isInitialized, setIsInitialized] = useState(false);
+
+	const params = new URLSearchParams(window.location.search);
+	const token = params.get("token");
+
+	useEffect(() => {
+		const isOrderNumberInLocalStorage = localStorage.getItem(LABEL_ORDER_NUMBER_PAYPAL);
+		if (isOrderNumberInLocalStorage && token) {
+			setIsInitialized(true);
+		}
+	}, []);
 
 	useEffect(() => {
 		const isLoggedIn = async () => {
@@ -58,31 +70,14 @@ const Checkout = ({ customFields }) => {
 			setUser(false);
 		});
 	};
-	const createNewOrder = async ({ email, firstName, lastName, country }) => {
+
+	const setUserInfoAndShowPaymentScreen = async (userInfo) => {
+		const { firstName, lastName } = userInfo;
+		setUserInfo(userInfo);
 		if (user) {
 			Identity.updateUserProfile({ firstName, lastName });
 		}
-
-		Sales.getCart().then((cart) => {
-			if (!cart?.items?.length) {
-				window.location.href = offerURL;
-				return;
-			}else{
-				Sales.createNewOrder({ country }, email).then((order) => {
-					setOrderNumber(order.orderNumber);
-					Sales.getPaymentOptions().then((paymentOptions) => {
-						const newPaymentMethodID = paymentOptions[0].paymentMethodID;
-						Sales.initializePayment(order.orderNumber, paymentOptions[0].paymentMethodID).then(
-							(paymentObject) => {
-								setPayment(paymentObject);
-								setPaymentMethodID(newPaymentMethodID);
-								setShowPaymentScreen(true);
-							},
-						);
-					});
-				});
-			}
-		});
+		setShowPaymentScreen(true);
 	};
 
 	return (
@@ -92,9 +87,9 @@ const Checkout = ({ customFields }) => {
 
 			<Cart offerURL={offerURL} className={BLOCK_CLASS_NAME} />
 
-			{!showPaymentScreen ? (
+			{!showPaymentScreen && !isInitialized ? (
 				<ContactInfo
-					callback={createNewOrder}
+					callback={setUserInfoAndShowPaymentScreen}
 					user={user}
 					signedInIdentity={signedInIdentity}
 					logoutCallback={logoutCallback}
@@ -102,11 +97,14 @@ const Checkout = ({ customFields }) => {
 				/>
 			) : (
 				<PaymentInfo
-					orderNumber={orderNumber}
-					paymentDetails={payment}
-					paymentMethodID={paymentMethodID}
 					successURL={successURL}
 					className={BLOCK_CLASS_NAME}
+					userInfo={userInfo}
+					offerURL={offerURL}
+					stripeIntents={stripeIntents}
+					paypal={paypal}
+					errorPaymentOptions={error}
+					isInitialized={isInitialized}
 				/>
 			)}
 		</section>
@@ -120,6 +118,11 @@ Checkout.propTypes = {
 		successURL: PropTypes.string.tag({
 			defaultValue: "/",
 			label: "Success URL",
+		}),
+		stripeIntentsID: PropTypes.number.tag({
+			label: "Stripe Intents - Provider ID",
+			description:
+				"In case you have multiple payment providers for stripe Intents, It determines what is the provider ID to be used by default.",
 		}),
 	}),
 };

@@ -4,7 +4,7 @@
 			"default": {
 				"components": {
 					"image": {
-						"width": "auto"
+						"inline-size": "auto"
 					},
 					"carousel": {
 						"--slides": 1,
@@ -15,8 +15,8 @@
 					},
 					"carousel-track": {
 						"gap": "var(--global-spacing-4)",
-						"max-width": "100%",
-						"width": "100%"
+						"max-inline-size": "100%",
+						"inline-size": "100%"
 					}
 				}
 			},
@@ -42,9 +42,12 @@
 	"product-gallery-thumbnail": {
 		"styles": {
 			"default": {
-				"margin": "3px",
-				"height": "var(--global-spacing-7)",
-				"width": "var(--global-spacing-7)"
+				"margin-block-start": "3px",
+				"margin-inline-end": "3px",
+				"margin-block-end": "3px",
+				"margin-inline-start": "3px",
+				"block-size": "var(--global-spacing-7)",
+				"inline-size": "var(--global-spacing-7)"
 			},
 			"desktop": {}
 		}
@@ -62,11 +65,11 @@
 			"default": {
 				"position": "fixed",
 				"background-color": "var(--global-white)",
-				"height": "100vh",
-				"left": 0,
+				"block-size": "100vh",
+				"inset-inline-start": 0,
 				"overflow": "hidden",
-				"top": 0,
-				"width": "100vw",
+				"inset-block-start": 0,
+				"inline-size": "100vw",
 				"z-index": "var(--global-z-index-5)",
 				"components": {
 					"grid": {
@@ -81,8 +84,8 @@
 		"styles": {
 			"default": {
 				"gap": "var(--global-spacing-7)",
-				"height": "100vh",
-				"max-width": "100%",
+				"block-size": "100vh",
+				"max-inline-size": "100%",
 				"overflow-y": "auto"
 			},
 			"desktop": {}
@@ -91,8 +94,8 @@
 	"product-gallery-focus-view-main-image": {
 		"styles": {
 			"default": {
-				"height": "auto",
-				"max-width": "100%"
+				"block-size": "auto",
+				"max-inline-size": "100%"
 			},
 			"desktop": {}
 		}
@@ -101,11 +104,14 @@
 		"styles": {
 			"default": {
 				"position": "fixed",
-				"right": "var(--global-spacing-5)",
-				"top": "var(--global-spacing-5)",
+				"inset-inline-end": "var(--global-spacing-5)",
+				"inset-block-start": "var(--global-spacing-5)",
 				"components": {
 					"button-medium": {
-						"padding": "var(--global-spacing-3)"
+						"padding-block-start": "var(--global-spacing-3)",
+						"padding-inline-end": "var(--global-spacing-3)",
+						"padding-block-end": "var(--global-spacing-3)",
+						"padding-inline-start": "var(--global-spacing-3)"
 					},
 					"icon": {
 						"fill": "currentColor"
@@ -118,20 +124,20 @@
 	"product-gallery-focus-view-thumbnail-bar": {
 		"styles": {
 			"default": {
-				"padding-top": "var(--global-spacing-7)",
-				"padding-right": "var(--global-spacing-6)",
-				"padding-bottom": "var(--global-spacing-7)",
-				"padding-left": "var(--global-spacing-6)",
+				"padding-block-start": "var(--global-spacing-7)",
+				"padding-inline-end": "var(--global-spacing-6)",
+				"padding-block-end": "var(--global-spacing-7)",
+				"padding-inline-start": "var(--global-spacing-6)",
 				"components": {
 					"button": {
 						"justify-content": "center",
-						"padding-bottom": "var(--global-spacing-2)",
-						"padding-top": "var(--global-spacing-2)",
-						"width": "100%"
+						"padding-block-end": "var(--global-spacing-2)",
+						"padding-block-start": "var(--global-spacing-2)",
+						"inline-size": "100%"
 					},
 					"image": {
-						"max-height": "100px",
-						"max-width": "100px"
+						"max-block-size": "100px",
+						"max-inline-size": "100px"
 					},
 					"stack": {
 						"gap": "var(--global-spacing-2)"
@@ -148,7 +154,7 @@
 				"font-size": "var(--heading-level-6-font-size)",
 				"font-weight": "var(--global-font-weight-4)",
 				"line-height": "var(--heading-level-6-line-height)",
-				"margin-bottom": "var(--global-spacing-2)"
+				"margin-block-end": "var(--global-spacing-2)"
 			},
 			"desktop": {}
 		}

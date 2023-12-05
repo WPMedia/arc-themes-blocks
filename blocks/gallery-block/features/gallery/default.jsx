@@ -56,7 +56,7 @@ export const GalleryPresentation = ({
 					source: galleryContentConfig.contentService,
 					query: galleryContentConfig.contentConfigValues,
 			  }
-			: {}
+			: {},
 	);
 
 	const showGlobalContent =

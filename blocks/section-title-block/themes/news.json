@@ -14,7 +14,10 @@
 						"font-family": "var(--font-family-primary)"
 					},
 					"separator": {
-						"margin": "0 var(--global-spacing-4)"
+						"margin-block-start": "0",
+						"margin-inline-end": "var(--global-spacing-4)",
+						"margin-block-end": "0",
+						"margin-inline-start": "var(--global-spacing-4)"
 					}
 				}
 			},

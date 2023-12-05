@@ -2,9 +2,12 @@
 	"product-information": {
 		"styles": {
 			"default": {
-				"margin": "0auto",
-				"max-width": "var(--content-scale-width)",
-				"width": "100%",
+				"margin-block-start": "0auto",
+				"margin-inline-end": "0auto",
+				"margin-block-end": "0auto",
+				"margin-inline-start": "0auto",
+				"max-inline-size": "var(--content-scale-width)",
+				"inline-size": "100%",
 				"components": {
 					"heading": {
 						"color": "var(--global-black)",
@@ -29,7 +32,7 @@
 				}
 			},
 			"desktop": {
-				"max-width": "100%"
+				"max-inline-size": "100%"
 			}
 		}
 	},

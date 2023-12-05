@@ -8,8 +8,8 @@
 						"-webkit-line-clamp": 2
 					},
 					"icon": {
-						"height": "var(--global-font-size-9)",
-						"width": "var(--global-font-size-9)"
+						"block-size": "var(--global-font-size-9)",
+						"inline-size": "var(--global-font-size-9)"
 					}
 				}
 			},
@@ -42,10 +42,10 @@
 		"styles": {
 			"default": {
 				"font-size": "var(--heading-level-5-font-size)",
-				"margin-left": "auto",
-				"margin-right": "auto",
-				"max-width": "var(--content-scale-width)",
-				"width": "100%"
+				"margin-inline-start": "auto",
+				"margin-inline-end": "auto",
+				"max-inline-size": "var(--content-scale-width)",
+				"inline-size": "100%"
 			},
 			"desktop": {}
 		}

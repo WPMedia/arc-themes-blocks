@@ -15,7 +15,7 @@
 						"line-height": "var(--heading-level-2-line-height)"
 					},
 					"image": {
-						"max-height": "100vh"
+						"max-block-size": "100vh"
 					},
 					"paragraph": {
 						"font-family": "var(--font-family-primary)"
@@ -37,12 +37,12 @@
 			"default": {
 				"gap": "var(--global-spacing-5)",
 				"grid-template-rows": "1fr auto",
-				"max-height": "100vh",
+				"max-block-size": "100vh",
 				"components": {
 					"image": {
-						"max-height": "100vh",
+						"max-block-size": "100vh",
 						"object-fit": "cover",
-						"width": "100%"
+						"inline-size": "100%"
 					},
 					"picture": {
 						"display": "flex",
@@ -72,9 +72,12 @@
 	"hero-text-overlay": {
 		"styles": {
 			"default": {
-				"margin": "0auto",
-				"max-width": "var(--content-scale-width)",
-				"width": "100%"
+				"margin-block-start": "0auto",
+				"margin-inline-end": "0auto",
+				"margin-block-end": "0auto",
+				"margin-inline-start": "0auto",
+				"max-inline-size": "var(--content-scale-width)",
+				"inline-size": "100%"
 			},
 			"desktop": {}
 		}
@@ -82,8 +85,8 @@
 	"hero-text-left": {
 		"styles": {
 			"default": {
-				"max-width": "var(--content-scale-width)",
-				"width": "100%",
+				"max-inline-size": "var(--content-scale-width)",
+				"inline-size": "100%",
 				"components": {
 					"paragraph": {
 						"align-self": "flex-start"
@@ -93,7 +96,7 @@
 			"desktop": {
 				"components": {
 					"paragraph": {
-						"max-width": "65%"
+						"max-inline-size": "65%"
 					}
 				}
 			}
@@ -102,11 +105,14 @@
 	"hero-text-stacked": {
 		"styles": {
 			"default": {
-				"margin": "0auto",
+				"margin-block-start": "0auto",
+				"margin-inline-end": "0auto",
+				"margin-block-end": "0auto",
+				"margin-inline-start": "0auto",
 				"components": {
 					"paragraph": {
 						"align-self": "center",
-						"max-width": "24rem"
+						"max-inline-size": "24rem"
 					}
 				}
 			},

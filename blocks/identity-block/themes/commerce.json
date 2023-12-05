@@ -14,7 +14,7 @@
 					"heading": {
 						"font-size": "var(--global-font-size-7)",
 						"margin-block-end": "var(--global-spacing-2)",
-						"margin-bottom": "var(--global-spacing-2)"
+						"margin-block-end": "var(--global-spacing-2)"
 					},
 					"input": {
 						"margin-block-end": "var(--global-spacing-5)"
@@ -24,7 +24,7 @@
 					},
 					"input-input": {
 						"inline-size": "100%",
-						"width": "100%",
+						"inline-size": "100%",
 						"padding-block-end": "var(--global-spacing-2)",
 						"padding-block-start": "var(--global-spacing-2)"
 					},
@@ -116,7 +116,7 @@
 						"border-block-end-width": "var(--global-border-width-1)",
 						"font-size": "var(--global-font-size-9)",
 						"margin-block-end": "var(--global-spacing-4)",
-						"margin-bottom": "var(--global-spacing-4)",
+						"margin-block-end": "var(--global-spacing-4)",
 						"padding-block-end": "var(--global-spacing-2)",
 						"text-align": "center"
 					},
@@ -128,7 +128,7 @@
 					},
 					"input-input": {
 						"inline-size": "100%",
-						"width": "100%",
+						"inline-size": "100%",
 						"padding-block-end": "var(--global-spacing-2)",
 						"padding-block-start": "var(--global-spacing-2)"
 					},
@@ -188,14 +188,25 @@
 	"header-account-action-dropdown-open": {
 		"styles": {
 			"default": {
-				"top": "100%",
+				"inset-block-start": "100%",
 				"position": "absolute",
 				"padding-block-end": "var(--global-spacing-4)",
 				"padding-block-start": "var(--global-spacing-4)",
 				"padding-inline-end": "var(--global-spacing-4)",
 				"padding-inline-start": "var(--global-spacing-4)",
 				"background-color": "var(--global-white)",
-				"border": "1px solid var(--border-color)",
+				"border-block-start-width": "1px",
+				"border-block-end-width": "1px",
+				"border-inline-start-width": "1px",
+				"border-inline-end-width": "1px",
+				"border-block-start-style": "solid",
+				"border-block-end-style": "solid",
+				"border-inline-start-style": "solid",
+				"border-inline-end-style": "solid",
+				"border-block-start-color": "var(--border-color)",
+				"border-block-end-color": "var(--border-color)",
+				"border-inline-start-color": "var(--border-color)",
+				"border-inline-end-color": "var(--border-color)",
 				"border-radius": "var(--global-spacing-1)",
 				"box-shadow": "0 0 4px 0 rgba(0, 0, 0, 0.25)",
 				"display": "flex",
@@ -243,7 +254,7 @@
 						"border-block-end-width": "var(--global-border-width-1)",
 						"font-size": "var(--global-font-size-9)",
 						"margin-block-end": "var(--global-spacing-4)",
-						"margin-bottom": "var(--global-spacing-4)",
+						"margin-block-end": "var(--global-spacing-4)",
 						"padding-block-end": "var(--global-spacing-2)",
 						"text-align": "center"
 					},
@@ -255,7 +266,7 @@
 					},
 					"input-input": {
 						"inline-size": "100%",
-						"width": "100%",
+						"inline-size": "100%",
 						"padding-block-end": "var(--global-spacing-2)",
 						"padding-block-start": "var(--global-spacing-2)"
 					},
@@ -304,7 +315,7 @@
 						"border-block-end-width": "var(--global-border-width-1)",
 						"font-size": "var(--global-font-size-9)",
 						"margin-block-end": "var(--global-spacing-4)",
-						"margin-bottom": "var(--global-spacing-4)",
+						"margin-block-end": "var(--global-spacing-4)",
 						"padding-block-end": "var(--global-spacing-2)",
 						"text-align": "center"
 					},
@@ -316,7 +327,7 @@
 					},
 					"input-input": {
 						"inline-size": "100%",
-						"width": "100%",
+						"inline-size": "100%",
 						"padding-block-end": "var(--global-spacing-2)",
 						"padding-block-start": "var(--global-spacing-2)"
 					},
@@ -351,7 +362,7 @@
 						"border-block-end-width": "var(--global-border-width-1)",
 						"font-size": "var(--global-font-size-9)",
 						"margin-block-end": "var(--global-spacing-4)",
-						"margin-bottom": "var(--global-spacing-4)",
+						"margin-block-end": "var(--global-spacing-4)",
 						"padding-block-end": "var(--global-spacing-2)",
 						"text-align": "center"
 					},
@@ -363,7 +374,7 @@
 					},
 					"input-input": {
 						"inline-size": "100%",
-						"width": "100%",
+						"inline-size": "100%",
 						"padding-block-end": "var(--global-spacing-2)",
 						"padding-block-start": "var(--global-spacing-2)"
 					},

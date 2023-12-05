@@ -9,8 +9,11 @@
 						"line-height": "var(--heading-level-3-line-height)"
 					},
 					"media-item": {
-						"width": "100%",
-						"margin": "auto"
+						"inline-size": "100%",
+						"margin-block-start": "auto",
+						"margin-inline-end": "auto",
+						"margin-block-end": "auto",
+						"margin-inline-start": "auto"
 					}
 				}
 			},
@@ -24,8 +27,8 @@
 				"components": {
 					"media-item-fig-caption": {
 						"margin-bottom": 0,
-						"margin-left": "var(--global-spacing-4)",
-						"margin-right": "var(--global-spacing-4)",
+						"margin-inline-start": "var(--global-spacing-4)",
+						"margin-inline-end": "var(--global-spacing-4)",
 						"margin-top": 0
 					}
 				}
@@ -36,8 +39,11 @@
 	"video-player-feature-meta": {
 		"styles": {
 			"default": {
-				"margin": "auto",
-				"width": "var(--content-scale-width)",
+				"margin-block-start": "auto",
+				"margin-inline-end": "auto",
+				"margin-block-end": "auto",
+				"margin-inline-start": "auto",
+				"inline-size": "var(--content-scale-width)",
 				"components": {
 					"stack": {
 						"gap": "var(--global-spacing-4)"

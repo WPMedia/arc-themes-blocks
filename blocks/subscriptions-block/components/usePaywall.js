@@ -21,7 +21,6 @@ const usePaywall = () => {
 	const { Identity, isInitialized: isIdentityInitialized } = useIdentity();
 
 	// eslint-disable-next-line no-underscore-dangle
-	const rules = (!isServerSide() && window?.ArcP?._rules) || [];
 	const apiOrigin = api?.retail?.origin;
 
 	useEffect(() => {
@@ -45,7 +44,7 @@ const usePaywall = () => {
 						setIsPaywalled(true);
 					},
 					section: globalContent.taxonomy?.primary_section._id,
-				})
+				}),
 			);
 		};
 
@@ -54,14 +53,27 @@ const usePaywall = () => {
 			contentIdentifier &&
 			contentRestriction &&
 			isIdentityInitialized &&
-			!isPaywalled &&
-			!isServerSide()
+			!isPaywalled
 		) {
-			runPaywall();
+			setTimeout(() => runPaywall(), 1000);
 		}
-	}, [apiOrigin, globalContent, Identity, isIdentityInitialized, isPaywalled]);
+	}, [
+		apiOrigin,
+		globalContent,
+		Identity,
+		isIdentityInitialized,
+		isPaywalled,
+		contentIdentifier,
+		contentRestriction,
+		contentType,
+	]);
+
+	
 
 	useEffect(() => {
+		// eslint-disable-next-line no-underscore-dangle
+		const rules = window?.ArcP?._rules || [];
+		
 		if (results?.triggered && rules?.length) {
 			const { id: triggerId, rc: triggerCount } = results.triggered;
 
@@ -83,13 +95,13 @@ const usePaywall = () => {
 					.find(withRestrictedStatus);
 
 				setTriggeredRule(
-					paywallableRule && paywallableRule !== triggeringRule ? paywallableRule : triggeringRule
+					paywallableRule && paywallableRule !== triggeringRule ? paywallableRule : triggeringRule,
 				);
 			} else {
 				setTriggeredRule(triggeringRule);
 			}
 		}
-	}, [results, rules, isLoggedIn]);
+	}, [results, isLoggedIn]);
 
 	if (isServerSide()) {
 		return {

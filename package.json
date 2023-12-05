@@ -37,9 +37,7 @@
 		"test:watch": "npm run test -- --watch -o --coverage"
 	},
 	"browserslist": [
-		"defaults",
-		"not op_mini all",
-		"not IE 11"
+		"supports css-logical-props and > 0.5% and not dead"
 	],
 	"lint-staged": {
 		"*": "prettier --write --ignore-unknown"

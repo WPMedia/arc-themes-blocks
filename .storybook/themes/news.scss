@@ -300,8 +300,8 @@
 							"flex": 0 0 auto
 						),
 						"button-large": (
-							"margin-bottom": var(--global-spacing-1),
-							"margin-top": var(--global-spacing-1),
+							"margin-block-end": var(--global-spacing-1),
+							"margin-block-start": var(--global-spacing-1),
 							"filter": drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.0))
 						),
 						"link": (
@@ -310,10 +310,10 @@
 							"font-family": var(--font-family-primary),
 							"font-size": var(--body-font-size-small),
 							"font-weight": var(--global-font-weight-7),
-							"padding-bottom": var(--global-spacing-5),
-							"padding-left": var(--global-spacing-4),
-							"padding-right": var(--global-spacing-5),
-							"padding-top": var(--global-spacing-5),
+							"padding-block-end": var(--global-spacing-5),
+							"padding-block-start": var(--global-spacing-5),
+							"padding-inline-end": var(--global-spacing-5),
+							"padding-inline-start": var(--global-spacing-4),
 							"text-decoration": none
 						),
 						"link-hover": (
@@ -882,14 +882,20 @@
 					"gap": var(--global-spacing-6) 0
 				),
 				"footer": (
-					"width": var(--content-scale-width),
+					"inline-size": var(--content-scale-width),
 					"gap": var(--global-spacing-6),
-					"margin": 0 auto,
-					"max-width": calc(var(--content-max-width) * 1px),
+					"margin-block-end": 0,
+					"margin-block-start": 0,
+					"margin-inline-end": auto,
+					"margin-inline-start": auto,
+					"max-inline-size": calc(var(--content-max-width) * 1px),
 					"components": (
 						"image": (
-							"margin": auto,
-							"max-height": var(--global-spacing-7)
+							"margin-block-end": auto,
+							"margin-block-start": auto,
+							"margin-inline-end": auto,
+							"margin-inline-start": auto,
+							"max-block-size": var(--global-spacing-7)
 						)
 					)
 				),
@@ -922,26 +928,32 @@
 					)
 				),
 				"footer-social-links": (
-					"border": 1px solid var(--color-primary),
+					"border-block-end": 1px solid var(--color-primary),
+					"border-block-start": 1px solid var(--color-primary),
+					"border-inline-end": 1px solid var(--color-primary),
+					"border-inline-start": 1px solid var(--color-primary),
 					"border-radius": var(--border-radius),
-					"margin": var(--global-spacing-2) auto,
-					"width": fit-content,
+					"margin-block-end": var(--global-spacing-2),
+					"margin-block-start": var(--global-spacing-2),
+					"margin-inline-end": auto,
+					"margin-inline-start": auto,
+					"inline-size": fit-content,
 					"components": (
 						"icon": (
 							"fill": var(--color-primary)
 						),
 						"link": (
-							"border-right": 1px solid var(--color-primary),
-							"padding-top": var(--global-spacing-2),
-							"padding-right": var(--global-spacing-2),
-							"padding-bottom": var(--global-spacing-2),
-							"padding-left": var(--global-spacing-2)
+							"border-inline-end": 1px solid var(--color-primary),
+							"padding-block-end": var(--global-spacing-2),
+							"padding-block-start": var(--global-spacing-2),
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
 						)
 					)
 				),
 				"footer-social-links-container": (
-					"border-bottom": 1px solid var(--global-neutral-4),
-					"width": 100%
+					"border-block-end": 1px solid var(--global-neutral-4),
+					"inline-size": 100%
 				),
 				"footer-social-links-hover": (
 					"components": (
@@ -953,20 +965,20 @@
 				"footer-social-links-last": (
 					"components": (
 						"link": (
-							"border-right": none
+							"border-inline-end": none
 						)
 					)
 				),
 				"footer-top-container": (
-					"border-top": 1px solid var(--global-neutral-4),
-					"border-bottom": none,
+					"border-block-start": 1px solid var(--global-neutral-4),
+					"border-block-end": none,
 					"display": grid,
 					"grid-template-columns": 100%,
 					"grid-template-rows": auto auto,
 					"grid-auto-flow": column,
 					"gap": var(--global-spacing-6),
 					"justify-content": center,
-					"width": 100%,
+					"inline-size": 100%,
 					"components": (
 						"paragraph": (
 							"justify-self": center
@@ -1662,7 +1674,10 @@
 						"media-item-fig-caption": (
 							"background-color": var(--global-white),
 							"line-height": var(--body-line-height-5),
-							"margin": var(--global-spacing-2) 0
+							"margin-block-end": var(--global-spacing-2),
+							"margin-block-start": var(--global-spacing-2),
+							"margin-inline-end": 0,
+							"margin-inline-start": 0
 						)
 					)
 				),
@@ -1674,15 +1689,18 @@
 						),
 						"icon": (
 							"fill": currentColor,
-							"height": var(--global-spacing-6),
-							"width": var(--global-spacing-6)
+							"block-size": var(--global-spacing-6),
+							"inline-size": var(--global-spacing-6)
 						)
 					)
 				),
 				"lead-art-carousel-fullscreen": (
 					"components": (
 						"media-item-fig-caption": (
-							"padding": 0 var(--global-spacing-2)
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
 						)
 					)
 				),
@@ -1692,13 +1710,13 @@
 					"background-color": var(--global-black),
 					"display": flex,
 					"justify-content": center,
-					"max-height": 75vh,
+					"max-block-size": 75vh,
 					"overflow": auto,
 					"components": (
 						"image": (
-							"height": auto,
-							"max-height": 100%,
-							"max-width": 100%,
+							"block-size": auto,
+							"max-block-size": 100%,
+							"max-inline-size": 100%,
 							"object-fit": contain
 						)
 					)
@@ -1711,8 +1729,8 @@
 						),
 						"icon": (
 							"fill": currentColor,
-							"height": var(--global-spacing-8),
-							"width": var(--global-spacing-8)
+							"block-size": var(--global-spacing-8),
+							"inline-size": var(--global-spacing-8)
 						)
 					)
 				),
@@ -1772,7 +1790,7 @@
 					)
 				),
 				"masthead": (
-					"border-bottom": 2px solid var(--global-neutral-8),
+					"border-block-end": 2px solid var(--global-neutral-8),
 					"color": var(--text-color),
 					"display": none,
 					"font-family": var(--font-family-primary),
@@ -1792,8 +1810,14 @@
 					"flex": 11 0%
 				),
 				"masthead-divider": (
-					"margin": 0,
-					"padding": 0
+					"margin-block-end": 0,
+					"margin-block-start": 0,
+					"margin-inline-end": 0,
+					"margin-inline-start": 0,
+					"padding-block-end": 0,
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-inline-start": 0
 				),
 				"masthead-link": (
 					"align-items": flex-end,
@@ -1806,7 +1830,7 @@
 					"justify-content": center
 				),
 				"masthead-logo-image": (
-					"max-height": 64px,
+					"max-block-size": 64px,
 					"object-fit": contain,
 					"vertical-align": middle
 				),
@@ -2187,36 +2211,39 @@
 				"results-list": (
 					"components": (
 						"attribution": (
-							"margin-top": var(--global-spacing-4)
+							"margin-block-start": var(--global-spacing-4)
 						),
-						"media-item": (
-							"float": right,
-							"max-width": 100px
-						),
-						"overline": (
-							"font-size": var(--body-font-size)
+						"button": (
+							"gap": var(--global-spacing-6)
 						),
 						"heading": (
 							"font-size": var(--heading-level-5-font-size),
 							"font-weight": var(--heading-level-5-font-weight),
 							"line-height": var(--heading-level-5-line-height),
-							"margin-bottom": var(--global-spacing-4)
+							"margin-block-end": var(--global-spacing-4)
 						),
-						"button": (
-							"gap": var(--global-spacing-6)
+						"media-item": (
+							"float": inline-end,
+							"max-inline-size": 100px
+						),
+						"overline": (
+							"font-size": var(--body-font-size)
 						),
 						"separator": (
-							"padding": 0 var(--global-spacing-2)
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
 						)
 					)
 				),
 				"results-list-see-more": (
-					"margin-top": var(--global-spacing-2)
+					"margin-block-size": var(--global-spacing-2)
 				),
 				"results-list-show-image": (
 					"components": (
 						"heading": (
-							"width": 68%
+							"inline-size": 68%
 						),
 						"overline": (
 							"font-size": var(--body-font-size)
@@ -2349,10 +2376,10 @@
 						),
 						"icon": (
 							"align-self": center,
+							"block-size": var(--global-spacing-5),
 							"grid-area": icon,
-							"height": var(--global-spacing-5),
+							"inline-size": var(--global-spacing-5),
 							"justify-self": center,
-							"width": var(--global-spacing-5),
 							"z-index": 1
 						),
 						"input": (
@@ -2362,16 +2389,19 @@
 						"input-input": (
 							"font-family": var(--font-family-primary),
 							"font-weight": var(--global-font-weight-7),
-							"padding-inline-start": var(--global-spacing-7),
-							"width": 100%
+							"inline-size": 100%,
+							"padding-inline-start": var(--global-spacing-7)
 						)
 					)
 				),
 				"search-results-list-results": (
 					"components": (
 						"button": (
-							"margin": var(--global-spacing-2) auto 0,
-							"width": auto
+							"inline-size": auto,
+							"margin-block-end": 0,
+							"margin-block-start": var(--global-spacing-2),
+							"margin-inline-end": auto,
+							"margin-inline-start": auto
 						)
 					)
 				),
@@ -2379,17 +2409,20 @@
 					"components": (
 						"attribution": (
 							"display": block,
-							"margin-top": var(--global-spacing-4)
+							"margin-block-start": var(--global-spacing-4)
 						),
 						"heading": (
 							"font-size": var(--heading-level-5-font-size),
 							"font-weight": var(--heading-level-5-font-weight),
 							"line-height": var(--heading-level-5-line-height),
-							"margin-bottom": var(--global-spacing-4)
+							"margin-block-end": var(--global-spacing-4)
+						),
+						"link": (
+							"position": relative
 						),
 						"media-item": (
-							"float": right,
-							"max-width": 100px
+							"float": inline-end,
+							"max-inline-size": 100px
 						),
 						"overline": (
 							"font-weight": var(--heading-level-4-font-weight),
@@ -2400,17 +2433,17 @@
 							"display": block
 						),
 						"separator": (
-							"padding": 0 var(--global-spacing-2)
-						),
-						"link": (
-							"position": relative
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
 						)
 					)
 				),
 				"search-results-list-results-item-show-image": (
 					"components": (
 						"heading": (
-							"width": 68%
+							"inline-size": 68%
 						),
 						"overline": (
 							"font-size": var(--body-font-size)
@@ -2919,8 +2952,11 @@
 							"line-height": var(--heading-level-3-line-height)
 						),
 						"media-item": (
-							"width": 100%,
-							"margin": auto
+							"inline-size": 100%,
+							"margin-block-end": auto,
+							"margin-block-start": auto,
+							"margin-inline-end": auto,
+							"margin-inline-start": auto
 						)
 					)
 				),
@@ -2928,16 +2964,19 @@
 					"gap": var(--global-spacing-6),
 					"components": (
 						"media-item-fig-caption": (
-							"margin-bottom": 0,
-							"margin-left": var(--global-spacing-4),
-							"margin-right": var(--global-spacing-4),
-							"margin-top": 0
+							"margin-block-end": 0,
+							"margin-block-start": 0,
+							"margin-inline-end": var(--global-spacing-4),
+							"margin-inline-start": var(--global-spacing-4)
 						)
 					)
 				),
 				"video-player-feature-meta": (
-					"margin": auto,
-					"width": var(--content-scale-width),
+					"margin-block-end": auto,
+					"margin-block-start": auto,
+					"margin-inline-end": auto,
+					"margin-inline-start": auto,
+					"inline-size": var(--content-scale-width),
 					"components": (
 						"stack": (
 							"gap": var(--global-spacing-4)
@@ -3058,7 +3097,10 @@
 					"font-size": var(--body-font-size-tiny),
 					"font-weight": var(--global-font-weight-7),
 					"line-height": var(--body-line-height-tiny),
-					"padding": var(--global-spacing-1) var(--global-spacing-2)
+					"padding-inline-start": var(--global-spacing-2),
+					"padding-inline-end": var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-1),
+					"padding-block-end": var(--global-spacing-1)
 				),
 				"badge-danger": (
 					"background-color": var(--status-color-danger)
@@ -3095,12 +3137,18 @@
 				"button-large": (
 					"font-size": var(--body-font-size),
 					"line-height": var(--body-line-height),
-					"padding": var(--global-spacing-4)
+					"padding-block-start": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4),
+					"padding-block-end": var(--global-spacing-4),
+					"padding-inline-end": var(--global-spacing-4)
 				),
 				"button-medium": (
 					"font-size": var(--body-font-size-small),
 					"line-height": var(--body-line-height-small),
-					"padding": var(--global-spacing-3) var(--global-spacing-4)
+					"padding-block-start": var(--global-spacing-3),
+					"padding-inline-start": var(--global-spacing-4),
+					"padding-block-end": var(--global-spacing-3),
+					"padding-inline-end": var(--global-spacing-4)
 				),
 				"button-primary": (
 					"background-color": var(--color-primary),
@@ -3138,7 +3186,10 @@
 				"button-small": (
 					"font-size": var(--body-font-size-small),
 					"line-height": var(--body-line-height-small),
-					"padding": var(--global-spacing-1) var(--global-spacing-4)
+					"padding-block-start": var(--global-spacing-1),
+					"padding-inline-start": var(--global-spacing-4),
+					"padding-block-end": var(--global-spacing-1),
+					"padding-inline-end": var(--global-spacing-4)
 				),
 				"carousel": (
 					"font-family": var(--font-family-primary),
@@ -3148,8 +3199,8 @@
 				),
 				"carousel-actions": (
 					"display": none,
-					"padding-left": var(--global-spacing-5),
-					"padding-right": var(--global-spacing-5)
+					"padding-inline-start": var(--global-spacing-5),
+					"padding-inline-end": var(--global-spacing-5)
 				),
 				"carousel-additional-controls": (
 					"display": flex
@@ -3162,17 +3213,20 @@
 					"display": flex,
 					"font-size": var(--body-font-size-tiny),
 					"gap": var(--global-spacing-2),
-					"height": var(--global-spacing-4),
+					"block-size": var(--global-spacing-4),
 					"line-height": var(--body-line-height-tiny),
-					"padding": 0 var(--global-spacing-2),
-					"width": auto
+					"padding-block-start": 0,
+					"padding-inline-start": var(--global-spacing-2),
+					"padding-block-end": 0,
+					"padding-inline-end": var(--global-spacing-2),
+					"inline-size": auto
 				),
 				"carousel-button-enter-full-screen": (
-					"padding-left": 0
+					"padding-inline-start": 0
 				),
 				"carousel-button-exit-full-screen": (
-					"padding-left": 0,
-					"padding-right": 0
+					"padding-inline-start": 0,
+					"padding-inline-end": 0
 				),
 				"carousel-button-full-screen": (
 					"color": var(--global-white)
@@ -3187,11 +3241,14 @@
 					"color": var(--global-white)
 				),
 				"carousel-controls": (
-					"margin-bottom": var(--global-spacing-2)
+					"margin-block-end": var(--global-spacing-2)
 				),
 				"carousel-fullscreen": (
 					"color": var(--global-white),
-					"padding": var(--global-spacing-2) 0
+					"padding-block-start": var(--global-spacing-2),
+					"padding-inline-start": 0,
+					"padding-block-end": var(--global-spacing-2),
+					"padding-inline-end": 0
 				),
 				"carousel-fullscreen-button-toggle-auto-play": (
 					"display": none
@@ -3199,21 +3256,21 @@
 				"carousel-fullscreen-controls": (
 					"align-items": flex-end,
 					"flex-direction": column,
-					"padding-top": var(--global-spacing-2),
-					"padding-right": var(--global-spacing-2),
-					"padding-bottom": var(--global-spacing-2),
-					"padding-left": var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-2),
+					"padding-inline-end": var(--global-spacing-2),
+					"padding-block-end": var(--global-spacing-2),
+					"padding-inline-start": var(--global-spacing-2),
 					"place-self": initial
 				),
 				"carousel-icon": (
 					"fill": currentColor,
-					"height": var(--global-spacing-4),
-					"width": var(--global-spacing-4)
+					"block-size": var(--global-spacing-4),
+					"inline-size": var(--global-spacing-4)
 				),
 				"carousel-track": (
 					"gap": initial,
-					"max-width": initial,
-					"width": 100%
+					"max-inline-size": initial,
+					"inline-size": 100%
 				),
 				"date": (
 					"color": var(--text-color),
@@ -3222,7 +3279,7 @@
 				),
 				"divider": (
 					"background-color": var(--border-color),
-					"height": 1px
+					"block-size": 1px
 				),
 				"heading": (
 					"font-family": var(--font-family-primary),
@@ -3232,11 +3289,12 @@
 				),
 				"icon": (
 					"fill": var(--icon-fill-color),
-					"height": var(--global-spacing-5),
-					"width": var(--global-spacing-5)
+					"block-size": var(--global-spacing-5),
+					"inline-size": var(--global-spacing-5)
 				),
 				"image": (
-					"max-width": 100%
+					"block-size": auto,
+					"max-inline-size": 100%
 				),
 				"image-hover": (
 					"opacity": 1
@@ -3254,7 +3312,18 @@
 					"outline-color": var(--status-color-danger)
 				),
 				"input-input": (
-					"border": var(--global-border-width-1) var(--global-border-style-1) var(--form-border-color),
+					"border-block-start-width": var(--global-border-width-1),
+					"border-block-end-width": var(--global-border-width-1),
+					"border-inline-start-width": var(--global-border-width-1),
+					"border-inline-end-width": var(--global-border-width-1),
+					"border-block-start-style": var(--global-border-style-1),
+					"border-block-end-style": var(--global-border-style-1),
+					"border-inline-start-style": var(--global-border-style-1),
+					"border-inline-end-style": var(--global-border-style-1),
+					"border-block-start-color": var(--form-border-color),
+					"border-block-end-color": var(--form-border-color),
+					"border-inline-start-color": var(--form-border-color),
+					"border-inline-end-color": var(--form-border-color),
 					"border-radius": var(--border-radius),
 					"padding-block-end": var(--global-spacing-4),
 					"padding-block-start": var(--global-spacing-4),
@@ -3308,8 +3377,11 @@
 					"line-height": var(--body-line-height-tiny)
 				),
 				"media-item-fig-caption-fullscreen": (
-					"padding-left": var(--global-spacing-5),
-					"padding-right": var(--global-spacing-5)
+					"padding-inline-start": var(--global-spacing-5),
+					"padding-inline-end": var(--global-spacing-5)
+				),
+				"media-item-fig-caption-vertical-video": (
+					"text-align": center
 				),
 				"media-item-fig-caption-vertical-video": (
 					"text-align": center
@@ -3336,7 +3408,10 @@
 					"border-radius": var(--border-radius-pill),
 					"color": var(--global-white),
 					"font-size": var(--body-font-size-tiny),
-					"padding": var(--global-spacing-1) var(--global-spacing-4),
+					"padding-block-start": var(--global-spacing-1),
+					"padding-inline-start": var(--global-spacing-4),
+					"padding-block-end": var(--global-spacing-1),
+					"padding-inline-end": var(--global-spacing-4),
 					"text-decoration": none
 				),
 				"pill-hover": (
@@ -3344,18 +3419,28 @@
 				),
 				"stack-divider-horizontal": (
 					"border": none,
-					"border-left": var(--global-border-width-1) var(--global-border-style-1) var(--border-color),
-					"width": 1px,
-					"height": auto
+					"border-inline-start-width": var(--global-border-width-1),
+					"border-inline-start-style": var(--global-border-style-1),
+					"border-inline-start-color": var(--border-color),
+					"inline-size": 1px,
+					"block-size": auto
 				),
 				"stack-divider-vertical": (
-					"border-bottom": var(--global-border-width-1) var(--global-border-style-1) var(--border-color)
+					"border-block-end-width": var(--global-border-width-1),
+					"border-block-end-style": var(--global-border-style-1),
+					"border-block-end-color": var(--border-color)
+				),
+				"vertical-video-frame": (
+					"background-color": transparent
 				),
 				"vertical-video-frame": (
 					"background-color": transparent
 				),
 				"video": (
-					"margin": auto
+					"margin-block-start": auto,
+					"margin-inline-start": auto,
+					"margin-block-end": auto,
+					"margin-inline-end": auto
 				),
 				"video-frame": (
 					"background-color": transparent
@@ -3420,7 +3505,7 @@
 				"footer": (
 					"components": (
 						"image": (
-							"max-height": var(--global-spacing-10)
+							"max-block-size": var(--global-spacing-10)
 						)
 					)
 				),
@@ -3429,11 +3514,11 @@
 					"grid-template-columns": 1fr 1fr 1fr 1fr
 				),
 				"footer-social-links-container": (
-					"border-bottom": none,
-					"width": max-content
+					"border-block-end": none,
+					"inline-size": max-content
 				),
 				"footer-top-container": (
-					"border-bottom": 1px solid var(--global-neutral-4),
+					"border-block-end": 1px solid var(--global-neutral-4),
 					"grid-auto-flow": column,
 					"grid-template-columns": 1fr auto 1fr,
 					"grid-template-rows": auto,
@@ -3562,12 +3647,12 @@
 				"lead-art-carousel-fullscreen": (
 					"components": (
 						"media-item-fig-caption": (
-							"padding": 0 var(--global-spacing-5)
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-5),
+							"padding-inline-start": var(--global-spacing-5)
 						)
 					)
-				),
-				"lead-art-carousel-image-wrapper": (
-					"max-height": 75vh
 				),
 				"login-form": (
 					"components": (
@@ -3661,9 +3746,12 @@
 				"results-list": (
 					"components": (
 						"media-item": (
-							"float": left,
-							"margin": 0,
-							"max-width": 33%
+							"float": inline-start,
+							"margin-block-top": 0,
+							"margin-block-end": 0,
+							"margin-inline-start": 0,
+							"margin-inline-end": 0,
+							"max-inline-size": 33%
 						),
 						"overline": (
 							"font-size": var(--global-font-size-7)
@@ -3674,18 +3762,18 @@
 					"components": (
 						"attribution": (
 							"display": block,
-							"margin-left": calc(33% + var(--global-spacing-6))
+							"margin-inline-end": calc(33% + var(--global-spacing-6))
 						),
 						"heading": (
-							"margin-left": calc(33% + var(--global-spacing-6)),
-							"width": auto
-						),
-						"paragraph": (
-							"margin-left": calc(33% + var(--global-spacing-6))
+							"margin-inline-end": calc(33% + var(--global-spacing-6)),
+							"inline-size": auto
 						),
 						"overline": (
-							"margin-left": var(--global-spacing-6),
+							"margin-inline-end": var(--global-spacing-6),
 							"font-size": var(--global-font-size-7)
+						),
+						"paragraph": (
+							"margin-inline-end": calc(33% + var(--global-spacing-6))
 						)
 					)
 				),
@@ -3727,9 +3815,12 @@
 							"display": block
 						),
 						"media-item": (
-							"float": left,
-							"margin": 0,
-							"max-width": 33%
+							"float": inline-start,
+							"margin-block-end": 0,
+							"margin-block-start": 0,
+							"margin-inline-end": 0,
+							"margin-inline-start": 0,
+							"max-inline-size": 33%
 						),
 						"paragraph": (
 							"display": block
@@ -3739,18 +3830,18 @@
 				"search-results-list-results-item-show-image": (
 					"components": (
 						"attribution": (
-							"margin-left": calc(33% + var(--global-spacing-6))
+							"margin-inline-start": calc(33% + var(--global-spacing-6))
 						),
 						"heading": (
-							"margin-left": calc(33% + var(--global-spacing-6)),
-							"width": auto
+							"inline-size": auto,
+							"margin-inline-start": calc(33% + var(--global-spacing-6))
 						),
 						"overline": (
-							"margin-left": var(--global-spacing-6),
-							"font-size": var(--heading-level-5-font-size)
+							"font-size": var(--heading-level-5-font-size),
+							"margin-inline-start": var(--global-spacing-6)
 						),
 						"paragraph": (
-							"margin-left": calc(33% + var(--global-spacing-6))
+							"margin-inline-start": calc(33% + var(--global-spacing-6))
 						)
 					)
 				),
@@ -3938,20 +4029,26 @@
 				),
 				"carousel-additional-controls": (
 					"gap": var(--global-spacing-2),
-					"padding": 0 0 0 var(--global-spacing-2)
+					"padding-block-start": 0,
+					"padding-inline-start": var(--global-spacing-2),
+					"padding-block-end": 0,
+					"padding-inline-end": 0
 				),
 				"carousel-fullscreen": (
-					"padding": var(--global-spacing-5) 0
+					"padding-block-start": var(--global-spacing-5),
+					"padding-inline-start": 0,
+					"padding-block-end": var(--global-spacing-5),
+					"padding-inline-end": 0
 				),
 				"carousel-fullscreen-button-toggle-auto-play": (
 					"display": flex
 				),
 				"carousel-fullscreen-controls": (
 					"flex-direction": initial,
-					"padding-top": var(--global-spacing-5),
-					"padding-right": var(--global-spacing-5),
-					"padding-bottom": var(--global-spacing-5),
-					"padding-left": var(--global-spacing-5),
+					"padding-block-start": var(--global-spacing-5),
+					"padding-inline-end": var(--global-spacing-5),
+					"padding-block-end": var(--global-spacing-5),
+					"padding-inline-start": var(--global-spacing-5),
 					"place-self": flex-start
 				),
 				"carousel-track": (

@@ -71,7 +71,9 @@ const usePaywall = () => {
 	
 
 	useEffect(() => {
+		// eslint-disable-next-line no-underscore-dangle
 		const rules = window?.ArcP?._rules || [];
+		
 		if (results?.triggered && rules?.length) {
 			const { id: triggerId, rc: triggerCount } = results.triggered;
 

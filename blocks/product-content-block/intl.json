@@ -1,46 +1,46 @@
 {
 	"product-content.description": {
-		"de": "Beschreibung",
-		"en": "Description",
-		"es": "Descripción",
-		"fr": "Description",
-		"ja": "説明",
-		"ko": "설명",
-		"no": "Beskrivelse",
+		"sv": "Beskrivning",
 		"pt": "Descrição",
-		"sv": "Beskrivning"
+		"no": "Beskrivelse",
+		"ko": "설명",
+		"ja": "説明",
+		"fr": "Description",
+		"es": "Descripción",
+		"en": "Description",
+		"de": "Beschreibung"
 	},
 	"product-content.details": {
-		"de": "Details",
-		"en": "Details",
-		"es": "Detalles",
-		"fr": "Détails",
-		"ja": "詳細",
-		"ko": "세부 정보",
-		"no": "Detaljer",
+		"sv": "Information",
 		"pt": "Detalhes",
-		"sv": "Information"
+		"no": "Detaljer",
+		"ko": "세부 정보",
+		"ja": "詳細",
+		"fr": "Détails",
+		"es": "Detalles",
+		"en": "Details",
+		"de": "Details"
 	},
 	"product-content.shipping-and-returns": {
-		"de": "Versand und Rückgabe",
-		"en": "Shipping & Returns",
-		"es": "Envíos y devoluciones",
-		"fr": "Expédition et retours",
-		"ja": "配送および返品",
-		"ko": "배송 및 반품",
-		"no": "Frakt og returer",
+		"sv": "Leverans och retur",
 		"pt": "Envios e Devoluções",
-		"sv": "Leverans och retur"
+		"no": "Frakt og returer",
+		"ko": "배송 및 반품",
+		"ja": "配送および返品",
+		"fr": "Expédition et retours",
+		"es": "Envíos y devoluciones",
+		"en": "Shipping & Returns",
+		"de": "Versand und Rückgabe"
 	},
 	"product-content.size-and-fit": {
-		"de": "Größe und Passform",
-		"en": "Size & Fit",
-		"es": "Talla y ajuste",
-		"fr": "Taille et coupe",
-		"ja": "サイズおよびフィット",
-		"ko": "크기 및 핏",
-		"no": "Størrelse og passform",
+		"sv": "Storlek och passform",
 		"pt": "Tamanho e ajuste",
-		"sv": "Storlek och passform"
+		"no": "Størrelse og passform",
+		"ko": "크기 및 핏",
+		"ja": "サイズおよびフィット",
+		"fr": "Taille et coupe",
+		"es": "Talla y ajuste",
+		"en": "Size & Fit",
+		"de": "Größe und Passform"
 	}
 }

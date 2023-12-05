@@ -1,57 +1,57 @@
 {
 	"search-results-block.search-button": {
-		"de": "Suche",
-		"en": "Search",
-		"es": "Buscar",
-		"fr": "Rechercher",
-		"ja": "検索",
-		"ko": "검색",
-		"no": "Søk",
+		"sv": "Sök",
 		"pt": "Procurar",
-		"sv": "Sök"
+		"no": "Søk",
+		"ko": "검색",
+		"ja": "検索",
+		"fr": "Rechercher",
+		"es": "Buscar",
+		"en": "Search",
+		"de": "Suche"
 	},
 	"search-results-block.search-result-number": {
-		"de": "%{smart_count} Ergebnis für \"%{searchTerm}\" |||| %{smart_count} Ergebnisse für \"%{searchTerm}\"",
-		"en": "%{smart_count} result for \"%{searchTerm}\" |||| %{smart_count} results for \"%{searchTerm}\"",
-		"es": "%{smart_count} resultado para \"%{searchTerm}\" |||| %{smart_count} resultados para \"%{searchTerm}\"",
-		"fr": "%{smart_count} résultat pour \"%{searchTerm}\" |||| %{smart_count} résultats pour \"%{searchTerm}\"",
-		"ja": "%{searchTerm}\" の結果 %{smart_count} \" 件 |||| \"%{searchTerm}\" の結果 %{smart_count} 件",
-		"ko": "\"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개 |||| \"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개",
-		"no": "%{smart_count} treff for \"%{searchTerm}\" |||| %{smart_count} treff for \"%{searchTerm}\"",
+		"sv": "%{smart_count} resultat för ”%{searchTerm}”",
 		"pt": "%{smart_count} resultado para \"%{searchTerm}\" |||| %{smart_count} resultados para \"%{searchTerm}\"",
-		"sv": "%{smart_count} resultat för ”%{searchTerm}”"
+		"no": "%{smart_count} treff for \"%{searchTerm}\" |||| %{smart_count} treff for \"%{searchTerm}\"",
+		"ko": "\"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개 |||| \"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개",
+		"ja": "%{searchTerm}\" の結果 %{smart_count} \" 件 |||| \"%{searchTerm}\" の結果 %{smart_count} 件",
+		"fr": "%{smart_count} résultat pour \"%{searchTerm}\" |||| %{smart_count} résultats pour \"%{searchTerm}\"",
+		"es": "%{smart_count} resultado para \"%{searchTerm}\" |||| %{smart_count} resultados para \"%{searchTerm}\"",
+		"en": "%{smart_count} result for \"%{searchTerm}\" |||| %{smart_count} results for \"%{searchTerm}\"",
+		"de": "%{smart_count} Ergebnis für \"%{searchTerm}\" |||| %{smart_count} Ergebnisse für \"%{searchTerm}\""
 	},
 	"search-results-block.see-more-button": {
-		"de": "Mehr anzeigen",
-		"en": "See more",
-		"es": "Ver más",
-		"fr": "En savoir plus",
-		"ja": "詳細",
-		"ko": "자세히 보기",
-		"no": "Se mer",
+		"sv": "Fler artiklar",
 		"pt": "Veja mais",
-		"sv": "Fler artiklar"
+		"no": "Se mer",
+		"ko": "자세히 보기",
+		"ja": "詳細",
+		"fr": "En savoir plus",
+		"es": "Ver más",
+		"en": "See more",
+		"de": "Mehr anzeigen"
 	},
 	"search-results-block.see-more-button-aria-label": {
-		"de": "Sehen Sie sich weitere Artikel zu diesem Thema an",
-		"en": "See more stories about this topic",
-		"es": "Ver más historias sobre este tema",
-		"fr": "Voir plus d'articles concernant ce sujet",
-		"ja": "このトピックに関するその他の記事を表示",
-		"ko": "이 주제에 대한 스토리 더 보기",
-		"no": "Se flere historier om dette emnet",
+		"sv": "Se fler artiklar om detta ämne",
 		"pt": "Veja mais histórias sobre este tópico",
-		"sv": "Se fler artiklar om detta ämne"
+		"no": "Se flere historier om dette emnet",
+		"ko": "이 주제에 대한 스토리 더 보기",
+		"ja": "このトピックに関するその他の記事を表示",
+		"fr": "Voir plus d'articles concernant ce sujet",
+		"es": "Ver más historias sobre este tema",
+		"en": "See more stories about this topic",
+		"de": "Sehen Sie sich weitere Artikel zu diesem Thema an"
 	},
 	"search-results-blocks.search-input-placeholder": {
-		"de": "Geben Sie Ihre Suchbegriffe ein",
-		"en": "Enter your search terms",
-		"es": "Introduzca sus términos de búsqueda",
-		"fr": "Entrez vos termes de recherche",
-		"ja": "検索語句を入力",
-		"ko": "검색어 입력",
-		"no": "Skriv inn søkeordene dine",
+		"sv": "Ange sökord",
 		"pt": "Introduza os termos da sua pesquisa",
-		"sv": "Ange sökord"
+		"no": "Skriv inn søkeordene dine",
+		"ko": "검색어 입력",
+		"ja": "検索語句を入力",
+		"fr": "Entrez vos termes de recherche",
+		"es": "Introduzca sus términos de búsqueda",
+		"en": "Enter your search terms",
+		"de": "Geben Sie Ihre Suchbegriffe ein"
 	}
 }

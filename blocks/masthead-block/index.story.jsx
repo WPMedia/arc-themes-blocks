@@ -67,3 +67,12 @@ export const emptyTagLineAndLogoURL = () => {
 	const customFieldData = { ...allCustomFieldData, tagLine: "", logoURL: "" };
 	return <MastheadPresentational customFields={customFieldData} displayDate={displayDate} />;
 };
+
+export const rightToLeft = () => {
+	const customFieldData = allCustomFieldData;
+	return (
+		<div dir="rtl">
+			<MastheadPresentational customFields={customFieldData} displayDate={displayDate} />
+		</div>
+	);
+};

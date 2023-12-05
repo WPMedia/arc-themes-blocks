@@ -4,16 +4,16 @@
 			"default": {
 				"inline-size": "var(--content-scale-width)",
 				"gap": "var(--global-spacing-6)",
+				"margin-block-end": "0",
 				"margin-block-start": "0",
 				"margin-inline-end": "auto",
-				"margin-block-end": "0",
 				"margin-inline-start": "auto",
 				"max-inline-size": "calc(var(--content-max-width) * 1px)",
 				"components": {
 					"image": {
+						"margin-block-end": "auto",
 						"margin-block-start": "auto",
 						"margin-inline-end": "auto",
-						"margin-block-end": "auto",
 						"margin-inline-start": "auto",
 						"max-block-size": "var(--global-spacing-7)"
 					}
@@ -144,7 +144,7 @@
 			"default": {
 				"components": {
 					"link": {
-						"border-right": "none"
+						"border-inline-end": "none"
 					}
 				}
 			},

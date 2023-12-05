@@ -10,9 +10,9 @@
 					},
 					"media-item": {
 						"inline-size": "100%",
+						"margin-block-end": "auto",
 						"margin-block-start": "auto",
 						"margin-inline-end": "auto",
-						"margin-block-end": "auto",
 						"margin-inline-start": "auto"
 					}
 				}
@@ -26,10 +26,10 @@
 				"gap": "var(--global-spacing-6)",
 				"components": {
 					"media-item-fig-caption": {
-						"margin-bottom": 0,
-						"margin-inline-start": "var(--global-spacing-4)",
+						"margin-block-end": 0,
+						"margin-block-start": 0,
 						"margin-inline-end": "var(--global-spacing-4)",
-						"margin-top": 0
+						"margin-inline-start": "var(--global-spacing-4)"
 					}
 				}
 			},
@@ -39,9 +39,9 @@
 	"video-player-feature-meta": {
 		"styles": {
 			"default": {
+				"margin-block-end": "auto",
 				"margin-block-start": "auto",
 				"margin-inline-end": "auto",
-				"margin-block-end": "auto",
 				"margin-inline-start": "auto",
 				"inline-size": "var(--content-scale-width)",
 				"components": {

@@ -28,9 +28,9 @@
 						"font-size": "var(--body-font-size-small)",
 						"font-weight": "var(--global-font-weight-7)",
 						"padding-block-end": "var(--global-spacing-5)",
-						"padding-inline-start": "var(--global-spacing-4)",
-						"padding-inline-end": "var(--global-spacing-5)",
 						"padding-block-start": "var(--global-spacing-5)",
+						"padding-inline-end": "var(--global-spacing-5)",
+						"padding-inline-start": "var(--global-spacing-4)",
 						"text-decoration": "none"
 					},
 					"link-hover": {

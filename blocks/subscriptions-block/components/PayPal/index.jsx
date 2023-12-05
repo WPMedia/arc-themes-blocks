@@ -1,12 +1,9 @@
 import React from "react";
 import { usePaymentRedirect } from "../usePaymentRedirect";
+import { usePhrases } from "@wpmedia/arc-themes-components";
 
-export const PaypalCheckout = ({
-	labelOrderNumber,
-	paypal,
-	orderNumber,
-	successURL,
-}) => {
+export const PaypalCheckout = ({ labelOrderNumber, paypal, orderNumber, successURL }) => {
+	const phrases = usePhrases();
 	const params = new URLSearchParams(window.location.search);
 	const token = params.get("token");
 
@@ -16,18 +13,13 @@ export const PaypalCheckout = ({
 	} else {
 		orderNumber = localStorage[labelOrderNumber];
 	}
-	const { error } = usePaymentRedirect(
-		paypal,
-		orderNumber,
-		token,
-		"parameter1",
-		successURL
-	);
+
+	const { error } = usePaymentRedirect(paypal, orderNumber, token, "parameter1", successURL);
 
 	return (
 		<>
-			<div>{token ? "Processing..." : "Redirecting to paypal page..."}</div>
-			<pre>{error && JSON.stringify(error, null, 2)}</pre>
+			<div data-testid="paypal-message-div">{token ? phrases.t("subscriptions-block.paypal-processing") : phrases.t("subscriptions-block.paypal-redirect-label")}</div>
+			<div data-testid="paypal-error-message-div">{error && phrases.t("subscriptions-block.payment-error") }</div>
 		</>
 	);
 };

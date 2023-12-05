@@ -6,8 +6,8 @@ import Cart from "../../components/Cart";
 import ContactInfo from "../../components/ContactInfo";
 import PaymentInfo from "./_children/PaymentInfo";
 
+export const LABEL_ORDER_NUMBER_PAYPAL = "ArcSubs_OrderNumber"
 const BLOCK_CLASS_NAME = "b-checkout";
-const LABEL_ORDER_NUMBER_PAYPAL = "ArcSubs_OrderNumber";
 
 const Checkout = ({ customFields }) => {
 	const { offerURL, successURL, stripeIntentsID } = customFields;
@@ -102,7 +102,6 @@ const Checkout = ({ customFields }) => {
 					offerURL={offerURL}
 					stripeIntentsID={stripeIntentsID}
 					isInitialized = {isInitialized}
-					LABEL_ORDER_NUMBER_PAYPAL={LABEL_ORDER_NUMBER_PAYPAL}
 				/>
 			)}
 		</section>

@@ -1,6 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
+import mockConsole from "jest-mock-console";
+
 import * as fusionContent from "fusion:content";
 
 import Hero from "./default";
@@ -13,6 +15,14 @@ jest.mock("fusion:content", () => ({
 }));
 
 describe("Hero", () => {
+	let restoreConsole;
+	afterAll(() => {
+		restoreConsole?.();
+	});
+	beforeAll(() => {
+		restoreConsole = mockConsole();
+	});
+
 	it("should render", () => {
 		render(
 			<Hero
@@ -22,7 +32,7 @@ describe("Hero", () => {
 					subHeadline: "My Sub Headline",
 					description: "My description",
 				}}
-			/>
+			/>,
 		);
 		expect(screen.getByRole("img")).toBeInTheDocument();
 		expect(screen.queryByText("My Headline")).toBeInTheDocument();
@@ -53,7 +63,7 @@ describe("Hero", () => {
 					imageURLMobile: "https://www.google.com",
 					mobileImageAuth: { 2: "2cc3c2b3" },
 				}}
-			/>
+			/>,
 		);
 		expect(container.querySelectorAll("a")).toHaveLength(0);
 	});
@@ -70,7 +80,7 @@ describe("Hero", () => {
 					link1Text: "For Him",
 					link1Type: "primary",
 				}}
-			/>
+			/>,
 		);
 		expect(container.querySelectorAll("a")).toHaveLength(1);
 	});
@@ -90,7 +100,7 @@ describe("Hero", () => {
 					link2Text: "For Her",
 					link2Type: "secondary",
 				}}
-			/>
+			/>,
 		);
 		expect(container.querySelectorAll("a.c-button--secondary")).toHaveLength(2);
 	});
@@ -110,7 +120,7 @@ describe("Hero", () => {
 					link2Text: "For Her",
 					link2Type: "secondary",
 				}}
-			/>
+			/>,
 		);
 		expect(container.querySelectorAll(".b-hero--stacked")).toHaveLength(0);
 		expect(container.querySelectorAll(".b-hero--overlay")).toHaveLength(1);
@@ -132,7 +142,7 @@ describe("Hero", () => {
 					link2Text: "For Her",
 					link2Type: "secondary",
 				}}
-			/>
+			/>,
 		);
 		expect(container.querySelectorAll(".b-hero--overlay")).toHaveLength(0);
 		expect(container.querySelectorAll(".b-hero--stacked")).toHaveLength(1);
@@ -153,7 +163,7 @@ describe("Hero", () => {
 					link2Text: "For Her",
 					link2Type: "secondary",
 				}}
-			/>
+			/>,
 		);
 		expect(container.querySelectorAll(".b-hero__text--left")).toHaveLength(0);
 		expect(container.querySelectorAll(".b-hero__text--center")).toHaveLength(1);
@@ -175,7 +185,7 @@ describe("Hero", () => {
 					link2Text: "For Her",
 					link2Type: "secondary",
 				}}
-			/>
+			/>,
 		);
 		expect(container.querySelectorAll(".b-hero__text--center")).toHaveLength(0);
 		expect(container.querySelectorAll(".b-hero__text--left")).toHaveLength(1);
@@ -198,7 +208,7 @@ describe("Hero", () => {
 					link2Type: "secondary",
 					variant: "light",
 				}}
-			/>
+			/>,
 		);
 		expect(container.querySelectorAll(".b-hero--dark")).toHaveLength(0);
 		expect(container.querySelectorAll(".b-hero--light")).toHaveLength(1);
@@ -230,7 +240,7 @@ describe("Hero", () => {
 					link2Type: "secondary",
 					variant: "light",
 				}}
-			/>
+			/>,
 		);
 		expect(container.querySelector("img").getAttribute("alt")).toBe("My Headline");
 	});

@@ -2922,7 +2922,6 @@
 		"ja": "クレジットカード情報",
 		"fr": "Informations relatives à la carte de crédit",
 		"es": "Información de la tarjeta de crédito",
-		"en": "Credit card information",
 		"de": "Kreditkarteninformationen"
 	},
 	"subscriptions-block.submit-payment": {
@@ -2950,5 +2949,11 @@
 	},
 	"subscriptions-block.update-payment": {
 		"en": "Update Payment Method"
+	},
+	"subscriptions-block.paypal-processing": {
+		"en": "Processing..."
+	},
+	"subscriptions-block.paypal-redirect-label": {
+		"en": "Redirecting to PayPal page..."
 	}
 }

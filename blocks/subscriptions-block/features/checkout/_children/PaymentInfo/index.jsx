@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-
-import { usePhrases, Heading, HeadingSection, Paragraph } from "@wpmedia/arc-themes-components";
-
 import useSales from "../../../../components/useSales";
 import PayPal from "../../../../components/PayPal";
+import { LABEL_ORDER_NUMBER_PAYPAL } from "../../default";
+
+import { usePhrases, Heading, HeadingSection, Paragraph, useIdentity } from "@wpmedia/arc-themes-components";
+
 import PaymentForm from "../../../../components/PaymentForm";
 import usePaymentOptions from "../../../../components/usePaymentOptions";
 
@@ -17,12 +18,12 @@ const PaymentInfo = ({
 	offerURL,
 	stripeIntentsID,
 	isInitialized,
-	LABEL_ORDER_NUMBER_PAYPAL,
 	successUpdateURL,
 	isPaymentMethodUpdate = false,
 }) => {
 
 	const { Sales } = useSales();
+	const { Identity } = useIdentity();
 	const { stripeIntents, paypal, error } = usePaymentOptions(stripeIntentsID);
 
 	const [stripeInstance, setStripeInstance] = useState(null);
@@ -43,7 +44,6 @@ const PaymentInfo = ({
 
 	const formErrorText = phrases.t("subscriptions-block.payment-error");
 	const formLabel = phrases.t("subscriptions-block.credit-card-information");
-	const formTitle = phrases.t("subscriptions-block.payment-information");
 	const submitText = phrases.t("subscriptions-block.submit-payment");
 	const payWithCardDividerLabel = phrases.t("subscriptions-block.payWithCard-label");
 	const updateText = phrases.t("subscriptions-block.update-payment");
@@ -186,7 +186,6 @@ const PaymentInfo = ({
 						clientSecret={clientSecret}
 						formErrorText={formErrorText}
 						formLabel={formLabel}
-						formTitle={formTitle}
 						orderNumber={orderNumber}
 						paymentMethodID={stripeIntents?.paymentMethodID}
 						stripeInstance={stripeInstance}

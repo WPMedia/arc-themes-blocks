@@ -6,16 +6,16 @@ import { Image, imageANSToImageSrc } from "@wpmedia/arc-themes-components";
 
 function useOnScreen(ref) {
 	const [isIntersecting, setIntersecting] = useState(false);
-	const observer = new IntersectionObserver(([entry]) => setIntersecting(entry.isIntersecting), {
-		rootMargin: "-50% 0% -50% 0%",
-	});
 
 	useEffect(() => {
+		const observer = new IntersectionObserver(([entry]) => setIntersecting(entry.isIntersecting), {
+			rootMargin: "-50% 0% -50% 0%",
+		});
 		observer.observe(ref.current);
 		return () => {
 			observer.disconnect();
 		};
-	}, [observer, ref]);
+	}, [ref]);
 	return isIntersecting;
 }
 

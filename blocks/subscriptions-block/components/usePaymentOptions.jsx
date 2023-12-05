@@ -59,7 +59,7 @@ export const usePaymentOptions = (stripeIntentsDefaultID, paypalDefaultID) => {
 		paymentOpts,
 		stripeIntents,
 		paypal,
-        error
+		error
 	};
 };
 

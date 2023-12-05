@@ -1,7 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import { useFusionContext } from "fusion:context";
+import mockConsole from "jest-mock-console";
 
 import ProductFeaturedImage from "./default";
 
@@ -17,6 +18,13 @@ const FEATURED_IMAGE_ASSET = {
 };
 
 describe("Product Featured Image", () => {
+	let restoreConsole;
+	afterAll(() => {
+		restoreConsole?.();
+	});
+	beforeAll(() => {
+		restoreConsole = mockConsole();
+	});
 	it("should render null if no global content", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: {},

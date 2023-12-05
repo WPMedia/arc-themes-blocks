@@ -68,3 +68,12 @@ export const featureWithDescription = () => (
 		customFields={{ description: customFields.description, displayStyle: "featureVideo" }}
 	/>
 );
+
+export const rightToLeft = () => (
+	<div dir="rtl">
+		<VideoPlayer
+			embedMarkup={embedMarkup}
+			customFields={{ ...customFields, displayStyle: "featureVideo" }}
+		/>
+	</div>
+);

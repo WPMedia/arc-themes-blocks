@@ -5,7 +5,7 @@ import useSales from "../../../../components/useSales";
 import PayPal from "../../../../components/PayPal";
 import { LABEL_ORDER_NUMBER_PAYPAL } from "../../default";
 
-import { usePhrases, Heading, HeadingSection, Paragraph } from "@wpmedia/arc-themes-components";
+import { usePhrases, Heading, HeadingSection, Paragraph, useIdentity } from "@wpmedia/arc-themes-components";
 
 import PaymentForm from "../../../../components/PaymentForm";
 
@@ -20,7 +20,8 @@ const PaymentInfo = ({
 	isInitialized
 }) => {
 	const { Sales } = useSales();
-	window.Sales = Sales;
+	const { Identity } = useIdentity();
+
 	const [stripeInstance, setStripeInstance] = useState(null);
 
 	const [isStripeInitialized, setIsStripeInitialized] = useState(false);

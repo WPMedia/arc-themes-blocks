@@ -1651,7 +1651,10 @@
 						"media-item-fig-caption": (
 							"background-color": var(--global-white),
 							"line-height": var(--body-line-height-5),
-							"margin": var(--global-spacing-2) 0
+							"margin-block-end": var(--global-spacing-2),
+							"margin-block-start": var(--global-spacing-2),
+							"margin-inline-end": 0,
+							"margin-inline-start": 0
 						)
 					)
 				),
@@ -1663,15 +1666,18 @@
 						),
 						"icon": (
 							"fill": currentColor,
-							"height": var(--global-spacing-6),
-							"width": var(--global-spacing-6)
+							"block-size": var(--global-spacing-6),
+							"inline-size": var(--global-spacing-6)
 						)
 					)
 				),
 				"lead-art-carousel-fullscreen": (
 					"components": (
 						"media-item-fig-caption": (
-							"padding": 0 var(--global-spacing-2)
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
 						)
 					)
 				),
@@ -1681,13 +1687,13 @@
 					"background-color": var(--global-black),
 					"display": flex,
 					"justify-content": center,
-					"max-height": 75vh,
+					"max-block-size": 75vh,
 					"overflow": auto,
 					"components": (
 						"image": (
-							"height": auto,
-							"max-height": 100%,
-							"max-width": 100%,
+							"block-size": auto,
+							"max-block-size": 100%,
+							"max-inline-size": 100%,
 							"object-fit": contain
 						)
 					)
@@ -1700,8 +1706,8 @@
 						),
 						"icon": (
 							"fill": currentColor,
-							"height": var(--global-spacing-8),
-							"width": var(--global-spacing-8)
+							"block-size": var(--global-spacing-8),
+							"inline-size": var(--global-spacing-8)
 						)
 					)
 				),
@@ -2914,8 +2920,11 @@
 							"line-height": var(--heading-level-3-line-height)
 						),
 						"media-item": (
-							"width": 100%,
-							"margin": auto
+							"inline-size": 100%,
+							"margin-block-end": auto,
+							"margin-block-start": auto,
+							"margin-inline-end": auto,
+							"margin-inline-start": auto
 						)
 					)
 				),
@@ -2923,16 +2932,19 @@
 					"gap": var(--global-spacing-6),
 					"components": (
 						"media-item-fig-caption": (
-							"margin-bottom": 0,
-							"margin-left": var(--global-spacing-4),
-							"margin-right": var(--global-spacing-4),
-							"margin-top": 0
+							"margin-block-end": 0,
+							"margin-block-start": 0,
+							"margin-inline-end": var(--global-spacing-4),
+							"margin-inline-start": var(--global-spacing-4)
 						)
 					)
 				),
 				"video-player-feature-meta": (
-					"margin": auto,
-					"width": var(--content-scale-width),
+					"margin-block-end": auto,
+					"margin-block-start": auto,
+					"margin-inline-end": auto,
+					"margin-inline-start": auto,
+					"inline-size": var(--content-scale-width),
 					"components": (
 						"stack": (
 							"gap": var(--global-spacing-4)
@@ -3594,12 +3606,12 @@
 				"lead-art-carousel-fullscreen": (
 					"components": (
 						"media-item-fig-caption": (
-							"padding": 0 var(--global-spacing-5)
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-5),
+							"padding-inline-start": var(--global-spacing-5)
 						)
 					)
-				),
-				"lead-art-carousel-image-wrapper": (
-					"max-height": 75vh
 				),
 				"login-form": (
 					"components": (

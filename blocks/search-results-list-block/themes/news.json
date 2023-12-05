@@ -83,7 +83,7 @@
 					"heading": {
 						"font-size": "var(--heading-level-5-font-size)",
 						"font-weight": "var(--heading-level-5-font-weight)",
-						"line-block-size": "var(--heading-level-5-line-height)",
+						"line-height": "var(--heading-level-5-line-height)",
 						"margin-block-end": "var(--global-spacing-4)"
 					},
 					"link": {
@@ -96,7 +96,7 @@
 					"overline": {
 						"font-weight": "var(--heading-level-4-font-weight)",
 						"font-size": "var(--heading-level-5-font-size)",
-						"line-block-size": "var(--heading-level-5-line-height)"
+						"line-height": "var(--heading-level-5-line-height)"
 					},
 					"paragraph": {
 						"display": "block"

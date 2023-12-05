@@ -37,7 +37,7 @@
 		"test:watch": "npm run test -- --watch -o --coverage"
 	},
 	"browserslist": [
-		"supports css-logical-props and last 2 versions and > 0.001%"
+		"supports css-logical-props and last 2 versions and > 0%"
 	],
 	"lint-staged": {
 		"*": "prettier --write --ignore-unknown"

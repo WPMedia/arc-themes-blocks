@@ -617,27 +617,18 @@
 					)
 				),
 				"card-list": (
-					"box-shadow": var(--global-box-shadow-1),
-					"border-radius": 0 var(--border-radius) var(--border-radius) 0,
 					"background-color": var(--background-color),
-					"padding-block-start": var(--global-spacing-4) ,
+					"border-radius": 0 var(--border-radius) var(--border-radius) 0,
+					"box-shadow": var(--global-box-shadow-1),
 					"padding-block-end": var(--global-spacing-4),
-					"padding-inline-start": 0,
+					"padding-block-start": var(--global-spacing-4) ,
 					"padding-inline-end": 0,
+					"padding-inline-start": 0,
 					"components": (
 						"heading": (
 							"font-size": var(--heading-level-5-font-size),
 							"font-weight": var(--heading-level-5-font-weight),
 							"line-height": var(--heading-level-5-line-height)
-						),
-						"stack": (
-							"gap": var(--global-spacing-4)
-						),
-						"separator": (
-							"padding-block-start": 0,
-							"padding-block-end": 0,
-							"padding-inline-start": var(--global-spacing-2),
-							"padding-inline-end": var(--global-spacing-2)
 						),
 						"image": (
 							"transition": opacity 0.4s ease
@@ -651,21 +642,30 @@
 						),
 						"link-hover": (
 							"color": var(--text-color-subtle)
+						),
+						"separator": (
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
+						),
+						"stack": (
+							"gap": var(--global-spacing-4)
 						)
 					)
 				),
 				"card-list-list": (
-					"padding-block-start": 0,
 					"padding-block-end": 0,
-					"padding-inline-start": var(--global-spacing-4),
-					"padding-inline-end": var(--global-spacing-4)
+					"padding-block-start": 0,
+					"padding-inline-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4)
 				),
 				"card-list-main-item-image-link": (
 					"components": (
 						"image": (
+							"inline-size": 100%,
 							"max-block-size": 40vh,
-							"object-fit": cover,
-							"inline-size": 100%
+							"object-fit": cover
 						)
 					)
 				),
@@ -699,12 +699,12 @@
 					"max-inline-size": 105px
 				),
 				"card-list-title": (
-					"padding-block-start": 0,
-					"padding-block-end": 0,
-					"padding-inline-start": var(--global-spacing-4),
-					"padding-inline-end": var(--global-spacing-4),
 					"font-size": var(--heading-level-5-font-size),
-					"line-height": var(--heading-level-5-line-height)
+					"line-height": var(--heading-level-5-line-height),
+					"padding-block-end": 0,
+					"padding-block-start": 0,
+					"padding-inline-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4)
 				),
 				"checkout": (
 					"font-family": var(--font-family-primary),
@@ -1976,7 +1976,7 @@
 					)
 				),
 				"numbered-list-item-image": (
-					"max-width": 25%
+					"max-inline-size": 25%
 				),
 				"numbered-list-items": (
 					"gap": var(--global-spacing-4)

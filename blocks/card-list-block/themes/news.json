@@ -2,13 +2,13 @@
 	"card-list": {
 		"styles": {
 			"default": {
-				"box-shadow": "var(--global-box-shadow-1)",
-				"border-radius": "0 var(--border-radius) var(--border-radius) 0",
 				"background-color": "var(--background-color)",
-				"padding-block-start": "var(--global-spacing-4) ",
+				"border-radius": "0 var(--border-radius) var(--border-radius) 0",
+				"box-shadow": "var(--global-box-shadow-1)",
 				"padding-block-end": "var(--global-spacing-4) ",
-				"padding-inline-start": 0,
+				"padding-block-start": "var(--global-spacing-4) ",
 				"padding-inline-end": 0,
+				"padding-inline-start": 0,
 				"components": {
 					"heading": {
 						"font-size": "var(--heading-level-5-font-size)",
@@ -29,10 +29,10 @@
 						"color": "var(--text-color-subtle)"
 					},
 					"separator": {
-						"padding-block-start": "0",
 						"padding-block-end": "0",
-						"padding-inline-start": "var(--global-spacing-2)",
-						"paddinginline-end": "var(--global-spacing-2)"
+						"padding-block-start": "0",
+						"paddinginline-end": "var(--global-spacing-2)",
+						"padding-inline-start": "var(--global-spacing-2)"
 					},
 					"stack": {
 						"gap": "var(--global-spacing-4)"
@@ -45,10 +45,10 @@
 	"card-list-list": {
 		"styles": {
 			"default": {
-				"padding-block-start": "0)",
 				"padding-block-end": "0",
-				"padding-inline-start": "var(--global-spacing-4)",
-				"padding-inline-end": "var(--global-spacing-4)"
+				"padding-block-start": "0)",
+				"padding-inline-end": "var(--global-spacing-4)",
+				"padding-inline-start": "var(--global-spacing-4)"
 			},
 			"desktop": {}
 		}
@@ -58,9 +58,9 @@
 			"default": {
 				"components": {
 					"image": {
+						"inline-size": "100%",
 						"max-block-size": "40vh",
-						"object-fit": "cover",
-						"inline-size": "100%"
+						"object-fit": "cover"
 					}
 				}
 			},
@@ -119,12 +119,12 @@
 	"card-list-title": {
 		"styles": {
 			"default": {
-				"padding-block-start": "0",
-				"padding-block-end": "0",
-				"padding-inline-start": "var(--global-spacing-4)",
-				"padding-inline-end": "var(--global-spacing-4)",
 				"font-size": "var(--heading-level-5-font-size)",
-				"line-height": "var(--heading-level-5-line-height)"
+				"line-height": "var(--heading-level-5-line-height)",
+				"padding-block-end": "0",
+				"padding-block-start": "0",
+				"padding-inline-end": "var(--global-spacing-4)",
+				"padding-inline-start": "var(--global-spacing-4)"
 			},
 			"desktop": {}
 		}

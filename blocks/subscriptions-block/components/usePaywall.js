@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
@@ -60,8 +60,12 @@ const usePaywall = () => {
 		}
 	}, [apiOrigin, globalContent, Identity, isIdentityInitialized, isPaywalled, contentIdentifier, contentRestriction, contentType]);
 
+	const rules = useMemo(
+		() => (!isServerSide() && window?.ArcP?._rules) || [],
+		[window?.ArcP?._rules, !isServerSide()]
+	  );
+
 	useEffect(() => {
-		const rules = window?.ArcP?._rules || [];
 		if (results?.triggered && rules?.length) {
 			const { id: triggerId, rc: triggerCount } = results.triggered;
 
@@ -89,7 +93,7 @@ const usePaywall = () => {
 				setTriggeredRule(triggeringRule);
 			}
 		}
-	}, [results,  window?.ArcP?._rules, isLoggedIn]);
+	}, [results, rules, isLoggedIn]);
 
 	if (isServerSide()) {
 		return {

@@ -44,7 +44,7 @@ const usePaywall = () => {
 						setIsPaywalled(true);
 					},
 					section: globalContent.taxonomy?.primary_section._id,
-				})
+				}),
 			);
 		};
 
@@ -53,19 +53,25 @@ const usePaywall = () => {
 			contentIdentifier &&
 			contentRestriction &&
 			isIdentityInitialized &&
-			!isPaywalled &&
-			!isServerSide()
+			!isPaywalled
 		) {
 			setTimeout(() => runPaywall(), 1000);
 		}
-	}, [apiOrigin, globalContent, Identity, isIdentityInitialized, isPaywalled, contentIdentifier, contentRestriction, contentType]);
+	}, [
+		apiOrigin,
+		globalContent,
+		Identity,
+		isIdentityInitialized,
+		isPaywalled,
+		contentIdentifier,
+		contentRestriction,
+		contentType,
+	]);
 
-	const rules = useMemo(
-		() => (!isServerSide() && window?.ArcP?._rules) || [],
-		[window?.ArcP?._rules, !isServerSide()]
-	  );
+	
 
 	useEffect(() => {
+		const rules = window?.ArcP?._rules || [];
 		if (results?.triggered && rules?.length) {
 			const { id: triggerId, rc: triggerCount } = results.triggered;
 
@@ -87,13 +93,13 @@ const usePaywall = () => {
 					.find(withRestrictedStatus);
 
 				setTriggeredRule(
-					paywallableRule && paywallableRule !== triggeringRule ? paywallableRule : triggeringRule
+					paywallableRule && paywallableRule !== triggeringRule ? paywallableRule : triggeringRule,
 				);
 			} else {
 				setTriggeredRule(triggeringRule);
 			}
 		}
-	}, [results, rules, isLoggedIn]);
+	}, [results, isLoggedIn]);
 
 	if (isServerSide()) {
 		return {

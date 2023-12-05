@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";

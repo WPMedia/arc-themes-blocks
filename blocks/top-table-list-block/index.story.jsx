@@ -257,3 +257,17 @@ export const fourSmallStoriesPerRowNoBorder = () => (
 		}}
 	/>
 );
+
+export const withRtl = () => (
+	<div dir="rtl">
+		<TopTableListWrapper
+			customFields={{
+				...config,
+				extraLarge: 1,
+				large: 1,
+				medium: 1,
+				small: 2,
+			}}
+		/>
+	</div>
+);

@@ -1844,7 +1844,7 @@
 				"medium-manual-promo": (
 					"clear": both,
 					"display": table,
-					"width": 100%,
+					"inline-size": 100%,
 					"components": (
 						"attribution": (
 							"color": var(--text-color),
@@ -1856,14 +1856,14 @@
 							"font-size": var(--heading-level-5-font-size),
 							"font-weight": var(--heading-level-5-font-weight),
 							"line-height": var(--heading-level-5-line-height),
-							"margin-bottom": var(--global-spacing-4)
+							"margin-block-end": var(--global-spacing-4)
 						),
 						"link-hover": (
 							"color": var(--text-color-subtle)
 						),
 						"media-item": (
-							"float": right,
-							"max-width": 100px
+							"float": inline-end,
+							"max-inline-size": 100px
 						),
 						"paragraph": (
 							"display": inline,
@@ -1882,7 +1882,7 @@
 				"medium-manual-promo-show-image": (
 					"components": (
 						"heading": (
-							"width": 68%
+							"inline-size": 68%
 						)
 					)
 				),
@@ -3668,9 +3668,12 @@
 				"medium-manual-promo": (
 					"components": (
 						"media-item": (
-							"float": left,
-							"margin": 0,
-							"max-width": 33%
+							"float": inline-start,
+							"margin-block-end": 0,
+							"margin-block-start": 0,
+							"margin-inline-end": 0,
+							"margin-inline-start": 0,
+							"max-inline-size": 33%
 						),
 						"paragraph": (
 							"display": block
@@ -3680,11 +3683,11 @@
 				"medium-manual-promo-show-image": (
 					"components": (
 						"paragraph": (
-							"margin-left": calc(33% + var(--global-spacing-6))
+							"margin-inline-start": calc(33% + var(--global-spacing-6))
 						),
 						"heading": (
-							"margin-left": calc(33% + var(--global-spacing-6)),
-							"width": auto
+							"inline-size": auto,
+							"margin-inline-start": calc(33% + var(--global-spacing-6))
 						)
 					)
 				),

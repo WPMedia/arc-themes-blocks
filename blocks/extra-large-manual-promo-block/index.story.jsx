@@ -119,3 +119,14 @@ export const overlineAndDescription = () => {
 
 	return <ExtraLargeManualPromo customFields={updatedCustomFields} />;
 };
+
+export const withRtl = () => {
+	const updatedCustomFields = {
+		...allCustomFields,
+		showOverline: true,
+		showHeadline: true,
+		showImage: true,
+		showDescription: true,
+	};
+	return <div dir="rtl"><ExtraLargeManualPromo customFields={updatedCustomFields} /></div>;
+};

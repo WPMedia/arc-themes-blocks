@@ -161,3 +161,14 @@ export const twoPromos = () => {
 		</>
 	);
 };
+
+export const withRtl = () => {
+	const customFields = {
+		...sampleData,
+		showHeadline: true,
+		showImage: true,
+		showDescription: true,
+	};
+
+	return <div dir="rtl"><MediumManualPromo customFields={customFields} /></div>;
+};

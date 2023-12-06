@@ -100,7 +100,7 @@ describe("the small manual promo feature", () => {
 	});
 
 	it("should render heading first when imagePosition is set to below", () => {
-		render(<SmallManualPromo customFields={{ ...customFields, imagePosition: "below" }} />);
+		render(<SmallManualPromo customFields={{ ...customFields, imagePosition: "inset-block-end" }} />);
 		const stack = screen.queryByRole("article");
 		const heading = screen.queryByRole("heading");
 		expect(stack.firstChild).toBe(heading);
@@ -109,7 +109,7 @@ describe("the small manual promo feature", () => {
 	it("should render image first when imagePosition is set to left", () => {
 		render(
 			<SmallManualPromo
-				customFields={{ ...customFields, imagePosition: "left", linkURL: undefined }}
+				customFields={{ ...customFields, imagePosition: "inset-inline-start", linkURL: undefined }}
 			/>
 		);
 		const stack = screen.queryByRole("article");
@@ -155,7 +155,7 @@ describe("the small manual promo feature", () => {
 	});
 
 	it("should render heading first when imagePosition is set to right", () => {
-		render(<SmallManualPromo customFields={{ ...customFields, imagePosition: "right" }} />);
+		render(<SmallManualPromo customFields={{ ...customFields, imagePosition: "inset-inline-end" }} />);
 		const stack = screen.queryByRole("article");
 		const heading = screen.queryByRole("heading");
 		expect(stack.firstChild).toBe(heading);

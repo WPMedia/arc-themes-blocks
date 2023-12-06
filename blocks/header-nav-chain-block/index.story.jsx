@@ -243,3 +243,22 @@ export const sectionMenuOpenWithSearch = () => (
 		primaryLogoAlt="Shows dimensions of 1200 by 150 for testing purposes"
 	/>
 );
+
+export const rightToLeft = () => (
+	<div dir="rtl">
+		<PresentationalNav
+			closeDrawer={() => {}}
+			customFields={CUSTOM_FIELDS_BASE}
+			isAdmin={false}
+			isSectionDrawerOpen={false}
+			logoAlignment="center"
+			menuButtonClickAction={() => {}}
+			sectionAriaLabel="Menu des sections"
+			sections={[]}
+			showDotSeparators={false}
+			signInOrder={1}
+			primaryLogoPath="/100x100.gif"
+			primaryLogoAlt="Shows dimensions of 100 by 100 for tall testing purposes"
+		/>
+	</div>
+);

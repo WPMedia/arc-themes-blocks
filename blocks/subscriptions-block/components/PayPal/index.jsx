@@ -2,7 +2,7 @@ import React from "react";
 import { usePaymentRedirect } from "../usePaymentRedirect";
 import { usePhrases } from "@wpmedia/arc-themes-components";
 
-export const PaypalCheckout = ({ labelOrderNumber, paypal, orderNumber, successURL, isInitialized }) => {
+export const PaypalCheckout = ({ labelOrderNumber, paypal, orderNumber, successURL }) => {
 	const phrases = usePhrases();
 	const params = new URLSearchParams(window.location.search);
 	const token = params.get("token");
@@ -14,7 +14,7 @@ export const PaypalCheckout = ({ labelOrderNumber, paypal, orderNumber, successU
 		orderNumber = localStorage[labelOrderNumber];
 	}
 
-	const { error } = usePaymentRedirect(paypal, orderNumber, token, "parameter1", successURL, isInitialized);
+	const { error } = usePaymentRedirect(paypal, orderNumber, token, "parameter1", successURL);
 
 	return (
 		<>

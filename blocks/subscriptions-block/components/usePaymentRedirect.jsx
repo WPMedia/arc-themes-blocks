@@ -7,7 +7,7 @@ export const usePaymentRedirect = (
 	orderNumber,
 	token,
 	redirectURLParameterName = "parameter1",
-  successURL,
+  	successURL,
 ) => {
 	const { Sales } = useSales();
 
@@ -20,7 +20,7 @@ export const usePaymentRedirect = (
 			try {
 				const orderDetails = await Sales.getOrderDetails(orderNumber);
 				setCurrentOrder(orderDetails);
-				setCurrentMerchantId(paymentMethodType.paymentMethodID);
+				setCurrentMerchantId(paymentMethodType?.paymentMethodID);
 			} catch (e) {
 				setError(e);
 			}
@@ -34,7 +34,7 @@ export const usePaymentRedirect = (
 		const initPayment = async () => {
 			try {
 				const payment = await Sales.initializePayment(
-					currentOrder.orderNumber,
+					currentOrder?.orderNumber,
 					currentMerchantId,
 				);
 				window.location.href = payment[redirectURLParameterName];

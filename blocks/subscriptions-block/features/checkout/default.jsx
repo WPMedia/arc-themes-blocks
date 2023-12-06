@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
+
 import PropTypes from "@arc-fusion/prop-types";
 import { usePhrases, Heading, Link, useIdentity } from "@wpmedia/arc-themes-components";
-import usePaymentOptions from "../../components/usePaymentOptions";
 import Cart from "../../components/Cart";
 import ContactInfo from "../../components/ContactInfo";
 import PaymentInfo from "./_children/PaymentInfo";
@@ -11,7 +11,6 @@ const BLOCK_CLASS_NAME = "b-checkout";
 
 const Checkout = ({ customFields }) => {
 	const { offerURL, successURL, stripeIntentsID } = customFields;
-	const { stripeIntents, paypal, error } = usePaymentOptions(stripeIntentsID);
 
 	const [loggedIn, setIsLoggedIn] = useState(false);
 	const [user, setUser] = useState(false);
@@ -101,10 +100,8 @@ const Checkout = ({ customFields }) => {
 					className={BLOCK_CLASS_NAME}
 					userInfo={userInfo}
 					offerURL={offerURL}
-					stripeIntents={stripeIntents}
-					paypal={paypal}
-					errorPaymentOptions={error}
-					isInitialized={isInitialized}
+					stripeIntentsID={stripeIntentsID}
+					isInitialized = {isInitialized}
 				/>
 			)}
 		</section>

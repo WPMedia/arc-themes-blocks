@@ -2947,6 +2947,9 @@
 	"subscriptions-block.payWithCard-label": {
 		"en": "Or Pay with card"
 	},
+	"subscriptions-block.update-payment": {
+		"en": "Update Payment Method"
+	},
 	"subscriptions-block.paypal-processing": {
 		"en": "Processing..."
 	},

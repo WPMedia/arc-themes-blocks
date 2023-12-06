@@ -7,19 +7,28 @@
 				"border-radius": "0 var(--border-radius) var(--border-radius) 0",
 				"display": "none",
 				"gap": "var(--global-spacing-2)",
-				"left": 0,
-				"padding": "var(--global-spacing-4) 0",
+				"inset-inline-start": 0,
+				"padding-block-end": "var(--global-spacing-4)",
+				"padding-block-start": "var(--global-spacing-4)",
+				"padding-inline-end": "0",
+				"padding-inline-start": "0",
 				"position": "fixed",
-				"top": "200px",
+				"inset-block-start": "200px",
 				"components": {
 					"button": {
 						"background-color": "transparent"
 					},
 					"button-default": {
-						"border-width": 0
+						"border-block-end-width": 0,
+						"border-block-start-width": 0,
+						"border-inline-end-width": 0,
+						"border-inline-start-width": 0
 					},
 					"button-medium": {
-						"padding": "0 var(--global-spacing-3)"
+						"padding-block-end": "0",
+						"padding-block-start": "0",
+						"padding-inline-end": "var(--global-spacing-3)",
+						"padding-inline-start": "var(--global-spacing-3)"
 					}
 				}
 			},

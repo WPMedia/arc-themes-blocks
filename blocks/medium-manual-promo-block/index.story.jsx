@@ -170,5 +170,9 @@ export const withRtl = () => {
 		showDescription: true,
 	};
 
-	return <div dir="rtl"><MediumManualPromo customFields={customFields} /></div>;
+	return (
+		<div dir="rtl">
+			<MediumManualPromo customFields={customFields} />
+		</div>
+	);
 };

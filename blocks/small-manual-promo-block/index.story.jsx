@@ -114,5 +114,9 @@ export const withRtl = () => {
 		showImage: true,
 	};
 
-	return <div dir="rtl"><SmallManualPromo customFields={customFields} /></div>;
+	return (
+		<div dir="rtl">
+			<SmallManualPromo customFields={customFields} />
+		</div>
+	);
 };

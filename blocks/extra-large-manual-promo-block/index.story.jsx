@@ -128,5 +128,9 @@ export const withRtl = () => {
 		showImage: true,
 		showDescription: true,
 	};
-	return <div dir="rtl"><ExtraLargeManualPromo customFields={updatedCustomFields} /></div>;
+	return (
+		<div dir="rtl">
+			<ExtraLargeManualPromo customFields={updatedCustomFields} />
+		</div>
+	);
 };

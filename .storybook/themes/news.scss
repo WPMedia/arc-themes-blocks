@@ -3682,11 +3682,11 @@
 				),
 				"medium-manual-promo-show-image": (
 					"components": (
-						"paragraph": (
-							"margin-inline-start": calc(33% + var(--global-spacing-6))
-						),
 						"heading": (
 							"inline-size": auto,
+							"margin-inline-start": calc(33% + var(--global-spacing-6))
+						),
+						"paragraph": (
 							"margin-inline-start": calc(33% + var(--global-spacing-6))
 						)
 					)

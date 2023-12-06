@@ -13,17 +13,17 @@
 				"gap": "var(--global-spacing-4)",
 				"components": {
 					"image": {
-						"max-width": "var(--global-spacing-13)",
-						"max-height": "var(--global-spacing-13)",
-						"border-radius": "var(--border-radius-circle)",
-						"height": "100%",
-						"width": "100%",
 						"aspect-ratio": 1,
+						"border-radius": "var(--border-radius-circle)",
+						"block-size": "100%",
+						"inline-size": "100%",
+						"max-inline-size": "var(--global-spacing-13)",
+						"max-block-size": "var(--global-spacing-13)",
 						"object-fit": "cover"
 					},
 					"stack": {
 						"gap": "var(--global-spacing-2)",
-						"width": "100%"
+						"inline-size": "100%"
 					}
 				}
 			},
@@ -36,7 +36,7 @@
 				"font-family": "var(--font-family-primary)",
 				"font-size": "var(--body-font-size-small)",
 				"line-height": "var(--body-line-height-small)",
-				"margin-bottom": 0
+				"margin-block-end": 0
 			},
 			"desktop": {
 				"font-size": "var(--body-font-size)",
@@ -83,10 +83,10 @@
 		"styles": {
 			"default": {
 				"gap": "var(--global-spacing-4)",
-				"margin-top": 0
+				"margin-block-start": 0
 			},
 			"desktop": {
-				"margin-top": "var(--global-spacing-4)"
+				"margin-block-start": "var(--global-spacing-4)"
 			}
 		}
 	}

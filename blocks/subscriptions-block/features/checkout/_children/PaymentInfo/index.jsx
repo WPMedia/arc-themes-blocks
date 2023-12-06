@@ -20,6 +20,7 @@ const PaymentInfo = ({
 	isInitialized,
 	successUpdateURL,
 	isPaymentMethodUpdate = false,
+	loginURL
 }) => {
 
 	const { Sales } = useSales();
@@ -101,7 +102,7 @@ const PaymentInfo = ({
 
 	const handlePayPal = async () => {
 		const isLoggedIn = await Identity.isLoggedIn();
-
+		const checkoutURL = window.location.pathname;
 		if (!isLoggedIn) {
 			window.location.href = `${loginURL}?redirect=${checkoutURL}`;
 		}

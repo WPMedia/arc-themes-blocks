@@ -55,7 +55,7 @@ const usePaywall = () => {
 			isIdentityInitialized &&
 			!isPaywalled
 		) {
-			setTimeout(() => runPaywall(), 1000);
+			setTimeout(() => runPaywall(), 0);
 		}
 	}, [
 		apiOrigin,

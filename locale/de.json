@@ -455,6 +455,9 @@
 		"checkout-block.Zambia": "Zambia",
 		"checkout-block.Zimbabwe": "Zimbabwe",
 		"checkout-block.back-to-offer-page": "Zurück zur Auswahl der Abonnements",
+		"checkout-block.cardNumber": "Card number",
+		"checkout-block.cardholderName": "Name on card",
+		"checkout-block.cardholderName-requirements": "Please enter name on card",
 		"checkout-block.contact-info": "Kontaktinformationen",
 		"checkout-block.continue-to-checkout": "Weiter zur Kasse",
 		"checkout-block.country": "Land oder Region",
@@ -475,8 +478,12 @@
 		"checkout-block.plus-sales-tax": "Zuzüglich der geltenden Umsatzsteuer",
 		"checkout-block.Åland-Islands": "Åland Islands",
 		"subscriptions-block.credit-card-information": "Zahlungsmethode und Informationen",
+		"subscriptions-block.payWithCard-label": "Or Pay with card",
 		"subscriptions-block.payment-error": "Bei der Bearbeitung Ihrer Zahlung ist ein Fehler aufgetreten.",
 		"subscriptions-block.payment-information": "Kreditkarteninformationen",
-		"subscriptions-block.submit-payment": "Abonnement kaufen"
+		"subscriptions-block.paypal-processing": "Processing...",
+		"subscriptions-block.paypal-redirect-label": "Redirecting to PayPal page...",
+		"subscriptions-block.submit-payment": "Abonnement kaufen",
+		"subscriptions-block.update-payment": "Update Payment Method"
 	}
 }

@@ -2683,6 +2683,39 @@
 		"en": "Back to subscription selection",
 		"de": "Zurück zur Auswahl der Abonnements"
 	},
+	"checkout-block.cardNumber": {
+		"sv": "Card number",
+		"pt": "Card number",
+		"no": "Card number",
+		"ko": "Card number",
+		"ja": "Card number",
+		"fr": "Card number",
+		"es": "Card number",
+		"en": "Card number",
+		"de": "Card number"
+	},
+	"checkout-block.cardholderName": {
+		"sv": "Name on card",
+		"pt": "Name on card",
+		"no": "Name on card",
+		"ko": "Name on card",
+		"ja": "Name on card",
+		"fr": "Name on card",
+		"es": "Name on card",
+		"en": "Name on card",
+		"de": "Name on card"
+	},
+	"checkout-block.cardholderName-requirements": {
+		"sv": "Please enter name on card",
+		"pt": "Please enter name on card",
+		"no": "Please enter name on card",
+		"ko": "Please enter name on card",
+		"ja": "Please enter name on card",
+		"fr": "Please enter name on card",
+		"es": "Please enter name on card",
+		"en": "Please enter name on card",
+		"de": "Please enter name on card"
+	},
 	"checkout-block.contact-info": {
 		"sv": "Kontaktuppgifter",
 		"pt": "Informações de contacto",
@@ -2903,6 +2936,17 @@
 		"en": "Payment Method and Information",
 		"de": "Zahlungsmethode und Informationen"
 	},
+	"subscriptions-block.payWithCard-label": {
+		"sv": "Or Pay with card",
+		"pt": "Or Pay with card",
+		"no": "Or Pay with card",
+		"ko": "Or Pay with card",
+		"ja": "Or Pay with card",
+		"fr": "Or Pay with card",
+		"es": "Or Pay with card",
+		"en": "Or Pay with card",
+		"de": "Or Pay with card"
+	},
 	"subscriptions-block.payment-error": {
 		"sv": "Ett fel uppstod när din betalning skulle behandlas.",
 		"pt": "Ocorreu um erro ao processar o seu pagamento.",
@@ -2922,7 +2966,30 @@
 		"ja": "クレジットカード情報",
 		"fr": "Informations relatives à la carte de crédit",
 		"es": "Información de la tarjeta de crédito",
+		"en": "Credit card information",
 		"de": "Kreditkarteninformationen"
+	},
+	"subscriptions-block.paypal-processing": {
+		"sv": "Processing...",
+		"pt": "Processing...",
+		"no": "Processing...",
+		"ko": "Processing...",
+		"ja": "Processing...",
+		"fr": "Processing...",
+		"es": "Processing...",
+		"en": "Processing...",
+		"de": "Processing..."
+	},
+	"subscriptions-block.paypal-redirect-label": {
+		"sv": "Redirecting to PayPal page...",
+		"pt": "Redirecting to PayPal page...",
+		"no": "Redirecting to PayPal page...",
+		"ko": "Redirecting to PayPal page...",
+		"ja": "Redirecting to PayPal page...",
+		"fr": "Redirecting to PayPal page...",
+		"es": "Redirecting to PayPal page...",
+		"en": "Redirecting to PayPal page...",
+		"de": "Redirecting to PayPal page..."
 	},
 	"subscriptions-block.submit-payment": {
 		"sv": "Köp prenumeration",
@@ -2935,25 +3002,15 @@
 		"en": "Purchase Subscription",
 		"de": "Abonnement kaufen"
 	},
-	"checkout-block.cardholderName": {
-		"en": "Name on card"
-	},
-	"checkout-block.cardNumber": {
-		"en": "Card number"
-	},
-	"checkout-block.cardholderName-requirements": {
-		"en": "Please enter name on card"
-	},
-	"subscriptions-block.payWithCard-label": {
-		"en": "Or Pay with card"
-	},
 	"subscriptions-block.update-payment": {
-		"en": "Update Payment Method"
-	},
-	"subscriptions-block.paypal-processing": {
-		"en": "Processing..."
-	},
-	"subscriptions-block.paypal-redirect-label": {
-		"en": "Redirecting to PayPal page..."
+		"sv": "Update Payment Method",
+		"pt": "Update Payment Method",
+		"no": "Update Payment Method",
+		"ko": "Update Payment Method",
+		"ja": "Update Payment Method",
+		"fr": "Update Payment Method",
+		"es": "Update Payment Method",
+		"en": "Update Payment Method",
+		"de": "Update Payment Method"
 	}
 }

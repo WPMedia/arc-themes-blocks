@@ -6,7 +6,13 @@ import useSales from "../../../../components/useSales";
 import PayPal from "../../../../components/PayPal";
 import { LABEL_ORDER_NUMBER_PAYPAL } from "../../default";
 
-import { usePhrases, Heading, HeadingSection, Paragraph, useIdentity } from "@wpmedia/arc-themes-components";
+import {
+	usePhrases,
+	Heading,
+	HeadingSection,
+	Paragraph,
+	useIdentity,
+} from "@wpmedia/arc-themes-components";
 
 import PaymentForm from "../../../../components/PaymentForm";
 import usePaymentOptions from "../../../../components/usePaymentOptions";
@@ -20,9 +26,8 @@ const PaymentInfo = ({
 	isInitialized,
 	successUpdateURL,
 	isPaymentMethodUpdate = false,
-	loginURL
+	loginURL,
 }) => {
-
 	const { Sales } = useSales();
 	const { Identity } = useIdentity();
 	const { stripeIntents, paypal, error } = usePaymentOptions(stripeIntentsID);
@@ -30,6 +35,7 @@ const PaymentInfo = ({
 	const [stripeInstance, setStripeInstance] = useState(null);
 
 	const [isStripeInitialized, setIsStripeInitialized] = useState(false);
+	const [errorInitialize, setErrorInitialize] = useState();
 	const [isPayPal, setIsPayPal] = useState(false);
 
 	const [orderNumber, setOrderNumber] = useState();
@@ -53,7 +59,12 @@ const PaymentInfo = ({
 		if (isPaymentMethodUpdate) {
 			const urlParams = new URLSearchParams(window.location.href);
 			const pmID = urlParams.get("paymentMethodID");
-			setPaymentID(pmID);
+
+			if (!!pmID) {
+				setPaymentID(pmID);
+			}else{
+				setErrorInitialize({message: "paymentMethodID is required"});
+			}
 		}
 	}, [isPaymentMethodUpdate]);
 
@@ -73,21 +84,23 @@ const PaymentInfo = ({
 								Sales.initializePayment(order.orderNumber, stripeIntents?.paymentMethodID).then(
 									(paymentObject) => {
 										setPayment(paymentObject);
+										setErrorInitialize();
 									},
 								);
 							})
-							.catch((e) => console.error(e));
+							.catch((e) => setErrorInitialize(e));
 					}
 				});
 			}
 
 			//Update payment method
 			if (stripeIntents?.paymentMethodID && isPaymentMethodUpdate && paymentID) {
-				Sales.initializePaymentUpdate(paymentID, stripeIntents?.paymentMethodID).then(
-					(paymentObject) => {
+				Sales.initializePaymentUpdate(paymentID, stripeIntents?.paymentMethodID)
+					.then((paymentObject) => {
 						setPayment(paymentObject);
-					},
-				);
+						setErrorInitialize();
+					})
+					.catch((e) => setErrorInitialize(e));
 			}
 		}
 	}, [stripeIntents, isPaymentMethodUpdate, paymentID, error, isInitialized]);
@@ -203,6 +216,11 @@ const PaymentInfo = ({
 			{error && (
 				<section role="alert">
 					<Paragraph>{error}</Paragraph>
+				</section>
+			)}
+			{errorInitialize && (
+				<section role="alert">
+					<Paragraph>{errorInitialize?.message}</Paragraph>
 				</section>
 			)}
 		</div>

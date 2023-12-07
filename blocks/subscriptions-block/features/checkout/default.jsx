@@ -10,7 +10,7 @@ export const LABEL_ORDER_NUMBER_PAYPAL = "ArcSubs_OrderNumber"
 const BLOCK_CLASS_NAME = "b-checkout";
 
 const Checkout = ({ customFields }) => {
-	const { offerURL, successURL, stripeIntentsID } = customFields;
+	const { offerURL, successURL, loginURL, stripeIntentsID } = customFields;
 
 	const [loggedIn, setIsLoggedIn] = useState(false);
 	const [user, setUser] = useState(false);
@@ -102,6 +102,7 @@ const Checkout = ({ customFields }) => {
 					offerURL={offerURL}
 					stripeIntentsID={stripeIntentsID}
 					isInitialized = {isInitialized}
+					loginURL = {loginURL}
 				/>
 			)}
 		</section>
@@ -109,8 +110,13 @@ const Checkout = ({ customFields }) => {
 };
 Checkout.propTypes = {
 	customFields: PropTypes.shape({
+		loginURL: PropTypes.string.tag({
+			defaultValue: "/account/login/",
+			label: "Login URL",
+		}),
 		offerURL: PropTypes.string.tag({
 			defaultValue: "/offer/",
+			label: "Offer URL",
 		}),
 		successURL: PropTypes.string.tag({
 			defaultValue: "/",

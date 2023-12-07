@@ -66,7 +66,7 @@
 		"global.gallery-autoplay-label-stop": "자동 슬라이드 쇼 중지",
 		"global.gallery-expand-button": "더보기",
 		"global.gallery-next-label": "다음 슬라이드",
-		"global.gallery-page-count-text": "%{current}/%개 보는 %{total}",
+		"global.gallery-page-count-text": "%{current}\/%개 보는 %{total}",
 		"global.gallery-pause-autoplay-button": "자동 재생 일시 중지",
 		"global.gallery-previous-label": "이전 슬라이드",
 		"global.gallery-text": "갤러리",
@@ -152,7 +152,7 @@
 		"identity-block.save": "Save",
 		"identity-block.sign-up": "Sign Up",
 		"identity-block.sign-up-form-error": "There's been an error creating your account",
-		"identity-block.terms-privacy-text": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>.",
+		"identity-block.terms-privacy-text": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service<\/a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy<\/a>.",
 		"identity-block.update-email-error": "There's been an error updating your email address",
 		"identity-block.update-password-error": "There's been an error updating your password",
 		"identity-block.username": "사용자 이름"
@@ -455,6 +455,9 @@
 		"checkout-block.Zambia": "Zambia",
 		"checkout-block.Zimbabwe": "Zimbabwe",
 		"checkout-block.back-to-offer-page": "구독 선택으로 돌아가기",
+		"checkout-block.cardNumber": "Card number",
+		"checkout-block.cardholderName": "Name on card",
+		"checkout-block.cardholderName-requirements": "Please enter name on card",
 		"checkout-block.contact-info": "연락처 정보",
 		"checkout-block.continue-to-checkout": "결제 계속하기",
 		"checkout-block.country": "국가 또는 지역",
@@ -475,8 +478,12 @@
 		"checkout-block.plus-sales-tax": "해당 판매세 별도",
 		"checkout-block.Åland-Islands": "Åland Islands",
 		"subscriptions-block.credit-card-information": "결제 방법 및 정보",
+		"subscriptions-block.payWithCard-label": "Or Pay with card",
 		"subscriptions-block.payment-error": "결제를 처리하는 중 오류가 발생했습니다.",
 		"subscriptions-block.payment-information": "신용카드 정보",
-		"subscriptions-block.submit-payment": "구독 구입"
+		"subscriptions-block.paypal-processing": "Processing...",
+		"subscriptions-block.paypal-redirect-label": "Redirecting to PayPal page...",
+		"subscriptions-block.submit-payment": "구독 구입",
+		"subscriptions-block.update-payment": "Update Payment Method"
 	}
 }

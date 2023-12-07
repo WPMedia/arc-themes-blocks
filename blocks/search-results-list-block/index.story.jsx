@@ -91,3 +91,26 @@ export const allFields = () => {
 
 	return <SearchResultsList customFields={customFields} />;
 };
+
+export const withRTL = () => {
+	const customFields = {
+		globalContent,
+		itemContentConfig: {},
+		listContentConfig: {
+			contentService: null,
+			contentConfigValues: {
+				offset: 0,
+				size: 17,
+			},
+		},
+		inheritGlobalContent: true,
+		showHeadline: true,
+		showImage: true,
+		showDescription: true,
+		showByline: true,
+		showDate: true,
+		imageRatio: "16:9",
+	};
+
+	return <div dir="rtl"><SearchResultsList customFields={customFields} /></div>;
+};

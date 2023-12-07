@@ -556,17 +556,17 @@
 					"gap": var(--global-spacing-4),
 					"components": (
 						"image": (
-							"max-width": var(--global-spacing-13),
-							"max-height": var(--global-spacing-13),
-							"border-radius": var(--border-radius-circle),
-							"height": 100%,
-							"width": 100%,
 							"aspect-ratio": 1,
+							"block-size": 100%,
+							"border-radius": var(--border-radius-circle),
+							"inline-size": 100%,
+							"max-inline-size": var(--global-spacing-13),
+							"max-block-size": var(--global-spacing-13),
 							"object-fit": cover
 						),
 						"stack": (
 							"gap": var(--global-spacing-2),
-							"width": 100%
+							"inline-size": 100%
 						)
 					)
 				),
@@ -574,7 +574,7 @@
 					"font-family": var(--font-family-primary),
 					"font-size": var(--body-font-size-small),
 					"line-height": var(--body-line-height-small),
-					"margin-bottom": 0
+					"margin-block-end": 0
 				),
 				"author-bio-author-name": (
 					"font-family": var(--font-family-primary),
@@ -598,7 +598,7 @@
 				),
 				"author-bio-social-link-wrapper": (
 					"gap": var(--global-spacing-4),
-					"margin-top": 0
+					"margin-block-start": 0
 				),
 				"byline": (
 					"font-size": var(--body-font-weight),
@@ -1024,7 +1024,10 @@
 					"display": flex,
 					"flex-direction": column,
 					"gap": var(--global-spacing-4),
-					"margin": auto,
+					"margin-block-end": auto,
+					"margin-block-start": auto,
+					"margin-inline-end": auto,
+					"margin-inline-start": auto,
 					"components": (
 						"heading": (
 							"color": var(--color-primary),
@@ -1033,9 +1036,12 @@
 						"image": (
 							"aspect-ratio": 1,
 							"border-radius": var(--border-radius-circle),
-							"margin": auto,
-							"max-height": 9.375rem,
-							"max-width": 9.375rem
+							"margin-block-end": auto,
+							"margin-block-start": auto,
+							"margin-inline-end": auto,
+							"margin-inline-start": auto,
+							"max-block-size": 9.375rem,
+							"max-inline-size": 9.375rem
 						),
 						"paragraph": (
 							"color": var(--text-color),
@@ -1068,8 +1074,8 @@
 				"full-author-bio-social-icons": (
 					"display": flex,
 					"flex-wrap": wrap,
-					"justify-content": center,
-					"gap": var(--global-spacing-4)
+					"gap": var(--global-spacing-4),
+					"justify-content": center
 				),
 				"full-author-bio-social-link": (
 					"components": (
@@ -3486,7 +3492,7 @@
 					"line-height": var(--body-line-height)
 				),
 				"author-bio-social-link-wrapper": (
-					"margin-top": var(--global-spacing-4)
+					"margin-block-start": var(--global-spacing-4)
 				),
 				"double-chain": (
 					"components": (
@@ -3541,18 +3547,24 @@
 				"full-author-bio": (
 					"flex-direction": row,
 					"gap": var(--global-spacing-5),
-					"margin": 0,
-					"max-width": auto,
+					"margin-block-end": 0,
+					"margin-block-start": 0,
+					"margin-inline-end": 0,
+					"margin-inline-start": 0,
+					"max-inline-size": auto,
 					"components": (
 						"image": (
-							"margin": 0,
-							"max-height": 11.25rem,
-							"max-width": 11.25rem
+							"margin-block-end": 0,
+							"margin-block-start": 0,
+							"margin-inline-end": 0,
+							"margin-inline-start": 0,
+							"max-block-size": 11.25rem,
+							"max-inline-size": 11.25rem
 						)
 					)
 				),
 				"full-author-bio-social-header": (
-					"text-align": left
+					"text-align": start
 				),
 				"full-author-bio-social-icons": (
 					"justify-content": flex-start

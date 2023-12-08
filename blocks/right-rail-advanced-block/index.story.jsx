@@ -80,3 +80,9 @@ export const basic = () => (
 		<RightRailAdvancedLayout children={layoutAreas.map((name) => layoutItem(name))} />
 	</div>
 );
+
+export const withRtl = () => {
+	<div dir="rtl" id="fusion-app" className="layout-section">
+		<RightRailAdvancedLayout children={layoutAreas.map((name) => layoutItem(name))} />
+	</div>
+}

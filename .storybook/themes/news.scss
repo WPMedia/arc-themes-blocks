@@ -2237,23 +2237,38 @@
 					"gap": var(--global-spacing-6)
 				),
 				"right-rail-advanced-footer": (
-					"margin": var(--global-spacing-10) 0 var(--global-spacing-8) 0
+					"margin-block-start": var(--global-spacing-10),
+					"margin-inline-end": 0,
+					"margin-block-end": var(--global-spacing-8),
+					"margin-inline-start": 0
 				),
 				"right-rail-advanced-full-width-1": (
-					"margin": 0 0 var(--global-spacing-5) 0
+					"margin-block-start": 0,
+					"margin-inline-end": 0,
+					"margin-block-end": var(--global-spacing-5),
+					"margin-inline-start": 0
 				),
 				"right-rail-advanced-full-width-2": (
-					"margin": var(--global-spacing-6) 0 0 0
+					"margin-block-start": var(--global-spacing-6),
+					"margin-inline-end": 0,
+					"margin-block-end": 0,
+					"margin-inline-start": 0
 				),
 				"right-rail-advanced-main": (
 					"gap": var(--global-spacing-6),
-					"max-width": calc(var(--content-max-width) * 1px),
-					"width": var(--content-scale-width),
-					"margin": auto
+					"max-inline-size": calc(var(--content-max-width) * 1px),
+					"inline-size": var(--content-scale-width),
+					"margin-block-start": auto,
+					"margin-inline-end": auto,
+					"margin-block-end": auto,
+					"margin-inline-start": auto
 				),
 				"right-rail-advanced-main-interior-item": (
-					"padding": initial,
-					"border-right": initial,
+					"padding-block-start": initial,
+					"padding-inline-end": initial,
+					"padding-block-end": initial,
+					"padding-inline-start": initial,
+					"border-inline-end": initial,
 					"gap": var(--global-spacing-5),
 					"display": contents
 				),
@@ -2264,7 +2279,10 @@
 					"grid-area": main-interior-item-2
 				),
 				"right-rail-advanced-main-right-rail": (
-					"padding": initial,
+					"padding-block-start": initial,
+					"padding-inline-end": initial,
+					"padding-block-end": initial,
+					"padding-inline-start": initial,
 					"gap": var(--global-spacing-5),
 					"display": contents
 				),
@@ -2279,10 +2297,13 @@
 				),
 				"right-rail-advanced-navigation": (
 					"position": sticky,
-					"top": 0,
-					"width": 100%,
+					"inset-block-start": 0,
+					"inline-size": 100%,
 					"z-index": 9,
-					"margin": 0 0 var(--global-spacing-5) 0
+					"margin-block-start": 0,
+					"margin-inline-end": 0,
+					"margin-block-end": var(--global-spacing-5),
+					"margin-inline-start": 0
 				),
 				"right-rail-advanced-rail-container": (
 					"grid-template-areas": "main-right-rail-top" "main-interior-item-1" "main-right-rail-middle" "main-interior-item-2" "main-right-rail-bottom",
@@ -2574,11 +2595,14 @@
 				),
 				"single-column-regular-body": (
 					"inline-size": calc(100% - var(--global-spacing-6)),
-					"margin": auto,
+					"margin-block-start": "auto",
+					"margin-inline-end": "auto",
+					"margin-block-end": "auto",
+					"margin-inline-start": "auto",
 					"max-inline-size": none
 				),
 				"single-column-regular-footer": (
-					"width": 100%
+					"inline-size": 100%
 				),
 				"single-column-regular-main": (
 					"components": (
@@ -3746,16 +3770,27 @@
 					)
 				),
 				"right-rail-advanced-main-interior-item": (
-					"border-right": 1px solid #dadada,
-					"padding": 0 var(--global-spacing-6) 0 0,
+					"border-inline-end-width": 1px,
+					"border-inline-end-style": solid,
+					"border-inline-end-color": #dadada,
+					"padding-block-start": 0,
+					"padding-inline-end": var(--global-spacing-6),
+					"padding-block-end": 0,
+					"padding-inline-start": 0,
 					"display": flex
 				),
 				"right-rail-advanced-main-right-rail": (
-					"padding": 0 0 0 var(--global-spacing-6),
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-block-end": 0,
+					"padding-inline-start": var(--global-spacing-6),
 					"display": flex
 				),
 				"right-rail-advanced-navigation": (
-					"padding": 0 0 var(--global-spacing-8) 0
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-block-end": var(--global-spacing-8),
+					"padding-inline-start": 0
 				),
 				"right-rail-advanced-rail-container": (
 					"grid-template-columns": 2fr 1fr,

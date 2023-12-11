@@ -618,7 +618,10 @@
 				),
 				"card-list": (
 					"background-color": var(--background-color),
-					"border-radius": 0 var(--border-radius) var(--border-radius) 0,
+					"border-end-end-radius": var(--border-radius),
+					"border-end-start-radius": 0,
+					"border-start-end-radius": var(--border-radius),
+					"border-start-start-radius": 0,
 					"box-shadow": var(--global-box-shadow-1),
 					"padding-block-end": var(--global-spacing-4),
 					"padding-block-start": var(--global-spacing-4) ,

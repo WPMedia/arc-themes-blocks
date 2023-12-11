@@ -133,7 +133,7 @@ const SmallManualPromo = ({ customFields }) => {
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
 				<Grid as="article" className={containerClassNames}>
-					{["inset-block-end", "inset-inline-end"].includes(imagePosition) ? (
+					{["below", "right"].includes(imagePosition) ? (
 						<>
 							<PromoHeading />
 							<PromoImage />

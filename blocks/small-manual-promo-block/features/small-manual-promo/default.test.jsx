@@ -57,12 +57,12 @@ describe("the small manual promo feature", () => {
 
 	it("should have one image when showImage is true", () => {
 		render(<SmallManualPromo customFields={customFields} />);
-		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+		expect(screen.getByRole("img", { hidden: true })).not.toBeNull();
 	});
 
 	it("should use fallback image", () => {
 		render(<SmallManualPromo customFields={{ ...customFields, imageId: null }} />);
-		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+		expect(screen.getByRole("img", { hidden: true })).not.toBeNull();
 	});
 
 	it("should have no image when showImage is false", () => {
@@ -124,7 +124,7 @@ describe("the small manual promo feature", () => {
 			imageId: null,
 		};
 		render(<SmallManualPromo customFields={config} />);
-		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
+		expect(screen.getByRole("img", { name: config.headline })).not.toBeNull();
 	});
 
 	it("should make a blank call to the signing-service if the image is from PhotoCenter and has an Auth value", () => {

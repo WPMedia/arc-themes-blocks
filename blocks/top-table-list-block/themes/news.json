@@ -387,12 +387,12 @@
 			"default": {
 				"components": {
 					"heading": {
-						"align-self": "inline-start",
-						"justify-content": "inline-start"
+						"align-self": "start",
+						"justify-content": "start"
 					},
 					"overline": {
 						"display": "flex",
-						"justify-content": "inline-start"
+						"justify-content": "start"
 					},
 					"separator": {
 						"padding-block-end": "0",

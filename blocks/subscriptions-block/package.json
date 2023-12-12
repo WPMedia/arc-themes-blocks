@@ -33,7 +33,7 @@
     "@arc-publishing/sdk-sales": "^1.55.0",
     "@arc-publishing/sdk-identity": "^1.55.0",
     "@stripe/react-stripe-js": "^1.6.0",
-    "@stripe/stripe-js": "^1.22.0",
+    "@stripe/stripe-js": "^2.2.1",
     "is-url": "^1.2.4"
   }
 }

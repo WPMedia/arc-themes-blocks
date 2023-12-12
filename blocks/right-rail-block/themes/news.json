@@ -65,7 +65,7 @@
 				"padding-inline-end": "initial",
 				"padding-block-end": "initial",
 				"padding-inline-start": "initial",
-				"border-right": "initial"
+				"border-inline-end": "initial"
 			},
 			"desktop": {
 				"border-inline-end-width": "1px",

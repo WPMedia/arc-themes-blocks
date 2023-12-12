@@ -1000,25 +1000,31 @@
 				),
 				"right-rail-navigation": (
 					"position": sticky,
-					"top": 0,
-					"width": 100%,
+					"inset-block-start": 0,
+					"inline-size": 100%,
 					"z-index": 9
 				),
 				"right-rail-rail-container": (
 					"grid-template-columns": initial,
 					"grid-template-rows": 1fr,
 					"gap": var(--global-spacing-5),
-					"margin": auto,
-					"max-width": calc(var(--content-max-width) * 1px),
-					"width": 100%
+					"margin-block-start": auto,
+					"margin-inline-end": auto,
+					"margin-block-end": auto,
+					"margin-inline-start": auto,
+					"max-inline-size": calc(var(--content-max-width) * 1px),
+					"inline-size": 100%
 				),
 				"single-column-regular-body": (
 					"inline-size": calc(100% - var(--global-spacing-6)),
-					"margin": auto,
+					"margin-block-start": auto,
+					"margin-inline-end": auto,
+					"margin-block-end": auto,
+					"margin-inline-start": auto,
 					"max-inline-size": none
 				),
 				"single-column-regular-footer": (
-					"width": 100%
+					"inline-size": 100%
 				),
 				"single-column-regular-main": (
 					"components": (
@@ -1660,7 +1666,7 @@
 					"grid-template-columns": repeat(12, 1fr),
 					"gap": var(--global-spacing-6),
 					"grid-template-rows": initial,
-					"width": var(--content-scale-width)
+					"inline-size": var(--content-scale-width)
 				),
 				"single-column-regular-body": (
 					"max-inline-size": 37rem

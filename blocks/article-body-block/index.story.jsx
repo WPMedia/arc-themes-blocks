@@ -12,8 +12,12 @@ const styles = {
 	backgroundColor: "rgb(240 240 240)",
 };
 
-const Comp1 = () => <div style={styles}>Ad 1</div>;
-const Comp2 = () => <div style={styles}>Ad 2</div>;
+function Comp1() {
+	return <div style={styles}>Ad 1</div>;
+}
+function Comp2() {
+	return <div style={styles}>Ad 2</div>;
+}
 
 const mockBlockQuote = {
 	_id: "block_quote_id",
@@ -774,4 +778,40 @@ export const contentVideo = () => {
 	};
 
 	return <ArticleBodyChainPresentation context={mockContext} />;
+};
+
+export const rightToLeft = () => {
+	const mockContext = {
+		...mockContextBase,
+		globalContent: {
+			...mockContextGlobalContent,
+			content_elements: [
+				mockBlockQuote,
+				mockCopyright,
+				mockCorrection,
+				mockDivider,
+				mockGallery,
+				mockHeader2,
+				mockHeader3,
+				mockHeader4,
+				mockImage,
+				mockInterstitial,
+				mockList,
+				mockListUnordered,
+				mockPullQuote,
+				mockRawHtml,
+				mockTable,
+				mockText(),
+				mockVideo,
+				mockOEmbed,
+				mockYouTube,
+			],
+		},
+	};
+
+	return (
+		<div dir="rtl">
+			<ArticleBodyChainPresentation context={mockContext} />
+		</div>
+	);
 };

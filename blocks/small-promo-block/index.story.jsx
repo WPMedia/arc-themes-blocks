@@ -111,3 +111,17 @@ export const imageBelow = () => {
 
 	return <SmallPromo customFields={customFields} />;
 };
+
+export const rightToLeft = () => {
+	const customFields = {
+		...sampleData,
+		showHeadline: true,
+		showImage: true,
+	};
+
+	return (
+		<div dir="rtl">
+			<SmallPromo customFields={customFields} />
+		</div>
+	);
+};

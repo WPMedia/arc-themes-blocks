@@ -108,3 +108,9 @@ export const noImage = () => {
 export const linkedAuthorName = () => (
 	<FullAuthorBioPresentational author={authorObject} linkAuthorProfile locale="en" />
 );
+
+export const withRtl = () => (
+	<div dir="rtl">
+		<FullAuthorBioPresentational author={authorObject} locale="en" />
+	</div>
+);

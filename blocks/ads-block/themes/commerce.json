@@ -19,12 +19,18 @@
 		"styles": {
 			"default": {
 				"background-color": "$global.neutral-7",
-				"padding": "$global.spacing-4",
-				"border-radius": "var(--border-radius)",
+				"padding-block-start": "$global.spacing-4",
+				"padding-inline-end": "$global.spacing-4",
+				"padding-block-end": "$global.spacing-4",
+				"padding-inline-start": "$global.spacing-4",
+				"border-start-start-radius": "var(--border-radius)",
+				"border-start-end-radius": "var(--border-radius)",
+				"border-end-start-radius": "var(--border-radius)",
+				"border-end-end-radius": "var(--border-radius)",
 				"components": {
 					"stack": {
 						"gap": "$global.spacing-4",
-						"padding-bottom": "$global.spacing-5"
+						"padding-block-end": "$global.spacing-5"
 					},
 					"paragraph": {
 						"color": "$global.white"

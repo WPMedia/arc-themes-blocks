@@ -3,7 +3,10 @@
 		"styles": {
 			"default": {
 				"inline-size": "calc(100% - var(--global-spacing-6))",
-				"margin": "auto",
+				"margin-block-start": "auto",
+				"margin-inline-end": "auto",
+				"margin-block-end": "auto",
+				"margin-inline-start": "auto",
 				"max-inline-size": "none"
 			},
 			"desktop": {
@@ -31,7 +34,7 @@
 	"single-column-regular-footer": {
 		"styles": {
 			"default": {
-				"width": "100%"
+				"inline-size": "100%"
 			},
 			"desktop": {}
 		}

@@ -272,12 +272,18 @@
 				),
 				"ads-block-admin": (
 					"background-color": "$global.neutral-7",
-					"padding": "$global.spacing-4",
-					"border-radius": var(--border-radius),
+					"padding-block-start": "$global.spacing-4",
+					"padding-inline-end": "$global.spacing-4",
+					"padding-block-end": "$global.spacing-4",
+					"padding-inline-start": "$global.spacing-4",
+					"border-start-start-radius": var(--border-radius),
+					"border-start-end-radius": var(--border-radius),
+					"border-end-start-radius": var(--border-radius),
+					"border-end-end-radius": var(--border-radius),
 					"components": (
 						"stack": (
 							"gap": "$global.spacing-4",
-							"padding-bottom": "$global.spacing-5",
+							"padding-block-end": "$global.spacing-5",
 						),
 						"paragraph": (
 							"color": "$global.white",
@@ -349,8 +355,11 @@
 					"box-shadow": inset 5px 0 0 0 var(--global-neutral-4),
 					"font-style": italic,
 					"gap": var(--global-spacing-2),
-					"padding": var(--global-spacing-4) 0 var(--global-spacing-4) var(--global-spacing-5),
-					"text-align": left,
+					"padding-block-start": var(--global-spacing-4),
+					"padding-inline-end": 0,
+					"padding-block-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-5),
+					"text-align": start,
 					"components": (
 						"paragraph": (
 							"font-size": var(--heading-level-6-font-size),
@@ -359,7 +368,7 @@
 					),
 				),
 				"article-body-children": (
-					"margin-bottom": var(--global-spacing-5),
+					"margin-block-end": var(--global-spacing-5),
 				),
 				"article-body-citation": (
 					"font-family": var(--font-family-primary),
@@ -369,7 +378,7 @@
 				"article-body-correction": (
 					"box-shadow": inset 0 -1px 0 0 var(--border-color),
 					"font-style": italic,
-					"padding-bottom": var(--global-spacing-6),
+					"padding-block-end": var(--global-spacing-6),
 					"components": (
 						"heading": (
 							"font-size": var(--heading-level-6-font-size),
@@ -382,16 +391,16 @@
 				),
 				"article-body-divider": (
 					"background-color": var(--border-color),
-					"height": 1px,
+					"block-size": 1px,
 				),
 				"article-body-embed-responsive": (
 					"aspect-ratio": calc(16 / 9),
-					"width": 100%,
+					"inline-size": 100%,
 				),
 				"article-body-embed-responsive-item": (
 					"aspect-ratio": calc(16 / 9),
-					"height": auto,
-					"width": 100%,
+					"block-size": auto,
+					"inline-size": 100%,
 				),
 				"article-body-gallery-close-button": (
 					"color": var(--global-white),
@@ -401,15 +410,18 @@
 						),
 						"icon": (
 							"fill": currentColor,
-							"height": var(--global-spacing-6),
-							"width": var(--global-spacing-6),
+							"block-size": var(--global-spacing-6),
+							"inline-size": var(--global-spacing-6),
 						),
 					),
 				),
 				"article-body-gallery-fullscreen": (
 					"components": (
 						"media-item-fig-caption": (
-							"padding": 0 var(--global-spacing-2),
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-block-end": 0,
+							"padding-inline-start": var(--global-spacing-2),
 						),
 					),
 				),
@@ -421,8 +433,8 @@
 						),
 						"icon": (
 							"fill": currentColor,
-							"height": var(--global-spacing-8),
-							"width": var(--global-spacing-8),
+							"block-size": var(--global-spacing-8),
+							"inline-size": var(--global-spacing-8),
 						),
 					),
 				),
@@ -457,14 +469,14 @@
 					"font-weight": bold,
 				),
 				"article-body-image-float-left": (
-					"width": 50%,
-					"float": left,
-					"margin-right": var(--global-spacing-5),
+					"inline-size": 50%,
+					"float": inline-start,
+					"margin-inline-end": var(--global-spacing-5),
 				),
 				"article-body-image-float-right": (
-					"width": 50%,
-					"float": right,
-					"margin-left": var(--global-spacing-5),
+					"inline-size": 50%,
+					"float": inline-end,
+					"margin-inline-start": var(--global-spacing-5),
 				),
 				"article-body-image-wrapper": (
 					"align-items": center,
@@ -472,13 +484,13 @@
 					"background-color": var(--global-black),
 					"display": flex,
 					"justify-content": center,
-					"max-height": 75vh,
+					"max-block-size": 75vh,
 					"overflow": auto,
 					"components": (
 						"image": (
-							"height": auto,
-							"max-height": 100%,
-							"max-width": 100%,
+							"block-size": auto,
+							"max-block-size": 100%,
+							"max-inline-size": 100%,
 							"object-fit": contain,
 						),
 					),
@@ -488,7 +500,9 @@
 					"font-style": italic,
 					"components": (
 						"link": (
-							"border-bottom": 1px solid var(--color-primary),
+							"border-block-end-width": 1px,
+							"border-block-end-style": solid,
+							"border-block-end-color": var(--color-primary),
 							"color": var(--color-primary),
 						),
 					),
@@ -508,7 +522,10 @@
 						inset 0 5px 0 0 var(--border-color),
 					),
 					"gap": var(--global-spacing-4),
-					"padding": var(--global-spacing-6) 0 var(--global-spacing-5),
+					"padding-block-start": var(--global-spacing-6) 0,
+					"padding-inline-end": var(--global-spacing-5),
+					"padding-block-end": var(--global-spacing-6) 0,
+					"padding-inline-start": var(--global-spacing-5),
 					"text-align": center,
 					"components": (
 						"paragraph": (
@@ -524,20 +541,59 @@
 					"font-size": var(--body-font-size-small),
 					"line-height": var(--body-line-height-small),
 					"text-align": center,
-					"width": 100%,
+					"inline-size": 100%,
 				),
 				"article-body-table-td": (
-					"border": 1px solid var(--border-color),
-					"padding": var(--global-spacing-1) var(--global-spacing-2),
+					"border-block-start-width": 1px,
+					"border-block-end-width": 1px,
+					"border-inline-start-width": 1px,
+					"border-inline-end-width": 1px,
+					"border-block-start-style": solid,
+					"border-block-end-style": solid,
+					"border-inline-start-style": solid,
+					"border-inline-end-style": solid,
+					"border-block-start-color": var(--border-color),
+					"border-block-end-color": var(--border-color),
+					"border-inline-start-color": var(--border-color),
+					"border-inline-end-color": var(--border-color),
+					"padding-block-start": var(--global-spacing-1),
+					"padding-inline-end": var(--global-spacing-2),
+					"padding-block-end": var(--global-spacing-1),
+					"padding-inline-start": var(--global-spacing-2),
 				),
 				"article-body-table-th": (
-					"border": 1px solid var(--border-color),
+					"border-block-start-width": 1px,
+					"border-block-end-width": 1px,
+					"border-inline-start-width": 1px,
+					"border-inline-end-width": 1px,
+					"border-block-start-style": solid,
+					"border-block-end-style": solid,
+					"border-inline-start-style": solid,
+					"border-inline-end-style": solid,
+					"border-block-start-color": var(--border-color),
+					"border-block-end-color": var(--border-color),
+					"border-inline-start-color": var(--border-color),
+					"border-inline-end-color": var(--border-color),
 					"font-weight": var(--global-font-weight-7),
-					"padding": var(--global-spacing-1) var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-1),
+					"padding-inline-end": var(--global-spacing-2),
+					"padding-block-end": var(--global-spacing-1),
+					"padding-inline-start": var(--global-spacing-2),
 				),
 				"article-body-table-thead": (
 					"background-color": var(--global-neutral-4),
-					"border": 2px solid var(--border-color),
+					"border-block-start-width": 2px,
+					"border-block-end-width": 2px,
+					"border-inline-start-width": 2px,
+					"border-inline-end-width": 2px,
+					"border-block-start-style": solid,
+					"border-block-end-style": solid,
+					"border-inline-start-style": solid,
+					"border-inline-end-style": solid,
+					"border-block-start-color": var(--border-color),
+					"border-block-end-color": var(--border-color),
+					"border-inline-start-color": var(--border-color),
+					"border-inline-end-color": var(--border-color),
 				),
 				"article-body-ul": (
 					"font-size": var(--body-font-size),
@@ -620,21 +676,21 @@
 					),
 				),
 				"card-list": (
-					"box-shadow": var(--global-box-shadow-1),
-					"border-radius": 0 var(--border-radius) var(--border-radius) 0,
 					"background-color": var(--background-color),
-					"padding": var(--global-spacing-4) 0,
+					"border-end-end-radius": var(--border-radius),
+					"border-end-start-radius": 0,
+					"border-start-end-radius": var(--border-radius),
+					"border-start-start-radius": 0,
+					"box-shadow": var(--global-box-shadow-1),
+					"padding-block-end": var(--global-spacing-4),
+					"padding-block-start": var(--global-spacing-4),
+					"padding-inline-end": 0,
+					"padding-inline-start": 0,
 					"components": (
 						"heading": (
 							"font-size": var(--heading-level-5-font-size),
 							"font-weight": var(--heading-level-5-font-weight),
 							"line-height": var(--heading-level-5-line-height),
-						),
-						"stack": (
-							"gap": var(--global-spacing-4),
-						),
-						"separator": (
-							"padding": 0 var(--global-spacing-2),
 						),
 						"image": (
 							"transition": opacity 0.4s ease,
@@ -649,17 +705,29 @@
 						"link-hover": (
 							"color": var(--text-color-subtle),
 						),
+						"separator": (
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2),
+						),
+						"stack": (
+							"gap": var(--global-spacing-4),
+						),
 					),
 				),
 				"card-list-list": (
-					"padding": 0 var(--global-spacing-4),
+					"padding-block-end": 0,
+					"padding-block-start": 0,
+					"padding-inline-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4),
 				),
 				"card-list-main-item-image-link": (
 					"components": (
 						"image": (
-							"max-height": 40vh,
+							"inline-size": 100%,
+							"max-block-size": 40vh,
 							"object-fit": cover,
-							"width": 100%,
 						),
 					),
 				),
@@ -687,15 +755,18 @@
 					),
 				),
 				"card-list-secondary-item-heading-link": (
-					"width": 100%,
+					"inline-size": 100%,
 				),
 				"card-list-secondary-item-image-link": (
-					"max-width": 105px,
+					"max-inline-size": 105px,
 				),
 				"card-list-title": (
-					"padding": 0 var(--global-spacing-4),
 					"font-size": var(--heading-level-5-font-size),
 					"line-height": var(--heading-level-5-line-height),
+					"padding-block-end": 0,
+					"padding-block-start": 0,
+					"padding-inline-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4),
 				),
 				"checkout": (
 					"font-family": var(--font-family-primary),
@@ -2021,7 +2092,7 @@
 					),
 				),
 				"numbered-list-item-image": (
-					"max-width": 25%,
+					"max-inline-size": 25%,
 				),
 				"numbered-list-items": (
 					"gap": var(--global-spacing-4),
@@ -2294,23 +2365,38 @@
 					"gap": var(--global-spacing-6),
 				),
 				"right-rail-advanced-footer": (
-					"margin": var(--global-spacing-10) 0 var(--global-spacing-8) 0,
+					"margin-block-start": var(--global-spacing-10),
+					"margin-inline-end": 0,
+					"margin-block-end": var(--global-spacing-8),
+					"margin-inline-start": 0,
 				),
 				"right-rail-advanced-full-width-1": (
-					"margin": 0 0 var(--global-spacing-5) 0,
+					"margin-block-start": 0,
+					"margin-inline-end": 0,
+					"margin-block-end": var(--global-spacing-5),
+					"margin-inline-start": 0,
 				),
 				"right-rail-advanced-full-width-2": (
-					"margin": var(--global-spacing-6) 0 0 0,
+					"margin-block-start": var(--global-spacing-6),
+					"margin-inline-end": 0,
+					"margin-block-end": 0,
+					"margin-inline-start": 0,
 				),
 				"right-rail-advanced-main": (
 					"gap": var(--global-spacing-6),
-					"max-width": calc(var(--content-max-width) * 1px),
-					"width": var(--content-scale-width),
-					"margin": auto,
+					"max-inline-size": calc(var(--content-max-width) * 1px),
+					"inline-size": var(--content-scale-width),
+					"margin-block-start": auto,
+					"margin-inline-end": auto,
+					"margin-block-end": auto,
+					"margin-inline-start": auto,
 				),
 				"right-rail-advanced-main-interior-item": (
-					"padding": initial,
-					"border-right": initial,
+					"padding-block-start": initial,
+					"padding-inline-end": initial,
+					"padding-block-end": initial,
+					"padding-inline-start": initial,
+					"border-inline-end": initial,
 					"gap": var(--global-spacing-5),
 					"display": contents,
 				),
@@ -2321,7 +2407,10 @@
 					"grid-area": main-interior-item-2,
 				),
 				"right-rail-advanced-main-right-rail": (
-					"padding": initial,
+					"padding-block-start": initial,
+					"padding-inline-end": initial,
+					"padding-block-end": initial,
+					"padding-inline-start": initial,
 					"gap": var(--global-spacing-5),
 					"display": contents,
 				),
@@ -2336,10 +2425,13 @@
 				),
 				"right-rail-advanced-navigation": (
 					"position": sticky,
-					"top": 0,
-					"width": 100%,
+					"inset-block-start": 0,
+					"inline-size": 100%,
 					"z-index": 9,
-					"margin": 0 0 var(--global-spacing-5) 0,
+					"margin-block-start": 0,
+					"margin-inline-end": 0,
+					"margin-block-end": var(--global-spacing-5),
+					"margin-inline-start": 0,
 				),
 				"right-rail-advanced-rail-container": (
 					"grid-template-areas": "main-right-rail-top" "main-interior-item-1"
@@ -2350,18 +2442,30 @@
 					"gap": var(--global-spacing-6),
 				),
 				"right-rail-footer": (
-					"margin": var(--global-spacing-10) 0 var(--global-spacing-8) 0,
+					"margin-block-start": var(--global-spacing-10),
+					"margin-inline-end": 0,
+					"margin-block-end": var(--global-spacing-8),
+					"margin-inline-start": 0,
 				),
 				"right-rail-full-width-1": (
-					"margin": 0 0 var(--global-spacing-5) 0,
+					"margin-block-start": 0,
+					"margin-inline-end": 0,
+					"margin-block-end": var(--global-spacing-5),
+					"margin-inline-start": 0,
 				),
 				"right-rail-full-width-2": (
-					"margin": var(--global-spacing-6) 0 0 0,
+					"margin-block-start": var(--global-spacing-6),
+					"margin-inline-end": 0,
+					"margin-block-end": 0,
+					"margin-inline-start": 0,
 				),
 				"right-rail-main": (
-					"max-width": calc(var(--content-max-width) * 1px),
-					"width": var(--content-scale-width),
-					"margin": auto,
+					"max-inline-size": calc(var(--content-max-width) * 1px),
+					"inline-size": var(--content-scale-width),
+					"margin-block-start": auto,
+					"margin-inline-end": auto,
+					"margin-block-end": auto,
+					"margin-inline-start": auto,
 					"components": (
 						"stack": (
 							"gap": var(--global-spacing-6),
@@ -2369,18 +2473,27 @@
 					),
 				),
 				"right-rail-main-interior-item": (
-					"padding": initial,
-					"border-right": initial,
+					"padding-block-start": initial,
+					"padding-inline-end": initial,
+					"padding-block-end": initial,
+					"padding-inline-start": initial,
+					"border-inline-end": initial,
 				),
 				"right-rail-main-right-rail": (
-					"padding": initial,
+					"padding-block-start": initial,
+					"padding-inline-end": initial,
+					"padding-block-end": initial,
+					"padding-inline-start": initial,
 				),
 				"right-rail-navigation": (
 					"position": sticky,
-					"top": 0,
-					"width": 100%,
+					"inset-block-start": 0,
+					"inline-size": 100%,
 					"z-index": 9,
-					"margin": 0 0 var(--global-spacing-5) 0,
+					"margin-block-start": 0,
+					"margin-inline-end": 0,
+					"margin-block-end": var(--global-spacing-5),
+					"margin-inline-start": 0,
 				),
 				"right-rail-rail-container": (
 					"grid-template-columns": initial,
@@ -2508,19 +2621,28 @@
 					"border-radius": 0 var(--border-radius) var(--border-radius) 0,
 					"display": none,
 					"gap": var(--global-spacing-2),
-					"left": 0,
-					"padding": var(--global-spacing-4) 0,
+					"inset-block-start": 200px,
+					"inset-inline-start": 0,
+					"padding-block-end": var(--global-spacing-4),
+					"padding-block-start": var(--global-spacing-4),
+					"padding-inline-end": 0,
+					"padding-inline-start": 0,
 					"position": fixed,
-					"top": 200px,
 					"components": (
 						"button": (
 							"background-color": transparent,
 						),
 						"button-default": (
-							"border-width": 0,
+							"border-block-end-width": 0,
+							"border-block-start-width": 0,
+							"border-inline-end-width": 0,
+							"border-inline-start-width": 0,
 						),
 						"button-medium": (
-							"padding": 0 var(--global-spacing-3),
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-3),
+							"padding-inline-start": var(--global-spacing-3),
 						),
 					),
 				),
@@ -2632,11 +2754,14 @@
 				),
 				"single-column-regular-body": (
 					"inline-size": calc(100% - var(--global-spacing-6)),
-					"margin": auto,
+					"margin-block-start": "auto",
+					"margin-inline-end": "auto",
+					"margin-block-end": "auto",
+					"margin-inline-start": "auto",
 					"max-inline-size": none,
 				),
 				"single-column-regular-footer": (
-					"width": 100%,
+					"inline-size": 100%,
 				),
 				"single-column-regular-main": (
 					"components": (
@@ -2785,25 +2910,31 @@
 				),
 				"top-table-list-large-icon-label": (
 					"align-items": center,
-					"padding": var(--global-spacing-2),
 					"background-color": var(--color-primary),
-					"border": 0,
+					"border-block-end": 0,
+					"border-block-start": 0,
+					"border-inline-end": 0,
+					"border-inline-start": 0,
 					"border-radius": var(--global-spacing-2),
-					"bottom": var(--global-spacing-2),
-					"margin-left": var(--global-spacing-2),
+					"insert-block-end": var(--global-spacing-2),
+					"margin-inline-start": var(--global-spacing-2),
+					"padding-block-end": var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-2),
+					"padding-inline-end": var(--global-spacing-2),
+					"padding-inline-start": var(--global-spacing-2),
 					"position": absolute,
 					"z-index": 1,
 					"components": (
 						"icon": (
 							"fill": var(--global-white),
-							"height": var(--global-spacing-4),
-							"width": var(--global-spacing-4),
+							"block-size": var(--global-spacing-4),
+							"inline-size": var(--global-spacing-4),
 						),
 					),
 				),
 				"top-table-list-large-label": (
-					"margin-left": var(--global-spacing-2),
 					"color": var(--global-white),
+					"margin-inline-start": var(--global-spacing-2),
 				),
 				"top-table-list-large-text": (
 					"gap": 0,
@@ -2820,11 +2951,14 @@
 							"font-size": var(--body-font-size),
 							"line-height": var(--body-line-height),
 						),
+						"separator": (
+							"margin-block-end": 0,
+							"margin-block-start": 0,
+							"margin-inline-end": var(--global-spacing-2),
+							"margin-inline-start": var(--global-spacing-2),
+						),
 						"stack": (
 							"gap": var(--global-spacing-4),
-						),
-						"separator": (
-							"margin": 0 var(--global-spacing-2) 0 var(--global-spacing-2),
 						),
 					),
 				),
@@ -2832,31 +2966,37 @@
 					"components": (
 						"attribution": (
 							"display": block,
-							"margin-top": var(--global-spacing-4),
+							"margin-block-start": var(--global-spacing-4),
 						),
 						"divider": (
 							"clear": both,
-							"margin-top": var(--global-spacing-5),
-						),
-						"media-item": (
-							"float": right,
-							"margin": 0 0 var(--global-spacing-5) 0,
-							"max-width": 100px,
+							"margin-block-start": var(--global-spacing-5),
 						),
 						"heading": (
 							"font-size": var(--heading-level-5-font-size),
 							"font-weight": var(--heading-level-5-font-weight),
 							"line-height": var(--heading-level-5-line-height),
-							"margin-bottom": var(--global-spacing-4),
+							"margin-block-end": var(--global-spacing-4),
+						),
+						"link": (
+							"position": relative,
+						),
+						"media-item": (
+							"float": inline-end,
+							"margin-block-end": var(--global-spacing-5),
+							"margin-block-start": 0,
+							"margin-inline-end": 0,
+							"margin-inline-start": 0,
+							"max-inline-size": 100px,
 						),
 						"paragraph": (
 							"display": block,
 						),
 						"separator": (
-							"padding": 0 var(--global-spacing-2),
-						),
-						"link": (
-							"position": relative,
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2),
 						),
 					),
 				),
@@ -2867,31 +3007,36 @@
 				),
 				"top-table-list-medium-icon-label": (
 					"align-items": center,
-					"padding": var(--global-spacing-2),
 					"background-color": var(--color-primary),
-					"border": 0,
+					"border-block-end": 0,
+					"border-block-start": 0,
+					"border-inline-end": 0,
+					"border-inline-start": 0,
 					"border-radius": var(--global-spacing-2),
-					"bottom": var(--global-spacing-2),
+					"inline-block-end": var(--global-spacing-2),
 					"margin-left": var(--global-spacing-2),
-					"position": absolute,
+					"padding-block-end": var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-2),
+					"padding-inline-end": var(--global-spacing-2),
+					"padding-inline-start": var(--global-spacing-2) "position": absolute,
 					"z-index": 1,
 					"components": (
 						"icon": (
 							"fill": var(--global-white),
-							"height": var(--global-spacing-4),
-							"width": var(--global-spacing-4),
+							"block-size": var(--global-spacing-4),
+							"inline-size": var(--global-spacing-4),
 						),
 					),
 				),
 				"top-table-list-medium-label": (
-					"margin-left": var(--global-spacing-2),
 					"color": var(--global-white),
 					"display": none,
+					"margin-inline-start": var(--global-spacing-2),
 				),
 				"top-table-list-medium-show-image": (
 					"components": (
 						"heading": (
-							"width": 68%,
+							"inline-size": 68%,
 						),
 					),
 				),
@@ -2939,15 +3084,18 @@
 				"top-table-list-xl": (
 					"components": (
 						"heading": (
-							"align-self": left,
-							"justify-content": left,
+							"align-self": start,
+							"justify-content": start,
 						),
 						"overline": (
 							"display": flex,
-							"justify-content": left,
+							"justify-content": start,
 						),
 						"separator": (
-							"padding": 0 var(--global-spacing-2),
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2),
 						),
 						"stack": (
 							"gap": var(--global-spacing-4),
@@ -3522,12 +3670,15 @@
 				"article-body-gallery-fullscreen": (
 					"components": (
 						"media-item-fig-caption": (
-							"padding": 0 var(--global-spacing-5),
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-5),
+							"padding-block-end": 0,
+							"padding-inline-start": var(--global-spacing-5),
 						),
 					),
 				),
 				"article-body-image-wrapper": (
-					"max-height": 75vh,
+					"max-block-size": 75vh,
 				),
 				"author-bio-author-description": (
 					"font-size": var(--body-font-size),
@@ -3835,16 +3986,27 @@
 					),
 				),
 				"right-rail-advanced-main-interior-item": (
-					"border-right": 1px solid #dadada,
-					"padding": 0 var(--global-spacing-6) 0 0,
+					"border-inline-end-width": 1px,
+					"border-inline-end-style": solid,
+					"border-inline-end-color": #dadada,
+					"padding-block-start": 0,
+					"padding-inline-end": var(--global-spacing-6),
+					"padding-block-end": 0,
+					"padding-inline-start": 0,
 					"display": flex,
 				),
 				"right-rail-advanced-main-right-rail": (
-					"padding": 0 0 0 var(--global-spacing-6),
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-block-end": 0,
+					"padding-inline-start": var(--global-spacing-6),
 					"display": flex,
 				),
 				"right-rail-advanced-navigation": (
-					"padding": 0 0 var(--global-spacing-8) 0,
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-block-end": var(--global-spacing-8),
+					"padding-inline-start": 0,
 				),
 				"right-rail-advanced-rail-container": (
 					"grid-template-columns": 2fr 1fr,
@@ -3852,14 +4014,25 @@
 					"grid-template-rows": initial,
 				),
 				"right-rail-main-interior-item": (
-					"border-right": 1px solid #dadada,
-					"padding": 0 var(--global-spacing-6) 0 0,
+					"border-inline-end-width": 1px,
+					"border-inline-end-style": solid,
+					"border-inline-end-color": #dadada,
+					"padding-block-start": 0,
+					"padding-inline-end": var(--global-spacing-6),
+					"padding-block-end": 0,
+					"padding-inline-start": 0,
 				),
 				"right-rail-main-right-rail": (
-					"padding": 0 0 0 var(--global-spacing-6),
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-block-end": 0,
+					"padding-inline-start": var(--global-spacing-6),
 				),
 				"right-rail-navigation": (
-					"padding": 0 0 var(--global-spacing-8) 0,
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-block-end": var(--global-spacing-8),
+					"padding-inline-start": 0,
 				),
 				"right-rail-rail-container": (
 					"grid-template-columns": 2fr 1fr,
@@ -3951,8 +4124,8 @@
 							"display": block,
 						),
 						"media-item": (
-							"float": left,
-							"max-width": 33%,
+							"float": inline-start,
+							"max-inline-size": 33%,
 						),
 						"paragraph": (
 							"display": block,
@@ -3968,14 +4141,14 @@
 				"top-table-list-medium-show-image": (
 					"components": (
 						"attribution": (
-							"margin-left": calc(33% + var(--global-spacing-6)),
+							"margin-inline-start": calc(33% + var(--global-spacing-6)),
 						),
 						"heading": (
-							"margin-left": calc(33% + var(--global-spacing-6)),
-							"width": auto,
+							"inline-size": auto,
+							"margin-inline-start": calc(33% + var(--global-spacing-6)),
 						),
 						"paragraph": (
-							"margin-left": calc(33% + var(--global-spacing-6)),
+							"margin-inline-start": calc(33% + var(--global-spacing-6)),
 						),
 					),
 				),

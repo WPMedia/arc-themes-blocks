@@ -71,3 +71,17 @@ export const noImageNoHeadline = () => {
 
 	return <SimpleList {...props} customFields={customFields} />;
 };
+
+export const withRtl = () => {
+	const customFields = {
+		...sampleData,
+		showHeadline: true,
+		showImage: true,
+	};
+
+	return (
+		<div dir="rtl">
+			<SimpleList {...props} customFields={customFields} />
+		</div>
+	);
+};

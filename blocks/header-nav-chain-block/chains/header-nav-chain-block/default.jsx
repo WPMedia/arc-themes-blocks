@@ -103,7 +103,6 @@ export function PresentationalNav(props) {
 					}`}
 					direction="vertical"
 					justification="start"
-					onClick={closeDrawer}
 				>
 					<FocusTrap
 						active={isSectionDrawerOpen}

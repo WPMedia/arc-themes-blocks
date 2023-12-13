@@ -3875,14 +3875,25 @@
 					"grid-template-rows": initial
 				),
 				"right-rail-main-interior-item": (
-					"border-right": 1px solid #dadada,
-					"padding": 0 var(--global-spacing-6) 0 0
+					"border-inline-end-width": 1px,
+					"border-inline-end-style": solid,
+					"border-inline-end-color": #dadada,
+					"padding-block-start": 0,
+					"padding-inline-end": var(--global-spacing-6),
+					"padding-block-end": 0,
+					"padding-inline-start": 0
 				),
 				"right-rail-main-right-rail": (
-					"padding": 0 0 0 var(--global-spacing-6)
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-block-end": 0,
+					"padding-inline-start": var(--global-spacing-6)
 				),
 				"right-rail-navigation": (
-					"padding": 0 0 var(--global-spacing-8) 0
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-block-end": var(--global-spacing-8),
+					"padding-inline-start": 0
 				),
 				"right-rail-rail-container": (
 					"grid-template-columns": 2fr 1fr,

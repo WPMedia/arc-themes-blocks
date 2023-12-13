@@ -66,7 +66,7 @@
 		"global.gallery-autoplay-label-stop": "Parar apresentação automática de diapositivos",
 		"global.gallery-expand-button": "Expandir",
 		"global.gallery-next-label": "Próximo diapositivo",
-		"global.gallery-page-count-text": "<span class='visually-hidden'>Imagem</span> %{current} de %{total}",
+		"global.gallery-page-count-text": "<span class='visually-hidden'>Imagem<\/span> %{current} de %{total}",
 		"global.gallery-pause-autoplay-button": "Colocar a reprodução automática em pausa",
 		"global.gallery-previous-label": "Diapositivo anterior",
 		"global.gallery-text": "Galeria",
@@ -152,7 +152,7 @@
 		"identity-block.save": "Save",
 		"identity-block.sign-up": "Sign Up",
 		"identity-block.sign-up-form-error": "There's been an error creating your account",
-		"identity-block.terms-privacy-text": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>.",
+		"identity-block.terms-privacy-text": "Ao criar uma conta, você concorda com os <a href='%{termsURL}'> Termos de Serviço <\/a> e reconhece nossa <a href='%{privacyURL}'> Política de Privacidade <\/a> .",
 		"identity-block.update-email-error": "There's been an error updating your email address",
 		"identity-block.update-password-error": "There's been an error updating your password",
 		"identity-block.username": "Username"
@@ -455,6 +455,9 @@
 		"checkout-block.Zambia": "Zambia",
 		"checkout-block.Zimbabwe": "Zimbabwe",
 		"checkout-block.back-to-offer-page": "Voltar à seleção de subscrição",
+		"checkout-block.cardNumber": "Número do cartão",
+		"checkout-block.cardholderName": "Nome no cartão",
+		"checkout-block.cardholderName-requirements": "Por favor insira o nome no cartão",
 		"checkout-block.contact-info": "Informações de contacto",
 		"checkout-block.continue-to-checkout": "Continuar para o checkout",
 		"checkout-block.country": "País ou região",
@@ -475,8 +478,12 @@
 		"checkout-block.plus-sales-tax": "Mais imposto sobre vendas aplicável",
 		"checkout-block.Åland-Islands": "Åland Islands",
 		"subscriptions-block.credit-card-information": "Método de pagamento e informação",
+		"subscriptions-block.payWithCard-label": "Ou pague com cartão",
 		"subscriptions-block.payment-error": "Ocorreu um erro ao processar o seu pagamento.",
 		"subscriptions-block.payment-information": "Informação de cartão de crédito",
-		"subscriptions-block.submit-payment": "Adquirir subscrição"
+		"subscriptions-block.paypal-processing": "Em processamento...",
+		"subscriptions-block.paypal-redirect-label": "Redirecionando para a página do PayPal...",
+		"subscriptions-block.submit-payment": "Adquirir subscrição",
+		"subscriptions-block.update-payment": "Atualizar forma de pagamento"
 	}
 }

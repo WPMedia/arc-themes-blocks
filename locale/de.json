@@ -152,7 +152,7 @@
 		"identity-block.save": "Save",
 		"identity-block.sign-up": "Sign Up",
 		"identity-block.sign-up-form-error": "There's been an error creating your account",
-		"identity-block.terms-privacy-text": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service<\/a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy<\/a>.",
+		"identity-block.terms-privacy-text": "Durch die Erstellung eines Kontos stimmen Sie den <a href='%{termsURL}'> Nutzungsbedingungen <\/a> zu und erkennen unsere <a href='%{privacyURL}'> Datenschutzrichtlinie <\/a> an.",
 		"identity-block.update-email-error": "There's been an error updating your email address",
 		"identity-block.update-password-error": "There's been an error updating your password",
 		"identity-block.username": "Benutzername"
@@ -455,6 +455,9 @@
 		"checkout-block.Zambia": "Zambia",
 		"checkout-block.Zimbabwe": "Zimbabwe",
 		"checkout-block.back-to-offer-page": "Zurück zur Auswahl der Abonnements",
+		"checkout-block.cardNumber": "Kartennummer",
+		"checkout-block.cardholderName": "Name auf der Karte",
+		"checkout-block.cardholderName-requirements": "Bitte geben Sie den Namen auf der Karte ein",
 		"checkout-block.contact-info": "Kontaktinformationen",
 		"checkout-block.continue-to-checkout": "Weiter zur Kasse",
 		"checkout-block.country": "Land oder Region",
@@ -475,8 +478,12 @@
 		"checkout-block.plus-sales-tax": "Zuzüglich der geltenden Umsatzsteuer",
 		"checkout-block.Åland-Islands": "Åland Islands",
 		"subscriptions-block.credit-card-information": "Zahlungsmethode und Informationen",
+		"subscriptions-block.payWithCard-label": "Oder zahlen Sie mit Karte",
 		"subscriptions-block.payment-error": "Bei der Bearbeitung Ihrer Zahlung ist ein Fehler aufgetreten.",
 		"subscriptions-block.payment-information": "Kreditkarteninformationen",
-		"subscriptions-block.submit-payment": "Abonnement kaufen"
+		"subscriptions-block.paypal-processing": "Wird bearbeitet...",
+		"subscriptions-block.paypal-redirect-label": "Weiterleitung zur PayPal-Seite...",
+		"subscriptions-block.submit-payment": "Abonnement kaufen",
+		"subscriptions-block.update-payment": "Zahlungsmethode aktualisieren"
 	}
 }

@@ -152,7 +152,7 @@
 		"identity-block.save": "Save",
 		"identity-block.sign-up": "Sign Up",
 		"identity-block.sign-up-form-error": "There's been an error creating your account",
-		"identity-block.terms-privacy-text": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>.",
+		"identity-block.terms-privacy-text": "Al crear una cuenta, acepta las <a href='%{termsURL}'> Condiciones de servicio <\/a> y reconoce nuestra <a href='%{privacyURL}'> Política de privacidad <\/a> .",
 		"identity-block.update-email-error": "There's been an error updating your email address",
 		"identity-block.update-password-error": "There's been an error updating your password",
 		"identity-block.username": "Nombre de usuario"
@@ -455,6 +455,9 @@
 		"checkout-block.Zambia": "Zambia",
 		"checkout-block.Zimbabwe": "Zimbabwe",
 		"checkout-block.back-to-offer-page": "Volver a la selección de la suscripción",
+		"checkout-block.cardNumber": "Número de tarjeta",
+		"checkout-block.cardholderName": "Nombre en la tarjeta",
+		"checkout-block.cardholderName-requirements": "Por favor ingrese el nombre en la tarjeta",
 		"checkout-block.contact-info": "Información de contacto",
 		"checkout-block.continue-to-checkout": "Continuar con el pago",
 		"checkout-block.country": "País o región",
@@ -475,8 +478,12 @@
 		"checkout-block.plus-sales-tax": "Más impuestos sobre ventas aplicable",
 		"checkout-block.Åland-Islands": "Åland Islands",
 		"subscriptions-block.credit-card-information": "Información y método de pago",
+		"subscriptions-block.payWithCard-label": "O pagar con tarjeta",
 		"subscriptions-block.payment-error": "Hubo un error al procesar el pago.",
 		"subscriptions-block.payment-information": "Información de la tarjeta de crédito",
-		"subscriptions-block.submit-payment": "Comprar suscripción"
+		"subscriptions-block.paypal-processing": "Procesando...",
+		"subscriptions-block.paypal-redirect-label": "Redirigiendo a la página de PayPal...",
+		"subscriptions-block.submit-payment": "Comprar suscripción",
+		"subscriptions-block.update-payment": "Actualizar método de pago"
 	}
 }

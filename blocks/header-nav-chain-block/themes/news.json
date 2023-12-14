@@ -374,10 +374,10 @@
 	"header-nav-chain-flyout-nav-wrapper-closed": {
 		"styles": {
 			"default": {
-				"transform": "translate(-100vw, 0)"
+				"transform": "translate(calc(var(--text-direction) * -100vw), 0)"
 			},
 			"desktop": {
-				"transform": "translate(-315px, 0)"
+				"transform": "translate(calc(var(--text-direction) * -315px), 0)"
 			}
 		}
 	},

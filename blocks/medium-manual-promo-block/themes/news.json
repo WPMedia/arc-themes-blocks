@@ -36,7 +36,10 @@
 				"components": {
 					"media-item": {
 						"float": "inline-start",
-						"margin": 0,
+						"margin-block-end": 0,
+						"margin-block-start": 0,
+						"margin-inline-end": 0,
+						"margin-inline-start": 0,
 						"max-inline-size": "33%"
 					},
 					"paragraph": {
@@ -57,12 +60,12 @@
 			},
 			"desktop": {
 				"components": {
-					"paragraph": {
+					"heading": {
+						"inline-size": "auto",
 						"margin-inline-start": "calc(33% + var(--global-spacing-6))"
 					},
-					"heading": {
-						"margin-inline-start": "calc(33% + var(--global-spacing-6))",
-						"inline-size": "auto"
+					"paragraph": {
+						"margin-inline-start": "calc(33% + var(--global-spacing-6))"
 					}
 				}
 			}

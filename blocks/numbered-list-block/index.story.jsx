@@ -71,3 +71,17 @@ export const noImageNoHeadline = () => {
 
 	return <NumberedList {...props} customFields={customFields} />;
 };
+
+export const withRtl = () => {
+	const customFields = {
+		...sampleData,
+		showHeadline: true,
+		showImage: true,
+	};
+
+	return (
+		<div dir="rtl">
+			<NumberedList {...props} customFields={customFields} />
+		</div>
+	);
+};

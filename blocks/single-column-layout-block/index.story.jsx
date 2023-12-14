@@ -1,9 +1,9 @@
 /* eslint-disable react/no-children-prop */
 import React from "react";
-import RightRailAdvancedLayout from "./layouts/right-rail-advanced/default";
+import SingleColumnRegular from "./layouts/single-column-regular/default";
 
 export default {
-	title: "Layouts/Right Rail Advanced",
+	title: "Layouts/Single Column Regular",
 	parameters: {
 		// Set the viewports in Chromatic at a component level.
 		chromatic: { viewports: [320, 960, 1200, 1600] },
@@ -18,28 +18,10 @@ const layoutItemStyles = {
 	footer: {
 		height: "100px",
 	},
-	fullWidth1: {
+	fullWidth: {
 		height: "200px",
 	},
-	"main-1": {
-		height: "200px",
-	},
-	"main-2": {
-		height: "200px",
-	},
-	"rightrail-top": {
-		minHeight: "150px",
-		textAlign: "left",
-	},
-	"rightrail-middle": {
-		minHeight: "75px",
-		textAlign: "left",
-	},
-	"rightrail-bottom": {
-		minHeight: "150px",
-		textAlign: "left",
-	},
-	fullWidth2: {
+	body: {
 		height: "200px",
 	},
 	default: {
@@ -65,24 +47,19 @@ const layoutItem = (name) => (
 
 const layoutAreas = [
 	"navigation",
-	"fullwidth1",
-	"main-1",
-	"main-2",
-	"rightrail-top",
-	"rightrail-middle",
-	"rightrail-bottom",
-	"fullwidth2",
+	"fullWidth",
+  "body",
 	"footer",
 ];
 
 export const basic = () => (
 	<div id="fusion-app" className="layout-section">
-		<RightRailAdvancedLayout children={layoutAreas.map((name) => layoutItem(name))} />
+		<SingleColumnRegular children={layoutAreas.map((name) => layoutItem(name))} />
 	</div>
 );
 
 export const withRtl = () => {
 	<div dir="rtl" id="fusion-app" className="layout-section">
-		<RightRailAdvancedLayout children={layoutAreas.map((name) => layoutItem(name))} />
+		<SingleColumnRegular children={layoutAreas.map((name) => layoutItem(name))} />
 	</div>
 }

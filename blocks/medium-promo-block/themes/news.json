@@ -26,8 +26,8 @@
 					},
 					"separator": {
 						"padding-block-start": "0",
-						"padding-inline-end": "var(--global-spacing-2)",
 						"padding-block-end": "0",
+						"padding-inline-end": "var(--global-spacing-2)",
 						"padding-inline-start": "var(--global-spacing-2)"
 					},
 					"link": {
@@ -87,9 +87,9 @@
 			"default": {
 				"align-items": "center",
 				"padding-block-start": "var(--global-spacing-2)",
-				"padding-inline-end": "var(--global-spacing-2)",
 				"padding-block-end": "var(--global-spacing-2)",
 				"padding-inline-start": "var(--global-spacing-2)",
+				"padding-inline-end": "var(--global-spacing-2)",
 				"background-color": "var(--color-primary)",
 				"border": 0,
 				"border-radius": "var(--global-spacing-2)",

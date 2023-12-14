@@ -272,12 +272,18 @@
 				),
 				"ads-block-admin": (
 					"background-color": "$global.neutral-7",
-					"padding": "$global.spacing-4",
-					"border-radius": var(--border-radius),
+					"padding-block-start": "$global.spacing-4",
+					"padding-inline-end": "$global.spacing-4",
+					"padding-block-end": "$global.spacing-4",
+					"padding-inline-start": "$global.spacing-4",
+					"border-start-start-radius": var(--border-radius),
+					"border-start-end-radius": var(--border-radius),
+					"border-end-start-radius": var(--border-radius),
+					"border-end-end-radius": var(--border-radius),
 					"components": (
 						"stack": (
 							"gap": "$global.spacing-4",
-							"padding-bottom": "$global.spacing-5"
+							"padding-block-end": "$global.spacing-5"
 						),
 						"paragraph": (
 							"color": "$global.white"
@@ -326,222 +332,272 @@
 					)
 				),
 				"article-body": (
-					"font-family": var(--font-family-primary),
-					"font-size": var(--body-font-size),
-					"components": (
-						"link": (
-							"color": var(--color-primary)
-						),
-						"paragraph": (
-							"display": block,
-							"overflow": initial
-						),
-						"media-item-fig-caption": (
-							"background-color": var(--global-white),
-							"line-height": var(--body-line-height-5)
-						),
-						"icon": (
-							"fill": currentColor
-						)
-					)
-				),
-				"article-body-blockquote": (
-					"box-shadow": inset 5px 0 0 0 var(--global-neutral-4),
-					"font-style": italic,
-					"gap": var(--global-spacing-2),
-					"padding": var(--global-spacing-4) 0 var(--global-spacing-4) var(--global-spacing-5),
-					"text-align": left,
-					"components": (
-						"paragraph": (
-							"font-size": var(--heading-level-6-font-size),
-							"line-height": var(--heading-level-6-line-height)
-						)
-					)
-				),
-				"article-body-children": (
-					"margin-bottom": var(--global-spacing-5)
-				),
-				"article-body-citation": (
-					"font-family": var(--font-family-primary),
-					"font-style": normal,
-					"font-size": var(--body-font-size)
-				),
-				"article-body-correction": (
-					"box-shadow": inset 0 -1px 0 0 var(--border-color),
-					"font-style": italic,
-					"padding-bottom": var(--global-spacing-6),
-					"components": (
-						"heading": (
-							"font-size": var(--heading-level-6-font-size),
-							"text-transform": uppercase
-						),
-						"paragraph": (
-							"color": var(--global-neutral-6)
-						)
-					)
-				),
-				"article-body-divider": (
-					"background-color": var(--border-color),
-					"height": 1px
-				),
-				"article-body-embed-responsive": (
-					"aspect-ratio": calc(16 / 9),
-					"width": 100%
-				),
-				"article-body-embed-responsive-item": (
-					"aspect-ratio": calc(16 / 9),
-					"height": auto,
-					"width": 100%
-				),
-				"article-body-gallery-close-button": (
-					"color": var(--global-white),
-					"components": (
-						"button-hover": (
-							"color": var(--global-neutral-3)
-						),
-						"icon": (
-							"fill": currentColor,
-							"height": var(--global-spacing-6),
-							"width": var(--global-spacing-6)
-						)
-					)
-				),
-				"article-body-gallery-fullscreen": (
-					"components": (
-						"media-item-fig-caption": (
-							"padding": 0 var(--global-spacing-2)
-						)
-					)
-				),
-				"article-body-gallery-track-button": (
-					"color": var(--global-white),
-					"components": (
-						"button-hover": (
-							"color": var(--global-neutral-3)
-						),
-						"icon": (
-							"fill": currentColor,
-							"height": var(--global-spacing-8),
-							"width": var(--global-spacing-8)
-						)
-					)
-				),
-				"article-body-h2": (
-					"font-size": var(--heading-level-2-font-size),
-					"line-height": var(--heading-level-2-line-height),
-					"font-family": var(--font-family-primary),
-					"font-weight": bold
-				),
-				"article-body-h3": (
-					"font-size": var(--heading-level-3-font-size),
-					"line-height": var(--heading-level-3-line-height),
-					"font-family": var(--font-family-primary),
-					"font-weight": bold
-				),
-				"article-body-h4": (
-					"font-size": var(--heading-level-4-font-size),
-					"line-height": var(--heading-level-4-line-height),
-					"font-family": var(--font-family-primary),
-					"font-weight": bold
-				),
-				"article-body-h5": (
-					"font-size": var(--heading-level-5-font-size),
-					"line-height": var(--heading-level-5-line-height),
-					"font-family": var(--font-family-primary),
-					"font-weight": bold
-				),
-				"article-body-h6": (
-					"font-size": var(--heading-level-6-font-size),
-					"line-height": var(--heading-level-6-line-height),
-					"font-family": var(--font-family-primary),
-					"font-weight": bold
-				),
-				"article-body-image-float-left": (
-					"width": 50%,
-					"float": left,
-					"margin-right": var(--global-spacing-5)
-				),
-				"article-body-image-float-right": (
-					"width": 50%,
-					"float": right,
-					"margin-left": var(--global-spacing-5)
-				),
-				"article-body-image-wrapper": (
-					"align-items": center,
-					"aspect-ratio": calc(16/9),
-					"background-color": var(--global-black),
-					"display": flex,
-					"justify-content": center,
-					"max-height": 75vh,
-					"overflow": auto,
-					"components": (
-						"image": (
-							"height": auto,
-							"max-height": 100%,
-							"max-width": 100%,
-							"object-fit": contain
-						)
-					)
-				),
-				"article-body-interstitial-link": (
-					"font-family": var(--font-family-primary),
-					"font-style": italic,
-					"components": (
-						"link": (
-							"border-bottom": 1px solid var(--color-primary),
-							"color": var(--color-primary)
-						)
-					)
-				),
-				"article-body-link": (
-					"color": var(--color-primary)
-				),
-				"article-body-ol": (
-					"font-size": var(--body-font-size),
-					"line-height": var(--body-line-height),
-					"list-style-position": inside,
-					"list-style-type": decimal
-				),
-				"article-body-pullquote": (
+                    "font-family": var(--font-family-primary),
+                    "font-size": var(--body-font-size),
+                    "components": (
+                        "link": (
+                            "color": var(--color-primary)
+                        ),
+                        "paragraph": (
+                            "display": block,
+                            "overflow": initial
+                        ),
+                        "media-item-fig-caption": (
+                            "background-color": var(--global-white),
+                            "line-height": var(--body-line-height-5)
+                        ),
+                        "icon": (
+                            "fill": currentColor
+                        )
+                    )
+                ),
+                "article-body-blockquote": (
+                    "box-shadow": inset 5px 0 0 0 var(--global-neutral-4),
+                    "font-style": italic,
+                    "gap": var(--global-spacing-2),
+                    "padding-block-start": var(--global-spacing-4),
+                    "padding-inline-end": 0,
+                    "padding-block-end": var(--global-spacing-4),
+                    "padding-inline-start": var(--global-spacing-5),
+                    "text-align": start,
+                    "components": (
+                        "paragraph": (
+                            "font-size": var(--heading-level-6-font-size),
+                            "line-height": var(--heading-level-6-line-height)
+                        )
+                    )
+                ),
+                "article-body-children": (
+                    "margin-block-end": var(--global-spacing-5)
+                ),
+                "article-body-citation": (
+                    "font-family": var(--font-family-primary),
+                    "font-style": normal,
+                    "font-size": var(--body-font-size)
+                ),
+                "article-body-correction": (
+                    "box-shadow": inset 0 -1px 0 0 var(--border-color),
+                    "font-style": italic,
+                    "padding-block-end": var(--global-spacing-6),
+                    "components": (
+                        "heading": (
+                            "font-size": var(--heading-level-6-font-size),
+                            "text-transform": uppercase
+                        ),
+                        "paragraph": (
+                            "color": var(--global-neutral-6)
+                        )
+                    )
+                ),
+                "article-body-divider": (
+                    "background-color": var(--border-color),
+                    "block-size": 1px
+                ),
+                "article-body-embed-responsive": (
+                    "aspect-ratio": calc(16 / 9),
+                    "inline-size": 100%
+                ),
+                "article-body-embed-responsive-item": (
+                    "aspect-ratio": calc(16 / 9),
+                    "block-size": auto,
+                    "inline-size": 100%
+                ),
+                "article-body-gallery-close-button": (
+                    "color": var(--global-white),
+                    "components": (
+                        "button-hover": (
+                            "color": var(--global-neutral-3)
+                        ),
+                        "icon": (
+                            "fill": currentColor,
+                            "block-size": var(--global-spacing-6),
+                            "inline-size": var(--global-spacing-6)
+                        )
+                    )
+                ),
+                "article-body-gallery-fullscreen": (
+                    "components": (
+                        "media-item-fig-caption": (
+                            "padding-block-start": 0,
+                            "padding-inline-end": var(--global-spacing-2),
+                            "padding-block-end": 0,
+                            "padding-inline-start": var(--global-spacing-2)
+                        )
+                    )
+                ),
+                "article-body-gallery-track-button": (
+                    "color": var(--global-white),
+                    "components": (
+                        "button-hover": (
+                            "color": var(--global-neutral-3)
+                        ),
+                        "icon": (
+                            "fill": currentColor,
+                            "block-size": var(--global-spacing-8),
+                            "inline-size": var(--global-spacing-8)
+                        )
+                    )
+                ),
+                "article-body-h2": (
+                    "font-size": var(--heading-level-2-font-size),
+                    "line-height": var(--heading-level-2-line-height),
+                    "font-family": var(--font-family-primary),
+                    "font-weight": bold
+                ),
+                "article-body-h3": (
+                    "font-size": var(--heading-level-3-font-size),
+                    "line-height": var(--heading-level-3-line-height),
+                    "font-family": var(--font-family-primary),
+                    "font-weight": bold
+                ),
+                "article-body-h4": (
+                    "font-size": var(--heading-level-4-font-size),
+                    "line-height": var(--heading-level-4-line-height),
+                    "font-family": var(--font-family-primary),
+                    "font-weight": bold
+                ),
+                "article-body-h5": (
+                    "font-size": var(--heading-level-5-font-size),
+                    "line-height": var(--heading-level-5-line-height),
+                    "font-family": var(--font-family-primary),
+                    "font-weight": bold
+                ),
+                "article-body-h6": (
+                    "font-size": var(--heading-level-6-font-size),
+                    "line-height": var(--heading-level-6-line-height),
+                    "font-family": var(--font-family-primary),
+                    "font-weight": bold
+                ),
+                "article-body-image-float-left": (
+                    "inline-size": 50%,
+                    "float": inline-start,
+                    "margin-inline-end": var(--global-spacing-5)
+                ),
+                "article-body-image-float-right": (
+                    "inline-size": 50%,
+                    "float": inline-end,
+                    "margin-inline-start": var(--global-spacing-5)
+                ),
+                "article-body-image-wrapper": (
+                    "align-items": center,
+                    "aspect-ratio": calc(16/9),
+                    "background-color": var(--global-black),
+                    "display": flex,
+                    "justify-content": center,
+                    "max-block-size": 75vh,
+                    "overflow": auto,
+                    "components": (
+                        "image": (
+                            "block-size": auto,
+                            "max-block-size": 100%,
+                            "max-inline-size": 100%,
+                            "object-fit": contain
+                        )
+                    )
+                ),
+                "article-body-interstitial-link": (
+                    "font-family": var(--font-family-primary),
+                    "font-style": italic,
+                    "components": (
+                        "link": (
+                            "border-block-end-width": 1px,
+                            "border-block-end-style": solid,
+                            "border-block-end-color": var(--color-primary),
+                            "color": var(--color-primary)
+                        )
+                    )
+                ),
+                "article-body-link": (
+                    "color": var(--color-primary)
+                ),
+                "article-body-ol": (
+                    "font-size": var(--body-font-size),
+                    "line-height": var(--body-line-height),
+                    "list-style-position": inside,
+                    "list-style-type": decimal
+                ),
+                "article-body-pullquote": (
 					"box-shadow": (inset 0 -5px 0 0 var(--border-color), inset 0 5px 0 0 var(--border-color)),
-					"gap": var(--global-spacing-4),
-					"padding": var(--global-spacing-6) 0 var(--global-spacing-5),
-					"text-align": center,
-					"components": (
-						"paragraph": (
-							"font-style": italic,
-							"font-size": var(--heading-level-5-font-size),
-							"font-weight": var(--global-font-weight-7),
-							"line-height": var(--heading-level-5-line-height)
-						)
-					)
-				),
-				"article-body-table": (
-					"font-family": var(--font-family-primary),
-					"font-size": var(--body-font-size-small),
-					"line-height": var(--body-line-height-small),
-					"text-align": center,
-					"width": 100%
-				),
-				"article-body-table-td": (
-					"border": 1px solid var(--border-color),
-					"padding": var(--global-spacing-1) var(--global-spacing-2)
-				),
-				"article-body-table-th": (
-					"border": 1px solid var(--border-color),
-					"font-weight": var(--global-font-weight-7),
-					"padding": var(--global-spacing-1) var(--global-spacing-2)
-				),
-				"article-body-table-thead": (
-					"background-color": var(--global-neutral-4),
-					"border": 2px solid var(--border-color)
-				),
-				"article-body-ul": (
-					"font-size": var(--body-font-size),
-					"line-height": var(--body-line-height),
-					"list-style-position": inside,
-					"list-style-type": disc
-				),
+                    "gap": var(--global-spacing-4),
+                    "padding-block-start": var(--global-spacing-6) 0,
+                    "padding-inline-end": var(--global-spacing-5),
+                    "padding-block-end": var(--global-spacing-6) 0,
+                    "padding-inline-start": var(--global-spacing-5),
+                    "text-align": center,
+                    "components": (
+                        "paragraph": (
+                            "font-style": italic,
+                            "font-size": var(--heading-level-5-font-size),
+                            "font-weight": var(--global-font-weight-7),
+                            "line-height": var(--heading-level-5-line-height)
+                        )
+                    )
+                ),
+                "article-body-table": (
+                    "font-family": var(--font-family-primary),
+                    "font-size": var(--body-font-size-small),
+                    "line-height": var(--body-line-height-small),
+                    "text-align": center,
+                    "inline-size": 100%
+                ),
+                "article-body-table-td": (
+                    "border-block-start-width": 1px,
+                    "border-block-end-width": 1px,
+                    "border-inline-start-width": 1px,
+                    "border-inline-end-width": 1px,
+                    "border-block-start-style": solid,
+                    "border-block-end-style": solid,
+                    "border-inline-start-style": solid,
+                    "border-inline-end-style": solid,
+                    "border-block-start-color": var(--border-color),
+                    "border-block-end-color": var(--border-color),
+                    "border-inline-start-color": var(--border-color),
+                    "border-inline-end-color": var(--border-color),
+                    "padding-block-start": var(--global-spacing-1),
+                    "padding-inline-end": var(--global-spacing-2),
+                    "padding-block-end": var(--global-spacing-1),
+                    "padding-inline-start": var(--global-spacing-2)
+                ),
+                "article-body-table-th": (
+                    "border-block-start-width": 1px,
+                    "border-block-end-width": 1px,
+                    "border-inline-start-width": 1px,
+                    "border-inline-end-width": 1px,
+                    "border-block-start-style": solid,
+                    "border-block-end-style": solid,
+                    "border-inline-start-style": solid,
+                    "border-inline-end-style": solid,
+                    "border-block-start-color": var(--border-color),
+                    "border-block-end-color": var(--border-color),
+                    "border-inline-start-color": var(--border-color),
+                    "border-inline-end-color": var(--border-color),
+                    "font-weight": var(--global-font-weight-7),
+                    "padding-block-start": var(--global-spacing-1),
+                    "padding-inline-end": var(--global-spacing-2),
+                    "padding-block-end": var(--global-spacing-1),
+                    "padding-inline-start": var(--global-spacing-2)
+                ),
+                "article-body-table-thead": (
+                    "background-color": var(--global-neutral-4),
+                    "border-block-start-width": 2px,
+                    "border-block-end-width": 2px,
+                    "border-inline-start-width": 2px,
+                    "border-inline-end-width": 2px,
+                    "border-block-start-style": solid,
+                    "border-block-end-style": solid,
+                    "border-inline-start-style": solid,
+                    "border-inline-end-style": solid,
+                    "border-block-start-color": var(--border-color),
+                    "border-block-end-color": var(--border-color),
+                    "border-inline-start-color": var(--border-color),
+                    "border-inline-end-color": var(--border-color)
+                ),
+                "article-body-ul": (
+                    "font-size": var(--body-font-size),
+                    "line-height": var(--body-line-height),
+                    "list-style-position": inside,
+                    "list-style-type": disc
+                ),
 				"article-tag": (
 					"components": (
 						"stack": (
@@ -556,17 +612,17 @@
 					"gap": var(--global-spacing-4),
 					"components": (
 						"image": (
-							"max-width": var(--global-spacing-13),
-							"max-height": var(--global-spacing-13),
-							"border-radius": var(--border-radius-circle),
-							"height": 100%,
-							"width": 100%,
 							"aspect-ratio": 1,
+							"block-size": 100%,
+							"border-radius": var(--border-radius-circle),
+							"inline-size": 100%,
+							"max-inline-size": var(--global-spacing-13),
+							"max-block-size": var(--global-spacing-13),
 							"object-fit": cover
 						),
 						"stack": (
 							"gap": var(--global-spacing-2),
-							"width": 100%
+							"inline-size": 100%
 						)
 					)
 				),
@@ -574,7 +630,7 @@
 					"font-family": var(--font-family-primary),
 					"font-size": var(--body-font-size-small),
 					"line-height": var(--body-line-height-small),
-					"margin-bottom": 0
+					"margin-block-end": 0
 				),
 				"author-bio-author-name": (
 					"font-family": var(--font-family-primary),
@@ -598,7 +654,7 @@
 				),
 				"author-bio-social-link-wrapper": (
 					"gap": var(--global-spacing-4),
-					"margin-top": 0
+					"margin-block-start": 0
 				),
 				"byline": (
 					"font-size": var(--body-font-weight),
@@ -617,21 +673,21 @@
 					)
 				),
 				"card-list": (
-					"box-shadow": var(--global-box-shadow-1),
-					"border-radius": 0 var(--border-radius) var(--border-radius) 0,
 					"background-color": var(--background-color),
-					"padding": var(--global-spacing-4) 0,
+					"border-end-end-radius": var(--border-radius),
+					"border-end-start-radius": 0,
+					"border-start-end-radius": var(--border-radius),
+					"border-start-start-radius": 0,
+					"box-shadow": var(--global-box-shadow-1),
+					"padding-block-end": var(--global-spacing-4),
+					"padding-block-start": var(--global-spacing-4) ,
+					"padding-inline-end": 0,
+					"padding-inline-start": 0,
 					"components": (
 						"heading": (
 							"font-size": var(--heading-level-5-font-size),
 							"font-weight": var(--heading-level-5-font-weight),
 							"line-height": var(--heading-level-5-line-height)
-						),
-						"stack": (
-							"gap": var(--global-spacing-4)
-						),
-						"separator": (
-							"padding": 0 var(--global-spacing-2)
 						),
 						"image": (
 							"transition": opacity 0.4s ease
@@ -645,18 +701,30 @@
 						),
 						"link-hover": (
 							"color": var(--text-color-subtle)
+						),
+						"separator": (
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
+						),
+						"stack": (
+							"gap": var(--global-spacing-4)
 						)
 					)
 				),
 				"card-list-list": (
-					"padding": 0 var(--global-spacing-4)
+					"padding-block-end": 0,
+					"padding-block-start": 0,
+					"padding-inline-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4)
 				),
 				"card-list-main-item-image-link": (
 					"components": (
 						"image": (
-							"max-height": 40vh,
-							"object-fit": cover,
-							"width": 100%
+							"inline-size": 100%,
+							"max-block-size": 40vh,
+							"object-fit": cover
 						)
 					)
 				),
@@ -684,15 +752,18 @@
 					)
 				),
 				"card-list-secondary-item-heading-link": (
-					"width": 100%
+					"inline-size": 100%
 				),
 				"card-list-secondary-item-image-link": (
-					"max-width": 105px
+					"max-inline-size": 105px
 				),
 				"card-list-title": (
-					"padding": 0 var(--global-spacing-4),
 					"font-size": var(--heading-level-5-font-size),
-					"line-height": var(--heading-level-5-line-height)
+					"line-height": var(--heading-level-5-line-height),
+					"padding-block-end": 0,
+					"padding-block-start": 0,
+					"padding-inline-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4)
 				),
 				"checkout": (
 					"font-family": var(--font-family-primary),
@@ -1024,7 +1095,10 @@
 					"display": flex,
 					"flex-direction": column,
 					"gap": var(--global-spacing-4),
-					"margin": auto,
+					"margin-block-end": auto,
+					"margin-block-start": auto,
+					"margin-inline-end": auto,
+					"margin-inline-start": auto,
 					"components": (
 						"heading": (
 							"color": var(--color-primary),
@@ -1033,9 +1107,12 @@
 						"image": (
 							"aspect-ratio": 1,
 							"border-radius": var(--border-radius-circle),
-							"margin": auto,
-							"max-height": 9.375rem,
-							"max-width": 9.375rem
+							"margin-block-end": auto,
+							"margin-block-start": auto,
+							"margin-inline-end": auto,
+							"margin-inline-start": auto,
+							"max-block-size": 9.375rem,
+							"max-inline-size": 9.375rem
 						),
 						"paragraph": (
 							"color": var(--text-color),
@@ -1068,8 +1145,8 @@
 				"full-author-bio-social-icons": (
 					"display": flex,
 					"flex-wrap": wrap,
-					"justify-content": center,
-					"gap": var(--global-spacing-4)
+					"gap": var(--global-spacing-4),
+					"justify-content": center
 				),
 				"full-author-bio-social-link": (
 					"components": (
@@ -1203,30 +1280,33 @@
 					"line-height": var(--heading-level-6-line-height)
 				),
 				"header-nav-chain": (
-					"background-color": var(--global-black),
-					"padding": var(--global-spacing-2) var(--global-spacing-4),
-					"font-weight": var(--global-font-weight-7),
-					"font-size": var(--body-font-size),
-					"line-height": var(--body-line-height),
-					"transform": translateZ(0),
-					"min-height": var(--header-nav-chain-height),
-					"justify-content": center,
-					"display": flex,
 					"align-items": center,
-					"width": 100%,
+					"background-color": var(--global-black),
+					"display": flex,
+					"font-size": var(--body-font-size),
+					"font-weight": var(--global-font-weight-7),
+					"inline-size": 100%,
+					"inset-block-start": 0px,
+					"justify-content": center,
+					"line-height": var(--body-line-height),
+					"margin-block-end": 0px,
+					"min-block-size": var(--header-nav-chain-height),
+					"padding-block-end": var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-2),
+					"padding-inline-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4),
 					"position": sticky,
-					"top": 0px,
-					"margin-bottom": 0px,
+					"transform": translateZ(0),
 					"z-index": 1,
 					"components": (
 						"icon": (
 							"fill": currentColor,
-							"height": var(--global-spacing-5),
-							"width": var(--global-spacing-5)
+							"block-size": var(--global-spacing-5),
+							"inline-size": var(--global-spacing-5)
 						),
 						"button": (
 							"color": var(--global-white),
-							"height": var(--global-spacing-7),
+							"block-size": var(--global-spacing-7),
 							"font-weight": var(--global-font-weight-7),
 							"font-size": var(--body-font-size),
 							"line-height": var(--body-line-height)
@@ -1235,30 +1315,33 @@
 							"font-weight": var(--global-font-weight-7),
 							"font-size": var(--body-font-size),
 							"line-height": var(--body-line-height),
-							"padding": var(--global-spacing-2)
+							"padding-block-end": var(--global-spacing-2),
+							"padding-block-start": var(--global-spacing-2),
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
 						)
 					)
 				),
 				"header-nav-chain-flyout-nav": (
-					"height": calc((100vh - var(--header-nav-chain-height-scrolled))),
+					"block-size": calc((100vh - var(--header-nav-chain-height-scrolled))),
 					"gap": 0,
 					"font-weight": var(--global-font-weight-7),
 					"list-style": none,
 					"position": relative,
 					"components": (
 						"link": (
-							"width": 100%,
-							"padding-top": var(--global-spacing-2),
-							"padding-bottom": var(--global-spacing-2),
-							"padding-left": var(--global-spacing-5),
-							"padding-right": var(--global-spacing-5),
 							"align-items": center,
 							"color": var(--global-white),
-							"font-weight": var(--global-font-weight-7),
 							"display": block,
+							"font-weight": var(--global-font-weight-7),
 							"font-size": var(--body-font-size),
+							"inline-size": 100%,
 							"justify-content": space-between,
 							"line-height": 1.5,
+							"padding-block-end": var(--global-spacing-2),
+							"padding-block-start": var(--global-spacing-2),
+							"padding-inline-end": var(--global-spacing-5),
+							"padding-inline-start": var(--global-spacing-5),
 							"text-decoration": none
 						),
 						"link-hover": (
@@ -1268,7 +1351,10 @@
 				),
 				"header-nav-chain-flyout-nav-components-desktop": (
 					"display": none,
-					"padding": var(--global-spacing-5),
+					"padding-block-end": var(--global-spacing-5),
+					"padding-block-start": var(--global-spacing-5),
+					"padding-inline-end": var(--global-spacing-5),
+					"padding-inline-start": var(--global-spacing-5),
 					"components": (
 						"button": (
 							"align-self": flex-start
@@ -1277,15 +1363,18 @@
 				),
 				"header-nav-chain-flyout-nav-components-mobile": (
 					"display": flex,
-					"padding": var(--global-spacing-5)
+					"padding-block-end": var(--global-spacing-5),
+					"padding-block-start": var(--global-spacing-5),
+					"padding-inline-end": var(--global-spacing-5),
+					"padding-inline-start": var(--global-spacing-5)
 				),
 				"header-nav-chain-flyout-nav-item": (
 					"background-color": var(--global-black),
 					"components": (
 						"link": (
-							"padding-top": var(--global-spacing-3),
-							"padding-left": var(--global-spacing-5),
-							"padding-bottom": var(--global-spacing-3)
+							"padding-block-end": var(--global-spacing-3),
+							"padding-block-start": var(--global-spacing-3),
+							"padding-inline-start": var(--global-spacing-5)
 						)
 					)
 				),
@@ -1305,7 +1394,7 @@
 					)
 				),
 				"header-nav-chain-flyout-nav-subsection-anchor": (
-					"height": var(--global-spacing-8),
+					"block-size": var(--global-spacing-8),
 					"components": (
 						"stack": (
 							"align-content": center,
@@ -1350,10 +1439,10 @@
 							"font-size": var(--global-spacing-4),
 							"font-weight": var(--global-font-weight-7),
 							"line-height": var(--global-line-height-4),
-							"padding-top": var(--global-spacing-2),
-							"padding-right": var(--global-spacing-5),
-							"padding-left": var(--global-spacing-5),
-							"padding-bottom": var(--global-spacing-2),
+							"padding-block-end": var(--global-spacing-2),
+							"padding-block-start": var(--global-spacing-2),
+							"padding-inline-end": var(--global-spacing-5),
+							"padding-inline-start": var(--global-spacing-5),
 							"text-decoration": none
 						),
 						"link-hover": (
@@ -1367,14 +1456,17 @@
 					)
 				),
 				"header-nav-chain-flyout-nav-widgets": (
-					"margin-top": var(--global-spacing-3),
-					"padding": var(--global-spacing-1) var(--global-spacing-4) var(--global-spacing-1) var(--global-spacing-5)
+					"margin-block-start": var(--global-spacing-3),
+					"padding-block-end": var(--global-spacing-1),
+					"padding-block-start": var(--global-spacing-1),
+					"padding-inline-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-5)
 				),
 				"header-nav-chain-flyout-nav-wrapper": (
 					"z-index": 10,
 					"background": var(--global-black),
 					"transition": transform 300ms ease-in-out,
-					"width": 100vw
+					"inline-size": 100vw
 				),
 				"header-nav-chain-flyout-nav-wrapper-closed": (
 					"transform": translate(-100vw, 0)
@@ -1383,24 +1475,26 @@
 					"gap": var(--global-spacing-4)
 				),
 				"header-nav-chain-flyout-overlay": (
-					"margin-top": var(--header-nav-chain-height),
+					"margin-block-start": var(--header-nav-chain-height),
 					"z-index": 8,
 					"background": var(--header-nav-chain-overlay-background-color),
 					"-ms-overflow-style": none,
 					"position": absolute,
 					"scrollbar-width": none,
-					"left": 0,
-					"top": 0
+					"inset-inline-start": 0,
+					"inset-block-start": 0
 				),
 				"header-nav-chain-flyout-overlay-closed": (
 					"overflow-y": hidden,
-					"width": 0
+					"overflow-block": hidden,
+					"inline-size": 0
 				),
 				"header-nav-chain-flyout-overlay-open": (
 					"background": var(--header-nav-chain-overlay-background-color),
 					"overflow-y": scroll,
+					"overflow-block": scroll,
 					"transform": translate(0, 0),
-					"width": 100%
+					"inline-size": 100%
 				),
 				"header-nav-chain-flyout-overlay-scrollbar": (
 					"display": none
@@ -1408,18 +1502,18 @@
 				"header-nav-chain-links-list": (
 					"display": none,
 					"gap": var(--global-spacing-2),
-					"height": var(--global-spacing-5),
+					"block-size": var(--global-spacing-5),
 					"flex": 11 auto,
 					"overflow": hidden,
-					"text-align": left,
-					"width": auto,
+					"text-align": start,
+					"inline-size": auto,
 					"flex-wrap": wrap,
 					"components": (
 						"link": (
 							"color": var(--global-white),
 							"display": flex,
 							"align-items": center,
-							"height": 100%
+							"block-size": 100%
 						),
 						"separator": (
 							"color": var(--global-white)
@@ -1436,10 +1530,10 @@
 					)
 				),
 				"header-nav-chain-logo": (
-					"margin-right": auto
+					"margin-inline-end": auto
 				),
 				"header-nav-chain-logo-center": (
-					"margin-right": 0
+					"margin-inline-end": 0
 				),
 				"header-nav-chain-logo-hidden": (
 					"opacity": 0,
@@ -1447,8 +1541,8 @@
 					"visibility": hidden
 				),
 				"header-nav-chain-logo-image": (
-					"max-width": 240px,
-					"max-height": var(--header-nav-chain-height),
+					"max-inline-size": 240px,
+					"max-block-size": var(--header-nav-chain-height),
 					"transition": (opacity 0.4s ease)
 				),
 				"header-nav-chain-logo-image-hover": (
@@ -1472,12 +1566,12 @@
 				),
 				"header-nav-chain-nav-search-box-position": (
 					"position": absolute,
-					"right": 0
+					"inset-inline-end": 0
 				),
 				"header-nav-chain-nav-search-box-svg": (
 					"fill": #191919,
-					"height": 1rem,
-					"width": 1rem
+					"block-size": 1rem,
+					"inline-size": 1rem
 				),
 				"header-nav-chain-nav-search-button": (
 					"background": transparent,
@@ -1485,31 +1579,37 @@
 					"cursor": pointer
 				),
 				"header-nav-chain-nav-search-input": (
-					"padding": 0,
-					"width": 0
+					"padding-block-end": 0,
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-inline-start": 0,
+					"inline-size": 0
 				),
 				"header-nav-chain-nav-search-input-open": (
 					"font-size": var(--body-font-size),
-					"height": var(--global-spacing-7),
+					"block-size": var(--global-spacing-7),
 					"line-height": var(--global-line-height-4),
-					"padding": 4px 24px 4px 11px,
-					"width": 100%
+					"padding-block-end": var(--global-spacing-1),
+					"padding-block-start": var(--global-spacing-1),
+					"padding-inline-end": var(--global-spacing-5),
+					"padding-inline-start": var(--global-spacing-3),
+					"inline-size": 100%
 				),
 				"header-nav-chain-scrolled": (
-					"min-height": var(--header-nav-chain-height-scrolled)
+					"min-block-size": var(--header-nav-chain-height-scrolled)
 				),
 				"header-nav-chain-scrolled-flyout-overlay": (
-					"margin-top": var(--header-nav-chain-height-scrolled)
+					"margin-block-start": var(--header-nav-chain-height-scrolled)
 				),
 				"header-nav-chain-top-layout": (
 					"align-items": center,
 					"display": flex,
 					"justify-content": space-between,
-					"width": 100%,
+					"inline-size": 100%,
 					"gap": var(--global-spacing-5)
 				),
 				"header-nav-chain-top-layout-last-child": (
-					"margin-right": 0,
+					"margin-inline-end": 0,
 					"flex-shrink": 0
 				),
 				"header-nav-chain-top-nav-components-desktop": (
@@ -1529,7 +1629,7 @@
 					"display": flex,
 					"justify-content": flex-end,
 					"flex-shrink": 0,
-					"margin-right": 0
+					"margin-inline-end": 0
 				),
 				"header-small": (
 					"font-size": var(--body-font-size-small),
@@ -1591,19 +1691,22 @@
 				),
 				"large-promo-icon-label": (
 					"align-items": center,
-					"padding": var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-2),
+					"padding-inline-end": var(--global-spacing-2),
+					"padding-block-end": var(--global-spacing-2),
+					"padding-inline-start": var(--global-spacing-2),
 					"background-color": var(--color-primary),
 					"border": 0,
 					"border-radius": var(--global-spacing-2),
-					"bottom": var(--global-spacing-2),
-					"margin-left": var(--global-spacing-2),
+					"inset-block-end": var(--global-spacing-2),
+					"margin-inline-start": var(--global-spacing-2),
 					"position": absolute,
 					"z-index": 1,
 					"components": (
 						"icon": (
 							"fill": var(--global-white),
-							"height": var(--global-spacing-4),
-							"width": var(--global-spacing-4)
+							"block-size": var(--global-spacing-4),
+							"inline-size": var(--global-spacing-4)
 						)
 					)
 				),
@@ -1615,7 +1718,7 @@
 					)
 				),
 				"large-promo-label": (
-					"margin-left": var(--global-spacing-2),
+					"margin-inline-start": var(--global-spacing-2),
 					"color": var(--global-white)
 				),
 				"large-promo-text": (
@@ -1642,7 +1745,10 @@
 							"gap": var(--global-spacing-4)
 						),
 						"separator": (
-							"margin": 0 var(--global-spacing-2) 0 var(--global-spacing-2)
+							"margin-block-start": 0,
+							"margin-block-end": 0,
+							"margin-inline-end": var(--global-spacing-2),
+							"margin-inline-start": var(--global-spacing-2)
 						)
 					)
 				),
@@ -1821,7 +1927,7 @@
 				"medium-manual-promo": (
 					"clear": both,
 					"display": table,
-					"width": 100%,
+					"inline-size": 100%,
 					"components": (
 						"attribution": (
 							"color": var(--text-color),
@@ -1833,14 +1939,14 @@
 							"font-size": var(--heading-level-5-font-size),
 							"font-weight": var(--heading-level-5-font-weight),
 							"line-height": var(--heading-level-5-line-height),
-							"margin-bottom": var(--global-spacing-4)
+							"margin-block-end": var(--global-spacing-4)
 						),
 						"link-hover": (
 							"color": var(--text-color-subtle)
 						),
 						"media-item": (
-							"float": right,
-							"max-width": 100px
+							"float": inline-end,
+							"max-inline-size": 100px
 						),
 						"paragraph": (
 							"display": inline,
@@ -1859,35 +1965,38 @@
 				"medium-manual-promo-show-image": (
 					"components": (
 						"heading": (
-							"width": 68%
+							"inline-size": 68%
 						)
 					)
 				),
 				"medium-promo": (
 					"clear": both,
 					"display": table,
-					"width": 100%,
+					"inline-size": 100%,
 					"components": (
 						"attribution": (
 							"display": block,
-							"margin-top": var(--global-spacing-4)
+							"margin-block-start": var(--global-spacing-4)
 						),
 						"media-item": (
-							"float": right,
-							"max-width": 100px
+							"float": inline-end,
+							"max-inline-size": 100px
 						),
 						"heading": (
 							"font-size": var(--heading-level-5-font-size),
 							"font-weight": var(--heading-level-5-font-weight),
 							"line-height": var(--heading-level-5-line-height),
-							"margin-bottom": var(--global-spacing-4)
+							"margin-block-end": var(--global-spacing-4)
 						),
 						"paragraph": (
 							"display": block,
 							"width": 100%
 						),
 						"separator": (
-							"padding": 0 var(--global-spacing-2)
+							"padding-block-start": 0,
+							"padding-block-end": 0,
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
 						),
 						"link": (
 							"position": relative
@@ -1896,19 +2005,22 @@
 				),
 				"medium-promo-icon-label": (
 					"align-items": center,
-					"padding": var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-2),
+					"padding-block-end": var(--global-spacing-2),
+					"padding-inline-start": var(--global-spacing-2),
+					"padding-inline-end": var(--global-spacing-2),
 					"background-color": var(--color-primary),
 					"border": 0,
 					"border-radius": var(--global-spacing-2),
-					"bottom": var(--global-spacing-2),
-					"margin-left": var(--global-spacing-2),
+					"inset-block-end": var(--global-spacing-2),
+					"margin-inline-start": var(--global-spacing-2),
 					"position": absolute,
 					"z-index": 1,
 					"components": (
 						"icon": (
 							"fill": var(--global-white),
-							"height": var(--global-spacing-4),
-							"width": var(--global-spacing-4)
+							"block-size": var(--global-spacing-4),
+							"inline-size": var(--global-spacing-4)
 						)
 					)
 				),
@@ -1920,7 +2032,7 @@
 					)
 				),
 				"medium-promo-label": (
-					"margin-left": var(--global-spacing-2),
+					"margin-inline-start": var(--global-spacing-2),
 					"color": var(--global-white),
 					"display": none
 				),
@@ -1928,7 +2040,7 @@
 					"components": (
 						"heading": (
 							"color": var(--text-color),
-							"width": 68%
+							"inline-size": 68%
 						),
 						"link-hover": (
 							"color": var(--text-color-subtle)
@@ -1964,7 +2076,7 @@
 					)
 				),
 				"numbered-list-item-image": (
-					"max-width": 25%
+					"max-inline-size": 25%
 				),
 				"numbered-list-items": (
 					"gap": var(--global-spacing-4)
@@ -2237,23 +2349,38 @@
 					"gap": var(--global-spacing-6)
 				),
 				"right-rail-advanced-footer": (
-					"margin": var(--global-spacing-10) 0 var(--global-spacing-8) 0
+					"margin-block-start": var(--global-spacing-10),
+					"margin-inline-end": 0,
+					"margin-block-end": var(--global-spacing-8),
+					"margin-inline-start": 0
 				),
 				"right-rail-advanced-full-width-1": (
-					"margin": 0 0 var(--global-spacing-5) 0
+					"margin-block-start": 0,
+					"margin-inline-end": 0,
+					"margin-block-end": var(--global-spacing-5),
+					"margin-inline-start": 0
 				),
 				"right-rail-advanced-full-width-2": (
-					"margin": var(--global-spacing-6) 0 0 0
+					"margin-block-start": var(--global-spacing-6),
+					"margin-inline-end": 0,
+					"margin-block-end": 0,
+					"margin-inline-start": 0
 				),
 				"right-rail-advanced-main": (
 					"gap": var(--global-spacing-6),
-					"max-width": calc(var(--content-max-width) * 1px),
-					"width": var(--content-scale-width),
-					"margin": auto
+					"max-inline-size": calc(var(--content-max-width) * 1px),
+					"inline-size": var(--content-scale-width),
+					"margin-block-start": auto,
+					"margin-inline-end": auto,
+					"margin-block-end": auto,
+					"margin-inline-start": auto
 				),
 				"right-rail-advanced-main-interior-item": (
-					"padding": initial,
-					"border-right": initial,
+					"padding-block-start": initial,
+					"padding-inline-end": initial,
+					"padding-block-end": initial,
+					"padding-inline-start": initial,
+					"border-inline-end": initial,
 					"gap": var(--global-spacing-5),
 					"display": contents
 				),
@@ -2264,7 +2391,10 @@
 					"grid-area": main-interior-item-2
 				),
 				"right-rail-advanced-main-right-rail": (
-					"padding": initial,
+					"padding-block-start": initial,
+					"padding-inline-end": initial,
+					"padding-block-end": initial,
+					"padding-inline-start": initial,
 					"gap": var(--global-spacing-5),
 					"display": contents
 				),
@@ -2279,10 +2409,13 @@
 				),
 				"right-rail-advanced-navigation": (
 					"position": sticky,
-					"top": 0,
-					"width": 100%,
+					"inset-block-start": 0,
+					"inline-size": 100%,
 					"z-index": 9,
-					"margin": 0 0 var(--global-spacing-5) 0
+					"margin-block-start": 0,
+					"margin-inline-end": 0,
+					"margin-block-end": var(--global-spacing-5),
+					"margin-inline-start": 0
 				),
 				"right-rail-advanced-rail-container": (
 					"grid-template-areas": "main-right-rail-top" "main-interior-item-1" "main-right-rail-middle" "main-interior-item-2" "main-right-rail-bottom",
@@ -2292,18 +2425,30 @@
 					"gap": var(--global-spacing-6)
 				),
 				"right-rail-footer": (
-					"margin": var(--global-spacing-10) 0 var(--global-spacing-8) 0
+					"margin-block-start": var(--global-spacing-10),
+					"margin-inline-end": 0,
+					"margin-block-end": var(--global-spacing-8),
+					"margin-inline-start": 0
 				),
 				"right-rail-full-width-1": (
-					"margin": 0 0 var(--global-spacing-5) 0
+					"margin-block-start": 0,
+					"margin-inline-end": 0,
+					"margin-block-end": var(--global-spacing-5),
+					"margin-inline-start": 0
 				),
 				"right-rail-full-width-2": (
-					"margin": var(--global-spacing-6) 0 0 0
+					"margin-block-start": var(--global-spacing-6),
+					"margin-inline-end": 0,
+					"margin-block-end": 0,
+					"margin-inline-start": 0
 				),
 				"right-rail-main": (
-					"max-width": calc(var(--content-max-width) * 1px),
-					"width": var(--content-scale-width),
-					"margin": auto,
+					"max-inline-size": calc(var(--content-max-width) * 1px),
+					"inline-size": var(--content-scale-width),
+					"margin-block-start": auto,
+					"margin-inline-end": auto,
+					"margin-block-end": auto,
+					"margin-inline-start": auto,
 					"components": (
 						"stack": (
 							"gap": var(--global-spacing-6)
@@ -2311,18 +2456,27 @@
 					)
 				),
 				"right-rail-main-interior-item": (
-					"padding": initial,
-					"border-right": initial
+					"padding-block-start": initial,
+					"padding-inline-end": initial,
+					"padding-block-end": initial,
+					"padding-inline-start": initial,
+					"border-inline-end": initial
 				),
 				"right-rail-main-right-rail": (
-					"padding": initial
+					"padding-block-start": initial,
+					"padding-inline-end": initial,
+					"padding-block-end": initial,
+					"padding-inline-start": initial
 				),
 				"right-rail-navigation": (
 					"position": sticky,
-					"top": 0,
-					"width": 100%,
+					"inset-block-start": 0,
+					"inline-size": 100%,
 					"z-index": 9,
-					"margin": 0 0 var(--global-spacing-5) 0
+					"margin-block-start": 0,
+					"margin-inline-end": 0,
+					"margin-block-end": var(--global-spacing-5),
+					"margin-inline-start": 0
 				),
 				"right-rail-rail-container": (
 					"grid-template-columns": initial,
@@ -2450,19 +2604,28 @@
 					"border-radius": 0 var(--border-radius) var(--border-radius) 0,
 					"display": none,
 					"gap": var(--global-spacing-2),
-					"left": 0,
-					"padding": var(--global-spacing-4) 0,
+					"inset-block-start": 200px,
+					"inset-inline-start": 0,
+					"padding-block-end": var(--global-spacing-4),
+					"padding-block-start": var(--global-spacing-4),
+					"padding-inline-end": 0,
+					"padding-inline-start": 0,
 					"position": fixed,
-					"top": 200px,
 					"components": (
 						"button": (
 							"background-color": transparent
 						),
 						"button-default": (
-							"border-width": 0
+							"border-block-end-width": 0,
+							"border-block-start-width": 0,
+							"border-inline-end-width": 0,
+							"border-inline-start-width": 0
 						),
 						"button-medium": (
-							"padding": 0 var(--global-spacing-3)
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-3),
+							"padding-inline-start": var(--global-spacing-3)
 						)
 					)
 				),
@@ -2574,11 +2737,14 @@
 				),
 				"single-column-regular-body": (
 					"inline-size": calc(100% - var(--global-spacing-6)),
-					"margin": auto,
+					"margin-block-start": "auto",
+					"margin-inline-end": "auto",
+					"margin-block-end": "auto",
+					"margin-inline-start": "auto",
 					"max-inline-size": none
 				),
 				"single-column-regular-footer": (
-					"width": 100%
+					"inline-size": 100%
 				),
 				"single-column-regular-main": (
 					"components": (
@@ -2727,25 +2893,31 @@
 				),
 				"top-table-list-large-icon-label": (
 					"align-items": center,
-					"padding": var(--global-spacing-2),
 					"background-color": var(--color-primary),
-					"border": 0,
+					"border-block-end": 0,
+					"border-block-start": 0,
+					"border-inline-end": 0,
+					"border-inline-start": 0,
 					"border-radius": var(--global-spacing-2),
-					"bottom": var(--global-spacing-2),
-					"margin-left": var(--global-spacing-2),
+					"insert-block-end": var(--global-spacing-2),
+					"margin-inline-start": var(--global-spacing-2),
+					"padding-block-end": var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-2),
+					"padding-inline-end": var(--global-spacing-2),
+					"padding-inline-start": var(--global-spacing-2),
 					"position": absolute,
 					"z-index": 1,
 					"components": (
 						"icon": (
 							"fill": var(--global-white),
-							"height": var(--global-spacing-4),
-							"width": var(--global-spacing-4)
+							"block-size": var(--global-spacing-4),
+							"inline-size": var(--global-spacing-4)
 						)
 					)
 				),
 				"top-table-list-large-label": (
-					"margin-left": var(--global-spacing-2),
-					"color": var(--global-white)
+					"color": var(--global-white),
+					"margin-inline-start": var(--global-spacing-2)
 				),
 				"top-table-list-large-text": (
 					"gap": 0,
@@ -2762,11 +2934,14 @@
 							"font-size": var(--body-font-size),
 							"line-height": var(--body-line-height)
 						),
+						"separator": (
+							"margin-block-end":0,
+							"margin-block-start": 0,
+							"margin-inline-end": var(--global-spacing-2),
+							"margin-inline-start":var(--global-spacing-2)
+						),
 						"stack": (
 							"gap": var(--global-spacing-4)
-						),
-						"separator": (
-							"margin": 0 var(--global-spacing-2) 0 var(--global-spacing-2)
 						)
 					)
 				),
@@ -2774,31 +2949,37 @@
 					"components": (
 						"attribution": (
 							"display": block,
-							"margin-top": var(--global-spacing-4)
+							"margin-block-start": var(--global-spacing-4)
 						),
 						"divider": (
 							"clear": both,
-							"margin-top": var(--global-spacing-5)
-						),
-						"media-item": (
-							"float": right,
-							"margin": 0 0 var(--global-spacing-5) 0,
-							"max-width": 100px
+							"margin-block-start": var(--global-spacing-5)
 						),
 						"heading": (
 							"font-size": var(--heading-level-5-font-size),
 							"font-weight": var(--heading-level-5-font-weight),
 							"line-height": var(--heading-level-5-line-height),
-							"margin-bottom": var(--global-spacing-4)
+							"margin-block-end": var(--global-spacing-4)
+						),
+						"link": (
+							"position": relative
+						),
+						"media-item": (
+							"float": inline-end,
+							"margin-block-end":var(--global-spacing-5),
+							"margin-block-start": 0,
+							"margin-inline-end": 0,
+							"margin-inline-start": 0,
+							"max-inline-size": 100px
 						),
 						"paragraph": (
 							"display": block
 						),
 						"separator": (
-							"padding": 0 var(--global-spacing-2)
-						),
-						"link": (
-							"position": relative
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
 						)
 					)
 				),
@@ -2809,31 +2990,37 @@
 				),
 				"top-table-list-medium-icon-label": (
 					"align-items": center,
-					"padding": var(--global-spacing-2),
 					"background-color": var(--color-primary),
-					"border": 0,
+					"border-block-end": 0,
+					"border-block-start": 0,
+					"border-inline-end": 0,
+					"border-inline-start": 0,
 					"border-radius": var(--global-spacing-2),
-					"bottom": var(--global-spacing-2),
+					"inline-block-end": var(--global-spacing-2),
 					"margin-left": var(--global-spacing-2),
+					"padding-block-end": var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-2),
+					"padding-inline-end": var(--global-spacing-2),
+					"padding-inline-start": var(--global-spacing-2)
 					"position": absolute,
 					"z-index": 1,
 					"components": (
 						"icon": (
 							"fill": var(--global-white),
-							"height": var(--global-spacing-4),
-							"width": var(--global-spacing-4)
+							"block-size": var(--global-spacing-4),
+							"inline-size": var(--global-spacing-4)
 						)
 					)
 				),
 				"top-table-list-medium-label": (
-					"margin-left": var(--global-spacing-2),
 					"color": var(--global-white),
-					"display": none
+					"display": none,
+					"margin-inline-start": var(--global-spacing-2)
 				),
 				"top-table-list-medium-show-image": (
 					"components": (
 						"heading": (
-							"width": 68%
+							"inline-size": 68%
 						)
 					)
 				),
@@ -2881,15 +3068,18 @@
 				"top-table-list-xl": (
 					"components": (
 						"heading": (
-							"align-self": left,
-							"justify-content": left
+							"align-self": start,
+							"justify-content": start
 						),
 						"overline": (
 							"display": flex,
-							"justify-content": left
+							"justify-content": start
 						),
 						"separator": (
-							"padding": 0 var(--global-spacing-2)
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
 						),
 						"stack": (
 							"gap": var(--global-spacing-4)
@@ -3360,6 +3550,9 @@
 				"media-item-fig-caption-vertical-video": (
 					"text-align": center
 				),
+				"media-item-fig-caption-vertical-video": (
+					"text-align": center
+				),
 				"media-item-title": (
 					"font-weight": var(--global-font-weight-7)
 				),
@@ -3407,6 +3600,9 @@
 				"vertical-video-frame": (
 					"background-color": transparent
 				),
+				"vertical-video-frame": (
+					"background-color": transparent
+				),
 				"video": (
 					"margin-block-start": auto,
 					"margin-inline-start": auto,
@@ -3445,19 +3641,22 @@
 				"article-body-gallery-fullscreen": (
 					"components": (
 						"media-item-fig-caption": (
-							"padding": 0 var(--global-spacing-5)
+							"padding-block-start": 0,
+							"padding-inline-end": var(--global-spacing-5),
+							"padding-block-end": 0,
+							"padding-inline-start": var(--global-spacing-5)					
 						)
 					)
 				),
 				"article-body-image-wrapper": (
-					"max-height": 75vh
+					"max-block-size": 75vh
 				),
 				"author-bio-author-description": (
 					"font-size": var(--body-font-size),
 					"line-height": var(--body-line-height)
 				),
 				"author-bio-social-link-wrapper": (
-					"margin-top": var(--global-spacing-4)
+					"margin-block-start": var(--global-spacing-4)
 				),
 				"double-chain": (
 					"components": (
@@ -3512,18 +3711,24 @@
 				"full-author-bio": (
 					"flex-direction": row,
 					"gap": var(--global-spacing-5),
-					"margin": 0,
-					"max-width": auto,
+					"margin-block-end": 0,
+					"margin-block-start": 0,
+					"margin-inline-end": 0,
+					"margin-inline-start": 0,
+					"max-inline-size": auto,
 					"components": (
 						"image": (
-							"margin": 0,
-							"max-height": 11.25rem,
-							"max-width": 11.25rem
+							"margin-block-end": 0,
+							"margin-block-start": 0,
+							"margin-inline-end": 0,
+							"margin-inline-start": 0,
+							"max-block-size": 11.25rem,
+							"max-inline-size": 11.25rem
 						)
 					)
 				),
 				"full-author-bio-social-header": (
-					"text-align": left
+					"text-align": start
 				),
 				"full-author-bio-social-icons": (
 					"justify-content": flex-start
@@ -3550,7 +3755,10 @@
 					"display": none
 				),
 				"header-nav-chain": (
-					"padding": var(--global-spacing-3) var(--global-spacing-5)
+					"padding-block-end": var(--global-spacing-3),
+					"padding-block-start": var(--global-spacing-3),
+					"padding-inline-end": var(--global-spacing-5),
+					"padding-inline-start": var(--global-spacing-5)
 				),
 				"header-nav-chain-flyout-nav-components-desktop": (
 					"display": flex
@@ -3559,7 +3767,7 @@
 					"display": none
 				),
 				"header-nav-chain-flyout-nav-wrapper": (
-					"width": 315px
+					"inline-size": 315px
 				),
 				"header-nav-chain-flyout-nav-wrapper-closed": (
 					"transform": translate(-315px, 0)
@@ -3636,9 +3844,12 @@
 				"medium-manual-promo": (
 					"components": (
 						"media-item": (
-							"float": left,
-							"margin": 0,
-							"max-width": 33%
+							"float": inline-start,
+							"margin-block-end": 0,
+							"margin-block-start": 0,
+							"margin-inline-end": 0,
+							"margin-inline-start": 0,
+							"max-inline-size": 33%
 						),
 						"paragraph": (
 							"display": block
@@ -3647,12 +3858,12 @@
 				),
 				"medium-manual-promo-show-image": (
 					"components": (
-						"paragraph": (
-							"margin-left": calc(33% + var(--global-spacing-6))
-						),
 						"heading": (
-							"margin-left": calc(33% + var(--global-spacing-6)),
-							"width": auto
+							"inline-size": auto,
+							"margin-inline-start": calc(33% + var(--global-spacing-6))
+						),
+						"paragraph": (
+							"margin-inline-start": calc(33% + var(--global-spacing-6))
 						)
 					)
 				),
@@ -3746,16 +3957,27 @@
 					)
 				),
 				"right-rail-advanced-main-interior-item": (
-					"border-right": 1px solid #dadada,
-					"padding": 0 var(--global-spacing-6) 0 0,
+					"border-inline-end-width": 1px,
+					"border-inline-end-style": solid,
+					"border-inline-end-color": #dadada,
+					"padding-block-start": 0,
+					"padding-inline-end": var(--global-spacing-6),
+					"padding-block-end": 0,
+					"padding-inline-start": 0,
 					"display": flex
 				),
 				"right-rail-advanced-main-right-rail": (
-					"padding": 0 0 0 var(--global-spacing-6),
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-block-end": 0,
+					"padding-inline-start": var(--global-spacing-6),
 					"display": flex
 				),
 				"right-rail-advanced-navigation": (
-					"padding": 0 0 var(--global-spacing-8) 0
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-block-end": var(--global-spacing-8),
+					"padding-inline-start": 0
 				),
 				"right-rail-advanced-rail-container": (
 					"grid-template-columns": 2fr 1fr,
@@ -3763,14 +3985,25 @@
 					"grid-template-rows": initial
 				),
 				"right-rail-main-interior-item": (
-					"border-right": 1px solid #dadada,
-					"padding": 0 var(--global-spacing-6) 0 0
+					"border-inline-end-width": 1px,
+					"border-inline-end-style": solid,
+					"border-inline-end-color": #dadada,
+					"padding-block-start": 0,
+					"padding-inline-end": var(--global-spacing-6),
+					"padding-block-end": 0,
+					"padding-inline-start": 0
 				),
 				"right-rail-main-right-rail": (
-					"padding": 0 0 0 var(--global-spacing-6)
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-block-end": 0,
+					"padding-inline-start": var(--global-spacing-6)
 				),
 				"right-rail-navigation": (
-					"padding": 0 0 var(--global-spacing-8) 0
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-block-end": var(--global-spacing-8),
+					"padding-inline-start": 0
 				),
 				"right-rail-rail-container": (
 					"grid-template-columns": 2fr 1fr,
@@ -3862,8 +4095,8 @@
 							"display": block
 						),
 						"media-item": (
-							"float": left,
-							"max-width": 33%
+							"float": inline-start,
+							"max-inline-size": 33%
 						),
 						"paragraph": (
 							"display": block
@@ -3879,14 +4112,14 @@
 				"top-table-list-medium-show-image": (
 					"components": (
 						"attribution": (
-							"margin-left": calc(33% + var(--global-spacing-6))
+							"margin-inline-start": calc(33% + var(--global-spacing-6))
 						),
 						"heading": (
-							"margin-left": calc(33% + var(--global-spacing-6)),
-							"width": auto
+							"inline-size": auto,
+							"margin-inline-start": calc(33% + var(--global-spacing-6))
 						),
 						"paragraph": (
-							"margin-left": calc(33% + var(--global-spacing-6))
+							"margin-inline-start": calc(33% + var(--global-spacing-6))
 						)
 					)
 				),
@@ -3984,7 +4217,7 @@
 					)
 				),
 				"xl-promo-icon-label": (
-					"margin-left": var(--global-spacing-2),
+					"margin-inline-start": var(--global-spacing-2),
 					"color": var(--global-white)
 				)
 			),

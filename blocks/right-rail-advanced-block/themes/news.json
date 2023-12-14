@@ -61,7 +61,7 @@
 				"padding-inline-end": "initial",
 				"padding-block-end": "initial",
 				"padding-inline-start": "initial",
-				"border-right": "initial",
+				"border-inline-end": "initial",
 				"gap": "var(--global-spacing-5)",
 				"display": "contents"
 			},

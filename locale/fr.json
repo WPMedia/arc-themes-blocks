@@ -152,7 +152,7 @@
 		"identity-block.save": "Save",
 		"identity-block.sign-up": "Sign Up",
 		"identity-block.sign-up-form-error": "There's been an error creating your account",
-		"identity-block.terms-privacy-text": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>.",
+		"identity-block.terms-privacy-text": "En créant un compte, vous acceptez les <a href='%{termsURL}'> Conditions d'utilisation <\/a> et reconnaissez notre <a href='%{privacyURL}'> Politique de confidentialité <\/a> .",
 		"identity-block.update-email-error": "There's been an error updating your email address",
 		"identity-block.update-password-error": "There's been an error updating your password",
 		"identity-block.username": "Nom d’utilisateur"
@@ -455,6 +455,9 @@
 		"checkout-block.Zambia": "Zambia",
 		"checkout-block.Zimbabwe": "Zimbabwe",
 		"checkout-block.back-to-offer-page": "Retour à la sélection d'abonnement",
+		"checkout-block.cardNumber": "Numéro de carte",
+		"checkout-block.cardholderName": "Nom sur la carte",
+		"checkout-block.cardholderName-requirements": "Veuillez entrer votre nom sur la carte",
 		"checkout-block.contact-info": "Informations de contact",
 		"checkout-block.continue-to-checkout": "Continuer vers le paiement",
 		"checkout-block.country": "Pays ou région",
@@ -475,8 +478,12 @@
 		"checkout-block.plus-sales-tax": "Plus la taxe de vente applicable",
 		"checkout-block.Åland-Islands": "Åland Islands",
 		"subscriptions-block.credit-card-information": "Mode de paiement et informations",
+		"subscriptions-block.payWithCard-label": "Ou Payer par carte",
 		"subscriptions-block.payment-error": "Une erreur s'est produite lors du traitement de votre paiement.",
 		"subscriptions-block.payment-information": "Informations relatives à la carte de crédit",
-		"subscriptions-block.submit-payment": "Acheter un abonnement"
+		"subscriptions-block.paypal-processing": "Traitement...",
+		"subscriptions-block.paypal-redirect-label": "Redirection vers la page PayPal...",
+		"subscriptions-block.submit-payment": "Acheter un abonnement",
+		"subscriptions-block.update-payment": "Mettre à jour le mode de paiement"
 	}
 }

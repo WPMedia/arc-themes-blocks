@@ -31,7 +31,7 @@
 		"category-carousel.aria-label": "カテゴリ",
 		"category-carousel.left-arrow-label": "前",
 		"category-carousel.right-arrow-label": "次",
-		"category-carousel.slide-indicator": "スライド（%{current}/%{maximum}）"
+		"category-carousel.slide-indicator": "スライド（%{current}\/%{maximum}）"
 	},
 	"default-output-block": {
 		"default-output-block.skip-main": "メインコンテンツにスキップ"
@@ -66,7 +66,7 @@
 		"global.gallery-autoplay-label-stop": "自動スライド ショーを停止",
 		"global.gallery-expand-button": "展開",
 		"global.gallery-next-label": "次のスライド",
-		"global.gallery-page-count-text": "%{current} / %{total}",
+		"global.gallery-page-count-text": "%{current} \/ %{total}",
 		"global.gallery-pause-autoplay-button": "自動再生の一時停止",
 		"global.gallery-previous-label": "前のスライド",
 		"global.gallery-text": "ギャラリー",
@@ -152,7 +152,7 @@
 		"identity-block.save": "Save",
 		"identity-block.sign-up": "Sign Up",
 		"identity-block.sign-up-form-error": "There's been an error creating your account",
-		"identity-block.terms-privacy-text": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>.",
+		"identity-block.terms-privacy-text": "アカウントを作成すると、 <a href='%{termsURL}'>利用規約<\/a>に同意し、 <a href='%{privacyURL}'>プライバシー ポリシー<\/a>に同意したことになります。",
 		"identity-block.update-email-error": "There's been an error updating your email address",
 		"identity-block.update-password-error": "There's been an error updating your password",
 		"identity-block.username": "ユーザー名"
@@ -168,7 +168,7 @@
 		"product-assortment-carousel.aria-label": "製品",
 		"product-assortment-carousel.left-arrow-label": "前",
 		"product-assortment-carousel.right-arrow-label": "次",
-		"product-assortment-carousel.slide-indicator": "スライド（%{current}/%{maximum}）"
+		"product-assortment-carousel.slide-indicator": "スライド（%{current}\/%{maximum}）"
 	},
 	"product-content-block": {
 		"product-content.description": "説明",
@@ -184,7 +184,7 @@
 		"product-gallery.go-to-slide": "スライド%{slideNumber}に移動",
 		"product-gallery.left-arrow-label": "前",
 		"product-gallery.right-arrow-label": "次",
-		"product-gallery.slide-indicator": "スライド（%{current}/%{maximum}）"
+		"product-gallery.slide-indicator": "スライド（%{current}\/%{maximum}）"
 	},
 	"product-information-block": {
 		"product-information.list-price": "定価%{price}",
@@ -208,7 +208,7 @@
 		"story-carousel.aria-label": "記事",
 		"story-carousel.left-arrow-label": "前",
 		"story-carousel.right-arrow-label": "次",
-		"story-carousel.slide-indicator": "スライド（%{current}/%{maximum}）"
+		"story-carousel.slide-indicator": "スライド（%{current}\/%{maximum}）"
 	},
 	"subscriptions-block": {
 		"checkout-block.Afghanistan": "Afghanistan",
@@ -455,6 +455,9 @@
 		"checkout-block.Zambia": "Zambia",
 		"checkout-block.Zimbabwe": "Zimbabwe",
 		"checkout-block.back-to-offer-page": "サブスクリプションの選択に戻る",
+		"checkout-block.cardNumber": "カード番号",
+		"checkout-block.cardholderName": "カードに記載されている名前",
+		"checkout-block.cardholderName-requirements": "カードに名前を入力してください",
 		"checkout-block.contact-info": "連絡先情報",
 		"checkout-block.continue-to-checkout": "チェックアウトに進む",
 		"checkout-block.country": "国または地域",
@@ -475,8 +478,12 @@
 		"checkout-block.plus-sales-tax": "さらに消費税がかかります",
 		"checkout-block.Åland-Islands": "Åland Islands",
 		"subscriptions-block.credit-card-information": "支払い方法および情報",
+		"subscriptions-block.payWithCard-label": "またはカードで支払う",
 		"subscriptions-block.payment-error": "支払い処理中にエラーが発生しました。",
 		"subscriptions-block.payment-information": "クレジットカード情報",
-		"subscriptions-block.submit-payment": "サブスクリプションを購入"
+		"subscriptions-block.paypal-processing": "処理...",
+		"subscriptions-block.paypal-redirect-label": "PayPal ページにリダイレクトしています...",
+		"subscriptions-block.submit-payment": "サブスクリプションを購入",
+		"subscriptions-block.update-payment": "支払い方法の更新"
 	}
 }

@@ -19,7 +19,6 @@ export function PresentationalNav(props) {
 	const {
 		ariaLabelLink,
 		children,
-		closeDrawer,
 		customFields,
 		displayLinks,
 		horizontalLinksHierarchy,
@@ -233,14 +232,6 @@ const Nav = (props) => {
 		document.body.classList.remove("nav-open");
 	};
 
-	const closeDrawer = (event) => {
-		const ele = event.target;
-		if (ele.closest(".inner-drawer-nav")) {
-			return;
-		}
-		closeNavigation();
-	};
-
 	const menuButtonClickAction = () => {
 		setSectionDrawerOpen(!isSectionDrawerOpen);
 		document.body.classList.toggle("nav-open");
@@ -282,7 +273,6 @@ const Nav = (props) => {
 	return (
 		<PresentationalNav
 			ariaLabelLink={ariaLabelLink}
-			closeDrawer={closeDrawer}
 			customFields={customFields}
 			displayLinks={displayLinks}
 			horizontalLinksHierarchy={horizontalLinksHierarchy}

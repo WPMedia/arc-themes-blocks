@@ -1,13 +1,27 @@
 {
 	"links-bar-block.element-aria-label": {
+		"ar": "مزيداً من الروابط",
+		"bn": "আরও লিঙ্ক",
+		"bo": "སྦྲེལ་མཐུད་དེ་ལས་མང་བ།",
 		"de": "Weitere Links",
 		"en": "More Links",
 		"es": "Más enlaces",
 		"fr": "Plus de liens",
+		"id": "Tautan Lain",
 		"ja": "その他のリンク",
+		"km-KH": "តំណច្រើនទៀត",
 		"ko": "링크 더 보기",
+		"lo": "ລິ້ງເຊື່ອມຕໍ່ເພີ່ມຕື່ມ",
+		"ms": "Lebih Banyak Pautan",
+		"my": "နောက်ထပ်လင့်ခ်များ",
 		"no": "Flere lenker",
+		"pt-BR": "Mais links",
 		"pt": "Mais ligações",
-		"sv": "Fler länkar"
+		"sv": "Fler länkar",
+		"th": "ลิงก์เพิ่มเติม",
+		"ug": "تېخىمۇ كۆپ ئۇلىنىشلار",
+		"vi": "Xem thêm liên kết",
+		"zh-CN": "更多链接",
+		"zh-TW": "更多連結"
 	}
 }

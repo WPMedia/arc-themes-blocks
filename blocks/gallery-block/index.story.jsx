@@ -239,3 +239,29 @@ export const hideCaptionAndCreditsAndTitle = () => {
 		/>
 	);
 };
+
+export const hideCaptionAndCreditsAndTitleInRtl = () => {
+	const mockGlobalContent = {
+		...mockGallery,
+		...mockContextGlobalContent,
+	};
+
+	const mockCustomFields = {
+		inheritGlobalContent: true,
+		galleryContentConfig: {},
+		hideCaption: true,
+		hideCredits: true,
+		hideTitle: true,
+	};
+
+	return (
+		<div dir="rtl">
+			<GalleryPresentation
+				arcSite="StoryBook Site"
+				globalContent={mockGlobalContent}
+				customFields={mockCustomFields}
+				resizerAppVersion={2}
+			/>
+		</dir>
+	);
+};

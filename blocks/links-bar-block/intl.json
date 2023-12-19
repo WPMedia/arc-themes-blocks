@@ -1,6 +1,5 @@
 {
 	"links-bar-block.element-aria-label": {
-<<<<<<< HEAD
 		"ar": "مزيداً من الروابط",
 		"bn": "আরও লিঙ্ক",
 		"bo": "སྦྲེལ་མཐུད་དེ་ལས་མང་བ།",
@@ -24,16 +23,5 @@
 		"vi": "Xem thêm liên kết",
 		"zh-CN": "更多链接",
 		"zh-TW": "更多連結"
-=======
-		"sv": "Fler länkar",
-		"pt": "Mais ligações",
-		"no": "Flere lenker",
-		"ko": "링크 더 보기",
-		"ja": "その他のリンク",
-		"fr": "Plus de liens",
-		"es": "Más enlaces",
-		"en": "More Links",
-		"de": "Weitere Links"
->>>>>>> arc-themes-release-version-2.1.2
 	}
 }

@@ -37,7 +37,10 @@ const fetch = ({ _id, "arc-site": site }, { cachedCall }) => {
 		method: "GET",
 	})
 		.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_TOKEN_VERSION))
-		.then(({ data }) => data)
+		.then(({ data: { basic, ...remainingData } }) => ({
+			...remainingData,
+			content_elements: basic,
+		}))
 		.catch(handleFetchError);
 };
 

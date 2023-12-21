@@ -91,7 +91,7 @@
 	"share-bar-twitter": {
 		"styles": {
 			"default": {
-				"fill": "#6baae8"
+				"fill": "#000000"
 			},
 			"desktop": {}
 		}
@@ -99,7 +99,7 @@
 	"share-bar-twitter-hover": {
 		"styles": {
 			"default": {
-				"fill": "#91c4f6"
+				"fill": "#000000"
 			},
 			"desktop": {}
 		}

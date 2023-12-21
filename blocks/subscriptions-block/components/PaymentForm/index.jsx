@@ -4,13 +4,11 @@ import {
 	useElements,
 	CardNumberElement,
 	CardExpiryElement,
-	CardCvcElement
+	CardCvcElement,
 } from "@stripe/react-stripe-js";
 import {
 	usePhrases,
 	Button,
-	Heading,
-	HeadingSection,
 	Paragraph,
 	Grid,
 	Input,
@@ -34,11 +32,13 @@ function PaymentForm({
 	paymentMethodID,
 	clientSecret,
 	stripeInstance,
-	formTitle,
-	formLabel,
 	submitText,
 	formErrorText,
 	className,
+	paymentID,
+	isPaymentMethodUpdate,
+	updateText,
+	successUpdateURL,
 }) {
 	const [formStatus, setFormStatus] = useState(FORM_STATUS.IDLE);
 	const [cardName, setCardName] = useState("");
@@ -68,16 +68,19 @@ function PaymentForm({
 			return;
 		}
 
+		// if order of $0 there's a different stripe logic,
+		let totalOrder;
+		if (!isPaymentMethodUpdate) {
+			totalOrder = Sales.currentOrder.total;
+		}
+
 		let result;
-
-		// if order of $0 there's a different stripe logic
-		const totalOrder = Sales.currentOrder.total;
-
-		if (totalOrder > 0) {
+		if (totalOrder && totalOrder > 0 && !isPaymentMethodUpdate) {
 			result = await stripeInstance.confirmCardPayment(clientSecret, {
 				payment_method: paymentMethod.id,
 			});
 		} else {
+			// User is updating the payment method OR totalOder <= 0
 			result = await stripeInstance.confirmCardSetup(clientSecret, {
 				payment_method: paymentMethod.id,
 			});
@@ -88,31 +91,45 @@ function PaymentForm({
 			return;
 		}
 
-		if (totalOrder > 0) {
-			const nonZeroPriceOutput = await Sales.finalizePayment(
-				orderNumber,
-				paymentMethodID,
-				// using paymentIntent here for greater than 0
-				result.paymentIntent.id,
-			);
-			if (nonZeroPriceOutput.status === "Paid") {
-				setFormStatus(FORM_STATUS.SUCCESS);
-				window.location.href = successURL;
+		if (!isPaymentMethodUpdate) {
+			if (totalOrder > 0) {
+				const nonZeroPriceOutput = await Sales.finalizePayment(
+					orderNumber,
+					paymentMethodID,
+					// using paymentIntent here for greater than 0
+					result.paymentIntent.id,
+				);
+				if (nonZeroPriceOutput.status === "Paid") {
+					setFormStatus(FORM_STATUS.SUCCESS);
+					window.location.href = successURL;
+				} else {
+					setFormStatus(FORM_STATUS.ERROR);
+				}
 			} else {
-				setFormStatus(FORM_STATUS.ERROR);
+				const zeroPriceOutput = await Sales.finalizePayment(
+					orderNumber,
+					paymentMethodID,
+					// using setupIntent here for 0
+					result.setupIntent.id,
+				);
+				// even if no money changes hands, still shows status 'Paid'
+				if (zeroPriceOutput.status === "Paid") {
+					setFormStatus(FORM_STATUS.SUCCESS);
+					window.location.href = successURL;
+				} else {
+					setFormStatus(FORM_STATUS.ERROR);
+				}
 			}
 		} else {
-			const zeroPriceOutput = await Sales.finalizePayment(
-				orderNumber,
-				paymentMethodID,
-				// using setupIntent here for 0
-				result.setupIntent.id,
-			);
-			// even if no money changes hands, still shows status 'Paid'
-			if (zeroPriceOutput.status === "Paid") {
+			try {
+				await Sales.finalizePaymentUpdate(
+					paymentID,
+					paymentMethodID,
+					result.setupIntent.id,
+				);
 				setFormStatus(FORM_STATUS.SUCCESS);
-				window.location.href = successURL;
-			} else {
+				window.location.href = successUpdateURL;
+			} catch (e) {
 				setFormStatus(FORM_STATUS.ERROR);
 			}
 		}
@@ -122,11 +139,7 @@ function PaymentForm({
 
 	return (
 		<section className={`${className}__payment`}>
-			<HeadingSection>
-				<Heading>{formTitle}</Heading>
-			</HeadingSection>
 			<form onSubmit={handleSubmit} className={`${className}__payment-form`}>
-				<Paragraph>{formLabel}</Paragraph>
 				<Grid className={`${className}__payment-information`}>
 					<Stack>
 						<Input
@@ -168,9 +181,13 @@ function PaymentForm({
 					variant="primary"
 					fullWidth
 					type="submit"
-					disabled={(formStatus === FORM_STATUS.PROCESSING || formStatus === FORM_STATUS.SUCCESS) ? true : null}
+					disabled={
+						formStatus === FORM_STATUS.PROCESSING || formStatus === FORM_STATUS.SUCCESS
+							? true
+							: null
+					}
 				>
-					{submitText}
+					{!isPaymentMethodUpdate ? submitText : updateText}
 				</Button>
 				{formStatus === FORM_STATUS.ERROR ? (
 					<section role="alert">

@@ -245,7 +245,7 @@
 				"align-items": "center",
 				"inline-size": "100%",
 				"justify-content": "center",
-				"margin-top": "var(--global-spacing-5)",
+				"margin-block-start": "var(--global-spacing-5)",
 				"components": {
 					"paragraph": {
 						"margin-inline-start": "var(--global-spacing-5)",

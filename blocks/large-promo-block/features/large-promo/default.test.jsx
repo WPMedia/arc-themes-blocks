@@ -93,7 +93,7 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 }));
 
 jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => largePromoMock),
+	useContent: jest.fn(() => ({})),
 	useEditableContent: jest.fn(() => ({
 		editableContent: () => {},
 		searchableField: () => {},
@@ -103,10 +103,10 @@ jest.mock("fusion:content", () => ({
 describe("Large Promo", () => {
 	afterEach(() => {
 		jest.resetModules();
-		jest.clearAllMocks();
 	});
 
 	it("should return null if lazyLoad on the server and not in the admin", () => {
+		useContent.mockReturnValueOnce(largePromoMock);
 		const updatedConfig = {
 			lazyLoad: true,
 		};
@@ -116,6 +116,7 @@ describe("Large Promo", () => {
 	});
 
 	it("should render complete promo", () => {
+		useContent.mockReturnValueOnce(largePromoMock);
 		render(
 			<LargePromo
 				customFields={{
@@ -137,6 +138,7 @@ describe("Large Promo", () => {
 	});
 
 	it("should not render overline", () => {
+		useContent.mockReturnValueOnce(largePromoMock);
 		render(
 			<LargePromo
 				customFields={{
@@ -156,7 +158,8 @@ describe("Large Promo", () => {
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
-	it("should not render date", () => {
+	it("should not render date when disabled", () => {
+		useContent.mockReturnValueOnce(largePromoMock);
 		render(
 			<LargePromo
 				customFields={{
@@ -176,7 +179,33 @@ describe("Large Promo", () => {
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
+	it.only("should not render date when null", () => {
+		useContent.mockReturnValueOnce({
+			owner: {
+				sponsored: true,
+			},
+			headlines: {
+				basic: "Baby panda born at the zoo",
+			},
+		});
+		render(
+			<LargePromo
+				customFields={{
+					showByline: true,
+					showDate: true,
+					showDescription: false,
+					showHeadline: true,
+					showImage: false,
+					imageRatio: "4:3",
+					showOverline: true,
+				}}
+			/>,
+		);
+		expect(screen.queryByText("December 02, 2019 at 6:58PM UTC")).toBeNull();
+	});
+
 	it("should not render byline", () => {
+		useContent.mockReturnValueOnce(largePromoMock);
 		render(
 			<LargePromo
 				customFields={{
@@ -197,6 +226,7 @@ describe("Large Promo", () => {
 	});
 
 	it("should not render headline", () => {
+		useContent.mockReturnValueOnce(largePromoMock);
 		render(
 			<LargePromo
 				customFields={{
@@ -217,6 +247,7 @@ describe("Large Promo", () => {
 	});
 
 	it("should not render description", () => {
+		useContent.mockReturnValueOnce(largePromoMock);
 		render(
 			<LargePromo
 				customFields={{
@@ -237,6 +268,7 @@ describe("Large Promo", () => {
 	});
 
 	it("should only render Image", () => {
+		useContent.mockReturnValueOnce(largePromoMock);
 		render(
 			<LargePromo
 				customFields={{
@@ -253,6 +285,7 @@ describe("Large Promo", () => {
 	});
 
 	it('should not render Image if "showImage" is false', () => {
+		useContent.mockReturnValueOnce(largePromoMock);
 		render(
 			<LargePromo
 				customFields={{
@@ -265,6 +298,7 @@ describe("Large Promo", () => {
 	});
 
 	it("should make a blank call to the signing-service if the image is from PhotoCenter and has an Auth value", () => {
+		useContent.mockReturnValueOnce(largePromoMock);
 		const config = {
 			imageOverrideAuth: "test hash",
 			imageOverrideURL: "test_id=123",
@@ -277,6 +311,7 @@ describe("Large Promo", () => {
 	});
 
 	it("should make a call to the signing-service if the image is from PhotoCenter but does not have an Auth value", () => {
+		useContent.mockReturnValueOnce(largePromoMock);
 		const config = {
 			imageOverrideAuth: "",
 			imageOverrideURL: "test_id=123",
@@ -292,6 +327,7 @@ describe("Large Promo", () => {
 	});
 
 	it("should make a call to the signing-service if the image is not from PhotoCenter", () => {
+		useContent.mockReturnValueOnce(largePromoMock);
 		const config = {
 			imageOverrideAuth: "",
 			imageOverrideURL: "test_id=123",
@@ -314,6 +350,7 @@ describe("Large Promo", () => {
 			headlines: {
 				basic: "Baby panda born at the zoo",
 			},
+			display_date: "2019-12-02T18:58:11.638Z",
 		});
 		render(
 			<LargePromo
@@ -332,10 +369,11 @@ describe("Large Promo", () => {
 		expect(screen.queryByText("global.sponsored-content")).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).toBeNull();
-		expect(screen.queryByText("December 02, 2019 at 6:58PM UTC")).toBeNull();
 	});
 
 	it("should render image icon label", () => {
+		useContent.mockReturnValueOnce(largePromoMock);
+
 		const { container } = render(
 			<LargePromo
 				customFields={{

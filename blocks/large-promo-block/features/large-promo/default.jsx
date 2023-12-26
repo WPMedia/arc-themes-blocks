@@ -281,12 +281,12 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		fallbackImage,
 	} = getProperties(arcSite);
 
-	const displayDate = localizeDateTime(
+	const displayDate = content?.display_date ? localizeDateTime(
 		new Date(content?.display_date),
 		dateTimeFormat,
 		language,
 		timeZone
-	);
+	) : null;
 	const phrases = usePhrases();
 
 	const editableDescription = content?.description

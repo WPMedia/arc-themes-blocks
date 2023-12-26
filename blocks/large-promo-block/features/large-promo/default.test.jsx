@@ -179,7 +179,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
-	it.only("should not render date when null", () => {
+	it("should not render date when null", () => {
 		useContent.mockReturnValueOnce({
 			owner: {
 				sponsored: true,

@@ -17,7 +17,7 @@ import {
 	isServerSide,
 	LazyLoad,
 	Link,
-	localizeDate,
+	localizeDateTime,
 	Overline,
 	Separator,
 	Stack,
@@ -48,7 +48,7 @@ const CardListItems = (props) => {
 		dateLocalization: { language, timeZone, dateFormat } = {
 			language: "en",
 			timeZone: "GMT",
-			dateFormat: "%B %d, %Y",
+			dateFormat: "%B %d, %Y at %l:%M%p %Z",
 		},
 	} = props;
 	const phrases = usePhrases();
@@ -135,7 +135,7 @@ const CardListItems = (props) => {
 
 	const sourceContent = contentElements[0];
 
-	const displayDate = localizeDate(sourceContent.display_date, dateFormat, language, timeZone);
+	const displayDate = localizeDateTime(sourceContent.display_date, dateFormat, language, timeZone);
 
 	/* Author Formatting */
 	const bylineNodes = formatAuthors(sourceContent?.credits?.by, phrases.t("global.and-text"));
@@ -210,7 +210,7 @@ const CardListItems = (props) => {
 									{hasAuthor ? (
 										<>
 											<span>{phrases.t("global.by-text")}</span> <span>{bylineNodes}</span>
-											<Separator />
+											<Separator data-testid="card-list-separator" />
 										</>
 									) : null}
 									<Date dateTime={sourceContent.display_date} dateString={displayDate} />

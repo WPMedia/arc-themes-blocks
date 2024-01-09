@@ -3970,18 +3970,19 @@
 					"components": (
 						"attribution": (
 							"display": block,
-							"margin-inline-end": calc(33% + var(--global-spacing-6)),
+							"margin-inline-start": calc(33% + var(--global-spacing-6)),
 						),
 						"heading": (
-							"margin-inline-end": calc(33% + var(--global-spacing-6)),
+							"margin-inline-start": calc(33% + var(--global-spacing-6)),
 							"inline-size": auto,
 						),
 						"overline": (
-							"margin-inline-end": var(--global-spacing-6),
+							"margin-inline-start": var(--global-spacing-6),
 							"font-size": var(--global-font-size-7),
 						),
 						"paragraph": (
-							"margin-inline-end": calc(33% + var(--global-spacing-6)),
+							"display": block,
+							"margin-inline-start": calc(33% + var(--global-spacing-6)),
 						),
 					),
 				),

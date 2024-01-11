@@ -63,3 +63,17 @@ export const headlineWithReallyLongText = () => (
 		url={linkUrl}
 	/>
 );
+
+export const rightToLeft = () => (
+	<div dir="rtl">
+		<AlertBarPresentational
+			alertRef={null}
+			arcSite="story-book"
+			barAriaLabel="Alert bar"
+			closeAriaLabel="Close"
+			hideAlertHandler={null}
+			linkText={headlineText}
+			url={linkUrl}
+		/>
+	</div>
+);

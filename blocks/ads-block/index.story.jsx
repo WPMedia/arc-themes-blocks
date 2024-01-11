@@ -36,3 +36,15 @@ export const adViewWithTopLabel = () => <ArcAdDisplay {...DEFAULT_PROPS} />;
 export const adViewHidingTopLabel = () => (
 	<ArcAdDisplay {...DEFAULT_PROPS} displayAdLabel={false} />
 );
+
+export const adminViewRightToLeft = () => (
+	<div dir="rtl">
+		<ArcAdDisplay {...DEFAULT_PROPS} isAdmin />
+	</div>
+);
+
+export const adViewWithTopLabelRightToLeft = () => (
+	<div dir="rtl">
+		<ArcAdDisplay {...DEFAULT_PROPS} />
+	</div>
+);

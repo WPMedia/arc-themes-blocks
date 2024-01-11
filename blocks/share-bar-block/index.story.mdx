@@ -91,3 +91,24 @@ const AnotherComponentWithGlobalContent = () => <ShareBar />;
 		/>
 	</Story>
 </Preview>
+
+** With RTL **
+
+<div dir="rtl">
+	<Story name="Custom ShareBar" height="700px">
+		<ShareBar
+			customFields={{
+				email: boolean("Email", true),
+				facebook: boolean("Facebook", true),
+				pinterest: boolean("Pinterest", true),
+				twitter: boolean("Twitter", true),
+				linkedIn: boolean("Linkedin", true),
+			}}
+			websiteName={text("headlineString", "Man Bites Dog")}
+			websiteDomain={text("websiteDomain", "https://www.thesun.com/")}
+			websiteUrl={text("websiteUrl", "/2019/07/15/global-kitchen-sink-article/")}
+			headlineString={text("websiteName", "The Sun")}
+			phrases={{ t: (key) => key }}
+		/>
+	</Story>
+</div>

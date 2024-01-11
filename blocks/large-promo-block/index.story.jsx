@@ -223,3 +223,20 @@ export const playVideoInPlaceOfImage = () => (
 		viewportPercentage={60}
 	/>
 );
+
+export const rightToLeft = () => {
+	const updatedCustomFields = {
+		...allCustomFields,
+		showOverline: true,
+		showHeadline: true,
+		showImage: true,
+		showDescription: true,
+		showByline: true,
+		showDate: true,
+	};
+	return (
+		<div dir="rtl">
+			<Promo customFields={updatedCustomFields} />
+		</div>
+	);
+};

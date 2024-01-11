@@ -97,7 +97,7 @@ module.exports = {
 		"react-hooks/exhaustive-deps": "error",
 		"react-hooks/rules-of-hooks": "error",
 		"react/forbid-prop-types": "off",
-		"react/function-component-definition": "warn",
+		"react/function-component-definition": "off",
 		"react/jsx-props-no-spreading": "off",
 		"react/no-danger": "off",
 		"react/no-unstable-nested-components": "warn",

@@ -255,3 +255,17 @@ export const video = () => {
 	};
 	return <LeadArt content={globalContent} customFields={{ playthrough: false }} />;
 };
+
+export const rightToLeft = () => {
+	const globalContent = {
+		arcSite: "story-book",
+		promo_items: {
+			lead_art: leadArtGallery,
+		},
+	};
+	return (
+		<div dir="rtl">
+			<LeadArt content={globalContent} customFields={{}} />
+		</div>
+	);
+};

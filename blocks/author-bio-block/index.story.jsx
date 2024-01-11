@@ -249,3 +249,14 @@ export const emptyImageObject = () => {
 
 	return <AuthorBioItems content={data} />;
 };
+
+export const withRtl = () => {
+	const data = {
+		credits: { by: [authorObject] },
+	};
+	return (
+		<div dir="rtl">
+			<AuthorBioItems content={data} />
+		</div>
+	);
+};

@@ -1,13 +1,27 @@
 {
 	"ads-block.ad-label": {
+		"ar": "الإعلان",
+		"bn": "বিজ্ঞাপন",
+		"bo": "བརྡ་ཁྱབ།",
 		"de": "WERBUNG",
 		"en": "ADVERTISEMENT",
 		"es": "ANUNCIO",
 		"fr": "PUBLICITÉ",
+		"id": "IKLAN",
 		"ja": "広告",
+		"km-KH": "ការផ្សព្វផ្សាយពាណិជ្ជកម្ម",
 		"ko": "광고",
+		"lo": "ໂຄສະນາ",
+		"ms": "IKLAN",
+		"my": "ကြော်ငြာ",
 		"no": "ANNONSE",
+		"pt-BR": "ANÚNCIO",
 		"pt": "ANÚNCIO",
-		"sv": "REKLAM"
+		"sv": "REKLAM",
+		"th": "โฆษณา",
+		"ug": "ADVERTISEMENT",
+		"vi": "QUẢNG CÁO",
+		"zh-CN": "广告",
+		"zh-TW": "廣告"
 	}
 }

@@ -167,3 +167,19 @@ export const onlyDescription = () => {
 
 	return <LargeManualPromo customFields={customFields} />;
 };
+
+export const withRtl = () => {
+	const customFields = {
+		...sampleData,
+		showOverline: true,
+		showHeadline: true,
+		showImage: true,
+		showDescription: true,
+	};
+
+	return (
+		<div dir="rtl">
+			<LargeManualPromo customFields={customFields} />
+		</div>
+	);
+};

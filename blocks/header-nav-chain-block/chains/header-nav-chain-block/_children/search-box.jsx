@@ -21,7 +21,7 @@ export default ({ alwaysOpen = false, placeholderText, customSearchAction = null
 		}
 	}, [shouldSearchOpen]);
 
-	const handleSearchBtnMousedown = (event) => {
+	const handleSearchBtnMouseUp = (event) => {
 		if (!isSearchBarPending) {
 			// if open, prevent blur event so we don't get a race condition on click vs blur
 			if (shouldSearchOpen) {
@@ -75,7 +75,7 @@ export default ({ alwaysOpen = false, placeholderText, customSearchAction = null
 				variant="secondary-reverse"
 				size="small"
 				onClick={handleClick}
-				onMouseDown={handleSearchBtnMousedown}
+				onMouseUp={handleSearchBtnMouseUp}
 				type="button"
 			>
 				<Icon name="Search" width={24} height={24} />

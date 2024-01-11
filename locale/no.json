@@ -66,7 +66,7 @@
 		"global.gallery-autoplay-label-stop": "Stopp automatisk lysbildevisning",
 		"global.gallery-expand-button": "Utvid",
 		"global.gallery-next-label": "Neste slide",
-		"global.gallery-page-count-text": "<span class='visually-hidden'>Bilde</span> %{current} av %{total}",
+		"global.gallery-page-count-text": "<span class='visually-hidden'>Bilde<\/span> %{current} av %{total}",
 		"global.gallery-pause-autoplay-button": "Sett automatisk avspilling på pause",
 		"global.gallery-previous-label": "Forrige slide",
 		"global.gallery-text": "Bildegalleri",
@@ -152,7 +152,7 @@
 		"identity-block.save": "Save",
 		"identity-block.sign-up": "Sign Up",
 		"identity-block.sign-up-form-error": "There's been an error creating your account",
-		"identity-block.terms-privacy-text": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>.",
+		"identity-block.terms-privacy-text": "Ved å opprette en konto godtar du <a href='%{termsURL}'> vilkårene for bruk <\/a> og erkjenner våre <a href='%{privacyURL}'> personvernregler <\/a> .",
 		"identity-block.update-email-error": "There's been an error updating your email address",
 		"identity-block.update-password-error": "There's been an error updating your password",
 		"identity-block.username": "Username"
@@ -455,6 +455,9 @@
 		"checkout-block.Zambia": "Zambia",
 		"checkout-block.Zimbabwe": "Zimbabwe",
 		"checkout-block.back-to-offer-page": "Tilbake til abonnementsvalg",
+		"checkout-block.cardNumber": "Kortnummer",
+		"checkout-block.cardholderName": "Navn på kort",
+		"checkout-block.cardholderName-requirements": "Vennligst skriv inn navn på kortet",
 		"checkout-block.contact-info": "Kontaktinformasjon",
 		"checkout-block.continue-to-checkout": "Fortsett til kassen",
 		"checkout-block.country": "Land eller område",
@@ -475,8 +478,12 @@
 		"checkout-block.plus-sales-tax": "I tillegg til gjeldende salgsavgift",
 		"checkout-block.Åland-Islands": "Åland Islands",
 		"subscriptions-block.credit-card-information": "Betalingsmetode og -informasjon",
+		"subscriptions-block.payWithCard-label": "Eller betale med kort",
 		"subscriptions-block.payment-error": "Det oppstod en feil under behandlingen av betalingen.",
 		"subscriptions-block.payment-information": "Kredittkortopplysninger",
-		"subscriptions-block.submit-payment": "Kjøp abonnement"
+		"subscriptions-block.paypal-processing": "Behandling...",
+		"subscriptions-block.paypal-redirect-label": "Omdirigerer til PayPal-siden...",
+		"subscriptions-block.submit-payment": "Kjøp abonnement",
+		"subscriptions-block.update-payment": "Oppdater betalingsmåte"
 	}
 }

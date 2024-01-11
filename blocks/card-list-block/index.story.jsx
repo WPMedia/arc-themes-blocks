@@ -51,3 +51,15 @@ export const titleAndNoContentRenderingNothing = () => {
 
 	return <CardList customFields={customFields} />;
 };
+
+export const withRtl = () => {
+	const customFields = {
+		...sampleData,
+	};
+
+	return (
+		<div dir="rtl">
+			<CardList {...props} customFields={customFields} />
+		</div>
+	);
+};

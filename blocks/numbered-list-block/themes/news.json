@@ -48,7 +48,7 @@
 	"numbered-list-item-image": {
 		"styles": {
 			"default": {
-				"max-width": "25%"
+				"max-inline-size": "25%"
 			},
 			"desktop": {}
 		}

@@ -10,25 +10,31 @@
 
 // do not delete this as it's used to inject scss
 .skip-main {
-	left: -999px;
+	inset-inline-start: -999px;
 	position: absolute;
-	top: auto;
+	inset-block-start: auto;
 	z-index: -999;
 	transition: none;
-	width: auto;
-	height: 56px;
+	inline-size: auto;
+	block-size: 56px;
 	background-color: #fff;
 	color: #575757;
 	text-decoration: none;
 	font-size: 1rem;
-	margin: 20px 0 19px;
-	padding: 16px;
+	margin-block-start: 20px;
+	margin-inline-end: 0;
+	margin-block-end: 19px;
+	margin-inline-start: 0;
+	padding-block-start: 16px;
+	padding-inline-end: 16px;
+	padding-block-end: 16px;
+	padding-inline-start: 16px;
 	border-radius: 4px;
 	border: solid 1px #575757;
 	font-family: Arial, sans-serif;
 
 	&:focus {
-		left: 10px;
+		inset-inline-start: 10px;
 		z-index: 999;
 	}
 }

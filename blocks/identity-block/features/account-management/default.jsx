@@ -3,8 +3,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Heading } from "@wpmedia/arc-themes-components";
-import useIdentity from "../../components/identity";
+import { Heading, useIdentity } from "@wpmedia/arc-themes-components";
 import { GoogleSignInProvider } from "../../components/social-sign-on/utils/googleContext";
 import EmailEditableFieldContainer from "./_children/EmailEditableFieldContainer";
 import PasswordEditableFieldContainer from "./_children/PasswordEditableFieldContainer";
@@ -65,7 +64,7 @@ function AccountManagement({ customFields }) {
 				}
 
 				const passwordProfile = identities.filter(
-					({ type }) => type === "Password" || type === "Identity"
+					({ type }) => type === "Password" || type === "Identity",
 				);
 
 				setHasPassword(passwordProfile?.length > 0);
@@ -94,6 +93,8 @@ function AccountManagement({ customFields }) {
 
 	const header = phrases.t("identity-block.account-information");
 	const socialProfileHeader = phrases.t("identity-block.connected-accounts");
+
+	console.log(header, socialProfileHeader);
 
 	// if logged in, return account info
 	return (

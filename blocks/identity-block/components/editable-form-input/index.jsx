@@ -19,7 +19,7 @@ export function ConditionalFormContainer({ showForm, children, onSubmit, setIsEd
 						...accumulator,
 						[element.name]: element.value,
 					}),
-					{}
+					{},
 				);
 			onSubmit(namedFields).then(() => setIsEditable(false));
 		}
@@ -30,7 +30,7 @@ export function ConditionalFormContainer({ showForm, children, onSubmit, setIsEd
 			{children}
 		</form>
 	) : (
-		<>{children}</>
+		children
 	);
 }
 

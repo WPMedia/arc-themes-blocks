@@ -8,7 +8,7 @@ import LargeManualPromo from "./default";
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
-	LazyLoad: ({ children }) => <>{children}</>,
+	LazyLoad: ({ children }) => children,
 }));
 
 jest.mock("fusion:context", () => ({
@@ -74,7 +74,7 @@ describe("the large promo feature", () => {
 					imageAuth: undefined,
 					imageId: 123,
 				}}
-			/>
+			/>,
 		);
 		expect(useContent).toHaveBeenCalled();
 		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();

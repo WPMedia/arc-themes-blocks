@@ -1,46 +1,46 @@
 {
 	"category-carousel.aria-label": {
-		"de": "Kategorien",
-		"en": "Categories",
-		"es": "Categorías",
-		"fr": "Catégories",
-		"ja": "カテゴリ",
-		"ko": "범주",
-		"no": "Kategorier",
+		"sv": "Kategorier",
 		"pt": "Categorias",
-		"sv": "Kategorier"
+		"no": "Kategorier",
+		"ko": "범주",
+		"ja": "カテゴリ",
+		"fr": "Catégories",
+		"es": "Categorías",
+		"en": "Categories",
+		"de": "Kategorien"
 	},
 	"category-carousel.left-arrow-label": {
-		"de": "Vorheriges",
-		"en": "Previous",
-		"es": "Anterior",
-		"fr": "Précédent",
-		"ja": "前",
-		"ko": "이전",
-		"no": "Forrige",
+		"sv": "Föregående",
 		"pt": "Anterior",
-		"sv": "Föregående"
+		"no": "Forrige",
+		"ko": "이전",
+		"ja": "前",
+		"fr": "Précédent",
+		"es": "Anterior",
+		"en": "Previous",
+		"de": "Vorheriges"
 	},
 	"category-carousel.right-arrow-label": {
-		"de": "Nächstes",
-		"en": "Next",
-		"es": "Siguiente",
-		"fr": "Suivant",
-		"ja": "次",
-		"ko": "다음",
-		"no": "Neste",
+		"sv": "Nästa",
 		"pt": "Seguinte",
-		"sv": "Nästa"
+		"no": "Neste",
+		"ko": "다음",
+		"ja": "次",
+		"fr": "Suivant",
+		"es": "Siguiente",
+		"en": "Next",
+		"de": "Nächstes"
 	},
 	"category-carousel.slide-indicator": {
-		"de": "Bild %{current} von %{maximum}",
-		"en": "Slide %{current} of %{maximum}",
-		"es": "Diapositiva %{current} de %{maximum}",
-		"fr": "Diapositive %{current} sur %{maximum}",
-		"ja": "スライド（%{current}/%{maximum}）",
-		"ko": "%{maximum} 중 %{current} 슬라이드",
-		"no": "Slide %{current} av %{maximum}",
+		"sv": "Bild %{current} av %{maximum}",
 		"pt": "Slide %{current} de %{maximum}",
-		"sv": "Bild %{current} av %{maximum}"
+		"no": "Slide %{current} av %{maximum}",
+		"ko": "%{maximum} 중 %{current} 슬라이드",
+		"ja": "スライド（%{current}/%{maximum}）",
+		"fr": "Diapositive %{current} sur %{maximum}",
+		"es": "Diapositiva %{current} de %{maximum}",
+		"en": "Slide %{current} of %{maximum}",
+		"de": "Bild %{current} von %{maximum}"
 	}
 }

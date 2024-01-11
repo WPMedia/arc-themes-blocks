@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Input } from "@wpmedia/arc-themes-components";
-import useIdentity from "../../../components/identity";
+import { Input, useIdentity } from "@wpmedia/arc-themes-components";
 import EditableFieldPresentational from "../../../components/editable-form-input";
 
 function EmailEditableFieldContainer({ blockClassName, email, setEmail }) {

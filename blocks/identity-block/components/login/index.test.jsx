@@ -1,9 +1,9 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { useIdentity } from "@wpmedia/arc-themes-components";
 import useLogin from ".";
-import useIdentity from "../identity";
 
-jest.mock("../identity");
+jest.mock("@wpmedia/arc-themes-components");
 
 const defaultParams = {
 	isAdmin: false,

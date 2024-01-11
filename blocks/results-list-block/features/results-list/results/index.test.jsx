@@ -1,7 +1,7 @@
 import React from "react";
 
 import { render, fireEvent, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 
 import { useContent } from "fusion:content";
 
@@ -154,7 +154,7 @@ describe("seeMore", () => {
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
-			/>
+			/>,
 		);
 
 		expect(screen.getAllByText(/Result Item/i)).toHaveLength(1);
@@ -180,7 +180,7 @@ describe("seeMore", () => {
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
-			/>
+			/>,
 		);
 
 		expect(screen.queryByText("results-list-block.see-more-button")).not.toBeInTheDocument();
@@ -203,7 +203,7 @@ describe("focus", () => {
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
-			/>
+			/>,
 		);
 		expect(screen.getByText(/"_id":"element_1"/i)).not.toHaveFocus();
 		unmount();
@@ -227,7 +227,7 @@ describe("focus", () => {
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
-			/>
+			/>,
 		);
 		fireEvent.click(screen.getByText("results-list-block.see-more-button"));
 		expect(screen.getByText(/"_id":"element_2"/i)).toHaveFocus();
@@ -252,7 +252,7 @@ describe("focus", () => {
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
 				showDescription
-			/>
+			/>,
 		);
 		fireEvent.click(screen.getByText("results-list-block.see-more-button"));
 		expect(screen.getAllByText(/Result Item/i)[1]).not.toHaveFocus();
@@ -279,7 +279,7 @@ describe("story-feed-query service", () => {
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
-			/>
+			/>,
 		);
 
 		expect(useContent).toHaveBeenNthCalledWith(
@@ -290,7 +290,7 @@ describe("story-feed-query service", () => {
 					offset: 0,
 					size: 2,
 				},
-			})
+			}),
 		);
 
 		fireEvent.click(screen.getByText("results-list-block.see-more-button"));
@@ -302,7 +302,7 @@ describe("story-feed-query service", () => {
 					offset: 2,
 					size: 1,
 				},
-			})
+			}),
 		);
 
 		unmount();
@@ -328,7 +328,7 @@ describe("content-api-collections service", () => {
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
-			/>
+			/>,
 		);
 
 		expect(useContent).toHaveBeenNthCalledWith(
@@ -340,7 +340,7 @@ describe("content-api-collections service", () => {
 					size: 1,
 					getNext: true,
 				},
-			})
+			}),
 		);
 
 		fireEvent.click(screen.getByText("results-list-block.see-more-button"));
@@ -353,7 +353,7 @@ describe("content-api-collections service", () => {
 					size: 1,
 					getNext: true,
 				},
-			})
+			}),
 		);
 
 		unmount();
@@ -379,7 +379,7 @@ describe("story-feed-author service", () => {
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
-			/>
+			/>,
 		);
 
 		expect(useContent).toHaveBeenNthCalledWith(
@@ -390,7 +390,7 @@ describe("story-feed-author service", () => {
 					feedOffset: 0,
 					feedSize: 2,
 				},
-			})
+			}),
 		);
 
 		fireEvent.click(screen.getByText("results-list-block.see-more-button"));
@@ -402,7 +402,7 @@ describe("story-feed-author service", () => {
 					feedOffset: 2,
 					feedSize: 1,
 				},
-			})
+			}),
 		);
 
 		unmount();
@@ -428,7 +428,7 @@ describe("story-feed-sections service", () => {
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
-			/>
+			/>,
 		);
 
 		expect(useContent).toHaveBeenNthCalledWith(
@@ -439,7 +439,7 @@ describe("story-feed-sections service", () => {
 					feedOffset: 0,
 					feedSize: 2,
 				},
-			})
+			}),
 		);
 
 		fireEvent.click(screen.getByText("results-list-block.see-more-button"));
@@ -451,7 +451,7 @@ describe("story-feed-sections service", () => {
 					feedOffset: 2,
 					feedSize: 1,
 				},
-			})
+			}),
 		);
 
 		unmount();
@@ -472,7 +472,7 @@ describe("story-feed-tag service", () => {
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
-			/>
+			/>,
 		);
 
 		expect(useContent).toHaveBeenNthCalledWith(
@@ -483,7 +483,7 @@ describe("story-feed-tag service", () => {
 					feedOffset: 0,
 					feedSize: 2,
 				},
-			})
+			}),
 		);
 
 		fireEvent.click(screen.getByText("results-list-block.see-more-button"));
@@ -495,7 +495,7 @@ describe("story-feed-tag service", () => {
 					feedOffset: 2,
 					feedSize: 1,
 				},
-			})
+			}),
 		);
 
 		unmount();
@@ -524,7 +524,7 @@ describe("unknown service", () => {
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
-			/>
+			/>,
 		);
 
 		expect(useContent).toHaveBeenNthCalledWith(
@@ -537,7 +537,7 @@ describe("unknown service", () => {
 					offset: 0,
 					size: 2,
 				},
-			})
+			}),
 		);
 
 		unmount();
@@ -567,7 +567,7 @@ describe("lazy flags", () => {
 				imageProperties={imageProperties}
 				targetFallbackImage={fallbackImage}
 				isServerSideLazy
-			/>
+			/>,
 		);
 
 		expect(screen.queryByText(/Result Item/i)).not.toBeInTheDocument();
@@ -598,11 +598,11 @@ describe("fallback image", () => {
 				showHeadline
 				imageProperties={imageProperties}
 				targetFallbackImage="http://test/fallback.jpg"
-			/>
+			/>,
 		);
 
 		expect(
-			screen.queryByText(/"targetFallbackImage":"http:\/\/test\/fallback.jpg"/i)
+			screen.queryByText(/"targetFallbackImage":"http:\/\/test\/fallback.jpg"/i),
 		).toBeInTheDocument();
 
 		unmount();

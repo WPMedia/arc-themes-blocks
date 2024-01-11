@@ -131,8 +131,8 @@ function ProductGallery({ customFields }) {
 		? globalContent?.schema?.productGallery?.value.filter((asset) => asset.type === "image")
 		: [];
 
-	if (isFeaturedImageEnabled) {
-		carouselItems.unshift(...globalContent?.schema?.featuredImage?.value);
+	if (isFeaturedImageEnabled && globalContent?.schema?.featuredImage?.value) {
+		carouselItems.unshift(...globalContent.schema.featuredImage.value);
 	}
 
 	if (carouselItems.length === 0) {

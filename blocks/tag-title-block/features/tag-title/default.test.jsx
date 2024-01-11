@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { useFusionContext } from "fusion:context";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 
 import TagTitle from "./default";
 
@@ -51,7 +51,7 @@ describe("the tag title feature for the default output type", () => {
 			render(<TagTitle />);
 
 			expect(
-				screen.getByText("This is a tag about dogs. This is the description field.")
+				screen.getByText("This is a tag about dogs. This is the description field."),
 			).toBeInTheDocument();
 		});
 	});

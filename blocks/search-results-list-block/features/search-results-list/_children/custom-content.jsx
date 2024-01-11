@@ -9,6 +9,7 @@ import ResultsList from "./results-list";
 
 const BLOCK_CLASS_NAME = "b-search-results-list";
 
+// eslint-disable-next-line
 @Consumer
 class CustomSearchResultsList extends React.Component {
 	constructor(props) {

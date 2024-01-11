@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
 // presentational component not container
@@ -27,7 +27,7 @@ describe("Share Bar", () => {
 				websiteDomain={websiteDomain}
 				websiteUrl={websiteUrl}
 				headlineString={headlineString}
-			/>
+			/>,
 		);
 		const buttons = getAllByRole("button");
 		expect(buttons).toHaveLength(5);
@@ -47,7 +47,7 @@ describe("Share Bar", () => {
 				websiteDomain={websiteDomain}
 				websiteUrl={websiteUrl}
 				headlineString={headlineString}
-			/>
+			/>,
 		);
 
 		const buttons = getAllByRole("button");
@@ -68,7 +68,7 @@ describe("Share Bar", () => {
 				websiteDomain={websiteDomain}
 				websiteUrl={websiteUrl}
 				headlineString={headlineString}
-			/>
+			/>,
 		);
 		expect(container.firstChild).toBeNull();
 	});
@@ -81,7 +81,7 @@ describe("Share Bar", () => {
 				websiteDomain={websiteDomain}
 				websiteUrl={websiteUrl}
 				headlineString={headlineString}
-			/>
+			/>,
 		);
 		expect(container.firstChild).toBeNull();
 	});
@@ -100,15 +100,15 @@ describe("Share Bar", () => {
 					websiteDomain={websiteDomain}
 					websiteUrl={websiteUrl}
 					headlineString={headlineString}
-				/>
+				/>,
 			);
 			global.open = jest.fn();
-			await fireEvent(
+			fireEvent(
 				container.querySelector("button"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
-				})
+				}),
 			);
 			expect(window.location.origin).toEqual("http://localhost");
 		});
@@ -126,15 +126,15 @@ describe("Share Bar", () => {
 					websiteDomain={websiteDomain}
 					websiteUrl={websiteUrl}
 					headlineString={headlineString}
-				/>
+				/>,
 			);
 			global.open = jest.fn();
-			await fireEvent(
+			fireEvent(
 				container.querySelector("button"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
-				})
+				}),
 			);
 			expect(window.location.origin).toEqual("http://localhost");
 		});
@@ -152,15 +152,15 @@ describe("Share Bar", () => {
 					websiteDomain={websiteDomain}
 					websiteUrl={websiteUrl}
 					headlineString={headlineString}
-				/>
+				/>,
 			);
 			global.open = jest.fn();
-			await fireEvent(
+			fireEvent(
 				container.querySelector("button"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
-				})
+				}),
 			);
 			expect(window.location.origin).toEqual("http://localhost");
 		});
@@ -178,15 +178,15 @@ describe("Share Bar", () => {
 					websiteDomain={websiteDomain}
 					websiteUrl={websiteUrl}
 					headlineString={headlineString}
-				/>
+				/>,
 			);
 			global.open = jest.fn();
-			await fireEvent(
+			fireEvent(
 				container.querySelector("button"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
-				})
+				}),
 			);
 			expect(window.location.origin).toEqual("http://localhost");
 		});
@@ -204,15 +204,15 @@ describe("Share Bar", () => {
 					websiteDomain={websiteDomain}
 					websiteUrl={websiteUrl}
 					headlineString={headlineString}
-				/>
+				/>,
 			);
 			global.open = jest.fn();
-			await fireEvent(
+			fireEvent(
 				container.querySelector("button"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
-				})
+				}),
 			);
 			await expect(window.open).toBeCalled();
 			expect(window.location.origin).toEqual("http://localhost");
@@ -248,7 +248,7 @@ describe("Share Bar", () => {
 					websiteDomain={websiteDomain}
 					websiteUrl={websiteUrl}
 					headlineString={headlineString}
-				/>
+				/>,
 			);
 			expect(container.firstChild).not.toBeNull();
 		});
@@ -276,7 +276,7 @@ describe("Share Bar", () => {
 					websiteDomain={websiteDomain}
 					websiteUrl={websiteUrl}
 					headlineString={headlineString}
-				/>
+				/>,
 			);
 			expect(container.firstChild).not.toBeNull();
 		});

@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import { useFusionContext } from "fusion:context";
 
 import ProductGallery from "./default";
@@ -192,7 +192,7 @@ describe("Product Gallery", () => {
 			},
 		}));
 		const { container } = render(
-			<ProductGallery customFields={{ ...DEFAULT_CUSTOM_FIELDS, isFeaturedImageEnabled: true }} />
+			<ProductGallery customFields={{ ...DEFAULT_CUSTOM_FIELDS, isFeaturedImageEnabled: true }} />,
 		);
 		expect(container.querySelectorAll(".c-carousel__slide").length).toBe(9);
 	});
@@ -214,7 +214,7 @@ describe("Product Gallery", () => {
 			},
 		}));
 		const { container } = render(
-			<ProductGallery customFields={{ ...DEFAULT_CUSTOM_FIELDS, isFeaturedImageEnabled: false }} />
+			<ProductGallery customFields={{ ...DEFAULT_CUSTOM_FIELDS, isFeaturedImageEnabled: false }} />,
 		);
 		expect(container.querySelectorAll(".c-carousel__slide").length).toBe(8);
 	});

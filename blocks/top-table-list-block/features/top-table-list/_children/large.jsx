@@ -60,12 +60,12 @@ const Large = (props) => {
 		},
 	} = getProperties(arcSite);
 
-	const displayDate = localizeDateTime(
+	const displayDate = Date.parse(element?.display_date) ? localizeDateTime(
 		new Date(element?.display_date),
 		dateTimeFormat,
 		language,
 		timeZone
-	);
+	) : "";
 	const phrases = usePhrases();
 
 	const videoOrGalleryContent =

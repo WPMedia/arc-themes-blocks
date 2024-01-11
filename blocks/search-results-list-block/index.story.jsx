@@ -89,9 +89,5 @@ export const allFields = () => {
 		imageRatio: "16:9",
 	};
 
-	return (
-		<>
-			<SearchResultsList customFields={customFields} />
-		</>
-	);
+	return <SearchResultsList customFields={customFields} />;
 };

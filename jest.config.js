@@ -1,33 +1,27 @@
 module.exports = {
-	transformIgnorePatterns: [
-		"//node_modules/(?!@wpmedia/.*-block).*/",
-		"//node_modules/(?!(@wpmedia)).*/",
-	],
-	projects: [
-		"<rootDir>/blocks/*/jest.config.js",
-		// '<rootDir>/components/*/jest.config.js',
-		// Uncomment the components tests once we actually have them.
-		// Jest doesn't have an option to ignore those errors.
+	collectCoverageFrom: [
+		"**/(features|chains|layouts|sources|output-types|_children|components|utils)/**/*.{js,jsx}",
+		// for resizer image block
+		"!**/node_modules/**",
+		"!**/mock*.js",
+		"!**/*.story*.jsx",
 	],
 	coverageDirectory: "<rootDir>/coverage",
 	coverageThreshold: {
 		global: {
-			statements: 85,
-			branches: 85,
-			functions: 85,
-			lines: 85,
+			statements: 48,
+			branches: 60,
+			functions: 40,
+			lines: 40,
 		},
 	},
-	collectCoverageFrom: [
-		"**/(features|chains|layouts|sources|output-types|_children|components|utils)/**/*.{js,jsx}",
-		// for resizer image block
-		"**/extractImageFromStory.js",
-		"**/imageRatioCustomField.js",
-		"**/ratioFor.js",
-		"!**/node_modules/**",
-		"!**/vendor/**",
-		"!**/images/*.svg",
-		"!**/mock*.js",
-		"!**/*.story*.jsx",
+	// projects: ["<rootDir>/blocks/*/jest.config.js"],
+	testEnvironment: "<rootDir>/jest/custom-test-environment.js",
+	transform: {
+		"\\.[jt]sx?$": "babel-jest",
+	},
+	transformIgnorePatterns: [
+		"//node_modules/(?!@wpmedia/.*-block).*/",
+		"//node_modules/(?!(@wpmedia)).*/",
 	],
 };

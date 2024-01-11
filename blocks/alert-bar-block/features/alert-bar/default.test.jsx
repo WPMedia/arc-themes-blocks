@@ -1,13 +1,3 @@
-/*
- Enzyme is using an old jsdom that has issues using waitFor on prototype
- methods and this component is using Component constructor and prototypes.
-
- This will set the proper jsdom environment for this specific test need
- until we can convert this away from the component model or update the test.
-
- @jest-environment jsdom-sixteen
-*/
-
 import React from "react";
 
 import {
@@ -50,7 +40,7 @@ describe("the alert bar presentational component", () => {
 				hideAlertHandler={null}
 				linkText="Basic Headline"
 				url="#"
-			/>
+			/>,
 		);
 
 		await waitFor(() => expect(container.firstChild).not.toBe(null));
@@ -127,7 +117,7 @@ describe("the alert bar update interval", () => {
 		window.setInterval = jest.fn((func) => func());
 	});
 	afterAll(() => {
-		window.setInterval.clearMock();
+		window?.setInterval?.clearMock && window?.setInterval?.clearMock();
 	});
 
 	it("should be called", async () => {
@@ -328,12 +318,15 @@ describe("when the alert is added to the header-nav-chain", () => {
 		});
 
 		const { container, getByRole } = render(
-			<AlertBar arcSite="the-sun" customFields={{ ariaLabel: "Breaking News from custom field" }} />
+			<AlertBar
+				arcSite="the-sun"
+				customFields={{ ariaLabel: "Breaking News from custom field" }}
+			/>,
 		);
 
 		await waitFor(() => expect(container.firstChild).not.toBe(null));
 		await expect(getByRole("navigation", { name: "Breaking News from custom field" })).not.toBe(
-			null
+			null,
 		);
 	});
 });

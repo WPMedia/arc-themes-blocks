@@ -1,15 +1,6 @@
 module.exports = {
 	transform: {
-		"^.+\\.[t|j]sx?$": "babel-jest",
-		"^.+\\.(svg)$": "../../jest/fileTransformer.js",
+		"\\.[jt]sx?$": "babel-jest",
 	},
-	setupFilesAfterEnv: [
-		"../../jest/testSetupFile.js",
-		"../../node_modules/jest-enzyme/lib/index.js",
-	],
-	verbose: true,
-	moduleNameMapper: {
-		"^.+\\.(css|less|scss)$": "identity-obj-proxy",
-	},
-	transformIgnorePatterns: ["/node_modules/(?!@wpmedia)"],
+	setupFilesAfterEnv: ["../../jest/testSetupFile.js"],
 };

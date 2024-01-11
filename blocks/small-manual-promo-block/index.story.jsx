@@ -106,3 +106,17 @@ export const imageBelow = () => {
 
 	return <SmallManualPromo customFields={customFields} />;
 };
+
+export const withRtl = () => {
+	const customFields = {
+		...sampleData,
+		showHeadline: true,
+		showImage: true,
+	};
+
+	return (
+		<div dir="rtl">
+			<SmallManualPromo customFields={customFields} />
+		</div>
+	);
+};

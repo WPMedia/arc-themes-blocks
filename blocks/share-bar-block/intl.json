@@ -1,13 +1,27 @@
 {
 	"share-bar-block.share-button-aria-label": {
+		"ar": "مشاركة المقال الحالي عبر %{socialType}",
+		"bn": "%{socialType}-এর মাধ্যমে বর্তমান প্রবন্ধটি শেয়ার করুন",
+		"bo": "%{socialType}བརྒྱུད་ནས་མིག་སྔའི་བརྩམས་ཆོས་མཉམ་སྤྱོད་བྱེད།",
 		"de": "Aktuellen Artikel über %{socialType} teilen",
 		"en": "Share current article via %{socialType}",
 		"es": "Compartir el artículo actual mediante %{socialType}",
 		"fr": "Partager l'article en cours via %{socialType}",
+		"id": "Bagikan artikel terkini via %{socialType}",
 		"ja": "現在の記事を%{socialType}で共有",
+		"km-KH": "ចែករំលែកអត្ថបទបច្ចុប្បន្នរបស់អ្នកតាមរយៈ %{socialType}",
 		"ko": "%{socialType}을(를) 통해 현재 기사 공유",
+		"lo": "ແບ່ງປັນບົດຄວາມປັດຈຸບັນຜ່ານ %{socialType}",
+		"ms": "Kongsi artikel semasa melalui %{socialType}",
+		"my": "%{socialType} မှတစ်ဆင့် လက်ရှိဆောင်းပါးကို မျှဝေရန်",
 		"no": "Del gjeldende artikkel via %{socialType}",
+		"pt-BR": "Compartilhe o artigo atual via %{socialType}",
 		"pt": "Partilhar artigo atual no %{socialType}",
-		"sv": "Dela aktuell artikel via %{socialType}"
+		"sv": "Dela aktuell artikel via %{socialType}",
+		"th": "แชร์บทความปัจจุบันผ่าน %{socialType}",
+		"ug": "نۆۋەتتىكى ماقالىنى %{socialType} ئارقىلىق ھەمبەھىرلەڭ",
+		"vi": "Chia sẻ bài viết hiện tại qua %{socialType}",
+		"zh-CN": "通过 %{socialType} 分享当前文章",
+		"zh-TW": "透過 %{socialType} 分享目前文章"
 	}
 }

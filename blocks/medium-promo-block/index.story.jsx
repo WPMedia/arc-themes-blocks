@@ -217,3 +217,19 @@ export const twoPromos = () => {
 		</>
 	);
 };
+
+export const rightToLeft = () => {
+	const customFields = {
+		...sampleData,
+		showHeadline: true,
+		showImage: true,
+		showDescription: true,
+		showByline: true,
+		showDate: true,
+	};
+	return (
+		<div dir="rtl">
+			<MediumPromo customFields={customFields} />
+		</div>
+	);
+};

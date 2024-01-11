@@ -102,3 +102,22 @@ export const withLazyLoadDisabledAndBylineDateHeadlineImage = () => {
 
 	return <ResultsListBlock customFields={data} />;
 };
+
+export const withRTL = () => {
+	const data = {
+		...sampleData,
+		lazyLoad: true,
+		showByline: true,
+		showDate: true,
+		showDescription: true,
+		showHeadline: true,
+		showImage: true,
+		showItemOverline: true,
+	};
+
+	return (
+		<div dir="rtl">
+			<ResultsListBlock customFields={data} />
+		</div>
+	);
+};

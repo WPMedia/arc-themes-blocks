@@ -2,7 +2,7 @@
 	"masthead": {
 		"styles": {
 			"default": {
-				"border-bottom": "2px solid var(--global-neutral-8)",
+				"border-block-end": "2px solid var(--global-neutral-8)",
 				"color": "var(--text-color)",
 				"display": "none",
 				"font-family": "var(--font-family-primary)",
@@ -27,7 +27,7 @@
 	"masthead-logo-image": {
 		"styles": {
 			"default": {
-				"max-height": "64px",
+				"max-block-size": "64px",
 				"object-fit": "contain",
 				"vertical-align": "middle"
 			},
@@ -81,8 +81,14 @@
 	"masthead-divider": {
 		"styles": {
 			"default": {
-				"margin": 0,
-				"padding": 0
+				"margin-block-end": 0,
+				"margin-block-start": 0,
+				"margin-inline-end": 0,
+				"margin-inline-start": 0,
+				"padding-block-end": 0,
+				"padding-block-start": 0,
+				"padding-inline-end": 0,
+				"padding-inline-start": 0
 			},
 			"desktop": {}
 		}

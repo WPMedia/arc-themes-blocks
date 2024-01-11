@@ -1,13 +1,27 @@
 {
 	"default-output-block.skip-main": {
+		"ar": "تخطي إلى المحتوى الرئيسي",
+		"bn": "বাদ দিয়ে প্রধান বিষয়বস্তুতে চলে যান",
+		"bo": "ནང་དོན་གཙོ་བོར་མཆོང་།",
 		"de": "Zum Hauptinhalt springen",
 		"en": "Skip to main content",
 		"es": "Omitir para ir al contenido principal",
 		"fr": "Passer au contenu principal",
+		"id": "Lompat ke konten utama",
 		"ja": "メインコンテンツにスキップ",
+		"km-KH": "រំលងទៅមាតិកាចម្បង",
 		"ko": "메인 콘텐츠로 건너뛰기",
+		"lo": "ຂ້າມໄປຍັງເນື້ອຫາຫຼັກ",
+		"ms": "Langkau ke kandungan utama",
+		"my": "ပင်မအကြောင်းအရာသို့ ကျော်ရန်",
 		"no": "Hopp til hovedinnhold",
+		"pt-BR": "Pular para o conteúdo principal",
 		"pt": "Avançar para o conteúdo principal",
-		"sv": "Gå vidare till huvudinnehåll"
+		"sv": "Gå vidare till huvudinnehåll",
+		"th": "ข้ามไปที่เนื้อหาหลัก",
+		"ug": "ئاساسلىق مەزمۇنغا ئاتلاڭ",
+		"vi": "Bỏ qua nội dung chính",
+		"zh-CN": "跳至主内容",
+		"zh-TW": "跳過主要內容"
 	}
 }

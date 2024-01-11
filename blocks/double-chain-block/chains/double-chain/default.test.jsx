@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import DoubleChain from "./default";
 
 describe("the double chain block", () => {
@@ -22,7 +22,7 @@ describe("the double chain block", () => {
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</DoubleChain>
+			</DoubleChain>,
 		);
 
 		expect(container.querySelectorAll(".b-double-chain")).toHaveLength(1);
@@ -40,7 +40,7 @@ describe("the double chain block", () => {
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</DoubleChain>
+			</DoubleChain>,
 		);
 
 		const col1 = container.querySelectorAll(".b-double-chain__child-item")[0];
@@ -57,7 +57,7 @@ describe("the double chain block", () => {
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</DoubleChain>
+			</DoubleChain>,
 		);
 
 		const col1 = container.querySelectorAll(".b-double-chain__child-item")[0];
@@ -74,7 +74,7 @@ describe("the double chain block", () => {
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</DoubleChain>
+			</DoubleChain>,
 		);
 
 		expect(container.querySelectorAll(".b-double-chain__child-item")).toHaveLength(0);
@@ -88,12 +88,12 @@ describe("the double chain block", () => {
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</DoubleChain>
+			</DoubleChain>,
 		);
 
 		expect(container.querySelectorAll(".b-double-chain__heading")).toHaveLength(1);
 		expect(container.querySelector(".b-double-chain__heading").textContent).toBe(
-			"Double Chain Heading"
+			"Double Chain Heading",
 		);
 		const col1 = container.querySelectorAll(".b-double-chain__child-item")[0];
 		expect(col1.querySelectorAll("div")).toHaveLength(1);
@@ -105,7 +105,7 @@ describe("the double chain block", () => {
 			<DoubleChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
-			</DoubleChain>
+			</DoubleChain>,
 		);
 
 		expect(container.querySelectorAll(".b-double-chain__heading")).toHaveLength(0);

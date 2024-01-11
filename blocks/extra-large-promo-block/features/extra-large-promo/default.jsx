@@ -92,23 +92,21 @@ export const ExtraLargePromoPresentation = ({
 										viewportPercentage={60}
 									/>
 								) : (
-									<>
-										<Conditional
-											className={`${BLOCK_CLASS_NAME}__img`}
-											component={Link}
-											condition={contentUrl}
-											href={contentUrl}
-											assistiveHidden
-										>
-											<Image {...imageParams} />
-											{labelIconName ? (
-												<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
-													<Icon name={labelIconName} />
-													<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
-												</div>
-											) : null}
-										</Conditional>
-									</>
+									<Conditional
+										className={`${BLOCK_CLASS_NAME}__img`}
+										component={Link}
+										condition={contentUrl}
+										href={contentUrl}
+										assistiveHidden
+									>
+										<Image {...imageParams} />
+										{labelIconName ? (
+											<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
+												<Icon name={labelIconName} />
+												<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
+											</div>
+										) : null}
+									</Conditional>
 								)}
 							</MediaItem>
 						) : null}
@@ -252,7 +250,7 @@ const ExtraLargePromo = ({ customFields }) => {
 	let resizedAuth = useContent(
 		resizedImage || !imageOverrideURL
 			? {}
-			: { source: "signing-service", query: { id: imageOverrideURL } }
+			: { source: "signing-service", query: { id: imageOverrideURL } },
 	);
 	if (imageOverrideAuth && !resizedAuth) {
 		resizedAuth = JSON.parse(imageOverrideAuth);

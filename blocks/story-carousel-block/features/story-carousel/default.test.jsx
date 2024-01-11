@@ -1,8 +1,11 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
+import mockConsole from "jest-mock-console";
+
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
+
 import StoryCarousel from "./default";
 
 const testImageURL = "dummy.png";
@@ -365,6 +368,14 @@ jest.mock("fusion:content", () => ({
 }));
 
 describe("Story Carousel", () => {
+	let restoreConsole;
+	afterAll(() => {
+		restoreConsole?.();
+	});
+	beforeAll(() => {
+		restoreConsole = mockConsole();
+	});
+
 	it("should render", () => {
 		useContent.mockReturnValue(mockCollectionContent2);
 
@@ -444,7 +455,7 @@ describe("Story Carousel", () => {
 
 		expect(container.querySelectorAll(".b-story-carousel__story-card-header")).toHaveLength(0);
 		expect(container.querySelectorAll(".b-story-carousel__story-card .c-paragraph")).toHaveLength(
-			0
+			0,
 		);
 	});
 
@@ -464,7 +475,7 @@ describe("Story Carousel", () => {
 
 		expect(container.querySelectorAll(".b-story-carousel__story-card-header")).toHaveLength(6);
 		expect(container.querySelectorAll(".b-story-carousel__story-card .c-paragraph")).toHaveLength(
-			6
+			6,
 		);
 	});
 
@@ -517,7 +528,7 @@ describe("Story Carousel", () => {
 
 		expect(container.querySelectorAll(".b-story-carousel__story-card-header")).toHaveLength(0);
 		expect(container.querySelectorAll(".b-story-carousel__story-card .c-paragraph")).toHaveLength(
-			0
+			0,
 		);
 	});
 

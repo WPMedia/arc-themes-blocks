@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Input, isServerSide, Paragraph } from "@wpmedia/arc-themes-components";
-import useIdentity from "../../components/identity";
+import { Input, isServerSide, Paragraph, useIdentity } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
 import FormPasswordConfirm from "../../components/form-password-confirm";
 import validatePasswordPattern from "../../utils/validate-password-pattern";
@@ -96,8 +95,8 @@ const SignUp = ({ customFields, arcSite }) => {
 			},
 			specialCharacters: {
 				value: pwSpecialCharacters,
-				message: phrases.t("identity-block.password-requirements-uppercase", {
-					requirementCount: pwUppercase,
+				message: phrases.t("identity-block.password-requirements-special", {
+					requirementCount: pwSpecialCharacters,
 				}),
 			},
 		},
@@ -115,7 +114,9 @@ const SignUp = ({ customFields, arcSite }) => {
 					},
 					{
 						email,
-					}
+					},
+					undefined,
+					true,
 				)
 					.then(() => {
 						window.location = redirectURL;
@@ -144,7 +145,7 @@ const SignUp = ({ customFields, arcSite }) => {
 					pwMinLength,
 					pwPwNumbers,
 					pwSpecialCharacters,
-					pwUppercase
+					pwUppercase,
 				)}
 				confirmLabel={phrases.t("identity-block.confirm-password")}
 				confirmValidationErrorMessage={phrases.t("identity-block.confirm-password-error")}

@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import MainImage from "./index";
 import mockData from "../../mock-data";
 
@@ -19,14 +19,14 @@ describe("Product Focus View : Main Image", () => {
 	it("Renders an image.", () => {
 		const isVisible = true;
 		render(
-			<MainImage image={mockData[0]} loading={isVisible ? "eager" : "lazy"} onVisible={() => 0} />
+			<MainImage image={mockData[0]} loading={isVisible ? "eager" : "lazy"} onVisible={() => 0} />,
 		);
 		expect(screen.queryAllByRole("img")).toHaveLength(1);
 	});
 	it("Renders an image.", () => {
 		const isVisible = false;
 		render(
-			<MainImage image={mockData[0]} loading={isVisible ? "eager" : "lazy"} onVisible={() => 0} />
+			<MainImage image={mockData[0]} loading={isVisible ? "eager" : "lazy"} onVisible={() => 0} />,
 		);
 		expect(screen.queryAllByRole("img")).toHaveLength(1);
 	});

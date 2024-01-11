@@ -57,7 +57,7 @@ const Results = ({
 			}
 			return { offset, size };
 		},
-		[configuredOffset, configuredSize, contentService]
+		[configuredOffset, configuredSize, contentService],
 	);
 
 	const requestedResultList = useContent({
@@ -157,7 +157,7 @@ const Results = ({
 			const refArray = existingRefs.concat(
 				requestedResultList?.content_elements
 					? requestedResultList.content_elements.map(() => createRef())
-					: []
+					: [],
 			);
 			if (queryOffset !== configuredOffset) {
 				// ignore the first item for focus purposes
@@ -179,10 +179,10 @@ const Results = ({
 
 	const viewableElements = resultList?.content_elements.slice(
 		0,
-		queryOffset + configuredSize - configuredOffset
+		queryOffset + configuredSize - configuredOffset,
 	);
 	const fullListLength = resultList?.count
-		? resultList?.count - configuredOffset
+		? resultList.count - configuredOffset
 		: resultList?.content_elements.length;
 
 	const isThereMore = requestedResultList?.next || viewableElements?.length < fullListLength;

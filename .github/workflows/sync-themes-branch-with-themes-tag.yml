@@ -51,8 +51,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      #- name: Run all tests
-      #  run: npm run test
+      - name: Run all tests
+        run: npm run test
 
       # See confluence pages https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2983788608/How+To+Do+Product-Facing+Tag+Release and https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/3013541978/Github+Actions+for+NodeJS+Standards+Best+Practices for documentation
       - name: Publish to target tag based off of branch name

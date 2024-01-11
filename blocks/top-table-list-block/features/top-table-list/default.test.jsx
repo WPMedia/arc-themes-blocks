@@ -22,7 +22,7 @@ jest.mock("fusion:content", () => ({
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => false),
-	LazyLoad: ({ children }) => <>{children}</>,
+	LazyLoad: ({ children }) => children,
 }));
 
 const config = {
@@ -70,7 +70,7 @@ describe("Top Table List", () => {
 		});
 
 		const { container } = render(
-			<TopTableListWrapper customFields={{ ...config, lazyLoad: true }} />
+			<TopTableListWrapper customFields={{ ...config, lazyLoad: true }} />,
 		);
 		expect(container.firstChild).toBeNull();
 	});

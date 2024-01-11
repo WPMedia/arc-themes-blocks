@@ -1,16 +1,6 @@
-/*
- Enzyme is using an old jsdom that has issues using waitFor on prototype
- methods and this component is using Component constructor and prototypes.
-
- This will set the proper jsdom environment for this specific test need
- until we can convert this away from the component model or update the test.
-
- @jest-environment jsdom-sixteen
-*/
-
 import React from "react";
 import { act, fireEvent, render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import ThumbnailBar from "./index";
 import mockData from "../../mock-data";
 
@@ -44,7 +34,7 @@ describe("Thumbnail Bar", () => {
 
 	it("navigates up and down images using buttons", () => {
 		const { container } = render(
-			<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={() => true} />
+			<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={() => true} />,
 		);
 
 		expect(screen.queryAllByRole("img")).toHaveLength(1);
@@ -54,14 +44,14 @@ describe("Thumbnail Bar", () => {
 			container
 				.querySelector(".b-product-gallery__focus-view-thumbnail-image--selected")
 				.getAttribute("src")
-				.includes(mockData[1]._id)
+				.includes(mockData[1]._id),
 		).toBeTruthy();
 
 		fireEvent.click(screen.getByRole("button", { name: "product-gallery.focus-thumbnail-next" }));
 		expect(screen.queryByRole("img").getAttribute("src").includes(mockData[2]._id)).toBeTruthy();
 
 		fireEvent.click(
-			screen.getByRole("button", { name: "product-gallery.focus-thumbnail-previous" })
+			screen.getByRole("button", { name: "product-gallery.focus-thumbnail-previous" }),
 		);
 	});
 

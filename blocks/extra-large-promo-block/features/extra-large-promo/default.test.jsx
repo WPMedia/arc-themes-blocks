@@ -10,7 +10,7 @@ import mockDataSponsoredVideo from "./mock-data-sponsored";
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
-	LazyLoad: ({ children }) => <>{children}</>,
+	LazyLoad: ({ children }) => children,
 	Video: () => "video embed",
 }));
 
@@ -125,7 +125,7 @@ describe("the extra large promo feature", () => {
 		};
 		render(<ExtraLargePromo customFields={config} />);
 		expect(
-			screen.queryByText("Why does August seem hotter? Maybe it comes from weariness.")
+			screen.queryByText("Why does August seem hotter? Maybe it comes from weariness."),
 		).not.toBeNull();
 	});
 
@@ -135,7 +135,7 @@ describe("the extra large promo feature", () => {
 		};
 		const { getByText } = render(<ExtraLargePromo customFields={config} />);
 		expect(
-			getByText("global.by-text Example Author1, Example Author2, global.and-text Example Author3")
+			getByText("global.by-text Example Author1, Example Author2, global.and-text Example Author3"),
 		).not.toBeNull();
 	});
 

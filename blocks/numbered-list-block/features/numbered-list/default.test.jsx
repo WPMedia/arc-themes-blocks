@@ -1,11 +1,13 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
+import mockConsole from "jest-mock-console";
+
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import { isServerSide } from "@wpmedia/arc-themes-components";
-import mockData from "./mock-data";
 
+import mockData from "./mock-data";
 import NumberedList from "./default";
 
 jest.mock("fusion:properties", () =>
@@ -13,7 +15,7 @@ jest.mock("fusion:properties", () =>
 		fallbackImage: "placeholder.jpg",
 		primaryLogoAlt: "test",
 		resizerURL: "http://url.com/",
-	}))
+	})),
 );
 
 jest.mock("fusion:content", () => ({
@@ -23,7 +25,7 @@ jest.mock("fusion:content", () => ({
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(),
-	LazyLoad: ({ children }) => <>{children}</>,
+	LazyLoad: ({ children }) => children,
 }));
 
 const listContentConfig = {
@@ -36,6 +38,13 @@ const listContentConfig = {
 };
 
 describe("The numbered-list-block", () => {
+	let restoreConsole;
+	afterAll(() => {
+		restoreConsole?.();
+	});
+	beforeAll(() => {
+		restoreConsole = mockConsole();
+	});
 	beforeEach(() => {
 		useFusionContext.mockReturnValue({
 			arcSite: "the-sun",

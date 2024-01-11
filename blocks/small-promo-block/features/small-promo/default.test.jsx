@@ -10,7 +10,7 @@ import mockData from "./mock-data";
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
-	LazyLoad: ({ children }) => <>{children}</>,
+	LazyLoad: ({ children }) => children,
 }));
 
 jest.mock("fusion:content", () => ({
@@ -27,7 +27,7 @@ jest.mock("fusion:content", () => ({
 jest.mock("fusion:properties", () =>
 	jest.fn(() => ({
 		fallbackImage: "placeholder.jpg",
-	}))
+	})),
 );
 
 describe("Small Promo", () => {

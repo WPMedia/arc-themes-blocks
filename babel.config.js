@@ -3,13 +3,16 @@ module.exports = {
 		[
 			"@babel/preset-env",
 			{
+				targets: {
+					node: "current",
+				},
 				modules: "commonjs",
 			},
 		],
 		[
 			"@babel/preset-react",
 			{
-				runtime: "automatic",
+				runtime: "automatic", // default in preset-react v8
 			},
 		],
 	],
@@ -41,6 +44,7 @@ module.exports = {
 						},
 					},
 				],
+				"@babel/plugin-transform-private-methods",
 			],
 		},
 	},

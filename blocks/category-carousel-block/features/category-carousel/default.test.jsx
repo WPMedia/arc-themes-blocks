@@ -1,7 +1,10 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
+import mockConsole from "jest-mock-console";
+
 import { useContent } from "fusion:content";
+
 import CategoryCarousel from "./default";
 
 jest.mock("fusion:content", () => ({
@@ -12,6 +15,13 @@ jest.mock("fusion:content", () => ({
 }));
 
 describe("Category Carousel", () => {
+	let restoreConsole;
+	afterAll(() => {
+		restoreConsole?.();
+	});
+	beforeAll(() => {
+		restoreConsole = mockConsole();
+	});
 	it("should render", () => {
 		const { unmount } = render(
 			<CategoryCarousel
@@ -29,7 +39,7 @@ describe("Category Carousel", () => {
 					label_3: "Test 4",
 					linkUrl_3: "#",
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText("Test 1")).toBeInTheDocument();
 		expect(screen.queryByText("Test 2")).toBeInTheDocument();
@@ -56,7 +66,7 @@ describe("Category Carousel", () => {
 					label_3: "Test 4",
 					linkUrl_3: "#",
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText("Heading Text")).toBeInTheDocument();
 		unmount();
@@ -92,7 +102,7 @@ describe("Category Carousel", () => {
 					label_6: "ummm",
 					linkUrl_6: "/incomplete/3",
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText("Test 1")).toBeInTheDocument();
 		expect(screen.queryByText("Test 2")).toBeInTheDocument();
@@ -146,7 +156,7 @@ describe("Category Carousel", () => {
 					label_12: "Test Fail",
 					linkUrl_12: "#",
 				}}
-			/>
+			/>,
 		);
 
 		expect(screen.queryByText("Test 1")).toBeInTheDocument();
@@ -190,7 +200,7 @@ describe("Category Carousel", () => {
 					label_3: "Test 4",
 					linkUrl_3: "#",
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText("Test 1")).toBeInTheDocument();
 		expect(screen.queryByText("Test 2")).toBeInTheDocument();
@@ -227,7 +237,7 @@ describe("Category Carousel", () => {
 					label_3: "Test 4",
 					linkUrl_3: "#",
 				}}
-			/>
+			/>,
 		);
 		expect(screen.queryByText("Test 1")).toBeInTheDocument();
 		expect(screen.queryByText("Test 2")).toBeInTheDocument();

@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import QuadChain from "./default";
 
 describe("the quad chain block", () => {
@@ -22,7 +22,7 @@ describe("the quad chain block", () => {
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</QuadChain>
+			</QuadChain>,
 		);
 		expect(container.querySelectorAll(".b-quad-chain")).toHaveLength(1);
 
@@ -40,7 +40,7 @@ describe("the quad chain block", () => {
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</QuadChain>
+			</QuadChain>,
 		);
 
 		const col1 = container.querySelectorAll(".b-quad-chain__child-item")[0];
@@ -58,7 +58,7 @@ describe("the quad chain block", () => {
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</QuadChain>
+			</QuadChain>,
 		);
 
 		const col1 = container.querySelectorAll(".b-quad-chain__child-item")[0];
@@ -80,7 +80,7 @@ describe("the quad chain block", () => {
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</QuadChain>
+			</QuadChain>,
 		);
 
 		expect(container.querySelectorAll(".b-quad-chain__child-item")).toHaveLength(0);
@@ -96,12 +96,12 @@ describe("the quad chain block", () => {
 			<QuadChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
-			</QuadChain>
+			</QuadChain>,
 		);
 
 		expect(container.querySelectorAll(".b-quad-chain__heading")).toHaveLength(1);
 		expect(container.querySelector(".b-quad-chain__heading").textContent).toBe(
-			"Quad Chain Heading"
+			"Quad Chain Heading",
 		);
 		const col1 = container.querySelectorAll(".b-quad-chain__child-item")[0];
 		const col2 = container.querySelectorAll(".b-quad-chain__child-item")[1];
@@ -115,7 +115,7 @@ describe("the quad chain block", () => {
 			<QuadChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
-			</QuadChain>
+			</QuadChain>,
 		);
 
 		expect(container.querySelectorAll(".b-quad-chain__heading")).toHaveLength(0);

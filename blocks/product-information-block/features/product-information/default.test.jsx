@@ -1,7 +1,7 @@
 import React from "react";
 import { useFusionContext } from "fusion:context";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 
 import ProductInformation from "./default";
 

@@ -9,18 +9,14 @@ describe("Algolia Assortment content source", () => {
 		jest.resetAllMocks();
 	});
 	it("should use the proper param types", () => {
-		expect(contentSource.params).toMatchInlineSnapshot(
-			`
-		Object {
-		  "filters": "text",
-		  "hitsPerPage": "number",
-		  "index": "text",
-		  "page": "number",
-		  "query": "text",
-		  "ruleContexts": "text",
-		}
-	`
-		);
+		expect(contentSource.params).toMatchObject({
+			filters: "text",
+			hitsPerPage: "number",
+			index: "text",
+			page: "number",
+			query: "text",
+			ruleContexts: "text",
+		});
 	});
 	it("should transform data", () => {
 		const key = {

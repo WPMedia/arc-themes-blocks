@@ -64,9 +64,6 @@
 	}
 
 	&__gallery {
-		@include scss.block-components("article-body-gallery");
-		@include scss.block-properties("article-body-gallery");
-
 		&:fullscreen {
 			@include scss.block-components("article-body-gallery-fullscreen");
 			@include scss.block-properties("article-body-gallery-fullscreen");
@@ -81,6 +78,9 @@
 			@include scss.block-components("article-body-gallery-close-button");
 			@include scss.block-properties("article-body-gallery-close-button");
 		}
+
+		@include scss.block-components("article-body-gallery");
+		@include scss.block-properties("article-body-gallery");
 	}
 
 	&__image-wrapper {

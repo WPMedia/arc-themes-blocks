@@ -13,7 +13,7 @@
 		padding: 0;
 
 		img {
-			width: 100%;
+			inline-size: 100%;
 		}
 
 		@include scss.block-properties("product-assortment-carousel-product");

@@ -44,7 +44,7 @@
 	}
 
 	&__text--left {
-		width: 100%;
+		inline-size: 100%;
 		@include scss.block-properties("hero-text-left");
 		@include scss.block-components("hero-text-left");
 	}

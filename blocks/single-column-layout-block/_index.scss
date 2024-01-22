@@ -12,15 +12,15 @@
 	}
 
 	&__full-width {
-		width: 100%;
+		inline-size: 100%;
 		margin: auto;
 		@include scss.block-properties("single-column-regular-full-width");
 		@include scss.block-components("single-column-regular-full-width");
 	}
 
 	&__body {
-		max-width: 90rem; // 1440px
-		width: 100%;
+		max-inline-size: 90rem; // 1440px
+		inline-size: 100%;
 		margin: auto;
 		@include scss.block-properties("single-column-regular-body");
 		@include scss.block-components("single-column-regular-body");

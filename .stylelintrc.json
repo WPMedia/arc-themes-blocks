@@ -1,5 +1,9 @@
 {
-	"plugins": ["stylelint-no-unsupported-browser-features"],
+	"plugins": [
+		"stylelint-no-unsupported-browser-features",
+		"stylelint-order",
+		"stylelint-use-logical"
+	],
 	"extends": [
 		"stylelint-config-recommended",
 		"stylelint-config-sass-guidelines",
@@ -7,20 +11,23 @@
 	],
 	"ignoreFiles": ["**/*.js", "**/*.jsx"],
 	"rules": {
+		"csstools/use-logical": "always",
 		"max-nesting-depth": 5,
 		"plugin/no-unsupported-browser-features": [
 			true,
 			{
 				"ignore": [
-					"css-sticky",
-					"multicolumn",
 					"calc",
 					"css-appearance",
-					"intrinsic-width",
-					"viewport-units",
-					"css3-cursor",
 					"css-initial-value",
-					"pointer-events"
+					"css-nesting",
+					"css-sticky",
+					"css3-cursor",
+					"fullscreen",
+					"intrinsic-width",
+					"multicolumn",
+					"pointer-events",
+					"viewport-units"
 				],
 				"severity": "warning"
 			}
@@ -32,12 +39,7 @@
 				"border": ["none"]
 			}
 		],
-		"value-no-vendor-prefix": [
-			true,
-			{
-				"ignore": ["-webkit-box"]
-			}
-		],
+		"value-no-vendor-prefix": true,
 		"property-no-vendor-prefix": [
 			true,
 			{

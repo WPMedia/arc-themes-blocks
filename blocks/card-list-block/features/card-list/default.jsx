@@ -45,10 +45,10 @@ const CardListItems = (props) => {
 			displayAmount,
 		},
 		targetFallbackImage,
-		dateLocalization: { language, timeZone, dateFormat } = {
+		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
 			timeZone: "GMT",
-			dateFormat: "%B %d, %Y at %l:%M%p %Z",
+			dateTimeFormat: "%B %d, %Y at %l:%M%p %Z",
 		},
 	} = props;
 	const phrases = usePhrases();
@@ -135,7 +135,7 @@ const CardListItems = (props) => {
 
 	const sourceContent = contentElements[0];
 
-	const displayDate = localizeDateTime(sourceContent.display_date, dateFormat, language, timeZone);
+	const displayDate = localizeDateTime(sourceContent.display_date, dateTimeFormat, language, timeZone);
 
 	/* Author Formatting */
 	const bylineNodes = formatAuthors(sourceContent?.credits?.by, phrases.t("global.and-text"));
@@ -270,8 +270,7 @@ const CardListItems = (props) => {
 
 const CardList = ({ customFields }) => {
 	const { id, arcSite, contextPath, deployment, isAdmin } = useFusionContext();
-	const { websiteDomain, fallbackImage, primaryLogoAlt } = getProperties(arcSite);
-
+	const { dateLocalization, fallbackImage, primaryLogoAlt, websiteDomain } = getProperties(arcSite);
 	const targetFallbackImage = getFallbackImageURL({
 		deployment,
 		contextPath,
@@ -288,6 +287,7 @@ const CardList = ({ customFields }) => {
 			<CardListItems
 				id={id}
 				customFields={customFields}
+				dateLocalization={dateLocalization}
 				targetFallbackImage={targetFallbackImage}
 				websiteDomain={websiteDomain}
 				primaryLogoAlt={primaryLogoAlt}

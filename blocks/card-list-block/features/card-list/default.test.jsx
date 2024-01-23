@@ -1,9 +1,10 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import getThemeStyle from "fusion:themes";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
+import getProperties from "fusion:properties";
+import { localizeDateTime } from "@wpmedia/arc-themes-components";
 import mockData, { oneListItem, oneListItemDisplayLabel, twoListItemNoSiteUrl } from "./mock-data";
 import CardList from "./default";
 
@@ -152,10 +153,6 @@ describe("Card list", () => {
 			const title = "Test Title";
 			const customFields = { listContentConfig, title };
 	
-			getThemeStyle.mockImplementation(() => ({
-				"primary-font-family": "Papyrus",
-			}));
-	
 			useContent.mockReturnValueOnce(oneListItem);
 			render(<CardList customFields={customFields} />);
 		};
@@ -201,6 +198,26 @@ describe("Card list", () => {
 		it("should render a publish date", () => {
 			setup();
 			expect(screen.getByText("date")).not.toBeNull();
+		});
+
+		it("should use default date format", () => {
+			setup();
+			expect(localizeDateTime).toHaveBeenLastCalledWith("2019-12-18T17:09:22.308Z", "%B %d, %Y at %l:%M%p %Z", "en", "GMT");
+		});
+
+		it("should use custom date format", () => {
+			getProperties.mockReturnValueOnce({
+				locale: "en",
+				fallbackImage: "placeholder.jpg",
+				resizerURL: "http://url.com/",
+				dateLocalization: {
+					language: "fr",
+					timeZone: "CET",
+					dateTimeFormat: "%d-%m-%Y at %l:%M%p %Z",
+				},
+			})
+			setup();
+			expect(localizeDateTime).toHaveBeenLastCalledWith("2019-12-18T17:09:22.308Z", "%d-%m-%Y at %l:%M%p %Z", "fr", "CET");
 		});
 	});
 

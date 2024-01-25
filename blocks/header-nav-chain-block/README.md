@@ -2,6 +2,7 @@
 
 This block is intended to be used as the header navigation chain block.
 
+
 ## Props
 
 | **Prop**     | **Required** | **Type** | **Description**                  |

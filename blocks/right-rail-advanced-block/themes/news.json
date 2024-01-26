@@ -101,14 +101,19 @@
 				"padding-block-end": "initial",
 				"padding-inline-start": "initial",
 				"gap": "var(--global-spacing-5)",
-				"display": "contents"
+				"display": "contents",
+				"border-inline-start-style": "none",
+				"border-inline-start-color": "var(--border-color)",
+				"border-inline-start-width": "0"
 			},
 			"desktop": {
 				"padding-block-start": "0",
 				"padding-inline-end": "0",
 				"padding-block-end": "0",
 				"padding-inline-start": "var(--global-spacing-6)",
-				"display": "flex"
+				"display": "flex",
+				"border-inline-start-style": "solid",
+				"border-inline-start-width": "1px"
 			}
 		}
 	},

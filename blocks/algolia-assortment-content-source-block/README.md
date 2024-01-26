@@ -4,6 +4,7 @@ The Algolia assortment content source block allows you to display products from 
 
 ## ANS Schema
 
+
 not applicable
 
 ## Configurable Params

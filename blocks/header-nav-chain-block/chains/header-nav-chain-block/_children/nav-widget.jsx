@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import { Button, Icon, usePhrases } from "@wpmedia/arc-themes-components";
 import SearchBox from "./search-box";
 import QuerylySearch from "./queryly-search";
@@ -6,7 +6,7 @@ import { WIDGET_CONFIG, PLACEMENT_AREAS } from "../nav-helper";
 
 const NavWidget = ({
 	breakpoint,
-	children = [],
+	children,
 	menuButtonClickAction,
 	placement = PLACEMENT_AREAS.NAV_BAR,
 	position = 0,
@@ -36,20 +36,24 @@ const NavWidget = ({
 				iconRight={<Icon name="HamburgerMenu" />}
 				variant="secondary-reverse"
 				size="small"
+				data-testid="nav-chain-nav-section-button"
 			>
 				{breakpoint === "desktop" ? phrases.t("header-nav-chain-block.sections-button") : null}
 			</Button>
 		) : null);
 
+	// The children prop is not 100% guaranteed to be an array, so this is a bit of future proofing in case something changes.
+	const widgetChildren = Children.toArray(children);
+
 	return (
 		predefinedWidget ||
-		(children &&
-		children.length > 0 &&
+		(widgetChildren &&
+		widgetChildren.length > 0 &&
 		position &&
 		position > 0 &&
 		Number.isInteger(position) &&
-		position <= children.length
-			? children[position - 1]
+		position <= widgetChildren.length
+			? widgetChildren[position - 1]
 			: null)
 	);
 };

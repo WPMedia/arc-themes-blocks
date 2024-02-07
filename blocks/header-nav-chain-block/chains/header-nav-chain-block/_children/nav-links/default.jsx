@@ -53,6 +53,7 @@ const NavLinksBar = ({
 			wrap="wrap"
 			justification={justification}
 			aria-label={ariaLabel || phrases.t("header-nav-chain-block.links-element-aria-label")}
+			data-testid="nav-chain-nav-links-bar"
 		>
 			{menuItems.map((item, index) => (
 				<span className={`${blockClassName}__links-list-item`} key={item._id}>

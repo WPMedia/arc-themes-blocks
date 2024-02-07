@@ -30,8 +30,8 @@ const RightRailAdvancedLayout = ({ children }) => {
 	] = React.Children.toArray(children);
 	const featureList = useFeatureList();
 
-	const mainItems =
-		featureList["2"] + featureList["3"] + featureList["4"] + featureList["5"] + featureList["6"];
+	const mainItems = featureList["2"] + featureList["3"];
+	const rightRailItems = featureList["4"] + featureList["5"] + featureList["6"];
 
 	return (
 		<div className={LAYOUT_CLASS_NAME}>
@@ -41,12 +41,14 @@ const RightRailAdvancedLayout = ({ children }) => {
 			<section role="main" tabIndex="-1" className={`${LAYOUT_CLASS_NAME}__main`}>
 				<Stack className={`${LAYOUT_CLASS_NAME}__full-width-1`}>{fullwidth1}</Stack>
 				<Grid className={`${LAYOUT_CLASS_NAME}__rail-container `}>
-					<Stack className={`${LAYOUT_CLASS_NAME}__main-interior-item`}>
+					<Stack
+						className={`${LAYOUT_CLASS_NAME}__main-interior-item${mainItems < 2 ? ` ${LAYOUT_CLASS_NAME}__empty` : ""}`}
+					>
 						<Stack className={`${LAYOUT_CLASS_NAME}__main-interior-item-1`}>{main}</Stack>
 						<Stack className={`${LAYOUT_CLASS_NAME}__main-interior-item-2`}>{main2}</Stack>
 					</Stack>
 					<Stack
-						className={`${LAYOUT_CLASS_NAME}__main-right-rail ${mainItems === 0 && `${LAYOUT_CLASS_NAME}__main-right-rail-empty`}`}
+						className={`${LAYOUT_CLASS_NAME}__main-right-rail${rightRailItems < 2 ? ` ${LAYOUT_CLASS_NAME}__empty` : ""}`}
 					>
 						<Stack className={`${LAYOUT_CLASS_NAME}__main-right-rail-top`}>{rightRailTop}</Stack>
 						<Stack className={`${LAYOUT_CLASS_NAME}__main-right-rail-middle`}>

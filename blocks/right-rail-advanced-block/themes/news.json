@@ -117,10 +117,10 @@
 			}
 		}
 	},
-	"right-rail-advanced-main-right-rail-empty": {
+	"right-rail-advanced-empty": {
 		"styles": {
 			"default": {
-				"border-inline-start-style": "none"
+				"gap": "0"
 			},
 			"desktop": {}
 		}

@@ -36,9 +36,9 @@
 		@include scss.block-components("right-rail-advanced-main-right-rail");
 	}
 
-	&__main-right-rail-empty {
-		@include scss.block-properties("right-rail-advanced-main-right-rail-empty");
-		@include scss.block-components("right-rail-advanced-main-right-rail-empty");
+	&__empty {
+		@include scss.block-properties("right-rail-advanced-empty");
+		@include scss.block-components("right-rail-advanced-empty");
 	}
 
 	&__rail-container {

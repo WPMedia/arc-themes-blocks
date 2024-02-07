@@ -30,24 +30,24 @@ const RightRailAdvancedLayout = ({ children }) => {
 	] = React.Children.toArray(children);
 	const featureList = useFeatureList();
 
+	const mainItems =
+		featureList["2"] + featureList["3"] + featureList["4"] + featureList["5"] + featureList["6"];
+
 	return (
 		<div className={LAYOUT_CLASS_NAME}>
-			{navigation ? (
-				<Stack as="header" className={`${LAYOUT_CLASS_NAME}__navigation`}>
-					{navigation}
-				</Stack>
-			) : null}
-
+			<Stack as="header" className={`${LAYOUT_CLASS_NAME}__navigation`}>
+				{navigation}
+			</Stack>
 			<section role="main" tabIndex="-1" className={`${LAYOUT_CLASS_NAME}__main`}>
-				{fullwidth1 ? (
-					<Stack className={`${LAYOUT_CLASS_NAME}__full-width-1`}>{fullwidth1}</Stack>
-				) : null}
-				<Grid className={`${LAYOUT_CLASS_NAME}__rail-container`}>
+				<Stack className={`${LAYOUT_CLASS_NAME}__full-width-1`}>{fullwidth1}</Stack>
+				<Grid className={`${LAYOUT_CLASS_NAME}__rail-container `}>
 					<Stack className={`${LAYOUT_CLASS_NAME}__main-interior-item`}>
 						<Stack className={`${LAYOUT_CLASS_NAME}__main-interior-item-1`}>{main}</Stack>
 						<Stack className={`${LAYOUT_CLASS_NAME}__main-interior-item-2`}>{main2}</Stack>
 					</Stack>
-					<Stack className={`${LAYOUT_CLASS_NAME}__main-right-rail`}>
+					<Stack
+						className={`${LAYOUT_CLASS_NAME}__main-right-rail ${mainItems === 0 && `${LAYOUT_CLASS_NAME}__main-right-rail-empty`}`}
+					>
 						<Stack className={`${LAYOUT_CLASS_NAME}__main-right-rail-top`}>{rightRailTop}</Stack>
 						<Stack className={`${LAYOUT_CLASS_NAME}__main-right-rail-middle`}>
 							{rightRailMiddle}
@@ -57,15 +57,11 @@ const RightRailAdvancedLayout = ({ children }) => {
 						</Stack>
 					</Stack>
 				</Grid>
-				{featureList["7"] > 0 ? (
-					<Stack className={`${LAYOUT_CLASS_NAME}__full-width-2`}>{fullWidth2}</Stack>
-				) : null}
+				<Stack className={`${LAYOUT_CLASS_NAME}__full-width-2`}>{fullWidth2}</Stack>
 			</section>
-			{footer ? (
-				<Stack as="footer" className={`${LAYOUT_CLASS_NAME}__footer`}>
-					{footer}
-				</Stack>
-			) : null}
+			<Stack as="footer" className={`${LAYOUT_CLASS_NAME}__footer`}>
+				{footer}
+			</Stack>
 		</div>
 	);
 };

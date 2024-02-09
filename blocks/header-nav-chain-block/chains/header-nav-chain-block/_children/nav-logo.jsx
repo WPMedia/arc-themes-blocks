@@ -53,9 +53,7 @@ const NavLogo = ({ imageAltText, imageSource, blockClassName, logoAlignment }) =
 		}
 
 		const timerID = setTimeout(() => {
-			console.log('running timer')
 			const mastHead = document.querySelector(".b-masthead .b-masthead__logo");
-			console.log('masthead: ', mastHead)
 			if (!mastHead) {
 				setLogoVisibility(true);
 			}

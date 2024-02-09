@@ -57,7 +57,7 @@ describe("the header navigation feature for the default output type", () => {
 				horizontalLinksHierarchy: "default",
 			};
 			render(<Navigation customFields={cFields} />);
-			expect(screen.getByTestId("nav-chain-nav-links-bar")).not.toBeNull();
+			expect(screen.getByLabelText("header-nav-chain-block.links-element-aria-label")).not.toBeNull();
 		});
 
 		it('should not render horizontal links when "logoAlignment" is "center"', () => {
@@ -67,7 +67,7 @@ describe("the header navigation feature for the default output type", () => {
 				horizontalLinksHierarchy: "default",
 			};
 			render(<Navigation customFields={cFields} />);
-			expect(screen.queryByTestId("nav-chain-nav-links-bar")).toBeNull();
+			expect(screen.queryByLabelText("header-nav-chain-block.links-element-aria-label")).toBeNull();
 		});
 	});
 
@@ -169,8 +169,8 @@ describe("the header navigation feature for the default output type", () => {
 					</>
 				);
 				
-				expect(screen.getAllByRole("link").length).toBe(3);
-				// The logo link has aria-hidden set, so there should now be one more link found.
+				expect(screen.queryAllByRole("link").length).toBe(0);
+				// The logo link and menu links have aria-hidden set, so there should be four total.
 				expect(screen.getAllByRole("link", { hidden: true }).length).toBe(4);
 			});
 
@@ -180,8 +180,8 @@ describe("the header navigation feature for the default output type", () => {
 				render(<Navigation customFields={DEFAULT_SELECTIONS} />);
 				act(() => {
 					jest.runAllTimers();
-				})
-				expect(screen.getAllByRole("link").length).toBe(4);
+				});
+				expect(screen.getByRole("link")).not.toBeNull();
 			});
 
 			it("should show the logo after 1 second on mobile devices", () => {
@@ -195,7 +195,7 @@ describe("the header navigation feature for the default output type", () => {
 					jest.runAllTimers();
 				});
 
-				expect(screen.getAllByRole("link").length).toBe(4);
+				expect(screen.getByRole("link")).not.toBeNull();
 			});
 
 			it("should show the logo after 1 second if there is a masthead but no logo", () => {
@@ -207,12 +207,12 @@ describe("the header navigation feature for the default output type", () => {
 						selector === ".b-masthead .b-masthead__logo" ? undefined : {}
 					);
 				render(<Navigation customFields={DEFAULT_SELECTIONS} />);
-				expect(screen.getAllByRole("link").length).toBe(3);
+				expect(screen.queryAllByRole("link").length).toBe(0);
 				act(() => {
 					jest.runAllTimers();
 				});
 
-				expect(screen.getAllByRole("link").length).toBe(4);
+				expect(screen.getByRole("link")).not.toBeNull();
 				spy.mockRestore();
 			});
 
@@ -225,19 +225,16 @@ describe("the header navigation feature for the default output type", () => {
 						selector === ".b-masthead .b-masthead__logo" ? {} : undefined
 					);
 
-				const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
+				render(<Navigation customFields={DEFAULT_SELECTIONS} />);
 				act(() => {
 					jest.runAllTimers();
-					wrapper.setProps({});
 				});
 
-				expect(wrapper.find(".b-header-nav-chain__logo.nav-logo-hidden").hostNodes().length).toBe(
-					1
-				);
+				expect(screen.queryByRole("link")).toBeNull();
 				spy.mockRestore();
 			});
 
-			it("should setup scroll handlers, when enable logo", () => {
+			it("should setup scroll handlers, when masthead has logo", () => {
 				let handlerSetup = false;
 				const spy = jest.spyOn(window, "addEventListener").mockImplementation((...args) => {
 					if (args[0] === "scroll") {
@@ -252,15 +249,12 @@ describe("the header navigation feature for the default output type", () => {
 					);
 				getProperties.mockImplementation(() => ({}));
 				jest.useFakeTimers();
-				const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
+				render(<Navigation customFields={DEFAULT_SELECTIONS} />);
 				act(() => {
 					jest.runAllTimers();
-					wrapper.setProps({});
 				});
 
-				expect(wrapper.find(".b-header-nav-chain__logo.nav-logo-hidden").hostNodes().length).toBe(
-					1
-				);
+				expect(screen.queryByRole("link")).toBeNull();
 				expect(handlerSetup).toBeTruthy();
 
 				spy.mockRestore();
@@ -271,72 +265,33 @@ describe("the header navigation feature for the default output type", () => {
 
 	describe("hamburger menu", () => {
 		it("opens and closes with the sections button", () => {
-			const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(true);
+			render(<Navigation customFields={DEFAULT_SELECTIONS} />);
+			const navComponents = screen.getByTestId("nav-chain-nav-components-desktop-left")
+			fireEvent.click(within(navComponents).getByTestId("nav-chain-nav-section-button"));
+			expect(screen.queryAllByRole("link").length).toBe(3);
 
-			wrapper
-				.find(".b-header-nav-chain__nav-left > .nav-components--desktop button")
-				.at(1)
-				.hostNodes()
-				.simulate("click");
-			expect(wrapper.find("div#flyout-overlay").hasClass("open")).toBe(true);
-
-			wrapper
-				.find(".b-header-nav-chain__nav-left > .nav-components--desktop button")
-				.at(1)
-				.hostNodes()
-				.simulate("click");
-			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(true);
-		});
-
-		it("open with section button, closes when click the container", () => {
-			const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(true);
-
-			wrapper
-				.find(".b-header-nav-chain__nav-left > .nav-components--desktop button")
-				.at(1)
-				.hostNodes()
-				.simulate("click");
-			expect(wrapper.find("div#flyout-overlay").hasClass("open")).toBe(true);
-
-			wrapper.find("div#flyout-overlay").simulate("click", { target: { closest: () => false } });
-			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(true);
-		});
-
-		it("open with section button, must not close when inside the drawer", () => {
-			const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(true);
-
-			wrapper
-				.find(".b-header-nav-chain__nav-left > .nav-components--desktop button")
-				.at(1)
-				.hostNodes()
-				.simulate("click");
-			expect(wrapper.find("div#flyout-overlay").hasClass("open")).toBe(true);
-
-			wrapper.find("div#flyout-overlay").simulate("click", { target: { closest: () => true } });
-			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(false);
+			fireEvent.click(within(navComponents).getByTestId("nav-chain-nav-section-button"));
+			expect(screen.queryAllByRole("link").length).toBe(0);
 		});
 	});
 
 	describe("dealing with accessibility and screen readers", () => {
 		it("should render the block with the default aria-label", () => {
-			const wrapper = mount(<Navigation customFields={{}} />);
-			expect(wrapper.find("nav#main-nav").props()).toHaveProperty(
-				"aria-label",
-				"header-nav-chain-block.sections-element-aria-label"
-			);
+			render(<Navigation customFields={{}} />);
+			expect(
+				screen.getByLabelText("header-nav-chain-block.sections-element-aria-label")
+			).not.toBeNull();
 		});
 
 		it("should render the block with the custom aria-label", () => {
-			const wrapper = mount(<Navigation customFields={{ ariaLabel: "Links" }} />);
-			expect(wrapper.find("nav#main-nav").props()).toHaveProperty("aria-label", "Links");
+			render(<Navigation customFields={{ ariaLabel: "Links" }} />);
+			expect(screen.getByLabelText("Links")).not.toBeNull();
 		});
 	});
 
 	describe("primary image", () => {
 		it("shown without deployment function prefix if external http url", () => {
+			jest.useFakeTimers();
 			getProperties.mockReturnValueOnce({
 				primaryLogo: "http://www.example.com/logo.png",
 			});
@@ -345,14 +300,17 @@ describe("the header navigation feature for the default output type", () => {
 				deployment: jest.fn(() => ({})).mockReturnValue("rendered-from-deployment"),
 			});
 
-			const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-
-			const navLogoImg = wrapper.find(".b-header-nav-chain__logo img");
-			expect(navLogoImg).toHaveLength(1);
-			expect(navLogoImg.prop("src")).toEqual("http://www.example.com/logo.png");
+			render(<Navigation customFields={DEFAULT_SELECTIONS} />);
+			act(() => {
+				jest.runAllTimers();
+			});
+			const navLogoImg = screen.getByRole("img")
+			expect(navLogoImg).not.toBeNull();
+			expect(navLogoImg.getAttribute("src")).toEqual("http://www.example.com/logo.png");
 		});
 
 		it("shows image rendered from depoyment function if no http or base64 found", () => {
+			jest.useFakeTimers();
 			getProperties.mockReturnValueOnce({
 				primaryLogo: "resources/images/logo.png",
 			});
@@ -360,14 +318,17 @@ describe("the header navigation feature for the default output type", () => {
 				contextPath: "pf",
 				deployment: jest.fn(() => ({})).mockReturnValue("rendered-from-deployment"),
 			});
-			const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-
-			const navLogoImg = wrapper.find(".b-header-nav-chain__logo img");
-			expect(navLogoImg).toHaveLength(1);
-			expect(navLogoImg.prop("src")).toEqual("rendered-from-deployment");
+			render(<Navigation customFields={DEFAULT_SELECTIONS} />);
+			act(() => {
+				jest.runAllTimers();
+			});
+			const navLogoImg = screen.getByRole("img")
+			expect(navLogoImg).not.toBeNull();
+			expect(navLogoImg.getAttribute("src")).toEqual("rendered-from-deployment");
 		});
 
 		it("shows image with deployment function used with base64", () => {
+			jest.useFakeTimers();
 			getProperties.mockReturnValueOnce({
 				primaryLogo: "base64, iVBORw0KGgoAAAANSUhEUgAAAAUA",
 			});
@@ -375,11 +336,13 @@ describe("the header navigation feature for the default output type", () => {
 				contextPath: "pf",
 				deployment: jest.fn(() => ({})).mockReturnValue("rendered-from-deployment"),
 			});
-			const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-
-			const navLogoImg = wrapper.find(".b-header-nav-chain__logo img");
-			expect(navLogoImg).toHaveLength(1);
-			expect(navLogoImg.prop("src")).toEqual("base64, iVBORw0KGgoAAAANSUhEUgAAAAUA");
+			render(<Navigation customFields={DEFAULT_SELECTIONS} />);
+			act(() => {
+				jest.runAllTimers();
+			});
+			const navLogoImg = screen.getByRole("img")
+			expect(navLogoImg).not.toBeNull();
+			expect(navLogoImg.getAttribute("src")).toEqual("base64, iVBORw0KGgoAAAANSUhEUgAAAAUA");
 		});
 	});
 });

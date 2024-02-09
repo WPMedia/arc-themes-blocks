@@ -6,10 +6,10 @@ function hasChildren(node) {
 }
 
 const SectionAnchor = ({ item, isHidden }) =>
-	item.node_type === "link" && !isHidden ? (
-		<Link href={item.url}>{item.display_name}</Link>
+	item.node_type === "link" ? (
+		<Link href={item.url} assistiveHidden={isHidden}>{item.display_name}</Link>
 	) : (
-		<Link href={item._id}>{item.name}</Link>
+		<Link href={item._id} assistiveHidden={isHidden}>{item.name}</Link>
 	);
 
 const onClickSubsection = (evt) => {
@@ -56,13 +56,14 @@ const SubSectionAnchor = ({ item, isOpen, isHidden, blockClassName }) => {
 			direction="horizontal"
 			alignment="center"
 			onClick={onClickSubsection}
+			data-testid="nav-chain-section-item-subsection"
 		>
 			<SectionAnchor item={item} isHidden={isHidden} />
 			<Button
 				type="button"
 				className="submenu-caret"
 				aria-expanded="false"
-				aria-label={phrases.t("header-nav-chain-block.sections-button-aria-label", {
+				accessibilityLabel={phrases.t("header-nav-chain-block.sections-button-aria-label", {
 					item: item.display_name ?? item.name,
 				})}
 				aria-controls={`header_sub_section_${item._id.replace("/", "")}`}
@@ -83,7 +84,7 @@ const SectionItem = ({ item, isHidden, blockClassName }) => {
 	const isOpen = isSamePath(currentLocation, item._id) ? "open" : "";
 
 	return (
-		<li className="section-item">
+		<li className="section-item" data-testid="nav-chain-section-item">
 			{hasChildren(item) ? (
 				<SubSectionAnchor
 					item={item}
@@ -109,7 +110,7 @@ const SectionItem = ({ item, isHidden, blockClassName }) => {
 
 const SubSectionMenu = ({ items, isOpen, id, isHidden, blockClassName }) => {
 	const itemsList = items.map((item) => (
-		<li className="subsection-item" key={item._id}>
+		<li className="subsection-item" key={item._id} data-testid="nav-chain-subsection-item">
 			{item.node_type === "link" ? (
 				<Link href={item.url} assistiveHidden={isHidden}>
 					{item.display_name}
@@ -133,7 +134,6 @@ const SubSectionMenu = ({ items, isOpen, id, isHidden, blockClassName }) => {
 
 export default ({ children = [], sections = [], isHidden = false, blockClassName }) => {
 	const active = sections.filter((s) => !s.inactive);
-
 	return (
 		<>
 			{children}

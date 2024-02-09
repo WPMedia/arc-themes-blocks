@@ -129,12 +129,14 @@ describe("the SectionNav component", () => {
 
 		it("should render a .subsection-container", () => {
 			render(<SectionNav sections={items} />);
+			// eslint-disable-next-line testing-library/no-node-access
 			const numSubsectionContainers = items.filter((i) => i.children && i.children.length).length;
 			expect(screen.getAllByTestId("nav-chain-section-item-subsection")).toHaveLength(numSubsectionContainers);
 		});
 
 		it("should render the correct number of active .subsection-item elements", () => {
 			render(<SectionNav sections={items} blockClassName="b-header-nav-chain" />);
+			// eslint-disable-next-line testing-library/no-node-access
 			const numActiveSubItems = items[0].children.length;
 			expect(screen.getAllByTestId("nav-chain-subsection-item")).toHaveLength(
 				numActiveSubItems

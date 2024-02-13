@@ -117,6 +117,14 @@
 			}
 		}
 	},
+	"right-rail-advanced-empty": {
+		"styles": {
+			"default": {
+				"gap": "0"
+			},
+			"desktop": {}
+		}
+	},
 	"right-rail-advanced-main-right-rail-bottom": {
 		"styles": {
 			"default": {

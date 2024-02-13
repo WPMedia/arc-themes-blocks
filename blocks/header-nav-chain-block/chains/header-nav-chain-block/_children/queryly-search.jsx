@@ -18,7 +18,7 @@ const QuerylySearch = () => {
 
 	return (
 		<Button
-			aria-label={phrases.t("header-nav-chain-block.search-text")}
+			accessibilityLabel={phrases.t("header-nav-chain-block.search-text")}
 			onClick={querylySearchClick}
 			variant="secondary-reverse"
 			size="small"

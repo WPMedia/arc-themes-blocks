@@ -56,7 +56,7 @@ const NavLinksBar = ({
 		>
 			{menuItems.map((item, index) => (
 				<span className={`${blockClassName}__links-list-item`} key={item._id}>
-					{index > 0 && showSeparator ? <Separator /> : null}
+					{index > 0 && showSeparator ? <Separator data-testid="nav-chain-link-bar-separator" /> : null}
 					{item.node_type === "link" ? (
 						<Link href={item.url}>{item.display_name}</Link>
 					) : (

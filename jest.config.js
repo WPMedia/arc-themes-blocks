@@ -9,10 +9,10 @@ module.exports = {
 	coverageDirectory: "<rootDir>/coverage",
 	coverageThreshold: {
 		global: {
-			statements: 48,
-			branches: 60,
-			functions: 40,
-			lines: 40,
+			statements: 53,
+			branches: 66,
+			functions: 44,
+			lines: 54,
 		},
 	},
 	// projects: ["<rootDir>/blocks/*/jest.config.js"],

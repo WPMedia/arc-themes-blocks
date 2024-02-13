@@ -31,6 +31,7 @@ const reduceResultList = (state = defaultResultList, action) => {
 
 const resolveDefaultPromoElements = (customFields = {}) => {
 	const fields = {
+		imageRatio: "3:2",
 		showByline: true,
 		showDate: true,
 		showDescription: true,

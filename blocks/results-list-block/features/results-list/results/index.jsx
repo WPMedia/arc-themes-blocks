@@ -14,6 +14,7 @@ const Results = ({
 	configuredSize,
 	contentConfigValues,
 	contentService,
+	imageRatio,
 	isServerSideLazy = false,
 	showByline = false,
 	showDate = false,
@@ -21,7 +22,6 @@ const Results = ({
 	showHeadline = false,
 	showImage = false,
 	showItemOverline = false,
-	imageRatio,
 	targetFallbackImage,
 }) => {
 	const [queryOffset, setQueryOffset] = useState(configuredOffset);
@@ -199,6 +199,7 @@ const Results = ({
 						ref={elementRefs[index]}
 						arcSite={arcSite}
 						element={element}
+						imageRatio={imageRatio}
 						placeholderResizedImageOptions={placeholderResizedImageOptions}
 						showByline={showByline}
 						showDate={showDate}
@@ -207,7 +208,6 @@ const Results = ({
 						showImage={showImage}
 						showItemOverline={showItemOverline}
 						targetFallbackImage={targetFallbackImage}
-						imageRatio={imageRatio}
 					/>
 				))}
 				{isThereMore && (

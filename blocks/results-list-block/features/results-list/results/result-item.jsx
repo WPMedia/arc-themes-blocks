@@ -32,6 +32,7 @@ const ResultItem = React.memo(
 			{
 				arcSite,
 				element,
+				imageRatio,
 				targetFallbackImage,
 				showByline,
 				showDate,
@@ -109,21 +110,21 @@ const ResultItem = React.memo(
 								<Image
 									src={imageURL !== null ? imageURL : targetFallbackImage}
 									alt={headlineText}
+									aspectRatio={imageRatio}
 									resizedOptions={{ auth: auth[RESIZER_TOKEN_VERSION], smart: true }}
 									resizerURL={resizerURL}
 									sizes={[
 										{
 											isDefault: true,
-											sourceSizeValue: "100px",
+											sourceSizeValue: "250px",
 										},
 										{
 											sourceSizeValue: "500px",
 											mediaCondition: "(min-width: 48rem)",
 										},
 									]}
-									responsiveImages={[100, 500]}
+									responsiveImages={[250, 500]}
 									width={500}
-									height={333}
 								/>
 							</Conditional>
 						</MediaItem>

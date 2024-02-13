@@ -139,7 +139,7 @@ const Results = ({
     }`,
 	});
 
-	const [resultList, alterResultList] = useReducer(reduceResultList, requestedResultList);
+	const [resultList, alterResultList] = useReducer(reduceResultList, { content_elements: [] });
 
 	useEffect(() => {
 		if (requestedResultList) {

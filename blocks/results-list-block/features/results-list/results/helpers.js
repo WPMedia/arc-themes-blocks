@@ -1,8 +1,4 @@
-const defaultResultList = {
-	content_elements: [],
-};
-
-const reduceResultList = (state = defaultResultList, action) => {
+const reduceResultList = (state, action) => {
 	const { type, data } = action;
 
 	if (!data) {

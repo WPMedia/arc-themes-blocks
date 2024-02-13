@@ -16,6 +16,7 @@ contexts should provide the clarity to the message that is being conveyed.
 
 ## Events
 
+
 - @wpmedia/hero-block currently emits no events.
 
 ### Event Listening

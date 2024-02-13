@@ -24,7 +24,11 @@ const NavSection = ({
 				children[signInOrder - 1]
 					? children[signInOrder - 1]
 					: NAV_BREAKPOINTS.map((breakpoint) => (
-							<div key={breakpoint} className={`nav-components--${breakpoint}`}>
+							<div
+								key={breakpoint}
+								className={`nav-components--${breakpoint}`}
+								data-testid={`nav-chain-nav-components-${breakpoint}-${side}`}
+							>
 								<WidgetList
 									breakpoint={breakpoint}
 									customFields={customFields}

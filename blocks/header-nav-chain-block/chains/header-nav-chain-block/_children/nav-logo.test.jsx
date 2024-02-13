@@ -1,46 +1,36 @@
-describe("This test is disabled", () => {
-	it("should succeed", () => {
-		expect(true);
+import React from "react";
+import { act } from "react-dom/test-utils";
+import { render, screen } from "@testing-library/react";
+import NavLogo from "./nav-logo";
+
+describe("<NavLogo/>", () => {
+	it("renders logo", () => {
+		jest.useFakeTimers();
+		render(
+			<NavLogo
+				blockClassName="b-header-nav-chain"
+				imageSource="resources/images/logo.png"
+				imageAltText="NavBar logo"
+			/>
+		);
+		act(() => {
+			jest.runAllTimers();
+		});
+		expect(screen.getByAltText("NavBar logo")).not.toBeNull();
+	});
+
+	it("renders SVG logo", () => {
+		jest.useFakeTimers();
+		render(
+			<NavLogo
+				blockClassName="b-header-nav-chain"
+				imageSource="resources/images/logo.svg"
+				imageAltText="NavBar SVG logo"
+			/>
+		);
+		act(() => {
+			jest.runAllTimers();
+		});
+		expect(screen.getByAltText("NavBar SVG logo")).not.toBeNull();
 	});
 });
-
-// import React from "react";
-// import { shallow } from "enzyme";
-// import NavLogo from "./nav-logo";
-
-// describe("<NavLogo/>", () => {
-// 	it("renders logo", () => {
-// 		const wrapper = shallow(
-// 			<NavLogo
-// 				blockClassName="b-header-nav-chain"
-// 				imageSource="resources/images/logo.png"
-// 				imageAltText="NavBar logo"
-// 			/>
-// 		);
-
-// 		const navLogo = wrapper.find(".b-header-nav-chain__logo");
-// 		expect(navLogo).toHaveLength(1);
-// 	});
-
-// 	it("renders SVG logo", () => {
-// 		const wrapper = shallow(
-// 			<NavLogo
-// 				blockClassName="b-header-nav-chain"
-// 				imageSource="resources/images/logo.svg"
-// 				imageAltText="NavBar SVG logo"
-// 			/>
-// 		);
-
-// 		const navLogo = wrapper.find(".b-header-nav-chain__logo");
-// 		expect(navLogo).toHaveLength(1);
-
-// 		const navLogoLink = navLogo.find("Link");
-// 		expect(navLogoLink.prop("href")).toEqual("/");
-// 		expect(navLogoLink.prop("title")).toEqual("NavBar SVG logo");
-
-// 		const navLogoImg = navLogoLink.find("img");
-// 		expect(navLogoImg).toHaveLength(1);
-// 		expect(navLogoImg.prop("src")).toEqual("resources/images/logo.svg");
-// 		expect(navLogoImg.prop("alt")).toEqual("NavBar SVG logo");
-// 	});
-// });

@@ -6,7 +6,11 @@ import WidgetList from "./widget-list";
 const MenuWidgets = ({ children, customFields, menuButtonClickAction }) => (
 	<div key="menu" className="nav-menu">
 		{NAV_BREAKPOINTS.map((breakpoint) => (
-			<Stack key={breakpoint} className={`nav-components--${breakpoint}`}>
+			<Stack
+				key={breakpoint}
+				className={`nav-components--${breakpoint}`}
+				data-testid={`nav-chain-nav-components-${breakpoint}`}
+			>
 				<WidgetList
 					breakpoint={breakpoint}
 					customFields={customFields}

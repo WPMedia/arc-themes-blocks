@@ -59,7 +59,7 @@ export default ({ alwaysOpen = false, placeholderText, customSearchAction = null
 	const navClassNames = `nav-search${isSearchBarOpen ? " open " : ""}`;
 
 	return (
-		<div className={navClassNames}>
+		<div className={navClassNames} data-testid="nav-chain-nav-search">
 			<input
 				ref={searchInput}
 				onBlur={() => {

@@ -42,7 +42,6 @@ const NavWidget = ({
 			</Button>
 		) : null);
 
-	// The children prop is not 100% guaranteed to be an array, so this is a bit of future proofing in case something changes.
 	const widgetChildren = Children.toArray(children);
 
 	return (

@@ -37,6 +37,7 @@ const ResultsList = ({ customFields }) => {
 					configuredSize={configuredSize}
 					contentConfigValues={contentConfigValues}
 					contentService={contentService}
+					imageRatio={promoElements.imageRatio}
 					isServerSideLazy={isServerSideLazy}
 					showByline={promoElements.showByline}
 					showDate={promoElements.showDate}
@@ -80,6 +81,11 @@ ResultsList.propTypes = {
 		showImage: PropTypes.bool.tag({
 			label: "Show image",
 			defaultValue: true,
+			group: "Show promo elements",
+		}),
+		imageRatio: PropTypes.oneOf(["3:2", "4:3", "16:9"]).tag({
+			defaultValue: "3:2",
+			label: "Image ratio",
 			group: "Show promo elements",
 		}),
 		showDescription: PropTypes.bool.tag({

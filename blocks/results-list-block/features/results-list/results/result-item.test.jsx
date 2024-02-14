@@ -113,6 +113,26 @@ describe("Result parts", () => {
 		unmount();
 	});
 
+	it("does not show the date if data is missing", () => {
+		const { unmount } = render(
+			<ResultItem
+				arcSite="the-sun"
+				element={{
+					...element,
+					display_date: ""
+				}}
+				imageProperties={imageProperties}
+				targetFallbackImage={fallbackImage}
+				placeholderResizedImageOptions={{}}
+				showDate
+			/>,
+		);
+
+		expect(screen.queryByText(/January 01, 2021 at 12:01AM UTC/i)).toBeNull();
+
+		unmount();
+	});
+
 	it("should show the description if showDescription", () => {
 		const { unmount } = render(
 			<ResultItem
@@ -250,8 +270,9 @@ describe("Result parts", () => {
 					...element,
 					promo_items: {
 						basic: {
+							_id: "ABCDEFG12345678910",
 							type: "image",
-							url: "http://test/resources/promo.jpg",
+							url: "http://test/resources/ABCDEFG12345678910.jpg",
 						},
 					},
 				}}
@@ -262,8 +283,31 @@ describe("Result parts", () => {
 			/>,
 		);
 
-		expect(screen.getAllByAltText(/Test headline 1/i)).toHaveLength(1);
+		const imageSrc = screen.getByAltText(/Test headline 1/i);
+		expect(imageSrc.src).toContain("ABCDEFG12345678910.jpg");
 
 		unmount();
 	});
+
+	it("should be null if all show* values are false", () => {
+		const { container, unmount } = render(
+			<ResultItem
+				arcSite="the-sun"
+				element={element}
+				imageProperties={imageProperties}
+				targetFallbackImage={fallbackImage}
+				placeholderResizedImageOptions={{}}
+				showByline={false}
+				showDate={false}
+				showDescription={false}
+				showHeadline={false}
+				showImage={false}
+				showItemOverline={false}
+			/>,
+		);
+
+		expect(container).toBeEmptyDOMElement();;
+
+		unmount();
+	})
 });

@@ -4,6 +4,7 @@
 			"default": {
 				"components": {
 					"attribution": {
+						"display": "block",
 						"margin-block-start": "var(--global-spacing-4)"
 					},
 					"button": {
@@ -20,6 +21,7 @@
 						"max-inline-size": "100px"
 					},
 					"overline": {
+						"display": "inline",
 						"font-size": "var(--body-font-size)"
 					},
 					"separator": {
@@ -27,6 +29,9 @@
 						"padding-block-start": "0",
 						"padding-inline-end": "var(--global-spacing-2)",
 						"padding-inline-start": "var(--global-spacing-2)"
+					},
+					"paragraph": {
+						"display": "block"
 					}
 				}
 			},
@@ -61,9 +66,6 @@
 				"components": {
 					"heading": {
 						"inline-size": "68%"
-					},
-					"overline": {
-						"font-size": "var(--body-font-size)"
 					}
 				}
 			},
@@ -82,7 +84,6 @@
 						"margin-inline-start": "var(--global-spacing-6)"
 					},
 					"paragraph": {
-						"display": "block",
 						"margin-inline-start": "calc(33% + var(--global-spacing-6))"
 					}
 				}

@@ -61,7 +61,7 @@
 		"@storybook/addon-knobs": "^7.0.2",
 		"@storybook/react": "^7.5.1",
 		"@stripe/react-stripe-js": "^2.3.1",
-		"@stripe/stripe-js": "^2.1.9",
+		"@stripe/stripe-js": "^3.0.2",
 		"@testing-library/jest-dom": "^6.1.4",
 		"@testing-library/react": "^14.0.0",
 		"@wpmedia/arc-themes-components": "arc-themes-release-version-2.1.4",

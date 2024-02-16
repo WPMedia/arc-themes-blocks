@@ -37,7 +37,7 @@ const resolveDefaultPromoElements = (customFields = {}) => {
 	};
 	const fieldKeys = Object.keys(fields);
 	return fieldKeys.reduce((acc, key) => {
-		if (typeof customFields[key] === "undefined") {
+		if (typeof customFields[key] === "undefined" || customFields[key] === null) {
 			acc[key] = fields[key];
 		} else {
 			acc[key] = customFields[key];

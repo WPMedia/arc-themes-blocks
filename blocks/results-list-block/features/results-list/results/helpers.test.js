@@ -4,6 +4,7 @@ describe("resolveDefaultPromoElements", () => {
 	it("should use default custom fields as empty object", () => {
 		const result = resolveDefaultPromoElements();
 		const expectedResult = {
+			imageRatio: "3:2",
 			showByline: true,
 			showDate: true,
 			showDescription: true,
@@ -16,6 +17,7 @@ describe("resolveDefaultPromoElements", () => {
 
 	it("should use valid passed field values when available", () => {
 		const result = resolveDefaultPromoElements({
+			imageRatio: "16:9",
 			showByline: true,
 			showDate: true,
 			showDescription: true,
@@ -24,6 +26,7 @@ describe("resolveDefaultPromoElements", () => {
 			showItemOverline: false,
 		});
 		const expectedResult = {
+			imageRatio: "16:9",
 			showByline: true,
 			showDate: true,
 			showDescription: true,
@@ -56,8 +59,8 @@ describe("reduceResultList", () => {
 		});
 	});
 
-	it("should return the new collection when the state is undefined", () => {
-		const result = reduceResultList(undefined, {
+	it("should return the new collection when the state is in initial form", () => {
+		const result = reduceResultList({ content_elements: [] }, {
 			type: "appendUnique",
 			data: {
 				content_elements: [{ _id: "a" }, { _id: "c" }, { _id: "d" }],

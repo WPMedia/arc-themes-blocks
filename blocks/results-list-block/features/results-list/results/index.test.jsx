@@ -602,7 +602,7 @@ describe("fallback image", () => {
 		);
 
 		expect(
-			screen.queryByText(/"targetFallbackImage":"http:\/\/test\/fallback.jpg"/i),
+			screen.getByText(/"targetFallbackImage":"http:\/\/test\/fallback.jpg"/i),
 		).toBeInTheDocument();
 
 		unmount();

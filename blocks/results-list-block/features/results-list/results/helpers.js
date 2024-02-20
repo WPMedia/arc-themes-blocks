@@ -1,8 +1,4 @@
-const defaultResultList = {
-	content_elements: [],
-};
-
-const reduceResultList = (state = defaultResultList, action) => {
+const reduceResultList = (state, action) => {
 	const { type, data } = action;
 
 	if (!data) {
@@ -31,6 +27,7 @@ const reduceResultList = (state = defaultResultList, action) => {
 
 const resolveDefaultPromoElements = (customFields = {}) => {
 	const fields = {
+		imageRatio: "3:2",
 		showByline: true,
 		showDate: true,
 		showDescription: true,

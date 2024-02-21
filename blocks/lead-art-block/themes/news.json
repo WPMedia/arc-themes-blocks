@@ -43,21 +43,7 @@
 	"lead-art-carousel-image-wrapper": {
 		"styles": {
 			"default": {
-				"align-items": "center",
-				"aspect-ratio": "calc(16/9)",
-				"background-color": "var(--global-black)",
-				"display": "flex",
-				"justify-content": "center",
-				"max-block-size": "75vh",
-				"overflow": "auto",
-				"components": {
-					"image": {
-						"block-size": "auto",
-						"max-block-size": "100%",
-						"max-inline-size": "100%",
-						"object-fit": "contain"
-					}
-				}
+				"aspect-ratio": "calc(16/9)"
 			},
 			"desktop": {}
 		}
@@ -92,6 +78,27 @@
 						"fill": "currentColor",
 						"block-size": "var(--global-spacing-6)",
 						"inline-size": "var(--global-spacing-6)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"lead-art-image-wrapper": {
+		"styles": {
+			"default": {
+				"align-items": "center",
+				"background-color": "var(--global-black)",
+				"display": "flex",
+				"justify-content": "center",
+				"max-block-size": "75vh",
+				"overflow": "auto",
+				"components": {
+					"image": {
+						"block-size": "auto",
+						"max-block-size": "100%",
+						"max-inline-size": "100%",
+						"object-fit": "contain"
 					}
 				}
 			},

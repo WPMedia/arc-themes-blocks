@@ -1,5 +1,6 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
 import LeadArt from "./default";
@@ -48,8 +49,8 @@ describe("LeadArt", () => {
 			},
 		};
 		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
-		const { queryByText } = render(<LeadArt customFields={{}} />);
-		expect(queryByText(rawHtml)).not.toBeNull();
+		render(<LeadArt customFields={{}} />);
+		expect(screen.getByText(rawHtml)).not.toBeNull();
 	});
 
 	it("renders video lead art type", () => {
@@ -70,10 +71,10 @@ describe("LeadArt", () => {
 			},
 		};
 		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
-		const { queryByText } = render(<LeadArt customFields={{}} />);
-		expect(queryByText("Title")).not.toBeNull();
-		expect(queryByText("Description")).not.toBeNull();
-		expect(queryByText("(Credit)")).not.toBeNull();
+		render(<LeadArt customFields={{}} />);
+		expect(screen.getByText("Title")).not.toBeNull();
+		expect(screen.getByText("Description")).not.toBeNull();
+		expect(screen.getByText("(Credit)")).not.toBeNull();
 	});
 
 	it("renders video lead art type with no meta data", () => {
@@ -94,7 +95,7 @@ describe("LeadArt", () => {
 			},
 		};
 		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
-		const { queryByText } = render(
+		render(
 			<LeadArt
 				customFields={{
 					hideTitle: true,
@@ -103,9 +104,9 @@ describe("LeadArt", () => {
 				}}
 			/>,
 		);
-		expect(queryByText("Title")).toBeNull();
-		expect(queryByText("Description")).toBeNull();
-		expect(queryByText("(Credit)")).toBeNull();
+		expect(screen.queryByText("Title")).toBeNull();
+		expect(screen.queryByText("Description")).toBeNull();
+		expect(screen.queryByText("(Credit)")).toBeNull();
 	});
 
 	it("renders image type", () => {
@@ -127,7 +128,7 @@ describe("LeadArt", () => {
 		};
 
 		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
-		const { queryByAltText, queryByText } = render(
+		render(
 			<LeadArt
 				customFields={{
 					hideTitle: false,
@@ -136,10 +137,10 @@ describe("LeadArt", () => {
 				}}
 			/>,
 		);
-		expect(queryByAltText("a test image")).not.toBeNull();
-		expect(queryByText("Caption")).not.toBeNull();
-		expect(queryByText("Subtitle")).not.toBeNull();
-		expect(queryByText("(Credit)")).not.toBeNull();
+		expect(screen.getByAltText("a test image")).not.toBeNull();
+		expect(screen.getByText("Caption")).not.toBeNull();
+		expect(screen.getByText("Subtitle")).not.toBeNull();
+		expect(screen.getByText("(Credit)")).not.toBeNull();
 	});
 
 	it("renders image type and no meta data", () => {
@@ -161,7 +162,7 @@ describe("LeadArt", () => {
 		};
 
 		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
-		const { queryByAltText, queryByText } = render(
+		render(
 			<LeadArt
 				customFields={{
 					hideTitle: true,
@@ -170,10 +171,10 @@ describe("LeadArt", () => {
 				}}
 			/>,
 		);
-		expect(queryByAltText("a test image")).not.toBeNull();
-		expect(queryByText("Caption")).toBeNull();
-		expect(queryByText("Subtitle")).toBeNull();
-		expect(queryByText("(Credit)")).toBeNull();
+		expect(screen.getByAltText("a test image")).not.toBeNull();
+		expect(screen.queryByText("Caption")).toBeNull();
+		expect(screen.queryByText("Subtitle")).toBeNull();
+		expect(screen.queryByText("(Credit)")).toBeNull();
 	});
 
 	it("renders gallery lead image type", () => {
@@ -200,12 +201,12 @@ describe("LeadArt", () => {
 			},
 		};
 		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
-		const { queryByRole, queryByText } = render(<LeadArt customFields={{}} />);
+		render(<LeadArt customFields={{}} />);
 
-		expect(queryByRole("region", { name: "test headline" })).not.toBeNull();
-		expect(queryByText("Caption")).not.toBeNull();
-		expect(queryByText("Subtitle")).not.toBeNull();
-		expect(queryByText("(Credit)")).not.toBeNull();
+		expect(screen.getByRole("region", { name: "test headline" })).not.toBeNull();
+		expect(screen.getByText("Caption")).not.toBeNull();
+		expect(screen.getByText("Subtitle")).not.toBeNull();
+		expect(screen.getByText("(Credit)")).not.toBeNull();
 	});
 
 	it("renders gallery lead image type with no meta data", () => {
@@ -232,7 +233,7 @@ describe("LeadArt", () => {
 			},
 		};
 		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
-		const { queryByRole, queryByText } = render(
+		render(
 			<LeadArt
 				customFields={{
 					hideTitle: true,
@@ -241,10 +242,10 @@ describe("LeadArt", () => {
 				}}
 			/>,
 		);
-		expect(queryByRole("region", { name: "test headline" })).not.toBeNull();
-		expect(queryByText("Caption")).toBeNull();
-		expect(queryByText("Subtitle")).toBeNull();
-		expect(queryByText("(Credit)")).toBeNull();
+		expect(screen.getByRole("region", { name: "test headline" })).not.toBeNull();
+		expect(screen.queryByText("Caption")).toBeNull();
+		expect(screen.queryByText("Subtitle")).toBeNull();
+		expect(screen.queryByText("(Credit)")).toBeNull();
 	});
 
 	it("renders gallery with an empty ans headline if no basic headline provided", () => {
@@ -259,8 +260,8 @@ describe("LeadArt", () => {
 		};
 
 		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
-		const { queryByRole } = render(<LeadArt customFields={{}} />);
-		expect(queryByRole("region", { name: "" })).not.toBeNull();
+		render(<LeadArt customFields={{}} />);
+		expect(screen.getByRole("region", { name: "" })).not.toBeNull();
 	});
 
 	it("returns null if invalid lead art type", () => {
@@ -275,7 +276,7 @@ describe("LeadArt", () => {
 
 		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
 		const { container } = render(<LeadArt customFields={{}} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("returns null if no content promo items", () => {
@@ -283,6 +284,6 @@ describe("LeadArt", () => {
 
 		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
 		const { container } = render(<LeadArt customFields={{}} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 });

@@ -32,10 +32,15 @@ export const LeadArtPresentation = (props) => {
 
 	const { arcSite, content, customFields } = props;
 	const {
+		enableAutoplay = false,
 		hideTitle = false,
 		hideCaption = false,
 		hideCredits = false,
-		imageLoadingStrategy,
+		imageLoadingStrategy = "eager",
+		imageRatio = "16:9",
+		playthrough = false,
+		videoRatio = "--",
+		viewportPercentage = 65
 	} = customFields;
 
 	/* istanbul ignore next  */
@@ -68,6 +73,7 @@ export const LeadArtPresentation = (props) => {
 		/* istanbul ignore next */
 		const { default: AdFeature } = require("@wpmedia/ads-block/features/ads/default");
 		/* istanbul ignore next */
+		/* eslint-disable-next-line react/no-unstable-nested-components */
 		AdBlock = () => (
 			<AdFeature
 				customFields={{
@@ -78,6 +84,7 @@ export const LeadArtPresentation = (props) => {
 		);
 	} catch (e) {
 		/* istanbul ignore next */
+		/* eslint-disable-next-line react/no-unstable-nested-components */
 		AdBlock = () => <p>Ad block not found</p>;
 	}
 
@@ -92,8 +99,8 @@ export const LeadArtPresentation = (props) => {
 
 		if (leadArt.type === "video") {
 			const embedMarkup = formatPowaVideoEmbed(leadArt?.embed_html, {
-				autoplay: customFields?.enableAutoplay,
-				playthrough: customFields?.playthrough,
+				autoplay: enableAutoplay,
+				playthrough,
 			});
 
 			return (
@@ -103,9 +110,9 @@ export const LeadArtPresentation = (props) => {
 					title={!hideTitle ? leadArt?.headlines?.basic : null}
 				>
 					<Video
-						aspectRatio={customFields?.aspectRatio}
+						aspectRatio={videoRatio}
 						embedMarkup={embedMarkup}
-						viewportPercentage={customFields?.viewportPercentage}
+						viewportPercentage={viewportPercentage}
 						borderRadius={customFields?.borderRadius}
 					/>
 				</MediaItem>
@@ -133,10 +140,9 @@ export const LeadArtPresentation = (props) => {
 					<div className={`${BLOCK_CLASS_NAME}__image-wrapper`} ref={imgRef}>
 						<Image
 							alt={leadArt.alt_text}
+							aspectRatio={imageRatio || "16:9"}
 							loading={imageLoadingStrategy}
-							// 16:9 aspect ratio
 							width={800}
-							height={450}
 							responsiveImages={[800, 1600]}
 							resizedOptions={{ smart: true }}
 							ansImage={leadArt}
@@ -237,7 +243,6 @@ export const LeadArtPresentation = (props) => {
 									<Image
 										ansImage={galleryItem}
 										loading={itemIndex === 0 ? imageLoadingStrategy : "lazy"}
-										// 16:9 aspect ratio
 										height={450}
 										responsiveImages={[800, 1600]}
 										alt={galleryItem.alt_text}
@@ -299,7 +304,7 @@ LeadArt.propTypes = {
 			defaultValue: 65,
 			group: "Video",
 		}),
-		aspectRatio: PropTypes.oneOf(["--", "16:9", "9:16", "1:1", "4:3"]).isRequired.tag({
+		videoRatio: PropTypes.oneOf(["--", "16:9", "9:16", "1:1", "4:3"]).isRequired.tag({
 			description:
 				"Aspect ratio to use in player (Defaults to the aspect ratio of the resolved video)",
 			label: "Player aspect ratio",
@@ -348,6 +353,12 @@ LeadArt.propTypes = {
 				eager: "Eager",
 				lazy: "Lazy",
 			},
+		}),
+		imageRatio: PropTypes.oneOf(["16:9", "4:3", "3:2"]).tag({
+			defaultValue: "16:9",
+			label: "Image ratio",
+			group: "Display Options",
+			ordered: false
 		}),
 	}),
 };

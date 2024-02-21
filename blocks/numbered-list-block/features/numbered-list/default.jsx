@@ -6,6 +6,7 @@ import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import {
+	getFocalFromANS,
 	getImageFromANS,
 	isServerSide,
 	Heading,
@@ -57,6 +58,10 @@ const NumberedList = (props) => {
 			auth {
 				${RESIZER_TOKEN_VERSION}
 			}
+			focal_point {
+				x
+				y
+			}
             type
             url
           }
@@ -66,6 +71,10 @@ const NumberedList = (props) => {
 				_id
 				auth {
 					${RESIZER_TOKEN_VERSION}
+				}
+				focal_point {
+					x
+					y
 				}
                 type
                 url
@@ -100,7 +109,7 @@ const NumberedList = (props) => {
 												ansImage: imageObj,
 												aspectRatio: "3:2",
 												resizedOptions: {
-													smart: true,
+													...getFocalFromANS(imageObj),
 												},
 												responsiveImages: [137, 274, 548],
 												width: 274,

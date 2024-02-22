@@ -2,8 +2,8 @@
 
 .b-lead-art {
 	&__image-wrapper {
-		@include scss.block-components("lead-art-carousel-image-wrapper");
-		@include scss.block-properties("lead-art-carousel-image-wrapper");
+		@include scss.block-components("lead-art-image-wrapper");
+		@include scss.block-properties("lead-art-image-wrapper");
 	}
 
 	&__carousel {
@@ -12,14 +12,19 @@
 			@include scss.block-properties("lead-art-carousel-fullscreen");
 		}
 
+		&__close-button {
+			@include scss.block-components("lead-art-carousel-close-button");
+			@include scss.block-properties("lead-art-carousel-close-button");
+		}
+
 		&__track-button {
 			@include scss.block-components("lead-art-carousel-track-button");
 			@include scss.block-properties("lead-art-carousel-track-button");
 		}
 
-		&__close-button {
-			@include scss.block-components("lead-art-carousel-close-button");
-			@include scss.block-properties("lead-art-carousel-close-button");
+		.b-lead-art__image-wrapper {
+			@include scss.block-components("lead-art-carousel-image-wrapper");
+			@include scss.block-properties("lead-art-carousel-image-wrapper");
 		}
 	}
 

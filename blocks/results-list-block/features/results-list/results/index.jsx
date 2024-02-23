@@ -106,11 +106,15 @@ const Results = ({
         promo_items {
           basic {
 			_id
-            auth {
+			auth {
 				${RESIZER_TOKEN_VERSION}
 			}
-            type
-            url
+			focal_point {
+				x
+				y
+			}
+			type
+			url
           }
           lead_art {
             promo_items {
@@ -119,8 +123,12 @@ const Results = ({
 				auth {
 					${RESIZER_TOKEN_VERSION}
 				}
-                type
-                url
+				focal_point {
+					x
+					y
+				}
+				type
+				url
               }
             }
             type

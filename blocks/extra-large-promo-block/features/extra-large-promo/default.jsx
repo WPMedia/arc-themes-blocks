@@ -305,18 +305,18 @@ const ExtraLargePromo = ({ customFields }) => {
 		showByline && content?.credits?.by?.length > 0
 			? formatAuthors(content.credits.by, phrases.t("global.and-text"))
 			: null;
-	const ansImage = imageOverrideURL
-		? {
-			_id: resizedImage ? imageOverrideId : "",
-			url: imageOverrideURL,
-			auth: resizedAuth || {},
-		}
-		: getImageFromANS(content);
+	const ansImage = getImageFromANS(content);
 	const imageParams =
 		showImage &&
-		(imageOverrideURL || (content && getImageFromANS(content))
+		(imageOverrideURL || ansImage
 			? {
-					ansImage,
+					ansImage: imageOverrideURL
+						? {
+							_id: resizedImage ? imageOverrideId : "",
+							url: imageOverrideURL,
+							auth: resizedAuth || {},
+						}
+						: ansImage,
 					alt: content?.headlines?.basic || "",
 					aspectRatio: imageRatio,
 					resizedOptions: {

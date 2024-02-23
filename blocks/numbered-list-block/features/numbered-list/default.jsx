@@ -76,8 +76,8 @@ const NumberedList = (props) => {
 					x
 					y
 				}
-                type
-                url
+				type
+				url
               }
             }
             type

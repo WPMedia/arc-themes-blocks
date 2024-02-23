@@ -107,6 +107,10 @@ const MediumPromo = ({ customFields }) => {
 							auth {
 								${RESIZER_TOKEN_VERSION}
 							}
+							focal_point {
+								x
+								y
+							}
 							type
 							url
 						}
@@ -116,6 +120,10 @@ const MediumPromo = ({ customFields }) => {
 					_id
 					auth {
 						${RESIZER_TOKEN_VERSION}
+					}
+					focal_point {
+						x
+						y
 					}
 					type
 					url

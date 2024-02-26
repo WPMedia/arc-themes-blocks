@@ -632,12 +632,12 @@
 					)
 				),
 				"hero-text-overlay": (
-					"margin": 0auto,
+					"margin": 0 auto,
 					"max-width": var(--content-scale-width),
 					"width": 100%
 				),
 				"hero-text-stacked": (
-					"margin": 0auto,
+					"margin": 0 auto,
 					"components": (
 						"paragraph": (
 							"align-self": center,
@@ -818,7 +818,7 @@
 					"width": 100%
 				),
 				"product-content": (
-					"margin": 0auto,
+					"margin": 0 auto,
 					"max-width": var(--content-scale-width),
 					"width": 100%
 				),
@@ -937,7 +937,7 @@
 					"width": var(--global-spacing-7)
 				),
 				"product-information": (
-					"margin": 0auto,
+					"margin": 0 auto,
 					"max-width": var(--content-scale-width),
 					"width": 100%,
 					"components": (
@@ -1020,7 +1020,7 @@
 					"gap": var(--global-spacing-6),
 					"grid-template-areas": 'top' 'middle' 'bottom',
 					"grid-auto-flow": column,
-					"margin": 0auto,
+					"margin": 0 auto,
 					"width": 100%,
 					"max-width": 100%
 				),

@@ -2006,7 +2006,7 @@
 						),
 						"paragraph": (
 							"display": block,
-							"width": 100%,
+							"inline-size": 100%,
 						),
 						"separator": (
 							"padding-block-start": 0,
@@ -3903,12 +3903,15 @@
 						),
 						"media-item": (
 							"float": left,
-							"margin": 0,
-							"max-width": 33%,
+							"margin-block-end": 0,
+							"margin-block-start": 0,
+							"margin-inline-end": 0,
+							"margin-inline-start": 0,
+							"max-inline-size": 33%,
 						),
 						"paragraph": (
 							"display": block,
-							"width": auto,
+							"inline-size": auto,
 						),
 					),
 				),
@@ -3922,7 +3925,7 @@
 						),
 						"heading": (
 							"margin-left": calc(33% + var(--global-spacing-6)),
-							"width": auto,
+							"inline-size": auto,
 						),
 						"paragraph": (
 							"margin-left": calc(33% + var(--global-spacing-6)),

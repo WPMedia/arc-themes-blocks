@@ -281,3 +281,10 @@
 		@include scss.block-properties("paywall-subscription-dialog");
 	}
 }
+
+@supports (hanging-punctuation: first) and (-webkit-appearance: none) {
+	/* Safari only override */
+	.b-paywall__overlay {
+		top: initial;
+	}
+}

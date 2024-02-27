@@ -33,6 +33,7 @@ export function PresentationalNav(props) {
 		signInOrder,
 		primaryLogoPath,
 		primaryLogoAlt,
+		closeNavigation,
 	} = props;
 
 	// Set the links bar justification based on the logoAlignment
@@ -102,6 +103,7 @@ export function PresentationalNav(props) {
 					}`}
 					direction="vertical"
 					justification="start"
+					onClick={closeNavigation}
 				>
 					<FocusTrap
 						active={isSectionDrawerOpen}
@@ -142,6 +144,7 @@ export function PresentationalNav(props) {
 								justification="start"
 								// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 								tabIndex={!sections.length ? "-1" : null}
+								onClick={(e) => e.stopPropagation()}
 							>
 								<SectionNav
 									blockClassName={BLOCK_CLASS_NAME}
@@ -287,6 +290,7 @@ const Nav = (props) => {
 			signInOrder={signInOrder}
 			primaryLogoPath={primaryLogoPath}
 			primaryLogoAlt={primaryLogoAlt}
+			closeNavigation={closeNavigation}
 		>
 			{children}
 		</PresentationalNav>

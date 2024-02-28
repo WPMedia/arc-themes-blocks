@@ -6,6 +6,7 @@ import getTranslatedPhrases from "fusion:intl";
 import { Input, useIdentity } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
 import useLogin from "../../components/login";
+import BotChallengeProtection from "../../components/bot-challenge-protection";
 import useOIDCLogin from "../../utils/useOIDCLogin";
 import validateURL from "../../utils/validate-redirect-url";
 
@@ -23,6 +24,7 @@ const Login = ({ customFields }) => {
 
 	const isOIDC = OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
 	const { Identity, isInitialized } = useIdentity();
+	const [captchaToken, setCaptchaToken] = useState();
 	const [error, setError] = useState();
 	const { loginRedirect } = useLogin({
 		isAdmin,
@@ -44,7 +46,10 @@ const Login = ({ customFields }) => {
 			formErrorText={error}
 			headline={phrases.t("identity-block.log-in")}
 			onSubmit={({ email, password }) =>
-				Identity.login(email, password, {rememberMe: true})
+				Identity.login(email, password, {
+					rememberMe: true,
+					recaptchaToken: captchaToken
+				})
 					.then(() => {
 						if (isOIDC) {
 							loginByOIDC();
@@ -73,6 +78,7 @@ const Login = ({ customFields }) => {
 				showDefaultError={false}
 				type="password"
 			/>
+			<BotChallengeProtection challengeIn={"signin"} setCaptchaToken={setCaptchaToken}/>
 		</HeadlinedSubmitForm>
 	);
 };

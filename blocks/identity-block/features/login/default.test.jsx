@@ -6,6 +6,7 @@ import { useIdentity } from "@wpmedia/arc-themes-components";
 const defaultCustomFields = {
 	redirectURL: "",
 	redirectToPreviousPage: true,
+	signUpURL: ""
 };
 
 const mockLogin = jest.fn(() => Promise.resolve());

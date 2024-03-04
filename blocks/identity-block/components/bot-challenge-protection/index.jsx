@@ -8,7 +8,7 @@ import useSales from "../../utils/useSales";
 import ReCAPTCHA from "react-google-recaptcha";
 
 
-const BotChallengeProtection = ({ challengeIn, setCaptchaToken }) => {
+const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className }) => {
 	const { Identity, isInitialized } = useIdentity();
   const { Sales } = useSales();
 	const [siteKey, setSiteKey] = useState();
@@ -46,25 +46,6 @@ const BotChallengeProtection = ({ challengeIn, setCaptchaToken }) => {
 		
 	}, []);
 
-  // if(['signup', 'signin', 'magicLink'].includes(challengeIn)) {
-  //   Identity.getConfig().then(config => {
-	// 		const {recaptchaSiteKey, recaptchaScore } = config;
-	// 		const isCaptchaEnabled = config?.[`${challengeIn}Recaptcha`];
-
-	// 		if (isCaptchaEnabled) {
-	// 			if (isCaptchaEnabled && recaptchaScore === '-1' && recaptchaSiteKey) {
-	// 				// v2 logic
-	// 				setSiteKey(recaptchaSiteKey);
-	// 			}
-	// 		}
-	// 	});
-  // };
-
-  // if (challengeIn === 'checkout') {
-  //   Identity.getConfig().then(config => console.log(config));
-  //   Sales.getConfig().then(config => console.log(config));
-  // }
-
 	const url_string = window.location.href;
 	const url = new URL(url_string);
 
@@ -79,8 +60,7 @@ const BotChallengeProtection = ({ challengeIn, setCaptchaToken }) => {
 	}
 
 	return (
-		<section data-testid="bot-challege-protection-container">
-			Challenge
+		<section className={`${className}__bot-protection-section`} data-testid="bot-challege-protection-container">
 			{!!siteKey && <ReCAPTCHA
 				sitekey={siteKey}
 				onChange={onChange}

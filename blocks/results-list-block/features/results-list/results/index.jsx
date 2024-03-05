@@ -23,6 +23,7 @@ const Results = ({
 	showImage = false,
 	showItemOverline = false,
 	targetFallbackImage,
+	loading = 'eager'
 }) => {
 	const [queryOffset, setQueryOffset] = useState(configuredOffset);
 	const phrases = usePhrases();
@@ -208,6 +209,7 @@ const Results = ({
 						showImage={showImage}
 						showItemOverline={showItemOverline}
 						targetFallbackImage={targetFallbackImage}
+						loading={loading}
 					/>
 				))}
 				{isThereMore && (

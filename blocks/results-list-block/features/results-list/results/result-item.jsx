@@ -40,6 +40,7 @@ const ResultItem = React.memo(
 				showHeadline,
 				showImage,
 				showItemOverline,
+				loading
 			},
 			ref
 		) => {
@@ -125,6 +126,7 @@ const ResultItem = React.memo(
 									]}
 									responsiveImages={[250, 500]}
 									width={500}
+									loading={loading}
 								/>
 							</Conditional>
 						</MediaItem>

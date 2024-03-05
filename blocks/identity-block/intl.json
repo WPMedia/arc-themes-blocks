@@ -643,7 +643,7 @@
 		"id": "Belum memiliki akun? Daftar",
 		"fr": "Sign up for an account.",
 		"es": "Sign up for an account.",
-		"en": "Don't have an account? Sign up",
+		"en": "Need to create an account? ",
 		"de": "Sign up for an account.",
 		"bo": "ཁྱེད་ལ་དྲ་གྲངས་མེད་དམ། ཐོ་འགོད།",
 		"bn": "কোনো অ্যাকাউন্ট নেই?\nসাইন আপ করুন",
@@ -1282,5 +1282,8 @@
 	},
 	"identity-block.privacy-statement": {
 		"en": "By creating an account, you agree to the Terms of Service and acknowledge our Privacy Policy."
+	},
+	"identity-block.sign-up-natural": {
+		"en": "Sign up"
 	}
 }

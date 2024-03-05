@@ -7,7 +7,6 @@ import { Paragraph, useIdentity } from "@wpmedia/arc-themes-components";
 import useSales from "../../utils/useSales";
 import ReCAPTCHA from "react-google-recaptcha";
 
-
 const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className }) => {
 	const { Identity, isInitialized } = useIdentity();
   const { Sales } = useSales();
@@ -67,15 +66,6 @@ const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className }) => 
 			/>}
 		</section>
 	);
-};
-
-BotChallengeProtection.propTypes = {
-	customFields: PropTypes.shape({
-		challengeIn: PropTypes.oneOf(['signup', 'signin', 'magiclink', 'checkout']).tag({
-			name: "Challenge In",
-			defaultValue: "signup",
-		})
-	}),
 };
 
 export default BotChallengeProtection;

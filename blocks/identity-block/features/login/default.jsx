@@ -13,7 +13,7 @@ import validateURL from "../../utils/validate-redirect-url";
 const BLOCK_CLASS_NAME = "b-login-form";
 
 const Login = ({ customFields }) => {
-	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC, signUpURL } = customFields;
+	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC } = customFields;
 
 	const url_string = window.location.href;
 	const url = new URL(url_string);
@@ -34,12 +34,6 @@ const Login = ({ customFields }) => {
 		isOIDC,
 	});
 	const { loginByOIDC } = useOIDCLogin();
-
-	const redirectToSignUp = () => {
-		if(signUpURL){
-			window.location = signUpURL;
-		}
-	}
 
 	if (!isInitialized) {
 		return null;
@@ -88,9 +82,6 @@ const Login = ({ customFields }) => {
 				<BotChallengeProtection className={BLOCK_CLASS_NAME} challengeIn={"signin"} setCaptchaToken={setCaptchaToken}/>
 				<Paragraph className={`${BLOCK_CLASS_NAME}__privacy-statement`}>{phrases.t("identity-block.privacy-statement")}</Paragraph>
 			</HeadlinedSubmitForm>
-			<div className={`${BLOCK_CLASS_NAME}__sign-up-div`}>
-				<Paragraph>Need to create an account? <button onClick={redirectToSignUp} className={`${BLOCK_CLASS_NAME}__sign-up-button`}>{phrases.t("identity-block.sign-up")}</button></Paragraph>
-			</div>
 		</>
 	);
 };
@@ -114,12 +105,6 @@ Login.propTypes = {
 			defaultValue: "/account/",
 			description:
 				"The URL to which a user would be redirected to if visiting a login page when already logged in.",
-		}),
-		signUpURL: PropTypes.string.tag({
-			name: "Sign up URL",
-			defaultValue: "/signup/",
-			description:
-				"The URL to which a user would be redirected to if the user clicks on the sign up button",
 		}),
 		OIDC: PropTypes.bool.tag({
       name: 'Login with OIDC',

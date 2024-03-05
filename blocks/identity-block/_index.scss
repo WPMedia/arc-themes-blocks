@@ -83,6 +83,10 @@
 .b-login-links {
 	@include scss.block-components("login-links");
 	@include scss.block-properties("login-links");
+	&__inner-link {
+		@include scss.block-components("login-links-inner-link");
+		@include scss.block-properties("login-links-inner-link");
+	}
 }
 
 .b-reset-password {

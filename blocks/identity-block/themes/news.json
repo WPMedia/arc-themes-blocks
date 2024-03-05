@@ -340,9 +340,15 @@
 	"login-links": {
 		"styles": {
 			"default": {
+				"font-family": "inter",
 				"components": {
+					"paragraph": {
+						"text-align": "center",
+						"font-family": "inter"
+					},
 					"link": {
-						"text-align": "center"
+						"text-align": "center",
+						"font-family": "inter"
 					},
 					"link-hover": {
 						"color": "var(--text-color-subtle)"
@@ -350,6 +356,13 @@
 				}
 			},
 			"desktop": {}
+		}
+	},
+	"login-links-inner-link": {
+		"styles": {
+			"default": {
+				"text-decoration": "underline"
+			}
 		}
 	},
 	"reset-password": {

@@ -40,49 +40,47 @@ const Login = ({ customFields }) => {
 	}
 
 	return (
-		<>
-			<HeadlinedSubmitForm
-				buttonLabel={phrases.t("identity-block.log-in")}
-				className={BLOCK_CLASS_NAME}
-				formErrorText={error}
-				headline={phrases.t("identity-block.log-in-headline")}
-				onSubmit={({ email, password }) =>
-					Identity.login(email, password, {
-						rememberMe: true,
-						recaptchaToken: captchaToken
+		<HeadlinedSubmitForm
+			buttonLabel={phrases.t("identity-block.log-in")}
+			className={BLOCK_CLASS_NAME}
+			formErrorText={error}
+			headline={phrases.t("identity-block.log-in-headline")}
+			onSubmit={({ email, password }) =>
+				Identity.login(email, password, {
+					rememberMe: true,
+					recaptchaToken: captchaToken
+				})
+					.then(() => {
+						if (isOIDC) {
+							loginByOIDC();
+						} else {
+							const validatedURL = validateURL(loginRedirect);
+							window.location = validatedURL;
+						}
 					})
-						.then(() => {
-							if (isOIDC) {
-								loginByOIDC();
-							} else {
-								const validatedURL = validateURL(loginRedirect);
-								window.location = validatedURL;
-							}
-						})
-						.catch(() => setError(phrases.t("identity-block.login-form-error")))
-				}
-			>
-				<Input
-					autoComplete="email"
-					label={phrases.t("identity-block.email-label")}
-					name="email"
-					required
-					showDefaultError={false}
-					type="email"
-					validationErrorMessage={phrases.t("identity-block.email-requirements")}
-				/>
-				<Input
-					autoComplete="current-password"
-					label={phrases.t("identity-block.password")}
-					name="password"
-					required
-					showDefaultError={false}
-					type="password"
-				/>
-				<BotChallengeProtection className={BLOCK_CLASS_NAME} challengeIn={"signin"} setCaptchaToken={setCaptchaToken}/>
-				<Paragraph className={`${BLOCK_CLASS_NAME}__privacy-statement`}>{phrases.t("identity-block.privacy-statement")}</Paragraph>
-			</HeadlinedSubmitForm>
-		</>
+					.catch(() => setError(phrases.t("identity-block.login-form-error")))
+			}
+		>
+			<Input
+				autoComplete="email"
+				label={phrases.t("identity-block.email-label")}
+				name="email"
+				required
+				showDefaultError={false}
+				type="email"
+				validationErrorMessage={phrases.t("identity-block.email-requirements")}
+			/>
+			<Input
+				autoComplete="current-password"
+				label={phrases.t("identity-block.password")}
+				name="password"
+				required
+				showDefaultError={false}
+				type="password"
+			/>
+			<BotChallengeProtection className={BLOCK_CLASS_NAME} challengeIn={"signin"} setCaptchaToken={setCaptchaToken}/>
+			<Paragraph className={`${BLOCK_CLASS_NAME}__privacy-statement`}>{phrases.t("identity-block.privacy-statement")}</Paragraph>
+		</HeadlinedSubmitForm>
 	);
 };
 

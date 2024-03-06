@@ -16,8 +16,6 @@ const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className }) => 
 	const onChange = (value) => {
 		setCaptchaToken(value);
     localStorage.setItem('captchaToken', captchaToken);
-
-		console.log("Captcha value:", value);
 	};
 
 	useEffect(() => {

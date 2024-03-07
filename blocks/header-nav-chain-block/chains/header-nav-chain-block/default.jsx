@@ -19,6 +19,7 @@ export function PresentationalNav(props) {
 	const {
 		ariaLabelLink,
 		children,
+		closeNavigation,
 		customFields,
 		displayLinks,
 		horizontalLinksHierarchy,
@@ -102,6 +103,7 @@ export function PresentationalNav(props) {
 					}`}
 					direction="vertical"
 					justification="start"
+					onClick={closeNavigation}
 				>
 					<FocusTrap
 						active={isSectionDrawerOpen}
@@ -140,6 +142,7 @@ export function PresentationalNav(props) {
 								}`}
 								direction="vertical"
 								justification="start"
+								onClick={(e) => e.stopPropagation()}
 								// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 								tabIndex={!sections.length ? "-1" : null}
 							>
@@ -273,6 +276,7 @@ const Nav = (props) => {
 	return (
 		<PresentationalNav
 			ariaLabelLink={ariaLabelLink}
+			closeNavigation={closeNavigation}
 			customFields={customFields}
 			displayLinks={displayLinks}
 			horizontalLinksHierarchy={horizontalLinksHierarchy}

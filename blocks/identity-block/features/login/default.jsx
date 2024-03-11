@@ -26,6 +26,7 @@ const Login = ({ customFields }) => {
 	const { Identity, isInitialized } = useIdentity();
 	const [captchaToken, setCaptchaToken] = useState();
 	const [error, setError] = useState();
+	const [captchaError, setCaptchaError] = useState();
 	const { loginRedirect } = useLogin({
 		isAdmin,
 		redirectURL,
@@ -45,8 +46,10 @@ const Login = ({ customFields }) => {
 			className={BLOCK_CLASS_NAME}
 			formErrorText={error}
 			headline={phrases.t("identity-block.log-in-headline")}
-			onSubmit={({ email, password }) =>
-				Identity.login(email, password, {
+			onSubmit={({ email, password }) => {
+				setError(null);
+				setCaptchaError(null);
+				return Identity.login(email, password, {
 					rememberMe: true,
 					recaptchaToken: captchaToken
 				})
@@ -58,7 +61,18 @@ const Login = ({ customFields }) => {
 							window.location = validatedURL;
 						}
 					})
-					.catch(() => setError(phrases.t("identity-block.login-form-error")))
+					.catch((e) => {
+						if (e?.code === "130001") {
+							setCaptchaError(true);
+						}
+						else {
+							setError(phrases.t("identity-block.login-form-error"));
+						}
+						if (!!grecaptcha) {
+							grecaptcha.reset();
+						}
+					})
+			}
 			}
 		>
 			<Input
@@ -78,7 +92,7 @@ const Login = ({ customFields }) => {
 				showDefaultError={false}
 				type="password"
 			/>
-			<BotChallengeProtection className={BLOCK_CLASS_NAME} challengeIn={"signin"} setCaptchaToken={setCaptchaToken}/>
+			<BotChallengeProtection className={BLOCK_CLASS_NAME} challengeIn={"signin"} setCaptchaToken={setCaptchaToken} captchaError={captchaError} />
 			<Paragraph className={`${BLOCK_CLASS_NAME}__privacy-statement`}>{phrases.t("identity-block.privacy-statement")}</Paragraph>
 		</HeadlinedSubmitForm>
 	);

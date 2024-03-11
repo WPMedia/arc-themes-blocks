@@ -286,7 +286,12 @@
 		"styles": {
 			"default": {
 				"margin-top": "var(--global-spacing-5)",
-				"margin-bottom": "var(--global-spacing-5)"
+				"margin-bottom": "var(--global-spacing-5)",
+				"components": {
+					"paragraph": {
+						"color": "#f00"
+					}
+				}
 			}
 		}
 	},

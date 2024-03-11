@@ -7,11 +7,10 @@ import { Paragraph, useIdentity } from "@wpmedia/arc-themes-components";
 import useSales from "../../utils/useSales";
 import ReCAPTCHA from "react-google-recaptcha";
 
-const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className }) => {
+const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captchaError }) => {
 	const { Identity, isInitialized } = useIdentity();
   const { Sales } = useSales();
 	const [siteKey, setSiteKey] = useState();
-	console.log('siteKey', siteKey)
 
 	const onChange = (value) => {
 		setCaptchaToken(value);
@@ -50,8 +49,6 @@ const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className }) => 
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
-	const [error, setError] = useState();
-
 	if (!isInitialized) {
 		return null;
 	}
@@ -62,6 +59,7 @@ const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className }) => 
 				sitekey={siteKey}
 				onChange={onChange}
 			/>}
+			{captchaError && <Paragraph>{phrases.t("identity-block.bot-protection-error")}</Paragraph>}
 		</section>
 	);
 };

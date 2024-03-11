@@ -108,6 +108,7 @@
 		"identity-block.account": "Account",
 		"identity-block.account-information": "Account Information",
 		"identity-block.add-password": "Add Password",
+		"identity-block.bot-protection-error": "Please verify that you are not a robot.",
 		"identity-block.cancel": "Cancel",
 		"identity-block.confirm-password": "Confirm password",
 		"identity-block.confirm-password-error": "Passwords must match",

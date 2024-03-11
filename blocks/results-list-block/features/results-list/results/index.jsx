@@ -15,7 +15,6 @@ const Results = ({
 	contentConfigValues,
 	contentService,
 	imageRatio,
-	isServerSideLazy = false,
 	showByline = false,
 	showDate = false,
 	showDescription = false,
@@ -62,7 +61,7 @@ const Results = ({
 	);
 
 	const requestedResultList = useContent({
-		source: isServerSideLazy ? null : contentService,
+		source: contentService,
 		query: {
 			...contentConfigValues,
 			feature: "results-list",
@@ -140,7 +139,7 @@ const Results = ({
     }`,
 	});
 
-	const [resultList, alterResultList] = useReducer(reduceResultList, { content_elements: [] });
+	const [resultList, alterResultList] = useReducer(reduceResultList, { content_elements: requestedResultList ?? [] });
 
 	useEffect(() => {
 		if (requestedResultList) {
@@ -191,7 +190,7 @@ const Results = ({
 	const onReadMoreClick = useCallback(() => {
 		setQueryOffset((oldOffset) => oldOffset + configuredSize);
 	}, [configuredSize, setQueryOffset]);
-	return viewableElements?.length > 0 && !isServerSideLazy ? (
+	return viewableElements?.length > 0 ? (
 		<Stack className={`${BLOCK_CLASS_NAME}__wrapper`}>
 			<Join separator={Divider}>
 				{viewableElements.map((element, index) => (

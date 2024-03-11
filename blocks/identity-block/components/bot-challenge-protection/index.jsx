@@ -3,8 +3,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Paragraph, useIdentity } from "@wpmedia/arc-themes-components";
-import useSales from "../../utils/useSales";
+import { Paragraph, useIdentity, useSales } from "@wpmedia/arc-themes-components";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captchaError }) => {

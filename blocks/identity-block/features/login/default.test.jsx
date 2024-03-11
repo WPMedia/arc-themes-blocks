@@ -37,14 +37,14 @@ describe("Identity Login Feature", () => {
 		render(<Login customFields={defaultCustomFields} />);
 		expect(screen.queryByRole("form")).not.toBeNull();
 		expect(screen.getByLabelText("identity-block.password")).not.toBeNull();
-		expect(screen.getByLabelText("identity-block.email")).not.toBeNull();
+		expect(screen.getByLabelText("identity-block.email-label")).not.toBeNull();
 	});
 
 	it("submits the login form", async () => {
 		render(<Login customFields={defaultCustomFields} />);
 
-		await waitFor(() => expect(screen.getByLabelText("identity-block.email")));
-		fireEvent.change(screen.getByLabelText("identity-block.email"), {
+		await waitFor(() => expect(screen.getByLabelText("identity-block.email-label")));
+		fireEvent.change(screen.getByLabelText("identity-block.email-label"), {
 			target: { value: "email@test.com" },
 		});
 		await waitFor(() => expect(screen.getByLabelText("identity-block.password")));
@@ -61,6 +61,9 @@ describe("Identity Login Feature", () => {
 describe("Identity Login Feature - rejected Login", () => {
 	beforeEach(() => {
 		mockLogin.mockImplementation(() => Promise.reject());
+		global.grecaptcha = {
+			reset: jest.fn()
+		}
 	});
 
 	afterEach(() => {
@@ -70,8 +73,8 @@ describe("Identity Login Feature - rejected Login", () => {
 	it("rejects the login", async () => {
 		render(<Login customFields={defaultCustomFields} />);
 
-		await waitFor(() => expect(screen.getByLabelText("identity-block.email")));
-		fireEvent.change(screen.getByLabelText("identity-block.email"), {
+		await waitFor(() => expect(screen.getByLabelText("identity-block.email-label")));
+		fireEvent.change(screen.getByLabelText("identity-block.email-label"), {
 			target: { value: "email@test.com" },
 		});
 

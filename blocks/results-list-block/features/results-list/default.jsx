@@ -28,6 +28,10 @@ const ResultsList = ({ customFields }) => {
 	const configuredSize =
 		parseInt(contentConfigValues?.size, 10) || parseInt(contentConfigValues?.feedSize, 10) || 10;
 
+	if (isServerSideLazy) {
+		// On Server
+		return null;
+	}
 	return (
 		<LazyLoad enabled={lazyLoad && !isAdmin}>
 			<HeadingSection>
@@ -38,7 +42,6 @@ const ResultsList = ({ customFields }) => {
 					contentConfigValues={contentConfigValues}
 					contentService={contentService}
 					imageRatio={promoElements.imageRatio}
-					isServerSideLazy={isServerSideLazy}
 					showByline={promoElements.showByline}
 					showDate={promoElements.showDate}
 					showDescription={promoElements.showDescription}

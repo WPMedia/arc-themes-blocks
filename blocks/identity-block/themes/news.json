@@ -239,22 +239,24 @@
 	"login-form": {
 		"styles": {
 			"default": {
-				"font-family": "var(--font-family-primary)",
+				"font-family": "Inter",
+				"padding-bottom": "var(--global-spacing-5)",
 				"components": {
 					"button": {
 						"font-size": "var(--global-font-size-4)"
 					},
 					"heading": {
-						"border-block-end-color": "var(--border-color)",
-						"border-block-end-style": "var(--global-border-style-1)",
-						"border-block-end-width": "var(--global-border-width-1)",
-						"font-size": "var(--global-font-size-9)",
-						"margin-block-end": "var(--global-spacing-4)",
-						"padding-block-end": "var(--global-spacing-2)",
-						"text-align": "center"
+						"font-size": "var(--heading-level-4-font-size)",
+						"font-family": "var(--font-family-secondary)",
+						"font-weight": 700,
+						"font-style": "normal",
+						"line-height": "140%",
+						"text-align": "center",
+						"padding": 0,
+						"margin-bottom": "var(--global-spacing-5)"
 					},
 					"input": {
-						"margin-block-end": "var(--global-spacing-5)"
+						"margin-bottom": "var(--global-spacing-4)"
 					},
 					"input-error-tip": {
 						"color": "var(--status-color-danger)"
@@ -280,12 +282,90 @@
 			}
 		}
 	},
+	"login-form-bot-protection-section": {
+		"styles": {
+			"default": {
+				"margin-top": "var(--global-spacing-5)",
+				"margin-bottom": "var(--global-spacing-5)"
+			}
+		}
+	},
+	"login-form-privacy-statement": {
+		"styles": {
+			"default": {
+				"display": "block",
+				"text-align": "center",
+				"width": "100%",
+				"margin": 0,
+				"line-height": "150%",
+				"font-size": "0.75rem",
+				"margin-bottom": "var(--global-spacing-5)"
+			}
+		}
+	},
+	"login-form-sign-up-div": {
+		"styles": {
+			"default": {
+				"display": "block",
+				"text-align": "center",
+				"width": "100%",
+				"margin": 0,
+				"line-height": "150%",
+				"font-size": "1rem",
+				"margin-bottom": "var(--global-spacing-5)",
+				"components": {
+					"paragraph": {
+						"font-family": "Inter",
+						"font-weight": "400",
+						"font-size": "1rem",
+						"line-height": "150%"
+					}
+				}
+			}
+		}
+	},
+	"login-form-sign-up-button": {
+		"styles": {
+			"default": {
+				"font-family": "Inter",
+				"font-weight": "400",
+				"font-size": "1rem",
+				"line-height": "150%",
+				"background-color": "transparent",
+				"text-decoration": "underline",
+				"cursor": "pointer"
+			}
+		}
+	},
+	"login-form-error":{
+		"styles": {
+			"default": {
+				"font-family": "inter",
+				"text-align": "center",
+				"margin-bottom": "var(--global-spacing-4)",
+				"components": {
+					"paragraph": {
+						"background-color": "var(--status-color-danger-subtle)",
+						"color": "var(--status-color-danger)",
+						"padding": "0 var(--global-spacing-2) 0 var(--global-spacing-2)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
 	"login-links": {
 		"styles": {
 			"default": {
+				"font-family": "inter",
 				"components": {
+					"paragraph": {
+						"text-align": "center",
+						"font-family": "inter"
+					},
 					"link": {
-						"text-align": "center"
+						"text-align": "center",
+						"font-family": "inter"
 					},
 					"link-hover": {
 						"color": "var(--text-color-subtle)"
@@ -293,6 +373,13 @@
 				}
 			},
 			"desktop": {}
+		}
+	},
+	"login-links-inner-link": {
+		"styles": {
+			"default": {
+				"text-decoration": "underline"
+			}
 		}
 	},
 	"reset-password": {

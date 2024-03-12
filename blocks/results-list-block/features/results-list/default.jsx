@@ -28,6 +28,10 @@ const ResultsList = ({ customFields }) => {
 	const configuredSize =
 		parseInt(contentConfigValues?.size, 10) || parseInt(contentConfigValues?.feedSize, 10) || 10;
 
+	if (isServerSideLazy) {
+		// On Server
+		return null;
+	}
 	return (
 		<LazyLoad enabled={lazyLoad && !isAdmin}>
 			<HeadingSection>
@@ -46,6 +50,7 @@ const ResultsList = ({ customFields }) => {
 					showImage={promoElements.showImage}
 					showItemOverline={promoElements.showItemOverline}
 					targetFallbackImage={targetFallbackImage}
+					loading={lazyLoad ? 'lazy' : 'eager'}
 				/>
 			</HeadingSection>
 		</LazyLoad>

@@ -42,6 +42,7 @@ const ResultsList = ({ customFields }) => {
 					contentConfigValues={contentConfigValues}
 					contentService={contentService}
 					imageRatio={promoElements.imageRatio}
+					isServerSideLazy={isServerSideLazy}
 					showByline={promoElements.showByline}
 					showDate={promoElements.showDate}
 					showDescription={promoElements.showDescription}

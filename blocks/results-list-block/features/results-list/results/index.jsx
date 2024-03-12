@@ -15,6 +15,7 @@ const Results = ({
 	contentConfigValues,
 	contentService,
 	imageRatio,
+	isServerSideLazy = false,
 	showByline = false,
 	showDate = false,
 	showDescription = false,
@@ -26,11 +27,6 @@ const Results = ({
 }) => {
 	const [queryOffset, setQueryOffset] = useState(configuredOffset);
 	const phrases = usePhrases();
-
-	const placeholderResizedImageOptions = useContent({
-		source: !targetFallbackImage.includes("/resources/") ? "resize-image-api" : null,
-		query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
-	});
 
 	const serviceQueryPage = useCallback(
 		(requestedOffset) => {
@@ -61,7 +57,7 @@ const Results = ({
 	);
 
 	const requestedResultList = useContent({
-		source: contentService,
+		source: isServerSideLazy ? null : contentService,
 		query: {
 			...contentConfigValues,
 			feature: "results-list",
@@ -139,7 +135,7 @@ const Results = ({
     }`,
 	});
 
-	const [resultList, alterResultList] = useReducer(reduceResultList, { content_elements: requestedResultList ?? [] });
+	const [resultList, alterResultList] = useReducer(reduceResultList, { content_elements: [] });
 
 	useEffect(() => {
 		if (requestedResultList) {
@@ -177,6 +173,7 @@ const Results = ({
 		}
 	}, [focalElement]);
 
+	console.log("resultList>>>>",resultList);
 	const viewableElements = resultList?.content_elements.slice(
 		0,
 		queryOffset + configuredSize - configuredOffset,
@@ -200,7 +197,6 @@ const Results = ({
 						arcSite={arcSite}
 						element={element}
 						imageRatio={imageRatio}
-						placeholderResizedImageOptions={placeholderResizedImageOptions}
 						showByline={showByline}
 						showDate={showDate}
 						showDescription={showDescription}

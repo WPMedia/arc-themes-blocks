@@ -636,6 +636,7 @@
 					"margin-block-end": 0,
 				),
 				"author-bio-author-name": (
+					"color": var(--color-primary),
 					"font-family": var(--font-family-primary),
 					"font-size": var(--heading-level-6-font-size),
 					"font-weight": var(--heading-level-6-font-weight),
@@ -1132,6 +1133,7 @@
 					"line-height": var(--heading-level-3-line-height),
 				),
 				"full-author-bio-role": (
+					"color": var(--text-color),
 					"font-size": var(--heading-level-6-font-size),
 					"font-weight": var(--heading-level-6-font-weight),
 					"line-height": var(--heading-level-6-line-height),
@@ -1140,10 +1142,11 @@
 					"gap": var(--global-spacing-2),
 				),
 				"full-author-bio-social-header": (
-					"text-align": center,
+					"color": var(--text-color),
 					"font-size": var(--heading-level-6-font-size),
 					"font-weight": var(--heading-level-6-font-weight),
 					"line-height": var(--heading-level-6-line-height),
+					"text-align": center,
 				),
 				"full-author-bio-social-icons": (
 					"display": flex,

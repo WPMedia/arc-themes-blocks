@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
@@ -41,10 +40,7 @@ const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captc
 		
 	}, []);
 
-	const url_string = window.location.href;
-	const url = new URL(url_string);
-
-	const { isAdmin, arcSite } = useFusionContext();
+	const { arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 

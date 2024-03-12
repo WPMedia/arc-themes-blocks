@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Input, useIdentity, Paragraph, Button } from "@wpmedia/arc-themes-components";
+import { Input, useIdentity, Paragraph } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
 import useLogin from "../../components/login";
 import BotChallengeProtection from "../../components/bot-challenge-protection";

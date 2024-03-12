@@ -101,6 +101,7 @@ export function PresentationalNav(props) {
 					className={`${BLOCK_CLASS_NAME}__flyout-overlay ${
 						isSectionDrawerOpen ? "open" : "closed"
 					}`}
+					data-testid="nav-chain-flyout-overlay"
 					direction="vertical"
 					justification="start"
 					onClick={closeNavigation}

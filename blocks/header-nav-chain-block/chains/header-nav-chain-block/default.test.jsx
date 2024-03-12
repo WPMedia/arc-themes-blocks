@@ -273,6 +273,16 @@ describe("the header navigation feature for the default output type", () => {
 			fireEvent.click(within(navComponents).getByTestId("nav-chain-nav-section-button"));
 			expect(screen.queryAllByRole("link").length).toBe(0);
 		});
+
+		it("opens with the sections button and closes with the overlay", () => {
+			render(<Navigation customFields={DEFAULT_SELECTIONS} />);
+			const navComponents = screen.getByTestId("nav-chain-nav-components-desktop-left")
+			fireEvent.click(within(navComponents).getByTestId("nav-chain-nav-section-button"));
+			expect(screen.queryAllByRole("link").length).toBe(3);
+
+			fireEvent.click(screen.getByTestId("nav-chain-flyout-overlay"));
+			expect(screen.queryAllByRole("link").length).toBe(0);
+		});
 	});
 
 	describe("dealing with accessibility and screen readers", () => {

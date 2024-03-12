@@ -10,6 +10,7 @@ jest.mock("fusion:properties", () =>
 		locale: "somelocale",
 	}))
 );
+
 jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({
 		arcSite: "dagen",

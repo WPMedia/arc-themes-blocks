@@ -173,7 +173,6 @@ const Results = ({
 		}
 	}, [focalElement]);
 
-	console.log("resultList>>>>",resultList);
 	const viewableElements = resultList?.content_elements.slice(
 		0,
 		queryOffset + configuredSize - configuredOffset,

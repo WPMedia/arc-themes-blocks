@@ -72,6 +72,7 @@
 	"full-author-bio-role": {
 		"styles": {
 			"default": {
+				"color": "var(--text-color)",
 				"font-size": "var(--heading-level-6-font-size)",
 				"font-weight": "var(--heading-level-6-font-weight)",
 				"line-height": "var(--heading-level-6-line-height)"
@@ -90,10 +91,11 @@
 	"full-author-bio-social-header": {
 		"styles": {
 			"default": {
-				"text-align": "center",
+				"color": "var(--text-color)",
 				"font-size": "var(--heading-level-6-font-size)",
 				"font-weight": "var(--heading-level-6-font-weight)",
-				"line-height": "var(--heading-level-6-line-height)"
+				"line-height": "var(--heading-level-6-line-height)",
+				"text-align": "center"
 			},
 			"desktop": {
 				"text-align": "start"

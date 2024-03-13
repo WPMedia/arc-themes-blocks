@@ -5,13 +5,14 @@ import getTranslatedPhrases from "fusion:intl";
 import { Paragraph, useIdentity, useSales } from "@wpmedia/arc-themes-components";
 import ReCAPTCHA from "react-google-recaptcha";
 
-const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captchaError }) => {
+const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captchaError, setCaptchaError }) => {
 	const { Identity, isInitialized } = useIdentity();
   const { Sales } = useSales();
 	const [siteKey, setSiteKey] = useState();
 
 	const onChange = (value) => {
 		setCaptchaToken(value);
+		setCaptchaError(null);
     localStorage.setItem('ArcXP_captchaToken', captchaToken);
 	};
 

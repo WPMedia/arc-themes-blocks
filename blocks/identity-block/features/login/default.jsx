@@ -92,7 +92,7 @@ const Login = ({ customFields }) => {
 				showDefaultError={false}
 				type="password"
 			/>
-			<BotChallengeProtection className={BLOCK_CLASS_NAME} challengeIn={"signin"} setCaptchaToken={setCaptchaToken} captchaError={captchaError} />
+			<BotChallengeProtection className={BLOCK_CLASS_NAME} challengeIn={"signin"} setCaptchaToken={setCaptchaToken} captchaError={captchaError} setCaptchaError={setCaptchaError} />
 			<Paragraph className={`${BLOCK_CLASS_NAME}__privacy-statement`}>{phrases.t("identity-block.privacy-statement")}</Paragraph>
 		</HeadlinedSubmitForm>
 	);

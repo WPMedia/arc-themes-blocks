@@ -1,20 +1,21 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { isServerSide } from "@wpmedia/arc-themes-components";
+import { isServerSide, getFocalFromANS } from "@wpmedia/arc-themes-components";
 import { useContent } from "fusion:content";
 
 import MediumManualPromo from "./default";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
+	getFocalFromANS: jest.fn(() => { }),
 	isServerSide: jest.fn(() => false),
 	LazyLoad: ({ children }) => children,
 }));
 
 jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => {}),
+	useContent: jest.fn(() => ({})),
 	useEditableContent: jest.fn(() => ({
-		searchableField: () => {},
+		searchableField: () => { },
 	})),
 }));
 
@@ -34,6 +35,7 @@ const customFieldData = {
 describe("the medium promo feature", () => {
 	afterEach(() => {
 		jest.resetModules();
+		getFocalFromANS.mockClear();
 	});
 
 	it("should return null if lazyLoad on the server and not in the admin", () => {
@@ -165,4 +167,21 @@ describe("the medium promo feature", () => {
 		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
+
+	it("should respect focal point if one is set", () => {
+		const config = {
+			imageAuth: "",
+			imageURL: "test_id=123",
+			imageId: "123",
+			imageFocalPoint: JSON.stringify({ x: 1234, y: 2345 }),
+			imageRatio: "4:3",
+			showImage: true,
+		};
+		render(<MediumManualPromo customFields={config} />);
+		expect(getFocalFromANS).toHaveBeenCalledWith(
+			expect.objectContaining({
+				focal_point: JSON.parse(config.imageFocalPoint)
+			})
+		);
+	})
 });

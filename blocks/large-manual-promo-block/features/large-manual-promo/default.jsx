@@ -5,6 +5,7 @@ import { useComponentContext, useFusionContext } from "fusion:context";
 import { useContent, useEditableContent } from "fusion:content";
 import getProperties from "fusion:properties";
 import {
+	getFocalFromANS,
 	Conditional,
 	Image,
 	isServerSide,
@@ -29,6 +30,7 @@ const LargeManualPromo = ({ customFields }) => {
 		imageAuth,
 		imageURL,
 		imageId,
+		imageFocalPoint,
 		imageRatio,
 		lazyLoad,
 		linkURL,
@@ -52,9 +54,9 @@ const LargeManualPromo = ({ customFields }) => {
 		resizedImage || !imageURL
 			? {}
 			: {
-					source: "signing-service",
-					query: { id: imageURL },
-			  }
+				source: "signing-service",
+				query: { id: imageURL },
+			}
 	);
 	if (imageAuth && !resizedAuth) {
 		resizedAuth = JSON.parse(imageAuth);
@@ -66,28 +68,30 @@ const LargeManualPromo = ({ customFields }) => {
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}
+	const ansImage = {
+		_id: resizedImage ? imageId : "",
+		url: imageURL,
+		auth: resizedAuth,
+		focal_point: imageFocalPoint ? JSON.parse(imageFocalPoint) : undefined
+	}
 
 	const alt = headline || description || null;
 	const imageParams =
 		imageURL && resizedAuth
 			? {
-					ansImage: {
-						_id: resizedImage ? imageId : "",
-						url: imageURL,
-						auth: resizedAuth,
-					},
-					alt,
-					aspectRatio: imageRatio,
-					resizedOptions: {
-						smart: true,
-					},
-					responsiveImages: [200, 400, 600, 800, 1200],
-					width: 600,
-			  }
+				ansImage,
+				alt,
+				aspectRatio: imageRatio,
+				resizedOptions: {
+					...getFocalFromANS(ansImage)
+				},
+				responsiveImages: [200, 400, 600, 800, 1200],
+				width: 600,
+			}
 			: {
-					src: fallbackImage,
-					alt,
-			  };
+				src: fallbackImage,
+				alt,
+			};
 
 	const PromoOverline = () => {
 		if (showOverline && overline) {
@@ -109,6 +113,7 @@ const LargeManualPromo = ({ customFields }) => {
 								imageURL: "url",
 								imageId: "_id",
 								imageAuth: "auth",
+								imageFocalPoint: "focal_point",
 							})}
 							suppressContentEditableWarning
 						>
@@ -179,6 +184,9 @@ LargeManualPromo.propTypes = {
 			hidden: true,
 		}),
 		imageId: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageFocalPoint: PropTypes.string.tag({
 			hidden: true,
 		}),
 		linkURL: PropTypes.string.tag({

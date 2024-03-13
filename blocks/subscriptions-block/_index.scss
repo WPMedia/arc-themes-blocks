@@ -282,9 +282,8 @@
 	}
 }
 
-@supports (hanging-punctuation: first) and (-webkit-appearance: none) {
-	/* Safari only override */
-	.b-paywall__overlay {
-		top: initial;
-	}
+@media (min-width: 320px) and (max-width: 480px) {
+  .b-paywall__overlay {
+    top: initial;
+  }
 }

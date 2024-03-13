@@ -26,7 +26,7 @@
     "directory": "blocks/identity-block"
   },
   "peerDependencies": {
-    "@wpmedia/arc-themes-components": "*"
+    "@wpmedia/arc-themes-components": "file:../../../arc-themes-components"
   },
   "dependencies": {
     "@arc-fusion/prop-types": "^0.1.5",

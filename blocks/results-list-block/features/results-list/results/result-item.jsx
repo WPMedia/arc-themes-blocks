@@ -39,6 +39,7 @@ const ResultItem = React.memo(
 				showHeadline,
 				showImage,
 				showItemOverline,
+				loading
 			},
 			ref
 		) => {
@@ -89,6 +90,7 @@ const ResultItem = React.memo(
 				? {
 						ansImage,
 						aspectRatio: imageRatio,
+						loading,
 						resizedOptions: {
 							...getFocalFromANS(ansImage),
 						},
@@ -107,6 +109,7 @@ const ResultItem = React.memo(
 				  }
 				: {
 						src: targetFallbackImage,
+						loading
 				  };
 			return showHeadline ||
 				showImage ||

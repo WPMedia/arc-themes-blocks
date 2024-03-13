@@ -81,24 +81,10 @@ describe("<ArcAd>", () => {
 		});
 
 		describe("Reserve Space", () => {
-			it("renders with width only", () => {
-				const adProps = {
-					...AD_PROPS_MOCK,
-					customFields: {
-						reserveSpace: false,
-					},
-				};
-				const { container } = render(<ArcAd {...adProps} />);
-				const adContainer = container.querySelector("div.b-ads-block > div");
-				expect(adContainer.style.maxWidth).not.toBe("");
-				expect(adContainer.style.minHeight).toBe("");
-			});
-
-			it("renders with height and width", () => {
-				const { container } = render(<ArcAd {...AD_PROPS_MOCK} />);
-				const adContainer = container.querySelector("div.b-ads-block > div");
-				expect(adContainer.style.maxWidth).not.toBe("");
-				expect(adContainer.style.minHeight).not.toBe("");
+			it("renders with height", () => {
+				render(<ArcAd {...AD_PROPS_MOCK} />);
+				const adContainer = screen.getByTestId("ad-block-unit-wrapper");
+				expect(adContainer.style.minBlockSize).toBe("250px");
 			});
 		});
 

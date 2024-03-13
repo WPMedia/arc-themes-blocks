@@ -57,7 +57,7 @@ describe("Results List", () => {
 		};
 
 		const { unmount } = render(<ResultsList customFields={customFields} />);
-		expect(screen.queryByText("Results")).toBeInTheDocument();
+		expect(screen.getByText("Results")).toBeInTheDocument();
 		unmount();
 	});
 
@@ -80,7 +80,7 @@ describe("Results List", () => {
 		};
 
 		const { unmount } = render(<ResultsList customFields={customFields} />);
-		expect(screen.queryByText("Results")).toBeInTheDocument();
+		expect(screen.getByText("Results")).toBeInTheDocument();
 		unmount();
 	});
 });
@@ -132,7 +132,7 @@ describe("configured values", () => {
 		};
 
 		const { unmount } = render(<ResultsList customFields={customFields} />);
-		expect(screen.queryByText(/"configuredOffset":0/i)).toBeInTheDocument();
+		expect(screen.getByText(/"configuredOffset":0/i)).toBeInTheDocument();
 		unmount();
 	});
 	it("should default size to 10 if not configured", () => {
@@ -145,7 +145,7 @@ describe("configured values", () => {
 		};
 
 		const { unmount } = render(<ResultsList customFields={customFields} />);
-		expect(screen.queryByText(/"configuredSize":10/i)).toBeInTheDocument();
+		expect(screen.getByText(/"configuredSize":10/i)).toBeInTheDocument();
 		unmount();
 	});
 });
@@ -161,7 +161,7 @@ describe("isServerSideLazy flag", () => {
 		};
 
 		const { unmount } = render(<ResultsList customFields={customFields} />);
-		expect(screen.queryByText(/"isServerSideLazy":false/i)).toBeInTheDocument();
+		expect(screen.getByText(/"isServerSideLazy":false/i)).toBeInTheDocument();
 		unmount();
 	});
 	it("should be false if isAdmin is true", () => {
@@ -181,7 +181,7 @@ describe("isServerSideLazy flag", () => {
 		};
 
 		const { unmount } = render(<ResultsList customFields={customFields} />);
-		expect(screen.queryByText(/"isServerSideLazy":false/i)).toBeInTheDocument();
+		expect(screen.getByText(/"isServerSideLazy":false/i)).toBeInTheDocument();
 		unmount();
 	});
 	it("should be true if isServerSide is true, admin is false, and lazyload is false", () => {
@@ -201,7 +201,7 @@ describe("isServerSideLazy flag", () => {
 		};
 
 		const { unmount } = render(<ResultsList customFields={customFields} />);
-		expect(screen.queryByText(/"isServerSideLazy":true/i)).toBeInTheDocument();
+		expect(screen.getByText(/"isServerSideLazy":true/i)).toBeInTheDocument();
 		unmount();
 	});
 });

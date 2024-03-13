@@ -23,14 +23,10 @@ const Results = ({
 	showImage = false,
 	showItemOverline = false,
 	targetFallbackImage,
+	loading = 'eager'
 }) => {
 	const [queryOffset, setQueryOffset] = useState(configuredOffset);
 	const phrases = usePhrases();
-
-	const placeholderResizedImageOptions = useContent({
-		source: !targetFallbackImage.includes("/resources/") ? "resize-image-api" : null,
-		query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
-	});
 
 	const serviceQueryPage = useCallback(
 		(requestedOffset) => {
@@ -147,7 +143,7 @@ const Results = ({
     }`,
 	});
 
-	const [resultList, alterResultList] = useReducer(reduceResultList, { content_elements: [] });
+	const [resultList, alterResultList] = useReducer(reduceResultList, { content_elements: requestedResultList?.content_elements || [] });
 
 	useEffect(() => {
 		if (requestedResultList) {
@@ -198,7 +194,7 @@ const Results = ({
 	const onReadMoreClick = useCallback(() => {
 		setQueryOffset((oldOffset) => oldOffset + configuredSize);
 	}, [configuredSize, setQueryOffset]);
-	return viewableElements?.length > 0 && !isServerSideLazy ? (
+	return viewableElements?.length > 0 ? (
 		<Stack className={`${BLOCK_CLASS_NAME}__wrapper`}>
 			<Join separator={Divider}>
 				{viewableElements.map((element, index) => (
@@ -208,7 +204,6 @@ const Results = ({
 						arcSite={arcSite}
 						element={element}
 						imageRatio={imageRatio}
-						placeholderResizedImageOptions={placeholderResizedImageOptions}
 						showByline={showByline}
 						showDate={showDate}
 						showDescription={showDescription}
@@ -216,6 +211,7 @@ const Results = ({
 						showImage={showImage}
 						showItemOverline={showItemOverline}
 						targetFallbackImage={targetFallbackImage}
+						loading={loading}
 					/>
 				))}
 				{isThereMore && (

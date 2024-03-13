@@ -35,7 +35,7 @@ export const ArcAdDisplay = (props) => {
 		<Stack id={`arcad-feature-${instanceId}`} className={BLOCK_CLASS_NAME} alignment="center">
 			{showAdLabel ? <Paragraph>{adLabel}</Paragraph> : null}
 			{showAd ? (
-				<div style={sizing}>
+				<div style={sizing} data-testid="ad-block-unit-wrapper">
 					<LazyLoad
 						enabled={lazyLoad}
 						offsetBottom={0}
@@ -76,11 +76,10 @@ const ArcAd = (props) => {
 	// istanbul ignore next
 	const isAMP = () => !!(propsWithContext.outputType && propsWithContext.outputType === "amp");
 
-	const [width, height] = config.adClass ? config.adClass.split("x") : [];
+	const [, height] = config.adClass ? config.adClass.split("x") : [];
 
 	const sizing = {
-		maxWidth: `${width}px`,
-		minHeight: reserveSpace ? `${height}px` : null,
+		minBlockSize: reserveSpace && height ? `${height}px` : null,
 	};
 
 	// shows ADVERTISEMENT (en) string above the ad

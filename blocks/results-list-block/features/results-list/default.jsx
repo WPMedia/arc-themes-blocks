@@ -46,6 +46,7 @@ const ResultsList = ({ customFields }) => {
 					showImage={promoElements.showImage}
 					showItemOverline={promoElements.showItemOverline}
 					targetFallbackImage={targetFallbackImage}
+					loading={lazyLoad ? 'lazy' : 'eager'}
 				/>
 			</HeadingSection>
 		</LazyLoad>

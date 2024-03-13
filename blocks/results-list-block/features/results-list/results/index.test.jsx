@@ -139,9 +139,7 @@ describe("seeMore", () => {
 	it("should trigger a state update", () => {
 		useContent
 			.mockReset()
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[0])
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[1]);
 
 		const { unmount } = render(
@@ -168,7 +166,7 @@ describe("seeMore", () => {
 	});
 
 	it("should not show for the last items", () => {
-		useContent.mockReset().mockReturnValueOnce({}).mockReturnValueOnce(mockLastItemContent[0]);
+		useContent.mockReset().mockReturnValueOnce(mockLastItemContent[0]);
 
 		const { unmount } = render(
 			<Results
@@ -191,7 +189,7 @@ describe("seeMore", () => {
 
 describe("focus", () => {
 	it("should not be set on the very first item on the page", () => {
-		useContent.mockReset().mockReturnValueOnce({}).mockReturnValueOnce(mockContent[0]);
+		useContent.mockReset().mockReturnValueOnce(mockContent[0]);
 
 		const { unmount } = render(
 			<Results
@@ -212,9 +210,7 @@ describe("focus", () => {
 	it("should be set on the first new item added", () => {
 		useContent
 			.mockReset()
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[0])
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[1]);
 
 		const { unmount } = render(
@@ -237,9 +233,7 @@ describe("focus", () => {
 	it("should not set focus if there is no link", () => {
 		useContent
 			.mockReset()
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[0])
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[1]);
 
 		const { unmount } = render(
@@ -264,9 +258,7 @@ describe("story-feed-query service", () => {
 	it("should call useContent with appropriate query parameters", () => {
 		useContent
 			.mockReset()
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[0])
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[1]);
 
 		const { unmount } = render(
@@ -313,9 +305,7 @@ describe("content-api-collections service", () => {
 	it("should call useContent with appropriate query parameters", () => {
 		useContent
 			.mockReset()
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[0])
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[1]);
 
 		const { unmount } = render(
@@ -364,9 +354,7 @@ describe("story-feed-author service", () => {
 	it("should call useContent with appropriate query parameters", () => {
 		useContent
 			.mockReset()
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[0])
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[1]);
 
 		const { unmount } = render(
@@ -413,9 +401,7 @@ describe("story-feed-sections service", () => {
 	it("should call useContent with appropriate query parameters", () => {
 		useContent
 			.mockReset()
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[0])
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[1]);
 
 		const { unmount } = render(
@@ -506,9 +492,7 @@ describe("unknown service", () => {
 	it("should call useContent with appropriate query parameters", () => {
 		useContent
 			.mockReset()
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[0])
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[1]);
 
 		const { unmount } = render(
@@ -548,10 +532,8 @@ describe("lazy flags", () => {
 	it("should return nothing if isServerSideLazy is true", () => {
 		useContent
 			.mockReset()
-			.mockReturnValueOnce({})
-			.mockReturnValueOnce(mockContent[0])
-			.mockReturnValueOnce({})
-			.mockReturnValueOnce(mockContent[1]);
+			.mockReturnValueOnce(null)
+			.mockReturnValueOnce(null);
 
 		const { unmount } = render(
 			<Results
@@ -580,9 +562,7 @@ describe("fallback image", () => {
 	it("should return even if the fallback image is not a /resource/ path", () => {
 		useContent
 			.mockReset()
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[0])
-			.mockReturnValueOnce({})
 			.mockReturnValueOnce(mockContent[1]);
 
 		const { unmount } = render(

@@ -12,7 +12,7 @@ const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captc
 
 	const onChange = (value) => {
 		setCaptchaToken(value);
-    localStorage.setItem('captchaToken', captchaToken);
+    localStorage.setItem('ArcXP_captchaToken', captchaToken);
 	};
 
 	useEffect(() => {
@@ -53,6 +53,7 @@ const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captc
 			{!!siteKey && <ReCAPTCHA
 				sitekey={siteKey}
 				onChange={onChange}
+				onExpired={() => {}}
 			/>}
 			{captchaError && <Paragraph>{phrases.t("identity-block.bot-protection-error")}</Paragraph>}
 		</section>

@@ -37,7 +37,9 @@ const useLogin = ({
 		}
 
 		if (redirectToPreviousPage && document?.referrer) {
-			setRedirectToURL(document.referrer);
+			const redirectUrl = new URL(document.referrer);
+
+			setRedirectToURL(`${redirectUrl.pathname}${redirectUrl.search}`);
 		}
 	}, [redirectQueryParam, redirectToPreviousPage]);
 

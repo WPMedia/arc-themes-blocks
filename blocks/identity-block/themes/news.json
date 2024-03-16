@@ -240,7 +240,7 @@
 		"styles": {
 			"default": {
 				"font-family": "Inter",
-				"padding-bottom": "var(--global-spacing-5)",
+				"padding-block-end": "var(--global-spacing-5)",
 				"components": {
 					"button": {
 						"font-size": "var(--global-font-size-4)"
@@ -253,10 +253,10 @@
 						"line-height": "140%",
 						"text-align": "center",
 						"padding": 0,
-						"margin-bottom": "var(--global-spacing-5)"
+						"margin-block-end": "var(--global-spacing-5)"
 					},
 					"input": {
-						"margin-bottom": "var(--global-spacing-4)"
+						"margin-block-end": "var(--global-spacing-4)"
 					},
 					"input-error-tip": {
 						"color": "var(--status-color-danger)"
@@ -285,8 +285,8 @@
 	"login-form-bot-protection-section": {
 		"styles": {
 			"default": {
-				"margin-top": "var(--global-spacing-5)",
-				"margin-bottom": "var(--global-spacing-5)",
+				"margin-block-start": "var(--global-spacing-5)",
+				"margin-block-end": "var(--global-spacing-5)",
 				"components": {
 					"paragraph": {
 						"color": "#f00"
@@ -304,7 +304,7 @@
 				"margin": 0,
 				"line-height": "150%",
 				"font-size": "0.75rem",
-				"margin-bottom": "var(--global-spacing-5)"
+				"margin-block-end": "var(--global-spacing-5)"
 			}
 		}
 	},
@@ -317,7 +317,7 @@
 				"margin": 0,
 				"line-height": "150%",
 				"font-size": "1rem",
-				"margin-bottom": "var(--global-spacing-5)",
+				"margin-block-end": "var(--global-spacing-5)",
 				"components": {
 					"paragraph": {
 						"font-family": "Inter",

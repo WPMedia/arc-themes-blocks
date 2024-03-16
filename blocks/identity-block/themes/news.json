@@ -308,40 +308,6 @@
 			}
 		}
 	},
-	"login-form-sign-up-div": {
-		"styles": {
-			"default": {
-				"display": "block",
-				"text-align": "center",
-				"inline-size": "100%",
-				"margin": 0,
-				"line-height": "150%",
-				"font-size": "1rem",
-				"margin-block-end": "var(--global-spacing-5)",
-				"components": {
-					"paragraph": {
-						"font-family": "Inter",
-						"font-weight": "400",
-						"font-size": "1rem",
-						"line-height": "150%"
-					}
-				}
-			}
-		}
-	},
-	"login-form-sign-up-button": {
-		"styles": {
-			"default": {
-				"font-family": "Inter",
-				"font-weight": "400",
-				"font-size": "1rem",
-				"line-height": "150%",
-				"background-color": "transparent",
-				"text-decoration": "underline",
-				"cursor": "pointer"
-			}
-		}
-	},
 	"login-links": {
 		"styles": {
 			"default": {

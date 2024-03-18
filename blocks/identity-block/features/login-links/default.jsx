@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getTranslatedPhrases from "fusion:intl";
-import { Link, Stack } from "@wpmedia/arc-themes-components";
+import { Link, Stack, Button } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-login-links";
 const defaultLoginURL = "/account/login/";
@@ -12,6 +12,7 @@ const defaultSignUpURL = "/account/signup/";
 const LoginLinks = ({ customFields }) => {
 	const {
 		showLogin = false,
+		showLoginWithoutPassword = false,
 		loginURL = defaultLoginURL,
 		showForgot = false,
 		forgotURL = defaultForgotURL,
@@ -28,6 +29,11 @@ const LoginLinks = ({ customFields }) => {
 
 	return (
 		<Stack as="div" className={BLOCK_CLASS_NAME}>
+			{showLoginWithoutPassword && (
+				<Button className={`${BLOCK_CLASS_NAME}-ota-link`} size="large" fullWidth type="submit">
+					Log in without password
+				</Button>
+			)}
 			{showLogin ? (
 				<Link href={loginURL}>{phrases.t("identity-block.login-links-login")}</Link>
 			) : null}
@@ -49,6 +55,11 @@ LoginLinks.propTypes = {
 	customFields: PropTypes.shape({
 		showLogin: PropTypes.bool.tag({
 			name: "Show Login link",
+			defaultValue: false,
+			group: "Login",
+		}),
+		showLoginWithoutPassword: PropTypes.bool.tag({
+			name: "Show Login without password",
 			defaultValue: false,
 			group: "Login",
 		}),

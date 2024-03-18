@@ -295,6 +295,14 @@
 			"desktop": {}
 		}
 	},
+	"login-links-ota-link": {
+		"styles": {
+			"default": {
+				"border": "1px solid black"
+			},
+			"desktop": {}
+		}
+	},
 	"reset-password": {
 		"styles": {
 			"default": {

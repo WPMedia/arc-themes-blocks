@@ -67,6 +67,10 @@
 .b-login-links {
 	@include scss.block-components("login-links");
 	@include scss.block-properties("login-links");
+	&-ota-link {
+		@include scss.block-components("login-links-ota-link");
+		@include scss.block-properties("login-links-ota-link");
+	}
 }
 
 .b-reset-password {

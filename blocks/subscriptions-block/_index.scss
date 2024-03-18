@@ -281,3 +281,9 @@
 		@include scss.block-properties("paywall-subscription-dialog");
 	}
 }
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .b-paywall__overlay {
+    top: initial;
+  }
+}

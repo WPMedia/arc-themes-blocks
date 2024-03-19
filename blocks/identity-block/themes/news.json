@@ -252,7 +252,10 @@
 						"font-style": "normal",
 						"line-height": "140%",
 						"text-align": "center",
-						"padding": 0,
+						"padding-block-end": 0,
+						"padding-block-start": 0,
+						"padding-inline-end": 0,
+						"padding-inline-start": 0,
 						"margin-block-end": "var(--global-spacing-5)"
 					},
 					"input": {
@@ -301,10 +304,12 @@
 				"display": "block",
 				"text-align": "center",
 				"inline-size": "100%",
-				"margin": 0,
+				"margin-block-start": 0,
+				"margin-block-end": "var(--global-spacing-5)",
+				"margin-inline-end": 0,
+				"margin-inline-start": 0,
 				"line-height": "150%",
-				"font-size": "0.75rem",
-				"margin-block-end": "var(--global-spacing-5)"
+				"font-size": "0.75rem"
 			}
 		}
 	},

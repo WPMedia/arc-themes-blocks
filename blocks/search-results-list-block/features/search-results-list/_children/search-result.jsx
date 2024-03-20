@@ -7,6 +7,7 @@ import {
 	Date as DateComponent,
 	formatAuthors,
 	formatURL,
+	getFocalFromANS,
 	getImageFromANS,
 	Heading,
 	HeadingSection,
@@ -59,6 +60,9 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 			? {
 					ansImage,
 					aspectRatio: imageRatio,
+					resizedOptions: {
+						...getFocalFromANS(ansImage),
+					},
 					responsiveImages: [200, 400, 800],
 					sizes: [
 						{

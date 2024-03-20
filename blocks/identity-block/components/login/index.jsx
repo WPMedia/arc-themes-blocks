@@ -22,13 +22,12 @@ const useLogin = ({
 		if (window?.location?.search) {
 			const searchParams = new URLSearchParams(window.location.search.substring(1));
 
-			//redirectURL could have additional params
+			// redirectURL could have additional params
 			const params = ["paymentMethodID"];
-			const aditionalParams = params.map((p) => {
-				const paramExist = searchParams.has(p)
-				if(paramExist){
-					return {[p]:searchParams.get(p)}
-				}
+			const aditionalParams = params.filter((p) => {
+				const paramExist = searchParams.has(p);
+
+				return paramExist;
 			})
 
 			const fullURL = searchParams.get("redirect") ? appendURLParams(searchParams.get("redirect"), aditionalParams.filter(item => item !== undefined)) : null;
@@ -58,6 +57,7 @@ const useLogin = ({
 		const checkLoggedInStatus = async () => {
 			const isLoggedIn = await Identity.isLoggedIn();
 			const validatedLoggedInPageLoc = validateURL(loggedInPageLocation);
+
 			if (isLoggedIn) {
 				if (isOIDC) {
 					loginByOIDC();
@@ -69,7 +69,7 @@ const useLogin = ({
 		if (Identity && !isAdmin) {
 			checkLoggedInStatus();
 		}
-	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin]);
+	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin, loginByOIDC, isOIDC]);
 
 	return {
 		loginRedirect: redirectQueryParam || redirectToURL,

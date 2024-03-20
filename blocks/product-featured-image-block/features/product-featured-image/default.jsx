@@ -2,21 +2,21 @@ import React from "react";
 import { useFusionContext } from "fusion:context";
 import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import getProperties from "fusion:properties";
-import { imageANSToImageSrc, Image } from "@wpmedia/arc-themes-components";
+import { getFocalFromANS, Image } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-featured-image";
 
-export const ProductFeaturedImageDisplay = ({ featuredImage, resizerAppVersion, resizerURL }) => {
-	const { auth = {}, alt_text: altText } = featuredImage;
+export const ProductFeaturedImageDisplay = ({ featuredImage, resizerURL }) => {
+	const { alt_text: altText } = featuredImage;
 	return (
 		<Image
 			alt={altText}
+			ansImage={featuredImage}
 			className={BLOCK_CLASS_NAME}
 			height={768}
-			resizedOptions={{ auth: auth[resizerAppVersion] }}
+			resizedOptions={{ ...getFocalFromANS(featuredImage) }}
 			resizerURL={resizerURL}
 			responsiveImages={[320, 768]}
-			src={imageANSToImageSrc(featuredImage)}
 			width={768}
 		/>
 	);

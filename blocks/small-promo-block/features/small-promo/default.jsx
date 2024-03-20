@@ -5,7 +5,11 @@ import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import {
+	Conditional,
 	formatURL,
+	getFocalFromANS,
+	getImageFromANS,
+	Grid,
 	Heading,
 	HeadingSection,
 	Image,
@@ -13,9 +17,6 @@ import {
 	LazyLoad,
 	Link,
 	MediaItem,
-	Grid,
-	getImageFromANS,
-	Conditional,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-small-promo";
@@ -67,21 +68,29 @@ const SmallPromo = ({ customFields }) => {
 				promo_items {
 					basic {
 						_id
-						type
-						url
 						auth {
 							${RESIZER_TOKEN_VERSION}
 						}
+						focal_point {
+							x
+							y
+						}
+						type
+						url
 					}
 				}
 			}
 			basic {
 				_id
-				type
-				url
 				auth {
 					${RESIZER_TOKEN_VERSION}
 				}
+				focal_point {
+					x
+					y
+				}
+				type
+				url
 			}
 		}
 		websites {
@@ -118,31 +127,29 @@ const SmallPromo = ({ customFields }) => {
 	const linkURL = content?.websites?.[arcSite]?.website_url;
 	const headline = content?.headlines?.basic;
 
-	const PromoImage = () => {
-		const { fallbackImage } = getProperties(arcSite);
-		const imageParams =
-			imageOverrideURL || (content && getImageFromANS(content))
+	const { fallbackImage } = getProperties(arcSite);
+	const ansImage = getImageFromANS(content);
+	const imageParams = imageOverrideURL || ansImage
+		? {
+			ansImage: imageOverrideURL
 				? {
-						ansImage: imageOverrideURL
-							? {
-									_id: resizedImage ? imageOverrideId : "",
-									url: imageOverrideURL,
-									auth: resizedAuth || {},
-							  }
-							: getImageFromANS(content),
-						alt: content?.headlines?.basic || "",
-						aspectRatio: imageRatio,
-						resizedOptions: {
-							smart: true,
-						},
-						responsiveImages: [200, 400, 600, 800, 1200],
-						width: 600,
-				  }
-				: {
-						src: fallbackImage,
-				  };
+						_id: resizedImage ? imageOverrideId : "",
+						url: imageOverrideURL,
+						auth: resizedAuth || {},
+					}
+				: ansImage,
+			alt: content?.headlines?.basic || "",
+			aspectRatio: imageRatio,
+			resizedOptions: {
+				...getFocalFromANS(ansImage),
+			},
+			responsiveImages: [200, 400, 600, 800, 1200],
+			width: 600,
+		}
+		: { src: fallbackImage, };
 
-		return showImage ? (
+	const promoImage = showImage
+		? (
 			<Conditional
 				className={`${BLOCK_CLASS_NAME}__img`}
 				component={Link}
@@ -163,10 +170,9 @@ const SmallPromo = ({ customFields }) => {
 				</MediaItem>
 			</Conditional>
 		) : null;
-	};
 
-	const PromoHeading = () =>
-		showHeadline && headline ? (
+	const promoHeading = showHeadline && headline
+		? (
 			<Heading>
 				<Conditional
 					component={Link}
@@ -192,13 +198,13 @@ const SmallPromo = ({ customFields }) => {
 				<Grid as="article" className={containerClassNames}>
 					{["below", "right"].includes(imagePosition) ? (
 						<>
-							<PromoHeading />
-							<PromoImage />
+							{ promoHeading }
+							{ promoImage }
 						</>
 					) : (
 						<>
-							<PromoImage />
-							<PromoHeading />
+							{ promoImage }
+							{ promoHeading }
 						</>
 					)}
 				</Grid>

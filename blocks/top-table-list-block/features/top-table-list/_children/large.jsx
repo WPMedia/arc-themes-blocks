@@ -3,8 +3,17 @@ import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
 
 import {
+	Attribution,
 	Conditional,
+	Date as DateDisplay,
+	Divider,
+	formatAuthors,
+	formatURL,
+	getFocalFromANS,
+	getImageFromANS,
+	getVideoFromANS,
 	Grid,
+	Heading,
 	HeadingSection,
 	Icon,
 	Image,
@@ -12,20 +21,13 @@ import {
 	Link,
 	localizeDateTime,
 	MediaItem,
-	Stack,
-	formatURL,
-	getImageFromANS,
-	getVideoFromANS,
 	Overline,
-	Heading,
 	Paragraph,
-	Date as DateDisplay,
-	formatAuthors,
-	Attribution,
 	Separator,
+	Stack,
 	usePhrases,
 	Video,
-	Divider,
+	
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-top-table-list-large";
@@ -111,16 +113,16 @@ const Large = (props) => {
 	const contentOverline = showOverlineLG ? overlineText : null;
 	const contentUrl = element?.websites?.[arcSite]?.website_url;
 	const embedMarkup = playVideoInPlaceLG && getVideoFromANS(element);
-	const promoImageURL = showImageLG && (getImageFromANS(element)?.url || fallbackImage);
-
+	const ansImage = getImageFromANS(element);
+	const promoImageURL = showImageLG && (ansImage?.url || fallbackImage);
 	const imageParams =
-		element && getImageFromANS(element)
+		element && ansImage
 			? {
-					ansImage: getImageFromANS(element),
+					ansImage,
 					alt: element?.headlines?.basic || "",
 					aspectRatio: imageRatioLG,
 					resizedOptions: {
-						smart: true,
+						...getFocalFromANS(ansImage),
 					},
 					responsiveImages: [400, 600, 800, 1200],
 					width: 800,

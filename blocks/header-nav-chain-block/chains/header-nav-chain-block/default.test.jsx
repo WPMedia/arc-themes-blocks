@@ -13,13 +13,16 @@ jest.mock(
 		({ children }) =>
 			children
 );
+
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
+
 jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({
 		contextPath: "pf",
 		deployment: jest.fn(() => ({})).mockReturnValue("path/image.svg"),
 	})),
 }));
+
 jest.mock("fusion:content", () => ({
 	useContent: jest.fn(() => ({
 		children: [
@@ -271,6 +274,16 @@ describe("the header navigation feature for the default output type", () => {
 			expect(screen.queryAllByRole("link").length).toBe(3);
 
 			fireEvent.click(within(navComponents).getByTestId("nav-chain-nav-section-button"));
+			expect(screen.queryAllByRole("link").length).toBe(0);
+		});
+
+		it("opens with the sections button and closes with the overlay", () => {
+			render(<Navigation customFields={DEFAULT_SELECTIONS} />);
+			const navComponents = screen.getByTestId("nav-chain-nav-components-desktop-left")
+			fireEvent.click(within(navComponents).getByTestId("nav-chain-nav-section-button"));
+			expect(screen.queryAllByRole("link").length).toBe(3);
+
+			fireEvent.click(screen.getByTestId("nav-chain-flyout-overlay"));
 			expect(screen.queryAllByRole("link").length).toBe(0);
 		});
 	});

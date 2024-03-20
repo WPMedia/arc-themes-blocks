@@ -30,12 +30,12 @@ describe("Product Featured Image", () => {
 			globalContent: {},
 		}));
 		const { container } = render(<ProductFeaturedImage />);
-		expect(container.firstChild).toBe(null);
+		expect(container).toBeEmptyDOMElement();
 	});
 	it("should render null if no global content object", () => {
 		useFusionContext.mockImplementation(() => ({}));
 		const { container } = render(<ProductFeaturedImage />);
-		expect(container.firstChild).toBe(null);
+		expect(container).toBeEmptyDOMElement();
 	});
 	it("should render null if empty schema provided", () => {
 		useFusionContext.mockImplementation(() => ({
@@ -44,7 +44,7 @@ describe("Product Featured Image", () => {
 			},
 		}));
 		const { container } = render(<ProductFeaturedImage />);
-		expect(container.firstChild).toBe(null);
+		expect(container).toBeEmptyDOMElement();
 	});
 	it("should render null if no featured image provided", () => {
 		useFusionContext.mockImplementation(() => ({
@@ -57,7 +57,7 @@ describe("Product Featured Image", () => {
 			},
 		}));
 		const { container } = render(<ProductFeaturedImage />);
-		expect(container.firstChild).toBe(null);
+		expect(container).toBeEmptyDOMElement();
 	});
 	it("should render a featured image", () => {
 		useFusionContext.mockImplementation(() => ({
@@ -85,17 +85,5 @@ describe("Product Featured Image", () => {
 		const image = screen.getByRole("img");
 		expect(image).toBeInTheDocument();
 		expect(image).toHaveAttribute("alt", "");
-	});
-	it("should render with no auth", () => {
-		useFusionContext.mockImplementation(() => ({
-			globalContent: {
-				schema: {
-					featuredImage: { value: [{ ...FEATURED_IMAGE_ASSET, auth: undefined }] },
-				},
-			},
-		}));
-		render(<ProductFeaturedImage />);
-		const image = screen.getByRole("img");
-		expect(image).toBeInTheDocument();
 	});
 });

@@ -30,7 +30,7 @@ const LoginLinks = ({ customFields }) => {
 	return (
 		<Stack as="div" className={BLOCK_CLASS_NAME}>
 			{showLoginWithoutPassword && (
-				<Button className={`${BLOCK_CLASS_NAME}-ota-link`} size="large" fullWidth type="submit">
+				<Button className={`${BLOCK_CLASS_NAME}__ota-link`} size="large" fullWidth type="submit">
 					Log in without password
 				</Button>
 			)}

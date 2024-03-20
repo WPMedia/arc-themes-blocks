@@ -298,7 +298,7 @@
 	"login-links-ota-link": {
 		"styles": {
 			"default": {
-				"border": "1px solid black"
+				"border": "1px solid var(--border-color)"
 			},
 			"desktop": {}
 		}

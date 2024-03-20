@@ -22,7 +22,7 @@ const useLogin = ({
 		if (window?.location?.search) {
 			const searchParams = new URLSearchParams(window.location.search.substring(1));
 
-			//redirectURL could have additional params
+			// redirectURL could have additional params
 			const params = ["paymentMethodID"];
 			const aditionalParams = params.map((p) => {
 				const paramExist = searchParams.has(p)

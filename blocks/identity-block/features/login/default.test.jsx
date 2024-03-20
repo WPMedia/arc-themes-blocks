@@ -1,7 +1,7 @@
 import React from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import Login from "./default";
 import { useIdentity } from "@wpmedia/arc-themes-components";
+import Login from "./default";
 
 const defaultCustomFields = {
 	redirectURL: "",

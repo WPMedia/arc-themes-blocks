@@ -13,7 +13,7 @@ const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captc
 	const onChange = (value) => {
 		setCaptchaToken(value);
 		setCaptchaError(null);
-    localStorage.setItem('ArcXP_captchaToken', captchaToken);
+    localStorage.setItem('ArcXP_captchaToken', value);
 	};
 
 	useEffect(() => {

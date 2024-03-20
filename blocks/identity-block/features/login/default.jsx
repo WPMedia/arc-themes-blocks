@@ -15,8 +15,8 @@ const BLOCK_CLASS_NAME = "b-login-form";
 const Login = ({ customFields }) => {
 	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC } = customFields;
 
-	const url_string = window.location.href;
-	const url = new URL(url_string);
+	const urlString = window.location.href;
+	const url = new URL(urlString);
 
 	const { isAdmin, arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);
@@ -68,7 +68,7 @@ const Login = ({ customFields }) => {
 						else {
 							setError(phrases.t("identity-block.login-form-error"));
 						}
-						if (!!grecaptcha) {
+						if (grecaptcha) {
 							grecaptcha.reset();
 						}
 					})
@@ -92,7 +92,7 @@ const Login = ({ customFields }) => {
 				showDefaultError={false}
 				type="password"
 			/>
-			<BotChallengeProtection className={BLOCK_CLASS_NAME} challengeIn={"signin"} setCaptchaToken={setCaptchaToken} captchaError={captchaError} setCaptchaError={setCaptchaError} />
+			<BotChallengeProtection className={BLOCK_CLASS_NAME} challengeIn="signin" setCaptchaToken={setCaptchaToken} captchaError={captchaError} setCaptchaError={setCaptchaError} />
 			<Paragraph className={`${BLOCK_CLASS_NAME}__privacy-statement`}>{phrases.t("identity-block.privacy-statement")}</Paragraph>
 		</HeadlinedSubmitForm>
 	);

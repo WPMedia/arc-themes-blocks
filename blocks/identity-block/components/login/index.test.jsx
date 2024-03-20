@@ -12,7 +12,7 @@ const defaultParams = {
 	loggedInPageLocation: "/account-2/",
 };
 
-const Test = (props) => {
+function Test(props) {
 	const { loginRedirect } = useLogin({
 		...defaultParams,
 		...props,
@@ -29,7 +29,7 @@ const Test = (props) => {
 			</button>
 		</div>
 	);
-};
+}
 
 describe("useLogin()", () => {
 	beforeEach(() => {

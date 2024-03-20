@@ -16,12 +16,22 @@ const mockIdentity = {
 	login: mockLogin,
 };
 
+const mockSales = {
+	getConfig: jest.fn(() => {})
+}
+
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	useIdentity: jest.fn(() => ({
 		isInitialized: true,
 		Identity: {
 			...mockIdentity,
+		},
+	})),
+	useSales: jest.fn(() => ({
+		isInitialized: true,
+		Sales: {
+			...mockSales,
 		},
 	})),
 }));

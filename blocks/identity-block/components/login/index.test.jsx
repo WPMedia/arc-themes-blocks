@@ -12,7 +12,7 @@ const defaultParams = {
 	loggedInPageLocation: "/account-2/",
 };
 
-const Test = (props) => {
+function Test(props) {
 	const { loginRedirect } = useLogin({
 		...defaultParams,
 		...props,
@@ -29,12 +29,16 @@ const Test = (props) => {
 			</button>
 		</div>
 	);
-};
+}
 
 describe("useLogin()", () => {
 	beforeEach(() => {
 		Object.defineProperty(window, "location", {
 			writable: true,
+			value: {
+				href: 'http://localhost',
+				search: ''
+			}
 		});
 		useIdentity.mockImplementation(() => ({
 			isInitialized: true,
@@ -68,14 +72,14 @@ describe("useLogin()", () => {
 	});
 
 	it("uses document referrer", async () => {
-		const referrerURL = "http://referrer.com";
+		const referrerURL = "http://referrer.com/article/1234";
 		Object.defineProperty(document, "referrer", {
 			value: referrerURL,
 			configurable: true,
 		});
 		await render(<Test />);
 		fireEvent.click(screen.getByRole("button"));
-		expect(window.location).toBe(referrerURL);
+		expect(window.location).toBe("/article/1234");
 		delete document.referrer;
 	});
 

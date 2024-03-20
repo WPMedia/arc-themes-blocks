@@ -23,5 +23,14 @@
 			},
 			"desktop": {}
 		}
+	},
+
+	"section-title-links": {
+		"styles": {
+			"default": {
+				"overflow-x": "hidden"
+			},
+			"desktop": {}
+		}
 	}
 }

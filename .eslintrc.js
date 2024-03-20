@@ -29,6 +29,7 @@ module.exports = {
 		},
 		ecmaVersion: 2020,
 		sourceType: "module",
+		requireConfigFile: false,
 	},
 	plugins: ["jest", "jest-dom", "jsx-a11y", "react", "react-hooks", "testing-library"],
 	rules: {

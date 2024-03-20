@@ -284,6 +284,6 @@
 
 @media (min-width: 320px) and (max-width: 480px) {
   .b-paywall__overlay {
-    top: initial;
+    inset-block-start: initial;
   }
 }

@@ -31,7 +31,7 @@ const NavWidget = ({
 		) : null) ||
 		(type === "menu" ? (
 			<Button
-				aria-label={phrases.t("header-nav-chain-block.sections-button")}
+				accessibilityLabel={phrases.t("header-nav-chain-block.sections-button")}
 				onClick={menuButtonClickAction}
 				iconRight={<Icon name="HamburgerMenu" />}
 				variant="secondary-reverse"

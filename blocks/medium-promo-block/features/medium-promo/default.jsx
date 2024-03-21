@@ -11,6 +11,7 @@ import {
 	Date as DateComponent,
 	formatAuthors,
 	formatURL,
+	getFocalFromANS,
 	getImageFromANS,
 	getPromoType,
 	Heading,
@@ -106,6 +107,10 @@ const MediumPromo = ({ customFields }) => {
 							auth {
 								${RESIZER_TOKEN_VERSION}
 							}
+							focal_point {
+								x
+								y
+							}
 							type
 							url
 						}
@@ -115,6 +120,10 @@ const MediumPromo = ({ customFields }) => {
 					_id
 					auth {
 						${RESIZER_TOKEN_VERSION}
+					}
+					focal_point {
+						x
+						y
 					}
 					type
 					url
@@ -170,9 +179,9 @@ const MediumPromo = ({ customFields }) => {
 		gallery: phrases.t("global.gallery-text"),
 		video: phrases.t("global.video-text"),
 	}[promoType];
-
+	const ansImage = getImageFromANS(content);
 	const imageParams =
-		imageOverrideURL || (content && getImageFromANS(content))
+		imageOverrideURL || ansImage
 			? {
 					ansImage: imageOverrideURL
 						? {
@@ -180,11 +189,11 @@ const MediumPromo = ({ customFields }) => {
 								url: imageOverrideURL,
 								auth: resizedAuth || {},
 						  }
-						: getImageFromANS(content),
+						: ansImage,
 					alt: content?.headlines?.basic || "",
 					aspectRatio: imageRatio,
 					resizedOptions: {
-						smart: true,
+						...getFocalFromANS(ansImage),
 					},
 					responsiveImages: [200, 400, 600, 800, 1200],
 					width: 600,

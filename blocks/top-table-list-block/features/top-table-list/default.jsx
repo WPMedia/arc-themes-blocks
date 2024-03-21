@@ -145,12 +145,16 @@ const TopTableListWrapper = ({ customFields }) => {
         }
         promo_items {
           basic {
-				_id
-            type
-            url
-				auth {
-					${RESIZER_TOKEN_VERSION}
-				}
+			_id
+			auth {
+				${RESIZER_TOKEN_VERSION}
+			}
+			focal_point {
+				x
+				y
+			}
+			type
+			url
           }
           lead_art {
 				_id
@@ -158,12 +162,16 @@ const TopTableListWrapper = ({ customFields }) => {
             embed_html
             promo_items {
               basic {
-					 _id
-                type
-                url
-					 auth {
-						${RESIZER_TOKEN_VERSION}
-					}
+				_id
+				auth {
+					${RESIZER_TOKEN_VERSION}
+				}
+				focal_point {
+					x
+					y
+				}
+				type
+				url
               }
             }
           }

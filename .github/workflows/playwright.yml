@@ -12,8 +12,18 @@ jobs:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
-        node-version: 18
-    - name: Install dependencies
+        node-version-file: .nvmrc
+        registry-url: "https://npm.pkg.github.com"
+
+    - name: Cache Node Modules
+      id: cache
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: node-modules-${{ hashFiles('package-lock.json') }}
+
+    - name: Clean install (CI) dependencies if lockfile (above) changed
+      if: steps.cache.outputs.cache-hit != 'true'
       run: npm ci
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

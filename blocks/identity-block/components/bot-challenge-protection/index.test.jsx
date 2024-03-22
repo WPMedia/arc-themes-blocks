@@ -1,5 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import { useIdentity } from "@wpmedia/arc-themes-components";
 import BotChallengeProtection from ".";
 
 const mockLogin = jest.fn(() => Promise.resolve());
@@ -35,5 +36,15 @@ describe("Bot challenge protection", () => {
 		render(<BotChallengeProtection challengeIn="signin" />);
 
 		expect(screen.getByTestId("bot-challege-protection-container")).not.toBeNull();
+	});
+	it("it does not render if identity is not initialized", () => {
+		useIdentity.mockImplementation(() => ({
+			isInitialized: false,
+			Identity: {
+				...mockIdentity,
+			},
+		}))
+		render(<BotChallengeProtection challengeIn="test" />);
+		expect(screen.queryByTestId("bot-challege-protection-container")).toBeNull();
 	});
 });

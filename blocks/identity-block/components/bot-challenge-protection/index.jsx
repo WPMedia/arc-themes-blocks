@@ -56,7 +56,7 @@ const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captc
 				onChange={onChange}
 				onExpired={() => {}}
 			/>}
-			{captchaError && <Paragraph>{phrases.t("identity-block.bot-protection-error")}</Paragraph>}
+			{captchaError && <Paragraph data-testid="bot-challege-captcha-error">{phrases.t("identity-block.bot-protection-error")}</Paragraph>}
 		</section>
 	);
 };

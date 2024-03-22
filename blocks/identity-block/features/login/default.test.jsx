@@ -40,12 +40,12 @@ jest.mock("fusion:properties", () => jest.fn(() => ({})));
 describe("Identity Login Feature", () => {
 	it("renders", () => {
 		render(<Login customFields={defaultCustomFields} />);
-		expect(screen.queryByRole("form")).not.toBeNull();
+		expect(screen.getByRole("form")).not.toBeNull();
 	});
 
 	it("shows login form", () => {
 		render(<Login customFields={defaultCustomFields} />);
-		expect(screen.queryByRole("form")).not.toBeNull();
+		expect(screen.getByRole("form")).not.toBeNull();
 		expect(screen.getByLabelText("identity-block.password")).not.toBeNull();
 		expect(screen.getByLabelText("identity-block.email-label")).not.toBeNull();
 	});
@@ -97,7 +97,7 @@ describe("Identity Login Feature - rejected Login", () => {
 		fireEvent.click(screen.getByRole("button"));
 
 		await waitFor(() => expect(mockLogin).toHaveBeenCalled());
-		await waitFor(() => screen.getByText("identity-block.login-form-error"));
+		await screen.findByText("identity-block.login-form-error");
 	});
 });
 

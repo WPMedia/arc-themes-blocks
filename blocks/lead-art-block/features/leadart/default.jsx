@@ -321,7 +321,7 @@ LeadArt.propTypes = {
 			defaultValue: 65,
 			group: "Video",
 		}),
-		videoRatio: PropTypes.oneOf(["--", "16:9", "9:16", "1:1", "4:3"]).tag({
+		videoRatio: PropTypes.oneOf(["--", "16:9", "9:16", "1:1", "4:3"]).isRequired.tag({
 			description:
 				"Aspect ratio to use in player (Defaults to the aspect ratio of the resolved video)",
 			label: "Player aspect ratio",

@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
@@ -43,6 +43,22 @@ export const LeadArtPresentation = (props) => {
 		videoRatio = "--",
 		viewportPercentage = 65
 	} = customFields;
+
+	useEffect(() => {
+		if (document.fullscreenEnabled) {
+			document.addEventListener("fullscreenchange", () => {
+				if (!document.fullscreenElement) {
+					setIsOpen(false);
+				}
+			});
+		} else if (document.webkitFullscreenEnabled) {
+			document.addEventListener("webkitfullscreenchange", () => {
+				if (!document.webkitFullscreenElement) {
+					setIsOpen(false);
+				}
+			})
+		}
+	}, []);
 
 	/* istanbul ignore next  */
 	const toggleFullScreen = () => {
@@ -305,7 +321,7 @@ LeadArt.propTypes = {
 			defaultValue: 65,
 			group: "Video",
 		}),
-		videoRatio: PropTypes.oneOf(["--", "16:9", "9:16", "1:1", "4:3"]).isRequired.tag({
+		videoRatio: PropTypes.oneOf(["--", "16:9", "9:16", "1:1", "4:3"]).tag({
 			description:
 				"Aspect ratio to use in player (Defaults to the aspect ratio of the resolved video)",
 			label: "Player aspect ratio",

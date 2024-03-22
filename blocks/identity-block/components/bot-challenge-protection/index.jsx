@@ -39,7 +39,7 @@ const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captc
 		};
 		checkCaptcha();
 		
-	}, []);
+	}, [Identity, Sales, challengeIn]);
 
 	const { arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);

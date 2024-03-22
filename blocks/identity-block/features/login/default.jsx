@@ -1,3 +1,4 @@
+/* global grecaptcha */
 import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";

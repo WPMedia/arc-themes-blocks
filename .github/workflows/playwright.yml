@@ -1,0 +1,39 @@
+name: Playwright Tests
+on:
+  push:
+    branches: [ arc-themes-release-version-** ]
+  pull_request:
+    branches: [ arc-themes-release-version-** ]
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version-file: .nvmrc
+        registry-url: "https://npm.pkg.github.com"
+
+    - name: Cache Node Modules
+      id: cache
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: node-modules-${{ hashFiles('package-lock.json') }}
+
+    - name: Clean install (CI) dependencies if lockfile (above) changed
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: npm ci
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    - name: Run Playwright tests
+      run: npx playwright test
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30

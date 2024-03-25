@@ -7,3 +7,7 @@ coverage
 
 # output of build-storybook for chromatic usage
 storybook-static
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

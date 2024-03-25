@@ -34,7 +34,6 @@ const useRecaptcha = (challengeIn) => {
 
 	const checkCaptcha = async () => {
 		const identityConfig = await Identity.getConfig();
-		console.log(identityConfig);
 		const { recaptchaSiteKey, recaptchaScore } = identityConfig;
 		if (["signup", "signin", "magicLink"].includes(challengeIn)) {
 			const isIdentityCaptchaEnabled = identityConfig?.[`${challengeIn}Recaptcha`];

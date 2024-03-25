@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useIdentity } from "@wpmedia/arc-themes-components";
+import React from "react";
+import { useIdentity, Paragraph } from "@wpmedia/arc-themes-components";
 import useRecaptcha, { RECAPTCHA_V2, RECAPTCHA_V3 } from "../../utils/useRecaptcha";
 import ReCAPTCHA from "react-google-recaptcha";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";

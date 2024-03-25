@@ -8,6 +8,7 @@ import RecaptchaV3 from "./reCaptchaV3";
 export const ARCXP_CAPTCHA= "ArcXP_captchaToken"
 
 const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captchaError, setCaptchaError, resetRecaptcha }) => {
+
 	const { isInitialized } = useIdentity();
 	const { recaptchaVersion, siteKey, isRecaptchaEnabled } = useRecaptcha(challengeIn);
 

@@ -63,9 +63,9 @@ const Login = ({ customFields }) => {
 			onSubmit={({ email, password }) => {
 				setError(null);
 				setCaptchaError(null);
-				Identity.login(email, password, {
+				return Identity.login(email, password, {
 					rememberMe: true,
-					recaptchaToken: captchaToken,
+					recaptchaToken: captchaToken
 				})
 					.then(() => {
 						if (isOIDC) {

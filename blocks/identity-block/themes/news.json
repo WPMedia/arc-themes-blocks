@@ -240,7 +240,7 @@
 		"styles": {
 			"default": {
 				"font-family": "Inter",
-				"padding-bottom": "var(--global-spacing-5)",
+				"padding-block-end": "var(--global-spacing-5)",
 				"components": {
 					"button": {
 						"font-size": "var(--global-font-size-4)"

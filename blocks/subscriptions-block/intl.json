@@ -6429,7 +6429,7 @@
 		"bn": "সাবস্ক্রিপশন অর্ডার পর্যালোচনা করুন",
 		"bo": "སྔོན་མངག་ཐོར་བསྐྱར་ལྟ་བྱེད།",
 		"de": "Abonnementauftrag prüfen",
-		"en": "Review Subscription Order",
+		"en": "Checkout",
 		"es": "Revisar pedido de suscripción",
 		"fr": "Vérifier la commande de l'abonnement",
 		"id": "Tinjau Pesanan Berlangganan",
@@ -6848,5 +6848,20 @@
 		"vi": "Cập nhật phương thức thanh toán",
 		"zh-CN": "更新付款方式",
 		"zh-TW": "更新付款方式"
+	},
+	"checkout-block.account": {
+		"en": "Account"
+	},
+	"checkout-block.billingAddress": {
+		"en": "Billing Address"
+	},
+	"checkout-block.edit": {
+		"en": "Edit"
+	},
+	"checkout-block.payment": {
+		"en": "Payment"
+	},
+	"checkout-block.review": {
+		"en": "Review"
 	}
 }

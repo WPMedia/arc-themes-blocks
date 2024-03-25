@@ -245,6 +245,9 @@
 					"button": {
 						"font-size": "var(--global-font-size-4)"
 					},
+					"button-hover": {
+						"color": "white"
+					},
 					"heading": {
 						"font-size": "var(--heading-level-4-font-size)",
 						"font-family": "var(--font-family-secondary)",

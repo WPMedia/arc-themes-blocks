@@ -629,7 +629,7 @@
 		"bn": "কোনো অ্যাকাউন্ট নেই?\nসাইন আপ করুন",
 		"bo": "ཁྱེད་ལ་དྲ་གྲངས་མེད་དམ། ཐོ་འགོད།",
 		"de": "Sign up for an account.",
-		"en": "Don't have an account? Sign up",
+		"en": "Need to create an account? ",
 		"es": "Sign up for an account.",
 		"fr": "Sign up for an account.",
 		"id": "Belum memiliki akun? Daftar",
@@ -1273,5 +1273,20 @@
 		"vi": "Tên người dùng",
 		"zh-CN": "用户名",
 		"zh-TW": "使用者名稱"
+	},
+	"identity-block.bot-protection-error": {
+		"en": "Please verify that you are not a robot."
+	},
+	"identity-block.email-label": {
+		"en": "Email"
+	},
+	"identity-block.log-in-headline": {
+		"en": "Log in to your account"
+	},
+	"identity-block.privacy-statement": {
+		"en": "By creating an account, you agree to the Terms of Service and acknowledge our Privacy Policy."
+	},
+	"identity-block.sign-up-natural": {
+		"en": "Sign up"
 	}
 }

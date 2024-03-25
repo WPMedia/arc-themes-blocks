@@ -4,6 +4,9 @@ import useSales from "../useSales";
 import { Grid } from "@wpmedia/arc-themes-components";
 import OfferCard from "../OfferCard";
 
+export const ARCXP_CART = 'ArcXP_cart';
+export const ARCXP_CAMPAIGN = 'ArcXP_campaignName';
+
 const OfferToProductList = ({ offer, isLoggedIn, checkoutURL, loginURL, className }) => {
 	const { Sales } = useSales();
 
@@ -21,7 +24,7 @@ const OfferToProductList = ({ offer, isLoggedIn, checkoutURL, loginURL, classNam
 						products[productIdx].attributes.length !== 0
 							? products[productIdx].attributes.map((feature) => ({
 									featureText: feature.value,
-							  }))
+								}))
 							: [];
 					const { sku } = products[productIdx];
 					const { priceCode } = strategies[strategiesIdx];
@@ -32,21 +35,25 @@ const OfferToProductList = ({ offer, isLoggedIn, checkoutURL, loginURL, classNam
 						actionText: strategies[strategiesIdx].summary,
 						actionEvent: () => {
 							Sales.clearCart()
-								.then(() =>
+								.then(() => {
 									Sales.addItemToCart([
 										{
 											sku,
 											priceCode,
 											quantity: 1,
 										},
-									])
-								)
+									]);
+									const maxEndDate = Math.max(...offer?.campaigns?.map(c => c.validUntil));
+									const liveCampaing = offer?.campaigns?.find(c => c.validUntil === null || c.validUntil === maxEndDate);
+									localStorage.setItem(ARCXP_CAMPAIGN, liveCampaing?.name);
+								})
 								.then(() => {
 									if (isLoggedIn) {
 										window.location.href = checkoutURL;
 										return;
 									}
-									window.location.href = `${loginURL}?redirect=${checkoutURL}`;
+									localStorage.setItem(ARCXP_CART, JSON.stringify({sku, priceCode}));
+									window.location.href = `${loginURL}&redirect=${checkoutURL}`;
 								});
 						},
 						features,
@@ -75,7 +82,7 @@ const OfferToProductList = ({ offer, isLoggedIn, checkoutURL, loginURL, classNam
 					className={className}
 				/>
 			))}
-			</Grid>
+		</Grid>
 	);
 };
 

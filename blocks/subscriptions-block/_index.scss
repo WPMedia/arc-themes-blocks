@@ -136,24 +136,40 @@
 		@include scss.block-properties("checkout-payment");
 	}
 
-	&__test {
-		&-1 {
-			@include scss.block-components("checkout-payment-test-1");
-			@include scss.block-properties("checkout-payment-test-1");
+	&__orderCard {
+		&--productPrice {
+			@include scss.block-components("checkout-order-card-productPrice");
+			@include scss.block-properties("checkout-order-card-productPrice");
 		}
 
-		&-2 {
-			@include scss.block-components("checkout-payment-test-2");
-			@include scss.block-properties("checkout-payment-test-2");
+		&__card--features {
+			&--feature-item {
+				@include scss.block-components("checkout-order-card--features--item");
+				@include scss.block-properties("checkout-order-card--features--item");
+			}
+			@include scss.block-components("checkout-order-card--features");
+			@include scss.block-properties("checkout-order-card--features");
 		}
 
-		&-row {
-			@include scss.block-components("checkout-payment-test-row");
-			@include scss.block-properties("checkout-payment-test-row");
+		&__summary {
+			&--dueToday{
+				@include scss.block-components("checkout-order-card--summary--dueToday");
+				@include scss.block-properties("checkout-order-card--summary--dueToday");
+			}
+			&--details{
+				&--item{
+					@include scss.block-components("checkout-order-card--summary--details--item");
+					@include scss.block-properties("checkout-order-card--summary--details--item");
+				}
+                @include scss.block-components("checkout-order-card--summary--details");
+                @include scss.block-properties("checkout-order-card--summary--details");
+            }
+			@include scss.block-components("checkout-order-card--summary");
+			@include scss.block-properties("checkout-order-card--summary");
 		}
 
-		@include scss.block-components("checkout-payment-test");
-		@include scss.block-properties("checkout-payment-test");
+		@include scss.block-components("checkout-order-card");
+		@include scss.block-properties("checkout-order-card");
 	}
 
 	@include scss.block-components("checkout");

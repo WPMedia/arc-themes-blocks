@@ -6848,5 +6848,14 @@
 		"vi": "Cập nhật phương thức thanh toán",
 		"zh-CN": "更新付款方式",
 		"zh-TW": "更新付款方式"
+	},
+	"checkout-block.view-subscription-offers": {
+		"en": "View subscription offers"
+	},
+	"checkout-block.subtotal": {
+		"en": "Subtotal"
+	},
+	"checkout-block.salesTax": {
+		"en": "Sales tax"
 	}
 }

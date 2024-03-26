@@ -2619,7 +2619,8 @@
 					),
 				),
 				"section-title-links": (
-					"overflow-x": hidden,
+					"display": flex,
+					"flex-wrap": wrap
 				),
 				"share-bar": (
 					"background": var(--background-color),

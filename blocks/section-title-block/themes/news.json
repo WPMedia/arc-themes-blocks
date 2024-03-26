@@ -28,7 +28,8 @@
 	"section-title-links": {
 		"styles": {
 			"default": {
-				"overflow-x": "hidden"
+				"display": "flex",
+				"flex-wrap": "wrap"
 			},
 			"desktop": {}
 		}

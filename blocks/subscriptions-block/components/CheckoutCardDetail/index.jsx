@@ -32,7 +32,7 @@ const CheckoutCardDetail = ({ type, summary, children, link, className, isOpen, 
 	);
 };
 
-CheckoutCardDetail.PropTypes = {
+CheckoutCardDetail.propTypes = {
 	type: PropTypes.oneOf([ACCOUNT, BILLING_ADDRESS, PAYMENT, REVIEW]).isRequired,
 	summary: PropTypes.string,
 	children: PropTypes.any,

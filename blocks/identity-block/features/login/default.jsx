@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+/* global grecaptcha */
+import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Input, useIdentity } from "@wpmedia/arc-themes-components";
+import { Input, useIdentity, Paragraph } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
 import useLogin from "../../components/login";
+import BotChallengeProtection from "../../components/bot-challenge-protection";
 import useOIDCLogin from "../../utils/useOIDCLogin";
 import validateURL from "../../utils/validate-redirect-url";
 
@@ -14,8 +16,8 @@ const BLOCK_CLASS_NAME = "b-login-form";
 const Login = ({ customFields }) => {
 	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC } = customFields;
 
-	const url_string = window.location.href;
-	const url = new URL(url_string);
+	const urlString = window.location.href;
+	const url = new URL(urlString);
 
 	const { isAdmin, arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);
@@ -23,7 +25,9 @@ const Login = ({ customFields }) => {
 
 	const isOIDC = OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
 	const { Identity, isInitialized } = useIdentity();
+	const [captchaToken, setCaptchaToken] = useState();
 	const [error, setError] = useState();
+	const [captchaError, setCaptchaError] = useState();
 	const { loginRedirect } = useLogin({
 		isAdmin,
 		redirectURL,
@@ -42,9 +46,14 @@ const Login = ({ customFields }) => {
 			buttonLabel={phrases.t("identity-block.log-in")}
 			className={BLOCK_CLASS_NAME}
 			formErrorText={error}
-			headline={phrases.t("identity-block.log-in")}
-			onSubmit={({ email, password }) =>
-				Identity.login(email, password, {rememberMe: true})
+			headline={phrases.t("identity-block.log-in-headline")}
+			onSubmit={({ email, password }) => {
+				setError(null);
+				setCaptchaError(null);
+				return Identity.login(email, password, {
+					rememberMe: true,
+					recaptchaToken: captchaToken
+				})
 					.then(() => {
 						if (isOIDC) {
 							loginByOIDC();
@@ -53,12 +62,23 @@ const Login = ({ customFields }) => {
 							window.location = validatedURL;
 						}
 					})
-					.catch(() => setError(phrases.t("identity-block.login-form-error")))
+					.catch((e) => {
+						if (e?.code === "130001") {
+							setCaptchaError(true);
+						}
+						else {
+							setError(phrases.t("identity-block.login-form-error"));
+						}
+						if (grecaptcha) {
+							grecaptcha.reset();
+						}
+					})
+			}
 			}
 		>
 			<Input
 				autoComplete="email"
-				label={phrases.t("identity-block.email")}
+				label={phrases.t("identity-block.email-label")}
 				name="email"
 				required
 				showDefaultError={false}
@@ -73,6 +93,8 @@ const Login = ({ customFields }) => {
 				showDefaultError={false}
 				type="password"
 			/>
+			<BotChallengeProtection className={BLOCK_CLASS_NAME} challengeIn="signin" setCaptchaToken={setCaptchaToken} captchaError={captchaError} setCaptchaError={setCaptchaError} />
+			<Paragraph className={`${BLOCK_CLASS_NAME}__privacy-statement`}>{phrases.t("identity-block.privacy-statement")}</Paragraph>
 		</HeadlinedSubmitForm>
 	);
 };

@@ -62,11 +62,23 @@
 .b-login-form {
 	@include scss.block-components("login-form");
 	@include scss.block-properties("login-form");
+	&__bot-protection-section {
+		@include scss.block-components("login-form-bot-protection-section");
+		@include scss.block-properties("login-form-bot-protection-section");
+	}
+	&__privacy-statement {
+		@include scss.block-components("login-form-privacy-statement");
+		@include scss.block-properties("login-form-privacy-statement");
+	}
 }
 
 .b-login-links {
 	@include scss.block-components("login-links");
 	@include scss.block-properties("login-links");
+	&__inner-link {
+		@include scss.block-components("login-links-inner-link");
+		@include scss.block-properties("login-links-inner-link");
+	}
 }
 
 .b-reset-password {

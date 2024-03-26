@@ -9,6 +9,7 @@ import {
 	Divider,
 	formatAuthors,
 	formatURL,
+	getFocalFromANS,
 	getImageFromANS,
 	getPromoType,
 	Heading,
@@ -81,7 +82,7 @@ const Medium = (props) => {
 				ansImage: ANSImage,
 				aspectRatio: imageRatioMD,
 				resizedOptions: {
-					smart: true,
+					...getFocalFromANS(ANSImage),
 				},
 				responsiveImages: [400, 600, 800, 1200],
 				width: 800,

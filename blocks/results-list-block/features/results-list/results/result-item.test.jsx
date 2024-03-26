@@ -273,6 +273,9 @@ describe("Result parts", () => {
 							_id: "ABCDEFG12345678910",
 							type: "image",
 							url: "http://test/resources/ABCDEFG12345678910.jpg",
+							auth: {
+								"2": "abc123",
+							}
 						},
 					},
 				}}

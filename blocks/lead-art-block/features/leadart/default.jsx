@@ -9,6 +9,7 @@ import {
 	Carousel,
 	formatCredits,
 	formatPowaVideoEmbed,
+	getFocalFromANS,
 	Icon,
 	Image,
 	MediaItem,
@@ -140,12 +141,12 @@ export const LeadArtPresentation = (props) => {
 					<div className={`${BLOCK_CLASS_NAME}__image-wrapper`} ref={imgRef}>
 						<Image
 							alt={leadArt.alt_text}
+							ansImage={leadArt}
 							aspectRatio={imageRatio || "16:9"}
 							loading={imageLoadingStrategy}
-							width={800}
 							responsiveImages={[800, 1600]}
-							resizedOptions={{ smart: true }}
-							ansImage={leadArt}
+							resizedOptions={{ ...getFocalFromANS(leadArt) }}
+							width={800}
 						/>
 						{isOpen ? (
 							<Button

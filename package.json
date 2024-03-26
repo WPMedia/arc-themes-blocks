@@ -181,7 +181,7 @@
 		"@wpmedia/unpublished-content-source-block": "file:blocks/unpublished-content-source-block",
 		"@wpmedia/video-player-block": "file:blocks/video-player-block",
 		"focus-trap-react": "^10.2.3",
-		"use-debounce": "^9.0.4"
+		"use-debounce": "^10.0.0"
 	},
 	"overrides": {
 		"react-oembed-container": {

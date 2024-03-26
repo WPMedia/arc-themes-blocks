@@ -239,7 +239,7 @@
 	"login-form": {
 		"styles": {
 			"default": {
-				"font-family": "Inter",
+				"font-family": "var(--font-family-primary)",
 				"padding-block-end": "var(--global-spacing-5)",
 				"components": {
 					"button": {
@@ -320,11 +320,11 @@
 				"text-align": "center",
 				"inline-size": "100%",
 				"margin-block-start": 0,
+				"margin-block-end": "var(--global-spacing-5)",
 				"margin-inline-end": 0,
 				"margin-inline-start": 0,
 				"line-height": "150%",
 				"font-size": "1rem",
-				"margin-block-end": "var(--global-spacing-5)",
 				"components": {
 					"paragraph": {
 						"font-family": "var(--font-family-primary)",

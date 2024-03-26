@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, act } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom';
 
 import CheckoutCardDetail from "./index";
@@ -10,13 +10,13 @@ describe('CheckoutCardDetail component', () => {
     render(
       <CheckoutCardDetail
         type='Account'
-        isOpen={true}
+        isOpen
       >
         <p>Account placeholder</p>
       </CheckoutCardDetail>
     )
-    expect(await screen.getByText('1. checkout-block.account')).toHaveTextContent('1. checkout-block.account');
-    expect(await screen.getByText('Account placeholder')).toHaveTextContent('Account placeholder');
+    expect(screen.getByText('1. checkout-block.account')).toHaveTextContent('1. checkout-block.account');
+    expect(screen.getByText('Account placeholder')).toHaveTextContent('Account placeholder');
   });
   it("do not show summary if card is closed",  async () => {
     render(
@@ -27,37 +27,34 @@ describe('CheckoutCardDetail component', () => {
         <p>Account placeholder</p>
       </CheckoutCardDetail>
     )
-    expect(await screen.getByText('1. checkout-block.account')).toHaveTextContent('1. checkout-block.account');
-    expect(await screen.queryByText('Account placeholder')).toBe(null);
+    expect(screen.getByText('1. checkout-block.account')).toHaveTextContent('1. checkout-block.account');
+    expect(screen.queryByText('Account placeholder')).toBe(null);
   });
   it("renders billing address card",  async () => {
     render(
       <CheckoutCardDetail
         type='Billing Address'
-        isOpen={true}
-      >
-      </CheckoutCardDetail>
+        isOpen
+      />
     )
-    expect(await screen.getByText('2. checkout-block.billingAddress')).toHaveTextContent('2. checkout-block.billingAddress');
+    expect(screen.getByText('2. checkout-block.billingAddress')).toHaveTextContent('2. checkout-block.billingAddress');
   });
   it("renders payment card",  async () => {
     render(
       <CheckoutCardDetail
         type='Payment'
-        isOpen={true}
-      >
-      </CheckoutCardDetail>
+        isOpen
+      />
     )
-    expect(await screen.getByText('3. checkout-block.payment')).toHaveTextContent('3. checkout-block.payment');
+    expect(screen.getByText('3. checkout-block.payment')).toHaveTextContent('3. checkout-block.payment');
   });
   it("renders review card",  async () => {
     render(
       <CheckoutCardDetail
         type='Review'
-        isOpen={true}
-      >
-      </CheckoutCardDetail>
+        isOpen
+      />
     )
-    expect(await screen.getByText('4. checkout-block.review')).toHaveTextContent('4. checkout-block.review');
+    expect(screen.getByText('4. checkout-block.review')).toHaveTextContent('4. checkout-block.review');
   });
 })

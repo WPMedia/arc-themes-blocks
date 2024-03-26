@@ -15,6 +15,7 @@ const CheckoutCardDetail = ({ type, summary, children, link, className, isOpen, 
 		if (type === BILLING_ADDRESS) return `2. ${phrases.t("checkout-block.billingAddress")}`;
 		if (type === PAYMENT) return `3. ${phrases.t("checkout-block.payment")}`;
 		if (type === REVIEW) return `4. ${phrases.t("checkout-block.review")}`;
+		return null;
 	}
 
 	return (

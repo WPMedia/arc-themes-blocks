@@ -263,7 +263,7 @@ export const LeadArtPresentation = (props) => {
 	const leadArtContent = getLeadArtContent(lead_art);
 
 	useEffect(() => {
-		if(leadArtContent.type === "image"){
+		if(leadArtContent?.type === "image"){
 			if (document.fullscreenEnabled) {
 				document.addEventListener("fullscreenchange", () => {
 					if (!document.fullscreenElement) {
@@ -279,7 +279,7 @@ export const LeadArtPresentation = (props) => {
 			}
 		}
 	}, [leadArtContent]);
-	
+
 	if (leadArtContent) {
 		return <div className={BLOCK_CLASS_NAME}>{leadArtContent}</div>;
 	}

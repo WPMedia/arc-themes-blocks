@@ -1,16 +1,20 @@
 import React from "react";
-import { useIdentity, Paragraph } from "@wpmedia/arc-themes-components";
-import useRecaptcha, { RECAPTCHA_V2, RECAPTCHA_V3 } from "../../utils/useRecaptcha";
 import ReCAPTCHA from "react-google-recaptcha";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+
+import { usePhrases, useIdentity, Paragraph } from "@wpmedia/arc-themes-components";
+import useRecaptcha, { RECAPTCHA_V2, RECAPTCHA_V3 } from "../../utils/useRecaptcha";
+
+// eslint-disable-next-line
 import RecaptchaV3 from "./reCaptchaV3";
 
 export const ARCXP_CAPTCHA= "ArcXP_captchaToken"
 
 const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captchaError, setCaptchaError, resetRecaptcha }) => {
-
+	
 	const { isInitialized } = useIdentity();
 	const { recaptchaVersion, siteKey, isRecaptchaEnabled } = useRecaptcha(challengeIn);
+	const phrases = usePhrases();
 
 	const onChange = (value) => {
 		setCaptchaToken(value);
@@ -44,6 +48,8 @@ const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captc
 	} else {
 		return null;
 	}
+
+	return null;
 };
 
 export default BotChallengeProtection;

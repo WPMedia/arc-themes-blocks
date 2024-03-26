@@ -70,7 +70,7 @@ describe("Identity Login Feature", () => {
 
 describe("Identity Login Feature - rejected Login", () => {
 	beforeEach(() => {
-		mockLogin.mockImplementation(() => Promise.reject());
+		mockLogin.mockImplementation(() => Promise.reject({ code: 0 }));
 		global.grecaptcha = {
 			reset: jest.fn()
 		}
@@ -97,7 +97,7 @@ describe("Identity Login Feature - rejected Login", () => {
 		fireEvent.click(screen.getByRole("button"));
 
 		await waitFor(() => expect(mockLogin).toHaveBeenCalled());
-		await screen.findByText("identity-block.login-form-error");
+		await screen.findByText("identity-block.login-form-error.invalid-email-password");
 	});
 });
 

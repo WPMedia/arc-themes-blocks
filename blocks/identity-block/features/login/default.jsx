@@ -1,3 +1,4 @@
+/* global grecaptcha */
 import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
@@ -13,10 +14,6 @@ import { RECAPTCHA_LOGIN } from "../../utils/useRecaptcha";
 
 const BLOCK_CLASS_NAME = "b-login-form";
 
-export function definedMessageByCode(code) {
-	return errorCodes[code] || errorCodes["0"];
-}
-
 const errorCodes = {
 	100015: "identity-block.login-form-error.account-is-disabled",
 	130001: "identity-block.login-form-error.captcha-token-invalid",
@@ -24,6 +21,10 @@ const errorCodes = {
 	100013: "identity-block.login-form-error.max-devices",
 	0: "identity-block.login-form-error.invalid-email-password",
 };
+
+export function definedMessageByCode(code) {
+	return errorCodes[code] || errorCodes["0"];
+}
 
 const Login = ({ customFields }) => {
 	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC } = customFields;

@@ -1,14 +1,13 @@
 import { useState, useMemo } from "react";
-import { useIdentity } from "@wpmedia/arc-themes-components";
-import { useSales } from "@wpmedia/arc-themes-components";
+import { useIdentity, useSales } from "@wpmedia/arc-themes-components";
 
-export const RECAPTCHA_LOGIN = 'signin';
-export const RECAPTCHA_SIGNUP = 'signup';
-export const RECAPTCHA_MAGICLINK = 'magicLink';
-export const RECAPTCHA_CHECKOUT = 'checkout';
+export const RECAPTCHA_LOGIN = "signin";
+export const RECAPTCHA_SIGNUP = "signup";
+export const RECAPTCHA_MAGICLINK = "magicLink";
+export const RECAPTCHA_CHECKOUT = "checkout";
 
-export const RECAPTCHA_V2 = 'V2';
-export const RECAPTCHA_V3 = 'V3';
+export const RECAPTCHA_V2 = "V2";
+export const RECAPTCHA_V3 = "V3";
 
 const useRecaptcha = (challengeIn) => {
 	const { Identity } = useIdentity();
@@ -18,13 +17,13 @@ const useRecaptcha = (challengeIn) => {
 	const [siteKey, setSiteKey] = useState();
 	const [isRecaptchaEnabled, setIsRecaptchaEnabled] = useState(false);
 
-	const setRecaptchaInfo = (isRecaptchaEnabled, recaptchaSiteKey, recaptchaScore) => {
-		if (isRecaptchaEnabled && recaptchaSiteKey && recaptchaScore) {
+	const setRecaptchaInfo = (isCaptchaEnabled, recaptchaSiteKey, recaptchaScore) => {
+		if (isCaptchaEnabled && recaptchaSiteKey && recaptchaScore) {
 			if (recaptchaScore === "-1") {
 				setSiteKey(recaptchaSiteKey);
 				setRecaptchaVersion(RECAPTCHA_V2);
 				setIsRecaptchaEnabled(true);
-			} else if (0 <= parseFloat(recaptchaScore) && parseFloat(recaptchaScore) <= 1) {
+			} else if (parseFloat(recaptchaScore) >= 0 && parseFloat(recaptchaScore) <= 1) {
 				setSiteKey(recaptchaSiteKey);
 				setRecaptchaVersion(RECAPTCHA_V3);
 				setIsRecaptchaEnabled(true);
@@ -47,14 +46,17 @@ const useRecaptcha = (challengeIn) => {
 		}
 	};
 
-	useMemo(() => checkCaptcha(), [challengeIn]);
-	
+	useMemo(
+		() => checkCaptcha(),
+		/* eslint-disable-next-line */
+		[challengeIn],
+	);
+
 	return {
 		recaptchaVersion,
 		siteKey,
-		isRecaptchaEnabled
+		isRecaptchaEnabled,
 	};
 };
 
 export default useRecaptcha;
-

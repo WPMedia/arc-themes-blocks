@@ -44,22 +44,6 @@ export const LeadArtPresentation = (props) => {
 		viewportPercentage = 65
 	} = customFields;
 
-	useEffect(() => {
-		if (document.fullscreenEnabled) {
-			document.addEventListener("fullscreenchange", () => {
-				if (!document.fullscreenElement) {
-					setIsOpen(false);
-				}
-			});
-		} else if (document.webkitFullscreenEnabled) {
-			document.addEventListener("webkitfullscreenchange", () => {
-				if (!document.webkitFullscreenElement) {
-					setIsOpen(false);
-				}
-			})
-		}
-	}, []);
-
 	/* istanbul ignore next  */
 	const toggleFullScreen = () => {
 		// the full screen element is the div wrapping a lead art of type image
@@ -277,6 +261,25 @@ export const LeadArtPresentation = (props) => {
 
 	const lead_art = content?.promo_items?.lead_art || content?.promo_items?.basic || {};
 	const leadArtContent = getLeadArtContent(lead_art);
+
+	useEffect(() => {
+		if(leadArtContent.type === "image"){
+			if (document.fullscreenEnabled) {
+				document.addEventListener("fullscreenchange", () => {
+					if (!document.fullscreenElement) {
+						setIsOpen(false);
+					}
+				});
+			} else if (document.webkitFullscreenEnabled) {
+				document.addEventListener("webkitfullscreenchange", () => {
+					if (!document.webkitFullscreenElement) {
+						setIsOpen(false);
+					}
+				})
+			}
+		}
+	}, [leadArtContent]);
+	
 	if (leadArtContent) {
 		return <div className={BLOCK_CLASS_NAME}>{leadArtContent}</div>;
 	}

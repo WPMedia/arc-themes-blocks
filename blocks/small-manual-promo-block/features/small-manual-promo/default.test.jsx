@@ -1,20 +1,21 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { useContent } from "fusion:content";
-import { isServerSide } from "@wpmedia/arc-themes-components";
+import { isServerSide, getFocalFromANS } from "@wpmedia/arc-themes-components";
 import SmallManualPromo from "./default";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
+	getFocalFromANS: jest.fn(() => { }),
 	isServerSide: jest.fn(() => true),
 	LazyLoad: ({ children }) => children,
 }));
 
 jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => {}),
+	useContent: jest.fn(() => ({})),
 	useEditableContent: jest.fn(() => ({
 		editableContent: () => ({ contentEditable: "true" }),
-		searchableField: () => {},
+		searchableField: () => { },
 		useFusionContext: jest.fn(() => ({
 			isAdmin: false,
 		})),
@@ -45,6 +46,7 @@ const customFields = {
 describe("the small manual promo feature", () => {
 	afterEach(() => {
 		jest.resetModules();
+		getFocalFromANS.mockClear();
 	});
 
 	beforeEach(() => {
@@ -153,6 +155,23 @@ describe("the small manual promo feature", () => {
 			query: { id: "test_id=123" },
 		});
 	});
+
+	it("should respect focal point if one is set", () => {
+		const config = {
+			imageAuth: "",
+			imageURL: "test_id=123",
+			imageId: "123",
+			imageFocalPoint: JSON.stringify({ x: 1234, y: 2345 }),
+			imageRatio: "4:3",
+			showImage: true,
+		};
+		render(<SmallManualPromo customFields={config} />);
+		expect(getFocalFromANS).toHaveBeenCalledWith(
+			expect.objectContaining({
+				focal_point: JSON.parse(config.imageFocalPoint)
+			})
+		);
+	})
 
 	it("should render heading first when imagePosition is set to right", () => {
 		render(<SmallManualPromo customFields={{ ...customFields, imagePosition: "right" }} />);

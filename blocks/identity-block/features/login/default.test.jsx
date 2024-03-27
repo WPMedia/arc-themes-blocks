@@ -68,9 +68,9 @@ describe("Identity Login Feature", () => {
 	});
 });
 
-describe("Identity Login Feature - rejected Login", () => {
+describe("Identity Login Feature - rejected Login, general message", () => {
 	beforeEach(() => {
-		mockLogin.mockImplementation(() => Promise.reject());
+		mockLogin.mockRejectedValueOnce({ code: 0 });
 		global.grecaptcha = {
 			reset: jest.fn()
 		}
@@ -97,7 +97,41 @@ describe("Identity Login Feature - rejected Login", () => {
 		fireEvent.click(screen.getByRole("button"));
 
 		await waitFor(() => expect(mockLogin).toHaveBeenCalled());
-		await screen.findByText("identity-block.login-form-error");
+		await screen.findByText("identity-block.login-form-error.invalid-email-password");
+	});
+});
+
+describe("Identity Login Feature - rejected Login, error code 130001", () => {
+	beforeEach(() => {
+		mockLogin.mockRejectedValueOnce({ code: 130001 });
+		global.grecaptcha = {
+			reset: jest.fn()
+		}
+	});
+
+	afterEach(() => {
+		jest.clearAllMocks();
+	});
+
+	it("rejects the login", async () => {
+
+		render(<Login customFields={defaultCustomFields} />);
+
+		await waitFor(() => expect(screen.getByLabelText("identity-block.email-label")));
+		fireEvent.change(screen.getByLabelText("identity-block.email-label"), {
+			target: { value: "email@test.com" },
+		});
+
+		await waitFor(() => expect(screen.getByLabelText("identity-block.password")));
+		fireEvent.change(screen.getByLabelText("identity-block.password"), {
+			target: { value: "thisNotIsMyPassword" },
+		});
+
+		await waitFor(() => expect(screen.getByRole("button")));
+		fireEvent.click(screen.getByRole("button"));
+
+		await waitFor(() => expect(mockLogin).toHaveBeenCalled());
+		await screen.findByText("identity-block.login-form-error.captcha-token-invalid");
 	});
 });
 

@@ -1,64 +1,57 @@
-import React, { useState, useEffect } from "react";
-import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
-import { Paragraph, useIdentity, useSales } from "@wpmedia/arc-themes-components";
+import React from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
-const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captchaError, setCaptchaError }) => {
-	const { Identity, isInitialized } = useIdentity();
-  const { Sales } = useSales();
-	const [siteKey, setSiteKey] = useState();
+import { usePhrases, useIdentity, Paragraph } from "@wpmedia/arc-themes-components";
+import useRecaptcha, { RECAPTCHA_V2, RECAPTCHA_V3 } from "../../utils/useRecaptcha";
+
+// eslint-disable-next-line
+import RecaptchaV3 from "./reCaptchaV3";
+
+export const ARCXP_CAPTCHA= "ArcXP_captchaToken"
+
+const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captchaError, setCaptchaError, resetRecaptcha }) => {
+	
+	const { isInitialized } = useIdentity();
+	const { recaptchaVersion, siteKey, isRecaptchaEnabled } = useRecaptcha(challengeIn);
+	const phrases = usePhrases();
 
 	const onChange = (value) => {
 		setCaptchaToken(value);
 		setCaptchaError(null);
-    localStorage.setItem('ArcXP_captchaToken', value);
+		localStorage.setItem(ARCXP_CAPTCHA, value);
 	};
-
-	useEffect(() => {
-		const checkCaptcha = async () => {
-			const config = await Identity.getConfig();
-			const {recaptchaSiteKey, recaptchaScore } = config;
-			const isIdentityCaptchaEnabled = config?.[`${challengeIn}Recaptcha`];
-
-			if(['signup', 'signin', 'magicLink'].includes(challengeIn)) {
-				if (isIdentityCaptchaEnabled && recaptchaScore === '-1' && recaptchaSiteKey) {
-					setSiteKey(recaptchaSiteKey);
-				}
-			}
-
-			if (challengeIn === 'checkout') {
-				const salesConfig = await Sales.getConfig();
-				const isSalesCaptchaEnabled = salesConfig?.checkoutRecaptchaEnabled;
-				if (isSalesCaptchaEnabled && recaptchaScore === '-1' && recaptchaSiteKey) {
-					setSiteKey(recaptchaSiteKey);
-				}
-			}
-
-		};
-		checkCaptcha();
-		
-	}, [Identity, Sales, challengeIn]);
-
-	const { arcSite } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
 
 	if (!isInitialized) {
 		return null;
 	}
 
-	return (
-		<section className={`${className}__bot-protection-section`} data-testid="bot-challege-protection-container">
-			{!!siteKey && <ReCAPTCHA
-				sitekey={siteKey}
-				onChange={onChange}
-				onExpired={() => {}}
-			/>}
-			{captchaError && <Paragraph data-testid="bot-challege-captcha-error">{phrases.t("identity-block.bot-protection-error")}</Paragraph>}
-		</section>
-	);
+	if (isRecaptchaEnabled && !!siteKey && !!recaptchaVersion) {
+		if (recaptchaVersion === RECAPTCHA_V2) {
+			return (
+				/* istanbul ignore next */
+				<section
+					className={`${className}__bot-protection-section`}
+					data-testid="bot-challege-protection-container"
+				>
+					<ReCAPTCHA sitekey={siteKey} onChange={onChange} onExpired={() => {}}/>
+					{captchaError && <Paragraph>{phrases.t("identity-block.bot-protection-error")}</Paragraph>}
+				</section>
+			);
+		}
+		if (recaptchaVersion === RECAPTCHA_V3) {
+			return (
+				/* istanbul ignore next */ 
+				<GoogleReCaptchaProvider reCaptchaKey={siteKey} scriptProps={{ async: true }}>
+					<RecaptchaV3 setCaptchaToken={setCaptchaToken} resetRecaptcha={resetRecaptcha} />
+				</GoogleReCaptchaProvider>
+			);
+		}
+	} else {
+		return null;
+	}
+
+	return null;
 };
 
 export default BotChallengeProtection;

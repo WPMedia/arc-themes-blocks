@@ -18,7 +18,7 @@ const useRecaptcha = (challengeIn) => {
 	const [isRecaptchaEnabled, setIsRecaptchaEnabled] = useState(false);
 
 	const setRecaptchaInfo = (isCaptchaEnabled, recaptchaSiteKey, recaptchaScore) => {
-		if (isCaptchaEnabled && recaptchaSiteKey && recaptchaScore) {
+		if (isCaptchaEnabled && recaptchaSiteKey && !!String(recaptchaScore)) {
 			if (recaptchaScore === "-1") {
 				setSiteKey(recaptchaSiteKey);
 				setRecaptchaVersion(RECAPTCHA_V2);
@@ -34,12 +34,12 @@ const useRecaptcha = (challengeIn) => {
 	const checkCaptcha = async () => {
 		const identityConfig = await Identity.getConfig();
 		const { recaptchaSiteKey, recaptchaScore } = identityConfig;
-		if (["signup", "signin", "magicLink"].includes(challengeIn)) {
+		if ([RECAPTCHA_LOGIN, RECAPTCHA_SIGNUP, RECAPTCHA_MAGICLINK].includes(challengeIn)) {
 			const isIdentityCaptchaEnabled = identityConfig?.[`${challengeIn}Recaptcha`];
 			setRecaptchaInfo(isIdentityCaptchaEnabled, recaptchaSiteKey, recaptchaScore);
 		}
 
-		if (challengeIn === "checkout") {
+		if (challengeIn === RECAPTCHA_CHECKOUT) {
 			const salesConfig = await Sales.getConfig();
 			const isSalesCaptchaEnabled = salesConfig?.checkoutRecaptchaEnabled;
 			setRecaptchaInfo(isSalesCaptchaEnabled, recaptchaSiteKey, recaptchaScore);

@@ -56,7 +56,7 @@
 		"@babel/preset-react": "^7.22.15",
 		"@etchteam/storybook-addon-css-variables-theme": "^1.5.1",
 		"@storybook/addon-a11y": "^7.5.1",
-		"@storybook/addon-docs": "^7.5.1",
+		"@storybook/addon-docs": "^8.0.4",
 		"@storybook/addon-essentials": "^7.5.1",
 		"@storybook/addon-knobs": "^7.0.2",
 		"@storybook/react": "^7.5.1",

@@ -70,7 +70,7 @@ describe("Identity Login Feature", () => {
 
 describe("Identity Login Feature - rejected Login, general message", () => {
 	beforeEach(() => {
-		mockLogin.mockImplementation(() => Promise.reject({ code: 0 }));
+		mockLogin.mockRejectedValueOnce({ code: 0 });
 		global.grecaptcha = {
 			reset: jest.fn()
 		}
@@ -103,7 +103,7 @@ describe("Identity Login Feature - rejected Login, general message", () => {
 
 describe("Identity Login Feature - rejected Login, error code 130001", () => {
 	beforeEach(() => {
-		mockLogin.mockImplementation(() => Promise.reject({ code: 130001}));
+		mockLogin.mockRejectedValueOnce({ code: 130001 });
 		global.grecaptcha = {
 			reset: jest.fn()
 		}
@@ -114,6 +114,7 @@ describe("Identity Login Feature - rejected Login, error code 130001", () => {
 	});
 
 	it("rejects the login", async () => {
+
 		render(<Login customFields={defaultCustomFields} />);
 
 		await waitFor(() => expect(screen.getByLabelText("identity-block.email-label")));

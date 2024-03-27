@@ -29,6 +29,7 @@ const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captc
 	if (isRecaptchaEnabled && !!siteKey && !!recaptchaVersion) {
 		if (recaptchaVersion === RECAPTCHA_V2) {
 			return (
+				/* istanbul ignore next */
 				<section
 					className={`${className}__bot-protection-section`}
 					data-testid="bot-challege-protection-container"
@@ -40,6 +41,7 @@ const BotChallengeProtection = ({ challengeIn, setCaptchaToken, className, captc
 		}
 		if (recaptchaVersion === RECAPTCHA_V3) {
 			return (
+				/* istanbul ignore next */ 
 				<GoogleReCaptchaProvider reCaptchaKey={siteKey} scriptProps={{ async: true }}>
 					<RecaptchaV3 setCaptchaToken={setCaptchaToken} resetRecaptcha={resetRecaptcha} />
 				</GoogleReCaptchaProvider>

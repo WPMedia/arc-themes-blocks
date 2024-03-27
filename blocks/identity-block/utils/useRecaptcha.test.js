@@ -1,7 +1,6 @@
-import React from "react";
 import { waitFor, renderHook } from "@testing-library/react";
-import useRecaptcha from "./useRecaptcha";
 import { useIdentity } from "@wpmedia/arc-themes-components";
+import useRecaptcha from "./useRecaptcha";
 
 // Mock setTimeout and clearTimeout
 jest.useFakeTimers();

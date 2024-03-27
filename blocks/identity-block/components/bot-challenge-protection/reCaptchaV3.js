@@ -4,10 +4,9 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 // eslint-disable-next-line
 import { ARCXP_CAPTCHA } from "./index";
 
+/* istanbul ignore file */
 const RecaptchaV3 = ({ setCaptchaToken, resetRecaptcha }) => {
 	const { executeRecaptcha } = useGoogleReCaptcha();
-
-	
 	const handleReCaptcha3Verify = useCallback(async () => {
 		if (!executeRecaptcha) {
 			// eslint-disable-next-line

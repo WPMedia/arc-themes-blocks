@@ -23,5 +23,15 @@
 			},
 			"desktop": {}
 		}
+	},
+
+	"section-title-links": {
+		"styles": {
+			"default": {
+				"display": "flex",
+				"flex-wrap": "wrap"
+			},
+			"desktop": {}
+		}
 	}
 }

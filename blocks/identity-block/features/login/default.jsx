@@ -10,8 +10,21 @@ import useLogin from "../../components/login";
 import BotChallengeProtection from "../../components/bot-challenge-protection";
 import useOIDCLogin from "../../utils/useOIDCLogin";
 import validateURL from "../../utils/validate-redirect-url";
+import { RECAPTCHA_LOGIN } from "../../utils/useRecaptcha";
 
 const BLOCK_CLASS_NAME = "b-login-form";
+
+const errorCodes = {
+	100015: "identity-block.login-form-error.account-is-disabled",
+	130001: "identity-block.login-form-error.captcha-token-invalid",
+	130051: "identity-block.login-form-error.unverified-email-address",
+	100013: "identity-block.login-form-error.max-devices",
+	0: "identity-block.login-form-error.invalid-email-password",
+};
+
+export function definedMessageByCode(code) {
+	return errorCodes[code] || errorCodes["0"];
+}
 
 const Login = ({ customFields }) => {
 	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC } = customFields;
@@ -23,9 +36,11 @@ const Login = ({ customFields }) => {
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
-	const isOIDC = OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
+	const isOIDC =
+		OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
 	const { Identity, isInitialized } = useIdentity();
 	const [captchaToken, setCaptchaToken] = useState();
+	const [resetRecaptcha, setResetRecaptcha] = useState(true);
 	const [error, setError] = useState();
 	const [captchaError, setCaptchaError] = useState();
 	const { loginRedirect } = useLogin({
@@ -45,7 +60,6 @@ const Login = ({ customFields }) => {
 		<HeadlinedSubmitForm
 			buttonLabel={phrases.t("identity-block.log-in")}
 			className={BLOCK_CLASS_NAME}
-			formErrorText={error}
 			headline={phrases.t("identity-block.log-in-headline")}
 			onSubmit={({ email, password }) => {
 				setError(null);
@@ -63,19 +77,25 @@ const Login = ({ customFields }) => {
 						}
 					})
 					.catch((e) => {
+						setResetRecaptcha(!resetRecaptcha);
 						if (e?.code === "130001") {
 							setCaptchaError(true);
 						}
 						else {
-							setError(phrases.t("identity-block.login-form-error"));
+							setError(phrases.t(definedMessageByCode(e.code)));
 						}
 						if (grecaptcha) {
 							grecaptcha.reset();
 						}
-					})
-			}
-			}
+						
+					});
+			}}
 		>
+			{error ? (
+				<div className={`${BLOCK_CLASS_NAME}__login-form-error`}>
+					<Paragraph>{error}</Paragraph>
+				</div>
+			) : null}
 			<Input
 				autoComplete="email"
 				label={phrases.t("identity-block.email-label")}
@@ -93,8 +113,17 @@ const Login = ({ customFields }) => {
 				showDefaultError={false}
 				type="password"
 			/>
-			<BotChallengeProtection className={BLOCK_CLASS_NAME} challengeIn="signin" setCaptchaToken={setCaptchaToken} captchaError={captchaError} setCaptchaError={setCaptchaError} />
-			<Paragraph className={`${BLOCK_CLASS_NAME}__privacy-statement`}>{phrases.t("identity-block.privacy-statement")}</Paragraph>
+			<BotChallengeProtection
+				className={BLOCK_CLASS_NAME}
+				challengeIn={RECAPTCHA_LOGIN}
+				setCaptchaToken={setCaptchaToken}
+				captchaError={captchaError}
+				setCaptchaError={setCaptchaError}
+				resetRecaptcha={resetRecaptcha}
+			/>
+			<Paragraph className={`${BLOCK_CLASS_NAME}__privacy-statement`}>
+				{phrases.t("identity-block.privacy-statement")}
+			</Paragraph>
 		</HeadlinedSubmitForm>
 	);
 };
@@ -120,10 +149,11 @@ Login.propTypes = {
 				"The URL to which a user would be redirected to if visiting a login page when already logged in.",
 		}),
 		OIDC: PropTypes.bool.tag({
-      name: 'Login with OIDC',
-      defaultValue: false,
-      description: 'Used when authenticating a third party site with OIDC PKCE flow. This will use an ArcXp Org as an auth provider',
-    }),
+			name: "Login with OIDC",
+			defaultValue: false,
+			description:
+				"Used when authenticating a third party site with OIDC PKCE flow. This will use an ArcXp Org as an auth provider",
+		}),
 	}),
 };
 

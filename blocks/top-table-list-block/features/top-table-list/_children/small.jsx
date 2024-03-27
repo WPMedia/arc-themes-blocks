@@ -2,16 +2,17 @@ import React from "react";
 import { useFusionContext } from "fusion:context";
 
 import {
+	Conditional,
 	Divider,
 	formatURL,
+	getFocalFromANS,
+	getImageFromANS,
+	Grid,
 	Heading,
 	HeadingSection,
 	Image,
 	Link,
 	MediaItem,
-	Grid,
-	getImageFromANS,
-	Conditional,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-top-table-list-small";
@@ -42,7 +43,7 @@ const Small = (props) => {
 				ansImage: ANSImage,
 				aspectRatio: imageRatioSM,
 				resizedOptions: {
-					smart: true,
+					...getFocalFromANS(ANSImage),
 				},
 				responsiveImages: [400, 600, 800, 1200],
 				width: 800,
@@ -58,8 +59,8 @@ const Small = (props) => {
 		.filter((classString) => classString)
 		.join(" ");
 
-	const PromoImage = () =>
-		showImageSM ? (
+	const promoImage = showImageSM
+		? (
 			<Conditional component={Link} condition={linkURL} href={formatURL(linkURL)} assistiveHidden>
 				<MediaItem>
 					<Image {...imageParams} />
@@ -67,8 +68,8 @@ const Small = (props) => {
 			</Conditional>
 		) : null;
 
-	const PromoHeading = () =>
-		showHeadlineSM && headline ? (
+	const promoHeading = showHeadlineSM && headline
+		? (
 			<Heading>
 				<Conditional component={Link} condition={linkURL} href={formatURL(linkURL)}>
 					{headline}
@@ -81,13 +82,13 @@ const Small = (props) => {
 			<Grid as="article" className={containerClassNames}>
 				{["below", "right"].includes(imagePosition) ? (
 					<>
-						<PromoHeading />
-						<PromoImage />
+						{ promoHeading }
+						{ promoImage }
 					</>
 				) : (
 					<>
-						<PromoImage />
-						<PromoHeading />
+						{ promoImage }
+						{ promoHeading }
 					</>
 				)}
 				{showBottomBorder ? <Divider /> : null}

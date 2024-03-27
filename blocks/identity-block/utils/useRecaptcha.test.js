@@ -50,7 +50,7 @@ const mockIdentity = {
 const mockSales = {
 	getConfig: jest.fn(() =>
 		Promise.resolve({
-            checkoutRecaptchaEnabled: false,
+            checkoutRecaptchaEnabled: true,
 		}),
 	),
 };
@@ -120,8 +120,8 @@ describe("useRecaptcha", () => {
 		);
 	});
 
-    it("reCaptcha v2 enabled for magicLink", async () => {
-		const { result } = renderHook(() => useRecaptcha("magicLink"));
+    it("reCaptcha v2 enabled for checkout", async () => {
+		const { result } = renderHook(() => useRecaptcha("checkout"));
 
 		expect(result.current.recaptchaVersion).toBe(undefined);
 		expect(result.current.siteKey).toBe(undefined);
@@ -136,14 +136,44 @@ describe("useRecaptcha", () => {
 		);
 	});
 
-    it("reCaptcha v2 disabled for signIn", async () => {
-
+    it("reCaptcha v3 enabled for signIn", async () => {
         useIdentity.mockReturnValueOnce({
             isInitialized: true,
             Identity: {
               getConfig: jest.fn(() =>
                 Promise.resolve({
-                  signupRecaptcha: false, // Change the mocked data here
+                  signupRecaptcha: true, 
+                  signinRecaptcha: true,
+                  magicLinkRecaptcha: true,
+                  recaptchaScore: "0.5",
+                  recaptchaSiteKey: "6LemcOMhAAAAAEGptytQEAMK_SfH4ZAGJ_e4652C",
+                }),
+              ),
+            },
+          });
+
+		const { result } = renderHook(() => useRecaptcha("signin"));
+
+		expect(result.current.recaptchaVersion).toBe(undefined);
+		expect(result.current.siteKey).toBe(undefined);
+		expect(result.current.isRecaptchaEnabled).toBe(false);
+
+		await waitFor(() => expect(result.current.recaptchaVersion).toEqual("V3"));
+
+		await waitFor(() => expect(result.current.isRecaptchaEnabled).toEqual(true));
+
+		await waitFor(() =>
+			expect(result.current.siteKey).toEqual("6LemcOMhAAAAAEGptytQEAMK_SfH4ZAGJ_e4652C"),
+		);
+	});
+
+    it("reCaptcha v2 disabled for signIn", async () => {
+        useIdentity.mockReturnValueOnce({
+            isInitialized: true,
+            Identity: {
+              getConfig: jest.fn(() =>
+                Promise.resolve({
+                  signupRecaptcha: false, 
                   signinRecaptcha: false,
                   magicLinkRecaptcha: false,
                   recaptchaScore: "-1",

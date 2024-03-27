@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, screen, act } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { useIdentity, usePhrases } from "@wpmedia/arc-themes-components";
@@ -40,16 +40,14 @@ describe("Checkout Feature", () => {
 			Sales: {},
 		});
 
-		await act(async () => {
-					render(
-						<Checkout
-							customFields={{
-								offerURL: "/offer-url/"
-							}}
-						/>,
-					);
-				});
-		expect(screen.getByText("Billing Address Placeholder")).not.toBeNull();
+		render(
+			<Checkout
+				customFields={{
+					offerURL: "/offer-url/"
+				}}
+			/>,
+		);
+		expect(await screen.findByText("Billing Address Placeholder")).not.toBeNull();
 	});
 	it("redirects user to login url when user is not logged in", async () => {
 		useIdentity.mockImplementation(() => ({
@@ -73,16 +71,15 @@ describe("Checkout Feature", () => {
 			Sales: {},
 		});
 
-		await act(async () => {
-					render(
-						<Checkout
-							customFields={{
-								loginURL: "/login-url/",
-							}}
-						/>,
-					);
-				});
-		expect(screen.getByText("Account Placeholder")).not.toBeNull();
-		expect(window.location.href).toBe("/login-url/?redirect=checkoutURL");
+		render(
+			<Checkout
+				customFields={{
+					loginURL: "/login-url/",
+				}}
+			/>,
+		);
+
+		expect(await screen.findByText("Account Placeholder")).not.toBeNull();
+		await waitFor(() => expect(window.location.href).toBe("/login-url/?redirect=checkoutURL"));
 	});
 });

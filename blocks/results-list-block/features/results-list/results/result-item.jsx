@@ -2,7 +2,6 @@ import React from "react";
 import { useEditableContent } from "fusion:content";
 import { useComponentContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 
 import {
 	Attribution,
@@ -10,10 +9,10 @@ import {
 	Date as DateComponent,
 	formatAuthors,
 	formatURL,
+	getFocalFromANS,
 	getImageFromANS,
 	Heading,
 	Image,
-	imageANSToImageSrc,
 	Join,
 	Link,
 	localizeDateTime,
@@ -59,7 +58,6 @@ const ResultItem = React.memo(
 					timeZone: "GMT",
 					dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 				},
-				resizerURL,
 			} = getProperties(arcSite);
 
 			const {
@@ -80,8 +78,7 @@ const ResultItem = React.memo(
 			}
 
 			/* Author Formatting */
-			const imageURL = imageANSToImageSrc(getImageFromANS(element)) || null;
-			const auth = getImageFromANS(element)?.auth || {};
+			const ansImage = getImageFromANS(element)
 			const { searchableField } = useEditableContent();
 			const hasAuthors = showByline ? credits?.by?.some((author) => author?.name !== "") : null;
 			const contentHeading = showHeadline ? headlineText : null;
@@ -89,6 +86,31 @@ const ResultItem = React.memo(
 				? localizeDateTime(new Date(displayDate), dateTimeFormat, language, timeZone)
 				: "";
 			const url = websites[arcSite].website_url;
+			const imageParams = ansImage
+				? {
+						ansImage,
+						aspectRatio: imageRatio,
+						loading,
+						resizedOptions: {
+							...getFocalFromANS(ansImage),
+						},
+						responsiveImages: [250, 500],	
+						sizes: [
+							{
+								isDefault: true,
+								sourceSizeValue: "250px",
+							},
+							{
+								sourceSizeValue: "500px",
+								mediaCondition: "(min-width: 48rem)",
+							},
+						],
+						width: 500,
+				  }
+				: {
+						src: targetFallbackImage,
+						loading
+				  };
 			return showHeadline ||
 				showImage ||
 				showDescription ||
@@ -109,24 +131,8 @@ const ResultItem = React.memo(
 								assistiveHidden
 							>
 								<Image
-									src={imageURL !== null ? imageURL : targetFallbackImage}
 									alt={headlineText}
-									aspectRatio={imageRatio}
-									resizedOptions={{ auth: auth[RESIZER_TOKEN_VERSION], smart: true }}
-									resizerURL={resizerURL}
-									sizes={[
-										{
-											isDefault: true,
-											sourceSizeValue: "250px",
-										},
-										{
-											sourceSizeValue: "500px",
-											mediaCondition: "(min-width: 48rem)",
-										},
-									]}
-									responsiveImages={[250, 500]}
-									width={500}
-									loading={loading}
+									{ ...imageParams }
 								/>
 							</Conditional>
 						</MediaItem>

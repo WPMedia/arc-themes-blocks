@@ -11,6 +11,7 @@ import {
 	Conditional,
 	Date as DateComponent,
 	formatAuthors,
+	getFocalFromANS,
 	getImageFromANS,
 	getVideoFromANS,
 	Heading,
@@ -211,21 +212,29 @@ const ExtraLargePromo = ({ customFields }) => {
 						promo_items {
 							basic {
 								_id
-								type
-								url
 								auth {
 									${RESIZER_TOKEN_VERSION}
 								}
+								focal_point {
+									x
+									y
+								}
+								type
+								url
 							}
 						}
 					}
 					basic {
 						_id
-						type
-						url
 						auth {
 							${RESIZER_TOKEN_VERSION}
 						}
+						focal_point {
+							x
+							y
+						}
+						type
+						url
 					}
 				}
 				website_url
@@ -296,21 +305,22 @@ const ExtraLargePromo = ({ customFields }) => {
 		showByline && content?.credits?.by?.length > 0
 			? formatAuthors(content.credits.by, phrases.t("global.and-text"))
 			: null;
+	const ansImage = getImageFromANS(content);
 	const imageParams =
 		showImage &&
-		(imageOverrideURL || (content && getImageFromANS(content))
+		(imageOverrideURL || ansImage
 			? {
 					ansImage: imageOverrideURL
 						? {
-								_id: resizedImage ? imageOverrideId : "",
-								url: imageOverrideURL,
-								auth: resizedAuth || {},
-						  }
-						: getImageFromANS(content),
+							_id: resizedImage ? imageOverrideId : "",
+							url: imageOverrideURL,
+							auth: resizedAuth || {},
+						}
+						: ansImage,
 					alt: content?.headlines?.basic || "",
 					aspectRatio: imageRatio,
 					resizedOptions: {
-						smart: true,
+						...getFocalFromANS(ansImage),
 					},
 					responsiveImages: [400, 600, 800, 1200],
 					width: 800,

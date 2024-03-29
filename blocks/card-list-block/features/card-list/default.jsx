@@ -10,6 +10,7 @@ import {
 	Date,
 	formatAuthors,
 	formatURL,
+	getFocalFromANS,
 	getImageFromANS,
 	Heading,
 	HeadingSection,
@@ -84,21 +85,29 @@ const CardListItems = (props) => {
 		  promo_items {
 			 basic {
 				_id
-				type
-				url
 				auth {
 					${RESIZER_TOKEN_VERSION}
 				}
+				focal_point {
+					x
+					y
+				}
+				type
+				url
 			 }
 			 lead_art {
 				promo_items {
 				  basic {
 					_id
-					type
-					url
 					auth {
 						${RESIZER_TOKEN_VERSION}
 					}
+					focal_point {
+						x
+						y
+					}
+					type
+					url
 				  }
 				}
 				type
@@ -170,7 +179,7 @@ const CardListItems = (props) => {
 				ansImage,
 				aspectRatio: "4:3",
 				resizedOptions: {
-					smart: true,
+					...getFocalFromANS(ansImage),
 				},
 				responsiveImages: [377, 754, 1508],
 				width: 377,
@@ -230,7 +239,7 @@ const CardListItems = (props) => {
 										ansImage: itemAnsImage,
 										aspectRatio: "3:2",
 										resizedOptions: {
-											smart: true,
+											...getFocalFromANS(itemAnsImage),
 										},
 										responsiveImages: [105, 210, 420],
 										width: 105,

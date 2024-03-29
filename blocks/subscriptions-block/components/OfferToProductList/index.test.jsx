@@ -1,5 +1,5 @@
 import React from "react";
-import { act, render } from "@testing-library/react";
+import { act, render, waitFor } from "@testing-library/react";
 import OfferToProductList from "./index";
 import useOffer from "../useOffer";
 import OfferCard from "../OfferCard";
@@ -177,31 +177,34 @@ jest.mock("fusion:properties", () =>
 				script: "https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/arc/subs/p.min.js",
 			},
 		},
-	}))
+	})),
 );
+
+jest.mock("../OfferCard", () => {
+	return jest.fn(() => null);
+  });
 
 jest.mock("@arc-publishing/sdk-sales");
 jest.mock("../../components/useOffer");
+
 useOffer.mockReturnValue({
 	offer: sampleOffer,
 	fetchOffer: () => sampleOffer,
 });
 
 describe("The OfferToProductList component", () => {
-	it("renders the correct number of offer cards", () => {
-		const { container } =  render(
+	it("renders the correct number of offer cards", async () => {
+		render(
 			<OfferToProductList
 				isLoggedIn
 				loginURL="/login/"
 				checkoutURL="/checkout/"
 				offer={sampleOffer}
-			/>
+			/>,
 		);
 
-		act(() => {
-			container.setProps({});
-		});
+		const mockedChildComponent = OfferCard;
 
-		expect(container.find(OfferCard)).toHaveLength(4);
+		await waitFor(() =>  expect(mockedChildComponent).toHaveBeenCalledTimes(4));
 	});
 });

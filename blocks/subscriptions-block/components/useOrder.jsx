@@ -21,20 +21,21 @@ const useOrder = (orderNumber) => {
 
 	useEffect(() => {
 		const getCart = async () => {
-			const cart = await Sales.getCart();
-			setCart(cart);
+			const currentCart = await Sales.getCart();
+			setCart(currentCart);
 		};
 		getCart();
 
-		const campaignName = localStorage.getItem(ARCXP_CAMPAIGN);
-		setCampaignName(campaignName);
+		const campaignNameStored = localStorage.getItem(ARCXP_CAMPAIGN);
+		setCampaignName(campaignNameStored);
+		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
 		const getOrder = async () => {
 			try{
-				const order = await Sales.getOrderDetails(orderNumber);
-				setOrder(order);
+				const currentOrder = await Sales.getOrderDetails(orderNumber);
+				setOrder(currentOrder);
 			}catch(e){
 				setError(e);
 			}
@@ -42,6 +43,7 @@ const useOrder = (orderNumber) => {
 		if (orderNumber) {
 			getOrder();
 		}
+		// eslint-disable-next-line
 	}, [orderNumber]);
 
 	useEffect(() => {

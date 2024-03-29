@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import useSales from "../useSales";
 import { Grid } from "@wpmedia/arc-themes-components";
+import useSales from "../useSales";
 import OfferCard from "../OfferCard";
 
 export const ARCXP_CART = 'ArcXP_cart';
@@ -43,7 +43,8 @@ const OfferToProductList = ({ offer, isLoggedIn, checkoutURL, loginURL, classNam
 											quantity: 1,
 										},
 									]);
-									const maxEndDate = Math.max(...offer?.campaigns?.map(c => c.validUntil));
+									const allValidUntil = offer?.campaigns?.map(c => c.validUntil !== undefined && !Number.isNaN(c.validUntil));
+									const maxEndDate = allValidUntil.length ? Math.max(allValidUntil) : null;
 									const liveCampaing = offer?.campaigns?.find(c => c.validUntil === null || c.validUntil === maxEndDate);
 									localStorage.setItem(ARCXP_CAMPAIGN, liveCampaing?.name);
 								})

@@ -32,7 +32,33 @@ const OrderSummary = ({ orderDetails, className }) => {
 	);
 };
 
+const ProductPriceDetails = ({
+	details = [],
+	showPriceDescription,
+	showProductFeatures,
+	className,
+}) => {
+	if (details?.items?.length) {
+		return details?.items?.map((item) => 
+				<Stack as="div" className={`${className}__orderCard--productPrice`}>
+					<Heading> {item.priceName}</Heading>
+					{showPriceDescription && (
+						<Paragraph dangerouslySetInnerHTML={{ __html: item?.priceDescription }} />
+					)}
+					{showProductFeatures && (
+						<FeatureDetails
+							features={item?.productAttributes}
+							className={`${className}__orderCard`}
+						/>
+					)}
+				</Stack>
+		);
+	}
+	return null;
+};
+
 const OrderInformation = ({
+	id,
 	offerURL,
 	showOfferURL,
 	showPriceDescription,
@@ -41,36 +67,9 @@ const OrderInformation = ({
 	className,
 }) => {
 	const phrases = usePhrases();
-
-	const ProductPriceDetails = ({
-		details = [],
-		showPriceDescription,
-		showProductFeatures,
-		className,
-	}) => {
-		if (details?.items?.length) {
-			return details?.items?.map((item) => {
-				return (
-					<Stack as="div" className={`${className}__orderCard--productPrice`}>
-						<Heading> {item.priceName}</Heading>
-						{showPriceDescription && (
-							<Paragraph dangerouslySetInnerHTML={{ __html: item?.priceDescription }} />
-						)}
-						{showProductFeatures && (
-							<FeatureDetails
-								features={item?.productAttributes}
-								className={`${className}__orderCard`}
-							/>
-						)}
-					</Stack>
-				);
-			});
-		}
-		return null;
-	};
-
+	
 	return (
-		<section className={`${className}__orderCard`}>
+		<section key={`orderInfo${id && `-${id}`}`} className={`${className}__orderCard`}>
 			<ProductPriceDetails
 				details={orderDetails}
 				showPriceDescription={showPriceDescription}

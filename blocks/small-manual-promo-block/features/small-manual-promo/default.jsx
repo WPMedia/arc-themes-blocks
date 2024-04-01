@@ -174,8 +174,22 @@ const SmallManualPromo = ({ customFields }) => {
 						</>
 					) : (
 						<>
-							<PromoImage showImage={showImage} searchableField={searchableField} imageParams={imageParams} linkURL={linkURL} newTab={newTab} registerSuccessEvent={registerSuccessEvent} showHeadline={showHeadline} />
-							<PromoHeading showHeadline={showHeadline} headline={headline} linkURL={linkURL} newTab={newTab} registerSuccessEvent={registerSuccessEvent} />
+							<PromoImage
+								showImage={showImage}
+								searchableField={searchableField}
+								imageParams={imageParams}
+								linkURL={linkURL}
+								newTab={newTab}
+								registerSuccessEvent={registerSuccessEvent}
+								showHeadline={showHeadline}
+							/>
+							<PromoHeading
+								showHeadline={showHeadline}
+								headline={headline}
+								linkURL={linkURL}
+								newTab={newTab}
+								registerSuccessEvent={registerSuccessEvent}
+							/>
 						</>
 					)}
 				</Grid>

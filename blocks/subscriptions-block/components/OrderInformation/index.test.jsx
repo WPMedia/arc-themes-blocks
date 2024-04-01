@@ -71,6 +71,8 @@ jest.mock("fusion:context", () => ({
 	}),
 }));
 
+const className = 'checkout';
+
 describe('Order Information component', () => {
 	it("renders order info", () => {
 		const showProductF = true;
@@ -82,6 +84,7 @@ describe('Order Information component', () => {
 				showOfferURL={false}
 				showPriceDescription={false}
 				showProductFeatures={showProductF}
+				className={className}
 			/>,
 		);
 		expect(screen.getByText(orderDetails?.items?.[0]?.priceName)).toBeVisible();
@@ -95,6 +98,9 @@ describe('Order Information component', () => {
 			screen.getByText(`${currency(orderDetails?.currency)}${orderDetails?.total}`),
 		).toBeVisible();
 		expect(screen.getByText("checkout-block.due-today")).toBeVisible();
+
+		const headingElement = document.getElementsByClassName('c-heading');
+		expect(headingElement.length).toBe(2)
 	});
 
 	it("renders price description", () => {
@@ -146,5 +152,23 @@ describe('Order Information component', () => {
 		expect(
 			screen.getByRole("link", { name: "checkout-block.view-subscription-offers" }),
 		).toHaveAttribute("href", "/offer/");
+
 	});
+
+	it("items is empty", ()=>{
+		const showOfferUrl = true
+		const showPriceDesc = false;
+		const showProductFeat = true;
+		render(
+			<OrderInformation
+				orderDetails={{...orderDetails, items: []}}
+				offerURL="/offer/"
+				showOfferURL={showOfferUrl}
+				showPriceDescription={showPriceDesc}
+				showProductFeatures={showProductFeat}
+			/>,
+		);
+		const headingElement = document.getElementsByClassName('c-heading');
+		expect(headingElement.length).toBe(1)
+	})
 });

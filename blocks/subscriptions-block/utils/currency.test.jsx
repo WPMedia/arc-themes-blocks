@@ -8,4 +8,8 @@ describe("Currency", () => {
 	it("returns null if currency is not supported", () => {
 		expect(currency("HKD")).toBe(null);
 	});
+
+	it("returns null if currency is sent", () => {
+		expect(currency()).toBe(null);
+	});
 });

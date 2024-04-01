@@ -99,7 +99,7 @@ describe('Order Information component', () => {
 		).toBeVisible();
 		expect(screen.getByText("checkout-block.due-today")).toBeVisible();
 
-		const headingElement = document.getElementsByClassName('c-heading');
+		const headingElement = document.getElementsByClassName('c-heading'); // eslint-disable-line
 		expect(headingElement.length).toBe(2)
 	});
 
@@ -168,7 +168,7 @@ describe('Order Information component', () => {
 				showProductFeatures={showProductFeat}
 			/>,
 		);
-		const headingElement = document.getElementsByClassName('c-heading');
+		const headingElement = document.getElementsByClassName('c-heading'); // eslint-disable-line
 		expect(headingElement.length).toBe(1)
 	})
 });

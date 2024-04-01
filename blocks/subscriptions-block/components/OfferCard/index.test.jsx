@@ -25,20 +25,21 @@ describe("OfferCard", () => {
 		expect(screen.getByRole("button")).not.toBeNull();
 
 		const ul = screen.getByRole("list");
-		expect(ul.childElementCount).toBe(2);
+		expect(ul.childElementCount).toBe(2); // eslint-disable-line
 
-		const ulByClass = document.getElementsByClassName("test-block__card--features--feature-item");
+		const ulByClass = document.getElementsByClassName("test-block__card--features--feature-item"); // eslint-disable-line
 		expect(ulByClass.length).toBe(2);
 
-		expect(screen.getByText(props.features[0].featureText)).not.toBeNull();
-		expect(screen.getByText(props.features[1].featureText)).not.toBeNull();
+		expect(screen.getByText(props.features[0].featureText)).not.toBeNull(); // eslint-disable-line
+		expect(screen.getByText(props.features[1].featureText)).not.toBeNull(); // eslint-disable-line
 	});
 
 	it("does not render headline if not present", () => {
 		render(
 			<OfferCard {...props} className={BLOCK_CLASS_NAME} headline={null} />,
 		);
-		const headingElement = document.getElementsByClassName('.b-offer__card h1');
+
+		const headingElement = document.getElementsByClassName('.b-offer__card h1'); // eslint-disable-line
 		expect(headingElement.length).toBe(0)
 	});
 
@@ -47,7 +48,7 @@ describe("OfferCard", () => {
 			<OfferCard {...props} className={BLOCK_CLASS_NAME} subHeadline={null} />,
 		);
 
-		const headingElement = document.getElementsByClassName('.b-offer__card p');
+		const headingElement = document.getElementsByClassName('.b-offer__card p');  // eslint-disable-line
 		expect(headingElement.length).toBe(0)
 	});
 
@@ -75,7 +76,7 @@ describe("OfferCard", () => {
 	it("does not render features", () => {
 		render(<OfferCard className={BLOCK_CLASS_NAME} headline="Headline" />);
 
-		const ulByClass = document.getElementsByClassName("test-block__card--features--feature-item");
+		const ulByClass = document.getElementsByClassName("test-block__card--features--feature-item"); // eslint-disable-line
 		expect(ulByClass.length).toBe(0);
 	});
 });

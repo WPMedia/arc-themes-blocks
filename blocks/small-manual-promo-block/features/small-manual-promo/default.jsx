@@ -19,7 +19,15 @@ import {
 
 const BLOCK_CLASS_NAME = "b-small-manual-promo";
 
-const PromoImage = ({ showImage, searchableField, imageParams, linkURL, newTab, registerSuccessEvent, showHeadline }) => {
+const PromoImage = ({
+	showImage,
+	searchableField,
+	imageParams,
+	linkURL,
+	newTab,
+	registerSuccessEvent,
+	showHeadline
+}) => {
 	const ImageDisplay = showImage ? (
 		<MediaItem
 			{...searchableField({
@@ -48,7 +56,13 @@ const PromoImage = ({ showImage, searchableField, imageParams, linkURL, newTab, 
 	);
 };
 
-const PromoHeading = ({ showHeadline, headline, linkURL, newTab, registerSuccessEvent }) =>
+const PromoHeading = ({
+	showHeadline,
+	headline,
+	linkURL,
+	newTab,
+	registerSuccessEvent
+}) =>
 	showHeadline && headline ? (
 		<Heading>
 			{linkURL ? (
@@ -141,8 +155,22 @@ const SmallManualPromo = ({ customFields }) => {
 				<Grid as="article" className={containerClassNames}>
 					{["below", "right"].includes(imagePosition) ? (
 						<>
-							<PromoHeading showHeadline={showHeadline} headline={headline} linkURL={linkURL} newTab={newTab} registerSuccessEvent={registerSuccessEvent} />
-							<PromoImage showImage={showImage} searchableField={searchableField} imageParams={imageParams} linkURL={linkURL} newTab={newTab} registerSuccessEvent={registerSuccessEvent} showHeadline={showHeadline} />
+							<PromoHeading
+								showHeadline={showHeadline}
+								headline={headline}
+								linkURL={linkURL}
+								newTab={newTab}
+								registerSuccessEvent={registerSuccessEvent}
+							/>
+							<PromoImage
+								showImage={showImage}
+								searchableField={searchableField}
+								imageParams={imageParams}
+								linkURL={linkURL}
+								newTab={newTab}
+								registerSuccessEvent={registerSuccessEvent}
+								showHeadline={showHeadline}
+							/>
 						</>
 					) : (
 						<>

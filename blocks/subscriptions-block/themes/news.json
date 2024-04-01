@@ -86,7 +86,12 @@
 			"default": {
 				"display": "flex",
 				"justify-content": "space-between",
-				"width": "100%"
+				"width": "100%",
+				"components": {
+					"paragraph": {
+						"font-size": "14px"
+					}
+				}
 			}
 		}
 	},

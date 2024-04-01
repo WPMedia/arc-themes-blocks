@@ -23,7 +23,7 @@ const useOrder = (orderNumber) => {
 		const getCart = async () => {
 			try {
 				const currentCart = await Sales.getCart();
-				if(currentCart.items.length){
+				if(currentCart?.items?.length){
 					setCart(currentCart);
 				}
 			} catch (e) {

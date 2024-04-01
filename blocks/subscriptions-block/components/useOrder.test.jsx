@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useSales } from "@wpmedia/arc-themes-components";
 import { waitFor, renderHook } from "@testing-library/react";
 
@@ -297,9 +295,9 @@ describe("The OfferToProductList component", () => {
 			isInitialized: true,
 			Sales: {
 				getCart: jest.fn(() => Promise.resolve(emptyCart)),
-				getOrderDetails: jest.fn(() => {
-					return Promise.resolve(orderDetail);
-				}),
+				getOrderDetails: jest.fn(() => 
+					Promise.resolve(orderDetail)
+				),
 			},
 		});
 
@@ -332,7 +330,7 @@ describe("The OfferToProductList component", () => {
 					],
 				},
 			],
-		}
+		};
 
 		const { result } = renderHook(() => useOrder("6OGJP2GGVJ7GT8L3"));
 
@@ -346,13 +344,12 @@ describe("The OfferToProductList component", () => {
 	});
 
 	it("getOrderDetail is returning an error", async () => {
-
-		const error = {code: '200019', message: 'Access Denied'}; 
+		const error = { code: "200019", message: "Access Denied" };
 		useSales.mockReturnValueOnce({
 			isInitialized: true,
 			Sales: {
 				getCart: jest.fn(() => Promise.resolve(emptyCart)),
-				getOrderDetails: jest.fn().mockRejectedValueOnce(error)
+				getOrderDetails: jest.fn().mockRejectedValueOnce(error),
 			},
 		});
 
@@ -365,5 +362,26 @@ describe("The OfferToProductList component", () => {
 		await waitFor(() => expect(result.current.cartDetails).toEqual(undefined));
 		await waitFor(() => expect(result.current.orderDetails).toEqual(undefined));
 		await waitFor(() => expect(result.current.error).toEqual(error));
-	})
+	});
+
+	it("getCart is returning an error", async () => {
+		const error = { code: "0", message: "Unexpected Server error" };
+		useSales.mockReturnValueOnce({
+			isInitialized: true,
+			Sales: {
+				getCart: jest.fn().mockRejectedValueOnce(error),
+				getOrderDetails: jest.fn(() => {}),
+			},
+		});
+
+		const { result } = renderHook(() => useOrder());
+
+		expect(result.current.cartDetails).toBe(undefined);
+		expect(result.current.orderDetails).toBe(undefined);
+		expect(result.current.error).toBe(undefined);
+
+		await waitFor(() => expect(result.current.cartDetails).toEqual(undefined));
+		await waitFor(() => expect(result.current.orderDetails).toEqual(undefined));
+		await waitFor(() => expect(result.current.error).toEqual(error));
+	});
 });

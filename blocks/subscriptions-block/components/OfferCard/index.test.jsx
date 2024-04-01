@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import OfferCard from ".";
 
 const props = {
@@ -24,51 +24,58 @@ describe("OfferCard", () => {
 
 		expect(screen.getByRole("button")).not.toBeNull();
 
-		const ul = getByRole("list");
-		expect(ul).toBeInTheDocument();
+		const ul = screen.getByRole("list");
+		expect(ul.childElementCount).toBe(2);
+
+		const ulByClass = document.getElementsByClassName("test-block__card--features--feature-item");
+		expect(ulByClass.length).toBe(2);
 
 		expect(screen.getByText(props.features[0].featureText)).not.toBeNull();
 		expect(screen.getByText(props.features[1].featureText)).not.toBeNull();
 	});
 
 	it("does not render headline if not present", () => {
-		const { container } = render(
+		render(
 			<OfferCard {...props} className={BLOCK_CLASS_NAME} headline={null} />,
 		);
-
-		expect(container.querySelector(".b-offer__card h1")).not.toBeInTheDocument();
+		const headingElement = document.getElementsByClassName('.b-offer__card h1');
+		expect(headingElement.length).toBe(0)
 	});
 
 	it("does not render subHeadline if not present", () => {
-		const { container } = render(
+		render(
 			<OfferCard {...props} className={BLOCK_CLASS_NAME} subHeadline={null} />,
 		);
 
-		expect(container.querySelector(".b-offer__card p")).not.toBeInTheDocument();
+		const headingElement = document.getElementsByClassName('.b-offer__card p');
+		expect(headingElement.length).toBe(0)
 	});
 
 	it("does not render button if no actionText and no ActionEvent", () => {
 		render(<OfferCard {...props} actionText={null} actionEvent={null} />);
 
-		expect(screen.getByRole("button")).not.toBeNull();
+		const button = screen.queryByRole("button");
+  		expect(button).toBeNull();
 	});
 
 	it("does not render button if no actionText", () => {
 		render(<OfferCard {...props} actionText={null} />);
 
-		expect(screen.getByRole("button")).not.toBeNull();
+		const button = screen.queryByRole("button");
+  		expect(button).toBeNull();
 	});
 
 	it("does not render button if no actionEvent", () => {
 		render(<OfferCard {...props} actionEvent={null} />);
 
-		expect(screen.getByRole("button")).not.toBeNull();
+		const button = screen.queryByRole("button");
+  		expect(button).toBeNull();
 	});
 
 	it("does not render features", () => {
-		const { container } = render(<OfferCard className={BLOCK_CLASS_NAME} headline="Headline" />);
+		render(<OfferCard className={BLOCK_CLASS_NAME} headline="Headline" />);
 
-		const features = expect(container.querySelector(".b-offer__card--features li"));
-		expect(features.length).toBe(0);
+		const ulByClass = document.getElementsByClassName("test-block__card--features--feature-item");
+		expect(ulByClass.length).toBe(0);
 	});
 });

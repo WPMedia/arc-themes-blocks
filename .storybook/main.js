@@ -3,16 +3,23 @@ const path = require("path");
 
 // Export a function. Accept the base config as the only param.
 module.exports = {
-	stories: ["../stories/*.stories.@(js|jsx|mdx|tsx)", "../blocks/**/*.story.@(js|jsx|mdx|tsx)"],
-	addons: [
-		"@etchteam/storybook-addon-css-variables-theme",
-		"@storybook/addon-a11y",
-		"@storybook/addon-docs",
-		"@storybook/addon-knobs",
-		"@storybook/addon-essentials",
-	],
-	staticDirs: ["../resources"],
-	webpackFinal: async (config) => {
+    stories: [
+        "../stories/*.@(mdx|stories.@(js|jsx|tsx))",
+        "../blocks/**/*.story.@(js|jsx|mdx|tsx)"
+    ],
+
+    addons: [
+        "@etchteam/storybook-addon-css-variables-theme",
+        "@storybook/addon-a11y",
+        "@storybook/addon-docs",
+        "@storybook/addon-knobs",
+        "@storybook/addon-essentials",
+        "@storybook/addon-webpack5-compiler-babel"
+    ],
+
+    staticDirs: ["../resources"],
+
+    webpackFinal: async (config) => {
 		// `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
 		// You can change the configuration based on that.
 		// 'PRODUCTION' is used when building the static version of storybook.
@@ -56,4 +63,13 @@ module.exports = {
 		// Return the altered config
 		return config;
 	},
+
+    framework: {
+        name: "@storybook/react-webpack5",
+        options: {}
+    },
+
+    docs: {
+        autodocs: true
+    }
 };

@@ -73,14 +73,15 @@ jest.mock("fusion:context", () => ({
 
 describe('Order Information component', () => {
 	it("renders order info", () => {
+		const showProductF = true;
 		render(
 			<OrderInformation
 				id={1}
 				orderDetails={orderDetails}
-				offerURL={"/offer/"}
+				offerURL="/offer/"
 				showOfferURL={false}
 				showPriceDescription={false}
-				showProductFeatures={true}
+				showProductFeatures={showProductF}
 			/>,
 		);
 		expect(screen.getByText(orderDetails?.items?.[0]?.priceName)).toBeVisible();
@@ -97,25 +98,30 @@ describe('Order Information component', () => {
 	});
 
 	it("renders price description", () => {
+		const showPriceDesc = true;
+		const showProductFeat = true;
 		render(
 			<OrderInformation
 				orderDetails={orderDetails}
 				showOfferURL={false}
-				showPriceDescription={true}
-				showProductFeatures={true}
+				showPriceDescription={showPriceDesc}
+				showProductFeatures={showProductFeat}
 			/>,
 		);
 		expect(screen.getByText("with tax description price")).toBeVisible();
 	});
 
 	it("renders features", () => {
+		const showOfferUrl = true
+		const showPriceDesc = false;
+		const showProductFeat = true;
 		render(
 			<OrderInformation
 				orderDetails={orderDetails}
-				offerURL={"/offer/"}
-				showOfferURL={true}
-				showPriceDescription={false}
-				showProductFeatures={true}
+				offerURL="/offer/"
+				showOfferURL={showOfferUrl}
+				showPriceDescription={showPriceDesc}
+				showProductFeatures={showProductFeat}
 			/>,
 		);
 		const list = screen.getByRole("list");
@@ -125,13 +131,16 @@ describe('Order Information component', () => {
 	});
 
 	it("renders link to offer", () => {
+		const showOfferUrl = true
+		const showPriceDesc = false;
+		const showProductFeat = true;
 		render(
 			<OrderInformation
 				orderDetails={orderDetails}
-				offerURL={"/offer/"}
-				showOfferURL={true}
-				showPriceDescription={false}
-				showProductFeatures={true}
+				offerURL="/offer/"
+				showOfferURL={showOfferUrl}
+				showPriceDescription={showPriceDesc}
+				showProductFeatures={showProductFeat}
 			/>,
 		);
 		expect(

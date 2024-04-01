@@ -1,5 +1,5 @@
 import React from "react";
-import { act, render, waitFor } from "@testing-library/react";
+import {render, waitFor } from "@testing-library/react";
 import OfferToProductList from "./index";
 import useOffer from "../useOffer";
 import OfferCard from "../OfferCard";
@@ -180,9 +180,9 @@ jest.mock("fusion:properties", () =>
 	})),
 );
 
-jest.mock("../OfferCard", () => {
-	return jest.fn(() => null);
-  });
+jest.mock("../OfferCard", () => 
+	(jest.fn(() => null))
+  );
 
 jest.mock("@arc-publishing/sdk-sales");
 jest.mock("../../components/useOffer");

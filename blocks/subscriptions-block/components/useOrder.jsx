@@ -8,9 +8,9 @@ const useOrder = (orderNumber) => {
 	const { Sales } = useSales();
 
 	const [order, setOrder] = useState();
-    const [orderDetails, setOrderDetails] = useState();
+	const [orderDetails, setOrderDetails] = useState();
 	const [cart, setCart] = useState();
-    const [cartDetails, setCartDetails] = useState();
+	const [cartDetails, setCartDetails] = useState();
 	const [error, setError] = useState();
 
 	const [campaignName, setCampaignName] = useState();
@@ -21,8 +21,14 @@ const useOrder = (orderNumber) => {
 
 	useEffect(() => {
 		const getCart = async () => {
-			const currentCart = await Sales.getCart();
-			setCart(currentCart);
+			try {
+				const currentCart = await Sales.getCart();
+				if(currentCart.items.length){
+					setCart(currentCart);
+				}
+			} catch (e) {
+				setError(e);
+			}
 		};
 		getCart();
 
@@ -33,10 +39,12 @@ const useOrder = (orderNumber) => {
 
 	useEffect(() => {
 		const getOrder = async () => {
-			try{
+			try {
 				const currentOrder = await Sales.getOrderDetails(orderNumber);
-				setOrder(currentOrder);
-			}catch(e){
+				if(currentOrder?.items?.length){
+					setOrder(currentOrder);
+				}
+			} catch (e) {
 				setError(e);
 			}
 		};
@@ -49,10 +57,10 @@ const useOrder = (orderNumber) => {
 	useEffect(() => {
 		const getProductPriceDetailsFromOffer = (sku, priceCode) => {
 			let productAttributes;
-            let productDescription;
+			let productDescription;
 			let priceName;
-            let priceDescription;
-            let priceSummary;
+			let priceDescription;
+			let priceSummary;
 			let rates;
 
 			const productBySku = offer?.products?.find((item) => item?.sku === sku);
@@ -64,21 +72,23 @@ const useOrder = (orderNumber) => {
 								featureText: feature.value,
 							}))
 						: [];
-                productDescription = productBySku?.description;
-                const pricingStrategy =   productBySku?.pricingStrategies?.find((price)=> price?.priceCode === priceCode);
+				productDescription = productBySku?.description;
+				const pricingStrategy = productBySku?.pricingStrategies?.find(
+					(price) => price?.priceCode === priceCode,
+				);
 
 				priceName = pricingStrategy?.name;
-                priceDescription = pricingStrategy?.description;
-                priceSummary = pricingStrategy?.summary;
-                rates = pricingStrategy?.rates;
+				priceDescription = pricingStrategy?.description;
+				priceSummary = pricingStrategy?.summary;
+				rates = pricingStrategy?.rates;
 			}
 
 			return {
 				productAttributes,
-                productDescription,
+				productDescription,
 				priceName,
-                priceDescription,
-                priceSummary,
+				priceDescription,
+				priceSummary,
 				rates,
 			};
 		};
@@ -86,22 +96,48 @@ const useOrder = (orderNumber) => {
 		if (offer) {
 			if (order) {
 				const itemsDetail = order?.items?.map((item) => {
-					const { productAttributes, productDescription, priceName, priceDescription, priceSummary, rates } = getProductPriceDetailsFromOffer(
-						item?.sku,
-						item?.priceCode,
-					);
-					return { ...item, productAttributes, productDescription, priceName, priceDescription, priceSummary, rates};
+					const {
+						productAttributes,
+						productDescription,
+						priceName,
+						priceDescription,
+						priceSummary,
+						rates,
+					} = getProductPriceDetailsFromOffer(item?.sku, item?.priceCode);
+					return {
+						...item,
+						productAttributes,
+						productDescription,
+						priceName,
+						priceDescription,
+						priceSummary,
+						rates,
+					};
 				});
-                setOrderDetails({...order, items: itemsDetail})
+				setOrderDetails({ ...order, items: itemsDetail });
 			} else if (cart) {
 				const itemsDetail = cart?.items?.map((item) => {
-					const { productAttributes, productDescription, priceName, priceDescription, priceSummary, rates, taxInclusive }  = getProductPriceDetailsFromOffer(
-						item?.sku,
-						item?.priceCode,
-					);
-					return { ...item, productAttributes, productDescription, priceName,  priceDescription, priceSummary, rates, taxInclusive};
+					const {
+						productAttributes,
+						productDescription,
+						priceName,
+						priceDescription,
+						priceSummary,
+						rates,
+						taxInclusive,
+					} = getProductPriceDetailsFromOffer(item?.sku, item?.priceCode);
+					return {
+						...item,
+						productAttributes,
+						productDescription,
+						priceName,
+						priceDescription,
+						priceSummary,
+						rates,
+						taxInclusive,
+					};
 				});
-                setCartDetails({...cart, items: itemsDetail})
+				setCartDetails({ ...cart, items: itemsDetail });
 			}
 		}
 	}, [order, cart, offer]);
@@ -109,7 +145,7 @@ const useOrder = (orderNumber) => {
 	return {
 		cartDetails,
 		orderDetails,
-		error
+		error,
 	};
 };
 

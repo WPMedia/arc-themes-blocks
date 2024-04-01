@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSales } from "@wpmedia/arc-themes-components";
+import useSales from "./useSales";
 import { LABEL_ORDER_NUMBER_PAYPAL } from "../features/checkout/default";
 
 export const usePaymentRedirect = (

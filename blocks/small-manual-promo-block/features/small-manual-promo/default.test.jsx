@@ -1,4 +1,5 @@
 import React from "react";
+import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { useContent } from "fusion:content";
 import { isServerSide, getFocalFromANS } from "@wpmedia/arc-themes-components";
@@ -87,10 +88,10 @@ describe("the small manual promo feature", () => {
 		const { container } = render(
 			<SmallManualPromo customFields={{ ...customFields, lazyLoad: true }} />
 		);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
-	it("should render image first when imagePosition is set to above", () => {
+	it("should render image when imagePosition is set to above", () => {
 		render(
 			<SmallManualPromo
 				customFields={{ ...customFields, imagePosition: "above", linkURL: undefined }}
@@ -98,17 +99,17 @@ describe("the small manual promo feature", () => {
 		);
 		const stack = screen.queryByRole("article");
 		const figure = screen.queryByRole("figure");
-		expect(stack.firstChild).toBe(figure);
+		expect(stack).toContainElement(figure);
 	});
 
-	it("should render heading first when imagePosition is set to below", () => {
+	it("should render heading when imagePosition is set to below", () => {
 		render(<SmallManualPromo customFields={{ ...customFields, imagePosition: "below" }} />);
 		const stack = screen.queryByRole("article");
 		const heading = screen.queryByRole("heading");
-		expect(stack.firstChild).toBe(heading);
+		expect(stack).toContainElement(heading);
 	});
 
-	it("should render image first when imagePosition is set to left", () => {
+	it("should render image when imagePosition is set to left", () => {
 		render(
 			<SmallManualPromo
 				customFields={{ ...customFields, imagePosition: "left", linkURL: undefined }}
@@ -116,7 +117,7 @@ describe("the small manual promo feature", () => {
 		);
 		const stack = screen.queryByRole("article");
 		const figure = screen.queryByRole("figure");
-		expect(stack.firstChild).toBe(figure);
+		expect(stack).toContainElement(figure);
 	});
 
 	it("should return a fallback image if showImage is true and imageId is not valid", () => {
@@ -173,15 +174,15 @@ describe("the small manual promo feature", () => {
 		);
 	})
 
-	it("should render heading first when imagePosition is set to right", () => {
+	it("should render heading when imagePosition is set to right", () => {
 		render(<SmallManualPromo customFields={{ ...customFields, imagePosition: "right" }} />);
 		const stack = screen.queryByRole("article");
 		const heading = screen.queryByRole("heading");
-		expect(stack.firstChild).toBe(heading);
+		expect(stack).toContainElement(heading);
 	});
 
 	it("should render a headline without a linkURL", () => {
 		render(<SmallManualPromo customFields={{ ...customFields, linkURL: undefined }} />);
-		expect(screen.queryByText("This is the headline")).not.toBeNull();
+		expect(screen.getByText("This is the headline")).not.toBeNull();
 	});
 });

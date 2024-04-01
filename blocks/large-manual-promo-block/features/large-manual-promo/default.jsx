@@ -23,6 +23,16 @@ import {
 
 const BLOCK_CLASS_NAME = "b-large-manual-promo";
 
+const PromoOverline = ({ showOverline, overline, overlineURL }) => {
+	if (showOverline && overline) {
+		if (overlineURL) {
+			return <Overline href={overlineURL}>{overline}</Overline>;
+		}
+		return <Overline>{overline}</Overline>;
+	}
+	return null;
+};
+
 const LargeManualPromo = ({ customFields }) => {
 	const {
 		description,
@@ -93,16 +103,6 @@ const LargeManualPromo = ({ customFields }) => {
 				alt,
 			};
 
-	const PromoOverline = () => {
-		if (showOverline && overline) {
-			if (overlineURL) {
-				return <Overline href={overlineURL}>{overline}</Overline>;
-			}
-			return <Overline>{overline}</Overline>;
-		}
-		return null;
-	};
-
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
@@ -131,7 +131,7 @@ const LargeManualPromo = ({ customFields }) => {
 						</MediaItem>
 					) : null}
 					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
-						<PromoOverline />
+						<PromoOverline showOverline={showOverline} overline={overline} overlineURL={overlineURL} />
 						{showDescription || showHeadline ? (
 							<Stack>
 								{showHeadline && headline ? (

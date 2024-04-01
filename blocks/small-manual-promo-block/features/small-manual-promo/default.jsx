@@ -19,6 +19,48 @@ import {
 
 const BLOCK_CLASS_NAME = "b-small-manual-promo";
 
+const PromoImage = ({ showImage, searchableField, imageParams, linkURL, newTab, registerSuccessEvent, showHeadline }) => {
+	const ImageDisplay = showImage ? (
+		<MediaItem
+			{...searchableField({
+				imageURL: "url",
+				imageId: "_id",
+				imageAuth: "auth",
+				imageFocalPoint: "focal_point"
+			})}
+			suppressContentEditableWarning
+		>
+			<Image {...imageParams} />
+		</MediaItem>
+	) : null;
+	return showImage && linkURL ? (
+		<Link
+			className={`${BLOCK_CLASS_NAME}__img`}
+			href={formatURL(linkURL)}
+			openInNewTab={newTab}
+			onClick={registerSuccessEvent}
+			assistiveHidden={showHeadline}
+		>
+			{ImageDisplay}
+		</Link>
+	) : (
+		ImageDisplay
+	);
+};
+
+const PromoHeading = ({ showHeadline, headline, linkURL, newTab, registerSuccessEvent }) =>
+	showHeadline && headline ? (
+		<Heading>
+			{linkURL ? (
+				<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
+					{headline}
+				</Link>
+			) : (
+				headline
+			)}
+		</Heading>
+	) : null;
+
 const SmallManualPromo = ({ customFields }) => {
 	const {
 		headline,
@@ -86,48 +128,6 @@ const SmallManualPromo = ({ customFields }) => {
 				alt,
 			};
 
-	const PromoImage = () => {
-		const ImageDisplay = showImage ? (
-			<MediaItem
-				{...searchableField({
-					imageURL: "url",
-					imageId: "_id",
-					imageAuth: "auth",
-					imageFocalPoint: "focal_point"
-				})}
-				suppressContentEditableWarning
-			>
-				<Image {...imageParams} />
-			</MediaItem>
-		) : null;
-		return showImage && linkURL ? (
-			<Link
-				className={`${BLOCK_CLASS_NAME}__img`}
-				href={formatURL(linkURL)}
-				openInNewTab={newTab}
-				onClick={registerSuccessEvent}
-				assistiveHidden={showHeadline}
-			>
-				{ImageDisplay}
-			</Link>
-		) : (
-			ImageDisplay
-		);
-	};
-
-	const PromoHeading = () =>
-		showHeadline && headline ? (
-			<Heading>
-				{linkURL ? (
-					<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
-						{headline}
-					</Link>
-				) : (
-					headline
-				)}
-			</Heading>
-		) : null;
-
 	const containerClassNames = [
 		BLOCK_CLASS_NAME,
 		!showImage || !showHeadline ? null : `${BLOCK_CLASS_NAME}--${imagePosition}`,
@@ -141,13 +141,13 @@ const SmallManualPromo = ({ customFields }) => {
 				<Grid as="article" className={containerClassNames}>
 					{["below", "right"].includes(imagePosition) ? (
 						<>
-							<PromoHeading />
-							<PromoImage />
+							<PromoHeading showHeadline={showHeadline} headline={headline} linkURL={linkURL} newTab={newTab} registerSuccessEvent={registerSuccessEvent} />
+							<PromoImage showImage={showImage} searchableField={searchableField} imageParams={imageParams} linkURL={linkURL} newTab={newTab} registerSuccessEvent={registerSuccessEvent} showHeadline={showHeadline} />
 						</>
 					) : (
 						<>
-							<PromoImage />
-							<PromoHeading />
+							<PromoImage showImage={showImage} searchableField={searchableField} imageParams={imageParams} linkURL={linkURL} newTab={newTab} registerSuccessEvent={registerSuccessEvent} showHeadline={showHeadline} />
+							<PromoHeading showHeadline={showHeadline} headline={headline} linkURL={linkURL} newTab={newTab} registerSuccessEvent={registerSuccessEvent} />
 						</>
 					)}
 				</Grid>

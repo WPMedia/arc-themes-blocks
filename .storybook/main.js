@@ -9,7 +9,6 @@ module.exports = {
     ],
 
     addons: [
-        "@etchteam/storybook-addon-css-variables-theme",
         "@storybook/addon-a11y",
 		"@storybook/addon-controls",
         "@storybook/addon-docs",

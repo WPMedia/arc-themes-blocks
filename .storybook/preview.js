@@ -1,11 +1,7 @@
-import cssVariablesTheme from "@etchteam/storybook-addon-css-variables-theme";
-
 // eslint-disable-next-line import/no-webpack-loader-syntax,import/no-unresolved
 import news from "!!style-loader?injectType=lazyStyleTag!css-loader!sass-loader!./themes/news.scss";
 // eslint-disable-next-line import/no-webpack-loader-syntax,import/no-unresolved
 import commerce from "!!style-loader?injectType=lazyStyleTag!css-loader!sass-loader!./themes/commerce.scss";
-
-export const decorators = [cssVariablesTheme];
 
 // eslint-disable-next-line import/prefer-default-export
 export const parameters = {

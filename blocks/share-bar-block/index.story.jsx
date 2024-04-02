@@ -1,12 +1,16 @@
 import React from "react";
-import { text, boolean } from "@storybook/addon-knobs";
 import ShareBarContainer, { ShareBar } from "./features/share-bar/default";
 
 
 export default {
 	title: "Blocks/Share Bar",
 	component: ShareBarContainer,
-
+	args: {
+		websiteName: "The Sun",
+		websiteDomain: "https://www.thesun.com/",
+		websiteUrl: "/2019/07/15/global-kitchen-sink-article/",
+		headlineString: "Man Bites Dog"
+	},
 	parameters: {
 		chromatic: {
 			viewports: [960, 1200],
@@ -14,31 +18,27 @@ export default {
 	},
 };
 
-export const CustomShareBar = (
+export const CustomShareBar = (args) => (
 	<ShareBar
-		customFields={{
-			email: boolean("Email", true),
-			facebook: boolean("Facebook", true),
-			pinterest: boolean("Pinterest", true),
-			twitter: boolean("Twitter", true),
-			linkedIn: boolean("Linkedin", true),
-		}}
-		websiteName={text("headlineString", "Man Bites Dog")}
-		websiteDomain={text("websiteDomain", "https://www.thesun.com/")}
-		websiteUrl={text("websiteUrl", "/2019/07/15/global-kitchen-sink-article/")}
-		headlineString={text("websiteName", "The Sun")}
+		{ ...args }
 		phrases={{
 			t: (key) => key,
 		}}
 	/>
 );
+CustomShareBar.args = {
+	customFields: {
+		email: true,
+		facebook: true,
+		pinterest: true,
+		twitter: true,
+		linkedIn: true,
+	},
+};
 
-export const NoShareButtons = (
+export const NoShareButtons = (args) => (
 	<ShareBar
-		websiteName={text("headlineString", "Man Bites Dog")}
-		websiteDomain={text("websiteDomain", "https://www.thesun.com/")}
-		websiteUrl={text("websiteUrl", "/2019/07/15/global-kitchen-sink-article/")}
-		headlineString={text("websiteName", "The Sun")}
+		{ ...args }
 		phrases={{
 			t: (key) => key,
 		}}

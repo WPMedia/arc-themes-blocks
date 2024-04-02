@@ -1,10 +1,8 @@
 import React from "react";
-import { withKnobs } from "@storybook/addon-knobs";
 import { MastheadPresentational } from "./features/masthead-block/default";
 
 export default {
 	title: "Blocks/Masthead",
-	decorators: [withKnobs],
 	parameters: {
 		// Set the viewports in Chromatic at a component level.
 		chromatic: { viewports: [320, 1200] },

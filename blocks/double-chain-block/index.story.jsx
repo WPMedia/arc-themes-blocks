@@ -1,10 +1,8 @@
 import React from "react";
-import { withKnobs } from "@storybook/addon-knobs";
 import DoubleChain from "./chains/double-chain/default";
 
 export default {
 	title: "Chains/Double",
-	decorators: [withKnobs],
 	parameters: {
 		// Set the viewports in Chromatic at a component level.
 		chromatic: { viewports: [320, 740, 1200] },

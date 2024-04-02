@@ -1,10 +1,8 @@
 import React from "react";
-import { withKnobs } from "@storybook/addon-knobs";
 import NumberedList from "./features/numbered-list/default";
 
 export default {
 	title: "Blocks/Numbered List",
-	decorators: [withKnobs],
 	parameters: {
 		// Set the viewports in Chromatic at a component level.
 		chromatic: { viewports: [320, 1200] },

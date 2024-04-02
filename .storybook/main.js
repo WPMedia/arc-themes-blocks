@@ -56,9 +56,13 @@ module.exports = {
 			{
 				test: /\.(js|jsx)$/,
 				include: path.resolve(__dirname, "../node_modules/@wpmedia/arc-themes-components"),
-				use: ["babel-loader"],
-			}
+				use: {
+					loader: "babel-loader",				
+				},
+			},
 		);
+
+		config.externals = /^(fusion:)/;
 
 		// Return the altered config
 		return config;

@@ -3021,7 +3021,8 @@
 					"padding-block-end": var(--global-spacing-2),
 					"padding-block-start": var(--global-spacing-2),
 					"padding-inline-end": var(--global-spacing-2),
-					"padding-inline-start": var(--global-spacing-2) "position": absolute,
+					"padding-inline-start": var(--global-spacing-2),
+					"position": absolute,
 					"z-index": 1,
 					"components": (
 						"icon": (
@@ -3582,9 +3583,6 @@
 				"media-item-fig-caption-vertical-video": (
 					"text-align": center,
 				),
-				"media-item-fig-caption-vertical-video": (
-					"text-align": center,
-				),
 				"media-item-title": (
 					"font-weight": var(--global-font-weight-7),
 				),
@@ -3628,9 +3626,6 @@
 					"border-block-end-width": var(--global-border-width-1),
 					"border-block-end-style": var(--global-border-style-1),
 					"border-block-end-color": var(--border-color),
-				),
-				"vertical-video-frame": (
-					"background-color": transparent,
 				),
 				"vertical-video-frame": (
 					"background-color": transparent,

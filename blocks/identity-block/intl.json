@@ -604,7 +604,7 @@
 		"bn": "ইতিমধ্যে একটি অ্যাকাউন্ট আছে?\nলগ ইন করুন",
 		"bo": "དྲ་གྲངས་ཡོད་པ་ཡིན་ནམ། ཐོ་འཇུག",
 		"de": "Already have an account? Log in.",
-		"en": "Already have an account? Log in",
+		"en": "Already have an account?",
 		"es": "Already have an account? Log in.",
 		"fr": "Already have an account? Log in.",
 		"id": "Sudah memiliki akun? Masuk",
@@ -1179,7 +1179,6 @@
 		"bn": "একটি অ্যাকাউন্ট তৈরী করে,<a href='%{termsURL}'> আপনি পরিষেবার শর্তাবলী</a>তে সম্মত হন এবং আমাদের <a href='%{privacyURL}'>গোপনীয়তা নীতি</a> স্বীকার করেন।",
 		"bo": "དྲ་གྲངས་གཅིག་གསར་བཟོ་བྱས་ཚེ། ཁྱེད་ཀྱིས་<a href='%{termsURL}'>ཞབས་ཞུའི་དོན་ཚན་</a>ལ་མོས་མཐུན་བྱེད་པ་དང་། <a href='%{privacyURL}'>གསང་བའི་སྲིད་ཇུས་</a>ཁས་ལེན་བྱེད་པ་མཚོན།",
 		"de": "Durch die Erstellung eines Kontos stimmen Sie den <a href='%{termsURL}'> Nutzungsbedingungen </a> zu und erkennen unsere <a href='%{privacyURL}'> Datenschutzrichtlinie </a> an.",
-		"en": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service</a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy</a>.",
 		"es": "Al crear una cuenta, acepta las <a href='%{termsURL}'> Condiciones de servicio </a> y reconoce nuestra <a href='%{privacyURL}'> Política de privacidad </a> .",
 		"fr": "En créant un compte, vous acceptez les <a href='%{termsURL}'> Conditions d'utilisation </a> et reconnaissez notre <a href='%{privacyURL}'> Politique de confidentialité </a> .",
 		"id": "Dengan membuat akun, Anda menyetujui <a href='%{termsURL}'>Persyaratan Layanan</a> dan mengakui <a href='%{privacyURL}'>Kebijakan Privasi</a> kami.",
@@ -1277,16 +1276,40 @@
 	"identity-block.bot-protection-error": {
 		"en": "Please verify that you are not a robot."
 	},
+	"identity-block.create-an-account": {
+		"en": "Create an account"
+	},
 	"identity-block.email-label": {
 		"en": "Email"
 	},
+	"identity-block.log-in-natural": {
+		"en": "Log in"
+	},
 	"identity-block.log-in-headline": {
 		"en": "Log in to your account"
+	},
+	"identity-block.or": {
+		"en": "OR"
 	},
 	"identity-block.privacy-statement": {
 		"en": "By creating an account, you agree to the Terms of Service and acknowledge our Privacy Policy."
 	},
 	"identity-block.sign-up-natural": {
 		"en": "Sign up"
+	},
+	"identity-block.social-signOn-apple-login": {
+		"en": "Sign in with Apple"
+	},
+	"identity-block.social-signOn-apple-signUp": {
+		"en": "Sign up with Apple"
+	},
+	"identity-block.social-signOn-google-login": {
+		"en": "Sign in with Google"
+	},
+	"identity-block.social-signOn-google-signUp": {
+		"en": "Sign up with Google"
+	},
+	"identity-block.terms-service-privacy-text": {
+		"en": "By creating an account, you agree to the <a href='%{termsAndPrivacyURL}'>Terms of Service and acknowledge our Privacy Policy</a>"
 	}
 }

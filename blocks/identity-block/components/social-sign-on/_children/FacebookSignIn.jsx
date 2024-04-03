@@ -1,12 +1,16 @@
 import React from "react";
 
-function FacebookSignIn() {
+// eslint-disable-next-line
+import { SIGN_UP } from "../index";
+
+function FacebookSignIn({socialSignOnIn}) {
+	const facebookTextType = socialSignOnIn === SIGN_UP ? 'continue_with' : 'login_with';
 	return (
 		<div
 			className="fb-login-button"
-			data-width="300"
+			data-width="400"
 			data-size="large"
-			data-button-type="continue_with"
+			data-button-type={facebookTextType}
 			data-scope="public_profile,email"
 			data-auto-logout-link="false"
 			data-use-continue-as="true"

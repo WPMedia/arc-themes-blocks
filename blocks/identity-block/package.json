@@ -26,11 +26,12 @@
     "directory": "blocks/identity-block"
   },
   "peerDependencies": {
-    "@wpmedia/arc-themes-components": "*"
+    "@wpmedia/arc-themes-components": "file:../../../arc-themes-components"
   },
   "dependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
     "@arc-publishing/sdk-identity": "^1.79.0",
-    "react-google-recaptcha": "^3.1.0"
+    "react-google-recaptcha": "^3.1.0",
+    "react-google-recaptcha-v3": "^1.10.1"
   }
 }

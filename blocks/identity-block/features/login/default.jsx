@@ -4,7 +4,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Input, useIdentity, Paragraph } from "@wpmedia/arc-themes-components";
+import { Input, useIdentity } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
 import useLogin from "../../components/login";
 import BotChallengeProtection from "../../components/bot-challenge-protection";
@@ -23,7 +23,8 @@ const Login = ({ customFields }) => {
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
-	const isOIDC = OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
+	const isOIDC =
+		OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
 	const { Identity, isInitialized } = useIdentity();
 	const [captchaToken, setCaptchaToken] = useState();
 	const [error, setError] = useState();
@@ -52,7 +53,7 @@ const Login = ({ customFields }) => {
 				setCaptchaError(null);
 				return Identity.login(email, password, {
 					rememberMe: true,
-					recaptchaToken: captchaToken
+					recaptchaToken: captchaToken,
 				})
 					.then(() => {
 						if (isOIDC) {
@@ -65,16 +66,14 @@ const Login = ({ customFields }) => {
 					.catch((e) => {
 						if (e?.code === "130001") {
 							setCaptchaError(true);
-						}
-						else {
+						} else {
 							setError(phrases.t("identity-block.login-form-error"));
 						}
 						if (grecaptcha) {
 							grecaptcha.reset();
 						}
-					})
-			}
-			}
+					});
+			}}
 		>
 			<Input
 				autoComplete="email"
@@ -93,8 +92,13 @@ const Login = ({ customFields }) => {
 				showDefaultError={false}
 				type="password"
 			/>
-			<BotChallengeProtection className={BLOCK_CLASS_NAME} challengeIn="signin" setCaptchaToken={setCaptchaToken} captchaError={captchaError} setCaptchaError={setCaptchaError} />
-			<Paragraph className={`${BLOCK_CLASS_NAME}__privacy-statement`}>{phrases.t("identity-block.privacy-statement")}</Paragraph>
+			<BotChallengeProtection
+				className={BLOCK_CLASS_NAME}
+				challengeIn="signin"
+				setCaptchaToken={setCaptchaToken}
+				captchaError={captchaError}
+				setCaptchaError={setCaptchaError}
+			/>
 		</HeadlinedSubmitForm>
 	);
 };
@@ -120,10 +124,11 @@ Login.propTypes = {
 				"The URL to which a user would be redirected to if visiting a login page when already logged in.",
 		}),
 		OIDC: PropTypes.bool.tag({
-      name: 'Login with OIDC',
-      defaultValue: false,
-      description: 'Used when authenticating a third party site with OIDC PKCE flow. This will use an ArcXp Org as an auth provider',
-    }),
+			name: "Login with OIDC",
+			defaultValue: false,
+			description:
+				"Used when authenticating a third party site with OIDC PKCE flow. This will use an ArcXp Org as an auth provider",
+		}),
 	}),
 };
 

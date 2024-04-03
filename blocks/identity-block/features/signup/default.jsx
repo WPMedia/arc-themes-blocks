@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Input, isServerSide, Paragraph, useIdentity } from "@wpmedia/arc-themes-components";
+import {
+	Input,
+	isServerSide,
+	Paragraph,
+	useIdentity
+} from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
 import FormPasswordConfirm from "../../components/form-password-confirm";
 import validatePasswordPattern from "../../utils/validate-password-pattern";
@@ -12,7 +17,7 @@ const BLOCK_CLASS_NAME = "b-sign-up";
 
 const SignUp = ({ customFields, arcSite }) => {
 	let { redirectURL } = customFields;
-	const { privacyURL, redirectToPreviousPage, termsURL } = customFields;
+	const { termsAndPrivacyURL, redirectToPreviousPage } = customFields;
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
@@ -66,46 +71,52 @@ const SignUp = ({ customFields, arcSite }) => {
 		status,
 	} = passwordRequirements;
 
+	const passwordOptions = {
+		lowercase: {
+			value: pwLowercase,
+			message: phrases.t("identity-block.password-requirements-lowercase", {
+				requirementCount: pwLowercase,
+			}),
+		},
+		minLength: {
+			value: pwMinLength,
+			message: phrases.t("identity-block.password-requirements-characters", {
+				requirementCount: pwMinLength,
+			}),
+		},
+		uppercase: {
+			value: pwUppercase,
+			message: phrases.t("identity-block.password-requirements-uppercase", {
+				requirementCount: pwUppercase,
+			}),
+		},
+		numbers: {
+			value: pwPwNumbers,
+			message: phrases.t("identity-block.password-requirements-numbers", {
+				requirementCount: pwPwNumbers,
+			}),
+		},
+		specialCharacters: {
+			value: pwSpecialCharacters,
+			message: phrases.t("identity-block.password-requirements-special", {
+				requirementCount: pwSpecialCharacters,
+			}),
+		},
+	};
+
 	const passwordErrorMessage = passwordValidationMessage({
 		defaultMessage: phrases.t("identity-block.password-requirements"),
-		options: {
-			lowercase: {
-				value: pwLowercase,
-				message: phrases.t("identity-block.password-requirements-lowercase", {
-					requirementCount: pwLowercase,
-				}),
-			},
-			minLength: {
-				value: pwMinLength,
-				message: phrases.t("identity-block.password-requirements-characters", {
-					requirementCount: pwMinLength,
-				}),
-			},
-			uppercase: {
-				value: pwUppercase,
-				message: phrases.t("identity-block.password-requirements-uppercase", {
-					requirementCount: pwUppercase,
-				}),
-			},
-			numbers: {
-				value: pwPwNumbers,
-				message: phrases.t("identity-block.password-requirements-numbers", {
-					requirementCount: pwPwNumbers,
-				}),
-			},
-			specialCharacters: {
-				value: pwSpecialCharacters,
-				message: phrases.t("identity-block.password-requirements-special", {
-					requirementCount: pwSpecialCharacters,
-				}),
-			},
-		},
+		options: passwordOptions
+	});
+
+	const tipPasswordMessage = passwordValidationMessage({
+		options: passwordOptions
 	});
 
 	return (
 		<HeadlinedSubmitForm
-			headline={phrases.t("identity-block.sign-up")}
-			buttonLabel={phrases.t("identity-block.sign-up")}
+			headline={phrases.t("identity-block.create-an-account")}
+			buttonLabel={phrases.t("identity-block.sign-up-natural")}
 			onSubmit={({ email, password }) =>
 				Identity.signUp(
 					{
@@ -128,7 +139,7 @@ const SignUp = ({ customFields, arcSite }) => {
 		>
 			<Input
 				autoComplete="off"
-				label={phrases.t("identity-block.email")}
+				label={phrases.t("identity-block.email-label")}
 				name="email"
 				required
 				showDefaultError={false}
@@ -149,13 +160,16 @@ const SignUp = ({ customFields, arcSite }) => {
 				)}
 				confirmLabel={phrases.t("identity-block.confirm-password")}
 				confirmValidationErrorMessage={phrases.t("identity-block.confirm-password-error")}
+				tipPasswordMessage={tipPasswordMessage}
+				className={BLOCK_CLASS_NAME}
 			/>
-			<Paragraph
-				dangerouslySetInnerHTML={{
-					__html: phrases.t("identity-block.terms-privacy-text", { privacyURL, termsURL }),
-				}}
-				className={`${BLOCK_CLASS_NAME}__tos-container`}
-			/>
+			<div className={`${BLOCK_CLASS_NAME}__tos-container`}>
+				<Paragraph
+					dangerouslySetInnerHTML={{
+						__html: phrases.t("identity-block.terms-service-privacy-text", { termsAndPrivacyURL }),
+					}}
+				/>
+			</div>
 		</HeadlinedSubmitForm>
 	);
 };
@@ -174,13 +188,9 @@ SignUp.propTypes = {
 			description:
 				"Do you wish for the user to be redirected to the page they entered from before signing up? This overrides redirect URL",
 		}),
-		termsURL: PropTypes.string.tag({
-			name: "Terms and Conditions URL",
+		termsAndPrivacyURL: PropTypes.string.tag({
+			name: "Terms of Service and Privacy policy URL",
 			defaultValue: "/terms-and-conditions/",
-		}),
-		privacyURL: PropTypes.string.tag({
-			name: "Privacy Policy URL",
-			defaultValue: "/privacy-policy/",
 		}),
 	}),
 };

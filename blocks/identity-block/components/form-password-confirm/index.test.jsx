@@ -66,8 +66,6 @@ describe("Form Password Confirm", () => {
 				name="field1"
 			/>
 		);
-
-		expect(screen.getByText("Password Tip")).not.toBeNull();
 		expect(screen.getByText("Confirm Tip")).not.toBeNull();
 	});
 

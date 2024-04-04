@@ -4,10 +4,9 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Input, useIdentity, Paragraph } from "@wpmedia/arc-themes-components";
+import { Input, useIdentity, Paragraph, BotChallengeProtection } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
 import useLogin from "../../components/login";
-import BotChallengeProtection from "../../components/bot-challenge-protection";
 import useOIDCLogin from "../../utils/useOIDCLogin";
 import validateURL from "../../utils/validate-redirect-url";
 import { RECAPTCHA_LOGIN } from "../../utils/useRecaptcha";
@@ -38,11 +37,15 @@ const Login = ({ customFields }) => {
 
 	const isOIDC =
 		OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
+
 	const { Identity, isInitialized } = useIdentity();
+
 	const [captchaToken, setCaptchaToken] = useState();
-	const [resetRecaptcha, setResetRecaptcha] = useState(true);
-	const [error, setError] = useState();
 	const [captchaError, setCaptchaError] = useState();
+	const [resetRecaptcha, setResetRecaptcha] = useState(true);
+
+	const [error, setError] = useState();
+	
 	const { loginRedirect } = useLogin({
 		isAdmin,
 		redirectURL,

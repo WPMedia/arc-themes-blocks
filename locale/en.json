@@ -110,6 +110,7 @@
 		"identity-block.add-password": "Add Password",
 		"identity-block.bot-protection-error": "Please verify that you are not a robot.",
 		"identity-block.cancel": "Cancel",
+		"identity-block.create-an-account": "Create an account",
 		"identity-block.confirm-password": "Confirm password",
 		"identity-block.confirm-password-error": "Passwords must match",
 		"identity-block.connect-account": "Connected",
@@ -161,8 +162,9 @@
 		"identity-block.save": "Save",
 		"identity-block.sign-up": "Sign Up",
 		"identity-block.sign-up-natural": "Sign up",
+		"identity-block.signup-form-error.identity-already-exists": "Account already exists",
 		"identity-block.sign-up-form-error": "There's been an error creating your account",
-		"identity-block.terms-privacy-text": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service<\/a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy<\/a>.",
+		"identity-block.terms-service-privacy-text": "By creating an account, you agree to the <a href='%{termsAndPrivacyURL}'>Terms of Service and acknowledge our Privacy Policy<\/a>",
 		"identity-block.update-email-error": "There's been an error updating your email address",
 		"identity-block.update-password-error": "There's been an error updating your password",
 		"identity-block.username": "Username"

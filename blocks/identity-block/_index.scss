@@ -108,6 +108,12 @@
 			@include scss.block-components("sign-up-tos-link");
 			@include scss.block-properties("sign-up-tos-link");
 		}
+		@include scss.block-components("sign-up-tos-container-link");
+		@include scss.block-properties("sign-up-tos-container-link");
+	}
+	&__login-form-error {
+		@include scss.block-components("login-form-error");
+		@include scss.block-properties("login-form-error");
 	}
 
 	@include scss.block-components("sign-up");

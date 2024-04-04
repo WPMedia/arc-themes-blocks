@@ -13,9 +13,13 @@ const BLOCK_CLASS_NAME = "b-social-sign-on";
 const SocialSignOnBlock = ({ customFields }) => {
 	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC } = customFields;
 
-	const url_string = window.location.href;
-	const url = new URL(url_string);
-	const isOIDC = OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
+	let isOIDC;
+
+	if (typeof window !== "undefined"){
+		const urlString = window.location.href;
+		const url = new URL(urlString);
+		isOIDC = OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
+	}
 
 	const { isAdmin, arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);

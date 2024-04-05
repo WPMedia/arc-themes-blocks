@@ -26,6 +26,42 @@
 			}
 		}
 	},
+	"checkout-billing-address": {
+		"styles": {
+			"default": {
+				"margin-block-start": "var(--global-spacing-6)",
+				"components": {
+					"heading": {
+						"margin-block-end": "var(--global-spacing-5)",
+						"font-size": "var(--global-font-size-11)"
+					},
+					"input": {
+						"margin-block-end": "var(--global-spacing-5)"
+					},
+					"input-error-tip": {
+						"color": "var(--status-color-danger)"
+					},
+					"input-input": {
+						"inline-size": "100%",
+						"padding-block-end": "var(--global-spacing-2)",
+						"padding-block-start": "var(--global-spacing-2)",
+						"padding-inline-end": "var(--global-spacing-2)",
+						"padding-inline-start": "var(--global-spacing-2)"
+					}
+				}
+			}
+		}
+	},
+	"checkout-billing-address-input-div": {
+		"styles": {
+			"default": {
+				"display": "grid",
+				"inline-size": "100%",
+				"grid-template-columns": "repeat(2, 1fr)",
+				"column-gap": "var(--global-spacing-5)"
+			}
+		}
+	},
 	"checkout-card": {
 		"styles": {
 			"default": {
@@ -45,6 +81,22 @@
 						"color": "var(--text-color-subtle)"
 					}
 				}
+			}
+		}
+	},
+	"checkout-card-edit": {
+		"styles": {
+			"default": {
+				"text-decoration": "underline",
+				"font-family": "var(--font-family-primary)",
+				"font-size": "16px",
+				"line-height": "24px",
+				"font-weight": "400",
+				"color": "var(--color-primary)",
+				"padding-block-end": 0,
+				"padding-block-start": 0,
+				"padding-inline-end": 0,
+				"padding-inline-start": 0
 			}
 		}
 	},
@@ -154,42 +206,6 @@
 		"styles": {
 			"default": {
 				"font-size": "var(--global-font-size-2)"
-			}
-		}
-	},
-	"checkout-contact-info": {
-		"styles": {
-			"default": {
-				"margin-block-start": "var(--global-spacing-6)",
-				"components": {
-					"heading": {
-						"margin-block-end": "var(--global-spacing-5)",
-						"font-size": "var(--global-font-size-11)"
-					},
-					"input": {
-						"margin-block-end": "var(--global-spacing-5)"
-					},
-					"input-error-tip": {
-						"color": "var(--status-color-danger)"
-					},
-					"input-input": {
-						"inline-size": "100%",
-						"padding-block-end": "var(--global-spacing-2)",
-						"padding-block-start": "var(--global-spacing-2)",
-						"padding-inline-end": "var(--global-spacing-2)",
-						"padding-inline-start": "var(--global-spacing-2)"
-					}
-				}
-			}
-		}
-	},
-	"checkout-contact-info-profile": {
-		"styles": {
-			"default": {
-				"display": "grid",
-				"inline-size": "100%",
-				"grid-template-columns": "repeat(2, 1fr)",
-				"column-gap": "var(--global-spacing-5)"
 			}
 		}
 	},

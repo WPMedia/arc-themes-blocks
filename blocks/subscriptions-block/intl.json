@@ -6852,8 +6852,38 @@
 	"checkout-block.account": {
 		"en": "Account"
 	},
+	"checkout-block.address1": {
+		"en": "Address 1"
+	},
+	"checkout-block.address1-validation": {
+		"en": "Please enter a valid address."
+	},
+	"checkout-block.address2": {
+		"en": "Address 2 (Optional)"
+	},
+	"checkout-block.address2-placeholder": {
+		"en": "ex: Apt/Suite/Floor"
+	},
 	"checkout-block.billingAddress": {
 		"en": "Billing Address"
+	},
+	"checkout-block.city": {
+		"en": "City"
+	},
+	"checkout-block.city-placeholder": {
+		"en": "Any town"
+	},
+	"checkout-block.city-validation": {
+		"en": "Please enter a valid city."
+	},
+	"checkout-block.continue": {
+		"en": "Continue"
+	},
+	"checkout-block.country-region": {
+		"en": "Country/Region"
+	},
+	"checkout-block.country-validation": {
+		"en": "Please enter a valid country/region."
 	},
 	"checkout-block.edit": {
 		"en": "Edit"
@@ -6863,5 +6893,17 @@
 	},
 	"checkout-block.review": {
 		"en": "Review"
+	},
+	"checkout-block.state": {
+		"en": "State"
+	},
+	"checkout-block.state-validation": {
+		"en": "Please enter a valid state."
+	},
+	"checkout-block.zip-code": {
+		"en": "Zip/Postal Code"
+	},
+	"checkout-block.zip-code-validation": {
+		"en": "Please enter a valid zip/postal code."
 	}
 }

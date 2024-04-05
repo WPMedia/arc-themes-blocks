@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 
 import PropTypes from "@arc-fusion/prop-types";
-import { usePhrases, Heading, useIdentity } from "@wpmedia/arc-themes-components";
+import { usePhrases, Heading, useIdentity, useSales, Button } from "@wpmedia/arc-themes-components";
 import CheckoutCardDetail, {ACCOUNT, BILLING_ADDRESS, PAYMENT, REVIEW} from "../../components/CheckoutCardDetail";
+import BillingAddress, {ARCXP_BILLING_ADDRESS} from "./_children/BillingAddress";
 
 export const LABEL_ORDER_NUMBER_PAYPAL = "ArcSubs_OrderNumber"
 const BLOCK_CLASS_NAME = "b-checkout";
 
 const Checkout = ({ customFields }) => {
-	const { loginURL } = customFields;
+	const { loginURL, offerURL } = customFields;
 
 	const [loggedIn, setIsLoggedIn] = useState(false);
 	const [isFetching, setIsFetching] = useState(true);
@@ -22,11 +23,30 @@ const Checkout = ({ customFields }) => {
 	const [isOpen, setIsOpen] = useState(initialState);
 	const [isComplete, setIsComplete] = useState(initialState);
 	const [accountSummary, setAccountSummary] = useState();
+	const [billingAddress, setBillingAddress] = useState({});
 
 	const { Identity } = useIdentity();
+	const { Sales } = useSales();
 	const phrases = usePhrases();
 
 	const checkoutURL = window.location.href;
+
+	useEffect(() => {
+		const storedBillingAddress = localStorage.getItem(ARCXP_BILLING_ADDRESS);
+		const verifyJSON = (string) => {
+			try {
+				return JSON.parse(string);
+			} catch (e) {
+				return false;
+			}
+		};
+		const parsedBillingAddress = verifyJSON(storedBillingAddress);
+		if(parsedBillingAddress) {
+			setBillingAddress(parsedBillingAddress);
+		}
+	}, [])
+
+	const billingAddressSummary = `${billingAddress?.line1} ${billingAddress?.line2}, ${billingAddress?.locality}, ${billingAddress?.region} ${billingAddress?.postal}`
 
 	useEffect(() => {
 		const isLoggedIn = async () => {
@@ -71,20 +91,48 @@ const Checkout = ({ customFields }) => {
 		}
 	}, [loggedIn, user, isFetching, loginURL, checkoutURL])
 
+	useEffect(() => {
+		if (loggedIn) {
+			Sales.getCart().then(cart => {
+				if(!cart?.items?.length) {
+					window.location.href = `${offerURL}?redirect=${checkoutURL}`;
+				}
+			})
+			// eslint-disable-next-line
+			.catch(e => console.error(e))
+		}
+	}, [loggedIn, Sales, offerURL, checkoutURL])
+
 	const logoutAndRedirect = () => {
 		Identity.logout().then(() => {
 			window.location.href = `${loginURL}?redirect=${checkoutURL}`;
 		})
 	}
 
+	const editButton = (type) => {
+		if(type === ACCOUNT) {
+			return (
+				<Button onClick={logoutAndRedirect} className={`${BLOCK_CLASS_NAME}__card-edit`}>
+					{phrases.t("checkout-block.edit")}
+				</Button>
+			)
+		}
+		if(type === BILLING_ADDRESS) {
+			return (
+				<Button onClick={() => setIsOpen(state => ({...state, billingAddress: true, payment: false}))} className={`${BLOCK_CLASS_NAME}__card-edit`}>
+					{phrases.t("checkout-block.edit")}
+				</Button>
+			)
+		}
+		return null;
+	}
+
 	return (
 		<section className={BLOCK_CLASS_NAME}>
 			<Heading>{phrases.t("checkout-block.headline")}</Heading>
-			<CheckoutCardDetail className={`${BLOCK_CLASS_NAME}__card`} type={ACCOUNT} summary={accountSummary} link={<a href={`${loginURL}?redirect=${checkoutURL}`} onClick={logoutAndRedirect}>Edit</a>} isOpen={isOpen.account} isComplete={isComplete.account}>
-				Account Placeholder 
-			</CheckoutCardDetail>
-			<CheckoutCardDetail className={`${BLOCK_CLASS_NAME}__card`} type={BILLING_ADDRESS} summary='1234 Street Dr, San Diego, CA 92121' link={<a href='/login' >{phrases.t("checkout-block.edit")}</a>} isOpen={isOpen.billingAddress}>
-				Billing Address Placeholder
+			<CheckoutCardDetail className={`${BLOCK_CLASS_NAME}__card`} type={ACCOUNT} summary={accountSummary} link={editButton(ACCOUNT)} isOpen={isOpen.account} isComplete={isComplete.account} />
+			<CheckoutCardDetail className={`${BLOCK_CLASS_NAME}__card`} type={BILLING_ADDRESS} summary={billingAddressSummary} link={editButton(BILLING_ADDRESS)} isOpen={isOpen.billingAddress} isComplete={isComplete}>
+				<BillingAddress Sales={Sales} className={BLOCK_CLASS_NAME} billingAddress={billingAddress} setBillingAddress={setBillingAddress} setIsOpen={setIsOpen} setIsComplete={setIsComplete}/>
 			</CheckoutCardDetail>
 			<CheckoutCardDetail className={`${BLOCK_CLASS_NAME}__card`} type={PAYMENT} summary='Credit Card' link={<a href='/login' >Edit</a>} isOpen={isOpen.payment}>
 				Payment Placeholder

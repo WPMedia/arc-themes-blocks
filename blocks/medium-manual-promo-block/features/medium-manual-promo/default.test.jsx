@@ -1,20 +1,22 @@
 import React from "react";
+import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { isServerSide } from "@wpmedia/arc-themes-components";
+import { isServerSide, getFocalFromANS } from "@wpmedia/arc-themes-components";
 import { useContent } from "fusion:content";
 
 import MediumManualPromo from "./default";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
+	getFocalFromANS: jest.fn(() => { }),
 	isServerSide: jest.fn(() => false),
 	LazyLoad: ({ children }) => children,
 }));
 
 jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => {}),
+	useContent: jest.fn(() => ({})),
 	useEditableContent: jest.fn(() => ({
-		searchableField: () => {},
+		searchableField: () => { },
 	})),
 }));
 
@@ -34,6 +36,7 @@ const customFieldData = {
 describe("the medium promo feature", () => {
 	afterEach(() => {
 		jest.resetModules();
+		getFocalFromANS.mockClear();
 	});
 
 	it("should return null if lazyLoad on the server and not in the admin", () => {
@@ -42,14 +45,14 @@ describe("the medium promo feature", () => {
 			lazyLoad: true,
 		};
 		const { container } = render(<MediumManualPromo customFields={config} />);
-		expect(container.firstChild).toBe(null);
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("should render all fields", () => {
 		render(<MediumManualPromo customFields={customFieldData} />);
-		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
-		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
-		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+		expect(screen.getByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.getByText(customFieldData.description)).not.toBeNull();
+		expect(screen.getByRole("img", { hidden: true })).not.toBeNull();
 	});
 
 	it("does not show image", () => {
@@ -59,8 +62,8 @@ describe("the medium promo feature", () => {
 		};
 
 		render(<MediumManualPromo customFields={noImage} />);
-		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
-		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
+		expect(screen.getByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.getByText(customFieldData.description)).not.toBeNull();
 		expect(screen.queryByRole("img")).toBeNull();
 	});
 
@@ -71,9 +74,9 @@ describe("the medium promo feature", () => {
 		};
 
 		render(<MediumManualPromo customFields={fallbackImage} />);
-		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
-		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
-		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+		expect(screen.getByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.getByText(customFieldData.description)).not.toBeNull();
+		expect(screen.getByRole("img", { hidden: true })).not.toBeNull();
 	});
 
 	it("should return a fallback image if showImage is true and imageId is not valid", () => {
@@ -83,7 +86,7 @@ describe("the medium promo feature", () => {
 			imageId: null,
 		};
 		render(<MediumManualPromo customFields={config} />);
-		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
+		expect(screen.getByRole("img", { name: config.headline })).not.toBeNull();
 	});
 
 	it("should make a blank call to the signing-service if the image is from PhotoCenter and has an Auth value", () => {
@@ -121,9 +124,9 @@ describe("the medium promo feature", () => {
 		};
 
 		render(<MediumManualPromo customFields={noDescription} />);
-		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.getByText(customFieldData.headline)).not.toBeNull();
 		expect(screen.queryByText(customFieldData.description)).toBeNull();
-		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+		expect(screen.getByRole("img", { hidden: true })).not.toBeNull();
 	});
 
 	it("does not show headline", () => {
@@ -135,8 +138,8 @@ describe("the medium promo feature", () => {
 		render(<MediumManualPromo customFields={noHeadline} />);
 		expect(screen.getByRole("link")).not.toBeNull();
 		expect(screen.queryByText(customFieldData.headline)).toBeNull();
-		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByText(customFieldData.description)).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("does not show description or headline", () => {
@@ -150,7 +153,7 @@ describe("the medium promo feature", () => {
 		render(<MediumManualPromo customFields={noDescriptionOrHeadline} />);
 		expect(screen.queryByText(customFieldData.headline)).toBeNull();
 		expect(screen.queryByText(customFieldData.description)).toBeNull();
-		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+		expect(screen.getByRole("img", { hidden: true })).not.toBeNull();
 	});
 
 	it("renders headline with no link", () => {
@@ -161,8 +164,25 @@ describe("the medium promo feature", () => {
 
 		render(<MediumManualPromo customFields={noHeadline} />);
 		expect(screen.queryByRole("link")).toBeNull();
-		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
-		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.getByText(customFieldData.description)).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
+
+	it("should respect focal point if one is set", () => {
+		const config = {
+			imageAuth: "",
+			imageURL: "test_id=123",
+			imageId: "123",
+			imageFocalPoint: JSON.stringify({ x: 1234, y: 2345 }),
+			imageRatio: "4:3",
+			showImage: true,
+		};
+		render(<MediumManualPromo customFields={config} />);
+		expect(getFocalFromANS).toHaveBeenCalledWith(
+			expect.objectContaining({
+				focal_point: JSON.parse(config.imageFocalPoint)
+			})
+		);
+	})
 });

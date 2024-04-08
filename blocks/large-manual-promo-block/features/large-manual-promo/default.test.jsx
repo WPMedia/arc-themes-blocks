@@ -1,12 +1,14 @@
 import React from "react";
+import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { useContent } from "fusion:content";
-import { isServerSide } from "@wpmedia/arc-themes-components";
+import { isServerSide, getFocalFromANS } from "@wpmedia/arc-themes-components";
 
 import LargeManualPromo from "./default";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
+	getFocalFromANS: jest.fn(() => { }),
 	isServerSide: jest.fn(() => true),
 	LazyLoad: ({ children }) => children,
 }));
@@ -21,7 +23,7 @@ jest.mock("fusion:context", () => ({
 jest.mock("fusion:content", () => ({
 	useContent: jest.fn(() => ({})),
 	useEditableContent: jest.fn(() => ({
-		searchableField: () => {},
+		searchableField: () => { },
 	})),
 }));
 
@@ -43,6 +45,7 @@ const customFieldData = {
 describe("the large promo feature", () => {
 	afterEach(() => {
 		jest.resetModules();
+		getFocalFromANS.mockClear();
 	});
 
 	beforeEach(() => {
@@ -60,7 +63,7 @@ describe("the large promo feature", () => {
 			lazyLoad: true,
 		};
 		const { container } = render(<LargeManualPromo customFields={config} />);
-		expect(container.firstChild).toBe(null);
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("should use content source to get image auth", () => {
@@ -77,7 +80,7 @@ describe("the large promo feature", () => {
 			/>,
 		);
 		expect(useContent).toHaveBeenCalled();
-		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+		expect(screen.getByRole("img", { hidden: true })).not.toBeNull();
 	});
 
 	it("does not show image", () => {
@@ -99,8 +102,8 @@ describe("the large promo feature", () => {
 
 		render(<LargeManualPromo customFields={noHeadline} />);
 		expect(screen.queryByText(customFieldData.headline)).toBeNull();
-		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByText(customFieldData.description)).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("renders headline with no link", () => {
@@ -111,9 +114,9 @@ describe("the large promo feature", () => {
 
 		render(<LargeManualPromo customFields={noHeadline} />);
 		expect(screen.queryByRole("link", { name: customFieldData.headline })).toBeNull();
-		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
-		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.getByText(customFieldData.description)).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("does not show headline or description", () => {
@@ -128,7 +131,7 @@ describe("the large promo feature", () => {
 		render(<LargeManualPromo customFields={noHeadlineOrDescription} />);
 		expect(screen.queryByText(customFieldData.headline)).toBeNull();
 		expect(screen.queryByText(customFieldData.description)).toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("does not show description", () => {
@@ -139,9 +142,9 @@ describe("the large promo feature", () => {
 		};
 
 		render(<LargeManualPromo customFields={noDescripiton} />);
-		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.getByText(customFieldData.headline)).not.toBeNull();
 		expect(screen.queryByText(customFieldData.description)).toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("renders overline", () => {
@@ -151,11 +154,11 @@ describe("the large promo feature", () => {
 		};
 
 		render(<LargeManualPromo customFields={noHeadline} />);
-		expect(screen.queryByRole("link", { name: customFieldData.overline })).not.toBeNull();
-		expect(screen.queryByText(customFieldData.overline)).not.toBeNull();
-		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
-		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByRole("link", { name: customFieldData.overline })).not.toBeNull();
+		expect(screen.getByText(customFieldData.overline)).not.toBeNull();
+		expect(screen.getByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.getByText(customFieldData.description)).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("renders overline without link", () => {
@@ -166,10 +169,10 @@ describe("the large promo feature", () => {
 
 		render(<LargeManualPromo customFields={noOverlineLink} />);
 		expect(screen.queryByRole("link", { name: customFieldData.overline })).toBeNull();
-		expect(screen.queryByText(customFieldData.overline)).not.toBeNull();
-		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
-		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
-		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+		expect(screen.getByText(customFieldData.overline)).not.toBeNull();
+		expect(screen.getByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.getByText(customFieldData.description)).not.toBeNull();
+		expect(screen.getByRole("img", { hidden: true })).not.toBeNull();
 	});
 
 	it("does not render overline", () => {
@@ -182,9 +185,9 @@ describe("the large promo feature", () => {
 		render(<LargeManualPromo customFields={noOverlineLink} />);
 		expect(screen.queryByRole("link", { name: customFieldData.overline })).toBeNull();
 		expect(screen.queryByText(customFieldData.overline)).toBeNull();
-		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
-		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
-		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+		expect(screen.getByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.getByText(customFieldData.description)).not.toBeNull();
+		expect(screen.getByRole("img", { hidden: true })).not.toBeNull();
 	});
 
 	it("should return a fallback image if showImage is true and imageId is not valid", () => {
@@ -194,7 +197,7 @@ describe("the large promo feature", () => {
 			imageId: null,
 		};
 		render(<LargeManualPromo customFields={config} />);
-		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
+		expect(screen.getByRole("img", { name: config.headline })).not.toBeNull();
 	});
 
 	it("should make a blank call to the signing-service if the image is from PhotoCenter and has an Auth value", () => {
@@ -238,4 +241,21 @@ describe("the large promo feature", () => {
 			query: { id: "test_id=123" },
 		});
 	});
+
+	it("should respect focal point if one is set", () => {
+		const config = {
+			imageAuth: "",
+			imageURL: "test_id=123",
+			imageId: "123",
+			imageFocalPoint: JSON.stringify({ x: 1234, y: 2345 }),
+			imageRatio: "4:3",
+			showImage: true,
+		};
+		render(<LargeManualPromo customFields={config} />);
+		expect(getFocalFromANS).toHaveBeenCalledWith(
+			expect.objectContaining({
+				focal_point: JSON.parse(config.imageFocalPoint)
+			})
+		);
+	})
 });

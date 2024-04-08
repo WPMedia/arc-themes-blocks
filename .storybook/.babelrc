@@ -1,0 +1,31 @@
+{
+	"presets": [
+		"@babel/preset-env",
+		[
+			"@babel/preset-react",
+			{
+				"runtime": "automatic"
+			}
+		]
+	],
+	"plugins": [],
+    "overrides": [{
+        "plugins": [
+            [
+                "module-resolver",
+                {
+                    "alias": {
+                        "fusion:themes": "./alias/themes.js",
+                        "fusion:content": "./alias/content.js",
+                        "fusion:context": "./alias/context.js",
+                        "fusion:consumer": "./alias/consumer.js",
+                        "fusion:environment": "./alias/environment.js",
+                        "fusion:properties": "./alias/properties.js",
+                        "fusion:static": "./alias/static.js",
+                        "fusion:intl": "./alias/intl.js"
+                    }
+                }
+            ]
+        ]
+    }]
+}

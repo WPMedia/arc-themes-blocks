@@ -70,6 +70,18 @@
 		@include scss.block-components("login-form-privacy-statement");
 		@include scss.block-properties("login-form-privacy-statement");
 	}
+	&__sign-up-div {
+		@include scss.block-components("login-form-sign-up-div");
+		@include scss.block-properties("login-form-sign-up-div");
+	}
+	&__sign-up-button {
+		@include scss.block-components("login-form-sign-up-button");
+		@include scss.block-properties("login-form-sign-up-button");
+	}
+	&__login-form-error {
+		@include scss.block-components("login-form-error");
+		@include scss.block-properties("login-form-error");
+	}
 }
 
 .b-login-links {

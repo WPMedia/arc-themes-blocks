@@ -1288,6 +1288,21 @@
 	"identity-block.log-in-headline": {
 		"en": "Log in to your account"
 	},
+	"identity-block.login-form-error.account-is-disabled": {
+		"en": "Account is disabled."
+	},
+	"identity-block.login-form-error.captcha-token-invalid": {
+		"en": "Captcha token invalid."
+	},
+	"identity-block.login-form-error.unverified-email-address": {
+		"en": "Email Address is not verified."
+	},
+	"identity-block.login-form-error.max-devices": {
+		"en": "User account has reached the max number of devices."
+	},
+	"identity-block.login-form-error.invalid-email-password": {
+		"en": "Email or password is invalid. Try again."
+	},
 	"identity-block.or": {
 		"en": "OR"
 	},

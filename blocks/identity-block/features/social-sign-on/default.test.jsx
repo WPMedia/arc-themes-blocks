@@ -21,12 +21,12 @@ describe("Subscriptions Social Login Feature", () => {
 		useIdentity.mockImplementation(() => ({ isInitialized: false }));
 
 		render(<SocialSignOnBlock customFields={defaultCustomFields} />);
-		expect(screen.queryByTestId("social-sign-on-container")).toBeNull();
+		expect(screen.queryByTestId("social-sign-on-container")).toBeNull(); // eslint-disable-line
 	});
 	it("renders", () => {
 		useIdentity.mockImplementation(() => ({ isInitialized: true }));
 
 		render(<SocialSignOnBlock customFields={defaultCustomFields} />);
-		expect(screen.queryByTestId("social-sign-on-container")).not.toBeNull();
+		expect(screen.getByTestId("social-sign-on-container")).not.toBeNull();
 	});
 });

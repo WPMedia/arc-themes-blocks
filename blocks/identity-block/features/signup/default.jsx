@@ -18,7 +18,7 @@ const BLOCK_CLASS_NAME = "b-sign-up";
 
 const errorCodes = {
 	300039: "identity-block.signup-form-error.identity-already-exists",
-	130001: "identity-block.login-form-error.captcha-token-invalid",
+	'010122': "identity-block.login-form-error.captcha-token-invalid",
 	0: "identity-block.login-form-error.invalid-email-password",
 };
 
@@ -35,14 +35,14 @@ const SignUp = ({ customFields, arcSite }) => {
 	const { Identity, isInitialized } = useIdentity();
 
 	const [captchaToken, setCaptchaToken] = useState();
-	const [captchaError, setCaptchaError] = useState();
 	const [resetRecaptcha, setResetRecaptcha] = useState(true);
+	const [captchaError, setCaptchaError] = useState();
+
+	const [error, setError] = useState();
 
 	const [passwordRequirements, setPasswordRequirements] = useState({
 		status: "initial",
 	});
-
-	const [error, setError] = useState();
 
 	useEffect(() => {
 		const getConfig = async () => {
@@ -152,8 +152,8 @@ const SignUp = ({ customFields, arcSite }) => {
 					})
 					.catch((e) => {
 						setResetRecaptcha(!resetRecaptcha);
-						if (e?.code === "130001") {
-							setCaptchaError(true);
+						if (e?.code === "010122") {
+							setCaptchaError(phrases.t(definedMessageByCode(e.code)));
 						} else {
 							setError(phrases.t(definedMessageByCode(e.code)));
 						}
@@ -162,7 +162,7 @@ const SignUp = ({ customFields, arcSite }) => {
 			className={BLOCK_CLASS_NAME}
 		>
 			{error ? (
-				<div className={`${BLOCK_CLASS_NAME}__login-form-error`}>
+				<div className={`${BLOCK_CLASS_NAME}__login-form-error`} data-testid="signup-form-error">
 					<Paragraph>{error}</Paragraph>
 				</div>
 			) : null}
@@ -193,7 +193,6 @@ const SignUp = ({ customFields, arcSite }) => {
 				className={BLOCK_CLASS_NAME}
 			/>
 			<BotChallengeProtection
-				className={BLOCK_CLASS_NAME}
 				challengeIn="signup"
 				setCaptchaToken={setCaptchaToken}
 				captchaError={captchaError}

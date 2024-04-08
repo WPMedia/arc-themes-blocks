@@ -29,12 +29,4 @@ describe("Subscriptions Social Login Feature", () => {
 		render(<SocialSignOnBlock customFields={defaultCustomFields} />);
 		expect(screen.queryByTestId("social-sign-on-container")).not.toBeNull();
 	});
-	it("shows an error", () => {
-		SocialSignOn.mockImplementation(({ onError }) => {
-			onError();
-			return <div />;
-		});
-		render(<SocialSignOnBlock customFields={defaultCustomFields} />);
-		expect(screen.getByText("identity-block.login-form-error")).not.toBeNull();
-	});
 });

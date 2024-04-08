@@ -82,6 +82,18 @@
 		@include scss.block-components("login-form-error");
 		@include scss.block-properties("login-form-error");
 	}
+	&__tos-container {
+		a {
+			&:hover {
+				@include scss.block-components("login-form-tos-link-hover");
+				@include scss.block-properties("login-form-tos-link-hover");
+			}
+			@include scss.block-components("login-form-tos-link");
+			@include scss.block-properties("login-form-tos-link");
+		}
+		@include scss.block-components("login-form-tos-container-link");
+		@include scss.block-properties("login-form-tos-container-link");
+	}
 }
 
 .b-login-links {

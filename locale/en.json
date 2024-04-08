@@ -165,6 +165,7 @@
 		"identity-block.sign-up": "Sign Up",
 		"identity-block.sign-up-natural": "Sign up",
 		"identity-block.sign-up-form-error": "There's been an error creating your account",
+		"identity-block.terms-privacy-text": "By creating an account, you agree to the <a href='%{termsURL}'>Terms of Service<\/a> and acknowledge our <a href='%{privacyURL}'>Privacy Policy<\/a>.",
 		"identity-block.social-signOn-apple-login": "Sign in with Apple",
 		"identity-block.social-signOn-apple-signUp": "Sign up with Apple",
 		"identity-block.social-signOn-google-login": "Sign in with Google",

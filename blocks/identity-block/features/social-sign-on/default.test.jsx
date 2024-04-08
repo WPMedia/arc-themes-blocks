@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { useIdentity } from "@wpmedia/arc-themes-components";
 import SocialSignOn from "../../components/social-sign-on";
 import SocialSignOnBlock from "./default";
@@ -26,7 +26,7 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 		Identity: {
 			...mockIdentity,
 		},
-	}))
+	})),
 }));
 
 describe("Subscriptions Social Login Feature", () => {
@@ -42,8 +42,8 @@ describe("Subscriptions Social Login Feature", () => {
 		useIdentity.mockImplementation(() => ({ isInitialized: true }));
 
 		render(<SocialSignOnBlock customFields={defaultCustomFields} />);
-		await waitFor(() => expect(screen.getByTestId("social-sign-on-container")).not.toBeNull())
-		
+		const element = await screen.findByTestId("social-sign-on-container");
+		expect(element).not.toBeNull();
 	});
 	it("shows an error", () => {
 		SocialSignOn.mockImplementation(({ onError }) => {

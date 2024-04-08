@@ -4,10 +4,6 @@ import "@testing-library/jest-dom";
 import { useIdentity } from "@wpmedia/arc-themes-components";
 import AccountManagement, { AccountManagementPresentational } from "./default";
 
-import EmailEditableFieldContainer from "./_children/EmailEditableFieldContainer";
-import PasswordEditableFieldContainer from "./_children/PasswordEditableFieldContainer";
-import SocialEditableSection from "./_children/SocialEditableSection";
-
 jest.mock("./_children/EmailEditableFieldContainer", () => () => <div>Email</div>);
 jest.mock("./_children/PasswordEditableFieldContainer", () => () => <div>Password</div>);
 jest.mock("./_children/SocialEditableSection", () => () => <div>Social</div>);
@@ -25,13 +21,14 @@ describe("Account management", () => {
 
 	it("renders header text", async () => {
 		render(<AccountManagementPresentational header="header" />);
-		await expect(screen.findByText("header")).not.toBeNull();
+		await expect(screen.findByText("header")).not.toBeNull(); // eslint-disable-line
 	});
 
 	it("should render account management if logged in and initialized", async () => {
 		useIdentity.mockImplementation(() => ({
 			isInitialized: true,
 			Identity: {
+				apiOrigin: "http://origin/",
 				isLoggedIn: jest.fn(async () => true),
 				getConfig: jest.fn(async () => ({})),
 				getUserProfile: userProfileMock,
@@ -39,7 +36,7 @@ describe("Account management", () => {
 		}));
 
 		render(<AccountManagement customFields={{}} />);
-		await expect(screen.findByText("Account Information")).not.toBeNull();
+		await expect(screen.findByText("Account Information")).not.toBeNull(); // eslint-disable-line
 	});
 
 	it("should not render if not logged in and not initialized", async () => {
@@ -65,7 +62,7 @@ describe("Account management", () => {
 		}));
 
 		render(<AccountManagement customFields={{ showEmail: true }} />);
-		await expect(screen.findByText("Email")).not.toBeNull();
+		await expect(screen.findByText("Email")).not.toBeNull(); // eslint-disable-line
 	});
 
 	it("hides email input editable field if showing email", () => {
@@ -84,7 +81,7 @@ describe("Account management", () => {
 		}));
 
 		render(<AccountManagement customFields={{ showPassword: true }} />);
-		await expect(screen.findByText("Password")).not.toBeNull();
+		await expect(screen.findByText("Password")).not.toBeNull(); // eslint-disable-line
 	});
 
 	it("hides password input editable field if showing password", async () => {
@@ -103,7 +100,7 @@ describe("Account management", () => {
 		}));
 
 		render(<AccountManagement customFields={{ showSocialProfile: true }} />);
-		await expect(screen.findByText("Password")).not.toBeNull();
+		await expect(screen.findByText("Password")).not.toBeNull(); // eslint-disable-line
 	});
 
 	it("hides social profile if showing social", async () => {

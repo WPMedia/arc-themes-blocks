@@ -104,22 +104,26 @@ module.exports = {
 				}
 			],
 			"@babel/plugin-proposal-class-properties",
-			[
-				"module-resolver",
-				{
-					"alias": {
-						"fusion:themes": "./.storybook/alias/themes.js",
-						"fusion:content": "./.storybook/alias/content.js",
-						"fusion:context": "./.storybook/alias/context.js",
-						"fusion:consumer": "./.storybook/alias/consumer.js",
-						"fusion:environment": "./.storybook/alias/environment.js",
-						"fusion:properties": "./.storybook/alias/properties.js",
-						"fusion:static": "./.storybook/alias/static.js",
-						"fusion:intl": "./.storybook/alias/intl.js"
-					}
-				}
-			],
 			"@babel/plugin-transform-private-methods"
-		]
+		],
+		overrides: [{
+			"plugins": [
+				[
+					"module-resolver",
+					{
+						"alias": {
+							"fusion:themes": "./.storybook/alias/themes.js",
+							"fusion:content": "./.storybook/alias/content.js",
+							"fusion:context": "./.storybook/alias/context.js",
+							"fusion:consumer": "./.storybook/alias/consumer.js",
+							"fusion:environment": "./.storybook/alias/environment.js",
+							"fusion:properties": "./.storybook/alias/properties.js",
+							"fusion:static": "./.storybook/alias/static.js",
+							"fusion:intl": "./.storybook/alias/intl.js"
+						}
+					}
+				]
+			]
+		}],
 	},
 };

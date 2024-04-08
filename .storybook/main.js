@@ -56,7 +56,7 @@ module.exports = {
 				test: /\.(js|jsx)$/,
 				include: path.resolve(__dirname, "../node_modules/@wpmedia/arc-themes-components"),
 				use: {
-					loader: "babel-loader",				
+					loader: "babel-loader",
 				},
 			},
 		);
@@ -74,5 +74,52 @@ module.exports = {
 
     docs: {
         autodocs: true
-    }
+    },
+
+	babelDefault: {
+		"presets": [
+			[
+				"@babel/preset-env",
+				{
+					"targets": {
+						"node": "current"
+					},
+					"modules": "commonjs"
+				}
+			],
+			[
+				"@babel/preset-react",
+				{
+					"runtime": "automatic"
+				}
+			]
+		],
+		"plugins": [
+			"@babel/plugin-proposal-nullish-coalescing-operator",
+			"transform-react-remove-prop-types",
+			[
+				"@babel/plugin-proposal-decorators",
+				{
+					"legacy": true
+				}
+			],
+			"@babel/plugin-proposal-class-properties",
+			[
+				"module-resolver",
+				{
+					"alias": {
+						"fusion:themes": "./.storybook/alias/themes.js",
+						"fusion:content": "./.storybook/alias/content.js",
+						"fusion:context": "./.storybook/alias/context.js",
+						"fusion:consumer": "./.storybook/alias/consumer.js",
+						"fusion:environment": "./.storybook/alias/environment.js",
+						"fusion:properties": "./.storybook/alias/properties.js",
+						"fusion:static": "./.storybook/alias/static.js",
+						"fusion:intl": "./.storybook/alias/intl.js"
+					}
+				}
+			],
+			"@babel/plugin-transform-private-methods"
+		]
+	},
 };

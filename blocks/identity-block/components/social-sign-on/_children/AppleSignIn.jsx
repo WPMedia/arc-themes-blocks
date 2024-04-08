@@ -2,8 +2,8 @@ import React from "react";
 import { Button, Icon, useIdentity } from "@wpmedia/arc-themes-components";
 import { useFusionContext } from "fusion:context";
 import getTranslatedPhrases from "fusion:intl";
-// eslint-disable-next-line
-import { SIGN_UP } from "../index";
+
+import { SIGN_UP } from "../constants";
 
 const AppleIcon = <Icon name="Apple" width={21} height={24} viewBox="0 0 24 24" />;
 

@@ -14,8 +14,6 @@ const FormPasswordConfirm = ({
 	tip,
 	validationPattern,
 	validationErrorMessage,
-	tipPasswordMessage,
-	className
 }) => {
 	const [password, setPassword] = useState("");
 
@@ -47,7 +45,6 @@ const FormPasswordConfirm = ({
 				onChange={({ value }) => setPassword(value)}
 				required
 				type="password"
-				tip = {tipPasswordMessage}
 			/>
 			<Input
 				{...confirmFieldParameters}
@@ -56,7 +53,6 @@ const FormPasswordConfirm = ({
 				required
 				type="password"
 				validationPattern={`^${password}$`}
-				className={className}
 			/>
 		</>
 	);

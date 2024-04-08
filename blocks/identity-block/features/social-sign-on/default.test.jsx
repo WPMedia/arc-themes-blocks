@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { useIdentity } from "@wpmedia/arc-themes-components";
 import SocialSignOn from "../../components/social-sign-on";
 import SocialSignOnBlock from "./default";
@@ -14,6 +14,21 @@ const defaultCustomFields = {
 	redirectToPreviousPage: true,
 };
 
+const mockIdentity = {
+	apiOrigin: "http://origin/",
+	getConfig: jest.fn(() => ({})),
+};
+
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	useIdentity: jest.fn(() => ({
+		isInitialized: true,
+		Identity: {
+			...mockIdentity,
+		},
+	}))
+}));
+
 describe("Subscriptions Social Login Feature", () => {
 	SocialSignOn.mockImplementation(() => <div />);
 
@@ -21,13 +36,14 @@ describe("Subscriptions Social Login Feature", () => {
 		useIdentity.mockImplementation(() => ({ isInitialized: false }));
 
 		render(<SocialSignOnBlock customFields={defaultCustomFields} />);
-		expect(screen.queryByTestId("social-sign-on-container")).toBeNull();
+		expect(screen.queryByTestId("social-sign-on-container")).toBeNull(); // eslint-disable-line
 	});
-	it("renders", () => {
+	it("renders", async () => {
 		useIdentity.mockImplementation(() => ({ isInitialized: true }));
 
 		render(<SocialSignOnBlock customFields={defaultCustomFields} />);
-		expect(screen.queryByTestId("social-sign-on-container")).not.toBeNull();
+		await waitFor(() => expect(screen.getByTestId("social-sign-on-container")).not.toBeNull())
+		
 	});
 	it("shows an error", () => {
 		SocialSignOn.mockImplementation(({ onError }) => {

@@ -1,7 +1,6 @@
 import React from "react";
 
-// eslint-disable-next-line
-import { SIGN_UP } from "../index";
+import { SIGN_UP } from "../constants";
 
 function FacebookSignIn({socialSignOnIn}) {
 	const facebookTextType = socialSignOnIn === SIGN_UP ? 'continue_with' : 'login_with';

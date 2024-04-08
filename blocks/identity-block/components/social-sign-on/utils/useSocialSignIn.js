@@ -4,8 +4,7 @@ import { GoogleSignInContext } from "./googleContext";
 import useOIDCLogin from "../../../utils/useOIDCLogin";
 import validateURL from "../../../utils/validate-redirect-url";
 
-// eslint-disable-next-line
-import {SIGN_UP} from "../index";
+import {SIGN_UP} from "../constants";
 
 function useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError = () => {}) {
 	const { Identity } = useIdentity();
@@ -28,8 +27,7 @@ function useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError = () => {}
 				onError();
 			}
 		};
-		// eslint-disable-next-line
-	}, [Identity, onError, redirectURL]);
+	}, [Identity, onError, redirectURL, isOIDC, loginByOIDC]);
 
 	useEffect(() => {
 		const fetchConfig = async () => {
@@ -79,8 +77,7 @@ function useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError = () => {}
 				}
 			});
 		}
-		// eslint-disable-next-line
-	}, [config.googleClientId, Identity, isGoogleLoaded ]);
+	}, [config.googleClientId, Identity, isGoogleLoaded, isOIDC, loginByOIDC, redirectURL, socialSignOnIn ]);
 
 	useEffect(() => {
 		const initializeFacebook = async () => {

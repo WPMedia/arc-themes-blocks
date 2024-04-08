@@ -4,7 +4,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Input, useIdentity } from "@wpmedia/arc-themes-components";
+import { Input, useIdentity, Paragraph } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
 import useLogin from "../../components/login";
 import BotChallengeProtection from "../../components/bot-challenge-protection";
@@ -114,13 +114,6 @@ const Login = ({ customFields }) => {
 			/>
 			<BotChallengeProtection
 				className={BLOCK_CLASS_NAME}
-<<<<<<< HEAD
-				challengeIn="signin"
-				setCaptchaToken={setCaptchaToken}
-				captchaError={captchaError}
-				setCaptchaError={setCaptchaError}
-			/>
-=======
 				challengeIn={RECAPTCHA_LOGIN}
 				setCaptchaToken={setCaptchaToken}
 				captchaError={captchaError}
@@ -130,7 +123,6 @@ const Login = ({ customFields }) => {
 			<Paragraph className={`${BLOCK_CLASS_NAME}__privacy-statement`}>
 				{phrases.t("identity-block.privacy-statement")}
 			</Paragraph>
->>>>>>> arc-themes-release-version-2.3.0
 		</HeadlinedSubmitForm>
 	);
 };

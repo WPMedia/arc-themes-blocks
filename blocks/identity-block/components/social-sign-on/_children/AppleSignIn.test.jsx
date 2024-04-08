@@ -16,7 +16,7 @@ const SITE_PROPS_MOCK = {
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
-	Icon: ({}) => <div data-testid={`Apple-icon`} />,
+	Icon: () => <div data-testid="Apple-icon" />,
 }));
 
 describe("Identity Social Login Component", () => {

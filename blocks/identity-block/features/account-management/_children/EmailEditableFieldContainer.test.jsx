@@ -1,10 +1,8 @@
 import React from 'react';
-import { render, fireEvent, waitFor, act } from '@testing-library/react';
-import { useIdentity } from "@wpmedia/arc-themes-components";
+import { render, fireEvent, screen} from '@testing-library/react';
 import EmailEditableFieldContainer from './EmailEditableFieldContainer';
 
-
-mockUpdateProfile = jest.fn(() => Promise.resolve())
+const mockUpdateProfile = jest.fn(() => Promise.resolve())
 const mockIdentity = {
 	apiOrigin: "http://origin/",
 	isLoggedIn: jest.fn(() => false),
@@ -25,7 +23,7 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 describe('EmailEditableFieldContainer', () => {
   it('updates email and clears error on successful submission', async () => {
     const setEmail = jest.fn();
-    const { getByLabelText, getByText } = render(
+    render(
       <EmailEditableFieldContainer
         blockClassName="test-class"
         email="old@example.com"
@@ -33,8 +31,8 @@ describe('EmailEditableFieldContainer', () => {
       />
     );
 
-    fireEvent.click(getByText('identity-block.edit'));
-    const inputElement = getByLabelText('identity-block.email')
+    fireEvent.click(screen.getByText('identity-block.edit'));
+    const inputElement = screen.getByLabelText('identity-block.email')
     fireEvent.input(inputElement, { target: { value: 'new@example.com' } });
 
     expect(inputElement.value).toBe('new@example.com');

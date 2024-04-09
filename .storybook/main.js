@@ -23,23 +23,6 @@ module.exports = {
 		// You can change the configuration based on that.
 		// 'PRODUCTION' is used when building the static version of storybook.
 
-		// Make whatever fine-grained changes you need
-		// eslint-disable-next-line no-unused-expressions
-		config.resolve = {
-			...config.resolve,
-			alias: {
-				...config.resolve.alias,
-				"fusion:consumer": path.resolve(__dirname, "./alias/consumer.js"),
-				"fusion:content": path.resolve(__dirname, "./alias/content.js"),
-				"fusion:context": path.resolve(__dirname, "./alias/context.js"),
-				"fusion:environment": path.resolve(__dirname, "./alias/environment.js"),
-				"fusion:intl": path.resolve(__dirname, "./alias/intl.js"),
-				"fusion:properties": path.resolve(__dirname, "./alias/properties.js"),
-				"fusion:static": path.resolve(__dirname, "./alias/static.js"),
-				"fusion:themes": path.resolve(__dirname, "./alias/themes.js"),
-			},
-		};
-
 		config.module.rules.push(
 			{
 				test: /\.scss$/,
@@ -57,6 +40,26 @@ module.exports = {
 				include: path.resolve(__dirname, "../node_modules/@wpmedia/arc-themes-components"),
 				use: {
 					loader: "babel-loader",
+					options: {
+						"plugins": [
+							[
+								// Module resolver aliases need to be set here as well so arc-themes-components uses the right mock files.
+								"module-resolver",
+								{
+									"alias": {
+										"fusion:themes": "./.storybook/alias/themes.js",
+										"fusion:content": "./.storybook/alias/content.js",
+										"fusion:context": "./.storybook/alias/context.js",
+										"fusion:consumer": "./.storybook/alias/consumer.js",
+										"fusion:environment": "./.storybook/alias/environment.js",
+										"fusion:properties": "./.storybook/alias/properties.js",
+										"fusion:static": "./.storybook/alias/static.js",
+										"fusion:intl": "./.storybook/alias/intl.js"
+									}
+								}
+							]
+						],
+					},
 				},
 			},
 		);
@@ -104,26 +107,22 @@ module.exports = {
 				}
 			],
 			"@babel/plugin-proposal-class-properties",
-			"@babel/plugin-transform-private-methods"
-		],
-		overrides: [{
-			"plugins": [
-				[
-					"module-resolver",
-					{
-						"alias": {
-							"fusion:themes": "./.storybook/alias/themes.js",
-							"fusion:content": "./.storybook/alias/content.js",
-							"fusion:context": "./.storybook/alias/context.js",
-							"fusion:consumer": "./.storybook/alias/consumer.js",
-							"fusion:environment": "./.storybook/alias/environment.js",
-							"fusion:properties": "./.storybook/alias/properties.js",
-							"fusion:static": "./.storybook/alias/static.js",
-							"fusion:intl": "./.storybook/alias/intl.js"
-						}
+			"@babel/plugin-transform-private-methods",
+			[
+				"module-resolver",
+				{
+					"alias": {
+						"fusion:themes": "./.storybook/alias/themes.js",
+						"fusion:content": "./.storybook/alias/content.js",
+						"fusion:context": "./.storybook/alias/context.js",
+						"fusion:consumer": "./.storybook/alias/consumer.js",
+						"fusion:environment": "./.storybook/alias/environment.js",
+						"fusion:properties": "./.storybook/alias/properties.js",
+						"fusion:static": "./.storybook/alias/static.js",
+						"fusion:intl": "./.storybook/alias/intl.js"
 					}
-				]
+				}
 			]
-		}],
+		],
 	},
 };

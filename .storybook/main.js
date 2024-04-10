@@ -10,10 +10,11 @@ module.exports = {
 
     addons: [
         "@storybook/addon-a11y",
-		"@storybook/addon-controls",
+        "@storybook/addon-controls",
         "@storybook/addon-docs",
         "@storybook/addon-essentials",
-        "@storybook/addon-webpack5-compiler-babel"
+        "@storybook/addon-webpack5-compiler-babel",
+        "@storybook/addon-styling-webpack"
     ],
 
     staticDirs: ["../resources"],

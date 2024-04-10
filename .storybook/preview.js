@@ -1,7 +1,4 @@
-// eslint-disable-next-line import/no-webpack-loader-syntax,import/no-unresolved
-import news from "!!style-loader?injectType=lazyStyleTag!css-loader!sass-loader!./themes/news.scss";
-// eslint-disable-next-line import/no-webpack-loader-syntax,import/no-unresolved
-import commerce from "!!style-loader?injectType=lazyStyleTag!css-loader!sass-loader!./themes/commerce.scss";
+import "./themes/news.scss";
 
 // eslint-disable-next-line import/prefer-default-export
 export const parameters = {
@@ -35,11 +32,5 @@ export const parameters = {
 		a.title === b.title
 		? 0
 		: a.id.localeCompare(b.id, undefined, { numeric: true })
-	},
-	cssVariables: {
-		files: {
-			news,
-			commerce,
-		},
 	},
 };

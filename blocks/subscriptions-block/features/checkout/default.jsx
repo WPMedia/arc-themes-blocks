@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import PropTypes from "@arc-fusion/prop-types";
-import { usePhrases, Heading, useIdentity, useSales, Button } from "@wpmedia/arc-themes-components";
+import { usePhrases, Heading, useIdentity, useSales, Button, BotChallengeProtection } from "@wpmedia/arc-themes-components";
 import CheckoutCardDetail, {ACCOUNT, BILLING_ADDRESS, PAYMENT, REVIEW} from "../../components/CheckoutCardDetail";
 import BillingAddress, {ARCXP_BILLING_ADDRESS} from "./_children/BillingAddress";
 
@@ -24,7 +24,12 @@ const Checkout = ({ customFields }) => {
 	const [isComplete, setIsComplete] = useState(initialState);
 	const [accountSummary, setAccountSummary] = useState();
 	const [billingAddress, setBillingAddress] = useState({});
-
+	const [captchaToken, setCaptchaToken] = useState();
+	const [captchaError, setCaptchaError] = useState();
+	const [resetRecaptcha, setResetRecaptcha] = useState(true);
+	const [error, setError] = useState();
+	const [order, setOrder] = useState();
+				
 	const { Identity } = useIdentity();
 	const { Sales } = useSales();
 	const phrases = usePhrases();
@@ -132,7 +137,15 @@ const Checkout = ({ customFields }) => {
 			<Heading>{phrases.t("checkout-block.headline")}</Heading>
 			<CheckoutCardDetail className={`${BLOCK_CLASS_NAME}__card`} type={ACCOUNT} summary={accountSummary} link={editButton(ACCOUNT)} isOpen={isOpen.account} isComplete={isComplete.account} />
 			<CheckoutCardDetail className={`${BLOCK_CLASS_NAME}__card`} type={BILLING_ADDRESS} summary={billingAddressSummary} link={editButton(BILLING_ADDRESS)} isOpen={isOpen.billingAddress} isComplete={isComplete}>
-				<BillingAddress Sales={Sales} className={BLOCK_CLASS_NAME} billingAddress={billingAddress} setBillingAddress={setBillingAddress} setIsOpen={setIsOpen} setIsComplete={setIsComplete}/>
+				<BillingAddress Sales={Sales} user={user} captchaToken={captchaToken} setError={setError} setOrder={setOrder} className={BLOCK_CLASS_NAME} billingAddress={billingAddress} setBillingAddress={setBillingAddress} setIsOpen={setIsOpen} setIsComplete={setIsComplete}/>
+				<BotChallengeProtection 
+					challengeIn="checkout"
+					setCaptchaToken={setCaptchaToken}
+					captchaError={captchaError}
+					error={error}
+					setCaptchaError={setCaptchaError}
+					resetRecaptcha={resetRecaptcha}
+				/>
 			</CheckoutCardDetail>
 			<CheckoutCardDetail className={`${BLOCK_CLASS_NAME}__card`} type={PAYMENT} summary='Credit Card' link={<a href='/login' >Edit</a>} isOpen={isOpen.payment}>
 				Payment Placeholder

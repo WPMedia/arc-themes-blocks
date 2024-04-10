@@ -6,7 +6,7 @@ import listOfStates from "./listOfStates";
 
 export const ARCXP_BILLING_ADDRESS = "ArcXP_billingAddress"
 
-const BillingAddress = ({ Sales, billingAddress, setBillingAddress, className, setIsOpen, setIsComplete }) => {
+const BillingAddress = ({ Sales, user, setError, setOrder, captchaToken, billingAddress, setBillingAddress, className, setIsOpen, setIsComplete }) => {
 	const formRef = useRef();
 	const entriesRef = useRef({});
   const [isUS, setIsUs] = useState(false);
@@ -35,9 +35,10 @@ const BillingAddress = ({ Sales, billingAddress, setBillingAddress, className, s
       setIsOpen(state => ({...state, billingAddress: false, payment: true}));
 			setIsComplete(state => ({...state, billingAddress: true}))
 			try {
-				const order = await Sales.createNewOrder(entriesRef.current);
+				const order = await Sales.createNewOrder(entriesRef.current, user?.email, null, user?.firstName, user?.lastName, user?.secondLastName, null, captchaToken);
+				setOrder(order);
 			} catch (e) {
-				console.error(e)
+				setError(e)
 			}
 		}
 	};

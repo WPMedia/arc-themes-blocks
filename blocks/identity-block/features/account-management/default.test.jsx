@@ -91,7 +91,7 @@ describe("Account management", () => {
 
 		render(<AccountManagement customFields={defaultCustomFields} />);
 
-		await waitFor(() => expect(screen.getByText("identity-block.account-information")).not.toBeNull()); // eslint-disable-line
+		await waitFor(() => expect(screen.getByText("identity-block.account-information")));
 	});
 
 	it("should not render if not logged in and not initialized", async () => {
@@ -118,7 +118,7 @@ describe("Account management", () => {
 
 		render(<AccountManagement customFields={{ showEmail: true }} />);
 
-		await waitFor(() => expect(screen.getByText("Email")).not.toBeNull()); // eslint-disable-line
+		await waitFor(() => expect(screen.getByText("Email")));
 	});
 
 	it("hides email input editable field if showing email", () => {
@@ -138,7 +138,7 @@ describe("Account management", () => {
 
 		render(<AccountManagement customFields={{ showPassword: true }} />);
 
-		await waitFor(() => expect(screen.getByText("Password")).not.toBeNull()); // eslint-disable-line
+		await waitFor(() => expect(screen.getByText("Password")));
 	});
 
 	it("hides password input editable field if showing password", async () => {
@@ -158,7 +158,7 @@ describe("Account management", () => {
 
 		render(<AccountManagement customFields={{ showSocialProfile: true }} />);
 
-		await waitFor(() => expect(screen.getByText("Social")).not.toBeNull()); // eslint-disable-line
+		await waitFor(() => expect(screen.getByText("Social")));
 	});
 
 	it("hides social profile if showing social", async () => {

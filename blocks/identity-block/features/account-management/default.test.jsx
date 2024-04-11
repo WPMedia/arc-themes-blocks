@@ -67,7 +67,7 @@ const userProfileMock = jest.fn(() =>
 	Promise.resolve({ email: "test@domain.com", identities: [] }),
 );
 
-describe.only("Account management", () => {
+describe("Account management", () => {
 	afterAll(() => {
 		jest.restoreAllMocks();
 	});

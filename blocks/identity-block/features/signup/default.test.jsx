@@ -110,7 +110,7 @@ describe("With initialized identity", () => {
 	});
 
 	it("rejects the form", async () => {
-		const signUpMock = jest.fn(() => Promise.reject({code: 0})); // eslint-disable-line
+		const signUpMock = jest.fn(() => Promise.reject(new Error({code: 0})));
 		useIdentity.mockImplementation(
 			jest.fn(() => ({
 				Identity: {

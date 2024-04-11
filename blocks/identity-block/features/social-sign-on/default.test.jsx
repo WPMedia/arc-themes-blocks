@@ -21,7 +21,7 @@ describe("Subscriptions Social Login Feature", () => {
 		useIdentity.mockImplementation(() => ({ isInitialized: false }));
 
 		render(<SocialSignOnBlock customFields={defaultCustomFields} />);
-		expect(screen.queryByTestId("social-sign-on-container")).toBeNull(); // eslint-disable-line
+		expect(screen.queryByTestId("social-sign-on-container")).toBeNull();
 	});
 	it("renders", () => {
 		useIdentity.mockImplementation(() => ({ isInitialized: true }));

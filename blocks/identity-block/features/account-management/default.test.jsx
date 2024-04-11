@@ -91,7 +91,7 @@ describe.only("Account management", () => {
 
 		render(<AccountManagement customFields={defaultCustomFields} />);
 
-		await waitFor(() => expect(screen.getByText("identity-block.account-information")).not.toBeNull()), // eslint-disable-line
+		await waitFor(() => expect(screen.getByText("identity-block.account-information")).not.toBeNull()); // eslint-disable-line
 	});
 
 	it("should not render if not logged in and not initialized", async () => {

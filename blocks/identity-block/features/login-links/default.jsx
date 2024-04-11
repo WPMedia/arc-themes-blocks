@@ -29,7 +29,7 @@ const LoginLinks = ({ customFields }) => {
 	return (
 		<Stack as="div" className={BLOCK_CLASS_NAME}>
 			{showLogin ? (
-				<Paragraph>{phrases.t("identity-block.login-links-login")}<Link href={loginURL} className={`${BLOCK_CLASS_NAME}__inner-link`}>{phrases.t("identity-block.log-in-natural")}</Link></Paragraph>
+				<Paragraph>{phrases.t("identity-block.login-links-login")}<Link href={loginURL} className={`${BLOCK_CLASS_NAME}__inner-link`}>{phrases.t("identity-block.log-in")}</Link></Paragraph>
 			) : null}
 			{showForgot ? (
 				<Link className={`${BLOCK_CLASS_NAME}__inner-link`} href={forgotURL}>{phrases.t("identity-block.login-links-forgot")}</Link>

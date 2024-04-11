@@ -504,7 +504,7 @@
 		"bn": "লগ ইন করুন",
 		"bo": "ཐོ་འཇུག",
 		"de": "Log In",
-		"en": "Log In",
+		"en": "Log in",
 		"es": "Log In",
 		"fr": "Log In",
 		"id": "Masuk",
@@ -1282,9 +1282,6 @@
 	},
 	"identity-block.email-label": {
 		"en": "Email"
-	},
-	"identity-block.log-in-natural": {
-		"en": "Log in"
 	},
 	"identity-block.log-in-headline": {
 		"en": "Log in to your account"

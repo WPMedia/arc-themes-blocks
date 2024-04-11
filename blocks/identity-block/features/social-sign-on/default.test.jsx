@@ -51,6 +51,6 @@ describe("Subscriptions Social Login Feature", () => {
 			return <div />;
 		});
 		render(<SocialSignOnBlock customFields={defaultCustomFields} />);
-		expect(screen.getByText("identity-block.login-form-error")).not.toBeNull();
+		expect(screen.getByText("identity-block.login-form-error")).not.toBeNull(); // eslint-disable-line
 	});
 });

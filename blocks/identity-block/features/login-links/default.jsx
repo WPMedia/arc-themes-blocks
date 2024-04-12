@@ -14,6 +14,7 @@ const LoginLinks = ({ customFields }) => {
 		showLogin = false,
 		showLoginWithoutPassword = false,
 		loginURL = defaultLoginURL,
+		loginWithOutPasswordUrl = "/one-time-password/",
 		showForgot = false,
 		forgotURL = defaultForgotURL,
 		showSignUp = false,
@@ -30,7 +31,12 @@ const LoginLinks = ({ customFields }) => {
 	return (
 		<Stack as="div" className={BLOCK_CLASS_NAME}>
 			{showLoginWithoutPassword && (
-				<Button className={`${BLOCK_CLASS_NAME}__ota-link`} size="large" fullWidth type="submit">
+				<Button
+					href={loginWithOutPasswordUrl}
+					className={`${BLOCK_CLASS_NAME}__ota-link`}
+					size="large"
+					fullWidth
+				>
 					Log in without password
 				</Button>
 			)}
@@ -58,15 +64,20 @@ LoginLinks.propTypes = {
 			defaultValue: false,
 			group: "Login",
 		}),
-		showLoginWithoutPassword: PropTypes.bool.tag({
-			name: "Show Login without password",
-			defaultValue: false,
-			group: "Login",
-		}),
 		loginURL: PropTypes.string.tag({
 			name: "Login URL",
 			defaultValue: defaultLoginURL,
 			group: "Login",
+		}),
+		showLoginWithoutPassword: PropTypes.bool.tag({
+			name: "Show Login without password",
+			defaultValue: false,
+			group: "Login Without Password",
+		}),
+		loginWithOutPasswordUrl: PropTypes.string.tag({
+			name: "Login without password URL",
+			defaultValue: defaultLoginURL,
+			group: "Login Without Password",
 		}),
 		showForgot: PropTypes.bool.tag({
 			name: "Show Forgot Password link",

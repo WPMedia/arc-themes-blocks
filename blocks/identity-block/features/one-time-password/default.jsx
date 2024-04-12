@@ -9,13 +9,18 @@ import useLogin from "../../components/login";
 import useOIDCLogin from "../../utils/useOIDCLogin";
 import validateURL from "../../utils/validate-redirect-url";
 
-const BLOCK_CLASS_NAME = "b-login-form";
+const BLOCK_CLASS_NAME = "b-one-time-login-form";
 
-const Login = ({ customFields }) => {
+const OneTimePasswordLogin = ({ customFields }) => {
 	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC } = customFields;
 
-	const urlString = window.location.href;
-	const url = new URL(urlString);
+	let urlString = '';
+	let url = '';
+
+	if (typeof window !== "undefined") {
+		urlString = window.location.href
+		url = new URL(urlString);
+	}
 
 	const { isAdmin, arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);
@@ -42,7 +47,7 @@ const Login = ({ customFields }) => {
 			buttonLabel={phrases.t("identity-block.log-in")}
 			className={BLOCK_CLASS_NAME}
 			formErrorText={error}
-			headline={phrases.t("identity-block.log-in")}
+			headline="Request one time log in link"
 			onSubmit={({ email, password }) =>
 				Identity.login(email, password, {rememberMe: true})
 					.then(() => {
@@ -56,6 +61,7 @@ const Login = ({ customFields }) => {
 					.catch(() => setError(phrases.t("identity-block.login-form-error")))
 			}
 		>
+			<p className={`${BLOCK_CLASS_NAME}__ota-sub-headline`}>To sign in without a password, enter your email below and you will receive a one time log in link.</p>
 			<Input
 				autoComplete="email"
 				label={phrases.t("identity-block.email")}
@@ -77,9 +83,9 @@ const Login = ({ customFields }) => {
 	);
 };
 
-Login.label = "Identity Log In - Arc Block";
+OneTimePasswordLogin.label = "Identity One Time Password Log In - Arc Block";
 
-Login.propTypes = {
+OneTimePasswordLogin.propTypes = {
 	customFields: PropTypes.shape({
 		redirectURL: PropTypes.string.tag({
 			name: "Redirect URL",
@@ -105,4 +111,4 @@ Login.propTypes = {
 	}),
 };
 
-export default Login;
+export default OneTimePasswordLogin;

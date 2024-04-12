@@ -64,6 +64,16 @@
 	@include scss.block-properties("login-form");
 }
 
+.b-one-time-login-form {
+	@include scss.block-components("one-time-login-form");
+	@include scss.block-properties("one-time-login-form");
+
+	&__ota-sub-headline {
+		@include scss.block-components("ota-sub-headline");
+		@include scss.block-properties("ota-sub-headline");
+	}
+}
+
 .b-login-links {
 	@include scss.block-components("login-links");
 	@include scss.block-properties("login-links");

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getTranslatedPhrases from "fusion:intl";
-import { Link, Stack, Button } from "@wpmedia/arc-themes-components";
+import { Link, Stack, Button, Paragraph } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-login-links";
 const defaultLoginURL = "/account/login/";
@@ -47,7 +47,7 @@ const LoginLinks = ({ customFields }) => {
 				<Link href={forgotURL}>{phrases.t("identity-block.login-links-forgot")}</Link>
 			) : null}
 			{showSignUp ? (
-				<Link href={signUpURL}>{phrases.t("identity-block.login-links-signup")}</Link>
+				<Paragraph>{phrases.t("identity-block.login-links-signup")}<Link href={signUpURL} className={`${BLOCK_CLASS_NAME}__inner-link`}>{phrases.t("identity-block.sign-up-natural")}</Link></Paragraph>
 			) : null}
 		</Stack>
 	);

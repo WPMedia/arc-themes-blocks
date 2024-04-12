@@ -6,6 +6,7 @@ import { useContent, useEditableContent } from "fusion:content";
 
 import {
 	Carousel,
+	getFocalFromANS,
 	Heading,
 	HeadingSection,
 	Icon,
@@ -153,7 +154,7 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 											<Image
 												alt={altText}
 												ansImage={featuredImage}
-												resizedOptions={{ smart: true }}
+												resizedOptions={{ ...getFocalFromANS(featuredImage) }}
 												width={280}
 												height={280}
 												responsiveImages={[280, 420, 560, 840]}

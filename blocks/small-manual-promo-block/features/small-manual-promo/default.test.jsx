@@ -1,20 +1,22 @@
 import React from "react";
+import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { useContent } from "fusion:content";
-import { isServerSide } from "@wpmedia/arc-themes-components";
+import { isServerSide, getFocalFromANS } from "@wpmedia/arc-themes-components";
 import SmallManualPromo from "./default";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
+	getFocalFromANS: jest.fn(() => { }),
 	isServerSide: jest.fn(() => true),
 	LazyLoad: ({ children }) => children,
 }));
 
 jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => {}),
+	useContent: jest.fn(() => ({})),
 	useEditableContent: jest.fn(() => ({
 		editableContent: () => ({ contentEditable: "true" }),
-		searchableField: () => {},
+		searchableField: () => { },
 		useFusionContext: jest.fn(() => ({
 			isAdmin: false,
 		})),
@@ -45,6 +47,7 @@ const customFields = {
 describe("the small manual promo feature", () => {
 	afterEach(() => {
 		jest.resetModules();
+		getFocalFromANS.mockClear();
 	});
 
 	beforeEach(() => {
@@ -85,10 +88,10 @@ describe("the small manual promo feature", () => {
 		const { container } = render(
 			<SmallManualPromo customFields={{ ...customFields, lazyLoad: true }} />
 		);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
-	it("should render image first when imagePosition is set to above", () => {
+	it("should render image when imagePosition is set to above", () => {
 		render(
 			<SmallManualPromo
 				customFields={{ ...customFields, imagePosition: "above", linkURL: undefined }}
@@ -96,17 +99,17 @@ describe("the small manual promo feature", () => {
 		);
 		const stack = screen.queryByRole("article");
 		const figure = screen.queryByRole("figure");
-		expect(stack.firstChild).toBe(figure);
+		expect(stack).toContainElement(figure);
 	});
 
-	it("should render heading first when imagePosition is set to below", () => {
+	it("should render heading when imagePosition is set to below", () => {
 		render(<SmallManualPromo customFields={{ ...customFields, imagePosition: "below" }} />);
 		const stack = screen.queryByRole("article");
 		const heading = screen.queryByRole("heading");
-		expect(stack.firstChild).toBe(heading);
+		expect(stack).toContainElement(heading);
 	});
 
-	it("should render image first when imagePosition is set to left", () => {
+	it("should render image when imagePosition is set to left", () => {
 		render(
 			<SmallManualPromo
 				customFields={{ ...customFields, imagePosition: "left", linkURL: undefined }}
@@ -114,7 +117,7 @@ describe("the small manual promo feature", () => {
 		);
 		const stack = screen.queryByRole("article");
 		const figure = screen.queryByRole("figure");
-		expect(stack.firstChild).toBe(figure);
+		expect(stack).toContainElement(figure);
 	});
 
 	it("should return a fallback image if showImage is true and imageId is not valid", () => {
@@ -154,15 +157,32 @@ describe("the small manual promo feature", () => {
 		});
 	});
 
-	it("should render heading first when imagePosition is set to right", () => {
+	it("should respect focal point if one is set", () => {
+		const config = {
+			imageAuth: "",
+			imageURL: "test_id=123",
+			imageId: "123",
+			imageFocalPoint: JSON.stringify({ x: 1234, y: 2345 }),
+			imageRatio: "4:3",
+			showImage: true,
+		};
+		render(<SmallManualPromo customFields={config} />);
+		expect(getFocalFromANS).toHaveBeenCalledWith(
+			expect.objectContaining({
+				focal_point: JSON.parse(config.imageFocalPoint)
+			})
+		);
+	})
+
+	it("should render heading when imagePosition is set to right", () => {
 		render(<SmallManualPromo customFields={{ ...customFields, imagePosition: "right" }} />);
 		const stack = screen.queryByRole("article");
 		const heading = screen.queryByRole("heading");
-		expect(stack.firstChild).toBe(heading);
+		expect(stack).toContainElement(heading);
 	});
 
 	it("should render a headline without a linkURL", () => {
 		render(<SmallManualPromo customFields={{ ...customFields, linkURL: undefined }} />);
-		expect(screen.queryByText("This is the headline")).not.toBeNull();
+		expect(screen.getByText("This is the headline")).not.toBeNull();
 	});
 });

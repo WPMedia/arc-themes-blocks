@@ -629,7 +629,7 @@
 		"bn": "কোনো অ্যাকাউন্ট নেই?\nসাইন আপ করুন",
 		"bo": "ཁྱེད་ལ་དྲ་གྲངས་མེད་དམ། ཐོ་འགོད།",
 		"de": "Sign up for an account.",
-		"en": "Don't have an account? Sign up",
+		"en": "Need to create an account? ",
 		"es": "Sign up for an account.",
 		"fr": "Sign up for an account.",
 		"id": "Belum memiliki akun? Daftar",
@@ -1273,5 +1273,35 @@
 		"vi": "Tên người dùng",
 		"zh-CN": "用户名",
 		"zh-TW": "使用者名稱"
+	},
+	"identity-block.bot-protection-error": {
+		"en": "Please verify that you are not a robot."
+	},
+	"identity-block.email-label": {
+		"en": "Email"
+	},
+	"identity-block.log-in-headline": {
+		"en": "Log in to your account"
+	},
+	"identity-block.login-form-error.account-is-disabled": {
+		"en": "Account is disabled."
+	},
+	"identity-block.login-form-error.captcha-token-invalid": {
+		"en": "Captcha token invalid."
+	},
+	"identity-block.login-form-error.unverified-email-address": {
+		"en": "Email Address is not verified."
+	},
+	"identity-block.login-form-error.max-devices": {
+		"en": "User account has reached the max number of devices."
+	},
+	"identity-block.login-form-error.invalid-email-password": {
+		"en": "Email or password is invalid. Try again."
+	},
+	"identity-block.privacy-statement": {
+		"en": "By creating an account, you agree to the Terms of Service and acknowledge our Privacy Policy."
+	},
+	"identity-block.sign-up-natural": {
+		"en": "Sign up"
 	}
 }

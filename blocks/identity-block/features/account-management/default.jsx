@@ -94,7 +94,6 @@ function AccountManagement({ customFields }) {
 	const header = phrases.t("identity-block.account-information");
 	const socialProfileHeader = phrases.t("identity-block.connected-accounts");
 
-	console.log(header, socialProfileHeader);
 
 	// if logged in, return account info
 	return (

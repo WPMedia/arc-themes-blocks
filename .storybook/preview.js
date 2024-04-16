@@ -1,7 +1,6 @@
 import "./themes/news.scss";
 
-// eslint-disable-next-line import/prefer-default-export
-export const parameters = {
+const parameters = {
 	layout: "fullscreen",
 	a11y: {
 		element: "#root",
@@ -33,4 +32,8 @@ export const parameters = {
 		? 0
 		: a.id.localeCompare(b.id, undefined, { numeric: true })
 	},
+};
+
+export default {
+	parameters,
 };

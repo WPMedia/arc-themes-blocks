@@ -122,6 +122,8 @@
 			@include scss.block-components("sign-up-tos-link");
 			@include scss.block-properties("sign-up-tos-link");
 		}
+		@include scss.block-components("sign-up-tos-container-link");
+		@include scss.block-properties("sign-up-tos-container-link");
 	}
 
 	@include scss.block-components("sign-up");
@@ -132,6 +134,24 @@
 	&__button-container {
 		@include scss.block-components("social-sign-on-button-container");
 		@include scss.block-properties("social-sign-on-button-container");
+
+		&__Apple {
+			@include scss.block-components("social-sign-on-button-container-apple");
+			@include scss.block-properties("social-sign-on-button-container-apple");
+		}
+	}
+
+	&__dividerWithText{
+		@include scss.block-components("social-sign-on-dividerWithText");
+		@include scss.block-properties("social-sign-on-dividerWithText");
+		&::before{
+			@include scss.block-components("social-sign-on-dividerWithText-before");
+			@include scss.block-properties("social-sign-on-dividerWithText-before");
+		}
+		&::after{
+			@include scss.block-components("social-sign-on-dividerWithText-after");
+			@include scss.block-properties("social-sign-on-dividerWithText-after");
+		}
 	}
 
 	@include scss.block-components("social-sign-on");

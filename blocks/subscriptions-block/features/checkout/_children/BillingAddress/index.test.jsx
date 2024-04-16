@@ -1,8 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom';
-
-import { useSales, usePhrases } from "@wpmedia/arc-themes-components";
 import BillingAddress from "./index";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({

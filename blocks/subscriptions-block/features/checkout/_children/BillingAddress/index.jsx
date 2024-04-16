@@ -6,10 +6,10 @@ import listOfStates from "./listOfStates";
 
 export const ARCXP_BILLING_ADDRESS = "ArcXP_billingAddress"
 
-const BillingAddress = ({ Sales, user, setError, setOrder, captchaToken, billingAddress, setBillingAddress, className, setIsOpen, setIsComplete }) => {
+const BillingAddress = ({ Sales, user, setError, setOrder, captchaToken, billingAddress, setBillingAddress, className, setIsOpen, setIsComplete, resetRecaptcha, setResetRecaptcha, children }) => {
 	const formRef = useRef();
 	const entriesRef = useRef({});
-  const [isUS, setIsUs] = useState(false);
+  const [isUS, setIsUS] = useState(false);
   const [isValid, setIsValid] = useState(formRef?.current?.checkValidity());
 
 	if (billingAddress) {
@@ -24,7 +24,8 @@ const BillingAddress = ({ Sales, user, setError, setOrder, captchaToken, billing
   useEffect(() => {
     const check = formRef?.current?.checkValidity();
     setIsValid(check)
-  }, [formRef.current])
+		if(entriesRef.current?.country === "US") setIsUS(true);
+  }, [])
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -38,7 +39,9 @@ const BillingAddress = ({ Sales, user, setError, setOrder, captchaToken, billing
 				const order = await Sales.createNewOrder(entriesRef.current, user?.email, null, user?.firstName, user?.lastName, user?.secondLastName, null, captchaToken);
 				setOrder(order);
 			} catch (e) {
+				setResetRecaptcha(!resetRecaptcha);
 				setError(e)
+				setResetRecaptcha(!resetRecaptcha);
 			}
 		}
 	};
@@ -48,9 +51,9 @@ const BillingAddress = ({ Sales, user, setError, setOrder, captchaToken, billing
     if(isValid !== valid) setIsValid(valid);
     if(name === "country") {
       if (entry.value === "US") {
-        setIsUs(true);
+        setIsUS(true);
       } else {
-        setIsUs(false);
+        setIsUS(false);
       }
     }
 		entriesRef.current[name] = entry.value;
@@ -65,7 +68,7 @@ const BillingAddress = ({ Sales, user, setError, setOrder, captchaToken, billing
 
 	return (
 		<form onSubmit={handleSubmit} ref={formRef} className={`${className}__billing-address`} data-testid="billing-address">
-			<Stack direction="vertical">
+			<Stack direction="vertical" gap="16px" className={`${className}__billing-address-form-div`}>
 				<Input
 					label={phrases.t("checkout-block.address1")}
 					name="line1"
@@ -89,63 +92,65 @@ const BillingAddress = ({ Sales, user, setError, setOrder, captchaToken, billing
 					showDefaultError={false}
 					type="text"
 				/>
+				<Stack className={`${className}__billing-address-input-div`}>
+					<Input
+						label={phrases.t("checkout-block.country-region")}
+						name="country"
+						required
+						defaultValue={billingAddress.country ?? ''}
+						onChange={(value) => {
+							handleInputChange("country", value);
+						}}
+						showDefaultError={false}
+						options={getTranslatedCountries}
+						type="select"
+						validationErrorMessage={phrases.t("checkout-block.country-validation")}
+					/>
+					<Input
+						label={phrases.t("checkout-block.city")}
+						name="locality"
+						required
+						defaultValue={billingAddress.locality ?? ''}
+						placeholder={phrases.t("checkout-block.city-placeholder")}
+						onChange={(value) => {
+							handleInputChange("locality", value);
+						}}
+						showDefaultError={false}
+						type="text"
+						validationErrorMessage={phrases.t("checkout-block.city-validation")}
+					/>
+				</Stack>
+				<Stack className={`${className}__billing-address-input-div`}>
+					<Input
+						label={phrases.t("checkout-block.state")}
+						name="region"
+						required
+						defaultValue={billingAddress.region ?? ''}
+						onChange={(value) => {
+							handleInputChange("region", value);
+						}}
+						options={listOfStates}
+						showDefaultError={false}
+						type={isUS ? "select" : "text"}
+						validationErrorMessage={phrases.t("checkout-block.state-validation")}
+					/>
+					<Input
+						label={phrases.t("checkout-block.zip-code")}
+						name="postal"
+						required
+						defaultValue={billingAddress.postal ?? ''}
+						onChange={(value) => {
+							handleInputChange("postal", value);
+						}}
+						showDefaultError={false}
+						type="text"
+						validationErrorMessage={phrases.t("checkout-block.zip-code-validation")}
+					/>
+				</Stack>
 			</Stack>
-			<Stack className={`${className}__billing-address-input-div`}>
-				<Input
-					label={phrases.t("checkout-block.country-region")}
-					name="country"
-					required
-          defaultValue={billingAddress.country ?? ''}
-					onChange={(value) => {
-						handleInputChange("country", value);
-					}}
-					showDefaultError={false}
-          options={getTranslatedCountries}
-					type="select"
-					validationErrorMessage={phrases.t("checkout-block.country-validation")}
-				/>
-				<Input
-					label={phrases.t("checkout-block.city")}
-					name="locality"
-					required
-          defaultValue={billingAddress.locality ?? ''}
-          placeholder={phrases.t("checkout-block.city-placeholder")}
-					onChange={(value) => {
-						handleInputChange("locality", value);
-					}}
-					showDefaultError={false}
-					type="text"
-					validationErrorMessage={phrases.t("checkout-block.city-validation")}
-				/>
-			</Stack>
-      <Stack className={`${className}__billing-address-input-div`}>
-        <Input
-          label={phrases.t("checkout-block.state")}
-          name="region"
-          required
-          defaultValue={billingAddress.region ?? ''}
-          onChange={(value) => {
-            handleInputChange("region", value);
-          }}
-          options={listOfStates}
-          showDefaultError={false}
-					type={isUS ? "select" : "text"}
-          validationErrorMessage={phrases.t("checkout-block.state-validation")}
-        />
-        <Input
-          label={phrases.t("checkout-block.zip-code")}
-          name="postal"
-          required
-          defaultValue={billingAddress.postal ?? ''}
-          onChange={(value) => {
-            handleInputChange("postal", value);
-          }}
-          showDefaultError={false}
-          type="text"
-          validationErrorMessage={phrases.t("checkout-block.zip-code-validation")}
-        />
-      </Stack>
-			<Button size="medium" variant="primary" disabled={!isValid ? true : null} fullWidth type="submit">
+
+			{children}
+			<Button size="medium" variant="primary" disabled={!isValid ? true : null} fullWidth type="submit" >
 				<span>{phrases.t("checkout-block.continue")}</span>
 			</Button>
 		</form>

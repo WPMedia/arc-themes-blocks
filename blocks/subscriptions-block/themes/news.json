@@ -35,9 +35,6 @@
 						"margin-block-end": "var(--global-spacing-5)",
 						"font-size": "var(--global-font-size-11)"
 					},
-					"input": {
-						"margin-block-end": "var(--global-spacing-5)"
-					},
 					"input-error-tip": {
 						"color": "var(--status-color-danger)"
 					},
@@ -49,6 +46,21 @@
 						"padding-inline-start": "var(--global-spacing-2)"
 					}
 				}
+			}
+		}
+	},
+	"checkout-billing-address-captcha": {
+		"styles": {
+			"default": {
+				"margin-block-start": "var(--global-spacing-6)",
+				"margin-block-end": "var(--global-spacing-6)"
+			}
+		}
+	},
+	"checkout-billing-address-form-div": {
+		"styles": {
+			"default": {
+				"margin-block-end": "var(--global-spacing-4)"
 			}
 		}
 	},

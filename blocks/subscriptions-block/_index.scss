@@ -47,9 +47,17 @@
 	}
 
 	&__billing-address {
+		&-form-div {
+			@include scss.block-components("checkout-billing-address-form-div");
+			@include scss.block-properties("checkout-billing-address-form-div");
+		}
 		&-input-div {
 			@include scss.block-components("checkout-billing-address-input-div");
 			@include scss.block-properties("checkout-billing-address-input-div");
+		}
+		&-captcha {
+			@include scss.block-components("checkout-billing-address-captcha");
+			@include scss.block-properties("checkout-billing-address-captcha");
 		}
 
 		@include scss.block-components("checkout-billing-address");

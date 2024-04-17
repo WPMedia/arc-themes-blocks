@@ -1,24 +1,44 @@
 import React from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { useIdentity } from "@wpmedia/arc-themes-components";
-import Login from "./default";
+
+import Login, {definedMessageByCode}  from "./default";
 
 const defaultCustomFields = {
 	redirectURL: "",
 	redirectToPreviousPage: true,
-	signUpURL: ""
+	signUpURL: "",
 };
+
+jest.mock("@arc-publishing/sdk-identity", () => ({
+	__esModule: true,
+	default: {
+		apiOrigin: "http://origin/",
+		options: jest.fn(),
+	},
+}));
+
+jest.mock("fusion:properties", () =>
+	jest.fn(() => ({
+		api: {
+			identity: {
+				origin: "https://corecomponents-arc-demo-3-prod.api.cdn.arcpublishing.com",
+			}
+		},
+	})),
+);
 
 const mockLogin = jest.fn(() => Promise.resolve());
 const mockIdentity = {
+	apiOrigin: "http://origin/",
 	isLoggedIn: jest.fn(() => false),
 	getConfig: jest.fn(() => ({})),
 	login: mockLogin,
 };
 
 const mockSales = {
-	getConfig: jest.fn(() => {})
-}
+	getConfig: jest.fn(() => {}),
+};
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
@@ -34,13 +54,21 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 			...mockSales,
 		},
 	})),
+	BotChallengeProtection: ({ challengeIn= 'login' }) => <div data-testid={`reCapctha-${challengeIn}`} />
 }));
-jest.mock("fusion:properties", () => jest.fn(() => ({})));
+
+jest.mock("../../components/login", () => ({
+	__esModule: true,
+	default: jest.fn(() => ({
+	  loginRedirect: jest.fn(),
+	})),
+  }));
 
 describe("Identity Login Feature", () => {
-	it("renders", () => {
+	it("renders", async () => {
 		render(<Login customFields={defaultCustomFields} />);
 		expect(screen.getByRole("form")).not.toBeNull();
+		expect(screen.getByTestId("reCapctha-signin")).not.toBeNull();
 	});
 
 	it("shows login form", () => {
@@ -72,8 +100,8 @@ describe("Identity Login Feature - rejected Login, general message", () => {
 	beforeEach(() => {
 		mockLogin.mockRejectedValueOnce({ code: 0 });
 		global.grecaptcha = {
-			reset: jest.fn()
-		}
+			reset: jest.fn(),
+		};
 	});
 
 	afterEach(() => {
@@ -103,10 +131,10 @@ describe("Identity Login Feature - rejected Login, general message", () => {
 
 describe("Identity Login Feature - rejected Login, error code 130001", () => {
 	beforeEach(() => {
-		mockLogin.mockRejectedValueOnce({ code: 130001 });
+		mockLogin.mockRejectedValueOnce({ code: 130001 }); // eslint-disable-line
 		global.grecaptcha = {
-			reset: jest.fn()
-		}
+			reset: jest.fn(),
+		};
 	});
 
 	afterEach(() => {
@@ -114,7 +142,6 @@ describe("Identity Login Feature - rejected Login, error code 130001", () => {
 	});
 
 	it("rejects the login", async () => {
-
 		render(<Login customFields={defaultCustomFields} />);
 
 		await waitFor(() => expect(screen.getByLabelText("identity-block.email-label")));
@@ -149,8 +176,25 @@ describe("Identity Login Feature - unInitialized", () => {
 		jest.clearAllMocks();
 	});
 
-	it("renders nothing if identity not initialized", () => {
+	it("renders null if identity not initialized", async () => {
 		render(<Login customFields={defaultCustomFields} />);
 		expect(screen.queryAllByRole("button")).toEqual([]);
+	});
+});
+
+describe("Define message by code", () => {
+	it("returns generic message if code doesn't exist", () => {
+		const result = definedMessageByCode("123");
+		expect(result).toEqual("identity-block.login-form-error.invalid-email-password");
+	});
+
+	it("returns generic message if code is undefined", () => {
+		const result = definedMessageByCode();
+		expect(result).toEqual("identity-block.login-form-error.invalid-email-password");
+	});
+
+	it("return message if code exists", () => {
+		const result = definedMessageByCode(100015);
+		expect(result).toEqual("identity-block.login-form-error.account-is-disabled");
 	});
 });

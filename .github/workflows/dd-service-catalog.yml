@@ -1,0 +1,50 @@
+---
+name: DataDog Service Catalog
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: DD-service-catalog
+        uses: arcxp/datadog-service-catalog-metadata-provider@v2
+        with:
+          schema-version: v2.1
+          github-token: ${{ secrets.WP_DOT_GITHUB }}
+          datadog-key: ${{ secrets.DATADOG_API_KEY }}
+          datadog-app-key: ${{ secrets.DATADOG_APPLICATION_KEY }}
+          service-name: arc-themes-blocks
+          team: experience-themes-xp
+          application: Arc Themes Blocks
+          description: |
+            This is the Arc Themes Blocks
+          lifecycle: production
+          tier: p0
+          email: arc-themes-devs@washpost.com
+          slack-support-channel: 'https://washpost.enterprise.slack.com/archives/C0169HVBN2C'
+          repo: https://github.com/WPMedia/arc-themes-blocks
+          tags: |
+            - 'application:Arc Themes Blocks'
+            - infrastructure:packages
+            - language:nodejs
+            - division:arc
+            - data-sensitivity:high
+            - component:themes
+          links: |
+            - name: Datadog Dashboard
+              url: https://washpost.datadoghq.com/dashboard/b47-w8a-u9c/theme-settings-dashboard?view=spans
+              type: dashboard
+            - name: Themes Jira Project
+              url: https://arcpublishing.atlassian.net/jira/software/c/projects/THEMES/boards/838
+              provider: jira
+              type: dashboard
+            - name: Themes Runbooks
+              url: https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/3303637274/Runbooks
+              type: runbook
+          integrations: |
+            opsgenie:
+              service-url: https://washpost.app.opsgenie.com/teams/dashboard/6c290e84-4b44-4178-8bec-5fb72fac8239/main
+              region: US

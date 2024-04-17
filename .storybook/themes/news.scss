@@ -3073,7 +3073,7 @@
 					),
 				),
 				"top-table-list-small-left": (
-					"grid-template-columns": 1fr 2fr,
+					"grid-template-columns": auto 66%,
 					"components": (
 						"divider": (
 							"grid-column": span 2,
@@ -3081,7 +3081,7 @@
 					),
 				),
 				"top-table-list-small-right": (
-					"grid-template-columns": 2fr 1fr,
+					"grid-template-columns": 66% auto,
 					"components": (
 						"divider": (
 							"grid-column": span 2,

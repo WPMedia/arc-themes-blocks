@@ -3,7 +3,6 @@ import Footer from "./features/footer/default";
 
 export default {
 	title: "Blocks/Footer",
-	component: Footer,
 	parameters: {
 		chromatic: {
 			viewports: [320, 1200],
@@ -11,28 +10,26 @@ export default {
 	},
 };
 
-export const DefaultLayout = (
+const defaultCustomFields = {
+	navigationConfig: {
+		contentService: "footer-service",
+		contentConfigValues: {},
+	},
+	lazyLoad: false,
+};
+
+export const DefaultLayout = () => (
 	<footer>
 		<Footer
-			customFields={{
-				navigationConfig: {
-					contentService: "footer-service",
-					contentConfiguration: {},
-				},
-			}}
+			customFields={defaultCustomFields}
 		/>
 	</footer>
 );
 
-export const RightToLeft = (
+export const RightToLeft = () => (
 	<footer dir="rtl">
 		<Footer
-			customFields={{
-				navigationConfig: {
-					contentService: "footer-service",
-					contentConfiguration: {},
-				},
-			}}
+			customFields={defaultCustomFields}
 		/>
 	</footer>
 );

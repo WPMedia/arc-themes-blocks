@@ -5,6 +5,7 @@ import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import {
+	getFocalFromANS,
 	formatURL,
 	Heading,
 	HeadingSection,
@@ -18,6 +19,62 @@ import {
 
 const BLOCK_CLASS_NAME = "b-small-manual-promo";
 
+const PromoImage = ({
+	showImage,
+	searchableField,
+	imageParams,
+	linkURL,
+	newTab,
+	registerSuccessEvent,
+	showHeadline
+}) => {
+	const ImageDisplay = showImage ? (
+		<MediaItem
+			{...searchableField({
+				imageURL: "url",
+				imageId: "_id",
+				imageAuth: "auth",
+				imageFocalPoint: "focal_point"
+			})}
+			suppressContentEditableWarning
+		>
+			<Image {...imageParams} />
+		</MediaItem>
+	) : null;
+	return showImage && linkURL ? (
+		<Link
+			className={`${BLOCK_CLASS_NAME}__img`}
+			href={formatURL(linkURL)}
+			openInNewTab={newTab}
+			onClick={registerSuccessEvent}
+			assistiveHidden={showHeadline}
+		>
+			{ImageDisplay}
+		</Link>
+	) : (
+		ImageDisplay
+	);
+};
+
+const PromoHeading = ({
+	showHeadline,
+	headline,
+	linkURL,
+	newTab,
+	registerSuccessEvent
+}) =>
+	showHeadline && headline ? (
+		<Heading>
+			{linkURL ? (
+				<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
+					{headline}
+				</Link>
+			) : (
+				headline
+			)}
+		</Heading>
+	) : null;
+
 const SmallManualPromo = ({ customFields }) => {
 	const {
 		headline,
@@ -25,6 +82,7 @@ const SmallManualPromo = ({ customFields }) => {
 		imageAuth,
 		imageURL,
 		imageId,
+		imageFocalPoint,
 		imageRatio,
 		lazyLoad,
 		linkURL,
@@ -44,9 +102,9 @@ const SmallManualPromo = ({ customFields }) => {
 		resizedImage || !imageURL
 			? {}
 			: {
-					source: "signing-service",
-					query: { id: imageURL },
-			  }
+				source: "signing-service",
+				query: { id: imageURL },
+			}
 	);
 	if (imageAuth && !resizedAuth) {
 		resizedAuth = JSON.parse(imageAuth);
@@ -59,68 +117,30 @@ const SmallManualPromo = ({ customFields }) => {
 		return null;
 	}
 
+	const ansImage = {
+		_id: resizedImage ? imageId : "",
+		url: imageURL,
+		auth: resizedAuth,
+		focal_point: imageFocalPoint ? JSON.parse(imageFocalPoint) : undefined
+	}
+
 	const alt = headline || null;
 	const imageParams =
 		imageURL && resizedAuth
 			? {
-					ansImage: {
-						_id: resizedImage ? imageId : "",
-						url: imageURL,
-						auth: resizedAuth,
-					},
-					alt,
-					aspectRatio: imageRatio,
-					resizedOptions: {
-						smart: true,
-					},
-					responsiveImages: [200, 400, 600, 800, 1200],
-					width: 600,
-			  }
+				ansImage,
+				alt,
+				aspectRatio: imageRatio,
+				resizedOptions: {
+					...getFocalFromANS(ansImage)
+				},
+				responsiveImages: [200, 400, 600, 800, 1200],
+				width: 600,
+			}
 			: {
-					src: fallbackImage,
-					alt,
-			  };
-
-	const PromoImage = () => {
-		const ImageDisplay = showImage ? (
-			<MediaItem
-				{...searchableField({
-					imageURL: "url",
-					imageId: "_id",
-					imageAuth: "auth",
-				})}
-				suppressContentEditableWarning
-			>
-				<Image {...imageParams} />
-			</MediaItem>
-		) : null;
-		return showImage && linkURL ? (
-			<Link
-				className={`${BLOCK_CLASS_NAME}__img`}
-				href={formatURL(linkURL)}
-				openInNewTab={newTab}
-				onClick={registerSuccessEvent}
-				assistiveHidden={showHeadline}
-			>
-				{ImageDisplay}
-			</Link>
-		) : (
-			ImageDisplay
-		);
-	};
-
-	const PromoHeading = () =>
-		showHeadline && headline ? (
-			<Heading>
-				{linkURL ? (
-					<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
-						{headline}
-					</Link>
-				) : (
-					headline
-				)}
-			</Heading>
-		) : null;
+				src: fallbackImage,
+				alt,
+			};
 
 	const containerClassNames = [
 		BLOCK_CLASS_NAME,
@@ -135,13 +155,41 @@ const SmallManualPromo = ({ customFields }) => {
 				<Grid as="article" className={containerClassNames}>
 					{["below", "right"].includes(imagePosition) ? (
 						<>
-							<PromoHeading />
-							<PromoImage />
+							<PromoHeading
+								showHeadline={showHeadline}
+								headline={headline}
+								linkURL={linkURL}
+								newTab={newTab}
+								registerSuccessEvent={registerSuccessEvent}
+							/>
+							<PromoImage
+								showImage={showImage}
+								searchableField={searchableField}
+								imageParams={imageParams}
+								linkURL={linkURL}
+								newTab={newTab}
+								registerSuccessEvent={registerSuccessEvent}
+								showHeadline={showHeadline}
+							/>
 						</>
 					) : (
 						<>
-							<PromoImage />
-							<PromoHeading />
+							<PromoImage
+								showImage={showImage}
+								searchableField={searchableField}
+								imageParams={imageParams}
+								linkURL={linkURL}
+								newTab={newTab}
+								registerSuccessEvent={registerSuccessEvent}
+								showHeadline={showHeadline}
+							/>
+							<PromoHeading
+								showHeadline={showHeadline}
+								headline={headline}
+								linkURL={linkURL}
+								newTab={newTab}
+								registerSuccessEvent={registerSuccessEvent}
+							/>
 						</>
 					)}
 				</Grid>
@@ -165,6 +213,9 @@ SmallManualPromo.propTypes = {
 			hidden: true,
 		}),
 		imageId: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageFocalPoint: PropTypes.string.tag({
 			hidden: true,
 		}),
 		linkURL: PropTypes.string.tag({

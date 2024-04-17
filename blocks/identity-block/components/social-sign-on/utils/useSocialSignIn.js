@@ -4,7 +4,9 @@ import { GoogleSignInContext } from "./googleContext";
 import useOIDCLogin from "../../../utils/useOIDCLogin";
 import validateURL from "../../../utils/validate-redirect-url";
 
-function useSocialSignIn(redirectURL, onError = () => {}, isOIDC) {
+import {SIGN_UP} from "../constants";
+
+function useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError = () => {}) {
 	const { Identity } = useIdentity();
 	const { isGoogleLoaded } = useContext(GoogleSignInContext);
 	const [config, setConfig] = useState(() => Identity?.configOptions ?? {});
@@ -25,7 +27,7 @@ function useSocialSignIn(redirectURL, onError = () => {}, isOIDC) {
 				onError();
 			}
 		};
-	}, [Identity, onError, redirectURL]);
+	}, [Identity, onError, redirectURL, isOIDC, loginByOIDC]);
 
 	useEffect(() => {
 		const fetchConfig = async () => {
@@ -56,15 +58,15 @@ function useSocialSignIn(redirectURL, onError = () => {}, isOIDC) {
 			};
 
 			window.google.accounts.id.initialize(googleIdConfig);
-
+			const googleTextType = socialSignOnIn === SIGN_UP ? 'signup_with' : 'signin_with';
 			window.google.accounts.id.renderButton(document.getElementById("google-sign-in-button"), {
 				type: "standard",
 				theme: "outline",
 				size: "large",
-				text: "continue_with",
+				text: googleTextType,
 				shape: "rectangular",
 				logo_alignment: "left",
-				width: "300",
+				width: "400",
 			});
 
 			Identity.isLoggedIn().then((isLoggedIn) => {
@@ -75,7 +77,7 @@ function useSocialSignIn(redirectURL, onError = () => {}, isOIDC) {
 				}
 			});
 		}
-	}, [config.googleClientId, Identity, isGoogleLoaded]);
+	}, [config.googleClientId, Identity, isGoogleLoaded, isOIDC, loginByOIDC, redirectURL, socialSignOnIn ]);
 
 	useEffect(() => {
 		const initializeFacebook = async () => {
@@ -91,6 +93,9 @@ function useSocialSignIn(redirectURL, onError = () => {}, isOIDC) {
 		// then they will have a truthy value here
 		facebookAppId: config.facebookAppId,
 		googleClientId: config.googleClientId,
+		appleTeamId: config.teamId,
+		appleKeyId: config.keyId,
+		appleUrlToReceiveAuthToken: config.urlToReceiveAuthToken
 	};
 }
 

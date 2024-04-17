@@ -10,13 +10,30 @@ const useLogin = ({
 	redirectToPreviousPage,
 	loggedInPageLocation,
 	isOIDC,
+	appleCode,
 }) => {
 
 	const { Identity } = useIdentity();
 	const validatedRedirectURL = validateURL(redirectURL);
 	const [redirectToURL, setRedirectToURL] = useState(validatedRedirectURL);
 	const [redirectQueryParam, setRedirectQueryParam] = useState(null);
+	const [isAppleAuthSuccess, setIsAppleAuthSuccess] = useState(false);
 	const { loginByOIDC } = useOIDCLogin();
+
+	useEffect(()=>{
+		const askForloginWithApple = async (code) => {
+			await Identity.appleSignOn(code);
+			const isLoggedIn = await Identity.isLoggedIn();
+			
+			if(isLoggedIn){
+				setIsAppleAuthSuccess(true);
+			}
+		};
+
+		if(Identity && appleCode){
+			askForloginWithApple(appleCode);
+		}
+	},[appleCode, Identity]);
 
 	useEffect(() => {
 		if (window?.location?.search) {
@@ -69,7 +86,7 @@ const useLogin = ({
 		if (Identity && !isAdmin) {
 			checkLoggedInStatus();
 		}
-	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin, loginByOIDC, isOIDC]);
+	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin, loginByOIDC, isOIDC, isAppleAuthSuccess]);
 
 	return {
 		loginRedirect: redirectQueryParam || redirectToURL,

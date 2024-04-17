@@ -504,7 +504,7 @@
 		"bn": "লগ ইন করুন",
 		"bo": "ཐོ་འཇུག",
 		"de": "Log In",
-		"en": "Log In",
+		"en": "Log in",
 		"es": "Log In",
 		"fr": "Log In",
 		"id": "Masuk",
@@ -604,7 +604,7 @@
 		"bn": "ইতিমধ্যে একটি অ্যাকাউন্ট আছে?\nলগ ইন করুন",
 		"bo": "དྲ་གྲངས་ཡོད་པ་ཡིན་ནམ། ཐོ་འཇུག",
 		"de": "Already have an account? Log in.",
-		"en": "Already have an account? Log in",
+		"en": "Already have an account?",
 		"es": "Already have an account? Log in.",
 		"fr": "Already have an account? Log in.",
 		"id": "Sudah memiliki akun? Masuk",
@@ -1277,6 +1277,9 @@
 	"identity-block.bot-protection-error": {
 		"en": "Please verify that you are not a robot."
 	},
+	"identity-block.create-an-account": {
+		"en": "Create an account"
+	},
 	"identity-block.email-label": {
 		"en": "Email"
 	},
@@ -1298,10 +1301,28 @@
 	"identity-block.login-form-error.invalid-email-password": {
 		"en": "Email or password is invalid. Try again."
 	},
+	"identity-block.or": {
+		"en": "OR"
+	},
 	"identity-block.privacy-statement": {
 		"en": "By creating an account, you agree to the Terms of Service and acknowledge our Privacy Policy."
 	},
 	"identity-block.sign-up-natural": {
 		"en": "Sign up"
+	},
+	"identity-block.social-signOn-apple-login": {
+		"en": "Sign in with Apple"
+	},
+	"identity-block.social-signOn-apple-signUp": {
+		"en": "Sign up with Apple"
+	},
+	"identity-block.social-signOn-google-login": {
+		"en": "Sign in with Google"
+	},
+	"identity-block.social-signOn-google-signUp": {
+		"en": "Sign up with Google"
+	},
+	"identity-block.terms-service-privacy-text": {
+		"en": "By creating an account, you agree to the <a href='%{termsAndPrivacyURL}'>Terms of Service and acknowledge our Privacy Policy</a>"
 	}
 }

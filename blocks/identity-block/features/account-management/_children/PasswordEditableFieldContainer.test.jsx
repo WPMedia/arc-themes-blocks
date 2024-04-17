@@ -1,9 +1,7 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
 
 import PasswordEditableFieldContainer from "./PasswordEditableFieldContainer";
-import FormPasswordConfirm from "../../../components/form-password-confirm";
 
 jest.mock("../../../components/form-password-confirm", () => () => <div>Password Confirm</div>);
 

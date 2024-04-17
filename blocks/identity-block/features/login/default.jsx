@@ -66,7 +66,7 @@ const Login = ({ customFields }) => {
 				setCaptchaError(null);
 				return Identity.login(email, password, {
 					rememberMe: true,
-					recaptchaToken: captchaToken
+					recaptchaToken: captchaToken,
 				})
 					.then(() => {
 						if (isOIDC) {
@@ -86,8 +86,7 @@ const Login = ({ customFields }) => {
 						}
 						if (grecaptcha) {
 							grecaptcha.reset();
-						}
-						
+						}						
 					});
 			}}
 		>

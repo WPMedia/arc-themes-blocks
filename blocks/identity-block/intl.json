@@ -1310,6 +1310,9 @@
 	"identity-block.sign-up-natural": {
 		"en": "Sign up"
 	},
+	"identity-block.signup-form-error.identity-already-exists": {
+		"en": "Account already exists"
+	},
 	"identity-block.social-signOn-apple-login": {
 		"en": "Sign in with Apple"
 	},

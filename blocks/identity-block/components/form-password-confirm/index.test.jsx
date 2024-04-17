@@ -62,7 +62,7 @@ describe("Form Password Confirm", () => {
 				confirmLabel="Confirm"
 				confirmTip="Confirm Tip"
 				label="Password"
-				tip="Password Tip"
+				tipPasswordMessage="Password Tip"
 				name="field1"
 			/>
 		);

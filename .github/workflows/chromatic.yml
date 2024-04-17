@@ -49,9 +49,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-
-      - name: Check failure status
-        uses: act10ns/slack@v1
-        with:
-          status: ${{ job.status }}
-        if: failure()
+        env:
+          CHROMATIC_SHA: ${{ github.sha }}
+          CHROMATIC_BRANCH: ${{ github.ref }}
+          CHROMATIC_SLUG: ${{ github.repository }}

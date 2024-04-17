@@ -28,7 +28,7 @@ jobs:
           repo: https://github.com/WPMedia/arc-themes-blocks
           tags: |
             - 'application:Arc Themes Blocks'
-            - infrastructure:serverless
+            - infrastructure:packages
             - language:nodejs
             - division:arc
             - data-sensitivity:high

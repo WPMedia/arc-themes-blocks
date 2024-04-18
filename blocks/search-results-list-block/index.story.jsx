@@ -1,5 +1,4 @@
 import React from "react";
-import { withKnobs } from "@storybook/addon-knobs";
 import SearchResultsList from "./features/search-results-list/default";
 
 export default {
@@ -7,7 +6,6 @@ export default {
 		chromatic: { viewports: [640, 1280] },
 	},
 	title: "Blocks/Search Results List",
-	decorators: [withKnobs],
 };
 
 const globalContent = {

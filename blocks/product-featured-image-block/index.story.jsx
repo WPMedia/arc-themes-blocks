@@ -11,19 +11,34 @@ export default {
 const mockFeaturedImageData = {
 	_id: "HY6LDPEW4BBFDLBYD4S3S7LZ3E",
 	type: "image",
-	url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg",
-	auth: {
-		1: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
+	caption:
+		"Reimagining a tried-and-true staple can invigorate the senses. Tired of tomato soup with grilled cheese? Why not try a hearty gazpacho with a caprese focaccia?",
+	credits: {
+		affiliation: [
+			{
+				name: "Affiliation Name",
+			},
+		],
+		by: [
+			{
+				type: "author",
+				name: "Author Name",
+				org: "Author Org",
+				slug: "",
+			},
+		],
 	},
-	alt_text: "Man smiling posing in front of shelves. (This is alt text.)",
+	subtitle: "Switching It Up",
+	auth: {
+		2: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
+	},
+	url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg",
 };
 
 export const displayImage = () => (
 	<ProductFeaturedImageDisplay
 		featuredImage={mockFeaturedImageData}
-		resizerAppVersion={1}
+		resizerAppVersion={2}
 		resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 	/>
 );
-
-export const noImage = () => <ProductFeaturedImageDisplay featuredImage={{}} />;

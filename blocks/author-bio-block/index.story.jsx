@@ -1,10 +1,8 @@
 import React from "react";
-import { withKnobs } from "@storybook/addon-knobs";
 import { AuthorBioItems } from "./features/author-bio/default";
 
 export default {
 	title: "Blocks/Short Author Bio",
-	decorators: [withKnobs],
 	parameters: {
 		chromatic: {
 			viewports: [320, 1200],

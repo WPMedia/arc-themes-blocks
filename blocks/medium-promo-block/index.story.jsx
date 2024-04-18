@@ -1,10 +1,8 @@
 import React from "react";
-import { withKnobs } from "@storybook/addon-knobs";
 import MediumPromo from "./features/medium-promo/default";
 
 export default {
 	title: "Blocks/Medium Promo",
-	decorators: [withKnobs],
 	parameters: {
 		// Set the viewports in Chromatic at a component level.
 		chromatic: { viewports: [320, 768, 1200] },

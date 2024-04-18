@@ -240,7 +240,7 @@
 		"styles": {
 			"default": {
 				"font-family": "var(--font-family-primary)",
-				"padding-block-end": "var(--global-spacing-5)",
+				"padding-block-end": "var(--global-spacing-2)",
 				"components": {
 					"button": {
 						"font-size": "var(--global-font-size-4)"
@@ -252,11 +252,10 @@
 						"font-style": "normal",
 						"line-height": "140%",
 						"text-align": "center",
-						"padding-block-end": 0,
 						"padding-block-start": 0,
 						"padding-inline-end": 0,
-						"padding-inline-start": 0,
-						"margin-block-end": "var(--global-spacing-5)"
+						"margin-block-end": "var(--global-spacing-0)",
+                        "padding-block-end": "var(--global-spacing-2)"
 					},
 					"input": {
 						"margin-block-end": "var(--global-spacing-4)"
@@ -393,8 +392,38 @@
 	"login-links-inner-link": {
 		"styles": {
 			"default": {
-				"text-decoration": "underline"
+				"text-decoration": "underline",
+				"margin-block-end": "var(--global-spacing-5)",
+				"margin-inline-end": 0,
+				"margin-inline-start": 0,
+				"padding-inline-start": "var(--global-spacing-2)"
 			}
+		}
+	},
+	"login-form-tos-link": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color)",
+				"text-decoration": "underline"
+			},
+			"desktop": {}
+		}
+	},
+	"login-form-tos-link-hover": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color-subtle)"
+			},
+			"desktop": {}
+		}
+	},
+	"login-form-tos-container-link":{
+		"styles": {
+			"default": {
+				"margin-block-start": "var(--global-spacing-5)",
+				"margin-block-end": "var(--global-spacing-5)"
+			},
+			"desktop": {}
 		}
 	},
 	"reset-password": {
@@ -446,18 +475,22 @@
 		"styles": {
 			"default": {
 				"font-family": "var(--font-family-primary)",
+				"padding-block-end": "var(--global-spacing-2)",
 				"components": {
 					"button": {
 						"font-size": "var(--global-font-size-4)"
 					},
 					"heading": {
-						"border-block-end-color": "var(--border-color)",
-						"border-block-end-style": "var(--global-border-style-1)",
-						"border-block-end-width": "var(--global-border-width-1)",
-						"font-size": "var(--global-font-size-9)",
-						"margin-block-end": "var(--global-spacing-4)",
-						"padding-block-end": "var(--global-spacing-2)",
-						"text-align": "center"
+						"font-size": "var(--heading-level-4-font-size)",
+						"font-family": "var(--font-family-secondary)",
+						"font-weight": 700,
+						"font-style": "normal",
+						"line-height": "140%",
+						"text-align": "center",
+						"padding-block-start": 0,
+						"padding-inline-end": 0,
+						"margin-block-end": "var(--global-spacing-0)",
+                        "padding-block-end": "var(--global-spacing-2)"
 					},
 					"input": {
 						"margin-block-end": "var(--global-spacing-5)"
@@ -469,6 +502,9 @@
 						"inline-size": "100%",
 						"padding-block-end": "var(--global-spacing-2)",
 						"padding-block-start": "var(--global-spacing-2)"
+					},
+					"input-tip": {
+						"font-size": "var(--global-font-size-3)"
 					},
 					"paragraph": {
 						"font-family": "var(--font-family-primary)",
@@ -486,11 +522,40 @@
 			}
 		}
 	},
+	"sign-up-tos-container-link":{
+		"styles": {
+			"default": {
+				"margin-block-start": "var(--global-spacing-5)",
+				"margin-block-end": "var(--global-spacing-5)"
+			},
+			"desktop": {}
+		}
+	},
+	"sign-up-form-error":{
+		"styles": {
+			"default": {
+				"font-family": "var(--font-family-primary)",
+				"text-align": "center",
+				"margin-block-end": "var(--global-spacing-4)",
+				"components": {
+					"paragraph": {
+						"background-color": "var(--status-color-danger-subtle)",
+						"color": "var(--status-color-danger)",
+						"padding-block-end": "var(--global-spacing-1)",
+						"padding-block-start": "var(--global-spacing-1)",
+						"padding-inline-start": "var(--global-spacing-2)",
+						"padding-inline-end": "var(--global-spacing-2)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
 	"sign-up-tos-link": {
 		"styles": {
 			"default": {
 				"color": "var(--text-color)",
-				"text-decoration": "none"
+				"text-decoration": "underline"
 			},
 			"desktop": {}
 		}
@@ -506,8 +571,9 @@
 	"social-sign-on": {
 		"styles": {
 			"default": {
-				"inline-size": "300px",
+				"inline-size": "100%",
 				"margin-inline": "auto",
+				"gap": "var(--global-spacing-4)",
 				"components": {
 					"paragraph": {
 						"color": "var(--status-color-danger)",
@@ -523,7 +589,76 @@
 			"default": {
 				"display": "flex",
 				"flex-direction": "column",
-				"gap": "var(--global-spacing-4)"
+				"align-items": "center",
+				"gap": "var(--global-spacing-4)",
+				"inline-size": "100%",
+				"margin-block-start": "var(--global-spacing-2)",
+				"margin-block-end": "var(--global-spacing-2)"
+			},
+			"desktop": {}
+		}
+	},
+	"social-sign-on-button-container-apple": {
+		"styles": {
+			"default": {
+				"justify-content": "center",
+				"border-block-start-width": "1px",
+				"border-block-end-width": "1px",
+				"border-inline-start-width": "1px",
+				"border-inline-end-width": "1px",
+				"border-block-start-color": "var(--border-color)",
+				"border-block-end-color": "var(--border-color)",
+				"border-inline-start-color": "var(--border-color)",
+				"border-inline-end-color": "var(--border-color)",
+				"border-radius": "var(--global-spacing-1)",
+				"color": "var(--text-color)",
+				"font-weight": "var(--global-font-weight-7)",
+				"font-family": "var(--font-family-primary)",
+				"inline-size": "400px",
+				"components": {
+					"button-secondary-reverse-hover": {
+						"color": "var(--text-color)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"social-sign-on-dividerWithText": {
+		"styles": {
+			"default": {
+				"display": "flex",
+				"align-items": "center",
+				"flex-direction": "row",
+				"color": "var(--text-color-subtle)",
+				"font-family": "var(--font-family-primary)",
+				"font-weight": "var(--global-font-weight-4)",
+				"font-size": "var(--global-font-size-4)",
+				"margin-block-start": "var(--global-spacing-2)"
+			},
+			"desktop": {}
+		}
+	},
+	"social-sign-on-dividerWithText-before": {
+		"styles": {
+			"default": {
+				"content": "''",
+				"height": "1px",
+				"background-color": "var(--border-color)",
+				"flex-grow": "1",
+				"margin-inline-end": "var(--global-spacing-2)"
+			},
+			"desktop": {}
+		}
+	},
+	"social-sign-on-dividerWithText-after": {
+		"styles": {
+			"default": {
+				"content": "''",
+				"height": "1px",
+				"background-color": "var(--border-color)",
+				"flex-grow": "1",
+				"margin-inline-start": "var(--global-spacing-2)"
 			},
 			"desktop": {}
 		}

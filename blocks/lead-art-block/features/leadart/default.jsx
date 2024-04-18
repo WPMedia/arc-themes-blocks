@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
@@ -44,6 +44,26 @@ export const LeadArtPresentation = (props) => {
 		viewportPercentage = 65
 	} = customFields;
 
+	const lead_art = useMemo(() => content?.promo_items?.lead_art || content?.promo_items?.basic || {}, [content]) ;
+
+	useEffect(() => {
+		if (lead_art?.type === "image") {
+			if (document.fullscreenEnabled) {
+				document.addEventListener("fullscreenchange", () => {
+					if (!document.fullscreenElement) {
+						setIsOpen(false);
+					}
+				});
+			} else if (document.webkitFullscreenEnabled) {
+				document.addEventListener("webkitfullscreenchange", () => {
+					if (!document.webkitFullscreenElement) {
+						setIsOpen(false);
+					}
+				})
+			}
+		}
+	}, [lead_art]);
+	
 	/* istanbul ignore next  */
 	const toggleFullScreen = () => {
 		// the full screen element is the div wrapping a lead art of type image
@@ -259,7 +279,6 @@ export const LeadArtPresentation = (props) => {
 		return null;
 	};
 
-	const lead_art = content?.promo_items?.lead_art || content?.promo_items?.basic || {};
 	const leadArtContent = getLeadArtContent(lead_art);
 	if (leadArtContent) {
 		return <div className={BLOCK_CLASS_NAME}>{leadArtContent}</div>;

@@ -46,11 +46,11 @@ export const basic = () => (
 	</div>
 );
 
-export const withRtl = () => {
+export const withRtl = () => (
 	<div dir="rtl" id="fusion-app" className="layout-section">
 		<RightRailBlock children={layoutAreas.map((name) => layoutItem(name))} />
 	</div>
-}
+);
 
 export const commerce = () => (
 	<div id="fusion-app" className="layout-section">

@@ -1,10 +1,8 @@
 import React from "react";
-import { withKnobs } from "@storybook/addon-knobs";
 import { TagTitleOutput as TagTitle } from "./features/tag-title/default";
 
 export default {
 	title: "Blocks/Tag Title",
-	decorators: [withKnobs],
 };
 
 const fullMockData = {

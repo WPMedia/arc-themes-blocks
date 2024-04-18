@@ -49,7 +49,3 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-        env:
-          CHROMATIC_SHA: ${{ github.sha }}
-          CHROMATIC_BRANCH: ${{ github.ref }}
-          CHROMATIC_SLUG: ${{ github.repository }}

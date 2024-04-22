@@ -1,10 +1,8 @@
 import React from "react";
-import { withKnobs } from "@storybook/addon-knobs";
 import SimpleList from "./features/simple-list/default";
 
 export default {
 	title: "Blocks/Simple List",
-	decorators: [withKnobs],
 	parameters: {
 		// Set the viewports in Chromatic at a component level.
 		chromatic: { viewports: [320, 1200] },

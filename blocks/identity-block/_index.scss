@@ -51,6 +51,7 @@
 			@include scss.block-components("header-account-action-dropdown-list-item-last");
 			@include scss.block-properties("header-account-action-dropdown-list-item-last");
 		}
+
 		@include scss.block-components("header-account-action-dropdown-list-item");
 		@include scss.block-properties("header-account-action-dropdown-list-item");
 	}
@@ -60,49 +61,58 @@
 }
 
 .b-login-form {
-	@include scss.block-components("login-form");
-	@include scss.block-properties("login-form");
 	&__bot-protection-section {
 		@include scss.block-components("login-form-bot-protection-section");
 		@include scss.block-properties("login-form-bot-protection-section");
 	}
+	
 	&__privacy-statement {
 		@include scss.block-components("login-form-privacy-statement");
 		@include scss.block-properties("login-form-privacy-statement");
 	}
+	
 	&__sign-up-div {
 		@include scss.block-components("login-form-sign-up-div");
 		@include scss.block-properties("login-form-sign-up-div");
 	}
+	
 	&__sign-up-button {
 		@include scss.block-components("login-form-sign-up-button");
 		@include scss.block-properties("login-form-sign-up-button");
 	}
+	
 	&__login-form-error {
 		@include scss.block-components("login-form-error");
 		@include scss.block-properties("login-form-error");
 	}
+	
 	&__tos-container {
 		a {
 			&:hover {
 				@include scss.block-components("login-form-tos-link-hover");
 				@include scss.block-properties("login-form-tos-link-hover");
 			}
+
 			@include scss.block-components("login-form-tos-link");
 			@include scss.block-properties("login-form-tos-link");
 		}
+
 		@include scss.block-components("login-form-tos-container-link");
 		@include scss.block-properties("login-form-tos-container-link");
 	}
+
+	@include scss.block-components("login-form");
+	@include scss.block-properties("login-form");
 }
 
 .b-login-links {
-	@include scss.block-components("login-links");
-	@include scss.block-properties("login-links");
 	&__inner-link {
 		@include scss.block-components("login-links-inner-link");
 		@include scss.block-properties("login-links-inner-link");
 	}
+
+	@include scss.block-components("login-links");
+	@include scss.block-properties("login-links");
 }
 
 .b-reset-password {
@@ -112,17 +122,21 @@
 
 .b-sign-up {
 	&__tos-container {
+		/* stylelint-disable-next-line no-descending-specificity */
 		a {
 			&:hover {
 				@include scss.block-components("sign-up-tos-link-hover");
 				@include scss.block-properties("sign-up-tos-link-hover");
 			}
+			
 			@include scss.block-components("sign-up-tos-link");
 			@include scss.block-properties("sign-up-tos-link");
 		}
+		
 		@include scss.block-components("sign-up-tos-container-link");
 		@include scss.block-properties("sign-up-tos-container-link");
 	}
+	
 	&__login-form-error {
 		@include scss.block-components("login-form-error");
 		@include scss.block-properties("login-form-error");
@@ -134,6 +148,11 @@
 
 .b-social-sign-on {
 	&__button-container {
+		&__Apple {
+			@include scss.block-components("social-sign-on-button-container-apple");
+			@include scss.block-properties("social-sign-on-button-container-apple");
+		}
+
 		@include scss.block-components("social-sign-on-button-container");
 		@include scss.block-properties("social-sign-on-button-container");
 
@@ -154,6 +173,21 @@
 			@include scss.block-components("social-sign-on-dividerWithText-after");
 			@include scss.block-properties("social-sign-on-dividerWithText-after");
 		}
+	}
+
+	&__dividerWithText{
+		&::before{
+			@include scss.block-components("social-sign-on-dividerWithText-before");
+			@include scss.block-properties("social-sign-on-dividerWithText-before");
+		}
+		
+		&::after{
+			@include scss.block-components("social-sign-on-dividerWithText-after");
+			@include scss.block-properties("social-sign-on-dividerWithText-after");
+		}
+		
+		@include scss.block-components("social-sign-on-dividerWithText");
+		@include scss.block-properties("social-sign-on-dividerWithText");
 	}
 
 	@include scss.block-components("social-sign-on");

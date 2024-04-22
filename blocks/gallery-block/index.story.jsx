@@ -262,6 +262,6 @@ export const hideCaptionAndCreditsAndTitleInRtl = () => {
 				customFields={mockCustomFields}
 				resizerAppVersion={2}
 			/>
-		</dir>
+		</div>
 	);
 };

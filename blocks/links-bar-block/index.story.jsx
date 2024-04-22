@@ -1,10 +1,8 @@
 import React from "react";
-import { withKnobs } from "@storybook/addon-knobs";
 import LinksBar from "./features/links-bar/default";
 
 export default {
 	title: "Blocks/Links Bar",
-	decorators: [withKnobs],
 	parameters: {
 		chromatic: {
 			viewports: [320, 1200],

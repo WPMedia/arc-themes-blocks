@@ -1,14 +1,6 @@
-import cssVariablesTheme from "@etchteam/storybook-addon-css-variables-theme";
+import "./themes/news.scss";
 
-// eslint-disable-next-line import/no-webpack-loader-syntax,import/no-unresolved
-import news from "!!style-loader?injectType=lazyStyleTag!css-loader!sass-loader!./themes/news.scss";
-// eslint-disable-next-line import/no-webpack-loader-syntax,import/no-unresolved
-import commerce from "!!style-loader?injectType=lazyStyleTag!css-loader!sass-loader!./themes/commerce.scss";
-
-export const decorators = [cssVariablesTheme];
-
-// eslint-disable-next-line import/prefer-default-export
-export const parameters = {
+const parameters = {
 	layout: "fullscreen",
 	a11y: {
 		element: "#root",
@@ -36,12 +28,12 @@ export const parameters = {
 	},
 	options: {
 		storySort: (a, b) =>
-			a[1].kind === b[1].kind ? 0 : a[1].id.localeCompare(b[1].id, undefined, { numeric: true }),
+		a.title === b.title
+		? 0
+		: a.id.localeCompare(b.id, undefined, { numeric: true })
 	},
-	cssVariables: {
-		files: {
-			news,
-			commerce,
-		},
-	},
+};
+
+export default {
+	parameters,
 };

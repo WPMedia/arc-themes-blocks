@@ -1,14 +1,14 @@
 import React from "react";
-import { withKnobs, text } from "@storybook/addon-knobs";
 import Headline from "./features/headline/_children/headline";
 
 export default {
 	title: "Blocks/Headline",
-	decorators: [withKnobs],
 };
 
-export const customHeadline = () => {
-	const headlineString = text("headlineString", "Man Bites Dog");
+export const customHeadline = (args) => (
+	<Headline { ...args } />
+);
 
-	return <Headline headlineString={headlineString} />;
+customHeadline.args = {
+	headlineString: "Man Bites Dog",
 };

@@ -520,7 +520,7 @@
 		"subscriptions-block.paypal-redirect-label": "Redirecting to PayPal page...",
 		"subscriptions-block.submit-payment": "Purchase Subscription",
 		"subscriptions-block.update-payment": "Update Payment Method",
-		"checkout-block.zip-code": "Zip/Postal Code",
+		"checkout-block.zip-code": "Zip/Postal code",
 		"checkout-block.zip-code-validation": "Please enter a valid zip/postal code."
 	}
 }

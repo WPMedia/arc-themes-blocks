@@ -9,7 +9,7 @@ export const ARCXP_BILLING_ADDRESS = "ArcXP_billingAddress"
 const BillingAddress = ({ Sales, user, setError, setOrder, captchaToken, billingAddress, setBillingAddress, className, setIsOpen, setIsComplete, resetRecaptcha, setResetRecaptcha, children }) => {
 	const formRef = useRef();
 	const entriesRef = useRef({});
-  const [isUS, setIsUS] = useState(false);
+  const [isCountryUS, setIsCountryUS] = useState(false);
   const [isValid, setIsValid] = useState(formRef?.current?.checkValidity());
 
 	if (billingAddress) {
@@ -24,7 +24,7 @@ const BillingAddress = ({ Sales, user, setError, setOrder, captchaToken, billing
   useEffect(() => {
     const check = formRef?.current?.checkValidity();
     setIsValid(check)
-		if(entriesRef.current?.country === "US") setIsUS(true);
+		if(entriesRef.current?.country === "US") setIsCountryUS(true);
   }, [])
 
 	const handleSubmit = async (event) => {
@@ -51,9 +51,9 @@ const BillingAddress = ({ Sales, user, setError, setOrder, captchaToken, billing
     if(isValid !== valid) setIsValid(valid);
     if(name === "country") {
       if (entry.value === "US") {
-        setIsUS(true);
+        setIsCountryUS(true);
       } else {
-        setIsUS(false);
+        setIsCountryUS(false);
       }
     }
 		entriesRef.current[name] = entry.value;
@@ -131,7 +131,7 @@ const BillingAddress = ({ Sales, user, setError, setOrder, captchaToken, billing
 						}}
 						options={listOfStates}
 						showDefaultError={false}
-						type={isUS ? "select" : "text"}
+						type={isCountryUS ? "select" : "text"}
 						validationErrorMessage={phrases.t("checkout-block.state-validation")}
 					/>
 					<Input

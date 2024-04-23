@@ -478,7 +478,7 @@
 		"checkout-block.address1-validation": "Please enter a valid address.",
 		"checkout-block.address2": "Address 2 (Optional)",
 		"checkout-block.address2-placeholder": "ex: Apt/Suite/Floor",
-		"checkout-block.billingAddress": "Billing Address",
+		"checkout-block.billingAddress": "Billing address",
 		"checkout-block.cardNumber": "Card number",
 		"checkout-block.cardholderName": "Name on card",
 		"checkout-block.cardholderName-requirements": "Please enter name on card",

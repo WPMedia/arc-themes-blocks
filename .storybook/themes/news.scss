@@ -3417,6 +3417,9 @@
 				"triple-chain-child-item": (
 					"gap": var(--global-spacing-6) 0
 				),
+				"triple-chain-child-item-grid": (
+					"display": "grid"
+				),
 				"triple-chain-child-item-empty": (
 					"display": contents
 				),
@@ -4514,6 +4517,9 @@
 				"triple-chain-children-grid": (
 					"grid-template-columns": 1fr 1fr 1fr,
 					"gap": 0 var(--global-spacing-5)
+				),
+				"triple-chain-child-item-grid": (
+					"display": "flex"
 				),
 				"xl-manual-promo": (
 					"components": (

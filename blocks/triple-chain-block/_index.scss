@@ -19,6 +19,12 @@
 
 		@include scss.block-components("triple-chain-child-item");
 		@include scss.block-properties("triple-chain-child-item");
+
+		.c-grid {
+			@include scss.block-components("triple-chain-child-item-grid");
+			@include scss.block-properties("triple-chain-child-item-grid");
+		}
+
 	}
 
 	@include scss.block-components("triple-chain");

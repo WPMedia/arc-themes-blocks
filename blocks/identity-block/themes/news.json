@@ -246,8 +246,8 @@
 					},
 					"heading": {
 						"border-block-end-color": "var(--border-color)",
-						"border-block-end-style": "var(--global-border-style-1)",
-						"border-block-end-width": "var(--global-border-width-1)",
+						"border-block-end-style": "var(--global-border-style-0)",
+						"border-block-end-width": "var(--global-border-width-0)",
 						"font-size": "var(--global-font-size-9)",
 						"margin-block-end": "var(--global-spacing-4)",
 						"padding-block-end": "var(--global-spacing-2)",
@@ -281,7 +281,19 @@
 		}
 	},
 	"ota-sub-headline": {
-		"background": "green"
+		"styles": {
+			"default": {
+				"text-align": "center",
+				"margin-block-end": "var(--global-spacing-4)"
+			}
+		}
+	},
+	"ota-recaptcha": {
+		"styles": {
+			"default": {
+				"margin-block-end": "var(--global-spacing-4)"
+			}
+		}
 	},
 	"login-form": {
 		"styles": {
@@ -548,7 +560,7 @@
 			}
 		}
 	},
-	"sign-up-tos-container-link":{
+	"sign-up-tos-container-link": {
 		"styles": {
 			"default": {
 				"margin-block-end": "var(--global-spacing-5)"

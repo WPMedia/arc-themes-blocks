@@ -8,13 +8,14 @@ const BLOCK_CLASS_NAME = "b-login-links";
 const defaultLoginURL = "/account/login/";
 const defaultForgotURL = "/account/forgot-password/";
 const defaultSignUpURL = "/account/signup/";
+const defaultRequestOneTimePasswordURL = "/request-one-time-password/";
 
 const LoginLinks = ({ customFields }) => {
 	const {
 		showLogin = false,
 		showLoginWithoutPassword = false,
 		loginURL = defaultLoginURL,
-		loginWithOutPasswordUrl = "/one-time-password/",
+		loginWithOutPasswordUrl = defaultRequestOneTimePasswordURL,
 		showForgot = false,
 		forgotURL = defaultForgotURL,
 		showSignUp = false,
@@ -76,7 +77,7 @@ LoginLinks.propTypes = {
 		}),
 		loginWithOutPasswordUrl: PropTypes.string.tag({
 			name: "Login without password URL",
-			defaultValue: defaultLoginURL,
+			defaultValue: defaultRequestOneTimePasswordURL,
 			group: "Login Without Password",
 		}),
 		showForgot: PropTypes.bool.tag({

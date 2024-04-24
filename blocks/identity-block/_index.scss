@@ -92,6 +92,11 @@
 		@include scss.block-components("ota-sub-headline");
 		@include scss.block-properties("ota-sub-headline");
 	}
+
+	&__recaptcha {
+		@include scss.block-components("ota-recaptcha");
+		@include scss.block-properties("ota-recaptcha");
+	}
 }
 
 .b-login-links {
@@ -101,6 +106,8 @@
 	&__ota-link {
 		@include scss.block-components("login-links-ota-link");
 		@include scss.block-properties("login-links-ota-link");
+	}
+
 	&__inner-link {
 		@include scss.block-components("login-links-inner-link");
 		@include scss.block-properties("login-links-inner-link");

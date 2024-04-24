@@ -151,7 +151,7 @@ const Checkout = ({ customFields }) => {
 		<section className={BLOCK_CLASS_NAME}>
 			<Heading>{phrases.t("checkout-block.headline")}</Heading>
 			<CheckoutCardDetail className={`${BLOCK_CLASS_NAME}__card`} type={ACCOUNT} summary={accountSummary} link={editButton(ACCOUNT)} isOpen={isOpen.account} isComplete={isComplete.account} />
-			<CheckoutCardDetail className={`${BLOCK_CLASS_NAME}__card`} type={BILLING_ADDRESS} summary={generateBillingAddressSummary(billingAddress)} link={editButton(BILLING_ADDRESS)} isOpen={isOpen.billingAddress} isComplete={isComplete}>
+			<CheckoutCardDetail className={`${BLOCK_CLASS_NAME}__card`} type={BILLING_ADDRESS} summary={generateBillingAddressSummary(billingAddress)} link={editButton(BILLING_ADDRESS)} isOpen={isOpen.billingAddress} isComplete={isComplete?.billingAddress} error={error}>
 				<BillingAddress Sales={Sales} user={user} captchaToken={captchaToken} setError={setError} setOrder={setOrder} className={BLOCK_CLASS_NAME} billingAddress={billingAddress} setBillingAddress={setBillingAddress} setIsOpen={setIsOpen} setIsComplete={setIsComplete} resetRecaptcha={resetRecaptcha} setResetRecaptcha={setResetRecaptcha}>
 					{isRecaptchaEnabled && <div className={`${BLOCK_CLASS_NAME}__billing-address-captcha`}>
 						<BotChallengeProtection 

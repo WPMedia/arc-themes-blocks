@@ -20,6 +20,10 @@
 			@include scss.block-components("checkout-card-closed");
 			@include scss.block-properties("checkout-card-closed");
 		}
+		&__form-error{
+			@include scss.block-components("checkout-card-formError");
+			@include scss.block-properties("checkout-card-formError");
+		}
 	}
 	&__cart {
 		@include scss.block-components("checkout-cart");

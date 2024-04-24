@@ -74,6 +74,25 @@
 			}
 		}
 	},
+	"checkout-card-formError": {
+		"styles": {
+				"default": {
+						"padding-block-start": "var(--global-spacing-5)",
+						"padding-inline-end": "var(--global-spacing-5)",
+						"padding-block-end": "var(--global-spacing-5)",
+						"padding-inline-start": "var(--global-spacing-5)",
+						"color": "var(--global-white)",
+						"background-color": "var(--status-color-danger)",
+						"components": {
+								"paragraph": {
+										"font-size": "var(--global-font-size-4)",
+										"font-family": "var(--font-family-primary)",
+										"font-weight": "var(--global-font-weight-4)"
+								}
+						}
+				}
+		}
+},
 	"checkout-card": {
 		"styles": {
 			"default": {

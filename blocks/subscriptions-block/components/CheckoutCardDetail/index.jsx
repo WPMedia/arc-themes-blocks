@@ -7,7 +7,7 @@ export const BILLING_ADDRESS = "Billing Address";
 export const PAYMENT = "Payment";
 export const REVIEW = "Review";
 
-const CheckoutCardDetail = ({ type, summary, children, link, className, isOpen, isComplete }) => {
+const CheckoutCardDetail = ({ type, summary, children, link, className, isOpen, isComplete, error }) => {
 	const phrases = usePhrases();
 
 	const getTitle = () => {
@@ -28,6 +28,11 @@ const CheckoutCardDetail = ({ type, summary, children, link, className, isOpen, 
 					{link}
 				</div>}
 			</Stack>
+			{isOpen && error && (
+                <div className={`${className}__form-error`}>
+                    <Paragraph>{error?.message}</Paragraph>
+                </div>
+            )}
 			{isOpen && <div className={`${className}-children-div`}>{children}</div>}
 		</div>
 	);

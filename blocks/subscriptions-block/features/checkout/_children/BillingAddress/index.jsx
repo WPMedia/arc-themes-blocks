@@ -33,15 +33,17 @@ const BillingAddress = ({ Sales, user, setError, setOrder, captchaToken, billing
 		if (valid) {
       setBillingAddress(entriesRef.current);
       localStorage.setItem(ARCXP_BILLING_ADDRESS, JSON.stringify(entriesRef.current));
-      setIsOpen(state => ({...state, billingAddress: false, payment: true}));
-			setIsComplete(state => ({...state, billingAddress: true}))
 			try {
 				const order = await Sales.createNewOrder(entriesRef.current, user?.email, null, user?.firstName, user?.lastName, user?.secondLastName, null, captchaToken);
-				setOrder(order);
+				if(order?.orderNumber) {
+					setError();
+					setOrder(order);
+					setIsOpen(state => ({...state, billingAddress: false, payment: true}));
+					setIsComplete(state => ({...state, billingAddress: true}))
+				}
 			} catch (e) {
 				setResetRecaptcha(!resetRecaptcha);
-				setError(e)
-				setResetRecaptcha(!resetRecaptcha);
+				console.error(`Error: ${e?.message}`);
 			}
 		}
 	};

@@ -11,9 +11,9 @@ export const SummaryBillingAddress = ({billingAddress}) => {
 		<Paragraph>
 			{billingAddress?.line1 ||
 				(billingAddress?.line2 && (
-					<span>{`${billingAddress?.line1} ${billingAddress?.line2}, `}</span>
+					<><span>{billingAddress?.line1}</span>{' '}<span>{billingAddress?.line2}</span></>
 				))}
-			{billingAddress?.locality && <span>{`${billingAddress?.locality}, `}</span>}
+			{billingAddress?.locality && <span>{` ${billingAddress?.locality}, `}</span>}
 			{billingAddress?.region && <span>{`${billingAddress?.region}, `}</span>}
 			{billingAddress?.postal && <span>{`${billingAddress?.postal}, `}</span>}
 			{billingAddress?.country && <span>{billingAddress?.country}</span>}

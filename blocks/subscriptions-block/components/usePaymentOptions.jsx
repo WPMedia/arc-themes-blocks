@@ -31,6 +31,8 @@ export const usePaymentOptions = (stripeIntentsDefaultID, paypalDefaultID) => {
 	const [paymentOpts, setPaymentOpts] = useState();
 	const [paypal, setPaypal] = useState();
 	const [stripeIntents, setStripeIntents] = useState();
+	const [isFetching, setIsFetching] = useState(true);
+
 	const [error, setError] = useState();
 
 	const { Sales } = useSales();
@@ -48,8 +50,10 @@ export const usePaymentOptions = (stripeIntentsDefaultID, paypalDefaultID) => {
                 setPaymentOpts(options);
                 setPaypal(paypal);
                 setStripeIntents(stripe);
+				setIsFetching(false);
 			} catch (e) {
 				setError(e);
+				setIsFetching(false);
 			}
 		};
 		fetchData();
@@ -59,7 +63,8 @@ export const usePaymentOptions = (stripeIntentsDefaultID, paypalDefaultID) => {
 		paymentOpts,
 		stripeIntents,
 		paypal,
-		error
+		error,
+		isFetching
 	};
 };
 

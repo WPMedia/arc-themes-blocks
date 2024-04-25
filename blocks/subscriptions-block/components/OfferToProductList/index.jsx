@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import useSales from "../useSales";
 import { Grid } from "@wpmedia/arc-themes-components";
+import useSales from "../useSales";
 import OfferCard from "../OfferCard";
+
+import {ARCXP_CART} from "../../utils/constants";
 
 const OfferToProductList = ({ offer, isLoggedIn, checkoutURL, loginURL, className }) => {
 	const { Sales } = useSales();
@@ -46,6 +48,7 @@ const OfferToProductList = ({ offer, isLoggedIn, checkoutURL, loginURL, classNam
 										window.location.href = checkoutURL;
 										return;
 									}
+									localStorage.setItem(ARCXP_CART, JSON.stringify({sku, priceCode, cartDate: Date.now() }));
 									window.location.href = `${loginURL}?redirect=${checkoutURL}`;
 								});
 						},

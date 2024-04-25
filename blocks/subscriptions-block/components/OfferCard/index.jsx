@@ -2,7 +2,25 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { Heading, Button, Stack, Paragraph, Icon } from "@wpmedia/arc-themes-components";
 
-// TO-DO: Change the Icon <Icon name="ChevronRight" /> to Check <Icon name="Check"/>
+export const FeatureDetails = ({ features, className }) => {
+	if (features && features?.length) {
+		return (
+			<ul className={`${className}__card--features`}>
+				{features.map((feat) => (
+					<li
+						className={`${className}__card--features--feature-item`}
+						key={`feat-${feat.featureText}`}
+					>
+						<Icon name="Check" />
+						<span dangerouslySetInnerHTML={{ __html: feat.featureText }} />
+					</li>
+				))}
+			</ul>
+		);
+	}
+	return null;
+};
+
 const OfferCard = ({
 	headline,
 	subHeadline,
@@ -22,19 +40,7 @@ const OfferCard = ({
 			</Button>
 		) : null}
 
-		{features.length ? (
-			<ul className={`${className}__card--features`}>
-				{features.map((feat) => (
-					<li
-						className={`${className}__card--features--feature-item`}
-						key={`feat-${feat.featureText}`}
-					>
-						<Icon name="Check" />
-						<span dangerouslySetInnerHTML={{ __html: feat.featureText }} />
-					</li>
-				))}
-			</ul>
-		) : null}
+		<FeatureDetails features={features} className={className} />
 	</Stack>
 );
 
@@ -46,7 +52,7 @@ OfferCard.propTypes = {
 	features: PropTypes.arrayOf(
 		PropTypes.shape({
 			featureText: PropTypes.string,
-		})
+		}),
 	),
 };
 

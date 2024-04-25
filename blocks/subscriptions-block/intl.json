@@ -6154,7 +6154,7 @@
 		"bn": "কার্ডে নাম লিখুন",
 		"bo": "Please enter name on card",
 		"de": "Bitte geben Sie den Namen auf der Karte ein",
-		"en": "Please enter name on card",
+		"en": "Please enter a valid name.",
 		"es": "Por favor ingrese el nombre en la tarjeta",
 		"fr": "Veuillez entrer votre nom sur la carte",
 		"id": "Silakan masukkan nama pada kartu",
@@ -6849,19 +6849,181 @@
 		"zh-CN": "更新付款方式",
 		"zh-TW": "更新付款方式"
 	},
+	"checkout-block.view-subscription-offers": {
+		"en": "View subscription offers"
+	},
 	"checkout-block.account": {
 		"en": "Account"
+	},
+	"checkout-block.address1": {
+		"en": "Address 1"
+	},
+	"checkout-block.address1-validation": {
+		"en": "Please enter a valid address."
+	},
+	"checkout-block.address2": {
+		"en": "Address 2 (Optional)"
+	},
+	"checkout-block.address2-placeholder": {
+		"en": "ex: Apt/Suite/Floor"
 	},
 	"checkout-block.billingAddress": {
 		"en": "Billing Address"
 	},
+	"checkout-block.city": {
+		"en": "City"
+	},
+	"checkout-block.city-placeholder": {
+		"en": "Any town"
+	},
+	"checkout-block.city-validation": {
+		"en": "Please enter a valid city."
+	},
+	"checkout-block.continue": {
+		"en": "Continue"
+	},
+	"checkout-block.country-region": {
+		"en": "Country/Region"
+	},
+	"checkout-block.country-validation": {
+		"en": "Please enter a valid country/region."
+	},
+	"checkout-block.subtotal": {
+		"en": "Subtotal"
+	},
+	"checkout-block.salesTax": {
+		"en": "Sales tax"
+	},
 	"checkout-block.edit": {
 		"en": "Edit"
+	},
+	"checkout-block.expires": {
+		"en": "Expires"
 	},
 	"checkout-block.payment": {
 		"en": "Payment"
 	},
+	"checkout-block.payment-type.creditDebitCard": {
+		"en": "Credit or debit card"
+	},
+	"checkout-block.pay": {
+		"en": "Pay"
+	},
 	"checkout-block.review": {
 		"en": "Review"
+	},
+	"checkout-block.state": {
+		"en": "State"
+	},
+	"checkout-block.state-validation": {
+		"en": "Please enter a valid state."
+	},
+	"subscriptions-block.terms-sales-service-text": {
+		"en": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale </a> and <a href='%{termsOfServiceURL}'>terms of service</a>."
+	},
+	"subscriptions-block.submit-payment-paypal": {
+		"en": "Purchase with"
+	},
+	"checkout-block.zip-code": {
+		"en": "Zip/Postal Code"
+	},
+	"checkout-block.automatic-renewal-terms-title": {
+		"en": "Automatic Renewal Terms"
+	},
+	"checkout-block.automatic-renewal-terms-intro": {
+		"en": "Your payment method will be automatically charged in advance"
+	},
+	"checkout-block.sales-tax-may-apply": {
+		"en": "Sales tax may apply."
+	},
+	"checkout-block.automatic-renewal-terms-description": {
+		"en": "Your subscription will continue until you cancel. You can cancel your subscription online at any time in your Account settings, or during limited hours by chat or phone. Cancellations take effect at the end of your current billing period."
+	},
+	"checkout-block.zip-code-validation": {
+		"en": "Please enter a valid zip/postal code."
+	},
+	"checkout-block.rates-oneTime-day": {
+		"en": "one time for %{billingCount} day(s)"
+	},
+	"checkout-block.rates-oneTime-week": {
+		"en": "one time for %{billingCount} week(s)"
+	},
+	"checkout-block.rates-oneTime-month": {
+		"en": "one time for %{billingCount} month(s)"
+	},
+	"checkout-block.rates-oneTime-year": {
+		"en": "one time for %{billingCount} year(s)"
+	},
+	"checkout-block.rates-single-untilCancelled-day": {
+		"en": "every day until cancelled"
+	},
+	"checkout-block.rates-single-untilCancelled-week": {
+		"en": "every week until cancelled"
+	},
+	"checkout-block.rates-single-untilCancelled-month": {
+		"en": "every month until cancelled"
+	},
+	"checkout-block.rates-single-untilCancelled-year": {
+		"en": "every year until cancelled"
+	},
+	"checkout-block.rates-untilCancelled-day": {
+		"en": "every %{billingCount} day(s) until cancelled"
+	},
+	"checkout-block.rates-untilCancelled-week": {
+		"en": "every %{billingCount} week(s) until cancelled"
+	},
+	"checkout-block.rates-untilCancelled-month": {
+		"en": "every %{billingCount} month(s) until cancelled"
+	},
+	"checkout-block.rates-untilCancelled-year": {
+		"en": "every %{billingCount} year(s) until cancelled"
+	},
+	"checkout-block.rates-default-day-day": {
+		"en": "every %{billingCount} day(s) for %{durationCount} day(s)"
+	},
+	"checkout-block.rates-default-day-week": {
+		"en": "every %{billingCount} day(s) for %{durationCount} week(s)"
+	},
+	"checkout-block.rates-default-day-month": {
+		"en": "every %{billingCount} day(s) for %{durationCount} month(s)"
+	},
+	"checkout-block.rates-default-day-year": {
+		"en": "every %{billingCount} day(s) for %{durationCount} year(s)"
+	},
+	"checkout-block.rates-default-week-day": {
+		"en": "every %{billingCount} week(s) for %{durationCount} day(s)"
+	},
+	"checkout-block.rates-default-week-week": {
+		"en": "every %{billingCount} week(s) for %{durationCount} week(s)"
+	},
+	"checkout-block.rates-default-week-month": {
+		"en": "every %{billingCount} weekk(s) for %{durationCount} month(s)"
+	},
+	"checkout-block.rates-default-week-year": {
+		"en": "every %{billingCount} week(s) for %{durationCount} year(s)"
+	},
+	"checkout-block.rates-default-month-day": {
+		"en": "every %{billingCount} month(s) for %{durationCount} day(s)"
+	},
+	"checkout-block.rates-default-month-week": {
+		"en": "every %{billingCount} month(s) for %{durationCount} week(s)"
+	},
+	"checkout-block.rates-default-month-month": {
+		"en": "every %{billingCount} month(s) for %{durationCount} month(s)"
+	},
+	"checkout-block.rates-default-month-year": {
+		"en": "every %{billingCount} month(s) for %{durationCount} year(s)"
+	},
+	"checkout-block.rates-default-year-day": {
+		"en": "every %{billingCount} month(s) for %{durationCount} day(s)"
+	},
+	"checkout-block.rates-default-year-week": {
+		"en": "every %{billingCount} month(s) for %{durationCount} week(s)"
+	},
+	"checkout-block.rates-default-year-month": {
+		"en": "every %{billingCount} month(s) for %{durationCount} month(s)"
+	},
+	"checkout-block.rates-default-year-year": {
+		"en": "every %{billingCount} month(s) for %{durationCount} year(s)"
 	}
 }

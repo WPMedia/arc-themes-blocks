@@ -5,7 +5,7 @@ import {getNextRate} from "../../../../components/utils";
 import {getCurrentBillingFrequency} from "../../../../components/PriceRates";
 import PaymentIcon from "../../../../components/PaymentIcons";
 
-const generatePaymentString = (sub) => {
+const PaymentString = (sub) => {
   const phrases = usePhrases();
   const expDate = sub?.currentPaymentMethod?.expiration;
   const expDateString = expDate ?`${expDate.slice(0,2)}/${expDate.slice(2)}` : '';
@@ -15,10 +15,10 @@ const generatePaymentString = (sub) => {
   return <span>{phrases.t("subscriptions-block.subscription-profile-management-payment-method-details-payment-string", { creditCardType, lastFour, exp: expDateString })}</span>;
 }
 
-const generateNextBillStatement = (price) => {
+const NextBillStatement = (price) => {
   const phrases = usePhrases();
   const currency = price?.pricingStrategy?.currencyCode;
-  const amount = `${currency == "USD" ? "$" : `${currency} `}${price?.price}`;
+  const amount = `${currency === "USD" ? "$" : `${currency} `}${price?.price}`;
   const date = new Date(price?.paymentDate).toLocaleDateString(undefined, {month: 'long', day: 'numeric', year: 'numeric'})
   return <Paragraph>{phrases.t("subscriptions-block.subscription-profile-management-payment-method-details-billing-statement", { amount, date })}</Paragraph>
 };
@@ -33,8 +33,8 @@ const PaymentMethodDetails = ({sub, className, setPrice}) => {
   
   useEffect(() => {
     if(price && sub) {
-      const nextRate = getNextRate(sub?.currentRetailCycleIDX, price?.pricingStrategy);
-      setNextRate(nextRate);
+      const rate = getNextRate(sub?.currentRetailCycleIDX, price?.pricingStrategy);
+      setNextRate(rate);
     }
   }, [price, sub])
 
@@ -47,11 +47,11 @@ const PaymentMethodDetails = ({sub, className, setPrice}) => {
           {phrases.t("subscription-block.shared-Payment-method")}
           <div className={`${className}-title-payment-info`}>
             <PaymentIcon type={sub?.currentPaymentMethod?.creditCardType}/>
-            <Paragraph>{generatePaymentString(sub)}</Paragraph>
+            <Paragraph><PaymentString sub={sub} /></Paragraph>generate
           </div>
         </span>
       </div>
-      <div className={`${className}-next-bill`}>{phrases.t("subscriptions-block.subscription-profile-management-payment-method-details-next-bill")}{generateNextBillStatement(price)}</div>
+      <div className={`${className}-next-bill`}>{phrases.t("subscriptions-block.subscription-profile-management-payment-method-details-next-bill")}<NextBillStatement price={price} /></div>
       <em className={`${className}-billing-frequency`}>
         {nextRate && 
           <span>

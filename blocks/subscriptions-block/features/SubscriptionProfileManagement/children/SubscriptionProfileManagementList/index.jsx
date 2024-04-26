@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import { Button, Paragraph, useSales, usePhrases } from "@wpmedia/arc-themes-components";
 import SubscriptionCard from "../SubscriptionCard";
 import SubscriptionOverlay from "../../../../components/SubscriptionOverlay";
 
-const Modal = ({title, children, primaryBtnText, secondaryBtnText, primaryAction, secondaryAction, className , selectedSub}) => {
-  return (
+const Modal = ({title, children, primaryBtnText, secondaryBtnText, primaryAction, secondaryAction, className }) => (
     <div className={`${className}-modal`}>
       <h2 className={`${className}-modal-title`}>{title}</h2>
       {children}
@@ -14,7 +13,6 @@ const Modal = ({title, children, primaryBtnText, secondaryBtnText, primaryAction
       </div>
     </div>
   )
-}
 
 const SubscriptionProfileManagementList = ({subscriptions, fetchSubs, className, customFields}) => {
   const {Sales} = useSales();
@@ -23,32 +21,33 @@ const SubscriptionProfileManagementList = ({subscriptions, fetchSubs, className,
     const paymentPartner = sub?.currentPaymentMethod?.paymentPartner;
     const nonPaidTypes = ["EmailGroupSubPaymentProvider", "Gift", "Free", "Linked", "Sharing", "SwG"]
     if(paymentPartner && !nonPaidTypes.includes(paymentPartner)) {
-      return sub;
+      return true;
     }
+    return false;
   })
   const [selectedSub, setSelectedSub] = useState();
   const [selectedPrice, setSelectedPrice] = useState();
   const [isCancelModalOpen, setIsCancelModalOpen] = useState();
   const [isResubModalOpen, setIsResubModalOpen] = useState();
 
-  const startDate = selectedSub?.events?.find(e => e?.eventType === "START_SUBSCRIPTION")?.eventDateUTC;
-
   const cancelSub = async () => {
     try {
-      const res = await Sales.cancelSubscription(selectedSub?.subscriptionID);
+      await Sales.cancelSubscription(selectedSub?.subscriptionID);
       setIsCancelModalOpen(false);
       fetchSubs();
     } catch (e) {
+      // eslint-disable-next-line
       console.error(e);
     }
   }
 
   const reSubscribe = async () => {
     try {
-      const res = await Sales.rescueSubscription(selectedSub?.subscriptionID);
+      await Sales.rescueSubscription(selectedSub?.subscriptionID);
       setIsResubModalOpen(false);
       fetchSubs();
     } catch (e) {
+      // eslint-disable-next-line
       console.error(e);
     }
   }
@@ -65,21 +64,13 @@ const SubscriptionProfileManagementList = ({subscriptions, fetchSubs, className,
     setSelectedPrice(null);
   }
 
-  useEffect(() => {
-    console.log(selectedSub);
-  }, [selectedSub])
-
-  useEffect(() => {
-    console.log(selectedPrice);
-  }, [selectedSub, selectedPrice])
-
   return (
     <div>
-      {filteredList.map((sub, i) => (
+      {filteredList.map((sub) => (
         <SubscriptionCard 
           className={className} 
           sub={sub} 
-          key={`${sub?.subscriptionID}-${i}`} 
+          key={sub?.subscriptionID} 
           customFields={customFields} 
           setSelectedSub={setSelectedSub} 
           setIsCancelModalOpen={setIsCancelModalOpen} 
@@ -87,7 +78,7 @@ const SubscriptionProfileManagementList = ({subscriptions, fetchSubs, className,
           setSelectedPrice={setSelectedPrice}
         />
       ))}
-      {isCancelModalOpen && <SubscriptionOverlay usePortal={true} className={className}>
+      {isCancelModalOpen && <SubscriptionOverlay usePortal className={className}>
         <Modal 
           title={phrases.t("subscriptions-block.subscription-profile-management-basic-subscription-details-link-active")} 
           className={className}
@@ -100,7 +91,7 @@ const SubscriptionProfileManagementList = ({subscriptions, fetchSubs, className,
           <Paragraph>{phrases.t("subscriptions-block.subscription-profile-management-cancel-modal-paragraph2")}</Paragraph>
         </Modal>
       </SubscriptionOverlay>}
-      {isResubModalOpen && nextPaymentDate && <SubscriptionOverlay usePortal={true} className={className}>
+      {isResubModalOpen && nextPaymentDate && <SubscriptionOverlay usePortal className={className}>
         <Modal 
           title={phrases.t("subscriptions-block.subscription-profile-management-resub-modal-title")}
           className={className}

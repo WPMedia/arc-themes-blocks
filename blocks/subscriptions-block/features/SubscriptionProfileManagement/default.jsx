@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import PropTypes from "@arc-fusion/prop-types";
 import { useIdentity, useSales } from "@wpmedia/arc-themes-components";
@@ -14,27 +14,29 @@ const SubscriptionProfileManagement = ({ customFields }) => {
   const { Sales } = useSales();
 
   useEffect(() => {
-		const isLoggedIn = async () => {
+		const checkIsLoggedIn = async () => {
 			setIsLoggedIn(await Identity.isLoggedIn());
 		};
 
-		isLoggedIn();
+		checkIsLoggedIn();
 	}, [Identity]);
 
-  const fetchSubs = async () => {
+  const fetchSubs = useCallback(async () => {
     if(isLoggedIn) {
 
       const subs = await Sales?.getAllSubscriptions();
 
       return Promise.all(subs?.map((sub => Sales?.getSubscriptionDetails(sub?.subscriptionID))))
         .then(response => setSubscriptions(response))
+        // eslint-disable-next-line
         .catch(e => console.error(e))
     }
-  }
+    return null;
+  }, [Sales, isLoggedIn])
 
   useEffect(() => {
     fetchSubs();
-  }, [isLoggedIn])
+  }, [isLoggedIn, fetchSubs])
 
 	return (
 		<section className={BLOCK_CLASS_NAME}>

@@ -132,48 +132,46 @@ const ratesDefaultMessage = (billingCount, billingFrequency, durationCount, dura
 	return "";
 };
 
-const getAmount = (amount, priceCurrency) => {
-	return `${currency(priceCurrency)}${amount}`;
-};
+const getAmount = (amount, priceCurrency) => `${currency(priceCurrency)}${amount}`;
 
 const getPriceRate = (rate, currency) => {
-	let amount = getAmount(rate?.amount, currency);
+	const amount = getAmount(rate?.amount, currency);
 
 	if (rate?.billingCount === rate?.durationCount && rate?.billingFrequency === rate?.duration) {
 		return `${amount} ${ratesOneTime(rate?.billingCount, rate?.billingFrequency)}`;
-	} else if (rate?.duration === UNTIL_CANCELLED) {
+	} if (rate?.duration === UNTIL_CANCELLED) {
 		if (rate?.billingCount <= 1) {
 			return `${amount} ${ratesSingleUntilCancelled(rate?.billingFrequency)}`;
-		} else {
+		} 
 			return `${amount} ${ratesUntilCancelled(rate?.billingCount, rate?.billingFrequency)}`;
-		}
-	} else {
+		
+	} 
 		return `${amount} ${ratesDefaultMessage(
 			rate?.billingCount,
 			rate?.billingFrequency,
 			rate?.durationCount,
 			rate?.duration,
 		)}`;
-	}
+	
 };
 
 export const getCurrentBillingFrequency = (rate,) => {
 	if (rate?.billingCount === rate?.durationCount && rate?.billingFrequency === rate?.duration) {
 		return `${ratesOneTime(rate?.billingCount, rate?.billingFrequency)}`;
-	} else if (rate?.duration === UNTIL_CANCELLED) {
+	} if (rate?.duration === UNTIL_CANCELLED) {
 		if (rate?.billingCount <= 1) {
 			return `${ratesSingleUntilCancelled(rate?.billingFrequency)}`;
-		} else {
+		} 
 			return `${ratesUntilCancelled(rate?.billingCount, rate?.billingFrequency)}`;
-		}
-	} else {
+		
+	} 
 		return `${ratesDefaultMessage(
 			rate?.billingCount,
 			rate?.billingFrequency,
 			rate?.durationCount,
 			rate?.duration,
 		)}`;
-	}
+	
 };
 
 const PriceRates = ({ priceRates, currency }) => {
@@ -216,9 +214,7 @@ const PriceRates = ({ priceRates, currency }) => {
 	];
 
 	if (priceRates && priceRates.length && currency) {
-		let priceRateStrings = priceRatestest.map((rate) => {
-			return getPriceRate(rate, currency);
-		});
+		let priceRateStrings = priceRatestest.map((rate) => getPriceRate(rate, currency));
 		priceRateStrings = priceRateStrings.join(", ");
 		return <span>{priceRateStrings}</span>;
 	}

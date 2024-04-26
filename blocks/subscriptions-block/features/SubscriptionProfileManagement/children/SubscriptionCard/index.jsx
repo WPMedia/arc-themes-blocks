@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import { Divider, Button, Paragraph, useSales, usePhrases } from "@wpmedia/arc-themes-components";
+import React, { useState} from 'react';
+import { Divider } from "@wpmedia/arc-themes-components";
 import BasicSubscriptionDetail from '../BasicSubscriptionDetail';
 import PaymentMethodDetails from '../PaymentMethodDetails';
 import BillingAddressDetails from "../BillingAddressDetails";

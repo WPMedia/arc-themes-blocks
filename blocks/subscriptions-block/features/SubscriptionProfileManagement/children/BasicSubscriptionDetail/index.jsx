@@ -9,6 +9,7 @@ const getStatus = (sub) => {
   if(sub?.status === 1) return ACTIVE;
   if(sub?.status === 2) return TERMINATED;
   if(sub?.status === 3) return CANCELED;
+  return ""
 };
 
 const StatusBadge = ({status, className}) => {
@@ -23,6 +24,7 @@ const StatusBadge = ({status, className}) => {
   if(status === TERMINATED) {
     return <Badge variant="light">{phrases.t("subscriptions-block.subscription-profile-management-basic-subscription-details-statusBadge-terminated")}</Badge>
   }
+  return null;
 };
 
 const LinkButton = ({status, sub, setSelectedSub, customFields, setIsCancelModalOpen, setIsResubModalOpen, className, setSelectedPrice, price}) => {

@@ -17,13 +17,13 @@ const usePrice = ({ priceCode, cycleIndex, startDate }) => {
 	const [isFetching, setIsFetching] = useState(true);
 
 	const fetchPrice = useCallback(
-		async ({priceCode, cycleIndex, startDate}) => {
+		async ({code, index, start}) => {
 			try {
 				const priceResponse = await priceCodeService({
-					priceCode,
+					code,
 					origin,
-					cycleIndex,
-					startDate
+					index,
+					start
 				});
 				setPrice(priceResponse);
 				return priceResponse;

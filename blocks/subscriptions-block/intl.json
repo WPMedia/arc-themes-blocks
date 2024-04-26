@@ -6848,5 +6848,152 @@
 		"vi": "Cập nhật phương thức thanh toán",
 		"zh-CN": "更新付款方式",
 		"zh-TW": "更新付款方式"
+	},
+	"checkout-block.rates-oneTime-day": {
+		"en": "one time for %{billingCount} day(s)"
+	},
+	"checkout-block.rates-oneTime-week": {
+		"en": "one time for %{billingCount} week(s)"
+	},
+	"checkout-block.rates-oneTime-month": {
+		"en": "one time for %{billingCount} month(s)"
+	},
+	"checkout-block.rates-oneTime-year": {
+		"en": "one time for %{billingCount} year(s)"
+	},
+	"checkout-block.rates-single-untilCancelled-day": {
+		"en": "every day until cancelled"
+	},
+	"checkout-block.rates-single-untilCancelled-week": {
+		"en": "every week until cancelled"
+	},
+	"checkout-block.rates-single-untilCancelled-month": {
+		"en": "every month until cancelled"
+	},
+	"checkout-block.rates-single-untilCancelled-year": {
+		"en": "every year until cancelled"
+	},
+	"checkout-block.rates-untilCancelled-day": {
+		"en": "every %{billingCount} day(s) until cancelled"
+	},
+	"checkout-block.rates-untilCancelled-week": {
+		"en": "every %{billingCount} week(s) until cancelled"
+	},
+	"checkout-block.rates-untilCancelled-month": {
+		"en": "every %{billingCount} month(s) until cancelled"
+	},
+	"checkout-block.rates-untilCancelled-year": {
+		"en": "every %{billingCount} year(s) until cancelled"
+	},
+	"checkout-block.rates-default-day-day": {
+		"en": "every %{billingCount} day(s) for %{durationCount} day(s)"
+	},
+	"checkout-block.rates-default-day-week": {
+		"en": "every %{billingCount} day(s) for %{durationCount} week(s)"
+	},
+	"checkout-block.rates-default-day-month": {
+		"en": "every %{billingCount} day(s) for %{durationCount} month(s)"
+	},
+	"checkout-block.rates-default-day-year": {
+		"en": "every %{billingCount} day(s) for %{durationCount} year(s)"
+	},
+	"checkout-block.rates-default-week-day": {
+		"en": "every %{billingCount} week(s) for %{durationCount} day(s)"
+	},
+	"checkout-block.rates-default-week-week": {
+		"en": "every %{billingCount} week(s) for %{durationCount} week(s)"
+	},
+	"checkout-block.rates-default-week-month": {
+		"en": "every %{billingCount} weekk(s) for %{durationCount} month(s)"
+	},
+	"checkout-block.rates-default-week-year": {
+		"en": "every %{billingCount} week(s) for %{durationCount} year(s)"
+	},
+	"checkout-block.rates-default-month-day": {
+		"en": "every %{billingCount} month(s) for %{durationCount} day(s)"
+	},
+	"checkout-block.rates-default-month-week": {
+		"en": "every %{billingCount} month(s) for %{durationCount} week(s)"
+	},
+	"checkout-block.rates-default-month-month": {
+		"en": "every %{billingCount} month(s) for %{durationCount} month(s)"
+	},
+	"checkout-block.rates-default-month-year": {
+		"en": "every %{billingCount} month(s) for %{durationCount} year(s)"
+	},
+	"checkout-block.rates-default-year-day": {
+		"en": "every %{billingCount} month(s) for %{durationCount} day(s)"
+	},
+	"checkout-block.rates-default-year-week": {
+		"en": "every %{billingCount} month(s) for %{durationCount} week(s)"
+	},
+	"checkout-block.rates-default-year-month": {
+		"en": "every %{billingCount} month(s) for %{durationCount} month(s)"
+	},
+	"checkout-block.rates-default-year-year": {
+		"en": "every %{billingCount} month(s) for %{durationCount} year(s)"
+	},
+	"subscriptions-block.subscription-profile-management-basic-subscription-details-link-active": {
+		"en": "Cancel subscription"
+	},
+	"subscriptions-block.subscription-profile-management-basic-subscription-details-link-canceled": {
+		"en": "Re-subscribe"
+	},
+	"subscriptions-block.subscription-profile-management-basic-subscription-details-link-terminated": {
+		"en": "View subscription offers"
+	},
+	"subscriptions-block.subscription-profile-management-basic-subscription-details-statusBadge-active": {
+		"en": "Active"
+	},
+	"subscriptions-block.subscription-profile-management-basic-subscription-details-statusBadge-canceled": {
+		"en": "Pending cancelation"
+	},
+	"subscriptions-block.subscription-profile-management-basic-subscription-details-statusBadge-terminated": {
+		"en": "Inactive"
+	},
+	"subscriptions-block.subscription-profile-management-basic-subscription-details-sub-start": {
+		"en": "The subscription started on %{dateString}"
+	},
+	"subscriptions-block.subscription-profile-management-basic-subscription-details-sub-cancel": {
+		"en": "This subscription was canceled on %{cancelDateString}. You will have access to the subscription until %{nextEventDateString}"
+	},
+	"subscriptions-block.subscription-profile-management-billing-address": {
+		"en": "Billing address"
+	},
+	"subscriptions-block.subscription-profile-management-payment-method-details-payment-string": {
+		"en": "%{creditCardType} ••••%{lastFour} Expires %{exp}"
+	},
+	"subscriptions-block.subscription-profile-management-payment-method-details-billing-statement": {
+		"en": "%{amount} on %{date}"
+	},
+	"subscriptions-block.subscription-profile-management-payment-method-details-next-bill": {
+		"en": "Next bill: "
+	},
+	"subscriptions-block.subscription-profile-management-payment-method-details-billing-frequency": {
+		"en": "Billed %{rate}. Sales tax may apply"
+	},
+	"subscriptions-block.subscription-profile-management-cancel-modal-paragraph1": {
+		"en": "%{productName} subscription will be canceled at the end of the billing period."
+	},
+	"subscriptions-block.subscription-profile-management-cancel-modal-paragraph2": {
+		"en": "Are you sure you want to cancel it?"
+	},
+	"subscriptions-block.subscription-profile-management-cancel-modal-primary-button-text": {
+		"en": "Yes, cancel subscription"
+	},
+	"subscriptions-block.subscription-profile-management-resub-modal-title": {
+		"en": "Re-subscribe"
+	},
+	"subscriptions-block.subscription-profile-management-resub-modal-paragraph2": {
+		"en": "Are you sure you want to resubscribe?"
+	},
+	"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": {
+		"en": "Yes, Resubscribe"
+	},
+	"subscription-block.shared-No": {
+		"en": "No"
+	},
+	"subscription-block.shared-Payment-method": {
+		"en": "Payment method"
 	}
 }

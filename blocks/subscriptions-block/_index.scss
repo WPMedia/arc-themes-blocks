@@ -282,6 +282,106 @@
 	}
 }
 
+.b-subscriptions {
+	&__subscription-list {
+		&-detail {
+			&-cancel-badge {
+				@include scss.block-components("subscriptions-subscription-list-detail-cancel-badge");
+				@include scss.block-properties("subscriptions-subscription-list-detail-cancel-badge");
+			}
+			&-div {
+				@include scss.block-components("subscriptions-subscription-list-detail-div");
+				@include scss.block-properties("subscriptions-subscription-list-detail-div");
+			}
+			&-title-div {
+				@include scss.block-components("subscriptions-subscription-list-detail-title-div");
+				@include scss.block-properties("subscriptions-subscription-list-detail-title-div");
+			}
+			&-title {
+				@include scss.block-components("subscriptions-subscription-list-detail-title");
+				@include scss.block-properties("subscriptions-subscription-list-detail-title");
+			}
+			&-cancel {
+				@include scss.block-components("subscriptions-subscription-list-detail-cancel");
+				@include scss.block-properties("subscriptions-subscription-list-detail-cancel");
+			}
+			&-subID {
+				@include scss.block-components("subscriptions-subscription-list-detail-subID");
+				@include scss.block-properties("subscriptions-subscription-list-detail-subID");
+			}
+			&-startDate {
+				@include scss.block-components("subscriptions-subscription-list-detail-startDate");
+				@include scss.block-properties("subscriptions-subscription-list-detail-startDate");
+			}
+			&-cancel-info {
+				@include scss.block-components("subscriptions-subscription-list-detail-cancel-info");
+				@include scss.block-properties("subscriptions-subscription-list-detail-cancel-info");
+
+				&-button {
+					@include scss.block-components("subscriptions-subscription-list-detail-cancel-info-button");
+					@include scss.block-properties("subscriptions-subscription-list-detail-cancel-info-button");
+					&:hover {
+						@include scss.block-components("subscriptions-subscription-list-detail-cancel-info-button-hover");
+						@include scss.block-properties("subscriptions-subscription-list-detail-cancel-info-button-hover");
+					}
+				}
+			}
+			&-payment-container {
+				@include scss.block-components("subscriptions-subscription-list-detail-payment-container");
+				@include scss.block-properties("subscriptions-subscription-list-detail-payment-container");
+			}
+			&-payment-title {
+				@include scss.block-components("subscriptions-subscription-list-detail-payment-title");
+				@include scss.block-properties("subscriptions-subscription-list-detail-payment-title");
+			}
+			&-payment-title-span {
+				@include scss.block-components("subscriptions-subscription-list-detail-payment-title-span");
+				@include scss.block-properties("subscriptions-subscription-list-detail-payment-title-span");
+			}
+			&-payment-title-payment-info {
+				@include scss.block-components("subscriptions-subscription-list-detail-payment-title-payment-info");
+				@include scss.block-properties("subscriptions-subscription-list-detail-payment-title-payment-info");
+			}
+			&-payment-next-bill {
+				@include scss.block-components("subscriptions-subscription-list-detail-payment-next-bill");
+				@include scss.block-properties("subscriptions-subscription-list-detail-payment-next-bill");
+			}
+			&-payment-billing-frequency {
+				@include scss.block-components("subscriptions-subscription-list-detail-payment-billing-frequency");
+				@include scss.block-properties("subscriptions-subscription-list-detail-payment-billing-frequency");
+			}
+			&-billing {
+				@include scss.block-components("subscriptions-subscription-list-detail-billing");
+				@include scss.block-properties("subscriptions-subscription-list-detail-billing");
+			}
+		}
+		&-card {
+			@include scss.block-components("subscriptions-subscription-list-card");
+			@include scss.block-properties("subscriptions-subscription-list-card");
+		}
+		&__overlay {
+			&-content {
+				@include scss.block-components("subscriptions-subscription-list-overlay-content");
+				@include scss.block-properties("subscriptions-subscription-list-overlay-content");
+			}
+			@include scss.block-components("subscriptions-subscription-list-overlay");
+			@include scss.block-properties("subscriptions-subscription-list-overlay");
+		}
+		&-modal {
+			@include scss.block-components("subscriptions-subscription-list-modal");
+			@include scss.block-properties("subscriptions-subscription-list-modal");
+			&-title {
+				@include scss.block-components("subscriptions-subscription-list-modal-title");
+				@include scss.block-properties("subscriptions-subscription-list-modal-title");	
+			}
+			&-button-div {
+				@include scss.block-components("subscriptions-subscription-list-modal-button-div");
+				@include scss.block-properties("subscriptions-subscription-list-modal-button-div");	
+			}
+		}
+	}
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
   .b-paywall__overlay {
     inset-block-start: initial;

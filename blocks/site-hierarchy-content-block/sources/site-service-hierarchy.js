@@ -11,17 +11,11 @@ export default {
 		sectionId: "text",
 	},
 	transform: (data, query) => {
-		let idMatch = false;
-		if (query.sectionId) {
-			idMatch = data._id !== query.sectionId;
-		}
-
-		if ((!query.hierarchy && idMatch) || (query.uri && idMatch)) {
+		if (query.sectionId && query.sectionId !== data._id) {
 			const error = new Error("Not found");
 			error.statusCode = 404;
 			throw error;
 		}
-
 		return data;
 	},
 };

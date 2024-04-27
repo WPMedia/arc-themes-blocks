@@ -50,16 +50,17 @@ const LinkButton = ({status, sub, setSelectedSub, customFields, setIsCancelModal
   if(status === ACTIVE && showCancelLink) return <Button onClick={cancelSub} className={`${className}-cancel`}>{phrases.t("subscriptions-block.subscription-profile-management-basic-subscription-details-link-active")}</Button>;
   if(status === CANCELED && showResubscribeLink) return <Button onClick={reSubscribe} className={`${className}-cancel`}>{phrases.t("subscriptions-block.subscription-profile-management-basic-subscription-details-link-canceled")}</Button>;
   if(status === TERMINATED) return <Button onClick={viewSubOnClick} className={`${className}-cancel`}>{phrases.t("subscriptions-block.subscription-profile-management-basic-subscription-details-link-terminated")}</Button>;
+  return null;
 }
 
 const BasicSubscriptionDetail = ({sub, customFields, setSelectedSub, className, setIsCancelModalOpen, setIsResubModalOpen, setSelectedPrice, price }) => {
   const phrases = usePhrases();
   const [status, setStatus] = useState(null);
   const [showCancelInfo, setShowCancelInfo] = useState(true);
-  const startEvent = sub?.events?.find(sub => sub?.eventType === "START_SUBSCRIPTION");
+  const startEvent = sub?.events?.find(s => s?.eventType === "START_SUBSCRIPTION");
   const startDate = startEvent?.eventDateUTC;
   const dateString = new Date(startDate).toLocaleDateString(undefined, {month: 'long', day: 'numeric', year: 'numeric'})
-  const cancelEvent = sub?.events?.find(sub => sub?.eventType === "CANCEL_SUBSCRIPTION");
+  const cancelEvent = sub?.events?.find(s => s?.eventType === "CANCEL_SUBSCRIPTION");
 
   const cancelDateString = new Date(cancelEvent?.eventDateUTC).toLocaleDateString(undefined, {month: 'long', day: 'numeric', year: 'numeric'});
   const nextEventDateString = new Date(sub?.nextEventDateUTC).toLocaleDateString(undefined, {month: 'long', day: 'numeric', year: 'numeric'});
@@ -82,7 +83,7 @@ const BasicSubscriptionDetail = ({sub, customFields, setSelectedSub, className, 
       {status === CANCELED && showCancelInfo && cancelDateString &&
         <div className={`${className}-cancel-info`}>
           <Paragraph>{phrases.t("subscriptions-block.subscription-profile-management-basic-subscription-details-sub-cancel", {cancelDateString, nextEventDateString})}</Paragraph>
-          <button className={`${className}-cancel-info-button`}onClick={() => setShowCancelInfo(false)}><Icon name="Close" /></button>
+          <button aria-label="cancel" type="button" className={`${className}-cancel-info-button`} onClick={() => setShowCancelInfo(false)}><Icon name="Close" /></button>
         </div>
       }
     </Stack>

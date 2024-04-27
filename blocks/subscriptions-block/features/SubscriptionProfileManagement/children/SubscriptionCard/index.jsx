@@ -6,6 +6,7 @@ import BillingAddressDetails from "../BillingAddressDetails";
 
 const SubscriptionCard = ({className, sub, customFields, setSelectedSub, setIsCancelModalOpen, setIsResubModalOpen, setSelectedPrice}) => {
   const [price, setPrice] = useState();
+
   return(
     <div className={`${className}-card`}>
       <BasicSubscriptionDetail 

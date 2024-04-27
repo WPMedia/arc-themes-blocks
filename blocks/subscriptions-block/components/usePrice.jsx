@@ -2,8 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 
-const priceCodeService = ({ origin, priceCode, cycleIndex, startDate }) =>
-	fetch(`${origin}/retail/public/v1/pricing/paymentInfo/${priceCode}/${cycleIndex}/${startDate}`, {}).then((res) => res.json());
+const priceCodeService = ({ origin, code, index, start }) =>
+	fetch(`${origin}/retail/public/v1/pricing/paymentInfo/${code}/${index}/${start}`, {}).then((res) => res.json());
 
 const usePrice = ({ priceCode, cycleIndex, startDate }) => {
 	const { arcSite } = useFusionContext();
@@ -38,7 +38,7 @@ const usePrice = ({ priceCode, cycleIndex, startDate }) => {
 	useEffect(() => {
 		const fetchNewPrice = async () => {
 			setIsFetching(true);
-			await fetchPrice({priceCode, cycleIndex, startDate});
+			await fetchPrice({code: priceCode, index: cycleIndex, start: startDate});
 			setIsFetching(false);
 		};
 		if (!price) {

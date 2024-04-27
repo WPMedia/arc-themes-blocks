@@ -5,7 +5,7 @@ import {getNextRate} from "../../../../components/utils";
 import {getCurrentBillingFrequency} from "../../../../components/PriceRates";
 import PaymentIcon from "../../../../components/PaymentIcons";
 
-const PaymentString = (sub) => {
+const PaymentString = ({sub}) => {
   const phrases = usePhrases();
   const expDate = sub?.currentPaymentMethod?.expiration;
   const expDateString = expDate ?`${expDate.slice(0,2)}/${expDate.slice(2)}` : '';
@@ -15,7 +15,7 @@ const PaymentString = (sub) => {
   return <span>{phrases.t("subscriptions-block.subscription-profile-management-payment-method-details-payment-string", { creditCardType, lastFour, exp: expDateString })}</span>;
 }
 
-const NextBillStatement = (price) => {
+const NextBillStatement = ({price}) => {
   const phrases = usePhrases();
   const currency = price?.pricingStrategy?.currencyCode;
   const amount = `${currency === "USD" ? "$" : `${currency} `}${price?.price}`;
@@ -47,7 +47,7 @@ const PaymentMethodDetails = ({sub, className, setPrice}) => {
           {phrases.t("subscription-block.shared-Payment-method")}
           <div className={`${className}-title-payment-info`}>
             <PaymentIcon type={sub?.currentPaymentMethod?.creditCardType}/>
-            <Paragraph><PaymentString sub={sub} /></Paragraph>generate
+            <Paragraph><PaymentString sub={sub} /></Paragraph>
           </div>
         </span>
       </div>

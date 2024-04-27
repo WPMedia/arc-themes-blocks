@@ -155,7 +155,7 @@ const getPriceRate = (rate, currency) => {
 	
 };
 
-export const getCurrentBillingFrequency = (rate,) => {
+export const getCurrentBillingFrequency = (rate) => {
 	if (rate?.billingCount === rate?.durationCount && rate?.billingFrequency === rate?.duration) {
 		return `${ratesOneTime(rate?.billingCount, rate?.billingFrequency)}`;
 	} if (rate?.duration === UNTIL_CANCELLED) {

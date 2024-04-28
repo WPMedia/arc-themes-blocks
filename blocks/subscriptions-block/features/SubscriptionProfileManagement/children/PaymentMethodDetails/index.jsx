@@ -29,14 +29,16 @@ const PaymentMethodDetails = ({sub, className, setPrice}) => {
   const startDate = sub?.events?.find(e => e?.eventType === "START_SUBSCRIPTION")?.eventDateUTC;
   const { price } = usePrice({priceCode: sub?.priceCode, cycleIndex: sub?.currentRetailCycleIDX, startDate});
 
-  setPrice(price);
+  useEffect(() => {
+    setPrice(price);
+  }, [price, setPrice]);
   
   useEffect(() => {
     if(price && sub) {
       const rate = getNextRate(sub?.currentRetailCycleIDX, price?.pricingStrategy);
       setNextRate(rate);
     }
-  }, [price, sub])
+  }, [price, sub]);
 
   const currentBillingFrequency = getCurrentBillingFrequency(nextRate);
 

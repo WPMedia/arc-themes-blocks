@@ -8,7 +8,8 @@ const fileMappings = {};
 const supportedLocales = [];
 const defaultLang = 'en';
 
-const localeFiles = glob.sync('./locale/*.json');
+let localeFiles = glob.sync('./locale/*.json');
+localeFiles = localeFiles.sort();
 
 localeFiles.forEach((file) => {
   const lang = path.basename(file).split('.json')[0];

@@ -1,129 +1,187 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
-import { loadStripe } from "@stripe/stripe-js";
+import { useElements, useStripe } from "@stripe/react-stripe-js";
 
-import { Button, Input, Stack, usePhrases, useSales } from "@wpmedia/arc-themes-components";
+import { Button, Input, Stack, usePhrases } from "@wpmedia/arc-themes-components";
 
-import usePaymentOptions from "../../../../components/usePaymentOptions";
+import Sales from "@arc-publishing/sdk-sales";
+
 import PaymentIcon, { APPLEPAY, GOOGLEPAY, PAYPAL } from "../../../../components/PaymentIcons";
 import { STRIPEINTENTS } from "../../../../utils/constants";
 import StripeIntentCheckout from "../../../../components/StripeIntentCheckout";
 
+// export const FORM_STATUS = {
+// 	IDLE: "idle",
+// 	PROCESSING: "processing",
+// 	SUCCESS: "success",
+// 	ERROR: "error",
+// };
+
+// const CARD_ELEMENT_OPTIONS = {
+// 	showIcon: true,
+// };
+
 const Payment = ({
-	stripeIntentsID,
+	stripeInstance,
+	paypal,
 	order,
-	error,
-	setError,
 	billingAddress,
 	setIsOpen,
 	setIsComplete,
 	setPaymentMethodDetails,
 	paymentOptionSelected,
 	setPaymentOptionSelected,
-	checkFinalizePayment,
-	setClientSecret,
+	handleSubmitStripeIntents,
+	setPaymentRequestAppleGooglePay,
 	className,
 }) => {
-	const { Sales } = useSales();
 	const phrases = usePhrases();
+	const entriesRef = useRef({});
 
-	const {
-		stripeIntents,
-		paypal,
-		error: errorPaymentOptions,
-		isFetching,
-	} = usePaymentOptions(stripeIntentsID);
+	const elements = stripeInstance ? useElements() : undefined;
+	const stripe = stripeInstance ? useStripe() : undefined;
 
-	const [stripeInstance, setStripeInstance] = useState(null);
-	const [isFetchingWallets, setIsFetchingWallets] = useState(true);
-	const [isGooglePaySupported, setIsGooglePaySupported] = useState(false);
+	if (billingAddress) {
+		if (!entriesRef.current.country)
+			entriesRef.current.country = billingAddress.country ? billingAddress.country : "";
+		if (!entriesRef.current.postal)
+			entriesRef.current.postal = billingAddress.postal ? billingAddress.postal : "";
+	}
+
+	const [errorForm, setErrorForm] = useState();
 	const [isApplePaySupported, setIsApplePaySupported] = useState(false);
-
-	const [isStripeInitialized, setIsStripeInitialized] = useState(false);
-	const [checkStripeForm, setCheckStripeForm] = useState();
-	const [isStripeIntentFormValid, setIsStripeIntentFormValid] = useState(false);
-	const [payment, setPayment] = useState({});
-
-	const [isValid, setIsValid] = useState(false);
-
-	// load stripe key via payment details stripe key string
-	const { parameter2: stripeKey, parameter1: clientSecret } = payment;
+	const [isGooglePaySupported, setIsGooglePaySupported] = useState(true);
 
 	useEffect(() => {
-		if (paypal?.paymentMethodType && !stripeIntents?.paymentMethodType) {
-			setPaymentOptionSelected(PAYPAL);
-			setIsFetchingWallets(false);
-		}
-		if (!paypal?.paymentMethodType && stripeIntents?.paymentMethodType) {
-			setPaymentOptionSelected(STRIPEINTENTS);
-		}
-		if (paypal?.paymentMethodType && stripeIntents?.paymentMethodType) {
-			setPaymentOptionSelected(STRIPEINTENTS);
-		}
-	}, [stripeIntents, paypal]);
+		const getIpAddressCountry = async () => {
+			const url = `https://${(Sales.apiOrigin ?? Identity.apiOrigin).replace(
+				/^https?:\/\//,
+				"",
+			)}/sales/public/v1/entitlements`;
+			const headers = {
+				"Cache-Control": "no-store",
+			};
+			let response;
 
-	useEffect(() => {
-		if (!error?.message && errorPaymentOptions?.message) {
-			setError(errorPaymentOptions);
-		}
-		if (!error?.message && !errorPaymentOptions?.message) {
-			setError();
-		}
-	}, [error, errorPaymentOptions]);
+			try {
+				response = await fetch(url, {
+					headers,
+				});
+			} catch (e) {
+				console.warn("call to /entitlements, service not available");
+			}
 
-	useEffect(() => {
-		if (stripeIntents && order?.orderNumber) {
-			Sales.initializePayment(order?.orderNumber, stripeIntents?.paymentMethodID)
-				.then((paymentObject) => {
-					setClientSecret(clientSecret);
-					setPayment(paymentObject);
-					setError();
-				})
-				.catch((e) => setError(e));
-		}
-	}, [order, stripeIntents]);
+			const json = !!response && response.ok && (await response.json());
+			return json?.edgescape?.country_code;
+		};
 
-	useEffect(() => {
-		if (stripeKey && !isStripeInitialized) {
-			// stripe docs https://stripe.com/docs/stripe-js/react#elements-provider
-			loadStripe(stripeKey).then((newStripePromise) => setStripeInstance(newStripePromise));
-			setIsStripeInitialized(true);
-		}
-	}, [stripeKey, isStripeInitialized]);
+		const checkApplePayGooglePayWallets = () => {
+			console.log("Checking wallets....")
+			const billingCountry = order?.billingAddress?.country || billingAddress?.country;
+			if (order?.currency && order?.total && billingCountry) {
+				const paymentRequest = stripe.paymentRequest({
+					currency: order?.currency?.toLowerCase(),
+					country: billingCountry,
+					requestPayerName: true,
+					requestPayerEmail: true,
+					total: {
+						label: "Apple pay",
+						amount: Math.round(orderDetail?.total * 100),
+					},
+					disableWallets: ["link"],
+				});
 
-	useEffect(() => {
-		if (paymentOptionSelected === STRIPEINTENTS && isStripeIntentFormValid) {
-			setIsValid(true);
-		}
-	}, [paymentOptionSelected, isStripeIntentFormValid]);
+				setPaymentRequestAppleGooglePay(paymentRequest);
 
-	useEffect(() => {
-		if (isValid) {
-			setIsOpen((state) => ({ ...state, payment: false, review: true }));
-			setIsComplete((state) => ({ ...state, payment: true }));
-		}
-	}, [isValid]);
+				// const prButton = elements.create("paymentRequestButton", {
+				// 	paymentRequest: paymentRequest,
+				// });
 
-	const handleSubmit = (event) => {
+				paymentRequest.canMakePayment().then((res) => {
+					console.info(res);
+					if (res) {
+						//prButton.mount("#ApplePay-payment-request-button");
+						if (res?.applePay) {
+							setIsApplePaySupported(true);
+						}
+						if (res?.googlePay) {
+							setIsGooglePaySupported(true);
+						}
+					} 
+					// else {
+					// 	document.getElementById("#ApplePay-payment-request-button").style.display = "none";
+					// }
+				});
+
+				paymentRequest.on("paymentmethod", async () => {
+					handleSubmitStripeIntents();
+				});
+			}
+		};
+
+		if (stripeInstance) {
+			getIpAddressCountry().then((countryCode) => {
+				console.log("Country code");
+				// ApplePay & GooglePay don't display for IP addresses in India https://docs.stripe.com/stripe-js/elements/payment-request-button?client=html
+				if (countryCode && countryCode !== "IN") {
+					checkApplePayGooglePayWallets(order);
+				}
+			});
+		}
+	}, [stripeInstance, order]);
+
+	const handleSubmit = async (event) => {
 		event.preventDefault();
+
+		const checkStripeFormIsValid = async () => {
+			const cardName = entriesRef.current["cardHolderName"];
+			const countryCode = entriesRef.current["country"];
+			const postalCode = entriesRef.current["postal"];
+
+			const cardNumber = elements.getElement("cardNumber");
+
+			const { error, paymentMethod } = await stripe.createPaymentMethod({
+				type: "card",
+				card: cardNumber,
+				billing_details: {
+					name: cardName,
+					address: {
+						country: countryCode,
+						postal_code: postalCode,
+					},
+				},
+			});
+
+			if (error) {
+				setPaymentMethodDetails();
+				setErrorForm(error);
+				return false;
+			} else {
+				setPaymentMethodDetails(paymentMethod);
+				setErrorForm();
+				return true;
+			}
+		};
+
 		if (paymentOptionSelected === STRIPEINTENTS) {
-			setCheckStripeForm(!checkStripeForm);
+			checkStripeFormIsValid().then((isvalid) => {
+				if (isvalid) {
+					setIsOpen((state) => ({ ...state, payment: false, review: true }));
+					setIsComplete((state) => ({ ...state, payment: true }));
+				}
+			});
 		}
 		if ([APPLEPAY, GOOGLEPAY, PAYPAL].includes(paymentOptionSelected)) {
-			setIsValid(true);
 			setIsOpen((state) => ({ ...state, payment: false, review: true }));
 			setIsComplete((state) => ({ ...state, payment: true }));
+			setPaymentMethodDetails({ paymentMethodSelected: paymentOptionSelected });
 		}
 	};
-
-	if (isFetching) {
-		return null;
-	}
 
 	return (
 		<form onSubmit={handleSubmit} className={`${className}__payment-form`}>
 			<Stack className={`${className}-paymentOptions`}>
-				{stripeIntents?.paymentMethodType && (
+				{stripeInstance && (
 					<>
 						<Input
 							type="radio"
@@ -134,19 +192,12 @@ const Payment = ({
 							onChange={() => setPaymentOptionSelected(STRIPEINTENTS)}
 							label={phrases.t("checkout-block.payment-type.creditDebitCard")}
 						/>
-						{paymentOptionSelected === STRIPEINTENTS && isStripeInitialized && (
+						{paymentOptionSelected === STRIPEINTENTS && stripeInstance && (
 							<StripeIntentCheckout
+								entriesRef={entriesRef}
 								stripeInstance={stripeInstance}
-								isStripeInitialized={isStripeInitialized}
-								setIsFetchingWallets={setIsFetchingWallets}
-								setIsGooglePaySupported={setIsGooglePaySupported}
-								setIsApplePaySupported={setIsApplePaySupported}
-								setIsStripeIntentFormValid={setIsStripeIntentFormValid}
-								setPaymentMethodDetails={setPaymentMethodDetails}
-								checkStripeForm={checkStripeForm}
+								errorForm={errorForm}
 								billingAddress={billingAddress}
-								order={order}
-								checkFinalizePayment={checkFinalizePayment}
 								className={className}
 							/>
 						)}
@@ -163,7 +214,7 @@ const Payment = ({
 						label={<PaymentIcon type={PAYPAL} />}
 					/>
 				)}
-				{!isFetchingWallets && isApplePaySupported && (
+				{isApplePaySupported && (
 					<Input
 						type="radio"
 						name="paymentOptions"
@@ -174,7 +225,7 @@ const Payment = ({
 						label={<PaymentIcon type={APPLEPAY} />}
 					/>
 				)}
-				{!isFetchingWallets && isGooglePaySupported && (
+				{isGooglePaySupported && (
 					<Input
 						type="radio"
 						name="paymentOptions"
@@ -189,7 +240,7 @@ const Payment = ({
 			<Button
 				size="medium"
 				variant="primary"
-				disabled={!isValid || error?.message ? true : null}
+				// disabled={!isValid || error?.message ? true : null}
 				fullWidth
 				type="submit"
 			>

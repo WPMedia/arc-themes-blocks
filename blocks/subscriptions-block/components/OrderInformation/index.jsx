@@ -81,6 +81,7 @@ const OrderInformation = ({
 		<div className={showBorder ? `${className}__orderCard-borderOn` : undefined}>
 			<section key={`orderInfo${id && `-${id}`}`} className={`${className}__orderCard`}>
 				<ProductPriceDetails
+					key={id}
 					details={orderDetails}
 					showPriceDescription={showPriceDescription}
 					showProductFeatures={showProductFeatures}

@@ -30,13 +30,13 @@ const CheckoutCardDetail = ({
 
 	const Summary = () => {
 		if (type === ACCOUNT) {
-			return <SummaryAccount account = {summary}/>
+			return <SummaryAccount account={summary} />;
 		}
 		if (type === BILLING_ADDRESS) {
-			return <SummaryBillingAddress billingAddress = {summary}/>
+			return <SummaryBillingAddress billingAddress={summary} />;
 		}
 		if (type === PAYMENT) {
-			return <SummaryPayment paymentDetails={summary} />
+			return <SummaryPayment paymentDetails={summary} />;
 		}
 		return null;
 	};

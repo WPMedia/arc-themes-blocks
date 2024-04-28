@@ -14,22 +14,19 @@ import CheckoutCardDetail, {
 	ACCOUNT,
 	BILLING_ADDRESS,
 	PAYMENT,
-	REVIEW,
 } from "../../components/CheckoutCardDetail";
 import BillingAddress from "./_children/BillingAddress";
-import Payment from "./_children/Payment";
+import PaymentReview from "./_children/PaymentReview";
 import OrderInformation from "../../components/OrderInformation";
 
 import useCartOrderDetail from "./useCartOrderDetail";
-import ReviewOrder from "./_children/Review";
+import usePaymentOptions from "../../components/usePaymentOptions";
 
 export const LABEL_ORDER_NUMBER_PAYPAL = "ArcSubs_OrderNumber";
 const BLOCK_CLASS_NAME = "b-checkout";
 
 const Checkout = ({ customFields }) => {
-	const { loginURL, offerURL, stripeIntentsID, termsOfSaleURL, termsOfServiceURL } = customFields;
-
-	const [user, setUser] = useState(false);
+	const { loginURL, offerURL, stripeIntentsID} = customFields;
 
 	const initialState = {
 		account: true,
@@ -42,26 +39,29 @@ const Checkout = ({ customFields }) => {
 	const { Sales } = useSales();
 	const phrases = usePhrases();
 
+	const { isFetching, isFetchingCartOrder, isLoggedIn, cartDetail, orderDetail } =
+		useCartOrderDetail();
+
+	const {
+		stripeIntents,
+		paypal,
+		error: errorPaymentOptions,
+		isFetching: isFetchingPaymentOptions,
+	} = usePaymentOptions(stripeIntentsID);
+
+	const [user, setUser] = useState(false);
 	const [isOpen, setIsOpen] = useState(initialState);
 	const [isComplete, setIsComplete] = useState(initialState);
 
 	const [billingAddress, setBillingAddress] = useState({});
-	const [paymentMethodDetails, setPaymentMethodDetails] = useState({});
-	const [paymentOptionSelected, setPaymentOptionSelected] = useState();
 
 	const [captchaToken, setCaptchaToken] = useState();
 	const [captchaError, setCaptchaError] = useState();
 	const [resetRecaptcha, setResetRecaptcha] = useState(true);
 	const [error, setError] = useState();
 
-	const [checkFinalizePayment, setCheckFinalizePayment] = useState();
-	const [clientSecret, setClientSecret] = useState();
-
 	const [order, setOrder] = useState();
 	const { isRecaptchaEnabled } = useRecaptcha("checkout");
-
-	const { isFetching, isFetchingCartOrder, isLoggedIn, cartDetail, orderDetail } =
-		useCartOrderDetail();
 
 	const checkoutURL = window.location.href;
 
@@ -82,7 +82,6 @@ const Checkout = ({ customFields }) => {
 				});
 		}
 
-		// cancel subscription to useEffect
 		return () => {
 			isActive = false;
 			return null;
@@ -156,9 +155,10 @@ const Checkout = ({ customFields }) => {
 		return null;
 	};
 
+	console.log("Order!!!!----")
 	console.log(order);
 
-	if (!isFetchingCartOrder) {
+	if (!isFetchingCartOrder && !isFetchingPaymentOptions) {
 		return (
 			<div className={BLOCK_CLASS_NAME}>
 				<div className={`${BLOCK_CLASS_NAME}__main`}>
@@ -209,49 +209,18 @@ const Checkout = ({ customFields }) => {
 								)}
 							</BillingAddress>
 						</CheckoutCardDetail>
-						<CheckoutCardDetail
-							className={`${BLOCK_CLASS_NAME}__card`}
-							order={orderDetail}
-							type={PAYMENT}
-							summary={{...paymentMethodDetails, paymentOptionSelected: paymentOptionSelected}}
-							link={editButton(PAYMENT)}
-							isOpen={isOpen.payment}
-							isComplete={isComplete.payment}
+						<PaymentReview
+							customFields={customFields}
+							paymentOptions={{ stripeIntents, paypal, errorPaymentOptions }}
+							order={order}
+							isOpen={isOpen}
+							setIsOpen={setIsOpen}
+							isComplete={isComplete}
+							setIsComplete={setIsComplete}
 							error={error}
-						>
-							<Payment
-								stripeIntentsID={stripeIntentsID}
-								order={order}
-								error={error}
-								setError={setError}
-								billingAddress={billingAddress}
-								setIsOpen={setIsOpen}
-								setIsComplete={setIsComplete}
-								setPaymentMethodDetails={setPaymentMethodDetails}
-								paymentOptionSelected={paymentOptionSelected}
-								setPaymentOptionSelected={setPaymentOptionSelected}
-								setClientSecret={setClientSecret}
-								className={`${BLOCK_CLASS_NAME}__card`}
-							/>
-						</CheckoutCardDetail>
-						<CheckoutCardDetail
-							className={`${BLOCK_CLASS_NAME}__card`}
-							type={REVIEW}
-							isOpen={true}
-							isComplete={isComplete.review}
-						>
-							<ReviewOrder
-								order={orderDetail}
-								paymentOptionSelected={paymentOptionSelected}
-								offerURL={offerURL}
-								termsOfSaleURL={termsOfSaleURL}
-								termsOfServiceURL={termsOfServiceURL}
-								checkFinalizePayment={checkFinalizePayment}
-								setCheckFinalizePayment={setCheckFinalizePayment}
-								clientSecret={clientSecret}
-								className={BLOCK_CLASS_NAME}
-							/>
-						</CheckoutCardDetail>
+							setError={setError}
+							className={BLOCK_CLASS_NAME}
+						/>
 					</section>
 				</div>
 				<div className={`${BLOCK_CLASS_NAME}__sidebar`}>

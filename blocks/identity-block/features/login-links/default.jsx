@@ -38,7 +38,7 @@ const LoginLinks = ({ customFields }) => {
 					size="large"
 					fullWidth
 				>
-					Log in without password
+					{phrases.t("identity-block.ota-button")}
 				</Button>
 			)}
 			{showLogin ? (

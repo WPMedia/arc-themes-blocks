@@ -5,7 +5,6 @@ import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { Input, useIdentity, BotChallengeProtection, Paragraph, Heading, HeadingSection } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
-import { RECAPTCHA_MAGICLINK } from "../../utils/useRecaptcha";
 
 const BLOCK_CLASS_NAME = "b-one-time-login-form";
 
@@ -39,9 +38,9 @@ const OneTimePasswordLogin = () => {
 		return (
 			<div className={BLOCK_CLASS_NAME}>
 				<HeadingSection>
-					<Heading>Check Your Email</Heading>
+					<Heading>{phrases.t("identity-block.ota-success-heading")}</Heading>
 				</HeadingSection>
-				<p className={`${BLOCK_CLASS_NAME}__ota-sub-headline`}>If there’s an account associated with <b>{userEmail}</b>, you’ll get a link in your inbox that will automatically sign you in to your account. The link will expire in 24 hours.</p>
+				<p className={`${BLOCK_CLASS_NAME}__ota-sub-headline`}>{phrases.t("identity-block.ota-success-body", { userEmail })}</p>
 			</div>
 		)
 	}
@@ -49,10 +48,10 @@ const OneTimePasswordLogin = () => {
 	return (
 		<div>
 			<HeadlinedSubmitForm
-				buttonLabel="Send log in link"
+				buttonLabel={phrases.t("identity-block.ota-form-button")}
 				className={BLOCK_CLASS_NAME}
 				formErrorText={error}
-				headline="Request one time log in link"
+				headline={phrases.t("identity-block.ota-headline")}
 				onSubmit={({ email }) => {
 					setError(null);
 					setCaptchaError(null);
@@ -83,7 +82,7 @@ const OneTimePasswordLogin = () => {
 					</div>
 				)}
 
-				<p className={`${BLOCK_CLASS_NAME}__ota-sub-headline`}>To sign in without a password, enter your email below and you will receive a one time log in link.</p>
+				<p className={`${BLOCK_CLASS_NAME}__ota-sub-headline`}>{phrases.t("identity-block.ota-subheadline")}</p>
 				<Input
 					autoComplete="email"
 					label={phrases.t("identity-block.email-label")}
@@ -97,7 +96,7 @@ const OneTimePasswordLogin = () => {
 				<div className={`${BLOCK_CLASS_NAME}__recaptcha`}>
 					<BotChallengeProtection
 						className={BLOCK_CLASS_NAME}
-						challengeIn={RECAPTCHA_MAGICLINK}
+						challengeIn="magicLink"
 						setCaptchaToken={setCaptchaToken}
 						captchaError={captchaError}
 						setCaptchaError={setCaptchaError}

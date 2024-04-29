@@ -40,7 +40,10 @@ const OneTimePasswordLogin = () => {
 				<HeadingSection>
 					<Heading>{phrases.t("identity-block.ota-success-heading")}</Heading>
 				</HeadingSection>
-				<p className={`${BLOCK_CLASS_NAME}__ota-sub-headline`}>{phrases.t("identity-block.ota-success-body", { userEmail })}</p>
+				<p
+					className={`${BLOCK_CLASS_NAME}__ota-sub-headline`}
+					dangerouslySetInnerHTML={{__html: phrases.t("identity-block.ota-success-body", { userEmail })}}
+				/>
 			</div>
 		)
 	}

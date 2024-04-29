@@ -1,4 +1,3 @@
-/* global grecaptcha */
 import React, { useState } from "react";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
@@ -69,13 +68,9 @@ const OneTimePasswordLogin = () => {
 						setResetRecaptcha(!resetRecaptcha);
 						if (e?.code === "130001") {
 							setCaptchaError(phrases.t(definedMessageByCode(e.code)));
-						}
-						else {
+						} else {
 							setError(phrases.t(definedMessageByCode(e.code)));
-						}
-						if (grecaptcha) {
-							grecaptcha.reset();
-						}						
+						}				
 					});
 				}}
 			>

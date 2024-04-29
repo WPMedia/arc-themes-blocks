@@ -1,6 +1,119 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-checkout {
+	&__main {
+		&-full {
+			@include scss.block-components("checkout-main-full");
+			@include scss.block-properties("checkout-main-full");
+		}
+		
+		@include scss.block-components("checkout-main");
+		@include scss.block-properties("checkout-main");
+	}
+
+	&__section {
+		@include scss.block-components("checkout-section");
+		@include scss.block-properties("checkout-section");
+	}
+
+	&__sidebar {
+		@include scss.block-components("checkout-sidebar");
+		@include scss.block-properties("checkout-sidebar");
+	}
+
+	&__card {
+		@include scss.block-components("checkout-card");
+		@include scss.block-properties("checkout-card");
+		&-children-div {
+			@include scss.block-components("checkout-card-children-div");
+			@include scss.block-properties("checkout-card-children-div");
+		}
+		&-edit {
+			@include scss.block-components("checkout-card-edit");
+			@include scss.block-properties("checkout-card-edit");
+		}
+		&-summary {
+			@include scss.block-components("checkout-card-summary");
+			@include scss.block-properties("checkout-card-summary");
+		}
+		&-closed {
+			@include scss.block-components("checkout-card-closed");
+			@include scss.block-properties("checkout-card-closed");
+		}
+		&-paymentOptions {
+			@include scss.block-components("checkout-card-paymentOptions");
+			@include scss.block-properties("checkout-card-paymentOptions");
+		}
+
+		&__form-error {
+			@include scss.block-components("checkout-card-formError");
+			@include scss.block-properties("checkout-card-formError");
+		}
+
+		&__payment {
+			&-form {
+				&--stripe-input-container {
+					@include scss.block-components("checkout-payment-form--stripe-input-container");
+					@include scss.block-properties("checkout-payment-form--stripe-input-container");
+				}
+
+				&--stripe-label {
+					@include scss.block-components("checkout-payment-form--stripe-label");
+					@include scss.block-properties("checkout-payment-form--stripe-label");
+				}
+
+				&--stripe-element {
+					@include scss.block-components("checkout-payment-form--stripe-element");
+					@include scss.block-properties("checkout-payment-form--stripe-element");
+				}
+
+				&--stripe-cardDetails {
+					@include scss.block-components("checkout-payment-form--stripe-cardDetails");
+					@include scss.block-properties("checkout-payment-form--stripe-cardDetails");
+				}
+
+				&--stripe-countryDetails {
+					@include scss.block-components("checkout-payment-form--stripe-countryDetails");
+					@include scss.block-properties("checkout-payment-form--stripe-countryDetails");
+				}
+
+				&--stripe-country-zipCode {
+					@include scss.block-components("checkout-payment-form--stripe-countryZipCode");
+					@include scss.block-properties("checkout-payment-form--stripe-countryZipCode");
+				}
+				&--stripe-row {
+					@include scss.block-components("checkout-payment-form--stripe-row");
+					@include scss.block-properties("checkout-payment-form--stripe-row");
+				}
+				&--stripe-error {
+					@include scss.block-components("checkout-payment-form--stripe-error");
+					@include scss.block-properties("checkout-payment-form--stripe-error");
+				}
+
+				&--border-bottom {
+					@include scss.block-components("checkout-payment-form--border-bottom");
+					@include scss.block-properties("checkout-payment-form--border-bottom");
+				}
+
+				&--border-right {
+					@include scss.block-components("checkout-payment-form--border-right");
+					@include scss.block-properties("checkout-payment-form--border-right");
+				}
+
+				@include scss.block-components("checkout-payment-form");
+				@include scss.block-properties("checkout-payment-form");
+			}
+
+			&-information {
+				@include scss.block-components("checkout-payment-information");
+				@include scss.block-properties("checkout-payment-information");
+			}
+
+			@include scss.block-components("checkout-payment");
+			@include scss.block-properties("checkout-payment");
+		}
+	}
+
 	&__cart {
 		@include scss.block-components("checkout-cart");
 		@include scss.block-properties("checkout-cart");
@@ -26,14 +139,22 @@
 		@include scss.block-properties("checkout-cart-item");
 	}
 
-	&__contact-info {
-		&-profile {
-			@include scss.block-components("checkout-contact-info-profile");
-			@include scss.block-properties("checkout-contact-info-profile");
+	&__billing-address {
+		&-form-div {
+			@include scss.block-components("checkout-billing-address-form-div");
+			@include scss.block-properties("checkout-billing-address-form-div");
+		}
+		&-input-div {
+			@include scss.block-components("checkout-billing-address-input-div");
+			@include scss.block-properties("checkout-billing-address-input-div");
+		}
+		&-captcha {
+			@include scss.block-components("checkout-billing-address-captcha");
+			@include scss.block-properties("checkout-billing-address-captcha");
 		}
 
-		@include scss.block-components("checkout-contact-info");
-		@include scss.block-properties("checkout-contact-info");
+		@include scss.block-components("checkout-billing-address");
+		@include scss.block-properties("checkout-billing-address");
 	}
 
 	&__identity-row {
@@ -46,114 +167,83 @@
 		@include scss.block-properties("checkout-identity-icon");
 	}
 
-	&__payment {
-		&-info {
-			&-payments {
-				@include scss.block-components("checkout-payment-info-payments");
-				@include scss.block-properties("checkout-payment-info-payments");
+	&__orderCard {
+		&--productPrice {
+			@include scss.block-components("checkout-order-card-productPrice");
+			@include scss.block-properties("checkout-order-card-productPrice");
+		}
+
+		&__card--features {
+			&--feature-item {
+				@include scss.block-components("checkout-order-card--features--item");
+				@include scss.block-properties("checkout-order-card--features--item");
 			}
+			@include scss.block-components("checkout-order-card--features");
+			@include scss.block-properties("checkout-order-card--features");
+		}
 
-			&-paypal {
-				&-button {
-					&:hover {
-						@include scss.block-components("checkout-payment-info-paypal-button-hover");
-						@include scss.block-properties("checkout-payment-info-paypal-button-hover");
-					}
-
-					@include scss.block-components("checkout-payment-info-paypal-button");
-					@include scss.block-properties("checkout-payment-info-paypal-button");
+		&__summary {
+			&--dueToday {
+				@include scss.block-components("checkout-order-card--summary--dueToday");
+				@include scss.block-properties("checkout-order-card--summary--dueToday");
+			}
+			&--details {
+				&--item {
+					@include scss.block-components("checkout-order-card--summary--details--item");
+					@include scss.block-properties("checkout-order-card--summary--details--item");
 				}
-
-				@include scss.block-components("checkout-payment-info-paypal");
-				@include scss.block-properties("checkout-payment-info-paypal");
+				@include scss.block-components("checkout-order-card--summary--details");
+				@include scss.block-properties("checkout-order-card--summary--details");
 			}
-
-			&-divider-container {
-				@include scss.block-components("checkout-payment-info-divider-container");
-				@include scss.block-properties("checkout-payment-info-divider-container");
-			}
-
-			&-divider-line {
-				@include scss.block-components("checkout-payment-info-divider-line");
-				@include scss.block-properties("checkout-payment-info-divider-line");
-			}
-
-			@include scss.block-components("checkout-payment-info");
-			@include scss.block-properties("checkout-payment-info");
+			@include scss.block-components("checkout-order-card--summary");
+			@include scss.block-properties("checkout-order-card--summary");
 		}
 
-		&-form {
-			&--stripe-input-container {
-				@include scss.block-components("checkout-payment-form--stripe-input-container");
-				@include scss.block-properties("checkout-payment-form--stripe-input-container");
-			}
-
-			&--stripe-label {
-				@include scss.block-components("checkout-payment-form--stripe-label");
-				@include scss.block-properties("checkout-payment-form--stripe-label");
-			}
-
-			&--stripe-element {
-				@include scss.block-components("checkout-payment-form--stripe-element");
-				@include scss.block-properties("checkout-payment-form--stripe-element");
-			}
-
-			&--stripe-cardDetails {
-				@include scss.block-components("checkout-payment-form--stripe-cardDetails");
-				@include scss.block-properties("checkout-payment-form--stripe-cardDetails");
-			}
-
-			&--stripe-countryDetails {
-				@include scss.block-components("checkout-payment-form--stripe-countryDetails");
-				@include scss.block-properties("checkout-payment-form--stripe-countryDetails");
-			}
-
-			&--stripe-row {
-				@include scss.block-components("checkout-payment-form--stripe-row");
-				@include scss.block-properties("checkout-payment-form--stripe-row");
-			}
-
-			&--border-bottom {
-				@include scss.block-components("checkout-payment-form--border-bottom");
-				@include scss.block-properties("checkout-payment-form--border-bottom");
-			}
-
-			&--border-right {
-				@include scss.block-components("checkout-payment-form--border-right");
-				@include scss.block-properties("checkout-payment-form--border-right");
-			}
-
-			@include scss.block-components("checkout-payment-form");
-			@include scss.block-properties("checkout-payment-form");
+		&-borderOn {
+			@include scss.block-components("checkout-order-card-border");
+			@include scss.block-properties("checkout-order-card-border");
 		}
 
-		&-information {
-			@include scss.block-components("checkout-payment-information");
-			@include scss.block-properties("checkout-payment-information");
-		}
-
-		@include scss.block-components("checkout-payment");
-		@include scss.block-properties("checkout-payment");
+		@include scss.block-components("checkout-order-card");
+		@include scss.block-properties("checkout-order-card");
 	}
 
-	&__test {
-		&-1 {
-			@include scss.block-components("checkout-payment-test-1");
-			@include scss.block-properties("checkout-payment-test-1");
+	&__review {
+		&-orderInformation {
+			@include scss.block-components("checkout-review-orderInformation");
+			@include scss.block-properties("checkout-review-orderInformation");
 		}
 
-		&-2 {
-			@include scss.block-components("checkout-payment-test-2");
-			@include scss.block-properties("checkout-payment-test-2");
+		&-renewalInformation {
+			@include scss.block-components("checkout-review-renewalInformation");
+			@include scss.block-properties("checkout-review-renewalInformation");
 		}
 
-		&-row {
-			@include scss.block-components("checkout-payment-test-row");
-			@include scss.block-properties("checkout-payment-test-row");
+		&-ratesInformaion {
+			@include scss.block-components("checkout-review-ratesInformation");
+			@include scss.block-properties("checkout-review-ratesInformation");
 		}
 
-		@include scss.block-components("checkout-payment-test");
-		@include scss.block-properties("checkout-payment-test");
+		&__tos-container {
+			a {
+				&:hover {
+					@include scss.block-components("checkout-review-tos-link-hover");
+					@include scss.block-properties("checkout-review-tos-link-hover");
+				}
+				@include scss.block-components("checkout-review-tos-link");
+				@include scss.block-properties("checkout-review-tos-link");
+			}
+			@include scss.block-components("checkout-review-tos-container-link");
+			@include scss.block-properties("checkout-review-tos-container-link");
+		}
+
+		&-paypal-button {
+			@include scss.block-components("checkout-payment-paypal-button");
+			@include scss.block-properties("checkout-payment-paypal-button");
+		}
+
+		@include scss.block-components("checkout-review");
+		@include scss.block-properties("checkout-review");
 	}
 
 	@include scss.block-components("checkout");
@@ -283,7 +373,7 @@
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
-  .b-paywall__overlay {
-    inset-block-start: initial;
-  }
+	.b-paywall__overlay {
+		inset-block-start: initial;
+	}
 }

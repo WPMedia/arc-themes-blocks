@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { usePhrases, Heading, Link } from "@wpmedia/arc-themes-components";
-import useSales from "../useSales";
+import { usePhrases, Heading, Link, useSales } from "@wpmedia/arc-themes-components";
+
 import currency from "../../utils/currency";
 import Item from "./item";
 

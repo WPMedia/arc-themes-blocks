@@ -58,8 +58,8 @@ export const basic = () => (
 	</div>
 );
 
-export const withRtl = () => {
+export const withRtl = () => (
 	<div dir="rtl" id="fusion-app" className="layout-section">
 		<SingleColumnRegular children={layoutAreas.map((name) => layoutItem(name))} />
 	</div>
-}
+);

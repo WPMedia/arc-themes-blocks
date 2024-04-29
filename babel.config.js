@@ -16,17 +16,19 @@ module.exports = {
 			},
 		],
 	],
+	plugins: [
+		[
+			"@babel/plugin-proposal-decorators",
+			{
+				legacy: true,
+			},
+		],
+	],
 	env: {
 		test: {
 			plugins: [
 				"@babel/plugin-proposal-nullish-coalescing-operator",
 				"transform-react-remove-prop-types",
-				[
-					"@babel/plugin-proposal-decorators",
-					{
-						legacy: true,
-					},
-				],
 				"@babel/plugin-proposal-class-properties",
 				[
 					"module-resolver",

@@ -1,10 +1,8 @@
 import React from "react";
-import { withKnobs } from "@storybook/addon-knobs";
 import SmallPromo from "./features/small-promo/default";
 
 export default {
 	title: "Blocks/Small Promo",
-	decorators: [withKnobs],
 };
 
 const sampleData = {

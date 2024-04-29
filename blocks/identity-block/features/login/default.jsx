@@ -1,16 +1,18 @@
-/* global grecaptcha */
 import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Input, useIdentity, Paragraph } from "@wpmedia/arc-themes-components";
+import {
+	Input,
+	useIdentity,
+	Paragraph,
+	BotChallengeProtection,
+} from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
 import useLogin from "../../components/login";
-import BotChallengeProtection from "../../components/bot-challenge-protection";
 import useOIDCLogin from "../../utils/useOIDCLogin";
 import validateURL from "../../utils/validate-redirect-url";
-import { RECAPTCHA_LOGIN } from "../../utils/useRecaptcha";
 
 const BLOCK_CLASS_NAME = "b-login-form";
 
@@ -27,7 +29,8 @@ export function definedMessageByCode(code) {
 }
 
 const Login = ({ customFields }) => {
-	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC } = customFields;
+	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC, termsAndPrivacyURL } =
+		customFields;
 
 	const urlString = window.location.href;
 	const url = new URL(urlString);
@@ -38,11 +41,15 @@ const Login = ({ customFields }) => {
 
 	const isOIDC =
 		OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
+
 	const { Identity, isInitialized } = useIdentity();
+
 	const [captchaToken, setCaptchaToken] = useState();
-	const [resetRecaptcha, setResetRecaptcha] = useState(true);
-	const [error, setError] = useState();
 	const [captchaError, setCaptchaError] = useState();
+	const [resetRecaptcha, setResetRecaptcha] = useState(true);
+
+	const [error, setError] = useState();
+
 	const { loginRedirect } = useLogin({
 		isAdmin,
 		redirectURL,
@@ -79,14 +86,10 @@ const Login = ({ customFields }) => {
 					.catch((e) => {
 						setResetRecaptcha(!resetRecaptcha);
 						if (e?.code === "130001") {
-							setCaptchaError(true);
-						}
-						else {
+							setCaptchaError(phrases.t(definedMessageByCode(e.code)));
+						} else {
 							setError(phrases.t(definedMessageByCode(e.code)));
 						}
-						if (grecaptcha) {
-							grecaptcha.reset();
-						}						
 					});
 			}}
 		>
@@ -113,16 +116,20 @@ const Login = ({ customFields }) => {
 				type="password"
 			/>
 			<BotChallengeProtection
-				className={BLOCK_CLASS_NAME}
-				challengeIn={RECAPTCHA_LOGIN}
+				challengeIn="signin"
 				setCaptchaToken={setCaptchaToken}
 				captchaError={captchaError}
+				error={error}
 				setCaptchaError={setCaptchaError}
 				resetRecaptcha={resetRecaptcha}
 			/>
-			<Paragraph className={`${BLOCK_CLASS_NAME}__privacy-statement`}>
-				{phrases.t("identity-block.privacy-statement")}
-			</Paragraph>
+			<div className={`${BLOCK_CLASS_NAME}__tos-container`}>
+				<Paragraph
+					dangerouslySetInnerHTML={{
+						__html: phrases.t("identity-block.terms-service-privacy-text", { termsAndPrivacyURL }),
+					}}
+				/>
+			</div>
 		</HeadlinedSubmitForm>
 	);
 };
@@ -152,6 +159,10 @@ Login.propTypes = {
 			defaultValue: false,
 			description:
 				"Used when authenticating a third party site with OIDC PKCE flow. This will use an ArcXp Org as an auth provider",
+		}),
+		termsAndPrivacyURL: PropTypes.string.tag({
+			name: "Privacy Policy URL",
+			defaultValue: "/privacy-policy/",
 		}),
 	}),
 };

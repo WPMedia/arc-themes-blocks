@@ -25,6 +25,8 @@ const BillingAddress = ({
 }) => {
 	const formRef = useRef();
 	const entriesRef = useRef({});
+	const phrases = usePhrases();
+
 	const [isUS, setIsUS] = useState(false);
 	const [isValid, setIsValid] = useState(formRef?.current?.checkValidity());
 
@@ -67,7 +69,7 @@ const BillingAddress = ({
 				const order = await Sales.createNewOrder(
 					{
 						...entriesRef.current,
-						line2: !!(entriesRef.current?.line2).trim()?.length
+						line2: (entriesRef?.current?.line2 || "").trim()?.length
 							? entriesRef.current?.line2
 							: undefined,
 					},
@@ -108,8 +110,6 @@ const BillingAddress = ({
 		}
 		entriesRef.current[name] = entry.value;
 	};
-
-	const phrases = usePhrases();
 
 	const getTranslatedCountries = countryCodes.map((entry) => ({
 		label: phrases.t(entry.key),

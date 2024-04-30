@@ -5,27 +5,25 @@ import { STRIPEINTENTS } from "../../utils/constants";
 
 export const SummaryAccount = ({ account }) => <Paragraph>{account?.email}</Paragraph>;
 
-export const SummaryBillingAddress = ({ billingAddress }) => {
-	return (
-		<Paragraph>
-			{billingAddress?.line1 ||
-				(billingAddress?.line2 && (
-					<>
-						<span>{billingAddress?.line1}</span>{billingAddress?.line2 && <span>{' '}{billingAddress?.line2}</span>}
-					</>
-				))}
-			{billingAddress?.locality && <span>{` ${billingAddress?.locality}, `}</span>}
-			{billingAddress?.region && <span>{`${billingAddress?.region}, `}</span>}
-			{billingAddress?.postal && <span>{`${billingAddress?.postal}, `}</span>}
-			{billingAddress?.country && <span>{billingAddress?.country}</span>}
-		</Paragraph>
-	);
-};
+export const SummaryBillingAddress = ({ billingAddress }) => (
+	<Paragraph>
+		{billingAddress?.line1 ||
+			(billingAddress?.line2 && (
+				<>
+					<span>{billingAddress?.line1}</span>
+					{billingAddress?.line2 && <span> {billingAddress?.line2}</span>}
+				</>
+			))}
+		{billingAddress?.locality && <span>{` ${billingAddress?.locality}, `}</span>}
+		{billingAddress?.region && <span>{`${billingAddress?.region}, `}</span>}
+		{billingAddress?.postal && <span>{`${billingAddress?.postal}, `}</span>}
+		{billingAddress?.country && <span>{billingAddress?.country}</span>}
+	</Paragraph>
+);
 
 export const SummaryPayment = ({ paymentDetails }) => {
-
 	const phrases = usePhrases();
-	
+
 	if (paymentDetails?.paymentOptionSelected === STRIPEINTENTS) {
 		return (
 			<Paragraph>
@@ -42,14 +40,21 @@ export const SummaryPayment = ({ paymentDetails }) => {
 				{paymentDetails?.card?.exp_month && paymentDetails?.card?.exp_year && (
 					<span>
 						{" "}
-						{phrases.t("checkout-block.expires")} {paymentDetails?.card?.exp_month}
-						{"/"}
+						{phrases.t("checkout-block.expires")} {paymentDetails?.card?.exp_month}/
 						{paymentDetails?.card?.exp_year}
 					</span>
 				)}
 			</Paragraph>
 		);
-	}else{
-		return(<Paragraph><PaymentIcon type={paymentDetails?.paymentOptionSelected} /></Paragraph>)
 	}
+
+	if (paymentDetails?.paymentOptionSelected !== STRIPEINTENTS) {
+		return (
+			<Paragraph>
+				<PaymentIcon type={paymentDetails?.paymentOptionSelected} />
+			</Paragraph>
+		);
+	}
+
+	return null;
 };

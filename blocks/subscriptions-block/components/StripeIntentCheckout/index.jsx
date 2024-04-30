@@ -5,8 +5,7 @@ import {
 	CardExpiryElement,
 	CardNumberElement,
 } from "@stripe/react-stripe-js";
-
-import { Divider } from "@wpmedia/arc-themes-components";
+import { usePhrases, Grid, Input, Stack, Divider } from "@wpmedia/arc-themes-components";
 
 import countryCodes from "../ContactInfo/countryCodes";
 
@@ -21,20 +20,18 @@ const CARD_ELEMENT_OPTIONS = {
 	showIcon: true,
 };
 
-import { usePhrases, Grid, Input, Stack } from "@wpmedia/arc-themes-components";
-
 const StripeIntentCheckout = ({
 	entriesRef,
 	errorForm,
 	billingAddress,
 	className,
 }) => {
-
 	const phrases = usePhrases();
 
 	const additionalClass = `${className}__payment-form--stripe-element`;
 
 	const handleInputChange = (name, entry) => {
+		// eslint-disable-next-line
 		entriesRef.current[name] = entry;
 	};
 

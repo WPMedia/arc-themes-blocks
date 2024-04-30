@@ -10,15 +10,14 @@ const getPricingStrategy = async ({ origin, priceCode }) => {
 	const dateMidnight = new Date();
 	dateMidnight.setUTCHours(0, 0, 0, 0);
 
-	return await fetch(
+	return fetch(
 		`${origin}/retail/public/v1/pricing/paymentInfo/${priceCode}/1/${dateMidnight.getTime()}`,
 		{},
 	).then((res) => res.json());
 };
 
-const getProduct = async ({ origin, sku }) => {
-	return await fetch(`${origin}/retail/public/v1/product/${sku}`, {}).then((res) => res.json());
-};
+const getProduct = async ({ origin, sku }) =>
+	fetch(`${origin}/retail/public/v1/product/${sku}`, {}).then((res) => res.json());
 
 export const getItemDetails = async (origin, items) => {
 	let itemDetails = items;
@@ -52,19 +51,18 @@ export const getItemDetails = async (origin, items) => {
 
 	await Promise.all(
 		itemDetails.map((item) =>
-			fetchProduct(item?.sku).then((productSummary) => {
-				return {
-					...item,
-					productAttributes:
-					typeof productSummary?.attributes !== "undefined" && productSummary?.attributes?.length !== 0
+			fetchProduct(item?.sku).then((productSummary) => ({
+				...item,
+				productAttributes:
+					typeof productSummary?.attributes !== "undefined" &&
+					productSummary?.attributes?.length !== 0
 						? productSummary?.attributes.map((feature) => ({
 								featureText: feature.value,
-                                id: feature?.id
+								id: feature?.id,
 							}))
 						: [],
-					productDescription: productSummary?.description,
-				};
-			}),
+				productDescription: productSummary?.description,
+			})),
 		),
 	).then((results) => {
 		itemDetails = results;
@@ -92,83 +90,89 @@ const useCartOrderDetail = () => {
 		},
 	} = getProperties(arcSite);
 
-	const getCartDetails = async () => {
-		const cartDetails = await Sales.getCart();
-		return cartDetails;
-	};
-
-	const getLastPendingOrder = async () => {
-		const orderHistory = await Sales.getOrderHistory();
-		const lastPendingOrder = orderHistory?.orders?.find((it) => it.orderStatus === "Pending");
-		return lastPendingOrder;
-	};
-
-	const getOrderDetail = async (orderNumber) => {
-		const orderHistory = await Sales.getOrderDetails(orderNumber);
-		return orderHistory;
-	};
-
-	const getCartItemFromLocalstorge = () => {
-		const items = localStorage.getItem(ARCXP_CART);
-		const cartItem = verifyJSON(items);
-		if (cartItem && cartItem?.sku && cartItem?.priceCode && cartItem?.cartDate) {
-			return cartItem;
-		}
-		return;
-	};
-
-	const createNewCart = async (currentItemCart) => {
-		await Sales.clearCart();
-		const newCart = await Sales.addItemToCart([
-			{
-				sku: currentItemCart?.sku,
-				priceCode: currentItemCart?.priceCode,
-				quantity: 1,
-			},
-		]);
-		return newCart;
-	};
-
-	const getLastestOrderOrCart = async (currentOrder, currentCart) => {
-		if (currentOrder?.orderDate && !currentCart?.cartDate) {
-			return { lastOrder: currentOrder, currentCart: undefined };
-		}
-
-		if (!currentOrder?.orderDate && currentCart?.cartDate) {
-			const newCart = await createNewCart(currentCart);
-			return { lastOrder: undefined, currentCart: newCart };
-		}
-
-		if (currentOrder?.orderDate && currentCart?.cartDate) {
-			if (currentOrder?.orderDate >= currentCart?.cartDate) {
-				return { lastOrder: currentOrder, currentCart: undefined };
-			} else {
-				const newCart = await createNewCart(currentCart);
-				if (newCart?.items?.length) {
-					return { lastOrder: undefined, currentCart: newCart };
-				} else {
-					return { lastOrder: currentOrder, currentCart: undefined };
-				}
-			}
-		}
-	};
-
 	useEffect(() => {
-		const isLoggedIn = async () => {
+		const isUserLoggedIn = async () => {
 			setIsLoggedIn(await Identity.isLoggedIn());
 			setIsFetching(false);
 		};
 
-		isLoggedIn();
+		isUserLoggedIn();
 	}, [Identity]);
 
+
 	useEffect(() => {
+
+		const getCartDetails = async () => {
+			const cartDetails = await Sales.getCart();
+			return cartDetails;
+		};
+
+		const getLastPendingOrder = async () => {
+			const orderHistory = await Sales.getOrderHistory();
+			const lastPendingOrder = orderHistory?.orders?.find((it) => it.orderStatus === "Pending");
+			return lastPendingOrder;
+		};
+
+		const getOrderDetail = async (orderNumber) => {
+			const orderHistory = await Sales.getOrderDetails(orderNumber);
+			return orderHistory;
+		};
+
+		const createNewCart = async (currentItemCart) => {
+			await Sales.clearCart();
+			const newCart = await Sales.addItemToCart([
+				{
+					sku: currentItemCart?.sku,
+					priceCode: currentItemCart?.priceCode,
+					quantity: 1,
+				},
+			]);
+			return newCart;
+		};
+
+		const getLastestOrderOrCart = async (currentOrder, currentCart) => {
+			if (currentOrder?.orderDate && !currentCart?.cartDate) {
+				return { lastOrder: currentOrder, currentCart: undefined };
+			}
+	
+			if (!currentOrder?.orderDate && currentCart?.cartDate) {
+				const newCart = await createNewCart(currentCart);
+				return { lastOrder: undefined, currentCart: newCart };
+			}
+	
+			let obj;
+			if (currentOrder?.orderDate && currentCart?.cartDate) {
+				if (currentOrder?.orderDate >= currentCart?.cartDate) {
+					obj = { lastOrder: currentOrder, currentCart: undefined };
+				} else {
+					const newCart = await createNewCart(currentCart);
+					if (newCart?.items?.length) {
+						obj = { lastOrder: undefined, currentCart: newCart };
+					} else {
+						obj = { lastOrder: currentOrder, currentCart: undefined };
+					}
+				}
+			}
+			return obj;
+		};
+
+		const getCartItemFromLocalstorge = () => {
+			const items = localStorage.getItem(ARCXP_CART);
+			const cartItem = verifyJSON(items);
+			if (cartItem && cartItem?.sku && cartItem?.priceCode && cartItem?.cartDate) {
+				return cartItem;
+			}
+			return undefined;
+		};
+
 		if (isLoggedIn) {
+			const itemCart = getCartItemFromLocalstorge();
+
 			getCartDetails().then((cart) => {
 				if (cart?.items?.length) {
 					console.log("There are items into cart...");
-					getItemDetails(origin, cart?.items).then((newDetails)=>{
-						setCartDetail({...cart, items: newDetails});
+					getItemDetails(origin, cart?.items).then((newDetails) => {
+						setCartDetail({ ...cart, items: newDetails });
 						setIsFetchingCartOrder(false);
 					});
 				} else {
@@ -176,33 +180,33 @@ const useCartOrderDetail = () => {
 						"There are not items into the cart, we will check pending order & localstorage",
 					);
 
-					const itemCart = getCartItemFromLocalstorge();
-
 					let lastPendingOrder;
 					getLastPendingOrder()
 						.then((order) => {
 							if (order?.orderNumber) {
 								getOrderDetail(order?.orderNumber)
-									.then((orderDetail) => {
-										if (orderDetail?.billingAddress?.country) {
-											lastPendingOrder = orderDetail;
+									.then((orderDetails) => {
+										if (orderDetails?.billingAddress?.country) {
+											lastPendingOrder = orderDetails;
 										}
 
 										if (lastPendingOrder?.orderNumber || itemCart?.cartDate) {
-											console.log("There are pending orders and cart, checking what is the most recent one");
+											console.log(
+												"There are pending orders and cart, checking what is the most recent one",
+											);
 											getLastestOrderOrCart(lastPendingOrder, itemCart).then(
 												({ lastOrder, currentCart }) => {
-													if(lastOrder?.items){
+													if (lastOrder?.items) {
 														console.log("Pending orders is the most recent one");
-														getItemDetails(origin, lastOrder?.items).then((newDetails)=>{
-															setOrderDetail({...lastOrder, items: newDetails});
+														getItemDetails(origin, lastOrder?.items).then((newDetails) => {
+															setOrderDetail({ ...lastOrder, items: newDetails });
 															setIsFetchingCartOrder(false);
 														});
 													}
-													if(currentCart?.items){
+													if (currentCart?.items) {
 														console.log("Cart is the most recent one");
-														getItemDetails(origin, currentCart?.items).then((newDetails)=>{
-															setCartDetail({...currentCart, items: newDetails});
+														getItemDetails(origin, currentCart?.items).then((newDetails) => {
+															setCartDetail({ ...currentCart, items: newDetails });
 															setIsFetchingCartOrder(false);
 														});
 													}
@@ -215,9 +219,9 @@ const useCartOrderDetail = () => {
 									.catch(() => {
 										if (itemCart) {
 											createNewCart(itemCart)
-												.then((cart) => {
-													getItemDetails(origin, cart?.items).then((newDetails)=>{
-														setCartDetail({...cart, items: newDetails});
+												.then((newCart) => {
+													getItemDetails(origin, newCart?.items).then((newDetails) => {
+														setCartDetail({ ...newCart, items: newDetails });
 														setIsFetchingCartOrder(false);
 													});
 												})
@@ -228,21 +232,24 @@ const useCartOrderDetail = () => {
 											setIsFetchingCartOrder(false);
 										}
 									});
-							} else {
-								getLastestOrderOrCart(undefined, items).then(({ currentCart }) => {
-									getItemDetails(origin, currentCart?.items).then((newDetails)=>{
-										setCartDetail({...currentCart, items: newDetails});
+							} else if (itemCart) {
+								getLastestOrderOrCart(undefined, itemCart).then(({ currentCart }) => {
+									getItemDetails(origin, currentCart?.items).then((newDetails) => {
+										setCartDetail({ ...currentCart, items: newDetails });
 										setIsFetchingCartOrder(false);
 									});
 								});
+							} else {
+								setCartDetail();
+								setOrderDetail();
 							}
 						})
 						.catch(() => {
 							if (itemCart) {
 								createNewCart(itemCart)
-									.then((cart) => {
-										getItemDetails(origin, cart?.items).then((newDetails)=>{
-											setCartDetail({...cart, items: newDetails});
+									.then((newCart) => {
+										getItemDetails(origin, newCart?.items).then((newDetails) => {
+											setCartDetail({ ...newCart, items: newDetails });
 											setIsFetchingCartOrder(false);
 										});
 									})
@@ -260,7 +267,7 @@ const useCartOrderDetail = () => {
 		if (!isFetching && !isLoggedIn) {
 			setIsFetchingCartOrder(false);
 		}
-	}, [isFetching, isLoggedIn]);
+	}, [isFetching, isLoggedIn, Sales, origin]);
 
 	return {
 		isFetching,

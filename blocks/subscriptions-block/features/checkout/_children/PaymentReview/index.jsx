@@ -3,12 +3,29 @@ import React, { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
-import { Button, usePhrases, useSales, BotChallengeProtection } from "@wpmedia/arc-themes-components";
+import {
+	Button,
+	usePhrases,
+	useSales,
+	BotChallengeProtection,
+} from "@wpmedia/arc-themes-components";
 
 import { STRIPEINTENTS, PAYPAL, RECAPTCHA_TOKEN } from "../../../../utils/constants";
 import CheckoutCardDetail, { PAYMENT, REVIEW } from "../../../../components/CheckoutCardDetail";
 import Payment from "../Payment";
 import ReviewOrder from "../Review";
+
+const EditButton = ({ editLabel, setPaymentMethod, setIsOpen, className }) => (
+	<Button
+		onClick={() => {
+			setPaymentMethod();
+			setIsOpen((state) => ({ ...state, payment: true, review: false }));
+		}}
+		className={`${className}__card-edit`}
+	>
+		{editLabel}
+	</Button>
+);
 
 const PaymentReviewDetail = ({
 	stripeInstance,
@@ -36,7 +53,7 @@ const PaymentReviewDetail = ({
 	const [paymentMethodAppleGooglePay, setPaymentMethodAppleGooglePay] = useState();
 
 	const reCaptchaStorage = localStorage.getItem(RECAPTCHA_TOKEN);
-	const [reCaptchaToken, setReCaptchaToken] = useState(captchaToken ? captchaToken : reCaptchaStorage);
+	const [reCaptchaToken, setReCaptchaToken] = useState(captchaToken || reCaptchaStorage);
 	const [resetRecaptcha, setResetRecaptcha] = useState(false);
 
 	useEffect(() => {
@@ -48,33 +65,33 @@ const PaymentReviewDetail = ({
 		}
 	}, [stripeInstance, paypal]);
 
-	const EditButton = () => (
-		<Button
-			onClick={() => setIsOpen((state) => ({ ...state, payment: true, review: false }))}
-			className={`${className}__card-edit`}
-		>
-			{phrases.t("checkout-block.edit")}
-		</Button>
-	);
-
 	return (
 		<>
 			<CheckoutCardDetail
 				className={`${className}__card`}
 				type={PAYMENT}
-				summary={{ ...paymentMethod, paymentOptionSelected: paymentOptionSelected }}
-				link={<EditButton />}
+				summary={{ ...paymentMethod, paymentOptionSelected }}
+				link={
+					<EditButton
+						editLabel={phrases.t("checkout-block.edit")}
+						setPaymentMethod={setPaymentMethod}
+						setIsOpen={setIsOpen}
+						className={className}
+					/>
+				}
 				isOpen={isOpen.payment}
 				isComplete={isComplete.payment}
 				error={error}
 			>
 				<Payment
 					stripeInstance={stripeInstance}
+					customFields={customFields}
 					paypal={paypal}
 					order={order}
 					billingAddress={order?.billingAddress ? order?.billingAddress : billingAddress}
 					setIsOpen={setIsOpen}
 					setIsComplete={setIsComplete}
+					paymentMethod={paymentMethod}
 					setPaymentMethod={setPaymentMethod}
 					paymentOptionSelected={paymentOptionSelected}
 					setPaymentOptionSelected={setPaymentOptionSelected}
@@ -161,22 +178,22 @@ const PaymentReview = ({
 
 	useEffect(() => {
 		if (stripeIntents && order?.orderNumber) {
-			if(!payment || payment?.orderNumber !== order?.orderNumber){
+			if (!payment || payment?.orderNumber !== order?.orderNumber) {
 				Sales.initializePayment(order?.orderNumber, stripeIntents?.paymentMethodID)
-				.then((paymentObject) => {
-					if(paymentObject?.orderNumber && order?.orderNumber !== payment?.orderNumber){
-						setOrder({...order, orderNumber: paymentObject?.orderNumber});
-					}
-					setPayment(paymentObject);
-					setError();
-				})
-				.catch((e) => {
-					setPayment({});
-					setError(e);
-				});
+					.then((paymentObject) => {
+						if (paymentObject?.orderNumber && order?.orderNumber !== payment?.orderNumber) {
+							setOrder({ ...order, orderNumber: paymentObject?.orderNumber });
+						}
+						setPayment(paymentObject);
+						setError();
+					})
+					.catch((e) => {
+						setPayment({});
+						setError(e);
+					});
 			}
 		}
-	}, [order, payment, stripeIntents]);
+	}, [order, payment, stripeIntents, Sales, setError, setOrder, setPayment]);
 
 	if (stripeInstance) {
 		return (

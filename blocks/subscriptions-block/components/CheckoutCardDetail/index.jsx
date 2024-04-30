@@ -8,6 +8,19 @@ export const BILLING_ADDRESS = "Billing Address";
 export const PAYMENT = "Payment";
 export const REVIEW = "Review";
 
+const Summary = ({ type, summary }) => {
+	if (type === ACCOUNT) {
+		return <SummaryAccount account={summary} />;
+	}
+	if (type === BILLING_ADDRESS) {
+		return <SummaryBillingAddress billingAddress={summary} />;
+	}
+	if (type === PAYMENT) {
+		return <SummaryPayment paymentDetails={summary} />;
+	}
+	return null;
+};
+
 const CheckoutCardDetail = ({
 	className,
 	type,
@@ -16,7 +29,7 @@ const CheckoutCardDetail = ({
 	isOpen,
 	isComplete,
 	error,
-	children
+	children,
 }) => {
 	const phrases = usePhrases();
 
@@ -25,19 +38,6 @@ const CheckoutCardDetail = ({
 		if (type === BILLING_ADDRESS) return `2. ${phrases.t("checkout-block.billingAddress")}`;
 		if (type === PAYMENT) return `3. ${phrases.t("checkout-block.payment")}`;
 		if (type === REVIEW) return `4. ${phrases.t("checkout-block.review")}`;
-		return null;
-	};
-
-	const Summary = () => {
-		if (type === ACCOUNT) {
-			return <SummaryAccount account={summary} />;
-		}
-		if (type === BILLING_ADDRESS) {
-			return <SummaryBillingAddress billingAddress={summary} />;
-		}
-		if (type === PAYMENT) {
-			return <SummaryPayment paymentDetails={summary} />;
-		}
 		return null;
 	};
 
@@ -52,7 +52,7 @@ const CheckoutCardDetail = ({
 				<Heading>{getTitle()}</Heading>
 				{!isOpen && isComplete && (
 					<div className={`${className}-summary`}>
-						<Summary />
+						<Summary type={type} summary={summary} />
 						{link}
 					</div>
 				)}

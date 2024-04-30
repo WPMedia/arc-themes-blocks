@@ -39,6 +39,10 @@ const Checkout = ({ customFields }) => {
 	const { Sales } = useSales();
 	const phrases = usePhrases();
 
+	const params = new URLSearchParams(window.location.search);
+	const paypalToken = params.get("token");
+	const [isPaypalInitialized, setIsPaypalInitialized] = useState(false);
+
 	const { isFetching, isFetchingCartOrder, isLoggedIn, cartDetail, orderDetail } =
 		useCartOrderDetail();
 
@@ -225,9 +229,9 @@ const Checkout = ({ customFields }) => {
 						<OrderInformation
 							id="orderInformationSidebar"
 							offerURL={offerURL}
-							showOfferURL={true}
+							showOfferURL
 							showPriceDescription={false}
-							showProductFeatures={true}
+							showProductFeatures
 							orderDetails={order?.items ? order : cartDetail}
 							className={BLOCK_CLASS_NAME}
 						/>

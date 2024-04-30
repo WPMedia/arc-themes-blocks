@@ -9,6 +9,55 @@ import PaymentIcon, { PAYPAL as paypalIcon } from "../../../../components/Paymen
 
 import { STRIPEINTENTS, PAYPAL } from "../../../../utils/constants";
 
+const PaymentButton = ({
+	paymentOptionSelected,
+	handleSubmitStripeIntents,
+	handlePayPalPayment,
+	isSubmitting,
+	className,
+}) => {
+	const phrases = usePhrases();
+
+	if (paymentOptionSelected === STRIPEINTENTS) {
+		return (
+			<Button
+				size="medium"
+				variant="primary"
+				fullWidth
+				type="submit"
+				disabled={isSubmitting}
+				onClick={() => handleSubmitStripeIntents()}
+			>
+				<span>{phrases.t("subscriptions-block.submit-payment")}</span>
+			</Button>
+		);
+	}
+
+	if (paymentOptionSelected === PAYPAL) {
+		return (
+			<Button
+				size="medium"
+				variant="primary"
+				fullWidth
+				className={`${className}__review-paypal-button`}
+				type="submit"
+				onClick={handlePayPalPayment}
+			>
+				<>
+					<span>{phrases.t("subscriptions-block.submit-payment-paypal")} </span>
+					<PaymentIcon type={paypalIcon} />
+				</>
+			</Button>
+		);
+	}
+
+	if (paymentOptionSelected === "ApplePay" || paymentOptionSelected === "GooglePay") {
+		return <div id="ApplePay-payment-request-button"/>;
+	}
+
+	return null;
+};
+
 const ReviewOrder = ({
 	customFields,
 	paymentOptions,
@@ -68,8 +117,9 @@ const ReviewOrder = ({
 		if (result?.error) {
 			setError(result.error);
 			setIsSubmitting(false);
-      return;
-		} else {
+		} 
+
+		if(result?.paymentIntent || result?.setupIntent){
 			if (totalOrder > 0) {
 				Sales.finalizePayment(
 					orderNumber,
@@ -152,7 +202,6 @@ const ReviewOrder = ({
 			setError(result.error);
 			setIsSubmitting(false);
 			event.complete("fail");
-			return;
 		} else {
 			event.complete("success");
 			if (totalOrder > 0) {
@@ -164,7 +213,7 @@ const ReviewOrder = ({
 					reCaptchaToken,
 				)
 					.then(() => {
-						//history.push('/success');
+						console.log("Redirecting to ......")
 					})
 					.catch((e) => {
 						setResetRecaptcha(!resetRecaptcha);
@@ -180,7 +229,7 @@ const ReviewOrder = ({
 					reCaptchaToken,
 				)
 					.then(() => {
-						//history.push('/success');
+						console.log("Redirecting to ......")
 					})
 					.catch((e) => {
 						setResetRecaptcha(!resetRecaptcha);
@@ -191,49 +240,10 @@ const ReviewOrder = ({
 		}
 	};
 
-	const handlePayPalPayment = () => {
+	const handleSubmitPayPalPayment = () => {
 		const paymentMethodID = paypal?.paymentMethodID;
 		console.log("finalizando pago PayPal");
 		console.log(paymentMethodID);
-	};
-
-	const PaymentButton = () => {
-		if (paymentOptionSelected === STRIPEINTENTS) {
-			return (
-				<Button
-					size="medium"
-					variant="primary"
-					fullWidth
-					type="submit"
-					disabled={isSubmitting}
-					onClick={() => handleSubmitStripeIntents()}
-				>
-					<span>{phrases.t("subscriptions-block.submit-payment")}</span>
-				</Button>
-			);
-		}
-
-		if (paymentOptionSelected === PAYPAL) {
-			return (
-				<Button
-					size="medium"
-					variant="primary"
-					fullWidth
-					className={`${className}__review-paypal-button`}
-					type="submit"
-					onClick={handlePayPalPayment}
-				>
-					<>
-						<span>{phrases.t("subscriptions-block.submit-payment-paypal")} </span>
-						<PaymentIcon type={paypalIcon} />
-					</>
-				</Button>
-			);
-		}
-
-		if (paymentOptionSelected === "ApplePay" || paymentOptionSelected === "GooglePay") {
-			return <div id="ApplePay-payment-request-button"></div>;
-		}
 	};
 
 	const mountApplePayGooglePayButton = () => {
@@ -252,6 +262,7 @@ const ReviewOrder = ({
 
 	useEffect(() => {
 		mountApplePayGooglePayButton();
+		// eslint-disable-next-line
 	}, []);
 
 	return (
@@ -259,10 +270,10 @@ const ReviewOrder = ({
 			<OrderInformation
 				offerURL={offerURL}
 				showOfferURL={false}
-				showPriceDescription={true}
+				showPriceDescription
 				showProductFeatures={false}
 				orderDetails={order}
-				showBorder={true}
+				showBorder
 				className={className}
 			/>
 			<RenewalInformation order={order} className={className} />
@@ -277,7 +288,13 @@ const ReviewOrder = ({
 					}}
 				/>
 			</div>
-			<PaymentButton />
+			<PaymentButton
+				paymentOptionSelected={paymentOptionSelected}
+				handleSubmitStripeIntents={handleSubmitStripeIntents}
+				handleSubmitPayPalPayment={handleSubmitPayPalPayment}
+				isSubmitting={isSubmitting}
+				className={className}
+			/>
 		</Stack>
 	);
 };

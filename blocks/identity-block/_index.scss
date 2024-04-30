@@ -111,13 +111,13 @@
 		@include scss.block-properties("ota-sub-headline");
 	}
 
-	@include scss.block-components("one-time-login-form");
-	@include scss.block-properties("one-time-login-form");
-
 	&__recaptcha {
 		@include scss.block-components("ota-recaptcha");
 		@include scss.block-properties("ota-recaptcha");
 	}
+
+	@include scss.block-components("one-time-login-form");
+	@include scss.block-properties("one-time-login-form");
 }
 
 .b-login-links {
@@ -183,13 +183,13 @@
 			@include scss.block-properties("social-sign-on-dividerWithText-before");
 		}
 
-		@include scss.block-components("social-sign-on-dividerWithText");
-		@include scss.block-properties("social-sign-on-dividerWithText");
-
 		&::after{
 			@include scss.block-components("social-sign-on-dividerWithText-after");
 			@include scss.block-properties("social-sign-on-dividerWithText-after");
 		}
+
+		@include scss.block-components("social-sign-on-dividerWithText");
+		@include scss.block-properties("social-sign-on-dividerWithText");
 	}
 
 	&__dividerWithText{

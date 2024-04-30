@@ -678,6 +678,7 @@
 				"color": "var(--text-color)",
 				"line-height": "24px",
 				"margin-block-start": "var(--global-spacing-4)",
+				"display": "flex",
 				"components": {
 					"paragraph": {
 						"margin-inline-start": "var(--global-spacing-4)",
@@ -687,6 +688,14 @@
 						"color": "var(--text-color-subtle)"
 					}
 				}
+			}
+		}
+	},
+	"subscriptions-subscription-list-detail-billing-subtitle": {
+		"styles": {
+			"default": {
+				"min-width": "max-content",
+				"display": "block"
 			}
 		}
 	},
@@ -724,9 +733,17 @@
 				"display": "flex",
 				"flex-direction": "row",
 				"justify-content": "space-between",
-				"height": "28px",
+				"height": "max-content",
 				"align-content": "center",
 				"flex-wrap": "wrap"
+			}
+		}
+	},
+	"subscriptions-subscription-list-detail-title-sub-info": {
+		"styles": {
+			"default": {
+				"display": "flex",
+				"flex-direction": "column"
 			}
 		}
 	},
@@ -737,7 +754,9 @@
 				"font-family": "Inter",
 				"font-weight": "700",
 				"line-height": "28px",
-				"align-self": "center"
+				"align-self": "center",
+				"width": "100%",
+				"margin-block-end": "var(--global-spacing-2)"
 			}
 		}
 	},
@@ -750,7 +769,8 @@
 				"line-height": "24px",
 				"align-self": "center",
 				"height": "24px",
-				"text-decoration": "underline"
+				"text-decoration": "underline",
+				"padding-inline-start": "0"
 			}
 		}
 	},
@@ -762,7 +782,8 @@
 				"font-weight": "400",
 				"line-height": "18px",
 				"height": "18px",
-				"color": "var(--text-color-subtle)"
+				"color": "var(--text-color-subtle)",
+				"margin-block-end": "var(--global-spacing-4)"
 			}
 		}
 	},
@@ -787,6 +808,7 @@
 				"padding-block-start": "24px",
 				"padding-inline-end": "24px",
 				"padding-inline-start": "24px",
+				"margin-block-start": "var(--global-spacing-4)",
 				"justify-content": "space-between",
 				"display": "flex",
 				"font-family": "Inter",
@@ -825,7 +847,8 @@
 			"default": {
 				"justify-content": "space-between",
 				"display": "flex",
-				"align-items": "center"
+				"align-items": "center",
+				"margin-block-end": "var(--global-spacing-2)"
 			}
 		}
 	},
@@ -890,6 +913,7 @@
 				"font-weight": "700",
 				"font-size": "16px",
 				"line-height": "24px",
+				"margin-block-end": "var(--global-spacing-2)",
 				"components": {
 					"paragraph": {
 						"font-weight": "400"

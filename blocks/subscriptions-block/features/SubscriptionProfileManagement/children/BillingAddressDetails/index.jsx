@@ -31,7 +31,7 @@ const phrases = usePhrases();
   
   const addressString = generateAddressString(sub?.billingAddress);
   return <div className={className}>
-    {phrases.t("subscriptions-block.subscription-profile-management-billing-address")}
+    <span className={`${className}-subtitle`}>{phrases.t("subscriptions-block.subscription-profile-management-billing-address")}</span>
     <Paragraph>{addressString}</Paragraph>
   </div>
 };

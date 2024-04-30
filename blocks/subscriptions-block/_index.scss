@@ -300,6 +300,11 @@
 				@include scss.block-properties("subscriptions-subscription-list-detail-title-div");
 			}
 
+			&-title-sub-info {
+				@include scss.block-components("subscriptions-subscription-list-detail-title-sub-info");
+				@include scss.block-properties("subscriptions-subscription-list-detail-title-sub-info");
+			}
+
 			&-title {
 				@include scss.block-components("subscriptions-subscription-list-detail-title");
 				@include scss.block-properties("subscriptions-subscription-list-detail-title");
@@ -364,6 +369,10 @@
 			}
 
 			&-billing {
+				&-subtitle {
+					@include scss.block-components("subscriptions-subscription-list-detail-billing-subtitle");
+					@include scss.block-properties("subscriptions-subscription-list-detail-billing-subtitle");
+				}
 				@include scss.block-components("subscriptions-subscription-list-detail-billing");
 				@include scss.block-properties("subscriptions-subscription-list-detail-billing");
 			}

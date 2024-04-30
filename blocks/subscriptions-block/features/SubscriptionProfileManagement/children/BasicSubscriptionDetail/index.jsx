@@ -6,7 +6,7 @@ const CANCELED = "Canceled";
 const TERMINATED = "Terminated";
 
 const getStatus = (sub) => {
-  if(sub?.status === 1) return ACTIVE;
+  if(sub?.status === 1 || sub?.status === 4 || sub?.status === 6 || sub?.status === 7) return ACTIVE;
   if(sub?.status === 2) return TERMINATED;
   if(sub?.status === 3) return CANCELED;
   return ""
@@ -72,14 +72,16 @@ const BasicSubscriptionDetail = ({sub, customFields, setSelectedSub, className, 
   return (
     <Stack  className={`${className}-div`}>
       <div className={`${className}-title-div`}>
-        <span className={`${className}-title`}>{sub?.productName}</span>
+        <span className={`${className}-title-sub-info`}>
+          <span className={`${className}-title`}>{sub?.productName}</span>
+          <span className={`${className}-subID`}>{`#${sub?.subscriptionID}`}</span>
+          <em className={`${className}-startDate`}>{phrases.t("subscriptions-block.subscription-profile-management-basic-subscription-details-sub-start", {dateString})}</em>
+        </span>
         <span>
           <LinkButton status={status} customFields={customFields} sub={sub} setSelectedSub={setSelectedSub} className={className} setIsCancelModalOpen={setIsCancelModalOpen} setIsResubModalOpen={setIsResubModalOpen} setSelectedPrice={setSelectedPrice} price={price}/>
           <StatusBadge status={status} className={className}/>
         </span>
       </div>
-      <span className={`${className}-subID`}>{`#${sub?.subscriptionID}`}</span>
-      <em className={`${className}-startDate`}>{phrases.t("subscriptions-block.subscription-profile-management-basic-subscription-details-sub-start", {dateString})}</em>
       {status === CANCELED && showCancelInfo && cancelDateString &&
         <div className={`${className}-cancel-info`}>
           <Paragraph>{phrases.t("subscriptions-block.subscription-profile-management-basic-subscription-details-sub-cancel", {cancelDateString, nextEventDateString})}</Paragraph>

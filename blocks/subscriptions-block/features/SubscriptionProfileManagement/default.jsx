@@ -52,7 +52,7 @@ SubscriptionProfileManagement.propTypes = {
     }),
 		showCancelLink: PropTypes.bool.tag({
 			defaultValue: false,
-			label: "Show cacnel link",
+			label: "Show cancel link",
 		}),
 		showResubscribeLink: PropTypes.bool.tag({
 			defaultValue: false,

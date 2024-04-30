@@ -192,21 +192,6 @@
 		@include scss.block-properties("social-sign-on-dividerWithText");
 	}
 
-	&__dividerWithText{
-		&::before{
-			@include scss.block-components("social-sign-on-dividerWithText-before");
-			@include scss.block-properties("social-sign-on-dividerWithText-before");
-		}
-		
-		&::after{
-			@include scss.block-components("social-sign-on-dividerWithText-after");
-			@include scss.block-properties("social-sign-on-dividerWithText-after");
-		}
-		
-		@include scss.block-components("social-sign-on-dividerWithText");
-		@include scss.block-properties("social-sign-on-dividerWithText");
-	}
-
 	@include scss.block-components("social-sign-on");
 	@include scss.block-properties("social-sign-on");
 }

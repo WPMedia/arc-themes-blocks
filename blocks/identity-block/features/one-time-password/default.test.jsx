@@ -1,7 +1,7 @@
 import React from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import OneTimePassword from "./default";
 import { useIdentity } from "@wpmedia/arc-themes-components";
+import OneTimePassword from "./default";
 
 const mockSubmitForm = jest.fn(() => Promise.resolve());
 const mockIdentity = {

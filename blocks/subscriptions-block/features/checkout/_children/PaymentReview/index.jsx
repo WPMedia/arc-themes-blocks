@@ -181,7 +181,7 @@ const PaymentReview = ({
 
 	useEffect(() => {
 		if (stripeIntents && order?.orderNumber) {
-			if (!payment || payment?.orderNumber !== order?.orderNumber) {
+			if (!payment || payment?.orderNumber !== order?.orderNumber && !error) {
 				Sales.initializePayment(order?.orderNumber, stripeIntents?.paymentMethodID)
 					.then((paymentObject) => {
 						if (paymentObject?.orderNumber && order?.orderNumber !== payment?.orderNumber) {
@@ -196,7 +196,7 @@ const PaymentReview = ({
 					});
 			}
 		}
-	}, [order, payment, stripeIntents, Sales, setError, setOrder, setPayment]);
+	}, [order, payment, stripeIntents, Sales, setError, error, setOrder, setPayment]);
 
 	if (stripeInstance) {
 		return (

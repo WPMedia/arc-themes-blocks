@@ -74,12 +74,6 @@ const OneTimePasswordLogin = () => {
 					});
 				}}
 			>
-				{error && (
-					<div className={`${BLOCK_CLASS_NAME}__login-form-error`}>
-						<Paragraph>{error}</Paragraph>
-					</div>
-				)}
-
 				<p className={`${BLOCK_CLASS_NAME}__ota-sub-headline`}>{phrases.t("identity-block.ota-subheadline")}</p>
 				<Input
 					autoComplete="email"

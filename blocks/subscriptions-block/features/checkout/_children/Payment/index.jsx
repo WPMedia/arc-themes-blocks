@@ -81,9 +81,6 @@ const StripeIntentsOptions = ({
 
 	const checkApplePayGooglePayWallets = useCallback(() => {
         const billingCountry = order?.billingAddress?.country || billingAddress?.country;
-        console.log(
-            `Apple pay and google pay cannot be tested in localhost---- ${order?.currency && billingCountry}`,
-        );
 
         if (order?.currency && billingCountry) {
             const request = {
@@ -130,6 +127,7 @@ const StripeIntentsOptions = ({
 					headers,
 				});
 			} catch (e) {
+				// eslint-disable-next-line
 				console.warn("call to /entitlements, service not available");
 			}
 

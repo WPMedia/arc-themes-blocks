@@ -10,7 +10,7 @@ import {
 	BotChallengeProtection,
 } from "@wpmedia/arc-themes-components";
 
-import { STRIPEINTENTS, PAYPAL, RECAPTCHA_TOKEN } from "../../../../utils/constants";
+import { STRIPEINTENTS, PAYPAL } from "../../../../utils/constants";
 import CheckoutCardDetail, { PAYMENT, REVIEW } from "../../../../components/CheckoutCardDetail";
 import Payment from "../Payment";
 import ReviewOrder from "../Review";
@@ -40,7 +40,6 @@ const PaymentReviewDetail = ({
 	setIsComplete,
 	error,
 	setError,
-	captchaToken,
 	className,
 }) => {
 	const phrases = usePhrases();
@@ -52,9 +51,9 @@ const PaymentReviewDetail = ({
 	const [paymentMethod, setPaymentMethod] = useState();
 	const [paymentMethodAppleGooglePay, setPaymentMethodAppleGooglePay] = useState();
 
-	const reCaptchaStorage = localStorage.getItem(RECAPTCHA_TOKEN);
-	const [reCaptchaToken, setReCaptchaToken] = useState(captchaToken || reCaptchaStorage);
-	const [resetRecaptcha, setResetRecaptcha] = useState(false);
+	const [captchaToken, setCaptchaToken] = useState();
+	const [captchaError, setCaptchaError] = useState();
+	const [resetRecaptcha, setResetRecaptcha] = useState(true);
 
 	useEffect(() => {
 		if (stripeInstance) {
@@ -110,28 +109,33 @@ const PaymentReviewDetail = ({
 					customFields={customFields}
 					paymentOptions={paymentOptions}
 					order={order}
+					billingAddress={order?.billingAddress ? order?.billingAddress : billingAddress}
 					paymentOptionSelected={paymentOptionSelected}
 					stripeInstance={stripeInstance}
 					clientSecret={clientSecret}
 					paymentMethod={paymentMethod}
 					paymentMethodAppleGooglePay={paymentMethodAppleGooglePay}
 					setError={setError}
-					reCaptchaToken={reCaptchaToken}
+					captchaToken={captchaToken}
 					resetRecaptcha={resetRecaptcha}
 					setResetRecaptcha={setResetRecaptcha}
+					setCaptchaError={setCaptchaError}
 					className={className}
 				>
-					{error &&
-						(error?.code === "130001" || error?.code === "010122" || error?.code === "010125") && (
-							<div className={`${className}__billing-address-captcha`}>
-								<BotChallengeProtection
-									challengeIn="checkout"
-									setCaptchaToken={setReCaptchaToken}
-									error={error?.message}
-									resetRecaptcha={resetRecaptcha}
-								/>
-							</div>
-						)}
+					{(error?.code === "130001" ||
+						error?.code === "010122" ||
+						error?.code === "010125") && (
+						<div className={`${className}__billing-address-captcha`}>
+							<BotChallengeProtection
+								challengeIn="checkout"
+								setCaptchaToken={setCaptchaToken}
+								captchaError={captchaError}
+								error={error?.message}
+								setCaptchaError={setCaptchaError}
+								resetRecaptcha={resetRecaptcha}
+							/>
+						</div>
+					)}
 				</ReviewOrder>
 			</CheckoutCardDetail>
 		</>
@@ -150,7 +154,6 @@ const PaymentReview = ({
 	isComplete,
 	setIsComplete,
 	error,
-	captchaToken,
 	setError,
 }) => {
 	const { Sales } = useSales();
@@ -211,7 +214,6 @@ const PaymentReview = ({
 					setIsComplete={setIsComplete}
 					error={error}
 					setError={setError}
-					captchaToken={captchaToken}
 					className={className}
 				/>
 			</Elements>
@@ -230,7 +232,6 @@ const PaymentReview = ({
 			setIsComplete={setIsComplete}
 			error={error}
 			setError={setError}
-			captchaToken={captchaToken}
 			className={className}
 		/>
 	);

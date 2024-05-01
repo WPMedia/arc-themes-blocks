@@ -33,7 +33,7 @@ const getPaymentMethodByID = (paymentOptions, paymentMethodTypeID, paymentMethod
 
 // On subscriptions side we can setup multiple payment providers with the same typeID.
 // This hook is on charge to return the default one or the one with the min paymentMethodID
-export const usePaymentOptions = (stripeIntentsDefaultID, paypalDefaultID) => {
+const usePaymentOptions = (stripeIntentsDefaultID, paypalDefaultID) => {
 	const [paymentOpts, setPaymentOpts] = useState();
 	const [paypal, setPaypal] = useState();
 	const [stripeIntents, setStripeIntents] = useState();

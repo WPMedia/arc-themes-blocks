@@ -66,6 +66,7 @@ const BillingAddress = ({
 		if (valid) {
 			setBillingAddress(entriesRef.current);
 			try {
+				setCaptchaError(null);
 				const order = await Sales.createNewOrder(
 					{
 						...entriesRef.current,

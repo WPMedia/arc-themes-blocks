@@ -1,4 +1,5 @@
 export const ARCXP_CART = "ArcXP_cart";
+export const ARCXP_ORDERNUMBER = 'ArcXP_orderNumber';
 export const STRIPEINTENTS = "StripeIntents";
 export const PAYPAL = "PayPal";
 export const APPLEPAY = "ApplePay";

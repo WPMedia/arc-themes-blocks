@@ -1,22 +1,60 @@
 import React, { useEffect, useState } from "react";
 import { useElements, useStripe } from "@stripe/react-stripe-js";
 
-import { Paragraph, usePhrases, Stack, Button, useSales } from "@wpmedia/arc-themes-components";
+import {
+	Paragraph,
+	usePhrases,
+	Stack,
+	Button,
+	useIdentity,
+	useSales,
+} from "@wpmedia/arc-themes-components";
 
 import OrderInformation from "../../../../components/OrderInformation";
 import RenewalInformation from "../../../../components/RenewalInformation";
 import PaymentIcon, { PAYPAL as paypalIcon } from "../../../../components/PaymentIcons";
 
-import { STRIPEINTENTS, PAYPAL } from "../../../../utils/constants";
+import {
+	STRIPEINTENTS,
+	PAYPAL,
+	APPLEPAY,
+	GOOGLEPAY,
+	ARCXP_ORDERNUMBER,
+	RECAPTCHA_TOKEN,
+} from "../../../../utils/constants";
 
-const PaymentButton = ({
+const StripeIntentsButtons = ({
 	paymentOptionSelected,
+	paymentMethodAppleGooglePay,
 	handleSubmitStripeIntents,
-	handlePayPalPayment,
+	handleSubmitApplePayGooglePay,
 	isSubmitting,
-	className,
 }) => {
 	const phrases = usePhrases();
+
+	const elements = useElements();
+	const stripe = useStripe();
+
+	const mountApplePayGooglePayButton = () => {
+		if (paymentMethodAppleGooglePay) {
+			const prButton = elements.create("paymentRequestButton", {
+				paymentRequest: paymentMethodAppleGooglePay,
+			});
+
+			prButton.mount("#ApplePay-payment-request-button");
+
+			paymentMethodAppleGooglePay.on("paymentmethod", async (e) => {
+				handleSubmitApplePayGooglePay(e, stripe);
+			});
+		}
+	};
+
+	useEffect(() => {
+		if (paymentOptionSelected === APPLEPAY || paymentOptionSelected === GOOGLEPAY) {
+			mountApplePayGooglePayButton();
+		}
+		// eslint-disable-next-line
+	}, [paymentOptionSelected, APPLEPAY, GOOGLEPAY]);
 
 	if (paymentOptionSelected === STRIPEINTENTS) {
 		return (
@@ -26,12 +64,34 @@ const PaymentButton = ({
 				fullWidth
 				type="submit"
 				disabled={isSubmitting}
-				onClick={() => handleSubmitStripeIntents()}
+				onClick={() => handleSubmitStripeIntents(stripe)}
 			>
 				<span>{phrases.t("subscriptions-block.submit-payment")}</span>
 			</Button>
 		);
 	}
+
+	if (paymentOptionSelected === APPLEPAY || paymentOptionSelected === GOOGLEPAY) {
+		<div id="ApplePay-payment-request-button" />;
+	}
+
+	return null;
+};
+
+const PaymentButton = ({
+	resultConfirmAppleGooglePay,
+	order,
+	paymentOptionSelected,
+	paymentMethodAppleGooglePay,
+	handleSubmitStripeIntents,
+	handleSubmitPayPalPayment,
+	handleSubmitApplePayGooglePay,
+	stripeInstance,
+	isSubmitting,
+	setError,
+	className,
+}) => {
+	const phrases = usePhrases();
 
 	if (paymentOptionSelected === PAYPAL) {
 		return (
@@ -41,7 +101,7 @@ const PaymentButton = ({
 				fullWidth
 				className={`${className}__review-paypal-button`}
 				type="submit"
-				onClick={handlePayPalPayment}
+				onClick={handleSubmitPayPalPayment}
 			>
 				<>
 					<span>{phrases.t("subscriptions-block.submit-payment-paypal")} </span>
@@ -51,8 +111,19 @@ const PaymentButton = ({
 		);
 	}
 
-	if (paymentOptionSelected === "ApplePay" || paymentOptionSelected === "GooglePay") {
-		return <div id="ApplePay-payment-request-button"/>;
+	if (stripeInstance && paymentOptionSelected !== PAYPAL) {
+		return (
+			<StripeIntentsButtons
+				order={order}
+				paymentOptionSelected={paymentOptionSelected}
+				resultConfirmAppleGooglePay={resultConfirmAppleGooglePay}
+				paymentMethodAppleGooglePay={paymentMethodAppleGooglePay}
+				handleSubmitStripeIntents={handleSubmitStripeIntents}
+				handleSubmitApplePayGooglePay={handleSubmitApplePayGooglePay}
+				isSubmitting={isSubmitting}
+				setError={setError}
+			/>
+		);
 	}
 
 	return null;
@@ -61,6 +132,7 @@ const PaymentButton = ({
 const ReviewOrder = ({
 	customFields,
 	paymentOptions,
+	billingAddress,
 	order,
 	paymentOptionSelected,
 	stripeInstance,
@@ -68,32 +140,42 @@ const ReviewOrder = ({
 	paymentMethod,
 	paymentMethodAppleGooglePay,
 	setError,
-	reCaptchaToken,
+	captchaToken,
 	resetRecaptcha,
 	setResetRecaptcha,
+	setCaptchaError,
 	children,
 	className,
 }) => {
-	const phrases = usePhrases();
-	const { Sales } = useSales();
 
-	const elements = stripeInstance ? useElements() : undefined;
-	const stripe = stripeInstance ? useStripe() : undefined;
+	const phrases = usePhrases();
+
+	const { Sales } = useSales();
+	const { Identity } = useIdentity();
 
 	const { stripeIntents, paypal } = paymentOptions;
 
-	const { termsOfSaleURL, termsOfServiceURL, offerURL } = customFields;
+	const { termsOfSaleURL, termsOfServiceURL, offerURL, loginURL, successURL } = customFields;
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const [resultConfirmStripeIntents, setResultConfirmStripeIntents] = useState();
 	const [resultConfirmAppleGooglePay, setResultConfirmAppleGooglePay] = useState();
 
-	const handleSubmitStripeIntents = async () => {
+	const recaptchaStored = localStorage.getItem(RECAPTCHA_TOKEN);
+
+	const handleSubmitStripeIntents = async (stripe) => {
+		const isLoggedIn = await Identity.isLoggedIn();
+		const checkoutURL = window.location.pathname;
+		if (!isLoggedIn) {
+			window.location.href = `${loginURL}?redirect=${checkoutURL}`;
+		}
+
 		let result = resultConfirmStripeIntents;
 		const totalOrder = order?.total;
 		const orderNumber = order?.orderNumber;
 
 		setIsSubmitting(true);
+		setCaptchaError(null);
 
 		if (!resultConfirmStripeIntents) {
 			if (typeof totalOrder === "number" && orderNumber) {
@@ -117,23 +199,21 @@ const ReviewOrder = ({
 		if (result?.error) {
 			setError(result.error);
 			setIsSubmitting(false);
-		} 
+		}
 
-		if(result?.paymentIntent || result?.setupIntent){
+		if (result?.paymentIntent || result?.setupIntent) {
 			if (totalOrder > 0) {
 				Sales.finalizePayment(
 					orderNumber,
 					stripeIntents?.paymentMethodID,
 					result?.paymentIntent?.id,
 					null,
-					reCaptchaToken,
+					recaptchaStored || captchaToken,
 				)
 					.then(() => {
-						setError();
-						console.log("---------- PAGO EXITOSO ------------");
+						window.location.href = `${successURL}`;
 					})
 					.catch((e) => {
-						console.log("---------- PAGO FALLO ------------");
 						setResetRecaptcha(!resetRecaptcha);
 						setError(e);
 						setIsSubmitting(false);
@@ -144,14 +224,12 @@ const ReviewOrder = ({
 					stripeIntents?.paymentMethodID,
 					result.setupIntent.id,
 					null,
-					reCaptchaToken,
+					recaptchaStored || captchaToken,
 				)
 					.then(() => {
-						setError();
-						console.log("---------- PAGO EXITOSO ------------");
+						window.location.href = `${successURL}`;
 					})
 					.catch((e) => {
-						console.log("---------- PAGO FALLO ------------");
 						setResetRecaptcha(!resetRecaptcha);
 						setError(e);
 						setIsSubmitting(false);
@@ -161,11 +239,18 @@ const ReviewOrder = ({
 	};
 
 	const handleSubmitApplePayGooglePay = async (event, stripe) => {
+		const isLoggedIn = await Identity.isLoggedIn();
+		const checkoutURL = window.location.pathname;
+		if (!isLoggedIn) {
+			window.location.href = `${loginURL}?redirect=${checkoutURL}`;
+		}
+
 		let result = resultConfirmAppleGooglePay;
 		const totalOrder = order?.total;
 		const orderNumber = order?.orderNumber;
 
 		setIsSubmitting(true);
+		setCaptchaError(null);
 
 		if (!resultConfirmAppleGooglePay) {
 			if (typeof totalOrder === "number" && orderNumber) {
@@ -210,10 +295,10 @@ const ReviewOrder = ({
 					stripeIntents?.paymentMethodID,
 					result.paymentIntent.id,
 					null,
-					reCaptchaToken,
+					recaptchaStored || captchaToken,
 				)
 					.then(() => {
-						console.log("Redirecting to ......")
+						window.location.href = `${successURL}`;
 					})
 					.catch((e) => {
 						setResetRecaptcha(!resetRecaptcha);
@@ -226,10 +311,10 @@ const ReviewOrder = ({
 					stripeIntents?.paymentMethodID,
 					result.setupIntent.id,
 					null,
-					reCaptchaToken,
+					recaptchaStored || captchaToken,
 				)
 					.then(() => {
-						console.log("Redirecting to ......")
+						window.location.href = `${successURL}`;
 					})
 					.catch((e) => {
 						setResetRecaptcha(!resetRecaptcha);
@@ -240,30 +325,76 @@ const ReviewOrder = ({
 		}
 	};
 
-	const handleSubmitPayPalPayment = () => {
-		const paymentMethodID = paypal?.paymentMethodID;
-		console.log("finalizando pago PayPal");
-		console.log(paymentMethodID);
-	};
+	const handleSubmitPayPalPayment = async () => {
+		const isLoggedIn = await Identity.isLoggedIn();
+		const checkoutURL = window.location.pathname;
+		if (!isLoggedIn) {
+			window.location.href = `${loginURL}?redirect=${checkoutURL}`;
+		}
 
-	const mountApplePayGooglePayButton = () => {
-		if (paymentMethodAppleGooglePay) {
-			const prButton = elements.create("paymentRequestButton", {
-				paymentRequest: paymentMethodAppleGooglePay,
-			});
+		setIsSubmitting(true);
+		setCaptchaError(null);
 
-			prButton.mount("#ApplePay-payment-request-button");
+		// We cannot use the order, the payment was already initialized using stripeIntens
+		if (stripeInstance) {
+			const currentOrder = { ...order };
+			if (currentOrder?.items?.length) {
+				try {
+					await Sales.clearCart();
+					const items = currentOrder.items.map((item) => {
+						const { sku, priceCode, quantity } = item;
+						return { sku, priceCode, quantity };
+					});
+					await Sales.addItemToCart(items);
+					const country = billingAddress?.country || order?.billingAddress?.country;
+					const email = order?.email;
+					const newOrder = await Sales.createNewOrder(
+						{ country },
+						email,
+						null,
+						undefined,
+						undefined,
+						undefined,
+						{},
+						recaptchaStored || captchaToken,
+					);
+					const paypalPayment = await Sales.initializePayment(
+						newOrder?.orderNumber,
+						paypal?.paymentMethodID,
+					);
+					const orderNumberPaypal = paypalPayment?.orderNumber || newOrder?.orderNumber;
+					// When paypal token is returned, We need to know the orderNumber in order to call Sales.finalizePayment();
+					localStorage.setItem(ARCXP_ORDERNUMBER, orderNumberPaypal);
+					window.location.href = paypalPayment?.parameter1;
+				} catch (e) {
+					setIsSubmitting(false);
+					setResetRecaptcha(!resetRecaptcha);
+					setError(e);
+				}
+			} else {
+				window.location.href = offerURL;
+				return;
+			}
+		}
 
-			paymentMethodAppleGooglePay.on("paymentmethod", async (e) => {
-				handleSubmitApplePayGooglePay(e, stripe);
-			});
+		// We can use the order, a payment was not initialized using stripeIntents
+		if (!stripeInstance) {
+			try{
+				const paypalPayment = await Sales.initializePayment(
+					order?.orderNumber,
+					paypal?.paymentMethodID,
+				);
+				const orderNumberPaypal = paypalPayment?.orderNumber || order?.orderNumber;
+				// When paypal token is returned, We need to know the orderNumber in order to call Sales.finalizePayment();
+				localStorage.setItem(ARCXP_ORDERNUMBER, orderNumberPaypal);
+				window.location.href = paypalPayment?.parameter1;
+			}catch(e){
+				setIsSubmitting(false)
+				setResetRecaptcha(!resetRecaptcha);
+				setError(e);
+			}
 		}
 	};
-
-	useEffect(() => {
-		mountApplePayGooglePayButton();
-		// eslint-disable-next-line
-	}, []);
 
 	return (
 		<Stack className={`${className}__review`}>
@@ -289,10 +420,16 @@ const ReviewOrder = ({
 				/>
 			</div>
 			<PaymentButton
+				resultConfirmAppleGooglePay={resultConfirmAppleGooglePay}
+				stripeInstance={stripeInstance}
+				order={order}
 				paymentOptionSelected={paymentOptionSelected}
+				paymentMethodAppleGooglePay={paymentMethodAppleGooglePay}
 				handleSubmitStripeIntents={handleSubmitStripeIntents}
 				handleSubmitPayPalPayment={handleSubmitPayPalPayment}
+				handleSubmitApplePayGooglePay={handleSubmitApplePayGooglePay}
 				isSubmitting={isSubmitting}
+				setError={setError}
 				className={className}
 			/>
 		</Stack>

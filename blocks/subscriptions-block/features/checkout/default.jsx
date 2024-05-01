@@ -21,12 +21,13 @@ import OrderInformation from "../../components/OrderInformation";
 
 import useCartOrderDetail from "../../components/useCartOrderDetail";
 import usePaymentOptions from "../../components/usePaymentOptions";
+import usePayPalPaymentRedirect from "../../components/usePayPalPaymentRedirect";
 
 export const LABEL_ORDER_NUMBER_PAYPAL = "ArcSubs_OrderNumber";
 const BLOCK_CLASS_NAME = "b-checkout";
 
 const Checkout = ({ customFields }) => {
-	const { loginURL, offerURL, stripeIntentsID } = customFields;
+	const { loginURL, offerURL, stripeIntentsID, successURL } = customFields;
 
 	const initialState = {
 		account: true,
@@ -35,16 +36,9 @@ const Checkout = ({ customFields }) => {
 		review: false,
 	};
 
-	const { Identity } = useIdentity();
 	const { Sales } = useSales();
+	const { Identity } = useIdentity();
 	const phrases = usePhrases();
-
-	const params = new URLSearchParams(window.location.search);
-	const paypalToken = params.get("token");
-	const [isPaypalInitialized, setIsPaypalInitialized] = useState(false);
-
-	const { isFetching, isFetchingCartOrder, isLoggedIn, cartDetail, orderDetail } =
-		useCartOrderDetail();
 
 	const {
 		stripeIntents,
@@ -53,15 +47,25 @@ const Checkout = ({ customFields }) => {
 		isFetching: isFetchingPaymentOptions,
 	} = usePaymentOptions(stripeIntentsID);
 
+	const params = new URLSearchParams(window.location.search);
+	const paypalToken = params.get("token");
+
+	const { error: errorPaypal } = usePayPalPaymentRedirect(paypal, paypalToken, successURL);
+
+	const { isFetching, isFetchingCartOrder, isLoggedIn, cartDetail, orderDetail } =
+		useCartOrderDetail(paypalToken);
+
 	const [user, setUser] = useState(false);
 	const [isOpen, setIsOpen] = useState(initialState);
 	const [isComplete, setIsComplete] = useState(initialState);
 
 	const [billingAddress, setBillingAddress] = useState({});
+	const [cart, setCart] = useState();
 
 	const [captchaToken, setCaptchaToken] = useState();
 	const [captchaError, setCaptchaError] = useState();
 	const [resetRecaptcha, setResetRecaptcha] = useState(true);
+
 	const [error, setError] = useState();
 
 	const [order, setOrder] = useState();
@@ -107,6 +111,7 @@ const Checkout = ({ customFields }) => {
 			}
 
 			if (cartDetail?.items?.length) {
+				setCart(cartDetail);
 				setIsOpen((state) => ({ ...state, billingAddress: true }));
 			}
 
@@ -118,6 +123,12 @@ const Checkout = ({ customFields }) => {
 			}
 		}
 	}, [isLoggedIn, isFetchingCartOrder, cartDetail, orderDetail, offerURL, checkoutURL]);
+
+	useEffect(() => {
+		if (errorPaypal) {
+			setError(errorPaypal);
+		}
+	}, [errorPaypal]);
 
 	const logoutAndRedirect = () => {
 		Identity.logout().then(() => {
@@ -136,7 +147,18 @@ const Checkout = ({ customFields }) => {
 		if (type === BILLING_ADDRESS) {
 			return (
 				<Button
-					onClick={() => setIsOpen((state) => ({ ...state, billingAddress: true, payment: false }))}
+					onClick={() => {
+						Sales.clearCart().then(() => {
+							const items = orderDetail.items.map((item) => {
+								const { sku, priceCode, quantity } = item;
+								return { sku, priceCode, quantity };
+							});
+							Sales.addItemToCart(items).then(()=>{
+								setIsOpen((state) => ({ ...state, billingAddress: true, payment: false }));
+								setIsComplete((state) => ({ ...state, billingAddress: false, payment: false }));
+							});
+						})
+					}}
 					className={`${BLOCK_CLASS_NAME}__card-edit`}
 				>
 					{phrases.t("checkout-block.edit")}
@@ -199,8 +221,8 @@ const Checkout = ({ customFields }) => {
 											challengeIn="checkout"
 											setCaptchaToken={setCaptchaToken}
 											captchaError={captchaError}
-											error={error}
 											setCaptchaError={setCaptchaError}
+											error={error}
 											resetRecaptcha={resetRecaptcha}
 										/>
 									</div>
@@ -220,7 +242,12 @@ const Checkout = ({ customFields }) => {
 							setIsComplete={setIsComplete}
 							error={error}
 							setError={setError}
-							captchaToken={captchaToken}
+							// captchaToken={captchaToken}
+							// setCaptchaToken={setCaptchaToken}
+							// captchaError={captchaError}
+							// setCaptchaError={setCaptchaError}
+							// resetRecaptcha={resetRecaptcha}
+							// setResetRecaptcha={setResetRecaptcha}
 						/>
 					</section>
 				</div>
@@ -232,7 +259,7 @@ const Checkout = ({ customFields }) => {
 							showOfferURL
 							showPriceDescription={false}
 							showProductFeatures
-							orderDetails={order?.items ? order : cartDetail}
+							orderDetails={order?.items ? order : cart}
 							className={BLOCK_CLASS_NAME}
 						/>
 					</div>
@@ -247,8 +274,8 @@ const Checkout = ({ customFields }) => {
 Checkout.propTypes = {
 	customFields: PropTypes.shape({
 		loginURL: PropTypes.string.tag({
-			description:
-				"In case you have multiple payment providers for stripe Intents, It determines what is the provider ID to be used by default.",
+			defaultValue: "/account/login/",
+			description: "Login URL",
 		}),
 		offerURL: PropTypes.string.tag({
 			defaultValue: "/offer/",

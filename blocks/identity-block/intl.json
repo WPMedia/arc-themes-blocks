@@ -1714,6 +1714,9 @@
 	"identity-block.ota-form-button": {
 		"en": "Send log in link"
 	},
+	"identity-block.ota-input-placeholder": {
+		"en": "Enter email address"
+	},
 	"identity-block.ota-success-heading": {
 		"en": "Check Your Email"
 	},

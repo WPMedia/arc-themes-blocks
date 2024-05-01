@@ -57,10 +57,10 @@ const OneTimePasswordLogin = () => {
 				onSubmit={({ email }) => {
 					setError(null);
 					setCaptchaError(null);
-					return Identity.requestOTALink({
+					return Identity.requestOTALink(
 						email,
-						recaptchaToken: captchaToken,
-					}).then(() => {
+						captchaToken,
+					).then(() => {
 						setUserEmail(email);
 						setSuccess(true);
 					})
@@ -85,6 +85,7 @@ const OneTimePasswordLogin = () => {
 					autoComplete="email"
 					label={phrases.t("identity-block.email-label")}
 					name="email"
+					placeholder={phrases.t("identity-block.ota-input-placeholder")}
 					required
 					showDefaultError={false}
 					type="email"

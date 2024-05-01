@@ -12,22 +12,20 @@ const MONTH = "Month";
 const YEAR = "Year";
 const UNTIL_CANCELLED = "UntilCancelled";
 
-const ratesOneTime = (billingCount, billingFrequency) => {
-	const phrases = usePhrases();
-
+const ratesOneTime = (billingFrequency) => {
 	let message;
 	switch (billingFrequency) {
 		case DAY:
-			message = phrases.t("checkout-block.rates-oneTime-day", { billingCount });
+			message = "checkout-block.rates-oneTime-day";
 			break;
 		case WEEK:
-			message = phrases.t("checkout-block.rates-oneTime-week", { billingCount });
+			message = "checkout-block.rates-oneTime-week";
 			break;
 		case MONTH:
-			message = phrases.t("checkout-block.rates-oneTime-month", { billingCount });
+			message = "checkout-block.rates-oneTime-month";
 			break;
 		case YEAR:
-			message = phrases.t("checkout-block.rates-oneTime-year", { billingCount });
+			message = "checkout-block.rates-oneTime-year";
 			break;
 		default:
 			message = "";
@@ -37,21 +35,19 @@ const ratesOneTime = (billingCount, billingFrequency) => {
 };
 
 const ratesSingleUntilCancelled = (billingFrequency) => {
-    const phrases = usePhrases();
-
 	let message;
 	switch (billingFrequency) {
 		case DAY:
-			message = phrases.t("checkout-block.rates-single-untilCancelled-day");
+			message = "checkout-block.rates-single-untilCancelled-day";
 			break;
 		case WEEK:
-			message = phrases.t("checkout-block.rates-single-untilCancelled-week");
+			message = "checkout-block.rates-single-untilCancelled-week";
 			break;
 		case MONTH:
-			message = phrases.t("checkout-block.rates-single-untilCancelled-month");
+			message = "checkout-block.rates-single-untilCancelled-month";
 			break;
 		case YEAR:
-			message = phrases.t("checkout-block.rates-single-untilCancelled-year");
+			message = "checkout-block.rates-single-untilCancelled-year";
 			break;
 		default:
 			message = "";
@@ -60,22 +56,20 @@ const ratesSingleUntilCancelled = (billingFrequency) => {
 	return message;
 };
 
-const ratesUntilCancelled = (billingCount, billingFrequency) => {
-    const phrases = usePhrases();
-
+const ratesUntilCancelled = (billingFrequency) => {
 	let message;
 	switch (billingFrequency) {
 		case DAY:
-			message = phrases.t("checkout-block.rates-untilCancelled-day", { billingCount });
+			message = "checkout-block.rates-untilCancelled-day";
 			break;
 		case WEEK:
-			message = phrases.t("checkout-block.rates-untilCancelled-week", { billingCount });
+			message = "checkout-block.rates-untilCancelled-week";
 			break;
 		case MONTH:
-			message = phrases.t("checkout-block.rates-untilCancelled-month", { billingCount });
+			message = "checkout-block.rates-untilCancelled-month";
 			break;
 		case YEAR:
-			message = phrases.t("checkout-block.rates-untilCancelled-year", { billingCount });
+			message = "checkout-block.rates-untilCancelled-year";
 			break;
 		default:
 			message = "";
@@ -84,42 +78,32 @@ const ratesUntilCancelled = (billingCount, billingFrequency) => {
 	return message;
 };
 
-const ratesDefaultMessage = (billingCount, billingFrequency, durationCount, duration) => {
-    const phrases = usePhrases();
+const ratesDefaultMessage = (billingFrequency, duration) => {
 
 	const cases = {
 		[DAY]: {
-			[DAY]: phrases.t("checkout-block.rates-default-day-day", { billingCount, durationCount }),
-			[WEEK]: phrases.t("checkout-block.rates-default-day-week", { billingCount, durationCount }),
-			[MONTH]: phrases.t("checkout-block.rates-default-day-month", { billingCount, durationCount }),
-			[YEAR]: phrases.t("checkout-block.rates-default-day-year", { billingCount, durationCount }),
+			[DAY]: "checkout-block.rates-default-day-day",
+			[WEEK]: "checkout-block.rates-default-day-week",
+			[MONTH]: "checkout-block.rates-default-day-month",
+			[YEAR]: "checkout-block.rates-default-day-year",
 		},
 		[WEEK]: {
-			[DAY]: phrases.t("checkout-block.rates-default-week-day", { billingCount, durationCount }),
-			[WEEK]: phrases.t("checkout-block.rates-default-week-week", { billingCount, durationCount }),
-			[MONTH]: phrases.t("checkout-block.rates-default-week-month", {
-				billingCount,
-				durationCount,
-			}),
-			[YEAR]: phrases.t("checkout-block.rates-default-week-year", { billingCount, durationCount }),
+			[DAY]: "checkout-block.rates-default-week-day",
+			[WEEK]: "checkout-block.rates-default-week-week",
+			[MONTH]: "checkout-block.rates-default-week-month",
+			[YEAR]: "checkout-block.rates-default-week-year",
 		},
 		[MONTH]: {
-			[DAY]: phrases.t("checkout-block.rates-default-month-day", { billingCount, durationCount }),
-			[WEEK]: phrases.t("checkout-block.rates-default-month-week", { billingCount, durationCount }),
-			[MONTH]: phrases.t("checkout-block.rates-default-month-month", {
-				billingCount,
-				durationCount,
-			}),
-			[YEAR]: phrases.t("checkout-block.rates-default-month-year", { billingCount, durationCount }),
+			[DAY]: "checkout-block.rates-default-month-day",
+			[WEEK]: "checkout-block.rates-default-month-week",
+			[MONTH]: "checkout-block.rates-default-month-month",
+			[YEAR]: "checkout-block.rates-default-month-year",
 		},
 		[YEAR]: {
-			[DAY]: phrases.t("checkout-block.rates-default-year-day", { billingCount, durationCount }),
-			[WEEK]: phrases.t("checkout-block.rates-default-year-week", { billingCount, durationCount }),
-			[MONTH]: phrases.t("checkout-block.rates-default-year-month", {
-				billingCount,
-				durationCount,
-			}),
-			[YEAR]: phrases.t("checkout-block.rates-default-year-year", { billingCount, durationCount }),
+			[DAY]: "checkout-block.rates-default-year-day",
+			[WEEK]: "checkout-block.rates-default-year-week",
+			[MONTH]: "checkout-block.rates-default-year-month",
+			[YEAR]: "checkout-block.rates-default-year-year",
 		},
 	};
 
@@ -129,95 +113,104 @@ const ratesDefaultMessage = (billingCount, billingFrequency, durationCount, dura
 		}
 	}
 
-	return "";
+	return undefined;
 };
 
 const getAmount = (amount, priceCurrency) => `${currency(priceCurrency)}${amount}`;
 
-const getPriceRate = (rate, currency) => {
-	const amount = getAmount(rate?.amount, currency);
+export const PriceRate = (rate, rateCurrency) => {
+	const phrases = usePhrases();
 
-	if (rate?.billingCount === rate?.durationCount && rate?.billingFrequency === rate?.duration) {
-		return `${amount} ${ratesOneTime(rate?.billingCount, rate?.billingFrequency)}`;
-	} if (rate?.duration === UNTIL_CANCELLED) {
-		if (rate?.billingCount <= 1) {
-			return `${amount} ${ratesSingleUntilCancelled(rate?.billingFrequency)}`;
+	const {billingCount, durationCount, billingFrequency, duration} = rate;
+
+	const amount = getAmount(rate?.amount, rateCurrency);
+
+	let rateString = "";
+	let fullRateString = "";
+
+	if(duration === UNTIL_CANCELLED){
+		if (billingCount <= 1) {
+			rateString = ratesSingleUntilCancelled(billingFrequency);
+			fullRateString = `${amount} ${rateString ? phrases.t(rateString) : ''}`;
+		} else {
+			rateString = ratesUntilCancelled(billingFrequency);
+			fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount }) : ''}`;
+		}
+	}
+
+	if (billingCount === durationCount && billingFrequency === duration) {
+		rateString = ratesOneTime(billingFrequency);
+		fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount }) : ''}`;
+	} else {
+		rateString = ratesDefaultMessage(
+			billingFrequency,
+			duration,
+		);
+		fullRateString = `${amount} ${rateString ? phrases.t(rateString, {billingCount, durationCount}): ''}`;
+	}
+	return fullRateString;
+};
+
+export const NextRate = ({nextRate}) => {
+
+	const phrases = usePhrases();
+	const {billingCount, durationCount, billingFrequency, duration} = nextRate;
+
+	let rateString = "";
+	let rate = "";
+
+	const getFinalString = (r) => phrases.t("subscriptions-block.subscription-profile-management-payment-method-details-billing-frequency", {rate: r})
+
+	if(duration === UNTIL_CANCELLED){
+		if (billingCount <= 1) {
+			rateString = ratesSingleUntilCancelled(billingFrequency) ?? '';
+			rate = `${rateString ? phrases.t(rateString) : ''}`;
+			return getFinalString(rate);
 		} 
-			return `${amount} ${ratesUntilCancelled(rate?.billingCount, rate?.billingFrequency)}`;
-		
-	} 
-		return `${amount} ${ratesDefaultMessage(
-			rate?.billingCount,
-			rate?.billingFrequency,
-			rate?.durationCount,
-			rate?.duration,
-		)}`;
-	
+		rateString = ratesUntilCancelled(billingFrequency);
+		rate = `${rateString ? phrases.t(rateString, { billingCount }) : ''}`;
+		return getFinalString(rate);
+	}
+
+	if (billingCount === durationCount && billingFrequency === duration) {
+		rateString = ratesOneTime(billingFrequency);
+		rate = `${rateString ? phrases.t(rateString, { billingCount }) : ''}`;
+		return getFinalString(rate);
+	}
+
+	rateString = ratesDefaultMessage(
+		billingFrequency,
+		duration,
+	);
+	rate = `${rateString ? phrases.t(rateString, {billingCount, durationCount}): ''}`;
+	return getFinalString(rate);
+
 };
 
 export const getCurrentBillingFrequency = (rate) => {
 	if (rate?.billingCount === rate?.durationCount && rate?.billingFrequency === rate?.duration) {
-		return `${ratesOneTime(rate?.billingCount, rate?.billingFrequency)}`;
+		return `${ratesOneTime(rate?.billingFrequency)}`;
 	} if (rate?.duration === UNTIL_CANCELLED) {
 		if (rate?.billingCount <= 1) {
 			return `${ratesSingleUntilCancelled(rate?.billingFrequency)}`;
 		} 
-			return `${ratesUntilCancelled(rate?.billingCount, rate?.billingFrequency)}`;
+			return `${ratesUntilCancelled(rate?.billingFrequency)}`;
 		
 	} 
 		return `${ratesDefaultMessage(
-			rate?.billingCount,
 			rate?.billingFrequency,
-			rate?.durationCount,
 			rate?.duration,
 		)}`;
-	
 };
 
-const PriceRates = ({ priceRates, currency }) => {
-	const priceRatestest = [
-		{
-			amount: "10000.00",
-			billingCount: 1,
-			billingFrequency: "Day",
-			duration: "Day",
-			durationCount: 1,
-		},
-		{
-			amount: "10000.00",
-			billingCount: 1,
-			billingFrequency: "Month",
-			duration: "Month",
-			durationCount: 1,
-		},
-		{
-			amount: "20000.00",
-			billingCount: 1,
-			billingFrequency: "Month",
-			duration: "UntilCancelled",
-			durationCount: 1,
-		},
-		{
-			amount: "30000.00",
-			billingCount: 5,
-			billingFrequency: "Month",
-			duration: "Day",
-			durationCount: 3,
-		},
-		{
-			amount: "40000.00",
-			billingCount: 1,
-			billingFrequency: "Month",
-			duration: "Year",
-			durationCount: 1,
-		},
-	];
+const PriceRates = ({ priceRates, orderCurrency }) => {
 
 	if (priceRates && priceRates.length && currency) {
-		let priceRateStrings = priceRatestest.map((rate) => getPriceRate(rate, currency));
+		let priceRateStrings = priceRates.map((rate) => PriceRate(rate, orderCurrency));
 		priceRateStrings = priceRateStrings.join(", ");
 		return <span>{priceRateStrings}</span>;
 	}
+
 	return null;
 };
 

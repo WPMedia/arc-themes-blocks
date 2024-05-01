@@ -15,29 +15,36 @@ export const durationInMillis = duration => {
 
 export const transformRateToDuration = ({ duration, durationCount = 0 }) => durationCount * durationInMillis(duration);
 
+const getBillingCount = (rate) => {
+  if(rate?.billingFrequency === 'OneTime' && rate?.duration === 'UntilCancelled') return rate?.billingFrequency;
+  if(rate?.billingFrequency === 'OneTime' && rate?.duration !== 'UntilCancelled') return rate?.durationCount;
+  return rate?.billingCount;
+}
+
+const getBillingFrequency = (rate) => {
+  if (rate?.billingFrequency === 'OneTime' && rate?.duration === 'UntilCancelled') return rate?.duration;
+  if (rate?.billingFrequency === 'OneTime' && rate?.duration !== 'UntilCancelled') return rate?.duration;
+  return rate?.billingFrequency;
+}
+
+const calculateDurationCycle = (rate) => {
+  if (rate?.billingFrequency === 'OneTime' && rate?.duration) return durationInMillis(rate.duration);
+  if (rate?.billingFrequency !== 'Hour' && rate?.billingFrequency && rate?.billingCount) return durationInMillis(rate.billingFrequency) * rate.billingCount;
+  if (rate?.billingCount) return durationInMillis('Day') * rate.billingCount;
+  return 0;
+}
+
 // On Staging we have some rates where the billingFrequency & duration is set to hours.
 // For safety reasons the renewal engines will only touch an individual subscription once per day.
 // BE is no handling for Hours for NextRenewalDate calculation. It execute default case and it adds Days.
 export const getCyclesCurrentRate = rate => {
   let startNextCycle = 0;
   const durationRate = transformRateToDuration(rate);
-  const durationCycle =
-    rate?.billingFrequency === 'OneTime'
-      ? durationInMillis(rate?.duration)
-      : durationInMillis(rate?.billingFrequency !== 'Hour' ? rate?.billingFrequency : 'Day') *
-        rate?.billingCount;
-  const billingCount =
-    rate?.billingFrequency === 'OneTime' && rate?.duration === 'UntilCancelled'
-      ? rate?.billingFrequency
-      : rate?.billingFrequency === 'OneTime' && rate?.duration !== 'UntilCancelled'
-      ? rate?.durationCount
-      : rate?.billingCount;
-  const billingFrequency =
-    rate?.billingFrequency === 'OneTime' && rate?.duration === 'UntilCancelled'
-      ? rate?.duration
-      : rate?.billingFrequency === 'OneTime' && rate?.duration !== 'UntilCancelled'
-      ? rate?.duration
-      : rate?.billingFrequency;
+  const durationCycle = calculateDurationCycle(rate);
+
+  const billingCount = getBillingCount(rate);
+    
+  const billingFrequency = getBillingFrequency(rate);
 
   const cyclesOnRate = [];
 
@@ -82,11 +89,11 @@ export const getCyclesCurrentRate = rate => {
 
 export const getNextRate = (currentCycle, price) => {
   let allCyclesInPrice = [];
-
-  for (const rate in price.rates) {
-    const cyclesCurrentRate = getCyclesCurrentRate(price.rates[rate]);
+  // eslint-disable-next-line
+  for (const rate of price.rates) {
+    const cyclesCurrentRate = getCyclesCurrentRate(rate);
     allCyclesInPrice = [...allCyclesInPrice, ...cyclesCurrentRate];
-    if (price.rates[rate].duration === 'UntilCancelled') {
+    if (rate.duration === 'UntilCancelled') {
       break;
     }
   }

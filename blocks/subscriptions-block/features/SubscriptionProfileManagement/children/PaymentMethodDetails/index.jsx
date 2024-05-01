@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { usePhrases, Paragraph } from "@wpmedia/arc-themes-components";
 import usePrice from "../../../../components/usePrice";
 import {getNextRate} from "../../../../components/utils";
-import {getCurrentBillingFrequency} from "../../../../components/PriceRates";
+import {NextRate} from "../../../../components/PriceRates";
 import PaymentIcon from "../../../../components/PaymentIcons";
 
 const PaymentString = ({sub}) => {
@@ -40,8 +40,6 @@ const PaymentMethodDetails = ({sub, className, setPrice}) => {
     }
   }, [price, sub]);
 
-  const currentBillingFrequency = getCurrentBillingFrequency(nextRate);
-
   return (
     <div className={`${className}-container`}>
       <div className={`${className}-title`}>
@@ -57,7 +55,7 @@ const PaymentMethodDetails = ({sub, className, setPrice}) => {
       <em className={`${className}-billing-frequency`}>
         {nextRate && 
           <span>
-            {phrases.t("subscriptions-block.subscription-profile-management-payment-method-details-billing-frequency", {rate: currentBillingFrequency})}
+            <NextRate nextRate={nextRate} />
           </span>
         }
       </em>

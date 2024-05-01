@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Input, useIdentity, BotChallengeProtection, Paragraph, Heading, HeadingSection } from "@wpmedia/arc-themes-components";
+import { Input, useIdentity, BotChallengeProtection, Heading, HeadingSection } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
 
 const BLOCK_CLASS_NAME = "b-one-time-login-form";

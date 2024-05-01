@@ -1,5 +1,4 @@
 # `@wpmedia/gallery-block`
-
 _Block containing a gallery that reads in a gallery from a content source or globalContent._
 
 ## Acceptance Criteria

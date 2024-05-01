@@ -1,5 +1,4 @@
 # `@wpmedia/shared-styles`
-
 This block is reused by others for the time being.
 
 ## Acceptance Criteria

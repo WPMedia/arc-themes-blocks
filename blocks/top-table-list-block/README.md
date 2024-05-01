@@ -1,5 +1,4 @@
 # `@wpmedia/top-table-list-block`
-
 _Fusion News Theme top table list block. Please provide a 1-2 sentence description of what the block is and what it does._
 
 // TODO: add badge for passing/failing tests

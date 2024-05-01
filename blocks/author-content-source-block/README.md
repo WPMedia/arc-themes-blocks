@@ -1,5 +1,4 @@
 # `@wpmedia/author-content-source-block`
-
 Fusion News Theme author API content source block
 _Please provide a 1-2 sentence description of what the block is and what it does._
 

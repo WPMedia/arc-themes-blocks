@@ -1,5 +1,4 @@
 # `@wpmedia/htmlbox-block`
-
 _HTML Box for block for Fusion News Theme. Please provide a 1-2 sentence description of what the block is and what it does._
 
 // TODO: add badge for passing/failing tests

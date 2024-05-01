@@ -1,5 +1,4 @@
 # `@wpmedia/related-content-content-source-block`
-
 _Content source block to get stories related content, using the story Id as key._
 
 ## Configurable Params

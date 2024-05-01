@@ -72,7 +72,7 @@ const StripeIntentsButtons = ({
 	}
 
 	if (paymentOptionSelected === APPLEPAY || paymentOptionSelected === GOOGLEPAY) {
-		<div id="ApplePay-payment-request-button" />;
+		return <div id="ApplePay-payment-request-button" />;
 	}
 
 	return null;

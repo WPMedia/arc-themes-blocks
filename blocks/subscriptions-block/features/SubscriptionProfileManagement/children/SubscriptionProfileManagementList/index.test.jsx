@@ -176,11 +176,12 @@ describe("SubscriptionProfileManagementList component", () => {
     expect(screen.getByText("subscriptions-block.subscription-profile-management-cancel-modal-paragraph2")).toBeInTheDocument();
     expect(screen.getByText("subscription-block.shared-No")).toBeInTheDocument();
     expect(screen.getByText("subscriptions-block.subscription-profile-management-cancel-modal-primary-button-text")).toBeInTheDocument();
+
     fireEvent(screen.getByText("subscription-block.shared-No"), new MouseEvent('click', {
       bubbles: true,
       cancelable: true,
     }))
-    await screen.debug();
+
     expect(screen.queryByText("subscriptions-block.subscription-profile-management-cancel-modal-paragraph1")).toBeNull();
     expect(screen.queryByText("subscriptions-block.subscription-profile-management-cancel-modal-paragraph2")).toBeNull();
     expect(screen.queryByText("subscription-block.shared-No")).toBeNull();

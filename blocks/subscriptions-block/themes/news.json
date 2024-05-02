@@ -254,6 +254,9 @@
 					"input-radio-checked": {
 						"border-color": "red",
 						"background-color": "red"
+					},
+					"icon":{
+						"inline-size": "none"
 					}
 				}
 			}
@@ -388,7 +391,12 @@
 		"styles": {
 			"default": {
 				"background-color": "#FFC43A",
-				"color": "var(--text-color)"
+				"color": "var(--text-color)",
+				"components": {
+					"icon": {
+						"inline-size": "none"
+					}
+				}
 			}
 		}
 	},

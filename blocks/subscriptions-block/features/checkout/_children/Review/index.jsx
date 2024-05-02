@@ -12,7 +12,7 @@ import {
 
 import OrderInformation from "../../../../components/OrderInformation";
 import RenewalInformation from "../../../../components/RenewalInformation";
-import PaymentIcon, { PAYPAL as paypalIcon } from "../../../../components/PaymentIcons";
+import PaymentIcon from "../../../../components/PaymentIcons";
 
 import {
 	STRIPEINTENTS,
@@ -105,7 +105,7 @@ const PaymentButton = ({
 			>
 				<>
 					<span>{phrases.t("subscriptions-block.submit-payment-paypal")} </span>
-					<PaymentIcon type={paypalIcon} />
+					<PaymentIcon type={"PayPal"} />
 				</>
 			</Button>
 		);

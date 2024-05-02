@@ -1,55 +1,41 @@
 import React from "react";
 
-export const PAYPAL = "PayPal";
-export const APPLEPAY = "ApplePay";
-export const GOOGLEPAY = "GooglePay";
-export const VISA = "visa";
-export const MASTERCARD = "mastercard";
-export const AMERICANEXPRESS = "amex";
-export const DISCOVER = "discover";
-export const DINERS = "diners";
-export const JCB = "jcb";
-export const UNIONPAY = "unionpay";
+import { Icon } from "@wpmedia/arc-themes-components";
 
-// brands supported by StripeIntents https://docs.stripe.com/testing
+export const AMERICANEXPRESS = "amex";
+export const APPLEPAY = "ApplePay";
+export const DINERS = "diners";
+export const DISCOVER = "discover";
+export const GOOGLEPAY = "GooglePay";
+export const JCB = "jcb";
+export const MASTERCARD = "mastercard";
+export const PAYPAL = "PayPal";
+export const UNIONPAY = "unionpay";
+export const VISA = "visa";
 
 const PaymentIcon = ({ type }) => {
+
 	switch (type) {
-		case PAYPAL:
-			return <img src={require("./Icons/paypal-icon.svg")} alt="Buy now with PayPal" height={20} />;
+		case AMERICANEXPRESS:
+			return <Icon name={"Amex"} width={24} height={16} viewBox="0 0 24 16" />;
 		case APPLEPAY:
-			return (
-				<img src={require("./Icons/applePay-icon.svg")} alt="Buy now with Apple Pay" height={19} />
-			);
+			return <Icon name={APPLEPAY} width={48} height={20} viewBox="0 0 48 20" />;
+		case DINERS:
+			return <Icon name={"Diners"} width={24} height={16} viewBox="0 0 24 16" />;
+		case DISCOVER:
+			return <Icon name={"Discover"} width={24} height={16} viewBox="0 0 24 16" />;
 		case GOOGLEPAY:
-			return (
-				<img
-					src={require("./Icons/googlePay-icon.svg")}
-					alt="Buy now with Google Pay"
-					height={19}
-				/>
-			);
-		case VISA: {
-			return <img src={require("./Icons/visa-icon.svg")} alt={VISA} height={16} />;
-		}
-		case MASTERCARD: {
-			return <img src={require("./Icons/mastercard-icon.svg")} alt={MASTERCARD} height={16} />;
-		}
-		case AMERICANEXPRESS: {
-			return <img src={require("./Icons/amex-icon.svg")} alt={AMERICANEXPRESS} height={16} />;
-		}
-		case DISCOVER: {
-			return <img src={require("./Icons/discover-icon.svg")} alt={DISCOVER} height={16} />;
-		}
-		case DINERS: {
-			return <img src={require("./Icons/diners-icon.svg")} alt={DINERS} height={16} />;
-		}
-		case JCB: {
-			return <img src={require("./Icons/jcb-icon.svg")} alt={JCB} height={16} />;
-		}
-		case UNIONPAY: {
-			return <img src={require("./Icons/unionpay-icon.svg")} alt={UNIONPAY} height={14} />;
-		}
+			return <Icon name={GOOGLEPAY} width={50} height={21} viewBox="0 0 50 21" />;
+		case JCB:
+			return <Icon name={"Jcb"} width={23} height={16} viewBox="0 0 23 16" />;
+		case MASTERCARD:
+			return <Icon name={"Mastercard"} width={24} height={16} viewBox="0 0 24 16" />;
+		case PAYPAL:
+			return <Icon name={PAYPAL} width={86} height={22} viewBox="0 0 86 22" />;
+		case UNIONPAY:
+			return <Icon name={"Unionpay"} width={22} height={14} viewBox="0 0 22 14" />;
+		case VISA:
+			return <Icon name={"Visa"} width={24} height={16} viewBox="0 0 24 16" />;
 		default:
 			return null;
 	}

@@ -22,24 +22,26 @@
 	}
 
 	&__card {
-		@include scss.block-components("checkout-card");
-		@include scss.block-properties("checkout-card");
 		&-children-div {
 			@include scss.block-components("checkout-card-children-div");
 			@include scss.block-properties("checkout-card-children-div");
 		}
+
 		&-edit {
 			@include scss.block-components("checkout-card-edit");
 			@include scss.block-properties("checkout-card-edit");
 		}
+
 		&-summary {
 			@include scss.block-components("checkout-card-summary");
 			@include scss.block-properties("checkout-card-summary");
 		}
+
 		&-closed {
 			@include scss.block-components("checkout-card-closed");
 			@include scss.block-properties("checkout-card-closed");
 		}
+
 		&-paymentOptions {
 			@include scss.block-components("checkout-card-paymentOptions");
 			@include scss.block-properties("checkout-card-paymentOptions");
@@ -112,6 +114,9 @@
 			@include scss.block-components("checkout-payment");
 			@include scss.block-properties("checkout-payment");
 		}
+
+		@include scss.block-components("checkout-card");
+		@include scss.block-properties("checkout-card");
 	}
 
 	&__cart {
@@ -144,10 +149,12 @@
 			@include scss.block-components("checkout-billing-address-form-div");
 			@include scss.block-properties("checkout-billing-address-form-div");
 		}
+
 		&-input-div {
 			@include scss.block-components("checkout-billing-address-input-div");
 			@include scss.block-properties("checkout-billing-address-input-div");
 		}
+
 		&-captcha {
 			@include scss.block-components("checkout-billing-address-captcha");
 			@include scss.block-properties("checkout-billing-address-captcha");
@@ -178,6 +185,7 @@
 				@include scss.block-components("checkout-order-card--features--item");
 				@include scss.block-properties("checkout-order-card--features--item");
 			}
+
 			@include scss.block-components("checkout-order-card--features");
 			@include scss.block-properties("checkout-order-card--features");
 		}
@@ -187,14 +195,17 @@
 				@include scss.block-components("checkout-order-card--summary--dueToday");
 				@include scss.block-properties("checkout-order-card--summary--dueToday");
 			}
+
 			&--details {
 				&--item {
 					@include scss.block-components("checkout-order-card--summary--details--item");
 					@include scss.block-properties("checkout-order-card--summary--details--item");
 				}
+
 				@include scss.block-components("checkout-order-card--summary--details");
 				@include scss.block-properties("checkout-order-card--summary--details");
 			}
+
 			@include scss.block-components("checkout-order-card--summary");
 			@include scss.block-properties("checkout-order-card--summary");
 		}
@@ -230,9 +241,11 @@
 					@include scss.block-components("checkout-review-tos-link-hover");
 					@include scss.block-properties("checkout-review-tos-link-hover");
 				}
+
 				@include scss.block-components("checkout-review-tos-link");
 				@include scss.block-properties("checkout-review-tos-link");
 			}
+			
 			@include scss.block-components("checkout-review-tos-container-link");
 			@include scss.block-properties("checkout-review-tos-container-link");
 		}

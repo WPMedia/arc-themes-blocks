@@ -12,7 +12,7 @@ const MONTH = "Month";
 const YEAR = "Year";
 const UNTIL_CANCELLED = "UntilCancelled";
 
-const ratesOneTime = (billingFrequency) => {
+export const ratesOneTime = (billingFrequency) => {
 	let message;
 	switch (billingFrequency) {
 		case DAY:
@@ -34,7 +34,7 @@ const ratesOneTime = (billingFrequency) => {
 	return message;
 };
 
-const ratesSingleUntilCancelled = (billingFrequency) => {
+export const ratesSingleUntilCancelled = (billingFrequency) => {
 	let message;
 	switch (billingFrequency) {
 		case DAY:
@@ -56,7 +56,7 @@ const ratesSingleUntilCancelled = (billingFrequency) => {
 	return message;
 };
 
-const ratesUntilCancelled = (billingFrequency) => {
+export const ratesUntilCancelled = (billingFrequency) => {
 	let message;
 	switch (billingFrequency) {
 		case DAY:
@@ -78,7 +78,7 @@ const ratesUntilCancelled = (billingFrequency) => {
 	return message;
 };
 
-const ratesDefaultMessage = (billingFrequency, duration) => {
+export const ratesDefaultMessage = (billingFrequency, duration) => {
 
 	const cases = {
 		[DAY]: {

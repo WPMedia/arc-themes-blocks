@@ -28,6 +28,7 @@ const sub = {
           "eventType": "START_SUBSCRIPTION"
       }
   ],
+  "status": 2,
   "currentPaymentMethod": {
       "creditCardType": "Visa",
       "lastFour": "1111",
@@ -53,9 +54,28 @@ describe("PaymentMethodDetails component", () => {
         setPrice={setPrice}
 			/>
 		);
-
+    expect(setPrice).toHaveBeenCalled();
 		expect(screen.getByText("subscription-block.shared-Payment-method")).not.toBeNull();
 		expect(screen.getByText("subscriptions-block.subscription-profile-management-payment-method-details-payment-string")).not.toBeNull();
+		expect(screen.getByText("subscriptions-block.subscription-profile-management-payment-method-details-next-bill")).not.toBeNull();
+		expect(screen.getByText("subscriptions-block.subscription-profile-management-payment-method-details-billing-statement")).not.toBeNull();
+	});
+
+  it("renders when there is no subscription", () => {
+		
+		render(
+			<PaymentMethodDetails
+				customFields={{
+					offerURL: "/offer-url/",
+          showCancelLink: true,
+          showResubscribeLink: true
+				}}
+        sub={null}
+        setPrice={setPrice}
+			/>
+		);
+    expect(setPrice).toHaveBeenCalled();
+		expect(screen.getByText("subscription-block.shared-Payment-method")).not.toBeNull();
 		expect(screen.getByText("subscriptions-block.subscription-profile-management-payment-method-details-next-bill")).not.toBeNull();
 		expect(screen.getByText("subscriptions-block.subscription-profile-management-payment-method-details-billing-statement")).not.toBeNull();
 	});

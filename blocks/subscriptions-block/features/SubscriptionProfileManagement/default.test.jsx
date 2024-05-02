@@ -51,8 +51,8 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
   ...jest.requireActual("@wpmedia/arc-themes-components"),
   useSales: () => ({
     Sales: {
-      getAllSubscriptions: jest.fn(async() => await (mockSubs)),
-      getSubscriptionDetails: jest.fn(async() => await (mockSub))
+      getAllSubscriptions: jest.fn(() => mockSubs),
+      getSubscriptionDetails: jest.fn(() => mockSub)
     }
   }),
   useIdentity: () => ({Identity: {

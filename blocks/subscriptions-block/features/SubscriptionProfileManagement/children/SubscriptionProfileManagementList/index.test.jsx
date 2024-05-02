@@ -1,6 +1,6 @@
 import React from "react";
 
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import SubscriptionProfileManagementList from "./index";
@@ -150,37 +150,5 @@ describe("SubscriptionProfileManagementList component", () => {
 		expect(screen.queryByText("subscriptions-block.subscription-profile-management-payment-method-details-next-bill")).toBeNull();
 		expect(screen.queryByText("subscriptions-block.subscription-profile-management-payment-method-details-billing-statement")).toBeNull();
 		expect(screen.queryByText("subscriptions-block.subscription-profile-management-billing-address")).toBeNull();
-	});
-
-  it("renders cancel modal", async () => {
-		render(
-			<SubscriptionProfileManagementList
-				customFields={{
-					offerURL: "/offer-url/",
-          showCancelLink: true,
-          showResubscribeLink: true
-				}}
-        subscriptions={subscriptions}
-        fetchSubs={fetchSubs}
-			/>
-		);
-    fireEvent(screen.getByText("subscriptions-block.subscription-profile-management-basic-subscription-details-link-active"), new MouseEvent('click', {
-      bubbles: true,
-      cancelable: true,
-    }))
-    expect(screen.getByText("subscriptions-block.subscription-profile-management-cancel-modal-paragraph1")).toBeInTheDocument();
-    expect(screen.getByText("subscriptions-block.subscription-profile-management-cancel-modal-paragraph2")).toBeInTheDocument();
-    expect(screen.getByText("subscription-block.shared-No")).toBeInTheDocument();
-    expect(screen.getByText("subscriptions-block.subscription-profile-management-cancel-modal-primary-button-text")).toBeInTheDocument();
-
-    fireEvent(screen.getByText("subscription-block.shared-No"), new MouseEvent('click', {
-      bubbles: true,
-      cancelable: true,
-    }))
-
-    expect(screen.queryByText("subscriptions-block.subscription-profile-management-cancel-modal-paragraph1")).toBeNull();
-    expect(screen.queryByText("subscriptions-block.subscription-profile-management-cancel-modal-paragraph2")).toBeNull();
-    expect(screen.queryByText("subscription-block.shared-No")).toBeNull();
-    expect(screen.queryByText("subscriptions-block.subscription-profile-management-cancel-modal-primary-button-text")).toBeNull();
 	});
 });

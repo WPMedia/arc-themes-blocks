@@ -57,15 +57,11 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
   }),
   useIdentity: () => ({Identity: {
     isLoggedIn: jest.fn(() => true)
-  }})
+  }}),
+  Icon: () => <i />
 }));
 
 jest.mock("@wpmedia/arc-themes-components")
-
-jest.mock("../../components/PaymentIcons", () => {
-  const PaymentIcon = () => <i />
-  return PaymentIcon;
-});
 
 jest.mock("fusion:properties", () => jest.fn(() => ({ api: { retail: { origin: "" } } })));
 

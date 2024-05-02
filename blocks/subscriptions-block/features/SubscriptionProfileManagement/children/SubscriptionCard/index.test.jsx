@@ -3,12 +3,12 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import SubscriptionCard from "./index";
+jest.mock("@wpmedia/arc-themes-components", () => ({
+  ...jest.requireActual("@wpmedia/arc-themes-components"),
+  Icon: () => <i />
+}));
 
-jest.mock("../../../../components/PaymentIcons", () => {
-  const PaymentIcon = () => <i />
-  return PaymentIcon;
-});
+import SubscriptionCard from "./index";
 
 jest.mock("fusion:properties", () => jest.fn(() => ({ api: { retail: { origin: "" } } })));
 

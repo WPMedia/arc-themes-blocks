@@ -7,16 +7,12 @@ import SubscriptionProfileManagementList from "./index";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
   ...jest.requireActual("@wpmedia/arc-themes-components"),
-  useSales: () => ({Sales: () => {}})
+  useSales: () => ({Sales: () => {}}),
+  Icon: () => <i />
 }));
 
 
 jest.mock("@wpmedia/arc-themes-components")
-
-jest.mock("../../../../components/PaymentIcons", () => {
-  const PaymentIcon = () => <i />
-  return PaymentIcon;
-});
 
 jest.mock("fusion:properties", () => jest.fn(() => ({ api: { retail: { origin: "" } } })));
 

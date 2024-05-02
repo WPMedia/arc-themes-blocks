@@ -32,8 +32,6 @@ const SubscriptionOverlay = ({ children, usePortal = true, className }) => {
 	useEffect(() => {
 		const disableScroll = (event) => event.preventDefault();
 		const scrollElement = overlayRef.current.ownerDocument.scrollingElement;
-		if (!scrollElement) return;
-
 		const { overflow } = scrollElement.style;
 
 		scrollElement.addEventListener("scroll", disableScroll);

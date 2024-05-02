@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import { usePhrases, Paragraph } from "@wpmedia/arc-themes-components";
+import { usePhrases, Paragraph, Icon } from "@wpmedia/arc-themes-components";
 import usePrice from "../../../../components/usePrice";
 import {getNextRate} from "../../../../components/utils";
 import {NextRate} from "../../../../components/PriceRates";
-import PaymentIcon from "../../../../components/PaymentIcons";
 
 const PaymentString = ({sub}) => {
   const phrases = usePhrases();
@@ -46,7 +45,7 @@ const PaymentMethodDetails = ({sub, className, setPrice}) => {
         <span className={`${className}-title-span`}>
           {phrases.t("subscription-block.shared-Payment-method")}
           <div className={`${className}-title-payment-info`}>
-            <PaymentIcon type={sub?.currentPaymentMethod?.creditCardType}/>
+            <Icon name={sub?.currentPaymentMethod?.creditCardType} viewBox="0 0 24 16"/>
             <Paragraph><PaymentString sub={sub} /></Paragraph>
           </div>
         </span>

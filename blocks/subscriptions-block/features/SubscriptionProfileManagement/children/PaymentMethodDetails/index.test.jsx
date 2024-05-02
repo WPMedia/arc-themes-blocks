@@ -5,10 +5,10 @@ import "@testing-library/jest-dom";
 
 import PaymentMethodDetails from "./index";
 
-jest.mock("../../../../components/PaymentIcons", () => {
-  const PaymentIcon = () => <i />
-  return PaymentIcon;
-});
+jest.mock("@wpmedia/arc-themes-components", () => ({
+  ...jest.requireActual("@wpmedia/arc-themes-components"),
+  Icon: () => <i />
+}));
 
 jest.mock("fusion:properties", () => jest.fn(() => ({ api: { retail: { origin: "" } } })));
 

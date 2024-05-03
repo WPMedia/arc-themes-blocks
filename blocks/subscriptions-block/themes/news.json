@@ -211,6 +211,9 @@
 					"paragraph": {
 						"font-size": "14px",
 						"align-items": "center"
+					},
+					"icon": {
+						"inline-size": "none"
 					}
 				}
 			}

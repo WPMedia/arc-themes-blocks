@@ -87,12 +87,11 @@ const StripeIntentsOptions = ({
                 currency: order?.currency?.toLowerCase(),
                 country: billingCountry,
                 requestPayerEmail: true,
-
                 total: {
                     label: titleApplePayGooglePay,
-                    amount: Math.round(order.total * 100),
+                    amount: Math.round(order.total * 100)
                 },
-                disableWallets: ["link"],
+                disableWallets: ["link"]
             };
 
             const paymentRequest = stripe.paymentRequest(request);
@@ -152,6 +151,7 @@ const StripeIntentsOptions = ({
 					type="radio"
 					name="paymentOptions"
 					optionValueKey={STRIPEINTENTS}
+					inputId = {STRIPEINTENTS}
 					defaultValue={STRIPEINTENTS}
 					checked={paymentOptionSelected === STRIPEINTENTS}
 					onChange={() => setPaymentOptionSelected(STRIPEINTENTS)}
@@ -232,6 +232,10 @@ const Payment = ({
 		}
 	};
 
+	// https://developer.paypal.com/docs/reports/reference/paypal-supported-currencies/
+	// Subscriptions supports: ['BRL', 'CAD', 'CLP', 'COP' 'EUR', 'JPY', 'KRW' 'MXN', 'NZD', 'PEN' 'GBP', 'USD']
+	const currenciesPayPalSuppport = ['BRL', 'CAD', 'EUR', 'JPY', 'MXN', 'NZD', 'GBP', 'USD'];
+
 	return (
 		<form onSubmit={handleSubmit} className={`${className}__payment-form`}>
 			<Stack className={`${className}-paymentOptions`}>
@@ -251,7 +255,7 @@ const Payment = ({
 						className={className}
 					/>
 				)}
-				{paypal?.paymentMethodID && (
+				{paypal?.paymentMethodID && order?.total > 0 && order?.currency && currenciesPayPalSuppport.includes(order?.currency) && (
 					<Input
 						type="radio"
 						name="paymentOptions"

@@ -50,7 +50,7 @@ const Checkout = ({ customFields }) => {
 	const params = new URLSearchParams(window.location.search);
 	const paypalToken = params.get("token");
 
-	const { error: errorPaypal } = usePayPalPaymentRedirect(paypal, paypalToken, successURL);
+	const { error: errorPaypal, isCheckingPaypal } = usePayPalPaymentRedirect(paypal, paypalToken, successURL);
 
 	const { isFetching, isFetchingCartOrder, isLoggedIn, cartDetail, orderDetail } =
 		useCartOrderDetail(paypalToken);
@@ -178,6 +178,10 @@ const Checkout = ({ customFields }) => {
 		return null;
 	};
 
+	if(isCheckingPaypal){
+		return null;
+	}
+
 	if (!isFetchingCartOrder && !isFetchingPaymentOptions) {
 		return (
 			<div className={BLOCK_CLASS_NAME}>
@@ -221,8 +225,8 @@ const Checkout = ({ customFields }) => {
 											challengeIn="checkout"
 											setCaptchaToken={setCaptchaToken}
 											captchaError={captchaError}
-											setCaptchaError={setCaptchaError}
 											error={error}
+											setCaptchaError={setCaptchaError}
 											resetRecaptcha={resetRecaptcha}
 										/>
 									</div>
@@ -242,12 +246,6 @@ const Checkout = ({ customFields }) => {
 							setIsComplete={setIsComplete}
 							error={error}
 							setError={setError}
-							// captchaToken={captchaToken}
-							// setCaptchaToken={setCaptchaToken}
-							// captchaError={captchaError}
-							// setCaptchaError={setCaptchaError}
-							// resetRecaptcha={resetRecaptcha}
-							// setResetRecaptcha={setResetRecaptcha}
 						/>
 					</section>
 				</div>

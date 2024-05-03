@@ -147,7 +147,6 @@ const ReviewOrder = ({
 	children,
 	className,
 }) => {
-
 	const phrases = usePhrases();
 
 	const { Sales } = useSales();
@@ -335,64 +334,21 @@ const ReviewOrder = ({
 		setIsSubmitting(true);
 		setCaptchaError(null);
 
-		// We cannot use the order, the payment was already initialized using stripeIntens
-		if (stripeInstance) {
-			const currentOrder = { ...order };
-			if (currentOrder?.items?.length) {
-				try {
-					await Sales.clearCart();
-					const items = currentOrder.items.map((item) => {
-						const { sku, priceCode, quantity } = item;
-						return { sku, priceCode, quantity };
-					});
-					await Sales.addItemToCart(items);
-					const country = billingAddress?.country || order?.billingAddress?.country;
-					const email = order?.email;
-					const newOrder = await Sales.createNewOrder(
-						{ country },
-						email,
-						null,
-						undefined,
-						undefined,
-						undefined,
-						{},
-						recaptchaStored || captchaToken,
-					);
-					const paypalPayment = await Sales.initializePayment(
-						newOrder?.orderNumber,
-						paypal?.paymentMethodID,
-					);
-					const orderNumberPaypal = paypalPayment?.orderNumber || newOrder?.orderNumber;
-					// When paypal token is returned, We need to know the orderNumber in order to call Sales.finalizePayment();
-					localStorage.setItem(ARCXP_ORDERNUMBER, orderNumberPaypal);
-					window.location.href = paypalPayment?.parameter1;
-				} catch (e) {
-					setIsSubmitting(false);
-					setResetRecaptcha(!resetRecaptcha);
-					setError(e);
-				}
-			} else {
-				window.location.href = offerURL;
-				return;
-			}
-		}
-
-		// We can use the order, a payment was not initialized using stripeIntents
-		if (!stripeInstance) {
-			try{
-				const paypalPayment = await Sales.initializePayment(
-					order?.orderNumber,
-					paypal?.paymentMethodID,
-				);
-				const orderNumberPaypal = paypalPayment?.orderNumber || order?.orderNumber;
-				// When paypal token is returned, We need to know the orderNumber in order to call Sales.finalizePayment();
-				localStorage.setItem(ARCXP_ORDERNUMBER, orderNumberPaypal);
-				window.location.href = paypalPayment?.parameter1;
-			}catch(e){
-				setIsSubmitting(false)
-				setResetRecaptcha(!resetRecaptcha);
-				setError(e);
-			}
+		try {
+			const paypalPayment = await Sales.initializePayment(
+				order?.orderNumber,
+				paypal?.paymentMethodID,
+			);
+			const orderNumberPaypal = paypalPayment?.orderNumber || order?.orderNumber;
+			debugger
+			// When paypal token is returned, We need to know the orderNumber in order to call Sales.finalizePayment();
+			localStorage.setItem(ARCXP_ORDERNUMBER, orderNumberPaypal);
+			debugger
+			window.location.href = paypalPayment?.parameter1;
+		} catch (e) {
+			setIsSubmitting(false);
+			setResetRecaptcha(!resetRecaptcha);
+			setError(e);
 		}
 	};
 

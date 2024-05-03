@@ -7,6 +7,7 @@ import {
 	Button,
 	usePhrases,
 	useSales,
+	useRecaptcha,
 	BotChallengeProtection,
 } from "@wpmedia/arc-themes-components";
 
@@ -43,6 +44,7 @@ const PaymentReviewDetail = ({
 	className,
 }) => {
 	const phrases = usePhrases();
+	const { isRecaptchaEnabled } = useRecaptcha("checkout");
 
 	const { paypal } = paymentOptions;
 
@@ -122,7 +124,7 @@ const PaymentReviewDetail = ({
 					setCaptchaError={setCaptchaError}
 					className={className}
 				>
-					{(error?.code === "130001" ||
+					{isRecaptchaEnabled && (error?.code === "130001" ||
 						error?.code === "010122" ||
 						error?.code === "010125") && (
 						<div className={`${className}__billing-address-captcha`}>
@@ -130,12 +132,12 @@ const PaymentReviewDetail = ({
 								challengeIn="checkout"
 								setCaptchaToken={setCaptchaToken}
 								captchaError={captchaError}
-								error={error?.message}
+								error={error}
 								setCaptchaError={setCaptchaError}
 								resetRecaptcha={resetRecaptcha}
 							/>
 						</div>
-					)}
+					 )}
 				</ReviewOrder>
 			</CheckoutCardDetail>
 		</>

@@ -105,7 +105,7 @@ const PaymentButton = ({
 			>
 				<>
 					<span>{phrases.t("subscriptions-block.submit-payment-paypal")} </span>
-					<PaymentIcon type={"PayPal"} />
+					<PaymentIcon type="PayPal" />
 				</>
 			</Button>
 		);
@@ -132,7 +132,6 @@ const PaymentButton = ({
 const ReviewOrder = ({
 	customFields,
 	paymentOptions,
-	billingAddress,
 	order,
 	paymentOptionSelected,
 	stripeInstance,
@@ -340,10 +339,8 @@ const ReviewOrder = ({
 				paypal?.paymentMethodID,
 			);
 			const orderNumberPaypal = paypalPayment?.orderNumber || order?.orderNumber;
-			debugger
 			// When paypal token is returned, We need to know the orderNumber in order to call Sales.finalizePayment();
 			localStorage.setItem(ARCXP_ORDERNUMBER, orderNumberPaypal);
-			debugger
 			window.location.href = paypalPayment?.parameter1;
 		} catch (e) {
 			setIsSubmitting(false);

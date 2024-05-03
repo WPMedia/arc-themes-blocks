@@ -21,7 +21,7 @@ const usePayPalPaymentRedirect = (paypal, token, successURL, loginURL) => {
 		};
 
 		isUserLoggedIn();
-	}, [Identity]);
+	}, [Identity, loginURL]);
 
 	useEffect(() => {
         const callFinalizePayment = async () =>{
@@ -49,7 +49,7 @@ const usePayPalPaymentRedirect = (paypal, token, successURL, loginURL) => {
 		if (paypal?.paymentMethodID && token && isLoggedIn) {
             callFinalizePayment();
 		}
-	}, [paypal, token, isLoggedIn]);
+	}, [paypal, token, isLoggedIn, Sales, successURL]);
 
 	return { error, isCheckingPaypal };
 };

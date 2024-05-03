@@ -1,8 +1,8 @@
 import React from "react";
-import { act, render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import OfferToProductList from "./index";
 import useOffer from "../useOffer";
-import OfferCard from "../OfferCard";
 
 const sampleOffer = {
 	name: "All Products Offer",
@@ -162,6 +162,22 @@ const sampleOffer = {
 	default: false,
 };
 
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	useSales: jest.fn(() => ({
+		isInitialized: true,
+		Sales: {
+			clearCart: jest.fn(async() => {})
+		},
+	})),
+    Grid: ({children}) => <div>{children}</div>,
+    Heading: ({ dangerouslySetInnerHTML }) => (
+		<h1 dangerouslySetInnerHTML={dangerouslySetInnerHTML} />),
+    Stack: ({children}) => <div>{children}</div>,
+    Button: ({ onClick, actionText }) => <button onClick={onClick}><span dangerouslySetInnerHTML={{ __html: actionText }} /></button>,
+    Icon: () => <svg>'Icon'</svg>,
+}));
+
 jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({
 		arcSite: "gazette",
@@ -187,9 +203,18 @@ useOffer.mockReturnValue({
 	fetchOffer: () => sampleOffer,
 });
 
+jest.mock('../OfferCard', () => ({ type }) => <div data-testid="offer-card-mock">{`${type}-offer-card`}</div>);
+const MockOfferCard = () => {
+    // You can render anything you want to simulate the PaymentIcon
+    return <div>"Offer card"</div>;
+  };
+
 describe("The OfferToProductList component", () => {
 	it("renders the correct number of offer cards", () => {
-		const { container } =  render(
+        
+        jest.mock('../OfferCard', () => MockOfferCard)
+
+		render(
 			<OfferToProductList
 				isLoggedIn
 				loginURL="/login/"
@@ -198,10 +223,6 @@ describe("The OfferToProductList component", () => {
 			/>
 		);
 
-		act(() => {
-			container.setProps({});
-		});
-
-		expect(container.find(OfferCard)).toHaveLength(4);
+        expect(screen.getAllByTestId('offer-card-mock')).toHaveLength(4);
 	});
 });

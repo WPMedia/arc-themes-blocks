@@ -1,5 +1,7 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+
 import OfferCard from ".";
 
 const props = {
@@ -8,10 +10,23 @@ const props = {
 	actionText: "Subscribe for $68 for one year",
 	actionEvent: () => {},
 	features: [
-		{ featureText: "Unlimited access to The Daily Intelligencer" },
-		{ featureText: "Save $40" },
+		{ featureText: "Unlimited access to The Daily Intelligencer", id: "feat1" },
+		{ featureText: "Save $40", id: "feat2" },
 	],
 };
+
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	Heading: ({ dangerouslySetInnerHTML }) => (
+		<h1 dangerouslySetInnerHTML={dangerouslySetInnerHTML} />
+	),
+	Paragraph: ({ dangerouslySetInnerHTML }) => (
+		<div dangerouslySetInnerHTML={dangerouslySetInnerHTML} />
+	),
+	Button: ({ onClick, actionText }) => <button onClick={onClick}><span dangerouslySetInnerHTML={{ __html: actionText }} /></button>,
+	Stack: ({ children }) => <div>{children}</div>,
+	Icon: () => <svg>'Icon'</svg>,
+}));
 
 const BLOCK_CLASS_NAME = "test-block";
 
@@ -24,7 +39,7 @@ describe("OfferCard", () => {
 
 		expect(screen.getByRole("button")).not.toBeNull();
 
-		const ul = getByRole("list");
+		const ul = screen.getByRole("list");
 		expect(ul).toBeInTheDocument();
 
 		expect(screen.getByText(props.features[0].featureText)).not.toBeNull();
@@ -50,25 +65,25 @@ describe("OfferCard", () => {
 	it("does not render button if no actionText and no ActionEvent", () => {
 		render(<OfferCard {...props} actionText={null} actionEvent={null} />);
 
-		expect(screen.getByRole("button")).not.toBeNull();
+        expect(screen.queryByText(props.actionText)).not.toBeInTheDocument();
 	});
 
 	it("does not render button if no actionText", () => {
 		render(<OfferCard {...props} actionText={null} />);
 
-		expect(screen.getByRole("button")).not.toBeNull();
+        expect(screen.queryByText(props.actionText)).not.toBeInTheDocument();
 	});
 
 	it("does not render button if no actionEvent", () => {
 		render(<OfferCard {...props} actionEvent={null} />);
 
-		expect(screen.getByRole("button")).not.toBeNull();
+        expect(screen.queryByText(props.actionText)).not.toBeInTheDocument();
 	});
 
 	it("does not render features", () => {
 		const { container } = render(<OfferCard className={BLOCK_CLASS_NAME} headline="Headline" />);
 
-		const features = expect(container.querySelector(".b-offer__card--features li"));
-		expect(features.length).toBe(0);
+		const features = container.querySelectorAll(".b-offer__card--features li");
+		expect(features?.length).toBe(0);
 	});
 });

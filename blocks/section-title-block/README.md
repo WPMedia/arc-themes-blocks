@@ -1,5 +1,4 @@
 # `@wpmedia/section-title-block`
-
 _Fusion News Theme section title block# Name of Block. Please provide a 1-2 sentence description of what the block is and what it does._
 
 ## Acceptance Criteria

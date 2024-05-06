@@ -1,5 +1,4 @@
 # `@wpmedia/card-list-block`
-
 Fusion News Theme card list block
 _Please provide a 1-2 sentence description of what the block is and what it does._
 

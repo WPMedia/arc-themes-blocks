@@ -1,5 +1,4 @@
 # `@wpmedia/tag-title-block`
-
 _Fusion News Theme tag title block. Please provide a 1-2 sentence description of what the block is and what it does._
 
 ## Acceptance Criteria

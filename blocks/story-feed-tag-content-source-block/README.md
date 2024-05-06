@@ -1,5 +1,4 @@
 # `@wpmedia/story-feed-tag-content-source-block`
-
 _Content source block for story feed queries by tag. Please provide a 1-2 sentence description of what the block is and what it does._
 
 // TODO: add badge for passing/failing tests

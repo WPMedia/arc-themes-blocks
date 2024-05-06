@@ -1,5 +1,4 @@
 # `@wpmedia/ad-taboola-block`
-
 _Block that implement a [Taboola Block](https://www.taboola.com/)._
 
 ## Props

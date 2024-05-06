@@ -1,5 +1,4 @@
 # `@wpmedia/author-bio-block`
-
 _Author Short Biography block for Fusion News Theme_
 
 ## Acceptance Criteria

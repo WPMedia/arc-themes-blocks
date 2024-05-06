@@ -1,5 +1,4 @@
 # `@wpmedia/headline-block`
-
 _Fusion News Theme headline block. Please provide a 1-2 sentence description of what the block is and what it does._
 
 ## Acceptance Criteria

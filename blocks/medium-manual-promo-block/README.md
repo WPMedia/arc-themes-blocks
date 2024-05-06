@@ -1,5 +1,4 @@
 # `@wpmedia/medium-manual-promo-block`
-
 _Block containing a medium manual promo component. Please provide a 1-2 sentence description of what the block is and what it does._
 
 ## Acceptance Criteria

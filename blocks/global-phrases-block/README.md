@@ -1,5 +1,4 @@
 # `@wpmedia/global-phrases-block`
-
 _A package containing a set of translated phrases expected to be available globally. For example, if there is a commonly used SDK component that depends on a set of translated phrases such as the Gallery component, its phrases will likely make sense here._
 
 _The translations can be found the `intl.json` file._

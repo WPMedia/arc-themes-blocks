@@ -1,5 +1,4 @@
 # `@wpmedia/resizer-image-block`
-
 _This is a helper to transform the return value of the content sources. This is specifically to make sure that resized image urls are available at themes' `blocks.json` widths._
 
 ## Acceptance Criteria

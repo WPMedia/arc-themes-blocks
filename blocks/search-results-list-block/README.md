@@ -1,5 +1,4 @@
 # `@wpmedia/search-results-list-block`
-
 _Search Results List block for Fusion News Theme. This block displays a search bar with a results list where each result card will have a description, headline, byline block and publish date._
 
 ## Acceptance Criteria

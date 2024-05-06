@@ -1,5 +1,4 @@
 # `@wpmedia/masthead-block`
-
 _Fusion News Theme masthead block is a relatively simple feature that is typically only used on newspaper homepages. It displays the logo, the date, a tag line, and an optional link (usually to a Weather page but could be to other pages)._
 
 ## Acceptance Criteria

@@ -9,10 +9,10 @@ export const SummaryBillingAddress = ({ billingAddress }) => (
 	<Paragraph>
 		{billingAddress?.line1 ||
 			(billingAddress?.line2 && (
-				<>
+				<span>
 					<span>{billingAddress?.line1}</span>
 					{billingAddress?.line2 && <span> {billingAddress?.line2}</span>}
-				</>
+				</span>
 			))}
 		{billingAddress?.locality && <span>{` ${billingAddress?.locality}, `}</span>}
 		{billingAddress?.region && <span>{`${billingAddress?.region}, `}</span>}
@@ -21,7 +21,7 @@ export const SummaryBillingAddress = ({ billingAddress }) => (
 	</Paragraph>
 );
 
-export const SummaryPayment = ({ paymentDetails }) => {
+export const SummaryPayment = ({ paymentDetails, className }) => {
 	const phrases = usePhrases();
 
 	if (paymentDetails?.paymentOptionSelected === STRIPEINTENTS) {
@@ -50,8 +50,8 @@ export const SummaryPayment = ({ paymentDetails }) => {
 
 	if (paymentDetails?.paymentOptionSelected !== STRIPEINTENTS) {
 		return (
-			<Paragraph>
-				<PaymentIcon type={paymentDetails?.paymentOptionSelected} />
+			<Paragraph className={`${className}-summary-icon`}>
+				<PaymentIcon type={paymentDetails?.paymentOptionSelected}/>
 			</Paragraph>
 		);
 	}

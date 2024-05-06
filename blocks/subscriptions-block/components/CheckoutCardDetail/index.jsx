@@ -8,7 +8,7 @@ export const BILLING_ADDRESS = "Billing Address";
 export const PAYMENT = "Payment";
 export const REVIEW = "Review";
 
-const Summary = ({ type, summary }) => {
+const Summary = ({ type, summary, className }) => {
 	if (type === ACCOUNT) {
 		return <SummaryAccount account={summary} />;
 	}
@@ -16,7 +16,7 @@ const Summary = ({ type, summary }) => {
 		return <SummaryBillingAddress billingAddress={summary} />;
 	}
 	if (type === PAYMENT) {
-		return <SummaryPayment paymentDetails={summary} />;
+		return <SummaryPayment paymentDetails={summary} className={className} />;
 	}
 	return null;
 };
@@ -52,7 +52,7 @@ const CheckoutCardDetail = ({
 				<Heading>{getTitle()}</Heading>
 				{!isOpen && isComplete && (
 					<div className={`${className}-summary`}>
-						<Summary type={type} summary={summary} />
+						<Summary type={type} summary={summary} className={className}/>
 						{link}
 					</div>
 				)}

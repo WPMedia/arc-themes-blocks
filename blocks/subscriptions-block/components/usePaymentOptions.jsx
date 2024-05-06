@@ -5,7 +5,7 @@ import { useSales } from "@wpmedia/arc-themes-components";
 const STRIPE_PAYMENT_METHOD_ID = 18;
 const PAYPAL_METHOD_ID = 10;
 
-const getPaymentMethodByID = (paymentOptions, paymentMethodTypeID, paymentMethodID) => {
+export const getPaymentMethodByID = (paymentOptions, paymentMethodTypeID, paymentMethodID) => {
 	let minStripeIntentsID;
 
 	const stripeDefault = paymentOptions?.find(

@@ -7,18 +7,16 @@ import { SummaryAccount, SummaryBillingAddress, SummaryPayment } from "./Summary
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	Paragraph: ({ children }) => <p>{children}</p>,
-    usePhrases: jest.fn(() => ({
-		t: jest.fn((phrase => phrase))
+	usePhrases: jest.fn(() => ({
+		t: jest.fn((phrase) => phrase),
 	})),
 }));
 
-jest.mock('../PaymentIcons', () => ({ type }) => <div data-testid="payment-icon-mock">{`${type}-icon`}</div>);
+jest.mock("../PaymentIcons", () => ({ type }) => (
+	<div data-testid="payment-icon-mock">{`${type}-icon`}</div>
+));
 
-
-const MockPaymentIcon = () => {
-    // You can render anything you want to simulate the PaymentIcon
-    return <div>"Payment icon"</div>;
-  };
+const MockPaymentIcon = () => <div>Payment icon</div>;
 
 describe("Summary component", () => {
 	it("Summary account", async () => {
@@ -36,45 +34,45 @@ describe("Summary component", () => {
 		};
 		render(<SummaryBillingAddress billingAddress={billingAddress} />);
 		expect(screen.getByText(`${billingAddress?.line1}`)).toHaveTextContent("1234 Street");
-        expect(screen.getByText('Brooklyn,')).toBeInTheDocument();
-        expect(screen.getByText('NY,')).toBeInTheDocument();
-        expect(screen.getByText('11209,')).toBeInTheDocument();
-        expect(screen.getByText('US')).toBeInTheDocument();
+		expect(screen.getByText("Brooklyn,")).toBeInTheDocument();
+		expect(screen.getByText("NY,")).toBeInTheDocument();
+		expect(screen.getByText("11209,")).toBeInTheDocument();
+		expect(screen.getByText("US")).toBeInTheDocument();
 	});
 
-    it("Summary payment", async () => {
+	it("Summary payment", async () => {
+		jest.mock("../PaymentIcons", () => MockPaymentIcon);
 
-        jest.mock('../PaymentIcons', () => MockPaymentIcon)
-
-        const paymentDetails = {
-            paymentOptionSelected: 'StripeIntents',
+		const paymentDetails = {
+			paymentOptionSelected: "StripeIntents",
 			card: {
-                brand: 'visa',
-                last4: '4242',
-                exp_year: '2030',
-                exp_month: '12'
-            }
+				brand: "visa",
+				last4: "4242",
+				exp_year: "2030",
+				exp_month: "12",
+			},
 		};
 
-        render(<SummaryPayment paymentDetails={paymentDetails} />);
+		render(<SummaryPayment paymentDetails={paymentDetails} />);
 
-        expect(screen.getByTestId('payment-icon-mock')).not.toBeNull();
-        expect(screen.getByText('visa')).toBeInTheDocument();
-        expect(screen.getByText('4242')).toBeInTheDocument();
-        expect(screen.getByText(`${paymentDetails?.card?.brand}`)).toBeInTheDocument;
-        expect(screen.getByText(`checkout-block.expires ${paymentDetails?.card?.exp_month}/${paymentDetails?.card?.exp_year}`)).toBeInTheDocument;
-    });
+		expect(screen.getByTestId("payment-icon-mock")).not.toBeNull();
+		expect(screen.getByText("visa")).toBeInTheDocument();
+		expect(screen.getByText("4242")).toBeInTheDocument();
 
-    it("Summary payment with paymentOption different to StripeIntents", async () => {
+		const brand = paymentDetails?.card?.brand;
+		expect(screen.getByText(brand)).toBeInTheDocument();
+		expect(screen.getByText(`checkout-block.expires 12/2030`)).toBeInTheDocument();
+	});
 
-        jest.mock('../PaymentIcons', () => MockPaymentIcon)
+	it("Summary payment with paymentOption different to StripeIntents", async () => {
+		jest.mock("../PaymentIcons", () => MockPaymentIcon);
 
-        const paymentDetails = {
-            paymentOptionSelected: 'PayPal'
+		const paymentDetails = {
+			paymentOptionSelected: "PayPal",
 		};
 
-        render(<SummaryPayment paymentDetails={paymentDetails} />);
+		render(<SummaryPayment paymentDetails={paymentDetails} />);
 
-        expect(screen.getByTestId('payment-icon-mock')).not.toBeNull();
-    })
+		expect(screen.getByTestId("payment-icon-mock")).not.toBeNull();
+	});
 });

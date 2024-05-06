@@ -23,9 +23,15 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	Paragraph: ({ dangerouslySetInnerHTML }) => (
 		<div dangerouslySetInnerHTML={dangerouslySetInnerHTML} />
 	),
-	Button: ({ onClick, actionText }) => <button onClick={onClick}><span dangerouslySetInnerHTML={{ __html: actionText }} /></button>,
+	Button: ({ onClick, actionText }) => (
+		<div>
+			<button id="submitButton" type="submit" onClick={onClick} aria-label={actionText}>
+				<span dangerouslySetInnerHTML={{ __html: actionText }} />
+			</button>
+		</div>
+	),
 	Stack: ({ children }) => <div>{children}</div>,
-	Icon: () => <svg>'Icon'</svg>,
+	Icon: () => <svg>Icon</svg>,
 }));
 
 const BLOCK_CLASS_NAME = "test-block";
@@ -47,43 +53,39 @@ describe("OfferCard", () => {
 	});
 
 	it("does not render headline if not present", () => {
-		const { container } = render(
-			<OfferCard {...props} className={BLOCK_CLASS_NAME} headline={null} />,
-		);
+		render(<OfferCard {...props} className={BLOCK_CLASS_NAME} headline={null} />);
 
-		expect(container.querySelector(".b-offer__card h1")).not.toBeInTheDocument();
+		expect(screen.queryByRole("heading", { name: /headline/i })).not.toBeInTheDocument();
 	});
 
 	it("does not render subHeadline if not present", () => {
-		const { container } = render(
-			<OfferCard {...props} className={BLOCK_CLASS_NAME} subHeadline={null} />,
-		);
+		render(<OfferCard {...props} className={BLOCK_CLASS_NAME} subHeadline={null} />);
 
-		expect(container.querySelector(".b-offer__card p")).not.toBeInTheDocument();
+		expect(screen.queryByRole("paragraph")).toBeNull();
 	});
 
 	it("does not render button if no actionText and no ActionEvent", () => {
 		render(<OfferCard {...props} actionText={null} actionEvent={null} />);
 
-        expect(screen.queryByText(props.actionText)).not.toBeInTheDocument();
+		expect(screen.queryByText(props.actionText)).not.toBeInTheDocument();
 	});
 
 	it("does not render button if no actionText", () => {
 		render(<OfferCard {...props} actionText={null} />);
 
-        expect(screen.queryByText(props.actionText)).not.toBeInTheDocument();
+		expect(screen.queryByText(props.actionText)).not.toBeInTheDocument();
 	});
 
 	it("does not render button if no actionEvent", () => {
 		render(<OfferCard {...props} actionEvent={null} />);
 
-        expect(screen.queryByText(props.actionText)).not.toBeInTheDocument();
+		expect(screen.queryByText(props.actionText)).not.toBeInTheDocument();
 	});
 
 	it("does not render features", () => {
-		const { container } = render(<OfferCard className={BLOCK_CLASS_NAME} headline="Headline" />);
+		render(<OfferCard className={BLOCK_CLASS_NAME} headline="Headline" />);
 
-		const features = container.querySelectorAll(".b-offer__card--features li");
+		const features = screen.queryAllByRole("listitem", { name: /feature/i });
 		expect(features?.length).toBe(0);
 	});
 });

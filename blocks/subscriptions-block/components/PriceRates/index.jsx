@@ -12,7 +12,7 @@ const MONTH = "Month";
 const YEAR = "Year";
 const UNTIL_CANCELLED = "UntilCancelled";
 
-const ratesOneTime = (billingFrequency) => {
+export const ratesOneTime = (billingFrequency) => {
 	let message;
 	switch (billingFrequency) {
 		case DAY:
@@ -34,7 +34,7 @@ const ratesOneTime = (billingFrequency) => {
 	return message;
 };
 
-const ratesSingleUntilCancelled = (billingFrequency) => {
+export const ratesSingleUntilCancelled = (billingFrequency) => {
 	let message;
 	switch (billingFrequency) {
 		case DAY:
@@ -56,7 +56,7 @@ const ratesSingleUntilCancelled = (billingFrequency) => {
 	return message;
 };
 
-const ratesUntilCancelled = (billingFrequency) => {
+export const ratesUntilCancelled = (billingFrequency) => {
 	let message;
 	switch (billingFrequency) {
 		case DAY:
@@ -78,7 +78,7 @@ const ratesUntilCancelled = (billingFrequency) => {
 	return message;
 };
 
-const ratesDefaultMessage = (billingFrequency, duration) => {
+export const ratesDefaultMessage = (billingFrequency, duration) => {
 
 	const cases = {
 		[DAY]: {
@@ -116,9 +116,9 @@ const ratesDefaultMessage = (billingFrequency, duration) => {
 	return undefined;
 };
 
-const getAmount = (amount, priceCurrency) => `${currency(priceCurrency)}${amount}`;
+export const getAmount = (amount, priceCurrency) => `${currency(priceCurrency)}${amount}`;
 
-const PriceRate = (rate, rateCurrency) => {
+export const PriceRate = (rate, rateCurrency) => {
 	const phrases = usePhrases();
 
 	const {billingCount, durationCount, billingFrequency, duration} = rate;
@@ -139,7 +139,7 @@ const PriceRate = (rate, rateCurrency) => {
 	}
 
 	if (billingCount === durationCount && billingFrequency === duration) {
-		rateString = ratesOneTime(billingCount, billingFrequency);
+		rateString = ratesOneTime(billingFrequency);
 		fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount }) : ''}`;
 	} else {
 		rateString = ratesDefaultMessage(

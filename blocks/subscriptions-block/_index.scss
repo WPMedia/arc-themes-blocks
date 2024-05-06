@@ -33,6 +33,11 @@
 		}
 
 		&-summary {
+			&-icon {
+				@include scss.block-components("checkout-card-summary-icon");
+				@include scss.block-properties("checkout-card-summary-icon");
+			}
+
 			@include scss.block-components("checkout-card-summary");
 			@include scss.block-properties("checkout-card-summary");
 		}

@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import OfferToProductList from "./index";
 import useOffer from "../useOffer";
@@ -162,22 +162,6 @@ const sampleOffer = {
 	default: false,
 };
 
-jest.mock("@wpmedia/arc-themes-components", () => ({
-	...jest.requireActual("@wpmedia/arc-themes-components"),
-	useSales: jest.fn(() => ({
-		isInitialized: true,
-		Sales: {
-			clearCart: jest.fn(async() => {})
-		},
-	})),
-    Grid: ({children}) => <div>{children}</div>,
-    Heading: ({ dangerouslySetInnerHTML }) => (
-		<h1 dangerouslySetInnerHTML={dangerouslySetInnerHTML} />),
-    Stack: ({children}) => <div>{children}</div>,
-    Button: ({ onClick, actionText }) => <button onClick={onClick}><span dangerouslySetInnerHTML={{ __html: actionText }} /></button>,
-    Icon: () => <svg>'Icon'</svg>,
-}));
-
 jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({
 		arcSite: "gazette",
@@ -198,21 +182,34 @@ jest.mock("fusion:properties", () =>
 
 jest.mock("@arc-publishing/sdk-sales");
 jest.mock("../../components/useOffer");
+
 useOffer.mockReturnValue({
 	offer: sampleOffer,
 	fetchOffer: () => sampleOffer,
 });
 
-jest.mock('../OfferCard', () => ({ type }) => <div data-testid="offer-card-mock">{`${type}-offer-card`}</div>);
-const MockOfferCard = () => {
-    // You can render anything you want to simulate the PaymentIcon
-    return <div>"Offer card"</div>;
-  };
+  jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	useSales: jest.fn(() => ({
+		isInitialized: true,
+		Sales: {
+			clearCart: jest.fn(async() => {}),
+			addItemToCart: jest.fn(async()=>{})
+		},
+	})),
+	Grid: ({children}) => <div>{children}</div>,
+	Button: ({ onClick, actionText, children }) => <button type="submit" onClick={onClick}><span dangerouslySetInnerHTML={{ __html: actionText }} />{children}</button>,
+	Stack: ({ children }) => <div>{children}</div>,
+	Heading: ({ dangerouslySetInnerHTML }) => (
+		<h1 dangerouslySetInnerHTML={dangerouslySetInnerHTML} />
+	),
+	Icon: () => <svg>Icon</svg>,
+}));
 
 describe("The OfferToProductList component", () => {
 	it("renders the correct number of offer cards", () => {
         
-        jest.mock('../OfferCard', () => MockOfferCard)
+		jest.mock('../OfferCard');
 
 		render(
 			<OfferToProductList
@@ -223,6 +220,24 @@ describe("The OfferToProductList component", () => {
 			/>
 		);
 
-        expect(screen.getAllByTestId('offer-card-mock')).toHaveLength(4);
+		const buttons = screen.queryAllByRole("button");
+		expect(buttons.length).toBe(4);
+	});
+
+	it("Add item into cart", ()=>{
+
+		jest.mock('../OfferCard');
+
+		render(
+			<OfferToProductList
+				isLoggedIn
+				loginURL="/login/"
+				checkoutURL="/checkout/"
+				offer={sampleOffer}
+			/>
+		);
+
+		const button = screen.getByText('10/mo');
+		fireEvent.click(button);
 	});
 });

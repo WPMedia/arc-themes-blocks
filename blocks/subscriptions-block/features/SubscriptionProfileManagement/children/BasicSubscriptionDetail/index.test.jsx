@@ -54,6 +54,7 @@ describe("BasicSubscriptionDetail component", () => {
           showResubscribeLink: true
 				}}
         sub={sub}
+				status="Active"
 			/>
 		);
 		expect(screen.getByText(sub?.productName)).toBeInTheDocument();
@@ -72,7 +73,8 @@ describe("BasicSubscriptionDetail component", () => {
           showCancelLink: true,
           showResubscribeLink: true
 				}}
-        sub={{...sub, status: 3}}
+        sub={sub}
+				status="Canceled"
 			/>
 		);
 		expect(screen.getByText(sub?.productName)).toBeInTheDocument();

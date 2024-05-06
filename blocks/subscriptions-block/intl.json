@@ -6990,6 +6990,12 @@
 	"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": {
 		"en": "Yes, Resubscribe"
 	},
+	"subscriptions-block.subscription-profile-management-subscription-period-text": {
+		"en": "Subscription period: "
+	},
+	"subscriptions-block.subscription-profile-management-subscription-period-paragraph": {
+		"en": "This subscription expired on %{terminateDate}"
+	},
 	"subscription-block.shared-No": {
 		"en": "No"
 	},

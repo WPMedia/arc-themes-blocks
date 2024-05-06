@@ -542,6 +542,8 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
 		"subscriptions-block.subscription-profile-management-resub-modal-paragraph2": "Are you sure you want to resubscribe?",
 		"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": "Yes, Resubscribe",
+		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
+		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
 		"subscriptions-block.credit-card-information": "Payment Method and Information",
 		"subscriptions-block.payWithCard-label": "Or Pay with card",
 		"subscriptions-block.payment-error": "There was an error processing your payment.",

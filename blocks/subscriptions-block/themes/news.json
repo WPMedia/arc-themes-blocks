@@ -691,6 +691,36 @@
 			}
 		}
 	},
+	"subscriptions-subscription-list-detail-inactive-sub": {
+		"styles": {
+			"default": {
+				"font-family": "var(--font-family-secondary)",
+				"font-weight": "700",
+				"font-size": "16px",
+				"color": "var(--text-color)",
+				"line-height": "24px",
+				"display": "flex",
+				"flex-direction": "row",
+				"components": {
+					"paragraph": {
+						"margin-inline-start": "var(--global-spacing-2)",
+						"font-weight": "400"
+					}
+				}
+			}
+		}
+	},
+	"subscriptions-subscription-list-detail-inactive-sub-paragraph": {
+		"styles": {
+			"default": {
+				"font-weight": "500",
+				"font-size": "14px",
+				"line-height": "16px",
+				"font-family": "sans-serif",
+				"color": "var(--text-color-subtle)"
+			}
+		}
+	},
 	"subscriptions-subscription-list-detail-billing-subtitle": {
 		"styles": {
 			"default": {

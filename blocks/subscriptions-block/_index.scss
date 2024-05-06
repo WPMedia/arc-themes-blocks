@@ -376,6 +376,15 @@
 				@include scss.block-components("subscriptions-subscription-list-detail-billing");
 				@include scss.block-properties("subscriptions-subscription-list-detail-billing");
 			}
+
+			&-inactive-sub {
+				&-paragraph {
+					@include scss.block-components("subscriptions-subscription-list-detail-inactive-sub-paragraph");
+					@include scss.block-properties("subscriptions-subscription-list-detail-inactive-sub-paragraph");
+				}
+				@include scss.block-components("subscriptions-subscription-list-detail-inactive-sub");
+				@include scss.block-properties("subscriptions-subscription-list-detail-inactive-sub");
+			}
 		}
 
 		&-card {

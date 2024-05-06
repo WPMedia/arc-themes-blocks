@@ -1,16 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { usePhrases, Stack, Button, Badge, Icon, Paragraph } from "@wpmedia/arc-themes-components";
 
-const ACTIVE = "Active";
-const CANCELED = "Canceled";
-const TERMINATED = "Terminated";
-
-const getStatus = (sub) => {
-  if(sub?.status === 1 || sub?.status === 4 || sub?.status === 6 || sub?.status === 7) return ACTIVE;
-  if(sub?.status === 2) return TERMINATED;
-  if(sub?.status === 3) return CANCELED;
-  return ""
-};
+export const ACTIVE = "Active";
+export const CANCELED = "Canceled";
+export const TERMINATED = "Terminated";
 
 const StatusBadge = ({status, className}) => {
   const phrases = usePhrases();
@@ -53,9 +46,8 @@ const LinkButton = ({status, sub, setSelectedSub, customFields, setIsCancelModal
   return null;
 }
 
-const BasicSubscriptionDetail = ({sub, customFields, setSelectedSub, className, setIsCancelModalOpen, setIsResubModalOpen, setSelectedPrice, price }) => {
+const BasicSubscriptionDetail = ({sub, customFields, setSelectedSub, className, setIsCancelModalOpen, setIsResubModalOpen, setSelectedPrice, price, status }) => {
   const phrases = usePhrases();
-  const [status, setStatus] = useState(null);
   const [showCancelInfo, setShowCancelInfo] = useState(true);
   const startEvent = sub?.events?.find(s => s?.eventType === "START_SUBSCRIPTION");
   const startDate = startEvent?.eventDateUTC;
@@ -64,10 +56,6 @@ const BasicSubscriptionDetail = ({sub, customFields, setSelectedSub, className, 
 
   const cancelDateString = new Date(cancelEvent?.eventDateUTC).toLocaleDateString(undefined, {month: 'long', day: 'numeric', year: 'numeric'});
   const nextEventDateString = new Date(sub?.nextEventDateUTC).toLocaleDateString(undefined, {month: 'long', day: 'numeric', year: 'numeric'});
-
-  useEffect(() => {
-    setStatus(getStatus(sub));
-  }, [sub])
 
   return (
     <Stack  className={`${className}-div`}>

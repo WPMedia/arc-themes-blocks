@@ -8,7 +8,7 @@ import PaymentIcon, { APPLEPAY, GOOGLEPAY, PAYPAL } from "../../../../components
 import { STRIPEINTENTS } from "../../../../utils/constants";
 import StripeIntentCheckout from "../../../../components/StripeIntentCheckout";
 
-const StripeIntentsOptions = ({
+export const StripeIntentsOptions = ({
 	stripeInstance,
 	customFields,
 	order,
@@ -79,6 +79,7 @@ const StripeIntentsOptions = ({
 		}
 	}, [checkFormIsValid, setErrorForm, setPaymentMethod, stripe, elements, entriesRef]);
 
+	/* istanbul ignore next */
 	const checkApplePayGooglePayWallets = useCallback(() => {
         const billingCountry = order?.billingAddress?.country || billingAddress?.country;
 

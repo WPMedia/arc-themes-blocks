@@ -211,7 +211,15 @@
 					"paragraph": {
 						"font-size": "14px",
 						"align-items": "center"
-					},
+					}
+				}
+			}
+		}
+	},
+	"checkout-card-summary-icon": {
+		"styles": {
+			"default": {
+				"components": {
 					"icon": {
 						"inline-size": "none"
 					}
@@ -258,7 +266,7 @@
 						"border-color": "red",
 						"background-color": "red"
 					},
-					"icon":{
+					"icon": {
 						"inline-size": "none"
 					}
 				}

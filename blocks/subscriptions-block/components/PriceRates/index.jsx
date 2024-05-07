@@ -79,7 +79,6 @@ export const ratesUntilCancelled = (billingFrequency) => {
 };
 
 export const ratesDefaultMessage = (billingFrequency, duration) => {
-
 	const cases = {
 		[DAY]: {
 			[DAY]: "checkout-block.rates-default-day-day",
@@ -121,38 +120,37 @@ export const getAmount = (amount, priceCurrency) => `${currency(priceCurrency)}$
 export const PriceRate = (rate, rateCurrency) => {
 	const phrases = usePhrases();
 
-	const {billingCount, durationCount, billingFrequency, duration} = rate;
+	const { billingCount, durationCount, billingFrequency, duration } = rate;
 
 	const amount = getAmount(rate?.amount, rateCurrency);
 
 	let rateString = "";
 	let fullRateString = "";
 
-	if(duration === UNTIL_CANCELLED){
+	if (duration === UNTIL_CANCELLED) {
 		if (billingCount <= 1) {
 			rateString = ratesSingleUntilCancelled(billingFrequency);
-			fullRateString = `${amount} ${rateString ? phrases.t(rateString) : ''}`;
+			fullRateString = `${amount} ${rateString ? phrases.t(rateString) : ""}`;
 		} else {
 			rateString = ratesUntilCancelled(billingFrequency);
-			fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount }) : ''}`;
+			fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount }) : ""}`;
 		}
 	}
 
-	if (billingCount === durationCount && billingFrequency === duration) {
-		rateString = ratesOneTime(billingFrequency);
-		fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount }) : ''}`;
-	} else {
-		rateString = ratesDefaultMessage(
-			billingFrequency,
-			duration,
-		);
-		fullRateString = `${amount} ${rateString ? phrases.t(rateString, {billingCount, durationCount}): ''}`;
+	if (duration !== UNTIL_CANCELLED) {
+		if (billingCount === durationCount && billingFrequency === duration) {
+			rateString = ratesOneTime(billingFrequency);
+			fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount }) : ""}`;
+		} else {
+			rateString = ratesDefaultMessage(billingFrequency, duration);
+			fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount, durationCount }) : ""}`;
+		}
 	}
+	
 	return fullRateString;
 };
 
 const PriceRates = ({ priceRates, orderCurrency }) => {
-	
 	if (priceRates && priceRates.length && currency) {
 		let priceRateStrings = priceRates.map((rate) => PriceRate(rate, orderCurrency));
 		priceRateStrings = priceRateStrings.join(", ");

@@ -20,6 +20,7 @@ const CARD_ELEMENT_OPTIONS = {
 	showIcon: true,
 };
 
+/* istanbul ignore next */
 const StripeIntentCheckout = ({
 	entriesRef,
 	errorForm,

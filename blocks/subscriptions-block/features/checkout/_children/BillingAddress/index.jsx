@@ -5,7 +5,7 @@ import { useFusionContext } from "fusion:context";
 import { usePhrases, Input, Button, Stack, useSales } from "@wpmedia/arc-themes-components";
 
 import countryCodes from "../../../../components/ContactInfo/countryCodes";
-import { getItemDetails } from "../../../../components/useCartOrderDetail";
+import getItemDetails from "../../../../utils/itemDetails";
 import listOfStates from "./listOfStates";
 
 const BillingAddress = ({

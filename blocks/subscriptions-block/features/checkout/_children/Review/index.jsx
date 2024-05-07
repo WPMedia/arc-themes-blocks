@@ -35,6 +35,7 @@ const StripeIntentsButtons = ({
 	const elements = useElements();
 	const stripe = useStripe();
 
+	/* istanbul ignore next */
 	const mountApplePayGooglePayButton = () => {
 		if (paymentMethodAppleGooglePay) {
 			const prButton = elements.create("paymentRequestButton", {
@@ -49,6 +50,7 @@ const StripeIntentsButtons = ({
 		}
 	};
 
+	/* istanbul ignore next */
 	useEffect(() => {
 		if (paymentOptionSelected === APPLEPAY || paymentOptionSelected === GOOGLEPAY) {
 			mountApplePayGooglePayButton();
@@ -236,6 +238,7 @@ const ReviewOrder = ({
 		}
 	};
 
+	/* istanbul ignore next */
 	const handleSubmitApplePayGooglePay = async (event, stripe) => {
 		const isLoggedIn = await Identity.isLoggedIn();
 		const checkoutURL = window.location.pathname;

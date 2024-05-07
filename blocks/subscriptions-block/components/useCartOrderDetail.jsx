@@ -5,71 +5,7 @@ import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
 
 import { ARCXP_CART, ARCXP_ORDERNUMBER, verifyJSON } from "../utils/constants";
-
-const getPricingStrategy = async ({ origin, priceCode }) => {
-	const dateMidnight = new Date();
-	dateMidnight.setUTCHours(0, 0, 0, 0);
-
-	return fetch(
-		`${origin}/retail/public/v1/pricing/paymentInfo/${priceCode}/1/${dateMidnight.getTime()}`,
-		{},
-	).then((res) => res.json());
-};
-
-const getProduct = async ({ origin, sku }) =>
-	fetch(`${origin}/retail/public/v1/product/${sku}`, {}).then((res) => res.json());
-
-export const getItemDetails = async (origin, items) => {
-	let itemDetails = items;
-
-	const fetchPricingStrategy = (priceCode) =>
-		getPricingStrategy({
-			origin,
-			priceCode,
-		});
-
-	const fetchProduct = (sku) =>
-		getProduct({
-			origin,
-			sku,
-		});
-
-	await Promise.all(
-		itemDetails.map((item) =>
-			fetchPricingStrategy(item?.priceCode).then((priceSummary) => ({
-				...item,
-				priceName: priceSummary?.pricingStrategy?.name,
-				priceDescription: priceSummary?.pricingStrategy?.description,
-				priceSummary: priceSummary?.pricingStrategy?.summary,
-				rates: priceSummary?.pricingStrategy?.rates,
-				taxInclusive: priceSummary?.pricingStrategy?.taxInclusive,
-			})),
-		),
-	).then((results) => {
-		itemDetails = results;
-	});
-
-	await Promise.all(
-		itemDetails.map((item) =>
-			fetchProduct(item?.sku).then((productSummary) => ({
-				...item,
-				productAttributes:
-					typeof productSummary?.attributes !== "undefined" &&
-					productSummary?.attributes?.length !== 0
-						? productSummary?.attributes.map((feature) => ({
-								featureText: feature.value,
-								id: feature?.id,
-							}))
-						: [],
-				productDescription: productSummary?.description,
-			})),
-		),
-	).then((results) => {
-		itemDetails = results;
-	});
-
-	return itemDetails;
-};
+import getItemDetails from "../utils/itemDetails";
 
 const useCartOrderDetail = (paypalToken) => {
 	const { Identity } = useIdentity();
@@ -173,36 +109,47 @@ const useCartOrderDetail = (paypalToken) => {
 			const itemCart = getCartItemFromLocalstorge();
 
 			if (orderNumberPayPal && paypalToken) {
-				getLastPendingOrder().then((lastOrder) => {
-					getOrderDetail(lastOrder?.orderNumber).then((lastOrderDetail) => {
-						Sales.clearCart().then(() => {
-							const items = lastOrderDetail.items.map((item) => {
-								const { sku, priceCode, quantity } = item;
-								return { sku, priceCode, quantity };
+				getLastPendingOrder()
+					.then((lastOrder) => {
+						getOrderDetail(lastOrder?.orderNumber)
+							.then((lastOrderDetail) => {
+								Sales.clearCart()
+									.then(() => {
+										const items = lastOrderDetail.items.map((item) => {
+											const { sku, priceCode, quantity } = item;
+											return { sku, priceCode, quantity };
+										});
+										Sales.addItemToCart(items).then((newCart) => {
+											getItemDetails(origin, newCart?.items).then((newDetails) => {
+												setCartDetail({ ...newCart, items: newDetails });
+												setIsFetchingCartOrder(false);
+											});
+										});
+									})
+									.catch(() => {
+										setIsFetchingCartOrder(false);
+									});
+							})
+							.catch(() => {
+								setIsFetchingCartOrder(false);
 							});
-							Sales.addItemToCart(items).then((newCart)=>{
-								getItemDetails(origin, newCart?.items).then((newDetails) => {
-									setCartDetail({ ...newCart, items: newDetails });
-									setIsFetchingCartOrder(false);
-								});
-							});
-						}).catch(()=>{
-							setIsFetchingCartOrder(false);
-						});
-					}).catch(()=>{
-						setIsFetchingCartOrder(false);
 					})
-				}).catch(()=>{
-					setIsFetchingCartOrder(false);
-				});
+					.catch(() => {
+						setIsFetchingCartOrder(false);
+					});
 			} else {
 				getCartDetails().then((cart) => {
 					if (cart?.items?.length) {
 						// There are items into the cart, we return cart
-						getItemDetails(origin, cart?.items).then((newDetails) => {
-							setCartDetail({ ...cart, items: newDetails });
-							setIsFetchingCartOrder(false);
-						});
+						getItemDetails(origin, cart?.items)
+							.then((newDetails) => {
+								setCartDetail({ ...cart, items: newDetails });
+								setIsFetchingCartOrder(false);
+							})
+							.catch(() => {
+								setCartDetail(cart);
+								setIsFetchingCartOrder(false);
+							});
 					} else {
 						// There are no items into the cart, we will check last pending order & items in localStorage
 						let lastPendingOrder;

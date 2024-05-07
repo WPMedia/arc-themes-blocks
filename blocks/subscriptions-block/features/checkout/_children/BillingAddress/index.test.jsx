@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import '@testing-library/jest-dom';
-import BillingAddress from "./index";
 
+import BillingAddress from "./index";
 
 jest.mock("fusion:properties", () =>
 	jest.fn(() => ({

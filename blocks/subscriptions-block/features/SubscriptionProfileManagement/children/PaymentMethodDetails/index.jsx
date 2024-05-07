@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { usePhrases, Paragraph, Icon } from "@wpmedia/arc-themes-components";
 import usePrice from "../../../../components/usePrice";
-import {getNextRate} from "../../../../components/utils";
+import {getNextRate, getLocalDateString} from "../../../../components/utils";
 import {NextRate} from "../../../../components/PriceRates";
 
 const PaymentString = ({sub}) => {
@@ -18,7 +18,7 @@ const NextBillStatement = ({price}) => {
   const phrases = usePhrases();
   const currency = price?.pricingStrategy?.currencyCode;
   const amount = `${currency === "USD" ? "$" : `${currency} `}${price?.price}`;
-  const date = new Date(price?.paymentDate).toLocaleDateString(undefined, {month: 'long', day: 'numeric', year: 'numeric'})
+  const date = getLocalDateString(price?.paymentDate);
   return <Paragraph>{phrases.t("subscriptions-block.subscription-profile-management-payment-method-details-billing-statement", { amount, date })}</Paragraph>
 };
 
@@ -45,7 +45,7 @@ const PaymentMethodDetails = ({sub, className, setPrice}) => {
         <span className={`${className}-title-span`}>
           {phrases.t("subscription-block.shared-Payment-method")}
           <div className={`${className}-title-payment-info`}>
-            <Icon name={sub?.currentPaymentMethod?.creditCardType} viewBox="0 0 24 16"/>
+            {sub?.currentPaymentMethod?.creditCardType && <Icon name={sub?.currentPaymentMethod?.creditCardType} viewBox="0 0 24 16"/>}
             <Paragraph><PaymentString sub={sub} /></Paragraph>
           </div>
         </span>

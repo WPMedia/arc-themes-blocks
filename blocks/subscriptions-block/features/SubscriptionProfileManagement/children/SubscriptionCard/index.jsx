@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Divider, Paragraph, usePhrases } from "@wpmedia/arc-themes-components";
+import { getLocalDateString } from "../../../../components/utils";
 import BasicSubscriptionDetail, {ACTIVE, CANCELED, TERMINATED } from '../BasicSubscriptionDetail';
 import PaymentMethodDetails from '../PaymentMethodDetails';
 import BillingAddressDetails from "../BillingAddressDetails";
@@ -18,8 +19,8 @@ const SubscriptionCard = ({className, sub, customFields, setSelectedSub, setIsCa
 
   const startEvent = sub?.events?.find(e => e?.eventType === "START_SUBSCRIPTION");
   const terminateEvent = sub?.events?.find(e => e?.eventType === "TERMINATE_SUBSCRIPTION");
-  const startDate = new Date(startEvent?.eventDateUTC).toLocaleDateString(undefined, {month: 'long', day: 'numeric', year: 'numeric'})
-  const terminateDate = new Date(terminateEvent?.eventDateUTC).toLocaleDateString(undefined, {month: 'long', day: 'numeric', year: 'numeric'})
+  const startDate = getLocalDateString(startEvent?.eventDateUTC);
+  const terminateDate = getLocalDateString(terminateEvent?.eventDateUTC);
 
   useEffect(() => {
     setStatus(getStatus(sub));

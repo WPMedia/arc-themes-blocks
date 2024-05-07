@@ -22,8 +22,7 @@ const getBillingCount = (rate) => {
 }
 
 const getBillingFrequency = (rate) => {
-  if (rate?.billingFrequency === 'OneTime' && rate?.duration === 'UntilCancelled') return rate?.duration;
-  if (rate?.billingFrequency === 'OneTime' && rate?.duration !== 'UntilCancelled') return rate?.duration;
+  if (rate?.billingFrequency === 'OneTime' && rate?.duration) return rate?.duration;
   return rate?.billingFrequency;
 }
 
@@ -89,11 +88,12 @@ export const getCyclesCurrentRate = rate => {
 
 export const getNextRate = (currentCycle, price) => {
   let allCyclesInPrice = [];
+  const rates = price?.rates || []
   // eslint-disable-next-line
-  for (const rate of price.rates) {
-    const cyclesCurrentRate = getCyclesCurrentRate(rate);
+  for (let i = 0; i < rates?.length; i += 1) {
+    const cyclesCurrentRate = getCyclesCurrentRate(rates[i]);
     allCyclesInPrice = [...allCyclesInPrice, ...cyclesCurrentRate];
-    if (rate.duration === 'UntilCancelled') {
+    if (rates[i].duration === 'UntilCancelled') {
       break;
     }
   }
@@ -104,3 +104,5 @@ export const getNextRate = (currentCycle, price) => {
     return allCyclesInPrice[currentCycle];
   
 };
+
+export const getLocalDateString = (date) =>  new Date(date).toLocaleDateString(undefined, {month: 'long', day: 'numeric', year: 'numeric'});

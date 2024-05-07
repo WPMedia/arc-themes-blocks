@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Paragraph, useSales, usePhrases } from "@wpmedia/arc-themes-components";
+import { getLocalDateString } from "../../../../components/utils";
 import SubscriptionCard from "../SubscriptionCard";
 import SubscriptionOverlay from "../../../../components/SubscriptionOverlay";
 
@@ -52,7 +53,7 @@ const SubscriptionProfileManagementList = ({subscriptions, fetchSubs, className,
     }
   }
 
-  const nextPaymentDate = new Date(selectedPrice?.paymentDate).toLocaleDateString(undefined, {month: 'long', day: 'numeric', year: 'numeric'})
+  const nextPaymentDate = getLocalDateString(selectedPrice?.paymentDate);
   const closeCancelModal = () => {
     setSelectedSub(null);
     setIsCancelModalOpen(false);

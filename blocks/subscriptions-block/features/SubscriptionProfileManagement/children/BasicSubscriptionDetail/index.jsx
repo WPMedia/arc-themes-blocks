@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { usePhrases, Stack, Button, Badge, Icon, Paragraph } from "@wpmedia/arc-themes-components";
+import { getLocalDateString } from "../../../../components/utils";
 
 export const ACTIVE = "Active";
 export const CANCELED = "Canceled";
@@ -51,11 +52,11 @@ const BasicSubscriptionDetail = ({sub, customFields, setSelectedSub, className, 
   const [showCancelInfo, setShowCancelInfo] = useState(true);
   const startEvent = sub?.events?.find(s => s?.eventType === "START_SUBSCRIPTION");
   const startDate = startEvent?.eventDateUTC;
-  const dateString = new Date(startDate).toLocaleDateString(undefined, {month: 'long', day: 'numeric', year: 'numeric'})
+  const dateString = getLocalDateString(startDate);
   const cancelEvent = sub?.events?.find(s => s?.eventType === "CANCEL_SUBSCRIPTION");
 
-  const cancelDateString = new Date(cancelEvent?.eventDateUTC).toLocaleDateString(undefined, {month: 'long', day: 'numeric', year: 'numeric'});
-  const nextEventDateString = new Date(sub?.nextEventDateUTC).toLocaleDateString(undefined, {month: 'long', day: 'numeric', year: 'numeric'});
+  const cancelDateString = getLocalDateString(cancelEvent?.eventDateUTC);
+  const nextEventDateString = getLocalDateString(sub?.nextEventDateUTC);
 
   return (
     <Stack  className={`${className}-div`}>

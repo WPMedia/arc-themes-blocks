@@ -724,7 +724,7 @@
 	"subscriptions-subscription-list-detail-billing-subtitle": {
 		"styles": {
 			"default": {
-				"min-width": "max-content",
+				"min-inline-size": "max-content",
 				"display": "block"
 			}
 		}
@@ -763,7 +763,7 @@
 				"display": "flex",
 				"flex-direction": "row",
 				"justify-content": "space-between",
-				"height": "max-content",
+				"block-size": "max-content",
 				"align-content": "center",
 				"flex-wrap": "wrap"
 			}
@@ -785,7 +785,7 @@
 				"font-weight": "700",
 				"line-height": "28px",
 				"align-self": "center",
-				"width": "100%",
+				"inline-size": "100%",
 				"margin-block-end": "var(--global-spacing-2)"
 			}
 		}
@@ -798,7 +798,7 @@
 				"font-weight": "400",
 				"line-height": "24px",
 				"align-self": "center",
-				"height": "24px",
+				"block-size": "24px",
 				"text-decoration": "underline",
 				"padding-inline-start": "0"
 			}
@@ -811,7 +811,7 @@
 				"font-family": "Inter",
 				"font-weight": "400",
 				"line-height": "18px",
-				"height": "18px",
+				"block-size": "18px",
 				"color": "var(--text-color-subtle)",
 				"margin-block-end": "var(--global-spacing-4)"
 			}
@@ -824,7 +824,7 @@
 				"font-family": "Inter",
 				"font-weight": "500",
 				"line-height": "16px",
-				"height": "24px",
+				"block-size": "24px",
 				"color": "var(--text-color)"
 
 			}
@@ -1028,12 +1028,12 @@
 			"default": {
 				"background-color": "var(--global-white)",
 				"margin-block-start": "-105px",
-				"top": "50%",
+				"inset-block-start": "50%",
 				"position": "absolute",
-				"left": "50%",
-				"width": "475px",
-				"height": "211px",
-				"min-height": "max-content",
+				"inset-inline-start": "50%",
+				"inline-size": "475px",
+				"block-size": "211px",
+				"min-block-size": "max-content",
 				"margin-inline-start": "-237px",
 				"box-shadow": "4px 8px 8px 0px #999999",
 				"padding-block-end": "var(--global-spacing-4)",

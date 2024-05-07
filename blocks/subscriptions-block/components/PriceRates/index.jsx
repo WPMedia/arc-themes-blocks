@@ -124,26 +124,24 @@ export const PriceRate = (rate, rateCurrency) => {
 
 	const amount = getAmount(rate?.amount, rateCurrency);
 
-	let rateString = "";
 	let fullRateString = "";
 
 	if (duration === UNTIL_CANCELLED) {
 		if (billingCount <= 1) {
-			rateString = ratesSingleUntilCancelled(billingFrequency);
+			const rateString = ratesSingleUntilCancelled(billingFrequency);
 			fullRateString = `${amount} ${rateString ? phrases.t(rateString) : ""}`;
 		} else {
-			rateString = ratesUntilCancelled(billingFrequency);
+			const rateString = ratesUntilCancelled(billingFrequency);
 			fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount }) : ""}`;
 		}
-	}else{
-		if (billingCount === durationCount && billingFrequency === duration) {
-			rateString = ratesOneTime(billingFrequency);
-			fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount }) : ""}`;
-		} else {
-			rateString = ratesDefaultMessage(billingFrequency, duration);
-			fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount, durationCount }) : ""}`;
-		}
+	} else if (billingCount === durationCount && billingFrequency === duration) {
+		const rateString = ratesOneTime(billingFrequency);
+		fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount }) : ""}`;
+	} else {
+		const rateString = ratesDefaultMessage(billingFrequency, duration);
+		fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount, durationCount }) : ""}`;
 	}
+
 	return fullRateString;
 };
 

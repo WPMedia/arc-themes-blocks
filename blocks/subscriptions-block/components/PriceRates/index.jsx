@@ -146,8 +146,55 @@ export const PriceRate = (rate, rateCurrency) => {
 			fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount, durationCount }) : ""}`;
 		}
 	}
-	
 	return fullRateString;
+};
+
+export const NextRate = ({ nextRate }) => {
+	const phrases = usePhrases();
+	const { billingCount, durationCount, billingFrequency, duration } = nextRate;
+
+	let rateString = "";
+	let rate = "";
+
+	const getFinalString = (r) =>
+		phrases.t(
+			"subscriptions-block.subscription-profile-management-payment-method-details-billing-frequency",
+			{ rate: r },
+		);
+
+	if (duration === UNTIL_CANCELLED) {
+		if (billingCount <= 1) {
+			rateString = ratesSingleUntilCancelled(billingFrequency) ?? "";
+			rate = `${rateString ? phrases.t(rateString) : ""}`;
+			return getFinalString(rate);
+		}
+		rateString = ratesUntilCancelled(billingFrequency);
+		rate = `${rateString ? phrases.t(rateString, { billingCount }) : ""}`;
+		return getFinalString(rate);
+	}
+
+	if (billingCount === durationCount && billingFrequency === duration) {
+		rateString = ratesOneTime(billingFrequency);
+		rate = `${rateString ? phrases.t(rateString, { billingCount }) : ""}`;
+		return getFinalString(rate);
+	}
+
+	rateString = ratesDefaultMessage(billingFrequency, duration);
+	rate = `${rateString ? phrases.t(rateString, { billingCount, durationCount }) : ""}`;
+	return getFinalString(rate);
+};
+
+export const getCurrentBillingFrequency = (rate) => {
+	if (rate?.billingCount === rate?.durationCount && rate?.billingFrequency === rate?.duration) {
+		return `${ratesOneTime(rate?.billingFrequency)}`;
+	}
+	if (rate?.duration === UNTIL_CANCELLED) {
+		if (rate?.billingCount <= 1) {
+			return `${ratesSingleUntilCancelled(rate?.billingFrequency)}`;
+		}
+		return `${ratesUntilCancelled(rate?.billingFrequency)}`;
+	}
+	return `${ratesDefaultMessage(rate?.billingFrequency, rate?.duration)}`;
 };
 
 const PriceRates = ({ priceRates, orderCurrency }) => {

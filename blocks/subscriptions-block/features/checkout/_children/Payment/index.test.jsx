@@ -112,7 +112,7 @@ describe("Payment component", () => {
 				order={order}
 			/>,
 		);
-		expect(screen.queryByTestId("PayPal")).not.toBeNull();
+		expect(screen.getByTestId("PayPal")).not.toBeNull();
 	});
 
 	it("renders Payment component, paypal & stripeIntents", async () => {
@@ -141,7 +141,7 @@ describe("Payment component", () => {
 			</Elements>,
 		);
 		expect(screen.getByText("checkout-block.payment-type.creditDebitCard")).not.toBeNull();
-        expect(screen.queryByTestId("PayPal")).not.toBeNull();
+        expect(screen.getByTestId("PayPal")).not.toBeNull();
 	});
 
     it("renders review component, if click on continue", async () => {
@@ -159,7 +159,7 @@ describe("Payment component", () => {
 			/>,
 		);
 
-		expect(screen.queryByTestId("PayPal")).not.toBeNull();
+		expect(screen.getByTestId("PayPal")).not.toBeNull();
 
         const button = screen.getByText('checkout-block.continue');
         fireEvent.click(button);

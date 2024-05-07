@@ -1,4 +1,3 @@
-import React from "react";
 import { waitFor, renderHook } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import usePayPalPaymentRedirect from "./usePayPalPaymentRedirect";
@@ -111,7 +110,7 @@ describe("usePayPalPaymentRedirect Hook", () => {
         jest.spyOn(require("@wpmedia/arc-themes-components"), "useSales").mockReturnValue({
 			Sales: {
                 isInitialized: true,
-				finalizePayment: jest.fn(() => Promise.reject("error code"))
+				finalizePayment: jest.fn(() => Promise.reject(new Error({code: 0})))
 			},
 		});
 
@@ -125,7 +124,7 @@ describe("usePayPalPaymentRedirect Hook", () => {
 		expect(result.current.isCheckingPaypal).toBe(false);
 
         await waitFor(() => {
-            expect(result.current.error).toBe("error code");
+            expect(result.current.error).toEqual(new Error({ code: 0 }));
         });
 
 	});

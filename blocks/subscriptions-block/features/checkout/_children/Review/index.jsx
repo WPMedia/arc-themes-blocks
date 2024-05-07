@@ -23,7 +23,7 @@ import {
 	RECAPTCHA_TOKEN,
 } from "../../../../utils/constants";
 
-const StripeIntentsButtons = ({
+export const StripeIntentsButtons = ({
 	paymentOptionSelected,
 	paymentMethodAppleGooglePay,
 	handleSubmitStripeIntents,
@@ -74,7 +74,7 @@ const StripeIntentsButtons = ({
 	}
 
 	if (paymentOptionSelected === APPLEPAY || paymentOptionSelected === GOOGLEPAY) {
-		return <div id="ApplePay-payment-request-button" />;
+		return <div data-testid="ApplePay-payment-request-button"><div id="ApplePay-payment-request-button"/></div>;
 	}
 
 	return null;

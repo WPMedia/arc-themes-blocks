@@ -99,12 +99,8 @@ export const StripeIntentsOptions = ({
 
             paymentRequest.canMakePayment().then((res) => {
                 if (res) {
-                    if (res?.applePay) {
-                        setIsApplePaySupported(true);
-                    }
-                    if (res?.googlePay) {
-                        setIsGooglePaySupported(true);
-                    }
+					setIsApplePaySupported(res?.applePay);
+                    setIsGooglePaySupported(res?.googlePay);
                     setPaymentMethodAppleGooglePay(paymentRequest);
                 }
             });

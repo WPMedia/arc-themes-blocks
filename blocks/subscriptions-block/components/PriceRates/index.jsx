@@ -135,9 +135,7 @@ export const PriceRate = (rate, rateCurrency) => {
 			rateString = ratesUntilCancelled(billingFrequency);
 			fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount }) : ""}`;
 		}
-	}
-
-	if (duration !== UNTIL_CANCELLED) {
+	}else{
 		if (billingCount === durationCount && billingFrequency === duration) {
 			rateString = ratesOneTime(billingFrequency);
 			fullRateString = `${amount} ${rateString ? phrases.t(rateString, { billingCount }) : ""}`;
@@ -199,8 +197,7 @@ export const getCurrentBillingFrequency = (rate) => {
 
 const PriceRates = ({ priceRates, orderCurrency }) => {
 	if (priceRates && priceRates.length && currency) {
-		let priceRateStrings = priceRates.map((rate) => PriceRate(rate, orderCurrency));
-		priceRateStrings = priceRateStrings.join(", ");
+		const priceRateStrings = priceRates.map((rate) => PriceRate(rate, orderCurrency)).join(", ");
 		return <span>{priceRateStrings}</span>;
 	}
 

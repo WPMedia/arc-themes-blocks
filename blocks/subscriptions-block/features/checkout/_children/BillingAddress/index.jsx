@@ -83,16 +83,16 @@ const BillingAddress = ({
 					captchaToken,
 				);
 				getItemDetails(origin, order?.items).then((newOrderDetails) => {
-					setOrder({...order, items: newOrderDetails});
+					setOrder({ ...order, items: newOrderDetails });
 					setIsOpen((state) => ({ ...state, billingAddress: false, payment: true }));
 					setIsComplete((state) => ({ ...state, billingAddress: true }));
 					setError();
 				});
 			} catch (e) {
 				setResetRecaptcha(!resetRecaptcha);
-				if(e.code === '130001'){
-					setCaptchaError(phrases.t("identity-block.login-form-error.captcha-token-invalid"))
-				}else{
+				if (e.code === "130001") {
+					setCaptchaError(phrases.t("identity-block.login-form-error.captcha-token-invalid"));
+				} else {
 					setError(e);
 				}
 			}
@@ -102,13 +102,7 @@ const BillingAddress = ({
 	const handleInputChange = (name, entry) => {
 		const valid = formRef.current.checkValidity();
 		if (isValid !== valid) setIsValid(valid);
-		if (name === "country") {
-			if (entry.value === "US") {
-				setIsUS(true);
-			} else {
-				setIsUS(false);
-			}
-		}
+		setIsUS(entry.value === "US");
 		entriesRef.current[name] = entry.value;
 	};
 

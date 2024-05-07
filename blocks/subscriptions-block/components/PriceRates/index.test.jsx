@@ -100,6 +100,45 @@ describe("utils", () => {
 		expect(PriceRate(rate3, "USD")).toBe("$10 checkout-block.rates-default-day-month");
 	});
 
+	it("NextRate", () => {
+		const rate1 = {
+		  duration: 'Month',
+		  durationCount: 1,
+		  billingCount: 1,
+		  billingFrequency: 'Month',
+		  amount: 10
+		}
+	
+		expect(NextRate({nextRate: rate1})).toBe("subscriptions-block.subscription-profile-management-payment-method-details-billing-frequency");
+		});
+	
+	  it("getCurrentBillingFrequency", () => {
+		const rate1 = {
+		  duration: 'Month',
+		  durationCount: 1,
+		  billingCount: 1,
+		  billingFrequency: 'Month',
+		  amount: 10
+		}
+		const rate2 = {
+		  duration: 'Year',
+		  durationCount: 1,
+		  billingCount: 4,
+		  billingFrequency: 'Month',
+		  amount: 10
+		}
+		const rate3 = {
+		  duration: 'Month',
+		  durationCount: 1,
+		  billingCount: 10,
+		  billingFrequency: 'Day',
+		  amount: 10
+		}
+		expect(getCurrentBillingFrequency(rate1)).toBe("checkout-block.rates-oneTime-month");
+		expect(getCurrentBillingFrequency(rate2)).toBe("checkout-block.rates-default-month-year");
+		expect(getCurrentBillingFrequency(rate3)).toBe("checkout-block.rates-default-day-month");
+		});
+
 	it("PriceRates", () => {
 		const rates = [
 			{

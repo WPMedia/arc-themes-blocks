@@ -6,8 +6,6 @@ const STRIPE_PAYMENT_METHOD_ID = 18;
 const PAYPAL_METHOD_ID = 10;
 
 export const getPaymentMethodByID = (paymentOptions, paymentMethodTypeID, paymentMethodID) => {
-	let minStripeIntentsID;
-
 	const stripeDefault = paymentOptions?.find(
 		(opts) =>
 			opts?.paymentMethodType === paymentMethodTypeID && opts?.paymentMethodID === paymentMethodID,
@@ -22,10 +20,9 @@ export const getPaymentMethodByID = (paymentOptions, paymentMethodTypeID, paymen
 			(opts) => opts?.paymentMethodType === paymentMethodTypeID,
 		);
 
-		minStripeIntentsID = allStripeIntents.reduce((res, obj) =>
+		return allStripeIntents.reduce((res, obj) =>
 			obj.paymentMethodID < res.paymentMethodID ? obj : res,
 		);
-		return minStripeIntentsID;
 	}
 
 	return undefined;

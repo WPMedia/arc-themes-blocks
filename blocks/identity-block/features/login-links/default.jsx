@@ -25,7 +25,9 @@ const LoginLinks = ({ customFields }) => {
 	const { locale } = siteProperties;
 	const phrases = getTranslatedPhrases(locale);
 
-	if (!showLogin && !showForgot && !showSignUp && !showLoginWithoutPassword) {
+	const logInLinks = [showLogin, showForgot, showSignUp, showLoginWithoutPassword];
+
+	if (!logInLinks.includes(true)) {
 		return null;
 	}
 

@@ -89,7 +89,7 @@ export const getCyclesCurrentRate = rate => {
 export const getNextRate = (currentCycle, price) => {
   let allCyclesInPrice = [];
   const rates = price?.rates || []
-  // eslint-disable-next-line
+  
   for (let i = 0; i < rates?.length; i += 1) {
     const cyclesCurrentRate = getCyclesCurrentRate(rates[i]);
     allCyclesInPrice = [...allCyclesInPrice, ...cyclesCurrentRate];

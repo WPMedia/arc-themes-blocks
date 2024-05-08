@@ -29,9 +29,6 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	})),
 	useIdentity: jest.fn(() => ({
 		isInitialized: true,
-		// Identity: {
-		// 	isLoggedIn: jest.fn(() => false),
-		// },
 	})),
 }));
 

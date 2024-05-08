@@ -8,7 +8,7 @@ const BLOCK_CLASS_NAME = "b-login-links";
 const defaultLoginURL = "/account/login/";
 const defaultForgotURL = "/account/forgot-password/";
 const defaultSignUpURL = "/account/signup/";
-const defaultRequestOneTimePasswordURL = "/request-one-time-password/";
+const defaultRequestOneTimePasswordURL = "/account/request-one-time/";
 
 const LoginLinks = ({ customFields }) => {
 	const {

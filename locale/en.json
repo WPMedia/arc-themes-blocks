@@ -173,7 +173,14 @@
 		"identity-block.terms-service-privacy-text": "By creating an account, you agree to the <a href='%{termsAndPrivacyURL}'>Terms of Service and acknowledge our Privacy Policy<\/a>",
 		"identity-block.update-email-error": "There's been an error updating your email address",
 		"identity-block.update-password-error": "There's been an error updating your password",
-		"identity-block.username": "Username"
+		"identity-block.username": "Username",
+		"identity-block.ota-button": "Log in without password",
+		"identity-block.ota-headline": "Request one time log in link",
+		"identity-block.ota-subheadline": "To sign in without a password, enter your email below and you will receive a one time log in link.",
+		"identity-block.ota-form-button": "Send log in link",
+		"identity-block.ota-input-placeholder": "Enter email address",
+		"identity-block.ota-success-heading": "Check Your Email",
+		"identity-block.ota-success-body": "If there's an account associated with <b>%{userEmail}<\/b>, you'll get a link in your inbox that will automatically sign you in to your account. The link will expire in 24 hours."
 	},
 	"lead-art-block": {
 		"lead-art-block.fullscreen-enter": "Enter full screen mode displaying the lead image",

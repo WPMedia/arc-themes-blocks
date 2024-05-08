@@ -1701,5 +1701,26 @@
 	},
 	"identity-block.signup-form-error.identity-already-exists": {
 		"en": "Account already exists"
+	},
+	"identity-block.ota-button": {
+		"en": "Log in without password"
+	},
+	"identity-block.ota-headline": {
+		"en": "Request one time log in link"
+	},
+	"identity-block.ota-subheadline": {
+		"en": "To sign in without a password, enter your email below and you will receive a one time log in link."
+	},
+	"identity-block.ota-form-button": {
+		"en": "Send log in link"
+	},
+	"identity-block.ota-input-placeholder": {
+		"en": "Enter email address"
+	},
+	"identity-block.ota-success-heading": {
+		"en": "Check Your Email"
+	},
+	"identity-block.ota-success-body": {
+		"en": "If there's an account associated with <b>%{userEmail}</b>, you'll get a link in your inbox that will automatically sign you in to your account. The link will expire in 24 hours."
 	}
 }

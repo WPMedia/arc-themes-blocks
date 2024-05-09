@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { useIdentity } from "@wpmedia/arc-themes-components";
+import { useIdentity, useSales } from "@wpmedia/arc-themes-components";
 import Checkout from "./default";
 
 import useCartOrderDetail from "../../components/useCartOrderDetail";
@@ -14,7 +14,6 @@ jest.mock("./_children/BillingAddress", () => () => <div>Billing Address</div>);
 const assignMock = jest.fn(() => "checkoutURL");
 delete window.location;
 window.location = { assign: assignMock, href: "checkoutURL" };
-
 
 jest.mock("fusion:properties", () =>
 	jest.fn(() => ({
@@ -40,7 +39,7 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 				) || null,
 		),
 		Identity: {
-			isLoggedIn: jest.fn(async () => false),
+			isLoggedIn: jest.fn(async () => true),
 			getUserProfile: jest.fn(async () => {}),
 		},
 	})),
@@ -51,6 +50,11 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 		isInitialized: true,
 		Sales: {
 			getCart: jest.fn(async () => {}),
+			getPaymentOptions: jest.fn().mockResolvedValue([
+                { paymentMethodID: 4336, paymentMethodType: 18 },
+                { paymentMethodID: 4339, paymentMethodType: 10 },
+                { paymentMethodID: 4340, paymentMethodType: 18 },
+            ]),
 		},
 	})),
 	useRecaptcha: jest.fn(async () => ({
@@ -76,41 +80,91 @@ describe("Checkout Feature", () => {
 	afterEach(() => {
 		assignMock.mockClear();
 	});
+
 	it("Redirects user to login url when user is not logged in", async () => {
 		useCartOrderDetail.mockImplementation(() => ({
 			isFetching: false,
 			isFetchingCartOrder: false,
-			isLoggedIn: false,
 			cartDetail: undefined,
 			orderDetail: undefined,
 		}));
+
+		useIdentity.mockReturnValue({
+			Identity: {
+				isLoggedIn: jest.fn(async () => false),
+				getUserProfile: jest.fn(async () => {}),
+			},
+		});
+
+		const checkoutURL = 'checkout'
+		window.location.href = checkoutURL
 
 		render(
 			<Checkout
 				customFields={{
 					loginURL: "/login-url/",
-					checkoutURL: "/checkout/",
 					offerURL: '/offer-url/'
 				}}
 			/>,
 		);
 
-		const windowLocation = window.location.href;
-		await waitFor(() => expect(windowLocation).toBe("/login-url/?redirect=/login-url/?redirect=checkoutURL"));
+		await waitFor(() => expect(window.location.href).toBe(`/login-url/?redirect=${checkoutURL}`));
+	});
+
+	it("Redirects user to offer URL when cart is empty and user isLoggedIn", async () => {
+	
+		useCartOrderDetail.mockImplementation(() => ({
+			isLoggedIn: true
+		}));
+
+		const checkoutURL = 'checkout'
+		window.location.href = checkoutURL
+
+		render(
+			<Checkout
+			customFields={{
+				loginURL: "/login-url/",
+				offerURL: '/offer-url/'
+			}}
+			/>,
+		);
+
+		await waitFor(() => {
+			expect(window.location.href).toBe("/offer-url/?redirect=undefined");
+		});
 	});
 
 	it("show billing address card when user is logged in", async () => {
-		useIdentity.mockImplementation(() => ({
-			getSignedInIdentity: jest.fn(
-				(user) =>
-					user?.identities?.reduce((prev, current) =>
-						prev.lastLoginDate > current.lastLoginDate ? prev : current,
-					) || null,
-			),
-			Identity: {
-				isLoggedIn: jest.fn(async () => true),
-				getUserProfile: jest.fn(async () => {}),
-			},
+		const cart = {
+			total: 20,
+			subtotal: 20,
+			tax: 0,
+			shipping: 0,
+			items: [
+				{
+					sku: "test",
+					quantity: 1,
+					shortDescription: "<p>test-1</p>",
+					name: "test product",
+					price: 20,
+					tax: 0,
+					subtotal: 20,
+					total: 20,
+					priceCode: "YLE801",
+					eventId: null,
+					ownerClientId: null,
+					attributes: [],
+					gift: false,
+				},
+			],
+			currency: "USD",
+			taxSupported: true,
+		};
+
+		useSales.mockImplementation(()=>({
+			Sales: {
+				getCart: jest.fn(() => cart),
+			}
 		}));
 
 		render(
@@ -123,26 +177,5 @@ describe("Checkout Feature", () => {
 		expect(await screen.findByText("2. checkout-block.billingAddress")).toBeInTheDocument();
 	});
 
-	it("Redirects user to offer url when cart is empty and user isLoggedIn", async() =>{
-		useCartOrderDetail.mockImplementation(() => ({
-			isFetching: false,
-			isFetchingCartOrder: false,
-			isLoggedIn: true,
-			cartDetail: undefined,
-			orderDetail: undefined,
-		}));
-
-		render(
-			<Checkout
-				customFields={{
-					loginURL: "/login-url/",
-					checkoutURL: "/checkout/",
-					offerURL: '/offer-url/'
-				}}
-			/>,
-		);
-
-		const windowLocation = window.location.href;
-		await waitFor(() => expect(windowLocation).toBe("/offer-url/?redirect=/offer-url/?redirect=undefined"));
-	});
+	
 });

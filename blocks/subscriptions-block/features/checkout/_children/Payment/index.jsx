@@ -37,6 +37,8 @@ export const StripeIntentsOptions = ({
 	const [isApplePaySupported, setIsApplePaySupported] = useState(false);
 	const [isGooglePaySupported, setIsGooglePaySupported] = useState(false);
 
+	const paymentRequestButton = elements.getElement("paymentRequestButton");
+
 	useEffect(() => {
 		if (billingAddress) {
 			if (!entriesRef?.current?.country)
@@ -104,8 +106,12 @@ export const StripeIntentsOptions = ({
                     setPaymentMethodAppleGooglePay(paymentRequest);
                 }
             });
+
+			if(paymentRequestButton){
+				paymentRequestButton.destroy();
+			}
         }
-    }, [order, stripe, billingAddress, setPaymentMethodAppleGooglePay, titleApplePayGooglePay]);
+    }, [order, stripe, billingAddress, setPaymentMethodAppleGooglePay, titleApplePayGooglePay, paymentRequestButton]);
 
 	useEffect(() => {
 		const getIpAddressCountry = async () => {

@@ -39,31 +39,32 @@ const usePaymentOptions = (stripeIntentsDefaultID, paypalDefaultID) => {
 
 	const { Sales } = useSales();
 
-	const fetchData = async () => {
-		try {
-			const options = await Sales.getPaymentOptions();
-			const stripeSettings = getPaymentMethodByID(
-				options,
-				STRIPE_PAYMENT_METHOD_ID,
-				stripeIntentsDefaultID,
-			);
-			setStripeIntents(stripeSettings);
-
-			const paypalSettings = getPaymentMethodByID(options, PAYPAL_METHOD_ID, paypalDefaultID);
-			setPaypal(paypalSettings);
-			
-			setPaymentOpts(options);
-			setIsFetching(false);
-		} catch (e) {
-			setError(e);
-			setIsFetching(false);
-		}
-	};
-
 	useEffect(() => {
+		const fetchData = async () => {
+			if (Sales && !error && isFetching) {
+				try {
+					const options = await Sales.getPaymentOptions();
+					const stripeSettings = getPaymentMethodByID(
+						options,
+						STRIPE_PAYMENT_METHOD_ID,
+						stripeIntentsDefaultID,
+					);
+					setStripeIntents(stripeSettings);
+		
+					const paypalSettings = getPaymentMethodByID(options, PAYPAL_METHOD_ID, paypalDefaultID);
+					setPaypal(paypalSettings);
+					
+					setPaymentOpts(options);
+					setIsFetching(false);
+				} catch (e) {
+					setError(e);
+					setIsFetching(false);
+				}
+			}
+		};
+
 		fetchData();
-		// eslint-disable-next-line
-	}, []);
+	}, [Sales, stripeIntentsDefaultID, paypalDefaultID, error, isFetching]);
 
 	return {
 		paymentOpts,

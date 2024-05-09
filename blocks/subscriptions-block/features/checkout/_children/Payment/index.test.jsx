@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { Elements } from "@stripe/react-stripe-js";
+import { Elements, useElements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
 import Payment from "./index";
@@ -102,6 +102,12 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	Icon: ({ name }) => <div data-testid={name} />,
 }));
 
+jest.mock("@stripe/react-stripe-js", () => ({
+	__esModule: true,
+	...jest.requireActual("@stripe/react-stripe-js"),
+	useElements: jest.fn(),
+  }));
+
 describe("Payment component", () => {
 	it("renders Payment component, only PayPal", async () => {
 		render(
@@ -116,12 +122,9 @@ describe("Payment component", () => {
 	});
 
 	it("renders Payment component, paypal & stripeIntents", async () => {
-
-        jest.mock("@stripe/stripe-js", () => ({
-            loadStripe: jest.fn().mockResolvedValue({
-              elements: jest.fn(),
-            }),
-          }));
+		useElements.mockReturnValue({
+			getElement: jest.fn()
+		  });
 
 		jest.mock("./index", () => ({
 			StripeIntentsOptions: () => (

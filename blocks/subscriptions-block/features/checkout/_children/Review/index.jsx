@@ -36,27 +36,27 @@ export const StripeIntentsButtons = ({
 	const stripe = useStripe();
 
 	/* istanbul ignore next */
-	const mountApplePayGooglePayButton = () => {
-		if (paymentMethodAppleGooglePay) {
-			const prButton = elements.create("paymentRequestButton", {
-				paymentRequest: paymentMethodAppleGooglePay,
-			});
-
-			prButton.mount("#ApplePay-payment-request-button");
-
-			paymentMethodAppleGooglePay.on("paymentmethod", async (e) => {
-				handleSubmitApplePayGooglePay(e, stripe);
-			});
-		}
-	};
-
-	/* istanbul ignore next */
 	useEffect(() => {
 		if (paymentOptionSelected === APPLEPAY || paymentOptionSelected === GOOGLEPAY) {
-			mountApplePayGooglePayButton();
+			if (paymentMethodAppleGooglePay) {
+				const prButton = elements.create("paymentRequestButton", {
+					paymentRequest: paymentMethodAppleGooglePay,
+				});
+
+				prButton.mount("#ApplePay-payment-request-button");
+
+				paymentMethodAppleGooglePay.on("paymentmethod", async (e) => {
+					handleSubmitApplePayGooglePay(e, stripe);
+				});
+			}
 		}
-		// eslint-disable-next-line
-	}, [paymentOptionSelected, APPLEPAY, GOOGLEPAY]);
+	}, [
+		paymentOptionSelected,
+		elements,
+		handleSubmitApplePayGooglePay,
+		paymentMethodAppleGooglePay,
+		stripe,
+	]);
 
 	if (paymentOptionSelected === STRIPEINTENTS) {
 		return (
@@ -74,7 +74,11 @@ export const StripeIntentsButtons = ({
 	}
 
 	if (paymentOptionSelected === APPLEPAY || paymentOptionSelected === GOOGLEPAY) {
-		return <div data-testid="ApplePay-payment-request-button"><div id="ApplePay-payment-request-button"/></div>;
+		return (
+			<div data-testid="ApplePay-payment-request-button">
+				<div id="ApplePay-payment-request-button" />
+			</div>
+		);
 	}
 
 	return null;

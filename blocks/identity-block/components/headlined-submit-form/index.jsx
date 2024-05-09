@@ -36,7 +36,7 @@ const HeadlinedSubmitForm = ({
 			</HeadingSection>
 			<form aria-label={headline} onSubmit={handleSubmit} ref={formRef}>
 				{children}
-				<Button size="medium" variant="primary" fullWidth type="submit">
+				<Button size="large" variant="primary" fullWidth type="submit">
 					{buttonLabel}
 				</Button>
 				{formErrorText ? (

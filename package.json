@@ -66,7 +66,7 @@
 		"@storybook/react-webpack5": "^8.0.8",
 		"@storybook/theming": "^8.0.8",
 		"@stripe/react-stripe-js": "^2.3.1",
-		"@stripe/stripe-js": "^2.1.9",
+		"@stripe/stripe-js": "^3.4.0",
 		"@testing-library/jest-dom": "^6.1.4",
 		"@testing-library/react": "^14.0.0",
 		"@wpmedia/arc-themes-components": "arc-themes-release-version-2.3.1",

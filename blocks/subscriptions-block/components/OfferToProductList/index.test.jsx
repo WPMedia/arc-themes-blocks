@@ -1,8 +1,8 @@
 import React from "react";
-import { act, render } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import OfferToProductList from "./index";
 import useOffer from "../useOffer";
-import OfferCard from "../OfferCard";
 
 const sampleOffer = {
 	name: "All Products Offer",
@@ -182,14 +182,36 @@ jest.mock("fusion:properties", () =>
 
 jest.mock("@arc-publishing/sdk-sales");
 jest.mock("../../components/useOffer");
+
 useOffer.mockReturnValue({
 	offer: sampleOffer,
 	fetchOffer: () => sampleOffer,
 });
 
+  jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	useSales: jest.fn(() => ({
+		isInitialized: true,
+		Sales: {
+			clearCart: jest.fn(async() => {}),
+			addItemToCart: jest.fn(async()=>{})
+		},
+	})),
+	Grid: ({children}) => <div>{children}</div>,
+	Button: ({ onClick, actionText, children }) => <button type="submit" onClick={onClick}><span dangerouslySetInnerHTML={{ __html: actionText }} />{children}</button>,
+	Stack: ({ children }) => <div>{children}</div>,
+	Heading: ({ dangerouslySetInnerHTML }) => (
+		<h1 dangerouslySetInnerHTML={dangerouslySetInnerHTML} />
+	),
+	Icon: () => <svg>Icon</svg>,
+}));
+
 describe("The OfferToProductList component", () => {
 	it("renders the correct number of offer cards", () => {
-		const { container } =  render(
+        
+		jest.mock('../OfferCard');
+
+		render(
 			<OfferToProductList
 				isLoggedIn
 				loginURL="/login/"
@@ -198,10 +220,24 @@ describe("The OfferToProductList component", () => {
 			/>
 		);
 
-		act(() => {
-			container.setProps({});
-		});
+		const buttons = screen.queryAllByRole("button");
+		expect(buttons.length).toBe(4);
+	});
 
-		expect(container.find(OfferCard)).toHaveLength(4);
+	it("Add item into cart", ()=>{
+
+		jest.mock('../OfferCard');
+
+		render(
+			<OfferToProductList
+				isLoggedIn
+				loginURL="/login/"
+				checkoutURL="/checkout/"
+				offer={sampleOffer}
+			/>
+		);
+
+		const button = screen.getByText('10/mo');
+		fireEvent.click(button);
 	});
 });

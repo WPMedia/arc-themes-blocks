@@ -88,10 +88,12 @@
 					@include scss.block-components("checkout-payment-form--stripe-countryZipCode");
 					@include scss.block-properties("checkout-payment-form--stripe-countryZipCode");
 				}
+
 				&--stripe-row {
 					@include scss.block-components("checkout-payment-form--stripe-row");
 					@include scss.block-properties("checkout-payment-form--stripe-row");
 				}
+				
 				&--stripe-error {
 					@include scss.block-components("checkout-payment-form--stripe-error");
 					@include scss.block-properties("checkout-payment-form--stripe-error");

@@ -19,14 +19,6 @@ describe("Identity Password Reset Feature", () => {
 				isInitialized: true,
 			})),
 		}));
-		// useIdentity.mockImplementation(() => ({
-		// 	Identity: {
-		// 		isLoggedIn: jest.fn(() => false),
-		// 		getConfig: jest.fn(() => ({})),
-		// 		requestResetPassword: mockReset,
-		// 	},
-		// 	isInitialized: true,
-		// }));
 	});
 
 	afterAll(() => {

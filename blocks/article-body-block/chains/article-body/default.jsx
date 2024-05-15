@@ -167,7 +167,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 					: phrases.t("article-body-block.correction");
 
 			return item.text && item.text.length > 0 ? (
-				<section className={`${BLOCK_CLASS_NAME}__correction`} key={`${type}_${index}_${key}`}>
+				<section className={`${BLOCK_CLASS_NAME}__correction`} key={`${type}_${index}_${key}`} data-testid="correction-section">
 					<HeadingSection>
 						<Heading>{labelText}</Heading>
 						<Paragraph>{item.text}</Paragraph>
@@ -226,6 +226,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 						className="video-container"
 						embedMarkup={item.embed_html}
 						borderRadius={borderRadius}
+						data-testid="video-container"
 					/>
 				</MediaItem>
 			);

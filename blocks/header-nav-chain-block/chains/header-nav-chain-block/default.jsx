@@ -4,7 +4,7 @@ import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import FocusTrap from "focus-trap-react";
-import { Stack, usePhrases } from "@wpmedia/arc-themes-components";
+import { Button, Icon, Stack, usePhrases } from "@wpmedia/arc-themes-components";
 import { useDebouncedCallback } from "use-debounce";
 import { generateNavComponentPropTypes } from "./nav-helper";
 import SectionNav from "./_children/section-nav";
@@ -29,6 +29,7 @@ export function PresentationalNav(props) {
 		logoAlignment,
 		menuButtonClickAction,
 		sectionAriaLabel,
+		sectionCloseAriaLabel,
 		sections,
 		showDotSeparators,
 		signInOrder,
@@ -147,6 +148,13 @@ export function PresentationalNav(props) {
 								// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 								tabIndex={!sections.length ? "-1" : null}
 							>
+								<div className={`${BLOCK_CLASS_NAME}__flyout-close`}>
+									<Button
+										accessibilityLabel={sectionCloseAriaLabel}
+										onClick={closeNavigation}
+										iconRight={<Icon height={24} width={24} name="Close" />}
+									/>
+								</div>
 								<SectionNav
 									blockClassName={BLOCK_CLASS_NAME}
 									sections={sections}
@@ -274,6 +282,8 @@ const Nav = (props) => {
 	const sectionAriaLabel =
 		ariaLabel || phrases.t("header-nav-chain-block.sections-element-aria-label");
 
+	const sectionCloseAriaLabel = phrases.t("header-nav-chain-block.sections-close-aria-label");
+	
 	return (
 		<PresentationalNav
 			ariaLabelLink={ariaLabelLink}
@@ -287,6 +297,7 @@ const Nav = (props) => {
 			menuButtonClickAction={menuButtonClickAction}
 			isScrolled={isScrolled}
 			sectionAriaLabel={sectionAriaLabel}
+			sectionCloseAriaLabel={sectionCloseAriaLabel}
 			sections={sections}
 			showDotSeparators={showDotSeparators}
 			signInOrder={signInOrder}

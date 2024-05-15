@@ -102,6 +102,7 @@
 		"header-nav-chain-block.search-text": "Search",
 		"header-nav-chain-block.sections-button": "Sections",
 		"header-nav-chain-block.sections-button-aria-label": "Show %{item} sub sections",
+		"header-nav-chain-block.sections-close-aria-label": "Close sections menu",
 		"header-nav-chain-block.sections-element-aria-label": "Sections Menu"
 	},
 	"identity-block": {

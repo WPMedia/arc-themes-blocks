@@ -53,4 +53,20 @@ describe("LoginLinks", () => {
 		expect(links[1]).toHaveAttribute("href", customFields.forgotURL);
 		expect(links[2]).toHaveAttribute("href", customFields.signUpURL);
 	});
+
+	it("renders one-time password", () => {
+		const customFields = {
+			showLogin: true,
+			showLoginWithoutPassword: true,
+			showSignUp: false,
+			showForgot: false,
+			loginURL: "custom-login",
+			forgotURL: "custom-forgot",
+			signUpURL: "custom-signup",
+		};
+		render(<LoginLinks customFields={customFields} />);
+		const links = screen.getAllByRole("link");
+		
+		expect(links[0]).toHaveAttribute("href", customFields.loginWithOutPasswordUrl);
+	});
 });

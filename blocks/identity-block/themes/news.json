@@ -236,6 +236,65 @@
 			"desktop": {}
 		}
 	},
+	"one-time-login-form": {
+		"styles": {
+			"default": {
+				"font-family": "var(--font-family-primary)",
+				"components": {
+					"button": {
+						"font-size": "var(--global-font-size-4)"
+					},
+					"heading": {
+						"border-block-end-color": "var(--border-color)",
+						"border-block-end-style": "var(--global-border-style-0)",
+						"border-block-end-width": "var(--global-border-width-0)",
+						"font-size": "var(--global-font-size-12)",
+						"margin-block-end": "var(--global-spacing-4)",
+						"padding-block-end": 0,
+						"text-align": "center"
+					},
+					"input": {
+						"margin-block-end": "var(--global-spacing-5)"
+					},
+					"input-error-tip": {
+						"color": "var(--status-color-danger)"
+					},
+					"input-input": {
+						"inline-size": "100%",
+						"padding-block-end": "var(--global-spacing-2)",
+						"padding-block-start": "var(--global-spacing-2)"
+					},
+					"paragraph": {
+						"font-family": "var(--font-family-primary)",
+						"margin-block-end": "var(--global-spacing-5)"
+					}
+				}
+			},
+			"desktop": {
+				"components": {
+					"heading": {
+						"font-size": "var(--global-font-size-11)",
+						"padding-block-end": 0
+					}
+				}
+			}
+		}
+	},
+	"ota-sub-headline": {
+		"styles": {
+			"default": {
+				"text-align": "center",
+				"margin-block-end": "var(--global-spacing-4)"
+			}
+		}
+	},
+	"ota-recaptcha": {
+		"styles": {
+			"default": {
+				"margin-block-end": "var(--global-spacing-4)"
+			}
+		}
+	},
 	"login-form": {
 		"styles": {
 			"default": {
@@ -255,7 +314,7 @@
 						"padding-block-start": 0,
 						"padding-inline-end": 0,
 						"margin-block-end": "var(--global-spacing-0)",
-                        "padding-block-end": "var(--global-spacing-2)"
+						"padding-block-end": "var(--global-spacing-2)"
 					},
 					"input": {
 						"margin-block-end": "var(--global-spacing-4)"
@@ -348,7 +407,7 @@
 			}
 		}
 	},
-	"login-form-error":{
+	"login-form-error": {
 		"styles": {
 			"default": {
 				"font-family": "var(--font-family-primary)",
@@ -389,6 +448,14 @@
 			"desktop": {}
 		}
 	},
+	"login-links-ota-link": {
+		"styles": {
+			"default": {
+				"border": "1px solid var(--border-color)"
+			},
+			"desktop": {}
+		}
+	},
 	"login-links-inner-link": {
 		"styles": {
 			"default": {
@@ -417,7 +484,7 @@
 			"desktop": {}
 		}
 	},
-	"login-form-tos-container-link":{
+	"login-form-tos-container-link": {
 		"styles": {
 			"default": {
 				"margin-block-start": "var(--global-spacing-5)",
@@ -490,7 +557,7 @@
 						"padding-block-start": 0,
 						"padding-inline-end": 0,
 						"margin-block-end": "var(--global-spacing-0)",
-                        "padding-block-end": "var(--global-spacing-2)"
+						"padding-block-end": "var(--global-spacing-2)"
 					},
 					"input": {
 						"margin-block-end": "var(--global-spacing-5)"
@@ -522,7 +589,7 @@
 			}
 		}
 	},
-	"sign-up-tos-container-link":{
+	"sign-up-tos-container-link": {
 		"styles": {
 			"default": {
 				"margin-block-start": "var(--global-spacing-5)",
@@ -531,7 +598,7 @@
 			"desktop": {}
 		}
 	},
-	"sign-up-form-error":{
+	"sign-up-form-error": {
 		"styles": {
 			"default": {
 				"font-family": "var(--font-family-primary)",

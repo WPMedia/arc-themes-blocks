@@ -1898,5 +1898,17 @@
 		"vi": "Tên người dùng",
 		"zh-CN": "用户名",
 		"zh-TW": "使用者名稱"
+	},
+	"identity-block.login-form-error.something-went-wrong": {
+		"en": "Something went wrong. Try again."
+	},
+	"identity-block.ota-ivalid-login-link": {
+		"en": "Invalid login link"
+	},
+	"identity-block.ota-ivalid-login-link-subheadline": {
+		"en": "Looks like one time login link is invalid or expired. Please request a new log in link and try again."
+	},
+	"identity-block.ota-get-new-link": {
+		"en": "Get a new link"
 	}
 }

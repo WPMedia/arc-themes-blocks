@@ -282,7 +282,7 @@ const Nav = (props) => {
 	const sectionAriaLabel =
 		ariaLabel || phrases.t("header-nav-chain-block.sections-element-aria-label");
 
-	const sectionCloseAriaLabel = phrases.t("header-nav-chain-block.sections-close-aria-label");
+	const sectionCloseAriaLabel = phrases.t("global.close");
 	
 	return (
 		<PresentationalNav

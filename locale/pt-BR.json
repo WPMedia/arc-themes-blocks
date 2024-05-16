@@ -61,6 +61,7 @@
 	"global-phrases-block": {
 		"global.and-text": "e",
 		"global.by-text": "Por",
+		"global.close": "Fechar",
 		"global.gallery-autoplay-button": "Reprodução automática",
 		"global.gallery-autoplay-label-start": "Iniciar apresentação automática de slides",
 		"global.gallery-autoplay-label-stop": "Parar a apresentação automática de slides",
@@ -203,7 +204,6 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "Produtos",
-		"product-gallery.focus-close": "Fechar",
 		"product-gallery.focus-thumbnail-next": "Próxima imagem",
 		"product-gallery.focus-thumbnail-previous": "Imagem anterior",
 		"product-gallery.go-to-slide": "Ir para o slide %{slideNumber}",
@@ -588,8 +588,6 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-paragraph2": "Are you sure you want to resubscribe?",
 		"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": "Yes, Resubscribe",
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
-		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
-		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
 		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
 		"subscriptions-block.update-payment": "Atualizar forma de pagamento"
 	}

@@ -61,6 +61,7 @@
 	"global-phrases-block": {
 		"global.and-text": "et",
 		"global.by-text": "Par",
+		"global.close": "Fermer",
 		"global.gallery-autoplay-button": "Lecture automatique",
 		"global.gallery-autoplay-label-start": "Démarrer le diaporama automatique",
 		"global.gallery-autoplay-label-stop": "Arrêter le diaporama automatique",
@@ -203,7 +204,6 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "Produits",
-		"product-gallery.focus-close": "Fermer",
 		"product-gallery.focus-thumbnail-next": "Image suivante",
 		"product-gallery.focus-thumbnail-previous": "Image précédente",
 		"product-gallery.go-to-slide": "Aller à la diapositive %{slideNumber}",
@@ -588,8 +588,6 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-paragraph2": "Voulez-vous vraiment vous réabonner ?",
 		"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": "Oui, se réabonner",
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Se réabonner",
-		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
-		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
 		"subscriptions-block.terms-sales-service-text": "En vous abonnant, vous acceptez les modalités de renouvellement automatique figurant sur cette page, nos <a href='%{termsOfSaleURL}'>conditions de vente<\/a> et nos <a href='%{termsOfServiceURL}'>conditions de service<\/a>.",
 		"subscriptions-block.update-payment": "Mettre à jour le mode de paiement"
 	}

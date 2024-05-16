@@ -61,6 +61,7 @@
 	"global-phrases-block": {
 		"global.and-text": "နှင့်",
 		"global.by-text": "ဖြင့်",
+		"global.close": "ပိတ်မည်",
 		"global.gallery-autoplay-button": "အော်တိုဖွင့်",
 		"global.gallery-autoplay-label-start": "အလိုအလျောက် ဆလိုက်ရှိုးကို စတင်ရန်",
 		"global.gallery-autoplay-label-stop": "အလိုအလျောက် ဆလိုက်ရှိုးကို ရပ်ရန်",
@@ -203,7 +204,6 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "ထုတ်ကုန်များ",
-		"product-gallery.focus-close": "ပိတ်မည်",
 		"product-gallery.focus-thumbnail-next": "နောက်တစ်ပုံ",
 		"product-gallery.focus-thumbnail-previous": "ယခင်ပုံ",
 		"product-gallery.go-to-slide": "ဆလိုက် %{slideNumber} သို့ သွားရန်",
@@ -588,8 +588,6 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-paragraph2": "Are you sure you want to resubscribe?",
 		"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": "Yes, Resubscribe",
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
-		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
-		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
 		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
 		"subscriptions-block.update-payment": "ငွေပေးချေမှုနည်းလမ်းကို အပ်ဒိတ်လုပ်ပါ။"
 	}

@@ -19,6 +19,7 @@
 		"fr": "Principaux liens",
 		"es": "Mejores enlaces",
 		"en": "Top Links",
+		"el": "Κορυφαίοι σύνδεσμοι",
 		"de": "Relevanteste Links",
 		"bo": "སྦྲེལ་མཐུད་སྔོན་ཐོན།",
 		"bn": "শীর্ষের লিঙ্কগুলো",
@@ -44,6 +45,7 @@
 		"fr": "Rechercher",
 		"es": "Buscar",
 		"en": "Search",
+		"el": "Αναζήτηση",
 		"de": "Suche",
 		"bo": "བཤེར་འཚོལ།",
 		"bn": "সন্ধান করুন",
@@ -69,6 +71,7 @@
 		"fr": "Rechercher",
 		"es": "Buscar",
 		"en": "Search",
+		"el": "Αναζήτηση",
 		"de": "Suche",
 		"bo": "བཤེར་འཚོལ།",
 		"bn": "সন্ধান করুন",
@@ -94,6 +97,7 @@
 		"fr": "Sections",
 		"es": "Secciones",
 		"en": "Sections",
+		"el": "Ενότητες",
 		"de": "Rubriken",
 		"bo": "དུམ་བུ།",
 		"bn": "বিভাগগুলি",
@@ -119,6 +123,7 @@
 		"fr": "Afficher les sous-sections de %{item}",
 		"es": "Mostrar %{item} subsecciones",
 		"en": "Show %{item} sub sections",
+		"el": "Εμφάνιση υποενοτήτων %{item}",
 		"de": "%{item} Unterrubriken anzeigen",
 		"bo": "%{item}དུམ་བུ་མངོན།",
 		"bn": "%{item} উপ বিভাগগুলি দেখান",
@@ -144,12 +149,10 @@
 		"fr": "Menu des sections",
 		"es": "Menú de secciones",
 		"en": "Sections Menu",
+		"el": "Μενού ενοτήτων",
 		"de": "Rubriken-Menü",
 		"bo": "དུམ་བུ་འདེམས་ཐོ།",
 		"bn": "বিভাগগুলির মেনু",
 		"ar": "قائمة الأقسام"
-	},
-	"header-nav-chain-block.sections-close-aria-label": {
-		"en": "Close sections menu"
 	}
 }

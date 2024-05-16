@@ -61,6 +61,7 @@
 	"global-phrases-block": {
 		"global.and-text": "và",
 		"global.by-text": "Bởi",
+		"global.close": "Đóng",
 		"global.gallery-autoplay-button": "Tự động phát",
 		"global.gallery-autoplay-label-start": "Bắt đầu trình chiếu tự động",
 		"global.gallery-autoplay-label-stop": "Dừng trình chiếu tự động",
@@ -203,7 +204,6 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "Sản phẩm",
-		"product-gallery.focus-close": "Đóng",
 		"product-gallery.focus-thumbnail-next": "Hình ảnh tiếp theo",
 		"product-gallery.focus-thumbnail-previous": "Hình ảnh trước đó",
 		"product-gallery.go-to-slide": "Đi tới trang chiếu %{slideNumber}",
@@ -588,8 +588,6 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-paragraph2": "Are you sure you want to resubscribe?",
 		"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": "Yes, Resubscribe",
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
-		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
-		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
 		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
 		"subscriptions-block.update-payment": "Cập nhật phương thức thanh toán"
 	}

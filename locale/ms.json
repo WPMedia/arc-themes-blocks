@@ -61,6 +61,7 @@
 	"global-phrases-block": {
 		"global.and-text": "dan",
 		"global.by-text": "Oleh",
+		"global.close": "Tutup",
 		"global.gallery-autoplay-button": "Automain",
 		"global.gallery-autoplay-label-start": "Mulakan paparan slaid automatik",
 		"global.gallery-autoplay-label-stop": "Hentikan paparan slaid automatik",
@@ -203,7 +204,6 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "Produk-produk",
-		"product-gallery.focus-close": "Tutup",
 		"product-gallery.focus-thumbnail-next": "Imej Seterusnya",
 		"product-gallery.focus-thumbnail-previous": "Imej Sebelumnya",
 		"product-gallery.go-to-slide": "Pergi ke slaid %{slideNumber}",
@@ -588,8 +588,6 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-paragraph2": "Are you sure you want to resubscribe?",
 		"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": "Yes, Resubscribe",
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
-		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
-		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
 		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
 		"subscriptions-block.update-payment": "Kemas kini Kaedah Pembayaran"
 	}

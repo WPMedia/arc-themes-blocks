@@ -85,7 +85,7 @@ const ExtraLarge = (props) => {
 	const contentHeading = showHeadlineXL ? element?.headlines?.basic : null;
 	const contentUrl = element?.websites?.[arcSite]?.website_url;
 	const embedMarkup = playVideoInPlaceXL && getVideoFromANS(element);
-	const hasAuthors = showBylineXL && element?.credits?.by.length > 0;
+	const hasAuthors = showBylineXL && element?.credits?.by?.length > 0;
 	const ansImage = getImageFromANS(element);
 	const imageParams =
 		element && ansImage

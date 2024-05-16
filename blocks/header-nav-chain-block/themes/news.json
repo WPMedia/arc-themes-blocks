@@ -305,6 +305,19 @@
 			"desktop": {}
 		}
 	},
+	"header-nav-chain-flyout-close-button": {
+		"styles": {
+			"default": {
+				"align-self": "flex-end",
+				"components": {
+					"button": {
+						"border-width": 0
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
 	"header-nav-chain-flyout-overlay": {
 		"styles": {
 			"default": {

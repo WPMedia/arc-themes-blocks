@@ -148,11 +148,13 @@ export function PresentationalNav(props) {
 								// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 								tabIndex={!sections.length ? "-1" : null}
 							>
-								<div className={`${BLOCK_CLASS_NAME}__flyout-close`}>
+								<div className={`${BLOCK_CLASS_NAME}__flyout-close-button`}>
 									<Button
 										accessibilityLabel={sectionCloseAriaLabel}
-										onClick={closeNavigation}
 										iconRight={<Icon height={24} width={24} name="Close" />}
+										onClick={closeNavigation}
+										size="small"
+										variant="secondary-reverse"
 									/>
 								</div>
 								<SectionNav

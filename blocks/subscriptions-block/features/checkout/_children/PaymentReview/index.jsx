@@ -66,6 +66,10 @@ const PaymentReviewDetail = ({
 		}
 	}, [stripeInstance, paypal]);
 
+	if(!paymentOptionSelected){
+		return null
+	}
+
 	return (
 		<>
 			<CheckoutCardDetail

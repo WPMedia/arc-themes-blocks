@@ -231,7 +231,6 @@
 		"styles": {
 			"default": {
 				"display": "flex",
-				"width": "560px",
 				"border-radius": "var(--border-radius)",
 				"border-block-start-width": "1px",
 				"border-block-end-width": "1px",

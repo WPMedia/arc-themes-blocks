@@ -765,23 +765,174 @@
 					"padding-inline-start": var(--global-spacing-4)
 				),
 				"checkout": (
-					"font-family": var(--font-family-primary),
+					"display": flex
+				),
+				"checkout-billing-address": (
+					"margin-block-start": var(--global-spacing-6),
+					"components": (
+						"heading": (
+							"margin-block-end": var(--global-spacing-5),
+							"font-size": var(--global-font-size-11)
+						),
+						"input-error-tip": (
+							"color": var(--status-color-danger)
+						),
+						"input-input": (
+							"inline-size": 100%,
+							"padding-block-end": var(--global-spacing-2),
+							"padding-block-start": var(--global-spacing-2),
+							"padding-inline-end": var(--global-spacing-2),
+							"padding-inline-start": var(--global-spacing-2)
+						)
+					)
+				),
+				"checkout-billing-address-captcha": (
+					"margin-block-start": var(--global-spacing-6),
+					"margin-block-end": var(--global-spacing-6),
+					"components": (
+						"paragraph": (
+							"color": var(--status-color-danger),
+							"font-family": var(--font-family-primary)
+						)
+					)
+				),
+				"checkout-billing-address-form-div": (
+					"margin-block-end": var(--global-spacing-4)
+				),
+				"checkout-billing-address-input-div": (
+					"display": grid,
+					"inline-size": 100%,
+					"grid-template-columns": repeat(2, 1fr),
+					"column-gap": var(--global-spacing-5)
+				),
+				"checkout-card": (
+					"display": flex,
+					"flex-direction": row,
+					"margin-block-start": var(--global-spacing-4),
 					"margin-block-end": var(--global-spacing-5),
 					"components": (
 						"heading": (
-							"font-size": var(--global-font-size-12)
+							"font-size": 20px,
+							"font-weight": 700,
+							"min-width": max-content,
+							"margin-inline-end": 0,
+							"margin-block-end": 0
 						),
-						"link": (
-							"color": var(--color-primary),
-							"border-block-end-width": 1px,
-							"border-block-end-style": solid,
-							"border-block-end-color": var(--color-primary)
+						"paragraph": (
+							"color": var(--text-color-subtle)
+						)
+					)
+				),
+				"checkout-card-children-div": (
+					"margin-inline-start": var(--global-spacing-5),
+					"margin-inline-end": var(--global-spacing-5),
+					"margin-block-start": var(--global-spacing-4),
+					"margin-block-end": var(--global-spacing-4)
+				),
+				"checkout-card-closed": (
+					"display": flex,
+					"flex-direction": row,
+					"margin-block-start": var(--global-spacing-4),
+					"margin-block-end": var(--global-spacing-5),
+					"components": (
+						"heading": (
+							"color": var(--text-color-subtle),
+							"font-size": 20px,
+							"font-weight": 700,
+							"min-width": max-content,
+							"margin-inline-end": 0,
+							"margin-block-end": 0
 						),
-						"link-hover": (
-							"color": var(--color-primary-hover),
-							"border-block-end-width": 1px,
-							"border-block-end-style": solid,
-							"border-block-end-color": var(--color-primary-hover)
+						"paragraph": (
+							"color": var(--text-color-subtle)
+						)
+					)
+				),
+				"checkout-card-edit": (
+					"text-decoration": underline,
+					"font-family": var(--font-family-primary),
+					"font-size": 16px,
+					"line-height": 24px,
+					"font-weight": 400,
+					"color": var(--color-primary),
+					"padding-block-end": 0,
+					"padding-block-start": 0,
+					"padding-inline-end": 0,
+					"padding-inline-start": 0
+				),
+				"checkout-card-formError": (
+					"padding-block-start": var(--global-spacing-5),
+					"padding-inline-end": var(--global-spacing-5),
+					"padding-block-end": var(--global-spacing-5),
+					"padding-inline-start": var(--global-spacing-5),
+					"color": var(--global-white),
+					"background-color": var(--status-color-danger),
+					"components": (
+						"paragraph": (
+							"font-size": var(--global-font-size-4),
+							"font-family": var(--font-family-primary),
+							"font-weight": var(--global-font-weight-4)
+						)
+					)
+				),
+				"checkout-card-paymentOptions": (
+					"display": flex,
+					"width": 560px,
+					"border-radius": var(--border-radius),
+					"border-block-start-width": 1px,
+					"border-block-end-width": 1px,
+					"border-inline-start-width": 1px,
+					"border-inline-end-width": 1px,
+					"border-block-start-style": solid,
+					"border-block-end-style": solid,
+					"border-inline-start-style": solid,
+					"border-inline-end-style": solid,
+					"border-block-start-color": var(--border-color),
+					"border-block-end-color": var(--border-color),
+					"border-inline-start-color": var(--border-color),
+					"border-inline-end-color": var(--border-color),
+					"padding-block-end": var(--global-spacing-3),
+					"padding-block-start": var(--global-spacing-3),
+					"padding-inline-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4),
+					"gap": var(--global-spacing-4),
+					"components": (
+						"input-label": (
+							"font-size": var(--global-font-size-4),
+							"font-family": var(--font-family-secondary),
+							"font-weight": var(--global-font-weight-7)
+						),
+						"input-radio": (
+							"margin-block-start": 0,
+							"margin-inline-end": var(--global-spacing-2),
+							"margin-block-end": 0,
+							"margin-inline-start": 0
+						),
+						"input-radio-checked": (
+							"border-color": red,
+							"background-color": red
+						),
+						"icon": (
+							"inline-size": none
+						)
+					)
+				),
+				"checkout-card-summary": (
+					"display": flex,
+					"justify-content": space-between,
+					"width": 100%,
+					"align-items": center,
+					"components": (
+						"paragraph": (
+							"font-size": 14px,
+							"align-items": center
+						)
+					)
+				),
+				"checkout-card-summary-icon": (
+					"components": (
+						"icon": (
+							"inline-size": none
 						)
 					)
 				),
@@ -827,34 +978,6 @@
 					"border-inline-start-color": var(--border-color),
 					"border-inline-end-color": var(--border-color)
 				),
-				"checkout-contact-info": (
-					"margin-block-start": var(--global-spacing-6),
-					"components": (
-						"heading": (
-							"margin-block-end": var(--global-spacing-5),
-							"font-size": var(--global-font-size-11)
-						),
-						"input": (
-							"margin-block-end": var(--global-spacing-5)
-						),
-						"input-error-tip": (
-							"color": var(--status-color-danger)
-						),
-						"input-input": (
-							"inline-size": 100%,
-							"padding-block-end": var(--global-spacing-2),
-							"padding-block-start": var(--global-spacing-2),
-							"padding-inline-end": var(--global-spacing-2),
-							"padding-inline-start": var(--global-spacing-2)
-						)
-					)
-				),
-				"checkout-contact-info-profile": (
-					"display": grid,
-					"inline-size": 100%,
-					"grid-template-columns": repeat(2, 1fr),
-					"column-gap": var(--global-spacing-5)
-				),
 				"checkout-identity-row": (
 					"inline-size": 100%,
 					"display": inline-flex,
@@ -880,13 +1003,138 @@
 						)
 					)
 				),
+				"checkout-main": (
+					"display": flex,
+					"justify-content": center,
+					"inline-size": 80%,
+					"padding-block-start": var(--global-spacing-6),
+					"padding-inline-start": var(--global-spacing-6),
+					"padding-block-end": var(--global-spacing-6),
+					"padding-inline-end": var(--global-spacing-6),
+					"align-items": start
+				),
+				"checkout-main-full": (
+					"display": flex,
+					"justify-content": center,
+					"inline-size": 100%,
+					"padding-block-start": var(--global-spacing-6),
+					"padding-inline-start": var(--global-spacing-6),
+					"padding-block-end": var(--global-spacing-6),
+					"padding-inline-end": var(--global-spacing-6),
+					"align-items": start
+				),
+				"checkout-order-card": (
+					"display": flex,
+					"flex-direction": column,
+					"padding-block-start": var(--global-spacing-4),
+					"padding-inline-end": var(--global-spacing-4),
+					"padding-block-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4),
+					"gap": var(--global-spacing-5),
+					"column-gap": var(--global-spacing-5),
+					"components": (
+						"link": (
+							"color": var(--text-color),
+							"text-decoration": underline,
+							"font-size": var(--global-font-size-4),
+							"font-weight": var(--global-font-weight-4)
+						),
+						"heading": (
+							"margin-block-end": 0
+						)
+					)
+				),
+				"checkout-order-card--features": (
+					"align-self": baseline
+				),
+				"checkout-order-card--features--item": (
+					"align-items": center,
+					"display": flex,
+					"margin-block-end": var(--global-spacing-2),
+					"components": (
+						"icon": (
+							"fill": var(--status-color-success),
+							"display": flex,
+							"inline-size": var(--global-spacing-4),
+							"block-size": var(--global-spacing-4),
+							"margin-block-start": 0,
+							"margin-inline-end": var(--global-spacing-2),
+							"margin-block-end": 0,
+							"margin-inline-start": 0
+						)
+					)
+				),
+				"checkout-order-card--summary": (
+					"gap": var(--global-spacing-2),
+					"components": (
+						"heading": (
+							"font-family": var(--font-family-secondary),
+							"font-weight": var(--global-font-weight-7),
+							"font-size": var(--global-font-size-4),
+							"padding-block-end": var(--global-spacing-2),
+							"border-block-end-width": 1px,
+							"border-block-end-style": solid,
+							"border-block-end-color": var(--border-color)
+						)
+					)
+				),
+				"checkout-order-card--summary--details": (
+					"gap": var(--global-spacing-2)
+				),
+				"checkout-order-card--summary--details--item": (
+					"flex-direction": row,
+					"justify-content": space-between,
+					"font-family": var(--font-family-primary),
+					"font-weight": var(--global-font-weight-4),
+					"font-size": var(--global-font-size-3)
+				),
+				"checkout-order-card--summary--dueToday": (
+					"display": flex,
+					"justify-content": space-between,
+					"padding-block-start": var(--global-spacing-2),
+					"border-block-start-width": 1px,
+					"border-block-start-style": solid,
+					"border-block-start-color": var(--border-color),
+					"font-family": var(--font-family-secondary),
+					"font-weight": var(--global-font-weight-7),
+					"font-size": var(--global-font-size-7),
+					"inline-size": 100%,
+					"align-items": flex-start
+				),
+				"checkout-order-card-border": (
+					"border-block-start-width": 1px,
+					"border-block-end-width": 1px,
+					"border-inline-start-width": 1px,
+					"border-inline-end-width": 1px,
+					"border-block-start-style": solid,
+					"border-block-end-style": solid,
+					"border-inline-start-style": solid,
+					"border-inline-end-style": solid,
+					"border-block-start-color": var(--border-color),
+					"border-block-end-color": var(--border-color),
+					"border-inline-start-color": var(--border-color),
+					"border-inline-end-color": var(--border-color),
+					"border-radius": var(--border-radius)
+				),
+				"checkout-order-card-productPrice": (
+					"display": flex,
+					"flex-direction": column,
+					"gap": var(--global-spacing-5),
+					"column-gap": var(--global-spacing-5),
+					"components": (
+						"heading": (
+							"font-size": var(--global-font-size-9),
+							"font-weight": var(--global-font-weight-7),
+							"line-height": var(--global-line-height-6)
+						)
+					)
+				),
 				"checkout-payment": (
 					"inline-size": 100%
 				),
 				"checkout-payment-form": (
 					"display": grid,
-					"margin-block-start": var(--global-spacing-5),
-					"gap": var(--global-spacing-6)
+					"gap": var(--global-spacing-5)
 				),
 				"checkout-payment-form--border-bottom": (
 					"border-block-end-width": 1px,
@@ -938,11 +1186,21 @@
 						"padding-inline-start": 0
 					)
 				),
+				"checkout-payment-form--stripe-countryZipCode": (
+					"display": grid,
+					"inline-size": 100%,
+					"grid-template-columns": repeat(2, 1fr),
+					"column-gap": var(--global-spacing-5)
+				),
 				"checkout-payment-form--stripe-element": (
 					"padding-block-start": var(--global-spacing-2),
 					"padding-inline-end": var(--global-spacing-2),
 					"padding-block-end": var(--global-spacing-2),
 					"padding-inline-start": var(--global-spacing-2)
+				),
+				"checkout-payment-form--stripe-error": (
+					"color": var(--status-color-danger),
+					"font-size": var(--global-font-size-3)
 				),
 				"checkout-payment-form--stripe-input-container": (
 					"display": grid,
@@ -950,8 +1208,8 @@
 				),
 				"checkout-payment-form--stripe-label": (
 					"font-size": var(--global-font-size-4),
-					"font-weight": var(--global-font-weight-4),
-					"color": var(--global-neutral-7)
+					"font-weight": var(--global-font-weight-7),
+					"font-family": var(--font-family-secondary)
 				),
 				"checkout-payment-form--stripe-row": (
 					"display": grid,
@@ -1038,7 +1296,7 @@
 				),
 				"checkout-payment-information": (
 					"inline-size": 100%,
-					"gap": var(--global-spacing-5),
+					"gap": var(--global-spacing-3),
 					"grid-template-columns": 1fr,
 					"components": (
 						"input-error-tip": (
@@ -1046,8 +1304,8 @@
 						),
 						"input-label": (
 							"font-size": var(--global-font-size-4),
-							"font-weight": var(--global-font-weight-4),
-							"color": var(--global-neutral-7)
+							"font-weight": var(--global-font-weight-7),
+							"font-family": var(--font-family-secondary)
 						),
 						"input-input": (
 							"inline-size": 100%,
@@ -1057,6 +1315,111 @@
 							"padding-inline-start": var(--global-spacing-2)
 						)
 					)
+				),
+				"checkout-payment-paypal-button": (
+					"background-color": #FFC43A,
+					"color": var(--text-color),
+					"components": (
+						"icon": (
+							"inline-size": none
+						)
+					)
+				),
+				"checkout-review": (
+					"gap": var(--global-spacing-4),
+					"components": (
+						"paragraph": (
+							"margin-block-end": 0
+						)
+					)
+				),
+				"checkout-review-orderInformation": (
+					"border-block-start-width": 1px,
+					"border-block-end-width": 1px,
+					"border-inline-start-width": 1px,
+					"border-inline-end-width": 1px,
+					"border-block-start-style": solid,
+					"border-block-end-style": solid,
+					"border-inline-start-style": solid,
+					"border-inline-end-style": solid,
+					"border-block-start-color": var(--border-color),
+					"border-block-end-color": var(--border-color),
+					"border-inline-start-color": var(--border-color),
+					"border-inline-end-color": var(--border-color),
+					"border-radius": var(--border-radius),
+					"components": (
+						"heading": (
+							"margin-block-end": 0
+						)
+					)
+				),
+				"checkout-review-renewalInformation": (
+					"font-family": var(--font-family-secondary),
+					"border-block-start-width": 1px,
+					"border-block-end-width": 1px,
+					"border-inline-start-width": 1px,
+					"border-inline-end-width": 1px,
+					"border-block-start-style": solid,
+					"border-block-end-style": solid,
+					"border-inline-start-style": solid,
+					"border-inline-end-style": solid,
+					"border-block-start-color": var(--border-color),
+					"border-block-end-color": var(--border-color),
+					"border-inline-start-color": var(--border-color),
+					"border-inline-end-color": var(--border-color),
+					"border-radius": var(--border-radius),
+					"padding-block-start": var(--global-spacing-4),
+					"padding-inline-end": var(--global-spacing-4),
+					"padding-block-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4),
+					"gap": var(--global-spacing-4),
+					"components": (
+						"heading": (
+							"margin-block-end": 0,
+							"font-weight": var(--global-font-weight-7),
+							"font-size": var(--global-font-size-4)
+						)
+					)
+				),
+				"checkout-review-tos-link": (
+					"color": var(--text-color),
+					"text-decoration": underline
+				),
+				"checkout-review-tos-link-hover": (
+					"color": var(--text-color-subtle)
+				),
+				"checkout-section": (
+					"font-family": var(--font-family-primary),
+					"margin-block-end": var(--global-spacing-5),
+					"max-width": 650px,
+					"components": (
+						"heading": (
+							"font-size": var(--heading-level-4-font-size),
+							"font-family": var(--font-family-secondary),
+							"margin-block-end": var(--global-spacing-5)
+						),
+						"link": (
+							"color": var(--color-primary),
+							"border-block-end-width": 1px,
+							"border-block-end-style": solid,
+							"border-block-end-color": var(--color-primary)
+						),
+						"link-hover": (
+							"color": var(--color-primary-hover),
+							"border-block-end-width": 1px,
+							"border-block-end-style": solid,
+							"border-block-end-color": var(--color-primary-hover)
+						)
+					)
+				),
+				"checkout-sidebar": (
+					"height": 100vh,
+					"border-inline-start-width": 2px,
+					"border-inline-start-style": solid,
+					"border-inline-start-color": #DADADA,
+					"padding-block-start": var(--global-spacing-6),
+					"padding-inline-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-6)
 				),
 				"double-chain": (
 					"components": (
@@ -1464,6 +1827,14 @@
 						)
 					)
 				),
+				"header-nav-chain-flyout-close-button": (
+					"align-self": flex-end,
+					"components": (
+						"button": (
+							"border-width": 0
+						)
+					)
+				),
 				"header-nav-chain-flyout-nav": (
 					"block-size": calc((100vh - var(--header-nav-chain-height-scrolled))),
 					"gap": 0,
@@ -1493,8 +1864,6 @@
 				),
 				"header-nav-chain-flyout-nav-components-desktop": (
 					"display": none,
-					"padding-block-end": var(--global-spacing-5),
-					"padding-block-start": var(--global-spacing-5),
 					"padding-inline-end": var(--global-spacing-5),
 					"padding-inline-start": var(--global-spacing-5),
 					"components": (
@@ -1505,8 +1874,6 @@
 				),
 				"header-nav-chain-flyout-nav-components-mobile": (
 					"display": flex,
-					"padding-block-end": var(--global-spacing-5),
-					"padding-block-start": var(--global-spacing-5),
 					"padding-inline-end": var(--global-spacing-5),
 					"padding-inline-start": var(--global-spacing-5)
 				),
@@ -1614,7 +1981,8 @@
 					"transform": translate(calc(var(--text-direction) * -100vw), 0)
 				),
 				"header-nav-chain-flyout-nav-wrapper-open": (
-					"gap": var(--global-spacing-4)
+					"gap": var(--global-spacing-4),
+					"padding-block-start": var(--global-spacing-4)
 				),
 				"header-nav-chain-flyout-overlay": (
 					"margin-block-start": var(--header-nav-chain-height),
@@ -1974,7 +2342,7 @@
 				),
 				"login-form": (
 					"font-family": var(--font-family-primary),
-					"padding-block-end": var(--global-spacing-5),
+					"padding-block-end": var(--global-spacing-2),
 					"components": (
 						"button": (
 							"font-size": var(--global-font-size-4)
@@ -1986,11 +2354,10 @@
 							"font-style": normal,
 							"line-height": 140%,
 							"text-align": center,
-							"padding-block-end": 0,
 							"padding-block-start": 0,
 							"padding-inline-end": 0,
-							"padding-inline-start": 0,
-							"margin-block-end": var(--global-spacing-5)
+							"margin-block-end": var(--global-spacing-0),
+							"padding-block-end": var(--global-spacing-2)
 						),
 						"input": (
 							"margin-block-end": var(--global-spacing-4)
@@ -2072,6 +2439,17 @@
 						)
 					)
 				),
+				"login-form-tos-container-link": (
+					"margin-block-start": var(--global-spacing-5),
+					"margin-block-end": var(--global-spacing-5)
+				),
+				"login-form-tos-link": (
+					"color": var(--text-color),
+					"text-decoration": underline
+				),
+				"login-form-tos-link-hover": (
+					"color": var(--text-color-subtle)
+				),
 				"login-links": (
 					"font-family": var(--font-family-primary),
 					"components": (
@@ -2094,6 +2472,9 @@
 					"margin-inline-end": 0,
 					"margin-inline-start": 0,
 					"padding-inline-start": var(--global-spacing-2)
+				),
+				"login-links-ota-link": (
+					"border": 1px solid var(--border-color)
 				),
 				"masthead": (
 					"border-block-end": 2px solid var(--global-neutral-8),
@@ -2414,6 +2795,45 @@
 				"offer-wrapper": (
 					"margin-block-start": var(--global-spacing-5),
 					"margin-block-end": var(--global-spacing-6)
+				),
+				"one-time-login-form": (
+					"font-family": var(--font-family-primary),
+					"components": (
+						"button": (
+							"font-size": var(--global-font-size-4)
+						),
+						"heading": (
+							"border-block-end-color": var(--border-color),
+							"border-block-end-style": var(--global-border-style-0),
+							"border-block-end-width": var(--global-border-width-0),
+							"font-size": var(--global-font-size-12),
+							"margin-block-end": var(--global-spacing-4),
+							"padding-block-end": 0,
+							"text-align": center
+						),
+						"input": (
+							"margin-block-end": var(--global-spacing-5)
+						),
+						"input-error-tip": (
+							"color": var(--status-color-danger)
+						),
+						"input-input": (
+							"inline-size": 100%,
+							"padding-block-end": var(--global-spacing-2),
+							"padding-block-start": var(--global-spacing-2)
+						),
+						"paragraph": (
+							"font-family": var(--font-family-primary),
+							"margin-block-end": var(--global-spacing-5)
+						)
+					)
+				),
+				"ota-recaptcha": (
+					"margin-block-end": var(--global-spacing-4)
+				),
+				"ota-sub-headline": (
+					"text-align": center,
+					"margin-block-end": var(--global-spacing-4)
 				),
 				"paywall-overlay": (
 					"background-color": rgba(0, 0, 0, 0.63),
@@ -2920,18 +3340,22 @@
 				),
 				"sign-up": (
 					"font-family": var(--font-family-primary),
+					"padding-block-end": var(--global-spacing-2),
 					"components": (
 						"button": (
 							"font-size": var(--global-font-size-4)
 						),
 						"heading": (
-							"border-block-end-color": var(--border-color),
-							"border-block-end-style": var(--global-border-style-0),
-							"border-block-end-width": var(--global-border-width-1),
-							"font-size": var(--global-font-size-9),
-							"margin-block-end": var(--global-spacing-4),
-							"padding-block-end": var(--global-spacing-2),
-							"text-align": center
+							"font-size": var(--heading-level-4-font-size),
+							"font-family": var(--font-family-secondary),
+							"font-weight": 700,
+							"font-style": normal,
+							"line-height": 140%,
+							"text-align": center,
+							"padding-block-start": 0,
+							"padding-inline-end": 0,
+							"margin-block-end": var(--global-spacing-0),
+							"padding-block-end": var(--global-spacing-2)
 						),
 						"input": (
 							"margin-block-end": var(--global-spacing-5)
@@ -2953,7 +3377,23 @@
 						)
 					)
 				),
+				"sign-up-form-error": (
+					"font-family": var(--font-family-primary),
+					"text-align": center,
+					"margin-block-end": var(--global-spacing-4),
+					"components": (
+						"paragraph": (
+							"background-color": var(--status-color-danger-subtle),
+							"color": var(--status-color-danger),
+							"padding-block-end": var(--global-spacing-1),
+							"padding-block-start": var(--global-spacing-1),
+							"padding-inline-start": var(--global-spacing-2),
+							"padding-inline-end": var(--global-spacing-2)
+						)
+					)
+				),
 				"sign-up-tos-container-link": (
+					"margin-block-start": var(--global-spacing-5),
 					"margin-block-end": var(--global-spacing-5)
 				),
 				"sign-up-tos-link": (
@@ -3158,6 +3598,258 @@
 					"font-size": var(--heading-level-6-font-size),
 					"font-weight": var(--heading-level-6-font-weight),
 					"line-height": var(--heading-level-6-line-height)
+				),
+				"subscriptions-subscription-list-card": (
+					"padding-block-end": var(--global-spacing-4),
+					"padding-block-start": var(--global-spacing-4),
+					"padding-inline-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4),
+					"border": solid 1px #8593AA,
+					"border-radius": 4px,
+					"margin-block-end": var(--global-spacing-5)
+				),
+				"subscriptions-subscription-list-detail-billing": (
+					"font-family": var(--font-family-secondary),
+					"font-weight": 700,
+					"size": 16px,
+					"color": var(--text-color),
+					"line-height": 24px,
+					"margin-block-start": var(--global-spacing-4),
+					"display": flex,
+					"components": (
+						"paragraph": (
+							"margin-inline-start": var(--global-spacing-4),
+							"font-weight": 400,
+							"font-size": 14px,
+							"line-height": 21px,
+							"color": var(--text-color-subtle)
+						)
+					)
+				),
+				"subscriptions-subscription-list-detail-billing-subtitle": (
+					"min-inline-size": max-content,
+					"display": block
+				),
+				"subscriptions-subscription-list-detail-cancel": (
+					"font-size": 16px,
+					"font-family": Inter,
+					"font-weight": 400,
+					"line-height": 24px,
+					"align-self": center,
+					"block-size": 24px,
+					"text-decoration": underline,
+					"padding-inline-start": 0
+				),
+				"subscriptions-subscription-list-detail-cancel-badge": (
+					"background-color": var(--global-orange-2),
+					"color": var(--text-color)
+				),
+				"subscriptions-subscription-list-detail-cancel-info": (
+					"background-color": var(--global-orange-2),
+					"padding-block-end": 24px,
+					"padding-block-start": 24px,
+					"padding-inline-end": 24px,
+					"padding-inline-start": 24px,
+					"margin-block-start": var(--global-spacing-4),
+					"justify-content": space-between,
+					"display": flex,
+					"font-family": Inter,
+					"font-size": 16px,
+					"line-height": 24px,
+					"font-weight": 400
+				),
+				"subscriptions-subscription-list-detail-cancel-info-button": (
+					"background-color": transparent
+				),
+				"subscriptions-subscription-list-detail-cancel-info-button-hover": (
+					"cursor": pointer
+				),
+				"subscriptions-subscription-list-detail-div": (
+					"margin-block-end": var(--global-spacing-4)
+				),
+				"subscriptions-subscription-list-detail-inactive-sub": (
+					"font-family": var(--font-family-secondary),
+					"font-weight": 700,
+					"font-size": 16px,
+					"color": var(--text-color),
+					"line-height": 24px,
+					"display": flex,
+					"flex-direction": row,
+					"components": (
+						"paragraph": (
+							"margin-inline-start": var(--global-spacing-2),
+							"font-weight": 400
+						)
+					)
+				),
+				"subscriptions-subscription-list-detail-inactive-sub-paragraph": (
+					"font-weight": 500,
+					"font-size": 14px,
+					"line-height": 16px,
+					"font-family": sans-serif,
+					"color": var(--text-color-subtle)
+				),
+				"subscriptions-subscription-list-detail-payment-billing-frequency": (
+					"font-family": var(--font-family-secondary),
+					"font-weight": 500,
+					"font-size": 14px,
+					"line-height": 16px,
+					"color": var(--text-color-subtle)
+				),
+				"subscriptions-subscription-list-detail-payment-container": (
+					"margin-block-start": var(--global-spacing-2),
+					"margin-block-end": var(--global-spacing-2),
+					"display": flex,
+					"flex-direction": column
+				),
+				"subscriptions-subscription-list-detail-payment-next-bill": (
+					"font-family": var(--font-family-secondary),
+					"font-weight": 700,
+					"font-size": 16px,
+					"line-height": 24px,
+					"margin-block-end": var(--global-spacing-2),
+					"components": (
+						"paragraph": (
+							"font-weight": 400
+						)
+					)
+				),
+				"subscriptions-subscription-list-detail-payment-title": (
+					"justify-content": space-between,
+					"display": flex,
+					"align-items": center,
+					"margin-block-end": var(--global-spacing-2)
+				),
+				"subscriptions-subscription-list-detail-payment-title-payment-info": (
+					"margin-inline-start": var(--global-spacing-4),
+					"font-family": Lora,
+					"font-size": 14px,
+					"font-weight": 400,
+					"line-height": 21px,
+					"display": flex,
+					"align-items": center,
+					"components": (
+						"paragraph": (
+							"margin-inline-start": 4px
+						)
+					)
+				),
+				"subscriptions-subscription-list-detail-payment-title-span": (
+					"font-family": Lora,
+					"font-size": 16px,
+					"font-weight": 700,
+					"line-height": 24px,
+					"color": var(--text-color),
+					"display": flex
+				),
+				"subscriptions-subscription-list-detail-payment-visa-icon": (
+					"block-size": 26px,
+					"inline-size": 37px,
+					"display": flex,
+					"justify-content": center,
+					"border": solid 1px lightgray,
+					"border-radius": 5px,
+					"margin-inline-end": 4px,
+					"align-content": center,
+					"flex-wrap": wrap
+				),
+				"subscriptions-subscription-list-detail-startDate": (
+					"font-size": 14px,
+					"font-family": Inter,
+					"font-weight": 500,
+					"line-height": 16px,
+					"block-size": 24px,
+					"color": var(--text-color)
+				),
+				"subscriptions-subscription-list-detail-subID": (
+					"font-size": 12px,
+					"font-family": Inter,
+					"font-weight": 400,
+					"line-height": 18px,
+					"block-size": 18px,
+					"color": var(--text-color-subtle),
+					"margin-block-end": var(--global-spacing-4)
+				),
+				"subscriptions-subscription-list-detail-title": (
+					"font-size": 20px,
+					"font-family": Inter,
+					"font-weight": 700,
+					"line-height": 28px,
+					"align-self": center,
+					"inline-size": 100%,
+					"margin-block-end": var(--global-spacing-2)
+				),
+				"subscriptions-subscription-list-detail-title-div": (
+					"display": flex,
+					"flex-direction": row,
+					"justify-content": space-between,
+					"block-size": max-content,
+					"align-content": center,
+					"flex-wrap": wrap
+				),
+				"subscriptions-subscription-list-detail-title-sub-info": (
+					"display": flex,
+					"flex-direction": column
+				),
+				"subscriptions-subscription-list-modal": (
+					"font-family": sans-serif,
+					"font-weight": 500,
+					"font-size": 16px,
+					"line-heigth": 18.72px,
+					"display": flex,
+					"flex-direction": column,
+					"components": (
+						"paragraph": (
+							"margin-block-end": var(--global-spacing-2)
+						)
+					)
+				),
+				"subscriptions-subscription-list-modal-button-div": (
+					"display": flex,
+					"justify-content": flex-end,
+					"components": (
+						"button": (
+							"font-size": 16px,
+							"font-weight": 500,
+							"font-family": sans-serif,
+							"line-height": 19.2px
+						)
+					)
+				),
+				"subscriptions-subscription-list-modal-title": (
+					"font-size": 32px,
+					"font-weight": 500,
+					"line-height": 40px,
+					"font-family": sans-serif,
+					"margin-block-end": var(--global-spacing-2)
+				),
+				"subscriptions-subscription-list-overlay": (
+					"background-color": rgba(179, 191, 210, 0.7),
+					"inset-block-end": 0,
+					"inset-inline-start": 0,
+					"inset-inline-end": 0,
+					"inset-block-start": 0,
+					"overflow": auto,
+					"pointer-events": all,
+					"position": fixed,
+					"block-size": 100vh,
+					"z-index": 1
+				),
+				"subscriptions-subscription-list-overlay-content": (
+					"background-color": var(--global-white),
+					"margin-block-start": -105px,
+					"inset-block-start": 50%,
+					"position": absolute,
+					"inset-inline-start": 50%,
+					"inline-size": 475px,
+					"block-size": 211px,
+					"min-block-size": max-content,
+					"margin-inline-start": -237px,
+					"box-shadow": 4px 8px 8px 0px #999999,
+					"padding-block-end": var(--global-spacing-4),
+					"padding-block-start": var(--global-spacing-4),
+					"padding-inline-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4)
 				),
 				"tag-title": (
 					"components": (
@@ -3801,6 +4493,21 @@
 					"flex-direction": column,
 					"gap": var(--global-spacing-1)
 				),
+				"input-checked": (
+					"appearance": none,
+					"-webkit-appearance": none,
+					"-moz-appearance": none,
+					"width": 16px,
+					"height": 16px,
+					"border": 5px solid var(--global-blue-5),
+					"border-radius": 50%,
+					"cursor": pointer,
+					"position": relative,
+					"outline": none,
+					"box-sizing": border-box,
+					"padding": 0,
+					"border-color": var(--global-blue-5)
+				),
 				"input-error-input": (
 					"border-color": var(--status-color-danger)
 				),
@@ -3833,6 +4540,15 @@
 				"input-label": (
 					"font-weight": var(--global-font-weight-7)
 				),
+				"input-radio": (
+					"flex-direction": row,
+					"align-items": center,
+					"components": (
+						"input": (
+							"margin-block-end": var(--global-spacing-5)
+						)
+					)
+				),
 				"input-small-input": (
 					"padding-block-end": var(--global-spacing-2),
 					"padding-block-start": var(--global-spacing-2),
@@ -3844,6 +4560,9 @@
 				),
 				"input-success-input-focus": (
 					"outline-color": var(--status-color-success)
+				),
+				"input-tip": (
+					"font-size": var(--global-font-size-3)
 				),
 				"input-warning-input": (
 					"border-color": var(--status-color-warning)
@@ -3909,6 +4628,9 @@
 				),
 				"pill-hover": (
 					"background-color": var(--global-neutral-7)
+				),
+				"reCaptcha-warning": (
+					"color": var(--status-color-danger)
 				),
 				"stack-divider-horizontal": (
 					"border": none,
@@ -4226,6 +4948,14 @@
 						),
 						"paragraph": (
 							"margin-inline-start": calc(33% + var(--global-spacing-6))
+						)
+					)
+				),
+				"one-time-login-form": (
+					"components": (
+						"heading": (
+							"font-size": var(--global-font-size-11),
+							"padding-block-end": 0
 						)
 					)
 				),

@@ -29,11 +29,16 @@ export function definedMessageByCode(code) {
 }
 
 const Login = ({ customFields }) => {
-	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC, termsAndPrivacyURL } =
+	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC, termsAndPrivacyURL, resetPasswordURL } =
 		customFields;
 
-	const urlString = window.location.href;
-	const url = new URL(urlString);
+	let urlString = '';
+	let url = '';
+
+	if (window?.location?.href) {
+		urlString = window.location.href;
+		url = new URL(urlString);
+	}
 
 	const { isAdmin, arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);
@@ -54,6 +59,7 @@ const Login = ({ customFields }) => {
 		isAdmin,
 		redirectURL,
 		redirectToPreviousPage,
+		resetPasswordURL,
 		loggedInPageLocation,
 		isOIDC,
 	});
@@ -147,6 +153,12 @@ Login.propTypes = {
 			defaultValue: true,
 			description:
 				"Do you wish for the user to be redirected to the page they entered from before logging in? This overrides redirect URL",
+		}),
+		resetPasswordURL: PropTypes.string.tag({
+			name: "Reset Password URL",
+			defaultValue: "/account/reset-password/",
+			description:
+				"The URL of your Reset Password page. If your using 'Redirect to previous page' this must be set so the user does not get redirected back to the reset page.",
 		}),
 		loggedInPageLocation: PropTypes.string.tag({
 			name: "Logged In URL",

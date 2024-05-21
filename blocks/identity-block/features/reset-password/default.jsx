@@ -24,7 +24,12 @@ export const ResetPasswordPresentation = ({ isAdmin = false, phrases, successAct
 
 	// eslint doesn't handle globalThis yet, but this is appropriate
 	/* global globalThis */
-	const nonce = new URLSearchParams(globalThis.location.search).get("nonce");
+
+	let nonce = '';
+
+	if (globalThis?.location?.search) {
+		nonce = new URLSearchParams(globalThis.location.search).get("nonce");
+	}
 
 	useEffect(() => {
 		const getConfig = async () => {

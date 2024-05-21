@@ -8,6 +8,7 @@ const useLogin = ({
 	isAdmin,
 	redirectURL,
 	redirectToPreviousPage,
+	resetPasswordURL,
 	loggedInPageLocation,
 	isOIDC,
 	appleCode,
@@ -20,20 +21,20 @@ const useLogin = ({
 	const [isAppleAuthSuccess, setIsAppleAuthSuccess] = useState(false);
 	const { loginByOIDC } = useOIDCLogin();
 
-	useEffect(()=>{
+	useEffect(() => {
 		const askForloginWithApple = async (code) => {
 			await Identity.appleSignOn(code);
 			const isLoggedIn = await Identity.isLoggedIn();
-			
-			if(isLoggedIn){
+
+			if (isLoggedIn) {
 				setIsAppleAuthSuccess(true);
 			}
 		};
 
-		if(Identity && appleCode){
+		if (Identity && appleCode) {
 			askForloginWithApple(appleCode);
 		}
-	},[appleCode, Identity]);
+	}, [appleCode, Identity]);
 
 	useEffect(() => {
 		if (window?.location?.search) {
@@ -55,9 +56,13 @@ const useLogin = ({
 		if (redirectToPreviousPage && document?.referrer) {
 			const redirectUrl = new URL(document.referrer);
 
-			setRedirectToURL(`${redirectUrl.pathname}${redirectUrl.search}`);
+			if (redirectUrl.pathname.includes(resetPasswordURL)) {
+				setRedirectToURL(`${redirectURL}${redirectUrl.search}`);
+			} else {
+				setRedirectToURL(`${redirectUrl.pathname}${redirectUrl.search}`);
+			}
 		}
-	}, [redirectQueryParam, redirectToPreviousPage]);
+	}, [redirectQueryParam, redirectToPreviousPage, resetPasswordURL, redirectURL]);
 
 	useEffect(() => {
 		const getConfig = async () => {

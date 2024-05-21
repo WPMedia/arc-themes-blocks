@@ -1,0 +1,159 @@
+import contentApi from "./content-api-gallery";
+
+jest.mock("fusion:environment", () => ({
+	CONTENT_BASE: "https://content.base",
+}));
+
+jest.mock("axios", () => ({
+	__esModule: true,
+	default: jest.fn((request) => {
+		const requestUrl = new URL(request.url);
+		const url = {
+			hostname: requestUrl.hostname,
+			pathname: requestUrl.pathname,
+			searchObject: Object.fromEntries(requestUrl.searchParams),
+		};
+		if (request.url.includes("302Mode")) {
+			return Promise.resolve({
+				data: {
+					type: "story",
+					related_content: {
+						redirect: [{ redirect_url: "test_url" }],
+					},
+					request: {
+						...request,
+						url,
+					},
+				},
+			});
+		}
+		return Promise.resolve({
+			data: {
+				content_elements: [{ url }],
+				request: {
+					...request,
+					url,
+				},
+			},
+		});
+	}),
+}));
+
+describe("the content api source block", () => {
+	it("should use the proper param types", () => {
+		expect(contentApi.params).toEqual([
+			{
+				displayName: "_id",
+				name: "_id",
+				type: "text",
+			},
+			{
+				displayName: "website_url",
+				name: "website_url",
+				type: "text",
+			},
+			{
+				default: "2",
+				displayName: "Themes Version",
+				name: "themes",
+				type: "text",
+			},
+		]);
+	});
+
+	describe("when a site is provided", () => {
+		it('should include the "website" query param with the value', async () => {
+			const contentSourceFetch = await contentApi.fetch(
+				{
+					"arc-site": "wapo",
+					website_url: "/aaaa/bccccd/",
+				},
+				{ cachedCall: () => {} },
+			);
+
+			expect(contentSourceFetch.request.url.pathname).toEqual("/content/v4/");
+			expect(contentSourceFetch.request.url.searchObject).toEqual(
+				expect.objectContaining({
+					website: "wapo",
+					website_url: "/aaaa/bccccd/",
+				}),
+			);
+		});
+	});
+
+	describe("when a site is NOT provided but a website url is ", () => {
+		it('should NOT include the "website" query param', async () => {
+			const contentSourceFetch = await contentApi.fetch(
+				{
+					website_url: "/aaaa/bccccd/",
+				},
+				{ cachedCall: () => {} },
+			);
+
+			expect(contentSourceFetch.request.url.pathname).toEqual("/content/v4/");
+			expect(contentSourceFetch.request.url.searchObject).toEqual(
+				expect.objectContaining({
+					website_url: "/aaaa/bccccd/",
+				}),
+			);
+		});
+	});
+
+	describe("when an _id is provided", () => {
+		it("should set the _id query param", async () => {
+			const contentSourceFetch = await contentApi.fetch(
+				{
+					_id: "myid",
+				},
+				{ cachedCall: () => {} },
+			);
+
+			expect(contentSourceFetch.request.url.pathname).toEqual("/content/v4/");
+			expect(contentSourceFetch.request.url.searchObject).toEqual(
+				expect.objectContaining({
+					_id: "myid",
+				}),
+			);
+		});
+	});
+
+	describe("when an _id and website_url are both provided", () => {
+		it("should set the _id query param", async () => {
+			const contentSourceFetch = await contentApi.fetch(
+				{
+					_id: "myid",
+					website_url: "/aaaa/eeeeee/",
+				},
+				{ cachedCall: () => {} },
+			);
+
+			expect(contentSourceFetch.request.url.pathname).toEqual("/content/v4/");
+			expect(contentSourceFetch.request.url.searchObject).toEqual(
+				expect.objectContaining({
+					_id: "myid",
+				}),
+			);
+		});
+	});
+
+	describe("when a website url is and an id are NOT provided", () => {
+		it("should have an undefined website_url", async () => {
+			const contentSourceFetch = await contentApi.fetch({}, { cachedCall: () => {} });
+
+			expect(contentSourceFetch.request.url.pathname).toEqual("/content/v4/");
+			expect(contentSourceFetch.request.url.searchObject).toEqual(
+				expect.objectContaining({
+					website_url: "undefined",
+				}),
+			);
+		});
+	});
+
+	describe("When a redirect is set", () => {
+		it("should throw a 302", async () => {
+			await expect(() =>
+				contentApi.fetch({ _id: "302Mode" }, { cachedCall: () => {} }),
+			).rejects.toEqual(new Error("Redirect"));
+		});
+	});
+});

@@ -1829,9 +1829,18 @@
 				),
 				"header-nav-chain-flyout-close-button": (
 					"align-self": flex-end,
+					"block-size": var(--global-spacing-5),
+					"margin-inline-end": var(--global-spacing-5),
 					"components": (
 						"button": (
-							"border-width": 0
+							"border-width": 0,
+							"block-size": auto,
+						),
+						"button-small": (
+							"padding-block-end": 0,
+							"padding-block-start": 0,
+							"padding-inline-end": 0,
+							"padding-inline-start": 0
 						)
 					)
 				),

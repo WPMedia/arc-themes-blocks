@@ -8,6 +8,7 @@ jest.mock("@wpmedia/arc-themes-components");
 const defaultParams = {
 	isAdmin: false,
 	redirectURL: "/account/",
+	resetPasswordURL: "/reset-password/",
 	redirectToPreviousPage: true,
 	loggedInPageLocation: "/account-2/",
 };
@@ -80,6 +81,18 @@ describe("useLogin()", () => {
 		await render(<Test />);
 		fireEvent.click(screen.getByRole("button"));
 		expect(window.location).toBe("/article/1234");
+		delete document.referrer;
+	});
+
+	it("uses redirectURL when referrer is the reset password page", async () => {
+		const referrerURL = "http://referrer.com/reset-password/";
+		Object.defineProperty(document, "referrer", {
+			value: referrerURL,
+			configurable: true,
+		});
+		await render(<Test />);
+		fireEvent.click(screen.getByRole("button"));
+		expect(window.location).toBe("/account/");
 		delete document.referrer;
 	});
 

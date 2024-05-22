@@ -14,7 +14,7 @@ describe("the extra large promo feature", () => {
 	it("should return null if no show flag is true", () => {
 		const config = {};
 		const { container } = render(<ExtraLarge element={mockData} customFields={config} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("should return an overline if showOverline is true", () => {

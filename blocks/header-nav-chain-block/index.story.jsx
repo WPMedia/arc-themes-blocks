@@ -225,9 +225,33 @@ export const sectionMenuOpenWithSearch = () => (
 			leftComponentDesktop2: "menu",
 			leftComponentMobile1: "menu",
 			menuComponentDesktop1: "search",
-			menuComponentDesktop2: "queryly",
 			menuComponentMobile1: "search",
-			menuComponentMobile2: "queryly",
+		}}
+		displayLinks
+		horizontalLinksHierarchy="horizontal-links"
+		isAdmin={false}
+		isSectionDrawerOpen
+		logoAlignment="left"
+		menuButtonClickAction={() => {}}
+		sectionAriaLabel="Menu des sections"
+		sections={headerNavMock}
+		showDotSeparators={false}
+		signInOrder={1}
+		primaryLogoPath="/1200x150.gif"
+		primaryLogoAlt="Shows dimensions of 1200 by 150 for testing purposes"
+	/>
+);
+
+export const sectionMenuOpenWithQueryly = () => (
+	<PresentationalNav
+		closeDrawer={() => {}}
+		customFields={{
+			...CUSTOM_FIELDS_BASE,
+			leftComponentDesktop1: "search",
+			leftComponentDesktop2: "menu",
+			leftComponentMobile1: "menu",
+			menuComponentDesktop1: "queryly",
+			menuComponentMobile1: "queryly",
 		}}
 		displayLinks
 		horizontalLinksHierarchy="horizontal-links"

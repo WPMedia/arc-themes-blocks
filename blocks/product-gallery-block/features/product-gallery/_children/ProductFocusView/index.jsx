@@ -66,7 +66,7 @@ const ProductFocusView = ({ initialItemId, onClose, productImages }) => {
 				</Stack>
 				<div className={`${BLOCK_CLASS_NAME}__focus-view-close`}>
 					<Button
-						accessibilityLabel={phrases.t("product-gallery.focus-close")}
+						accessibilityLabel={phrases.t("global.close")}
 						onClick={onClose}
 						size="medium"
 						variant="secondary"

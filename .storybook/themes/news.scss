@@ -2854,10 +2854,6 @@
 					"display": flex,
 					"flex-wrap": wrap
 				),
-				"section-title-links": (
-					"display": flex,
-					"flex-wrap": wrap
-				),
 				"share-bar": (
 					"background": var(--background-color),
 					"box-shadow": var(--global-box-shadow-1),
@@ -3289,15 +3285,6 @@
 							"margin-inline-end": 0,
 							"margin-inline-start": 0,
 							"max-inline-size": 100px
-						),
-						"heading": (
-							"font-size": var(--heading-level-5-font-size),
-							"font-weight": var(--heading-level-5-font-weight),
-							"line-height": var(--heading-level-5-line-height),
-							"margin-block-end": var(--global-spacing-4)
-						),
-						"link": (
-							"position": relative
 						),
 						"paragraph": (
 							"display": block

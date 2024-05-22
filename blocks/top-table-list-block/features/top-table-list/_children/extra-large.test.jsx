@@ -1,5 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import '@testing-library/jest-dom'
 import mockData from "../../../mock-data";
 
 import ExtraLarge from "./extra-large";

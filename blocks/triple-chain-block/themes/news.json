@@ -29,7 +29,8 @@
 			},
 			"desktop": {}
 		}
-	},"triple-chain-child-item-grid": {
+	},
+	"triple-chain-child-item-grid": {
 		"styles": {
 			"default": {
 				"display": "grid"

@@ -28,11 +28,6 @@ const Results = ({
 	const [queryOffset, setQueryOffset] = useState(configuredOffset);
 	const phrases = usePhrases();
 
-	const placeholderResizedImageOptions = useContent({
-		source: !targetFallbackImage.includes("/resources/") ? "resize-image-api" : null,
-		query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
-	});
-
 	const serviceQueryPage = useCallback(
 		(requestedOffset) => {
 			/*
@@ -107,11 +102,15 @@ const Results = ({
         promo_items {
           basic {
 			_id
-            auth {
+			auth {
 				${RESIZER_TOKEN_VERSION}
 			}
-            type
-            url
+			focal_point {
+				x
+				y
+			}
+			type
+			url
           }
           lead_art {
             promo_items {
@@ -120,8 +119,12 @@ const Results = ({
 				auth {
 					${RESIZER_TOKEN_VERSION}
 				}
-                type
-                url
+				focal_point {
+					x
+					y
+				}
+				type
+				url
               }
             }
             type
@@ -140,7 +143,7 @@ const Results = ({
     }`,
 	});
 
-	const [resultList, alterResultList] = useReducer(reduceResultList, { content_elements: [] });
+	const [resultList, alterResultList] = useReducer(reduceResultList, { content_elements: requestedResultList?.content_elements || [] });
 
 	useEffect(() => {
 		if (requestedResultList) {
@@ -191,7 +194,7 @@ const Results = ({
 	const onReadMoreClick = useCallback(() => {
 		setQueryOffset((oldOffset) => oldOffset + configuredSize);
 	}, [configuredSize, setQueryOffset]);
-	return viewableElements?.length > 0 && !isServerSideLazy ? (
+	return viewableElements?.length > 0 ? (
 		<Stack className={`${BLOCK_CLASS_NAME}__wrapper`}>
 			<Join separator={Divider}>
 				{viewableElements.map((element, index) => (
@@ -201,7 +204,6 @@ const Results = ({
 						arcSite={arcSite}
 						element={element}
 						imageRatio={imageRatio}
-						placeholderResizedImageOptions={placeholderResizedImageOptions}
 						showByline={showByline}
 						showDate={showDate}
 						showDescription={showDescription}

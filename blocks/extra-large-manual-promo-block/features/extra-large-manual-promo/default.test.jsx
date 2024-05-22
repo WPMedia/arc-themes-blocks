@@ -1,10 +1,13 @@
 import React from "react";
+import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { useContent } from "fusion:content";
+import { getFocalFromANS } from "@wpmedia/arc-themes-components";
 import ExtraLargeManualPromo from "./default";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
+	getFocalFromANS: jest.fn(() => { }),
 	isServerSide: jest.fn(() => true),
 	LazyLoad: ({ children }) => children,
 }));
@@ -12,17 +15,20 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 jest.mock("fusion:content", () => ({
 	useContent: jest.fn(() => ({})),
 	useEditableContent: jest.fn(() => ({
-		searchableField: () => {},
+		searchableField: () => { },
 	})),
 }));
 
 describe("the extra large promo feature", () => {
+	afterEach(() => {
+		getFocalFromANS.mockClear();
+	});
 	it("should return null if lazyLoad on the server and not in the admin", () => {
 		const config = {
 			lazyLoad: true,
 		};
 		const { container } = render(<ExtraLargeManualPromo customFields={config} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("should return null if no show flag is true", () => {
@@ -33,7 +39,7 @@ describe("the extra large promo feature", () => {
 			showOverline: false,
 		};
 		const { container } = render(<ExtraLargeManualPromo customFields={config} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("should render all items", () => {
@@ -48,9 +54,9 @@ describe("the extra large promo feature", () => {
 		};
 		render(<ExtraLargeManualPromo customFields={config} />);
 
-		expect(screen.queryByRole("heading", { name: config.headline })).not.toBeNull();
-		expect(screen.queryByText(config.description)).not.toBeNull();
-		expect(screen.queryByText(config.overline)).not.toBeNull();
+		expect(screen.getByRole("heading", { name: config.headline })).not.toBeNull();
+		expect(screen.getByText(config.description)).not.toBeNull();
+		expect(screen.getByText(config.overline)).not.toBeNull();
 	});
 
 	it("should return an overline if showOverline is true", () => {
@@ -59,7 +65,7 @@ describe("the extra large promo feature", () => {
 			showOverline: true,
 		};
 		render(<ExtraLargeManualPromo customFields={config} />);
-		expect(screen.queryByText(config.overline)).not.toBeNull();
+		expect(screen.getByText(config.overline)).not.toBeNull();
 	});
 
 	it("should return a headline if showHeadline is true", () => {
@@ -68,7 +74,7 @@ describe("the extra large promo feature", () => {
 			showHeadline: true,
 		};
 		render(<ExtraLargeManualPromo customFields={config} />);
-		expect(screen.queryByRole("heading", { name: config.headline })).not.toBeNull();
+		expect(screen.getByRole("heading", { name: config.headline })).not.toBeNull();
 	});
 
 	it("should return a image if showImage is true", () => {
@@ -81,7 +87,7 @@ describe("the extra large promo feature", () => {
 			showImage: true,
 		};
 		render(<ExtraLargeManualPromo customFields={config} />);
-		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
+		expect(screen.getByRole("img", { name: config.headline })).not.toBeNull();
 	});
 
 	it("should use content source to get image auth", () => {
@@ -95,7 +101,7 @@ describe("the extra large promo feature", () => {
 		};
 		render(<ExtraLargeManualPromo customFields={config} />);
 		expect(useContent).toHaveBeenCalled();
-		expect(screen.queryByRole("img", { hidden: true })).not.toBeNull();
+		expect(screen.getByRole("img", { hidden: true })).not.toBeNull();
 	});
 
 	it("should return a fallback image if showImage is true and imageUrl is not valid", () => {
@@ -105,7 +111,7 @@ describe("the extra large promo feature", () => {
 			showImage: true,
 		};
 		render(<ExtraLargeManualPromo customFields={config} />);
-		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
+		expect(screen.getByRole("img", { name: config.headline })).not.toBeNull();
 	});
 
 	it("should make a blank call to the signing-service if the image is from PhotoCenter and has an Auth value", () => {
@@ -156,6 +162,22 @@ describe("the extra large promo feature", () => {
 			showDescription: true,
 		};
 		render(<ExtraLargeManualPromo customFields={config} />);
-		expect(screen.queryByText(config.description)).not.toBeNull();
+		expect(screen.getByText(config.description)).not.toBeNull();
 	});
+	it("should respect focal point if one is set", () => {
+		const config = {
+			imageAuth: "",
+			imageURL: "test_id=123",
+			imageId: "123",
+			imageFocalPoint: JSON.stringify({ x: 1234, y: 2345 }),
+			imageRatio: "4:3",
+			showImage: true,
+		};
+		render(<ExtraLargeManualPromo customFields={config} />);
+		expect(getFocalFromANS).toHaveBeenCalledWith(
+			expect.objectContaining({
+				focal_point: JSON.parse(config.imageFocalPoint)
+			})
+		);
+	})
 });

@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Input, useIdentity } from "@wpmedia/arc-themes-components";
+import {
+	Input,
+	useIdentity,
+	Paragraph,
+	BotChallengeProtection,
+} from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
 import useLogin from "../../components/login";
 import useOIDCLogin from "../../utils/useOIDCLogin";
@@ -11,19 +16,40 @@ import validateURL from "../../utils/validate-redirect-url";
 
 const BLOCK_CLASS_NAME = "b-login-form";
 
-const Login = ({ customFields }) => {
-	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC } = customFields;
+const errorCodes = {
+	100015: "identity-block.login-form-error.account-is-disabled",
+	130001: "identity-block.login-form-error.captcha-token-invalid",
+	130051: "identity-block.login-form-error.unverified-email-address",
+	100013: "identity-block.login-form-error.max-devices",
+	0: "identity-block.login-form-error.invalid-email-password",
+};
 
-	const url_string = window.location.href;
-	const url = new URL(url_string);
+export function definedMessageByCode(code) {
+	return errorCodes[code] || errorCodes["0"];
+}
+
+const Login = ({ customFields }) => {
+	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC, termsAndPrivacyURL } =
+		customFields;
+
+	const urlString = window.location.href;
+	const url = new URL(urlString);
 
 	const { isAdmin, arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
-	const isOIDC = OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
+	const isOIDC =
+		OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
+
 	const { Identity, isInitialized } = useIdentity();
+
+	const [captchaToken, setCaptchaToken] = useState();
+	const [captchaError, setCaptchaError] = useState();
+	const [resetRecaptcha, setResetRecaptcha] = useState(true);
+
 	const [error, setError] = useState();
+
 	const { loginRedirect } = useLogin({
 		isAdmin,
 		redirectURL,
@@ -41,10 +67,14 @@ const Login = ({ customFields }) => {
 		<HeadlinedSubmitForm
 			buttonLabel={phrases.t("identity-block.log-in")}
 			className={BLOCK_CLASS_NAME}
-			formErrorText={error}
-			headline={phrases.t("identity-block.log-in")}
-			onSubmit={({ email, password }) =>
-				Identity.login(email, password, {rememberMe: true})
+			headline={phrases.t("identity-block.log-in-headline")}
+			onSubmit={({ email, password }) => {
+				setError(null);
+				setCaptchaError(null);
+				return Identity.login(email, password, {
+					rememberMe: true,
+					recaptchaToken: captchaToken,
+				})
 					.then(() => {
 						if (isOIDC) {
 							loginByOIDC();
@@ -53,12 +83,24 @@ const Login = ({ customFields }) => {
 							window.location = validatedURL;
 						}
 					})
-					.catch(() => setError(phrases.t("identity-block.login-form-error")))
-			}
+					.catch((e) => {
+						setResetRecaptcha(!resetRecaptcha);
+						if (e?.code === "130001") {
+							setCaptchaError(phrases.t(definedMessageByCode(e.code)));
+						} else {
+							setError(phrases.t(definedMessageByCode(e.code)));
+						}
+					});
+			}}
 		>
+			{error ? (
+				<div className={`${BLOCK_CLASS_NAME}__login-form-error`}>
+					<Paragraph>{error}</Paragraph>
+				</div>
+			) : null}
 			<Input
 				autoComplete="email"
-				label={phrases.t("identity-block.email")}
+				label={phrases.t("identity-block.email-label")}
 				name="email"
 				required
 				showDefaultError={false}
@@ -73,6 +115,21 @@ const Login = ({ customFields }) => {
 				showDefaultError={false}
 				type="password"
 			/>
+			<BotChallengeProtection
+				challengeIn="signin"
+				setCaptchaToken={setCaptchaToken}
+				captchaError={captchaError}
+				error={error}
+				setCaptchaError={setCaptchaError}
+				resetRecaptcha={resetRecaptcha}
+			/>
+			<div className={`${BLOCK_CLASS_NAME}__tos-container`}>
+				<Paragraph
+					dangerouslySetInnerHTML={{
+						__html: phrases.t("identity-block.terms-service-privacy-text", { termsAndPrivacyURL }),
+					}}
+				/>
+			</div>
 		</HeadlinedSubmitForm>
 	);
 };
@@ -98,10 +155,15 @@ Login.propTypes = {
 				"The URL to which a user would be redirected to if visiting a login page when already logged in.",
 		}),
 		OIDC: PropTypes.bool.tag({
-      name: 'Login with OIDC',
-      defaultValue: false,
-      description: 'Used when authenticating a third party site with OIDC PKCE flow. This will use an ArcXp Org as an auth provider',
-    }),
+			name: "Login with OIDC",
+			defaultValue: false,
+			description:
+				"Used when authenticating a third party site with OIDC PKCE flow. This will use an ArcXp Org as an auth provider",
+		}),
+		termsAndPrivacyURL: PropTypes.string.tag({
+			name: "Privacy Policy URL",
+			defaultValue: "/privacy-policy/",
+		}),
 	}),
 };
 

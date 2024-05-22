@@ -8,6 +8,7 @@ import {
 	Date as DateComponent,
 	Divider,
 	formatAuthors,
+	getFocalFromANS,
 	getImageFromANS,
 	getVideoFromANS,
 	Heading,
@@ -85,14 +86,15 @@ const ExtraLarge = (props) => {
 	const contentUrl = element?.websites?.[arcSite]?.website_url;
 	const embedMarkup = playVideoInPlaceXL && getVideoFromANS(element);
 	const hasAuthors = showBylineXL && element?.credits?.by.length > 0;
+	const ansImage = getImageFromANS(element);
 	const imageParams =
-		element && getImageFromANS(element)
+		element && ansImage
 			? {
-					ansImage: getImageFromANS(element),
+					ansImage,
 					alt: element?.headlines?.basic || "",
 					aspectRatio: imageRatioXL,
 					resizedOptions: {
-						smart: true,
+						...getFocalFromANS(ansImage),
 					},
 					responsiveImages: [400, 600, 800, 1200],
 					width: 800,

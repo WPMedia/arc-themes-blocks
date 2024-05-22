@@ -1,20 +1,21 @@
 import React from "react";
-import { usePaymentRedirect } from "../usePaymentRedirect";
 import { usePhrases } from "@wpmedia/arc-themes-components";
+import { usePaymentRedirect } from "../usePaymentRedirect";
 
 export const PaypalCheckout = ({ labelOrderNumber, paypal, orderNumber, successURL }) => {
 	const phrases = usePhrases();
 	const params = new URLSearchParams(window.location.search);
 	const token = params.get("token");
 
+	let newOrderNumber;
 	// Paypal can't pass back the orderNumber to us (like other payment methods does, e.g. payment express), we store it in local storage
 	if (orderNumber) {
 		localStorage.setItem(labelOrderNumber, orderNumber);
 	} else {
-		orderNumber = localStorage[labelOrderNumber];
+		newOrderNumber = localStorage[labelOrderNumber];
 	}
 
-	const { error } = usePaymentRedirect(paypal, orderNumber, token, "parameter1", successURL);
+	const { error } = usePaymentRedirect(paypal, newOrderNumber, token, "parameter1", successURL);
 
 	return (
 		<>

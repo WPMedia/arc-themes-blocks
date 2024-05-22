@@ -10,25 +10,41 @@ const useLogin = ({
 	redirectToPreviousPage,
 	loggedInPageLocation,
 	isOIDC,
+	appleCode,
 }) => {
 
 	const { Identity } = useIdentity();
 	const validatedRedirectURL = validateURL(redirectURL);
 	const [redirectToURL, setRedirectToURL] = useState(validatedRedirectURL);
 	const [redirectQueryParam, setRedirectQueryParam] = useState(null);
+	const [isAppleAuthSuccess, setIsAppleAuthSuccess] = useState(false);
 	const { loginByOIDC } = useOIDCLogin();
+
+	useEffect(()=>{
+		const askForloginWithApple = async (code) => {
+			await Identity.appleSignOn(code);
+			const isLoggedIn = await Identity.isLoggedIn();
+			
+			if(isLoggedIn){
+				setIsAppleAuthSuccess(true);
+			}
+		};
+
+		if(Identity && appleCode){
+			askForloginWithApple(appleCode);
+		}
+	},[appleCode, Identity]);
 
 	useEffect(() => {
 		if (window?.location?.search) {
 			const searchParams = new URLSearchParams(window.location.search.substring(1));
 
-			//redirectURL could have additional params
+			// redirectURL could have additional params
 			const params = ["paymentMethodID"];
-			const aditionalParams = params.map((p) => {
-				const paramExist = searchParams.has(p)
-				if(paramExist){
-					return {[p]:searchParams.get(p)}
-				}
+			const aditionalParams = params.filter((p) => {
+				const paramExist = searchParams.has(p);
+
+				return paramExist;
 			})
 
 			const fullURL = searchParams.get("redirect") ? appendURLParams(searchParams.get("redirect"), aditionalParams.filter(item => item !== undefined)) : null;
@@ -37,7 +53,9 @@ const useLogin = ({
 		}
 
 		if (redirectToPreviousPage && document?.referrer) {
-			setRedirectToURL(document.referrer);
+			const redirectUrl = new URL(document.referrer);
+
+			setRedirectToURL(`${redirectUrl.pathname}${redirectUrl.search}`);
 		}
 	}, [redirectQueryParam, redirectToPreviousPage]);
 
@@ -56,6 +74,7 @@ const useLogin = ({
 		const checkLoggedInStatus = async () => {
 			const isLoggedIn = await Identity.isLoggedIn();
 			const validatedLoggedInPageLoc = validateURL(loggedInPageLocation);
+
 			if (isLoggedIn) {
 				if (isOIDC) {
 					loginByOIDC();
@@ -67,7 +86,7 @@ const useLogin = ({
 		if (Identity && !isAdmin) {
 			checkLoggedInStatus();
 		}
-	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin]);
+	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin, loginByOIDC, isOIDC, isAppleAuthSuccess]);
 
 	return {
 		loginRedirect: redirectQueryParam || redirectToURL,

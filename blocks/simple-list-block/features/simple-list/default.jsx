@@ -6,14 +6,15 @@ import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import { RESIZER_TOKEN_VERSION } from "fusion:environment";
 import {
+	getFocalFromANS,
 	getImageFromANS,
-	Stack,
-	isServerSide,
 	Heading,
 	HeadingSection,
 	Image,
+	isServerSide,
 	LazyLoad,
 	Link,
+	Stack,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-simple-list";
@@ -85,21 +86,29 @@ const SimpleList = (props) => {
 		  	promo_items {
 				basic {
 					_id
-					type
-					url
 					auth {
 						${RESIZER_TOKEN_VERSION}
 					}
+					focal_point {
+						x
+						y
+					}
+					type
+					url
 			 	}
 				lead_art {
 					promo_items {
 				  		basic {
 							_id
-							type
-							url
 							auth {
 								${RESIZER_TOKEN_VERSION}
 							}
+							focal_point {
+								x
+								y
+							}
+							type
+							url
 						}
 					}
 					type
@@ -135,7 +144,7 @@ const SimpleList = (props) => {
 										ansImage: image,
 										aspectRatio: "3:2",
 										resizedOptions: {
-											smart: true,
+											...getFocalFromANS(image),
 										},
 										responsiveImages: [274, 548, 1096],
 										width: 274,

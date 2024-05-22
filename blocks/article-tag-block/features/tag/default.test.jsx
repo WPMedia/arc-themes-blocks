@@ -46,7 +46,7 @@ describe("the article tag block", () => {
 			};
 			render(<ArticleTags customFields={config} />);
 			const wrapper = await screen.findByRole("generic");
-			expect(wrapper.innerHTML).toBeFalsy();
+			expect(wrapper).toBeEmptyDOMElement()
 		});
 
 		test("should render a parent container for the tags", () => {
@@ -98,9 +98,8 @@ describe("the article tag block", () => {
 
 		it("should render pill components", () => {
 			render(<ArticleTags />)
-			const co = screen.getByTestId("article-container");
-			// eslint-disable-next-line testing-library/no-node-access
-			expect(co.children.length).toBe(2);
+			screen.getByTestId("article-container");
+			screen.getByText("dogs text");
 		});
 	});
 
@@ -123,7 +122,7 @@ describe("the article tag block", () => {
 		it("should not render anything", async () => {
 			render(<ArticleTags />);
 			const wrapper = await screen.findByRole("generic");
-			expect(wrapper).toContainHTML('<div />');
+			expect(wrapper).toBeEmptyDOMElement()
 		});
 	});
 
@@ -141,8 +140,7 @@ describe("the article tag block", () => {
 
 		it("should not render anything", async () => {
 			const { container } = render(<ArticleTags ItemLength={1} />);
-			// eslint-disable-next-line testing-library/no-node-access
-			expect(container.firstChild).toBeNull();
+			expect(container).toBeEmptyDOMElement();
 		});
 	});
 });

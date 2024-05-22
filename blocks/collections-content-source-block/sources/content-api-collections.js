@@ -40,7 +40,7 @@ const params = [
 
 const fetch = (
 	{ _id, "arc-site": site, content_alias: contentAlias, from, getNext = "false", size },
-	{ cachedCall }
+	{ cachedCall },
 ) => {
 	// Max collection size is 20
 	// See: https://redirector.arcpublishing.com/alc/docs/swagger/?url=./arc-products/content-api.json
@@ -84,7 +84,7 @@ const fetch = (
 									...(data?.content_elements || []),
 									...(next?.content_elements || []),
 								],
-						  }
+							}
 						: {}),
 				}));
 		})
@@ -95,4 +95,5 @@ export default {
 	fetch,
 	params,
 	schemaName: "ans-feed",
+	searchable: "collection",
 };

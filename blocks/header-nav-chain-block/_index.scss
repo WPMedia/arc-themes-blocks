@@ -23,6 +23,11 @@
 		@include scss.block-properties("header-nav-chain-nav-search");
 	}
 
+	&__flyout-close-button {
+		@include scss.block-components("header-nav-chain-flyout-close-button");
+		@include scss.block-properties("header-nav-chain-flyout-close-button");
+	}
+
 	&__flyout-overlay {
 		&::-webkit-scrollbar {
 			@include scss.block-components("header-nav-chain-flyout-overlay-scrollbar");

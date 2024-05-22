@@ -61,6 +61,7 @@
 	"global-phrases-block": {
 		"global.and-text": "និង",
 		"global.by-text": "ដោយ",
+		"global.close": "បិទ",
 		"global.gallery-autoplay-button": "លេងដោយស្វ័យប្រវត្តិ",
 		"global.gallery-autoplay-label-start": "ចាប់ផ្ដើមការបញ្ចាំងស្លាយដោយស្វ័យប្រវត្តិ",
 		"global.gallery-autoplay-label-stop": "បញ្ឈប់ការបញ្ចាំងស្លាយដោយស្វ័យប្រវត្តិ",
@@ -203,7 +204,6 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "ផលិតផល",
-		"product-gallery.focus-close": "បិទ",
 		"product-gallery.focus-thumbnail-next": "រូបភាពបន្ទាប់",
 		"product-gallery.focus-thumbnail-previous": "រូបភាពមុន",
 		"product-gallery.go-to-slide": "ទៅកាន់ស្លាយ %{slideNumber}",
@@ -588,8 +588,8 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-paragraph2": "Are you sure you want to resubscribe?",
 		"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": "Yes, Resubscribe",
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
-		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
+		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
 		"subscriptions-block.update-payment": "ធ្វើបច្ចុប្បន្នភាពវិធីបង់ប្រាក់"
 	}

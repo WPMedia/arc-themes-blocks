@@ -61,6 +61,7 @@
 	"global-phrases-block": {
 		"global.and-text": "و",
 		"global.by-text": "بواسطة",
+		"global.close": "إغلاق",
 		"global.gallery-autoplay-button": "التشغيل التلقائي",
 		"global.gallery-autoplay-label-start": "بدء عرض الشرائح التلقائي",
 		"global.gallery-autoplay-label-stop": "إيقاف عرض الشرائح التلقائي",
@@ -203,7 +204,6 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "منتجات",
-		"product-gallery.focus-close": "إغلاق",
 		"product-gallery.focus-thumbnail-next": "الصورة التالية",
 		"product-gallery.focus-thumbnail-previous": "الصورة السابقة",
 		"product-gallery.go-to-slide": "الانتقال إلى شريحة %{slideNumber}",
@@ -588,8 +588,8 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-paragraph2": "Are you sure you want to resubscribe?",
 		"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": "Yes, Resubscribe",
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
-		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
+		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
 		"subscriptions-block.update-payment": "تحديث طريقة الدفع"
 	}

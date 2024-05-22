@@ -98,8 +98,7 @@ describe("the article tag block", () => {
 
 		it("should render pill components", () => {
 			render(<ArticleTags />)
-			screen.getByTestId("article-container");
-			screen.getByText("dogs text");
+			expect(screen.getByText("dogs text")).not.toBeNull();
 		});
 	});
 

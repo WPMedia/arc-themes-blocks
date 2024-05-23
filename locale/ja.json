@@ -61,6 +61,7 @@
 	"global-phrases-block": {
 		"global.and-text": "및",
 		"global.by-text": "担当者：",
+		"global.close": "閉じる",
 		"global.gallery-autoplay-button": "自動再生",
 		"global.gallery-autoplay-label-start": "自動スライドショーを開始",
 		"global.gallery-autoplay-label-stop": "自動スライド ショーを停止",
@@ -203,7 +204,6 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "製品",
-		"product-gallery.focus-close": "閉じる",
 		"product-gallery.focus-thumbnail-next": "次の画像",
 		"product-gallery.focus-thumbnail-previous": "前の画像",
 		"product-gallery.go-to-slide": "スライド%{slideNumber}に移動",
@@ -588,8 +588,8 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-paragraph2": "Are you sure you want to resubscribe?",
 		"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": "Yes, Resubscribe",
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
-		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
+		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
 		"subscriptions-block.update-payment": "支払い方法の更新"
 	}

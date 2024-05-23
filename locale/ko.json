@@ -61,6 +61,7 @@
 	"global-phrases-block": {
 		"global.and-text": "및",
 		"global.by-text": "저작자",
+		"global.close": "닫기",
 		"global.gallery-autoplay-button": "자동 재생",
 		"global.gallery-autoplay-label-start": "자동 슬라이드 쇼 시작",
 		"global.gallery-autoplay-label-stop": "자동 슬라이드 쇼 중지",
@@ -203,7 +204,6 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "상품",
-		"product-gallery.focus-close": "닫기",
 		"product-gallery.focus-thumbnail-next": "다음 이미지",
 		"product-gallery.focus-thumbnail-previous": "이전 이미지",
 		"product-gallery.go-to-slide": "슬라이드 %{slideNumber}(으)로 이동",
@@ -588,8 +588,8 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-paragraph2": "Are you sure you want to resubscribe?",
 		"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": "Yes, Resubscribe",
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
-		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
+		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
 		"subscriptions-block.update-payment": "결제 수단 업데이트"
 	}

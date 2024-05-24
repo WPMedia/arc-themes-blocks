@@ -5,7 +5,7 @@ import handleFetchError from "@wpmedia/arc-themes-components/src/utils/handle-fe
 import handleRedirect from "@wpmedia/arc-themes-components/src/utils/handle-redirect";
 import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source-block";
 
-export const params = [
+const params = [
 	{
 		displayName: "_id",
 		name: "_id",
@@ -24,7 +24,7 @@ export const params = [
 	},
 ];
 
-export const fetch = ({ _id, "arc-site": website, website_url: websiteUrl }, { cachedCall }) => {
+const fetch = ({ _id, "arc-site": website, website_url: websiteUrl }, { cachedCall }) => {
 	const urlSearch = new URLSearchParams({
 		...(_id ? { _id } : { website_url: websiteUrl }),
 		...(website ? { website } : {}),

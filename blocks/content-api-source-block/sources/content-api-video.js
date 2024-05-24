@@ -1,8 +1,6 @@
-import { fetch, params } from "./content-api";
+import contentAPI from "./content-api";
 
 export default {
-	fetch,
-	params,
-	schemaName: "ans-item",
+	...contentAPI,
 	searchable: "video",
 };

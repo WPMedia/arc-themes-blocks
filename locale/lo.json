@@ -61,6 +61,7 @@
 	"global-phrases-block": {
 		"global.and-text": "ແລະ",
 		"global.by-text": "ໂດຍ",
+		"global.close": "ປິດ",
 		"global.gallery-autoplay-button": "ຫຼິ້ນອັດຕະໂນມັດ",
 		"global.gallery-autoplay-label-start": "ເລີ່ມສະແດງສະໄລ້ອັດຕະໂນມັດ",
 		"global.gallery-autoplay-label-stop": "ຢຸດສະແດງສະໄລ້ອັດຕະໂນມັດ",
@@ -203,7 +204,6 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "ຜະລິດຕະພັນ",
-		"product-gallery.focus-close": "ປິດ",
 		"product-gallery.focus-thumbnail-next": "ຮູບຕໍ່ໄປ",
 		"product-gallery.focus-thumbnail-previous": "ຮູບກ່ອນໜ້າ",
 		"product-gallery.go-to-slide": "ໄປຍັງສະໄລ້ %{slideNumber}",
@@ -588,8 +588,8 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-paragraph2": "Are you sure you want to resubscribe?",
 		"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": "Yes, Resubscribe",
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
-		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
+		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
 		"subscriptions-block.update-payment": "ອັບເດດວິທີການຊໍາລະ"
 	}

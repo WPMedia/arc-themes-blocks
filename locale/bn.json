@@ -61,6 +61,7 @@
 	"global-phrases-block": {
 		"global.and-text": "এবং",
 		"global.by-text": "দ্বারা",
+		"global.close": "বন্ধ করুন",
 		"global.gallery-autoplay-button": "অটোপ্লে",
 		"global.gallery-autoplay-label-start": "স্বয়ংক্রিয় স্লাইড শো শুরু করুন",
 		"global.gallery-autoplay-label-stop": "স্বয়ংক্রিয় স্লাইড শো বন্ধ করুন",
@@ -203,7 +204,6 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "প্রোডাক্টগুলি",
-		"product-gallery.focus-close": "বন্ধ করুন",
 		"product-gallery.focus-thumbnail-next": "পরবর্তী ছবি",
 		"product-gallery.focus-thumbnail-previous": "পূর্ববর্তী ছবি",
 		"product-gallery.go-to-slide": "%{slideNumber} স্লাইডে যান",
@@ -588,8 +588,8 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-paragraph2": "Are you sure you want to resubscribe?",
 		"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": "Yes, Resubscribe",
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
-		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
+		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
 		"subscriptions-block.update-payment": "পেমেন্ট পদ্ধতি আপডেট করুন"
 	}

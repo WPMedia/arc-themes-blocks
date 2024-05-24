@@ -61,6 +61,7 @@
 	"global-phrases-block": {
 		"global.and-text": "和",
 		"global.by-text": "按",
+		"global.close": "关闭",
 		"global.gallery-autoplay-button": "自动播放",
 		"global.gallery-autoplay-label-start": "开始自动幻灯片放映",
 		"global.gallery-autoplay-label-stop": "停止自动幻灯片放映",
@@ -203,7 +204,6 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "产品",
-		"product-gallery.focus-close": "关闭",
 		"product-gallery.focus-thumbnail-next": "下一张图像",
 		"product-gallery.focus-thumbnail-previous": "上一张图像",
 		"product-gallery.go-to-slide": "转至幻灯片 %{slideNumber}",
@@ -588,8 +588,8 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-paragraph2": "Are you sure you want to resubscribe?",
 		"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": "Yes, Resubscribe",
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
-		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
+		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
 		"subscriptions-block.update-payment": "更新付款方式"
 	}

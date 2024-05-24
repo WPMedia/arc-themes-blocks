@@ -11,12 +11,15 @@
 			"default": {
 				"display": "flex",
 				"justify-content": "center",
-				"inline-size": "80%",
+				"inline-size": "100%",
 				"padding-block-start": "var(--global-spacing-6)",
 				"padding-inline-start": "var(--global-spacing-6)",
 				"padding-block-end": "var(--global-spacing-6)",
 				"padding-inline-end": "var(--global-spacing-6)",
 				"align-items": "start"
+			},
+			"desktop": {
+				"inline-size": "80%"
 			}
 		}
 	},
@@ -37,6 +40,7 @@
 	"checkout-sidebar": {
 		"styles": {
 			"default": {
+				"display": "none",
 				"height": "100vh",
 				"border-inline-start-width": "2px",
 				"border-inline-start-style": "solid",
@@ -44,6 +48,9 @@
 				"padding-block-start": "var(--global-spacing-6)",
 				"padding-inline-end": "var(--global-spacing-4)",
 				"padding-inline-start": "var(--global-spacing-6)"
+			},
+			"desktop": {
+				"display": "flex"
 			}
 		}
 	},

@@ -552,15 +552,3 @@
 		inset-block-start: initial;
 	}
 }
-
-@media (max-width: 880px) {
-	.b-checkout {
-		&__main {
-			inline-size: 100%;
-		}
-
-		&__sidebar {
-			display: none;
-		}
-	}
-}

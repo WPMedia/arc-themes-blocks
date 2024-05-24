@@ -48,4 +48,5 @@ export default {
 	fetch,
 	params,
 	schemaName: "ans-item",
+	searchable: "story",
 };

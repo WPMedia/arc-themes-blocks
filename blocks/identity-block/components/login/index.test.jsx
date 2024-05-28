@@ -90,6 +90,13 @@ describe("useLogin()", () => {
 			value: referrerURL,
 			configurable: true,
 		});
+		Object.defineProperty(window, "location", {
+			writable: true,
+			value: {
+				href: 'http://localhost',
+				search: '?reset_password=true'
+			}
+		});
 		await render(<Test />);
 		fireEvent.click(screen.getByRole("button"));
 		expect(window.location).toBe("/account/");

@@ -49,7 +49,7 @@ const AuthorImage = ({ image, altText = "" }) => {
 			</MediaItem>
 		);
 	}
-	if (typeof image === "string") {
+	if (typeof image === "string" && image !== "") {
 		return (
 			<MediaItem>
 				<Image alt={altText} src={image} width={100} />

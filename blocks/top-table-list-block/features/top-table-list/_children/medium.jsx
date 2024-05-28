@@ -54,7 +54,7 @@ const Medium = (props) => {
 
 	const showBottomBorder = typeof showBottomBorderMD === "undefined" ? true : showBottomBorderMD;
 
-	const hasAuthors = showBylineMD ? element?.credits?.by && element?.credits?.by.length : null;
+	const hasAuthors = showBylineMD ? element?.credits?.by && element?.credits?.by?.length : null;
 	const contentDescription = showDescriptionMD ? element?.description?.basic : null;
 	const contentHeading = showHeadlineMD ? element?.headlines?.basic : null;
 	const contentUrl = element?.websites?.[arcSite]?.website_url;

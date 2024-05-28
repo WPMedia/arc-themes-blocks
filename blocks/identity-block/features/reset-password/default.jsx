@@ -110,8 +110,8 @@ export const ResetPasswordPresentation = ({ isAdmin = false, phrases, successAct
 		},
 	});
 
-	if (true) {
-		if (true) {
+	if (isAdmin || (isInitialized && nonce)) {
+		if (submitted) {
 			return (
 				<HeadlinedSubmitForm
 					headline={phrases.t("identity-block.reset-password-headline-submitted")}

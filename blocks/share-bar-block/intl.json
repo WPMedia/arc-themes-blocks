@@ -4,6 +4,7 @@
 		"bn": "%{socialType}-এর মাধ্যমে বর্তমান প্রবন্ধটি শেয়ার করুন",
 		"bo": "%{socialType}བརྒྱུད་ནས་མིག་སྔའི་བརྩམས་ཆོས་མཉམ་སྤྱོད་བྱེད།",
 		"de": "Aktuellen Artikel über %{socialType} teilen",
+		"el": "Μοιραστείτε το τρέχον άρθρο μέσω %{socialType}",
 		"en": "Share current article via %{socialType}",
 		"es": "Compartir el artículo actual mediante %{socialType}",
 		"fr": "Partager l'article en cours via %{socialType}",

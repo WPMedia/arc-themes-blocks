@@ -305,6 +305,28 @@
 			"desktop": {}
 		}
 	},
+	"header-nav-chain-flyout-close-button": {
+		"styles": {
+			"default": {
+				"align-self": "flex-end",
+				"block-size": "var(--global-spacing-5)",
+				"margin-inline-end": "var(--global-spacing-5)",
+				"components": {
+					"button": {
+						"border-width": 0,
+						"block-size": "auto"
+					},
+					"button-small": {
+						"padding-block-end": 0,
+						"padding-block-start": 0,
+						"padding-inline-end": 0,
+						"padding-inline-start": 0
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
 	"header-nav-chain-flyout-overlay": {
 		"styles": {
 			"default": {
@@ -332,6 +354,7 @@
 		"styles": {
 			"default": {
 				"background": "var(--header-nav-chain-overlay-background-color)",
+				"block-size": "calc(100vh - var(--header-nav-chain-height))",
 				"overflow-y": "scroll",
 				"overflow-block": "scroll",
 				"transform": "translate(0, 0)",
@@ -366,7 +389,8 @@
 	"header-nav-chain-flyout-nav-wrapper-open": {
 		"styles": {
 			"default": {
-				"gap": "var(--global-spacing-4)"
+				"gap": "var(--global-spacing-4)",
+				"padding-block-start": "var(--global-spacing-4)"
 			},
 			"desktop": {}
 		}
@@ -409,8 +433,6 @@
 		"styles": {
 			"default": {
 				"display": "flex",
-				"padding-block-end": "var(--global-spacing-5)",
-				"padding-block-start": "var(--global-spacing-5)",
 				"padding-inline-end": "var(--global-spacing-5)",
 				"padding-inline-start": "var(--global-spacing-5)"
 			},
@@ -423,8 +445,6 @@
 		"styles": {
 			"default": {
 				"display": "none",
-				"padding-block-end": "var(--global-spacing-5)",
-				"padding-block-start": "var(--global-spacing-5)",
 				"padding-inline-end": "var(--global-spacing-5)",
 				"padding-inline-start": "var(--global-spacing-5)",
 				"components": {

@@ -44,6 +44,7 @@ export default ({ type = "blockquote", classPrefix, element }) => {
 			key={elementId}
 			className={className}
 			cite={element.citation && element.citation.content}
+			role="blockquote"
 		>
 			{quoteItems}
 		</Stack>

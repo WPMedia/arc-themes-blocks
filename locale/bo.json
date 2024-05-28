@@ -61,6 +61,7 @@
 	"global-phrases-block": {
 		"global.and-text": "དང་།",
 		"global.by-text": "ནས།",
+		"global.close": "ཁ་རྒྱག",
 		"global.gallery-autoplay-button": "གཏོང་བ།",
 		"global.gallery-autoplay-label-start": "སྒྲོན་བརྙན་དྲ་ཤོག་རང་འགུལ་གྱིས་གཏོང་འགོ་འཛུགས།",
 		"global.gallery-autoplay-label-stop": "སྒྲོན་བརྙན་དྲ་ཤོག་རང་འགུལ་གྱིས་གཏོང་མཚམས་འཇོག",
@@ -203,7 +204,6 @@
 	},
 	"product-gallery-block": {
 		"product-gallery.aria-label": "ཐོན་རྫས།",
-		"product-gallery.focus-close": "ཁ་རྒྱག",
 		"product-gallery.focus-thumbnail-next": "པར་རིས་རྗེས་མ།",
 		"product-gallery.focus-thumbnail-previous": "པར་རིས་གོང་མ།",
 		"product-gallery.go-to-slide": "སྒྲོན་བརྙན་དྲ་ཤོག་%{slideNumber}ལ་ཕེབས།",
@@ -588,8 +588,8 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-paragraph2": "Are you sure you want to resubscribe?",
 		"subscriptions-block.subscription-profile-management-resub-modal-primary-button-text": "Yes, Resubscribe",
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
-		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
+		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
 		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
 		"subscriptions-block.update-payment": "དངུལ་སྤྲོད་ཐབས་ལམ་གསར་སྣོན་བྱེད་པ།"
 	}

@@ -85,7 +85,10 @@ const ExtraLarge = (props) => {
 	const contentHeading = showHeadlineXL ? element?.headlines?.basic : null;
 	const contentUrl = element?.websites?.[arcSite]?.website_url;
 	const embedMarkup = playVideoInPlaceXL && getVideoFromANS(element);
-	const hasAuthors = showBylineXL && element?.credits?.by.length > 0;
+	const contentAuthors =
+		showBylineXL && element?.credits?.by?.length > 0
+			? formatAuthors(element.credits.by, phrases.t("global.and-text"))
+			: null;
 	const ansImage = getImageFromANS(element);
 	const imageParams =
 		element && ansImage
@@ -107,12 +110,12 @@ const ExtraLarge = (props) => {
 		contentHeading ||
 		showImageXL ||
 		contentDescription ||
-		hasAuthors ||
+		contentAuthors ||
 		hasDate ? (
 		<>
 			<article className={BLOCK_CLASS_NAME}>
 				{hasOverline ? <Overline href={overlineUrl}>{overlineText}</Overline> : null}
-				{contentHeading || showImageXL || contentDescription || hasAuthors || hasDate ? (
+				{contentHeading || showImageXL || contentDescription || contentAuthors || hasDate ? (
 					<Stack>
 						{contentHeading ? (
 							<HeadingSection>
@@ -140,13 +143,13 @@ const ExtraLarge = (props) => {
 							</MediaItem>
 						) : null}
 						{contentDescription ? <Paragraph>{contentDescription}</Paragraph> : null}
-						{hasAuthors || hasDate ? (
+						{contentAuthors || hasDate ? (
 							<Attribution>
 								<Join separator={Separator}>
-									{hasAuthors ? (
+									{contentAuthors ? (
 										<Join separator={() => " "}>
 											{phrases.t("global.by-text")}
-											{formatAuthors(element?.credits?.by, phrases.t("global.and-text"))}
+											{contentAuthors}
 										</Join>
 									) : null}
 									{hasDate ? (

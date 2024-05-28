@@ -55,6 +55,16 @@ export const ResetPasswordPresentation = ({ isAdmin = false, phrases, successAct
 		}
 	}, [Identity]);
 
+	useEffect(() => {
+		if (submitted) {
+			const url = new URL(window.location.href);
+
+			url.searchParams.delete('nonce');
+
+			window.history.replaceState(window.history.state, '', url.href);
+		}
+	}, [submitted])
+
 	const getRedirectUrl = () => {
 		const redirect = validateURL(successActionURL);
 

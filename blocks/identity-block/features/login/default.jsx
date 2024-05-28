@@ -29,7 +29,7 @@ export function definedMessageByCode(code) {
 }
 
 const Login = ({ customFields }) => {
-	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC, termsAndPrivacyURL, resetPasswordURL } =
+	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC, termsAndPrivacyURL } =
 		customFields;
 
 	let urlString = '';
@@ -59,7 +59,6 @@ const Login = ({ customFields }) => {
 		isAdmin,
 		redirectURL,
 		redirectToPreviousPage,
-		resetPasswordURL,
 		loggedInPageLocation,
 		isOIDC,
 	});
@@ -153,12 +152,6 @@ Login.propTypes = {
 			defaultValue: true,
 			description:
 				"Do you wish for the user to be redirected to the page they entered from before logging in? This overrides redirect URL",
-		}),
-		resetPasswordURL: PropTypes.string.tag({
-			name: "Reset Password URL",
-			defaultValue: "/account/reset-password/",
-			description:
-				"The URL of your Reset Password page. If your using 'Redirect to previous page' this must be set so the user does not get redirected back to the reset page.",
 		}),
 		loggedInPageLocation: PropTypes.string.tag({
 			name: "Logged In URL",

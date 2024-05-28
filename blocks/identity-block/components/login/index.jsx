@@ -8,7 +8,6 @@ const useLogin = ({
 	isAdmin,
 	redirectURL,
 	redirectToPreviousPage,
-	resetPasswordURL,
 	loggedInPageLocation,
 	isOIDC,
 	appleCode,
@@ -37,9 +36,9 @@ const useLogin = ({
 	}, [appleCode, Identity]);
 
 	useEffect(() => {
-		if (window?.location?.search) {
-			const searchParams = new URLSearchParams(window.location.search.substring(1));
+		const searchParams = new URLSearchParams(window.location.search.substring(1));
 
+		if (window?.location?.search) {
 			// redirectURL could have additional params
 			const params = ["paymentMethodID"];
 			const aditionalParams = params.filter((p) => {
@@ -56,13 +55,13 @@ const useLogin = ({
 		if (redirectToPreviousPage && document?.referrer) {
 			const redirectUrl = new URL(document.referrer);
 
-			if (redirectUrl.pathname.includes(resetPasswordURL)) {
+			if (searchParams.has('reset_password')) {
 				setRedirectToURL(`${redirectURL}${redirectUrl.search}`);
 			} else {
 				setRedirectToURL(`${redirectUrl.pathname}${redirectUrl.search}`);
 			}
 		}
-	}, [redirectQueryParam, redirectToPreviousPage, resetPasswordURL, redirectURL]);
+	}, [redirectQueryParam, redirectToPreviousPage, redirectURL]);
 
 	useEffect(() => {
 		const getConfig = async () => {

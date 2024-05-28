@@ -55,6 +55,16 @@ export const ResetPasswordPresentation = ({ isAdmin = false, phrases, successAct
 		}
 	}, [Identity]);
 
+	const getRedirectUrl = () => {
+		const redirect = validateURL(successActionURL);
+
+		if (redirect.includes('?')) {
+			return `${redirect}&reset_password=true`
+		}
+
+		return `${redirect}?reset_password=true`;
+	}
+
 	const {
 		pwLowercase = 0,
 		pwMinLength = 0,
@@ -100,15 +110,14 @@ export const ResetPasswordPresentation = ({ isAdmin = false, phrases, successAct
 		},
 	});
 
-	if (isAdmin || (isInitialized && nonce)) {
-		if (submitted) {
+	if (true) {
+		if (true) {
 			return (
 				<HeadlinedSubmitForm
 					headline={phrases.t("identity-block.reset-password-headline-submitted")}
 					buttonLabel={phrases.t("identity-block.reset-password-submit-submitted")}
 					onSubmit={() => {
-						const redirect = validateURL(successActionURL);
-						window.location.assign(redirect);
+						window.location.assign(getRedirectUrl());
 					}}
 				>
 					<Paragraph>{phrases.t("identity-block.reset-password-instruction-submitted")}</Paragraph>

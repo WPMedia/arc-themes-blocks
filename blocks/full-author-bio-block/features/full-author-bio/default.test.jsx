@@ -1,5 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
@@ -32,6 +33,20 @@ const authors = [
 ];
 
 describe("Full author bio block", () => {
+	beforeEach(() => {
+		jest.spyOn(console, "error").mockImplementation((message) =>
+			message === "No auth token provided for resizer"
+				? null
+				: // eslint-disable-next-line no-console
+					console.warn("Error Thrown:", message),
+		);
+	});
+
+	afterEach(() => {
+		// eslint-disable-next-line no-console
+		console.error.mockRestore();
+	});
+
 	describe("lazy load and isAdmin", () => {
 		it("should return null if lazyLoad on the server and not in the admin", () => {
 			useFusionContext.mockImplementation(() => ({
@@ -41,7 +56,7 @@ describe("Full author bio block", () => {
 				isAdmin: false,
 			}));
 			const { container } = render(<FullAuthorBio customFields={{ lazyLoad: true }} />);
-			expect(container.firstChild).toBeNull();
+			expect(container).toBeEmptyDOMElement();
 		});
 
 		it("should not return null if not lazyLoad on the server and isAdmin", () => {
@@ -52,7 +67,7 @@ describe("Full author bio block", () => {
 				isAdmin: true,
 			}));
 			const { container } = render(<FullAuthorBio customFields={{ lazyLoad: false }} />);
-			expect(container.firstChild).not.toBeNull();
+			expect(container).not.toBeEmptyDOMElement();
 		});
 
 		it("should not return null if lazyLoad on the server and isAdmin", () => {
@@ -63,7 +78,7 @@ describe("Full author bio block", () => {
 				isAdmin: true,
 			}));
 			const { container } = render(<FullAuthorBio customFields={{ lazyLoad: true }} />);
-			expect(container.firstChild).not.toBeNull();
+			expect(container).not.toBeEmptyDOMElement();
 		});
 	});
 
@@ -79,7 +94,7 @@ describe("Full author bio block", () => {
 
 		it("should render", () => {
 			const { container } = render(<FullAuthorBio customFields={{ lazyLoad: false }} />);
-			expect(container.firstChild).not.toBeNull();
+			expect(container).not.toBeEmptyDOMElement();
 		});
 	});
 
@@ -98,7 +113,7 @@ describe("Full author bio block", () => {
 
 		it("should still render", () => {
 			const { container } = render(<FullAuthorBio customFields={{ lazyLoad: false }} />);
-			expect(container.firstChild).not.toBeNull();
+			expect(container).not.toBeEmptyDOMElement();
 		});
 	});
 
@@ -114,7 +129,7 @@ describe("Full author bio block", () => {
 		it("should NOT render anything", () => {
 			const { container } = render(<FullAuthorBio />);
 
-			expect(container.firstChild).toBeNull();
+			expect(container).toBeEmptyDOMElement();
 		});
 	});
 });

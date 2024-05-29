@@ -2010,10 +2010,11 @@
 				),
 				"header-nav-chain-flyout-overlay-open": (
 					"background": var(--header-nav-chain-overlay-background-color),
+					"block-size": calc(100vh - var(--header-nav-chain-height)),
+					"inline-size": 100%,
 					"overflow-y": scroll,
 					"overflow-block": scroll,
-					"transform": translate(0, 0),
-					"inline-size": calc(100vh - var(--header-nav-chain-height))
+					"transform": translate(0, 0)
 				),
 				"header-nav-chain-flyout-overlay-scrollbar": (
 					"display": none
@@ -4118,9 +4119,6 @@
 				"triple-chain-child-item": (
 					"gap": var(--global-spacing-6) 0
 				),
-				"triple-chain-child-item-grid": (
-					"display": "grid"
-				),
 				"triple-chain-child-item-empty": (
 					"display": contents
 				),
@@ -5252,9 +5250,6 @@
 				),
 				"triple-chain-child-item-empty": (
 					"display": initial
-				),
-				"triple-chain-child-item-grid": (
-					"display": "flex"
 				),
 				"triple-chain-children-grid": (
 					"grid-template-columns": 1fr 1fr 1fr,

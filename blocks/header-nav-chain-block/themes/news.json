@@ -354,10 +354,11 @@
 		"styles": {
 			"default": {
 				"background": "var(--header-nav-chain-overlay-background-color)",
+				"block-size": "calc(100vh - var(--header-nav-chain-height))",
 				"overflow-y": "scroll",
 				"overflow-block": "scroll",
 				"transform": "translate(0, 0)",
-				"inline-size": "calc(100vh - var(--header-nav-chain-height))"
+				"inline-size": "100%"
 			},
 			"desktop": {}
 		}

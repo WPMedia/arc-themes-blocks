@@ -1,5 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import '@testing-library/jest-dom'
 import mockData from "../../../mock-data";
 
 import ExtraLarge from "./extra-large";
@@ -14,7 +15,7 @@ describe("the extra large promo feature", () => {
 	it("should return null if no show flag is true", () => {
 		const config = {};
 		const { container } = render(<ExtraLarge element={mockData} customFields={config} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("should return an overline if showOverline is true", () => {
@@ -22,7 +23,7 @@ describe("the extra large promo feature", () => {
 			showOverlineXL: true,
 		};
 		render(<ExtraLarge element={mockData} customFields={config} />);
-		expect(screen.queryByRole("link", { name: "Premium" })).not.toBeNull();
+		expect(screen.getByRole("link", { name: "Premium" })).not.toBeNull();
 	});
 
 	it("should return a headline if showHeadline is true", () => {
@@ -30,7 +31,7 @@ describe("the extra large promo feature", () => {
 			showHeadlineXL: true,
 		};
 		render(<ExtraLarge element={mockData} customFields={config} />);
-		expect(screen.queryByRole("heading", { name: config.headline })).not.toBeNull();
+		expect(screen.getByRole("heading", { name: config.headline })).not.toBeNull();
 	});
 
 	it("should return a image if showImage is true", () => {
@@ -39,7 +40,7 @@ describe("the extra large promo feature", () => {
 			showImageXL: true,
 		};
 		render(<ExtraLarge element={mockData} customFields={config} />);
-		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
+		expect(screen.getByRole("img", { name: config.headline })).not.toBeNull();
 	});
 
 	it("should return a fallback image if showImage is true and imageUrl is not valid", () => {
@@ -48,7 +49,7 @@ describe("the extra large promo feature", () => {
 			showImageXL: true,
 		};
 		render(<ExtraLarge element={mockData} customFields={config} />);
-		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
+		expect(screen.getByRole("img", { name: config.headline })).not.toBeNull();
 	});
 
 	it("should return a description if showDescription is true", () => {
@@ -57,7 +58,7 @@ describe("the extra large promo feature", () => {
 		};
 		render(<ExtraLarge element={mockData} customFields={config} />);
 		expect(
-			screen.queryByText("Why does August seem hotter? Maybe it comes from weariness.")
+			screen.getByText("Why does August seem hotter? Maybe it comes from weariness.")
 		).not.toBeNull();
 	});
 
@@ -65,9 +66,9 @@ describe("the extra large promo feature", () => {
 		const config = {
 			showBylineXL: true,
 		};
-		const { getByText } = render(<ExtraLarge element={mockData} customFields={config} />);
+		render(<ExtraLarge element={mockData} customFields={config} />);
 		expect(
-			getByText("global.by-text Example Author1, Example Author2, global.and-text Example Author3")
+			screen.getByText("global.by-text Example Author1, Example Author2, global.and-text Example Author3")
 		).not.toBeNull();
 	});
 
@@ -76,7 +77,7 @@ describe("the extra large promo feature", () => {
 			showDateXL: true,
 		};
 		render(<ExtraLarge element={mockData} customFields={config} />);
-		expect(screen.queryByText("January 30, 2020", { exact: false })).not.toBeNull();
+		expect(screen.getByText("January 30, 2020", { exact: false })).not.toBeNull();
 	});
 
 	it("should returned a sponsored overline if it's sponsored content", () => {
@@ -89,7 +90,7 @@ describe("the extra large promo feature", () => {
 			showOverlineXL: true,
 		};
 		render(<ExtraLarge element={modifiedData} customFields={config} />);
-		expect(screen.queryByText("global.sponsored-content")).not.toBeNull();
+		expect(screen.getByText("global.sponsored-content")).not.toBeNull();
 	});
 
 	it("should return a video if playVideoInPlace is true and video content available", () => {
@@ -106,6 +107,6 @@ describe("the extra large promo feature", () => {
 			showImageXL: true,
 		};
 		render(<ExtraLarge element={modifiedData} customFields={config} />);
-		expect(screen.queryByText("video embed")).not.toBeNull();
+		expect(screen.getByText("video embed")).not.toBeNull();
 	});
 });

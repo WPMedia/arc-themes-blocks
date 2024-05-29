@@ -16,11 +16,6 @@
 			@include scss.block-components("quad-chain-child-item-empty");
 			@include scss.block-properties("quad-chain-child-item-empty");
 		}
-		
-		.c-grid {
-			@include scss.block-components("triple-chain-child-item-grid");
-			@include scss.block-properties("triple-chain-child-item-grid");
-		}
 
 		@include scss.block-components("triple-chain-child-item");
 		@include scss.block-properties("triple-chain-child-item");

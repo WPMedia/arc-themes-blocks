@@ -59,13 +59,20 @@ const LargeManualPromo = ({ customFields }) => {
 	const shouldLazyLoad = lazyLoad && !isAdmin;
 
 	const resizedImage = imageId && imageAuth && imageAuth !== "{}" && imageURL?.includes(imageId);
-
+	// Check if URL is from cloudfront and extract imageID.
+	const cloudfrontRegex = /cloudfront.*images.arcpublishing.*\/([\w]{26})(?:$|\.[\w]{3,4})/
+	let manualImageId = "";
+	if (!resizedImage && imageURL) {
+		const matches = imageURL.match(cloudfrontRegex);
+		manualImageId = Array.isArray(matches) && matches.length >= 2 ? matches[1] : "";
+	}
 	let resizedAuth = useContent(
 		resizedImage || !imageURL
 			? {}
 			: {
 				source: "signing-service",
-				query: { id: imageURL },
+				// If image id was found from cloudfront URL use it here.
+				query: { id: manualImageId || imageURL },
 			}
 	);
 	if (imageAuth && !resizedAuth) {
@@ -79,7 +86,8 @@ const LargeManualPromo = ({ customFields }) => {
 		return null;
 	}
 	const ansImage = {
-		_id: resizedImage ? imageId : "",
+		// If image id was found from cloudfront URL use it here.
+		_id: resizedImage ? imageId : manualImageId,
 		url: imageURL,
 		auth: resizedAuth,
 		focal_point: imageFocalPoint ? JSON.parse(imageFocalPoint) : undefined

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
-import { usePhrases, Input, Button, Stack, useSales } from "@wpmedia/arc-themes-components";
+import { usePhrases, Input, Button, Stack, useSales, useIdentity } from "@wpmedia/arc-themes-components";
 
 import countryCodes from "../../../../components/ContactInfo/countryCodes";
 import getItemDetails from "../../../../utils/itemDetails";
@@ -31,6 +31,7 @@ const BillingAddress = ({
 	const [isValid, setIsValid] = useState(formRef?.current?.checkValidity());
 
 	const { Sales } = useSales();
+	const {Identity} = useIdentity();
 
 	const { arcSite } = useFusionContext();
 	const {
@@ -67,6 +68,7 @@ const BillingAddress = ({
 			setBillingAddress(entriesRef.current);
 			try {
 				setCaptchaError(null);
+				await Identity.isLoggedIn();
 				const order = await Sales.createNewOrder(
 					{
 						...entriesRef.current,

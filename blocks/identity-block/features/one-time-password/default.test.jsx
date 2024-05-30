@@ -16,9 +16,15 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 			...mockIdentity,
 		},
 	})),
-	BotChallengeProtection: ({ challengeIn= 'magicLink' }) => <div data-testid={`reCapctha-${challengeIn}`} />
+	BotChallengeProtection: ({ challengeIn = "magicLink" }) => (
+		<div data-testid={`reCapctha-${challengeIn}`} />
+	),
 }));
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
+
+const customFields = {
+	loggedInPageLocation: "/account/",
+};
 
 describe("Identity One Time Password Request Form - Arc Block", () => {
 	beforeEach(() => {
@@ -42,21 +48,21 @@ describe("Identity One Time Password Request Form - Arc Block", () => {
 			},
 		}));
 
-		render(<OneTimePassword />);
-		
+		render(<OneTimePassword customFields={customFields} />);
+
 		expect(screen.queryAllByRole("form").length).toEqual(0);
 	});
 
 	it("Does not render if Identity isn't initialized", () => {
-		render(<OneTimePassword />);
-		
+		render(<OneTimePassword customFields={customFields} />);
+
 		expect(screen.queryAllByRole("form").length).toEqual(1);
-		expect(screen.getByTestId('reCapctha-magicLink')).toBeTruthy();
+		expect(screen.getByTestId("reCapctha-magicLink")).toBeTruthy();
 	});
 
 	it("Should be able submit form", async () => {
-		render(<OneTimePassword />);
-		
+		render(<OneTimePassword customFields={customFields} />);
+
 		await waitFor(() => expect(screen.getByLabelText("identity-block.email-label")));
 		fireEvent.change(screen.getByLabelText("identity-block.email-label"), {
 			target: { value: "email@test.com" },
@@ -84,8 +90,8 @@ describe("Identity One Time Password Request Form - Arc Block", () => {
 			},
 		}));
 
-		render(<OneTimePassword />);
-		
+		render(<OneTimePassword customFields={customFields} />);
+
 		await waitFor(() => expect(screen.getByLabelText("identity-block.email-label")));
 		fireEvent.change(screen.getByLabelText("identity-block.email-label"), {
 			target: { value: "email@test.com" },
@@ -111,8 +117,8 @@ describe("Identity One Time Password Request Form - Arc Block", () => {
 			},
 		}));
 
-		render(<OneTimePassword />);
-		
+		render(<OneTimePassword customFields={customFields} />);
+
 		await waitFor(() => expect(screen.getByLabelText("identity-block.email-label")));
 		fireEvent.change(screen.getByLabelText("identity-block.email-label"), {
 			target: { value: "email@test.com" },
@@ -122,5 +128,50 @@ describe("Identity One Time Password Request Form - Arc Block", () => {
 		fireEvent.click(screen.getByRole("button"));
 
 		await waitFor(() => expect(errorMessage).toHaveBeenCalled());
+	});
+
+	it("Should redeem the nonce", async () => {
+		delete window.location;
+		window.location = {
+			href: "http://localhost/onetimeaccess/?ota_nonce=123",
+		};
+
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			Identity: {
+				...mockIdentity,
+				redeemOTALink: jest.fn(() => Promise.resolve()),
+			},
+		}));
+
+		render(<OneTimePassword customFields={customFields} />);
+		expect(window.location.href).toBe('http://localhost/onetimeaccess/?ota_nonce=123');
+
+		await waitFor(() => expect(window.location.href).toBe(`${customFields.loggedInPageLocation}`));
+	});
+
+	it("Should fail when trying to redeem the nonce", async () => {
+		delete window.location;
+		window.location = {
+			href: "http://localhost/onetimeaccess/?ota_nonce=123",
+		};
+
+		const error = new Error("Fake error");
+		error.code = "300040";
+
+		const errorMessage = jest.fn(() => Promise.reject(error));
+
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			Identity: {
+				...mockIdentity,
+				redeemOTALink: errorMessage,
+			},
+		}));
+
+		render(<OneTimePassword customFields={customFields} />);
+
+		expect(await screen.findByText("identity-block.ota-ivalid-login-link")).not.toBeNull();
+		expect(await screen.findByText("identity-block.ota-ivalid-login-link-subheadline")).not.toBeNull();
 	});
 });

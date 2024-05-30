@@ -158,7 +158,8 @@
 						"font-size": "var(--heading-level-5-font-size)",
 						"font-weight": "var(--heading-level-5-font-weight)",
 						"line-height": "var(--heading-level-5-line-height)",
-						"margin-block-end": "var(--global-spacing-4)"
+						"margin-block-end": "var(--global-spacing-4)",
+						"inline-size": "66%"
 					},
 					"link": {
 						"position": "relative"
@@ -359,7 +360,7 @@
 	"top-table-list-small-left": {
 		"styles": {
 			"default": {
-				"grid-template-columns": "1fr 2fr",
+				"grid-template-columns": "auto 66%",
 				"components": {
 					"divider": {
 						"grid-column": "span 2"
@@ -372,7 +373,7 @@
 	"top-table-list-small-right": {
 		"styles": {
 			"default": {
-				"grid-template-columns": "2fr 1fr",
+				"grid-template-columns": "66% auto",
 				"components": {
 					"divider": {
 						"grid-column": "span 2"

@@ -158,8 +158,7 @@
 						"font-size": "var(--heading-level-5-font-size)",
 						"font-weight": "var(--heading-level-5-font-weight)",
 						"line-height": "var(--heading-level-5-line-height)",
-						"margin-block-end": "var(--global-spacing-4)",
-						"inline-size": "66%"
+						"margin-block-end": "var(--global-spacing-4)"
 					},
 					"link": {
 						"position": "relative"
@@ -195,11 +194,10 @@
 		"styles": {
 			"default": {
 				"gap": "var(--global-spacing-8)",
-				"grid-template-columns": "66% auto",
+				"grid-template-columns": "1fr,",
 				"grid-template-rows": "auto"
 			},
 			"desktop": {
-				"grid-template-columns": "auto 66%",
 				"gap": "var(--global-spacing-5)"
 			}
 		}

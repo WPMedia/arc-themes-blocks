@@ -4000,7 +4000,7 @@
 				),
 				"top-table-list-medium-container": (
 					"gap": var(--global-spacing-8),
-					"grid-template-columns": "66% auto",
+					"grid-template-columns": "1fr",
 					"grid-template-rows": auto
 				),
 				"top-table-list-medium-icon-label": (
@@ -5178,7 +5178,6 @@
 					)
 				),
 				"top-table-list-medium-container": (
-					"grid-template-columns": "auto 66%",
 					"gap": var(--global-spacing-5)
 				),
 				"top-table-list-medium-label": (

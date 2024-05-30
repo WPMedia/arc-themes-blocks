@@ -134,6 +134,7 @@ describe("useCartOrderDetail Hook", () => {
 		},
 	];
 
+	const orderDate = new Date().getTime() - (60 * 60 * 24 * 1000);
 	const pendingOrder = {
 		start: 0,
 		pageSize: 10,
@@ -141,7 +142,7 @@ describe("useCartOrderDetail Hook", () => {
 		orders: [
 			{
 				orderNumber: "R2OMXGQBQY6SV670",
-				orderDate: 1715035042000,
+				orderDate,
 				orderType: "Parent",
 				orderStatus: "Pending",
 				totalAmount: 20,
@@ -214,6 +215,7 @@ describe("useCartOrderDetail Hook", () => {
 		jest.spyOn(require("@wpmedia/arc-themes-components"), "useIdentity").mockReturnValue({
 			Identity: {
 				isLoggedIn: jest.fn(() => true),
+				extendSession: jest.fn(() => {})
 			},
 		});
 
@@ -303,11 +305,11 @@ describe("useCartOrderDetail Hook", () => {
 		await waitFor(() => expect(result.current.orderDetail).toEqual(undefined));
 	});
 
-	test("There is cart in local storage and pending order, pending order is more recent that pending order", async() => {
+	test("There is cart in local storage and pending order, pending order is more recent than pending order", async() => {
 		const sku = 'test';
 		const priceCode = 'YLE801';
-		const newDate = new Date(2024, 0, 1);
-		localStorage.setItem('ArcXP_cart', JSON.stringify({sku, priceCode, cartDate: newDate.getTime() }));
+		const newDate = new Date().getTime() - (60 * 60 * 24 * 10 * 1000);
+		localStorage.setItem('ArcXP_cart', JSON.stringify({sku, priceCode, cartDate: newDate }));
 
 		const mockSales = {
 			getCart: jest.fn(() => {}),
@@ -366,7 +368,28 @@ describe("useCartOrderDetail Hook", () => {
 		await waitFor(() => expect(result.current.isLoggedIn).toEqual(true));
 		await waitFor(() =>expect(result.current.cartDetail).toEqual({ ...cart, items: mockedItemDetails }));
 		await waitFor(() => expect(result.current.orderDetail).toEqual(undefined));
-	})
+	});
+
+	test("There are not pending orders neither cart, just cart in localStorage, but date is older than 48 hours. Then user should be redirected to offer page", async() => {
+		const sku = 'test';
+		const priceCode = 'YLE801';
+		const newDate = new Date().getTime() - (60 * 60 * 24 * 3 * 1000);
+		localStorage.setItem('ArcXP_cart', JSON.stringify({sku, priceCode, cartDate: newDate }));
+
+		const { result } = renderHook(() => useCartOrderDetail());
+
+		expect(result.current.isFetching).toBe(true);
+		expect(result.current.isFetchingCartOrder).toBe(true);
+		expect(result.current.isLoggedIn).toBe(false);
+		expect(result.current.cartDetail).toBe(undefined);
+		expect(result.current.orderDetail).toBe(undefined);
+
+		await waitFor(() => expect(result.current.isFetching).toEqual(false));
+		await waitFor(() => expect(result.current.isFetchingCartOrder).toEqual(false));
+		await waitFor(() => expect(result.current.isLoggedIn).toEqual(true));
+		await waitFor(() => expect(result.current.cartDetail).toEqual(undefined));
+		await waitFor(() => expect(result.current.orderDetail).toEqual(undefined));
+	});
 
 	test("returns a new cart if there is a orderNumber and paypalToken", async () => {
 		localStorage.setItem('ArcXP_orderNumber', 'R2OMXGQBQY6SV670');
@@ -382,6 +405,7 @@ describe("useCartOrderDetail Hook", () => {
 		jest.spyOn(require("@wpmedia/arc-themes-components"), "useIdentity").mockReturnValue({
 			Identity: {
 				isLoggedIn: jest.fn(() => true),
+				extendSession: jest.fn(() => {})
 			},
 		});
 

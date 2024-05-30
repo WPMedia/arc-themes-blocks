@@ -60,20 +60,6 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	useRecaptcha: jest.fn(async () => ({
 		isRecaptchaEnabled: false,
 	})),
-	Link: ({ href, children }) => <a href={href}>{children}</a>,
-	Stack: ({ children }) => <div>{children}</div>,
-	Heading: ({ dangerouslySetInnerHTML, children }) =>
-		dangerouslySetInnerHTML ? (
-			<h1 dangerouslySetInnerHTML={dangerouslySetInnerHTML} />
-		) : (
-			<div>{children}</div>
-		),
-	Button: ({ onClick, actionText, ariaLabel }) => (
-		<button type="submit" onClick={onClick} aria-label={ariaLabel}>
-			<span dangerouslySetInnerHTML={{ __html: actionText }} />
-		</button>
-	),
-	Divider: () => <div>-----</div>,
 }));
 
 describe("Checkout Feature", () => {
@@ -134,7 +120,7 @@ describe("Checkout Feature", () => {
 		});
 	});
 
-	it("show billing address card when user is logged in", async () => {
+	it("show billing address card when user is logged in and cart is returned from hook", async () => {
 		const cart = {
 			total: 20,
 			subtotal: 20,
@@ -174,8 +160,6 @@ describe("Checkout Feature", () => {
 				}}
 			/>,
 		);
-		expect(await screen.findByText("2. checkout-block.billingAddress")).toBeInTheDocument();
+		expect(await screen.findByText("Billing Address")).toBeInTheDocument();
 	});
-
-	
 });

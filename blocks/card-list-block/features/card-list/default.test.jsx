@@ -114,8 +114,9 @@ describe("Card list", () => {
 		const customFields = { listContentConfig, offsetOverride: 1 };
 
 		render(<CardList customFields={customFields} />);
-
+		expect(screen.queryByText("Article with only promo_items.basic")).toBeNull();
 		expect(screen.getByText("2nd Story Title")).not.toBeNull();
+		expect(screen.getByText("John M Doe")).not.toBeNull();
 	});
 
 	it("should render a list of stories only for the arcSite", () => {
@@ -152,7 +153,7 @@ describe("Card list", () => {
 			};
 			const title = "Test Title";
 			const customFields = { listContentConfig, title };
-	
+
 			useContent.mockReturnValueOnce(oneListItem);
 			render(<CardList customFields={customFields} />);
 		};

@@ -96,49 +96,51 @@ const Medium = (props) => {
 			<article
 				className={`${BLOCK_CLASS_NAME}${showImageMD ? ` ${BLOCK_CLASS_NAME}--show-image` : ""}`}
 			>
-				{showImageMD ? (
-					<MediaItem>
-						<Conditional
-							component={Link}
-							condition={contentUrl}
-							href={formatURL(contentUrl)}
-							assistiveHidden
-						>
-							<Image {...imageParams} />
-							{labelIconName ? (
-								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
-									<Icon name={labelIconName} />
-									<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
-								</div>
-							) : null}
-						</Conditional>
-					</MediaItem>
-				) : null}
+				<div>
+					{showImageMD ? (
+						<MediaItem>
+							<Conditional
+								component={Link}
+								condition={contentUrl}
+								href={formatURL(contentUrl)}
+								assistiveHidden
+							>
+								<Image {...imageParams} />
+								{labelIconName ? (
+									<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
+										<Icon name={labelIconName} />
+										<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
+									</div>
+								) : null}
+							</Conditional>
+						</MediaItem>
+					) : null}
 
-				{contentHeading ? (
-					<Heading>
-						<Conditional component={Link} condition={contentUrl} href={formatURL(contentUrl)}>
-							{contentHeading}
-						</Conditional>
-					</Heading>
-				) : null}
+					{contentHeading ? (
+						<Heading>
+							<Conditional component={Link} condition={contentUrl} href={formatURL(contentUrl)}>
+								{contentHeading}
+							</Conditional>
+						</Heading>
+					) : null}
 
-				{contentDescription ? <Paragraph>{contentDescription}</Paragraph> : null}
-				{hasAuthors || showDateMD ? (
-					<Attribution>
-						<Join separator={Separator}>
-							{hasAuthors ? (
-								<Join separator={() => " "}>
-									{phrases.t("global.by-text")}
-									{formatAuthors(element?.credits?.by, phrases.t("global.and-text"))}
-								</Join>
-							) : null}
-							{showDateMD ? (
-								<DateComponent dateTime={contentDate} dateString={formattedDate} />
-							) : null}
-						</Join>
-					</Attribution>
-				) : null}
+					{contentDescription ? <Paragraph>{contentDescription}</Paragraph> : null}
+					{hasAuthors || showDateMD ? (
+						<Attribution>
+							<Join separator={Separator}>
+								{hasAuthors ? (
+									<Join separator={() => " "}>
+										{phrases.t("global.by-text")}
+										{formatAuthors(element?.credits?.by, phrases.t("global.and-text"))}
+									</Join>
+								) : null}
+								{showDateMD ? (
+									<DateComponent dateTime={contentDate} dateString={formattedDate} />
+								) : null}
+							</Join>
+						</Attribution>
+					) : null}
+				</div>
 				{showBottomBorder ? <Divider /> : null}
 			</article>
 		</HeadingSection>

@@ -6,7 +6,7 @@
 			@include scss.block-components("checkout-main-full");
 			@include scss.block-properties("checkout-main-full");
 		}
-		
+
 		@include scss.block-components("checkout-main");
 		@include scss.block-properties("checkout-main");
 	}
@@ -93,7 +93,7 @@
 					@include scss.block-components("checkout-payment-form--stripe-row");
 					@include scss.block-properties("checkout-payment-form--stripe-row");
 				}
-				
+
 				&--stripe-error {
 					@include scss.block-components("checkout-payment-form--stripe-error");
 					@include scss.block-properties("checkout-payment-form--stripe-error");
@@ -252,7 +252,7 @@
 				@include scss.block-components("checkout-review-tos-link");
 				@include scss.block-properties("checkout-review-tos-link");
 			}
-			
+
 			@include scss.block-components("checkout-review-tos-container-link");
 			@include scss.block-properties("checkout-review-tos-container-link");
 		}
@@ -438,11 +438,19 @@
 			&-cancel-info {
 				&-button {
 					&:hover {
-						@include scss.block-components("subscriptions-subscription-list-detail-cancel-info-button-hover");
-						@include scss.block-properties("subscriptions-subscription-list-detail-cancel-info-button-hover");
+						@include scss.block-components(
+							"subscriptions-subscription-list-detail-cancel-info-button-hover"
+						);
+						@include scss.block-properties(
+							"subscriptions-subscription-list-detail-cancel-info-button-hover"
+						);
 					}
-					@include scss.block-components("subscriptions-subscription-list-detail-cancel-info-button");
-					@include scss.block-properties("subscriptions-subscription-list-detail-cancel-info-button");
+					@include scss.block-components(
+						"subscriptions-subscription-list-detail-cancel-info-button"
+					);
+					@include scss.block-properties(
+						"subscriptions-subscription-list-detail-cancel-info-button"
+					);
 				}
 				@include scss.block-components("subscriptions-subscription-list-detail-cancel-info");
 				@include scss.block-properties("subscriptions-subscription-list-detail-cancel-info");
@@ -464,8 +472,12 @@
 			}
 
 			&-payment-title-payment-info {
-				@include scss.block-components("subscriptions-subscription-list-detail-payment-title-payment-info");
-				@include scss.block-properties("subscriptions-subscription-list-detail-payment-title-payment-info");
+				@include scss.block-components(
+					"subscriptions-subscription-list-detail-payment-title-payment-info"
+				);
+				@include scss.block-properties(
+					"subscriptions-subscription-list-detail-payment-title-payment-info"
+				);
 			}
 
 			&-payment-next-bill {
@@ -474,8 +486,12 @@
 			}
 
 			&-payment-billing-frequency {
-				@include scss.block-components("subscriptions-subscription-list-detail-payment-billing-frequency");
-				@include scss.block-properties("subscriptions-subscription-list-detail-payment-billing-frequency");
+				@include scss.block-components(
+					"subscriptions-subscription-list-detail-payment-billing-frequency"
+				);
+				@include scss.block-properties(
+					"subscriptions-subscription-list-detail-payment-billing-frequency"
+				);
 			}
 
 			&-billing {
@@ -489,8 +505,12 @@
 
 			&-inactive-sub {
 				&-paragraph {
-					@include scss.block-components("subscriptions-subscription-list-detail-inactive-sub-paragraph");
-					@include scss.block-properties("subscriptions-subscription-list-detail-inactive-sub-paragraph");
+					@include scss.block-components(
+						"subscriptions-subscription-list-detail-inactive-sub-paragraph"
+					);
+					@include scss.block-properties(
+						"subscriptions-subscription-list-detail-inactive-sub-paragraph"
+					);
 				}
 				@include scss.block-components("subscriptions-subscription-list-detail-inactive-sub");
 				@include scss.block-properties("subscriptions-subscription-list-detail-inactive-sub");
@@ -514,12 +534,12 @@
 		&-modal {
 			&-title {
 				@include scss.block-components("subscriptions-subscription-list-modal-title");
-				@include scss.block-properties("subscriptions-subscription-list-modal-title");	
+				@include scss.block-properties("subscriptions-subscription-list-modal-title");
 			}
 
 			&-button-div {
 				@include scss.block-components("subscriptions-subscription-list-modal-button-div");
-				@include scss.block-properties("subscriptions-subscription-list-modal-button-div");	
+				@include scss.block-properties("subscriptions-subscription-list-modal-button-div");
 			}
 			@include scss.block-components("subscriptions-subscription-list-modal");
 			@include scss.block-properties("subscriptions-subscription-list-modal");

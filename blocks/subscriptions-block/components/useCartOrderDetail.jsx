@@ -27,17 +27,23 @@ const useCartOrderDetail = (paypalToken) => {
 	} = getProperties(arcSite);
 
 	useEffect(() => {
-		const isUserLoggedIn = async () => {
-			setIsLoggedIn(await Identity.isLoggedIn());
+		const checkIsUserLoggedIn = async () => {
+			const isUserLoggedIn = await Identity.isLoggedIn();
+			if(isUserLoggedIn){
+				await Identity.extendSession();
+			}
+			setIsLoggedIn(isUserLoggedIn);
 			setIsFetching(false);
 		};
 
-		isUserLoggedIn();
+		checkIsUserLoggedIn();
 	}, [Identity]);
 
 	const orderNumberPayPal = localStorage[ARCXP_ORDERNUMBER];
 
 	useEffect(() => {
+		const maxAge = new Date().getTime() - (60 * 60 * 24 * 2 * 1000);
+
 		const getCartDetails = async () => {
 			const cartDetails = await Sales.getCart();
 			return cartDetails;
@@ -45,7 +51,22 @@ const useCartOrderDetail = (paypalToken) => {
 
 		const getLastPendingOrder = async () => {
 			const orderHistory = await Sales.getOrderHistory();
-			const lastPendingOrder = orderHistory?.orders?.find((it) => it.orderStatus === "Pending");
+
+			let lastPendingOrder = orderHistory?.orders?.find((it) => it.orderStatus === "Pending");
+			const lastPaidOrder = orderHistory?.orders?.find((it) => it.orderStatus === "Paid");
+
+			if(lastPendingOrder){
+				if(lastPaidOrder){
+					if(!(lastPendingOrder?.orderDate >= lastPaidOrder?.orderDate)){
+						lastPendingOrder = undefined;
+					}
+				}
+
+				if(!(lastPendingOrder?.orderDate >= maxAge)){
+					lastPendingOrder = undefined;
+				}
+			}
+
 			return lastPendingOrder;
 		};
 
@@ -93,12 +114,21 @@ const useCartOrderDetail = (paypalToken) => {
 		};
 
 		const getCartItemFromLocalstorge = () => {
+			let cartItem;
+
 			const items = localStorage.getItem(ARCXP_CART);
-			const cartItem = verifyJSON(items);
+			cartItem = verifyJSON(items);
+
 			if (cartItem && cartItem?.sku && cartItem?.priceCode && cartItem?.cartDate) {
-				return cartItem;
+				if(!(cartItem?.cartDate >= maxAge)){
+					cartItem = undefined;
+					localStorage.removeItem(ARCXP_CART);
+				}
+			}else{
+				cartItem = undefined
 			}
-			return undefined;
+			
+			return cartItem;
 		};
 
 		if (!isFetching && !isLoggedIn) {
@@ -106,7 +136,7 @@ const useCartOrderDetail = (paypalToken) => {
 		}
 
 		if (isLoggedIn) {
-			const itemCart = getCartItemFromLocalstorge();
+			const itemCart = getCartItemFromLocalstorge();			
 
 			if (orderNumberPayPal && paypalToken) {
 				getLastPendingOrder()

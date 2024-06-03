@@ -76,7 +76,7 @@ const Checkout = ({ customFields }) => {
 	useEffect(() => {
 		let isActive = true;
 
-		if (isLoggedIn) {
+		if (!isFetching && isLoggedIn) {
 			Identity.getUserProfile()
 				.then((userProfile) => {
 					if (isActive) {
@@ -94,7 +94,7 @@ const Checkout = ({ customFields }) => {
 			isActive = false;
 			return null;
 		};
-	}, [Identity, isLoggedIn]);
+	}, [Identity, isLoggedIn, isFetching]);
 
 	useEffect(() => {
 		if (!isFetching) {
@@ -147,9 +147,10 @@ const Checkout = ({ customFields }) => {
 		if (type === BILLING_ADDRESS) {
 			return (
 				<Button
-					onClick={() => {
+					onClick={async() => {
+						Identity.isLoggedIn();
 						Sales.clearCart().then(() => {
-							const items = orderDetail.items.map((item) => {
+							const items = order?.items?.map((item) => {
 								const { sku, priceCode, quantity } = item;
 								return { sku, priceCode, quantity };
 							});

@@ -111,6 +111,11 @@
 		@include scss.block-properties("ota-sub-headline");
 	}
 
+	&__ota-form-error {
+		@include scss.block-components("ota-form-error");
+		@include scss.block-properties("ota-form-error");
+	}
+
 	&__recaptcha {
 		@include scss.block-components("ota-recaptcha");
 		@include scss.block-properties("ota-recaptcha");

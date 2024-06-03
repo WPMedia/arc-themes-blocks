@@ -5,14 +5,15 @@ import { useComponentContext, useFusionContext } from "fusion:context";
 import { useContent, useEditableContent } from "fusion:content";
 import getProperties from "fusion:properties";
 import {
-	getFocalFromANS,
 	Conditional,
-	Image,
-	isServerSide,
 	formatURL,
+	getFocalFromANS,
+	getManualImageID,
 	Grid,
 	Heading,
 	HeadingSection,
+	Image,
+	isServerSide,
 	LazyLoad,
 	Link,
 	MediaItem,
@@ -59,19 +60,12 @@ const LargeManualPromo = ({ customFields }) => {
 	const shouldLazyLoad = lazyLoad && !isAdmin;
 
 	const resizedImage = imageId && imageAuth && imageAuth !== "{}" && imageURL?.includes(imageId);
-	// Check if URL is from cloudfront and extract imageID.
-	const cloudfrontRegex = /cloudfront.*images.arcpublishing.*\/([\w]{26})(?:$|\.[\w]{3,4})/
-	let manualImageId = "";
-	if (!resizedImage && imageURL) {
-		const matches = imageURL.match(cloudfrontRegex);
-		manualImageId = Array.isArray(matches) && matches.length >= 2 ? matches[1] : "";
-	}
+	const manualImageId = getManualImageID(imageURL, resizedImage);
 	let resizedAuth = useContent(
 		resizedImage || !imageURL
 			? {}
 			: {
 				source: "signing-service",
-				// If image id was found from cloudfront URL use it here.
 				query: { id: manualImageId || imageURL },
 			}
 	);
@@ -86,7 +80,6 @@ const LargeManualPromo = ({ customFields }) => {
 		return null;
 	}
 	const ansImage = {
-		// If image id was found from cloudfront URL use it here.
 		_id: resizedImage ? imageId : manualImageId,
 		url: imageURL,
 		auth: resizedAuth,

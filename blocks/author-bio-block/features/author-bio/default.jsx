@@ -4,7 +4,6 @@ import { useFusionContext } from "fusion:context";
 import {
 	Conditional,
 	formatSocialURL,
-	getFocalFromANS,
 	Heading,
 	HeadingSection,
 	Icon,
@@ -42,52 +41,32 @@ const AuthorBioItemsContainer = () => {
 	return <AuthorBioItems content={content} />;
 };
 
-const AuthorImage = ({ ansImage, altText }) => {
-	if (ansImage?.auth) {
-		return (
-			<Image
-				alt={altText}
-				ansImage={ansImage}
-				aspectRatio="1:1"
-				resizedOptions={getFocalFromANS(ansImage)}
-				responsiveImages={[100, 200, 400]}
-				width={100}
-			/>
-		);
-	}
-	if (ansImage?.url) {
-		return <Image alt={altText} src={ansImage.url} width={100} />;
-	}
-	return null;
-};
-
 export const AuthorBioItems = ({ content }) => {
 	const phrases = usePhrases();
 	const { credits = {} } = content;
 	const { by = [] } = credits;
 
+	// Generate a list of author components
 	const authors = by
+		// If the author doesn't have a description, then do not add them to the list
+		// Also check for their bio, which means that they are a staff
 		.filter(
 			({ additional_properties: additionalProperties = {}, description = "" }) =>
-				description?.length && additionalProperties?.original?.bio?.length,
+				description?.length && additionalProperties?.original?.bio?.length
 		)
+		// A loop to generate the list of social media links.
+		// If no url is provided, then the social link will be skipped.
 		.map(
 			({
-				additional_properties: {
-					original: { byline },
-				},
+				additional_properties: { original: { byline } } = {},
 				description,
 				name,
-				image: { alt_text: altText = "", ...ansImage } = {},
+				image: { url: imageUrl = "", alt_text: altText = "" } = {},
 				social_links: socialLinks = [],
 				url: authorUrl,
 			}) => (
-				<Stack
-					direction="horizontal"
-					className={`${BLOCK_CLASS_NAME}__author`}
-					key={`${name}_${authorUrl}`}
-				>
-					<AuthorImage ansImage={ansImage} altText={altText || name || ""} />
+				<Stack direction="horizontal" className={`${BLOCK_CLASS_NAME}__author`} key={name}>
+					{imageUrl ? <Image src={imageUrl} alt={altText || name} width={100} /> : null}
 					<Stack>
 						{byline ? (
 							<Conditional
@@ -130,7 +109,7 @@ export const AuthorBioItems = ({ content }) => {
 						) : null}
 					</Stack>
 				</Stack>
-			),
+			)
 		);
 
 	return authors.length ? <Stack className={BLOCK_CLASS_NAME}>{authors}</Stack> : null;
@@ -139,7 +118,7 @@ export const AuthorBioItems = ({ content }) => {
 const AuthorBio = ({ customFields = {} }) => {
 	const { isAdmin } = useFusionContext();
 
-	if (customFields?.lazyLoad && isServerSide() && !isAdmin) {
+	if (customFields.lazyLoad && isServerSide() && !isAdmin) {
 		// On Server
 		return null;
 	}

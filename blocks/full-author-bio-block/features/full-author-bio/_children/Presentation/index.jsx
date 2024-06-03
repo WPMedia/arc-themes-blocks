@@ -3,7 +3,6 @@ import React from "react";
 import {
 	Conditional,
 	formatSocialURL,
-	getFocalFromANS,
 	Heading,
 	HeadingSection,
 	Icon,
@@ -34,31 +33,6 @@ const socialIcons = {
 
 const BLOCK_CLASS_NAME = "b-full-author-bio";
 
-const AuthorImage = ({ image, altText = "" }) => {
-	if (image?.auth) {
-		return (
-			<MediaItem>
-				<Image
-					alt={altText}
-					ansImage={image}
-					aspectRatio="1:1"
-					resizedOptions={getFocalFromANS(image)}
-					responsiveImages={[180, 360, 720]}
-					width={180}
-				/>
-			</MediaItem>
-		);
-	}
-	if (typeof image === "string" && image !== "") {
-		return (
-			<MediaItem>
-				<Image alt={altText} src={image} width={180} />
-			</MediaItem>
-		);
-	}
-	return null;
-};
-
 const Presentation = ({ author = {}, authorProfileLink }) => {
 	const phrases = usePhrases();
 	const supportedSocials = Object.keys(socialIcons);
@@ -68,14 +42,13 @@ const Presentation = ({ author = {}, authorProfileLink }) => {
 
 	const bio = author?.longBio || author?.bio;
 
-	return author?.byline ||
-		author?.ansImage ||
-		author?.image ||
-		author?.role ||
-		bio ||
-		socials.length ? (
+	return author?.byline || author?.image || author?.role || bio || socials.length ? (
 		<div className={BLOCK_CLASS_NAME}>
-			<AuthorImage image={author?.ansImage || author?.image} altText={author?.byline} />
+			{author?.image ? (
+				<MediaItem>
+					<Image src={author.image} alt={author.byline || ""} />
+				</MediaItem>
+			) : null}
 			{author?.byline || author?.role || bio || socials.length ? (
 				<HeadingSection>
 					<Stack className={`${BLOCK_CLASS_NAME}__text`}>

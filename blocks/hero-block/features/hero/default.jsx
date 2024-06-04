@@ -9,6 +9,7 @@ import getProperties from "fusion:properties";
 // https://github.com/WPMedia/arc-themes-components/
 import {
 	Button,
+	getManualImageID,
 	Heading,
 	HeadingSection,
 	imageANSToImageSrc,
@@ -45,11 +46,11 @@ function Hero({ customFields }) {
 	const { searchableField } = useEditableContent();
 	const { fallbackImage, resizerURL } = getProperties(arcSite);
 	const imageId = imageDesktopURL
-		? imageDesktopURL.split("/").pop().split(".").shift()
+		? getManualImageID(imageDesktopURL)
 		: desktopImgId;
 
 	const imageMobileId = imageMobileURL
-		? imageMobileURL.split("/").pop().split(".").shift()
+		? getManualImageID(imageMobileURL)
 		: imgMobileId;
 	let desktopAuth = useContent(
 		!imageDesktopAuth && imageId

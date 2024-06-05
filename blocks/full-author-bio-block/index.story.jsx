@@ -40,7 +40,7 @@ const authorObject = {
 };
 
 export const allFieldsFull = () => (
-	<FullAuthorBioPresentational author={authorObject} locale="en" />
+	<FullAuthorBioPresentational author={{ additional_properties: { original: authorObject } }} />
 );
 
 export const noSocialAccounts = () => {
@@ -62,7 +62,15 @@ export const noSocialAccounts = () => {
 		...authorNoSocialKeys
 	} = authorObject;
 
-	return <FullAuthorBioPresentational author={authorNoSocialKeys} locale="en" />;
+	return (
+		<FullAuthorBioPresentational
+			author={{
+				additional_properties: {
+					original: authorNoSocialKeys,
+				},
+			}}
+		/>
+	);
 };
 
 export const noRole = () => {
@@ -71,7 +79,9 @@ export const noRole = () => {
 		role: "",
 	};
 
-	return <FullAuthorBioPresentational author={authorNoRole} locale="en" />;
+	return (
+		<FullAuthorBioPresentational author={{ additional_properties: { original: authorNoRole } }} />
+	);
 };
 
 export const noByline = () => {
@@ -80,7 +90,9 @@ export const noByline = () => {
 		byline: "",
 	};
 
-	return <FullAuthorBioPresentational author={authorNoByline} locale="en" />;
+	return (
+		<FullAuthorBioPresentational author={{ additional_properties: { original: authorNoByline } }} />
+	);
 };
 
 export const noBioNorLongBio = () => {
@@ -90,7 +102,9 @@ export const noBioNorLongBio = () => {
 		longBio: "",
 	};
 
-	return <FullAuthorBioPresentational author={authorNoBio} locale="en" />;
+	return (
+		<FullAuthorBioPresentational author={{ additional_properties: { original: authorNoBio } }} />
+	);
 };
 
 export const noImage = () => {
@@ -100,15 +114,17 @@ export const noImage = () => {
 		resized_params: {},
 	};
 
-	return <FullAuthorBioPresentational author={authorNoImage} locale="en" />;
+	return (
+		<FullAuthorBioPresentational author={{ additional_properties: { original: authorNoImage } }} />
+	);
 };
 
 export const linkedAuthorName = () => (
-	<FullAuthorBioPresentational author={authorObject} linkAuthorProfile locale="en" />
+	<FullAuthorBioPresentational author={{ additional_properties: { original: authorObject } }} />
 );
 
 export const withRtl = () => (
 	<div dir="rtl">
-		<FullAuthorBioPresentational author={authorObject} locale="en" />
+		<FullAuthorBioPresentational author={{ additional_properties: { original: authorObject } }} />
 	</div>
 );

@@ -59,41 +59,41 @@ const AuthorImage = ({ image, altText = "" }) => {
 	return null;
 };
 
-const Presentation = ({ author = {}, authorProfileLink }) => {
+const Presentation = ({ author }) => {
 	const phrases = usePhrases();
+
+	const originalAuthor = author?.additional_properties?.original;
+	const bio = originalAuthor?.longBio || originalAuthor?.bio;
+	const authorImage = author?.ansImage || author?.image || originalAuthor?.image;
+
 	const supportedSocials = Object.keys(socialIcons);
-	const socials = Object.entries(author)
+	const socials = Object.entries(originalAuthor || {})
 		.filter(([key, value]) => supportedSocials.includes(key) && value)
 		.map(([key]) => key);
 
-	const bio = author?.longBio || author?.bio;
-
-	return author?.byline ||
-		author?.ansImage ||
-		author?.image ||
-		author?.role ||
-		bio ||
-		socials.length ? (
+	return originalAuthor?.byline || authorImage || originalAuthor?.role || bio || socials.length ? (
 		<div className={BLOCK_CLASS_NAME}>
-			<AuthorImage image={author?.ansImage || author?.image} altText={author?.byline} />
-			{author?.byline || author?.role || bio || socials.length ? (
+			<AuthorImage image={authorImage} altText={originalAuthor?.byline} />
+			{originalAuthor?.byline || originalAuthor?.role || bio || socials.length ? (
 				<HeadingSection>
 					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
-						{author?.byline || author?.role ? (
+						{originalAuthor?.byline || originalAuthor?.role ? (
 							<Stack className={`${BLOCK_CLASS_NAME}__identification`}>
-								{author.byline ? (
+								{originalAuthor.byline ? (
 									<Conditional
 										className={`${BLOCK_CLASS_NAME}__name-link`}
-										condition={authorProfileLink}
+										condition={author?.url}
 										component={Link}
-										href={authorProfileLink}
+										href={author?.url}
 									>
-										<Heading className={`${BLOCK_CLASS_NAME}__name`}>{author.byline}</Heading>
+										<Heading className={`${BLOCK_CLASS_NAME}__name`}>
+											{originalAuthor.byline}
+										</Heading>
 									</Conditional>
 								) : null}
-								{author.role ? (
+								{originalAuthor.role ? (
 									<HeadingSection>
-										<Heading className={`${BLOCK_CLASS_NAME}__role`}>{author.role}</Heading>
+										<Heading className={`${BLOCK_CLASS_NAME}__role`}>{originalAuthor.role}</Heading>
 									</HeadingSection>
 								) : null}
 							</Stack>
@@ -110,11 +110,11 @@ const Presentation = ({ author = {}, authorProfileLink }) => {
 									{socials.map((item) => (
 										<Link
 											className={`${BLOCK_CLASS_NAME}__social-link`}
-											href={formatSocialURL(item, author[item])}
+											href={formatSocialURL(item, originalAuthor[item])}
 											key={item}
 											openInNewTab
 											title={phrases.t(`global.social-${item.toLowerCase()}-connect`, {
-												authorName: author.name,
+												authorName: originalAuthor.name,
 											})}
 										>
 											<Icon name={socialIcons[item]} />

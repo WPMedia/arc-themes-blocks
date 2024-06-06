@@ -142,7 +142,7 @@ const CardListItems = (props) => {
 		contentItems = contentItems.slice(0, displayAmount);
 	}
 
-	const sourceContent = contentElements[0];
+	const sourceContent = contentElements[offsetOverride];
 
 	const displayDate = localizeDateTime(sourceContent.display_date, dateTimeFormat, language, timeZone);
 
@@ -183,10 +183,10 @@ const CardListItems = (props) => {
 				},
 				responsiveImages: [377, 754, 1508],
 				width: 377,
-		  }
+			}
 		: {
 				src: targetFallbackImage,
-		  };
+			};
 
 	return contentItems.length > 0 ? (
 		<HeadingSection>
@@ -243,10 +243,10 @@ const CardListItems = (props) => {
 										},
 										responsiveImages: [105, 210, 420],
 										width: 105,
-								  }
+									}
 								: {
 										src: targetFallbackImage,
-								  };
+									};
 							return (
 								<Stack
 									as="article"

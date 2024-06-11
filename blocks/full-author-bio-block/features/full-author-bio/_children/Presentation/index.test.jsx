@@ -14,9 +14,6 @@ const byline = "Jane Da Doe";
 const role = "Senior Product Manager";
 const longBio = "She works on Arc Themes";
 const image = "img.jpg";
-const originalAuthor = (obj) => ({
-	additional_properties: { original: { ...obj } },
-});
 
 describe("Full Author Bio Block", () => {
 	beforeEach(() => {
@@ -39,36 +36,34 @@ describe("Full Author Bio Block", () => {
 	});
 
 	it("should render the author url if it exists", () => {
-		render(
-			<Presentation author={{ ...originalAuthor({ _id, byline }), url: "/author/profile" }} />,
-		);
+		render(<Presentation author={{ _id, byline }} authorProfileLink="/author/profile" />);
 		const link = screen.getByRole("link", { name: byline });
 		expect(link).not.toBeNull();
 		expect(link.href).toBe("http://localhost/author/profile");
 	});
 
 	it("should render the byline", () => {
-		render(<Presentation author={originalAuthor({ _id, byline })} />);
+		render(<Presentation author={{ _id, byline }} />);
 		expect(screen.getByRole("heading", { name: byline })).not.toBeNull();
 	});
 
 	it("should render the role", () => {
-		render(<Presentation author={originalAuthor({ _id, role })} />);
+		render(<Presentation author={{ _id, role }} />);
 		expect(screen.getByRole("heading", { name: role })).not.toBeNull();
 	});
 
 	it("should render the long bio", () => {
-		render(<Presentation author={originalAuthor({ _id, longBio })} />);
+		render(<Presentation author={{ _id, longBio }} />);
 		expect(screen.getByText(longBio)).not.toBeNull();
 	});
 
 	it("should render the photo with byline alt text", () => {
-		render(<Presentation author={originalAuthor({ _id, byline, image })} />);
+		render(<Presentation author={{ _id, byline, image }} />);
 		expect(screen.getByRole("img", { name: byline, exact: false })).not.toBeNull();
 	});
 
 	it("should render the photo without byline as blank alt text", () => {
-		render(<Presentation author={originalAuthor({ _id, image })} />);
+		render(<Presentation author={{ _id, image }} />);
 		expect(screen.getByRole("img", { name: "" })).not.toBeNull();
 	});
 
@@ -76,11 +71,10 @@ describe("Full Author Bio Block", () => {
 		render(
 			<Presentation
 				author={{
-					...originalAuthor({
-						_id,
-						image,
-						byline: "resized image",
-					}),
+					_id,
+					image,
+					byline: "resized image",
+
 					ansImage: {
 						url: "resized.jpg",
 						auth: { 2: "12345" },
@@ -107,7 +101,7 @@ describe("Full Author Bio Block", () => {
 	it("should render the all the supported icons if specified", () => {
 		render(
 			<Presentation
-				author={originalAuthor({
+				author={{
 					_id,
 					email: "janedoe",
 					facebook: "janedoe",
@@ -123,7 +117,7 @@ describe("Full Author Bio Block", () => {
 					twitter: "janedoe",
 					whatsapp: "janedoe",
 					youtube: "janedoe",
-				})}
+				}}
 			/>,
 		);
 		expect(screen.getByTestId("Envelope")).not.toBeNull();
@@ -143,79 +137,79 @@ describe("Full Author Bio Block", () => {
 	});
 
 	it("should not render the missing supported icon (twitter) if missing from author", () => {
-		render(<Presentation author={originalAuthor({ _id, email: "janedoe", youtube: "janedoe" })} />);
+		render(<Presentation author={{ _id, email: "janedoe", youtube: "janedoe" }} />);
 		expect(screen.getByTestId("Envelope")).not.toBeNull();
 		expect(screen.queryByTestId("Twitter")).toBeNull();
 		expect(screen.getByTestId("Youtube")).not.toBeNull();
 	});
 
 	it("should render the email icon if specified", () => {
-		render(<Presentation author={originalAuthor({ _id, email: "janedoe" })} />);
+		render(<Presentation author={{ _id, email: "janedoe" }} />);
 		expect(screen.getByTestId("Envelope")).not.toBeNull();
 	});
 
 	it("should render the Facebook icon if specified", () => {
-		render(<Presentation author={originalAuthor({ _id, facebook: "janedoe" })} />);
+		render(<Presentation author={{ _id, facebook: "janedoe" }} />);
 		expect(screen.getByTestId("Facebook")).not.toBeNull();
 	});
 
 	it("should render the Instagram icon if specified", () => {
-		render(<Presentation author={originalAuthor({ _id, instagram: "janedoe" })} />);
+		render(<Presentation author={{ _id, instagram: "janedoe" }} />);
 		expect(screen.getByTestId("Instagram")).not.toBeNull();
 	});
 
 	it("should render the LinkedIn icon if specified", () => {
-		render(<Presentation author={originalAuthor({ _id, linkedin: "janedoe" })} />);
+		render(<Presentation author={{ _id, linkedin: "janedoe" }} />);
 		expect(screen.getByTestId("LinkedIn")).not.toBeNull();
 	});
 
 	it("should render the RSS icon if specified", () => {
-		render(<Presentation author={originalAuthor({ _id, rss: "janedoe" })} />);
+		render(<Presentation author={{ _id, rss: "janedoe" }} />);
 		expect(screen.getByTestId("Rss")).not.toBeNull();
 	});
 
 	it("should render the Twitter icon if specified", () => {
-		render(<Presentation author={originalAuthor({ _id, twitter: "janedoe" })} />);
+		render(<Presentation author={{ _id, twitter: "janedoe" }} />);
 		expect(screen.getByTestId("Twitter")).not.toBeNull();
 	});
 
 	it("should render the Medium icon if specified", () => {
-		render(<Presentation author={originalAuthor({ _id, medium: "janedoe" })} />);
+		render(<Presentation author={{ _id, medium: "janedoe" }} />);
 		expect(screen.getByTestId("Medium")).not.toBeNull();
 	});
 
 	it("should render the Pinterest icon if specified", () => {
-		render(<Presentation author={originalAuthor({ _id, pinterest: "janedoe" })} />);
+		render(<Presentation author={{ _id, pinterest: "janedoe" }} />);
 		expect(screen.getByTestId("Pinterest")).not.toBeNull();
 	});
 
 	it("should render the Reddit icon if specified", () => {
-		render(<Presentation author={originalAuthor({ _id, reddit: "janedoe" })} />);
+		render(<Presentation author={{ _id, reddit: "janedoe" }} />);
 		expect(screen.getByTestId("Reddit")).not.toBeNull();
 	});
 
 	it("should render the Snapchat icon if specified", () => {
-		render(<Presentation author={originalAuthor({ _id, snapchat: "janedoe" })} />);
+		render(<Presentation author={{ _id, snapchat: "janedoe" }} />);
 		expect(screen.getByTestId("Snapchat")).not.toBeNull();
 	});
 
 	it("should render the SoundCloud icon if specified", () => {
-		render(<Presentation author={originalAuthor({ _id, soundcloud: "janedoe" })} />);
+		render(<Presentation author={{ _id, soundcloud: "janedoe" }} />);
 		expect(screen.getByTestId("SoundCloud")).not.toBeNull();
 	});
 
 	it("should render the Tumblr icon if specified", () => {
-		render(<Presentation author={originalAuthor({ _id, tumblr: "janedoe" })} />);
+		render(<Presentation author={{ _id, tumblr: "janedoe" }} />);
 		expect(screen.getByTestId("Tumblr")).not.toBeNull();
 	});
 
 	it("should render the WhatsApp icon if specified", () => {
-		render(<Presentation author={originalAuthor({ _id, whatsapp: "janedoe" })} />);
+		render(<Presentation author={{ _id, whatsapp: "janedoe" }} />);
 		expect(screen.getByTestId("WhatsApp")).not.toBeNull();
 	});
 
 	it("should render the Youtube icon if specified", () => {
-		render(<Presentation author={originalAuthor({ _id, youtube: "janedoe" })} />);
+		render(<Presentation author={{ _id, youtube: "janedoe" }} />);
 		expect(screen.getByTestId("Youtube")).not.toBeNull();
 	});
 });

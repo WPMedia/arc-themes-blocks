@@ -39,9 +39,7 @@ const authorObject = {
 	soundcloud: "someusername",
 };
 
-export const allFieldsFull = () => (
-	<FullAuthorBioPresentational author={{ additional_properties: { original: authorObject } }} />
-);
+export const allFieldsFull = () => <FullAuthorBioPresentational author={authorObject} />;
 
 export const noSocialAccounts = () => {
 	const {
@@ -62,15 +60,7 @@ export const noSocialAccounts = () => {
 		...authorNoSocialKeys
 	} = authorObject;
 
-	return (
-		<FullAuthorBioPresentational
-			author={{
-				additional_properties: {
-					original: authorNoSocialKeys,
-				},
-			}}
-		/>
-	);
+	return <FullAuthorBioPresentational author={authorNoSocialKeys} />;
 };
 
 export const noRole = () => {
@@ -79,9 +69,7 @@ export const noRole = () => {
 		role: "",
 	};
 
-	return (
-		<FullAuthorBioPresentational author={{ additional_properties: { original: authorNoRole } }} />
-	);
+	return <FullAuthorBioPresentational author={authorNoRole} />;
 };
 
 export const noByline = () => {
@@ -90,9 +78,7 @@ export const noByline = () => {
 		byline: "",
 	};
 
-	return (
-		<FullAuthorBioPresentational author={{ additional_properties: { original: authorNoByline } }} />
-	);
+	return <FullAuthorBioPresentational author={authorNoByline} />;
 };
 
 export const noBioNorLongBio = () => {
@@ -102,9 +88,7 @@ export const noBioNorLongBio = () => {
 		longBio: "",
 	};
 
-	return (
-		<FullAuthorBioPresentational author={{ additional_properties: { original: authorNoBio } }} />
-	);
+	return <FullAuthorBioPresentational author={authorNoBio} />;
 };
 
 export const noImage = () => {
@@ -114,17 +98,13 @@ export const noImage = () => {
 		resized_params: {},
 	};
 
-	return (
-		<FullAuthorBioPresentational author={{ additional_properties: { original: authorNoImage } }} />
-	);
+	return <FullAuthorBioPresentational author={authorNoImage} />;
 };
 
-export const linkedAuthorName = () => (
-	<FullAuthorBioPresentational author={{ additional_properties: { original: authorObject } }} />
-);
+export const linkedAuthorName = () => <FullAuthorBioPresentational author={authorObject} />;
 
 export const withRtl = () => (
 	<div dir="rtl">
-		<FullAuthorBioPresentational author={{ additional_properties: { original: authorObject } }} />
+		<FullAuthorBioPresentational author={authorObject} />
 	</div>
 );

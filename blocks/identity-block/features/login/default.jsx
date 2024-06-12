@@ -29,8 +29,14 @@ export function definedMessageByCode(code) {
 }
 
 const Login = ({ customFields }) => {
-	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC, termsAndPrivacyURL } =
-		customFields;
+	const {
+		redirectURL,
+		redirectToPreviousPage,
+		loggedInPageLocation,
+		OIDC,
+		termsAndPrivacyURL,
+		allowedRedirectDomains,
+	} = customFields;
 
 	let urlString = '';
 	let url = '';
@@ -84,7 +90,7 @@ const Login = ({ customFields }) => {
 						if (isOIDC) {
 							loginByOIDC();
 						} else {
-							const validatedURL = validateURL(loginRedirect);
+							const validatedURL = validateURL(loginRedirect, allowedRedirectDomains);
 							window.location = validatedURL;
 						}
 					})
@@ -152,6 +158,12 @@ Login.propTypes = {
 			defaultValue: true,
 			description:
 				"Do you wish for the user to be redirected to the page they entered from before logging in? This overrides redirect URL",
+		}),
+		allowedRedirectDomains: PropTypes.list.tag({
+			name: "Allowed Redirect Domains",
+			defaultValue: ["https://your-domain.com"],
+			description:
+				"Domains that are allowed to be redirected to. It will require your main domain and any others that you may allow. Ex. https://your-main-domain.com",
 		}),
 		loggedInPageLocation: PropTypes.string.tag({
 			name: "Logged In URL",

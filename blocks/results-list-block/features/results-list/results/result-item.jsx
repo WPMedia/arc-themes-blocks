@@ -1,5 +1,4 @@
 import React from "react";
-import { useEditableContent } from "fusion:content";
 import { useComponentContext } from "fusion:context";
 import getProperties from "fusion:properties";
 
@@ -79,7 +78,6 @@ const ResultItem = React.memo(
 
 			/* Author Formatting */
 			const ansImage = getImageFromANS(element)
-			const { searchableField } = useEditableContent();
 			const hasAuthors = showByline ? credits?.by?.some((author) => author?.name !== "") : null;
 			const contentHeading = showHeadline ? headlineText : null;
 			const formattedDate = Date.parse(displayDate)
@@ -122,7 +120,7 @@ const ResultItem = React.memo(
 					className={`${BLOCK_CLASS_NAME}${showImage ? ` ${BLOCK_CLASS_NAME}--show-image` : ""}`}
 				>
 					{showImage ? (
-						<MediaItem {...searchableField("imageOverrideURL")} suppressContentEditableWarning>
+						<MediaItem>
 							<Conditional
 								component={Link}
 								condition={url}

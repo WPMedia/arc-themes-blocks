@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useIdentity } from "@wpmedia/arc-themes-components";
+import { useFusionContext } from 'fusion:context';
 import { GoogleSignInContext } from "./googleContext";
 import useOIDCLogin from "../../../utils/useOIDCLogin";
 import validateURL from "../../../utils/validate-redirect-url";
@@ -11,6 +12,7 @@ function useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError = () => {}
 	const { isGoogleLoaded } = useContext(GoogleSignInContext);
 	const [config, setConfig] = useState(() => Identity?.configOptions ?? {});
 	const { loginByOIDC } = useOIDCLogin();
+	const { contextPath } = useFusionContext()
 
 	useEffect(() => {
 		window.onFacebookSignOn = async () => {
@@ -20,14 +22,14 @@ function useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError = () => {}
 				if (isOIDC) {
 					loginByOIDC();
 				} else {
-					const validatedURL = validateURL(redirectURL);
+					const validatedURL = validateURL(redirectURL, contextPath);
 					window.location = validatedURL;
 				}
 			} catch (e) {
 				onError();
 			}
 		};
-	}, [Identity, onError, redirectURL, isOIDC, loginByOIDC]);
+	}, [Identity, onError, redirectURL, isOIDC, loginByOIDC, contextPath]);
 
 	useEffect(() => {
 		const fetchConfig = async () => {
@@ -50,7 +52,7 @@ function useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError = () => {}
 						if (isOIDC) {
 							loginByOIDC();
 						} else {
-							const validatedURL = validateURL(redirectURL);
+							const validatedURL = validateURL(redirectURL, contextPath);
 							window.location = validatedURL;
 						}
 					}),
@@ -77,7 +79,7 @@ function useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError = () => {}
 				}
 			});
 		}
-	}, [config.googleClientId, Identity, isGoogleLoaded, isOIDC, loginByOIDC, redirectURL, socialSignOnIn ]);
+	}, [config.googleClientId, Identity, isGoogleLoaded, isOIDC, loginByOIDC, redirectURL, socialSignOnIn, contextPath ]);
 
 	useEffect(() => {
 		const initializeFacebook = async () => {

@@ -37,6 +37,7 @@ describe("useLogin()", () => {
 		Object.defineProperty(window, "location", {
 			writable: true,
 			value: {
+				origin: 'http://localhost',
 				href: 'http://localhost',
 				search: ''
 			}
@@ -57,7 +58,7 @@ describe("useLogin()", () => {
 	it("uses the passed in redirect URL", async () => {
 		await render(<Test />);
 		fireEvent.click(screen.getByRole("button"));
-		expect(window.location).toBe(defaultParams.redirectURL);
+		expect(window.location).toBe(`http://localhost${defaultParams.redirectURL}`);
 	});
 
 	it("uses redirect query", async () => {
@@ -65,11 +66,12 @@ describe("useLogin()", () => {
 			writable: true,
 			value: {
 				search: "?test=123&redirect=/new-account/",
+				origin: "http://localhost",
 			},
 		});
 		await render(<Test />);
 		fireEvent.click(screen.getByRole("button"));
-		expect(window.location).toBe("/new-account/");
+		expect(window.location).toBe("http://localhost/new-account/");
 	});
 
 	it("uses document referrer", async () => {
@@ -85,7 +87,7 @@ describe("useLogin()", () => {
 	});
 
 	it("uses redirectURL when referrer is the reset password page", async () => {
-		const referrerURL = "http://referrer.com/reset-password/";
+		const referrerURL = "http://localhost/reset-password/";
 		Object.defineProperty(document, "referrer", {
 			value: referrerURL,
 			configurable: true,
@@ -93,6 +95,7 @@ describe("useLogin()", () => {
 		Object.defineProperty(window, "location", {
 			writable: true,
 			value: {
+				origin: 'http://localhost',
 				href: 'http://localhost',
 				search: '?reset_password=true'
 			}
@@ -112,7 +115,7 @@ describe("useLogin()", () => {
 			},
 		}));
 		await render(<Test />);
-		expect(window.location).toBe(defaultParams.loggedInPageLocation);
+		expect(window.location).toBe(`http://localhost${defaultParams.loggedInPageLocation}`);
 	});
 
 	it("replaces potentially unsafe URLs in query param", async () => {

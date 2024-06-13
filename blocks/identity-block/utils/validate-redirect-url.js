@@ -1,23 +1,11 @@
-const validateURL = (url, allowedRedirectDomains = []) => {
+const validateURL = (url, contextPath = '') => {
 	if (!url) return null;
 	const validationRegEx = /^\/[^/].*$/;
 	const valid = validationRegEx.test(url);
+
 	if (valid) {
-		if (allowedRedirectDomains) {
-			const domain = allowedRedirectDomains.find((item) => item === window.location.origin);
-
-			if (domain) {
-				return `${domain}${url}`;
-			}
-		}
-
-		return url;
+		return `${window.location.origin}${contextPath}${url}`;
 	}
-
-	if (allowedRedirectDomains.includes(url)) {
-		return url;
-	}
-
 	return "/";
 };
 

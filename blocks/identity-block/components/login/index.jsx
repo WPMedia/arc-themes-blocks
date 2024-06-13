@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useIdentity } from "@wpmedia/arc-themes-components";
+import { useFusionContext } from 'fusion:context';
 import appendURLParams from "../../utils/append-url-params";
 import validateURL from "../../utils/validate-redirect-url";
 import useOIDCLogin from "../../utils/useOIDCLogin";
@@ -14,11 +15,13 @@ const useLogin = ({
 }) => {
 
 	const { Identity } = useIdentity();
-	const validatedRedirectURL = validateURL(redirectURL);
+	const { contextPath } = useFusionContext()
+	const validatedRedirectURL = validateURL(redirectURL, contextPath);
 	const [redirectToURL, setRedirectToURL] = useState(validatedRedirectURL);
 	const [redirectQueryParam, setRedirectQueryParam] = useState(null);
 	const [isAppleAuthSuccess, setIsAppleAuthSuccess] = useState(false);
 	const { loginByOIDC } = useOIDCLogin();
+
 
 	useEffect(() => {
 		const askForloginWithApple = async (code) => {
@@ -48,7 +51,7 @@ const useLogin = ({
 			})
 
 			const fullURL = searchParams.get("redirect") ? appendURLParams(searchParams.get("redirect"), aditionalParams.filter(item => item !== undefined)) : null;
-			const validatedRedirectParam = validateURL(fullURL);
+			const validatedRedirectParam = validateURL(fullURL, contextPath);
 			setRedirectQueryParam(validatedRedirectParam);
 		}
 
@@ -61,7 +64,7 @@ const useLogin = ({
 				setRedirectToURL(`${redirectUrl.pathname}${redirectUrl.search}`);
 			}
 		}
-	}, [redirectQueryParam, redirectToPreviousPage, redirectURL]);
+	}, [redirectQueryParam, redirectToPreviousPage, redirectURL, contextPath]);
 
 	useEffect(() => {
 		const getConfig = async () => {
@@ -77,7 +80,7 @@ const useLogin = ({
 	useEffect(() => {
 		const checkLoggedInStatus = async () => {
 			const isLoggedIn = await Identity.isLoggedIn();
-			const validatedLoggedInPageLoc = validateURL(loggedInPageLocation);
+			const validatedLoggedInPageLoc = validateURL(loggedInPageLocation, contextPath);
 
 			if (isLoggedIn) {
 				if (isOIDC) {
@@ -90,7 +93,7 @@ const useLogin = ({
 		if (Identity && !isAdmin) {
 			checkLoggedInStatus();
 		}
-	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin, loginByOIDC, isOIDC, isAppleAuthSuccess]);
+	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin, loginByOIDC, isOIDC, isAppleAuthSuccess, contextPath]);
 
 	return {
 		loginRedirect: redirectQueryParam || redirectToURL,

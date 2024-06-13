@@ -8,43 +8,22 @@ describe("validateURL()", () => {
 
 	it("reutrns URL when it is a page on the current site", () => {
 		const url = "/redirect-here";
-		const result = validateURL(url);
-		expect(result).toBe(url);
+		const result = validateURL(url, '');
+
+		expect(result).toBe('http://localhost/redirect-here');
 	});
 
-	it("reutrns the root URL when potentially unsafe", () => {
+	it("returns the root URL when potentially unsafe", () => {
 		const url = "https://www.unkown.com/redirect-here";
-		const result = validateURL(url);
+		const result = validateURL(url, '');
+
 		expect(result).toBe("/");
 	});
 
-	it("generates url from allowed domains", () => {
-		Object.defineProperty(window, "location", {
-			writable: true,
-			value: {
-				origin: 'http://allowed-domain.com',
-			}
-		});
-
+	it("returns concats contextPath if defined", () => {
 		const url = "/redirect-here/";
-		const allowedDomains = ['http://allowed-domain.com'];
+		const result = validateURL(url, '/pf');
 
-		const result = validateURL(url, allowedDomains);
-		expect(result).toBe('http://allowed-domain.com/redirect-here/');
-	});
-
-	it("generates url from allowed domains from external website", () => {
-		Object.defineProperty(window, "location", {
-			writable: true,
-			value: {
-				origin: 'http://allowed-domain.com',
-			}
-		});
-
-		const url = "https://external-page.com/redirect";
-		const allowedDomains = ['https://external-page.com/redirect'];
-
-		const result = validateURL(url, allowedDomains);
-		expect(result).toBe('https://external-page.com/redirect');
+		expect(result).toBe('http://localhost/pf/redirect-here/');
 	});
 });

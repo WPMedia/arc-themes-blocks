@@ -29,7 +29,7 @@ const definedMessageByCode = (code) => errorCodes[code] || errorCodes["0"];
 const OneTimePasswordLogin = ({ customFields }) => {
 	const { loggedInPageLocation } = customFields;
 
-	const { arcSite } = useFusionContext();
+	const { arcSite, contextPath } = useFusionContext();
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 	const { Identity, isInitialized } = useIdentity();
@@ -49,14 +49,14 @@ const OneTimePasswordLogin = ({ customFields }) => {
 		if (otaNonce) {
 			Identity.redeemOTALink(otaNonce)
 				.then(() => {
-					const validatedURL = validateURL(loggedInPageLocation);
+					const validatedURL = validateURL(loggedInPageLocation, contextPath);
 					window.location.href = validatedURL;
 				})
 				.catch(() => {
 					setSuccessRedeem(false);
 				});
 		}
-	}, [otaNonce, Identity, loggedInPageLocation, phrases]);
+	}, [otaNonce, Identity, loggedInPageLocation, phrases, contextPath]);
 
 	if (!isInitialized) {
 		return null;
@@ -78,7 +78,7 @@ const OneTimePasswordLogin = ({ customFields }) => {
 					type="button"
 					onClick={() => {
 						params.delete(OTA_NONCE, otaNonce);
-						const newUrl = `${url.origin}${url.pathname}?${params.toString()}`;
+						const newUrl = `${url.origin}${url.contextPath}?${params.toString()}`;
 						window.location.href = newUrl;
 					}}
 				>

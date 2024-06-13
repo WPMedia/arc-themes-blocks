@@ -35,7 +35,6 @@ const Login = ({ customFields }) => {
 		loggedInPageLocation,
 		OIDC,
 		termsAndPrivacyURL,
-		allowedRedirectDomains,
 	} = customFields;
 
 	let urlString = '';
@@ -46,7 +45,7 @@ const Login = ({ customFields }) => {
 		url = new URL(urlString);
 	}
 
-	const { isAdmin, arcSite } = useFusionContext();
+	const { isAdmin, arcSite, contextPath } = useFusionContext();
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
@@ -90,7 +89,7 @@ const Login = ({ customFields }) => {
 						if (isOIDC) {
 							loginByOIDC();
 						} else {
-							const validatedURL = validateURL(loginRedirect, allowedRedirectDomains);
+							const validatedURL = validateURL(loginRedirect, contextPath);
 							window.location = validatedURL;
 						}
 					})
@@ -158,12 +157,6 @@ Login.propTypes = {
 			defaultValue: true,
 			description:
 				"Do you wish for the user to be redirected to the page they entered from before logging in? This overrides redirect URL",
-		}),
-		allowedRedirectDomains: PropTypes.list.tag({
-			name: "Allowed Redirect Domains",
-			defaultValue: ["https://your-domain.com"],
-			description:
-				"Domains that are allowed to be redirected to. It will require your main domain and any others that you may allow. Ex. https://your-main-domain.com",
 		}),
 		loggedInPageLocation: PropTypes.string.tag({
 			name: "Logged In URL",

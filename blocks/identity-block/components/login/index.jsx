@@ -17,7 +17,7 @@ const useLogin = ({
 	const { Identity } = useIdentity();
 	const { contextPath } = useFusionContext()
 	const validatedRedirectURL = validateURL(redirectURL, contextPath);
-	const [redirectToURL, setRedirectToURL] = useState(validatedRedirectURL);
+	const [currentRedirectToURL, setCurrentRedirectToURL] = useState(validatedRedirectURL);
 	const [redirectQueryParam, setRedirectQueryParam] = useState(null);
 	const [isAppleAuthSuccess, setIsAppleAuthSuccess] = useState(false);
 	const { loginByOIDC } = useOIDCLogin();
@@ -56,12 +56,16 @@ const useLogin = ({
 		}
 
 		if (redirectToPreviousPage && document?.referrer) {
-			const redirectUrl = new URL(document.referrer);
+			const redirectUrlLocation = new URL(document.referrer);
 
 			if (searchParams.has('reset_password')) {
-				setRedirectToURL(`${redirectURL}${redirectUrl.search}`);
+				setCurrentRedirectToURL(`${redirectURL}${redirectUrlLocation.search}`);
 			} else {
-				setRedirectToURL(`${redirectUrl.pathname}${redirectUrl.search}`);
+				const newRedirectUrl = redirectUrlLocation.pathname.includes('/pagebuilder/')
+					? redirectURL
+					: `${redirectUrlLocation.pathname}${redirectUrlLocation.search}`;
+
+				setCurrentRedirectToURL(newRedirectUrl);
 			}
 		}
 	}, [redirectQueryParam, redirectToPreviousPage, redirectURL, contextPath]);
@@ -96,7 +100,7 @@ const useLogin = ({
 	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin, loginByOIDC, isOIDC, isAppleAuthSuccess, contextPath]);
 
 	return {
-		loginRedirect: redirectQueryParam || redirectToURL,
+		loginRedirect: redirectQueryParam || currentRedirectToURL,
 	};
 };
 

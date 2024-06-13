@@ -147,4 +147,24 @@ describe("useLogin()", () => {
 		await render(<Test loggedInPageLocation="https://somewhere.com" />);
 		expect(window.location).toBe("/");
 	});
+
+	it("should use redirectUrl from customFields if coming from /pagebulder/", async () => {
+		const referrerURL = "http://localhost/pagebuilder/";
+		Object.defineProperty(document, "referrer", {
+			value: referrerURL,
+			configurable: true,
+		});
+		Object.defineProperty(window, "location", {
+			writable: true,
+			value: {
+				origin: 'http://localhost',
+				href: 'http://localhost',
+				search: ''
+			}
+		});
+		await render(<Test />);
+		fireEvent.click(screen.getByRole("button"));
+		expect(window.location).toBe("/account/");
+		delete document.referrer;
+	});
 });

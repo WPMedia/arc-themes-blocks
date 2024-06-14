@@ -1,10 +1,15 @@
-const validateURL = (url, contextPath = '') => {
+const validateURL = (url) => {
 	if (!url) return null;
 	const validationRegEx = /^\/[^/].*$/;
 	const valid = validationRegEx.test(url);
 
 	if (valid) {
-		return `${window.location.origin}${contextPath}${url}`;
+		// handling preview with PB.
+		if (window.location.pathname.includes('/pf/')) {
+			return `${window.location.origin}/pf${url}`;
+		}
+
+		return `${window.location.origin}${url}`;
 	}
 
 	const urlLocation = new URL(url);

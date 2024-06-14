@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useIdentity } from "@wpmedia/arc-themes-components";
-import { useFusionContext } from 'fusion:context';
 import appendURLParams from "../../utils/append-url-params";
 import validateURL from "../../utils/validate-redirect-url";
 import useOIDCLogin from "../../utils/useOIDCLogin";
@@ -15,8 +14,7 @@ const useLogin = ({
 }) => {
 
 	const { Identity } = useIdentity();
-	const { contextPath } = useFusionContext()
-	const validatedRedirectURL = validateURL(redirectURL, contextPath);
+	const validatedRedirectURL = validateURL(redirectURL);
 	const [currentRedirectToURL, setCurrentRedirectToURL] = useState(validatedRedirectURL);
 	const [redirectQueryParam, setRedirectQueryParam] = useState(null);
 	const [isAppleAuthSuccess, setIsAppleAuthSuccess] = useState(false);
@@ -51,7 +49,7 @@ const useLogin = ({
 			})
 
 			const fullURL = searchParams.get("redirect") ? appendURLParams(searchParams.get("redirect"), aditionalParams.filter(item => item !== undefined)) : null;
-			const validatedRedirectParam = validateURL(fullURL, contextPath);
+			const validatedRedirectParam = validateURL(fullURL);
 			setRedirectQueryParam(validatedRedirectParam);
 		}
 
@@ -68,7 +66,7 @@ const useLogin = ({
 				setCurrentRedirectToURL(newRedirectUrl);
 			}
 		}
-	}, [redirectQueryParam, redirectToPreviousPage, redirectURL, contextPath]);
+	}, [redirectQueryParam, redirectToPreviousPage, redirectURL]);
 
 	useEffect(() => {
 		const getConfig = async () => {
@@ -84,7 +82,7 @@ const useLogin = ({
 	useEffect(() => {
 		const checkLoggedInStatus = async () => {
 			const isLoggedIn = await Identity.isLoggedIn();
-			const validatedLoggedInPageLoc = validateURL(loggedInPageLocation, contextPath);
+			const validatedLoggedInPageLoc = validateURL(loggedInPageLocation);
 
 			if (isLoggedIn) {
 				if (isOIDC) {
@@ -97,7 +95,7 @@ const useLogin = ({
 		if (Identity && !isAdmin) {
 			checkLoggedInStatus();
 		}
-	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin, loginByOIDC, isOIDC, isAppleAuthSuccess, contextPath]);
+	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin, loginByOIDC, isOIDC, isAppleAuthSuccess]);
 
 	return {
 		loginRedirect: redirectQueryParam || currentRedirectToURL,

@@ -134,6 +134,7 @@ describe("Identity One Time Password Request Form - Arc Block", () => {
 		delete window.location;
 		window.location = {
 			href: "http://localhost/onetimeaccess/?ota_nonce=123",
+			pathname: '/onetimeaccess/',
 			origin: "http://localhost",
 		};
 

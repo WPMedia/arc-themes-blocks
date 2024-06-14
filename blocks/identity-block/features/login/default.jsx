@@ -45,7 +45,7 @@ const Login = ({ customFields }) => {
 		url = new URL(urlString);
 	}
 
-	const { isAdmin, arcSite, contextPath } = useFusionContext();
+	const { isAdmin, arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
@@ -89,7 +89,7 @@ const Login = ({ customFields }) => {
 						if (isOIDC) {
 							loginByOIDC();
 						} else {
-							const validatedURL = validateURL(loginRedirect, contextPath);
+							const validatedURL = validateURL(loginRedirect);
 							window.location = validatedURL;
 						}
 					})

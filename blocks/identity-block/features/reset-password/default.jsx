@@ -21,7 +21,6 @@ export const ResetPasswordPresentation = ({ isAdmin = false, phrases, successAct
 		status: "initial",
 	});
 	const [submitted, setSubmitted] = useState(false);
-	const { contextPath } = useFusionContext();
 
 	// eslint doesn't handle globalThis yet, but this is appropriate
 	/* global globalThis */
@@ -67,7 +66,7 @@ export const ResetPasswordPresentation = ({ isAdmin = false, phrases, successAct
 	}, [submitted])
 
 	const getRedirectUrl = () => {
-		const redirect = validateURL(successActionURL, contextPath);
+		const redirect = validateURL(successActionURL);
 
 		if (redirect.includes('?')) {
 			return `${redirect}&reset_password=true`

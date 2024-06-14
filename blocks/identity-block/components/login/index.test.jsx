@@ -39,7 +39,8 @@ describe("useLogin()", () => {
 			value: {
 				origin: 'http://localhost',
 				href: 'http://localhost',
-				search: ''
+				search: '',
+				pathname: '/',
 			}
 		});
 		useIdentity.mockImplementation(() => ({
@@ -67,6 +68,7 @@ describe("useLogin()", () => {
 			value: {
 				search: "?test=123&redirect=/new-account/",
 				origin: "http://localhost",
+				pathname: "/",
 			},
 		});
 		await render(<Test />);
@@ -97,7 +99,8 @@ describe("useLogin()", () => {
 			value: {
 				origin: 'http://localhost',
 				href: 'http://localhost',
-				search: '?reset_password=true'
+				search: '?reset_password=true',
+				pathname: '/',
 			}
 		});
 		await render(<Test />);
@@ -123,6 +126,7 @@ describe("useLogin()", () => {
 			writable: true,
 			value: {
 				search: "?test=123&redirect=https://somewhere.com",
+				pathname: "/",
 			},
 		});
 		await render(<Test />);
@@ -159,7 +163,8 @@ describe("useLogin()", () => {
 			value: {
 				origin: 'http://localhost',
 				href: 'http://localhost',
-				search: ''
+				search: '',
+				pathname: '/'
 			}
 		});
 		await render(<Test />);

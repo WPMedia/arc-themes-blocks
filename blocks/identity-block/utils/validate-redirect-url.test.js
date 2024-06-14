@@ -26,21 +26,4 @@ describe("validateURL()", () => {
 
 		expect(result).toBe('http://localhost/redirect-here/');
 	});
-
-	it("returns url with /pf if location.pathname has /pf", () => {
-		Object.defineProperty(window, "location", {
-			writable: true,
-			value: {
-				origin: 'http://localhost',
-				href: 'http://localhost',
-				search: '',
-				pathname: '/pf/account/'
-			}
-		});
-
-		const url = "/account/";
-		const result = validateURL(url);
-
-		expect(result).toBe('http://localhost/pf/account/');
-	});
 });

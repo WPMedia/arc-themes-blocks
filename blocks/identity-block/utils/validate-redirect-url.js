@@ -9,7 +9,7 @@ const validateURL = (url) => {
 
 	const urlLocation = new URL(url);
 
-	if (urlLocation === window.location.origin) {
+	if (urlLocation.origin === window.location.origin) {
 		return url;
 	}
 

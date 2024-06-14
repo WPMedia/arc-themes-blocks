@@ -6,7 +6,7 @@ const validateURL = (url) => {
 	if (valid) {
 		// handling preview with PB. /p/ replace is to handle double validations appending an exta /pf.
 		if (window.location.pathname.includes('/pf/')) {
-			return `${window.location.origin}/pf${url.replace('/p/', '/')}`;
+			return `${window.location.origin}/pf${url.replace('/pf/', '/')}`;
 		}
 
 		return `${window.location.origin}${url}`;

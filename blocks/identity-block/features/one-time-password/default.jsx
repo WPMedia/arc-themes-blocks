@@ -78,7 +78,7 @@ const OneTimePasswordLogin = ({ customFields }) => {
 					type="button"
 					onClick={() => {
 						params.delete(OTA_NONCE, otaNonce);
-						const newUrl = `${url.origin}${url.contextPath}?${params.toString()}`;
+						const newUrl = `${url.origin}${url.pathname}?${params.toString()}`;
 						window.location.href = newUrl;
 					}}
 				>

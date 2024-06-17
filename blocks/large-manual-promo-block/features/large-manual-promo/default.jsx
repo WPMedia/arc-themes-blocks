@@ -5,14 +5,15 @@ import { useComponentContext, useFusionContext } from "fusion:context";
 import { useContent, useEditableContent } from "fusion:content";
 import getProperties from "fusion:properties";
 import {
-	getFocalFromANS,
 	Conditional,
-	Image,
-	isServerSide,
 	formatURL,
+	getFocalFromANS,
+	getManualImageID,
 	Grid,
 	Heading,
 	HeadingSection,
+	Image,
+	isServerSide,
 	LazyLoad,
 	Link,
 	MediaItem,
@@ -59,13 +60,13 @@ const LargeManualPromo = ({ customFields }) => {
 	const shouldLazyLoad = lazyLoad && !isAdmin;
 
 	const resizedImage = imageId && imageAuth && imageAuth !== "{}" && imageURL?.includes(imageId);
-
+	const manualImageId = getManualImageID(imageURL, resizedImage);
 	let resizedAuth = useContent(
 		resizedImage || !imageURL
 			? {}
 			: {
 				source: "signing-service",
-				query: { id: imageURL },
+				query: { id: manualImageId || imageURL },
 			}
 	);
 	if (imageAuth && !resizedAuth) {
@@ -79,7 +80,7 @@ const LargeManualPromo = ({ customFields }) => {
 		return null;
 	}
 	const ansImage = {
-		_id: resizedImage ? imageId : "",
+		_id: resizedImage ? imageId : manualImageId,
 		url: imageURL,
 		auth: resizedAuth,
 		focal_point: imageFocalPoint ? JSON.parse(imageFocalPoint) : undefined

@@ -13,6 +13,7 @@ import {
 	formatURL,
 	getFocalFromANS,
 	getImageFromANS,
+	getManualImageID,
 	getPromoType,
 	Heading,
 	HeadingSection,
@@ -142,10 +143,11 @@ const MediumPromo = ({ customFields }) => {
 		imageOverrideAuth &&
 		imageOverrideAuth !== "{}" &&
 		imageOverrideURL?.includes(imageOverrideId);
+	const manualImageId = getManualImageID(imageOverrideURL, resizedImage);
 	let resizedAuth = useContent(
 		resizedImage || !imageOverrideURL
 			? {}
-			: { source: "signing-service", query: { id: imageOverrideURL } }
+			: { source: "signing-service", query: { id: manualImageId || imageOverrideURL } }
 	);
 	if (imageOverrideAuth && !resizedAuth) {
 		resizedAuth = JSON.parse(imageOverrideAuth);
@@ -185,7 +187,7 @@ const MediumPromo = ({ customFields }) => {
 			? {
 					ansImage: imageOverrideURL
 						? {
-								_id: resizedImage ? imageOverrideId : "",
+								_id: resizedImage ? imageOverrideId : manualImageId,
 								url: imageOverrideURL,
 								auth: resizedAuth || {},
 						  }

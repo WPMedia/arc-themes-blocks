@@ -62,6 +62,7 @@ const AuthorImage = ({ image, altText = "" }) => {
 const Presentation = ({ author = {}, authorProfileLink }) => {
 	const phrases = usePhrases();
 	const supportedSocials = Object.keys(socialIcons);
+
 	const socials = Object.entries(author)
 		.filter(([key, value]) => supportedSocials.includes(key) && value)
 		.map(([key]) => key);

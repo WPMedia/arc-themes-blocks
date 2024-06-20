@@ -77,7 +77,7 @@ function useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError = () => {}
 				}
 			});
 		}
-	}, [config.googleClientId, Identity, isGoogleLoaded, isOIDC, loginByOIDC, redirectURL, socialSignOnIn ]);
+	}, [config.googleClientId, Identity, isGoogleLoaded, isOIDC, loginByOIDC, redirectURL, socialSignOnIn]);
 
 	useEffect(() => {
 		const initializeFacebook = async () => {

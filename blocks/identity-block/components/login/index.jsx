@@ -15,30 +15,31 @@ const useLogin = ({
 
 	const { Identity } = useIdentity();
 	const validatedRedirectURL = validateURL(redirectURL);
-	const [redirectToURL, setRedirectToURL] = useState(validatedRedirectURL);
+	const [currentRedirectToURL, setCurrentRedirectToURL] = useState(validatedRedirectURL);
 	const [redirectQueryParam, setRedirectQueryParam] = useState(null);
 	const [isAppleAuthSuccess, setIsAppleAuthSuccess] = useState(false);
 	const { loginByOIDC } = useOIDCLogin();
 
-	useEffect(()=>{
+
+	useEffect(() => {
 		const askForloginWithApple = async (code) => {
 			await Identity.appleSignOn(code);
 			const isLoggedIn = await Identity.isLoggedIn();
-			
-			if(isLoggedIn){
+
+			if (isLoggedIn) {
 				setIsAppleAuthSuccess(true);
 			}
 		};
 
-		if(Identity && appleCode){
+		if (Identity && appleCode) {
 			askForloginWithApple(appleCode);
 		}
-	},[appleCode, Identity]);
+	}, [appleCode, Identity]);
 
 	useEffect(() => {
-		if (window?.location?.search) {
-			const searchParams = new URLSearchParams(window.location.search.substring(1));
+		const searchParams = new URLSearchParams(window.location.search.substring(1));
 
+		if (window?.location?.search) {
 			// redirectURL could have additional params
 			const params = ["paymentMethodID"];
 			const aditionalParams = params.filter((p) => {
@@ -53,11 +54,19 @@ const useLogin = ({
 		}
 
 		if (redirectToPreviousPage && document?.referrer) {
-			const redirectUrl = new URL(document.referrer);
+			const redirectUrlLocation = new URL(document.referrer);
 
-			setRedirectToURL(`${redirectUrl.pathname}${redirectUrl.search}`);
+			if (searchParams.has('reset_password')) {
+				setCurrentRedirectToURL(`${redirectURL}${redirectUrlLocation.search}`);
+			} else {
+				const newRedirectUrl = redirectUrlLocation.pathname.includes('/pagebuilder/')
+					? redirectURL
+					: `${redirectUrlLocation.pathname}${redirectUrlLocation.search}`;
+
+				setCurrentRedirectToURL(newRedirectUrl);
+			}
 		}
-	}, [redirectQueryParam, redirectToPreviousPage]);
+	}, [redirectQueryParam, redirectToPreviousPage, redirectURL]);
 
 	useEffect(() => {
 		const getConfig = async () => {
@@ -89,7 +98,7 @@ const useLogin = ({
 	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin, loginByOIDC, isOIDC, isAppleAuthSuccess]);
 
 	return {
-		loginRedirect: redirectQueryParam || redirectToURL,
+		loginRedirect: redirectQueryParam || currentRedirectToURL,
 	};
 };
 

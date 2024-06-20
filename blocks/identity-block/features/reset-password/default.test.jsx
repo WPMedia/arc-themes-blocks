@@ -73,6 +73,7 @@ describe("Identity Password Reset Feature", () => {
 		}));
 		Object.defineProperty(window, "location", {
 			value: {
+				origin: "http://localhost",
 				...window.location,
 				assign: assignMock,
 			},

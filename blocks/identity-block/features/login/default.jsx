@@ -29,11 +29,21 @@ export function definedMessageByCode(code) {
 }
 
 const Login = ({ customFields }) => {
-	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC, termsAndPrivacyURL } =
-		customFields;
+	const {
+		redirectURL,
+		redirectToPreviousPage,
+		loggedInPageLocation,
+		OIDC,
+		termsAndPrivacyURL,
+	} = customFields;
 
-	const urlString = window.location.href;
-	const url = new URL(urlString);
+	let urlString = '';
+	let url = '';
+
+	if (window?.location?.href) {
+		urlString = window.location.href;
+		url = new URL(urlString);
+	}
 
 	const { isAdmin, arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);

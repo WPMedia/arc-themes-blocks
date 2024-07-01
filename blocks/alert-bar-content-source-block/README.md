@@ -1,5 +1,4 @@
 # `@wpmedia/collections-content-source-block`
-
 This is the content source that feeds the `alert-bar-block`. While the alert bar itself will refresh 30 seconds by default, this content source will refresh the cached results every two minutes. This is to not overwhelm the content API with simultaneous refreshes for any less intervals.
 
 ## Acceptance Criteria

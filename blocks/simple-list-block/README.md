@@ -1,5 +1,4 @@
 # `@wpmedia/simple-list-block`
-
 _Fusion News Theme Simple List block is a dynamically-sized list with items of a title and image. The list itself also has a title._
 
 ## Acceptance Criteria

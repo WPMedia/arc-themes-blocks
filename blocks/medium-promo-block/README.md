@@ -1,5 +1,4 @@
 # `@wpmedia/medium-promo-block`
-
 _Block containing a medium promo component. Please provide a 1-2 sentence description of what the block is and what it does._
 
 ## Acceptance Criteria

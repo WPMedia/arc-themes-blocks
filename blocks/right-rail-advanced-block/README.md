@@ -1,5 +1,4 @@
 # `@wpmedia/right-rail-advanced-block`
-
 _Please provide a 1-2 sentence description of what the block is and what it does._
 
 ## Acceptance Criteria

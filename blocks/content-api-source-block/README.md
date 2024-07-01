@@ -1,5 +1,4 @@
 # `@wpmedia/content-api-source-block`
-
 Content source block for Content API queries, used for retrieving stories from the content API. _Please provide a 1-2 sentence description of what the block is and what it does._
 
 ## Acceptance Criteria

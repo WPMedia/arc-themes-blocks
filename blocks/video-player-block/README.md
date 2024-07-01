@@ -1,5 +1,4 @@
 # `@wpmedia/video-player-block`
-
 _Fusion News Theme video player block. Provides a feature to play videos._
 
 ## Acceptance Criteria

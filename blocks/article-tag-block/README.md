@@ -1,5 +1,4 @@
 # `@wpmedia/article-tag-block`
-
 _Fusion News Article Tags block_
 
 ## Acceptance Criteria

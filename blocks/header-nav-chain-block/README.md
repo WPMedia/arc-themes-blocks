@@ -1,5 +1,4 @@
 # `@wpmedia/header-nav-chain-block`
-
 This block is intended to be used as the header navigation chain block.
 
 ## Acceptance Criteria

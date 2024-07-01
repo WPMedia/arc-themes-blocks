@@ -1,5 +1,4 @@
 # `@wpmedia/header-nav-block`
-
 _Block containing our News Theme nav for the header. Please provide a 1-2 sentence description of what the block is and what it does._
 
 ## Acceptance Criteria

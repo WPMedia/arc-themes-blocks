@@ -1,5 +1,4 @@
 # `@wpmedia/story-feed-query-content-source-block`
-
 _Content source block for story feed queries by Elasticsearch queries. Please provide a 1-2 sentence description of what the block is and what it does._
 
 // TODO: add badge for passing/failing tests

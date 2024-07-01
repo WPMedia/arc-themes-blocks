@@ -199,10 +199,6 @@ const SampleOutputType = ({
 				<CssLinks />
 				<Libs />
 				<script
-					async
-					src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CElement.prototype.prepend%2CElement.prototype.remove%2CArray.prototype.find%2CArray.prototype.includes"
-				/>
-				<script
 					data-integration="inlineScripts"
 					dangerouslySetInnerHTML={{ __html: inlineScripts }}
 				/>

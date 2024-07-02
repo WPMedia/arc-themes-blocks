@@ -1,7 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import SocialSignOn from "./index";
+import '@testing-library/jest-dom';
 import { useIdentity, usePhrases } from "@wpmedia/arc-themes-components";
+import SocialSignOn from "./index";
 import { GoogleSignInProvider } from "./utils/googleContext";
 
 jest.mock("@wpmedia/arc-themes-components");
@@ -58,14 +59,14 @@ describe("Identity Social Login Component", () => {
 				),
 		}));
 
-		const { container } = render(
+		render(
 			<GoogleSignInProvider>
-				<SocialSignOn onError={() => null} redirectURL="#" />
+				<SocialSignOn onError={() => null} redirectURL="#" customButtons={false}/>
 			</GoogleSignInProvider>,
 		);
 
-		expect(container.querySelector("#google-sign-in-button")).not.toBeNull();
-		expect(container.querySelector(".fb-login-button")).toBeNull();
+		expect(screen.getByTestId('google-sign-in-button')).toBeInTheDocument();
+		expect(screen.queryByTestId('fb-login-button')).not.toBeInTheDocument();
 	});
 
 	it("renders only Facebook button", () => {
@@ -82,14 +83,14 @@ describe("Identity Social Login Component", () => {
 			},
 		}));
 
-		const { container } = render(
+		render(
 			<GoogleSignInProvider>
 				<SocialSignOn onError={() => null} redirectURL="#" />
 			</GoogleSignInProvider>,
 		);
 
-		expect(container.querySelector("#google-sign-in-button")).toBeNull();
-		expect(container.querySelector(".fb-login-button")).not.toBeNull();
+		expect(screen.getByTestId('fb-login-button')).toBeInTheDocument();
+		expect(screen.queryByTestId('google-sign-in-button')).not.toBeInTheDocument();
 	});
 
 	it("renders", () => {
@@ -113,14 +114,14 @@ describe("Identity Social Login Component", () => {
 			},
 		}));
 
-		const { container } = render(
+		render(
 			<GoogleSignInProvider>
 				<SocialSignOn onError={() => null} redirectURL="#" />
 			</GoogleSignInProvider>,
 		);
 
-		expect(container.querySelector("#google-sign-in-button")).not.toBeNull();
-		expect(container.querySelector(".fb-login-button")).not.toBeNull();
+		expect(screen.getByTestId('fb-login-button')).toBeInTheDocument();
+		expect(screen.getByTestId('google-sign-in-button')).toBeInTheDocument();
 	});
 
 	it("calls getConfig if the options are missing", () => {

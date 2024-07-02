@@ -20,7 +20,7 @@ function GoogleSignIn({ customButtons, socialSignOnIn, className }) {
 						// eslint-disable-next-line
 						alert(googleNotification);
 						// Remove cookie works in Safari
-						document.cookie =  `g_state=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+						document.cookie = `g_state=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
 						window.google.accounts.id.prompt();
 					}
 				}),
@@ -44,7 +44,11 @@ function GoogleSignIn({ customButtons, socialSignOnIn, className }) {
 			</Button>
 		);
 	}
-	return <div id="google-sign-in-button" />;
+	return (
+		<div data-testid="google-sign-in-button">
+			<div id="google-sign-in-button" />
+		</div>
+	);
 }
 
 export default GoogleSignIn;

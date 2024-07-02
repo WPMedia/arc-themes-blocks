@@ -26,15 +26,17 @@ function SocialSignOnEditableFieldContainer({
 						if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
 							// https://developers.google.com/identity/gsi/web/reference/js-reference
 							// https://developers.google.com/identity/gsi/web/guides/features#exponential_cooldown
+							// eslint-disable-next-line
 							alert(googleNotification);
-							document.cookie =  `g_state=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT`; //Works in Safari
+							// Remove cookie works in Safari
+							document.cookie =  `g_state=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
 							window.google.accounts.id.prompt();
 						}
 					}),
 				);
 			setTimeout(() => attachEventListener(), 0);
 		}
-	}, [type, isConnected]);
+	}, [type, isConnected, googleNotification]);
 
 	useEffect(() => {
 		if (type === "Facebook" && !isConnected) {
@@ -55,7 +57,7 @@ function SocialSignOnEditableFieldContainer({
 			};
 			setTimeout(() => attachEventListener(), 0);
 		}
-	}, [type, isConnected]);
+	}, [type, isConnected, Identity]);
 
 	return (
 		<div className={`${blockClassName}__social-signOn-edit`}>

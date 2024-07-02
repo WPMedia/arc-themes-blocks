@@ -36,16 +36,18 @@ function FacebookSignIn({ customButtons, socialSignOnIn, className }) {
 	}
 
 	return (
-		<div
-			className="fb-login-button"
-			data-width="400"
-			data-size="large"
-			data-button-type={facebookTextType}
-			data-scope="public_profile,email"
-			data-auto-logout-link="false"
-			data-use-continue-as="true"
-			data-onlogin="window.onFacebookSignOn()"
-		/>
+		<div data-testid="fb-login-button">
+			<div
+				className="fb-login-button"
+				data-width="400"
+				data-size="large"
+				data-button-type={facebookTextType}
+				data-scope="public_profile,email"
+				data-auto-logout-link="false"
+				data-use-continue-as="true"
+				data-onlogin="window.onFacebookSignOn()"
+			/>
+		</div>
 	);
 }
 

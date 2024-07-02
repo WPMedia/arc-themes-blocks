@@ -134,6 +134,8 @@ describe("Identity One Time Password Request Form - Arc Block", () => {
 		delete window.location;
 		window.location = {
 			href: "http://localhost/onetimeaccess/?ota_nonce=123",
+			pathname: '/onetimeaccess/',
+			origin: "http://localhost",
 		};
 
 		useIdentity.mockImplementation(() => ({
@@ -147,7 +149,7 @@ describe("Identity One Time Password Request Form - Arc Block", () => {
 		render(<OneTimePassword customFields={customFields} />);
 		expect(window.location.href).toBe('http://localhost/onetimeaccess/?ota_nonce=123');
 
-		await waitFor(() => expect(window.location.href).toBe(`${customFields.loggedInPageLocation}`));
+		await waitFor(() => expect(window.location.href).toBe(`http://localhost${customFields.loggedInPageLocation}`));
 	});
 
 	it("Should fail when trying to redeem the nonce", async () => {

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
 import {
 	Input,
 	useIdentity,
@@ -23,8 +21,13 @@ const Login = ({ customFields }) => {
 	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC, termsAndPrivacyURL } =
 		customFields;
 
-	const urlString = window.location.href;
-	const url = new URL(urlString);
+	let urlString = '';
+	let url = '';
+
+	if (window?.location?.href) {
+		urlString = window.location.href;
+		url = new URL(urlString);
+	}
 
 	const { isAdmin } = useFusionContext();
 

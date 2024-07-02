@@ -24,7 +24,12 @@ export const ResetPasswordPresentation = ({ isAdmin = false, phrases, successAct
 
 	// eslint doesn't handle globalThis yet, but this is appropriate
 	/* global globalThis */
-	const nonce = new URLSearchParams(globalThis.location.search).get("nonce");
+
+	let nonce = '';
+
+	if (globalThis?.location?.search) {
+		nonce = new URLSearchParams(globalThis.location.search).get("nonce");
+	}
 
 	useEffect(() => {
 		const getConfig = async () => {
@@ -49,6 +54,26 @@ export const ResetPasswordPresentation = ({ isAdmin = false, phrases, successAct
 			getConfig();
 		}
 	}, [Identity]);
+
+	useEffect(() => {
+		if (submitted) {
+			const url = new URL(window.location.href);
+
+			url.searchParams.delete('nonce');
+
+			window.history.replaceState(window.history.state, '', url.href);
+		}
+	}, [submitted])
+
+	const getRedirectUrl = () => {
+		const redirect = validateURL(successActionURL);
+
+		if (redirect.includes('?')) {
+			return `${redirect}&reset_password=true`
+		}
+
+		return `${redirect}?reset_password=true`;
+	}
 
 	const {
 		pwLowercase = 0,
@@ -102,8 +127,7 @@ export const ResetPasswordPresentation = ({ isAdmin = false, phrases, successAct
 					headline={phrases.t("identity-block.reset-password-headline-submitted")}
 					buttonLabel={phrases.t("identity-block.reset-password-submit-submitted")}
 					onSubmit={() => {
-						const redirect = validateURL(successActionURL);
-						window.location.assign(redirect);
+						window.location.assign(getRedirectUrl());
 					}}
 				>
 					<Paragraph>{phrases.t("identity-block.reset-password-instruction-submitted")}</Paragraph>

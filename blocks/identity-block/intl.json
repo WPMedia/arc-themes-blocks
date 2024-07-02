@@ -2078,5 +2078,26 @@
 		"vi": "Tên người dùng",
 		"zh-CN": "用户名",
 		"zh-TW": "使用者名稱"
+	},
+	"identity-block.connect-identity": {
+		"en": "Connect"
+	},
+	"identity-block.connected-identity": {
+		"en": "Connected"
+	},
+	"identity-block.login-form-error.captcha-token-required": {
+		"en": "Captcha token required."
+	},
+	"identity-block.social-google-one-tap-notification": {
+		"en": "Sign-in prompt was suppressed by the user or dismissed. Please try again later or use another sign-in method."
+	},
+	"identity-block.social-signOn-unlink-error": {
+		"en": "At least one identity needs to remain on the user"
+	},
+	"identity-block.social-signOn-facebook-login": {
+		"en": "Sign in with Facebook"
+	},
+	"identity-block.social-signOn-facebook-signUp": {
+		"en": "Sign up with Facebook"
 	}
 }

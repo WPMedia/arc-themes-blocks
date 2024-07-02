@@ -1,9 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import { Button, Icon, usePhrases } from "@wpmedia/arc-themes-components";
 
 import { SIGN_UP } from "../constants";
 
-function FacebookSignIn({socialSignOnIn}) {
-	const facebookTextType = socialSignOnIn === SIGN_UP ? 'continue_with' : 'login_with';
+const FacebookIcon = <Icon name="Facebook" />;
+
+function FacebookSignIn({ customButtons, socialSignOnIn, className }) {
+	const phrases = usePhrases();
+	const facebookTextType = socialSignOnIn === SIGN_UP ? "continue_with" : "login_with";
+
+	useEffect(() => {
+		if (customButtons) {
+			document
+				.getElementById("facebook-btn")
+				.addEventListener("click", () => window.onFacebookSignOn());
+		}
+	}, [customButtons]);
+
+	if (customButtons) {
+		return (
+			<Button
+				id="facebook-btn"
+				variant="secondary-reverse"
+				iconLeft={FacebookIcon}
+				className={`${className}__Facebook`}
+			>
+				{socialSignOnIn !== SIGN_UP ? (
+					<span>{phrases.t("identity-block.social-signOn-facebook-login")}</span>
+				) : (
+					<span>{phrases.t("identity-block.social-signOn-facebook-signUp")}</span>
+				)}
+			</Button>
+		);
+	}
+
 	return (
 		<div
 			className="fb-login-button"

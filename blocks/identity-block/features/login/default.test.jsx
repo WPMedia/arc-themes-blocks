@@ -2,7 +2,8 @@ import React from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { useIdentity } from "@wpmedia/arc-themes-components";
 
-import Login, {definedMessageByCode}  from "./default";
+import Login  from "./default";
+import definedMessageByCode  from "../../utils/definedMessageByCode";
 
 const defaultCustomFields = {
 	redirectURL: "",

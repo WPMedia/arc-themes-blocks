@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
-import { Input, useIdentity } from "@wpmedia/arc-themes-components";
+import {
+	Input,
+	useIdentity,
+	usePhrases,
+	BotChallengeProtection,
+} from "@wpmedia/arc-themes-components";
 import EditableFieldPresentational from "../../../components/editable-form-input";
 import FormPasswordConfirm from "../../../components/form-password-confirm";
 import passwordValidationMessage from "../../../utils/password-validation-message";
 import validatePasswordPattern from "../../../utils/validate-password-pattern";
+import definedMessageByCode from "../../../utils/definedMessageByCode";
 
 function PasswordEditableFieldContainer({ blockClassName, email, hasPassword, setHasPassword }) {
+	const phrases = usePhrases();
+
 	const [error, setError] = useState(false);
 	const [passwordRequirements, setPasswordRequirements] = useState({});
 	const [configStatus, setConfigStatus] = useState("loading");
 
-	const { arcSite } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const [captchaToken, setCaptchaToken] = useState();
+	const [captchaError, setCaptchaError] = useState();
+	const [resetRecaptcha, setResetRecaptcha] = useState(true);
 
 	const { Identity } = useIdentity();
 
@@ -90,12 +95,25 @@ function PasswordEditableFieldContainer({ blockClassName, email, hasPassword, se
 				});
 		}
 
-		return Identity.signUp({ userName: email, credentials: newPassword }, { email })
+		return Identity.signUp(
+			{ userName: email, credentials: newPassword },
+			{ email },
+			undefined,
+			true,
+			captchaToken,
+		)
 			.then(() => {
 				setHasPassword(true);
 				setError(false);
 			})
-			.catch(() => setError(phrases.t("identity-block.sign-up-form-error")));
+			.catch((e) => {
+				setResetRecaptcha(!resetRecaptcha);
+				if (e?.code === "010122") {
+					setCaptchaError(phrases.t(definedMessageByCode(e.code)));
+				} else {
+					setError(phrases.t(definedMessageByCode(e.code)));
+				}
+			});
 	};
 
 	const handleCancelEdit = () => {
@@ -139,7 +157,7 @@ function PasswordEditableFieldContainer({ blockClassName, email, hasPassword, se
 							pwMinLength,
 							pwPwNumbers,
 							pwSpecialCharacters,
-							pwUppercase
+							pwUppercase,
 						)}
 						confirmLabel={phrases.t("identity-block.confirm-password")}
 						confirmValidationErrorMessage={phrases.t("identity-block.confirm-password-error")}
@@ -156,10 +174,20 @@ function PasswordEditableFieldContainer({ blockClassName, email, hasPassword, se
 						pwMinLength,
 						pwPwNumbers,
 						pwSpecialCharacters,
-						pwUppercase
+						pwUppercase,
 					)}
 					confirmLabel={phrases.t("identity-block.confirm-password")}
 					confirmValidationErrorMessage={phrases.t("identity-block.confirm-password-error")}
+				/>
+			)}
+			{!hasPassword && (
+				<BotChallengeProtection
+					challengeIn="signup"
+					setCaptchaToken={setCaptchaToken}
+					captchaError={captchaError}
+					error={error}
+					setCaptchaError={setCaptchaError}
+					resetRecaptcha={resetRecaptcha}
 				/>
 			)}
 		</EditableFieldPresentational>

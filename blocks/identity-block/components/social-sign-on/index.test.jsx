@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import SocialSignOn from "./index";
-import { useIdentity } from "@wpmedia/arc-themes-components";
+import { useIdentity, usePhrases } from "@wpmedia/arc-themes-components";
 import { GoogleSignInProvider } from "./utils/googleContext";
 
 jest.mock("@wpmedia/arc-themes-components");
@@ -20,13 +20,21 @@ describe("Identity Social Login Component", () => {
 				initializeFacebook: () => {},
 			},
 		}));
+		usePhrases.mockImplementation(() => ({
+			t: jest
+				.fn()
+				.mockReturnValue(
+					"Sign-in prompt was suppressed by the user or dismissed. Please try again later or use another sign-in method.",
+				),
+		}));
 		render(
 			<GoogleSignInProvider>
 				<SocialSignOn />
-			</GoogleSignInProvider>
+			</GoogleSignInProvider>,
 		);
 		// don't render any facebook stuff, only show wrapper
-		expect(screen.getByRole("generic")).not.toBeNull();
+		const genericElements = screen.getAllByRole("generic");
+		expect(genericElements.length).toBe(2);
 	});
 
 	it("renders only Google button", () => {
@@ -42,11 +50,18 @@ describe("Identity Social Login Component", () => {
 				initializeFacebook: () => {},
 			},
 		}));
+		usePhrases.mockImplementation(() => ({
+			t: jest
+				.fn()
+				.mockReturnValue(
+					"Sign-in prompt was suppressed by the user or dismissed. Please try again later or use another sign-in method.",
+				),
+		}));
 
 		const { container } = render(
 			<GoogleSignInProvider>
 				<SocialSignOn onError={() => null} redirectURL="#" />
-			</GoogleSignInProvider>
+			</GoogleSignInProvider>,
 		);
 
 		expect(container.querySelector("#google-sign-in-button")).not.toBeNull();
@@ -70,7 +85,7 @@ describe("Identity Social Login Component", () => {
 		const { container } = render(
 			<GoogleSignInProvider>
 				<SocialSignOn onError={() => null} redirectURL="#" />
-			</GoogleSignInProvider>
+			</GoogleSignInProvider>,
 		);
 
 		expect(container.querySelector("#google-sign-in-button")).toBeNull();
@@ -90,7 +105,7 @@ describe("Identity Social Login Component", () => {
 					Promise.resolve({
 						signinRecaptcha: false,
 						recaptchaSiteKey: "6LdXKVQcAAAAAO2tv3GdUbSK-1vcgujX6cP0IgF_",
-					})
+					}),
 				),
 				initFacebookLogin: () => {},
 				initializeFacebook: () => {},
@@ -101,7 +116,7 @@ describe("Identity Social Login Component", () => {
 		const { container } = render(
 			<GoogleSignInProvider>
 				<SocialSignOn onError={() => null} redirectURL="#" />
-			</GoogleSignInProvider>
+			</GoogleSignInProvider>,
 		);
 
 		expect(container.querySelector("#google-sign-in-button")).not.toBeNull();
@@ -124,7 +139,7 @@ describe("Identity Social Login Component", () => {
 		render(
 			<GoogleSignInProvider>
 				<SocialSignOn onError={() => null} redirectURL="#" />
-			</GoogleSignInProvider>
+			</GoogleSignInProvider>,
 		);
 
 		expect(getConfigMock).toHaveBeenCalled();
@@ -151,7 +166,7 @@ describe("Identity Social Login Component", () => {
 		render(
 			<GoogleSignInProvider>
 				<SocialSignOn onError={() => null} redirectURL="#" />
-			</GoogleSignInProvider>
+			</GoogleSignInProvider>,
 		);
 		window.onFacebookSignOn();
 		expect(facebookSignOnMock).toHaveBeenCalled();
@@ -177,11 +192,18 @@ describe("Identity Social Login Component", () => {
 				isLoggedIn: jest.fn(() => false),
 			},
 		}));
+		usePhrases.mockImplementation(() => ({
+			t: jest
+				.fn()
+				.mockReturnValue(
+					"Sign-in prompt was suppressed by the user or dismissed. Please try again later or use another sign-in method.",
+				),
+		}));
 
 		render(
 			<GoogleSignInProvider>
 				<SocialSignOn onError={onErrorMock} redirectURL="#" />
-			</GoogleSignInProvider>
+			</GoogleSignInProvider>,
 		);
 		window.onFacebookSignOn();
 		expect(onErrorMock).toHaveBeenCalled();

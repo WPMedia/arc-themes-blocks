@@ -55,7 +55,7 @@ function EditableFieldPresentational({
 				setIsEditable={setIsEditable}
 			>
 				<div>
-					{isEditable ? (
+					{(isEditable || formErrorText ) ? (
 						<>
 							{children}
 							{formErrorText ? (

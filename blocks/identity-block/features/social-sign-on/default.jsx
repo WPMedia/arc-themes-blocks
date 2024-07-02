@@ -18,6 +18,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 		OIDC,
 		socialSignOnIn,
 		hideDiv,
+		customButtons
 	} = customFields;
 
 	const checkAppleCodeExists = (url) => {
@@ -70,6 +71,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 					redirectURL={loginRedirect}
 					isOIDC={isOIDC}
 					socialSignOnIn={socialSignOnIn}
+					customButtons={customButtons}
 				/>
 			</GoogleSignInProvider>
 			{error ? (
@@ -117,6 +119,12 @@ SocialSignOnBlock.propTypes = {
 			defaultValue: false,
 			description:
 				"Used when we want to hide the ---OR--- divider",
+		}),
+		customButtons: PropTypes.bool.tag({
+			name: "Custom Facebook/Gooogle buttons",
+			defaultValue: true,
+			description:
+				"Render a custom Facebook/Google buttons or the ones provided by Facebook and Google.",
 		})
 	}),
 };

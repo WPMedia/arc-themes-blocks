@@ -8,36 +8,25 @@ import {
 	useIdentity,
 	Paragraph,
 	BotChallengeProtection,
+	usePhrases
 } from "@wpmedia/arc-themes-components";
 import HeadlinedSubmitForm from "../../components/headlined-submit-form";
 import useLogin from "../../components/login";
 import useOIDCLogin from "../../utils/useOIDCLogin";
 import validateURL from "../../utils/validate-redirect-url";
+import definedMessageByCode from "../../utils/definedMessageByCode";
 
 const BLOCK_CLASS_NAME = "b-login-form";
 
-const errorCodes = {
-	100015: "identity-block.login-form-error.account-is-disabled",
-	130001: "identity-block.login-form-error.captcha-token-invalid",
-	130051: "identity-block.login-form-error.unverified-email-address",
-	100013: "identity-block.login-form-error.max-devices",
-	0: "identity-block.login-form-error.invalid-email-password",
-};
-
-export function definedMessageByCode(code) {
-	return errorCodes[code] || errorCodes["0"];
-}
-
 const Login = ({ customFields }) => {
+	const phrases = usePhrases();
 	const { redirectURL, redirectToPreviousPage, loggedInPageLocation, OIDC, termsAndPrivacyURL } =
 		customFields;
 
 	const urlString = window.location.href;
 	const url = new URL(urlString);
 
-	const { isAdmin, arcSite } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const { isAdmin } = useFusionContext();
 
 	const isOIDC =
 		OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";

@@ -5,13 +5,13 @@ import GoogleSignIn from "./_children/GoogleSignIn";
 import AppleSignIn from "./_children/AppleSignIn";
 import useSocialSignIn from "./utils/useSocialSignIn";
 
-const SocialSignOn = ({ className, onError, redirectURL, isOIDC, socialSignOnIn }) => {
-	const { facebookAppId, googleClientId, appleTeamId, appleKeyId, appleUrlToReceiveAuthToken} = useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError);
+const SocialSignOn = ({ className, onError, redirectURL, isOIDC, socialSignOnIn, customButtons }) => {
+	const { facebookAppId, googleClientId, appleTeamId, appleKeyId, appleUrlToReceiveAuthToken} = useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError, customButtons);
 	return (
 		<section className={className}>
-			{googleClientId ? <GoogleSignIn onError={onError} redirectURL={redirectURL} socialSignOnIn={socialSignOnIn} className={className} /> : null}
-			{facebookAppId ? <FacebookSignIn socialSignOnIn={socialSignOnIn}/> : null}
-			{appleTeamId && appleKeyId && appleUrlToReceiveAuthToken ? <AppleSignIn socialSignOnIn={socialSignOnIn} className={className} /> : null}
+			{googleClientId ? <GoogleSignIn customButtons={customButtons} socialSignOnIn={socialSignOnIn} className={className} /> : null}
+			{facebookAppId ? <FacebookSignIn customButtons={customButtons} socialSignOnIn={socialSignOnIn} className={className} /> : null}
+			{appleTeamId && appleKeyId && appleUrlToReceiveAuthToken ? <AppleSignIn customButtons={customButtons} socialSignOnIn={socialSignOnIn} className={className} /> : null}
 		</section>
 	);
 };

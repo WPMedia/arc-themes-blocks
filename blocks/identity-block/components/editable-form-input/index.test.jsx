@@ -1,15 +1,19 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
-
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import '@testing-library/jest-dom';
 import EditableFormInputField, { ConditionalFormContainer } from ".";
 
 describe("Editable form input field", () => {
-	it("conditional form renders a form when show form elected", () => {
-		render(<ConditionalFormContainer showForm />);
+	it("conditional form renders a form when show form selected", () => {
+		render(
+			<ConditionalFormContainer showForm onSubmit={jest.fn()} setIsEditable={jest.fn()}>
+				<input name="testField" defaultValue="testValue" />{" "}
+			</ConditionalFormContainer>,
+		);
 		expect(screen.getByTestId("conditional-form")).not.toBeNull();
 	});
 
-	it("conditional form does not render a form when show form not elected", () => {
+	it("conditional form does not render a form when show form not selected", () => {
 		render(<ConditionalFormContainer showForm={false} />);
 		expect(screen.queryByTestId("conditional-form")).toBeNull();
 	});
@@ -23,7 +27,7 @@ describe("Editable form input field", () => {
 				onSubmit={() => {}}
 			>
 				<p id="test-child">Test child</p>
-			</EditableFormInputField>
+			</EditableFormInputField>,
 		);
 		expect(screen.getByText("initial value")).not.toBeNull();
 		expect(screen.getByText("edit text")).not.toBeNull();
@@ -40,7 +44,7 @@ describe("Editable form input field", () => {
 				formErrorText="Error Text"
 			>
 				<p id="test-child">Test child</p>
-			</EditableFormInputField>
+			</EditableFormInputField>,
 		);
 
 		expect(screen.getByText("Error Text")).not.toBeNull();
@@ -55,7 +59,7 @@ describe("Editable form input field", () => {
 				onSubmit={() => {}}
 			>
 				<p id="test-child">Test child</p>
-			</EditableFormInputField>
+			</EditableFormInputField>,
 		);
 
 		fireEvent.click(screen.getByRole("button"));
@@ -69,7 +73,7 @@ describe("Editable form input field", () => {
 		render(
 			<ConditionalFormContainer onSubmit={callback} setIsEditable={() => {}} showForm>
 				<input name="inputField" type="email" defaultValue="invalid" />
-			</ConditionalFormContainer>
+			</ConditionalFormContainer>,
 		);
 
 		fireEvent.submit(screen.getByTestId("conditional-form"));
@@ -83,7 +87,7 @@ describe("Editable form input field", () => {
 		render(
 			<ConditionalFormContainer onSubmit={callback} showForm setIsEditable={() => {}}>
 				<input name="inputField" type="email" defaultValue="valid@email.com" />
-			</ConditionalFormContainer>
+			</ConditionalFormContainer>,
 		);
 
 		fireEvent.submit(screen.getByTestId("conditional-form"));
@@ -103,7 +107,7 @@ describe("Editable form input field", () => {
 				formErrorText="Error"
 			>
 				<input name="inputField" type="email" defaultValue="invalid" />
-			</EditableFormInputField>
+			</EditableFormInputField>,
 		);
 
 		fireEvent.click(screen.getByText("cancel change"));
@@ -115,7 +119,7 @@ describe("Editable form input field", () => {
 		render(
 			<EditableFormInputField formErrorText="Error">
 				<input name="inputField" type="email" defaultValue="invalid" />
-			</EditableFormInputField>
+			</EditableFormInputField>,
 		);
 
 		expect(screen.getByText("Error")).not.toBeNull();

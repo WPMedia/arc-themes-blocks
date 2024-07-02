@@ -35,7 +35,7 @@ describe("Identity Social Login Component", () => {
 		);
 		// don't render any facebook stuff, only show wrapper
 		const genericElements = screen.getAllByRole("generic");
-		expect(genericElements.length).toBe(2);
+		expect(genericElements.length).toBe(1);
 	});
 
 	it("renders only Google button", () => {

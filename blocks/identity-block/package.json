@@ -30,8 +30,12 @@
   },
   "dependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@arc-publishing/sdk-identity": "^1.79.0",
+    "@arc-publishing/sdk-identity": "^1.88.0",
     "react-google-recaptcha": "^3.1.0",
     "react-google-recaptcha-v3": "^1.10.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/react": "^16.0.0"
   }
 }

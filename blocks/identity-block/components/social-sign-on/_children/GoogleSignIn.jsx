@@ -14,7 +14,7 @@ function GoogleSignIn({ customButtons, socialSignOnIn, className }) {
 		if (customButtons) {
 			document.getElementById("custom-google-signin-btn").addEventListener("click", () =>
 				window.google.accounts.id.prompt((notification) => {
-					if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+					if (notification.isSkippedMoment()) {
 						// https://developers.google.com/identity/gsi/web/reference/js-reference
 						// https://developers.google.com/identity/gsi/web/guides/features#exponential_cooldown
 						// eslint-disable-next-line

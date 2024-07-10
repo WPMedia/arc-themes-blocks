@@ -61,7 +61,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 
 	return (
 		<Stack className={BLOCK_CLASS_NAME} data-testid="social-sign-on-container">
-				{!hideDiv ? <div className={`${BLOCK_CLASS_NAME}__dividerWithText`}>{phrases.t("identity-block.or")}</div> : null}
+			{!hideDiv ? <div className={`${BLOCK_CLASS_NAME}__dividerWithText`}>{phrases.t("identity-block.or")}</div> : null}
 			<GoogleSignInProvider>
 				<SocialSignOn
 					className={`${BLOCK_CLASS_NAME}__button-container`}
@@ -121,10 +121,10 @@ SocialSignOnBlock.propTypes = {
 				"Used when we want to hide the ---OR--- divider",
 		}),
 		customButtons: PropTypes.bool.tag({
-			name: "Custom Facebook/Gooogle buttons",
+			name: "Custom Facebook/Gooogle/Apple buttons",
 			defaultValue: true,
 			description:
-				"Render a custom Facebook/Google buttons or the ones provided by Facebook and Google.",
+				"Render a custom Facebook/Google/Apple buttons or the ones provided by Facebook, Google, and Apple.",
 		})
 	}),
 };

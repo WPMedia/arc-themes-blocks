@@ -5,10 +5,10 @@ import useSocialSignIn from "../../../components/social-sign-on/utils/useSocialS
 import SocialSignOnEditableFieldContainer from "./SocialSignOnEditableContainer";
 
 function removeHostname(url) {
-    const parsedUrl = new URL(url);
-    const urlWithoutHostname = parsedUrl.pathname + parsedUrl.search + parsedUrl.hash;
-    
-    return urlWithoutHostname;
+	const parsedUrl = new URL(url);
+	const urlWithoutHostname = parsedUrl.pathname + parsedUrl.search + parsedUrl.hash;
+
+	return urlWithoutHostname;
 }
 
 function SocialEditableSection({
@@ -28,8 +28,8 @@ function SocialEditableSection({
 	const currentUrl = window.location.href;
 	const newURL = removeHostname(currentUrl);
 
-	const { facebookAppId, googleClientId, appleTeamId, appleKeyId, appleUrlToReceiveAuthToken, updateIdentities:checkIdentities } =
-		useSocialSignIn(newURL, null, null, () => {}, true, false);
+	const { facebookAppId, googleClientId, appleTeamId, appleKeyId, appleUrlToReceiveAuthToken, updateIdentities: checkIdentities } =
+		useSocialSignIn(newURL, null, null, () => { }, true, false);
 
 	const GoogleIcon = <Icon name="GoogleColor" />;
 	const AppleIcon = <Icon name="Apple" width={21} height={24} viewBox="0 0 24 24" />;
@@ -41,7 +41,7 @@ function SocialEditableSection({
 
 	return (
 		<>
-			{googleClientId ? (
+			{googleClientId && (
 				<SocialSignOnEditableFieldContainer
 					blockClassName={blockClassName}
 					socialIcon={GoogleIcon}
@@ -50,8 +50,8 @@ function SocialEditableSection({
 					numIdentities={numIdentities}
 					onDisconnectFunction={unlinkGoogle}
 				/>
-			) : null}
-			{facebookAppId ? (
+			)}
+			{facebookAppId && (
 				<SocialSignOnEditableFieldContainer
 					blockClassName={blockClassName}
 					socialIcon={FacebookIcon}
@@ -61,8 +61,8 @@ function SocialEditableSection({
 					onDisconnectFunction={unlinkFacebook}
 					updateIdentities={updateIdentities}
 				/>
-			) : null}
-			{appleTeamId && appleKeyId && appleUrlToReceiveAuthToken ? (
+			)}
+			{appleTeamId && appleKeyId && appleUrlToReceiveAuthToken && (
 				<SocialSignOnEditableFieldContainer
 					blockClassName={blockClassName}
 					socialIcon={AppleIcon}
@@ -70,9 +70,9 @@ function SocialEditableSection({
 					isConnected={hasApple}
 					numIdentities={numIdentities}
 					onDisconnectFunction={unlinkApple}
-					onConnectFunction = {linkApple}
+					onConnectFunction={linkApple}
 				/>
-			) : null}
+			)}
 		</>
 	);
 }

@@ -51,6 +51,7 @@ function useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError = () => {}
 							loginByOIDC();
 						} else {
 							const validatedURL = validateURL(redirectURL);
+
 							window.location = validatedURL;
 						}
 					}),

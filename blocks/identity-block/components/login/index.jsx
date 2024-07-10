@@ -20,6 +20,16 @@ const useLogin = ({
 	const [isAppleAuthSuccess, setIsAppleAuthSuccess] = useState(false);
 	const { loginByOIDC } = useOIDCLogin();
 
+	const setRedirectUrl = (url) => {
+		setCurrentRedirectToURL(url);
+		localStorage.setItem('ArcXP_redirectUrl', url);
+	};
+
+	const getRedirectURL = () => {
+		const localStorageRedirectUrl = localStorage.getItem('ArcXP_redirectUrl');
+
+		return redirectQueryParam || localStorageRedirectUrl || currentRedirectToURL;
+	};
 
 	useEffect(() => {
 		const askForloginWithApple = async (code) => {
@@ -57,13 +67,15 @@ const useLogin = ({
 			const redirectUrlLocation = new URL(document.referrer);
 
 			if (searchParams.has('reset_password')) {
-				setCurrentRedirectToURL(`${redirectURL}${redirectUrlLocation.search}`);
+				const newRedirectUrl = `${redirectURL}${redirectUrlLocation.search}`;
+
+				setRedirectUrl(newRedirectUrl);
 			} else {
 				const newRedirectUrl = redirectUrlLocation.pathname.includes('/pagebuilder/')
 					? redirectURL
 					: `${redirectUrlLocation.pathname}${redirectUrlLocation.search}`;
 
-				setCurrentRedirectToURL(newRedirectUrl);
+				setRedirectUrl(newRedirectUrl);
 			}
 		}
 	}, [redirectQueryParam, redirectToPreviousPage, redirectURL]);
@@ -88,8 +100,11 @@ const useLogin = ({
 				if (isOIDC) {
 					loginByOIDC();
 				} else {
-					window.location = redirectQueryParam || validatedLoggedInPageLoc;
+					const localStorageRedirectUrl = localStorage.getItem('ArcXP_redirectUrl');
+
+					window.location = redirectQueryParam || localStorageRedirectUrl || validatedLoggedInPageLoc;
 				}
+				localStorage.removeItem('ArcXP_redirectUrl');
 			}
 		};
 		if (Identity && !isAdmin) {
@@ -98,7 +113,7 @@ const useLogin = ({
 	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin, loginByOIDC, isOIDC, isAppleAuthSuccess]);
 
 	return {
-		loginRedirect: redirectQueryParam || currentRedirectToURL,
+		loginRedirect: getRedirectURL(),
 	};
 };
 

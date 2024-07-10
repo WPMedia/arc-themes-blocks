@@ -6,11 +6,11 @@ import AppleSignIn from "./_children/AppleSignIn";
 import useSocialSignIn from "./utils/useSocialSignIn";
 
 const SocialSignOn = ({ className, onError, redirectURL, isOIDC, socialSignOnIn }) => {
-	const { facebookAppId, googleClientId, appleTeamId, appleKeyId, appleUrlToReceiveAuthToken} = useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError);
+	const { facebookAppId, googleClientId, appleTeamId, appleKeyId, appleUrlToReceiveAuthToken } = useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError);
 	return (
 		<section className={className}>
 			{googleClientId ? <GoogleSignIn onError={onError} redirectURL={redirectURL} socialSignOnIn={socialSignOnIn} className={className} /> : null}
-			{facebookAppId ? <FacebookSignIn socialSignOnIn={socialSignOnIn}/> : null}
+			{facebookAppId ? <FacebookSignIn socialSignOnIn={socialSignOnIn} /> : null}
 			{appleTeamId && appleKeyId && appleUrlToReceiveAuthToken ? <AppleSignIn socialSignOnIn={socialSignOnIn} className={className} /> : null}
 		</section>
 	);

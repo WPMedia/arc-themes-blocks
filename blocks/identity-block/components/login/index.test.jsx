@@ -172,4 +172,36 @@ describe("useLogin()", () => {
 		expect(window.location).toBe("/account/");
 		delete document.referrer;
 	});
+
+	it("should use redirectUrl from localStorage", async () => {
+		const referrerURL = "http://localhost/featured-articles/";
+		Object.defineProperty(document, "referrer", {
+			value: referrerURL,
+			configurable: true,
+		});
+		Object.defineProperty(window, "location", {
+			writable: true,
+			value: {
+				origin: 'http://localhost',
+				href: 'http://localhost',
+				search: '',
+				pathname: '/'
+			}
+		});
+
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			Identity: {
+				isLoggedIn: jest.fn(() => true),
+				getConfig: jest.fn(() => ({})),
+			},
+		}));
+
+		await render(<Test />);
+
+		fireEvent.click(screen.getByRole("button"));
+		expect(window.location).toBe("/featured-articles/");
+		expect(localStorage.getItem("ArcXP_redirectUrl")).toBeNull();
+		delete document.referrer;
+	});
 });

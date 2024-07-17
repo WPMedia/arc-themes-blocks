@@ -74,7 +74,7 @@ const useLogin = ({
 				const newRedirectUrl = redirectUrlLocation.pathname.includes('/pagebuilder/')
 					? redirectURL
 					: `${redirectUrlLocation.pathname}${redirectUrlLocation.search}`;
-
+				debugger
 				setRedirectUrl(newRedirectUrl);
 			}
 		}

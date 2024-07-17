@@ -118,7 +118,7 @@ describe("useLogin()", () => {
 			},
 		}));
 		await render(<Test />);
-		expect(window.location).toBe(`http://localhost${defaultParams.loggedInPageLocation}`);
+		expect(window.location).toBe(defaultParams.redirectURL);
 	});
 
 	it("replaces potentially unsafe URLs in query param", async () => {

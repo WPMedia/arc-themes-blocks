@@ -21,7 +21,8 @@ function useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError = () => {}
 					loginByOIDC();
 				} else {
 					const validatedURL = validateURL(redirectURL);
-					window.location = validatedURL;
+
+					window.location.assign(validatedURL);
 				}
 			} catch (e) {
 				onError();
@@ -52,7 +53,7 @@ function useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError = () => {}
 						} else {
 							const validatedURL = validateURL(redirectURL);
 
-							window.location = validatedURL;
+							window.location.assign(validatedURL);
 						}
 					}),
 				auto_select: true,

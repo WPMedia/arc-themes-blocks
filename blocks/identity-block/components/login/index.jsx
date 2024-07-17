@@ -101,8 +101,9 @@ const useLogin = ({
 					loginByOIDC();
 				} else {
 					const localStorageRedirectUrl = localStorage.getItem('ArcXP_redirectUrl');
+					const newRedirectUrl = redirectQueryParam || localStorageRedirectUrl || validatedLoggedInPageLoc;
 
-					window.location = redirectQueryParam || localStorageRedirectUrl || validatedLoggedInPageLoc;
+					window.location.assign(newRedirectUrl);
 				}
 				localStorage.removeItem('ArcXP_redirectUrl');
 			}

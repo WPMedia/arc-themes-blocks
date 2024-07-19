@@ -53,7 +53,7 @@ function useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError = () => {}
 						} else {
 							const validatedURL = validateURL(redirectURL);
 
-							window.location.hred = validatedURL;
+							window.location = validatedURL;
 						}
 					}),
 				auto_select: true,

@@ -33,7 +33,6 @@ const Test = (props) => {
 };
 
 const windowLocationValues = {
-	assign: jest.fn((url) => { window.location = url }),
 	origin: 'http://localhost',
 	href: 'http://localhost',
 	search: '',
@@ -124,7 +123,7 @@ describe("useLogin()", () => {
 		}));
 		await render(<Test />);
 
-		expect(window.location).toBe(defaultParams.redirectURL);
+		expect(window.location).toBe(`http://localhost${defaultParams.redirectURL}`);
 	});
 
 	it("replaces potentially unsafe URLs in query param", async () => {
@@ -141,21 +140,23 @@ describe("useLogin()", () => {
 		expect(window.location).toBe("/");
 	});
 
-	it("replaces potentially unsafe URLs in redirectURL parameter", async () => {
-		await render(<Test redirectURL="https://somewhere.com" />);
+	it("replaces potentially unsafe URLs in query param", async () => {
+		Object.defineProperty(window, "location", {
+			writable: true,
+			value: {
+				...windowLocationValues,
+				search: "",
+				pathname: "/",
+			},
+		});
+		await render(<Test loggedInPageLocation="https://somewhere.com" />);
 		fireEvent.click(screen.getByRole("button"));
 		expect(window.location).toBe("/");
 	});
 
-	it("replaces potentially unsafe URLs in loggedInPageLocation parameter", async () => {
-		useIdentity.mockImplementation(() => ({
-			isInitialized: true,
-			Identity: {
-				isLoggedIn: jest.fn(() => true),
-				getConfig: jest.fn(() => ({})),
-			},
-		}));
-		await render(<Test loggedInPageLocation="https://somewhere.com" />);
+	it("replaces potentially unsafe URLs in redirectURL parameter", async () => {
+		await render(<Test redirectURL="https://somewhere.com" />);
+		fireEvent.click(screen.getByRole("button"));
 		expect(window.location).toBe("/");
 	});
 
@@ -181,38 +182,37 @@ describe("useLogin()", () => {
 		delete document.referrer;
 	});
 
-	// it("should use redirectUrl from localStorage", async () => {
-	// 	const referrerURL = "http://localhost/featured-articles/";
-	// 	Object.defineProperty(document, "referrer", {
-	// 		value: referrerURL,
-	// 		configurable: true,
-	// 	});
-	// 	Object.defineProperty(window, "location", {
-	// 		writable: true,
-	// 		value: {
-	// 			...windowLocationValues,
-	// 			origin: 'http://localhost',
-	// 			href: 'http://localhost',
-	// 			search: '',
-	// 			pathname: '/'
-	// 		}
-	// 	});
+	it("should use redirectUrl from sessionStorage", async () => {
+		const referrerURL = "http://localhost/featured-articles/";
+		Object.defineProperty(document, "referrer", {
+			value: referrerURL,
+			configurable: true,
+		});
+		Object.defineProperty(window, "location", {
+			writable: true,
+			value: {
+				...windowLocationValues,
+				origin: 'http://localhost',
+				href: 'http://localhost',
+				search: '',
+				pathname: '/'
+			}
+		});
 
-	// 	useIdentity.mockImplementation(() => ({
-	// 		isInitialized: true,
-	// 		Identity: {
-	// 			isLoggedIn: jest.fn(() => true),
-	// 			getConfig: jest.fn(() => ({})),
-	// 		},
-	// 	}));
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			Identity: {
+				isLoggedIn: jest.fn(() => true),
+				getConfig: jest.fn(() => ({})),
+			},
+		}));
 
-	// 	await render(<Test />);
+		await render(<Test />);
 
-	// 	expect(localStorage.getItem("ArcXP_redirectUrl")).toBe('http://localhost/featured-articles/');
+		expect(sessionStorage.getItem("ArcXP_redirectUrl")).toBe('/featured-articles/');
 
-	// 	fireEvent.click(screen.getByRole("button"));
-	// 	expect(window.location).toBe("/featured-articles/");
-	// 	expect(localStorage.getItem("ArcXP_redirectUrl")).toBeNull();
-	// 	delete document.referrer;
-	// });
+		fireEvent.click(screen.getByRole("button"));
+		expect(window.location).toBe("/featured-articles/");
+		delete document.referrer;
+	});
 });

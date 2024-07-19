@@ -148,7 +148,7 @@ const SignUp = ({ customFields, arcSite }) => {
 					captchaToken,
 				)
 					.then(() => {
-						window.location.assign(redirectURL);
+						window.location = redirectURL;
 					})
 					.catch((e) => {
 						setResetRecaptcha(!resetRecaptcha);

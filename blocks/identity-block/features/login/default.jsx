@@ -91,7 +91,7 @@ const Login = ({ customFields }) => {
 						} else {
 							const validatedURL = validateURL(loginRedirect);
 
-							window.location.assign(validatedURL);
+							window.location = validatedURL;
 						}
 					})
 					.catch((e) => {

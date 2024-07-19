@@ -13,6 +13,7 @@ const validateURL = (url) => {
 		return url;
 	}
 
+	sessionStorage.setItem("ArcXP_redirectUrl", "/");
 	return "/";
 };
 

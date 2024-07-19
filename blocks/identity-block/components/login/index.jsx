@@ -22,11 +22,11 @@ const useLogin = ({
 
 	const setRedirectUrl = (url) => {
 		setCurrentRedirectToURL(url);
-		localStorage.setItem('ArcXP_redirectUrl', url);
+		sessionStorage.setItem('ArcXP_redirectUrl', url);
 	};
 
 	const getRedirectURL = () => {
-		const localStorageRedirectUrl = localStorage.getItem('ArcXP_redirectUrl');
+		const localStorageRedirectUrl = sessionStorage.getItem('ArcXP_redirectUrl');
 
 		return redirectQueryParam || localStorageRedirectUrl || currentRedirectToURL;
 	};
@@ -100,12 +100,12 @@ const useLogin = ({
 				if (isOIDC) {
 					loginByOIDC();
 				} else {
-					const localStorageRedirectUrl = localStorage.getItem('ArcXP_redirectUrl');
-					const newRedirectUrl = redirectQueryParam || localStorageRedirectUrl || validatedLoggedInPageLoc;
+					const localStorageRedirectUrl = sessionStorage.getItem('ArcXP_redirectUrl');
+					const validatedLocalRedirectURL = validateURL(localStorageRedirectUrl);
+					const newRedirectUrl = redirectQueryParam || validatedLocalRedirectURL || validatedLoggedInPageLoc;
 
-					window.location.assign(newRedirectUrl);
+					window.location = newRedirectUrl;
 				}
-				localStorage.removeItem('ArcXP_redirectUrl');
 			}
 		};
 		if (Identity && !isAdmin) {

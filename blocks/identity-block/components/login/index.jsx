@@ -65,18 +65,17 @@ const useLogin = ({
 
 		if (redirectToPreviousPage && document?.referrer) {
 			const redirectUrlLocation = new URL(document.referrer);
+			let newRedirectUrl = redirectUrlLocation.pathname.includes('/pagebuilder/')
+				? redirectURL
+				: `${redirectUrlLocation.pathname}${redirectUrlLocation.search}`;
 
 			if (searchParams.has('reset_password')) {
-				const newRedirectUrl = `${redirectURL}${redirectUrlLocation.search}`;
-
-				setRedirectUrl(newRedirectUrl);
-			} else {
-				const newRedirectUrl = redirectUrlLocation.pathname.includes('/pagebuilder/')
-					? redirectURL
-					: `${redirectUrlLocation.pathname}${redirectUrlLocation.search}`;
+				newRedirectUrl = `${redirectURL}${redirectUrlLocation.search}`;
 
 				setRedirectUrl(newRedirectUrl);
 			}
+
+			setRedirectUrl(newRedirectUrl);
 		}
 	}, [redirectQueryParam, redirectToPreviousPage, redirectURL]);
 

@@ -182,6 +182,7 @@ function useSocialSignIn(
 		appleTeamId: config.teamId,
 		appleKeyId: config.keyId,
 		appleUrlToReceiveAuthToken: config.urlToReceiveAuthToken,
+		oidcClients: config.oidcClients,
 		updateIdentities,
 	};
 }

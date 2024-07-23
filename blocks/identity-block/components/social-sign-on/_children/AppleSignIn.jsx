@@ -5,24 +5,37 @@ import { SIGN_UP } from "../constants";
 
 const AppleIcon = <Icon name="Apple" width={21} height={24} viewBox="0 0 24 24" />;
 
-function AppleSignIn({ customButtons, socialSignOnIn, className }) {
+function AppleSignIn({ customButtons, socialSignOnIn, className, OidcClient }) {
 	const phrases = usePhrases();
 	const { Identity } = useIdentity();
 
+	const handleClick = () => {
+		if (OidcClient?.clientId) {
+			Identity.initiateOIDC(
+				OidcClient.clientId,
+				['name', 'email'],
+				true,
+				true
+			);
+		} else {
+			Identity.initAppleSignOn();
+		}
+	};
+
 	return (
-			<Button
-				id="apple-btn"
-				variant="secondary-reverse"
-				onClick={() => Identity.initAppleSignOn()}
-				iconLeft={AppleIcon}
-				className={`${className}__Apple ${customButtons ? `${className}__Apple__custom` : ''}`}
-			>
-				{socialSignOnIn !== SIGN_UP ? (
-					<span>{phrases.t("identity-block.social-signOn-apple-login")}</span>
-				) : (
-					<span>{phrases.t("identity-block.social-signOn-apple-signUp")}</span>
-				)}
-			</Button>
+		<Button
+			id="apple-btn"
+			variant="secondary-reverse"
+			onClick={handleClick}
+			iconLeft={AppleIcon}
+			className={`${className}__Apple ${customButtons ? `${className}__Apple__custom` : ''}`}
+		>
+			{socialSignOnIn !== SIGN_UP ? (
+				<span>{phrases.t("identity-block.social-signOn-apple-login")}</span>
+			) : (
+				<span>{phrases.t("identity-block.social-signOn-apple-signUp")}</span>
+			)}
+		</Button>
 	);
 }
 

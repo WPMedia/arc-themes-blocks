@@ -43,7 +43,6 @@ function AccountManagement({ customFields }) {
 		const checkLoggedInStatus = () =>
 			Identity.isLoggedIn().then((isLoggedIn) => {
 				if (!isLoggedIn) {
-
 					window.location = redirectURL;
 					return;
 				}

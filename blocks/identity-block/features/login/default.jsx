@@ -90,7 +90,6 @@ const Login = ({ customFields }) => {
 							loginByOIDC();
 						} else {
 							const validatedURL = validateURL(loginRedirect);
-
 							window.location = validatedURL;
 						}
 					})

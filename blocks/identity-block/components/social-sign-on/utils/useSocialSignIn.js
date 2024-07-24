@@ -21,7 +21,6 @@ function useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError = () => {}
 					loginByOIDC();
 				} else {
 					const validatedURL = validateURL(redirectURL);
-
 					window.location = validatedURL;
 				}
 			} catch (e) {
@@ -52,7 +51,6 @@ function useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError = () => {}
 							loginByOIDC();
 						} else {
 							const validatedURL = validateURL(redirectURL);
-
 							window.location = validatedURL;
 						}
 					}),

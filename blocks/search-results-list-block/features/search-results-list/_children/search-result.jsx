@@ -58,6 +58,9 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 	const imageParams =
 		content && ansImage
 			? {
+					...(!showHeadline && content?.headlines?.basic !== ""
+						? { alt: content?.headlines?.basic }
+						: {}),
 					ansImage,
 					aspectRatio: imageRatio,
 					resizedOptions: getFocalFromANS(ansImage),
@@ -73,10 +76,10 @@ const SearchResult = ({ arcSite, className, content, promoElements }) => {
 						},
 					],
 					width: 500,
-			  }
+				}
 			: {
 					src: fallbackImage,
-			  };
+				};
 
 	const displayDate = content?.display_date;
 	const formattedDate = Date.parse(displayDate)

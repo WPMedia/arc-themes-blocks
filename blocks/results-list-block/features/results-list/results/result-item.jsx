@@ -38,9 +38,9 @@ const ResultItem = React.memo(
 				showHeadline,
 				showImage,
 				showItemOverline,
-				loading
+				loading,
 			},
-			ref
+			ref,
 		) => {
 			const {
 				description: { basic: descriptionText } = {},
@@ -77,7 +77,7 @@ const ResultItem = React.memo(
 			}
 
 			/* Author Formatting */
-			const ansImage = getImageFromANS(element)
+			const ansImage = getImageFromANS(element);
 			const hasAuthors = showByline ? credits?.by?.some((author) => author?.name !== "") : null;
 			const contentHeading = showHeadline ? headlineText : null;
 			const formattedDate = Date.parse(displayDate)
@@ -105,7 +105,7 @@ const ResultItem = React.memo(
 				  }
 				: {
 						src: targetFallbackImage,
-						loading
+						loading,
 				  };
 			return showHeadline ||
 				showImage ||
@@ -126,10 +126,7 @@ const ResultItem = React.memo(
 								onClick={registerSuccessEvent}
 								assistiveHidden
 							>
-								<Image
-									alt={headlineText}
-									{ ...imageParams }
-								/>
+								<Image alt={headlineText} {...imageParams} />
 							</Conditional>
 						</MediaItem>
 					) : null}
@@ -170,8 +167,8 @@ const ResultItem = React.memo(
 					) : null}
 				</div>
 			) : null;
-		}
-	)
+		},
+	),
 );
 
 export default ResultItem;

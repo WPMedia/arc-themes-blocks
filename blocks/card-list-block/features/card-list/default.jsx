@@ -144,7 +144,12 @@ const CardListItems = (props) => {
 
 	const sourceContent = contentElements[offsetOverride];
 
-	const displayDate = localizeDateTime(sourceContent.display_date, dateTimeFormat, language, timeZone);
+	const displayDate = localizeDateTime(
+		sourceContent.display_date,
+		dateTimeFormat,
+		language,
+		timeZone,
+	);
 
 	/* Author Formatting */
 	const bylineNodes = formatAuthors(sourceContent?.credits?.by, phrases.t("global.and-text"));

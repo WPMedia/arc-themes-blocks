@@ -111,7 +111,7 @@ const SmallPromo = ({ customFields }) => {
 	let resizedAuth = useContent(
 		resizedImage || !imageOverrideURL
 			? {}
-			: { source: "signing-service", query: { id: manualImageId || imageOverrideURL } }
+			: { source: "signing-service", query: { id: manualImageId || imageOverrideURL } },
 	);
 	if (imageOverrideAuth && !resizedAuth) {
 		resizedAuth = JSON.parse(imageOverrideAuth);
@@ -131,8 +131,9 @@ const SmallPromo = ({ customFields }) => {
 
 	const { fallbackImage } = getProperties(arcSite);
 	const ansImage = getImageFromANS(content);
-	const imageParams = imageOverrideURL || ansImage
-		? {
+	const imageParams =
+		imageOverrideURL || ansImage
+			? {
 			ansImage: imageOverrideURL
 				? {
 						_id: resizedImage ? imageOverrideId : manualImageId,
@@ -146,10 +147,9 @@ const SmallPromo = ({ customFields }) => {
 			responsiveImages: [200, 400, 600, 800, 1200],
 			width: 600,
 		}
-		: { src: fallbackImage, };
+			: { src: fallbackImage };
 
-	const promoImage = showImage
-		? (
+	const promoImage = showImage ? (
 			<Conditional
 				className={`${BLOCK_CLASS_NAME}__img`}
 				component={Link}
@@ -171,8 +171,8 @@ const SmallPromo = ({ customFields }) => {
 			</Conditional>
 		) : null;
 
-	const promoHeading = showHeadline && headline
-		? (
+	const promoHeading =
+		showHeadline && headline ? (
 			<Heading>
 				<Conditional
 					component={Link}

@@ -272,7 +272,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	let resizedAuth = useContent(
 		resizedImage || !imageOverrideURL
 			? {}
-			: { source: "signing-service", query: { id: manualImageId || imageOverrideURL } }
+			: { source: "signing-service", query: { id: manualImageId || imageOverrideURL } },
 	);
 	if (imageOverrideAuth && !resizedAuth) {
 		resizedAuth = JSON.parse(imageOverrideAuth);
@@ -292,12 +292,10 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		fallbackImage,
 	} = getProperties(arcSite);
 
-	const displayDate = content?.display_date && Date.parse(content?.display_date) ? localizeDateTime(
-		new Date(content?.display_date),
-		dateTimeFormat,
-		language,
-		timeZone
-	) : "";
+	const displayDate =
+		content?.display_date && Date.parse(content?.display_date)
+			? localizeDateTime(new Date(content?.display_date), dateTimeFormat, language, timeZone)
+			: "";
 	const phrases = usePhrases();
 
 	const editableDescription = content?.description

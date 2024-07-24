@@ -57,17 +57,16 @@ const Small = (props) => {
 		.filter((classString) => classString)
 		.join(" ");
 
-	const promoImage = showImageSM
-		? (
-			<Conditional component={Link} condition={linkURL} href={formatURL(linkURL)} assistiveHidden>
-				<MediaItem>
-					<Image {...imageParams} />
-				</MediaItem>
-			</Conditional>
-		) : null;
+	const promoImage = showImageSM ? (
+		<Conditional component={Link} condition={linkURL} href={formatURL(linkURL)} assistiveHidden>
+			<MediaItem>
+				<Image {...imageParams} />
+			</MediaItem>
+		</Conditional>
+	) : null;
 
-	const promoHeading = showHeadlineSM && headline
-		? (
+	const promoHeading =
+		showHeadlineSM && headline ? (
 			<Heading>
 				<Conditional component={Link} condition={linkURL} href={formatURL(linkURL)}>
 					{headline}

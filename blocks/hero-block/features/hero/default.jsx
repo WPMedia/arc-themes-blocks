@@ -45,20 +45,16 @@ function Hero({ customFields }) {
 	const { arcSite } = useFusionContext();
 	const { searchableField } = useEditableContent();
 	const { fallbackImage, resizerURL } = getProperties(arcSite);
-	const imageId = imageDesktopURL
-		? getManualImageID(imageDesktopURL)
-		: desktopImgId;
+	const imageId = imageDesktopURL ? getManualImageID(imageDesktopURL) : desktopImgId;
 
-	const imageMobileId = imageMobileURL
-		? getManualImageID(imageMobileURL)
-		: imgMobileId;
+	const imageMobileId = imageMobileURL ? getManualImageID(imageMobileURL) : imgMobileId;
 	let desktopAuth = useContent(
 		!imageDesktopAuth && imageId
 			? {
 					source: "signing-service",
 					query: { id: imageId },
-			  }
-			: {}
+				}
+			: {},
 	);
 
 	if (!desktopAuth || (desktopAuth && !Object.keys(desktopAuth).length)) {
@@ -74,8 +70,8 @@ function Hero({ customFields }) {
 			? {
 					source: "signing-service",
 					query: { id: imageMobileId },
-			  }
-			: {}
+				}
+			: {},
 	);
 	if (mobileAuth?.hash) {
 		mobileAuth[RESIZER_TOKEN_VERSION] = mobileAuth.hash;

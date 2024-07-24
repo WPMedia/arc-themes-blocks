@@ -44,8 +44,8 @@ const ImageItem = ({
 			? {
 					source: "signing-service",
 					query: { id: imageId },
-			  }
-			: {}
+				}
+			: {},
 	);
 
 	const imageAuthTokenObj = {};

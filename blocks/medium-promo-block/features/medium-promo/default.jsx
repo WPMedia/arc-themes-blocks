@@ -147,7 +147,7 @@ const MediumPromo = ({ customFields }) => {
 	let resizedAuth = useContent(
 		resizedImage || !imageOverrideURL
 			? {}
-			: { source: "signing-service", query: { id: manualImageId || imageOverrideURL } }
+			: { source: "signing-service", query: { id: manualImageId || imageOverrideURL } },
 	);
 	if (imageOverrideAuth && !resizedAuth) {
 		resizedAuth = JSON.parse(imageOverrideAuth);

@@ -11,6 +11,7 @@ function AppleSignIn({ customButtons, socialSignOnIn, className, OidcClient }) {
 
 	const handleClick = () => {
 		if (OidcClient?.clientId) {
+			debugger;
 			Identity.initiateOIDC(
 				OidcClient.clientId,
 				['name', 'email'],

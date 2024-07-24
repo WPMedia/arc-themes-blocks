@@ -121,9 +121,7 @@ const Large = (props) => {
 					ansImage,
 					alt: element?.headlines?.basic || "",
 					aspectRatio: imageRatioLG,
-					resizedOptions: {
-						...getFocalFromANS(ansImage),
-					},
+					resizedOptions: getFocalFromANS(ansImage),
 					responsiveImages: [400, 600, 800, 1200],
 					width: 800,
 			  }

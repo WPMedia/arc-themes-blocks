@@ -143,9 +143,7 @@ const SimpleList = (props) => {
 								? {
 										ansImage: image,
 										aspectRatio: "3:2",
-										resizedOptions: {
-											...getFocalFromANS(image),
-										},
+										resizedOptions: getFocalFromANS(image),
 										responsiveImages: [274, 548, 1096],
 										width: 274,
 								  }

@@ -89,9 +89,7 @@ const ResultItem = React.memo(
 						ansImage,
 						aspectRatio: imageRatio,
 						loading,
-						resizedOptions: {
-							...getFocalFromANS(ansImage),
-						},
+						resizedOptions: getFocalFromANS(ansImage),
 						responsiveImages: [250, 500],	
 						sizes: [
 							{

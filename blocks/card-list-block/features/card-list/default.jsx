@@ -178,9 +178,7 @@ const CardListItems = (props) => {
 		? {
 				ansImage,
 				aspectRatio: "4:3",
-				resizedOptions: {
-					...getFocalFromANS(ansImage),
-				},
+				resizedOptions: getFocalFromANS(ansImage),
 				responsiveImages: [377, 754, 1508],
 				width: 377,
 			}
@@ -238,9 +236,7 @@ const CardListItems = (props) => {
 								? {
 										ansImage: itemAnsImage,
 										aspectRatio: "3:2",
-										resizedOptions: {
-											...getFocalFromANS(itemAnsImage),
-										},
+										resizedOptions: getFocalFromANS(itemAnsImage),
 										responsiveImages: [105, 210, 420],
 										width: 105,
 									}

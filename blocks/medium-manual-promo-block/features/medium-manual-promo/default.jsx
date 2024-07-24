@@ -78,9 +78,7 @@ const MediumManualPromo = ({ customFields }) => {
 				ansImage,
 				alt,
 				aspectRatio: imageRatio,
-				resizedOptions: {
-					...getFocalFromANS(ansImage)
-				},
+					resizedOptions: getFocalFromANS(ansImage),
 				responsiveImages: [200, 400, 600, 800, 1200],
 				width: 600,
 			}

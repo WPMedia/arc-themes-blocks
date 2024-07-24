@@ -42,9 +42,7 @@ const Small = (props) => {
 		? {
 				ansImage: ANSImage,
 				aspectRatio: imageRatioSM,
-				resizedOptions: {
-					...getFocalFromANS(ANSImage),
-				},
+				resizedOptions: getFocalFromANS(ansImage),
 				responsiveImages: [400, 600, 800, 1200],
 				width: 800,
 		  }

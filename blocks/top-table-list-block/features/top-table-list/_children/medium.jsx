@@ -81,9 +81,7 @@ const Medium = (props) => {
 		? {
 				ansImage: ANSImage,
 				aspectRatio: imageRatioMD,
-				resizedOptions: {
-					...getFocalFromANS(ANSImage),
-				},
+				resizedOptions: getFocalFromANS(ANSImage),
 				responsiveImages: [400, 600, 800, 1200],
 				width: 800,
 		  }

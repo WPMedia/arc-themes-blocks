@@ -108,9 +108,7 @@ const NumberedList = (props) => {
 										? {
 												ansImage: imageObj,
 												aspectRatio: "3:2",
-												resizedOptions: {
-													...getFocalFromANS(imageObj),
-												},
+												resizedOptions: getFocalFromANS(ansImage),
 												responsiveImages: [137, 274, 548],
 												width: 274,
 										  }

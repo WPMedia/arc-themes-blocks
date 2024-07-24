@@ -362,9 +362,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 						: ansImage,
 					alt: content?.headlines?.basic || "",
 					aspectRatio: imageRatio,
-					resizedOptions: {
-						...getFocalFromANS(ansImage),
-					},
+					resizedOptions: getFocalFromANS(ansImage),
 					responsiveImages: [400, 600, 800, 1200],
 					width: 377,
 			  }

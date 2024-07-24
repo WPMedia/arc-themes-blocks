@@ -86,11 +86,14 @@ const ResultItem = React.memo(
 			const url = websites[arcSite].website_url;
 			const imageParams = ansImage
 				? {
+						...(!showHeadline && element?.headlines?.basic !== ""
+							? { alt: element?.headlines?.basic }
+							: {}),
 						ansImage,
 						aspectRatio: imageRatio,
 						loading,
 						resizedOptions: getFocalFromANS(ansImage),
-						responsiveImages: [250, 500],	
+						responsiveImages: [250, 500],
 						sizes: [
 							{
 								isDefault: true,
@@ -102,11 +105,11 @@ const ResultItem = React.memo(
 							},
 						],
 						width: 500,
-				  }
+					}
 				: {
 						src: targetFallbackImage,
 						loading,
-				  };
+					};
 			return showHeadline ||
 				showImage ||
 				showDescription ||

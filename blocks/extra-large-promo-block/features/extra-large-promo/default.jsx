@@ -169,7 +169,7 @@ const ExtraLargePromo = ({ customFields }) => {
 				? {
 						feature: "extra-large-promo",
 						...itemContentConfig.contentConfigValues,
-				  }
+					}
 				: null,
 			filter: `{
 				_id
@@ -312,22 +312,22 @@ const ExtraLargePromo = ({ customFields }) => {
 		showImage &&
 		(imageOverrideURL || ansImage
 			? {
+					alt: content?.headlines?.basic || "",
 					ansImage: imageOverrideURL
 						? {
-							_id: resizedImage ? imageOverrideId : manualImageId,
-							url: imageOverrideURL,
-							auth: resizedAuth || {},
-						}
+								_id: resizedImage ? imageOverrideId : manualImageId,
+								url: imageOverrideURL,
+								auth: resizedAuth || {},
+							}
 						: ansImage,
-					alt: content?.headlines?.basic || "",
 					aspectRatio: imageRatio,
 					resizedOptions: getFocalFromANS(ansImage),
 					responsiveImages: [400, 600, 800, 1200],
 					width: 800,
-			  }
+				}
 			: {
 					src: fallbackImage,
-			  });
+				});
 	const videoOrGalleryContentType =
 		getType("video", content) ||
 		getType("gallery", content) ||

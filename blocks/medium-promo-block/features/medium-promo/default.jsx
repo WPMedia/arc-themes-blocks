@@ -66,7 +66,7 @@ const MediumPromo = ({ customFields }) => {
 				? {
 						feature: "medium-promo",
 						...customFields?.itemContentConfig?.contentConfigValues,
-				  }
+					}
 				: null,
 			// does not need embed_html because no video section
 			// does not need website section nor label because no overline
@@ -185,22 +185,22 @@ const MediumPromo = ({ customFields }) => {
 	const imageParams =
 		imageOverrideURL || ansImage
 			? {
+					alt: content?.headlines?.basic || "",
 					ansImage: imageOverrideURL
 						? {
 								_id: resizedImage ? imageOverrideId : manualImageId,
 								url: imageOverrideURL,
 								auth: resizedAuth || {},
-						  }
+							}
 						: ansImage,
-					alt: content?.headlines?.basic || "",
 					aspectRatio: imageRatio,
 					resizedOptions: getFocalFromANS(ansImage),
 					responsiveImages: [200, 400, 600, 800, 1200],
 					width: 600,
-			  }
+				}
 			: {
 					src: fallbackImage,
-			  };
+				};
 
 	return showHeadline || showImage || showDescription || showByline || showDate ? (
 		<LazyLoad enabled={shouldLazyLoad}>

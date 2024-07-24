@@ -179,7 +179,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 						"arc-site": arcSite,
 						feature: "large-promo",
 						...customFields?.itemContentConfig?.contentConfigValues,
-				  }
+					}
 				: null,
 			filter: `{
 				_id
@@ -347,26 +347,26 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
 	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 	const ansImage = getImageFromANS(content);
-	const promoImageParams = 
+	const promoImageParams =
 		showImage &&
 		(imageOverrideURL || ansImage
 			? {
+					alt: content?.headlines?.basic || "",
 					ansImage: imageOverrideURL
 						? {
 								_id: resizedImage ? imageOverrideId : manualImageId,
-								url: imageOverrideURL,
 								auth: resizedAuth || {},
-						  }
+								url: imageOverrideURL,
+							}
 						: ansImage,
-					alt: content?.headlines?.basic || "",
 					aspectRatio: imageRatio,
 					resizedOptions: getFocalFromANS(ansImage),
 					responsiveImages: [400, 600, 800, 1200],
 					width: 377,
-			  }
+				}
 			: {
 					src: fallbackImage,
-			  });
+				});
 	return (
 		<LargePromoPresentation
 			aspectRatio={imageRatio}

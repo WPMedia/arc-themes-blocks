@@ -89,41 +89,42 @@ function Hero({ customFields }) {
 	const desktopImageParams =
 		imageId && imageDesktopURL
 			? {
-					src: imageANSToImageSrc({
-						_id: imageId,
-						url: imageDesktopURL,
-					}),
+					alt,
+					height: 800,
 					resizedOptions: {
 						auth: desktopAuth || {},
 						smart: true,
 					},
-					width: 1200,
-					height: 800,
 					resizerURL,
-			  }
+					src: imageANSToImageSrc({
+						_id: imageId,
+						url: imageDesktopURL,
+					}),
+					width: 1200,
+				}
 			: {
 					src: fallbackImage,
-			  };
+				};
 	const mobileImageParams =
 		imageMobileId && imageMobileURL
 			? {
+					alt,
 					ansImage: {
 						_id: imageMobileId,
 						url: imageMobileURL,
 						auth: mobileAuth || {},
 					},
-					alt,
+					height: 400,
 					resizedOptions: {
 						smart: true,
 					},
-					width: 320,
-					height: 400,
 					resizerURL,
-			  }
+					width: 320,
+				}
 			: {
-					src: fallbackImage,
 					alt: imageMobileAlt,
-			  };
+					src: fallbackImage,
+				};
 	const HeadingWrapper = headline ? HeadingSection : Fragment;
 	return (
 		<div className={classes}>

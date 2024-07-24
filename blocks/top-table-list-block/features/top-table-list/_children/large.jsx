@@ -114,16 +114,16 @@ const Large = (props) => {
 	const imageParams =
 		element && ansImage
 			? {
-					ansImage,
 					alt: element?.headlines?.basic || "",
+					ansImage,
 					aspectRatio: imageRatioLG,
 					resizedOptions: getFocalFromANS(ansImage),
 					responsiveImages: [400, 600, 800, 1200],
 					width: 800,
-			  }
+				}
 			: {
 					src: fallbackImage,
-			  };
+				};
 
 	return embedMarkup ||
 		contentOverline ||

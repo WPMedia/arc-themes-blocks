@@ -45,7 +45,7 @@ const SmallPromo = ({ customFields }) => {
 				? {
 						feature: "small-promo",
 						...customFields.itemContentConfig.contentConfigValues,
-				  }
+					}
 				: null,
 			// does not need embed_html because no video section
 			// does not need website section nor label because no overline
@@ -134,42 +134,42 @@ const SmallPromo = ({ customFields }) => {
 	const imageParams =
 		imageOverrideURL || ansImage
 			? {
-			ansImage: imageOverrideURL
-				? {
-						_id: resizedImage ? imageOverrideId : manualImageId,
-						url: imageOverrideURL,
-						auth: resizedAuth || {},
-					}
-				: ansImage,
-			alt: content?.headlines?.basic || "",
-			aspectRatio: imageRatio,
+					alt: content?.headlines?.basic || "",
+					ansImage: imageOverrideURL
+						? {
+								_id: resizedImage ? imageOverrideId : manualImageId,
+								url: imageOverrideURL,
+								auth: resizedAuth || {},
+							}
+						: ansImage,
+					aspectRatio: imageRatio,
 					resizedOptions: getFocalFromANS(ansImage),
-			responsiveImages: [200, 400, 600, 800, 1200],
-			width: 600,
-		}
+					responsiveImages: [200, 400, 600, 800, 1200],
+					width: 600,
+				}
 			: { src: fallbackImage };
 
 	const promoImage = showImage ? (
-			<Conditional
-				className={`${BLOCK_CLASS_NAME}__img`}
-				component={Link}
-				condition={linkURL}
-				href={formatURL(linkURL)}
-				onClick={registerSuccessEvent}
-				assistiveHidden
+		<Conditional
+			className={`${BLOCK_CLASS_NAME}__img`}
+			component={Link}
+			condition={linkURL}
+			href={formatURL(linkURL)}
+			onClick={registerSuccessEvent}
+			assistiveHidden
+		>
+			<MediaItem
+				{...searchableField({
+					imageOverrideURL: "url",
+					imageOverrideId: "_id",
+					imageOverrideAuth: "auth",
+				})}
+				suppressContentEditableWarning
 			>
-				<MediaItem
-					{...searchableField({
-						imageOverrideURL: "url",
-						imageOverrideId: "_id",
-						imageOverrideAuth: "auth",
-					})}
-					suppressContentEditableWarning
-				>
-					<Image {...imageParams} />
-				</MediaItem>
-			</Conditional>
-		) : null;
+				<Image {...imageParams} />
+			</MediaItem>
+		</Conditional>
+	) : null;
 
 	const promoHeading =
 		showHeadline && headline ? (
@@ -198,13 +198,13 @@ const SmallPromo = ({ customFields }) => {
 				<Grid as="article" className={containerClassNames}>
 					{["below", "right"].includes(imagePosition) ? (
 						<>
-							{ promoHeading }
-							{ promoImage }
+							{promoHeading}
+							{promoImage}
 						</>
 					) : (
 						<>
-							{ promoImage }
-							{ promoHeading }
+							{promoImage}
+							{promoHeading}
 						</>
 					)}
 				</Grid>

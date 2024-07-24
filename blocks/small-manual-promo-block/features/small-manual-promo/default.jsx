@@ -124,17 +124,17 @@ const SmallManualPromo = ({ customFields }) => {
 	const imageParams =
 		imageURL && resizedAuth
 			? {
-				ansImage,
-				alt,
-				aspectRatio: imageRatio,
+					alt,
+					ansImage,
+					aspectRatio: imageRatio,
 					resizedOptions: getFocalFromANS(ansImage),
-				responsiveImages: [200, 400, 600, 800, 1200],
-				width: 600,
-			}
+					responsiveImages: [200, 400, 600, 800, 1200],
+					width: 600,
+				}
 			: {
-				src: fallbackImage,
-				alt,
-			};
+					alt,
+					src: fallbackImage,
+				};
 
 	const containerClassNames = [
 		BLOCK_CLASS_NAME,

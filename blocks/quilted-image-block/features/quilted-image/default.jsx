@@ -56,23 +56,23 @@ const ImageItem = ({
 	const imageParams =
 		imageId && imageURL
 			? {
+					alt: imageAlt,
 					ansImage: {
 						_id: imageId,
-						url: imageURL,
 						auth: imageAuth ? JSON.parse(imageAuth) : imageAuthTokenObj,
+						url: imageURL,
 					},
-					alt: imageAlt,
 					aspectRatio: ASPECT_RATIO_MAP[imageAspectRatio],
 					resizedOptions: {
 						smart: true,
 					},
 					responsiveImages: [200, 400, 600, 800, 1000],
 					width: 600,
-			  }
+				}
 			: {
 					src: imageURL,
 					alt: overlayText,
-			  };
+				};
 
 	if ((imageURL && itemAction && overlayText && buttonText) || isAdmin) {
 		return (

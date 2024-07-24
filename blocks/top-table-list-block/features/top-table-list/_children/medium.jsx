@@ -79,15 +79,16 @@ const Medium = (props) => {
 
 	const imageParams = ANSImage
 		? {
+				alt: element?.headlines?.basic || "",
 				ansImage: ANSImage,
 				aspectRatio: imageRatioMD,
 				resizedOptions: getFocalFromANS(ANSImage),
 				responsiveImages: [400, 600, 800, 1200],
 				width: 800,
-		  }
+			}
 		: {
 				src: fallbackImage,
-		  };
+			};
 
 	return showHeadlineMD || showImageMD || showDescriptionMD || showBylineMD || showDateMD ? (
 		<HeadingSection>

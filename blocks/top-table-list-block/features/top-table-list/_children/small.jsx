@@ -35,20 +35,21 @@ const Small = (props) => {
 	const showBottomBorder = typeof showBottomBorderSM === "undefined" ? true : showBottomBorderSM;
 
 	const linkURL = element?.websites?.[arcSite]?.website_url;
-	const ANSImage = getImageFromANS(element);
+	const ansImage = getImageFromANS(element);
 	const headline = element?.headlines?.basic;
 
-	const imageParams = ANSImage
+	const imageParams = ansImage
 		? {
-				ansImage: ANSImage,
+				alt: element?.headlines?.basic || "",
+				ansImage,
 				aspectRatio: imageRatioSM,
 				resizedOptions: getFocalFromANS(ansImage),
 				responsiveImages: [400, 600, 800, 1200],
 				width: 800,
-		  }
+			}
 		: {
 				src: fallbackImage,
-		  };
+			};
 
 	const containerClassNames = [
 		BLOCK_CLASS_NAME,
@@ -79,13 +80,13 @@ const Small = (props) => {
 			<Grid as="article" className={containerClassNames}>
 				{["below", "right"].includes(imagePosition) ? (
 					<>
-						{ promoHeading }
-						{ promoImage }
+						{promoHeading}
+						{promoImage}
 					</>
 				) : (
 					<>
-						{ promoImage }
-						{ promoHeading }
+						{promoImage}
+						{promoHeading}
 					</>
 				)}
 				{showBottomBorder ? <Divider /> : null}

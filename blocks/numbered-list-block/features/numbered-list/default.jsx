@@ -103,18 +103,21 @@ const NumberedList = (props) => {
 						{contentElements.length
 							? contentElements.map((element, i) => {
 									const { headlines: { basic: headlineText = "" } = {}, websites } = element;
-									const imageObj = getImageFromANS(element);
-									const imageProps = imageObj
+									const ansImage = getImageFromANS(element);
+									const imageProps = ansImage
 										? {
-												ansImage: imageObj,
+												...(!showHeadline && element?.headlines?.basic !== ""
+													? { alt: element?.headlines?.basic }
+													: {}),
+												ansImage,
 												aspectRatio: "3:2",
 												resizedOptions: getFocalFromANS(ansImage),
 												responsiveImages: [137, 274, 548],
 												width: 274,
-										  }
+											}
 										: {
 												src: targetFallbackImage,
-										  };
+											};
 
 									if (!websites[arcSite]) {
 										return null;
@@ -142,7 +145,7 @@ const NumberedList = (props) => {
 											</Stack>
 										</React.Fragment>
 									);
-							  })
+								})
 							: null}
 					</Stack>
 				</Wrapper>

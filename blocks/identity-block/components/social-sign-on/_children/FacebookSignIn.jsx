@@ -10,14 +10,6 @@ function FacebookSignIn({ customButtons, socialSignOnIn, className }) {
 	const phrases = usePhrases();
 	const facebookTextType = socialSignOnIn === SIGN_UP ? "continue_with" : "login_with";
 
-	useEffect(() => {
-		if (customButtons) {
-			document
-				.getElementById("facebook-btn")
-				.addEventListener("click", () => window.onFacebookSignOn());
-		}
-	}, [customButtons]);
-
 	if (customButtons) {
 		return (
 			<Button
@@ -25,6 +17,7 @@ function FacebookSignIn({ customButtons, socialSignOnIn, className }) {
 				variant="secondary-reverse"
 				iconLeft={FacebookIcon}
 				className={`${className}__Facebook`}
+				onClick={() => window?.onFacebookSignOn()}
 			>
 				{socialSignOnIn !== SIGN_UP ? (
 					<span>{phrases.t("identity-block.social-signOn-facebook-login")}</span>

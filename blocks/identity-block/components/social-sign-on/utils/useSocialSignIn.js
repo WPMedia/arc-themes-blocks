@@ -38,8 +38,7 @@ function useSocialSignIn(
 				} else if (fromSocialSignOnBlock) {
 					Identity.isLoggedIn().then((isLoggedIn) => {
 						if (isLoggedIn) {
-							const validatedURL = validateURL(redirectURL);
-							window.location = validatedURL;
+							window.location = validateURL(redirectURL);
 						}
 					});
 				}
@@ -135,20 +134,21 @@ function useSocialSignIn(
 
 	useEffect(() => {
 		const checkIsLoggedIn = () => {
-			setTimeout(() => {
+			const timeout = setTimeout(() => {
 				Identity.isLoggedIn().then((isLoggedIn) => {
 					if (isLoggedIn) {
-						const validatedURL = validateURL(redirectURL);
-						window.location = validatedURL;
+						window.location = validateURL(redirectURL);
 					}
 				});
 			}, 1500);
+  			return () => clearTimeout(timeout)
 		};
 
 		const setIdentityUpdated = () => {
-			setTimeout(() => {
+			const timeout = setTimeout(() => {
 				setUpdateIdentities((prev) => !prev);
 			}, 1500);
+			return () => clearTimeout(timeout)
 		};
 
 		if (customButtons && isFBInitialized && !isFBEventSubscribed && window?.FB?.Event) {
@@ -173,6 +173,11 @@ function useSocialSignIn(
 		fromSocialSignOnBlock,
 		redirectURL,
 	]);
+
+
+
+
+
 
 	return {
 		// if facebook and google setup with subs,

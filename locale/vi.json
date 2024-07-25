@@ -31,7 +31,7 @@
 		"category-carousel.aria-label": "Danh mục",
 		"category-carousel.left-arrow-label": "Trước đó",
 		"category-carousel.right-arrow-label": "Tiếp theo",
-		"category-carousel.slide-indicator": "Trang chiếu %{current}\/%{maximum}"
+		"category-carousel.slide-indicator": "Trang chiếu %{current}/%{maximum}"
 	},
 	"default-output-block": {
 		"default-output-block.skip-main": "Bỏ qua nội dung chính"
@@ -67,7 +67,7 @@
 		"global.gallery-autoplay-label-stop": "Dừng trình chiếu tự động",
 		"global.gallery-expand-button": "Mở rộng",
 		"global.gallery-next-label": "Trang chiếu tiếp theo",
-		"global.gallery-page-count-text": "<span class='visually-hidden'>Hình ảnh<\/span> %{current}\/%{total}",
+		"global.gallery-page-count-text": "<span class='visually-hidden'>Hình ảnh</span> %{current}/%{total}",
 		"global.gallery-pause-autoplay-button": "Tự động dừng",
 		"global.gallery-previous-label": "Trang chiếu trước",
 		"global.gallery-text": "Thư viện",
@@ -114,6 +114,12 @@
 		"identity-block.confirm-password": "Xác nhận mật khẩu",
 		"identity-block.confirm-password-error": "Mật khẩu phải trùng khớp",
 		"identity-block.connect-account": "Đã kết nối",
+		"identity-block.connect-identity": "Connect",
+		"identity-block.login-form-error.captcha-token-required": "Captcha token required.",
+		"identity-block.social-google-one-tap-notification": "Sign-in prompt was suppressed by the user or dismissed. Please try again later or use another sign-in method.",
+		"identity-block.social-signOn-unlink-error": "At least one identity needs to remain on the user",
+		"identity-block.social-signOn-facebook-login": "Sign in with Facebook",
+		"identity-block.social-signOn-facebook-signUp": "Sign up with Facebook",
 		"identity-block.connect-platform": "Kết nối %{platform}",
 		"identity-block.connected-accounts": "Tài khoản đã kết nối",
 		"identity-block.create-an-account": "Tạo tài khoản",
@@ -154,7 +160,7 @@
 		"identity-block.ota-ivalid-login-link": "Invalid login link",
 		"identity-block.ota-ivalid-login-link-subheadline": "Looks like one time login link is invalid or expired. Please request a new log in link and try again.",
 		"identity-block.ota-subheadline": "To sign in without a password, enter your email below and you will receive a one time log in link.",
-		"identity-block.ota-success-body": "If there's an account associated with <b>%{userEmail}<\/b>, you'll get a link in your inbox that will automatically sign you in to your account. The link will expire in 24 hours.",
+		"identity-block.ota-success-body": "If there's an account associated with <b>%{userEmail}</b>, you'll get a link in your inbox that will automatically sign you in to your account. The link will expire in 24 hours.",
 		"identity-block.ota-success-heading": "Check Your Email",
 		"identity-block.password": "Mật khẩu",
 		"identity-block.password-placeholder": "**********",
@@ -181,8 +187,8 @@
 		"identity-block.social-signOn-apple-signUp": "Đăng ký bằng Apple",
 		"identity-block.social-signOn-google-login": "Đăng nhập bằng Google",
 		"identity-block.social-signOn-google-signUp": "Đăng ký bằng Google",
-		"identity-block.terms-privacy-text": "Bằng cách tạo tài khoản, bạn đồng ý với <a href='%{termsURL}'>Điều khoản dịch vụ<\/a> và thừa nhận <a href='%{privacyURL}'>Chính sách quyền riêng tư<\/a> của chúng tôi.",
-		"identity-block.terms-service-privacy-text": "Bằng việc tạo tài khoản, bạn đồng ý với <a href='%{termsAndPrivacyURL}'>Điều khoản dịch vụ và thừa nhận Chính sách quyền riêng tư của chúng tôi<\/a>",
+		"identity-block.terms-privacy-text": "Bằng cách tạo tài khoản, bạn đồng ý với <a href='%{termsURL}'>Điều khoản dịch vụ</a> và thừa nhận <a href='%{privacyURL}'>Chính sách quyền riêng tư</a> của chúng tôi.",
+		"identity-block.terms-service-privacy-text": "Bằng việc tạo tài khoản, bạn đồng ý với <a href='%{termsAndPrivacyURL}'>Điều khoản dịch vụ và thừa nhận Chính sách quyền riêng tư của chúng tôi</a>",
 		"identity-block.update-email-error": "Đã xảy ra lỗi khi cập nhật địa chỉ email của bạn",
 		"identity-block.update-password-error": "Đã xảy ra lỗi khi cập nhật mật khẩu của bạn",
 		"identity-block.username": "Tên người dùng"
@@ -198,7 +204,7 @@
 		"product-assortment-carousel.aria-label": "Sản phẩm",
 		"product-assortment-carousel.left-arrow-label": "Trước đó",
 		"product-assortment-carousel.right-arrow-label": "Tiếp theo",
-		"product-assortment-carousel.slide-indicator": "Trang chiếu %{current}\/%{maximum}"
+		"product-assortment-carousel.slide-indicator": "Trang chiếu %{current}/%{maximum}"
 	},
 	"product-content-block": {
 		"product-content.description": "Mô tả",
@@ -213,7 +219,7 @@
 		"product-gallery.go-to-slide": "Đi tới trang chiếu %{slideNumber}",
 		"product-gallery.left-arrow-label": "Trước đó",
 		"product-gallery.right-arrow-label": "Tiếp theo",
-		"product-gallery.slide-indicator": "Trang chiếu %{current}\/%{maximum}"
+		"product-gallery.slide-indicator": "Trang chiếu %{current}/%{maximum}"
 	},
 	"product-information-block": {
 		"product-information.list-price": "Giá niêm yết %{price}",
@@ -237,7 +243,7 @@
 		"story-carousel.aria-label": "Câu chuyện",
 		"story-carousel.left-arrow-label": "Trước đó",
 		"story-carousel.right-arrow-label": "Tiếp theo",
-		"story-carousel.slide-indicator": "Trang chiếu %{current}\/%{maximum}"
+		"story-carousel.slide-indicator": "Trang chiếu %{current}/%{maximum}"
 	},
 	"subscriptions-block": {
 		"checkout-block.Afghanistan": "Afghanistan",
@@ -487,7 +493,7 @@
 		"checkout-block.address1": "Address 1",
 		"checkout-block.address1-validation": "Please enter a valid address.",
 		"checkout-block.address2": "Address 2 (Optional)",
-		"checkout-block.address2-placeholder": "ex: Apt\/Suite\/Floor",
+		"checkout-block.address2-placeholder": "ex: Apt/Suite/Floor",
 		"checkout-block.automatic-renewal-terms-description": "Your subscription will continue until you cancel. You can cancel your subscription online at any time in your Account settings, or during limited hours by chat or phone. Cancellations take effect at the end of your current billing period.",
 		"checkout-block.automatic-renewal-terms-intro": "Your payment method will be automatically charged in advance",
 		"checkout-block.automatic-renewal-terms-title": "Automatic Renewal Terms",
@@ -503,9 +509,9 @@
 		"checkout-block.continue": "Tiếp tục",
 		"checkout-block.continue-to-checkout": "Tiếp tục thanh toán",
 		"checkout-block.country": "Quốc gia hoặc khu vực",
-		"checkout-block.country-region": "Country\/Region",
+		"checkout-block.country-region": "Country/Region",
 		"checkout-block.country-requirements": "Vui lòng chọn quốc gia hoặc khu vực",
-		"checkout-block.country-validation": "Please enter a valid country\/region.",
+		"checkout-block.country-validation": "Please enter a valid country/region.",
 		"checkout-block.due-today": "Đến hạn vào hôm nay",
 		"checkout-block.edit": "Chỉnh sửa",
 		"checkout-block.email": "Địa chỉ email",
@@ -560,8 +566,8 @@
 		"checkout-block.state-validation": "Please enter a valid state.",
 		"checkout-block.subtotal": "Subtotal",
 		"checkout-block.view-subscription-offers": "View subscription offers",
-		"checkout-block.zip-code": "Zip\/Postal Code",
-		"checkout-block.zip-code-validation": "Please enter a valid zip\/postal code.",
+		"checkout-block.zip-code": "Zip/Postal Code",
+		"checkout-block.zip-code-validation": "Please enter a valid zip/postal code.",
 		"checkout-block.Åland-Islands": "Quần đảo Åland",
 		"subscription-block.shared-No": "No",
 		"subscription-block.shared-Payment-method": "Payment method",
@@ -594,7 +600,7 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
 		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
 		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
-		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
+		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale </a> and <a href='%{termsOfServiceURL}'>terms of service</a>.",
 		"subscriptions-block.update-payment": "Cập nhật phương thức thanh toán"
 	}
 }

@@ -31,7 +31,7 @@
 		"category-carousel.aria-label": "རིགས།",
 		"category-carousel.left-arrow-label": "གོང་མ།",
 		"category-carousel.right-arrow-label": "རྗེས་མ།",
-		"category-carousel.slide-indicator": "སྒྲོན་བརྙན་དྲ་ཤོག་%{current}\/%{maximum}"
+		"category-carousel.slide-indicator": "སྒྲོན་བརྙན་དྲ་ཤོག་%{current}/%{maximum}"
 	},
 	"default-output-block": {
 		"default-output-block.skip-main": "ནང་དོན་གཙོ་བོར་མཆོང་།"
@@ -67,7 +67,7 @@
 		"global.gallery-autoplay-label-stop": "སྒྲོན་བརྙན་དྲ་ཤོག་རང་འགུལ་གྱིས་གཏོང་མཚམས་འཇོག",
 		"global.gallery-expand-button": "རྒྱ་སྐྱེད།",
 		"global.gallery-next-label": "སྒྲོན་བརྙན་དྲ་ཤོག་རྗེས་མ།",
-		"global.gallery-page-count-text": "<span class='visually-hidden'>པར་རིས་<\/span> %{current} \/ %{total}",
+		"global.gallery-page-count-text": "<span class='visually-hidden'>པར་རིས་</span> %{current} / %{total}",
 		"global.gallery-pause-autoplay-button": "གཏོང་མཚམས་འཇོག",
 		"global.gallery-previous-label": "སྒྲོན་བརྙན་དྲ་ཤོག་གོང་མ།",
 		"global.gallery-text": "པར་མཛོད།",
@@ -114,6 +114,12 @@
 		"identity-block.confirm-password": "གསང་གྲངས་གཏན་འཁེལ།",
 		"identity-block.confirm-password-error": "གསང་གྲངས་གཅིག་མཐུན་ཡིན་དགོས།",
 		"identity-block.connect-account": "འབྲེལ་མཐུད་བྱས་ཟིན།",
+		"identity-block.connect-identity": "Connect",
+		"identity-block.login-form-error.captcha-token-required": "Captcha token required.",
+		"identity-block.social-google-one-tap-notification": "Sign-in prompt was suppressed by the user or dismissed. Please try again later or use another sign-in method.",
+		"identity-block.social-signOn-unlink-error": "At least one identity needs to remain on the user",
+		"identity-block.social-signOn-facebook-login": "Sign in with Facebook",
+		"identity-block.social-signOn-facebook-signUp": "Sign up with Facebook",
 		"identity-block.connect-platform": "%{platform}དང་འབྲེལ་གཏུག་བྱེད།",
 		"identity-block.connected-accounts": "འབྲེལ་བའི་དྲ་གྲངས།",
 		"identity-block.create-an-account": "ཁ་བྱང་གསར་པ་བཟོ་བ།",
@@ -154,7 +160,7 @@
 		"identity-block.ota-ivalid-login-link": "Invalid login link",
 		"identity-block.ota-ivalid-login-link-subheadline": "Looks like one time login link is invalid or expired. Please request a new log in link and try again.",
 		"identity-block.ota-subheadline": "To sign in without a password, enter your email below and you will receive a one time log in link.",
-		"identity-block.ota-success-body": "If there's an account associated with <b>%{userEmail}<\/b>, you'll get a link in your inbox that will automatically sign you in to your account. The link will expire in 24 hours.",
+		"identity-block.ota-success-body": "If there's an account associated with <b>%{userEmail}</b>, you'll get a link in your inbox that will automatically sign you in to your account. The link will expire in 24 hours.",
 		"identity-block.ota-success-heading": "Check Your Email",
 		"identity-block.password": "གསང་གྲངས།",
 		"identity-block.password-placeholder": "**********",
@@ -181,8 +187,8 @@
 		"identity-block.social-signOn-apple-signUp": "Appleདང་ལྷན་ཐོ་འགོད་བྱོས།",
 		"identity-block.social-signOn-google-login": "Googleདང་ལྷན་ནང་ཞུགས་བྱོས།",
 		"identity-block.social-signOn-google-signUp": "Googleདང་ལྷན་ཐོ་འགོད་བྱོས།",
-		"identity-block.terms-privacy-text": "དྲ་གྲངས་གཅིག་གསར་བཟོ་བྱས་ཚེ། ཁྱེད་ཀྱིས་<a href='%{termsURL}'>ཞབས་ཞུའི་དོན་ཚན་<\/a>ལ་མོས་མཐུན་བྱེད་པ་དང་། <a href='%{privacyURL}'>གསང་བའི་སྲིད་ཇུས་<\/a>ཁས་ལེན་བྱེད་པ་མཚོན།",
-		"identity-block.terms-service-privacy-text": "ཁ་བྱང་གཅིག་གསར་བཟོ་བྱས་ཚེ། ཁྱེད་ཀྱིས་ཞབས་ཞུའི་དོན་ཚན་ལ་མོས་མཐུན་བྱེད་པ་དང་། <a href='%{termsAndPrivacyURL}'>གསང་བའི་སྲིད་ཇུས་<\/a>ཁས་ལེན་བྱེད་པ་མཚོན།",
+		"identity-block.terms-privacy-text": "དྲ་གྲངས་གཅིག་གསར་བཟོ་བྱས་ཚེ། ཁྱེད་ཀྱིས་<a href='%{termsURL}'>ཞབས་ཞུའི་དོན་ཚན་</a>ལ་མོས་མཐུན་བྱེད་པ་དང་། <a href='%{privacyURL}'>གསང་བའི་སྲིད་ཇུས་</a>ཁས་ལེན་བྱེད་པ་མཚོན།",
+		"identity-block.terms-service-privacy-text": "ཁ་བྱང་གཅིག་གསར་བཟོ་བྱས་ཚེ། ཁྱེད་ཀྱིས་ཞབས་ཞུའི་དོན་ཚན་ལ་མོས་མཐུན་བྱེད་པ་དང་། <a href='%{termsAndPrivacyURL}'>གསང་བའི་སྲིད་ཇུས་</a>ཁས་ལེན་བྱེད་པ་མཚོན།",
 		"identity-block.update-email-error": "ཁྱེད་ཀྱི་དྲ་ཡིག་གནས་ཡུལ་གསར་སྒྱུར་བྱས་པར་ནོར་འཁྲུལ་ཐོན།",
 		"identity-block.update-password-error": "ཁྱེད་ཀྱི་གསང་གྲངས་གསར་སྒྱུར་བྱས་པར་ནོར་འཁྲུལ་ཐོན།",
 		"identity-block.username": "སྤྱོད་མཁན་མིང་།"
@@ -198,7 +204,7 @@
 		"product-assortment-carousel.aria-label": "ཐོན་རྫས།",
 		"product-assortment-carousel.left-arrow-label": "གོང་མ།",
 		"product-assortment-carousel.right-arrow-label": "རྗེས་མ།",
-		"product-assortment-carousel.slide-indicator": "སྒྲོན་བརྙན་དྲ་ཤོག་%{current}\/%{maximum}"
+		"product-assortment-carousel.slide-indicator": "སྒྲོན་བརྙན་དྲ་ཤོག་%{current}/%{maximum}"
 	},
 	"product-content-block": {
 		"product-content.description": "ཞིབ་བརྗོད།",
@@ -213,7 +219,7 @@
 		"product-gallery.go-to-slide": "སྒྲོན་བརྙན་དྲ་ཤོག་%{slideNumber}ལ་ཕེབས།",
 		"product-gallery.left-arrow-label": "གོང་མ།",
 		"product-gallery.right-arrow-label": "རྗེས་མ།",
-		"product-gallery.slide-indicator": "སྒྲོན་བརྙན་དྲ་ཤོག%{current}\/%{maximum}"
+		"product-gallery.slide-indicator": "སྒྲོན་བརྙན་དྲ་ཤོག%{current}/%{maximum}"
 	},
 	"product-information-block": {
 		"product-information.list-price": "རིན་གོང་། %{price}",
@@ -237,7 +243,7 @@
 		"story-carousel.aria-label": "སྒྲུང་གཏམ།",
 		"story-carousel.left-arrow-label": "གོང་མ།",
 		"story-carousel.right-arrow-label": "རྗེས་མ།",
-		"story-carousel.slide-indicator": "སྒྲོན་བརྙན་དྲ་ཤོག་%{current}\/%{maximum}"
+		"story-carousel.slide-indicator": "སྒྲོན་བརྙན་དྲ་ཤོག་%{current}/%{maximum}"
 	},
 	"subscriptions-block": {
 		"checkout-block.Afghanistan": "ཨ་ཧྥུ་ཀ་ནི་མི་ཐན།",
@@ -487,7 +493,7 @@
 		"checkout-block.address1": "Address 1",
 		"checkout-block.address1-validation": "Please enter a valid address.",
 		"checkout-block.address2": "Address 2 (Optional)",
-		"checkout-block.address2-placeholder": "ex: Apt\/Suite\/Floor",
+		"checkout-block.address2-placeholder": "ex: Apt/Suite/Floor",
 		"checkout-block.automatic-renewal-terms-description": "Your subscription will continue until you cancel. You can cancel your subscription online at any time in your Account settings, or during limited hours by chat or phone. Cancellations take effect at the end of your current billing period.",
 		"checkout-block.automatic-renewal-terms-intro": "Your payment method will be automatically charged in advance",
 		"checkout-block.automatic-renewal-terms-title": "Automatic Renewal Terms",
@@ -503,9 +509,9 @@
 		"checkout-block.continue": "མུ་མཐུད།",
 		"checkout-block.continue-to-checkout": "མུ་མཐུད་ཞིབ་བཤེར་བྱེད།",
 		"checkout-block.country": "རྒྱལ་ཁབ་བམ་ས་ཁུལ།",
-		"checkout-block.country-region": "Country\/Region",
+		"checkout-block.country-region": "Country/Region",
 		"checkout-block.country-requirements": "རྒྱལ་ཁབ་བམ་ས་ཁུལ་འདེམས།",
-		"checkout-block.country-validation": "Please enter a valid country\/region.",
+		"checkout-block.country-validation": "Please enter a valid country/region.",
 		"checkout-block.due-today": "དེ་རིང་མཇུག་སྒྲིལ།",
 		"checkout-block.edit": "རྩོམ་སྒྲིག",
 		"checkout-block.email": "དྲ་ཡིག་གནས་ཡུལ།",
@@ -560,8 +566,8 @@
 		"checkout-block.state-validation": "Please enter a valid state.",
 		"checkout-block.subtotal": "Subtotal",
 		"checkout-block.view-subscription-offers": "View subscription offers",
-		"checkout-block.zip-code": "Zip\/Postal Code",
-		"checkout-block.zip-code-validation": "Please enter a valid zip\/postal code.",
+		"checkout-block.zip-code": "Zip/Postal Code",
+		"checkout-block.zip-code-validation": "Please enter a valid zip/postal code.",
 		"checkout-block.Åland-Islands": "ཨོ་ལན་གླིང་ཚོམ།",
 		"subscription-block.shared-No": "No",
 		"subscription-block.shared-Payment-method": "Payment method",
@@ -594,7 +600,7 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
 		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
 		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
-		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
+		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale </a> and <a href='%{termsOfServiceURL}'>terms of service</a>.",
 		"subscriptions-block.update-payment": "དངུལ་སྤྲོད་ཐབས་ལམ་གསར་སྣོན་བྱེད་པ།"
 	}
 }

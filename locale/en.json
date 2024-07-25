@@ -120,7 +120,6 @@
 		"identity-block.current-password": "Current Password",
 		"identity-block.disconnect-account": "Disconnect",
 		"identity-block.connect-identity": "Connect",
-		"identity-block.connected-identity": "Connected",
 		"identity-block.edit": "Edit",
 		"identity-block.email": "Email address",
 		"identity-block.email-label": "Email",

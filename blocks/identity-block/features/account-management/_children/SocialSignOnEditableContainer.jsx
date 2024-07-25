@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback } from "react";
 
 import { Button, usePhrases, Icon, useIdentity } from "@wpmedia/arc-themes-components";
 
@@ -14,50 +14,31 @@ function SocialSignOnEditableFieldContainer({
 
 	const googleNotification = phrases.t("identity-block.social-google-one-tap-notification");
 
-	const connectedText = phrases.t("identity-block.connected-identity");
+	const connectedText = phrases.t("identity-block.connect-account");
 	const connectText = phrases.t("identity-block.connect-identity");
 	const disconnectText = phrases.t("identity-block.disconnect-account");
 
-	useEffect(() => {
-		if (type === "Google" && !isConnected) {
-			const attachEventListener = () =>
-				document.getElementById("custom-Google-signin-btn").addEventListener("click", () =>
-					window.google.accounts.id.prompt((notification) => {
-						if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-							// https://developers.google.com/identity/gsi/web/reference/js-reference
-							// https://developers.google.com/identity/gsi/web/guides/features#exponential_cooldown
-							// eslint-disable-next-line
-							alert(googleNotification);
-							// Remove cookie works in Safari
-							document.cookie =  `g_state=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
-							window.google.accounts.id.prompt();
-						}
-					}),
-				);
-			setTimeout(() => attachEventListener(), 0);
-		}
-	}, [type, isConnected, googleNotification]);
-
-	useEffect(() => {
-		if (type === "Facebook" && !isConnected) {
-			const attachEventListener = () =>
-				document.getElementById("custom-Facebook-signin-btn").addEventListener("click", () => {
-					window.onFacebookSignOn();
+	const onConnectIdentity = useCallback((type) => {
+		switch (type) {
+			case "Google":
+				window.google.accounts.id.prompt((notification) => {
+					if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+						alert(googleNotification);
+						document.cookie = "g_state=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT";
+						window.google.accounts.id.prompt();
+					}
 				});
-			setTimeout(() => attachEventListener(), 0);
+				break;
+			case "Facebook":
+				window.onFacebookSignOn();
+				break;
+			case "Apple":
+				Identity.initAppleSignOn();
+				break;
+			default:
+				break;
 		}
-	}, [type, isConnected]);
-
-	useEffect(() => {
-		if (type === "Apple" && !isConnected) {
-			const attachEventListener = () => {
-				document
-					.getElementById("custom-Apple-signin-btn")
-					.addEventListener("click", () => Identity.initAppleSignOn());
-			};
-			setTimeout(() => attachEventListener(), 0);
-		}
-	}, [type, isConnected, Identity]);
+	}, [googleNotification, Identity]);
 
 	return (
 		<div className={`${blockClassName}__social-signOn-edit`}>
@@ -81,6 +62,7 @@ function SocialSignOnEditableFieldContainer({
 					className={`${blockClassName}__social-signOn-button-connect`}
 					size="medium"
 					variant="primary"
+					onClick={() => onConnectIdentity(type)}
 				>
 					{connectText}
 				</Button>

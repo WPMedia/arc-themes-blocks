@@ -257,6 +257,68 @@
 					"padding-inline-start": var(--global-spacing-4),
 					"padding-inline-end": var(--global-spacing-4)
 				),
+				"account-management-social-signon-edit": (
+					"align-items": center,
+					"border-color": var(--border-color),
+					"border-radius": var(--border-radius),
+					"border-style": var(--global-border-style-1),
+					"border-width": var(--global-border-width-1),
+					"display": flex,
+					"justify-content": space-between,
+					"margin-block-end": var(--global-spacing-2),
+					"padding-block-start": var(--global-spacing-4),
+					"padding-block-end": var(--global-spacing-4),
+					"padding-inline-start": var(--global-spacing-4),
+					"padding-inline-end": var(--global-spacing-4),
+					"min-width": 280px
+				),
+				"account-management-social-signon-identity": (
+					"display": "flex",
+					"components": (
+						"icon": (
+							"margin-inline-end": var(--global-spacing-2)
+						)
+					)
+				),
+				"account-management-social-signon-button-connect": (
+					"background-color": var(--global-black)
+				),
+				"account-management-social-signon-button-disconnect": (
+					"color": var(--global-black),
+					"border-color": var(--global-black)
+				),
+				"account-management-social-signon-button-connected": (
+					"position": absolute,
+					"transform": translatey(175%),
+					"background": var(--global-white),
+					"font-size": var(--global-font-size-3),
+					"padding-inline-end": var(--global-spacing-1),
+					"color": var(--global-green-5),
+					"components": (
+						"icon": (
+							"margin-inline-start": var(--global-spacing-1),
+							"margin-inline-end": var(--global-spacing-1),
+							"fill": var(--global-green-5),
+							"block-size": var(--global-spacing-4),
+							"inline-size": var(--global-spacing-4)
+						)
+					)
+				),
+				"account-management-social-signon-identities-error": (
+					"font-family": "var(--font-family-primary)",
+					"margin-block-end": "var(--global-spacing-4)",
+					"components": (
+						"paragraph": (
+							"background-color": "var(--status-color-danger-subtle)",
+							"color": "var(--status-color-danger)",
+							"padding-block-end": "var(--global-spacing-1)",
+							"padding-block-start": "var(--global-spacing-1)",
+							"padding-inline-start": "var(--global-spacing-2)",
+							"padding-inline-end": "var(--global-spacing-2)"
+						)
+					)
+					"desktop": ()
+				),
 				"ads-block": (
 					"components": (
 						"paragraph": (
@@ -3579,6 +3641,60 @@
 							"color": var(--text-color)
 						)
 					)
+				),
+				"social-sign-on-button-container-apple-custom": (
+					"inline-size": 100%
+					"desktop": ()
+				)
+				"social-sign-on-button-container-facebook": (
+					"justify-content": center,
+					"border-block-start-width": 1px,
+					"border-block-end-width": 1px,
+					"border-inline-start-width": 1px,
+					"border-inline-end-width": 1px,
+					"border-block-start-color": var(--border-color),
+					"border-block-end-color": var(--border-color),
+					"border-inline-start-color": var(--border-color),
+					"border-inline-end-color": var(--border-color),
+					"border-radius": var(--global-spacing-1),
+					"color": var(--text-color),
+					"font-weight": var(--global-font-weight-7),
+					"font-family": var(--font-family-primary),
+					"inline-size": 100%,
+					"components": (
+						"button-secondary-reverse-hover": (
+							color": "var(--text-color)
+						),
+						"icon": (
+							"fill": #4285F4
+						)
+					)
+					"desktop": ()
+				),
+				"social-sign-on-button-container-google": (
+					"justify-content": center,
+					"border-block-start-width": 1px,
+					"border-block-end-width": 1px,
+					"border-inline-start-width": 1px,
+					"border-inline-end-width": 1px,
+					"border-block-start-color": var(--border-color),
+					"border-block-end-color": var(--border-color),
+					"border-inline-start-color": var(--border-color),
+					"border-inline-end-color": var(--border-color),
+					"border-radius": var(--global-spacing-1),
+					"color": var(--text-color),
+					"font-weight": var(--global-font-weight-7),
+					"font-family": var(--font-family-primary),
+					"inline-size": 100%,
+					"components": (
+						"button-secondary-reverse-hover": (
+							"color": var(--text-color)
+						),
+						"icon": (
+							"fill": #4285F4
+						)
+					)
+				"desktop": ()
 				),
 				"social-sign-on-dividerWithText": (
 					"display": flex,

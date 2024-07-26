@@ -18,11 +18,12 @@ function SocialSignOnEditableFieldContainer({
 	const connectText = phrases.t("identity-block.connect-identity");
 	const disconnectText = phrases.t("identity-block.disconnect-account");
 
-	const onConnectIdentity = useCallback((type) => {
+	const onConnectIdentity = useCallback(() => {
 		switch (type) {
 			case "Google":
 				window.google.accounts.id.prompt((notification) => {
 					if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+						// eslint-disable-next-line
 						alert(googleNotification);
 						document.cookie = "g_state=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT";
 						window.google.accounts.id.prompt();
@@ -38,7 +39,7 @@ function SocialSignOnEditableFieldContainer({
 			default:
 				break;
 		}
-	}, [googleNotification, Identity]);
+	}, [googleNotification, Identity, type]);
 
 	return (
 		<div className={`${blockClassName}__social-signOn-edit`}>
@@ -62,7 +63,7 @@ function SocialSignOnEditableFieldContainer({
 					className={`${blockClassName}__social-signOn-button-connect`}
 					size="medium"
 					variant="primary"
-					onClick={() => onConnectIdentity(type)}
+					onClick={() => onConnectIdentity()}
 				>
 					{connectText}
 				</Button>

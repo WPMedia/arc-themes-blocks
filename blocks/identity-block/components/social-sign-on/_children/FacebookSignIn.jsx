@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { Button, Icon, usePhrases } from "@wpmedia/arc-themes-components";
 

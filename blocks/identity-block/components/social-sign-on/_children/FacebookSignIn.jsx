@@ -12,21 +12,19 @@ function FacebookSignIn({ customButtons, socialSignOnIn, className }) {
 
 	if (customButtons) {
 		return (
-			<div data-testid="custom-facebook-btn">
-				<Button
-					id="facebook-btn"
-					variant="secondary-reverse"
-					iconLeft={FacebookIcon}
-					className={`${className}__Facebook`}
-					onClick={() => window?.onFacebookSignOn()}
-				>
-					{socialSignOnIn !== SIGN_UP ? (
-						<span>{phrases.t("identity-block.social-signOn-facebook-login")}</span>
-					) : (
-						<span>{phrases.t("identity-block.social-signOn-facebook-signUp")}</span>
-					)}
-				</Button>
-			</div>
+			<Button
+				id="facebook-btn"
+				variant="secondary-reverse"
+				iconLeft={FacebookIcon}
+				className={`${className}__Facebook`}
+				onClick={() => window?.onFacebookSignOn()}
+			>
+				{socialSignOnIn !== SIGN_UP ? (
+					<span>{phrases.t("identity-block.social-signOn-facebook-login")}</span>
+				) : (
+					<span>{phrases.t("identity-block.social-signOn-facebook-signUp")}</span>
+				)}
+			</Button>
 		);
 	}
 

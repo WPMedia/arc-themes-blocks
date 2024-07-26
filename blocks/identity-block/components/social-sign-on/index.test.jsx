@@ -1,11 +1,18 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 import { useIdentity, usePhrases } from "@wpmedia/arc-themes-components";
 import SocialSignOn from "./index";
 import { GoogleSignInProvider } from "./utils/googleContext";
 
-jest.mock("@wpmedia/arc-themes-components");
+const mockButton = jest.fn();
+
+jest.mock('@wpmedia/arc-themes-components', () => ({
+	...jest.requireActual('@wpmedia/arc-themes-components'),
+	Button: (props) => mockButton(props),
+	useIdentity: jest.fn(),
+	usePhrases: jest.fn()
+  }));
 
 describe("Identity Social Login Component", () => {
 	it("renders nothing if config settings are false", () => {
@@ -34,119 +41,9 @@ describe("Identity Social Login Component", () => {
 			</GoogleSignInProvider>,
 		);
 		// don't render any button
-		expect(screen.queryByTestId('fb-login-button')).not.toBeInTheDocument();
-		expect(screen.queryByTestId('google-sign-in-button')).not.toBeInTheDocument(); 
-		expect(screen.queryByTestId('apple-btn')).not.toBeInTheDocument();
-	});
-
-	it("renders only Google (default) button", () => {
-		useIdentity.mockImplementation(() => ({
-			isInitialized: true,
-			isLoggedIn: () => false,
-			Identity: {
-				configOptions: {
-					googleClientId: true,
-					facebookAppId: false,
-				},
-				initFacebookLogin: () => {},
-				initializeFacebook: () => {},
-			},
-		}));
-		usePhrases.mockImplementation(() => ({
-			t: jest
-				.fn()
-				.mockReturnValue(
-					"Sign-in prompt was suppressed by the user or dismissed. Please try again later or use another sign-in method.",
-				),
-		}));
-
-		render(
-			<GoogleSignInProvider>
-				<SocialSignOn onError={() => null} redirectURL="#" customButtons={false}/>
-			</GoogleSignInProvider>,
-		);
-
-		expect(screen.getByTestId('google-sign-in-button')).toBeInTheDocument();
-		expect(screen.queryByTestId('fb-login-button')).not.toBeInTheDocument();
-	});
-
-	it("renders only Google (custom) button", () => {
-		useIdentity.mockImplementation(() => ({
-			isInitialized: true,
-			isLoggedIn: () => false,
-			Identity: {
-				configOptions: {
-					googleClientId: true,
-					facebookAppId: false,
-				},
-				initFacebookLogin: () => {},
-				initializeFacebook: () => {},
-			},
-		}));
-		usePhrases.mockImplementation(() => ({
-			t: jest
-				.fn()
-				.mockReturnValue(
-					"Sign-in prompt was suppressed by the user or dismissed. Please try again later or use another sign-in method.",
-				),
-		}));
-
-		render(
-			<GoogleSignInProvider>
-				<SocialSignOn onError={() => null} redirectURL="#" customButtons />
-			</GoogleSignInProvider>,
-		);
-
-		expect(screen.getByTestId('custom-google-sign-in-button')).toBeInTheDocument();
-		expect(screen.queryByTestId('fb-login-button')).not.toBeInTheDocument();
-	});
-
-	it("renders only Facebook (default) button", () => {
-		useIdentity.mockImplementation(() => ({
-			isInitialized: true,
-			isLoggedIn: () => false,
-			Identity: {
-				configOptions: {
-					googleClientId: false,
-					facebookAppId: true,
-				},
-				initFacebookLogin: () => {},
-				initializeFacebook: () => {},
-			},
-		}));
-
-		render(
-			<GoogleSignInProvider>
-				<SocialSignOn onError={() => null} redirectURL="#" />
-			</GoogleSignInProvider>,
-		);
-
-		expect(screen.getByTestId('fb-login-button')).toBeInTheDocument();
-		expect(screen.queryByTestId('google-sign-in-button')).not.toBeInTheDocument();
-	});
-
-	it("renders only Facebook (custom) button", () => {
-		useIdentity.mockImplementation(() => ({
-			isInitialized: true,
-			isLoggedIn: () => false,
-			Identity: {
-				configOptions: {
-					googleClientId: false,
-					facebookAppId: true,
-				},
-				initFacebookLogin: () => {},
-				initializeFacebook: () => {},
-			},
-		}));
-
-		render(
-			<GoogleSignInProvider>
-				<SocialSignOn onError={() => null} redirectURL="#" customButtons />
-			</GoogleSignInProvider>,
-		);
-
-		expect(screen.getByTestId('custom-facebook-btn')).toBeInTheDocument();
-		expect(screen.queryByTestId('google-sign-in-button')).not.toBeInTheDocument();
+		expect(screen.queryByTestId("fb-login-button")).not.toBeInTheDocument();
+		expect(screen.queryByTestId("google-sign-in-button")).not.toBeInTheDocument();
+		expect(screen.queryByTestId("apple-btn")).not.toBeInTheDocument();
 	});
 
 	it("renders", () => {
@@ -176,8 +73,8 @@ describe("Identity Social Login Component", () => {
 			</GoogleSignInProvider>,
 		);
 
-		expect(screen.getByTestId('fb-login-button')).toBeInTheDocument();
-		expect(screen.getByTestId('google-sign-in-button')).toBeInTheDocument();
+		expect(screen.getByTestId("fb-login-button")).toBeInTheDocument();
+		expect(screen.getByTestId("google-sign-in-button")).toBeInTheDocument();
 	});
 
 	it("calls getConfig if the options are missing", () => {
@@ -264,5 +161,87 @@ describe("Identity Social Login Component", () => {
 		);
 		window.onFacebookSignOn();
 		expect(onErrorMock).toHaveBeenCalled();
+	});
+});
+
+describe("Identity Social Login Component - Google Button", () => {
+	beforeEach(() => {
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			isLoggedIn: () => false,
+			Identity: {
+				configOptions: {
+					googleClientId: true,
+					facebookAppId: false,
+				},
+				initFacebookLogin: () => {},
+				initializeFacebook: () => {},
+			},
+		}));
+	});
+	it("renders only Google (default) button", () => {
+		render(
+			<GoogleSignInProvider>
+				<SocialSignOn onError={() => null} redirectURL="#" customButtons={false} />
+			</GoogleSignInProvider>,
+		);
+
+		expect(screen.getByTestId("google-sign-in-button")).toBeInTheDocument();
+		expect(screen.queryByTestId("fb-login-button")).not.toBeInTheDocument();
+	});
+
+	it("renders only Google (custom) button", () => {
+		mockButton.mockImplementation(() => <div data-testid="custom-google-sign-in-button" />);
+
+		render(
+			<GoogleSignInProvider>
+				<SocialSignOn onError={() => null} redirectURL="#" customButtons />
+			</GoogleSignInProvider>,
+		);
+
+		expect(screen.getByTestId("custom-google-sign-in-button")).toBeInTheDocument();
+		expect(screen.queryByTestId("fb-login-button")).not.toBeInTheDocument();
+	});
+});
+
+describe("Identity Social Login Component - Facebook Button", () => {
+
+	beforeEach(() => {
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			isLoggedIn: () => false,
+			Identity: {
+				configOptions: {
+					googleClientId: false,
+					facebookAppId: true,
+				},
+				initFacebookLogin: () => {},
+				initializeFacebook: () => {},
+			},
+		}));
+	});
+	it("renders only Facebook (default) button", () => {
+
+		render(
+			<GoogleSignInProvider>
+				<SocialSignOn onError={() => null} redirectURL="#" />
+			</GoogleSignInProvider>,
+		);
+
+		expect(screen.getByTestId("fb-login-button")).toBeInTheDocument();
+		expect(screen.queryByTestId("google-sign-in-button")).not.toBeInTheDocument();
+	});
+
+	it("renders only Facebook (custom) button", () => {
+		mockButton.mockImplementation(() => <div data-testid="custom-facebook-btn" />);
+
+		render(
+			<GoogleSignInProvider>
+				<SocialSignOn onError={() => null} redirectURL="#" customButtons />
+			</GoogleSignInProvider>,
+		);
+
+		expect(screen.getByTestId("custom-facebook-btn")).toBeInTheDocument();
+		expect(screen.queryByTestId("google-sign-in-button")).not.toBeInTheDocument();
 	});
 });

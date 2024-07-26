@@ -93,7 +93,7 @@ describe("Identity Social Login Component", () => {
 
 		render(
 			<GoogleSignInProvider>
-				<SocialSignOn onError={() => null} redirectURL="#" customButtons={true} />
+				<SocialSignOn onError={() => null} redirectURL="#" customButtons />
 			</GoogleSignInProvider>,
 		);
 
@@ -141,7 +141,7 @@ describe("Identity Social Login Component", () => {
 
 		render(
 			<GoogleSignInProvider>
-				<SocialSignOn onError={() => null} redirectURL="#" customButtons={true} />
+				<SocialSignOn onError={() => null} redirectURL="#" customButtons />
 			</GoogleSignInProvider>,
 		);
 

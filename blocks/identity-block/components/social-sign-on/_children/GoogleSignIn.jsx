@@ -12,31 +12,33 @@ function GoogleSignIn({ customButtons, socialSignOnIn, className }) {
 
 	if (customButtons) {
 		return (
-			<Button
-				id="custom-google-signin-btn"
-				variant="secondary-reverse"
-				iconLeft={GoogleIcon}
-				className={`${className}__Google`}
-				onClick={() =>
-					window.google.accounts.id.prompt((notification) => {
-						if (notification.isSkippedMoment()) {
-							// https://developers.google.com/identity/gsi/web/reference/js-reference
-							// https://developers.google.com/identity/gsi/web/guides/features#exponential_cooldown
-							// eslint-disable-next-line
-							alert(googleNotification);
-							// Remove cookie works in Safari
-							document.cookie = `g_state=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
-							window.google.accounts.id.prompt();
-						}
-					})
-				}
-			>
-				{socialSignOnIn !== SIGN_UP ? (
-					<span>{phrases.t("identity-block.social-signOn-google-login")}</span>
-				) : (
-					<span>{phrases.t("identity-block.social-signOn-google-signUp")}</span>
-				)}
-			</Button>
+			<div data-testid="custom-google-sign-in-button">
+				<Button
+					id="custom-google-signin-btn"
+					variant="secondary-reverse"
+					iconLeft={GoogleIcon}
+					className={`${className}__Google`}
+					onClick={() =>
+						window.google.accounts.id.prompt((notification) => {
+							if (notification.isSkippedMoment()) {
+								// https://developers.google.com/identity/gsi/web/reference/js-reference
+								// https://developers.google.com/identity/gsi/web/guides/features#exponential_cooldown
+								// eslint-disable-next-line
+								alert(googleNotification);
+								// Remove cookie works in Safari
+								document.cookie = `g_state=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+								window.google.accounts.id.prompt();
+							}
+						})
+					}
+				>
+					{socialSignOnIn !== SIGN_UP ? (
+						<span>{phrases.t("identity-block.social-signOn-google-login")}</span>
+					) : (
+						<span>{phrases.t("identity-block.social-signOn-google-signUp")}</span>
+					)}
+				</Button>
+			</div>
 		);
 	}
 	return (

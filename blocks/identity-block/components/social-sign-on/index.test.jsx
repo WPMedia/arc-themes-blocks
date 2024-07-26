@@ -97,7 +97,7 @@ describe("Identity Social Login Component", () => {
 			</GoogleSignInProvider>,
 		);
 
-		expect(screen.getByTestId('custom-google-signin-btn')).toBeInTheDocument();
+		expect(screen.getByTestId('custom-google-sign-in-button')).toBeInTheDocument();
 		expect(screen.queryByTestId('fb-login-button')).not.toBeInTheDocument();
 	});
 
@@ -145,7 +145,7 @@ describe("Identity Social Login Component", () => {
 			</GoogleSignInProvider>,
 		);
 
-		expect(screen.getByTestId('facebook-btn')).toBeInTheDocument();
+		expect(screen.getByTestId('custom-facebook-btn')).toBeInTheDocument();
 		expect(screen.queryByTestId('google-sign-in-button')).not.toBeInTheDocument();
 	});
 

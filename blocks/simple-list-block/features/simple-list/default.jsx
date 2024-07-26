@@ -133,25 +133,24 @@ const SimpleList = (props) => {
 					<Stack className={`${BLOCK_CLASS_NAME}__items`} divider>
 						{contentElements.map((element) => {
 							const { headlines: { basic: headlineText = "" } = {}, websites } = element;
-							const image = getImageFromANS(element);
-
 							if (!websites[arcSite]) {
 								return null;
 							}
 							const url = websites[arcSite].website_url;
-							const imageParams = image
+
+							const ansImage = getImageFromANS(element);
+							const imageParams = ansImage
 								? {
-										ansImage: image,
+										...(!showHeadline && headlineText !== "" ? { alt: headlineText } : {}),
+										ansImage,
 										aspectRatio: "3:2",
-										resizedOptions: {
-											...getFocalFromANS(image),
-										},
+										resizedOptions: getFocalFromANS(ansImage),
 										responsiveImages: [274, 548, 1096],
 										width: 274,
-								  }
+									}
 								: {
 										src: targetFallbackImage,
-								  };
+									};
 
 							return (
 								<Stack

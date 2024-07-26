@@ -50,9 +50,9 @@ const MediumManualPromo = ({ customFields }) => {
 		resizedImage || !imageURL
 			? {}
 			: {
-				source: "signing-service",
-				query: { id: manualImageId || imageURL },
-			}
+					source: "signing-service",
+					query: { id: manualImageId || imageURL },
+				},
 	);
 	if (imageAuth && !resizedAuth) {
 		resizedAuth = JSON.parse(imageAuth);
@@ -69,25 +69,23 @@ const MediumManualPromo = ({ customFields }) => {
 		_id: resizedImage ? imageId : manualImageId,
 		url: imageURL,
 		auth: resizedAuth,
-		focal_point: imageFocalPoint ? JSON.parse(imageFocalPoint) : undefined
-	}
+		focal_point: imageFocalPoint ? JSON.parse(imageFocalPoint) : undefined,
+	};
 	const alt = headline || description || null;
 	const imageParams =
 		imageURL && resizedAuth
 			? {
-				ansImage,
-				alt,
-				aspectRatio: imageRatio,
-				resizedOptions: {
-					...getFocalFromANS(ansImage)
-				},
-				responsiveImages: [200, 400, 600, 800, 1200],
-				width: 600,
-			}
+					alt,
+					ansImage,
+					aspectRatio: imageRatio,
+					resizedOptions: getFocalFromANS(ansImage),
+					responsiveImages: [200, 400, 600, 800, 1200],
+					width: 600,
+				}
 			: {
-				src: fallbackImage,
-				alt,
-			};
+					alt,
+					src: fallbackImage,
+				};
 
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
@@ -101,7 +99,7 @@ const MediumManualPromo = ({ customFields }) => {
 								imageURL: "url",
 								imageId: "_id",
 								imageAuth: "auth",
-								imageFocalPoint: "focal_point"
+								imageFocalPoint: "focal_point",
 							})}
 							suppressContentEditableWarning
 						>

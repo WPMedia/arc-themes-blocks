@@ -27,7 +27,7 @@ const PromoImage = ({
 	linkURL,
 	newTab,
 	registerSuccessEvent,
-	showHeadline
+	showHeadline,
 }) => {
 	const ImageDisplay = showImage ? (
 		<MediaItem
@@ -35,7 +35,7 @@ const PromoImage = ({
 				imageURL: "url",
 				imageId: "_id",
 				imageAuth: "auth",
-				imageFocalPoint: "focal_point"
+				imageFocalPoint: "focal_point",
 			})}
 			suppressContentEditableWarning
 		>
@@ -57,13 +57,7 @@ const PromoImage = ({
 	);
 };
 
-const PromoHeading = ({
-	showHeadline,
-	headline,
-	linkURL,
-	newTab,
-	registerSuccessEvent
-}) =>
+const PromoHeading = ({ showHeadline, headline, linkURL, newTab, registerSuccessEvent }) =>
 	showHeadline && headline ? (
 		<Heading>
 			{linkURL ? (
@@ -104,9 +98,9 @@ const SmallManualPromo = ({ customFields }) => {
 		resizedImage || !imageURL
 			? {}
 			: {
-				source: "signing-service",
-				query: { id: manualImageId || imageURL },
-			}
+					source: "signing-service",
+					query: { id: manualImageId || imageURL },
+				},
 	);
 	if (imageAuth && !resizedAuth) {
 		resizedAuth = JSON.parse(imageAuth);
@@ -123,26 +117,24 @@ const SmallManualPromo = ({ customFields }) => {
 		_id: resizedImage ? imageId : manualImageId,
 		url: imageURL,
 		auth: resizedAuth,
-		focal_point: imageFocalPoint ? JSON.parse(imageFocalPoint) : undefined
-	}
+		focal_point: imageFocalPoint ? JSON.parse(imageFocalPoint) : undefined,
+	};
 
 	const alt = headline || null;
 	const imageParams =
 		imageURL && resizedAuth
 			? {
-				ansImage,
-				alt,
-				aspectRatio: imageRatio,
-				resizedOptions: {
-					...getFocalFromANS(ansImage)
-				},
-				responsiveImages: [200, 400, 600, 800, 1200],
-				width: 600,
-			}
+					alt,
+					ansImage,
+					aspectRatio: imageRatio,
+					resizedOptions: getFocalFromANS(ansImage),
+					responsiveImages: [200, 400, 600, 800, 1200],
+					width: 600,
+				}
 			: {
-				src: fallbackImage,
-				alt,
-			};
+					alt,
+					src: fallbackImage,
+				};
 
 	const containerClassNames = [
 		BLOCK_CLASS_NAME,

@@ -65,9 +65,9 @@ const LargeManualPromo = ({ customFields }) => {
 		resizedImage || !imageURL
 			? {}
 			: {
-				source: "signing-service",
-				query: { id: manualImageId || imageURL },
-			}
+					source: "signing-service",
+					query: { id: manualImageId || imageURL },
+				},
 	);
 	if (imageAuth && !resizedAuth) {
 		resizedAuth = JSON.parse(imageAuth);
@@ -83,26 +83,24 @@ const LargeManualPromo = ({ customFields }) => {
 		_id: resizedImage ? imageId : manualImageId,
 		url: imageURL,
 		auth: resizedAuth,
-		focal_point: imageFocalPoint ? JSON.parse(imageFocalPoint) : undefined
-	}
+		focal_point: imageFocalPoint ? JSON.parse(imageFocalPoint) : undefined,
+	};
 
 	const alt = headline || description || null;
 	const imageParams =
 		imageURL && resizedAuth
 			? {
-				ansImage,
-				alt,
-				aspectRatio: imageRatio,
-				resizedOptions: {
-					...getFocalFromANS(ansImage)
-				},
-				responsiveImages: [200, 400, 600, 800, 1200],
-				width: 600,
-			}
+					alt,
+					ansImage,
+					aspectRatio: imageRatio,
+					resizedOptions: getFocalFromANS(ansImage),
+					responsiveImages: [200, 400, 600, 800, 1200],
+					width: 600,
+				}
 			: {
-				src: fallbackImage,
-				alt,
-			};
+					alt,
+					src: fallbackImage,
+				};
 
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
@@ -132,7 +130,11 @@ const LargeManualPromo = ({ customFields }) => {
 						</MediaItem>
 					) : null}
 					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
-						<PromoOverline showOverline={showOverline} overline={overline} overlineURL={overlineURL} />
+						<PromoOverline
+							showOverline={showOverline}
+							overline={overline}
+							overlineURL={overlineURL}
+						/>
 						{showDescription || showHeadline ? (
 							<Stack>
 								{showHeadline && headline ? (

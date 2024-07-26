@@ -27,7 +27,6 @@ import {
 	Stack,
 	usePhrases,
 	Video,
-	
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-top-table-list-large";
@@ -62,12 +61,9 @@ const Large = (props) => {
 		},
 	} = getProperties(arcSite);
 
-	const displayDate = Date.parse(element?.display_date) ? localizeDateTime(
-		new Date(element?.display_date),
-		dateTimeFormat,
-		language,
-		timeZone
-	) : "";
+	const displayDate = Date.parse(element?.display_date)
+		? localizeDateTime(new Date(element?.display_date), dateTimeFormat, language, timeZone)
+		: "";
 	const phrases = usePhrases();
 
 	const videoOrGalleryContent =
@@ -118,18 +114,16 @@ const Large = (props) => {
 	const imageParams =
 		element && ansImage
 			? {
-					ansImage,
 					alt: element?.headlines?.basic || "",
+					ansImage,
 					aspectRatio: imageRatioLG,
-					resizedOptions: {
-						...getFocalFromANS(ansImage),
-					},
+					resizedOptions: getFocalFromANS(ansImage),
 					responsiveImages: [400, 600, 800, 1200],
 					width: 800,
-			  }
+				}
 			: {
 					src: fallbackImage,
-			  };
+				};
 
 	return embedMarkup ||
 		contentOverline ||

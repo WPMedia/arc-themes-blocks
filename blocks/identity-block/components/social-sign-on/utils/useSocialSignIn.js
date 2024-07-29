@@ -133,22 +133,21 @@ function useSocialSignIn(
 	}, [Identity, config.facebookAppId, customButtons]);
 
 	useEffect(() => {
+		let timeout;
 		const checkIsLoggedIn = () => {
-			const timeout = setTimeout(() => {
+			timeout = setTimeout(() => {
 				Identity.isLoggedIn().then((isLoggedIn) => {
 					if (isLoggedIn) {
 						window.location = validateURL(redirectURL);
 					}
 				});
 			}, 1500);
-  			return () => clearTimeout(timeout)
 		};
 
 		const setIdentityUpdated = () => {
-			const timeout = setTimeout(() => {
+			timeout = setTimeout(() => {
 				setUpdateIdentities((prev) => !prev);
 			}, 1500);
-			return () => clearTimeout(timeout)
 		};
 
 		if (customButtons && isFBInitialized && !isFBEventSubscribed && window?.FB?.Event) {
@@ -163,6 +162,7 @@ function useSocialSignIn(
 				}
 			});
 		}
+		return () => clearTimeout(timeout);
 	}, [
 		isFBInitialized,
 		isFBEventSubscribed,
@@ -173,11 +173,6 @@ function useSocialSignIn(
 		fromSocialSignOnBlock,
 		redirectURL,
 	]);
-
-
-
-
-
 
 	return {
 		// if facebook and google setup with subs,

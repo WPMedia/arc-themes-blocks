@@ -18,7 +18,7 @@ function GoogleSignIn({ customButtons, socialSignOnIn, className }) {
 				iconLeft={GoogleIcon}
 				className={`${className}__Google`}
 				onClick={() =>
-					window.google.accounts.id.prompt((notification) => {
+					window?.google?.accounts?.id?.prompt((notification) => {
 						if (notification.isSkippedMoment()) {
 							// https://developers.google.com/identity/gsi/web/reference/js-reference
 							// https://developers.google.com/identity/gsi/web/guides/features#exponential_cooldown

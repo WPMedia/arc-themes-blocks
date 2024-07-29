@@ -32,16 +32,18 @@ const Test = (props) => {
 	);
 };
 
+const windowLocationValues = {
+	origin: 'http://localhost',
+	href: 'http://localhost',
+	search: '',
+	pathname: '/',
+}
+
 describe("useLogin()", () => {
 	beforeEach(() => {
 		Object.defineProperty(window, "location", {
 			writable: true,
-			value: {
-				origin: 'http://localhost',
-				href: 'http://localhost',
-				search: '',
-				pathname: '/',
-			}
+			value: windowLocationValues,
 		});
 		useIdentity.mockImplementation(() => ({
 			isInitialized: true,
@@ -64,6 +66,7 @@ describe("useLogin()", () => {
 
 	it("uses redirect query", async () => {
 		Object.defineProperty(window, "location", {
+			...windowLocationValues,
 			writable: true,
 			value: {
 				search: "?test=123&redirect=/new-account/",
@@ -97,6 +100,7 @@ describe("useLogin()", () => {
 		Object.defineProperty(window, "location", {
 			writable: true,
 			value: {
+				...windowLocationValues,
 				origin: 'http://localhost',
 				href: 'http://localhost',
 				search: '?reset_password=true',
@@ -118,13 +122,15 @@ describe("useLogin()", () => {
 			},
 		}));
 		await render(<Test />);
-		expect(window.location).toBe(`http://localhost${defaultParams.loggedInPageLocation}`);
+
+		expect(window.location).toBe(`http://localhost${defaultParams.redirectURL}`);
 	});
 
 	it("replaces potentially unsafe URLs in query param", async () => {
 		Object.defineProperty(window, "location", {
 			writable: true,
 			value: {
+				...windowLocationValues,
 				search: "?test=123&redirect=https://somewhere.com",
 				pathname: "/",
 			},
@@ -134,21 +140,23 @@ describe("useLogin()", () => {
 		expect(window.location).toBe("/");
 	});
 
-	it("replaces potentially unsafe URLs in redirectURL parameter", async () => {
-		await render(<Test redirectURL="https://somewhere.com" />);
+	it("replaces potentially unsafe URLs in query param", async () => {
+		Object.defineProperty(window, "location", {
+			writable: true,
+			value: {
+				...windowLocationValues,
+				search: "",
+				pathname: "/",
+			},
+		});
+		await render(<Test loggedInPageLocation="https://somewhere.com" />);
 		fireEvent.click(screen.getByRole("button"));
 		expect(window.location).toBe("/");
 	});
 
-	it("replaces potentially unsafe URLs in loggedInPageLocation parameter", async () => {
-		useIdentity.mockImplementation(() => ({
-			isInitialized: true,
-			Identity: {
-				isLoggedIn: jest.fn(() => true),
-				getConfig: jest.fn(() => ({})),
-			},
-		}));
-		await render(<Test loggedInPageLocation="https://somewhere.com" />);
+	it("replaces potentially unsafe URLs in redirectURL parameter", async () => {
+		await render(<Test redirectURL="https://somewhere.com" />);
+		fireEvent.click(screen.getByRole("button"));
 		expect(window.location).toBe("/");
 	});
 
@@ -161,6 +169,7 @@ describe("useLogin()", () => {
 		Object.defineProperty(window, "location", {
 			writable: true,
 			value: {
+				...windowLocationValues,
 				origin: 'http://localhost',
 				href: 'http://localhost',
 				search: '',
@@ -170,6 +179,40 @@ describe("useLogin()", () => {
 		await render(<Test />);
 		fireEvent.click(screen.getByRole("button"));
 		expect(window.location).toBe("/account/");
+		delete document.referrer;
+	});
+
+	it("should use redirectUrl from sessionStorage", async () => {
+		const referrerURL = "http://localhost/featured-articles/";
+		Object.defineProperty(document, "referrer", {
+			value: referrerURL,
+			configurable: true,
+		});
+		Object.defineProperty(window, "location", {
+			writable: true,
+			value: {
+				...windowLocationValues,
+				origin: 'http://localhost',
+				href: 'http://localhost',
+				search: '',
+				pathname: '/'
+			}
+		});
+
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			Identity: {
+				isLoggedIn: jest.fn(() => true),
+				getConfig: jest.fn(() => ({})),
+			},
+		}));
+
+		await render(<Test />);
+
+		expect(sessionStorage.getItem("ArcXP_redirectUrl")).toBe('/featured-articles/');
+
+		fireEvent.click(screen.getByRole("button"));
+		expect(window.location).toBe("/featured-articles/");
 		delete document.referrer;
 	});
 });

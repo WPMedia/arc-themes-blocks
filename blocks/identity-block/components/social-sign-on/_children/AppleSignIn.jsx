@@ -14,19 +14,19 @@ function AppleSignIn({ socialSignOnIn, className }) {
 	const { Identity } = useIdentity();
 
 	return (
-			<Button
-				id="apple-btn"
-				variant="secondary-reverse"
-				onClick={() => Identity.initAppleSignOn()}
-				iconLeft={AppleIcon}
-				className={`${className}__Apple`}
-			>
-				{socialSignOnIn !== SIGN_UP ? (
-					<span>{phrases.t("identity-block.social-signOn-apple-login")}</span>
-				) : (
-					<span>{phrases.t("identity-block.social-signOn-apple-signUp")}</span>
-				)}
-			</Button>
+		<Button
+			id="apple-btn"
+			variant="secondary-reverse"
+			onClick={() => Identity.initAppleSignOn()}
+			iconLeft={AppleIcon}
+			className={`${className}__Apple`}
+		>
+			{socialSignOnIn !== SIGN_UP ? (
+				<span>{phrases.t("identity-block.social-signOn-apple-login")}</span>
+			) : (
+				<span>{phrases.t("identity-block.social-signOn-apple-signUp")}</span>
+			)}
+		</Button>
 	);
 }
 

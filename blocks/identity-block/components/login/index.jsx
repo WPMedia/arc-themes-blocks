@@ -20,6 +20,16 @@ const useLogin = ({
 	const [isAppleAuthSuccess, setIsAppleAuthSuccess] = useState(false);
 	const { loginByOIDC } = useOIDCLogin();
 
+	const setRedirectUrl = (url) => {
+		setCurrentRedirectToURL(url);
+		sessionStorage.setItem('ArcXP_redirectUrl', url);
+	};
+
+	const getRedirectURL = () => {
+		const localStorageRedirectUrl = sessionStorage.getItem('ArcXP_redirectUrl');
+
+		return redirectQueryParam || localStorageRedirectUrl || currentRedirectToURL;
+	};
 
 	useEffect(() => {
 		const askForloginWithApple = async (code) => {
@@ -55,16 +65,17 @@ const useLogin = ({
 
 		if (redirectToPreviousPage && document?.referrer) {
 			const redirectUrlLocation = new URL(document.referrer);
+			let newRedirectUrl = redirectUrlLocation.pathname.includes('/pagebuilder/')
+				? redirectURL
+				: `${redirectUrlLocation.pathname}${redirectUrlLocation.search}`;
 
 			if (searchParams.has('reset_password')) {
-				setCurrentRedirectToURL(`${redirectURL}${redirectUrlLocation.search}`);
-			} else {
-				const newRedirectUrl = redirectUrlLocation.pathname.includes('/pagebuilder/')
-					? redirectURL
-					: `${redirectUrlLocation.pathname}${redirectUrlLocation.search}`;
+				newRedirectUrl = `${redirectURL}${redirectUrlLocation.search}`;
 
-				setCurrentRedirectToURL(newRedirectUrl);
+				setRedirectUrl(newRedirectUrl);
 			}
+
+			setRedirectUrl(newRedirectUrl);
 		}
 	}, [redirectQueryParam, redirectToPreviousPage, redirectURL]);
 
@@ -88,7 +99,11 @@ const useLogin = ({
 				if (isOIDC) {
 					loginByOIDC();
 				} else {
-					window.location = redirectQueryParam || validatedLoggedInPageLoc;
+					const localStorageRedirectUrl = sessionStorage.getItem('ArcXP_redirectUrl');
+					const validatedLocalRedirectURL = validateURL(localStorageRedirectUrl);
+					const newRedirectUrl = redirectQueryParam || validatedLocalRedirectURL || validatedLoggedInPageLoc;
+
+					window.location = newRedirectUrl;
 				}
 			}
 		};
@@ -98,7 +113,7 @@ const useLogin = ({
 	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin, loginByOIDC, isOIDC, isAppleAuthSuccess]);
 
 	return {
-		loginRedirect: redirectQueryParam || currentRedirectToURL,
+		loginRedirect: getRedirectURL(),
 	};
 };
 

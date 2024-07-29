@@ -60,7 +60,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 
 	return (
 		<Stack className={BLOCK_CLASS_NAME} data-testid="social-sign-on-container">
-				{!hideDiv ? <div className={`${BLOCK_CLASS_NAME}__dividerWithText`}>{phrases.t("identity-block.or")}</div> : null}
+			{!hideDiv ? <div className={`${BLOCK_CLASS_NAME}__dividerWithText`}>{phrases.t("identity-block.or")}</div> : null}
 			<GoogleSignInProvider>
 				<SocialSignOn
 					className={`${BLOCK_CLASS_NAME}__button-container`}

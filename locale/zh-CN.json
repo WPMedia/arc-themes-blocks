@@ -31,7 +31,7 @@
 		"category-carousel.aria-label": "类别",
 		"category-carousel.left-arrow-label": "上一张",
 		"category-carousel.right-arrow-label": "下一张",
-		"category-carousel.slide-indicator": "幻灯片 %{current}\/%{maximum}"
+		"category-carousel.slide-indicator": "幻灯片 %{current}/%{maximum}"
 	},
 	"default-output-block": {
 		"default-output-block.skip-main": "跳至主内容"
@@ -67,7 +67,7 @@
 		"global.gallery-autoplay-label-stop": "停止自动幻灯片放映",
 		"global.gallery-expand-button": "展开",
 		"global.gallery-next-label": "下一张幻灯片",
-		"global.gallery-page-count-text": "<span class='visually-hidden'>图像<\/span> %{current}\/%{total}",
+		"global.gallery-page-count-text": "<span class='visually-hidden'>图像</span> %{current}/%{total}",
 		"global.gallery-pause-autoplay-button": "暂停自动播放",
 		"global.gallery-previous-label": "上一张幻灯片",
 		"global.gallery-text": "图库",
@@ -114,6 +114,12 @@
 		"identity-block.confirm-password": "确认密码",
 		"identity-block.confirm-password-error": "密码必须匹配",
 		"identity-block.connect-account": "已连接",
+		"identity-block.connect-identity": "Connect",
+		"identity-block.login-form-error.captcha-token-required": "Captcha token required.",
+		"identity-block.social-google-one-tap-notification": "Sign-in prompt was suppressed by the user or dismissed. Please try again later or use another sign-in method.",
+		"identity-block.social-signOn-unlink-error": "At least one identity needs to remain on the user",
+		"identity-block.social-signOn-facebook-login": "Sign in with Facebook",
+		"identity-block.social-signOn-facebook-signUp": "Sign up with Facebook",
 		"identity-block.connect-platform": "连接 %{platform}",
 		"identity-block.connected-accounts": "已连接帐户",
 		"identity-block.create-an-account": "创建帐户",
@@ -154,7 +160,7 @@
 		"identity-block.ota-ivalid-login-link": "Invalid login link",
 		"identity-block.ota-ivalid-login-link-subheadline": "Looks like one time login link is invalid or expired. Please request a new log in link and try again.",
 		"identity-block.ota-subheadline": "To sign in without a password, enter your email below and you will receive a one time log in link.",
-		"identity-block.ota-success-body": "If there's an account associated with <b>%{userEmail}<\/b>, you'll get a link in your inbox that will automatically sign you in to your account. The link will expire in 24 hours.",
+		"identity-block.ota-success-body": "If there's an account associated with <b>%{userEmail}</b>, you'll get a link in your inbox that will automatically sign you in to your account. The link will expire in 24 hours.",
 		"identity-block.ota-success-heading": "Check Your Email",
 		"identity-block.password": "密码",
 		"identity-block.password-placeholder": "**********",
@@ -181,8 +187,8 @@
 		"identity-block.social-signOn-apple-signUp": "使用 Apple 注册",
 		"identity-block.social-signOn-google-login": "使用 Google 登录",
 		"identity-block.social-signOn-google-signUp": "使用 Google 注册",
-		"identity-block.terms-privacy-text": "创建帐户即表示您同意<a href='%{termsURL}'>服务条款<\/a>并确认我们的<a href='%{privacyURL}'>隐私政策<\/a>。",
-		"identity-block.terms-service-privacy-text": "创建帐户即表示您同意<a href='%{termsAndPrivacyURL}'>服务条款并确认我们的隐私政策<\/a>",
+		"identity-block.terms-privacy-text": "创建帐户即表示您同意<a href='%{termsURL}'>服务条款</a>并确认我们的<a href='%{privacyURL}'>隐私政策</a>。",
+		"identity-block.terms-service-privacy-text": "创建帐户即表示您同意<a href='%{termsAndPrivacyURL}'>服务条款并确认我们的隐私政策</a>",
 		"identity-block.update-email-error": "更新您的电子邮件地址时出错",
 		"identity-block.update-password-error": "更新您的密码时出错",
 		"identity-block.username": "用户名"
@@ -198,7 +204,7 @@
 		"product-assortment-carousel.aria-label": "产品",
 		"product-assortment-carousel.left-arrow-label": "上一张",
 		"product-assortment-carousel.right-arrow-label": "下一张",
-		"product-assortment-carousel.slide-indicator": "幻灯片 %{current}\/%{maximum}"
+		"product-assortment-carousel.slide-indicator": "幻灯片 %{current}/%{maximum}"
 	},
 	"product-content-block": {
 		"product-content.description": "描述",
@@ -213,7 +219,7 @@
 		"product-gallery.go-to-slide": "转至幻灯片 %{slideNumber}",
 		"product-gallery.left-arrow-label": "上一张",
 		"product-gallery.right-arrow-label": "下一张",
-		"product-gallery.slide-indicator": "幻灯片 %{current}\/%{maximum}"
+		"product-gallery.slide-indicator": "幻灯片 %{current}/%{maximum}"
 	},
 	"product-information-block": {
 		"product-information.list-price": "标价 %{price}",
@@ -237,7 +243,7 @@
 		"story-carousel.aria-label": "故事",
 		"story-carousel.left-arrow-label": "上一张",
 		"story-carousel.right-arrow-label": "下一张",
-		"story-carousel.slide-indicator": "幻灯片 %{current}\/%{maximum}"
+		"story-carousel.slide-indicator": "幻灯片 %{current}/%{maximum}"
 	},
 	"subscriptions-block": {
 		"checkout-block.Afghanistan": "阿富汗",
@@ -430,7 +436,7 @@
 		"checkout-block.San-Marino": "圣马力诺",
 		"checkout-block.Sao-Tome-and-Principe": "圣多美和普林西比",
 		"checkout-block.Saudi-Arabia": "沙特阿拉伯",
-		"checkout-block.Select-Country": "选择国家\/地区",
+		"checkout-block.Select-Country": "选择国家/地区",
 		"checkout-block.Senegal": "塞内加尔",
 		"checkout-block.Serbia-and-Montenegro": "塞尔维亚和黑山",
 		"checkout-block.Seychelles": "塞舌尔",
@@ -487,7 +493,7 @@
 		"checkout-block.address1": "Address 1",
 		"checkout-block.address1-validation": "Please enter a valid address.",
 		"checkout-block.address2": "Address 2 (Optional)",
-		"checkout-block.address2-placeholder": "ex: Apt\/Suite\/Floor",
+		"checkout-block.address2-placeholder": "ex: Apt/Suite/Floor",
 		"checkout-block.automatic-renewal-terms-description": "Your subscription will continue until you cancel. You can cancel your subscription online at any time in your Account settings, or during limited hours by chat or phone. Cancellations take effect at the end of your current billing period.",
 		"checkout-block.automatic-renewal-terms-intro": "Your payment method will be automatically charged in advance",
 		"checkout-block.automatic-renewal-terms-title": "Automatic Renewal Terms",
@@ -503,9 +509,9 @@
 		"checkout-block.continue": "继续",
 		"checkout-block.continue-to-checkout": "继续结账",
 		"checkout-block.country": "国家或地区",
-		"checkout-block.country-region": "Country\/Region",
+		"checkout-block.country-region": "Country/Region",
 		"checkout-block.country-requirements": "请选择国家或地区",
-		"checkout-block.country-validation": "Please enter a valid country\/region.",
+		"checkout-block.country-validation": "Please enter a valid country/region.",
 		"checkout-block.due-today": "今天到期",
 		"checkout-block.edit": "编辑",
 		"checkout-block.email": "电子邮件地址",
@@ -560,8 +566,8 @@
 		"checkout-block.state-validation": "Please enter a valid state.",
 		"checkout-block.subtotal": "Subtotal",
 		"checkout-block.view-subscription-offers": "View subscription offers",
-		"checkout-block.zip-code": "Zip\/Postal Code",
-		"checkout-block.zip-code-validation": "Please enter a valid zip\/postal code.",
+		"checkout-block.zip-code": "Zip/Postal Code",
+		"checkout-block.zip-code-validation": "Please enter a valid zip/postal code.",
 		"checkout-block.Åland-Islands": "奥兰群岛",
 		"subscription-block.shared-No": "No",
 		"subscription-block.shared-Payment-method": "Payment method",
@@ -594,7 +600,7 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
 		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
 		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
-		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
+		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale </a> and <a href='%{termsOfServiceURL}'>terms of service</a>.",
 		"subscriptions-block.update-payment": "更新付款方式"
 	}
 }

@@ -3,13 +3,24 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Heading, useIdentity } from "@wpmedia/arc-themes-components";
+import { Heading, useIdentity, Paragraph } from "@wpmedia/arc-themes-components";
 import { GoogleSignInProvider } from "../../components/social-sign-on/utils/googleContext";
 import EmailEditableFieldContainer from "./_children/EmailEditableFieldContainer";
 import PasswordEditableFieldContainer from "./_children/PasswordEditableFieldContainer";
 import SocialEditableSection from "./_children/SocialEditableSection";
 
 const BLOCK_CLASS_NAME = "b-account-management";
+
+const errorCodes = {
+	300044: "identity-block.social-signOn-unlink-error",
+	130001: "identity-block.login-form-error.captcha-token-invalid",
+	'010122': "identity-block.login-form-error.captcha-token-required",
+	0: "identity-block.login-form-error.something-went-wrong",
+};
+
+export function definedMessageByCode(code) {
+	return errorCodes[code] || errorCodes["0"];
+}
 
 export function AccountManagementPresentational({ header, children }) {
 	return (
@@ -27,6 +38,10 @@ function AccountManagement({ customFields }) {
 	const [hasPassword, setHasPassword] = useState();
 	const [hasGoogle, setHasGoogle] = useState(false);
 	const [hasFacebook, setHasFacebook] = useState(false);
+	const [hasApple, setHasApple] = useState(false);
+	const [numIdentities, setNumIdentities] = useState();
+	const [updateIdentities, setUpdateIdentities] = useState(false);
+	const [error, setError] = useState();
 
 	const { redirectURL, showEmail, showPassword, showSocialProfile } = customFields;
 
@@ -59,6 +74,8 @@ function AccountManagement({ customFields }) {
 			Identity.getUserProfile().then((profileObject) => {
 				const { email: loggedInEmail, identities } = profileObject;
 
+				setNumIdentities(identities.length);
+
 				if (loggedInEmail) {
 					setEmail(loggedInEmail);
 				}
@@ -70,6 +87,7 @@ function AccountManagement({ customFields }) {
 				setHasPassword(passwordProfile?.length > 0);
 				setHasGoogle(identities.filter(({ type }) => type === "Google").length > 0);
 				setHasFacebook(identities.filter(({ type }) => type === "Facebook").length > 0);
+				setHasApple(identities.filter(({ type }) => type === "Apple").length > 0);
 
 				setIsLoading(false);
 			});
@@ -77,15 +95,40 @@ function AccountManagement({ customFields }) {
 		if (!isAdmin && loggedIn) {
 			getProfile();
 		}
-	}, [loggedIn, setEmail, Identity, isAdmin]);
+	}, [loggedIn, setEmail, Identity, isAdmin, updateIdentities]);
 
-	// cause re-render to re-check if identity has social identity
+	// istanbul ignore next
+	const unlinkGoogle = async () => 
+		Identity.unlinkSocialIdentity("google").then(() => {
+			setUpdateIdentities(!updateIdentities);
+			setError();
+		}).catch((e) => {
+			setError(phrases.t(definedMessageByCode(e.code)));
+		});
+
 	// istanbul ignore next
 	const unlinkFacebook = () =>
-		Identity.unlinkSocialIdentity("facebook").then(() => setHasFacebook(false));
+		Identity.unlinkSocialIdentity("facebook")
+			.then(() => {
+				setUpdateIdentities(!updateIdentities);
+				setError();
+			})
+			.catch((e) => {
+				setError(phrases.t(definedMessageByCode(e.code)));
+			});
+
+	const linkApple = () => {
+		Identity.initAppleSignOn();
+	};
+
 	// istanbul ignore next
-	const unlinkGoogle = () =>
-		Identity.unlinkSocialIdentity("google").then(() => setHasGoogle(false));
+	const unlinkApple = () =>
+		Identity.unlinkSocialIdentity("apple")
+			.then(() => {
+				setUpdateIdentities(!updateIdentities);
+				setError();
+			})
+			.catch((e) => setError(phrases.t(definedMessageByCode(e.code))));
 
 	if (!isInitialized || (isLoading && !isAdmin)) {
 		return null;
@@ -93,7 +136,6 @@ function AccountManagement({ customFields }) {
 
 	const header = phrases.t("identity-block.account-information");
 	const socialProfileHeader = phrases.t("identity-block.connected-accounts");
-
 
 	// if logged in, return account info
 	return (
@@ -117,14 +159,26 @@ function AccountManagement({ customFields }) {
 			</AccountManagementPresentational>
 			{showSocialProfile ? (
 				<AccountManagementPresentational header={socialProfileHeader}>
+					{error ? (
+						<div className={`${BLOCK_CLASS_NAME}__social-signOn-identities-error`}>
+							<Paragraph>{error}</Paragraph>
+						</div>
+					) : null}
 					<GoogleSignInProvider>
 						<SocialEditableSection
 							blockClassName={BLOCK_CLASS_NAME}
 							hasFacebook={hasFacebook}
+							setHasFacebook={setHasFacebook}
 							hasGoogle={hasGoogle}
+							hasApple={hasApple}
 							hasPasswordAccount={hasPassword}
 							unlinkFacebook={unlinkFacebook}
 							unlinkGoogle={unlinkGoogle}
+							unlinkApple={unlinkApple}
+							linkApple={linkApple}
+							numIdentities={numIdentities}
+							updateIdentities={updateIdentities}
+							setUpdateIdentities={setUpdateIdentities}
 						/>
 					</GoogleSignInProvider>
 				</AccountManagementPresentational>

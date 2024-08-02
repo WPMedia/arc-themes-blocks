@@ -48,13 +48,13 @@ const SignUp = ({ customFields, arcSite }) => {
 		const getConfig = async () => {
 			await Identity.getConfig()
 				.then((response) => {
-					const { pwLowercase, pwMinLength, pwPwNumbers, pwSpecialCharacters, pwUppercase } =
+					const { pwLowercase, pwMinLength, pwNumbers, pwSpecialCharacters, pwUppercase } =
 						response;
 
 					setPasswordRequirements({
 						pwLowercase,
 						pwMinLength,
-						pwPwNumbers,
+						pwNumbers,
 						pwSpecialCharacters,
 						pwUppercase,
 						status: "success",
@@ -80,7 +80,7 @@ const SignUp = ({ customFields, arcSite }) => {
 	const {
 		pwLowercase = 0,
 		pwMinLength = 0,
-		pwPwNumbers = 0,
+		pwNumbers = 0,
 		pwSpecialCharacters = 0,
 		pwUppercase = 0,
 		status,
@@ -106,9 +106,9 @@ const SignUp = ({ customFields, arcSite }) => {
 			}),
 		},
 		numbers: {
-			value: pwPwNumbers,
+			value: pwNumbers,
 			message: phrases.t("identity-block.password-requirements-numbers", {
-				requirementCount: pwPwNumbers,
+				requirementCount: pwNumbers,
 			}),
 		},
 		specialCharacters: {
@@ -183,7 +183,7 @@ const SignUp = ({ customFields, arcSite }) => {
 				validationPattern={validatePasswordPattern(
 					pwLowercase,
 					pwMinLength,
-					pwPwNumbers,
+					pwNumbers,
 					pwSpecialCharacters,
 					pwUppercase,
 				)}

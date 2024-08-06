@@ -32,7 +32,7 @@ function useSocialSignIn(
 						setIsFBInitialized(true);
 					}
 				});
-				debugger;
+
 				if (isOIDC) {
 					loginByOIDC();
 				} else if (fromSocialSignOnBlock) {

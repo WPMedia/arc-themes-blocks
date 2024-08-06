@@ -27,19 +27,24 @@ function AppleSignIn({ customButtons, socialSignOnIn, className, oidcClients = [
 	};
 
 	return (
-		<Button
-			id="apple-btn"
-			variant="secondary-reverse"
-			onClick={handleClick}
-			iconLeft={AppleIcon}
-			className={`${className}__Apple ${customButtons ? `${className}__Apple__custom` : ''}`}
+		<div
+			data-testid="apple-sign-in-button"
+			style={{ width: '100%' }}
 		>
-			{socialSignOnIn !== SIGN_UP ? (
-				<span>{phrases.t("identity-block.social-signOn-apple-login")}</span>
-			) : (
-				<span>{phrases.t("identity-block.social-signOn-apple-signUp")}</span>
-			)}
-		</Button>
+			<Button
+				id="apple-btn"
+				variant="secondary-reverse"
+				onClick={handleClick}
+				iconLeft={AppleIcon}
+				className={`${className}__Apple ${customButtons ? `${className}__Apple__custom` : ''}`}
+			>
+				{socialSignOnIn !== SIGN_UP ? (
+					<span>{phrases.t("identity-block.social-signOn-apple-login")}</span>
+				) : (
+					<span>{phrases.t("identity-block.social-signOn-apple-signUp")}</span>
+				)}
+			</Button>
+		</div>
 	);
 }
 

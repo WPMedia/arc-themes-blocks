@@ -3,7 +3,6 @@ import PropTypes from "@arc-fusion/prop-types";
 import FacebookSignIn from "./_children/FacebookSignIn";
 import GoogleSignIn from "./_children/GoogleSignIn";
 import AppleSignIn from "./_children/AppleSignIn";
-import OIDCSignIn from "./_children/OIDCSignin";
 import useSocialSignIn from "./utils/useSocialSignIn";
 
 const SocialSignOn = ({
@@ -12,7 +11,8 @@ const SocialSignOn = ({
 	redirectURL,
 	isOIDC,
 	socialSignOnIn,
-	customButtons
+	customButtons,
+	appleClientId,
 }) => {
 	const {
 		facebookAppId,
@@ -27,13 +27,13 @@ const SocialSignOn = ({
 		<section className={className}>
 			{googleClientId && <GoogleSignIn customButtons={customButtons} socialSignOnIn={socialSignOnIn} className={className} />}
 			{facebookAppId && <FacebookSignIn customButtons={customButtons} socialSignOnIn={socialSignOnIn} className={className} />}
-			{appleTeamId && appleKeyId && appleUrlToReceiveAuthToken && <AppleSignIn customButtons={customButtons} socialSignOnIn={socialSignOnIn} className={className} />}
-			{oidcClients?.length && oidcClients?.length > 0 && (
-				<OIDCSignIn
+			{appleTeamId && appleKeyId && appleUrlToReceiveAuthToken && (
+				<AppleSignIn
 					customButtons={customButtons}
 					socialSignOnIn={socialSignOnIn}
-					oidcClients={oidcClients}
 					className={className}
+					oidcClients={oidcClients}
+					appleClientId={appleClientId}
 				/>
 			)}
 		</section>
@@ -42,6 +42,7 @@ const SocialSignOn = ({
 
 SocialSignOn.propTypes = {
 	redirectURL: PropTypes.string.isRequired,
+	appleClientId: PropTypes.string,
 	onError: PropTypes.func.isRequired,
 };
 

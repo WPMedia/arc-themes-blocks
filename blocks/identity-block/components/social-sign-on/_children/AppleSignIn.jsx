@@ -5,14 +5,18 @@ import { SIGN_UP } from "../constants";
 
 const AppleIcon = <Icon name="Apple" width={21} height={24} viewBox="0 0 24 24" />;
 
-function AppleSignIn({ customButtons, socialSignOnIn, className, OidcClient }) {
+function AppleSignIn({ customButtons, socialSignOnIn, className, oidcClients = [], appleClientId }) {
 	const phrases = usePhrases();
 	const { Identity } = useIdentity();
 
+	const appleOIDCClient = oidcClients.find((oidcClient) => (
+		oidcClient.protocol === 'Apple' && oidcClient.clientId === appleClientId
+	));
+
 	const handleClick = () => {
-		if (OidcClient?.clientId) {
+		if (appleOIDCClient?.clientId) {
 			Identity.initiateOIDC(
-				OidcClient.clientId,
+				appleOIDCClient.clientId,
 				['name', 'email'],
 				true,
 				true

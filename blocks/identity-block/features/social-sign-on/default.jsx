@@ -18,7 +18,8 @@ const SocialSignOnBlock = ({ customFields }) => {
 		OIDC,
 		socialSignOnIn,
 		hideDiv,
-		customButtons
+		customButtons,
+		appleClientId,
 	} = customFields;
 
 	const checkAppleCodeExists = (url) => {
@@ -72,6 +73,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 					isOIDC={isOIDC}
 					socialSignOnIn={socialSignOnIn}
 					customButtons={customButtons}
+					appleClientId={appleClientId}
 				/>
 			</GoogleSignInProvider>
 			{error ? (
@@ -90,6 +92,12 @@ SocialSignOnBlock.propTypes = {
 		redirectURL: PropTypes.string.tag({
 			name: "Redirect URL",
 			defaultValue: "/account/",
+		}),
+		appleClientId: PropTypes.string.tag({
+			name: "Apple OIDC Client ID",
+			defaultValue: "",
+			description:
+				'Client ID for Apple OIDC authentication provider. This is the "Provider key" in your "Authentication Providers" settings',
 		}),
 		redirectToPreviousPage: PropTypes.bool.tag({
 			name: "Redirect to previous page",

@@ -23,11 +23,27 @@ const SocialSignOn = ({
 		oidcClients,
 	} = useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError, customButtons);
 
+	const hasAppleClient = () => {
+		const hasOIDCAppleClient = oidcClients && oidcClients.find((oidcClient) => (
+			oidcClient.protocol === "Apple" && oidcClient.clientId === appleClientId
+		));
+
+		if (hasOIDCAppleClient) {
+			return true;
+		}
+
+		if (appleTeamId && appleKeyId && appleUrlToReceiveAuthToken) {
+			return true;
+		}
+
+		return false;
+	}
+
 	return (
 		<section className={className}>
 			{googleClientId && <GoogleSignIn customButtons={customButtons} socialSignOnIn={socialSignOnIn} className={className} />}
 			{facebookAppId && <FacebookSignIn customButtons={customButtons} socialSignOnIn={socialSignOnIn} className={className} />}
-			{appleTeamId && appleKeyId && appleUrlToReceiveAuthToken && (
+			{hasAppleClient() && (
 				<AppleSignIn
 					customButtons={customButtons}
 					socialSignOnIn={socialSignOnIn}

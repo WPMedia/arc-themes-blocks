@@ -28,7 +28,8 @@ const SocialSignOnBlock = ({ customFields }) => {
 			const charsAfterLastQuestionMark = urlQueryParams[urlQueryParams.length - 1];
 			const queryParams = new URLSearchParams(charsAfterLastQuestionMark);
 			const appleCode = queryParams.get("code");
-			return appleCode;
+			const appleState = queryParams.get("state");
+			return { appleCode, appleState };
 		}
 		return null;
 	};
@@ -38,7 +39,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 	const isOIDC =
 		OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
 
-	const appleCode = checkAppleCodeExists(urlString);
+	const { appleCode, appleState } = checkAppleCodeExists(urlString);
 	const { isAdmin, arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
@@ -54,6 +55,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 		loggedInPageLocation,
 		isOIDC,
 		appleCode,
+		appleState,
 	});
 
 	if (!isInitialized) {

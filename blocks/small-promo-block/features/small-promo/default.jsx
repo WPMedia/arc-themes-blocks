@@ -36,7 +36,9 @@ const SmallPromo = ({ customFields }) => {
 	const { registerSuccessEvent } = useComponentContext();
 	const { arcSite, isAdmin } = useFusionContext();
 	const { searchableField } = useEditableContent();
+	const { editableContent } = useEditableContent();
 	const shouldLazyLoad = lazyLoad && !isAdmin;
+	const editable = true;
 
 	const content =
 		useContent({
@@ -171,9 +173,12 @@ const SmallPromo = ({ customFields }) => {
 		</Conditional>
 	) : null;
 
+	const editableItem =
+		content?.headlines && editable ? editableContent(content, "headlines.basic") : {};
+
 	const promoHeading =
 		showHeadline && headline ? (
-			<Heading>
+			<Heading {...editableItem} suppressContentEditableWarning>
 				<Conditional
 					component={Link}
 					condition={linkURL}

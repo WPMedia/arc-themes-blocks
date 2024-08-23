@@ -49,6 +49,7 @@ export const LargePromoPresentation = ({
 	contentUrl,
 	displayDate,
 	editableDescription,
+	editableHeading,
 	embedMarkup,
 	labelIconName,
 	labelIconText,
@@ -116,7 +117,7 @@ export const LargePromoPresentation = ({
 						{contentHeading || contentDescription || contentAuthors || contentDate ? (
 							<Stack>
 								{contentHeading ? (
-									<Heading>
+									<Heading {...editableHeading} suppressContentEditableWarning>
 										<Conditional
 											component={Link}
 											condition={contentUrl}
@@ -282,6 +283,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	}
 
 	const { editableContent, searchableField } = useEditableContent();
+	const editable = true;
 	const { registerSuccessEvent } = useComponentContext();
 	const {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
@@ -297,6 +299,9 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			? localizeDateTime(new Date(content?.display_date), dateTimeFormat, language, timeZone)
 			: "";
 	const phrases = usePhrases();
+
+	const editableHeading =
+	content?.headlines && editable ? editableContent(content, "headlines.basic") : {};
 
 	const editableDescription = content?.description
 		? editableContent(content, "description.basic")
@@ -380,6 +385,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			contentUrl={contentUrl}
 			displayDate={displayDate}
 			editableDescription={editableDescription}
+			editableHeading={editableHeading}
 			embedMarkup={embedMarkup}
 			labelIconName={labelIconName}
 			labelIconText={labelIconText}

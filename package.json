@@ -44,7 +44,7 @@
 	},
 	"devDependencies": {
 		"@arc-fusion/prop-types": "^0.1.5",
-		"@arc-publishing/sdk-identity": "^1.88.0",
+		"@arc-publishing/sdk-identity": "^1.89.0",
 		"@babel/core": "^7.23.2",
 		"@babel/eslint-parser": "^7.23.3",
 		"@babel/plugin-proposal-class-properties": "^7.16.7",

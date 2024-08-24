@@ -1565,7 +1565,7 @@
 		"bo": "མ་མཐར་ཡང་ཡི་གེ་%{requirementCount}དགོས།",
 		"de": "Must have at least %{requirementCount} letter(s).",
 		"el": "Πρέπει να διαθέτει τουλάχιστον %{requirementCount} γράμμα/τα.",
-		"en": "Must have at least %{requirementCount} letter(s).",
+		"en": "Must have at least %{requirementCount} lowercase character(s).",
 		"es": "Must have at least %{requirementCount} letter(s).",
 		"fr": "Must have at least %{requirementCount} letter(s).",
 		"id": "Harus terdiri dari setidaknya %{requirementCount} huruf.",

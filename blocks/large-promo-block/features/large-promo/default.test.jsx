@@ -112,7 +112,7 @@ describe("Large Promo", () => {
 		};
 		isServerSide.mockReturnValue(true);
 		const { container } = render(<LargePromo customFields={updatedConfig} />);
-		expect(container.firstChild).toBe(null);
+		expect(container.innerHTML).toBe('');
 	});
 
 	it("should render complete promo", () => {
@@ -130,11 +130,11 @@ describe("Large Promo", () => {
 			/>,
 		);
 
-		expect(screen.queryByText(largePromoMock.label.basic.text)).not.toBeNull();
-		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
-		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
-		expect(screen.queryByText("December 02, 2019 at 6:58PM UTC")).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByText(largePromoMock.label.basic.text)).not.toBeNull();
+		expect(screen.getByText(largePromoMock.headlines.basic)).not.toBeNull();
+		expect(screen.getByText(largePromoMock.description.basic)).not.toBeNull();
+		expect(screen.getByText("December 02, 2019 at 6:58PM UTC")).not.toBeNull();
+		expect(screen.getByAltText("Baby panda born at the zoo")).not.toBeNull();
 	});
 
 	it("should not render overline", () => {
@@ -152,10 +152,10 @@ describe("Large Promo", () => {
 			/>,
 		);
 		expect(screen.queryByText(largePromoMock.label.basic.text)).toBeNull();
-		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
-		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
-		expect(screen.queryByText("December 02, 2019 at 6:58PM UTC")).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByText(largePromoMock.headlines.basic)).not.toBeNull();
+		expect(screen.getByText(largePromoMock.description.basic)).not.toBeNull();
+		expect(screen.getByText("December 02, 2019 at 6:58PM UTC")).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("should not render date when disabled", () => {
@@ -173,10 +173,10 @@ describe("Large Promo", () => {
 			/>,
 		);
 		expect(screen.queryByText(largePromoMock.label.basic.text)).toBeNull();
-		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
-		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
+		expect(screen.getByText(largePromoMock.headlines.basic)).not.toBeNull();
+		expect(screen.getByText(largePromoMock.description.basic)).not.toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58PM UTC")).toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("should not render date when null", () => {
@@ -218,11 +218,11 @@ describe("Large Promo", () => {
 				}}
 			/>,
 		);
-		expect(screen.queryByText(largePromoMock.label.basic.text)).not.toBeNull();
-		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
-		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
-		expect(screen.queryByText("December 02, 2019 at 6:58PM UTC")).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByText(largePromoMock.label.basic.text)).not.toBeNull();
+		expect(screen.getByText(largePromoMock.headlines.basic)).not.toBeNull();
+		expect(screen.getByText(largePromoMock.description.basic)).not.toBeNull();
+		expect(screen.getByText("December 02, 2019 at 6:58PM UTC")).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("should not render headline", () => {
@@ -239,11 +239,11 @@ describe("Large Promo", () => {
 				}}
 			/>,
 		);
-		expect(screen.queryByText(largePromoMock.label.basic.text)).not.toBeNull();
+		expect(screen.getByText(largePromoMock.label.basic.text)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).toBeNull();
-		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
-		expect(screen.queryByText("December 02, 2019 at 6:58PM UTC")).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByText(largePromoMock.description.basic)).not.toBeNull();
+		expect(screen.getByText("December 02, 2019 at 6:58PM UTC")).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("should not render description", () => {
@@ -260,11 +260,11 @@ describe("Large Promo", () => {
 				}}
 			/>,
 		);
-		expect(screen.queryByText(largePromoMock.label.basic.text)).not.toBeNull();
-		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
+		expect(screen.getByText(largePromoMock.label.basic.text)).not.toBeNull();
+		expect(screen.getByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).toBeNull();
-		expect(screen.queryByText("December 02, 2019 at 6:58PM UTC")).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByText("December 02, 2019 at 6:58PM UTC")).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("should only render Image", () => {
@@ -281,7 +281,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.headlines.basic)).toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58PM UTC")).toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it('should not render Image if "showImage" is false', () => {
@@ -366,15 +366,15 @@ describe("Large Promo", () => {
 			/>,
 		);
 		expect(screen.queryByText(largePromoMock.label.basic.text)).toBeNull();
-		expect(screen.queryByText("global.sponsored-content")).not.toBeNull();
-		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
+		expect(screen.getByText("global.sponsored-content")).not.toBeNull();
+		expect(screen.getByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).toBeNull();
 	});
 
 	it("should render image icon label", () => {
 		useContent.mockReturnValueOnce(largePromoMock);
 
-		const { container } = render(
+		render(
 			<LargePromo
 				customFields={{
 					showImage: true,
@@ -384,7 +384,8 @@ describe("Large Promo", () => {
 				}}
 			/>,
 		);
-		expect(container.querySelector(".b-large-promo__icon_label")).not.toBeNull();
+		const img = screen.getByAltText("Baby panda born at the zoo");
+		expect(img).not.toBeNull();
 	});
 
 	// it("should render video player media when 'playVideoInPlace' prop is passed", () => {

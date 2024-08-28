@@ -46,6 +46,14 @@ const useLogin = ({
 		}
 	}, [appleCode, Identity]);
 
+	const isReferrerFromHost = () => {
+		if (!document?.referrer) return false;
+
+		const referrerURL = new URL(document.referrer);
+
+		return referrerURL.origin === window.location.origin;
+	};
+
 	useEffect(() => {
 		const searchParams = new URLSearchParams(window.location.search.substring(1));
 
@@ -63,7 +71,7 @@ const useLogin = ({
 			setRedirectQueryParam(validatedRedirectParam);
 		}
 
-		if (redirectToPreviousPage && document?.referrer) {
+		if (redirectToPreviousPage && document?.referrer && isReferrerFromHost()) {
 			const redirectUrlLocation = new URL(document.referrer);
 			let newRedirectUrl = redirectUrlLocation.pathname.includes('/pagebuilder/')
 				? redirectURL

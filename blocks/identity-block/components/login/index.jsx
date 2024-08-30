@@ -11,6 +11,7 @@ const useLogin = ({
 	loggedInPageLocation,
 	isOIDC,
 	appleCode,
+	appleState,
 }) => {
 
 	const { Identity } = useIdentity();
@@ -32,8 +33,13 @@ const useLogin = ({
 	};
 
 	useEffect(() => {
-		const askForloginWithApple = async (code) => {
-			await Identity.appleSignOn(code);
+		const askForloginWithApple = async (code, state) => {
+			if (state) {
+				await Identity.signInWithOIDC(code, state);
+			} else {
+				await Identity.appleSignOn(code);
+			}
+
 			const isLoggedIn = await Identity.isLoggedIn();
 
 			if (isLoggedIn) {
@@ -42,9 +48,9 @@ const useLogin = ({
 		};
 
 		if (Identity && appleCode) {
-			askForloginWithApple(appleCode);
+			askForloginWithApple(appleCode, appleState);
 		}
-	}, [appleCode, Identity]);
+	}, [appleCode, Identity, appleState]);
 
 	useEffect(() => {
 		const searchParams = new URLSearchParams(window.location.search.substring(1));

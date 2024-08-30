@@ -12,7 +12,7 @@ jest.mock('@wpmedia/arc-themes-components', () => ({
 	Button: (props) => mockButton(props),
 	useIdentity: jest.fn(),
 	usePhrases: jest.fn()
-  }));
+}));
 
 describe("Identity Social Login Component", () => {
 	it("renders nothing if config settings are false", () => {
@@ -24,8 +24,8 @@ describe("Identity Social Login Component", () => {
 					googleClientId: false,
 					facebookAppId: false,
 				},
-				initFacebookLogin: () => {},
-				initializeFacebook: () => {},
+				initFacebookLogin: () => { },
+				initializeFacebook: () => { },
 			},
 		}));
 		usePhrases.mockImplementation(() => ({
@@ -61,8 +61,8 @@ describe("Identity Social Login Component", () => {
 						recaptchaSiteKey: "6LdXKVQcAAAAAO2tv3GdUbSK-1vcgujX6cP0IgF_",
 					}),
 				),
-				initFacebookLogin: () => {},
-				initializeFacebook: () => {},
+				initFacebookLogin: () => { },
+				initializeFacebook: () => { },
 				isLoggedIn: jest.fn(() => false),
 			},
 		}));
@@ -82,8 +82,8 @@ describe("Identity Social Login Component", () => {
 		useIdentity.mockImplementation(() => ({
 			Identity: {
 				getConfig: getConfigMock,
-				initFacebookLogin: () => {},
-				initializeFacebook: () => {},
+				initFacebookLogin: () => { },
+				initializeFacebook: () => { },
 				isLoggedIn: jest.fn(() => false),
 			},
 			isInitialized: true,
@@ -110,9 +110,9 @@ describe("Identity Social Login Component", () => {
 					facebookAppId: true,
 				},
 				facebookSignOn: facebookSignOnMock,
-				getConfig: () => {},
-				initFacebookLogin: () => {},
-				initializeFacebook: () => {},
+				getConfig: () => { },
+				initFacebookLogin: () => { },
+				initializeFacebook: () => { },
 				isLoggedIn: jest.fn(() => false),
 			},
 		}));
@@ -140,9 +140,9 @@ describe("Identity Social Login Component", () => {
 					facebookAppId: true,
 				},
 				facebookSignOn: facebookSignOnMock,
-				getConfig: () => {},
-				initFacebookLogin: () => {},
-				initializeFacebook: () => {},
+				getConfig: () => { },
+				initFacebookLogin: () => { },
+				initializeFacebook: () => { },
 				isLoggedIn: jest.fn(() => false),
 			},
 		}));
@@ -162,6 +162,48 @@ describe("Identity Social Login Component", () => {
 		window.onFacebookSignOn();
 		expect(onErrorMock).toHaveBeenCalled();
 	});
+
+	it("renders Apple Sign in", () => {
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			isLoggedIn: () => true,
+			Identity: {
+				configOptions: {
+					googleClientId: true,
+					facebookAppId: true,
+					teamId: "teamId",
+					keyId: "keyId",
+					urlToReceiveAuthToken: "urlToReceiveAuthToken",
+					oidcClients: [],
+				},
+				getConfig: jest.fn(() =>
+					Promise.resolve({
+						signinRecaptcha: false,
+						recaptchaSiteKey: "6LdXKVQcAAAAAO2tv3GdUbSK-1vcgujX6cP0IgF_",
+					}),
+				),
+				initFacebookLogin: () => { },
+				initializeFacebook: () => { },
+				isLoggedIn: jest.fn(() => false),
+			},
+		}));
+
+		usePhrases.mockImplementation(() => ({
+			t: jest
+				.fn()
+				.mockReturnValue(
+					"Sign-in prompt was suppressed by the user or dismissed. Please try again later or use another sign-in method.",
+				),
+		}));
+
+		render(
+			<GoogleSignInProvider>
+				<SocialSignOn onError={() => null} redirectURL="#" />
+			</GoogleSignInProvider>,
+		);
+
+		expect(screen.getByTestId("apple-sign-in-button")).toBeInTheDocument();
+	});
 });
 
 describe("Identity Social Login Component - Google Button", () => {
@@ -174,8 +216,8 @@ describe("Identity Social Login Component - Google Button", () => {
 					googleClientId: true,
 					facebookAppId: false,
 				},
-				initFacebookLogin: () => {},
-				initializeFacebook: () => {},
+				initFacebookLogin: () => { },
+				initializeFacebook: () => { },
 			},
 		}));
 	});
@@ -215,8 +257,8 @@ describe("Identity Social Login Component - Facebook Button", () => {
 					googleClientId: false,
 					facebookAppId: true,
 				},
-				initFacebookLogin: () => {},
-				initializeFacebook: () => {},
+				initFacebookLogin: () => { },
+				initializeFacebook: () => { },
 			},
 		}));
 	});

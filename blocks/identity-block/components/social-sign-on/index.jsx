@@ -5,19 +5,60 @@ import GoogleSignIn from "./_children/GoogleSignIn";
 import AppleSignIn from "./_children/AppleSignIn";
 import useSocialSignIn from "./utils/useSocialSignIn";
 
-const SocialSignOn = ({ className, onError, redirectURL, isOIDC, socialSignOnIn, customButtons }) => {
-	const { facebookAppId, googleClientId, appleTeamId, appleKeyId, appleUrlToReceiveAuthToken} = useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError, customButtons);
+const SocialSignOn = ({
+	className,
+	onError,
+	redirectURL,
+	isOIDC,
+	socialSignOnIn,
+	customButtons,
+	appleClientId,
+}) => {
+	const {
+		facebookAppId,
+		googleClientId,
+		appleTeamId,
+		appleKeyId,
+		appleUrlToReceiveAuthToken,
+		oidcClients,
+	} = useSocialSignIn(redirectURL, isOIDC, socialSignOnIn, onError, customButtons);
+
+	const hasAppleClient = () => {
+		const hasOIDCAppleClient = oidcClients && oidcClients.find((oidcClient) => (
+			oidcClient.protocol === "Apple" && oidcClient.clientId === appleClientId
+		));
+
+		if (hasOIDCAppleClient) {
+			return true;
+		}
+
+		if (appleTeamId && appleKeyId && appleUrlToReceiveAuthToken) {
+			return true;
+		}
+
+		return false;
+	}
+
 	return (
 		<section className={className}>
-			{googleClientId ? <GoogleSignIn customButtons={customButtons} socialSignOnIn={socialSignOnIn} className={className} /> : null}
-			{facebookAppId ? <FacebookSignIn customButtons={customButtons} socialSignOnIn={socialSignOnIn} className={className} /> : null}
-			{appleTeamId && appleKeyId && appleUrlToReceiveAuthToken ? <AppleSignIn customButtons={customButtons} socialSignOnIn={socialSignOnIn} className={className} /> : null}
+			{googleClientId && <GoogleSignIn customButtons={customButtons} socialSignOnIn={socialSignOnIn} className={className} />}
+			{facebookAppId && <FacebookSignIn customButtons={customButtons} socialSignOnIn={socialSignOnIn} className={className} />}
+			{hasAppleClient() && (
+				<AppleSignIn
+					customButtons={customButtons}
+					socialSignOnIn={socialSignOnIn}
+					className={className}
+					oidcClients={oidcClients}
+					appleClientId={appleClientId}
+				/>
+			)}
 		</section>
 	);
 };
 
 SocialSignOn.propTypes = {
 	redirectURL: PropTypes.string.isRequired,
+	appleClientId: PropTypes.string,
 	onError: PropTypes.func.isRequired,
 };
 

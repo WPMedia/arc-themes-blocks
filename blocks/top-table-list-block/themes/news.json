@@ -148,7 +148,7 @@
 					},
 					"media-item": {
 						"float": "inline-end",
-						"margin-block-end": "var(--global-spacing-5)",
+						"margin-block-end": "var(--global-spacing-4)",
 						"margin-block-start": "0",
 						"margin-inline-end": "0",
 						"margin-inline-start": "0",

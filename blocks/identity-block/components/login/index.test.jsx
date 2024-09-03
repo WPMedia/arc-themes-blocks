@@ -80,7 +80,7 @@ describe("useLogin()", () => {
 	});
 
 	it("uses document referrer", async () => {
-		const referrerURL = "http://referrer.com/article/1234";
+		const referrerURL = "http://localhost/article/1234";
 		Object.defineProperty(document, "referrer", {
 			value: referrerURL,
 			configurable: true,

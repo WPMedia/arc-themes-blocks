@@ -31,7 +31,7 @@
 		"category-carousel.aria-label": "カテゴリ",
 		"category-carousel.left-arrow-label": "前",
 		"category-carousel.right-arrow-label": "次",
-		"category-carousel.slide-indicator": "スライド（%{current}\/%{maximum}）"
+		"category-carousel.slide-indicator": "スライド（%{current}/%{maximum}）"
 	},
 	"default-output-block": {
 		"default-output-block.skip-main": "メインコンテンツにスキップ"
@@ -67,7 +67,7 @@
 		"global.gallery-autoplay-label-stop": "自動スライド ショーを停止",
 		"global.gallery-expand-button": "展開",
 		"global.gallery-next-label": "次のスライド",
-		"global.gallery-page-count-text": "%{current} \/ %{total}",
+		"global.gallery-page-count-text": "%{current} / %{total}",
 		"global.gallery-pause-autoplay-button": "自動再生の一時停止",
 		"global.gallery-previous-label": "前のスライド",
 		"global.gallery-text": "ギャラリー",
@@ -114,6 +114,12 @@
 		"identity-block.confirm-password": "Confirm password",
 		"identity-block.confirm-password-error": "Passwords must match",
 		"identity-block.connect-account": "Connected",
+		"identity-block.connect-identity": "Connect",
+		"identity-block.login-form-error.captcha-token-required": "Captcha token required.",
+		"identity-block.social-google-one-tap-notification": "Sign-in prompt was suppressed by the user or dismissed. Please try again later or use another sign-in method.",
+		"identity-block.social-signOn-unlink-error": "At least one identity needs to remain on the user",
+		"identity-block.social-signOn-facebook-login": "Sign in with Facebook",
+		"identity-block.social-signOn-facebook-signUp": "Sign up with Facebook",
 		"identity-block.connect-platform": "Connect %{platform}",
 		"identity-block.connected-accounts": "Connected Accounts",
 		"identity-block.create-an-account": "アカウントを作成",
@@ -154,7 +160,7 @@
 		"identity-block.ota-ivalid-login-link": "Invalid login link",
 		"identity-block.ota-ivalid-login-link-subheadline": "Looks like one time login link is invalid or expired. Please request a new log in link and try again.",
 		"identity-block.ota-subheadline": "To sign in without a password, enter your email below and you will receive a one time log in link.",
-		"identity-block.ota-success-body": "If there's an account associated with <b>%{userEmail}<\/b>, you'll get a link in your inbox that will automatically sign you in to your account. The link will expire in 24 hours.",
+		"identity-block.ota-success-body": "If there's an account associated with <b>%{userEmail}</b>, you'll get a link in your inbox that will automatically sign you in to your account. The link will expire in 24 hours.",
 		"identity-block.ota-success-heading": "Check Your Email",
 		"identity-block.password": "パスワード",
 		"identity-block.password-placeholder": "**********",
@@ -181,8 +187,8 @@
 		"identity-block.social-signOn-apple-signUp": "Appleでサインアップ",
 		"identity-block.social-signOn-google-login": "Googleでサインイン",
 		"identity-block.social-signOn-google-signUp": "Googleでサインアップ",
-		"identity-block.terms-privacy-text": "アカウントを作成すると、 <a href='%{termsURL}'>利用規約<\/a>に同意し、 <a href='%{privacyURL}'>プライバシー ポリシー<\/a>に同意したことになります。",
-		"identity-block.terms-service-privacy-text": "アカウントを作成すると、<a href='%{termsAndPrivacyURL}'>利用規約に同意し、 プライバシー ポリシーを承認<\/a>したことになります",
+		"identity-block.terms-privacy-text": "アカウントを作成すると、 <a href='%{termsURL}'>利用規約</a>に同意し、 <a href='%{privacyURL}'>プライバシー ポリシー</a>に同意したことになります。",
+		"identity-block.terms-service-privacy-text": "アカウントを作成すると、<a href='%{termsAndPrivacyURL}'>利用規約に同意し、 プライバシー ポリシーを承認</a>したことになります",
 		"identity-block.update-email-error": "There's been an error updating your email address",
 		"identity-block.update-password-error": "There's been an error updating your password",
 		"identity-block.username": "ユーザー名"
@@ -198,7 +204,7 @@
 		"product-assortment-carousel.aria-label": "製品",
 		"product-assortment-carousel.left-arrow-label": "前",
 		"product-assortment-carousel.right-arrow-label": "次",
-		"product-assortment-carousel.slide-indicator": "スライド（%{current}\/%{maximum}）"
+		"product-assortment-carousel.slide-indicator": "スライド（%{current}/%{maximum}）"
 	},
 	"product-content-block": {
 		"product-content.description": "説明",
@@ -213,7 +219,7 @@
 		"product-gallery.go-to-slide": "スライド%{slideNumber}に移動",
 		"product-gallery.left-arrow-label": "前",
 		"product-gallery.right-arrow-label": "次",
-		"product-gallery.slide-indicator": "スライド（%{current}\/%{maximum}）"
+		"product-gallery.slide-indicator": "スライド（%{current}/%{maximum}）"
 	},
 	"product-information-block": {
 		"product-information.list-price": "定価%{price}",
@@ -237,7 +243,7 @@
 		"story-carousel.aria-label": "記事",
 		"story-carousel.left-arrow-label": "前",
 		"story-carousel.right-arrow-label": "次",
-		"story-carousel.slide-indicator": "スライド（%{current}\/%{maximum}）"
+		"story-carousel.slide-indicator": "スライド（%{current}/%{maximum}）"
 	},
 	"subscriptions-block": {
 		"checkout-block.Afghanistan": "Afghanistan",
@@ -487,7 +493,7 @@
 		"checkout-block.address1": "住所 1",
 		"checkout-block.address1-validation": "Please enter a valid address.",
 		"checkout-block.address2": "Address 2 (Optional)",
-		"checkout-block.address2-placeholder": "ex: Apt\/Suite\/Floor",
+		"checkout-block.address2-placeholder": "ex: Apt/Suite/Floor",
 		"checkout-block.automatic-renewal-terms-description": "Your subscription will continue until you cancel. You can cancel your subscription online at any time in your Account settings, or during limited hours by chat or phone. Cancellations take effect at the end of your current billing period.",
 		"checkout-block.automatic-renewal-terms-intro": "Your payment method will be automatically charged in advance",
 		"checkout-block.automatic-renewal-terms-title": "Automatic Renewal Terms",
@@ -503,9 +509,9 @@
 		"checkout-block.continue": "Continue",
 		"checkout-block.continue-to-checkout": "チェックアウトに進む",
 		"checkout-block.country": "国または地域",
-		"checkout-block.country-region": "Country\/Region",
+		"checkout-block.country-region": "Country/Region",
 		"checkout-block.country-requirements": "国または地域を選択してください",
-		"checkout-block.country-validation": "Please enter a valid country\/region.",
+		"checkout-block.country-validation": "Please enter a valid country/region.",
 		"checkout-block.due-today": "本日締め切り",
 		"checkout-block.edit": "編集",
 		"checkout-block.email": "メールアドレス",
@@ -561,7 +567,7 @@
 		"checkout-block.subtotal": "Subtotal",
 		"checkout-block.view-subscription-offers": "View subscription offers",
 		"checkout-block.zip-code": "郵便番号",
-		"checkout-block.zip-code-validation": "Please enter a valid zip\/postal code.",
+		"checkout-block.zip-code-validation": "Please enter a valid zip/postal code.",
 		"checkout-block.Åland-Islands": "Åland Islands",
 		"subscription-block.shared-No": "いいえ",
 		"subscription-block.shared-Payment-method": "支払方法",
@@ -594,7 +600,7 @@
 		"subscriptions-block.subscription-profile-management-resub-modal-title": "Re-subscribe",
 		"subscriptions-block.subscription-profile-management-subscription-period-paragraph": "This subscription expired on %{terminateDate}",
 		"subscriptions-block.subscription-profile-management-subscription-period-text": "Subscription period:",
-		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale <\/a> and <a href='%{termsOfServiceURL}'>terms of service<\/a>.",
+		"subscriptions-block.terms-sales-service-text": "By subscribing, you agree to the Automatic Renewal Terms on this page, our <a href='%{termsOfSaleURL}'>terms of sale </a> and <a href='%{termsOfServiceURL}'>terms of service</a>.",
 		"subscriptions-block.update-payment": "支払い方法の更新"
 	}
 }

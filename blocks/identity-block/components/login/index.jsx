@@ -11,34 +11,59 @@ const useLogin = ({
 	loggedInPageLocation,
 	isOIDC,
 	appleCode,
+	appleState,
 }) => {
 
 	const { Identity } = useIdentity();
 	const validatedRedirectURL = validateURL(redirectURL);
-	const [redirectToURL, setRedirectToURL] = useState(validatedRedirectURL);
+	const [currentRedirectToURL, setCurrentRedirectToURL] = useState(validatedRedirectURL);
 	const [redirectQueryParam, setRedirectQueryParam] = useState(null);
 	const [isAppleAuthSuccess, setIsAppleAuthSuccess] = useState(false);
 	const { loginByOIDC } = useOIDCLogin();
 
-	useEffect(()=>{
-		const askForloginWithApple = async (code) => {
-			await Identity.appleSignOn(code);
+	const setRedirectUrl = (url) => {
+		setCurrentRedirectToURL(url);
+		sessionStorage.setItem('ArcXP_redirectUrl', url);
+	};
+
+	const getRedirectURL = () => {
+		const localStorageRedirectUrl = sessionStorage.getItem('ArcXP_redirectUrl');
+
+		return redirectQueryParam || localStorageRedirectUrl || currentRedirectToURL;
+	};
+
+	useEffect(() => {
+		const askForloginWithApple = async (code, state) => {
+			if (state) {
+				await Identity.signInWithOIDC(code, state);
+			} else {
+				await Identity.appleSignOn(code);
+			}
+
 			const isLoggedIn = await Identity.isLoggedIn();
-			
-			if(isLoggedIn){
+
+			if (isLoggedIn) {
 				setIsAppleAuthSuccess(true);
 			}
 		};
 
-		if(Identity && appleCode){
-			askForloginWithApple(appleCode);
+		if (Identity && appleCode) {
+			askForloginWithApple(appleCode, appleState);
 		}
-	},[appleCode, Identity]);
+	}, [appleCode, Identity, appleState]);
+
+	const isReferrerFromHost = () => {
+		if (!document?.referrer) return false;
+
+		const referrerURL = new URL(document.referrer);
+
+		return referrerURL.origin === window.location.origin;
+	};
 
 	useEffect(() => {
-		if (window?.location?.search) {
-			const searchParams = new URLSearchParams(window.location.search.substring(1));
+		const searchParams = new URLSearchParams(window.location.search.substring(1));
 
+		if (window?.location?.search) {
 			// redirectURL could have additional params
 			const params = ["paymentMethodID"];
 			const aditionalParams = params.filter((p) => {
@@ -52,12 +77,21 @@ const useLogin = ({
 			setRedirectQueryParam(validatedRedirectParam);
 		}
 
-		if (redirectToPreviousPage && document?.referrer) {
-			const redirectUrl = new URL(document.referrer);
+		if (redirectToPreviousPage && document?.referrer && isReferrerFromHost()) {
+			const redirectUrlLocation = new URL(document.referrer);
+			let newRedirectUrl = redirectUrlLocation.pathname.includes('/pagebuilder/')
+				? redirectURL
+				: `${redirectUrlLocation.pathname}${redirectUrlLocation.search}`;
 
-			setRedirectToURL(`${redirectUrl.pathname}${redirectUrl.search}`);
+			if (searchParams.has('reset_password')) {
+				newRedirectUrl = `${redirectURL}${redirectUrlLocation.search}`;
+
+				setRedirectUrl(newRedirectUrl);
+			}
+
+			setRedirectUrl(newRedirectUrl);
 		}
-	}, [redirectQueryParam, redirectToPreviousPage]);
+	}, [redirectQueryParam, redirectToPreviousPage, redirectURL]);
 
 	useEffect(() => {
 		const getConfig = async () => {
@@ -79,7 +113,11 @@ const useLogin = ({
 				if (isOIDC) {
 					loginByOIDC();
 				} else {
-					window.location = redirectQueryParam || validatedLoggedInPageLoc;
+					const localStorageRedirectUrl = sessionStorage.getItem('ArcXP_redirectUrl');
+					const validatedLocalRedirectURL = validateURL(localStorageRedirectUrl);
+					const newRedirectUrl = redirectQueryParam || validatedLocalRedirectURL || validatedLoggedInPageLoc;
+
+					window.location = newRedirectUrl;
 				}
 			}
 		};
@@ -89,7 +127,7 @@ const useLogin = ({
 	}, [Identity, redirectQueryParam, loggedInPageLocation, isAdmin, loginByOIDC, isOIDC, isAppleAuthSuccess]);
 
 	return {
-		loginRedirect: redirectQueryParam || redirectToURL,
+		loginRedirect: getRedirectURL(),
 	};
 };
 

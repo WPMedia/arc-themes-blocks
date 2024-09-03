@@ -9,12 +9,21 @@ describe("validateURL()", () => {
 	it("reutrns URL when it is a page on the current site", () => {
 		const url = "/redirect-here";
 		const result = validateURL(url);
-		expect(result).toBe(url);
+
+		expect(result).toBe('http://localhost/redirect-here');
 	});
 
-	it("reutrns the root URL when potentially unsafe", () => {
+	it("returns the root URL when potentially unsafe", () => {
 		const url = "https://www.unkown.com/redirect-here";
 		const result = validateURL(url);
+
 		expect(result).toBe("/");
+	});
+
+	it("returns concats contextPath if defined", () => {
+		const url = "/redirect-here/";
+		const result = validateURL(url);
+
+		expect(result).toBe('http://localhost/redirect-here/');
 	});
 });

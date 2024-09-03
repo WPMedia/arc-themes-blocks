@@ -13,6 +13,7 @@ import {
 	formatAuthors,
 	getFocalFromANS,
 	getImageFromANS,
+	getManualImageID,
 	getVideoFromANS,
 	Heading,
 	HeadingSection,
@@ -168,7 +169,7 @@ const ExtraLargePromo = ({ customFields }) => {
 				? {
 						feature: "extra-large-promo",
 						...itemContentConfig.contentConfigValues,
-				  }
+					}
 				: null,
 			filter: `{
 				_id
@@ -256,10 +257,11 @@ const ExtraLargePromo = ({ customFields }) => {
 		imageOverrideAuth &&
 		imageOverrideAuth !== "{}" &&
 		imageOverrideURL?.includes(imageOverrideId);
+	const manualImageId = getManualImageID(imageOverrideURL, resizedImage);
 	let resizedAuth = useContent(
 		resizedImage || !imageOverrideURL
 			? {}
-			: { source: "signing-service", query: { id: imageOverrideURL } },
+			: { source: "signing-service", query: { id: manualImageId || imageOverrideURL } },
 	);
 	if (imageOverrideAuth && !resizedAuth) {
 		resizedAuth = JSON.parse(imageOverrideAuth);
@@ -310,24 +312,22 @@ const ExtraLargePromo = ({ customFields }) => {
 		showImage &&
 		(imageOverrideURL || ansImage
 			? {
+					alt: content?.headlines?.basic || "",
 					ansImage: imageOverrideURL
 						? {
-							_id: resizedImage ? imageOverrideId : "",
-							url: imageOverrideURL,
-							auth: resizedAuth || {},
-						}
+								_id: resizedImage ? imageOverrideId : manualImageId,
+								url: imageOverrideURL,
+								auth: resizedAuth || {},
+							}
 						: ansImage,
-					alt: content?.headlines?.basic || "",
 					aspectRatio: imageRatio,
-					resizedOptions: {
-						...getFocalFromANS(ansImage),
-					},
+					resizedOptions: getFocalFromANS(ansImage),
 					responsiveImages: [400, 600, 800, 1200],
 					width: 800,
-			  }
+				}
 			: {
 					src: fallbackImage,
-			  });
+				});
 	const videoOrGalleryContentType =
 		getType("video", content) ||
 		getType("gallery", content) ||

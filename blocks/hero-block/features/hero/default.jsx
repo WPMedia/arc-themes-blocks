@@ -9,6 +9,7 @@ import getProperties from "fusion:properties";
 // https://github.com/WPMedia/arc-themes-components/
 import {
 	Button,
+	getManualImageID,
 	Heading,
 	HeadingSection,
 	imageANSToImageSrc,
@@ -44,20 +45,16 @@ function Hero({ customFields }) {
 	const { arcSite } = useFusionContext();
 	const { searchableField } = useEditableContent();
 	const { fallbackImage, resizerURL } = getProperties(arcSite);
-	const imageId = imageDesktopURL
-		? imageDesktopURL.split("/").pop().split(".").shift()
-		: desktopImgId;
+	const imageId = imageDesktopURL ? getManualImageID(imageDesktopURL) : desktopImgId;
 
-	const imageMobileId = imageMobileURL
-		? imageMobileURL.split("/").pop().split(".").shift()
-		: imgMobileId;
+	const imageMobileId = imageMobileURL ? getManualImageID(imageMobileURL) : imgMobileId;
 	let desktopAuth = useContent(
 		!imageDesktopAuth && imageId
 			? {
 					source: "signing-service",
 					query: { id: imageId },
-			  }
-			: {}
+				}
+			: {},
 	);
 
 	if (!desktopAuth || (desktopAuth && !Object.keys(desktopAuth).length)) {
@@ -73,8 +70,8 @@ function Hero({ customFields }) {
 			? {
 					source: "signing-service",
 					query: { id: imageMobileId },
-			  }
-			: {}
+				}
+			: {},
 	);
 	if (mobileAuth?.hash) {
 		mobileAuth[RESIZER_TOKEN_VERSION] = mobileAuth.hash;
@@ -92,41 +89,42 @@ function Hero({ customFields }) {
 	const desktopImageParams =
 		imageId && imageDesktopURL
 			? {
-					src: imageANSToImageSrc({
-						_id: imageId,
-						url: imageDesktopURL,
-					}),
+					alt,
+					height: 800,
 					resizedOptions: {
 						auth: desktopAuth || {},
 						smart: true,
 					},
-					width: 1200,
-					height: 800,
 					resizerURL,
-			  }
+					src: imageANSToImageSrc({
+						_id: imageId,
+						url: imageDesktopURL,
+					}),
+					width: 1200,
+				}
 			: {
 					src: fallbackImage,
-			  };
+				};
 	const mobileImageParams =
 		imageMobileId && imageMobileURL
 			? {
+					alt,
 					ansImage: {
 						_id: imageMobileId,
 						url: imageMobileURL,
 						auth: mobileAuth || {},
 					},
-					alt,
+					height: 400,
 					resizedOptions: {
 						smart: true,
 					},
-					width: 320,
-					height: 400,
 					resizerURL,
-			  }
+					width: 320,
+				}
 			: {
-					src: fallbackImage,
 					alt: imageMobileAlt,
-			  };
+					src: fallbackImage,
+				};
 	const HeadingWrapper = headline ? HeadingSection : Fragment;
 	return (
 		<div className={classes}>

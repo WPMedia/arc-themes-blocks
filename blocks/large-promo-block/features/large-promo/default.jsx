@@ -20,6 +20,7 @@ import {
 	formatURL,
 	getFocalFromANS,
 	getImageFromANS,
+	getManualImageID,
 	getVideoFromANS,
 	isServerSide,
 	Overline,
@@ -178,7 +179,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 						"arc-site": arcSite,
 						feature: "large-promo",
 						...customFields?.itemContentConfig?.contentConfigValues,
-				  }
+					}
 				: null,
 			filter: `{
 				_id
@@ -266,11 +267,12 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		imageOverrideAuth &&
 		imageOverrideAuth !== "{}" &&
 		imageOverrideURL?.includes(imageOverrideId);
+	const manualImageId = getManualImageID(imageOverrideURL, resizedImage);
 
 	let resizedAuth = useContent(
 		resizedImage || !imageOverrideURL
 			? {}
-			: { source: "signing-service", query: { id: imageOverrideURL } }
+			: { source: "signing-service", query: { id: manualImageId || imageOverrideURL } },
 	);
 	if (imageOverrideAuth && !resizedAuth) {
 		resizedAuth = JSON.parse(imageOverrideAuth);
@@ -290,12 +292,10 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		fallbackImage,
 	} = getProperties(arcSite);
 
-	const displayDate = content?.display_date && Date.parse(content?.display_date) ? localizeDateTime(
-		new Date(content?.display_date),
-		dateTimeFormat,
-		language,
-		timeZone
-	) : "";
+	const displayDate =
+		content?.display_date && Date.parse(content?.display_date)
+			? localizeDateTime(new Date(content?.display_date), dateTimeFormat, language, timeZone)
+			: "";
 	const phrases = usePhrases();
 
 	const editableDescription = content?.description
@@ -347,28 +347,26 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
 	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 	const ansImage = getImageFromANS(content);
-	const promoImageParams = 
+	const promoImageParams =
 		showImage &&
 		(imageOverrideURL || ansImage
 			? {
+					alt: content?.headlines?.basic || "",
 					ansImage: imageOverrideURL
 						? {
-								_id: resizedImage ? imageOverrideId : "",
-								url: imageOverrideURL,
+								_id: resizedImage ? imageOverrideId : manualImageId,
 								auth: resizedAuth || {},
-						  }
+								url: imageOverrideURL,
+							}
 						: ansImage,
-					alt: content?.headlines?.basic || "",
 					aspectRatio: imageRatio,
-					resizedOptions: {
-						...getFocalFromANS(ansImage),
-					},
+					resizedOptions: getFocalFromANS(ansImage),
 					responsiveImages: [400, 600, 800, 1200],
 					width: 377,
-			  }
+				}
 			: {
 					src: fallbackImage,
-			  });
+				});
 	return (
 		<LargePromoPresentation
 			aspectRatio={imageRatio}

@@ -8,6 +8,7 @@ jest.mock("@wpmedia/arc-themes-components");
 const defaultParams = {
 	isAdmin: false,
 	redirectURL: "/account/",
+	resetPasswordURL: "/reset-password/",
 	redirectToPreviousPage: true,
 	loggedInPageLocation: "/account-2/",
 };
@@ -31,14 +32,18 @@ const Test = (props) => {
 	);
 };
 
+const windowLocationValues = {
+	origin: 'http://localhost',
+	href: 'http://localhost',
+	search: '',
+	pathname: '/',
+}
+
 describe("useLogin()", () => {
 	beforeEach(() => {
 		Object.defineProperty(window, "location", {
 			writable: true,
-			value: {
-				href: 'http://localhost',
-				search: ''
-			}
+			value: windowLocationValues,
 		});
 		useIdentity.mockImplementation(() => ({
 			isInitialized: true,
@@ -56,23 +61,26 @@ describe("useLogin()", () => {
 	it("uses the passed in redirect URL", async () => {
 		await render(<Test />);
 		fireEvent.click(screen.getByRole("button"));
-		expect(window.location).toBe(defaultParams.redirectURL);
+		expect(window.location).toBe(`http://localhost${defaultParams.redirectURL}`);
 	});
 
 	it("uses redirect query", async () => {
 		Object.defineProperty(window, "location", {
+			...windowLocationValues,
 			writable: true,
 			value: {
 				search: "?test=123&redirect=/new-account/",
+				origin: "http://localhost",
+				pathname: "/",
 			},
 		});
 		await render(<Test />);
 		fireEvent.click(screen.getByRole("button"));
-		expect(window.location).toBe("/new-account/");
+		expect(window.location).toBe("http://localhost/new-account/");
 	});
 
 	it("uses document referrer", async () => {
-		const referrerURL = "http://referrer.com/article/1234";
+		const referrerURL = "http://localhost/article/1234";
 		Object.defineProperty(document, "referrer", {
 			value: referrerURL,
 			configurable: true,
@@ -80,6 +88,28 @@ describe("useLogin()", () => {
 		await render(<Test />);
 		fireEvent.click(screen.getByRole("button"));
 		expect(window.location).toBe("/article/1234");
+		delete document.referrer;
+	});
+
+	it("uses redirectURL when referrer is the reset password page", async () => {
+		const referrerURL = "http://localhost/reset-password/";
+		Object.defineProperty(document, "referrer", {
+			value: referrerURL,
+			configurable: true,
+		});
+		Object.defineProperty(window, "location", {
+			writable: true,
+			value: {
+				...windowLocationValues,
+				origin: 'http://localhost',
+				href: 'http://localhost',
+				search: '?reset_password=true',
+				pathname: '/',
+			}
+		});
+		await render(<Test />);
+		fireEvent.click(screen.getByRole("button"));
+		expect(window.location).toBe("/account/");
 		delete document.referrer;
 	});
 
@@ -92,17 +122,34 @@ describe("useLogin()", () => {
 			},
 		}));
 		await render(<Test />);
-		expect(window.location).toBe(defaultParams.loggedInPageLocation);
+
+		expect(window.location).toBe(`http://localhost${defaultParams.redirectURL}`);
 	});
 
 	it("replaces potentially unsafe URLs in query param", async () => {
 		Object.defineProperty(window, "location", {
 			writable: true,
 			value: {
+				...windowLocationValues,
 				search: "?test=123&redirect=https://somewhere.com",
+				pathname: "/",
 			},
 		});
 		await render(<Test />);
+		fireEvent.click(screen.getByRole("button"));
+		expect(window.location).toBe("/");
+	});
+
+	it("replaces potentially unsafe URLs in query param", async () => {
+		Object.defineProperty(window, "location", {
+			writable: true,
+			value: {
+				...windowLocationValues,
+				search: "",
+				pathname: "/",
+			},
+		});
+		await render(<Test loggedInPageLocation="https://somewhere.com" />);
 		fireEvent.click(screen.getByRole("button"));
 		expect(window.location).toBe("/");
 	});
@@ -113,7 +160,45 @@ describe("useLogin()", () => {
 		expect(window.location).toBe("/");
 	});
 
-	it("replaces potentially unsafe URLs in loggedInPageLocation parameter", async () => {
+	it("should use redirectUrl from customFields if coming from /pagebulder/", async () => {
+		const referrerURL = "http://localhost/pagebuilder/";
+		Object.defineProperty(document, "referrer", {
+			value: referrerURL,
+			configurable: true,
+		});
+		Object.defineProperty(window, "location", {
+			writable: true,
+			value: {
+				...windowLocationValues,
+				origin: 'http://localhost',
+				href: 'http://localhost',
+				search: '',
+				pathname: '/'
+			}
+		});
+		await render(<Test />);
+		fireEvent.click(screen.getByRole("button"));
+		expect(window.location).toBe("/account/");
+		delete document.referrer;
+	});
+
+	it("should use redirectUrl from sessionStorage", async () => {
+		const referrerURL = "http://localhost/featured-articles/";
+		Object.defineProperty(document, "referrer", {
+			value: referrerURL,
+			configurable: true,
+		});
+		Object.defineProperty(window, "location", {
+			writable: true,
+			value: {
+				...windowLocationValues,
+				origin: 'http://localhost',
+				href: 'http://localhost',
+				search: '',
+				pathname: '/'
+			}
+		});
+
 		useIdentity.mockImplementation(() => ({
 			isInitialized: true,
 			Identity: {
@@ -121,7 +206,13 @@ describe("useLogin()", () => {
 				getConfig: jest.fn(() => ({})),
 			},
 		}));
-		await render(<Test loggedInPageLocation="https://somewhere.com" />);
-		expect(window.location).toBe("/");
+
+		await render(<Test />);
+
+		expect(sessionStorage.getItem("ArcXP_redirectUrl")).toBe('/featured-articles/');
+
+		fireEvent.click(screen.getByRole("button"));
+		expect(window.location).toBe("/featured-articles/");
+		delete document.referrer;
 	});
 });

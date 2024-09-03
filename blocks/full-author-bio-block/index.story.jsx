@@ -39,9 +39,7 @@ const authorObject = {
 	soundcloud: "someusername",
 };
 
-export const allFieldsFull = () => (
-	<FullAuthorBioPresentational author={authorObject} locale="en" />
-);
+export const allFieldsFull = () => <FullAuthorBioPresentational author={authorObject} />;
 
 export const noSocialAccounts = () => {
 	const {
@@ -62,7 +60,7 @@ export const noSocialAccounts = () => {
 		...authorNoSocialKeys
 	} = authorObject;
 
-	return <FullAuthorBioPresentational author={authorNoSocialKeys} locale="en" />;
+	return <FullAuthorBioPresentational author={authorNoSocialKeys} />;
 };
 
 export const noRole = () => {
@@ -71,7 +69,7 @@ export const noRole = () => {
 		role: "",
 	};
 
-	return <FullAuthorBioPresentational author={authorNoRole} locale="en" />;
+	return <FullAuthorBioPresentational author={authorNoRole} />;
 };
 
 export const noByline = () => {
@@ -80,7 +78,7 @@ export const noByline = () => {
 		byline: "",
 	};
 
-	return <FullAuthorBioPresentational author={authorNoByline} locale="en" />;
+	return <FullAuthorBioPresentational author={authorNoByline} />;
 };
 
 export const noBioNorLongBio = () => {
@@ -90,7 +88,7 @@ export const noBioNorLongBio = () => {
 		longBio: "",
 	};
 
-	return <FullAuthorBioPresentational author={authorNoBio} locale="en" />;
+	return <FullAuthorBioPresentational author={authorNoBio} />;
 };
 
 export const noImage = () => {
@@ -100,15 +98,13 @@ export const noImage = () => {
 		resized_params: {},
 	};
 
-	return <FullAuthorBioPresentational author={authorNoImage} locale="en" />;
+	return <FullAuthorBioPresentational author={authorNoImage} />;
 };
 
-export const linkedAuthorName = () => (
-	<FullAuthorBioPresentational author={authorObject} linkAuthorProfile locale="en" />
-);
+export const linkedAuthorName = () => <FullAuthorBioPresentational author={authorObject} />;
 
 export const withRtl = () => (
 	<div dir="rtl">
-		<FullAuthorBioPresentational author={authorObject} locale="en" />
+		<FullAuthorBioPresentational author={authorObject} />
 	</div>
 );

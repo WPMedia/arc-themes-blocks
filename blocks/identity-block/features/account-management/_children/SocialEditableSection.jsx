@@ -1,70 +1,78 @@
-import React from "react";
-import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
+import React, { useEffect } from "react";
+import { Icon } from "@wpmedia/arc-themes-components";
+
 import useSocialSignIn from "../../../components/social-sign-on/utils/useSocialSignIn";
-import FacebookSignIn from "../../../components/social-sign-on/_children/FacebookSignIn";
-import GoogleSignIn from "../../../components/social-sign-on/_children/GoogleSignIn";
-import SocialEditableFieldContainer from "./SocialEditableFieldContainer";
+import SocialSignOnEditableFieldContainer from "./SocialSignOnEditableContainer";
+
+function removeHostname(url) {
+	const parsedUrl = new URL(url);
+	const urlWithoutHostname = parsedUrl.pathname + parsedUrl.search + parsedUrl.hash;
+
+	return urlWithoutHostname;
+}
 
 function SocialEditableSection({
 	blockClassName,
 	hasFacebook,
 	hasGoogle,
-	hasPasswordAccount,
+	hasApple,
 	unlinkFacebook,
 	unlinkGoogle,
+	unlinkApple,
+	linkApple,
+	numIdentities,
+	updateIdentities,
+	setUpdateIdentities
 }) {
 	// get current because social sign in has reload and need to re-render page anyway
 	const currentUrl = window.location.href;
+	const newURL = removeHostname(currentUrl);
 
-	const { facebookAppId, googleClientId } = useSocialSignIn(currentUrl);
+	const { facebookAppId, googleClientId, appleTeamId, appleKeyId, appleUrlToReceiveAuthToken, updateIdentities: checkIdentities } =
+		useSocialSignIn(newURL, null, null, () => { }, true, false);
 
-	const { arcSite } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	const GoogleIcon = <Icon name="GoogleColor" />;
+	const AppleIcon = <Icon name="Apple" width={21} height={24} viewBox="0 0 24 24" />;
+	const FacebookIcon = <Icon name="Facebook" css={{ fill: "#4285F4" }} />;
 
-	const socialText = phrases.t("identity-block.connect-account");
-	const disconnectText = phrases.t("identity-block.disconnect-account");
-	const facebookConnectText = phrases.t("identity-block.connect-platform", {
-		platform: "Facebook",
-	});
-	const googleConnectText = phrases.t("identity-block.connect-platform", {
-		platform: "Google",
-	});
+	useEffect(() => {
+		setUpdateIdentities((prevState) => !prevState);
+	}, [checkIdentities, setUpdateIdentities]);
 
 	return (
 		<>
-			{googleClientId ? (
-				<div className={`${blockClassName}__social-edit`}>
-					<div>
-						<GoogleSignIn />
-					</div>
-					<div>
-						<SocialEditableFieldContainer
-							onDisconnectFunction={unlinkGoogle}
-							text={hasGoogle ? socialText : googleConnectText}
-							disconnectText={disconnectText}
-							showDisconnectButton={hasGoogle && hasPasswordAccount}
-						/>
-					</div>
-				</div>
-			) : null}
-			{facebookAppId ? (
-				<div className={`${blockClassName}__social-edit`}>
-					<div>
-						<FacebookSignIn />
-					</div>
-					<div>
-						<SocialEditableFieldContainer
-							onDisconnectFunction={unlinkFacebook}
-							text={hasFacebook ? socialText : facebookConnectText}
-							disconnectText={disconnectText}
-							showDisconnectButton={hasFacebook && hasPasswordAccount}
-						/>
-					</div>
-				</div>
-			) : null}
+			{googleClientId && (
+				<SocialSignOnEditableFieldContainer
+					blockClassName={blockClassName}
+					socialIcon={GoogleIcon}
+					type="Google"
+					isConnected={hasGoogle}
+					numIdentities={numIdentities}
+					onDisconnectFunction={unlinkGoogle}
+				/>
+			)}
+			{facebookAppId && (
+				<SocialSignOnEditableFieldContainer
+					blockClassName={blockClassName}
+					socialIcon={FacebookIcon}
+					type="Facebook"
+					isConnected={hasFacebook}
+					numIdentities={numIdentities}
+					onDisconnectFunction={unlinkFacebook}
+					updateIdentities={updateIdentities}
+				/>
+			)}
+			{appleTeamId && appleKeyId && appleUrlToReceiveAuthToken && (
+				<SocialSignOnEditableFieldContainer
+					blockClassName={blockClassName}
+					socialIcon={AppleIcon}
+					type="Apple"
+					isConnected={hasApple}
+					numIdentities={numIdentities}
+					onDisconnectFunction={unlinkApple}
+					onConnectFunction={linkApple}
+				/>
+			)}
 		</>
 	);
 }

@@ -47,7 +47,6 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 			...mockSales,
 		},
 	})),
-	// Button: ({onClick}) => <button onClick={onClick}>Click me</button>,
 	BotChallengeProtection: ({ challengeIn= 'signup' }) => <div data-testid={`reCapctha-${challengeIn}`} />
 }));
 

@@ -18,6 +18,8 @@ const SocialSignOnBlock = ({ customFields }) => {
 		OIDC,
 		socialSignOnIn,
 		hideDiv,
+		customButtons,
+		appleClientId,
 	} = customFields;
 
 	const checkAppleCodeExists = (url) => {
@@ -26,7 +28,8 @@ const SocialSignOnBlock = ({ customFields }) => {
 			const charsAfterLastQuestionMark = urlQueryParams[urlQueryParams.length - 1];
 			const queryParams = new URLSearchParams(charsAfterLastQuestionMark);
 			const appleCode = queryParams.get("code");
-			return appleCode;
+			const appleState = queryParams.get("state");
+			return { appleCode, appleState };
 		}
 		return null;
 	};
@@ -36,7 +39,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 	const isOIDC =
 		OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
 
-	const appleCode = checkAppleCodeExists(urlString);
+	const { appleCode, appleState } = checkAppleCodeExists(urlString);
 	const { isAdmin, arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
@@ -52,6 +55,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 		loggedInPageLocation,
 		isOIDC,
 		appleCode,
+		appleState,
 	});
 
 	if (!isInitialized) {
@@ -60,7 +64,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 
 	return (
 		<Stack className={BLOCK_CLASS_NAME} data-testid="social-sign-on-container">
-				{!hideDiv ? <div className={`${BLOCK_CLASS_NAME}__dividerWithText`}>{phrases.t("identity-block.or")}</div> : null}
+			{!hideDiv ? <div className={`${BLOCK_CLASS_NAME}__dividerWithText`}>{phrases.t("identity-block.or")}</div> : null}
 			<GoogleSignInProvider>
 				<SocialSignOn
 					className={`${BLOCK_CLASS_NAME}__button-container`}
@@ -70,6 +74,8 @@ const SocialSignOnBlock = ({ customFields }) => {
 					redirectURL={loginRedirect}
 					isOIDC={isOIDC}
 					socialSignOnIn={socialSignOnIn}
+					customButtons={customButtons}
+					appleClientId={appleClientId}
 				/>
 			</GoogleSignInProvider>
 			{error ? (
@@ -88,6 +94,12 @@ SocialSignOnBlock.propTypes = {
 		redirectURL: PropTypes.string.tag({
 			name: "Redirect URL",
 			defaultValue: "/account/",
+		}),
+		appleClientId: PropTypes.string.tag({
+			name: "Apple OIDC Client ID",
+			defaultValue: "",
+			description:
+				'Client ID for Apple OIDC authentication provider. This is the "Provider key" in your "Authentication Providers" settings',
 		}),
 		redirectToPreviousPage: PropTypes.bool.tag({
 			name: "Redirect to previous page",
@@ -117,6 +129,12 @@ SocialSignOnBlock.propTypes = {
 			defaultValue: false,
 			description:
 				"Used when we want to hide the ---OR--- divider",
+		}),
+		customButtons: PropTypes.bool.tag({
+			name: "Custom Facebook/Gooogle/Apple buttons",
+			defaultValue: true,
+			description:
+				"Render a custom Facebook/Google/Apple buttons or the ones provided by Facebook, Google, and Apple.",
 		})
 	}),
 };

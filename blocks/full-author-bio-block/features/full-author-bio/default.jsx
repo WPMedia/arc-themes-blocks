@@ -7,6 +7,8 @@ import { isServerSide, LazyLoad } from "@wpmedia/arc-themes-components";
 
 import Presentation from "./_children/Presentation";
 
+const firstTruthyValue = (...objects) => objects.find((value) => value || null);
+
 const FullAuthorBio = ({ customFields = {} }) => {
 	const { globalContent, isAdmin } = useFusionContext();
 
@@ -15,17 +17,31 @@ const FullAuthorBio = ({ customFields = {} }) => {
 		return null;
 	}
 
-	const currentAuthor =
-		globalContent?.authors?.[0] || globalContent?.credits?.by?.[0]?.additional_properties?.original;
+	const currentAuthor = firstTruthyValue(
+		globalContent?.authors?.[0],
+		globalContent?.credits?.by?.[0]?.additional_properties?.original,
+	);
 
 	const authorProfileLink =
 		currentAuthor === globalContent?.credits?.by?.[0]?.additional_properties?.original
 			? globalContent?.credits?.by?.[0]?.url
 			: null;
 
+	const authorImage = firstTruthyValue(
+		globalContent?.authors?.[0]?.ansImage,
+		globalContent?.credits?.by?.[0]?.ansImage,
+		globalContent?.credits?.by?.[0]?.additional_properties?.ansImage,
+		globalContent?.authors?.[0]?.image,
+		globalContent?.credits?.by?.[0]?.image,
+		globalContent?.credits?.by?.[0]?.additional_properties?.image,
+	);
+
 	return currentAuthor ? (
 		<LazyLoad enabled={isLazyLoad}>
-			<Presentation author={currentAuthor} authorProfileLink={authorProfileLink} />
+			<Presentation
+				author={{ ...currentAuthor, image: authorImage }}
+				authorProfileLink={authorProfileLink}
+			/>
 		</LazyLoad>
 	) : null;
 };

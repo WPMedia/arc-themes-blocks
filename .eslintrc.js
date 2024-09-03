@@ -9,6 +9,7 @@ module.exports = {
 		Atomics: "readonly",
 		SharedArrayBuffer: "readonly",
 		Fusion: "readonly",
+		history: "readonly",
 	},
 	ignorePatterns: [
 		"**/features/ad-taboola/default.jsx",

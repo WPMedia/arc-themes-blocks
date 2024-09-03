@@ -5,8 +5,9 @@ import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import {
-	getFocalFromANS,
 	formatURL,
+	getFocalFromANS,
+	getManualImageID,
 	Heading,
 	HeadingSection,
 	Image,
@@ -26,7 +27,7 @@ const PromoImage = ({
 	linkURL,
 	newTab,
 	registerSuccessEvent,
-	showHeadline
+	showHeadline,
 }) => {
 	const ImageDisplay = showImage ? (
 		<MediaItem
@@ -34,7 +35,7 @@ const PromoImage = ({
 				imageURL: "url",
 				imageId: "_id",
 				imageAuth: "auth",
-				imageFocalPoint: "focal_point"
+				imageFocalPoint: "focal_point",
 			})}
 			suppressContentEditableWarning
 		>
@@ -56,13 +57,7 @@ const PromoImage = ({
 	);
 };
 
-const PromoHeading = ({
-	showHeadline,
-	headline,
-	linkURL,
-	newTab,
-	registerSuccessEvent
-}) =>
+const PromoHeading = ({ showHeadline, headline, linkURL, newTab, registerSuccessEvent }) =>
 	showHeadline && headline ? (
 		<Heading>
 			{linkURL ? (
@@ -97,14 +92,15 @@ const SmallManualPromo = ({ customFields }) => {
 	const shouldLazyLoad = lazyLoad && !isAdmin;
 
 	const resizedImage = imageId && imageAuth && imageAuth !== "{}" && imageURL?.includes(imageId);
+	const manualImageId = getManualImageID(imageURL, resizedImage);
 
 	let resizedAuth = useContent(
 		resizedImage || !imageURL
 			? {}
 			: {
-				source: "signing-service",
-				query: { id: imageURL },
-			}
+					source: "signing-service",
+					query: { id: manualImageId || imageURL },
+				},
 	);
 	if (imageAuth && !resizedAuth) {
 		resizedAuth = JSON.parse(imageAuth);
@@ -118,29 +114,27 @@ const SmallManualPromo = ({ customFields }) => {
 	}
 
 	const ansImage = {
-		_id: resizedImage ? imageId : "",
+		_id: resizedImage ? imageId : manualImageId,
 		url: imageURL,
 		auth: resizedAuth,
-		focal_point: imageFocalPoint ? JSON.parse(imageFocalPoint) : undefined
-	}
+		focal_point: imageFocalPoint ? JSON.parse(imageFocalPoint) : undefined,
+	};
 
 	const alt = headline || null;
 	const imageParams =
 		imageURL && resizedAuth
 			? {
-				ansImage,
-				alt,
-				aspectRatio: imageRatio,
-				resizedOptions: {
-					...getFocalFromANS(ansImage)
-				},
-				responsiveImages: [200, 400, 600, 800, 1200],
-				width: 600,
-			}
+					alt,
+					ansImage,
+					aspectRatio: imageRatio,
+					resizedOptions: getFocalFromANS(ansImage),
+					responsiveImages: [200, 400, 600, 800, 1200],
+					width: 600,
+				}
 			: {
-				src: fallbackImage,
-				alt,
-			};
+					alt,
+					src: fallbackImage,
+				};
 
 	const containerClassNames = [
 		BLOCK_CLASS_NAME,

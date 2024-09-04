@@ -148,17 +148,18 @@
 					},
 					"media-item": {
 						"float": "inline-end",
-						"margin-block-end": "var(--global-spacing-5)",
+						"margin-block-end": "var(--global-spacing-4)",
 						"margin-block-start": "0",
 						"margin-inline-end": "0",
 						"margin-inline-start": "0",
-						"max-inline-size": "34%"
+						"max-inline-size": "33%"
 					},
 					"heading": {
 						"font-size": "var(--heading-level-5-font-size)",
 						"font-weight": "var(--heading-level-5-font-weight)",
 						"line-height": "var(--heading-level-5-line-height)",
-						"margin-block-end": "var(--global-spacing-4)"
+						"margin-block-end": "var(--global-spacing-4)",
+						"padding-inline-end": "var(--global-spacing-5)"
 					},
 					"link": {
 						"position": "relative"

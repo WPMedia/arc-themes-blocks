@@ -6,7 +6,6 @@ import { useContent } from "fusion:content";
 import MediumPromo from "./default";
 
 import mockData from "./mock-data";
-import { showDescription } from "../../../extra-large-manual-promo-block/index.story";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),

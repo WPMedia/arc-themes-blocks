@@ -28,18 +28,18 @@ describe("the medium promo feature", () => {
 		jest.clearAllMocks();
 	});
 
-	it("should return null if lazyLoad on the server and not in the admin", () => {
+	it("should not render if lazyLoad on the server and not in the admin", () => {
 		const config = {
 			lazyLoad: true,
 		};
-		const { container } = render(<MediumPromo customFields={config} />);
-		expect(container.firstChild).toBe(null);
+		render(<MediumPromo customFields={config} />);
+		expect(screen.queryByRole("article")).not.toBeInTheDocument();
 	});
 
-	it("should return null if none of the show... flags are true", () => {
+	it("should not render if none of the show... flags are true", () => {
 		const config = {};
-		const { container } = render(<MediumPromo customFields={config} />);
-		expect(container.firstChild).toBeNull();
+		render(<MediumPromo customFields={config} />);
+		expect(screen.queryByRole("article")).not.toBeInTheDocument();
 	});
 
 	it("should display a headline if showHeadline is true", () => {

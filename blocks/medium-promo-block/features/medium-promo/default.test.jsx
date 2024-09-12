@@ -1,10 +1,12 @@
 import React from "react";
+import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { useContent } from "fusion:content";
 
 import MediumPromo from "./default";
 
 import mockData from "./mock-data";
+import { showDescription } from "../../../extra-large-manual-promo-block/index.story";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
@@ -47,7 +49,27 @@ describe("the medium promo feature", () => {
 		};
 		render(<MediumPromo customFields={config} />);
 
-		expect(screen.queryByRole("heading", { name: config.headline })).not.toBeNull();
+		expect(screen.queryByRole("heading", { name: mockData.headlines.basic })).not.toBeNull();
+	});
+
+	it("should headline be an editable field", () => {
+		const config = {
+			showHeadline: true,
+		};
+		render(<MediumPromo customFields={config} />);
+
+		expect(screen.queryByRole("heading", { name: mockData.headlines.basic })).toHaveAttribute(
+			"contenteditable",
+		);
+	});
+
+	it("should description be an editable field", () => {
+		const config = {
+			showDescription: true,
+		};
+		render(<MediumPromo customFields={config} />);
+
+		expect(screen.queryByText(mockData.description.basic)).toHaveAttribute("contenteditable");
 	});
 
 	it("should display an image if showImage is true", () => {

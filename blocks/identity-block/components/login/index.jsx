@@ -11,6 +11,7 @@ const useLogin = ({
 	loggedInPageLocation,
 	isOIDC,
 	appleCode,
+	appleState,
 }) => {
 
 	const { Identity } = useIdentity();
@@ -32,8 +33,13 @@ const useLogin = ({
 	};
 
 	useEffect(() => {
-		const askForloginWithApple = async (code) => {
-			await Identity.appleSignOn(code);
+		const askForloginWithApple = async (code, state) => {
+			if (state) {
+				await Identity.signInWithOIDC(code, state);
+			} else {
+				await Identity.appleSignOn(code);
+			}
+
 			const isLoggedIn = await Identity.isLoggedIn();
 
 			if (isLoggedIn) {
@@ -42,9 +48,17 @@ const useLogin = ({
 		};
 
 		if (Identity && appleCode) {
-			askForloginWithApple(appleCode);
+			askForloginWithApple(appleCode, appleState);
 		}
-	}, [appleCode, Identity]);
+	}, [appleCode, Identity, appleState]);
+
+	const isReferrerFromHost = () => {
+		if (!document?.referrer) return false;
+
+		const referrerURL = new URL(document.referrer);
+
+		return referrerURL.origin === window.location.origin;
+	};
 
 	useEffect(() => {
 		const searchParams = new URLSearchParams(window.location.search.substring(1));
@@ -63,7 +77,7 @@ const useLogin = ({
 			setRedirectQueryParam(validatedRedirectParam);
 		}
 
-		if (redirectToPreviousPage && document?.referrer) {
+		if (redirectToPreviousPage && document?.referrer && isReferrerFromHost()) {
 			const redirectUrlLocation = new URL(document.referrer);
 			let newRedirectUrl = redirectUrlLocation.pathname.includes('/pagebuilder/')
 				? redirectURL

@@ -283,7 +283,6 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	}
 
 	const { editableContent, searchableField } = useEditableContent();
-	const editable = true;
 	const { registerSuccessEvent } = useComponentContext();
 	const {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
@@ -301,7 +300,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	const phrases = usePhrases();
 
 	const editableHeading =
-	content?.headlines && editable ? editableContent(content, "headlines.basic") : {};
+	content?.headlines ? editableContent(content, "headlines.basic") : {};
 
 	const editableDescription = content?.description
 		? editableContent(content, "description.basic")

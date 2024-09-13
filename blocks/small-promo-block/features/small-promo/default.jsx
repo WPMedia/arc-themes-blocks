@@ -37,7 +37,6 @@ const SmallPromo = ({ customFields }) => {
 	const { arcSite, isAdmin } = useFusionContext();
 	const { editableContent, searchableField } = useEditableContent();
 	const shouldLazyLoad = lazyLoad && !isAdmin;
-	// const editable = true;
 
 	const content =
 		useContent({

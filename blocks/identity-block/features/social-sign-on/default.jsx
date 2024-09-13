@@ -18,7 +18,8 @@ const SocialSignOnBlock = ({ customFields }) => {
 		OIDC,
 		socialSignOnIn,
 		hideDiv,
-		customButtons
+		customButtons,
+		appleClientId,
 	} = customFields;
 
 	const checkAppleCodeExists = (url) => {
@@ -27,7 +28,8 @@ const SocialSignOnBlock = ({ customFields }) => {
 			const charsAfterLastQuestionMark = urlQueryParams[urlQueryParams.length - 1];
 			const queryParams = new URLSearchParams(charsAfterLastQuestionMark);
 			const appleCode = queryParams.get("code");
-			return appleCode;
+			const appleState = queryParams.get("state");
+			return { appleCode, appleState };
 		}
 		return null;
 	};
@@ -37,7 +39,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 	const isOIDC =
 		OIDC && url.searchParams.get("client_id") && url.searchParams.get("response_type") === "code";
 
-	const appleCode = checkAppleCodeExists(urlString);
+	const { appleCode, appleState } = checkAppleCodeExists(urlString);
 	const { isAdmin, arcSite } = useFusionContext();
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
@@ -53,6 +55,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 		loggedInPageLocation,
 		isOIDC,
 		appleCode,
+		appleState,
 	});
 
 	if (!isInitialized) {
@@ -72,6 +75,7 @@ const SocialSignOnBlock = ({ customFields }) => {
 					isOIDC={isOIDC}
 					socialSignOnIn={socialSignOnIn}
 					customButtons={customButtons}
+					appleClientId={appleClientId}
 				/>
 			</GoogleSignInProvider>
 			{error ? (
@@ -90,6 +94,12 @@ SocialSignOnBlock.propTypes = {
 		redirectURL: PropTypes.string.tag({
 			name: "Redirect URL",
 			defaultValue: "/account/",
+		}),
+		appleClientId: PropTypes.string.tag({
+			name: "Apple OIDC Client ID",
+			defaultValue: "",
+			description:
+				'Client ID for Apple OIDC authentication provider. This is the "Provider key" in your "Authentication Providers" settings',
 		}),
 		redirectToPreviousPage: PropTypes.bool.tag({
 			name: "Redirect to previous page",

@@ -37,7 +37,7 @@ const SmallPromo = ({ customFields }) => {
 	const { arcSite, isAdmin } = useFusionContext();
 	const { editableContent, searchableField } = useEditableContent();
 	const shouldLazyLoad = lazyLoad && !isAdmin;
-	const editable = true;
+	// const editable = true;
 
 	const content =
 		useContent({
@@ -173,7 +173,7 @@ const SmallPromo = ({ customFields }) => {
 	) : null;
 
 	const editableItem =
-		content?.headlines && editable ? editableContent(content, "headlines.basic") : {};
+		content?.headlines ? editableContent(content, "headlines.basic") : {};
 
 	const promoHeading =
 		showHeadline && headline ? (

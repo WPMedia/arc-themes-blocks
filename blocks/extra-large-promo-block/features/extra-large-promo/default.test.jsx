@@ -53,6 +53,26 @@ describe("the extra large promo feature", () => {
 		expect(screen.queryByRole("heading", { name: config.headline })).not.toBeNull();
 	});
 
+	it("should headline be an editable field", () => {
+		const config = {
+			showHeadline: true,
+		};
+		render(<ExtraLargePromo customFields={config} />);
+
+		expect(screen.queryByRole("heading", { name: mockData.headlines.basic })).toHaveAttribute(
+			"contenteditable",
+		);
+	});
+
+	it("should description be an editable field", () => {
+		const config = {
+			showDescription: true,
+		};
+		render(<ExtraLargePromo customFields={config} />);
+
+		expect(screen.queryByText(mockData.description.basic)).toHaveAttribute("contenteditable");
+	});
+
 	it("should return a image if showImage is true", () => {
 		const config = {
 			imageOverrideURL: "#",

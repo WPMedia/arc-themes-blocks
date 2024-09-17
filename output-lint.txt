@@ -1,0 +1,838 @@
+
+> lint
+> eslint --ext js --ext jsx blocks .storybook --no-error-on-unmatched-pattern
+
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/ad-taboola-block/features/ad-taboola/default.test.jsx
+  16:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  16:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  17:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  17:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  26:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  26:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  27:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  27:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  41:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  41:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  42:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  42:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  61:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  61:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  62:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  62:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  79:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  79:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  80:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  80:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  81:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  81:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/ads-block/features/ads/_children/AdUnit/index.test.jsx
+  86:20  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  86:30  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  86:30  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/alert-bar-block/features/alert-bar/default.test.jsx
+   46:40  warning  Avoid direct Node access. Prefer using the methods from Testing Library           testing-library/no-node-access
+   63:38  warning  Return values from promise executor functions cannot be read                      no-promise-executor-return
+   67:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library           testing-library/no-node-access
+   93:38  warning  Return values from promise executor functions cannot be read                      no-promise-executor-return
+  107:38  warning  Return values from promise executor functions cannot be read                      no-promise-executor-return
+  111:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library           testing-library/no-node-access
+  120:3   error    Expected an assignment or function call and instead saw an expression             no-unused-expressions
+  159:40  warning  Avoid direct Node access. Prefer using the methods from Testing Library           testing-library/no-node-access
+  160:9   warning  Prefer `findByRole` query over using `waitFor` + `getByRole`                      testing-library/prefer-find-by
+  160:30  warning  Avoid destructuring queries from `render` result, use `screen.getByRole` instead  testing-library/prefer-screen-queries
+  161:19  warning  Promise returned from `waitForElementToBeRemoved` must be handled                 testing-library/await-async-utils
+  161:61  warning  Avoid direct Node access. Prefer using the methods from Testing Library           testing-library/no-node-access
+  161:61  warning  Avoid direct Node access. Prefer using the methods from Testing Library           testing-library/no-node-access
+  162:19  warning  Avoid destructuring queries from `render` result, use `screen.getByRole` instead  testing-library/prefer-screen-queries
+  188:38  warning  Return values from promise executor functions cannot be read                      no-promise-executor-return
+  194:61  warning  Avoid direct Node access. Prefer using the methods from Testing Library           testing-library/no-node-access
+  194:61  warning  Avoid direct Node access. Prefer using the methods from Testing Library           testing-library/no-node-access
+  224:38  warning  Return values from promise executor functions cannot be read                      no-promise-executor-return
+  228:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library           testing-library/no-node-access
+  255:38  warning  Return values from promise executor functions cannot be read                      no-promise-executor-return
+  260:22  warning  promise returned from `findByRole` query must be handled                          testing-library/await-async-queries
+  286:38  warning  Return values from promise executor functions cannot be read                      no-promise-executor-return
+  291:22  warning  promise returned from `findByRole` query must be handled                          testing-library/await-async-queries
+  317:38  warning  Return values from promise executor functions cannot be read                      no-promise-executor-return
+  327:40  warning  Avoid direct Node access. Prefer using the methods from Testing Library           testing-library/no-node-access
+  328:16  warning  Avoid destructuring queries from `render` result, use `screen.getByRole` instead  testing-library/prefer-screen-queries
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/article-body-block/chains/article-body/_children/table.jsx
+  20:11  warning  A control must be associated with a text label  jsx-a11y/control-has-associated-label
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/byline-block/features/byline/default.test.jsx
+  41:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+  54:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/category-carousel-block/features/category-carousel/default.test.jsx
+   44:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+   45:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+   46:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+   47:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+   71:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  107:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  108:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  109:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  110:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  162:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  163:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  164:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  165:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  166:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  167:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  168:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  169:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  170:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  171:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  172:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  173:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  205:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  206:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  207:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  208:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  242:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  243:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  244:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  245:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/date-block/features/date/default.test.jsx
+  20:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  29:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/divider-block/features/divider/default.test.jsx
+  10:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  10:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/double-chain-block/chains/double-chain/default.test.jsx
+   14:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   14:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   28:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   28:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   29:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   29:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   29:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   30:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   30:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   30:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   31:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   32:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   46:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   46:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   46:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   47:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   47:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   47:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   48:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   49:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   63:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   63:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   63:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   64:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   64:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   64:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   65:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   66:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   80:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   80:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   94:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   94:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   95:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   95:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   98:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   98:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   98:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   99:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  111:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  111:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  112:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  112:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  112:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  113:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/extra-large-promo-block/features/extra-large-promo/default.test.jsx
+   31:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library           testing-library/no-node-access
+   37:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library           testing-library/no-node-access
+   45:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+   53:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+   68:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+   77:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+  128:11  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+  138:4   warning  Avoid destructuring queries from `render` result, use `screen.getByText` instead  testing-library/prefer-screen-queries
+  147:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+  156:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+  166:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/gallery-block/features/gallery/default.jsx
+  39:13  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “GalleryPresentation” and pass data as props  react/no-unstable-nested-components
+  48:13  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “GalleryPresentation” and pass data as props  react/no-unstable-nested-components
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/hero-block/features/hero/default.test.jsx
+   38:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   39:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   40:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   68:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   68:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   85:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   85:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  105:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  105:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  125:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  125:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  126:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  126:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  147:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  147:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  148:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  148:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  168:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  168:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  169:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  169:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  190:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  190:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  191:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  191:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  213:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  213:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  214:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  214:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  245:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  245:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/identity-block/utils/append-url-params.js
+  6:39  error  Unexpected string concatenation  prefer-template
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/identity-block/utils/useOIDCLogin.jsx
+   1:8   error  'React' is defined but never used                                                                      no-unused-vars
+   8:11  error  Identifier 'url_string' is not in camel case                                                           camelcase
+  29:12  error  Redundant use of `await` on a return value                                                             no-return-await
+  31:22  error  Unexpected block statement surrounding arrow body; move the returned value immediately after the `=>`  arrow-body-style
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/large-promo-block/features/large-promo/default.test.jsx
+  115:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  133:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  134:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  135:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  136:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  137:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  155:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  156:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  157:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  158:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  176:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  177:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  179:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  221:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  222:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  223:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  224:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  225:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  242:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  244:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  245:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  246:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  263:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  264:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  266:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  267:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  284:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  369:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  370:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  387:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  387:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/masthead-block/features/masthead-block/default.test.jsx
+  31:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  56:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  62:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  73:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/medium-promo-block/features/medium-promo/default.test.jsx
+   35:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library           testing-library/no-node-access
+   41:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library           testing-library/no-node-access
+   50:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+   60:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+  111:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+  120:11  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+  130:4   warning  Avoid destructuring queries from `render` result, use `screen.getByText` instead  testing-library/prefer-screen-queries
+  139:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/numbered-list-block/features/numbered-list/default.test.jsx
+   68:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+   86:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+  129:18  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  145:27  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+  145:27  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+  161:18  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  179:18  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/product-assortment-carousel-block/features/product-assortment-carousel/default.test.jsx
+  126:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  126:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  139:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  139:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  142:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  142:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  151:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  151:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  154:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  154:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  166:11  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  191:31  warning  Avoid destructuring queries from `render` result, use `screen.queryAllByTestId` instead              testing-library/prefer-screen-queries
+  216:31  warning  Avoid destructuring queries from `render` result, use `screen.queryAllByTestId` instead              testing-library/prefer-screen-queries
+  220:33  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  221:33  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  238:31  warning  Avoid destructuring queries from `render` result, use `screen.queryAllByTestId` instead              testing-library/prefer-screen-queries
+  240:33  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  241:33  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  264:31  warning  Avoid destructuring queries from `render` result, use `screen.queryAllByTestId` instead              testing-library/prefer-screen-queries
+  266:33  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  267:33  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  345:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  345:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  346:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  346:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  347:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  347:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  348:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  348:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/product-content-block/features/product-content/default.test.jsx
+   15:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+   21:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+   34:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+   47:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+   65:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+   66:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+   84:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+   85:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  102:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  103:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  122:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/product-gallery-block/features/product-gallery/_children/ThumbnailBar/index.test.jsx
+  44:4   warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  45:6   warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  51:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/product-gallery-block/features/product-gallery/default.test.jsx
+  119:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  127:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  141:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  141:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  142:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  152:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  152:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  153:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  161:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  161:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  170:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  170:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  172:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  172:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  197:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  197:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  219:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  219:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/product-information-block/features/product-information/default.test.jsx
+   14:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+   20:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+   30:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+   54:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+   78:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+   79:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  107:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  108:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  110:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  139:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  140:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/quad-chain-block/chains/quad-chain/default.test.jsx
+   14:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   14:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   27:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   27:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   29:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   29:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   29:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   30:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   30:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   30:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   31:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   32:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   46:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   46:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   46:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   47:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   47:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   47:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   49:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   50:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   64:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   64:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   64:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   65:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   65:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   65:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   66:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   66:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   66:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   67:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   67:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   67:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   69:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   70:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   71:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   72:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   86:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   86:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  102:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  102:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  103:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  103:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  106:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  106:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  106:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  107:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  107:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  107:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  108:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  109:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  121:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  121:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  122:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  122:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  122:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  123:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  123:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  123:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  124:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  125:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/quilted-image-block/features/quilted-image/default.test.jsx
+   65:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   66:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   67:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   68:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   69:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   70:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   71:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   78:19  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   78:29  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   78:29  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   87:28  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   87:38  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   87:38  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   91:28  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   91:38  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   91:38  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   98:24  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   98:34  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   98:34  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  100:24  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  100:34  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  100:34  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  118:23  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  118:33  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  118:33  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  133:24  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  133:34  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  133:34  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  148:24  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  148:34  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  148:34  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/search-results-list-block/features/search-results-list/_children/results-list.test.jsx
+  24:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/section-title-block/features/section-title/default.test.jsx
+  28:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+  37:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  49:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  61:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  74:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  75:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  87:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  88:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  90:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  91:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/share-bar-block/features/share-bar/default.test.jsx
+   32:19  warning  Avoid destructuring queries from `render` result, use `screen.getAllByRole` instead                  testing-library/prefer-screen-queries
+   53:19  warning  Avoid destructuring queries from `render` result, use `screen.getAllByRole` instead                  testing-library/prefer-screen-queries
+   73:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   86:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  107:5   warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  107:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  133:5   warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  133:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  159:5   warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  159:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  185:5   warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  185:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  211:5   warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  211:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  253:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  281:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/simple-list-block/features/simple-list/default.test.jsx
+  133:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+  151:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+  191:18  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  206:27  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+  206:27  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+  222:18  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  240:18  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/small-promo-block/features/small-promo/default.test.jsx
+   44:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+   50:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+   60:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library      testing-library/no-node-access
+   70:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+   83:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  136:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+  148:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present  testing-library/prefer-presence-queries
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/story-carousel-block/features/story-carousel/default.test.jsx
+  393:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  393:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  394:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  394:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  411:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  411:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  412:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  412:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  425:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  425:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  426:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  426:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  438:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  438:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  439:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  439:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  456:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  456:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  457:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  457:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  476:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  476:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  477:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  477:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  495:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  495:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  512:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  512:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  529:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  529:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  530:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  530:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  549:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  549:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  570:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  570:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  571:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  571:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  572:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  572:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/components/Cart/index.test-ignore.jsx
+   27:9   warning  Avoid wrapping Testing Library util calls in `act`                     testing-library/no-unnecessary-act
+   31:10  error    Unexpected use of 'screen'                                             no-restricted-globals
+  100:7   error    Expected property shorthand                                            object-shorthand
+  108:9   warning  Avoid wrapping Testing Library util calls in `act`                     testing-library/no-unnecessary-act
+  112:10  error    Unexpected use of 'screen'                                             no-restricted-globals
+  113:3   error    Expected an assignment or function call and instead saw an expression  no-unused-expressions
+  113:10  error    Unexpected use of 'screen'                                             no-restricted-globals
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/components/Cart/item.test-ignore.jsx
+  16:10  error    Unexpected use of 'screen'                                                       no-restricted-globals
+  17:10  error    Unexpected use of 'screen'                                                       no-restricted-globals
+  18:10  error    Unexpected use of 'screen'                                                       no-restricted-globals
+  28:10  error    Unexpected use of 'screen'                                                       no-restricted-globals
+  29:10  error    Unexpected use of 'screen'                                                       no-restricted-globals
+  30:10  error    Unexpected use of 'screen'                                                       no-restricted-globals
+  30:17  warning  Use `queryBy*` queries rather than `getBy*` for checking element is NOT present  testing-library/prefer-presence-queries
+  37:9   error    'wrapper' is assigned a value but never used                                     no-unused-vars
+  37:19  error    'mount' is not defined                                                           no-undef
+  39:10  error    Unexpected use of 'screen'                                                       no-restricted-globals
+  40:10  error    Unexpected use of 'screen'                                                       no-restricted-globals
+  40:17  warning  Use `queryBy*` queries rather than `getBy*` for checking element is NOT present  testing-library/prefer-presence-queries
+  41:10  error    Unexpected use of 'screen'                                                       no-restricted-globals
+  41:17  warning  Use `queryBy*` queries rather than `getBy*` for checking element is NOT present  testing-library/prefer-presence-queries
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/components/ContactInfo/index.jsx
+  3:53  error  'Image' is defined but never used  no-unused-vars
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/components/ContactInfo/index.test-ignore.jsx
+   8:1  error    Import in body of module; reorder to top            import/first
+  40:3  error    'fireEvent' is not defined                          no-undef
+  48:9  warning  Avoid wrapping Testing Library util calls in `act`  testing-library/no-unnecessary-act
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/components/PaymentForm/index.test-ignore.jsx
+  22:9  error  Unexpected use of 'screen'  no-restricted-globals
+  23:9  error  Unexpected use of 'screen'  no-restricted-globals
+  25:9  error  Unexpected use of 'screen'  no-restricted-globals
+  26:9  error  Unexpected use of 'screen'  no-restricted-globals
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/components/PaywallOffer/index.test-ignore.js
+   54:4   error    JSX not allowed in files with extension '.js'                            react/jsx-filename-extension
+   65:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+   83:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+   84:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+   85:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+   85:38  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+   87:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+   88:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+   89:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+   90:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+   90:40  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+  106:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+  107:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+  107:40  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+  117:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+  118:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+  119:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/components/RegwallOffer/index.test-ignore.js
+  30:4   error    JSX not allowed in files with extension '.js'                            react/jsx-filename-extension
+  42:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+  61:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+  62:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+  63:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+  63:38  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+  65:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+  66:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+  67:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+  67:40  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/components/SubscriptionDialog/index.jsx
+  17:7  error  Unexpected block statement surrounding arrow body; move the returned value immediately after the `=>`  arrow-body-style
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/components/SubscriptionDialog/index.test-ignore.js
+   8:10  error    JSX not allowed in files with extension '.js'                            react/jsx-filename-extension
+  10:16  error    Unexpected use of 'screen'                                               no-restricted-globals
+  10:44  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+  18:16  error    Unexpected use of 'screen'                                               no-restricted-globals
+  18:46  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+  26:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+  26:37  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+  32:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+  32:37  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+  40:16  error    Unexpected use of 'screen'                                               no-restricted-globals
+  48:16  error    Unexpected use of 'screen'                                               no-restricted-globals
+  56:16  error    Unexpected use of 'screen'                                               no-restricted-globals
+  64:10  error    Unexpected use of 'screen'                                               no-restricted-globals
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/components/SubscriptionOverlay/index.test-ignore.jsx
+   20:10  error    Unexpected use of 'screen'                                                                                                                                                                                                                                                                                                          no-restricted-globals
+   26:16  error    Unexpected use of 'screen'                                                                                                                                                                                                                                                                                                          no-restricted-globals
+   36:10  error    Unexpected use of 'screen'                                                                                                                                                                                                                                                                                                          no-restricted-globals
+   46:28  error    Unexpected use of 'screen'                                                                                                                                                                                                                                                                                                          no-restricted-globals
+   68:28  error    Unexpected use of 'screen'                                                                                                                                                                                                                                                                                                          no-restricted-globals
+   91:19  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “ShowHide” and pass data as props  react/no-unstable-nested-components
+  112:10  error    'system' is not defined                                                                                                                                                                                                                                                                                                             no-undef
+  114:3   error    'system' is not defined                                                                                                                                                                                                                                                                                                             no-undef
+  115:10  error    'system' is not defined                                                                                                                                                                                                                                                                                                             no-undef
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/components/useOffer.test-ignore.jsx
+    2:34  warning  Return values from promise executor functions cannot be read  no-promise-executor-return
+  115:39  error    'useOffer' is not defined                                     no-undef
+  119:10  error    'React' must be in scope when using JSX                       react/react-in-jsx-scope
+  122:10  error    'React' must be in scope when using JSX                       react/react-in-jsx-scope
+  124:9   error    'React' must be in scope when using JSX                       react/react-in-jsx-scope
+  142:2   error    'unmountComponentAtNode' is not defined                       no-undef
+  148:2   warning  Avoid wrapping Testing Library util calls in `act`            testing-library/no-unnecessary-act
+  148:2   error    'act' is not defined                                          no-undef
+  149:3   error    'render' is not defined                                       no-undef
+  150:4   error    'React' must be in scope when using JSX                       react/react-in-jsx-scope
+  159:8   error    'act' is not defined                                          no-undef
+  164:2   warning  Avoid wrapping Testing Library util calls in `act`            testing-library/no-unnecessary-act
+  164:2   error    'act' is not defined                                          no-undef
+  165:3   error    'render' is not defined                                       no-undef
+  166:4   error    'React' must be in scope when using JSX                       react/react-in-jsx-scope
+  175:8   error    'act' is not defined                                          no-undef
+  182:2   warning  Avoid wrapping Testing Library util calls in `act`            testing-library/no-unnecessary-act
+  182:2   error    'act' is not defined                                          no-undef
+  183:3   error    'render' is not defined                                       no-undef
+  184:4   error    'React' must be in scope when using JSX                       react/react-in-jsx-scope
+  193:8   error    'act' is not defined                                          no-undef
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/components/usePaymentRedirect.jsx
+   5:1  error    Prefer default export on a file with single export                                                                                                                       import/prefer-default-export
+   9:2  warning  Default parameters should be last                                                                                                                                        default-param-last
+  31:5  error    React Hook useEffect has a missing dependency: 'Sales'. Either include it or remove the dependency array                                                                 react-hooks/exhaustive-deps
+  64:5  error    React Hook useEffect has missing dependencies: 'Sales', 'orderNumber', 'redirectURLParameterName', and 'successURL'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/components/usePaywall.test-ignore.js
+  88:9  error  JSX not allowed in files with extension '.js'  react/jsx-filename-extension
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/components/useSales.test-ignore.jsx
+  2:23  error  Unable to resolve path to module 'enzyme'  import/no-unresolved
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/features/checkout/_children/PaymentInfo/index.jsx
+    9:1   error    `@wpmedia/arc-themes-components` import should occur before import of `../../../../components/useSales`                                 import/order
+   63:8   error    Redundant double negation                                                                                                               no-extra-boolean-cast
+   73:4   error    Expected exception block, space or tab after '//' in comment                                                                            spaced-comment
+   78:7   error    Unnecessary return statement                                                                                                            no-useless-return
+   79:13  error    Unnecessary 'else' after 'return'                                                                                                       no-else-return
+   96:4   error    Expected exception block, space or tab after '//' in comment                                                                            spaced-comment
+  106:5   error    React Hook useEffect has missing dependencies: 'Sales', 'offerURL', and 'userInfo'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  143:5   error    Unnecessary return statement                                                                                                            no-useless-return
+  146:4   error    Expected exception block, space or tab after '//' in comment                                                                            spaced-comment
+  150:6   error    Unnecessary return statement                                                                                                            no-useless-return
+  151:12  error    Unnecessary 'else' after 'return'                                                                                                       no-else-return
+  157:21  warning  Unexpected console statement                                                                                                            no-console
+  173:8   error    Missing an explicit type attribute for button                                                                                           react/button-has-type
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/features/offer/default.jsx
+  35:5  error  React Hook useEffect has a missing dependency: 'getIsLoggedIn'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/features/offer/default.test-ignore.jsx
+  1:8   error  'React' is defined but never used   no-unused-vars
+  2:10  error  'render' is defined but never used  no-unused-vars
+  5:8   error  'Offer' is defined but never used   no-unused-vars
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/features/paywall/default.test-ignore.jsx
+   51:10  error  Unexpected use of 'screen'  no-restricted-globals
+   82:10  error  Unexpected use of 'screen'  no-restricted-globals
+  112:10  error  Unexpected use of 'screen'  no-restricted-globals
+  142:10  error  Unexpected use of 'screen'  no-restricted-globals
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/subscriptions-block/features/updatePaymentMethod/default.jsx
+  16:63  error  Expected '!==' and instead saw '!='                                                                               eqeqeq
+  24:5   error  React Hook useEffect has a missing dependency: 'getIsLoggedIn'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/tag-title-block/features/tag-title/default.test.jsx
+   31:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   31:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   36:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   36:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   41:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   41:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   79:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   79:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   84:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   84:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  108:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  108:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  113:11  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  113:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  125:21  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/top-table-list-block/features/top-table-list/_children/large.test.jsx
+   34:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   35:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   36:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   37:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   38:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   56:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   57:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   58:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   59:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   77:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   78:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   80:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   97:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   98:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+   99:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  100:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  101:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  118:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  120:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  121:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  122:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  139:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  140:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  142:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  143:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  159:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  195:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  196:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  198:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present                          testing-library/prefer-presence-queries
+  213:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  213:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  234:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  234:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/top-table-list-block/features/top-table-list/_children/medium.test.jsx
+  23:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library           testing-library/no-node-access
+  32:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+  41:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+  50:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+  59:11  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+  69:4   warning  Avoid destructuring queries from `render` result, use `screen.getByText` instead  testing-library/prefer-screen-queries
+  78:17  warning  Use `getBy*` queries rather than `queryBy*` for checking element is present       testing-library/prefer-presence-queries
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/top-table-list-block/features/top-table-list/default.test.jsx
+   61:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+   75:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+   82:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+   89:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+   96:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+  103:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library  testing-library/no-node-access
+
+/Users/elkarimm/dev/wpmedia/arc-themes-blocks/blocks/triple-chain-block/chains/triple-chain/default.test.jsx
+   14:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   14:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   27:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   27:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   29:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   29:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   29:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   30:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   30:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   30:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   31:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   32:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   46:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   46:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   46:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   47:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   47:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   47:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   49:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   50:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   64:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   64:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   64:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   65:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   65:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   65:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   66:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   66:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   66:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   68:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   69:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   70:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+   84:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+   84:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  100:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  100:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  101:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  101:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  104:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  104:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  104:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  105:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  105:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  105:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  106:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  107:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  119:10  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  119:20  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  120:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  120:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  120:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  121:16  warning  Avoid using container methods. Prefer using the methods from Testing Library, such as "getByRole()"  testing-library/no-container
+  121:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  121:26  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  122:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+  123:15  warning  Avoid direct Node access. Prefer using the methods from Testing Library                              testing-library/no-node-access
+
+✖ 720 problems (113 errors, 607 warnings)
+  15 errors and 1 warning potentially fixable with the `--fix` option.
+

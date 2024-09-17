@@ -40,8 +40,10 @@ const getType = (type, content) => (content?.type === type ? content : undefined
 export const ExtraLargePromoPresentation = ({
 	hasOverline,
 	contentHeading,
+	editableHeading,
 	showImage,
 	contentDescription,
+	editableDescription,
 	hasDate,
 	shouldLazyLoad,
 	overlineUrl,
@@ -71,7 +73,7 @@ export const ExtraLargePromoPresentation = ({
 					<Stack>
 						{contentHeading ? (
 							<HeadingSection>
-								<Heading>
+								<Heading suppressContentEditableWarning {...editableHeading}>
 									<Conditional component={Link} condition={contentUrl} href={contentUrl}>
 										{contentHeading}
 									</Conditional>
@@ -112,7 +114,11 @@ export const ExtraLargePromoPresentation = ({
 								)}
 							</MediaItem>
 						) : null}
-						{contentDescription ? <Paragraph>{contentDescription}</Paragraph> : null}
+						{contentDescription ? (
+							<Paragraph suppressContentEditableWarning {...editableDescription}>
+								{contentDescription}
+							</Paragraph>
+						) : null}
 						{contentAuthors || hasDate ? (
 							<Attribution>
 								<Join separator={Separator}>
@@ -136,7 +142,7 @@ export const ExtraLargePromoPresentation = ({
 
 const ExtraLargePromo = ({ customFields }) => {
 	const { arcSite, isAdmin } = useFusionContext();
-	const { searchableField } = useEditableContent();
+	const { editableContent, searchableField } = useEditableContent();
 	const {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
@@ -300,7 +306,13 @@ const ExtraLargePromo = ({ customFields }) => {
 
 	const hasOverline = showOverline && overlineText;
 	const contentDescription = showDescription ? content?.description?.basic : null;
+	const editableDescription = content?.description
+		? editableContent(content, "description.basic")
+		: {};
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
+	const editableHeading = content?.headlines?.basic
+		? editableContent(content, "headlines.basic")
+		: {};
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
 	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 	const contentAuthors =
@@ -352,8 +364,10 @@ const ExtraLargePromo = ({ customFields }) => {
 		<ExtraLargePromoPresentation
 			hasOverline={hasOverline}
 			contentHeading={contentHeading}
+			editableHeading={editableHeading}
 			showImage={showImage}
 			contentDescription={contentDescription}
+			editableDescription={editableDescription}
 			hasDate={hasDate}
 			shouldLazyLoad={shouldLazyLoad}
 			overlineUrl={overlineUrl}

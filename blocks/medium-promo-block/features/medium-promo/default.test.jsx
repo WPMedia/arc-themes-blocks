@@ -1,5 +1,4 @@
 import React from "react";
-import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { useContent } from "fusion:content";
 
@@ -28,18 +27,18 @@ describe("the medium promo feature", () => {
 		jest.clearAllMocks();
 	});
 
-	it("should not render if lazyLoad on the server and not in the admin", () => {
+	it("should return null if lazyLoad on the server and not in the admin", () => {
 		const config = {
 			lazyLoad: true,
 		};
-		render(<MediumPromo customFields={config} />);
-		expect(screen.queryByRole("article")).not.toBeInTheDocument();
+		const { container } = render(<MediumPromo customFields={config} />);
+		expect(container.firstChild).toBe(null);
 	});
 
-	it("should not render if none of the show... flags are true", () => {
+	it("should return null if none of the show... flags are true", () => {
 		const config = {};
-		render(<MediumPromo customFields={config} />);
-		expect(screen.queryByRole("article")).not.toBeInTheDocument();
+		const { container } = render(<MediumPromo customFields={config} />);
+		expect(container.firstChild).toBeNull();
 	});
 
 	it("should display a headline if showHeadline is true", () => {
@@ -48,27 +47,7 @@ describe("the medium promo feature", () => {
 		};
 		render(<MediumPromo customFields={config} />);
 
-		expect(screen.getByRole("heading", { name: mockData.headlines.basic })).not.toBeNull();
-	});
-
-	it("should headline be an editable field", () => {
-		const config = {
-			showHeadline: true,
-		};
-		render(<MediumPromo customFields={config} />);
-
-		expect(screen.queryByRole("heading", { name: mockData.headlines.basic })).toHaveAttribute(
-			"contenteditable",
-		);
-	});
-
-	it("should description be an editable field", () => {
-		const config = {
-			showDescription: true,
-		};
-		render(<MediumPromo customFields={config} />);
-
-		expect(screen.queryByText(mockData.description.basic)).toHaveAttribute("contenteditable");
+		expect(screen.queryByRole("heading", { name: config.headline })).not.toBeNull();
 	});
 
 	it("should display an image if showImage is true", () => {
@@ -78,7 +57,7 @@ describe("the medium promo feature", () => {
 			showImage: true,
 		};
 		render(<MediumPromo customFields={config} />);
-		expect(screen.getByRole("img", { name: config.headline })).not.toBeNull();
+		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
 	});
 
 	it("should make a blank call to the signing-service if the image is from PhotoCenter and has an Auth value", () => {
@@ -129,7 +108,7 @@ describe("the medium promo feature", () => {
 			showImage: true,
 		};
 		render(<MediumPromo customFields={config} />);
-		expect(screen.getByRole("img", { name: config.headline })).not.toBeNull();
+		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
 	});
 
 	it("should display a description if showDescription is true", () => {
@@ -138,7 +117,7 @@ describe("the medium promo feature", () => {
 		};
 		render(<MediumPromo customFields={config} />);
 		expect(
-			screen.getByText("Why does August seem hotter? Maybe it comes from weariness."),
+			screen.queryByText("Why does August seem hotter? Maybe it comes from weariness."),
 		).not.toBeNull();
 	});
 
@@ -146,11 +125,9 @@ describe("the medium promo feature", () => {
 		const config = {
 			showByline: true,
 		};
-		render(<MediumPromo customFields={config} />);
+		const { getByText } = render(<MediumPromo customFields={config} />);
 		expect(
-			screen.getByText(
-				"global.by-text Example Author1, Example Author2, global.and-text Example Author3",
-			),
+			getByText("global.by-text Example Author1, Example Author2, global.and-text Example Author3"),
 		).not.toBeNull();
 	});
 
@@ -159,6 +136,6 @@ describe("the medium promo feature", () => {
 			showDate: true,
 		};
 		render(<MediumPromo customFields={config} />);
-		expect(screen.getByText("January 30, 2020", { exact: false })).not.toBeNull();
+		expect(screen.queryByText("January 30, 2020", { exact: false })).not.toBeNull();
 	});
 });

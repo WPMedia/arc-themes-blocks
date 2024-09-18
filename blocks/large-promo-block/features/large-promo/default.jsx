@@ -50,6 +50,7 @@ export const LargePromoPresentation = ({
 	displayDate,
 	editableDescription,
 	editableHeading,
+	editableOverline,
 	embedMarkup,
 	labelIconName,
 	labelIconText,
@@ -112,7 +113,7 @@ export const LargePromoPresentation = ({
 				contentDate ? (
 					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
 						{contentOverline ? (
-							<Overline href={contentOverlineURL}>{contentOverline}</Overline>
+							<Overline href={contentOverlineURL} {...editableOverline} suppressContentEditableWarning>{contentOverline}</Overline>
 						) : null}
 						{contentHeading || contentDescription || contentAuthors || contentDate ? (
 							<Stack>
@@ -299,6 +300,9 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			: "";
 	const phrases = usePhrases();
 
+	const editableOverline =
+	content?.label?.basic?.text ? editableContent(content, "label.basic.text") : {};
+	
 	const editableHeading =
 	content?.headlines ? editableContent(content, "headlines.basic") : {};
 
@@ -385,6 +389,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			displayDate={displayDate}
 			editableDescription={editableDescription}
 			editableHeading={editableHeading}
+			editableOverline={editableOverline}
 			embedMarkup={embedMarkup}
 			labelIconName={labelIconName}
 			labelIconText={labelIconText}

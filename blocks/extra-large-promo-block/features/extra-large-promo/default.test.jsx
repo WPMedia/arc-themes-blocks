@@ -7,7 +7,6 @@ import ExtraLargePromo from "./default";
 
 import mockData from "./mock-data";
 import mockDataSponsoredVideo from "./mock-data-sponsored";
-import { useFusionContext } from "../../../../jest/mocks/context";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
@@ -45,11 +44,6 @@ describe("the extra large promo feature", () => {
 
 	it("should return an overline if showOverline is true", () => {
 		useContent.mockReturnValueOnce(mockDataSponsoredVideo);
-		const config = {
-			showOverline: true,
-		};
-		const { container } = render(<ExtraLargePromo customFields={config} />);
-		// screen.debug();
 		expect(screen.queryByRole("link", { name: "Sponsored" })).not.toBeNull();
 	});
 
@@ -59,13 +53,10 @@ describe("the extra large promo feature", () => {
 			showOverline: true,
 		};
 		render(<ExtraLargePromo customFields={config} />);
-		// expect(container.firstChild.firstChild).toHaveAttribute("contenteditable"); // this is dependent on the HTML structure of the component. Looking for the element that is displaying the overline and confirming it has contenteditable attribute.
 		let overline = screen.getByText(mockData.websites[arcSite].website_section.name);
 		if (mockData.owner?.sponsored) {
 			overline = screen.getByText(mockData.label.basic.text);
 		}
-		console.log(overline);
-		screen.debug();
 		expect(overline).toHaveAttribute("contenteditable", "true");
 	});
 
@@ -96,22 +87,6 @@ describe("the extra large promo feature", () => {
 
 		expect(screen.queryByText(mockData.description.basic)).toHaveAttribute("contenteditable");
 	});
-
-	// it("should overline text be an editable field - using label.basic", () => {
-	// 	const { arcSite } = useFusionContext();
-	// 	const config = {
-	// 		showOverline: true,
-	// 		arcSite,
-	// 	};
-	// 	render(<ExtraLargePromo customFields={config} />);
-	// 	screen.debug();
-	// 	console.log("test");
-	// 	console.log(mockDataSponsoredVideo.label.basic.text);
-
-	// 	expect(screen.queryByText(mockDataSponsoredVideo.label.basic.text)).toHaveAttribute(
-	// 		"contenteditable",
-	// 	);
-	// });
 
 	it("should return a image if showImage is true", () => {
 		const config = {

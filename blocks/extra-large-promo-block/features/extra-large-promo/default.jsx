@@ -39,6 +39,7 @@ const getType = (type, content) => (content?.type === type ? content : undefined
 
 export const ExtraLargePromoPresentation = ({
 	hasOverline,
+	editableOverline,
 	contentHeading,
 	editableHeading,
 	showImage,
@@ -63,7 +64,11 @@ export const ExtraLargePromoPresentation = ({
 	hasOverline || contentHeading || showImage || contentDescription || contentAuthors || hasDate ? (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<article className={BLOCK_CLASS_NAME}>
-				{hasOverline ? <Overline href={overlineUrl}>{overlineText}</Overline> : null}
+				{hasOverline ? (
+					<Overline href={overlineUrl} suppressContentEditableWarning {...editableOverline}>
+						{overlineText}
+					</Overline>
+				) : null}
 				{contentHeading ||
 				showImage ||
 				contentDescription ||
@@ -296,12 +301,21 @@ const ExtraLargePromo = ({ customFields }) => {
 
 	// Default to websites object data
 	let [overlineText, overlineUrl] = [sectionText, sectionUrl];
+	let editableOverline = content?.websites?.[arcSite]?.website_section?.name
+		? editableContent(content, `websites.${[arcSite]}.website_section.name`)
+		: {};
 
 	if (content?.owner?.sponsored) {
 		overlineText = content?.label?.basic?.text || phrases.t("global.sponsored-content");
 		overlineUrl = null;
+		editableOverline = content?.label?.basic?.text
+			? editableContent(content, "label.basic.text")
+			: {};
 	} else if (shouldUseLabel) {
 		[overlineText, overlineUrl] = [labelText, labelUrl];
+		editableOverline = content?.label?.basic?.text
+			? editableContent(content, "label.basic.text")
+			: {};
 	}
 
 	const hasOverline = showOverline && overlineText;
@@ -363,6 +377,7 @@ const ExtraLargePromo = ({ customFields }) => {
 	return (
 		<ExtraLargePromoPresentation
 			hasOverline={hasOverline}
+			editableOverline={editableOverline}
 			contentHeading={contentHeading}
 			editableHeading={editableHeading}
 			showImage={showImage}

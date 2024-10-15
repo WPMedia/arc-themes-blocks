@@ -1,4 +1,5 @@
 import React from "react";
+import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { useContent } from "fusion:content";
 
@@ -45,12 +46,51 @@ describe("the extra large promo feature", () => {
 		expect(screen.queryByRole("link", { name: "Premium" })).not.toBeNull();
 	});
 
+	it("should overline text be an editable field", () => {
+		const arcSite = "dagen"; // using default website
+
+		const config = {
+			showOverline: true,
+		};
+		render(<ExtraLargePromo customFields={config} />);
+
+		let overline = mockData?.websites[arcSite]?.website_section?.name;
+
+		if (!!mockData.owner?.sponsored) {
+			overline = mockData.label.basic.text;
+		} else if (!!mockData?.label?.basic?.display) {
+			overline = mockData?.label?.basic?.text;
+		}
+
+		overline ? expect(screen.getByText(overline)).toHaveAttribute("contenteditable", "true") : null; // Bypass test if overline value doesn't exist (to be editable)
+	});
+
 	it("should return a headline if showHeadline is true", () => {
 		const config = {
 			showHeadline: true,
 		};
 		render(<ExtraLargePromo customFields={config} />);
 		expect(screen.queryByRole("heading", { name: config.headline })).not.toBeNull();
+	});
+
+	it("should headline be an editable field", () => {
+		const config = {
+			showHeadline: true,
+		};
+		render(<ExtraLargePromo customFields={config} />);
+
+		expect(screen.queryByRole("heading", { name: mockData.headlines.basic })).toHaveAttribute(
+			"contenteditable",
+		);
+	});
+
+	it("should description be an editable field", () => {
+		const config = {
+			showDescription: true,
+		};
+		render(<ExtraLargePromo customFields={config} />);
+
+		expect(screen.queryByText(mockData.description.basic)).toHaveAttribute("contenteditable");
 	});
 
 	it("should return a image if showImage is true", () => {

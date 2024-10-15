@@ -39,9 +39,12 @@ const getType = (type, content) => (content?.type === type ? content : undefined
 
 export const ExtraLargePromoPresentation = ({
 	hasOverline,
+	editableOverline,
 	contentHeading,
+	editableHeading,
 	showImage,
 	contentDescription,
+	editableDescription,
 	hasDate,
 	shouldLazyLoad,
 	overlineUrl,
@@ -61,7 +64,11 @@ export const ExtraLargePromoPresentation = ({
 	hasOverline || contentHeading || showImage || contentDescription || contentAuthors || hasDate ? (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<article className={BLOCK_CLASS_NAME}>
-				{hasOverline ? <Overline href={overlineUrl}>{overlineText}</Overline> : null}
+				{hasOverline ? (
+					<Overline href={overlineUrl} suppressContentEditableWarning {...editableOverline}>
+						{overlineText}
+					</Overline>
+				) : null}
 				{contentHeading ||
 				showImage ||
 				contentDescription ||
@@ -71,7 +78,7 @@ export const ExtraLargePromoPresentation = ({
 					<Stack>
 						{contentHeading ? (
 							<HeadingSection>
-								<Heading>
+								<Heading suppressContentEditableWarning {...editableHeading}>
 									<Conditional component={Link} condition={contentUrl} href={contentUrl}>
 										{contentHeading}
 									</Conditional>
@@ -112,7 +119,11 @@ export const ExtraLargePromoPresentation = ({
 								)}
 							</MediaItem>
 						) : null}
-						{contentDescription ? <Paragraph>{contentDescription}</Paragraph> : null}
+						{contentDescription ? (
+							<Paragraph suppressContentEditableWarning {...editableDescription}>
+								{contentDescription}
+							</Paragraph>
+						) : null}
 						{contentAuthors || hasDate ? (
 							<Attribution>
 								<Join separator={Separator}>
@@ -136,7 +147,7 @@ export const ExtraLargePromoPresentation = ({
 
 const ExtraLargePromo = ({ customFields }) => {
 	const { arcSite, isAdmin } = useFusionContext();
-	const { searchableField } = useEditableContent();
+	const { editableContent, searchableField } = useEditableContent();
 	const {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
@@ -290,17 +301,32 @@ const ExtraLargePromo = ({ customFields }) => {
 
 	// Default to websites object data
 	let [overlineText, overlineUrl] = [sectionText, sectionUrl];
+	let editableOverline = content?.websites?.[arcSite]?.website_section?.name
+		? editableContent(content, `websites.${[arcSite]}.website_section.name`)
+		: {};
 
 	if (content?.owner?.sponsored) {
 		overlineText = content?.label?.basic?.text || phrases.t("global.sponsored-content");
 		overlineUrl = null;
+		editableOverline = content?.label?.basic?.text
+			? editableContent(content, "label.basic.text")
+			: {};
 	} else if (shouldUseLabel) {
 		[overlineText, overlineUrl] = [labelText, labelUrl];
+		editableOverline = content?.label?.basic?.text
+			? editableContent(content, "label.basic.text")
+			: {};
 	}
 
 	const hasOverline = showOverline && overlineText;
 	const contentDescription = showDescription ? content?.description?.basic : null;
+	const editableDescription = content?.description
+		? editableContent(content, "description.basic")
+		: {};
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
+	const editableHeading = content?.headlines?.basic
+		? editableContent(content, "headlines.basic")
+		: {};
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
 	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 	const contentAuthors =
@@ -351,9 +377,12 @@ const ExtraLargePromo = ({ customFields }) => {
 	return (
 		<ExtraLargePromoPresentation
 			hasOverline={hasOverline}
+			editableOverline={editableOverline}
 			contentHeading={contentHeading}
+			editableHeading={editableHeading}
 			showImage={showImage}
 			contentDescription={contentDescription}
+			editableDescription={editableDescription}
 			hasDate={hasDate}
 			shouldLazyLoad={shouldLazyLoad}
 			overlineUrl={overlineUrl}

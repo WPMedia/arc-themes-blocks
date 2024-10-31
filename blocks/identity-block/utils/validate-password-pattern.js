@@ -1,4 +1,5 @@
-const SPECIAL_CHARACTERS_ALLOWED = "@$!%*?&";
+const SPECIAL_CHARACTERS_ALLOWED =
+	".@$!%*+?&#<=>^:;,-" + "\\/\\(\\)\\{\\}\\[\\]\\|\\`\\\\" + "~_" + '"' + "'";
 
 // positive lookahead (?= )
 // with a non-capturing group within (?: )
@@ -12,7 +13,7 @@ const validatePasswordPattern = (
 	pwMinLength,
 	pwPwNumbers,
 	pwSpecialCharacters,
-	pwUppercase
+	pwUppercase,
 ) =>
 	`(?=(?:.*[a-z]){${pwLowercase},})(?=(?:.*[A-Z]){${pwUppercase},})(?=(?:.*\\d){${pwPwNumbers},})(?=(?:.*[${SPECIAL_CHARACTERS_ALLOWED}]){${pwSpecialCharacters},}).{${pwMinLength},}`;
 

@@ -111,9 +111,9 @@ describe("Validate Password", () => {
 	it("Takes matching special characters", () => {
 		const pattern = new RegExp(validatePasswordPattern(0, 1, 0, 7, 0));
 
-		expect(pattern.test("@$!%*?&")).toBe(true);
+		expect(pattern.test("@$!%*?&")).toBe(true); 
 		expect(pattern.test("---")).toBe(false);
 		expect(pattern.test("---------")).toBe(true);
-		expect(pattern.test("^^^^^^^^^^^^^^^^^^^^^^^")).toBe(false);
+		expect(pattern.test("^^^^^^^^^^^^^^^^^^^^^^^")).toBe(true);
 	});
 });

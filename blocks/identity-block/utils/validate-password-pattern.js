@@ -1,5 +1,9 @@
 const SPECIAL_CHARACTERS_ALLOWED =
-	".@$!%*+?&#<=>^:;,-" + "\\/\\(\\)\\{\\}\\[\\]\\|\\`\\\\" + "~_" + '"' + "'";
+	".@$!%*+?&#<=>^:;,-" + 
+	"\\/\\(\\)\\{\\}\\[\\]\\|\\`\\\\" + 
+	"~_" + 
+	'"' + 
+	"'";
 
 // positive lookahead (?= )
 // with a non-capturing group within (?: )

@@ -35,7 +35,7 @@ const BLOCK_CLASS_NAME = "b-medium-promo";
 const MediumPromo = ({ customFields }) => {
 	const { registerSuccessEvent } = useComponentContext();
 	const { arcSite, isAdmin } = useFusionContext();
-	const { searchableField } = useEditableContent();
+	const { editableContent, searchableField } = useEditableContent();
 	const {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
@@ -163,7 +163,13 @@ const MediumPromo = ({ customFields }) => {
 
 	const hasAuthors = showByline ? content?.credits?.by && content?.credits?.by?.length : null;
 	const contentDescription = showDescription ? content?.description?.basic : null;
+	const editableDescription = content?.description
+		? editableContent(content, "description.basic")
+		: {};
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
+	const editableHeading = content?.headlines?.basic
+		? editableContent(content, "headlines.basic")
+		: {};
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
 
 	const contentDate = content?.display_date;
@@ -237,7 +243,7 @@ const MediumPromo = ({ customFields }) => {
 					) : null}
 
 					{contentHeading ? (
-						<Heading>
+						<Heading suppressContentEditableWarning {...editableHeading}>
 							<Conditional
 								component={Link}
 								condition={contentUrl}
@@ -249,7 +255,11 @@ const MediumPromo = ({ customFields }) => {
 						</Heading>
 					) : null}
 
-					{showDescription ? <Paragraph>{contentDescription}</Paragraph> : null}
+					{showDescription ? (
+						<Paragraph suppressContentEditableWarning {...editableDescription}>
+							{contentDescription}
+						</Paragraph>
+					) : null}
 					{hasAuthors || showDate ? (
 						<Attribution>
 							<Join separator={Separator}>

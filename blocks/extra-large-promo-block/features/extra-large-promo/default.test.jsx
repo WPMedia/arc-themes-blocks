@@ -28,14 +28,14 @@ describe("the extra large promo feature", () => {
 		const config = {
 			lazyLoad: true,
 		};
-		const { container } = render(<ExtraLargePromo customFields={config} />);
-		expect(container.firstChild).toBe(null);
+		render(<ExtraLargePromo customFields={config} />);
+		expect(screen.queryByTestId("extra-large-promo")).toBeNull();
 	});
 
 	it("should return null if no show flag is true", () => {
 		const config = {};
-		const { container } = render(<ExtraLargePromo customFields={config} />);
-		expect(container.firstChild).toBeNull();
+		render(<ExtraLargePromo customFields={config} />);
+		expect(screen.queryByTestId("extra-large-promo")).toBeNull();
 	});
 
 	it("should return an overline if showOverline is true", () => {
@@ -43,7 +43,7 @@ describe("the extra large promo feature", () => {
 			showOverline: true,
 		};
 		render(<ExtraLargePromo customFields={config} />);
-		expect(screen.queryByRole("link", { name: "Premium" })).not.toBeNull();
+		expect(screen.getByRole("link", { name: "Premium" })).not.toBeNull();
 	});
 
 	it("should overline text be an editable field", () => {
@@ -72,7 +72,7 @@ describe("the extra large promo feature", () => {
 			showHeadline: true,
 		};
 		render(<ExtraLargePromo customFields={config} />);
-		expect(screen.queryByRole("heading", { name: config.headline })).not.toBeNull();
+		expect(screen.getByRole("heading", { name: config.headline })).not.toBeNull();
 	});
 
 	it("should headline be an editable field", () => {
@@ -81,7 +81,7 @@ describe("the extra large promo feature", () => {
 		};
 		render(<ExtraLargePromo customFields={config} />);
 
-		expect(screen.queryByRole("heading", { name: mockData.headlines.basic })).toHaveAttribute(
+		expect(screen.getByRole("heading", { name: mockData.headlines.basic })).toHaveAttribute(
 			"contenteditable",
 		);
 	});
@@ -92,7 +92,7 @@ describe("the extra large promo feature", () => {
 		};
 		render(<ExtraLargePromo customFields={config} />);
 
-		expect(screen.queryByText(mockData.description.basic)).toHaveAttribute("contenteditable");
+		expect(screen.getByText(mockData.description.basic)).toHaveAttribute("contenteditable");
 	});
 
 	it("should return a image if showImage is true", () => {
@@ -107,7 +107,7 @@ describe("the extra large promo feature", () => {
 			}),
 		};
 		render(<ExtraLargePromo customFields={config} />);
-		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
+		expect(screen.getByRole("img", { name: config.headline })).not.toBeNull();
 	});
 
 	it("should return a fallback image if showImage is true and imageUrl is not valid", () => {
@@ -116,7 +116,7 @@ describe("the extra large promo feature", () => {
 			showImage: true,
 		};
 		render(<ExtraLargePromo customFields={config} />);
-		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
+		expect(screen.getByRole("img", { name: config.headline })).not.toBeNull();
 	});
 
 	it("should make a blank call to the signing-service if the image is from PhotoCenter and has an Auth value", () => {
@@ -167,7 +167,7 @@ describe("the extra large promo feature", () => {
 		};
 		render(<ExtraLargePromo customFields={config} />);
 		expect(
-			screen.queryByText("Why does August seem hotter? Maybe it comes from weariness."),
+			screen.getByText("Why does August seem hotter? Maybe it comes from weariness."),
 		).not.toBeNull();
 	});
 
@@ -175,10 +175,12 @@ describe("the extra large promo feature", () => {
 		const config = {
 			showByline: true,
 		};
-		const { getByText } = render(<ExtraLargePromo customFields={config} />);
+		render(<ExtraLargePromo customFields={config} />);
 		expect(
-			getByText("global.by-text Example Author1, Example Author2, global.and-text Example Author3"),
-		).not.toBeNull();
+			screen.getByText(
+				"global.by-text Example Author1, Example Author2, global.and-text Example Author3",
+			),
+		).toBeInTheDocument();
 	});
 
 	it("should return a byline if showDate is true", () => {
@@ -186,7 +188,7 @@ describe("the extra large promo feature", () => {
 			showDate: true,
 		};
 		render(<ExtraLargePromo customFields={config} />);
-		expect(screen.queryByText("January 30, 2020", { exact: false })).not.toBeNull();
+		expect(screen.getByText("January 30, 2020", { exact: false })).not.toBeNull();
 	});
 
 	it("should returned a sponsored overline if it's sponsored content", () => {
@@ -195,7 +197,7 @@ describe("the extra large promo feature", () => {
 			showOverline: true,
 		};
 		render(<ExtraLargePromo customFields={config} />);
-		expect(screen.queryByText("Sponsored")).not.toBeNull();
+		expect(screen.getByText("Sponsored")).not.toBeNull();
 	});
 
 	it("should return a video if playVideoInPlace is true and video content available", () => {
@@ -205,6 +207,6 @@ describe("the extra large promo feature", () => {
 			showImage: true,
 		};
 		render(<ExtraLargePromo customFields={config} />);
-		expect(screen.queryByText("video embed")).not.toBeNull();
+		expect(screen.getByText("video embed")).not.toBeNull();
 	});
 });

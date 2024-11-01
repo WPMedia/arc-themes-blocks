@@ -56,13 +56,15 @@ describe("the extra large promo feature", () => {
 
 		let overline = mockData?.websites[arcSite]?.website_section?.name;
 
-		if (!!mockData.owner?.sponsored) {
+		if (mockData.owner?.sponsored) {
 			overline = mockData.label.basic.text;
-		} else if (!!mockData?.label?.basic?.display) {
+		} else if (mockData?.label?.basic?.display) {
 			overline = mockData?.label?.basic?.text;
 		}
 
-		overline ? expect(screen.getByText(overline)).toHaveAttribute("contenteditable", "true") : null; // Bypass test if overline value doesn't exist (to be editable)
+		if (overline) {
+			expect(screen.getByText(overline)).toHaveAttribute("contenteditable", "true");
+		}
 	});
 
 	it("should return a headline if showHeadline is true", () => {

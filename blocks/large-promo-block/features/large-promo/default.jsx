@@ -113,7 +113,13 @@ export const LargePromoPresentation = ({
 				contentDate ? (
 					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
 						{contentOverline ? (
-							<Overline href={contentOverlineURL} {...editableOverline} suppressContentEditableWarning>{contentOverline}</Overline>
+							<Overline
+								href={contentOverlineURL}
+								{...editableOverline}
+								suppressContentEditableWarning
+							>
+								{contentOverline}
+							</Overline>
 						) : null}
 						{contentHeading || contentDescription || contentAuthors || contentDate ? (
 							<Stack>
@@ -300,11 +306,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			: "";
 	const phrases = usePhrases();
 
-	const editableOverline =
-	content?.label?.basic?.text ? editableContent(content, "label.basic.text") : {};
-	
-	const editableHeading =
-	content?.headlines ? editableContent(content, "headlines.basic") : {};
+	const editableHeading = content?.headlines ? editableContent(content, "headlines.basic") : {};
 
 	const editableDescription = content?.description
 		? editableContent(content, "description.basic")
@@ -336,6 +338,25 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		content?.websites?.[arcSite]?.website_section || {};
 
 	let [overlineText, overlineURL] = [sectionText, sectionUrl];
+	const shouldUseLabel = !!labelDisplay;
+
+	let editableOverline = content?.websites?.[arcSite]?.website_section?.name
+		? editableContent(content, `websites.${[arcSite]}.website_section.name`)
+		: {};
+
+	if (content?.owner?.sponsored) {
+		overlineText = content?.label?.basic?.text || phrases.t("global.sponsored-content");
+		overlineURL = null;
+		editableOverline = content?.label?.basic?.text
+			? editableContent(content, "label.basic.text")
+			: {};
+	} else if (shouldUseLabel) {
+		[overlineText, overlineURL] = [labelText, labelUrl];
+		editableOverline = content?.label?.basic?.text
+			? editableContent(content, "label.basic.text")
+			: {};
+	}
+
 	if (content?.owner?.sponsored) {
 		overlineText = content?.label?.basic?.text || phrases.t("global.sponsored-content");
 		overlineURL = null;

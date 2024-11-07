@@ -9,7 +9,7 @@ function AppleSignIn({ customButtons, socialSignOnIn, className, oidcClients = [
 	const phrases = usePhrases();
 	const { Identity } = useIdentity();
 
-	const appleOIDCClient = oidcClients.find((oidcClient) => {
+	const appleOIDCClient = oidcClients && oidcClients.find((oidcClient) => {
 		const parsedClientId = oidcClient.clientId.split(';')[0];
 
 		return oidcClient.protocol === 'Apple' && parsedClientId === appleClientId;

@@ -36,9 +36,6 @@
 		"test:coverage": "jest --coverage",
 		"test:watch": "npm run test -- --watch -o --coverage"
 	},
-	"browserslist": [
-		"supports css-logical-props and last 2 versions and > 1%"
-	],
 	"lint-staged": {
 		"*": "prettier --write --ignore-unknown"
 	},

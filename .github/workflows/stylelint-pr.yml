@@ -38,7 +38,7 @@ jobs:
         uses: reviewdog/action-stylelint@v1
         with:
           github_token: ${{ secrets.github_token }}
-          fail_on_error: true
+          fail_level: "error"
           reporter: github-pr-review
           filter_mode: "diff_context"
           stylelint_config: ".stylelintrc.json"

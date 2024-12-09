@@ -15,9 +15,9 @@ The Gallery block shows a carousel with images and captions. It is used to displ
 
 This is set in the `blocks.json`.
 
-| **Prop**              | **Required** | **Type** | **Description**                                                                                                                     |
-| --------------------- | ------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| **galleryCubeClicks** | no           | integer  | If present sets the interval at which ads will be shown between gallery images. The click count do not take into account direction. |
+| **Prop**              | **Required** | **Type** | **Description**                                                                                                                       |
+| --------------------- | ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **galleryCubeClicks** | no           | integer  | If present sets the interval at which ads will be shown between gallery images. The click count does not take into account direction. |
 
 ## ANS Schema
 

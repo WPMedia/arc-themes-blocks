@@ -263,7 +263,7 @@ const ReviewOrder = ({
 					result = await stripe.confirmCardPayment(
 						clientSecret,
 						{
-							payment_method: event.paymentMethod.id,
+							payment_method: event?.paymentMethod?.id,
 						},
 						{
 							handleActions: false,
@@ -274,7 +274,7 @@ const ReviewOrder = ({
 					result = await stripe.confirmCardSetup(
 						clientSecret,
 						{
-							payment_method: event.paymentMethod.id,
+							payment_method: event?.paymentMethod?.id,
 						},
 						{
 							handleActions: false,
@@ -298,7 +298,7 @@ const ReviewOrder = ({
 				Sales.finalizePayment(
 					orderNumber,
 					stripeIntents?.paymentMethodID,
-					result.paymentIntent.id,
+					result?.paymentIntent?.id,
 					null,
 					recaptchaStored || captchaToken,
 				)
@@ -314,7 +314,7 @@ const ReviewOrder = ({
 				Sales.finalizePayment(
 					orderNumber,
 					stripeIntents?.paymentMethodID,
-					result.setupIntent.id,
+					result?.setupIntent?.id,
 					null,
 					recaptchaStored || captchaToken,
 				)

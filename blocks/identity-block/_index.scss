@@ -219,6 +219,11 @@
 				@include scss.block-properties("social-sign-on-button-container-apple-custom");
 			}
 
+			&__sso{
+				@include scss.block-components("social-sign-on-button-container-apple-sso");
+				@include scss.block-properties("social-sign-on-button-container-apple-sso");
+			}
+
 			@include scss.block-components("social-sign-on-button-container-apple");
 			@include scss.block-properties("social-sign-on-button-container-apple");
 		}

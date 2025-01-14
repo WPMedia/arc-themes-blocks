@@ -5,7 +5,6 @@ const validateURL = (url) => {
         const urlObject = new URL(url, window.location.origin);
 
         if (urlObject.origin === window.location.origin) {
-			console.log(urlObject.pathname+"bermet")
             return urlObject.pathname;
         }
     } catch (e) {

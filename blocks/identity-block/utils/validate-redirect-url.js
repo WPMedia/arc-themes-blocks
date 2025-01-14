@@ -1,24 +1,21 @@
 const validateURL = (url) => {
-	if (!url) return null;
-	const validationRegEx = /^\/[^/].*$/;
-	const valid = validationRegEx.test(url);
+    if (!url) return null;
 
-	if (valid) {
-		return `${window.location.origin}${url}`;
-	}
+    try {
+        const urlObject = new URL(url, window.location.origin);
 
-	if (url === "/") {
-		return url;
-	}
+        if (urlObject.origin === window.location.origin) {
+			console.log(urlObject.pathname+"bermet")
+            return urlObject.pathname;
+        }
+    } catch (e) {
 
-	const urlLocation = new URL(url);
+        sessionStorage.setItem("ArcXP_redirectUrl", "/");
+        return "/";
+    }
 
-	if (urlLocation.origin === window.location.origin) {
-		return url;
-	}
-
-	sessionStorage.setItem("ArcXP_redirectUrl", "/");
-	return "/";
+    sessionStorage.setItem("ArcXP_redirectUrl", "/");
+    return "/";
 };
 
 export default validateURL;

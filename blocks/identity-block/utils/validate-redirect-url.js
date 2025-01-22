@@ -11,7 +11,9 @@ const validateURL = (url) => {
 			}
 
 			if(urlObject.pathname !== "/"){
-				return `${urlObject.origin}${urlObject.pathname}`
+				urlObject.search = "";
+                urlObject.hash = "";
+                return urlObject.toString(); 
 			}
 		}
 		sessionStorage.setItem("ArcXP_redirectUrl", "/");

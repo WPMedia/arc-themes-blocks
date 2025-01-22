@@ -11,8 +11,6 @@ const validateURL = (url) => {
 			}
 
 			if(urlObject.pathname !== "/"){
-				urlObject.search = "";
-                urlObject.hash = "";
                 return urlObject.toString(); 
 			}
 		}

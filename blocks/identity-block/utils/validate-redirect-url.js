@@ -1,24 +1,32 @@
 const validateURL = (url) => {
 	if (!url) return null;
-	const validationRegEx = /^\/[^/].*$/;
-	const valid = validationRegEx.test(url);
 
-	if (valid) {
-		return `${window.location.origin}${url}`;
+	try {
+		const urlObject = new URL(url, window.location.origin);
+
+		if (urlObject.origin === window.location.origin) {
+	
+			if(urlObject.pathname === "/"){
+				return urlObject.pathname
+			}
+
+			if(urlObject.pathname !== "/"){
+                return urlObject.toString(); 
+			}
+		}
+		sessionStorage.setItem("ArcXP_redirectUrl", "/");
+		return "/";
+		
+	} catch (error) {
+		const storedRedirect = sessionStorage.getItem("ArcXP_redirectUrl");
+        if (storedRedirect && storedRedirect.startsWith("/")) {
+            return storedRedirect;
+        }
+
+        // Default to "/"
+        sessionStorage.setItem("ArcXP_redirectUrl", "/");
+        return "/";
 	}
-
-	if (url === "/") {
-		return url;
-	}
-
-	const urlLocation = new URL(url);
-
-	if (urlLocation.origin === window.location.origin) {
-		return url;
-	}
-
-	sessionStorage.setItem("ArcXP_redirectUrl", "/");
-	return "/";
 };
 
 export default validateURL;

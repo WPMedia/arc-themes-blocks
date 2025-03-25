@@ -130,7 +130,7 @@ const CardListItems = (props) => {
 	}
 
 	const Wrapper = title ? HeadingSection : React.Fragment;
-
+	const overrideValue = offsetOverride || 0;
 	let contentItems = contentElements.reduce((acc, element, index) => {
 		if (element.websites?.[arcSite] && index >= offsetOverride) {
 			return acc.concat(element);
@@ -142,7 +142,7 @@ const CardListItems = (props) => {
 		contentItems = contentItems.slice(0, displayAmount);
 	}
 
-	const sourceContent = contentElements[offsetOverride];
+	const sourceContent = contentElements[overrideValue] || null;
 
 	const displayDate = localizeDateTime(
 		sourceContent.display_date,

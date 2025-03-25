@@ -281,6 +281,9 @@
 					"heading": {
 						"font-size": "var(--body-font-size)",
 						"line-height": "var(--body-line-height)"
+					},
+					"link": {
+						"position": "relative"
 					}
 				}
 			},
@@ -446,6 +449,9 @@
 					},
 					"stack": {
 						"gap": "var(--global-spacing-4)"
+					},
+					"link": {
+						"position": "relative"
 					}
 				}
 			},

@@ -863,6 +863,16 @@
 			"desktop": {}
 		}
 	},
+	"social-sign-on-button-container-apple-sso":{
+		"styles": {
+			"default": {
+				"inline-size": "100%",
+				"justify-content": "center", 
+				"display": "flex"
+			},
+			"desktop": {}
+		}
+	},
 	"social-sign-on-dividerWithText": {
 		"styles": {
 			"default": {

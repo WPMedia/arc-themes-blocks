@@ -11,9 +11,11 @@ import {
 	getFocalFromANS,
 	getImageFromANS,
 	getVideoFromANS,
+	getPromoType,
 	Heading,
 	HeadingSection,
 	Image,
+	Icon,
 	Join,
 	Link,
 	localizeDateTime,
@@ -103,7 +105,16 @@ const ExtraLarge = (props) => {
 			: {
 					src: fallbackImage,
 				};
+	const promoType = getPromoType(element);
+	const labelIconName = {
+		gallery: "Camera",
+		video: "Play",
+	}[promoType];
 
+	const labelIconText = {
+		gallery: phrases.t("global.gallery-text"),
+		video: phrases.t("global.video-text"),
+	}[promoType];
 	return hasOverline ||
 		contentHeading ||
 		showImageXL ||
@@ -136,6 +147,12 @@ const ExtraLarge = (props) => {
 										assistiveHidden
 									>
 										<Image {...imageParams} />
+										{labelIconName ? (
+											<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
+												<Icon name={labelIconName} />
+												<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
+											</div>
+										) : null}
 									</Conditional>
 								)}
 							</MediaItem>

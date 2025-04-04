@@ -31,7 +31,7 @@ function AppleSignIn({ customButtons, socialSignOnIn, className, oidcClients = [
 	return (
 		<div
 			data-testid="apple-sign-in-button"
-			style={{ width: '100%' }}
+			className={`${className}__Apple__sso`}
 		>
 			<Button
 				id="apple-btn"

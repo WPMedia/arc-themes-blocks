@@ -284,6 +284,9 @@
 					},
 					"link": {
 						"position": "relative"
+					},
+					"media-item": {
+						"position": "relative"
 					}
 				}
 			},

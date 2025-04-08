@@ -284,6 +284,9 @@
 					},
 					"link": {
 						"position": "relative"
+					},
+					"media-item": {
+						"position": "relative"
 					}
 				}
 			},
@@ -389,18 +392,6 @@
 				}
 			},
 			"desktop": {}
-		}
-	},
-	"top-table-list-small-label": {
-		"styles": {
-			"default": {
-				"color": "var(--global-white)",
-				"display": "none",
-				"margin-inline-start": "var(--global-spacing-2)"
-			},
-			"desktop": {
-				"display": "inline"
-			}
 		}
 	},
 	"top-table-list-small-left": {

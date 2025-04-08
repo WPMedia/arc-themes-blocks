@@ -122,11 +122,6 @@
 			@include scss.block-properties("top-table-list-small-icon-label");
 		}
 
-		&__label {
-			@include scss.block-components("top-table-list-small-label");
-			@include scss.block-properties("top-table-list-small-label");
-		}
-
 		@include scss.block-components("top-table-list-small");
 		@include scss.block-properties("top-table-list-small");
 	}

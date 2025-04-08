@@ -15,7 +15,6 @@ import {
 	Image,
 	Link,
 	MediaItem,
-	usePhrases,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-top-table-list-small";
@@ -34,7 +33,6 @@ const Small = (props) => {
 	} = props;
 
 	const { arcSite } = useFusionContext();
-	const phrases = usePhrases();
 
 	const showBottomBorder = typeof showBottomBorderSM === "undefined" ? true : showBottomBorderSM;
 
@@ -42,11 +40,6 @@ const Small = (props) => {
 	const labelIconName = {
 		gallery: "Camera",
 		video: "Play",
-	}[promoType];
-
-	const labelIconText = {
-		gallery: phrases.t("global.gallery-text"),
-		video: phrases.t("global.video-text"),
 	}[promoType];
 
 	const linkURL = element?.websites?.[arcSite]?.website_url;
@@ -80,7 +73,6 @@ const Small = (props) => {
 				{labelIconName ? (
 					<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
 						<Icon name={labelIconName} />
-						<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
 					</div>
 				) : null}
 			</MediaItem>

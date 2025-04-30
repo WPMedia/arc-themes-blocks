@@ -131,7 +131,7 @@ SocialSignOnBlock.propTypes = {
 				"Used when we want to hide the ---OR--- divider",
 		}),
 		customButtons: PropTypes.bool.tag({
-			name: "Custom Facebook/Gooogle/Apple buttons",
+			name: "Custom Facebook/Google/Apple buttons",
 			defaultValue: true,
 			description:
 				"Render a custom Facebook/Google/Apple buttons or the ones provided by Facebook, Google, and Apple.",

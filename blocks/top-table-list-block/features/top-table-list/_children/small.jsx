@@ -7,9 +7,11 @@ import {
 	formatURL,
 	getFocalFromANS,
 	getImageFromANS,
+	getPromoType,
 	Grid,
 	Heading,
 	HeadingSection,
+	Icon,
 	Image,
 	Link,
 	MediaItem,
@@ -33,6 +35,12 @@ const Small = (props) => {
 	const { arcSite } = useFusionContext();
 
 	const showBottomBorder = typeof showBottomBorderSM === "undefined" ? true : showBottomBorderSM;
+
+	const promoType = getPromoType(element);
+	const labelIconName = {
+		gallery: "Camera",
+		video: "Play",
+	}[promoType];
 
 	const linkURL = element?.websites?.[arcSite]?.website_url;
 	const ansImage = getImageFromANS(element);
@@ -62,6 +70,11 @@ const Small = (props) => {
 		<Conditional component={Link} condition={linkURL} href={formatURL(linkURL)} assistiveHidden>
 			<MediaItem>
 				<Image {...imageParams} />
+				{labelIconName ? (
+					<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
+						<Icon name={labelIconName} />
+					</div>
+				) : null}
 			</MediaItem>
 		</Conditional>
 	) : null;

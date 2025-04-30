@@ -281,6 +281,12 @@
 					"heading": {
 						"font-size": "var(--body-font-size)",
 						"line-height": "var(--body-line-height)"
+					},
+					"link": {
+						"position": "relative"
+					},
+					"media-item": {
+						"position": "relative"
 					}
 				}
 			},
@@ -359,6 +365,35 @@
 			}
 		}
 	},
+	"top-table-list-small-icon-label": {
+		"styles": {
+			"default": {
+				"align-items": "center",
+				"background-color": "var(--color-primary)",
+				"border-block-end": 0,
+				"border-block-start": 0,
+				"border-inline-end": 0,
+				"border-inline-start": 0,
+				"border-radius": "var(--global-spacing-2)",
+				"inset-block-end": "var(--global-spacing-2)",
+				"margin-inline-start": "var(--global-spacing-2)",
+				"padding-block-end": "var(--global-spacing-2)",
+				"padding-block-start": "var(--global-spacing-2)",
+				"padding-inline-end": "var(--global-spacing-2)",
+				"padding-inline-start": "var(--global-spacing-2)",
+				"position": "absolute",
+				"z-index": 1,
+				"components": {
+					"icon": {
+						"block-size": "var(--global-spacing-4)",
+						"fill": "var(--global-white)",
+						"inline-size": "var(--global-spacing-4)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
 	"top-table-list-small-left": {
 		"styles": {
 			"default": {
@@ -405,6 +440,9 @@
 					},
 					"stack": {
 						"gap": "var(--global-spacing-4)"
+					},
+					"link": {
+						"position": "relative"
 					}
 				}
 			},
@@ -431,6 +469,44 @@
 		"styles": {
 			"default": {
 				"grid-template-columns": "1fr"
+			},
+			"desktop": {}
+		}
+	},
+	"top-table-list-xl-icon-label": {
+		"styles": {
+			"default": {
+				"align-items": "center",
+				"background-color": "var(--color-primary)",
+				"border-block-end": 0,
+				"border-block-start": 0,
+				"border-inline-end": 0,
+				"border-inline-start": 0,
+				"border-radius": "var(--global-spacing-2)",
+				"inset-block-end": "var(--global-spacing-2)",
+				"margin-inline-start": "var(--global-spacing-2)",
+				"padding-block-end": "var(--global-spacing-2)",
+				"padding-block-start": "var(--global-spacing-2)",
+				"padding-inline-end": "var(--global-spacing-2)",
+				"padding-inline-start": "var(--global-spacing-2)",
+				"position": "absolute",
+				"z-index": 1,
+				"components": {
+					"icon": {
+						"block-size": "var(--global-spacing-4)",
+						"fill": "var(--global-white)",
+						"inline-size": "var(--global-spacing-4)"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	},
+	"top-table-list-xl-label": {
+		"styles": {
+			"default": {
+				"color": "var(--global-white)",
+				"margin-inline-start": "var(--global-spacing-2)"
 			},
 			"desktop": {}
 		}

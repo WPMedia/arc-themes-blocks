@@ -1,0 +1,111 @@
+import { Controls, Meta, Story } from "@storybook/addon-docs";
+import * as IndexStories from "./index.stories";
+import Button from ".";
+
+<Meta of={IndexStories} />
+
+# Button
+
+A Button represent a clickable element that is generally found within forms for submitting and resetting.
+
+Buttons are generally used for actions such as "Show More", "Save", "Cancel" - when a user activated the button involves an action to be taken.
+
+In the cases where a Button's appearance is needed but the intention is to take the user to another page use the `href` prop to have the visual appearance of your button but using an `a` link.
+
+## Usage
+
+```jsx
+import { Button, Icon } from "@wpmedia/arc-themes-components";
+
+const Feature = () => (
+	<Button
+		iconLeft={<Icon name="User" width="24" height="24" />}
+		iconRight={<Icon name="ChevronDown" width="24" height="24" />}
+	>
+		My Account
+	</Button>
+);
+```
+
+### Using ref
+
+The `Button` component uses React's [forwarding refs](https://reactjs.org/docs/forwarding-refs.html) technique for automatically passing a ref through a component to one of its children
+
+```jsx
+import { Button } from "@wpmedia/arc-themes-components";
+
+const ref = React.createRef();
+const Feature = () => <Button ref={ref}>My Account</Button>;
+```
+
+## Properties
+
+<Controls />
+
+The `Button` component also allows for other properties to passed in and added to the `Button`.
+
+## Accessibility
+
+### Labelling
+
+The `Button` component provides some props for accessibility concerns
+
+The prop `accessibilityLabel` adds an `aria-label` attribute, which can accessed by assistive technologies. The primary use case for use this property is when
+
+- The button's visible text does not provide adequete meaning
+- The button has no text - when using only an icon to convey meaning
+
+### Disabling
+
+The prop `disabled` uses the `aria-disabled` attribute on a `button` to provide assistive technologies the ability to still access the `button` in the tab order, but provide context to the users of assistive technologies.
+When using the `disabled` property any events will need to account for preventing the event completing.
+
+## Stories
+
+### Button
+
+<Story of={IndexStories.DefaultButton} />
+
+### Disabled Button
+
+<Story of={IndexStories.DisabledButton} />
+
+### Link Button
+
+<Story of={IndexStories.LinkButton} />
+
+### Multiple Buttons
+
+<Story of={IndexStories.MultipleButtons} />
+
+### Buttons Sizes
+
+<Story of={IndexStories.ButtonSizes} />
+
+### Buttons Variants
+
+<Story of={IndexStories.ButtonVariants} />
+
+### With Icons
+
+<Story of={IndexStories.WithIcons} />
+
+### Icon Only
+
+<Story of={IndexStories.IconOnly} />
+
+### Left Icon Only
+
+<Story of={IndexStories.LeftIconOnly} />
+
+### Full Width
+
+<Story of={IndexStories.FullWidth} />
+
+### Button with HTML content
+
+<Story of={IndexStories.ButtonWithHtmlContent} />
+
+### Button with onClickEvent
+
+<Story of={IndexStories.ButtonWithOnClickEvent} />

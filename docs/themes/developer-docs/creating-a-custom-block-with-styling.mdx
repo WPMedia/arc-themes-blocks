@@ -1,0 +1,452 @@
+---
+title: Creating a custom block with styling
+description: Creating a custom block with styling
+lastUpdated: 2025-02-11T22:08:30.000Z
+migrationData:
+  short_description: Creating a custom block with styling
+  number: KB0011245
+  sys_id: 69cec240c3745250a046930a0501315d
+  sys_created_on: '2024-09-17 17:49:43'
+  sys_updated_on: '2024-09-17 18:08:30'
+  sys_created_by: Anna.Sherman@washpost.com
+  sys_updated_by: Anna.Sherman@washpost.com
+  author: 13c389ea47ee5550a87626c2846d4300
+  category: Themes
+  kb: Developer Docs
+  kb_category: ba320d8b47dad110a87626c2846d4317
+  meta: ''
+  topic: General
+  sys_view_count: 1253
+  helpful_count: 0
+  version: f01312c4c3745250a046930a05013103
+  display_number: KB0011245 v8.0
+migrationStatus: converted
+reviewStatus: pending
+conversionDate: 2024-10-15T17:18:05.397Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+You can apply the out-of-the-box Themes 2.0 blocks' styling capabilities to custom blocks in your feature pack. With just a few files added to your block, our StyleBuilder script reads the styling and includes it in a site's styles.
+
+:::note
+To see your style changes reflected, you must run your bundle locally first to build those styles. After running locally, you may upload the updated bundle for deployment. Styles will not be built during a Theme Settings or PageBuilder deployment, so they must be run locally first.
+:::
+
+## Deciding on creating a custom block
+
+To guide your decision on creating and using an ejected / custom block instead of an out-of-the-box block, see: 
+
+*   <Link blank href={`${globals.themesDevDocsPath}/ejecting-an-arc-block#implications-for-ejecting-a-block/`} text='Implications for ejecting a block' />
+*   <Link blank href={`${globals.themesDevDocsPath}/ejecting-an-arc-block#deciding-when-to-use-an-out-of-the-box-block-versus-a-custom-block`} text='Deciding when to use an out-of-the-box block versus a custom block' />
+
+## Creating a custom block
+
+You can create a custom block for any of the available types in PageBuilder Engine: output types, layouts, chains, blocks and content sources. Let's create a custom block example by generating a new file for displaying social media links in the footer of our site:
+
+```js
+// /components/features/footer/social-links.jsx
+
+import React, { Component } from 'react'
+import { Link } from "@wpmedia/arc-themes-components";
+
+const SocialLinks = (props) => {
+  return (
+    <ul>
+      <li><Link href={}>Facebook</Link></li>
+      <li><Link href={}>Twitter</Link></li>
+      <li><Link href={}>Instagram</Link></li>
+    </ul>
+  )
+}
+
+SocialLinks.label = 'Social Links'
+
+export default SocialLinks
+```
+
+At this point, our block won't function properly because we haven't filled in the `href` values for our links. If we knew the URLs we wanted to link to beforehand, we could hardcode them into our component, but we might have multiple sites with different URLs, so hardcoding won't make sense. In this scenario, we want to use Site Properties to get the social URLs for a specific site in our environment. Let's imagine we have 3 settings in our `blocks.json` file named `facebookPage`, `twitterUrl` and `instagramUrl` that we want to use:
+
+```js
+//  /components/features/footer/social-links.jsx
+
+import React, { Component } from 'react'
+import { useFusionContext } from 'fusion:context'
+import getProperties from 'fusion:properties';
+import { Link } from "@wpmedia/arc-themes-components";
+
+const SocialLinks = (props) => {
+  const { arcSite } = useFusionContext()
+  const { facebookPage, twitterUrl, instagramUrl } = getProperties(arcSite)
+  
+  return (
+    <ul>
+      <li><Link href={facebookPage}>Facebook</Link></li>
+      <li><Link href={twitterUrl}>Twitter</Link></li>
+      <li><Link href={instagramUrl}>Instagram</Link></li>
+    </ul>
+  )
+}
+
+SocialLinks.label = 'Social Links'
+
+export default SocialLinks
+```
+
+Now, we've added two imports to help us get the [site-specific](#adding-site-specific-styles) URLs we want. The line `import { useFusionContext } from 'fusion:context'` imports the useFusionContext function, which will give us information about what site is currently being requested later on. Then, `import getProperties from 'fusion:properties';` imports the getProperties function, which will look up the specific URLs we're looking for based on the site name. Now within the component function, we can invoke `const { arcSite } = useFusionContext()` to get the current arcSite that is being requested. We can then use that `arcSitevalue` to look up the URLs we need, like: `const { facebookPage, twitterUrl, instagramUrl } = getProperties(arcSite)`. Finally, once we have the URLs in hand, we can plug them into their respective spots in our component.
+
+Now our block should be functional and using the appropriate URLs defined in the file `blocks.json` to generate links to our social media accounts.
+
+## Folder and file structure for styling
+
+You need two files to get your custom block working with Blocks Styling: an `_index.scss` file to identify tokens for your block and a `json` file to hold the style definitions. The `json` file must be in a `themes` folder inside of your block and be named according to the `theme` set in the `blocks.json` file. The `theme` is most commonly set to `news`.
+
+This styling approach is not limited to custom blocks. You can use this structure to create styling tokens for custom chains, layouts, output-types, or any other custom folder nested under `components`.  
+
+Your block's folder structure goes from something like this:
+
+```
+components
+  -> features
+    -> my-custom-block
+      -> default.jsx
+```
+
+to this:
+
+```
+components
+  -> features
+       -> my-custom-block
+            -> _index.scss
+             -> default.jsx
+             -> themes
+                 -> news.json
+  -> chains (example/optional)
+       -> my-custom-chain
+            -> _index.scss
+            -> default.jsx
+            -> themes
+                 -> news.json
+  -> layouts (example/optional)
+       ....etc
+  -> output-types (example/optional)
+      ....etc
+  -> custom-folder (example/optional)
+      ....etc
+```
+
+Typically, to include styles in your block, you would have to have an `import` statement with the location of the style file. But when using the blocks styling method, this is not necessary.
+
+## Creating tokens
+
+With the necessary files and folders created, you can begin to create tokens that Blocks Styling uses to apply the desired styles. At the top of the new `_index.scss`, you must include the statement `@use "@wpmedia/arc-themes-components/scss";`. This statement imports our SCSS library's mix-ins to process the tokens that it adds in a future step. To add a new token, create a SCSS rule and add `@include scss.block-components("my-block-token");` and `@include scss.block-properties("my-block-token");`. The top level rule should be targeting a class on the outermost wrapper of your block. 
+
+Your `_index.scss` should now look something like this:
+
+```scss
+// /components/features/my-custom-block/_index.scss
+
+@use "@wpmedia/arc-themes-components/scss";
+.my-block-wrapper {
+  @include scss.block-components("my-block");
+  @include scss.block-properties("my-block");
+}
+```
+
+You can add tokens to any valid SCSS rule, but containing them all to the same top-level rule helps prevent issues with styling scope. Additionally, ensure you are not redefining a token already in use. Take care with how you name tokens. You can also apply styles to pseudo-elements by making tokens that target them. A more robust `_index.scss` may look something like this:
+
+```scss
+// /components/features/my-custom-block/_index.scss
+
+@use "@wpmedia/arc-themes-components/scss";
+.my-block-wrapper {
+  @include scss.block-components("my-block");
+  @include scss.block-properties("my-block");
+
+  &-left-container {
+    @include scss.block-components("my-block-left");
+    @include scss.block-properties("my-block-left");
+
+    &:before {
+      @include scss.block-components("my-block-left-before");
+      @include scss.block-properties("my-block-left-before");
+    }
+  }
+}
+```
+
+With that, you now have some tokens defined, so you can move on to adding styles.
+
+## Adding styles to tokens
+
+Now we can start adding styles to the `themes/[my-theme].json`. This JSON file includes an entry on the root node for each token you created. Using the example `_index.scss` from the previous section, the skeleton of the JSON file would look like this:
+
+```json
+// /components/features/my-custom-block/themes/my-theme.json
+{
+  "my-block": {
+    "styles": {
+      "default": {},
+      "desktop": {}
+    }
+  },
+  "my-block-left": {
+    "styles": {
+      "default": {},
+      "desktop": {}
+    }
+  },
+  "my-block-left-before": {
+    "styles": {
+      "default": {},
+      "desktop": {}
+    }
+  }
+}
+```
+
+In this example, the `default` and `desktop` entries refer to breakpoints. These two breakpoints are provided out of the box in Themes (see <Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system/#breakpoints`} text='Breakpoints' /> for how to define custom breakpoints). You define styles per breakpoint, adding in CSS properties to each object and assigning values. For example:
+
+```json
+// /components/features/my-custom-block/themes/my-theme.json
+{
+  "my-block": {
+    "styles": {
+      "default": {
+        "display": "block"
+      },
+      "desktop": {
+        "display": "flex"
+      }
+    }
+  },
+  ...
+}
+```
+
+The values could also be the global and alias tokens made available in Blocks Styling:
+
+```json
+// /components/features/my-custom-block/themes/my-theme.json
+{
+  "my-block": {
+    "styles": {
+      "default": {
+        "color": "$global.neutral-4",
+        "display": "block",
+        "font-family": "$alias.font-family-secondary"
+      },
+      "desktop": {
+        "display": "flex"
+      }
+    }
+  },
+  ...
+}
+```
+
+:::note 
+Only the `default` breakpoint is required. You do not need to include the keys for other breakpoints if you do not want to add styling to them.
+:::
+
+If you are using components from `@wpmedia/arc-themes-components` in your custom block, you can style those directly as well, without the need for extra tokens. To style those components, use the `component` key in your JSON file. For example, in your block's output, use the `<Paragraph>` component to output some text. You can style that component like this:
+
+```json
+// /components/features/my-custom-block/themes/my-theme.json
+{
+  "my-block": {
+    "styles": {
+      "default": {
+        "color": "$global.neutral-4",
+        "display": "block",
+        "font-family": "$alias.font-family-secondary",
+        "components": {
+          "paragraph": {
+            "margin-block-end": "$global.spacing-4"
+          }
+        }
+      },
+      "desktop": {
+        "display": "flex"
+      }
+    }
+  },
+  ...
+}
+```
+
+This code sample styles all uses of the `<Paragraph>` component used within your blocks wrapper. Placing these styles in other tokens affects only the uses of those components within that tokens scope. If you want a larger margin on just the `<Paragraph>` components in the `.my-block-wrapper-left-container` we defined a token for earlier, we could do so like this:
+
+```json
+// /components/features/my-custom-block/themes/my-theme.json
+{
+  "my-block": {
+    "styles": {
+      "default": {
+        "color": "$global.neutral-4",
+        "display": "block",
+        "font-family": "$alias.font-family-secondary",
+        "components": {
+          "paragraph": {
+            "margin-block-end": "$global.spacing-4"
+          }
+        }
+      },
+      "desktop": {
+        "display": "flex"
+      }
+    }
+  },
+  "my-block-left": {
+    "styles": {
+      "default": {
+        "components": {
+          "paragraph": {
+            "margin-block-end": "$global.spacing-6"
+          }
+        }
+      },
+      "desktop": {}
+    }
+  },
+}
+```
+
+The `<Paragraph>` component is just an example. You can use this method with any of the component tokens listed in the <Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system/#styling`} text='Styling' /> section if you use those components in your block's code.
+
+## Adding site-specific styles
+
+You may want to utilize different styles per site. In order to do this, you should add a site specific style for your block/component combination.
+
+Here's a code example of a basic custom block:
+
+```js
+// /components/link-block/default.jsx
+import React from 'react';
+import { Link } from "@wpmedia/arc-themes-components";
+
+const BLOCK_CLASS_NAME = "b-custom-link-block";
+
+function CustomBlockWithLink() {
+  return (
+    <div className={ BLOCK_CLASS_NAME }>
+      <Link href={}>Click for other reward</Link>
+    </div>
+  )
+}
+
+CustomBlockWithLink.icon = "user-question";
+CustomBlockWithLink.label = "My Custom Block With A Link";
+
+export default CustomBlockWithLink;
+```
+
+Set up the tokens for this block
+
+```scss
+// /components/link-block/_index.scss
+@use "@wpmedia/arc-themes-components/scss";
+.b-custom-link-block {
+  @include scss.block-components("my-custom-block-token");
+  @include scss.block-properties("my-custom-block-token");
+}
+```
+
+Set a default style:
+
+```json
+// /components/link-block/themes/news.json
+{
+  "my-custom-block-token": {
+    "styles": {
+      "default": {
+        "components": {
+          "link": {
+            "text-decoration": "none"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+In order to set a site specific style, just add the following file (or append the existing file):
+
+```json
+// /themes/sites/siteId/styles/blocks.json
+{
+  "my-custom-block-token": {
+    "styles": {
+      "default": {
+        "components": {
+          "link": {
+            "text-decoration": "underline"
+          }
+        }
+      }
+    }
+  }  
+}
+```
+
+For more details on Blocks Styling, see <Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system`} text='Introduction to Themes design system' />. 
+
+## Variants and custom tokens
+
+In addition to creating styles for your custom blocks, you can also create variations of non-custom blocks by creating tokens for certain SCSS rules. To start, add a `customTokens` folder to your feature pack, along with an `_index.scss` and a `themes/[my-theme].json` file. Your feature pack should look something like this:
+
+```
+blocks.json
+components
+  -> features
+  -> customTokens
+    -> _index.scss
+    -> themes
+      -> news.json
+content
+...
+```
+
+Now with that set up, you can create new tokens for out-of-the-box blocks. By adding a rule for a block's class in this new SCSS file, you can then style it specifically based on its location in a layout, if it's in a specific chain, or if it's the last instance of a block in the same container.
+
+For example, if you wanted to change the font size of the Card List Block's title but only on desktop and if it's in the `rightrail` section of the default Right Rail - Arc Layout, you could do so. Inspecting the Card list block, you can see the title has the class `b-card-list__title`. Then checking the right rail section of the Right Rail layout, you can see it has the class `b-right-rail__main-right-rail`. Knowing this, you can now create a token in the `customTokens/_index.scss`:
+
+```scss
+// /components/customTokens/_index.scss
+.b-right-rail {
+  &__main-right-rail {
+    .b-card-list {
+      &__title {
+        @include scss.block-components("card-list-title-right-rail");
+        @include scss.block-properties("card-list-title-right-rail");
+      }
+    }
+  }
+}
+```
+
+With the token created, you can now style it in the `customTokens/themes/[my-theme].json`:
+
+```json
+// /components/customTokens/themes/my-theme.json
+{
+  "card-list-title-right-rail": {
+    "styles": {
+      "default": {},
+      "desktop": {
+        "font-size": "$global.font-size-5"
+      }
+    }
+  }
+}
+```
+
+You've now created a variant of an out-of-the-box block, without the need to eject and fork the block. There are countless ways to use this functionality. This is just one example.
+
+As noted above, ensure you run your bundle locally first to build the styles and re-upload your bundle with the applied changes for your deployment. 
+
+Lastly, if you do have custom code that adds classes conditionally to a page, template, or is a custom-built chain, then you can create variants of out-of-the-box blocks based on those classes here as well. The only difference from the previous example is that you would use those custom classes in targeting a block.

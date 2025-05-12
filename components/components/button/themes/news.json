@@ -1,0 +1,133 @@
+{
+	"button": {
+		"styles": {
+			"default": {
+				"border-color": "transparent",
+				"border-style": "var(--global-border-style-1)",
+				"border-width": "var(--global-border-width-1)",
+				"border-radius": "var(--border-radius)",
+				"font-weight": "var(--global-font-weight-7)",
+				"gap": "var(--global-spacing-2)"
+			}
+		}
+	},
+	"button-small": {
+		"styles": {
+			"default": {
+				"font-size": "var(--body-font-size-small)",
+				"line-height": "var(--body-line-height-small)",
+				"padding-block-start": "var(--global-spacing-2)",
+				"padding-inline-start": "var(--global-spacing-4)",
+				"padding-block-end": "var(--global-spacing-2)",
+				"padding-inline-end": "var(--global-spacing-4)"
+			}
+		}
+	},
+	"button-medium": {
+		"styles": {
+			"default": {
+				"font-size": "var(--body-font-size-small)",
+				"line-height": "var(--body-line-height-small)",
+				"padding-block-start": "var(--global-spacing-3)",
+				"padding-inline-start": "var(--global-spacing-4)",
+				"padding-block-end": "var(--global-spacing-3)",
+				"padding-inline-end": "var(--global-spacing-4)"
+			}
+		}
+	},
+	"button-large": {
+		"styles": {
+			"default": {
+				"font-size": "var(--body-font-size)",
+				"line-height": "var(--body-line-height)",
+				"padding-block-start": "var(--global-spacing-4)",
+				"padding-inline-start": "var(--global-spacing-4)",
+				"padding-block-end": "var(--global-spacing-4)",
+				"padding-inline-end": "var(--global-spacing-4)"
+			}
+		}
+	},
+	"button-default": {
+		"styles": {
+			"default": {
+				"background-color": "var(--global-white)",
+				"border-color": "var(--text-color)",
+				"border-width": "var(--global-border-width-1)",
+				"color": "var(--text-color)"
+			}
+		}
+	},
+	"button-default-hover": {
+		"styles": {
+			"default": {
+				"color": "var(--color-primary-hover)"
+			}
+		}
+	},
+	"button-primary": {
+		"styles": {
+			"default": {
+				"background-color": "var(--color-primary)",
+				"color": "var(--global-white)"
+			}
+		}
+	},
+	"button-primary-hover": {
+		"styles": {
+			"default": {
+				"background-color": "var(--color-primary-hover)",
+				"color": "var(--global-white)"
+			}
+		}
+	},
+	"button-primary-reverse": {
+		"styles": {
+			"default": {
+				"background-color": "transparent",
+				"border-color": "var(--color-primary)",
+				"color": "var(--color-primary)"
+			}
+		}
+	},
+	"button-primary-reverse-hover": {
+		"styles": {
+			"default": {
+				"border-color": "var(--color-primary-hover)",
+				"color": "var(--color-primary-hover)"
+			}
+		}
+	},
+	"button-secondary": {
+		"styles": {
+			"default": {
+				"background-color": "var(--global-white)",
+				"color": "var (--text-color)"
+			}
+		}
+	},
+	"button-secondary-hover": {
+		"styles": {
+			"default": {
+				"background-color": "var(--color-primary-hover)",
+				"color": "var(--global-white)"
+			}
+		}
+	},
+	"button-secondary-reverse": {
+		"styles": {
+			"default": {
+				"background-color": "transparent",
+				"border-color": "var(--global-white)",
+				"color": "var(--global-white)"
+			}
+		}
+	},
+	"button-secondary-reverse-hover": {
+		"styles": {
+			"default": {
+				"border-color": "var(--color-primary-hover)",
+				"color": "var(--color-primary-hover)"
+			}
+		}
+	}
+}

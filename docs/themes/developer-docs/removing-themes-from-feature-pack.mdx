@@ -1,0 +1,63 @@
+---
+title: Removing Themes from the Feature Pack
+description: Removing Themes from Feature Pack
+lastUpdated: 2025-02-24
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+If you decide to stop using Themes after including it in your feature pack, you must delete the `blocks.json` file from your project or repository. However, after removing the `blocks.json` file, you must apply additional configurations to preserve all of the PageBuilder Engine capabilities. 
+
+This guide walks you through configuring your project without Themes. 
+
+## Site properties
+
+{/*Link Future Update: Pagebuilder doc that will eventually be moved to the dev portal*/}
+When using Themes, you define your site properties in the `blocks.json` file. Without the `blocks.json` file, you must set your site properties inside the `/properties` directory of your project. See <Link blank href='https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-use-site-properties.html' text='How to use site properties' /> for the correct placement of site properties. 
+
+:::caution[important]
+The structure of the `site-id` value from the `blocks.json` file must stay the same when moving the site properties to the `/properties` directory.
+:::
+
+:::note
+If the `blocks.json` file is present, PageBuilder Engine ignores the `/properties` directory.
+:::
+
+## Site-specific CSS
+
+Themes enables <Link blank href={`${globals.themesDevDocsPath}/themes-css/`} text='site-specific CSS overrides' /> for some chosen fields and includes variables and functions to achieve a consistent design. When removing Themes, you lose the site-specific CSS overrides feature and must include CSS files separately for each site.
+
+PageBuilder Engine supports site-specific CSS. For information on configuring and keeping the CSS files as small as possible for each site, see <Link blank href={`${globals.pbEngineDevDocsPath}/pagebuilder-engine-multi-site-styling-support/`} text='PageBuilder Engine Multi-site styling support' />.
+
+:::note
+When providing Themes CSS and site-specific CSS, both are included in the CSS bundle that PageBuilder Engine generates. They are not mutually exclusive and can work individually or together
+:::
+
+## Component CSS
+
+Any CSS included on the component level can stay as is and requires no change. See <Link blank href='https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-add-styling-to-components.html' text='How to add styling to components' /> for complete information on using static tags and importing styles into components.
+
+## `fusion:themes` package
+
+You must remove all references to the `fusion:themes` package from your code.
+
+## OutputType
+
+If you previously used the Themes outputType, your custom outputType must import the generated CSS in the head tag by adding `<props.cssLinks />`. See <Link blank href={`${globals.pbEngineDevDocsPath}/output-type-api/`} text='Output Type API' /> for more details.
+
+## Engine SDK
+
+The Engine SDK package provides components to use with Themes and custom code. Depending on your use case, you can use the Engine SDK individually, but you might require specific data structures (page-type metadata), variables, or content sources. You can add the package to your `package.json` file, which requires a GitHub personal access token with read permissions in the `.npmrc` file. See <Link blank href={`${globals.tutorialsQuickStartPath}/configure-local-environment-variables/#step-2-add-the-npmrc-file-to-your-project`} text='Configuring environment variables' /> to add the `.npmrc` file to your project. 
+
+
+:::caution[important]
+Removing the Engine SDK package might require code updates to any component that uses the Engine SDK. For example, `MetaData` is one of the most popular components that use the Engine SDK.
+:::
+
+## Internationalization
+
+You do not have to make any changes if you use internationalization in Themes. However, you must include the desired languages in the `blocks.json` file, which is not required if you are providing all translations yourself.
+
+Ensure that you have locale in your [copied site properties](#site-properties), and remove all Themes override entries from your `intl.json` file. For more information, see <Link blank href={`${globals.pbEngineDevDocsPath}/internationalization/`} text='Internationalization' />.

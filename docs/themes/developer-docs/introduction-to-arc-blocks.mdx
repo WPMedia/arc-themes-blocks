@@ -1,0 +1,63 @@
+---
+title: Introduction to Arc Blocks
+description: Introduction to Arc Blocks
+lastUpdated: 2025-03-25
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside, LinkButton, Card } from '@astrojs/starlight/components';
+
+Arc Blocks provides a set of reusable page templates, UI components, and content blocks that come out-of-the-box with your Arc XP bundle. By using Arc Blocks, you get the following benefits:
+
+- Use a quick-launch tool kit of customizable components, blocks, and page templates. 
+- Receive components and blocks updates by deploying the latest Themes version release.
+- Get full Arc XP support while using Arc Blocks.
+
+See the Arc Blocks repositories:
+
+<LinkButton href="https://github.com/WPMedia/arc-themes-blocks" icon="github">Arc Blocks</LinkButton>
+<LinkButton href="https://github.com/WPMedia/arc-themes-components" icon="github">Arc Components</LinkButton>
+
+## How Arc Blocks work
+
+Your Arc XP bundle includes a list of components and blocks in the `blocks.json` file. You can control the components and blocks available in your bundle by making changes to this file locally and redeploying your bundle. For more details, see <Link blank href={`${globals.themesDevDocsPath}/local-development-process-for-custom-blocks/`} text='Local development process for custom blocks' />.
+
+### Requirements
+
+When building and deploying a bundle, PageBuilder Engine validates the following requirements before making Arc Blocks available on your website:
+
+- `blocks.json` file with valid settings in the root directory of your project.
+- `arc-themes-components` package dependency in your project.
+- Environment variables and personal access tokens. 
+- Version compatibility between PageBuilder Engine and `themesReleaseVersion`.
+
+:::tip 
+To configure local environment variables and create access tokens, see:
+
+- <Link blank href={`${globals.tutorialsQuickStartPath}/configure-local-environment-variables/`} text='Configuring local environment variables' /> 
+- <Link blank href={`${globals.apiBasePath}/accessing-arcxp-apis/`} text='Using developer access tokens to access the Arc XP APIs' />
+:::
+
+### Usage
+
+Once you have set up Arc Blocks in your bundle, they become available in PageBuilder Editor, where you can select them and add them to your pages. Using the PageBuilder Editor UI, you can configure the Arc Blocks parameters through the Custom Fields section:
+
+![Block custom fields](/images/themes/blocksCustomFields-m.jpeg)
+
+### Styling customization
+
+Arc Blocks uses a design system that enables you to customize block styling without ejecting (forking) a block. The Themes design system is based on global tokens, breakpoints, and alias tokens, and leverages CSS logical properties. For more details on how to customize blocks styling, see:
+
+- <Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system/`} text='Introduction to Themes design system' /> 
+- <Link blank href={`${globals.themesDevDocsPath}/how-to-customize-a-block/`} text='How to customize a block' />
+- <Link blank href={`${globals.themesDevDocsPath}/components-and-blocks-storybook/`} text='Components and blocks storybook' />
+
+## Custom blocks
+
+To create your custom blocks and use Arc Blocks as a starting point, you must eject (fork) the Arc block. See: 
+
+- <Link blank href={`${globals.themesDevDocsPath}/local-development-process-for-custom-blocks/`} text='Local development process for custom blocks' /> 
+- <Link blank href={`${globals.themesDevDocsPath}/ejecting-an-arc-block`} text='Ejecting (forking) an Arc Block' />
+
+To create a custom block from the start and use the Themes design system, see <Link blank href={`${globals.themesDevDocsPath}/creating-a-custom-block-with-styling/`} text='Creating a custom block with styling' />.

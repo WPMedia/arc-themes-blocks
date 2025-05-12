@@ -1,0 +1,555 @@
+---
+title: Migrating from Theme Settings UI to PageBuilder Deployer
+description: This document explains how to modify themes settings locally and deploy them using the PageBuilder Deployer
+lastUpdated: 2025-02-06
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside, Card } from '@astrojs/starlight/components';
+
+This guide walks you through changing settings locally and deploying your changes using the PageBuilder Deployer UI.
+
+:::note
+This guide requires:
+- A configured local development environment.
+- Access to the PageBuilder Deployer UI in your Arc XP organization.
+:::
+
+
+## Step 1. Download Your Live Bundle
+
+:::note
+Take the steps in this section if:
+
+- You have not previously downloaded a live bundle.
+- The code in your remote or local repositories is not in sync with the code from your live bundle.
+
+Otherwise, proceed to [Step 2. Modify Arc Blocks Settings](#step-2-modify-arc-blocks-settings)
+:::
+
+To download your live bundle, take the following steps:
+
+1. Access your Arc XP organization.
+
+2. On the top-right of the Arc XP dashboard, select the environment you want to deploy to from the drop-down menu.
+
+3. Click the **PageBuilder Editor** tile in the Arc XP dashboard.
+
+    The PageBuilder Pages section displays.
+
+4. On the top navigation menu, click the **Developer Tools** tab.
+
+    The Developer Tools submenu appears below.
+
+5. On the Developer Tools submenu, click the **Deployer** tab.
+
+    The Deployer section opens and lists running and uploaded bundles. The `live` bundle appears first on the list in the running bundles section..
+
+6. On the top right of your uploaded `live` bundle, click the `***` button.
+
+7. Click the **Download option**
+
+    Your browser downloads a timestamped `zip` file.
+
+
+## Step 2. Modify Arc Blocks Settings
+
+Using an IDE or a code editor, open the `blocks.json` file located in the root directory of your project. The `blocks.json` contains key-value pairs that the Theme Settings UI updated through text fields. You can directly modify the `blocks.json` file to change your Arc Blocks settings.  
+
+The following table describes the keys and values that must be in the `blocks.json` file to ensure successful deployments with PageBuilder Deployer.
+
+| Key | Type | Description | Reference value |
+| --- | --- | --- | --- |
+| `themesReleaseVersion` | string | Sets the Themes version to use in your deployment | `arc-themes-release-version-2.4.1` |
+| `themeComponents` | string | Specifies and enables the use of arc-themes React components to build custom blocks | `@wpmedia/arc-themes-components` |
+| `theme` | string | Specifies the default style for the website. Arc XP currently only supports the News theme | `news` | 
+| `blocks` | array | Lists the Arc blocks available in your bundle | See the `blocks.json` example file for a complete list |
+| `siteProperties` | object | Contains key-value pairs to configure site properties | See the `blocks.json` example for example values |
+
+:::tip[blocks.json example file]
+<details>
+<summary>Click here to display</summary>
+
+```json
+{
+  "themesReleaseVersion": "arc-themes-release-version-2.4.1",
+  "themeComponents": "@wpmedia/arc-themes-components",
+  "theme": "news",
+  "blocks": [
+    "@wpmedia/ad-taboola-block",
+    "@wpmedia/ads-block",
+    "@wpmedia/alert-bar-block",
+    "@wpmedia/alert-bar-content-source-block",
+    "@wpmedia/alias-tokens",
+    "@wpmedia/article-body-block",
+    "@wpmedia/article-tag-block",
+    "@wpmedia/author-content-source-block",
+    "@wpmedia/author-bio-block",
+    "@wpmedia/breakpoint-tokens",
+    "@wpmedia/byline-block",
+    "@wpmedia/card-list-block",
+    "@wpmedia/collections-content-source-block",
+    "@wpmedia/content-api-source-block",
+    "@wpmedia/full-author-bio-block",
+    "@wpmedia/date-block",
+    "@wpmedia/default-output-block",
+    "@wpmedia/double-chain-block",
+    "@wpmedia/divider-block",
+    "@wpmedia/extra-large-manual-promo-block",
+    "@wpmedia/extra-large-promo-block",
+    "@wpmedia/footer-block",
+    "@wpmedia/global-phrases-block",
+    "@wpmedia/global-tokens",
+    "@wpmedia/gallery-block",
+    "@wpmedia/header-block",
+    "@wpmedia/header-nav-chain-block",
+    "@wpmedia/headline-block",
+    "@wpmedia/htmlbox-block",
+    "@wpmedia/identity-block",
+    "@wpmedia/large-manual-promo-block",
+    "@wpmedia/large-promo-block",
+    "@wpmedia/lead-art-block",
+    "@wpmedia/links-bar-block",
+    "@wpmedia/masthead-block",
+    "@wpmedia/medium-manual-promo-block",
+    "@wpmedia/medium-promo-block",
+    "@wpmedia/numbered-list-block",
+    "@wpmedia/overline-block",
+    "@wpmedia/quad-chain-block",
+    "@wpmedia/related-content-content-source-block",
+    "@wpmedia/results-list-block",
+    "@wpmedia/right-rail-advanced-block",
+    "@wpmedia/right-rail-block",
+    "@wpmedia/search-content-source-block",
+    "@wpmedia/search-results-list-block",
+    "@wpmedia/section-title-block",
+    "@wpmedia/share-bar-block",
+    "@wpmedia/signing-service-content-source-block",
+    "@wpmedia/simple-list-block",
+    "@wpmedia/single-chain-block",
+    "@wpmedia/single-column-layout-block",
+    "@wpmedia/site-hierarchy-content-block",
+    "@wpmedia/small-manual-promo-block",
+    "@wpmedia/small-promo-block",
+    "@wpmedia/story-feed-author-content-source-block",
+    "@wpmedia/story-feed-query-content-source-block",
+    "@wpmedia/story-feed-sections-content-source-block",
+    "@wpmedia/story-feed-tag-content-source-block",
+    "@wpmedia/subheadline-block",
+    "@wpmedia/tag-title-block",
+    "@wpmedia/tags-content-source-block",
+    "@wpmedia/top-table-list-block",
+    "@wpmedia/triple-chain-block",
+    "@wpmedia/unpublished-content-source-block",
+    "@wpmedia/video-player-block"
+  ],
+  "values": {
+    "default": {
+      "siteProperties": {
+        "websiteDomain": "https://www.arcintelligencer.com",
+        "websiteName": "Website Display Name",
+        "lightBackgroundLogo": "https://static.themebuilder.aws.arc.pub/orgid-custom1-env/1646855268779.png",
+        "primaryLogo": "https://static.themebuilder.aws.arc.pub/orgid-custom1-env/1646855268868.png",
+        "fallbackImage": "https://static.themebuilder.aws.arc.pub/orgid-custom1-env/1636037887909.png",
+        "primaryLogoAlt": "The Arc Intelligencer",
+        "facebookPage": "arcintelligencer",
+        "twitterUsername": "arcintelligencer",
+        "resizerURL": "https://orgid-siteid-env.web.arc-cdn.net/resizer/v2/",
+        "rssUrl": "http://feeds.arcintelligencer.com/rss/homepage",
+        "copyrightText": "arcintelligencer.com © 2024 The Arc Intelligencer",
+        "dangerouslyInjectJS": [],
+        "dateLocalization": {
+          "language": "en",
+          "timeZone": "America/New_York",
+          "dateTimeFormat": "%B %d, %Y at %l:%M %P %Z",
+          "dateFormat": "%B %d, %Y"
+        },
+        "locale": "en",
+        "taboolaPublisherId": "arc",
+        "fontUrl": [
+          "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lora:wght@400;700&display=swap"
+        ],
+        "chartbeatAccountId": "12345",
+        "chartbeatDomain": "arcintelligencer.com",
+        "textDirection": "ltr",
+        "textFlow": "horizontal-tb",
+        "api": {
+          "identity": {
+            "origin": "https://orgid-siteid-prod.api.cdn.arcpublishing.com"
+          }
+        }
+      }
+    },
+    "sites": {
+      "arc-demo-1": {
+        "siteProperties": {
+          "websiteDomain": "https://www.arcdemo1.com",
+          "websiteName": "Arc Demo 1",
+          "primaryLogoAlt": "Arc Demo 1 logo",
+          "facebookPage": "https://www.facebook.com/arcdemo1fb",
+          "twitterUsername": "arcdemo1twitter"
+        }
+      },
+      "arc-demo-2": {
+        "siteProperties": {
+          "websiteDomain": "https://www.arcdemo2.com",
+          "websiteName": "Arc Demo 2",
+          "primaryLogoAlt": "Arc Demo 2 logo",
+          "facebookPage": "https://www.facebook.com/arcdemo2fb",
+          "twitterUsername": "arcdemo2twitter"
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+:::
+
+:::caution[important]
+In the `siteProperties` object, If you want to set different `resizerURL` values per environment, you must create and deploy different bundles for each environment. Ensure you update the value using the following format: 
+
+```
+  "resizerURL": "https://{org}-{environment}.web.arc-cdn.net/resizer/v2"
+```
+
+Substitute `{org}` with your organization's name and `{environment}` with `sandbox`, `staging`, or `prod`.
+:::
+
+ 
+## Step 3. Zip Your bundle
+
+Before zipping your bundle, start the Docker daemon by opening the Docker Desktop application. See <Link blank href={`${globals.tutorialsQuickStartPath}/set-up-your-dev-playground/#system-requirements`} text='Setting Up Your Dev Playground' /> for Docker resources requirements.
+
+From the root directory of your project, run the following command:
+
+```
+npx fusion zip
+```
+
+This command will build your code and create a timestamped `.zip` file in the `/dist/` directory.
+
+## Step 4. Deploy Your bundle with PageBuilder Deployer
+
+To upload your bundle and deploy your changes using PageBuilder Deployer, take the following steps:
+
+1. Access your Arc XP organization.
+
+2. On the top-right of the Arc XP dashboard, select the environment you want to deploy to from the drop-down menu.
+
+3. Click the **PageBuilder Editor** tile in the Arc XP dashboard.
+
+    The PageBuilder Pages section displays.
+
+4. On the top navigation menu, click the **Developer Tools** tab.
+
+    The Developer Tools submenu appears below.
+
+5. On the Developer Tools submenu, click the **Deployer** tab.
+
+    The Deployer section opens and lists running and uploaded bundles. 
+
+6. In the uploaded bundles section, click the **Upload Bundle** button.
+
+    The Upload Bundle panel appears.
+
+7. Provide a name for your bundle in the **Bundle Name** text field.
+
+8. Click the **Upload Bundle** button.
+
+    A system file explorer window opens.
+
+9. Navigate to your project's /dist/ directory.
+
+10. Select the bundle zip file you created in Step 3.
+
+11. On the bottom of the Upload Bundle panel, click the **Upload Bundle** button.
+
+    Your bundle shows in the uploaded bundles list with the `Unused` badge.
+
+12. On the top right of your uploaded bundle, click the `***` button.
+
+13. Click the **deploy** option. 
+
+<br />
+<br />
+<br />
+
+<details>
+<summary> 
+
+**Alternate Method (Use with Caution)**
+
+</summary>
+
+:::caution
+This alternate method does not require a configured local development environment, but it does not build your code or validate your bundle. Proceed with caution. If your deployment is unsuccessful, repeat the steps in this section or set up your local development environment and use the main method described in this document.:::
+:::
+
+This method requires you to use the following tools:
+
+- PageBuilder Deployer UI
+- Plain text editor
+- File compression application (zip)
+
+Take the steps in this section to download your live bundle, modify Arc Blocks settings, and compress, upload, and deploy your updated bundle. 
+
+**Step 1. Download Your Live Bundle**
+
+To download your live bundle, take the following steps:
+
+1. Access your Arc XP organization.
+
+2. On the top-right of the Arc XP dashboard, select the environment you want to deploy to from the drop-down menu.
+
+3. Click the **PageBuilder Editor** tile in the Arc XP dashboard.
+
+    The PageBuilder Pages section displays.
+
+4. On the top navigation menu, click the **Developer Tools** tab.
+
+    The Developer Tools submenu appears below.
+
+5. On the Developer Tools submenu, click the **Deployer** tab.
+
+    The Deployer section opens and lists running and uploaded bundles. In the running bundles section, the `live` bundle appears first on the list.
+
+6. On the top right of your uploaded `live` bundle, click the `***` button.
+
+7. Click the **Download option**
+
+    Your browser downloads a timestamped `zip` file.
+
+**Step 2. Decompress Your Bundle**
+
+Using a file compression application, extract the contents of your bundle `zip` file. 
+
+:::tip
+On Mac OS, open the zip file to decompress
+:::
+
+The resulting directory contains the `blocks.json` file that you must modify.
+
+**Step 3. Modify Arc Blocks Settings**
+
+Using a plain text editor (like TextEdit on MacOS), open the `blocks.json` file, located in the root directory of your bundle. The `blocks.json` contains key-value pairs that the Themes Settings UI updates through text fields. You can directly modify the `blocks.json` file to change your Themes settings.  
+
+:::note
+If you are using other text editors, ensure your disable any rich text formats before making changes to and saving the `blocks.json` file.
+:::
+
+The following table describes the keys and values related to Themes settings that must be present in the `blocks.json` file to ensure successful deployments with PageBuilder Deployer.
+
+| Key | Type | Description | Reference value |
+| --- | --- | --- | --- |
+| `themesReleaseVersion` | string | Sets the Themes version to use in your deployment | `arc-themes-release-version-2.4.1` |
+| `themeComponents` | string | Specifies and enables the use of arc-themes React components to build custom blocks | `@wpmedia/arc-themes-components` |
+| `theme` | string | Specifies the default style for the website. Arc XP currently only supports the News theme | `news` | 
+| `blocks` | array | Lists the Arc blocks available in your bundle | See the `blocks.json` example file for a complete list |
+| `siteProperties` | object | Contains key-value pairs to configure site properties | See the See the `blocks.json` example for example values |
+
+:::tip[blocks.json example file]
+<details>
+<summary>Click here to display</summary>
+
+```json
+{
+  "themesReleaseVersion": "arc-themes-release-version-2.4.1",
+  "themeComponents": "@wpmedia/arc-themes-components",
+  "theme": "news",
+  "blocks": [
+    "@wpmedia/ad-taboola-block",
+    "@wpmedia/ads-block",
+    "@wpmedia/alert-bar-block",
+    "@wpmedia/alert-bar-content-source-block",
+    "@wpmedia/alias-tokens",
+    "@wpmedia/article-body-block",
+    "@wpmedia/article-tag-block",
+    "@wpmedia/author-content-source-block",
+    "@wpmedia/author-bio-block",
+    "@wpmedia/breakpoint-tokens",
+    "@wpmedia/byline-block",
+    "@wpmedia/card-list-block",
+    "@wpmedia/collections-content-source-block",
+    "@wpmedia/content-api-source-block",
+    "@wpmedia/full-author-bio-block",
+    "@wpmedia/date-block",
+    "@wpmedia/default-output-block",
+    "@wpmedia/double-chain-block",
+    "@wpmedia/divider-block",
+    "@wpmedia/extra-large-manual-promo-block",
+    "@wpmedia/extra-large-promo-block",
+    "@wpmedia/footer-block",
+    "@wpmedia/global-phrases-block",
+    "@wpmedia/global-tokens",
+    "@wpmedia/gallery-block",
+    "@wpmedia/header-block",
+    "@wpmedia/header-nav-chain-block",
+    "@wpmedia/headline-block",
+    "@wpmedia/htmlbox-block",
+    "@wpmedia/identity-block",
+    "@wpmedia/large-manual-promo-block",
+    "@wpmedia/large-promo-block",
+    "@wpmedia/lead-art-block",
+    "@wpmedia/links-bar-block",
+    "@wpmedia/masthead-block",
+    "@wpmedia/medium-manual-promo-block",
+    "@wpmedia/medium-promo-block",
+    "@wpmedia/numbered-list-block",
+    "@wpmedia/overline-block",
+    "@wpmedia/quad-chain-block",
+    "@wpmedia/related-content-content-source-block",
+    "@wpmedia/results-list-block",
+    "@wpmedia/right-rail-advanced-block",
+    "@wpmedia/right-rail-block",
+    "@wpmedia/search-content-source-block",
+    "@wpmedia/search-results-list-block",
+    "@wpmedia/section-title-block",
+    "@wpmedia/share-bar-block",
+    "@wpmedia/signing-service-content-source-block",
+    "@wpmedia/simple-list-block",
+    "@wpmedia/single-chain-block",
+    "@wpmedia/single-column-layout-block",
+    "@wpmedia/site-hierarchy-content-block",
+    "@wpmedia/small-manual-promo-block",
+    "@wpmedia/small-promo-block",
+    "@wpmedia/story-feed-author-content-source-block",
+    "@wpmedia/story-feed-query-content-source-block",
+    "@wpmedia/story-feed-sections-content-source-block",
+    "@wpmedia/story-feed-tag-content-source-block",
+    "@wpmedia/subheadline-block",
+    "@wpmedia/tag-title-block",
+    "@wpmedia/tags-content-source-block",
+    "@wpmedia/top-table-list-block",
+    "@wpmedia/triple-chain-block",
+    "@wpmedia/unpublished-content-source-block",
+    "@wpmedia/video-player-block"
+  ],
+  "values": {
+    "default": {
+      "siteProperties": {
+        "websiteDomain": "https://www.arcintelligencer.com",
+        "websiteName": "Website Display Name",
+        "lightBackgroundLogo": "https://static.themebuilder.aws.arc.pub/orgid-custom1-env/1646855268779.png",
+        "primaryLogo": "https://static.themebuilder.aws.arc.pub/orgid-custom1-env/1646855268868.png",
+        "fallbackImage": "https://static.themebuilder.aws.arc.pub/orgid-custom1-env/1636037887909.png",
+        "primaryLogoAlt": "The Arc Intelligencer",
+        "facebookPage": "arcintelligencer",
+        "twitterUsername": "arcintelligencer",
+        "resizerURL": "https://orgid-siteid-env.web.arc-cdn.net/resizer/v2/",
+        "rssUrl": "http://feeds.arcintelligencer.com/rss/homepage",
+        "copyrightText": "arcintelligencer.com © 2024 The Arc Intelligencer",
+        "dangerouslyInjectJS": [],
+        "dateLocalization": {
+          "language": "en",
+          "timeZone": "America/New_York",
+          "dateTimeFormat": "%B %d, %Y at %l:%M %P %Z",
+          "dateFormat": "%B %d, %Y"
+        },
+        "locale": "en",
+        "taboolaPublisherId": "arc",
+        "fontUrl": [
+          "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lora:wght@400;700&display=swap"
+        ],
+        "chartbeatAccountId": "12345",
+        "chartbeatDomain": "arcintelligencer.com",
+        "textDirection": "ltr",
+        "textFlow": "horizontal-tb",
+        "api": {
+          "identity": {
+            "origin": "https://orgid-siteid-prod.api.cdn.arcpublishing.com"
+          }
+        }
+      }
+    },
+    "sites": {
+      "arc-demo-1": {
+        "siteProperties": {
+          "websiteDomain": "https://www.arcdemo1.com",
+          "websiteName": "Arc Demo 1",
+          "primaryLogoAlt": "Arc Demo 1 logo",
+          "facebookPage": "https://www.facebook.com/arcdemo1fb",
+          "twitterUsername": "arcdemo1twitter"
+        }
+      },
+      "arc-demo-2": {
+        "siteProperties": {
+          "websiteDomain": "https://www.arcdemo2.com",
+          "websiteName": "Arc Demo 2",
+          "primaryLogoAlt": "Arc Demo 2 logo",
+          "facebookPage": "https://www.facebook.com/arcdemo2fb",
+          "twitterUsername": "arcdemo2twitter"
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+:::
+
+:::caution[important]
+In the `siteProperties` object, If you want to set different `resizerURL` values per environment, you must create and deploy different bundles, one for each environment. Ensure you update the value using the following format: 
+
+```
+  "resizerURL": "https://{org}-{environment}.web.arc-cdn.net/resizer/v2"
+```
+
+Substitute `{org}` with your organization's name and `{environment}` with `sandbox`, `staging`, or `prod`.
+:::
+
+**Step 4. Compress Your Bundle**
+
+Using a file compression application, compress the files and folders of the bundle as a zip file. 
+
+:::tip
+On Mac OS, select the files and folders, right click, then click **Compress**.
+:::
+
+:::caution[important]
+Ensure that you select all the files and folders inside the initial bundle decompressed folder. You must not compress the bundle folder itself.
+:::
+
+**Step 5. Deploy Your Bundle with PageBuilder Deployer UI**
+
+To upload your bundle and deploy your changes using PageBuilder Deployer, take the following steps:
+
+1. Access your Arc XP organization.
+
+2. Click the **PageBuilder Editor** tile in the Arc XP dashboard.
+
+    The PageBuilder Pages section displays.
+
+3. On the top navigation menu, click the **Developer Tools** tab.
+
+    The Developer Tools submenu appears below.
+
+4. On the Developer Tools submenu, click the **Deployer** tab.
+
+    The Deployer section opens and lists running and uploaded bundles. 
+
+5. In the uploaded bundles section, click the **Upload Bundle** button.
+
+    The Upload Bundle panel appears.
+
+6. Provide a name for your bundle in the **Bundle Name** text field.
+
+7. Click the **Upload Bundle** button.
+
+    A system file explorer window opens.
+
+8. Navigate to the folder where you compressed your bundle `zip` file.
+
+9. Select your bundle `zip` file.
+
+10. On the bottom of the Upload Bundle panel, click the **Upload Bundle** button.
+
+    Your bundle shows in the uploaded bundles list with the `Unused` badge.
+
+11. On the top right of your uploaded bundle, click the `***` button.
+
+12. Click the **deploy** option.
+</details>

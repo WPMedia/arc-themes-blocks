@@ -1,0 +1,376 @@
+@use "true" as *;
+
+$tokens: (
+	default: (
+		alias: (),
+		components: (
+			"block1": (
+				"font-size": var(--font-size-tiny),
+			),
+			"component1": (
+				"font-size": var(--font-size-small),
+			),
+			"with-state": (
+				"font-size": var(--font-size-small),
+			),
+			"with-state-hover": (
+				"font-size": var(--font-size-tiny),
+			),
+			"with-state-active": (
+				"font-size": var(--font-size-tiny),
+			),
+		),
+		blocks: (
+			"block1": (
+				"font-size": var(--font-size-small),
+				components: (
+					"component1": (
+						"font-size": var(--font-size-small),
+					),
+				),
+			),
+			"block2": (
+				components: (
+					"component2": (
+						"font-size": var(--font-size-large),
+						"font-weight": 900,
+					),
+				),
+			),
+		),
+	),
+	tablet: (
+		alias: (),
+		components: (),
+		blocks: (
+			"block1": (
+				components: (
+					"component1": (
+						"font-size": var(--font-size-large),
+					),
+				),
+			),
+			"block2": (
+				components: (
+					"component2": (
+						"color": red,
+					),
+				),
+			),
+		),
+	),
+	desktop: (
+		alias: (),
+		components: (),
+		blocks: (),
+	),
+);
+
+@use "root" with (
+	$breakpoints: (
+		default: "min-width: 0",
+		tablet: "min-width: 20rem",
+		desktop: "min-width: 48rem",
+	),
+	$global: (),
+	$tokens: $tokens
+);
+
+@include describe("root-tokens") {
+	@include it("it returns nothing if no tokens") {
+		@include assert {
+			@include output {
+				@include root.root-tokens();
+			}
+			@include expect {
+				// nothing
+			}
+		}
+
+		@include assert {
+			@include output {
+				@include root.root-tokens(());
+			}
+			@include expect {
+				// nothing
+			}
+		}
+	}
+
+	@include it("it returns only alias tokens") {
+		@include assert {
+			@include output {
+				@include root.root-tokens(
+					(
+						alias: (
+							color: #f00,
+							font-family: "Inter",
+						),
+					)
+				);
+			}
+			@include expect {
+				:root {
+					--color: #f00;
+					--font-family: "Inter";
+				}
+			}
+		}
+	}
+
+	@include it("it returns only component tokens") {
+		@include assert {
+			@include output {
+				@include root.root-tokens(
+					(
+						components: (
+							"component-name": (
+								color: #008000,
+							),
+						),
+					)
+				);
+			}
+			@include expect {
+				:root {
+					--c-component-name-color: #008000;
+				}
+			}
+		}
+	}
+
+	@include it("it returns only blocks tokens") {
+		@include assert {
+			@include output {
+				@include root.root-tokens(
+					(
+						blocks: (
+							"block-name": (
+								color: #ffa500,
+							),
+						),
+					)
+				);
+			}
+			@include expect {
+				:root {
+					--b-block-name-color: #ffa500;
+				}
+			}
+		}
+	}
+}
+
+@include describe("block-components") {
+	@include it("returns nothing if definition does not exist") {
+		@include assert {
+			@include output {
+				@include root.block-components("missing");
+			}
+			@include expect {
+				// nothing
+			}
+		}
+	}
+
+	@include it("returns appropriate value for definition that does exist") {
+		@include assert {
+			@include output {
+				@include root.block-components("block1");
+			}
+			@include expect {
+				@media (min-width: 0) {
+					--c-component1-font-size: var(--font-size-small);
+				}
+
+				@media (min-width: 20rem) {
+					--c-component1-font-size: var(--font-size-large);
+				}
+			}
+		}
+	}
+}
+
+@include describe("block-properties") {
+	@include it("returns nothing if definition does not exist") {
+		@include assert {
+			@include output {
+				@include root.block-properties("missing");
+			}
+			@include expect {
+				// nothing
+			}
+		}
+	}
+
+	@include it("returns appropriate value for definition that does exist") {
+		@include assert {
+			@include output {
+				@include root.block-properties("block1");
+			}
+			@include expect {
+				font-size: var(--b-block1-font-size);
+			}
+		}
+	}
+}
+
+@include describe("component-properties") {
+	@include it("returns nothing if definition does not exist") {
+		@include assert {
+			@include output {
+				@include root.component-properties("missing");
+			}
+			@include expect {
+				// nothing
+			}
+		}
+	}
+
+	@include it("returns appropriate value for definition that does exist") {
+		@include assert {
+			@include output {
+				@include root.component-properties("component2");
+			}
+			@include expect {
+				font-size: var(--c-component2-font-size);
+				font-weight: var(--c-component2-font-weight);
+				color: var(--c-component2-color);
+			}
+		}
+	}
+}
+
+@include describe("component-with-states") {
+	@include it("returns nothing if definition does not exist") {
+		@include assert {
+			@include output {
+				@include root.component-with-states("missing");
+			}
+			@include expect {
+				// nothing
+			}
+		}
+	}
+
+	@include it("returns default if no states") {
+		@include assert {
+			@include output {
+				@include root.component-with-states("with-state");
+			}
+			@include expect {
+				font-size: var(--c-with-state-font-size);
+			}
+		}
+	}
+
+	@include it("returns definition for each state") {
+		@include assert {
+			@include output {
+				@include root.component-with-states("with-state", [hover]);
+			}
+			@include expect {
+				font-size: var(--c-with-state-font-size);
+
+				&:hover {
+					font-size: var(--c-with-state-hover-font-size);
+				}
+			}
+		}
+	}
+
+	@include it("returns definition for each state") {
+		@include assert {
+			@include output {
+				@include root.component-with-states("with-state", [hover, active]);
+			}
+			@include expect {
+				font-size: var(--c-with-state-font-size);
+
+				&:hover {
+					font-size: var(--c-with-state-hover-font-size);
+				}
+
+				&:active {
+					font-size: var(--c-with-state-active-font-size);
+				}
+			}
+		}
+	}
+}
+
+@include describe("component-var") {
+	@include it("returns appropriate value for definition that does exist") {
+		@include assert-equal(
+			root.component-var("component1", "font-size"),
+			"var(--c-component1-font-size)"
+		);
+	}
+}
+
+@include describe("block-var") {
+	@include it("returns appropriate value for definition that does exist") {
+		@include assert-equal(root.block-var("block1", "font-size"), "var(--b-block1-font-size)");
+	}
+}
+
+@include describe("get-all-component-definitions") {
+	@include it("returns appropriate value for definition that does exist") {
+		@include assert-equal(root.get-all-component-definitions(), ());
+	}
+
+	@include it("returns appropriate value for definition that does exist") {
+		@include assert-equal(
+			root.get-all-component-definitions(
+				$tokens,
+				(
+					default: "min-width: 0",
+					tablet: "min-width: 20rem",
+					desktop: "min-width: 48rem",
+				)
+			),
+			(
+				"block1": (
+					"font-size": var(--font-size-tiny),
+				),
+				"component1": (
+					"font-size": var(--font-size-small),
+				),
+				"with-state": (
+					"font-size": var(--font-size-small),
+				),
+				"with-state-hover": (
+					"font-size": var(--font-size-tiny),
+				),
+				"with-state-active": (
+					"font-size": var(--font-size-tiny),
+				),
+				"component2": (
+					"color": initial,
+					"font-size": initial,
+					"font-weight": initial,
+				),
+			)
+		);
+	}
+}
+
+@include describe("replace-token-reference") {
+	@include it("replaces global token reference with CSS var") {
+		@include assert-equal(
+			root.replace-token-reference("var(--global-black)"),
+			"var(--global-black)"
+		);
+	}
+
+	@include it("replaces alias token reference with CSS var") {
+		@include assert-equal(
+			root.replace-token-reference("$alias.primary-font"),
+			"var(--primary-font)"
+		);
+	}
+
+	@include it("returns the original value if not a token reference") {
+		@include assert-equal(root.replace-token-reference("0px 10px"), "0px 10px");
+	}
+}

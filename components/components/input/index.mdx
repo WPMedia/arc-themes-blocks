@@ -1,0 +1,99 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Input, { FIELD_TYPES } from ".";
+
+<Meta of={IndexStories} />
+
+# Input
+
+The `Input` component is a wrapper for the `<input>` element. It is used to render a `text`, `email`, or `password` `type` input field.
+
+The variations available to the input that can modify the `<label>`, `<input>` and tip and error `<span>` elements are `error`, `success`, `focus`, `warning`, and `default`. The base style hook can be configured with merely `c-input` style hook. In this way, the elements can be styled with maximal or minimal customization.
+
+The `inputState` prop can be passed in and controls the state of the input. The `inputState` prop can be set to `error`, `success`, `focus` or `warning`. This will be overriden if the validation on the input is invalid. The `hidden` property can also override the `inputState` prop as it wouldn't make sense to change the visual state of the input if it is hidden.
+
+Validation is done via the `validationMessage` without using JavaScript. In this way, the `<Input>` is [utilizing](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/pattern) the best of HTML.
+
+## Usage
+
+```jsx
+import { Input } from "@wpmedia/arc-themes-components";
+
+const Feature = () => (
+	<form>
+		<Input label="Favorite color" validationPattern="^orange$" name="field1" />
+		<Input label="Email Field" name="field2" type="email" required />
+		<Input
+			label="Password Field"
+			name="field3"
+			validationErrorMessage="Your password is invalid ... sorry."
+			type="password"
+			required
+		/>
+		<button type="submit">Submit</button>
+	</form>
+);
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### Default Text Input
+
+<Story of={IndexStories.DefaultTextInput} />
+
+### Input States
+
+<Story of={IndexStories.InputStates} />
+
+### Input Sizes
+
+<Story of={IndexStories.InputSizes} />
+
+### Text Input With Error
+
+<Story of={IndexStories.TextInputWithError} />
+
+### Text Input With Placeholder
+
+<Story of={IndexStories.TextInputWithPlaceholder} />
+
+### With Field Tip
+
+<Story of={IndexStories.WithFieldTip} />
+
+### With Field Tip and Error
+
+<Story of={IndexStories.WithFieldTipAndError} />
+
+### With Field Tip and Custom Error
+
+<Story of={IndexStories.WithFieldTipAndCustomError} />
+
+### Email Field
+
+<Story of={IndexStories.EmailField} />
+
+### Email field With Error
+
+<Story of={IndexStories.EmailFieldWithError} />
+
+### Password Field
+
+<Story of={IndexStories.PasswordField} />
+
+### Without Autocomplete
+
+<Story of={IndexStories.WithoutAutocomplete} />
+
+### Autocomplete New Password
+
+<Story of={IndexStories.AutocompleteNewPassword} />
+
+### Select Field
+
+<Story of={IndexStories.SelectField} />

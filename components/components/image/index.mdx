@@ -1,0 +1,106 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Image from ".";
+
+<Meta of={IndexStories} />
+
+# Image
+
+Image provide a vital part of story telling for websites. Images are used to complement text, or provide supporting information. Images can be used as informational or for decoration. This component will provide the means to display images in a variety of different ways.
+
+For `resizedOptions`, here are the query parameters that are available: https://github.com/WPMedia/arc-photo-resizer/tree/main/docs/usage#query-parameters
+
+Crucially, an "auth" key will allow the image to be resized. This object will resize the image to the specified dimensions and other properties given in the query parameters in the `src`.
+
+For responsive images, the goal is to provide options given the media conditions, like screen size, provided using the "sizes" prop that takes in an array of objects. This is will render the [sizes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes) string.
+
+Given the sizes specified, the browser will choose the best image to display from the `srcset` attribute created given the the `responsiveImages` prop.
+
+The width and height prop are used to set the aspect ratio of the responsive images. For instance, if you set the width of 200 and height of 100, you're using an aspect ratio of 2. Then, if you're using `responsiveImages` of `[100, 200, 300]`, you'll get the height and width of the following: width=100, height=50 for 100, width=200 height=100 for 200, and width=300 height=150 for 300. In this way, the images are responsive based off of width. You are also opting into browser best practices of setting any width to give the browser a hint of how big the image will be. However, the image that's set based off of the `sizes` `mediaCondition` and `sourceSizeValue` will determine how big the image actually will be.
+
+If you don't set a `responsiveImages` array, you will have no responsive image options. However, you will have an image resized exactly like your width and height set.
+
+For more information on responsive image best practices, please see: https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia\_and\_embedding/Responsive\_images. We are using sizes and srcset based off of these practices, using arc resizer v2 auth and filters. If you seek more customization, you can create your own image component as well. Or, please refer to the Picture component if you require different image art direction or image.
+
+NOTE: The `resizedOptions` will not be used for the height and width: the `height` and `width` prop will only be used for setting width and height of the `<img>` as well as for calculating the aspect ratio used to generated the `<img>`'s srcset.
+
+## Usage
+
+```jsx
+import { Image } from "@wpmedia/arc-themes-components";
+
+const Feature = () => (
+	<Image
+		src="cat.jpg"
+		width={100}
+		height={100}
+		resizerURL="https://resizer.com/v2/"
+		alt="A cat meowing"
+		resizedOptions={{
+			auth: "secret",
+		}}
+		responsiveImages={[100, 500, 1000]}
+		sizes={[
+			{ isDefault: true, sourceSizeValue: "100px" },
+			{ sourceSizeValue: "500px", mediaCondition: "(min-width: 1000px)" },
+		]}
+	/>
+);
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### Default
+
+<Story of={IndexStories.Default} />
+
+### Image not found
+
+<Story of={IndexStories.ImageNotFound} />
+
+### Only width
+
+<Story of={IndexStories.OnlyWidth} />
+
+### Only height
+
+<Story of={IndexStories.OnlyHeight} />
+
+### Width and height
+
+<Story of={IndexStories.WidthAndHeight} />
+
+### Width and height and many responsive images
+
+<Story of={IndexStories.WidthAndHeightAndManyResponsiveImages} />
+
+### Width and height and many responsive images without sizes default
+
+<Story of={IndexStories.WidthAndHeightAndManyResponsiveImagesWithoutSizesDefault} />
+
+### Responsive images without height and width
+
+<Story of={IndexStories.ResponsiveImagesWithoutHeightAndWidth} />
+
+### Responsive image with in resized options like lowered quality
+
+<Story of={IndexStories.ResponsiveImageWithResizedOptionsLikeLoweredQuality} />
+
+### Responsive image with viewport width sizes, filling about half the screen with vw on desktop
+
+<Story
+	of={IndexStories.ResponsiveImageWithViewportWidthSizesFillingAboutHalfTheScreenWithVwOnDesktop}
+/>
+
+### Without auth token renders src raw
+
+<Story of={IndexStories.WithoutAuthTokenRendersSrcRaw} />
+
+### External url
+
+<Story of={IndexStories.ExternalUrl} />

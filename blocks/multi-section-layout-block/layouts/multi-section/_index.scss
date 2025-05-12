@@ -1,0 +1,52 @@
+.b-multi-section-layout {
+  &__header {
+    inline-size: 100%;
+    padding: var(--global-spacing-5);
+    border: 2px solid var(--color-brand-primary);
+    background-color: var(--color-background-primary);
+  }
+
+  &__three-column {
+    margin-block: var(--global-spacing-5);
+    margin-inline: auto;
+    max-inline-size: 75rem;
+    padding: var(--global-spacing-5);
+    border: 2px solid var(--color-brand-secondary);
+    background-color: var(--color-background-primary);
+  }
+
+  &__full-width {
+    inline-size: 100%;
+    padding: var(--global-spacing-5);
+    border: 2px solid var(--color-brand-accent);
+    background-color: var(--color-background-primary);
+  }
+
+  &__content {
+    margin-block: var(--global-spacing-5);
+    margin-inline: auto;
+    max-inline-size: 75rem;
+    background-color: var(--color-background-primary);
+  }
+
+  &__left-rail {
+    grid-column: 1;
+    padding: var(--global-spacing-5);
+    border: 2px solid var(--color-brand-tertiary);
+    background-color: var(--color-background-primary);
+  }
+
+  &__main {
+    grid-column: 2 / span 3;
+    padding: var(--global-spacing-5);
+    border: 2px solid var(--color-brand-quaternary);
+    background-color: var(--color-background-primary);
+  }
+
+  &__footer {
+    inline-size: 100%;
+    padding: var(--global-spacing-5);
+    border: 2px solid var(--color-brand-quinary);
+    background-color: var(--color-background-primary);
+  }
+} 

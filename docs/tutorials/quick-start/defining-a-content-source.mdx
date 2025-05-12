@@ -1,0 +1,221 @@
+---
+title: Defining a Content Source
+description: Explanation of content source definitions in javascript and JSON
+lastUpdated: 2025-01-15
+---
+
+import * as globals from '/public/globals.js';
+import Link from '/public/snippets/anchors.astro';
+import { Aside, Steps, LinkCard, CardGrid, Icon, Card } from '@astrojs/starlight/components';
+
+## Defining a Content Source
+A content source provides content to fill the components of a page created with PageBuilder Engine. Content sources consist of two elements:
+
+- A URL endpoint from which PageBuilder Engine retrieves content in JSON format. 
+
+- A series of parameters that define what data to retrieve.
+
+PageBuilder Engine enables two ways of defining a content source: <Link href={`${globals.tutorialsQuickStartPath}/creating-with-pagebuilder/#defining-a-content-source-in-javascript`} text='in JavaScript' /> and <Link href={`${globals.tutorialsQuickStartPath}/creating-with-pagebuilder/##defining-a-content-source-in-json`} text='in JSON.' /> 
+
+### Defining a Content Source in JavaScript
+This tutorial uses the [OMDb API](https://www.omdbapi.com/) as the content source to define. Suppose you want to find information about a movie based on its title. 
+
+In the `/content/sources/` directory, create a file called `movie-find.js`. You will later refer to this file in the code and the PageBuilder admin as `movie-find`.
+
+Then, paste the following code inside `movie-find.js`:
+
+  ```javascript
+    import { OMDB_API_KEY } from 'fusion:environment'
+
+    const resolve = (query) => {
+    const requestUri = `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&plot=full`
+
+    if (query.hasOwnProperty('movieTitle')) return `${requestUri}&t=${query.movieTitle}`
+
+    throw new Error('movie-find content source requires a movieTitle')
+    }
+
+    export default {
+    resolve,
+    params: {
+        movieTitle: 'text'
+    }
+    }
+  ```
+
+#### Content Source JavaScript Properties
+
+A content source defined in JavaScript has the following properties:
+
+<details>
+<summary>Click here to show the properties list</summary>
+##### `resolve` 
+
+When using a content source with a `resolve` property, the code applies the following logic:
+
+- The `resolve` property is a function that outputs is a URL that returns a JSON containing the desired data. This example accepts a single argument named `query`.  
+- The `query` object contains the values of the parameters required for the request. In this case, you only need the `movieTitle` parameter. These values are set in the PageBuilder Admin for "global" content and retried by resolvers.
+- If the returned `query` contains a `movieTitle` property, that parameter is used to find a movie. If not, the code returns an error indicating that the required data (`movieTitle`) does not exist. 
+
+<Aside type="note">
+A content source must include either one `resolve` or one `fetch` property.  
+</Aside>
+
+##### `fetch`
+`fetch` is an alternative to `resolve` when a single URL cannot entirely derive your content source. `fetch` returns a JSON object when given a `query` object. All content sources returning JSON objects (including those defined as `fetch`) are cached.
+
+<Aside type="note">
+A content source must include either one `resolve` or one `fetch` property.  
+</Aside>
+
+When you use `fetch` instead of `resolve`, you assume responsibility for handling cases like errors and redirects. You must handle redirects and other error scenarios in your `fetch` method. See <Link blank href={`${globals.pbEngineDevDocsPath}/handling-redirects-in-content-sources`} text='Handling Redirects in Content Sources' /> for more details on handling redirects. 
+
+The `fetch` response always returns plain JSON objects.  PageBuilder Engine does not cache the content source when a non-JSON object is returned. Non-JSON responses from `fetch` get serialized to JSON strings by PageBuilder Engine. 
+
+The object returned from `fetch` might contain sensitive information that can be exposed during the serialization (for example, headers containing authorization tokens). Ensure you handle your response for success and error scenarios instead of just returning common networking library objects. See <Link blank href={`${globals.pbEngineDevDocsPath}/how-does-pagebuilder-engine-content-caching-work/#non-json-data`} text='Non-JSON Data' /> and <Link blank href={`${globals.pbEngineDevDocsPath}/how-does-pagebuilder-engine-content-caching-work/##incorrect-error-handling-within-fetch`} text='Incorrect Error Handling within Fetch' /> for examples of using `fetch` incorrectly.
+
+The following code snippet shows an example of a content source that uses `fetch` instead of `resolve`:
+
+```javascript
+import axios from 'axios'
+import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment'
+import collectionFeed from './collection-feed'
+
+// Add other required fields here which are not present above
+const includedFields = [
+  'additional_properties',
+  'content_elements',
+  'first_publish_date',
+  'slug',
+  'source'
+].join()
+
+const fetch = (query) => {
+  return axios(`${CONTENT_BASE}${collectionFeed.resolve(query)}`, {
+    headers: {
+      Authorization: ARC_ACCESS_TOKEN
+    }
+  }).then(resp => resp.data)
+  .then((collectionResp) => {
+    const collectionResult = collectionFeed.transform(collectionResp, query)
+    const {
+      content_elements: contentElements = []
+    } = collectionResult
+    const ids = contentElements.map(({ _id }) => _id).join()
+    const {
+      website
+    } = query
+
+    return axios(`${CONTENT_BASE}/content/v4/ids?website=${website}&ids=${ids}&included_fields=${includedFields}`, {
+      headers: {
+        Authorization: ARC_ACCESS_TOKEN
+      }
+    }).then(resp => resp.data)
+    .then((idsResp) => {
+      const {
+        content_elements: stories = []
+      } = idsResp
+
+      if (stories.length) {
+        collectionResult.content_elements = collectionResult.content_elements.map((collectionStory) => {
+          return {
+            ...stories.find(({ _id }) => _id === collectionStory._id),
+            ...collectionStory
+          }
+        })
+      }
+
+      return collectionResult
+    })
+  })
+}
+
+export default {
+  fetch,
+  ttl: collectionFeed.ttl,
+  params: collectionFeed.params
+}
+```
+
+##### `params`
+The `params` property contains a list of parameter names and data types the content source needs for a request. In the example provided in this document, the content source only needs one parameter: `movieTitle`. 
+The `params` is part of the `query` object in the `resolve` function, and enables crafting a URL that retrieves the desired data. For example, the following URL provides data for the movie "Jurassic Park". 
+
+```bash
+https://www.omdbapi.com/?apikey=<apiKey>&t=Jurassic%20Park 
+```
+
+`params` can be defined in two ways: 
+
+- **As an object.** In this case, each object key is the name of a parameter, and its value is its corresponding data type. The allowed data types are `text`, `number` and `site`.
+
+- **As an Array Of Objects.** See <Link href={`${globals.tutorialsQuickStartPath}/creating-with-pagebuilder/#defining-a-content-source-in-json`} text='Defining a Content Source in JSON' /> for an example of `params` as an array of objects and **Table 1** for a list of the properties `params` must contain in this case. 
+
+Enumerate the parameters list so the PageBuilder Admin knows they exist. Then, editors can set values for those parameters. For example, content in templates and “global content" on pages.
+
+<Aside type="note">
+You must define each parameter you expect to use. Engine sanitizes your query before making it available in the content source. The same sanitized list of parameters is also used to generate your cache key.  
+</Aside>
+
+##### `transform` (Optional)
+The `transform` function transforms the JSON response received from the endpoint, if you need to modify the data's shape before applying a schema to it.
+
+For example, to count the number of words in the movie's plot and append a `numPlotWords` property to the payload for querying later, add the following to the exported object in `movie-find.js`:
+
+```javascript
+export default {
+  resolve,
+  params: { movieQuery: 'text' },
+  transform: (data) => {
+    return Object.assign(
+      data,
+      { numPlotWords: data.Plot ? data.Plot.split(' ').length : 0 }
+    )
+  }
+}
+```
+The `transform` function's only input is the data object it receives from the defined endpoint, and its only expected output is the object you want to query.
+
+
+</details>
+
+### Defining a Content Source in JSON
+You can also define a content source in JSON instead of JavaScript when you don't need to perform any logic to create the content source's URL endpoint, other than interpolating variables.
+
+This option mostly supports legacy PageBuilder content source configurations. **JavaScript** is the **recommended** method for content source definition. 
+
+The following code snippet shows an example of a content source defined in JSON:
+
+```json
+  {
+  "id": "darksky",
+  "content": "weather",
+  "params": [
+    {
+      "name": "lat",
+      "displayName": "Latitude",
+      "type": "number",
+      "default": "38.88",
+    },
+    {
+      "name": "lon",
+      "displayName": "Longitude",
+      "type": "number",
+      "default": "-77.00",
+    },
+  ],
+  "pattern": "https://api.darksky.net/forecast/SOME_UNENCRYPTED_API_KEY/{lat},{lon}"
+}
+```
+
+A content source defined in JSON must have the properties listed in **Table 1**:
+
+| Property    | Type              | Description                                                                                                                                                                   |
+|-------------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `id`        | String            | The name of the content source.                                                                                                                               |
+| `content`   | String            | The name of the content schema the content source uses. Treat this like the `schemaName` property in the JavaScript definition.                                           |
+| `params`    | Array[Object]     | An array of objects containing configuration data for each parameter included in this content source. <br /><br /> `params` contains the following properties: <br /><br /> - `name` (String): The name of the parameter in the pattern section. <br /> - `displayName` (String): A human-readable parameter title to use in PageBuilder. <br /> - `type` (String): The type of the parameter. Available options are: `text`, `number`, and `site`. <br /> |
+| `pattern`   | String            | A URI able to interpolate data enumerated by `params` with curly braces to construct the full URL for the content source.
+
+<p style="text-align:center; font-weight:bold;"> Table 1. Properties for Content Sources Defined in JSON</p>
+

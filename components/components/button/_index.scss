@@ -1,0 +1,73 @@
+@use "../../scss";
+
+.c-button {
+	appearance: none;
+	align-items: center;
+	display: inline-flex;
+	block-size: max-content;
+
+	&:hover {
+		cursor: pointer;
+
+		@include scss.component-properties("button-hover");
+	}
+
+	&:active {
+		@include scss.component-properties("button-active");
+	}
+
+	&:focus {
+		@include scss.component-properties("button-focus");
+	}
+
+	&[aria-disabled] {
+		cursor: not-allowed;
+
+		@include scss.component-with-states("button-disabled", [hover, active]);
+	}
+
+	&--link {
+		@include scss.component-with-states("button-link", [hover, active]);
+	}
+
+	&--full-width {
+		justify-content: center;
+		inline-size: 100%;
+
+		@include scss.component-properties("button-full-width");
+	}
+
+	&--default {
+		@include scss.component-with-states("button-default", [hover, active]);
+	}
+
+	&--primary {
+		@include scss.component-with-states("button-primary", [hover, active]);
+	}
+
+	&--primary-reverse {
+		@include scss.component-with-states("button-primary-reverse", [hover, active]);
+	}
+
+	&--secondary {
+		@include scss.component-with-states("button-secondary", [hover, active]);
+	}
+
+	&--secondary-reverse {
+		@include scss.component-with-states("button-secondary-reverse", [hover, active]);
+	}
+
+	&--small {
+		@include scss.component-with-states("button-small", [hover, active]);
+	}
+
+	&--medium {
+		@include scss.component-with-states("button-medium", [hover, active]);
+	}
+
+	&--large {
+		@include scss.component-with-states("button-large", [hover, active]);
+	}
+
+	@include scss.component-properties("button");
+}

@@ -1,0 +1,15 @@
+@use "../../scss";
+
+.c-price {
+	display: flex;
+
+	&__list {
+		@include scss.component-properties("price-list");
+	}
+
+	&__sale {
+		@include scss.component-properties("price-sale");
+	}
+
+	@include scss.component-properties("price");
+}

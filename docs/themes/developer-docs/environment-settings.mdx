@@ -1,0 +1,103 @@
+---
+title: Environment settings
+description: Environment settings
+lastUpdated: 2025-03-24T23:41:05.000Z
+migrationData:
+  short_description: Environment settings
+  number: KB0010627
+  sys_id: 6a60dfa847b78650a87626c2846d43b5
+  sys_created_on: '2024-07-31 18:50:40'
+  sys_updated_on: '2024-07-31 19:41:05'
+  sys_created_by: denise.rodriguez@washpost.com
+  sys_updated_by: denise.rodriguez@washpost.com
+  author: 368023b947431550a87626c2846d43c9
+  category: Themes
+  kb: Developer Docs
+  kb_category: ba320d8b47dad110a87626c2846d4317
+  meta: ''
+  topic: General
+  sys_view_count: 284
+  helpful_count: 0
+  version: c9fbdf20473b8650a87626c2846d43b8
+  display_number: KB0010627 v4.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.327Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+Your Themes feature repository requires environment variables to be created in the `/environment` directory of the repository. You can store variables that apply to all environments (for example, `production`, `sandbox`, `development`) for this organization in `/environment/index.json`. If there are environment variables that are unique to an environment in this org, you must store them in a file that matches the exact name of that environment (for example, `/environment/dailyplanet-sandbox.json` would override variable set in `/environment/index.json` in the environment named `dailyplanet-sandbox`.)
+
+:::note
+You can generate the `ACCESS_TOKEN` that you need to hit the Content API in the Developer Center tile in your environment. You will need a token for prod and sandbox in your env file when switching content bases.
+:::
+
+Here is a list of the environment variables to set in your `index.json`:
+
+<table>
+    <thead>
+        <tr>
+            <th>Property name</th>
+            <th>Data type</th>
+            <th>Purpose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>FUSION_SERVICE_WORKER</code></td>
+            <td>boolean</td>
+            <td>This environment variable controls if the service worker is included in the compiled bundle. The default value is <code>false</code>.</td>
+        </tr>
+        <tr>
+            <td><code>RESIZER_TOKEN_VERSION</code></td>
+            <td>string</td>
+            <td>String containing the image resizer version for your organization. You should confirm your token value in the Delivery API.<br />  Example: <code>2</code></td>
+        </tr>
+        <tr>
+            <td><code>SIGNING_SERVICE_DEFAULT_APP</code></td>
+            <td>string</td>
+            <td>Specifies the use of the image resizer on your blocks.<br />  Example: <code>resizer</code></td>
+        </tr>
+        <tr>
+            <td><code>allowedImageDomains</code></td>
+            <td>string</td>
+            <td>Comma-separated list of non-Arc domains where images can be served from on your website.<br />  Example: <code>archive.example.com,my-non-Arc-site.com</code></td>
+        </tr>
+        <tr>
+            <td><code>playerRoot</code></td>
+            <td>url</td>
+            <td>URL to root domain of POWA video player assets.<br />  Example: <code>playerRoot://d2w3jw6424abwq.cloudfront.net</code></td>
+        </tr>
+        <tr>
+            <td><code>searchKey</code></td>
+            <td>string</td>
+            <td>The key specified from your site search API.</td>
+        </tr>
+        <tr>
+            <td><code>siteStyles</code></td>
+            <td>
+            string object
+            </td>
+            <td>
+            The object should contain the mapping of your site ID with the desired site ID styles as the value. For a single site, this will be a one-to-one mapping.<br />  Example (multi-site):<br />  
+               
+            ```
+            "siteStyles": {
+                "daily-intelligencer": "daily-intelligencer",
+                "the-gazette": "daily-intelligencer",
+                "karc": "karc"
+            }
+            ```
+
+            </td>
+        </tr>
+        <tr>
+            <td><code>videoOrg</code></td>
+            <td>string</td>
+            <td>Name of your organization in Video Center.</td>
+        </tr>
+    </tbody>
+</table>

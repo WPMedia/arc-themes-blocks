@@ -1,0 +1,29 @@
+@use "../../scss";
+
+.c-media-item {
+	&__fig-caption {
+		&--fullscreen {
+			@include scss.component-properties("media-item-fig-caption-fullscreen");
+		}
+
+		@include scss.component-properties("media-item-fig-caption");
+	}
+	/* stylelint-disable selector-class-pattern */
+	.c-video__frame:has(.powa-vertical) ~ &__fig-caption {
+		@include scss.component-properties("media-item-fig-caption-vertical-video");
+	}
+
+	&__title {
+		@include scss.component-properties("media-item-title");
+	}
+
+	&__caption {
+		@include scss.component-properties("media-item-caption");
+	}
+
+	&__credit {
+		@include scss.component-properties("media-item-credit");
+	}
+
+	@include scss.component-properties("media-item");
+}

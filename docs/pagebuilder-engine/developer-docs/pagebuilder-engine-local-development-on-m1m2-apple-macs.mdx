@@ -1,0 +1,46 @@
+---
+title: Local Development on M1/M2 Apple Macs
+description: PageBuilder Engine Local Development on M1/M2 Apple Macs
+lastUpdated: 2023-11-21T02:27:21.000Z
+migrationData:
+  short_description: PageBuilder Engine Local Development on M1/M2 Apple Macs
+  number: KB0010807
+  sys_id: 38603bf2c3e671101fe095ff05013199
+  sys_created_on: '2023-11-20 21:27:04'
+  sys_updated_on: '2023-11-20 21:27:21'
+  sys_created_by: Adam.Evans@washpost.com
+  sys_updated_by: Adam.Evans@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: ''
+  topic: General
+  sys_view_count: 534
+  helpful_count: 3
+  version: 0170fbf2c3e671101fe095ff0501312b
+  display_number: KB0010807 v5.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.376Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+Starting with Engine 4.1 release and newer, you don't need to apply this special tag in the releases anymore. All releases 4.1 and after are published as universal images contain CPU-architecture specific contents in the same image. Read more about this in <Link href={`${globals.pbEngineDevDocsPath}/pagebuilder-engine-universal-docker-images-same-engine-version-now-works-with-intel-and-arm-chips`} text='PageBuilder Engine Universal Docker Images' /> announcement.
+
+When using M1/M2 (arm) architecture hardware for development environments, you must add a small special instruction to environment variables.
+
+The PageBuilder Engine team creates separate docker images with M1/M2 support for each engine version for local development. To run Fusion on Apple M1/M2s, you must choose and define which engine version you're using on your local development environment. This means, when there is a new Engine release, updating this environment variable is necessary to start using new features and fixes coming with the new version of Engine releases. Set the following in your `.env` file:
+
+```
+FUSION_RELEASE=[engine-version]-arm
+```
+
+Pick and set `[engine-version]` in this example like 3.3.4-arm Ensure you don't have duplicate `FUSION_RELEASE` set anywhere else in your `.env` file.
+
+## Use `-m1` Suffix prior to Engine 4.0.1 and Engine 3.3.6 releases
+
+Starting with Engine 4.0.1 and 3.3.6 releases, we switched to using `-arm` suffix instead of `-m1` in favor of broader arm CPU architecture.

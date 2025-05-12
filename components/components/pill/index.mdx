@@ -1,0 +1,55 @@
+import { Controls, Meta, Story } from "@storybook/addon-docs";
+import * as IndexStories from "./index.stories";
+import Pill from ".";
+
+<Meta of={IndexStories} />
+
+# Pill
+
+By default, the Pill component will render a span for use often with backgrounds. If an href is passed as a property, the `<Pill>` will instead render as a simple hyperlink for internal navigation. This is not intended for use for external navigation. If you desire this functionality, please utilize the &lt;Link /&gt; component as a wrap to the `<Pill>`.
+
+## Usage
+
+```jsx
+import { Pill } from "@wpmedia/arc-themes-components";
+
+const Feature = () => {
+	return (
+		<>
+			<Pill>Sports</Pill>
+			/* ... */
+		</>
+	);
+};
+```
+
+```jsx
+import { Pill } from "@wpmedia/arc-themes-components";
+
+const Feature = () => {
+	return (
+		<>
+			<Pill href="./sports">Sports</Pill>
+			/* ... */
+		</>
+	);
+};
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### Default
+
+<Story of={IndexStories.DefaultPill} />
+
+### Pill as a Hyperlink
+
+<Story of={IndexStories.PillAsHyperlink} />
+
+### Many Pills
+
+<Story of={IndexStories.ManyPills} />

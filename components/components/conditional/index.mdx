@@ -1,0 +1,35 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Stack from "../stack";
+import Link from "../link";
+
+import Conditional from ".";
+
+<Meta of={IndexStories} />
+
+# Conditional
+
+A component used for conditionally rendering a wrapping component. If the Condition is met, the component specified will be rendered with the children provided therein. If the condition is not met, only the children will be rendered.
+
+## Usage
+
+```jsx
+import { Conditional } from "@wpmedia/arc-themes-components";
+
+const Feature = () => (
+	<Conditional component={Link} condition={true}>
+		Component Children
+	</Conditional>
+);
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### Conditional
+
+<Story of={IndexStories.DefaultConditional} />

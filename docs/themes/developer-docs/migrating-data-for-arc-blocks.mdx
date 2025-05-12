@@ -1,0 +1,272 @@
+---
+title: Migrating data for Arc Blocks
+description: Migrating data for Arc Blocks
+lastUpdated: 2025-03-24T21:56:27.000Z
+migrationData:
+  short_description: Migrating data for Arc Blocks - A Guide
+  number: KB0010626
+  sys_id: d851dbe647c8f590eee38788436d4397
+  sys_created_on: '2023-07-18 17:55:51'
+  sys_updated_on: '2023-07-18 17:56:27'
+  sys_created_by: Adam.Evans@washpost.com
+  sys_updated_by: Adam.Evans@washpost.com
+  author: 368023b947431550a87626c2846d43c9
+  category: Themes
+  kb: Developer Docs
+  kb_category: ba320d8b47dad110a87626c2846d4317
+  meta: ''
+  topic: General
+  sys_view_count: 152
+  helpful_count: 0
+  version: fc71db2a47c8f590eee38788436d431c
+  display_number: KB0010626 v2.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.273Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+The Arc Blocks used in Theme websites are set up to use the <Link blank href='https://github.com/washingtonpost/ans-schema' text='Arc Native Specification (ANS)' /> data schema. Arc Blocks are optimized to work with the data as output by Arc XP applications (such as Composer, Photo Center, and Author Service). For more information, see <Link blank href={`${globals.conceptsContentModelPath}/understanding-arc-native-specification-ans/`} text='Understanding Arc Native Specification' />.
+
+There are some conventions, which are not part of the ANS, in how Arc XP applications use the data. Below is a list of ANS fields used in each Arc Block that you must be aware of if you are migrating content into Arc XP and intend to use Arc Blocks.
+
+## **NAVIGATION BLOCKS**
+
+### alert-bar-block
+
+**ANS fields**
+
+- `content_elements[0]` only uses first content element. used to check whether to render headline
+- `content_elements[0].websites[arcSite]` Uses `website_url`
+- `content_elements[0].headlines.basic`
+
+### footer-block
+
+**ANS Fields**
+
+Available through `useContent`
+
+- `children`
+- `children[x].node_type`
+- `children[x].url`
+- `children[x].display_name`
+- `children[x].name`
+
+### header-nav-block
+
+**ANS Fields**
+
+- `children` available via site-service-hierarchy (optional)
+- `children[x].node_type`
+- `children[x].url`
+- `children[x].display_name`
+- `children[x].name`
+
+### links-bar-block
+
+**ANS Fields**
+
+- `children` array
+- `children[x].node_type` determines what kind of content to render
+- `children[x].url`
+- `children[x].display_name`
+- `children[x].name`
+
+## **CONTENT HEADER BLOCKS**
+
+### byline-block
+
+**ANS Fields**
+
+- `credits.by`
+
+### date-block
+
+**ANS Fields**
+
+- `display_date` global date fallback string
+
+### headline-block
+
+**ANS Fields**
+
+- `headlines.basic`
+
+### lead-art-block
+
+**ANS Fields**
+
+- `promo_items.lead_art or promo_items.basic` = lead_art
+- `lead_art.caption`
+- `lead_art.subtitle`
+- `lead_art.credits`
+- `lead_art.content`
+- `lead_art.type` determines what kind of content to render with
+
+### overline-block
+
+**ANS Fields**
+
+- `globalContent.label.basic.display`
+- `globalContent.label.basic.url`
+- `globalContent.label.basic.text`
+- `content.websites[arcSite].website_section._id`
+- `content.websites[arcSite].website_section.name`
+
+### subheadline-block
+
+**ANS Fields**
+
+- `content.subheadlines.basic`
+
+## **CONTENT ITEM BLOCKS**
+
+### article-body-block
+
+**ANS fields**
+
+- `content_elements`
+- `content_elements[x].type` Check how many paragraphs included
+- `content_elements[x].content` Creates article body with included content
+
+### article-tag-block
+
+**ANS Fields**
+
+- `taxonomy.tags[x].slug` Detects for '#' as href for fallback
+- `taxonomy.tags[x].text` Required to be string
+
+### author-bio-block
+
+**ANS fields**
+
+- `credits.by` via globalContent
+- `credits.by[x]`
+- `credits.by[x].description` optionaL
+- `credits.by[x].additional_properties.original` optional
+
+### gallery-block
+
+**ANS Fields**
+
+- `globalContent.headlines.basic` (optional)
+- `globalContent.content_elements` (see below) for Engine Theme SDK Gallery component
+
+### share-bar-block
+
+**ANS Fields**
+
+- `globalContent.headlines.basic`
+- `globalContent.website_url`
+
+### video-player-block
+
+**ANS Fields**
+
+- `embed_html`
+
+## **PROMO BLOCKS**
+
+### card-list-block
+
+**ANS Fields**
+
+- `content_elements[x].websites[arcSite].website_url`
+- `content_elements[0].credits.by` Check for multiple authors in first article
+- `content_elements[0].websites[arcSite]` Uses `website_url`
+- `content_elements[0].headlines.basic`
+
+### large-promo-block
+
+**ANS Fields**
+
+- `content.headlines.basic`
+- `content.description.basic`
+- `content.websites[arcSite].website_section`
+- `content.promo_items`
+
+### medium-promo-block
+
+**ANS Fields**
+
+- `content.headlines.basic`
+- `content.description.basic`
+- `content.websites[arcSite].website_section`
+- `content.promo_items`
+
+### numbered-list-block
+
+**ANS Fields**
+
+- `content_elements.headlines.basic`
+- `content_elements.promo_items`
+- `content_elements.websites[arcSite].website_url`
+
+### small-promo-block
+
+**ANS Fields**
+
+- `content.headlines.basic`
+- `content.description.basic`
+- `content.websites[arcSite].website_section`
+- `content.promo_items`
+
+### top-table-list-block
+
+**ANS Fields**
+
+- `promo_items.basic.url`
+- `promo_items.basic.type`
+- `promo_items.label.basic.display`
+- `promo_items.label.basic.url`
+- `promo_items.label.basic.text`
+- `promo_items.headlines.basic`
+- `promo_items.content.description.basic`
+
+## **RESULTS PAGE BLOCKS**
+
+### full-author-bio-block
+
+**ANS Fields**
+
+- `authors[0]` Only uses first author
+
+### results-list-block
+
+**ANS Fields**
+
+- `content_elements[x].description.basic`
+- `content_elements[x].headlines.basic`
+- `content_elements[x].display_date`
+- `content_elements[x].credits.by`
+- `content_elements[x].promo_items`
+- `content_elements[x].websites`
+
+### section-title-block
+
+**ANS Fields**
+
+- `content.children[x].id`
+- `content.children[x]._id` used as href for link
+- `content.children[x].name`
+
+### simple-list-block
+
+**ANS Fields**
+
+- `content_elements[x].description.basic`
+- `content_elements[x].headlines.basic`
+- `content_elements[x].display_date`
+- `content_elements[x].credits.by`
+- `content_elements[x].promo_items`
+- `content_elements[x].websites`
+
+### tag-title-block
+
+**ANS Fields**
+
+- `content.Payload[0].name`
+- `content.Payload[0].description`

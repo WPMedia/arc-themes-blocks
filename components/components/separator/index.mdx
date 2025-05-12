@@ -1,0 +1,42 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Separator from ".";
+
+<Meta of={IndexStories} />
+
+# Separator
+
+The `<Separator />` component is used to break up content. The `content` property can be set via `separatorString` prop.
+
+The component is using a `<span>` that can be customized as a whole. The `content` property renders the `separatorString` prop, in this way. The default separator is set in Theme Settings.
+
+## Usage
+
+```jsx
+import { Separator } from "@wpmedia/arc-themes-components";
+
+const Feature = () => (
+	<p>
+		Everything needed: news <Separator /> Features <Separator separatorString="🚨" /> Breaking news.
+	</p>
+);
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### Default
+
+<Story of={IndexStories.Default} />
+
+### Custom string
+
+<Story of={IndexStories.CustomString} />
+
+### Custom string with emoji
+
+<Story of={IndexStories.CustomStringWithEmoji} />

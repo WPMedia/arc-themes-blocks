@@ -1,0 +1,46 @@
+---
+title: Local Development on Apple Silicon Macs (M1/M2/M3/M4)
+description: PageBuilder Engine Local Development on Apple Silicon Macs (M1/M2/M3/M4)
+lastUpdated: 2024-08-20T16:31:34.000Z
+migrationData:
+  short_description: PageBuilder Engine Local Development on Apple Silicon Macs (M1/M2/M3/M4)
+  number: KB0010807
+  sys_id: a509b0cf47401610a87626c2846d43b1
+  sys_created_on: '2024-08-20 12:29:44'
+  sys_updated_on: '2024-08-20 12:31:34'
+  sys_created_by: fatih.yildiz@washpost.com
+  sys_updated_by: fatih.yildiz@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: ''
+  topic: General
+  sys_view_count: 562
+  helpful_count: 3
+  version: 14793ccf47401610a87626c2846d431d
+  display_number: KB0010807 v7.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-10-15T17:18:05.450Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+As of Engine 4.1, you no longer need to apply this special tag in the releases. All releases from 4.1 and above are published as universal images contain CPU-architecture-specific contents in the same image. Read more about this in <Link href={`${globals.pbEngineDevDocsPath}/pagebuilder-engine-universal-docker-images-same-engine-version-now-works-with-intel-and-arm-chips`} text='PageBuilder Engine Universal Docker Images' />.
+
+:::note
+A known issue requires Apple Silicon Mac users to continue using the `-arm` prefix in order to run your local environment. If you've logged an issue with Arc XP Client Support, they'll notify you when the issue is resolved. We'll also update this documentation when the `-arm` prefix is no longer required.
+:::
+
+When using Apple Silicon Macs (M1/M2/M3/M4 - arm CPU) architecture hardware for development environments, you must add a small special instruction to environment variables.
+
+The PageBuilder Engine team creates separate docker images with Apple Silicon Macs support for each engine version for local development. To run Fusion on Apple Silicon Macs, you must choose and define which engine version you're using on your local development environment. This means, when there is a new Engine release, updating this environment variable is necessary to start using new features and fixes coming with the new version of Engine releases. Set the following in your `.env` file:
+
+```
+FUSION_RELEASE=[engine-version]-arm
+```
+
+Pick and set `[engine-version]` in this example like 3.3.4-arm Ensure you don't have duplicate `FUSION_RELEASE` set anywhere else in your `.env` file.

@@ -1,0 +1,48 @@
+import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+
+import signImagesInANSObject from ".";
+
+<Meta title="Utilities/Sign Images In ANS Object" component={signImagesInANSObject} />
+
+# Sign Images In ANS Object
+
+The `signImagesInANSObject()` function is a support function for `content-source` requests. It returns a "thenable" function that accepts an `axios` [response object](https://axios-http.com/docs/res_schema), and inspects the `data` value from the returned object. It then finds any image objects within the `data` structure that do not have an `auth` token, issues a [cachedCall request](https://redirector.arcpublishing.com/alc/arc-products/pagebuilder/fusion/developer-documentation/partial-caching-with-pagebuilder-engine/) to get an `auth` token for the resizer, and returns the ANS Object transformed to include this newly generated key.
+
+## Usage
+
+```jsx
+import axios from "axios";
+
+import { ARC_ACCESS_TOKEN, RESIZER_TOKEN_VERSION } from "fusion:environment";
+import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source";
+
+import signImagesInANSObject from "./signImagesInANSObject";
+
+const fetch = ({ ... }, { cachedCall }) => {
+	return axios({
+		method: "GET",
+		url,
+		headers: {
+    		"content-type": "application/json",
+    		Authorization: `Bearer ${ARC_ACCESS_TOKEN}`
+    	},
+	})
+	.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_TOKEN_VERSION))
+	.then(({ data }) => data);
+};
+
+export default {
+	params,
+	fetch,
+	schemaName: "ans-feed",
+};
+```
+
+## Properties
+
+| Name                  | Default       | Description                                                                                              |
+| --------------------- | ------------- | -------------------------------------------------------------------------------------------------------- |
+| **cachedCall**        | -             | The `cachedCall` promise function for partial caching.                                                   |
+| **resizerFetch**      | -             | The `fetch` method from the signing service used to fetch the auth value for a specific image `_id`      |
+| **resizerAppVersion** | -             | The resizer application version that you are currently using. Resizer requires a unique key per version. |
+| cacheKey              | "image-token" | The prefix cache key used by the partial caching. We append the image `_id` to make this unique.         |

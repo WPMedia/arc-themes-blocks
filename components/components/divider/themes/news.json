@@ -1,0 +1,10 @@
+{
+	"divider": {
+		"styles": {
+			"default": {
+				"background-color": "var(--border-color)",
+				"block-size": "1px"
+			}
+		}
+	}
+}

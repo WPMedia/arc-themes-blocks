@@ -1,0 +1,31 @@
+{
+  "name": "@wpmedia/recent-stories-content-source-block",
+  "version": "1.0.0",
+  "description": "Content source block for recent stories within a specified number of days",
+  "main": "index.js",
+  "files": [
+    "sources"
+  ],
+  "scripts": {
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "dependencies": {
+    "@wpmedia/arc-themes-components": "^1.0.0",
+    "@wpmedia/signing-service-content-source-block": "^1.0.0",
+    "axios": "^1.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^12.0.0",
+    "jest": "^27.0.0"
+  },
+  "peerDependencies": {
+    "@wpmedia/arc-themes-components": "*",
+    "@wpmedia/signing-service-content-source-block": "*"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "license": "UNLICENSED"
+} 

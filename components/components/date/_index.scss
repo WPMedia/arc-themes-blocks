@@ -1,0 +1,5 @@
+@use "../../scss";
+
+.c-date {
+	@include scss.component-properties("date");
+}

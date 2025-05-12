@@ -1,0 +1,168 @@
+---
+title: Setting Up Your Dev Playground
+description: Set Up your Dev Playground
+lastUpdated: 2025-01-21
+---
+
+import * as globals from '/public/globals.js';
+import Link from '/public/snippets/anchors.astro';
+import { Aside, Steps, LinkCard, CardGrid, Icon, Card } from '@astrojs/starlight/components';
+
+<CardGrid>
+<Card title='Purpose' icon='information'>
+List the steps to run a PageBuilder instance locally.
+</Card>
+<Card title='Audience' icon='star'>
+Developers learning to work with PageBuilder.
+</Card>
+</CardGrid>
+
+## Getting Started
+
+To start using PageBuilder Engine, you must use the **Arc Fusion Command-Line Interface (CLI)**, which enables you to perform the following tasks:
+
+* Create pages and layouts using a local PageBuilder Engine and PageBuilder Editor server.
+* Test your custom components (feature blocks) locally.
+* Create bundles for deployments if you have access to an Arc XP organization.
+
+<Aside type='note'>
+Experience with tools like <Link blank href='https://github.com/facebook/create-react-app' text='Create-React-App' /> can make it easier to work with the PageBuilder Engine CLI tool.
+</Aside>
+
+## Prerequisites to Running PageBuilder
+
+Ensure you have the following prerequisites before you run PageBuilder locally:
+- [Skills](#skills)
+- [System Requirements](#system-requirements)
+- [Access to an Arc XP Organization (Optional)](#access-to-an-arc-xp-organization-optional)
+
+### Skills
+
+Ensure you have the following skills:
+
+- Basic web development knowledge
+- Proficiency with <Link blank href='https://www.w3schools.com/js/' text='Javascript' />
+- Working knowledge of <Link blank href='https://www.docker.com/' text='Docker' />
+- Basic knowledge of <Link blank href='https://react.dev/' text='React' />
+- Familiarity with <Link blank href='https://nodejs.org/en' text='Node.js' />
+- Familiarity with <Link blank href='https://www.npmjs.com/' text='npm' />
+
+### System Requirements
+
+Ensure you have the following system requirements:
+
+- Installed <Link blank href='https://www.docker.com/' text='Docker' />: In Docker's **Settings**, ensure to set up the **Resources** as follows:
+  - **CPUs**: 6
+  - **Memory**: 8GB or more
+- Installed <Link blank href='https://nodejs.org/en' text='Node.js' />.
+- Installed <Link blank href='https://www.npmjs.com/' text='npm' />: Ensure that the version is `5.2` or later. <br />
+
+<Aside type='note'>  
+`npx` comes pre-packaged with `npm` in npm <Link blank href='https://github.com/npm/npm/releases/tag/v5.2.0' text='Versions 5.2.0 and later' />. If you don't have `npx` installed, run `npm install -g npx`.  
+</Aside>
+
+To verify the version, take the following steps:
+
+  1. Open a terminal.
+  2. Run the following command:  `npm -v` <br />
+  If npm is installed, the command returns the version. For example, `10.7.0` <br />
+
+
+### Access to an Arc XP Organization (Optional)
+
+Access to an Arc XP Organization requires a signed contract with Arc XP. After becoming a customer, you get the credentials and settings to use Arc XP's full feature set.
+
+To connect to an Arc XP Organization, you must configure access tokens and website information in your local development environment while using the Arc Fusion CLI. However, you can use Arc Fusion CLI without connecting it to an Arc XP organization.
+
+The Arc Fusion CLI works in the following scenarios:
+
+- **Running PageBuilder Locally without Arc XP Credentials (Available for anyone)**.
+   - Enables you to try core Arc XP functionalities.
+   - Runs a local server with PageBuilder Engine and PageBuilder Editor.
+   - Enables you to test custom feature blocks with content from APIs you already have access to (non-Arc XP APIs).
+
+- **Running PageBuilder Locally with Arc XP Credentials (Available for onboarded Arc XP customers)**.
+   - Runs a local server with PageBuilder Engine and PageBuilder Editor.
+   - Enables you to set API access tokens as environment variables.
+   - Enables you to test custom components with content sources from your Arc XP organization.
+
+<Aside type='caution' title='Important'>
+This guide lists the steps to run PageBuilder without Arc XP credentials.
+</Aside>
+
+
+## Running PageBuilder Locally Without Arc XP Credentials
+
+
+To run PageBuilder locally, complete the following steps:
+1. In the location of your choice, create the directory for your local PageBuilder instance:
+
+   ```
+   mkdir <directory-name>
+   ```
+
+   <Aside type="caution" title="Important">
+   Ensure the absolute path to the directory does not contain periods (".") to avoid the following MongoDB error: <br />
+   `UnhandledPromiseRejectionWarning: MongoAPIError: database names cannot contain the character '.'`
+   </Aside>
+2. Enter the directory you created:
+
+   ```
+   cd <directory-name>
+   ```
+
+3. Install Arc Fusion CLI:
+
+   ```
+   npx @arc-fusion/cli init
+   ```
+   <Aside type='note'>
+   Step 3 installs Arc Fusion CLI locally as a project dependency, which:
+
+   - Ensures consistent CLI versions across teams.
+   - Prevents system PATH configuration issues.
+
+   Optionally, you can install Arc Fusion CLI globally with the command `npm i -g @arc-fusion/cli`. The following steps assume a local Arc Fusion CLI installation.
+   </Aside>
+
+4. Type `y` to grant permission to install `@arc-fusion/cli` packages <br />
+   The initialization process continues and completes.
+5. Start the PageBuilder Engine and PageBuilder Editor local server:
+
+   ```
+   npx fusion start
+   ```
+
+   The project builds and runs the server.
+6. In your browser, open the following URL: **localhost/pagebuilder/pages**<br />
+   A PageBuilder page displays:
+   ![](/images/quick-wins/PageBuilderLocal.png)
+<p style="text-align:center; font-weight:bold;"> Figure 1. PageBuilder Editor</p>
+
+The PageBuilder Engine homepage is empty because you have not created any pages. Complete the <Link blank href='/tutorials/quick-start/creating-with-pagebuilder' text='Creating with PageBuilder' /> process to populate the PageBuilder Engine homepage.
+
+<Aside type='caution' title="Important">
+Without credentials or environment variables to work with a live Arc XP organization, the PageBuilder Editor displays an error message. You can ignore the error message while you complete the steps listed in the Quick Start documents.
+</Aside>
+
+**Figure 2** shows the Site Service Configurations error message.
+<center>
+
+    ![](/images/quick-wins/PageBuilderError.png)
+<p style="text-align:center; font-weight:bold;"> Figure 2. Site Service Configurations Error in PageBuilder Editor</p>
+
+</center>
+
+## Stopping the PageBuilder Engine Locally
+
+To stop the PageBuilder Engine on your local machine, run:
+
+```
+npx fusion down
+```
+
+To verify that all the PageBuilder Engine services stopped, run:
+
+```
+docker ps
+```

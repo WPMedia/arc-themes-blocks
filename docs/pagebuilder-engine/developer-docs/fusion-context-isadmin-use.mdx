@@ -1,0 +1,59 @@
+---
+title: Fusion Context isAdmin Use
+description: Fusion Context provides several properties that offer information about the Arc XP website.
+---
+
+Fusion Context provides several properties that offer information about the Arc XP website.
+
+The `isAdmin` property is a Boolean value that is `true` if the component is rendered on the PageBuilder Admin Preview (thus the admin name) and `false` if the component is rendered on the standard view.
+
+```js
+import React from 'react'
+import Context from 'fusion:context'
+
+const Ad = ({ isAdmin}) => !isAdmin && <div id='some-ad'></div>
+
+export default (props) =>
+  <Context>
+    {isAdmin ?
+      <div>Is PB Preview</div> :
+      <div>This is the real page</div>
+    }
+  </Context>
+```
+
+## Performance Advantages
+
+Understanding the location of the rendered page is essential for effectively managing previews from components that could lead to performance challenges during PageBuilder preview.
+
+Additionally, this knowledge is valuable for establishing mock values for components whenever necessary.
+
+## Ads
+
+Custom ads blocks may perform several HTTP calls that may compromise Page Builder performance. Consider using `isAdmin` to add a place holder or not to render any ads at all.
+
+```js
+import React from 'react'
+import Context from 'fusion:context'
+
+const Ad = ({ isAdmin}) => !isAdmin && <div id='some-ad'></div>
+
+export default (props) =>
+  <Context>
+    {Ad}
+  </Context>
+```
+
+![](/images/pagebuilder-engine/65e0f141-61ae-4750-bf3d-13ccc4b1d0a4.png)
+
+## Paywalls, Subscriptions, and User Sessions
+
+Some pages may utilize user information that cannot be previewed due to the absence of user data in PageBuilder.
+
+You can use `isAdmin` to feed mock information to user components.
+
+![](/images/pagebuilder-engine/d8bc9584-9ba7-4684-bf9c-7634e3b900c1.png)
+
+## Summary
+
+If no better alternative exists, and a component generates dynamic content beyond the Arc XP boundaries (for example, making HTTP requests without utilizing a content source), we recommend implementing a condition to verify the `isAdmin` property. This condition helps to avoid rendering a preview in PageBuilder, which could potentially harm performance.

@@ -1,0 +1,29 @@
+@use "../../scss";
+
+.c-badge {
+	@include scss.component-properties("badge");
+}
+
+.c-badge--default {
+	@include scss.component-properties("badge-default");
+}
+
+.c-badge--light {
+	@include scss.component-properties("badge-light");
+}
+
+.c-badge--primary {
+	@include scss.component-properties("badge-primary");
+}
+
+.c-badge--danger {
+	@include scss.component-properties("badge-danger");
+}
+
+.c-badge--warning {
+	@include scss.component-properties("badge-warning");
+}
+
+.c-badge--success {
+	@include scss.component-properties("badge-success");
+}

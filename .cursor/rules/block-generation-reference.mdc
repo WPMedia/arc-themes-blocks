@@ -1,0 +1,104 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Reference examples for generating blocks, layouts, content sources, chains, and output types. Attach with @block-generation-reference when needed.
+type: Manual
+---
+
+## How to use  
+Append `@block-generation-reference` in your prompt to include these guidelines.
+
+---
+
+### 1. Content Sources – use these as templates
+
+- alert-bar-content-source-block
+- related-content-content-source-block
+- content-api-source-block
+- collections-content-source-block
+- author-content-source-block
+- search-content-source-block
+- site-hierarchy-content-block
+- story-feed-author-content-source-block
+- story-feed-query-content-source-block
+- story-feed-sections-content-source-block
+- story-feed-tag-content-source-block
+- tags-content-source-block
+- unpublished-content-source-block
+- resizer-image-content-source-block
+
+---
+
+### 2. Layouts – reference these examples
+
+- right-rail-block
+- right-rail-advanced-block
+- single-column-block
+
+---
+
+### 3. Output Types  
+
+When asked to create an output type, use **default-output-block** as the example.
+
+---
+
+### 4. Chains – use according to complexity
+
+- header-nav-chain-block
+- single-chain-block
+- double-chain-block
+- triple-chain-block
+- quad-chain-block
+
+---
+
+### 5. Blocks – general examples
+
+- header-block
+- headline-block
+- lead-art-block
+- subheadline-block
+- article-body-block
+- article-tag-block
+- byline-block
+- date-block
+- gallery-block
+- overline-block
+- section-title
+- tag-title-block
+- video-player-block
+- card-list-block
+- numbered-list-block
+- results-list-block
+- search-results-list-block
+- simple-list-block
+- top-table-list-block
+- extra-large-manual-promo-block
+- large-manual-promo-block
+- medium-manual-promo-block
+- small-manual-promo-block
+- extra-large-promo-block
+- large-promo-block
+- medium-promo-block
+- small-promo-block
+- author-bio-block
+- full-author-bio-block
+- ads-block
+- ad-taboola-block
+- alert-bar-block
+- links-bar-block
+- footer-block
+- masthead-block
+
+---
+
+### 6. Choosing the correct `contentConfig`
+
+| Scenario                     | `contentConfig.type` | Example blocks                                                                                                   |
+| --------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Displays **multiple** items | `ans-feed`           | card-list-block, numbered-list-block, results-list-block, search-results-list-block, simple-list-block, top-table-list-block |
+| Displays **single** item    | `ans-item`           | extra-large-promo-block, large-promo-block, medium-promo-block, small-promo-block                                  |

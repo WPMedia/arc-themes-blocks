@@ -1,0 +1,78 @@
+---
+title: Versioning Policy
+description: PageBuilder Engine Versioning Policy
+lastUpdated: 2023-12-01T00:42:59.000Z
+migrationData:
+  short_description: PageBuilder Engine Versioning Policy
+  number: KB0010470
+  sys_id: ac68f206c3f63d101fe095ff05013107
+  sys_created_on: '2023-11-30 19:42:38'
+  sys_updated_on: '2023-11-30 19:42:59'
+  sys_created_by: Adam.Evans@washpost.com
+  sys_updated_by: Adam.Evans@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: >-
+    PageBuilder Engine, Releases, release, status, Semantic Versioning, Semver,
+    breaking changes, major versions, AWS, non-breaking changes, minor versions,
+    patch versions, availability policy, support timeline
+  topic: General
+  sys_view_count: 1061
+  helpful_count: 0
+  version: 7978be06c3f63d101fe095ff05013188
+  display_number: KB0010470 v19.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.458Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+PageBuilder Engine follows <Link blank href='https://semver.org/' text='Semantic Versioning' /> principles.
+
+That means that with a version number **x.y.z**:
+
+* When releasing **critical bug fixes**, we make a **patch release** by changing the **z** number (ex: 3.1.1 to 3.1.2).
+* When releasing **new features** or **non-critical fixes**, we make a **minor release** by changing the **y** number (ex: 3.1.2 to 3.2.0).
+* When releasing **breaking changes**, we make a **major release** by changing the **x** number (ex: 3.2.0 to 4.0.0).
+
+Major releases can also contain new features, and any release can include bug fixes. When we release a minor release, we omit the path version and simply refer to the minor and major releases with **x.y** format (ex: 3.2)
+
+Minor releases are the most common type of release.
+
+## Breaking Changes (major versions)
+
+PageBuilder Engine runs on AWS Lambda functions using Node.js runtime. This makes PageBuilder Engine primarily dependent on AWS support timelines for new Node.js runtime support. Our major release timelines correspond to the dates when AWS releases or deprecates Node.js runtimes.
+
+AWS only supports Node.js Long Term Support (LTS) versions (as can be seen in <Link blank href='https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html' text="Lambda's runtimes documentation" />). From the historical <Link blank href='https://nodejs.org/en/about/releases/' text='Node.js release timelines' />, this happens about once a year. AWS generally supports new Node.js versions at least a few months after the new Node.js LTS versions' release dates. We expect a similar cadence (once a year) but this is not certain or a promise from AWS. This makes our commitment to major versions unpredictable and has to follow AWS Lambda runtime support timelines.
+
+At times, there will be breaking changes on Engine in order to support other Arc platform products (ex: PageBuilder Editor or Content API). These changes may require us to plan a major release that will be breaking change.
+
+We commit to the stability of our customers' sites. We want to give enough time for customer developer teams to adapt and upgrade their site’s code. Therefore, we aim to minimize the number of breaking changes to a maximum of 2 major releases per year and the frequency to be 6 months minimum. This aim for 6 months to 1-year intervals for new major versions that will include breaking change.
+
+## Non-breaking changes (minor and patch versions)
+
+Any change and a bug fix that is non-breaking will be planned as a minor or patch release. We are currently targeting at least one minor release per quarter.
+
+## Availability policy
+
+We use the term "available" to refer to the list of Engine versions that customers can select when deploying their code bundle using the <Link blank href='/pagebuilder-engine/developer-docs/how-to-deploy-a-bundle/' text='Deployer' />. We have the following policy regarding which versions are available in the Deployer:
+
+* We aim to keep at least 2 major Engine versions available at any given time. The latest 2 major versions typically correspond to 2 actively supported Node.js runtimes (ex: Node 12 and Node 14). This allows developers to be able to stay on one of the major Engine versions until we (and AWS) drop support of that runtime. This generally happens in 1-2 year intervals.
+  * Example: If currently Engine 1.x and 2.x are available, and we release 3.x, then Engine 1.x is removed from availability. Now, Engine 2.x and 3.x are available.
+* Within each major version, we aim to make the latest minor version available. When we roll out a new minor version, we keep both minor versions available for 2 weeks. After 2 weeks, we remove the previous one from the Deployer.
+  * Example: If we currently have 3.1 available in Production and release 3.2 today, we make both versions (3.1 and 3.2) available for the next 2 weeks. After 2 weeks, we remove 3.1 from availability in the Deployer. Now, only 3.2 is the only version available from 3.x.
+
+:::note
+When a version becomes unavailable, it does not affect pre-existing bundles that are running in the Deployer with that version. However, if you need to re-deploy your bundle, or in the event of unexpected outages, you will not be able to select this unavailable version in the Deployer, and will need to deploy with an available version.
+:::
+
+## Support timeline
+
+At a minimum, all minor and patch versions within the latest 2 major versions are supported until the next major Engine version is released.
+
+Example: If currently we are supporting all 2.x and 3.x versions, then when we introduce the 4.x version, we'll set an end-of-life date for 2.x versions. These dates are often aligned with when AWS ends support in their Node.js runtimes.

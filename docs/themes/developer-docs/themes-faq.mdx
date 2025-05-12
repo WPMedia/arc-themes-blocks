@@ -1,0 +1,224 @@
+---
+title: Themes FAQ
+description: Themes - Developer FAQ
+lastUpdated: 2025-02-11T23:46:44.000Z
+migrationData:
+  short_description: Themes - Developer FAQ
+  number: KB0011255
+  sys_id: 7ef46e3947ec9a90a87626c2846d4347
+  sys_created_on: '2024-09-10 19:40:25'
+  sys_updated_on: '2024-09-10 19:46:44'
+  sys_created_by: denise.rodriguez@washpost.com
+  sys_updated_by: denise.rodriguez@washpost.com
+  author: 13c389ea47ee5550a87626c2846d4300
+  category: Themes
+  kb: Developer Docs
+  kb_category: ba320d8b47dad110a87626c2846d4317
+  meta: ''
+  topic: General
+  sys_view_count: 753
+  helpful_count: 1
+  version: 93662e3d47ec9a90a87626c2846d4302
+  display_number: KB0011255 v9.0
+migrationStatus: converted
+reviewStatus: pending
+conversionDate: 2024-10-15T17:18:05.418Z
+---
+
+import { Card, Aside, LinkButton } from '@astrojs/starlight/components';
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+
+The following serves as guidance for developers building and maintaining their site using the Themes 2.0 design system.
+
+<Card title="As a developer using Themes, how do I..." icon="open-book"></Card>
+
+
+## Get Started on Local Development
+
+You can use the following guides to get started on local development by configuring your feature pack and running PageBuilder Engine locally:
+
+
+1.  <Link blank href={`${globals.themesDevDocsPath}/upgrade-to-v2-arc-blocks/#1-configure-feature-pack`} text='Configure feature pack' />
+2.  <Link blank href={`${globals.tutorialsQuickStartPath}/set-up-your-dev-playground/`} text='Run PageBuilder Engine locally' />
+
+
+## Access the Arc Blocks Repository
+
+Click the button to go to the public blocks repository:
+
+<LinkButton href='https://github.com/WPMedia/arc-themes-blocks' icon='github' target='blank' variant='secondary'>Arc Blocks Repository</LinkButton>
+
+You can eject (fork) blocks from this repository to customize within your own bundle as needed.
+
+## Access the Themes Starter Repository
+
+You can view the Themes Starter repository in our <Link blank href='https://github.com/arcxp' text='Arc XP Github' /> organization. Click the button to go to the Themes Starter repository:
+
+<LinkButton href='https://github.com/arcxp/Themes-V2-Starter' icon='github' target='blank' variant='secondary'>Themes Starter Repository</LinkButton>
+
+### Use the Themes Starter Repository to Migrate from Custom to Themes Blocks
+
+:::caution[important]
+This guide is intended only for existing customers that are not using Themes blocks, or are on v1 and mostly using custom blocks. If you are a new customer, do not follow this guide. Your organization is already setup with a starter pack as part of our standard provisioning. 
+:::
+This guide enables you to update your `mocks/siteservice/api/v3/website` file, `environment/index.json` file, and the `resizerURL` in your `blocks.json` file. You also add the `themes-provisioning.js` file to the `.gitignore` file so it is not included in the repo you initialize.
+
+
+To use the Themes Starter repository, follow these steps:
+
+1.  On your terminal, clone the starter bundle into your desired directory using the following command:
+
+      ```
+      git clone https://github.com/arcxp/Themes-V2-Starter.git {directory}
+      ```
+
+2.  Navigate to the folder where you cloned the repository:
+
+      ```
+      cd {directory}
+      ```
+3.  Add a valid `.npmrc` file to the root directory of your project. 
+4.  Ensure you have the `.env` file in the root directory of your project.
+5.  Create a developer token in the sandbox environment of your Arc XP organization. 
+6.  Paste the token value in the `ACCESS_TOKEN` variable of the `.env` file
+7.  On the terminal, run the following command from the root directory of your project:
+
+      ```
+      node themes-provisioning.js configure-bundle
+      ```
+
+## Find and Set the Image Resizer v2 Token Version
+
+To use the latest image resizer, you must add new environment variables to your environment `.json` files:
+
+*   The `RESIZER_TOKEN_VERSION` value must match the currently enabled SSM version for your organization's secret from the **Organization > Get HMAC Keys** section of the <Link blank href={`${globals.webDeliveryApiBasePath}/delivery-api`} text='Delivery API documentation' />. If you are unable to locate your organization's token version through this method, contact <Link blank href='https://support.arcpublishing.com/' text='Arc XP Customer Support' />.
+*   Once you know your organization's token value, you must set that as the `RESIZER_TOKEN_VERSION` in the <Link blank href={`${globals.themesDevDocsPath}/upgrade-to-v2-arc-blocks/#environmentjson`} text='environment/*.json' /> file of your feature pack.
+*   See <Link blank href={`${globals.photoCenterDevDocsPath}/migrate-from-resizer-v1-to-v2/`} text='Introduction to Resizer v2' /> for more details.
+
+## Set Environment Variables for Your Themes Repository
+
+See the required <Link blank href={`${globals.themesDevDocsPath}/environment-settings/`} text='environment settings' /> you need to configure in the `/environment` directory of your repository.
+
+## Add a Custom Font
+
+You can manage fonts through the <Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system/#styling`} text='Blocks Styling token method' />. You can set the fonts as comma-separated values within parentheses in your <Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system/#feature-pack-structure`} text='alias.json' /> file. For example:
+
+```json
+{
+  "default": {
+    "font-family-primary": "('Merriweather Sans', sans-serif)"
+  }
+}
+```
+
+### Declare a New Font Family
+
+Custom font files should be included in the <Link blank href='https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-add-styling-to-components.html' text='/resources/ directory' />. To declare a new font family:
+
+
+1.  Set the font family via css.
+2.  Load the css file via the output type.
+
+
+The following section provide examples of the contents of each file.
+
+### fonts.css
+
+```scss
+//fonts.css
+@font-face {
+  font-family: 'MyFont';
+  src: ...; //file in resources folder or cdn url
+....
+```
+
+### output-types/default.jsx
+
+<Aside type='note'>
+If you are using a custom font that requires you to create a custom output type, you must remove the `@wpmedia/default-output-block` from your `blocks.json` when replacing with your custom output type. This avoids errors related to having redundant output types.
+</Aside>
+
+```js
+//output-types/default.jsx
+import './fonts.css'
+```
+
+### alias.json
+
+```json
+//alias.json
+{
+  "default": {
+    "font-family-primary": "('MyFont', sans-serif)"
+  }
+}
+```
+
+## Eject (Fork) a Block
+
+For full details on ejecting a Themes block as a starter for your custom needs, see <Link blank href={`${globals.themesDevDocsPath}/ejecting-an-arc-block/`} text='Ejecting (Forking) an Arc Block' />.
+
+## Use Block Styling on Custom Blocks
+
+For full details on applying Themes 2.0 block styling capabilities to custom blocks, see <Link blank href={`${globals.themesDevDocsPath}/creating-a-custom-block-with-styling/`} text='Creating a Custom Block with Styling' />.
+
+## Update Blocks for AMP Compatibility
+
+Due to the updates in the <Link blank href='https://developers.google.com/search/blog/2021/04/more-details-page-experience#details' text='page experience ranking' /> by Google, <Link blank href='https://developers.google.com/amp' text='AMP' /> is not supported out-of-the-box on Arc XP components, blocks, and pages. You may build a custom block to your specific requirements and will need to create a custom <Link blank href='https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-create-and-use-output-types.html' text='output type' /> to meet the <Link blank href='https://amp.dev/documentation/guides-and-tutorials/websites/learn/spec/amphtml' text='AMP HTML specification' />.
+
+For more details, see <Link blank href={`${globals.pbEngineDevDocsPath}/pagebuilder-engine-best-practices/#amp`} text='PageBuilder Engine Best Practices: AMP' />.
+
+## Internationalize Your Site
+
+For full details on Themes supported languages and site properties, see <Link blank href={`${globals.pbEngineDevDocsPath}/internationalization/`} text='Internationalization' />.
+
+
+
+## Set Site Properties
+
+{/* Commenting this because of Theme Settings deprecation
+
+### Theme Settings
+
+You may set your site properties and other settings through the [Theme Settings](https://docs.arcxp.com/alc/en/getting-started-with-themes-settings?sys_kb_id=9bc75d1dc3267d101fe095ff050131ba&id=kb_article_view&sysparm_rank=3&sysparm_tsqueryId=d0e59c8a47c73d50a87626c2846d4362) application:
+
+*   The following settings are supported within the application interface: [Theme Settings Configurations](https://docs.arcxp.com/alc/en/theme-settings-configurations?sys_kb_id=6c0f858847cf3550a87626c2846d436d&id=kb_article_view&sysparm_rank=2&sysparm_tsqueryId=a2c5d88a47c73d50a87626c2846d4346)
+*   For full details on using Theme Settings, see: [Getting Started with Theme Settings](https://docs.arcxp.com/alc/en/getting-started-with-themes-settings?sys_kb_id=9bc75d1dc3267d101fe095ff050131ba&id=kb_article_view&sysparm_rank=3&sysparm_tsqueryId=d0e59c8a47c73d50a87626c2846d4362 )
+*/}
+
+To set site properties in your bundle, see <Link blank href={`${globals.themesDevDocsPath}/migrating-from-themes-settings-to-pbdeployer/`} text='Migrating from Theme Settings UI to PageBuilder Deployer' />
+
+For more information about site properties that are not supported out-of-the-box, see:
+
+*   <Link blank href='https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-use-site-properties.html' text='How to Use Site Properties' /> 
+*   <Link blank href={`${globals.pbEngineDevDocsPath}/site-properties/`} text='Site Properties - Definition and Use' />
+
+## Add or Remove Blocks from Your Bundle
+
+{/* Commenting this because of Theme Settings deprecation
+### Theme Settings
+
+You can add and remove blocks from your bundle with the Theme Settings application. For details, see: [Getting Started with Theme Settings - Arc & Custom blocks](https://docs.arcxp.com/alc/en/getting-started-with-themes-settings?sys_kb_id=9bc75d1dc3267d101fe095ff050131ba&id=kb_article_view&sysparm_rank=3&sysparm_tsqueryId=d0e59c8a47c73d50a87626c2846d4362#Arc-&-Custom-blocks).
+*/}
+
+You can add or remove blocks from your bundle by changing your `blocks.json` file of your <Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system/#feature-pack-structure`} text='feature pack' />.
+
+## Complete a Deployment
+
+To complete a deployment using PageBuilder Deployer, see see <Link blank href={`${globals.themesDevDocsPath}/migrating-from-themes-settings-to-pbdeployer/`} text='Migrating from Theme Settings UI to PageBuilder Deployer' />
+
+{/* Commenting this because of Theme Settings deprecation
+### Theme Settings
+
+You can complete your build within the Theme Settings application. When you complete your deployment in Theme Settings, all of your global settings, website settings, and selected blocks are automatically compiled into your feature pack. The compatible Engine version, based on your selected Themes version, will automatically be applied as well. For full details, see: [Getting Started with Theme Settings - Complete build](https://docs.arcxp.com/alc/en/getting-started-with-themes-settings?sys_kb_id=9bc75d1dc3267d101fe095ff050131ba&id=kb_article_view&sysparm_rank=3&sysparm_tsqueryId=d0e59c8a47c73d50a87626c2846d4362#Complete-build).
+
+### PageBuilder Deployer
+
+You may opt to deploy your bundle through the PageBuilder Deployer if you find limitations on automated deployments in Theme Settings. If you choose this option, it is crucial to ensure the following for a successful deployment:
+
+
+1.  The above necessary settings for your organization are appropriately set within your [feature pack](../introduction-to-themes-20-design-system-developer-guide#feature-pack-structure).
+2.  The desired [Themes version](https://docs.arcxp.com/alc/en/getting-started-with-themes-settings?sys_kb_id=9bc75d1dc3267d101fe095ff050131ba&id=kb_article_view&sysparm_rank=3&sysparm_tsqueryId=f702804ac3eafd101fe095ff05013152#mcetoc_1heo5cluut) is set within your bundle.
+3.  The compatible [Engine version](https://docs.arcxp.com/alc/en/how-to-run-pagebuilder-engine-locally?sys_kb_id=ec72a3e9c30b39501fe095ff05013181&id=kb_article_view&sysparm_rank=2&sysparm_tsqueryId=fa2f1046470b3d50a87626c2846d435b#mcetoc_1hhd6q53t3f) for your Themes version is selected.
+*/}

@@ -1,0 +1,93 @@
+---
+title: Server-side versus client-side rendering - the best of both worlds in Arc XP
+description: Server-side versus client-side rendering - the best of both worlds in Arc XP
+lastUpdated: 2024-07-17T22:43:52.000Z
+migrationData:
+  short_description: Server-side versus client-side rendering - the best of both worlds in Arc XP
+  number: KB0011377
+  sys_id: fe674bc847eb0650a87626c2846d43f3
+  sys_created_on: '2024-07-17 18:43:48'
+  sys_updated_on: '2024-07-17 18:43:52'
+  sys_created_by: Adam.Evans@washpost.com
+  sys_updated_by: Adam.Evans@washpost.com
+  author: dde579bb47c79950a87626c2846d43c8
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: ''
+  meta: ''
+  topic: General
+  sys_view_count: 37
+  helpful_count: 0
+  version: d698478c47eb0650a87626c2846d43eb
+  display_number: KB0011377 v1.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.209Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+Server-side rendering (SSR) is the process of rendering web pages on the server and sending the fully-rendered HTML to the client. When a user makes a request for a website page, the server generates the markup code, including any dynamic data, and sends it to the user’s machine. The browser displays the page without needing further processing.
+
+SSR offers faster initial load times and better SEO optimization, making it perfect to emphasize search engine visibility and user experience.
+
+Client-side rendering (CSR) is the process of rendering web pages on the client side using JavaScript. The server sends the initial HTML file, and then the client relies on JavaScript to dynamically update the page as needed.
+
+CSR allows for more dynamic, responsive, and interactive web applications, as the client can update specific parts of the page without requiring a full reload. This boosts user engagement and interactivity, and provides a smoother browsing experience.
+
+Although client-side rendering has improved in terms of SEO compatibility due to advancements in search engine technology, it still presents challenges related to page performance. Poor performance can adversely affect SEO rankings. Key performance metrics, such as Largest Contentful Paint (LCP), Interaction to Next Paint (INP), and Cumulative Layout Shift (CLS), are critical in evaluating a site's performance, with CLS often being a significant issue for CSR-only sites.
+
+## Server- and client-side rendering within Arc XP
+
+Arc XP supports the combination of server-side rendering (SSR) and client-side rendering (CSR) on the same page, a technique often referred to as "rehydration." This allows for both rapid initial rendering and dynamic content updates. PageBuilder Engine facilitates this approach by default
+
+### What if I want to render server-side only?
+
+If you need to render a component solely on the server, you must declare your feature as static by adding `.static = true` to the feature’s name. This informs the PageBuilder Engine that the component should be rendered into HTML on the server-side and not re-hydrated as a React component on the client-side. However, this approach should not be the default or encouraged unless you are specifically trying to optimize bandwidth.
+
+### What if I want to render client-side only?
+
+In React.js, it is possible to render client-side only by using the `use client` directive; however, this doesn’t work with Arc XP because PageBuilder Engine renders on both the server and client side by default, so in this case, the mechanism to render client-side only is slightly different. There are two ways to ensure that code runs only on the client side:
+
+* Use a conditional to check for the `window` object if `` (typeof window !== 'undefined') { ... }` `` (which is available only on the client side)
+* Place client-side code inside the `componentDidMount` React lifecycle method or inside hook `useEffect`. Both methods are triggered when your component gets mounted on the page client-side, but does not get executed server-side. Keep in mind that `useEffect` doesn’t block the browser from updating the screen, so it may provide a better user experience.
+
+Check the code examples in <Link href={`${globals.pbEngineDevDocsPath}/rehydration-versus-server-side-versus-client-side-spa-rendering/`} text='Rehydration versus Server-Side versus Client-Side (SPA) Rendering' />
+
+## Optimizing content fetching
+
+Within the option of server-side rendering, Arc XP offers optimized ways of fetching content in the form of "global" content or "feature-specific" content. Ensure you fetch only the content that it is not already available.
+
+_“You only need to fetch content if the content you need has not already been provided to you by_ globalContent_, or if you want to retrieve some content client-side. If the content you need in your feature is part of the "global" content of the page, meaning it is semantically identified by the URL the user requested, then you probably don't need to fetch at all.”_ - More on this in <Link blank href='https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-fetch-content.html' text='How to Fetch Content' />
+
+## When to fetch client-side
+
+There are cases when a feature should respond to client-side interactions, such as `onClick`, `onLoad`, `onSubmit`, `keyPress`, and so on. In those cases, you can trigger a client-side fetch within `useEffect` for a smooth page update without requiring a full reload. Following React's rule of hooks, you should never conditionally call a hook, including `useContent`. This includes calling `useContent` from `useEffect` or another event handler. To avoid fetching data with `useContent` on the server-side, pass a null value into the source and update the source value when it is time to trigger the data fetch.
+
+```
+const[ shouldFetch, setShouldFetch] = useState(false);
+const response = useContent({
+  source: shouldFetch ? 'my-content-source' : null // will not fetch when the source is null
+  ...
+})
+
+useEffect(() => {
+  setShouldFetch(true)
+}, [])
+```
+
+More on this in <Link blank href='https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-fetch-content.html' text='How to Fetch Content' />.
+
+For the content source to be accessible client side, you must set `http` to `true` in the content source definition. You can find more information on the `http` property in <Link href={`${globals.pbEngineDevDocsPath}/content-source-api/`} text='Content Source API' />.
+
+## Recommended documentation
+
+We recommend reading the supporting ALC documents. They provide a better understanding of Arc XP extended rehydration capabilities:
+
+* <Link href={`${globals.pbEngineDevDocsPath}/rehydration-versus-server-side-versus-client-side-spa-rendering`} text='Rehydration versus Server-Side versus Client-Side (SPA) Rendering' />
+* <Link href={`${globals.pbEngineDevDocsPath}/how-does-rendering-work-in-pagebuilder-engine`} text='How Does Rendering Work in PageBuilder Engine' />
+* <Link blank href='https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-fetch-content.html' text='How to Fetch Content' />
+* <Link href={`${globals.pbEngineDevDocsPath}/how-does-pagebuilder-engine-content-caching-work`} text='How does PageBuilder Engine content caching work' />
+* <Link blank href='https://docs.arcxp.com/en/products/general/best-practices---performance-and-lighthouse-score-with-arc-xp.html' text='Best Practices - Performance and Lighthouse Score with Arc XP' />

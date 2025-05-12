@@ -1,0 +1,52 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Link from ".";
+
+<Meta of={IndexStories} />
+
+# Link
+
+By default, the Link component is secure and accessible. The link is for enclosing all contents with a link. There are security considerations made here by opting into using "rel=noreferrer" when opening the link in a new tab. In terms of accessibility, there is visually hidden text indicating to the user of the link behavior.
+
+In addition, the Link component is customizable. That accessible text can be customized or translated by passing in a prop `supplementalText`.
+
+By default, the link will open in a new tab if the `href` property starts with http or https. Yet this can be overridden with the `opensInNewTab` prop.
+
+## Usage
+
+```jsx
+import { Link } from "@wpmedia/arc-themes-components";
+
+const Feature = () => (
+	<Link href="https://www.arcxp.com/" supplementalText="The Arc XP page will open in a new window">
+		See Arc XP Homepage
+	</Link>
+);
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### External Link Due To Link Contents
+
+<Story of={IndexStories.ExternalLinkDueToLinkContents} />
+
+### Internal Link Due To Link Contents
+
+<Story of={IndexStories.InternalLinkDueToLinkContents} />
+
+### Internal Link Due To Opting Into Same Tab
+
+<Story of={IndexStories.InternalLinkDueToOptingIntoSameTab} />
+
+### External Link Due To Opting Into New Tab
+
+<Story of={IndexStories.ExternalLinkDueToOptingIntoNewTab} />
+
+### Custom accessible text
+
+<Story of={IndexStories.CustomAccessibleText} />

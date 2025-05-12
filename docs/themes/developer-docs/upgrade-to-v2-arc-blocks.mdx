@@ -1,0 +1,1631 @@
+---
+title: 'Upgrade to v2 Arc Blocks'
+description: 'Upgrade to v2 Arc Blocks'
+lastUpdated: 2025-04-16T23:50:49.000Z
+migrationData:
+  short_description: 'Upgrade to v2 Arc Blocks'
+  number: KB0011207
+  sys_id: 0083aeb547ec9a90a87626c2846d430b
+  sys_created_on: '2024-09-10 19:33:57'
+  sys_updated_on: '2024-09-10 19:50:49'
+  sys_created_by: denise.rodriguez@washpost.com
+  sys_updated_by: denise.rodriguez@washpost.com
+  author: 13c389ea47ee5550a87626c2846d4300
+  category: Themes
+  kb: Developer Docs
+  kb_category: ba320d8b47dad110a87626c2846d4317
+  meta: themes 2.0, migration, upgrade
+  topic: General
+  sys_view_count: 3074
+  helpful_count: 0
+  version: 5b57a6bd47ec9a90a87626c2846d4338
+  display_number: KB0011207 v26.0
+migrationStatus: converted
+reviewStatus: pending
+conversionDate: 2024-10-15T17:18:05.403Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside, LinkButton } from '@astrojs/starlight/components';
+
+The following sections guide you through configuring your feature pack to use Arc Blocks v2.
+
+You can also view the Themes starter repository in our Arc XP Github organization:
+
+<LinkButton target='blank' href="https://github.com/arcxp/Themes-V2-Starter" icon='github'>Themes v2 Starter</LinkButton>
+
+## 1. Configure Feature Pack
+
+This section provides the steps to update the Themes release version, the `blocks.json` file, and configure environment variables and dependencies for Arc Blocks v2.  
+
+### Recommended Versioning
+
+For compatible node, npm, and Engine versions to use with Themes versions, see <Link blank href='https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-run-pagebuilder-engine-locally.html' text='How to run PageBuilder Engine locally' />.
+
+### blocks.json
+
+This section lists the changes you must make to your `blocks.json` file as part of the upgrade. Take the following steps:
+
+1. Update the `themesReleaseVersion` value to the latest <Link blank href='https://docs.arcxp.com/en/what-s-new-in-arc-xp/what-s-new-in-themes.html' text='2.x.x version' />:
+		```
+		"themesReleaseVersion": "arc-themes-release-version-2.4.1",
+		```
+2. Add the new `themeComponents` key to enable the React `arc-themes-components` package: 
+		```
+		"themeComponents": "@wpmedia/arc-themes-components",
+		```
+3. Add the new `theme` key that defines which out-of-the-box styles to apply by default.
+		```
+		"theme": "news",
+		```
+4. Remove the following line from the `blocks.json` file:
+		```
+		"engineSDK": "@wpmedia/engine-theme-sdk",
+		```
+		:::note
+		Most of the `engine-themes-sdk` is now part of `arc-themes-components`. You must also change `engine-themes-sdk` imports to `arc-themes-components` in your custom blocks to successfully upgrade to Arc Blocks v2. See the [Deprecated Libraries](#deprecated-libraries) and [Change Log Summary](#change-log-summary) to review the changes from `engine-theme-sdk` to `arc-themes-components`.
+		To minimize compiling issues during the imports upgrade, Arc XP recommends cherry-picking styles and components as you need them. 
+		:::
+
+5. Add the new Arc Blocks to the `blocks` array. The new blocks are required for local development:
+		```
+		"blocks": [
+			...
+			"@wpmedia/alias-tokens",
+			"@wpmedia/breakpoint-tokens",
+			"@wpmedia/global-phrases-block",
+			"@wpmedia/global-tokens",
+			"@wpmedia/signing-service-content-source-block"
+		],
+		```
+6. Add the new value for `resizerURL`. Arc Blocks use Image Resizer v2 by default. To enable Image Resizer v2 in Arc Blocks, add the following line:
+		```
+		"resizerURL": "/resizer/v2/"
+		```
+7. Enable Arc XP blocks styling functionality (and compiler) by adding the following line:
+		```
+		"buildSiteStyles": true,
+		```
+
+		<Aside type="note">
+		Change the `buildSiteStyles` value to `false` if you intend to use your own design system.
+		</Aside>
+
+### Additional notes on Image Resizer v2
+
+Image Resizer v2 enables you to add SEO-friendly names for images. Additionally, the authentication token is included in the image ANS and is good for all resize variations, so you won't have to worry about storing the secret key.
+
+After you upgrade to Arc Blocks v2, the images in all blocks are fully migrated to Image Resizer v2. However, see the specific [image components and blocks deprecations](#deprecated-libraries) that may require updating during your upgrade to Arc Blocks v2.
+
+For custom content sources, see <Link blank href={`${globals.photoCenterResizerPath}/migrate-from-resizer-v1-to-v2/`} text='Migrate from Resizer v1 to v2' /> 
+
+
+### environment/\*.json
+
+You must add environment variables for Image Resizer v2 to your environment `.json` files, as well as a `siteStyles` object that contains your site ID with the site ID you want the styles mapped to as the value. For a single site, this becomes a one-to-one mapping. Add the following to your environment `.json` files:
+
+```
+"RESIZER_TOKEN_VERSION": "[check the delivery API for current value]",
+"SIGNING_SERVICE_DEFAULT_APP": "resizer",
+    "siteStyles": {
+		  "daily-intelligencer": "daily-intelligencer"
+	}
+```
+
+For multi-site, this enables you to define one-to-many styles. Meaning you could have one set of styles applied to multiple sites. Like in this case, `daily-intelligencer` and `the-gazette` would both have the same styling applied to their blocks while `karc` would have it's own.
+
+```
+"siteStyles": {
+	  "daily-intelligencer": "daily-intelligencer",
+      "the-gazette": "daily-intelligencer",
+      "karc": "karc"
+	}
+```
+
+:::note
+For other environment variables, see See <Link blank href={`${globals.tutorialsQuickStartPath}/configure-local-environment-variables/`} text='Configuring local environment variables' /> and <Link blank href={`${globals.themesDevDocsPath}/environment-settings`} text='Environment settings' />
+:::
+
+### package.json
+
+Update your <Link blank href='https://www.npmjs.com/package/@arc-fusion/cli' text='Arc Fusion CLI' /> to the latest version.
+
+```bash
+npm install --save-dev @arc-fusion/cli@latest
+```
+
+Use at least `@2.1.0`
+
+```bash
+npm install --save-dev @arc-fusion/cli@2.1.0
+```
+
+## 2. Set up Design System
+
+This section helps you set up the Block Design System with your own tokens. Arc XP offers a script to create and populate the required folder structure in your feature pack:
+
+```
+|-- themes
+    |-- styles
+        |-- alias.json
+        |-- blocks.json
+        |-- breakpoints.json
+        |-- components.json
+        |-- global.json
+```
+
+And for multi-site usage, you can add an optional `sites` folder to add site-specific styles:
+
+```
+|-- themes
+    |-- sites
+        |-- site1
+            |-- alias.json
+            |-- blocks.json
+            |-- breakpoints.json
+            |-- components.json
+            |-- global.json
+        |-- site2
+            |-- alias.json
+            ...
+```
+
+See <Link blank href='https://docs.arcxp.com/en/products/themes/how-to-design-for-arc-xp-themes.html' text='How to Design for Arc XP Themes' />.
+
+### Script Setup
+
+1. Create a file for the script. On your terminal, run:
+		```
+		touch arc-themes.js
+		```
+2. Copy the following code into the `arc-themes.js` file:
+		<Aside type='tip' title='Large Code Block'>
+		<details>
+		<summary>Click here to display...</summary>
+
+		```js
+		const fs = require('fs');
+		const https = require('https');
+		const path = require('path');
+
+		function parseArgs(args) {
+		const parsedArgs = {};
+		for (let i = 0; i < args.length; i += 2) {
+			if (args[i].startsWith('--') && args[i + 1]) {
+			const key = args[i].substring(2);
+			const value = args[i + 1];
+			parsedArgs[key] = value;
+			}
+		}
+		return parsedArgs;
+		}
+
+		function createFolderStructure(sites = []) {
+		const folders = ['themes', 'themes/styles', sites && 'themes/sites'];
+		const files = [
+			'themes/styles/alias.json',
+			'themes/styles/blocks.json',
+			'themes/styles/breakpoints.json',
+			'themes/styles/components.json',
+			'themes/styles/global.json',
+		];
+
+		sites.forEach((site) => {
+			folders.push(`themes/sites/${site}`);
+			folders.push(`themes/sites/${site}/styles`);
+			const siteStyleFiles = [
+			`themes/sites/${site}/styles/alias.json`,
+			`themes/sites/${site}/styles/blocks.json`,
+			`themes/sites/${site}/styles/breakpoints.json`,
+			`themes/sites/${site}/styles/components.json`,
+			`themes/sites/${site}/styles/global.json`,
+			];
+			files.push(...siteStyleFiles);
+		});
+
+		folders.forEach((folder) => {
+			if (!fs.existsSync(folder)) {
+			fs.mkdirSync(folder);
+			}
+		});
+
+		files.forEach((file) => {
+			if (!fs.existsSync(file)) {
+			fs.writeFileSync(file, '{}', 'utf-8');
+			}
+		});
+
+		console.log('Folder structure created successfully');
+		}
+
+		function fetchTokens(theme, version, site) {
+		const tokenUrls = [
+			{
+			url: `https://raw.githubusercontent.com/WPMedia/arc-themes-blocks/arc-themes-release-version-${version}/blocks/global-tokens/themes/${theme}.json`,
+			localFile: site ? `themes/sites/${site}/styles/global.json` : 'themes/styles/global.json',
+			},
+			{
+			url: `https://raw.githubusercontent.com/WPMedia/arc-themes-blocks/arc-themes-release-version-${version}/blocks/alias-tokens/themes/${theme}.json`,
+			localFile: site ? `themes/sites/${site}/styles/alias.json` : 'themes/styles/alias.json',
+			},
+			{
+			url: `https://raw.githubusercontent.com/WPMedia/arc-themes-blocks/arc-themes-release-version-${version}/blocks/breakpoint-tokens/themes/${theme}.json`,
+			localFile: site
+				? `themes/sites/${site}/styles/breakpoints.json`
+				: 'themes/styles/breakpoints.json',
+			},
+		];
+
+		tokenUrls.forEach(({ url, localFile }) => {
+			https
+			.get(url, (res) => {
+				let data = '';
+
+				res.on('data', (chunk) => {
+				data += chunk;
+				});
+
+				res.on('end', () => {
+				const remoteData = JSON.parse(data);
+				fs.writeFileSync(localFile, JSON.stringify(remoteData, null, 2));
+				console.log(`Successfully updated ${localFile}`);
+				});
+			})
+			.on('error', (err) => {
+				console.error(`Error: ${err.message}`);
+			});
+		});
+		}
+
+		function fetchStyles(block, theme, version, site) {
+		const url = `https://raw.githubusercontent.com/WPMedia/arc-themes-blocks/arc-themes-release-version-${version}/blocks/${block}/themes/${theme}.json`;
+		const writePath = site ? `themes/sites/${site}/styles/blocks.json` : 'themes/styles/blocks.json';
+		const localFile = path.join(__dirname, writePath);
+
+		https
+			.get(url, (res) => {
+			let data = '';
+
+			res.on('data', (chunk) => {
+				data += chunk;
+			});
+
+			res.on('end', () => {
+				const remoteData = JSON.parse(data);
+				let localData = {};
+
+				if (fs.existsSync(localFile)) {
+				localData = JSON.parse(fs.readFileSync(localFile, 'utf-8'));
+				}
+
+				const updatedData = { ...localData, ...remoteData };
+				fs.writeFileSync(localFile, JSON.stringify(updatedData, null, 2));
+				console.log(`Successfully updated ${localFile}`);
+			});
+			})
+			.on('error', (err) => {
+			console.error(`Error: ${err.message}`);
+			});
+		}
+
+		function fetchComponentStyles(component, theme, version, site) {
+		const url = `https://raw.githubusercontent.com/WPMedia/arc-themes-components/arc-themes-release-version-${version}/src/components/${component}/themes/${theme}.json`;
+		const writePath = site
+			? `themes/sites/${site}/styles/components.json`
+			: 'themes/styles/components.json';
+		const localFile = path.join(__dirname, writePath);
+
+		https
+			.get(url, (res) => {
+			let data = '';
+
+			res.on('data', (chunk) => {
+				data += chunk;
+			});
+
+			res.on('end', () => {
+				const remoteData = JSON.parse(data);
+				let localData = {};
+
+				if (fs.existsSync(localFile)) {
+				localData = JSON.parse(fs.readFileSync(localFile, 'utf-8'));
+				}
+
+				const updatedData = { ...localData, ...remoteData };
+				fs.writeFileSync(localFile, JSON.stringify(updatedData, null, 2));
+				console.log(`Successfully updated ${localFile}`);
+			});
+			})
+			.on('error', (err) => {
+			console.error(`Error: ${err.message}`);
+			});
+		}
+
+		const command = process.argv[2];
+
+		if (!command) {
+		console.error('Usage: node arc-themes.js <command> [options]');
+		process.exit(1);
+		}
+
+		switch (command) {
+		case 'init':
+			const sites = parseArgs(process.argv.slice(3)).sites
+			? parseArgs(process.argv.slice(3)).sites.split(',')
+			: [];
+			createFolderStructure(sites);
+			break;
+		case 'get-tokens':
+			const { theme, version, site } = parseArgs(process.argv.slice(3));
+			if (!theme || !version) {
+			console.error(
+				'Usage: node arc-themes.js get-tokens --theme <theme> --version <version> [--site <site>]',
+			);
+			process.exit(1);
+			}
+			fetchTokens(theme, version, site);
+			break;
+		case 'get-styles':
+			const {
+			block,
+			theme: blockTheme,
+			version: blockVersion,
+			site: blockSite,
+			} = parseArgs(process.argv.slice(3));
+			if (!block || !blockTheme || !blockVersion) {
+			console.error(
+				'Usage: node arc-themes.js get-styles --block <block> --theme <theme> --version <version> [--site <site>]',
+			);
+			process.exit(1);
+			}
+			fetchStyles(block, blockTheme, blockVersion, blockSite);
+			break;
+		case 'get-component-styles':
+			const {
+			component,
+			theme: compTheme,
+			version: compVersion,
+			site: compSite,
+			} = parseArgs(process.argv.slice(3));
+			if (!component || !compTheme || !compVersion) {
+			console.error(
+				'Usage: node arc-themes.js get-styles --component <component> --theme <theme> --version <version> [--site <site>]',
+			);
+			process.exit(1);
+			}
+			fetchComponentStyles(component, compTheme, compVersion, compSite);
+			break;
+		default:
+			console.error(`Unknown command: ${command}`);
+			process.exit(1);
+		}
+		```
+		</details>
+		</Aside>
+
+3. Add `"arc-themes": "node arc-themes.js"` to your `package.json` file to make it easy to execute:
+		```
+		{
+		"scripts": {
+			...
+			"arc-themes": "node arc-themes.js"
+		}
+		}
+		```
+
+### Initialize Folder Structure
+
+To initialize the folder structure, run:
+
+```bash
+npm run arc-themes -- init
+```
+
+Or for multi-site clients, run the following command using the site IDs that you would like to initialize in your `themes/sites` folder:
+
+```bash
+npm run arc-themes -- init --sites site1,site2,site3
+```
+
+### Pull Tokens
+
+To all of the out-of-the-box breakpoints, alias tokens, and global tokens, run:
+
+```bash
+npm run arc-themes -- get-tokens --theme news --version 2.4.1
+
+```
+
+Or if you'd like to pull the tokens into one of your site folders, run:
+
+```bash
+npm run arc-themes -- get-component-styles --component button --theme news --version 2.4.1 --site site1
+```
+<Aside type='caution' title='Warning'>
+Do not run `get-tokens` on an unsaved file or uncommitted file, it will sync to the latest and overwrite it. This is intended to be done for your initial setup and only after if you were willing to do a git diff. You likely do not need all of these tokens in your local, and by including them all you will be permanently overriding Arc block tokens.
+</Aside>
+
+### Pull Component Styles
+
+To get the styles for a specific component such as `button`, run:
+
+```bash
+npm run arc-themes -- get-component-styles --component button --theme news --version 2.4.1
+```
+
+Or if you'd like to pull the component styles into one of your site folders, run:
+
+```bash
+npm run arc-themes -- get-component-styles --component button --theme news --version 2.4.1 --site site1
+```
+
+### Pull Block Styles
+
+To get the styles for a specific block such as `card-list-block`, run:
+
+```bash
+npm run arc-themes -- get-component-styles --component button --theme news --version 2.4.1 --site site1
+```
+
+Or if you'd like to pull the block styles into one of your site folders, run:
+
+```bash
+npm run arc-themes -- get-styles --block card-list-block --theme news --version 2.4.1 --site site1
+```
+
+The above command is useful if you've previously ejected out of an Arc block to apply your own custom styling or have done custom style overrides, this gets you scaffolded out to begin setting the styles you want with the out-of-the-box block again.
+Keep in mind if it's ejected and you removed it from your `blocks.json`, you must to re-add it to your `blocks.json` array.
+If it was custom style overrides but you kept the Arc block installed, you must begin transferring them over into the styles object.
+
+## 3. Convert Custom Blocks
+
+In Arc Blocks v2, there are cases where you have custom blocks that you want to convert to using the Themes Design System or there is a change released that requires you to adapt your custom code.
+
+### Blocks Styling
+
+If you have applied custom style overrides or ejected out of an Arc block only to set your own styling. You can update your `themes/styles/blocks.json` with the blocks and style changes you need.
+
+Refer to the <Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system`} text='Introduction to Themes design system' />.
+
+#### Blocks Styling Using Logical Properties
+
+With the update to support right-to-left languages, blocks now uses <Link blank href='https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values' text='CSS logical properties' />. These properties conflict with older, physical and shorthand CSS properties causing unexpected results. If you are using custom styling in your blocks, you must make updates such as using `inline-size` and `max-inline-size`, instead of  `width` and `max-width`. For the full list of CSS logical properties and their older equivalents, see <Link blank href='https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values' text='CSS logical properties and values' />.
+
+```
+// arc-themes-feature-pack/themes/styles/blocks.json
+{
+	"byline": {
+		"styles": {
+			"default": {
+				"font-size": "$body-font-weight-small",
+				"line-height": "$body-line-height-tiny",
+				"components": {
+					"link": {
+						"text-decoration": "green wavy underline"
+					},
+					"link-hover": {
+						"text-decoration": "green dashed underline"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	}
+}
+```
+
+### Deprecated Libraries
+
+`@wpmedia/engine-theme-sdk` and `@wpmedia/shared-styles` had components, functions, and utilities available to construct your own custom blocks. Most of these have been shifted into the `@wpmedia/arc-themes-components` package as a direct replacement.
+
+If you are importing utilities, components, or functions from engine-theme-sdk or shared-styles, refer to the following lists to identify which can be converted to importing from `@wpmedia/arc-themes-components` and which are deprecated where you must replace the import with your own code or copy the deprecated import into your own codebase as custom code to continue using it.
+
+### Deprecated Packages
+
+Below is a list of all exports from our deprecated `engine-theme-sdk` and `shared-styles` libraries, indicating if there is library they've been migrated to and if the 2.0 implementation is a direct replacement (meaning you can just change the library imported from). If the **Direct Replacement** column is "TRUE", it is a direct swap to the new library with no code update. There is also a Github link when the replacement exists, or an example of the component used on a block.
+
+:::note
+If there is no migrated library it is fully deprecated with no replacement supported by Arc XP. You may add your own custom components and blocks as needed.
+:::
+
+**@wpmedia/blocks (including image components)**
+
+<Aside type='tip' title='Large Table'>
+<details>
+<summary>Click here to display...</summary>
+
+| Deprecated | New Library | Reference Link | Replacement | Direct Replacement | Migration Note |
+| --- | --- | --- | --- | --- | --- |
+| `ArticleDate` | `@wpmedia/arc-themes-components` | <Link blank href='https://github.com/WPMedia/arc-themes-blocks/tree/a72c7113013859e5613f74f319e441b76fbc89e5/blocks/date-block' text='date-block' /> | `Date` | TRUE |   |
+| `resizer-image-block` | `@wpmedia/arc-themes-components` | example from <Link blank href='https://github.com/WPMedia/arc-themes-blocks/blob/a72c7113013859e5613f74f319e441b76fbc89e5/blocks/small-promo-block/features/small-promo/default.jsx#L11' text='small-promo-block' /> | _see migration notes_ | FALSE | Depending on the use case, components like  `imageANSToImageSrc` or `getImageFromANS` should be used. The `author-content-source-block` is to retrieve the auth information to build imageURL. |
+| `PlaceholderImage` | `@wpmedia/arc-themes-components` | example from <Link blank href='https://github.com/WPMedia/arc-themes-blocks/blob/a72c7113013859e5613f74f319e441b76fbc89e5/blocks/card-list-block/features/card-list/default.jsx#L30' text='card-list-block' /> | `fallbackImage` | FALSE | `fallbackImage` is used in `promoImageParams` |
+| `extractImageFromStory` | `@wpmedia/arc-themes-components` | example from <Link blank href='https://github.com/WPMedia/arc-themes-blocks/blob/a72c7113013859e5613f74f319e441b76fbc89e5/blocks/gallery-block/features/gallery/default.jsx#L13' text='gallery-block' /> | `imageANSToImageSrc` | FALSE |   |
+| `extractResizedParams` | `@wpmedia/arc-themes-components` | example from <Link blank href='https://github.com/WPMedia/arc-themes-blocks/blob/a72c7113013859e5613f74f319e441b76fbc89e5/blocks/small-promo-block/features/small-promo/default.jsx#L11' text='small-promo-block' /> | `getImageFromANS` util | FALSE |   |
+</details>
+</Aside>
+
+**@wpmedia/shared-style**
+
+<Aside type='tip' title='Large Table'>
+<details>
+<summary>Click here to display...</summary>
+
+| Deprecated | New Library | Replacement | Direct Replacement | Migration Note |
+| --- | --- | --- | --- | --- |
+| `Button` | `@wpmedia/arc-themes-components` | `Button` | FALSE | See notes below on `Button` attribute replacements  |
+| `BUTTON_SIZES` |   | `Size` | FALSE | `Size` attribute of `Button` tag |
+| `BUTTON_STYLES` |   | `variant` | FALSE | `variant` attribute of `Button` tag |
+| `BUTTON_TYPES` |   | `iconLeft`, `iconRight` | FALSE | Icons are optional. When used, add `iconLeft` and/or `iconRight` to `Button` tag |
+| `Byline` | `@wpmedia/arc-themes-blocks` | `Byline` | FALSE | Moved to Arc Themes Blocks as a default OOTB block |
+| `ExtraLargePromoPresentation` | NONE | NONE | FALSE |   |
+| `Heading` | `@wpmedia/arc-themes-components` | `Heading` | TRUE |   |
+| `HeadingSection` | `@wpmedia/arc-themes-components` | `HeadingSection` | TRUE |   |
+| `LargePromoPresentation` | NONE | NONE | FALSE |   |
+| `Overline` | `@wpmedia/arc-themes-components` | `Overline` | TRUE |   |
+| `PrimaryFont` | NONE | NONE | FALSE | see [style properties](#styleproperties) |
+| `PromoDate` | NONE | NONE | FALSE |   |
+| `PromoDescription` | NONE | NONE | FALSE |   |
+| `PromoHeadline` | NONE | NONE | FALSE |   |
+| `PromoImage` | NONE | NONE | FALSE |   |
+| `PromoLabel` | `@wpmedia/arc-themes-components` | `labelIconName` | FALSE | Label type is been identified by the `labelIconName` function when useful |
+| `SecondaryFont` | `@wpmedia/arc-themes-components` | `Paragraph` | FALSE | Replaced with `paragraph` component to specify the text content |
+| `MediumPromoPresentation` | NONE | NONE | FALSE |   |
+| `SmallPromoContainer` | NONE | NONE | FALSE |   |
+| `SmallPromoPresentation` | NONE | NONE | FALSE |   |
+| `SmallPromoStyles` | NONE | NONE | FALSE |   |
+| `getNavSpecificSecondaryButtonTheme` | NONE | NONE | FALSE |   |
+| `getNavSpecificPrimaryButtonTheme` | NONE | NONE | FALSE |   |
+| `FormInputField` | NONE | NONE | FALSE |   |
+| `FIELD_TYPES` | NONE | NONE | FALSE |   |
+</details>
+</Aside>
+
+**@wpmedia/engine-theme-sdk**
+
+<Aside type='tip' title='Large Table'>
+<details>
+<summary>Click here to display...</summary>
+| Deprecated | New Library | Replacement | Direct Replacement | Migration Note |
+| --- | --- | --- | --- | --- |
+| `localizeDate` | `@wpmedia/arc-themes-components` | localizeDate | TRUE |   |
+| `localizeDateTime` | `@wpmedia/arc-themes-components` | localizeDateTime | TRUE |   |
+| `extractVideoEmbedFromStory` | NONE | NONE | FALSE |   |
+| `isServerSide` | `@wpmedia/arc-themes-components` | isServerSide | TRUE |   |
+| `constructSocialURL` | `@wpmedia/arc-themes-components` | formatSocialURL | FALSE |   |
+| `formatURL` | `@wpmedia/arc-themes-components` | formatURL | TRUE |   |
+| `ArcLogo` | NONE | NONE | FALSE |   |
+| `ErrorBoundary` | NONE | NONE | FALSE |   |
+| `EventEmitter` | `@wpmedia/arc-themes-components` | EventEmitter | TRUE |   |
+| `Gallery` | `@@wpmedia/arc-themes-components` | Carousel | FALSE |   |
+| `Image` | `@wpmedia/arc-themes-components` | Image | FALSE |   |
+| `ImageMetadata` | NONE | NONE | FALSE |   |
+| `LazyLoad` | `@wpmedia/arc-themes-components` | LazyLoad | TRUE |   |
+| `Lightbox` | NONE | NONE | FALSE |   |
+| `MetaData` | `@wpmedia/arc-themes-components` | MetaData | TRUE |   |
+| `Video` | `@wpmedia/arc-themes-components` | Video | TRUE |   |
+| `VideoPlayer` | NONE | NONE | FALSE |   |
+| `videoPlayerCustomFields` | NONE | NONE | FALSE |   |
+| `videoPlayerCustomFieldTags` | NONE | NONE | FALSE |   |
+| `ArrowDownIcon` | NONE | NONE | FALSE |   |
+| `ArrowLeftIcon` | `@wpmedia/arc-themes-components` | ArrowLeft | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `ArrowRightIcon` | `@wpmedia/arc-themes-components` | ArrowRight | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `ArrowUpIcon` | NONE | NONE | FALSE |   |
+| `BackwardIcon` | NONE | NONE | FALSE |   |
+| `BellIcon` | NONE | NONE | FALSE |   |
+| `CalendarIcon` | NONE | NONE | FALSE |   |
+| `CameraIcon` | `@wpmedia/arc-themes-components` | Camera | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `ChartIcon` | NONE | NONE | FALSE |   |
+| `CheckIcon` | NONE | NONE | FALSE |   |
+| `ChevronDownIcon` | `@wpmedia/arc-themes-components` | ChevronDown | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `ChevronLeftIcon` | `@wpmedia/arc-themes-components` | ChevronLeft | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `ChevronRightIcon` | `@wpmedia/arc-themes-components` | ChevronRight | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `ChevronUpIcon` | `@wpmedia/arc-themes-components` | ChevronUp | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `ClosedCaptioningIcon` | NONE | NONE | FALSE |   |
+| `CloseIcon` | `@wpmedia/arc-themes-components` | Close | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `CogIcon` | NONE | NONE | FALSE |   |
+| `CommentsIcon` | NONE | NONE | FALSE |   |
+| `DeleteIcon` | NONE | NONE | FALSE |   |
+| `DownloadIcon` | NONE | NONE | FALSE |   |
+| `EditIcon` | NONE | NONE | FALSE |   |
+| `EllipsisHorizontalIcon` | NONE | NONE | FALSE |   |
+| `EllipsisVerticalIcon` | NONE | NONE | FALSE |   |
+| `EnvelopeIcon` | `@wpmedia/arc-themes-components` | Envelope | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `EnvelopeOpenIcon` | NONE | NONE | FALSE |   |
+| `ErrorIcon` | NONE | NONE | FALSE |   |
+| `ExternalLinkIcon` | NONE | NONE | FALSE |   |
+| `FacebookAltIcon` | NONE | NONE | FALSE |   |
+| `FacebookIcon` | `@wpmedia/arc-themes-components` | Facebook | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `ForwardIcon` | NONE | NONE | FALSE |   |
+| `FullscreenIcon` | `@wpmedia/arc-themes-components` | Fullscreen | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `GiftIcon` | NONE | NONE | FALSE |   |
+| `GridIcon` | NONE | NONE | FALSE |   |
+| `GripVerticalIcon` | NONE | NONE | FALSE |   |
+| `HamburgerMenuIcon` | `@wpmedia/arc-themes-components` | HamburgerMenu | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `HeadphonesIcon` | NONE | NONE | FALSE |   |
+| `HomeIcon` | NONE | NONE | FALSE |   |
+| `InstagramIcon` | `@wpmedia/arc-themes-components` | Instagram | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `LinkedInAltIcon` | NONE | NONE | FALSE |   |
+| `LinkedInIcon` | `@wpmedia/arc-themes-components` | LinkedIn | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `LinkIcon` | `@wpmedia/arc-themes-components` | Link | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `LockIcon` | NONE | NONE | FALSE |   |
+| `MediumIcon` | `@wpmedia/arc-themes-components` | Medium | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `NextIcon` | `@wpmedia/arc-themes-components` | Next | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `PageIcon` | NONE | NONE | FALSE |   |
+| `PauseCircleIcon` | `@wpmedia/arc-themes-components` | PauseCircle | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `PauseIcon` | `@wpmedia/arc-themes-components` | Pause | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `PhoneIcon` | NONE | NONE | FALSE |   |
+| `PinterestAltIcon` | NONE | NONE | FALSE |   |
+| `PinterestIcon` | `@wpmedia/arc-themes-components` | Pinterest | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `PlayCircleIcon` | NONE | NONE | FALSE |   |
+| `PlayIcon` | `@wpmedia/arc-themes-components` | Play | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `PlusIcon` | NONE | NONE | FALSE |   |
+| `PreviousIcon` | `@wpmedia/arc-themes-components` | Previous | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `PrintIcon` | `@wpmedia/arc-themes-components` | Print | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `RedditIcon` | `@wpmedia/arc-themes-components` | Reddit | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `RssIcon` | `@wpmedia/arc-themes-components` | Rss | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `SearchIcon` | `@wpmedia/arc-themes-components` | Search | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `ShareIcon` | `@wpmedia/arc-themes-components` | Share | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `ShoppingCartIcon` | NONE | NONE | FALSE |   |
+| `SnapchatIcon` | `@wpmedia/arc-themes-components` | Snapchat | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `SoundCloudIcon` | `@wpmedia/arc-themes-components` | SoundCloud | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `SoundOffIcon` | `@wpmedia/arc-themes-components` | SoundOff | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `SoundOnIcon` | `@wpmedia/arc-themes-components` | SoundOn | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `StarHalfIcon` | NONE | NONE | FALSE |   |
+| `StarIcon` | NONE | NONE | FALSE |   |
+| `TumblrIcon` | `@wpmedia/arc-themes-components` | Tumblr | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `TwitchIcon` | `@wpmedia/arc-themes-components` | Twitch | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `TwitterAltIcon` | NONE | NONE | FALSE |   |
+| `TwitterIcon` | `@wpmedia/arc-themes-components` | Twitter | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `UnlockIcon` | NONE | NONE | FALSE |   |
+| `UserIcon` | `@wpmedia/arc-themes-components` | User | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `WhatsAppIcon` | `@wpmedia/arc-themes-components` | WhatsApp | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `YoutubeAltIcon` | NONE | NONE | FALSE |   |
+| `YoutubeIcon` | `@wpmedia/arc-themes-components` | Youtube | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `ZoomInIcon` | `@wpmedia/arc-themes-components` | ZoomIn | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />` |
+| `ZoomOutIcon` | `@wpmedia/arc-themes-components` | ZoomOut | FALSE | import is now from \``{ Icon }`\` Usage: `<Icon name="IconName" />`news-theme-css |
+</details>
+</Aside>
+
+**@wpmedia/news-theme-css**
+
+`news-theme-css` is not used by any Arc Block in v2, and the Arc Themes Design System is replacing the need for the `@wpmedia/news-theme-css` dependency. With this release of Themes, there is greater flexibility to define your own global CSS variable tokens and aliases through the Arc Themes Design System, as well as applying targeted block styling to every Arc Block. The dependency is no longer included when deploying with Theme Settings and it does not need included in your `blocks.json` when developing locally. The removal of these dependencies reduces unnecessary CSS in your bundle.
+
+| Deprecated | New Library | Reference Link | Replacement | Direct Replacement | Migration Note |
+| --- | --- | --- | --- | --- | --- |
+| `LinkedBackgroundHover` | `@wpmedia/arc-themes-components` | - <Link blank href='https://github.com/WPMedia/arc-themes-blocks/blob/a72c7113013859e5613f74f319e441b76fbc89e5/.storybook/themes/news.scss#L4741' text='Pill' /><br />- <Link blank href='https://github.com/WPMedia/arc-themes-blocks/blob/a72c7113013859e5613f74f319e441b76fbc89e5/.storybook/themes/news.scss#L372' text='Link' /> | `Pill` | FALSE | The `Pill` component will render in span for use with backgrounds. If an href is passed as a property, the `Pill` will render as a simple hyperlink for internal navigation, and is not intended for external navigation. For this functionality, use the `Link` component as a wrap to the `Pill`. |
+
+If you are using any CSS from `@wpmedia/news-theme-css`, you must replace it or copy the CSS into your feature pack custom styles. This includes using the JS utilities.
+
+```
+import { framework, calculateRem } from '@wpmedia/news-theme-css/js/framework';
+```
+
+If you need to migrate over any Sass (functions, utilities, variables):
+
+- <Link blank href='https://github.com/WPMedia/news-theme-css/tree/arc-themes-release-version-1.28/scss' text='news-theme-css Sass' />
+
+If you have specific classes you'd want to copy out as pure css:
+
+- <Link blank href='https://arc-learning-center-static.s3.amazonaws.com/docs/resources/arc-themes/news-theme.css' text='news-theme.css' />
+
+### List of news-theme-css classes
+To identify what classes you have in use, refer to the list below (and further down is a helper script to run in your codebase).
+
+<Aside type='tip' title='Long List'>
+<details>
+<summary>Click here to display...</summary>
+```
+[
+	"margin-xxs-left",
+	"margin-xxs-right",
+	"margin-xxs-top",
+	"margin-xxs-bottom",
+	"margin-xxs-all",
+	"margin-xs-left",
+	"margin-xs-right",
+	"margin-xs-top",
+	"margin-xs-bottom",
+	"margin-xs-all",
+	"margin-sm-left",
+	"margin-sm-right",
+	"margin-sm-top",
+	"margin-sm-bottom",
+	"margin-sm-all",
+	"margin-md-left",
+	"margin-md-right",
+	"margin-md-top",
+	"margin-md-bottom",
+	"margin-md-all",
+	"margin-lg-left",
+	"margin-lg-right",
+	"margin-lg-top",
+	"margin-lg-bottom",
+	"margin-lg-all",
+	"margin-xl-left",
+	"margin-xl-right",
+	"margin-xl-top",
+	"margin-xl-bottom",
+	"margin-xl-all",
+	"margin-xxl-left",
+	"margin-xxl-right",
+	"margin-xxl-top",
+	"margin-xxl-bottom",
+	"margin-xxl-all",
+	"block-margin-bottom",
+	"padding-xxs-left",
+	"padding-xxs-right",
+	"padding-xxs-top",
+	"padding-xxs-bottom",
+	"padding-xxs-all",
+	"padding-xs-left",
+	"padding-xs-right",
+	"padding-xs-top",
+	"padding-xs-bottom",
+	"padding-xs-all",
+	"padding-sm-left",
+	"padding-sm-right",
+	"padding-sm-top",
+	"padding-sm-bottom",
+	"padding-sm-all",
+	"padding-md-left",
+	"padding-md-right",
+	"padding-md-top",
+	"padding-md-bottom",
+	"padding-md-all",
+	"padding-lg-left",
+	"padding-lg-right",
+	"padding-lg-top",
+	"padding-lg-bottom",
+	"padding-lg-all",
+	"padding-xl-left",
+	"padding-xl-right",
+	"padding-xl-top",
+	"padding-xl-bottom",
+	"padding-xl-all",
+	"padding-xxl-left",
+	"padding-xxl-right",
+	"padding-xxl-top",
+	"padding-xxl-bottom",
+	"padding-xxl-all",
+	"defcon",
+	"h1-primary",
+	"h1-secondary",
+	"h2-primary",
+	"h2-secondary",
+	"h3-primary",
+	"h3-secondary",
+	"h4-primary",
+	"h4-secondary",
+	"h5-primary",
+	"h5-secondary",
+	"h6-primary",
+	"h6-secondary",
+	"container-fluid",
+	"container",
+	"row",
+	"reduce-internal-row-col-gap",
+	"col-sm-1",
+	"col-sm-md-1",
+	"col-sm-lg-1",
+	"col-sm-xl-1",
+	"col-sm-2",
+	"col-sm-md-2",
+	"col-sm-lg-2",
+	"col-sm-xl-2",
+	"col-sm-3",
+	"col-sm-md-3",
+	"col-sm-lg-3",
+	"col-sm-xl-3",
+	"col-sm-4",
+	"col-sm-md-4",
+	"col-sm-lg-4",
+	"col-sm-xl-4",
+	"col-sm-5",
+	"col-sm-md-5",
+	"col-sm-lg-5",
+	"col-sm-xl-5",
+	"col-sm-6",
+	"col-sm-md-6",
+	"col-sm-lg-6",
+	"col-sm-xl-6",
+	"col-sm-7",
+	"col-sm-md-7",
+	"col-sm-lg-7",
+	"col-sm-xl-7",
+	"col-sm-8",
+	"col-sm-md-8",
+	"col-sm-lg-8",
+	"col-sm-xl-8",
+	"col-sm-9",
+	"col-sm-md-9",
+	"col-sm-lg-9",
+	"col-sm-xl-9",
+	"col-sm-10",
+	"col-sm-md-10",
+	"col-sm-lg-10",
+	"col-sm-xl-10",
+	"col-sm-11",
+	"col-sm-md-11",
+	"col-sm-lg-11",
+	"col-sm-xl-11",
+	"col-sm-12",
+	"col-sm-md-12",
+	"col-sm-lg-12",
+	"col-sm-xl-12",
+	"col-md-1",
+	"col-md-lg-1",
+	"col-md-xl-1",
+	"col-md-2",
+	"col-md-lg-2",
+	"col-md-xl-2",
+	"col-md-3",
+	"col-md-lg-3",
+	"col-md-xl-3",
+	"col-md-4",
+	"col-md-lg-4",
+	"col-md-xl-4",
+	"col-md-5",
+	"col-md-lg-5",
+	"col-md-xl-5",
+	"col-md-6",
+	"col-md-lg-6",
+	"col-md-xl-6",
+	"col-md-7",
+	"col-md-lg-7",
+	"col-md-xl-7",
+	"col-md-8",
+	"col-md-lg-8",
+	"col-md-xl-8",
+	"col-md-9",
+	"col-md-lg-9",
+	"col-md-xl-9",
+	"col-md-10",
+	"col-md-lg-10",
+	"col-md-xl-10",
+	"col-md-11",
+	"col-md-lg-11",
+	"col-md-xl-11",
+	"col-md-12",
+	"col-md-lg-12",
+	"col-md-xl-12",
+	"col-lg-1",
+	"col-lg-xl-1",
+	"col-lg-2",
+	"col-lg-xl-2",
+	"col-lg-3",
+	"col-lg-xl-3",
+	"col-lg-4",
+	"col-lg-xl-4",
+	"col-lg-5",
+	"col-lg-xl-5",
+	"col-lg-6",
+	"col-lg-xl-6",
+	"col-lg-7",
+	"col-lg-xl-7",
+	"col-lg-8",
+	"col-lg-xl-8",
+	"col-lg-9",
+	"col-lg-xl-9",
+	"col-lg-10",
+	"col-lg-xl-10",
+	"col-lg-11",
+	"col-lg-xl-11",
+	"col-lg-12",
+	"col-lg-xl-12",
+	"col-xl-1",
+	"col-xl-2",
+	"col-xl-3",
+	"col-xl-4",
+	"col-xl-5",
+	"col-xl-6",
+	"col-xl-7",
+	"col-xl-8",
+	"col-xl-9",
+	"col-xl-10",
+	"col-xl-11",
+	"col-xl-12",
+	"ie-flex-100-percent-sm",
+	"vertical-centered",
+	"embed-responsive",
+	"embed-responsive-item",
+	"btn",
+	"3s",
+	"btn-block",
+	"btn-lg",
+	"5rem",
+	"btn-sm",
+	"disabled",
+	"btn-outline",
+	"btn-success",
+	"btn-warning",
+	"btn-danger",
+	"btn-outline-success",
+	"btn-outline-warning",
+	"btn-outline-danger",
+	"chain-container",
+	"chain-col",
+	"layout-section",
+	"wrap-bottom",
+]
+```
+</details>
+</Aside>
+
+### news-theme-css class finder script
+To help identify where these are used in your codebase, you can try using this helper script which will produce the file `news-theme-css-results.json` that lists every class used in your feature pack files with it's line number.
+
+To create and use the helper script, follow these steps:
+
+**1.** Install `glob` to help search your repo. You can remove this after.
+
+```bash
+npm i glob --save-dev
+```
+
+**2.** Copy the following script into the file `class-finder.js` inside your feature pack folder.
+
+<Aside type='tip' title='Large Code Block'>
+<details>
+<summary>Click here to display...</summary>
+```
+const fs = require("fs");
+const { glob } = require("glob");
+const readline = require("readline");
+
+
+async function processFile(file, deprecatedClasses) {
+	const fileStream = fs.createReadStream(file);
+	const rl = readline.createInterface({
+		input: fileStream,
+		crlfDelay: Infinity,
+	});
+
+
+	let lineNumber = 0;
+	const highConfidenceOccurrences = [];
+	const lowConfidenceOccurrences = [];
+
+
+	for await (const line of rl) {
+		lineNumber++;
+
+
+		deprecatedClasses.forEach((className) => {
+			const classAttributeRegex = new RegExp(
+				`class(?:Name)?\\s*=\\s*["'][^"']*\\b${className}\\b[^"']*["']`,
+				"i"
+			);
+			const variableAssignmentRegex = new RegExp(
+				`\\s*=\\s*["'][^"']*\\b${className}\\b[^"']*["']`,
+				"i"
+			);
+			const looseMatchRegex = new RegExp(`\\b${className}\\b`, "i");
+
+
+			if (classAttributeRegex.test(line) || variableAssignmentRegex.test(line)) {
+				highConfidenceOccurrences.push({
+					file,
+					lineNumber,
+					className,
+					confidence: "high",
+				});
+			} else if (looseMatchRegex.test(line)) {
+				lowConfidenceOccurrences.push({
+					file,
+					lineNumber,
+					className,
+					confidence: "low",
+				});
+			}
+		});
+	}
+
+
+	fileStream.close();
+	return { highConfidenceOccurrences, lowConfidenceOccurrences };
+}
+
+
+async function main() {
+	const deprecatedClasses = [
+		"test-class",
+		"margin-xxs-left",
+		"margin-xxs-right",
+		"margin-xxs-top",
+		"margin-xxs-bottom",
+		"margin-xxs-all",
+		"margin-xs-left",
+		"margin-xs-right",
+		"margin-xs-top",
+		"margin-xs-bottom",
+		"margin-xs-all",
+		"margin-sm-left",
+		"margin-sm-right",
+		"margin-sm-top",
+		"margin-sm-bottom",
+		"margin-sm-all",
+		"margin-md-left",
+		"margin-md-right",
+		"margin-md-top",
+		"margin-md-bottom",
+		"margin-md-all",
+		"margin-lg-left",
+		"margin-lg-right",
+		"margin-lg-top",
+		"margin-lg-bottom",
+		"margin-lg-all",
+		"margin-xl-left",
+		"margin-xl-right",
+		"margin-xl-top",
+		"margin-xl-bottom",
+		"margin-xl-all",
+		"margin-xxl-left",
+		"margin-xxl-right",
+		"margin-xxl-top",
+		"margin-xxl-bottom",
+		"margin-xxl-all",
+		"block-margin-bottom",
+		"padding-xxs-left",
+		"padding-xxs-right",
+		"padding-xxs-top",
+		"padding-xxs-bottom",
+		"padding-xxs-all",
+		"padding-xs-left",
+		"padding-xs-right",
+		"padding-xs-top",
+		"padding-xs-bottom",
+		"padding-xs-all",
+		"padding-sm-left",
+		"padding-sm-right",
+		"padding-sm-top",
+		"padding-sm-bottom",
+		"padding-sm-all",
+		"padding-md-left",
+		"padding-md-right",
+		"padding-md-top",
+		"padding-md-bottom",
+		"padding-md-all",
+		"padding-lg-left",
+		"padding-lg-right",
+		"padding-lg-top",
+		"padding-lg-bottom",
+		"padding-lg-all",
+		"padding-xl-left",
+		"padding-xl-right",
+		"padding-xl-top",
+		"padding-xl-bottom",
+		"padding-xl-all",
+		"padding-xxl-left",
+		"padding-xxl-right",
+		"padding-xxl-top",
+		"padding-xxl-bottom",
+		"padding-xxl-all",
+		"defcon",
+		"h1-primary",
+		"h1-secondary",
+		"h2-primary",
+		"h2-secondary",
+		"h3-primary",
+		"h3-secondary",
+		"h4-primary",
+		"h4-secondary",
+		"h5-primary",
+		"h5-secondary",
+		"h6-primary",
+		"h6-secondary",
+		"container-fluid",
+		"container",
+		"row",
+		"reduce-internal-row-col-gap",
+		"col-sm-1",
+		"col-sm-md-1",
+		"col-sm-lg-1",
+		"col-sm-xl-1",
+		"col-sm-2",
+		"col-sm-md-2",
+		"col-sm-lg-2",
+		"col-sm-xl-2",
+		"col-sm-3",
+		"col-sm-md-3",
+		"col-sm-lg-3",
+		"col-sm-xl-3",
+		"col-sm-4",
+		"col-sm-md-4",
+		"col-sm-lg-4",
+		"col-sm-xl-4",
+		"col-sm-5",
+		"col-sm-md-5",
+		"col-sm-lg-5",
+		"col-sm-xl-5",
+		"col-sm-6",
+		"col-sm-md-6",
+		"col-sm-lg-6",
+		"col-sm-xl-6",
+		"col-sm-7",
+		"col-sm-md-7",
+		"col-sm-lg-7",
+		"col-sm-xl-7",
+		"col-sm-8",
+		"col-sm-md-8",
+		"col-sm-lg-8",
+		"col-sm-xl-8",
+		"col-sm-9",
+		"col-sm-md-9",
+		"col-sm-lg-9",
+		"col-sm-xl-9",
+		"col-sm-10",
+		"col-sm-md-10",
+		"col-sm-lg-10",
+		"col-sm-xl-10",
+		"col-sm-11",
+		"col-sm-md-11",
+		"col-sm-lg-11",
+		"col-sm-xl-11",
+		"col-sm-12",
+		"col-sm-md-12",
+		"col-sm-lg-12",
+		"col-sm-xl-12",
+		"col-md-1",
+		"col-md-lg-1",
+		"col-md-xl-1",
+		"col-md-2",
+		"col-md-lg-2",
+		"col-md-xl-2",
+		"col-md-3",
+		"col-md-lg-3",
+		"col-md-xl-3",
+		"col-md-4",
+		"col-md-lg-4",
+		"col-md-xl-4",
+		"col-md-5",
+		"col-md-lg-5",
+		"col-md-xl-5",
+		"col-md-6",
+		"col-md-lg-6",
+		"col-md-xl-6",
+		"col-md-7",
+		"col-md-lg-7",
+		"col-md-xl-7",
+		"col-md-8",
+		"col-md-lg-8",
+		"col-md-xl-8",
+		"col-md-9",
+		"col-md-lg-9",
+		"col-md-xl-9",
+		"col-md-10",
+		"col-md-lg-10",
+		"col-md-xl-10",
+		"col-md-11",
+		"col-md-lg-11",
+		"col-md-xl-11",
+		"col-md-12",
+		"col-md-lg-12",
+		"col-md-xl-12",
+		"col-lg-1",
+		"col-lg-xl-1",
+		"col-lg-2",
+		"col-lg-xl-2",
+		"col-lg-3",
+		"col-lg-xl-3",
+		"col-lg-4",
+		"col-lg-xl-4",
+		"col-lg-5",
+		"col-lg-xl-5",
+		"col-lg-6",
+		"col-lg-xl-6",
+		"col-lg-7",
+		"col-lg-xl-7",
+		"col-lg-8",
+		"col-lg-xl-8",
+		"col-lg-9",
+		"col-lg-xl-9",
+		"col-lg-10",
+		"col-lg-xl-10",
+		"col-lg-11",
+		"col-lg-xl-11",
+		"col-lg-12",
+		"col-lg-xl-12",
+		"col-xl-1",
+		"col-xl-2",
+		"col-xl-3",
+		"col-xl-4",
+		"col-xl-5",
+		"col-xl-6",
+		"col-xl-7",
+		"col-xl-8",
+		"col-xl-9",
+		"col-xl-10",
+		"col-xl-11",
+		"col-xl-12",
+		"ie-flex-100-percent-sm",
+		"vertical-centered",
+		"embed-responsive",
+		"embed-responsive-item",
+		"btn",
+		"3s",
+		"btn-block",
+		"btn-lg",
+		"5rem",
+		"btn-sm",
+		"disabled",
+		"btn-outline",
+		"btn-success",
+		"btn-warning",
+		"btn-danger",
+		"btn-outline-success",
+		"btn-outline-warning",
+		"btn-outline-danger",
+		"chain-container",
+		"chain-col",
+		"layout-section",
+		"wrap-bottom",
+	];
+
+
+	// Adjust the file pattern according to the project structure
+	const filePattern = "**/*.{html,js,jsx,ts,tsx}";
+	const globOptions = {
+		ignore: "**/node_modules/**",
+	};
+
+
+	glob(filePattern, globOptions, async (err, files) => {
+		if (err) {
+			console.error("Error finding files:", err);
+			return;
+		}
+
+
+		const allOccurrences = {
+			highConfidence: [],
+			lowConfidence: [],
+		};
+
+
+		for (const file of files) {
+			try {
+				const stats = fs.statSync(file);
+
+
+				if (stats.isDirectory()) {
+					continue;
+				}
+
+
+				const { highConfidenceOccurrences, lowConfidenceOccurrences } = await processFile(
+					file,
+					deprecatedClasses
+				);
+				allOccurrences.highConfidence.push(...highConfidenceOccurrences);
+				allOccurrences.lowConfidence.push(...lowConfidenceOccurrences);
+			} catch (error) {
+				console.error(`Error processing file ${file}:`, error);
+			}
+		}
+
+
+		fs.writeFile("news-theme-css-results.json", JSON.stringify(allOccurrences, null, 2), "utf8", (err) => {
+			if (err) {
+				console.error("Error writing news-theme-css-results.json:", err);
+				return;
+			}
+
+
+			console.log("Results successfully saved to news-theme-css-results.json");
+		});
+	});
+}
+
+
+main();
+```
+</details>
+</Aside>
+
+**3.** Run the following command:
+```bash
+node class-finder.js
+```
+
+
+### styleProperties
+
+Defining `styleProperties` in `blocks.json` and Theme Settings is no longer needed with Arc Blocks v2. These properties are:
+
+- `primary-font`
+- `secondary-font`
+- `primary-color`
+
+Users could then `import getThemeStyle from 'fusion:themes';` in their feature pack to use the same style properties the Arc Blocks used. Arc Blocks no longer uses these style properties in Arc Blocks v2 because the Design System is far more robust and enables defining any number of style properties using global tokens and aliases.
+
+Theme Settings no longer displays fields to define these properties, and you can remove them from your `blocks.json` `styleProperties` key. If you are importing from `getThemeStyle` in custom code, these values would no longer be defined, and you must update your custom code.
+
+## Change Log Summary
+
+### Key Highlights
+
+- Arc Themes Design System
+- Arc Block Styling
+- Arc Components
+- Resizer v2 support
+
+### Breaking Changes
+
+#### engine-theme-sdk
+
+*   `@wpmedia/engine-theme-sdk` package has been replaced by `@wpmedia/arc-themes-components`
+*   See [deprecated packages](#deprecated-packages)
+
+#### news-theme-css
+
+Arc Blocks do not use `news-theme-css`, and the Arc Themes Design System is replacing the need for the `@wpmedia/news-theme-css` dependency. With this release of Themes, there is greater flexibility to define your own global CSS variable tokens and aliases through the Arc Themes Design System, as well as applying targeted block styling to every Arc Block. The dependency is no longer included when deploying with Theme Settings, and it does not need included in your `blocks.json` when developing locally. The removal of these reduces unnecessary CSS in your bundle.
+
+If you are using any CSS from `@wpmedia/news-theme-css`, you must replace it.
+
+Deprecated news-theme-css classes in Arc Blocks v2:
+
+<Aside type='tip' title='Long List'>
+<details>
+<summary>Click here to display...</summary>
+```
+[
+	"margin-xxs-left",
+	"margin-xxs-right",
+	"margin-xxs-top",
+	"margin-xxs-bottom",
+	"margin-xxs-all",
+	"margin-xs-left",
+	"margin-xs-right",
+	"margin-xs-top",
+	"margin-xs-bottom",
+	"margin-xs-all",
+	"margin-sm-left",
+	"margin-sm-right",
+	"margin-sm-top",
+	"margin-sm-bottom",
+	"margin-sm-all",
+	"margin-md-left",
+	"margin-md-right",
+	"margin-md-top",
+	"margin-md-bottom",
+	"margin-md-all",
+	"margin-lg-left",
+	"margin-lg-right",
+	"margin-lg-top",
+	"margin-lg-bottom",
+	"margin-lg-all",
+	"margin-xl-left",
+	"margin-xl-right",
+	"margin-xl-top",
+	"margin-xl-bottom",
+	"margin-xl-all",
+	"margin-xxl-left",
+	"margin-xxl-right",
+	"margin-xxl-top",
+	"margin-xxl-bottom",
+	"margin-xxl-all",
+	"block-margin-bottom",
+	"padding-xxs-left",
+	"padding-xxs-right",
+	"padding-xxs-top",
+	"padding-xxs-bottom",
+	"padding-xxs-all",
+	"padding-xs-left",
+	"padding-xs-right",
+	"padding-xs-top",
+	"padding-xs-bottom",
+	"padding-xs-all",
+	"padding-sm-left",
+	"padding-sm-right",
+	"padding-sm-top",
+	"padding-sm-bottom",
+	"padding-sm-all",
+	"padding-md-left",
+	"padding-md-right",
+	"padding-md-top",
+	"padding-md-bottom",
+	"padding-md-all",
+	"padding-lg-left",
+	"padding-lg-right",
+	"padding-lg-top",
+	"padding-lg-bottom",
+	"padding-lg-all",
+	"padding-xl-left",
+	"padding-xl-right",
+	"padding-xl-top",
+	"padding-xl-bottom",
+	"padding-xl-all",
+	"padding-xxl-left",
+	"padding-xxl-right",
+	"padding-xxl-top",
+	"padding-xxl-bottom",
+	"padding-xxl-all",
+	"defcon",
+	"h1-primary",
+	"h1-secondary",
+	"h2-primary",
+	"h2-secondary",
+	"h3-primary",
+	"h3-secondary",
+	"h4-primary",
+	"h4-secondary",
+	"h5-primary",
+	"h5-secondary",
+	"h6-primary",
+	"h6-secondary",
+	"container-fluid",
+	"container",
+	"row",
+	"reduce-internal-row-col-gap",
+	"col-sm-1",
+	"col-sm-md-1",
+	"col-sm-lg-1",
+	"col-sm-xl-1",
+	"col-sm-2",
+	"col-sm-md-2",
+	"col-sm-lg-2",
+	"col-sm-xl-2",
+	"col-sm-3",
+	"col-sm-md-3",
+	"col-sm-lg-3",
+	"col-sm-xl-3",
+	"col-sm-4",
+	"col-sm-md-4",
+	"col-sm-lg-4",
+	"col-sm-xl-4",
+	"col-sm-5",
+	"col-sm-md-5",
+	"col-sm-lg-5",
+	"col-sm-xl-5",
+	"col-sm-6",
+	"col-sm-md-6",
+	"col-sm-lg-6",
+	"col-sm-xl-6",
+	"col-sm-7",
+	"col-sm-md-7",
+	"col-sm-lg-7",
+	"col-sm-xl-7",
+	"col-sm-8",
+	"col-sm-md-8",
+	"col-sm-lg-8",
+	"col-sm-xl-8",
+	"col-sm-9",
+	"col-sm-md-9",
+	"col-sm-lg-9",
+	"col-sm-xl-9",
+	"col-sm-10",
+	"col-sm-md-10",
+	"col-sm-lg-10",
+	"col-sm-xl-10",
+	"col-sm-11",
+	"col-sm-md-11",
+	"col-sm-lg-11",
+	"col-sm-xl-11",
+	"col-sm-12",
+	"col-sm-md-12",
+	"col-sm-lg-12",
+	"col-sm-xl-12",
+	"col-md-1",
+	"col-md-lg-1",
+	"col-md-xl-1",
+	"col-md-2",
+	"col-md-lg-2",
+	"col-md-xl-2",
+	"col-md-3",
+	"col-md-lg-3",
+	"col-md-xl-3",
+	"col-md-4",
+	"col-md-lg-4",
+	"col-md-xl-4",
+	"col-md-5",
+	"col-md-lg-5",
+	"col-md-xl-5",
+	"col-md-6",
+	"col-md-lg-6",
+	"col-md-xl-6",
+	"col-md-7",
+	"col-md-lg-7",
+	"col-md-xl-7",
+	"col-md-8",
+	"col-md-lg-8",
+	"col-md-xl-8",
+	"col-md-9",
+	"col-md-lg-9",
+	"col-md-xl-9",
+	"col-md-10",
+	"col-md-lg-10",
+	"col-md-xl-10",
+	"col-md-11",
+	"col-md-lg-11",
+	"col-md-xl-11",
+	"col-md-12",
+	"col-md-lg-12",
+	"col-md-xl-12",
+	"col-lg-1",
+	"col-lg-xl-1",
+	"col-lg-2",
+	"col-lg-xl-2",
+	"col-lg-3",
+	"col-lg-xl-3",
+	"col-lg-4",
+	"col-lg-xl-4",
+	"col-lg-5",
+	"col-lg-xl-5",
+	"col-lg-6",
+	"col-lg-xl-6",
+	"col-lg-7",
+	"col-lg-xl-7",
+	"col-lg-8",
+	"col-lg-xl-8",
+	"col-lg-9",
+	"col-lg-xl-9",
+	"col-lg-10",
+	"col-lg-xl-10",
+	"col-lg-11",
+	"col-lg-xl-11",
+	"col-lg-12",
+	"col-lg-xl-12",
+	"col-xl-1",
+	"col-xl-2",
+	"col-xl-3",
+	"col-xl-4",
+	"col-xl-5",
+	"col-xl-6",
+	"col-xl-7",
+	"col-xl-8",
+	"col-xl-9",
+	"col-xl-10",
+	"col-xl-11",
+	"col-xl-12",
+	"ie-flex-100-percent-sm",
+	"vertical-centered",
+	"embed-responsive",
+	"embed-responsive-item",
+	"btn",
+	"3s",
+	"btn-block",
+	"btn-lg",
+	"5rem",
+	"btn-sm",
+	"disabled",
+	"btn-outline",
+	"btn-success",
+	"btn-warning",
+	"btn-danger",
+	"btn-outline-success",
+	"btn-outline-warning",
+	"btn-outline-danger",
+	"chain-container",
+	"chain-col",
+	"layout-section",
+	"wrap-bottom",
+]
+```
+</details>
+</Aside>
+
+### Theme Settings
+
+#### styleProperties
+
+Defining styleProperties in `blocks.json` and Theme Settings is no longer needed with Arc Blocks v2. These properties are:
+
+- primary-font
+- secondary-font
+- primary-color
+
+Users could then `import getThemeStyle from 'fusion:themes';` in their feature pack to use the same style properties the Arc Blocks used. These are no longer used by Arc Blocks in v2 as the Design System is far more robust and enables defining any number of style properties using global tokens and aliases.
+
+Theme Settings will no longer display fields to define these properties, and they can be removed from your blocks.json `styleProperties` key. If you are importing from `getThemeStyle` in custom code, these values would no longer be defined, you will need to update your custom code
+
+#### siteProperties
+
+Deprecated site properties include:
+
+- `navColor` (Navigation Bar Color Scheme)
+- `lightBackgroundLogo` (Dark Logo)
+
+The navigation bar properties, including color, may be styled using the new Blocks Styling.
+
+The logo fields have been consolidated, logos may be styled for any background color using Blocks Styling.

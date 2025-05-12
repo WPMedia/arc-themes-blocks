@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { usePhrases, Paragraph, Icon } from "@wpmedia/arc-themes-components";
 import usePrice from "../../../../components/usePrice";
-import {getNextRate, getLocalDateString} from "../../../../components/utils";
-import {NextRate} from "../../../../components/PriceRates";
+import { getNextRate, getLocalDateString } from "../../../../components/utils";
+import { NextRate } from "../../../../components/PriceRates";
 
 const PaymentString = ({sub}) => {
   const phrases = usePhrases();

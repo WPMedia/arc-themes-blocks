@@ -1,0 +1,23 @@
+{
+	"stack-divider-vertical": {
+		"styles": {
+			"default": {
+				"border-block-end-width": "var(--global-border-width-1)",
+				"border-block-end-style": "var(--global-border-style-1)",
+				"border-block-end-color": "var(--border-color)"
+			}
+		}
+	},
+	"stack-divider-horizontal": {
+		"styles": {
+			"default": {
+				"border": "none",
+				"border-inline-start-width": "var(--global-border-width-1)",
+				"border-inline-start-style": "var(--global-border-style-1)",
+				"border-inline-start-color": "var(--border-color)",
+				"inline-size": "1px",
+				"block-size": "auto"
+			}
+		}
+	}
+}

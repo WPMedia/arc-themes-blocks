@@ -1,0 +1,35 @@
+---
+title: How to Resize Images in PageBuilder Engine
+description: How Should You Resize Images in PageBuilder Engine?
+lastUpdated: 2025-02-06
+---
+
+import * as globals from "/public/globals";
+import Link from "/public/snippets/anchors.astro";
+
+The most important thing to remember is to not put your Image Resizer key in your feature code. It can live only in a content source or as an encrypted Engine environment variable.
+
+## Image Resizing
+
+Engine has two recommended ways to do server-side image resizing.
+
+* You can write a utility function and use it in a transform. This is ideal when you are pulling back images in Content API and you want to generate resized versions of them <Link blank href="https://www.npmjs.com/package/@arc-core-components/content-source_content-api-v4" text="(@arc-core-components/content-source_content-api-v4)" />.
+
+* You can write an image resizer content source. If you do this, you will want to make sure you either provide a whitelist of acceptable image sizes or only call it server-side (set `http` to `false` on the content source). Only calling it server-side is the preferred approach.
+
+Keep in mind that Engine content sources are public by default. Anyone can call them.
+
+## Feature Code
+
+There are two ways to make sure your features call only the content source and generate your image URL on the server-side render.
+
+* Set `Feature.static = true`.
+* Use a static component.
+
+Static components can directly use encrypted PageBuilder Engine variables.
+
+If you try to use an encrypted secret client side, it will be undefined. When developing locally, make sure to add the secret to your .env file.
+
+## Optimizing Content Cache
+
+By default, every server-side content query is added to the content cache that is sent to the client-side. This allows us to deduplicate identical queries from different features and store the cache at edge CDN. Additionally, the expiration time is stored with the content, which allows us to refresh it client-side if needed. However, if you are only ever using this content sever-side, you can set `staticMode` to `true` when using `fetchContent` or `useContent`.

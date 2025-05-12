@@ -1,0 +1,249 @@
+---
+title: >-
+  How To Run PageBuilder Engine Locally - Starting with my organization's live
+  bundle and pages
+description: >-
+  How To Run PageBuilder Engine Locally - Starting with my organization's live
+  bundle and pages
+lastUpdated: 2024-05-15T18:24:31.000Z
+migrationData:
+  short_description: >-
+    How To Run PageBuilder Engine Locally - Starting with my organization's live
+    bundle and pages
+  number: KB0011254
+  sys_id: fde031b3938e86504792b0cdfaba102c
+  sys_created_on: '2024-05-15 14:23:45'
+  sys_updated_on: '2024-05-15 14:24:31'
+  sys_created_by: Adam.Evans@washpost.com
+  sys_updated_by: Adam.Evans@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: ''
+  topic: General
+  sys_view_count: 273
+  helpful_count: 0
+  version: 7c11b9b3938e86504792b0cdfaba10b7
+  display_number: KB0011254 v3.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.319Z
+---
+import MediaCard from '/src/components/starlight/media-card.astro';
+import { Aside, Steps, LinkCard, CardGrid, Icon, Card } from '@astrojs/starlight/components';
+
+import * as globals from '/public/globals.js';
+import Link from '/public/snippets/anchors.astro';
+
+This article covers the PageBuilder local development environment set up using your organization's existing bundle code, and PageBuilder data that contains configuration about your pages, templates and resolvers in the PageBuilder Editor.
+
+If you are looking for simpler, plain Hello World setup, you can see the <Link blank href={`${globals.pbEngineDevDocsPath}/how-to-run-pagebuilder-engine-locally-starting-from-scratch-with-hello-world-example/`} text='Starting from scratch with a Hello World example' /> tutorial.
+
+## Video Tutorial
+
+Here is a 14 minute video version of this tutorial. You can use this page for copy/paste ready snippets for the steps we are walking through in the video.
+
+<MediaCard>
+<iframe src="https://share.descript.com/embed/7L1LsV2IbFD?transcript=false" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+</MediaCard>
+
+## Get started
+
+To configure your organization's PageBuilder local setup, take the following steps:
+
+* [Download the bundle code](#download-the-bundle-code).
+* [Set up the environment variables](#set-up-the-environment-variables) 
+* [Set up the Arc XP content platform access](#set-up-the-arc-xp-content-platform-access)
+* [Set up the site-service mocks](#set-up-the-site-service-mocks).
+* [Replicate the PageBuilder data from Arc XP environments](#download-pb-data-from-the-arc-xp-admin).
+* [Run the PageBuilder local instance and review the pages and templates](#run-pagebuilder-and-review-pages-and-templates)
+
+:::note
+For general local development environment notes and system requirements, see introduction notes in <Link blank href='https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-run-pagebuilder-engine-locally.html' text='How To Run PageBuilder Engine Locally' /> article.
+:::
+
+## Download the Bundle Code
+
+Your organization is most likely using a code repository service to host and collaborate on your bundle code. Pull the code from your organizations version control system (GitHub, GitLab, Bitbucket, or other). After you pull the code, you can skip to the next section.
+
+### Alternative: Deployer Tool
+
+Alternatively, you can use the **Deployer** tool to download and set up your organization's bundle code. 
+
+:::caution
+This method is not recommended because it is not sustainable to maintain a copy of a codebase from your organization. However, it is useful to know when you want to debug and troubleshoot a specific bundles.
+:::
+
+To use thr **Deployer** tool, take the following steps:
+
+  1. Login to Arc XP Admin.
+  2. Navigate to PageBuilder Editor.
+  3. Navigate to the **Developer Tools** menu. 
+  4. Navigate to the **Deployer** sub-menu. <br> **Figure 1** shows the location of the Deployer sub-menu. </br> ![Developer Tools Menu](/images/pagebuilder-engine/developer-tools-menu.jpg) <center> **Figure 1. Location of the Deployer Sub-Menu in the Arc XP Admin**</center>
+
+  5. In the main Deployer UI, you will see two lists. First one is the deployed bundles, including your live bundle. The second list contains all bundles your team have uploaded. These bundles might not be deployed or they might be deployed but terminated. We'll use the second "Bundles" list (second one) to find the bundle we want to download. Deployer also labels live bundles with a green label. <br> **Figure 2** shows an example of the two lists. </br> ![Deployer UI](/images/pagebuilder-engine/deployer-ui.jpg) <center> **Figure 2. Bundle Lists**</center>
+
+  6. Click the **...** icon at the right of the bundle you want to download.
+  7. Click the **Download** option. 
+  8. Download the zip file for the selected bundle. This is the unchanged zip file as your team uploaded it.
+  9. Unzip the zip file. This folder will be your project folder when you run the PageBuilder stack later.
+
+:::note
+The zip files containing the bundles are uploaded to Arc XP environments only and for the final runtime and they might exclude important files required for your local environment like tests, mocks, and special configuration files.
+:::
+
+## Set Up the Environment Variables
+
+After locally downloading the bundle code, you must set up environment variables to make the bundle build and run. By default, PageBuilder does not require any environment variables to run, but you might need to setup environment variables in the following scenarios: 
+
+* Your bundle works with a specific PageBuiler Engine version. Go to the [Defining the Engine Release in Your .env File](#defining-the-engine-release-in-your-env-file) section for more information.
+
+* Your organization has private npm packages containing credentials required for the npm install. Go to the [Set Up the .npmrc File to Access Your Organization's Private Packages](#set-up-the-npmrc-file-to-access-your-organizations-private-packages) section for more information.
+
+* Your bundle code interacts with Content Platform APIs (Content API, Websked, Photo Center, Video Center...), and your local environment needs to access to these APIs remotely when running locally. Go to the [Set up Arc XP Content Platform Access](#set-up-the-arc-xp-content-platform-access) section for more details.
+
+### Defining the Engine Release in Your .env File
+
+Set up this environment variable if your bundle code is tested and running in a specific PageBuilder Engine version. Arc XP supports two major Engine releases any given time and pushes regular updates as minor and patch releases. It's a good practice to control which Engine release you want to run your bundle within your local environment. To do this, define the PageBuilder Engine version in the `.env` file at the root of your project folder.
+
+```bash
+FUSION_RELEASE=4.1.1
+```
+
+We recommended matching the same version with which your team previously deployed. This means the bundle is stable because your team previously tested it, so you are less likely to encounter a code issue.
+
+### Set Up the .npmrc File to Access Your Organization's Private Packages
+
+Set up this environment variable if your organization manages private npm packages outside of your bundle code. This is a best practice when decoupling the contents of your bundle code, increasing testability and mobility, and allowing re-usability across different projects. Set up your credentials in the .npmrc file before running `npm install`, otherwise the command fails.
+
+The **PageBuilder CLI** tool assumes the npm installation was done before starting PageBuilder locally.
+
+Your team might be using other environment variables in the local development configuration, like debugging or request tracing. Ask your team to share these configurations. 
+
+:::note
+For more information about PageBuilder-recognized environment variables, see <Link blank href={`${globals.pbEngineDevDocsPath}/environment-variables/`} text='Environment Variables.' />
+:::
+
+## Set up the Arc XP Content Platform Access
+
+The most common scenario is that your bundle contains content sources that interact with Arc XP APIs. **PageBuilder Deployer** automatically handles setting up credentials in a secure way inside Arc XP environments. When running the same bundle locally, you need to set up access to Arc XP content platform to a specific environment from your local, so the pages you want to render in your local machine render properly.
+
+To set up the bundle for content platform access, you must set up the following environment variables in your `.env` file: `CONTENT_BASE` and `ARC_ACCESS_TOKEN`.
+
+The following code snippet shows the two variables to set up in .env file:
+
+  ```bash
+  CONTENT_BASE=https://api.sandbox.corecomponents.arcpublishing.com
+  ARC_ACCESS_TOKEN=CXORT..........REDACTED............84Z6H9E
+  ```
+
+### `CONTENT_BASE`
+
+`CONTENT_BASE` stores the base URL of all content platform API calls and points to a specific Arc XP environment.
+
+Your content base URL follows this schema:
+
+```
+https://api.[environment].[org-name].arcpublishing.com
+```
+
+### `ARC_ACCESS_TOKEN`
+
+`ARC_ACCESS_TOKEN` is a developer token we will generate from Developer Center.
+
+To generate a token, take the following steps:
+
+1. Login to Arc XP Admin.
+2. Navigate to the Developer Center.
+3. Ensure you are in the correct environment.
+4. Click **New access token** button.
+  <br> A pop-up displays. </br>
+5. In the pop-up, create your token. You can creat two types of token: 
+    - A read-only token. This token still has access to all APIs
+    - A restricted-access token. Enables you to select which APIs the token has access to.
+  **Figure 3** shows the pop-up with the token options:
+  <img src="/images/pagebuilder-engine/new-access-token.jpg" width="500" alt="New Access Token Screenshot" /> **Figure 3. New Access Token Options**
+
+6. Add a description to your token for future reference. A good practice is naming your token with your name and stating that it's for local development environment.
+7. Click the **Generate Token** button. 
+  <br> The Arc XP Admin generates the new token. **Figure 4** shows an example of a generated token: </br> 
+  <center><img src="/images/pagebuilder-engine/generated-restricted-access-token.jpg" alt="Generated Restricted Access Token" /> **Figure 4. Generated Access Token** </center>
+
+    :::caution
+    This is the only time you can see and copy the information of the generated token. The information becomes unavailable after closing the page.
+    :::
+
+8. Copy and store your access token in your password manager for future reference. 
+9. Copy the token to the `ARC_ACCESS_TOKEN` variable in your `.env` file.
+
+
+
+## Set Up the Site-Service Mocks
+
+You must set up the site-service mocks. Site-service is part of platform services. If you have multi-site set up in your organization, you must copy your site identifiers to a local mock file. This is a one-time manual process.
+
+To set up your site-service mocks, take the following steps:
+
+1. Login to Arc XP Admin.
+2. Navigate to PageBuilder Editor.
+3. Open the **Web Developer Tools** in your browser and navigate to the **Network** tab (If the page already loaded before you open the dev tools network tab, refresh the page to capture requests).
+4. Filter `siteservice api call` (you can filter the network list with "site"). 
+5. Select `/siteservice-readonly/api/v3/website`.
+6. Copy the JSON response in the "Response" tab. <br> **Figure 5** shows an example of the JSON response.</br>
+    <center>![Site Service API Call](/images/pagebuilder-engine/site-service-api-call.jpg) **Figure 5. Example of JSON Response for API Call** </center>  
+
+7. Write this JSON content the following file: `/mocks/siteservice/api/v3/website` (**Website** is a text file without an extension). 
+
+    Now, PageBuilder must show the list of sites you have. The same applies to the environment you copied in the site service configuration.
+
+## Download PB Data from the Arc XP Admin
+
+Now you must replicate your organization's PageBuilder configurations: pages, templates, and resolvers. 
+
+PageBuilder exposes its data as a MongoDB dump that you can easily download from the Arc XP Admin > PageBuilder Editor > Developer Tools > Data Center.
+
+<center>
+![Download PB Data](/images/pagebuilder-engine/download-pb-data.jpg) **Figure 6. Location of the PB DATA Option in the Arc XP Admin**
+</center> 
+
+After the download, place the data in your project under the `/data/restore` folder. If the folder don't exists, create it manually. PageBuilder will pick up this package, and import the data into the PageBuilder Engine the next time it starts.
+
+You can repeat this process as needed to keeping your local environment's page configuration up to date.
+
+:::note
+PageBuilder creates the pb data every 12 hours and the data you download may not include changes your Editor staff did after the last update.
+:::
+
+## Run PageBuilder and Review Pages and Templates
+
+After completing the previously described steps, run `npx fusion start` in your poject folder.
+
+PageBuilder downloads docker images, initializes services, and orchestrates build and runtime for you. This process may take longer on the first run, depending on complexity and size of your organization's bundle.
+
+Once ready, PageBuilder will output the following message:
+
+```
+fusion-webpack  |
+fusion-webpack  |     .d8888b. 88d888b. .d8888b. dP.  .dP 88d888b.
+fusion-webpack  |     88'  `88 88'  `88 88'  `""  `8bd8'  88'  `88
+fusion-webpack  |     88.  .88 88       88.  ...  .d88b.  88.  .88
+fusion-webpack  |     `88888P8 dP       `88888P' dP'  `dP 88Y888P'
+fusion-webpack  |                                         88
+fusion-webpack  |                                         dP
+fusion-webpack  |
+fusion-webpack  |     Webpack build completed in 27501 ms.
+fusion-webpack  |
+fusion-webpack  |     You can now view PageBuilder Editor in your browser:
+fusion-webpack  |     http://localhost/pagebuilder/pages
+fusion-webpack  |
+```
+
+This means we can open the browser and access to PageBuilder with visiting this url: [http://localhost/pagebuilder/pages](http://localhost/pagebuilder/pages)
+
+You must be able to see pages, templates, and resolvers that you downloaded from your organizations Arc XP environment, as **Figure 7** shows:
+<center>
+![Pages List](/images/pagebuilder-engine/pages-list.jpg) **Figure 7. PageBuilder Engine Local Instance with Pages from the Organization's Bundle**
+</center>
+
+Now your local environment is ready for development.

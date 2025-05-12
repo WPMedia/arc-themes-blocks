@@ -1,0 +1,294 @@
+---
+title: Creating with PageBuilder
+description: Creating with PageBuilder
+lastUpdated: 2025-01-15
+---
+import * as globals from '/public/globals.js';
+import Link from '/public/snippets/anchors.astro';
+import { Aside, Steps, LinkCard, CardGrid, Icon, Card } from '@astrojs/starlight/components';
+
+<CardGrid>
+<Card title='Purpose' icon='information'>
+Detail the steps to create a basic "Hello World" component and define a content source for your page. 
+</Card>
+<Card title='Audience' icon='star'>
+Developers learning to work with Arc XP.
+</Card>
+</CardGrid>
+
+## Creating a Static Hello World Page
+To create and publish a component that displays **Hello World** on a newly created page, take the following steps:
+
+1. <Link href={`${globals.tutorialsQuickStartPath}/creating-with-pagebuilder/#creating-a-new-component`} text='Create a new component' />
+
+2. <Link href={`${globals.tutorialsQuickStartPath}/creating-with-pagebuilder/#creating-a-new-page`} text='Create a new page' />
+
+3. <Link href={`${globals.tutorialsQuickStartPath}/creating-with-pagebuilder/#customizing-the-new-pages-layout`} text='Customize the new page layout' />
+
+4. <Link href={`${globals.tutorialsQuickStartPath}/creating-with-pagebuilder/#publishing-the-new-page`} text='Publish the new page' />
+
+:::note
+The preceding steps enable you to create only one component because the project bundle is empty. You must repeat this process for each new component you create.  
+:::
+
+### Prerequisites 
+Before creating a new component, install a local instance of PageBuilder Engine. See <Link blank href={`${globals.tutorialsQuickStartPath}/set-up-your-dev-playground/#running-pagebuilder-locally`} text='Running PageBuilder Locally' /> for details on installing and running a local instance.   
+
+### Creating a New Component
+To create a new component in PageBuilder Engine, take the following steps:
+
+1. Open your project folder in your preferred code editor.
+
+2. Under the `components/features` folder, create a `Greet` component folder. 
+
+3. Inside the `Greet` folder, create a `default.jsx` file. 
+
+4. Paste the following code inside the `default.jsx` file:
+
+    ```
+    import React from 'react';
+    import PropTypes from '@arc-fusion/prop-types';
+
+    const Greet = ({ customFields }) => (
+    <div className="hello_text">
+        Hello
+        {customFields.name || 'User'}
+        !
+    </div>
+    );
+
+    Greet.propTypes = {
+    customFields: PropTypes.shape({
+        name: PropTypes.string.tag({
+        label: 'Name',
+        description: 'What is your name?',
+        }),
+    }),
+    };
+
+    export default Greet;
+    ```
+
+5. Save the `default.jsx` file. This component defines the custom field `name` as a prop. 
+  
+
+6. Build and start the local PageBuilder Engine server with the following command in the terminal:
+
+    ```
+    npx fusion start
+    ```
+    This process can take several minutes.
+
+    <Aside type="note">
+    The Docker engine must be running for the `npx fusion start` command to work. 
+    </Aside>
+
+
+7. Go to http://localhost/pagebuilder/pages to access the PageBuilder editor.
+
+:::caution[important]
+When you open http://localhost/pagebuilder/pages without setting Arc XP credentials or environment variables, you get a Site Service configuration error message. Ignore this error while completing the rest of the steps on this guide. 
+:::
+
+### Creating a New Page
+
+To create a new page in the PageBuilder Editor (without Arc XP credentials) you must first create a template and save it as a page. Take the following steps:
+
+1. On the top navigation menu, click the **Templates** tab.  
+
+2. Click the **Create Template** button.
+
+3. Type a name for the Template.
+
+4. Click the **Create** button. The PageBuilder Editor opens.
+
+5. On the left sidebar, click the **Curate** button.
+
+6. Scroll down to the **Save as Page** section.
+
+7. Fill out the following fields:
+      - **Page Name:**  Defines the page's name. 
+      - **Page URI:** Defines the page's URI (Uniform Resource Identifier). The value in this field **must** be unique in PageBuilder. 
+
+8. Click the **Save Page** button. 
+
+:::tip
+To see a detailed walkthrough of the PageBuilder Editor UI, see See <Link blank href={`${globals.tutorialsQuickStartPath}/pagebuilder-structure#pagebuilder-editor-user-interface`} text='PageBuilder Editor User Interface' />.  
+:::  
+
+### Customizing the New Page's Layout
+
+Layouts enable you to customize your page. For example, the number of columns, the position of sections, and the page's distribution on the screen. You can render the page layout in any combination you create. Your editors then use the Editor UI to populate the page with content according to the layout structure.
+
+To customize layouts in PageBuilder Engine, take the following steps:
+
+1. On the top navigation menu, click the **Pages** tab.
+
+2. Click the name of the page you created in [Creating a New Page](#creating-a-new-page). The PageBuilder Editor opens. 
+
+3. On the left sidebar, click the **Curate** button.
+
+4. Click the **+ Add Block** button.  
+    The UI displays a middle panel showing the list of all available blocks. 
+5. Select the **Greet default** block.  
+    - The selected block appears listed in the left panel of the UI under the **Blocks** section.
+    - The middle panel displays the **Block Details**, which contain the block's configuration details and custom fields for customizing.
+    - The right panel shows the message `HelloUser!` according to the default value for the `name` custom field.
+    
+6. Customize the value of the `name` custom field.  
+    The value contained in `name` field changes the message displayed in the right panel. For example, if the value is "John" the message in the right panel changes to `HelloJohn!`.
+
+### Publishing the New Page
+
+After finishing your changes, take the following steps to publish your page:
+
+1. On the left sidebar, click the **Publish** button.  
+    The left panel now shows **Draft Options**. 
+
+2. Click the **Share & Publish** button.  
+    The page becomes accessible on the local server. 
+
+#### Viewing Your Changes 
+
+You can access your production URLs in the PageBuilder UI under the **Pages** section, which lists your created pages. Select a page URI, and the UI loads the page in render mode.     
+
+Alternatively, enter the page's URI directly in your browser, as shown in the following example:
+
+```
+http://localhost/pf/test/
+```
+:::note
+The `/pf/` prefix in the path is omitted in the Arc XP render stack and in live URLs. However, the local development environment requires the `/pf/` prefix because the PageBuilder local stack uses `localhost:80` to expose both the PageBuilder Editor UI and the rendering engine that resides under the `/pf/` path.
+:::
+
+## Adding External Data to a Component
+
+This section walks you through creating a component that queries data from a public API and renders it as a table. 
+
+The following example is based on the **Facts** endpoint from the <Link blank href='https://dogapi.dog/' text='Dog API' />, a public API that does not require any authentication and allows Cross-Origin Resource Sharing (CORS).
+
+To create the component, take the following steps:
+
+1. Under the `components/features` folder, create a `Dogs` component folder.
+
+2. Inside the `Dogs` folder, create a `default.jsx` file. 
+
+3. Paste the following code inside the `default.jsx` file:
+
+    ```
+    import React, { useEffect, useState } from 'react';
+    import PropTypes from '@arc-fusion/prop-types';
+
+    const DogFactsTable = ({ customFields }) => {
+      const [dogFacts, setDogFacts] = useState([]);
+
+      useEffect(() => {
+        const fetchDogFacts = async () => {
+          try {
+            const response = await fetch(
+              `https://dogapi.dog/api/v2/facts?limit=${customFields.factsLimit} || '1'`
+            );
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            setDogFacts(data.data || []); 
+          } catch (error) {
+            console.error("Error fetching dog facts:", error);
+          }
+        };
+
+        fetchDogFacts();
+      }, [customFields.factsLimit]);
+
+      return (
+        <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+          <h1 style={{ textAlign: "center", color: "#4CAF50" }}>Dog Facts</h1>
+          <table
+            style={{
+              width: "100%",
+              borderCollapse: "collapse",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            }}
+          >
+            <thead>
+              <tr
+                style={{
+                  backgroundColor: "#4CAF50",
+                  color: "white",
+                  textAlign: "left",
+                }}
+              >
+                <th style={{ padding: "10px" }}>ID</th>
+                <th style={{ padding: "10px" }}>Type</th>
+                <th style={{ padding: "10px" }}>Fact</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dogFacts.length > 0 ? (
+                dogFacts.map((fact) => (
+                  <tr
+                    key={fact.id}
+                    style={{
+                      backgroundColor: "#f9f9f9",
+                      borderBottom: "1px solid #ddd",
+                    }}
+                  >
+                    <td style={{ padding: "10px" }}>{fact.id}</td>
+                    <td style={{ padding: "10px" }}>{fact.type}</td>
+                    <td style={{ padding: "10px" }}>{fact.attributes.body}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan="3"
+                    style={{
+                      textAlign: "center",
+                      padding: "20px",
+                      backgroundColor: "#ffdddd",
+                    }}
+                  >
+                    Loading dog facts...
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      );
+    };
+
+    DogFactsTable.propTypes = {
+      customFields: PropTypes.shape({
+        factsLimit: PropTypes.string.tag({
+          label: 'factsLimit',
+          description: 'Specify number of facts to display',
+        }),
+      }),
+    };
+
+    export default DogFactsTable;
+    ```
+
+    The **Dogs** component comprises the following core elements:
+
+        - A `fetch` function that queries the **Facts** endpoint with a value for the available `limit` parameter.
+        - An HTML table that displays the retrieved data from the **Facts** endpoint.
+        - The `factsLimit` custom field to pass as a prop to the `fetch` function.
+
+4. Save the `default.jsx` file. The component becomes available in the **Curate** section.
+
+5. Add the component to your page.
+
+6. Modify the `limitFacts` custom field in the **Block details** panel to control the number of dog facts that the component displays on the table (possible values are 1-5).
+
+
+:::note
+The **Dogs** component handles the query to the Dog API, however, once you have access to an Arc XP instance, a normal Arc XP component workflow and behavior is as follows:
+1. The developer defines an Arc XP content source with a resolve function in the `/content/sources` folder.
+2. PageBuilder Engine takes the `CONTENT_BASE` environment variable as the base URL for querying Arc XP content APIs.
+3. PageBuilder Engine takes the `ARC_ACCESS_TOKEN` environment variable to authenticate to Arc XP content APIs.
+4. The developer creates in the `/components/features` folder a component that takes as a prop the data returned by a content source. 
+5. The component shows the content in PageBuilder Editor. 
+:::

@@ -1,0 +1,51 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import List from "./_children/List";
+import Sale from "./_children/Sale";
+import Price from ".";
+
+<Meta of={IndexStories} />
+
+# Price
+
+The `Price` component is used to denote a price List and/or Sale price of a given item. The component exposed two sub components which are the only children elements that can be used.
+
+## Usage
+
+```jsx
+import { Price } from "@wpmedia/arc-themes-components";
+
+const Feature = () => (
+	<Price>
+		<Price.Sale>$50</Price.Sale>
+		<Price.List>$100</Price.List>
+	</Price>
+);
+```
+
+## Properties
+
+<Controls />
+
+### Price.List
+
+<Controls />
+
+### Price.Sale
+
+<Controls />
+
+## Stories
+
+### Price
+
+<Story of={IndexStories.DefaultPrice} />
+
+### Sale Price
+
+<Story of={IndexStories.SalePrice} />
+
+### List Price
+
+<Story of={IndexStories.ListPrice} />

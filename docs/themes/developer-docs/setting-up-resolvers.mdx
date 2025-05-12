@@ -1,0 +1,25 @@
+---
+title: Setting up Resolvers
+description: Setting up Resolvers
+lastUpdated: 2025-02-18
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+This page documents the <Link blank href='https://docs.arcxp.com/en/products/pagebuilder-editor/curating-in-arc-xp/how-to-setup-resolvers.html' text='resolvers' /> included by default with Themes. These resolvers assume that you are using the template names included by default and that URL patterns match the standard ones that you must configure in Canonical URL Service. See <Link blank href={`${globals.themesDevDocsPath}/how-to-setup-canonical-url-service-for-themes/`} text='How to set up canonical URL service for Themes' /> for more information.
+
+:::note
+You can adjust these resolvers, but it is your responsibility to ensure that any customizations work as expected.
+:::
+
+Name| Pattern| Priority| Websites| Default Template| Content Source| Content Source Configurations  
+---|---|---|---|---|---|---  
+Video resolver| `^(/video/[\w-/]+?/)?$` |  **5** | All Sites| video| content-api| **website_url** _Pattern_ 1  
+Preview unpublished stories resolver| `^/composer-preview/(.*)/` | **5**|  All Sites| article-right-rail| content-api-unpublished| **_id** _Pattern_ 1  
+Tags resolver| `^/tags/([\w-]+?)/?$`| **6**|  All Sites| tags| tags-api| **Slug** _Pattern_ 1  
+Author resolver| `^/author/([\w-]+?)/?$` | **6**|  All Sites| author| author-api| **Slug** _Pattern_ 1  
+Gallery resolver| `^(/gallery/[\w-/]+?/)?$` | **8**|  All Sites| gallery| content-api| **website_url** _Pattern_ 1  
+Article resolver| `(./[0-9]{4}/[0-9]{2}/[0-9]{2}/.)` | **10**|  All Sites| article| content-api| **website_url** _Pattern_ 1  
+Section resolver| `^(.*)/` or `^(\/[\w\-]*\/?[\w\-]*\/?[\w\-]*\/?[\w\-]*\/?[\w\-]*)\/.*` |  **50**|  All Sites| section| site-service-hierarchy| **hierarchy** _Static_ default **sectionId** _Pattern_ 1  

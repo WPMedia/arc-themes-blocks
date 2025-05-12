@@ -1,0 +1,5 @@
+@use "../../scss";
+
+.c-link {
+	@include scss.component-with-states("link", [hover, active, visited]);
+}

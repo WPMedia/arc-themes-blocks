@@ -1,0 +1,41 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Join from ".";
+
+<Meta of={IndexStories} />
+
+export const Separator = () => <> • </>;
+
+# Join
+
+The `Join` component is used to inject a separator between children elements.
+
+## Usage
+
+```jsx
+import { Join } from "@wpmedia/arc-themes-components";
+
+const Separator = () => <> • </>;
+
+const List = () => (
+	<Join separator={Separator}>
+		<>List Item 1</>
+		<>List Item 2</>
+	</Join>
+);
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### Join With Only One Item
+
+<Story of={IndexStories.JoinWithOnlyOneItem} />
+
+### Join With Multiple Children
+
+<Story of={IndexStories.JoinWithMultipleChildren} />

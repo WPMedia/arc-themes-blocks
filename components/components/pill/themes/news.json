@@ -1,0 +1,24 @@
+{
+	"pill": {
+		"styles": {
+			"default": {
+				"background-color": "var(--color-primary)",
+				"border-radius": "var(--border-radius-pill)",
+				"color": "var(--global-white)",
+				"font-size": "var(--body-font-size-tiny)",
+				"padding-block-start": "var(--global-spacing-1)",
+				"padding-inline-start": "var(--global-spacing-4)",
+				"padding-block-end": "var(--global-spacing-1)",
+				"padding-inline-end": "var(--global-spacing-4)",
+				"text-decoration": "none"
+			}
+		}
+	},
+	"pill-hover": {
+		"styles": {
+			"default": {
+				"background-color": "var(--global-neutral-7)"
+			}
+		}
+	}
+}

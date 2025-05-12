@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Divider, Paragraph, usePhrases } from "@wpmedia/arc-themes-components";
 import { getLocalDateString } from "../../../../components/utils";
-import BasicSubscriptionDetail, {ACTIVE, CANCELED, TERMINATED } from '../BasicSubscriptionDetail';
+import BasicSubscriptionDetail, { ACTIVE, CANCELED, TERMINATED } from '../BasicSubscriptionDetail';
 import PaymentMethodDetails from '../PaymentMethodDetails';
 import BillingAddressDetails from "../BillingAddressDetails";
 

@@ -1,0 +1,53 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Image from "../image";
+
+import Grid from ".";
+
+<Meta of={IndexStories} />
+
+# Grid
+
+The `<Grid>` component is an wrapper to the CSS Grid layout in order for Themes to
+be able to control two-dimensional grid layout's within blocks.
+
+## as
+
+The `Grid` will default to use the HTML `div` element for rendering. There will be times
+where the `Grid` will be used for sectioning and the `div` element does not provide semantic
+meaning, to avoid having to use additional markup to bring back semantics use the `as` prop to
+render the `Grid` as a different HTML element. By using the `as` property you are then required
+to ensure all the correct attributes for a given tag are still passed through.
+
+**Note:** The `as` prop's primary use case if for sectioning. There is likely a component
+better suited for your needs. For example: `Link` component should be used for anchor's.
+
+For more resources on CSS Grid:
+
+- Documentation https://developer.mozilla.org/en-US/docs/Web/CSS/CSS\_Grid\_Layout
+- Really useful game for learning by doing https://cssgridgarden.com/
+
+## Usage
+
+```jsx
+import { Grid } from "@wpmedia/arc-themes-components";
+
+const Feature = () => (
+	<Grid>
+		<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+		<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+		<Image src="/coffee.jpeg" alt="A cup of coffee" />
+	</Grid>
+);
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### Grid
+
+<Story of={IndexStories.DefaultGrid} />

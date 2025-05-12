@@ -1,0 +1,132 @@
+---
+title: >-
+  Optimize large bundles' build size with content source compilation dependency
+  duplication
+description: >-
+  Optimize large bundles' build size with content source compilation dependency
+  duplication
+lastUpdated: 2024-05-03T19:18:11.000Z
+migrationData:
+  short_description: >-
+    Optimize large bundles' build size with content source compilation
+    dependency duplication
+  number: KB0011314
+  sys_id: 384a048847c60a10eee38788436d43b1
+  sys_created_on: '2024-05-03 15:18:05'
+  sys_updated_on: '2024-05-03 15:18:11'
+  sys_created_by: fatih.yildiz@washpost.com
+  sys_updated_by: fatih.yildiz@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: ''
+  topic: General
+  sys_view_count: 266
+  helpful_count: 0
+  version: d64a0cc847c60a10eee38788436d4304
+  display_number: KB0011314 v10.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.312Z
+---
+import YouTubeCard from '/src/components/starlight/youtube-card.astro';
+
+_This feature was introduced in Engine 4.1.8 and 5.0.4 releases that brings additional compiler options using a new `arc.config.json` configuration file. See [arc.config.json documentation](../arcconfigjson) to learn more about other compiler options._
+
+## Introduction and Demo
+
+
+<YouTubeCard href="https://www.youtube.com/embed/SpYVGBMsDnE" title="Optimize large bundles' build size for Lambdas" description="Learn how to optimize build sizes to avoid deployment failures due to Lambda file limitations" />
+
+When Engine compiles your bundle source code into Lambda-ready code, it produces individual server-side mini bundles for each of your content sources so that when a `/pf/api/content` call is received, a leaner Lambda handler can be executed to fetch content. This process produces unnecessary code duplication when many content sources import the same dependencies. Depending on the number of content sources and imported dependencies, this caused the compiled server-side code to be bloated and resulted in deployment failures due to exceeding the AWS Lambda file size limitations.
+
+This new feature utilizes `webpack.externals` to minimize the duplication of dependencies inside the Lambda after compilation by allowing the exclusion of `node_modules` to be removed from content sources. This is possible because content sources are invoked server-side.
+
+Two new variables are exposed to engine through an optional file in the root of your bundle called `arc.config.json`:
+
+* `compiler.contentSources.excludeModules` is essentially a boolean flag for now, but allowing `*` opens the possibility to support file globs in the future. When this property is set to `*`, it will exclude all dependencies in `node_modules` from being bundled into the content source.
+* `compiler.contentSources.includeModules` allows developers to explicitly bundle specific modules into the content source when this functionality is enabled. This allows customers to retain some backwards compatibility when opting into this. In this example, we are showcasing a common logging library for typescript (`typescript-logging`) that has side effects when included from `node_modules`. If importing a dependency from `node_modules` affects the behavior of your content source, you may want to designate the dependency to be bundled directly into your content source to maintain the existing behavior.
+
+1. Create or update the `arc.config.json` in the root of your bundle to have the following properties:
+  
+    ```json
+    {
+      "compiler": {
+          "contentSources": {
+              "excludeModules": "*",
+              "includeModules": ["typescript-logging"]
+          }
+      }
+    }
+    ```
+
+2. Re-run the bundle and check the file sizes for `.fusion/build/content/sources`
+
+   :::note
+   This capability does not change the client-side bundle that gets downloaded and used by the browser at render time, so it has no impact to your readers experience. This module de-duplication only affects the content source that is executed on the server.
+   :::
+
+## Benchmarks
+
+We have tested a few bundles that exceed lambda size limits. After evaluating different build artifacts, we found that compiled content sources were the main culprit for deployment issues on the AWS Lambda filesystem.
+
+By enabling this configuration, the PageBuilder compiler will exclude `node_modules` from bundling into the content sources. In this example, the majority of content sources were importing the same dependency. The actual JavaScript in the `content/sources` folder was quite optimized and DRY (don’t repeat yourself), but 1MB of dependencies multiplied by 100 content sources would previously generate 99MB of duplicated code. By removing this duplication during compilation, this yields a substantial file size reduction.
+
+We simply enabled build configuration in the example above, and checked the total build folder size using the `du -h -d 2 .fusion/build` command, that just calculates the directory sizes starting from `.fusion/build` directory down to 2 levels deep.
+
+Here are some examples we ran in our benchmarks:
+
+### Bundle1 - 77% size reduction
+
+<table style="border-collapse: collapse; width: 100.035%;" border="1"><tbody><tr><td style="width: 48.7566%;"><p>Before:</p><pre class="language-markup"><code>▶ du -h -d 2 .fusion/build
+101M	build/content/sources
+101M	build/content
+476K	build/components/output-types
+652K	build/components
+ 16K	build/environment
+102M	build</code></pre></td><td style="width: 48.7566%;"><p>After:</p><pre class="language-markup"><code>▶ du -h -d 2 .fusion/build
+ 23M	build/content/sources
+ 23M	build/content
+476K	build/components/output-types
+652K	build/components
+ 16K	build/environment
+ 24M	build</code></pre></td></tr></tbody></table>
+
+### Bundle2 - 65% size reduction
+
+<table style="border-collapse: collapse; width: 100.035%;" border="1"><tbody><tr><td style="width: 48.7566%;">Before:<pre class="language-markup"><code>▶ du -h -d 2 .fusion/build
+336M    build/content/sources
+336M    build/content
+6.0M    build/components/output-types
+6.2M    build/components
+ 12K    build/environment
+343M    build</code></pre></td><td style="width: 48.7566%;">After:<pre class="language-markup">▶ du -h -d 2 .fusion/build
+ 79M    build/content/sources
+ 79M    build/content
+6.0M    build/components/output-types
+6.2M    build/components
+ 12K    build/environment
+ 86M    build</pre></td></tr></tbody></table>
+
+### Bundle 3 - 39% size reduction
+
+<table style="border-collapse: collapse; width: 100.035%;" border="1"><tbody><tr><td style="width: 48.7566%;">Before:<pre class="language-markup"><code>▶ du -h -d 2 .fusion/build
+ 44K    build/content/schemas
+119M    build/content/sources
+119M    build/content
+ 19M    build/components/output-types
+ 20M    build/components
+ 28K    build/environment
+140M    build</code></pre></td><td style="width: 48.7566%;">After:<pre class="language-markup"><code>▶ du -h -d 2 .fusion/build
+ 44K    build/content/schemas
+ 66M    build/content/sources
+ 66M    build/content
+ 19M    build/components/output-types
+ 20M    build/components
+ 28K    build/environment
+ 86M    build</code></pre></td></tr></tbody></table>
+
+### Additional context about size limits
+
+AWS Lambda enforces a 250MB total size limit that is shared between PageBuilder Engine core, Arc Blocks (if used), and the custom bundle code.

@@ -1,0 +1,62 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import formatCredits from ".";
+
+<Meta of={IndexStories} />
+
+# Format Credits
+
+The `formatCredits()` function takes in an object with keys of `by` and `affiliation`. The function outputs a comma-separated list based off of the `name` key within the previously-mentioned keys. This follows the [ANS schema](https://github.com/washingtonpost/ans-schema) for credits.
+
+## Usage
+
+```jsx
+import formatCredits from "./formatCredits";
+
+const credits = {
+	by: [
+		{
+			name: "John Doe",
+		},
+		{
+			name: "Jane Doe",
+		},
+	],
+	affiliation: [{ name: "Stock Photo" }],
+};
+
+const formattedCredits = formatCredits(credits);
+```
+
+## Properties
+
+| Name        | Description                                                                                   | Default |
+| ----------- | --------------------------------------------------------------------------------------------- | ------- |
+| **credits** | Takes in an object like `{ by: [{ name: "Joe Doe" }], affiliation: [{name: "Stock Photo"}] }` | -       |
+
+## Stories
+
+### One creator, one affiliation
+
+<Story of={IndexStories.OneCreatorOneAffiliation} />
+
+### No credit
+
+<Story of={IndexStories.NoCredit} />
+
+### With many name credits
+
+<Story of={IndexStories.WithManyNameCredits} />
+
+### With many affiliations
+
+<Story of={IndexStories.WithManyAffiliations} />
+
+### With only affiliation
+
+<Story of={IndexStories.WithOnlyAffiliation} />
+
+### With only a name
+
+<Story of={IndexStories.WithOnlyAName} />

@@ -1,0 +1,5 @@
+@use "../../scss";
+
+.c-picture {
+	@include scss.component-properties("picture");
+}

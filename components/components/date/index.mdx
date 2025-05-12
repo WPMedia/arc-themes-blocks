@@ -1,0 +1,42 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Date from ".";
+
+<Meta of={IndexStories} />
+
+# Date
+
+The `<Date>` component is used to display a date string (human-readable format) and datetime (machine-readable). The `datetime` property can be used in alignment with browsers and other tools to integrate date and time.
+
+The datetime should be a valid ISO 8601 date string. In this way, the date and time can be handled in a uniform way across timezones. For more information on valid datetime values, [see MDN doc](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time#valid_datetime_values).
+
+## Usage
+
+```jsx
+import { Date } from "@wpmedia/arc-themes-components";
+
+const DateFeature = () => <Date dateTime="2018-03-05" dateString="March 5" />;
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### Date
+
+<Story of={IndexStories.DateOnly} />
+
+### Date and Time
+
+<Story of={IndexStories.DateAndTime} />
+
+### Time Only
+
+<Story of={IndexStories.TimeOnly} />
+
+### Date and Time with no timezone
+
+<Story of={IndexStories.DateAndTimeWithNoTimezone} />

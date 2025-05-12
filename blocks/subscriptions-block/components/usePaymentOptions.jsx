@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import { useSales } from "@wpmedia/arc-themes-components";
 
 const STRIPE_PAYMENT_METHOD_ID = 18;

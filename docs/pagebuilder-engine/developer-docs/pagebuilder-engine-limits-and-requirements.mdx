@@ -1,0 +1,92 @@
+---
+title: Limits and Requirements
+description: PageBuilder Engine Limits and Requirements
+lastUpdated: 2024-05-16T01:14:35.000Z
+migrationData:
+  short_description: PageBuilder Engine Limits and Requirements
+  number: KB0010511
+  sys_id: 2ececfff9346c6504792b0cdfaba1036
+  sys_created_on: '2024-05-15 21:13:57'
+  sys_updated_on: '2024-05-15 21:14:35'
+  sys_created_by: fatih.yildiz@washpost.com
+  sys_updated_by: fatih.yildiz@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: >-
+    PageBuilder Engine, limits, requirements, page rendering, cache, CDN,
+    requests, configuration, building, deploying, local development
+  topic: General
+  sys_view_count: 383
+  helpful_count: 0
+  version: 3bee47339386c6504792b0cdfaba1038
+  display_number: KB0010511 v4.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.352Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+PageBuilder Engine itself works without limitations as an application. But PageBuilder Engine runs on AWS Lambda at the core and the database it uses has certain limits. Aside from the runtime, the Engine has sophisticated caching and CDN layers that introduce other limits. We documented some of these limits that you should be aware of when deploying, running your PageBuilder Engine bundle code.
+
+## Page Rendering
+
+Server-side request process in Engine consists of 2 Lambda instances chained together:
+
+* When a URL is requested, first “Resolver” lambda gets invoked that resolves which page or template to render with which content. Then resolver lambda invokes the Engine page rendering. All of this needs to be resolved in under 10 seconds. In other words, your server-side page render needs to be completed within this time limit.
+* Separately from your server-side render, in the client-side render, the Engine will initiate content-source calls to its own API. These API calls will invoke Engine lambda directly and your Engine lambda calls need to be finished within 60 seconds.
+
+Keep in mind that a large majority of your site traffic don't need page render to happen because it will most likely serve previously cached content sources, as well as the actual page rendering happens that depends on the number of features you have on your page, number of dependencies you have in your bundle. Since the page render is separately cached (at the CDN) than the content sources caches, 60-second limit is the longest possible render time limit where there is no usable cache for that particular page requested and the content source needs to be executed.
+
+## Requests
+
+As part of the page render, the Engine will be able to accept and process request objects (query + body) depending on which environment it's running and how it's accessed. PageBuilder Engine render can be accessible in 2 few different ways:
+
+- In production, your site will be in the “public” access and you are accessing pages through CDN first, then in case no valid CDN cache is found, your page will be rendered by Engine. In this access, your request should be under 8,000 characters total (including URL, body).
+
+- Locally running Engine will not have these limits since it's not running inside a Lambda container or doesn't have any layers (like CDN) on it.
+
+## Cache
+
+PageBuilder Engine has its own caching layer internally that is used for content source caching. We recently introduced Partial Content Source caching for more advanced caching strategies that use the same caching layer.
+
+In the Engine Cache layer, currently, we support objects up to 1 MB size limit after compressed. Any content source results more than this limit will not be cached, but it will still work if it's under the 6 MB limit. PageBuilder engine currently doesn't support content source responses larger than 6 MB size.
+
+Further Read: <Link href={`${globals.pbEngineDevDocsPath}/how-does-pagebuilder-engine-content-caching-work`} text='How Does PageBuilder Engine Content Caching Work' />
+
+## Configuration
+
+When a page gets rendered by PageBuilder Engine, it uses page or template configuration objects from PageBuilder Editor. As part of building your site, your editors configure your page contents, arrange different features, and have custom configuration variables like custom variables in your features. All of this configuration information is stored in the PageBuilder database and we currently support page/template configuration objects up to 400 kb for each page or template. In recent PageBuilder Engine versions, we started to compress the configuration. In future Engine versions, we will be completely switching to the compressed storage model which will allow this limit to be 4-5x times higher.
+
+If your page has a lot of custom fields, or large values in custom fields, or raw HTML blocks with large content in them, you may get close or hit this limit. When your page configuration exceeds this limit, you will get an error in PageBuilder Editor UI.
+
+## Building and Deploying
+
+We mentioned that PageBuilder Engine runs Lambda functions in AWS. Lambda functions codebase has to be under 250 MB. This is an AWS hard limit. This codebase includes both PageBuilder Engine code, arc blocks (if you are using Themes or Outbound feeds), and your custom features in it all together. This makes it hard to estimate the space you will have for your custom code.
+
+When deploying your bundle code, the Deployer tool will compile, bundle your custom features, arc blocks, theme settings, and Engine code into a single package. This process may take longer if you have many custom features or multiple output types or a number of sites you have in your organization. This build process has to be finished in under 5 minutes or it will timeout.
+
+## Local Development
+
+PageBuilder Engine doesn't have runtime limits when running locally. But it does need a certain local environment configuration to run.
+
+### Docker
+
+* For docker resources, we suggest <Link blank href='https://docs.docker.com/docker-for-mac/#advanced' text='allocating at least 8GB of Ram and 8 CPUs' /> to it so it has the resources necessary to run all the services PageBuilder Engine requires.
+
+### NodeJS
+
+* Engine 3.x requires Node v14
+* Engine 4.x requires Node v16
+* Engine 5.x requires Node v18
+
+### npm
+
+* If using Node 14 or earlier, make sure you use npm v6
+* If using Node 16 and Node 18, make sure you use npm v7
+
+As part of the local builds, PageBuilder Engine uses webpack and babel but it doesn't allow plugins.

@@ -1,0 +1,55 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Video from ".";
+
+<Meta of={IndexStories} />
+
+# Video
+
+The `Video` component is a container used to initiate and display a Powa video player. The container is designed to save space for the video while the video is loading. It takes in an `embedMarkup` string that is rendered on the client-side. For more information on customizing that string, see the `Utilities/Format Powa Video Embed` story.
+
+To maximize Core Web Vitals scores, the `aspect-ratio` property can be set to match the `embedMarkup`'s expected data. Please see [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio) and [Google's advice](https://web.dev/aspect-ratio/#maintaining-aspect-ratio-with-aspect-ratio) on this pattern.
+
+The `viewportPercentage` property can be used to set the percentage of the vertical viewport that the video should occupy. The default is `65` and this property only applies for videos in `9:16`. This is designed so that the video's aspect ratio and video container maintain the desired aspect-ratio. For a mobile user, this can be helpful to ensure a vertical video does not take up the entire viewport.
+
+The `borderRadius` property can be used to round the corners of the video player. The default is `false` and this property only applies for videos in `9:16`. This property maps the `data-border-radius` property from PoWa; The styling is entirely handled by the PoWa player.
+
+## Usage
+
+```jsx
+import { Video } from "@wpmedia/arc-themes-components";
+
+const Feature = () => {
+	const embedMarkup =
+		'<div class="powa" id="powa-ezzy" data-org="corecomponents" data-env="prod" data-uuid="ezzy" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+
+	return <Video embedMarkup={embedMarkup} aspectRatio="16:9" viewportPercentage={50} />;
+};
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### Video Half Vertical Viewport Loading
+
+<Story of={IndexStories.VideoHalfVerticalViewportLoading} />
+
+### Video Full Vertical Viewport Loading
+
+<Story of={IndexStories.VideoFullVerticalViewportLoading} />
+
+### Video One Third Vertical Viewport Loading
+
+<Story of={IndexStories.VideoOneThirdVerticalViewportLoading} />
+
+### Two videos, different aspect ratios
+
+<Story of={IndexStories.TwoVideosDifferentAspectRatios} />
+
+### Vertical video with rounded corners
+
+<Story of={IndexStories.VerticalVideoWithRoundedCornersWithCustomViewportPercentage} />

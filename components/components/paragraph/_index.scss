@@ -1,0 +1,14 @@
+@use "../../scss";
+
+.c-paragraph {
+	--paragraph-truncation: var(--c-paragraph--webkit-line-clamp, "none");
+	// stylelint-disable-next-line value-no-vendor-prefix
+	display: -webkit-box;
+	-webkit-box-orient: block-axis;
+	-moz-box-orient: block-axis;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: var(--paragraph-truncation);
+
+	@include scss.component-properties("paragraph");
+}

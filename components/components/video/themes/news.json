@@ -1,0 +1,29 @@
+{
+	"video": {
+		"styles": {
+			"default": {
+				"margin-block-start": "auto",
+				"margin-inline-start": "auto",
+				"margin-block-end": "auto",
+				"margin-inline-end": "auto"
+			}
+		}
+	},
+	"video-frame": {
+		"styles": {
+			"default": {
+				"background-color": "transparent"
+			},
+			"desktop": {
+				"background-color": "var(--global-black)"
+			}
+		}
+	},
+	"vertical-video-frame": {
+		"styles": {
+			"default": {
+				"background-color": "transparent"
+			}
+		}
+	}
+}

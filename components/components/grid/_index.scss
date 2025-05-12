@@ -1,0 +1,9 @@
+@use "../../scss";
+
+.c-grid {
+	--grid-template-columns: var(--c-grid-template-columns, repeat(auto-fit, minmax(15em, 1fr)));
+	display: grid;
+	grid-template-columns: var(--grid-template-columns);
+
+	@include scss.component-properties("grid");
+}

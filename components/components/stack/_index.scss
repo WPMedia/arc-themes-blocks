@@ -1,0 +1,66 @@
+@use "../../scss";
+
+.c-stack {
+	display: flex;
+	@include scss.component-properties("stack");
+}
+
+.c-stack[data-style-inline="true"] {
+	display: inline-flex;
+}
+
+.c-stack[data-style-direction="vertical"] {
+	flex-flow: column;
+}
+
+.c-stack[data-style-direction="horizontal"] {
+	flex-direction: row;
+}
+
+.c-stack[data-style-direction="vertical"] > hr {
+	@include scss.component-properties("stack-divider-vertical");
+}
+
+.c-stack[data-style-direction="horizontal"] > hr {
+	@include scss.component-properties("stack-divider-horizontal");
+}
+
+.c-stack[data-style-justification="start"] {
+	justify-content: flex-start;
+}
+
+.c-stack[data-style-justification="center"] {
+	justify-content: center;
+}
+
+.c-stack[data-style-justification="end"] {
+	justify-content: flex-end;
+}
+
+.c-stack[data-style-justification="space-between"] {
+	justify-content: space-between;
+}
+
+.c-stack[data-style-alignment="start"] {
+	align-items: flex-start;
+}
+
+.c-stack[data-style-alignment="center"] {
+	align-items: center;
+}
+
+.c-stack[data-style-alignment="end"] {
+	align-items: flex-end;
+}
+
+.c-stack[data-style-wrap="nowrap"] {
+	flex-wrap: nowrap;
+}
+
+.c-stack[data-style-wrap="wrap"] {
+	flex-wrap: wrap;
+}
+
+.c-stack[data-style-wrap="reverse"] {
+	flex-wrap: wrap-reverse;
+}

@@ -1,0 +1,28 @@
+import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories.jsx";
+
+import Attribution from "./index.jsx";
+
+<Meta of={IndexStories} />
+
+# Attribution
+
+The `Attribution` component is used to deonote a credit or an author of a piece of content. This accepts any content and/or links that you would like to represent the attribution.
+
+## Usage
+
+```jsx
+import { Attribution } from "@wpmedia/arc-themes-components";
+
+const Credit = () => <Attribution>By: Arthur Writer</Attribution>;
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### Attribution
+
+<Story of={IndexStories.DefaultAttribution} />

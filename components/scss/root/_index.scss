@@ -1,0 +1,232 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "sass:string";
+
+@use "reset";
+@use "a11y";
+
+//
+// Variables
+//
+$breakpoints: (
+	default: "min-width: 0",
+) !default;
+$global: () !default;
+$tokens: () !default;
+
+//
+// Always warn if $breakpoints is passed in empty
+//
+@if list.length($breakpoints) == 0 {
+	@warn 'No breakpoints set, using default mobile first approach';
+}
+
+//
+// Functions
+//
+@function component-var($component, $item) {
+	@return var(--c-#{$component}-#{$item});
+}
+
+@function block-var($block, $item) {
+	@return var(--b-#{$block}-#{$item});
+}
+
+@function maintain-quotes($item) {
+	@return #{meta.inspect($item)};
+}
+
+@function get-all-component-definitions($allTokens: (), $breakpoints: ()) {
+	$component-map: ();
+
+	@if meta.type-of($allTokens) != map {
+		@return $component-map;
+	}
+
+	@if map.has-key($allTokens, "default", "components") {
+		@each $name, $value in map.get($allTokens, "default", "components") {
+			$component-map: map.set($component-map, $name, $value);
+		}
+	}
+
+	/* stylelint-disable max-nesting-depth */
+	@each $breakpoint, $breakpointValue in $breakpoints {
+		@each $blockName, $blockValue in map.get($allTokens, $breakpoint, "blocks") {
+			@if meta.type-of($blockValue) == map {
+				@if list.length(map.get($blockValue, "components")) >= 0 {
+					@each $name, $value in map.get($blockValue, "components") {
+						@each $cName, $cValue in $value {
+							@if map.get($component-map, $name, $cName) == null {
+								$component-map: map.set($component-map, $name, $cName, "initial");
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@return $component-map;
+}
+
+@function get-value-name-from-reference($value) {
+	@return string.slice($value, string.index($value, ".") + 1);
+}
+
+// Replaces the $global and $alias references in a property value.
+@function replace-token-reference($value) {
+	$new-value: $value;
+	@if meta.type-of($value) == string {
+		// Handle $global
+		@if string.index($value, "$global.") {
+			$global-var: get-value-name-from-reference($value);
+			$new-value: var(--global-#{$global-var});
+		}
+
+		// Handle $alias
+		@if string.index($value, "$alias.") {
+			$alias-var: get-value-name-from-reference($value);
+			$new-value: var(--#{$alias-var});
+		}
+	}
+
+	@return $new-value;
+}
+
+// Map of all components unique properties
+$component-map: get-all-component-definitions($tokens, $breakpoints);
+
+//
+// Mixins
+//
+@mixin block-components($blockName) {
+	@each $breakpoint, $breakpointValue in $breakpoints {
+		@media ($breakpointValue) {
+			@if list.length(map.get($tokens, $breakpoint, "blocks", $blockName, "components")) >= 0 {
+				@each $name, $value in map.get($tokens, $breakpoint, "blocks", $blockName, "components") {
+					@if meta.type-of($value) == map {
+						@each $bName, $bValue in $value {
+							$new-value: replace-token-reference($bValue);
+							& {
+								--c-#{$name}-#{$bName}: #{maintain-quotes($new-value)};
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@mixin block-properties($blockName) {
+	@each $name, $value in map.get($tokens, "default", "blocks", $blockName) {
+		@if map.has-key($tokens, "default", "blocks", $blockName) {
+			@if meta.type-of($value) != map {
+				& {
+					#{$name}: block-var($blockName, $name);
+				}
+			}
+		}
+	}
+}
+
+@mixin component-properties($component) {
+	@if map.has-key($component-map, $component) {
+		@each $name, $value in map.get($component-map, $component) {
+			& {
+				#{$name}: component-var($component, $name);
+			}
+		}
+	}
+}
+
+@mixin component-with-states($name, $states: []) {
+	@include component-properties("#{$name}");
+
+	@if list.length($states) > 0 {
+		@each $state in $states {
+			&:#{$state} {
+				@include component-properties("#{$name}-#{$state}");
+			}
+		}
+	}
+}
+
+//
+// token-map-to-css-variable
+// mixin to output CSS Variable from a token map
+//
+// $tokens - A map of tokens key values
+// $name - The name of the sub map in which to output from
+// $prefix - The prefix value to add to the CSS Variable name
+//
+@mixin token-map-to-css-variable($tokens, $name, $prefix: "t") {
+	@each $componentName, $componentItem in map.get($tokens, $name) {
+		@if list.length($componentItem) == 0 {
+			@warn '#{$name} "#{$componentName}" is configured with no options';
+		} @else {
+			@if meta.type-of($componentItem) == map {
+				@each $cProperty, $cValue in $componentItem {
+					@if meta.type-of($cValue) != map {
+						$new-value: replace-token-reference($cValue);
+						--#{$prefix}-#{$componentName}-#{$cProperty}: #{maintain-quotes($new-value)};
+					}
+				}
+			}
+		}
+	}
+}
+
+//
+// root-tokens
+// mixin to output a set of alias, components and block tokens from a given map
+//
+// $tokens - A map of tokens that contains the alias, components and blocks maps
+//
+@mixin root-tokens($tokens: ()) {
+	@if list.length($tokens) != 0 {
+		:root {
+			// Alias Tokens
+			@if map.has-key($tokens, "alias") {
+				@each $name, $value in map.get($tokens, "alias") {
+					--#{$name}: #{maintain-quotes(replace-token-reference($value))};
+				}
+			}
+
+			// Component Tokens
+			@include token-map-to-css-variable($tokens, "components", "c");
+
+			// Block Tokens
+			@include token-map-to-css-variable($tokens, "blocks", "b");
+		}
+	}
+}
+
+//
+// Start of output of CSS Variables
+//
+:root {
+	@each $name, $value in $global {
+		--global-#{$name}: #{maintain-quotes($value)};
+	}
+	--text-direction: 1;
+}
+
+@if list.length($tokens) != 0 {
+	@each $breakpoint, $breakpointValue in $breakpoints {
+		@if map.has-key($tokens, $breakpoint) {
+			@media ($breakpointValue) {
+				@include root-tokens(map.get($tokens, $breakpoint));
+			}
+		}
+	}
+}
+
+*[dir="rtl"] {
+	--text-direction: -1;
+}
+
+body {
+	@include component-properties("body");
+}

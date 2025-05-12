@@ -1,0 +1,218 @@
+---
+title: Ejecting (forking) an Arc Block
+description: Ejecting (forking) an Arc Block
+lastUpdated: 2025-03-21T02:34:08.000Z
+migrationData:
+  short_description: Ejecting (forking) an Arc Block
+  number: KB0010392
+  sys_id: 66b1dbc6477e7d10a87626c2846d43e6
+  sys_created_on: '2023-11-30 21:33:22'
+  sys_updated_on: '2023-11-30 21:34:08'
+  sys_created_by: denise.rodriguez@washpost.com
+  sys_updated_by: denise.rodriguez@washpost.com
+  author: eaa6ebfd47431550a87626c2846d43f5
+  category: Themes
+  kb: Developer Docs
+  kb_category: ba320d8b47dad110a87626c2846d4317
+  meta: forking, custom block, ejecting, themes blocks, arc blocks
+  topic: General
+  sys_view_count: 869
+  helpful_count: 0
+  version: 8ae1130a477e7d10a87626c2846d439b
+  display_number: KB0010392 v18.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.442Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+If there is an Arc block that does most of what you need but not all, you can save time by ejecting (forking) the block and changing it to suit your needs. Ejecting a block means copying the original Arc block, modifying it, and including it as a custom block in your feature pack.
+
+## Implications for ejecting a block
+
+When you eject an Arc block, you are no longer on the upgrade path, and any new out-of-the-box features will not be reflected in the ejected version.
+
+When ejecting a block, consider the following:
+
+- Ensure you copy the entire block, children, and styles.
+- If the block imports from `@wpmedia/arc-themes-components` , you must include the `@wpmedia/arc-themes-components` package as a dependency in the `package.json` file for your bundle.
+- You do not need to eject `@wpmedia/arc-themes-components`. This package is designed as a reusable set of components.
+
+{/* Commenting this because it is not relevant information (if it should not happen on OOB blocks, then devs should not worry)*/}
+{/*- In the case where a block imports another block (which shouldn’t happen) you would need to copy both blocks. */}
+
+## Themes 2.0 components and block features and styling on ejected blocks
+
+- **<Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system/#components`} text='Components' />** - For ejected or custom blocks, you can use Arc XP components that will remain on the upgrade path.
+- **<Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system/#blocks`} text='Blocks' />** - Ejected custom blocks will not receive feature upgrades. If your use case for ejecting is CSS or styling-related, we recommend you use our <Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system/#basics`} text='blocks styling' /> design system to remain on the upgrade path.
+- **<Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system/#themes-20-design-system-files`} text='Blocks styling' />** - Block styling applies to out-of-the-box components and blocks. This includes Arc XP components used on your custom blocks. Full custom blocks (not comprised of Arc XP components) will not be watched by our StyleBuilder script, but you can still apply your custom styling.
+
+### Deciding when to use an out-of-the-box block versus a custom block
+
+The diagram in this section helps you decide when to use out-of-the-box (OOTB) Arc blocks or create a custom block based on your requirements. For a full list of components, blocks, and available design tokens, see <Link blank href='https://docs.arcxp.com/en/products/themes/themes-2-0---blocks-styling-figma-library.html' text='Themes 2.0 - Blocks Styling Figma Library' />.
+
+![Themes](../images/Themes-2.0-Themes-ootb-vs-custom.png)
+
+## Ejecting breakdown
+
+The diagram in this section presents an overview of a block, the PageBuilder Engine entry, and the block children. This example uses the <Link blank href='https://github.com/WPMedia/arc-themes-blocks/tree/arc-themes-release-version-2.5.3/blocks/header-nav-chain-block' text='Header Nav Chain Block' />
+
+![Flowchart Themes](../images/flowchart-Themes-2.0-Forking-on-v2.png)
+
+### Blocks structure
+
+The blocks repository follows a similar folder structure as a feature pack. The block folder contains a folder of the Fusion block type. In this example, there is a `chains` folder and then inside there is a folder called `header-nav-chain-block`.
+
+To eject the header nav chain block you must make a copy of the `header-nav-chain-block` folder into your feature pack. Copy the folder from the <Link blank href='https://github.com/WPMedia/arc-themes-blocks/tree/arc-themes-release-version-2.5.3/blocks/header-nav-chain-block' text='WPMedia/Arc-Themes-Blocks' /> repository.
+
+At this point you have half-ejected the block. Because this block relies on Themes components from `@wpmedia/shared-styles` you must look into the block, identify the shared styles components the block uses, and make a copy of those shared styles components into your feature pack.
+
+The following code block shows how the imports currently look for the ejected `header-nav-chain-block`:
+
+```js
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { useContent } from 'fusion:content';
+import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import getThemeStyle from 'fusion:themes';
+import getTranslatedPhrases from 'fusion:intl';
+import { HamburgerMenuIcon, UserIcon } from '@wpmedia/engine-theme-sdk';
+import SectionNav from './_children/section-nav';
+import SearchBox from './_children/search-box';
+
+// shares styles with header nav chain
+// can modify styles in shared styles block
+import '@wpmedia/shared-styles/scss/_header-nav.scss';
+```
+
+The block imports `"@wpmedia/shared-styles/scss/_header-nav.scss";`
+
+You must make a copy of that file into your feature pack. If you place it at the same level as the `default.jsx` file, the imports look as follows:
+
+```js
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { useContent } from 'fusion:content';
+import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import getThemeStyle from 'fusion:themes';
+import getTranslatedPhrases from 'fusion:intl';
+import { HamburgerMenuIcon, UserIcon } from '@wpmedia/engine-theme-sdk';
+import SectionNav from './_children/section-nav';
+import SearchBox from './_children/search-box';
+
+// Now the shared styles from Blocks is maintained within your custom code
+import './_header-nav.scss';
+```
+
+The reason you must eject dependencies from the `@wpmedia/shared-styles` block is that if Themes makes any changes to the shared styles components that your ejected block is using, Arc XP is not 100% confident it will not cause your ejected version to stop working.
+
+## Creating a custom block
+
+For full details on creating a custom block, see <Link blank href={`${globals.themesDevDocsPath}/creating-a-custom-block-with-styling`} text='Creating a custom block with styling' />. After you have created the custom block, take the remaining steps on this guide to add and/or remove blocks to your feature pack.
+
+## Using an ejected / custom block instead of the Arc block
+
+This section presents recommendations to follow after ejecting an Arc block and using it as a custom block.
+
+### Removing Arc blocks from your bundle
+
+To reduce your bundle size and ensure the out-of-the-box block is not available in PageBuilder Editor, you can remove that block from your `blocks.json` file and <Link blank href={`${globals.themesDevDocsPath}/migrating-from-themes-settings-to-pbdeployer/`} text='redeploy your bundle' />. Below is an example of Arc blocks within the `blocks.json` of a bundle. The `blocks.json` is only used for out-of-the-box blocks.
+
+```json
+"blocks": [
+    "@wpmedia/global-phrases-block",
+    "@wpmedia/alert-bar-block",
+    "@wpmedia/article-body-block",
+    "@wpmedia/alert-bar-content-source-block",
+    "@wpmedia/article-tag-block",
+    "@wpmedia/author-bio-block",
+    "@wpmedia/byline-block",
+    "@wpmedia/card-list-block",
+    "@wpmedia/date-block",
+    "@wpmedia/default-output-block",
+    "@wpmedia/double-chain-block",
+    "@wpmedia/extra-large-manual-promo-block",
+    "@wpmedia/extra-large-promo-block",
+    "@wpmedia/footer-block",
+    "@wpmedia/full-author-bio-block",
+    "@wpmedia/gallery-block",
+    "@wpmedia/header-block",
+    "@wpmedia/header-nav-block",
+    "@wpmedia/header-nav-chain-block",
+    "@wpmedia/headline-block",
+    "@wpmedia/htmlbox-block",
+    "@wpmedia/large-manual-promo-block",
+    "@wpmedia/large-promo-block",
+    "@wpmedia/lead-art-block",
+    "@wpmedia/links-bar-block",
+    "@wpmedia/masthead-block",
+    "@wpmedia/medium-manual-promo-block",
+    "@wpmedia/medium-promo-block",
+    "@wpmedia/numbered-list-block",
+    "@wpmedia/overline-block",
+    "@wpmedia/quad-chain-block",
+    "@wpmedia/results-list-block",
+    "@wpmedia/right-rail-block",
+    "@wpmedia/right-rail-advanced-block",
+    "@wpmedia/search-results-list-block",
+    "@wpmedia/section-title-block",
+    "@wpmedia/share-bar-block",
+    "@wpmedia/shared-styles",
+    "@wpmedia/simple-list-block",
+    "@wpmedia/single-chain-block",
+    "@wpmedia/small-manual-promo-block",
+    "@wpmedia/small-promo-block",
+    "@wpmedia/subheadline-block",
+    "@wpmedia/tag-title-block",
+    "@wpmedia/text-output-block",
+    "@wpmedia/textfile-block",
+    "@wpmedia/top-table-list-block",
+    "@wpmedia/triple-chain-block",
+    "@wpmedia/video-player-block",
+    "@wpmedia/content-api-source-block",
+    "@wpmedia/collections-content-source-block",
+    "@wpmedia/author-content-source-block",
+    "@wpmedia/search-content-source-block",
+    "@wpmedia/site-hierarchy-content-block",
+    "@wpmedia/story-feed-author-content-source-block",
+    "@wpmedia/story-feed-query-content-source-block",
+    "@wpmedia/story-feed-sections-content-source-block",
+    "@wpmedia/story-feed-tag-content-source-block",
+    "@wpmedia/tags-content-source-block",
+    "@wpmedia/unpublished-content-source-block",
+    "@wpmedia/resizer-image-block",
+    "@wpmedia/resizer-image-content-source-block",
+    "@wpmedia/placeholder-image-block",
+    "@wpmedia/event-tester-block"
+  ],
+```
+
+### Including custom blocks in your bundle
+
+Your custom blocks, chains, layouts, and output-types must be inside the `components` folder of your bundle.
+
+### Feature pack structure
+
+For full details on the feature pack file structure, including the `blocks.json` and `components` folder, see:
+
+- <Link blank href={`${globals.pbEngineDevDocsPath}/feature-pack-directory-structure`} text='Feature pack directory structure' />
+- <Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system/#feature-pack-structure`} text='Themes - Feature pack structure (including site styles)' />
+
+## Naming conventions of custom blocks versus Arc blocks
+
+### Arc blocks
+
+Out-of-the-box blocks contain the `@wpmedia` prefix. This prefix displays in both your bundle and the PageBuilder Editor interface. For example, the following will display in PageBuilder Editor for Arc blocks:
+
+![](../images/image-1.png)
+
+### Custom blocks
+
+You must rename your ejected blocks to a naming convention that best suits your organization's best practices. If you do not rename the ejected block and still maintain the Arc block within your bundle, you will get a build error.

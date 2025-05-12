@@ -1,0 +1,36 @@
+---
+title: (Fusion) CLI
+description: PageBuilder Engine (Fusion) CLI
+lastUpdated: 2023-07-16T05:30:55.000Z
+migrationData:
+  short_description: PageBuilder Engine (Fusion) CLI
+  number: KB0010434
+  sys_id: f38c19f147043590eee38788436d4351
+  sys_created_on: '2023-07-16 01:30:18'
+  sys_updated_on: '2023-07-16 01:30:55'
+  sys_created_by: Adam.Evans@washpost.com
+  sys_updated_by: Adam.Evans@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: 'PageBuilder Engine, CLI, '
+  topic: General
+  sys_view_count: 615
+  helpful_count: 0
+  version: f4bc99f147043590eee38788436d43eb
+  display_number: KB0010434 v2.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.420Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+PageBuilder Engine applications should be managed by the <Link blank href='https://www.npmjs.com/package/@arc-fusion/cli' text='PageBuilder Engine Command Line Utility Found On NPM' />. You can find a full list of the commands it offers and their purpose in that repository's documentation.
+
+:::caution[Important]
+Do NOT confuse the `@arc-fusion/cli` NPM package with the `fusion-cli` package created by Uber. Even though they have the same name, Arc's PageBuilder Engine and CLI is an entirely different product, and (obviously) their CLI will not work with Arc PageBuilder Feature Packs.
+:::

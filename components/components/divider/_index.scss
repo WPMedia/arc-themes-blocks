@@ -1,0 +1,5 @@
+@use "../../scss";
+
+.c-divider {
+	@include scss.component-properties("divider");
+}

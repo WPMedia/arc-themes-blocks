@@ -1,0 +1,48 @@
+import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Icon from "../icon";
+
+import Details from ".";
+
+<Meta of={IndexStories} />
+
+# Details
+
+The `Details` component is a disclosure widget in which information is visible only when the widget is toggled into an "open" state. A summary or label must be provided.
+
+This is a wrapper for the HTML `<details>` element - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details
+
+## Usage
+
+```jsx
+import { Details } from "@wpmedia/arc-themes-components";
+
+const Feature = () => <Details summary="Summary">Details Text</Details>;
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### Details
+
+<Story of={IndexStories.DefaultDetails} />
+
+### Details with HTML Content
+
+<Story of={IndexStories.DetailsWithHtmlContext} />
+
+### Details with Icon
+
+<Story of={IndexStories.DetailsWithIcon} />
+
+### Details with Left Icon
+
+<Story of={IndexStories.DetailsWithLeftIcon} />
+
+### Details Open
+
+<Story of={IndexStories.DetailsOpen} />

@@ -1,0 +1,149 @@
+---
+title: Migrating from PageBuilder Engine 3.x to 4.x
+description: Migrating from PageBuilder Engine 3.x to 4.x
+lastUpdated: 2025-04-07T19:45:19.000Z
+migrationData:
+  short_description: Migrating from PageBuilder Engine 3.x to 4.x
+  number: KB0011137
+  sys_id: 08b2184c47778250a87626c2846d43fb
+  sys_created_on: '2024-07-29 15:44:47'
+  sys_updated_on: '2024-07-29 15:45:19'
+  sys_created_by: sara.carothers@washpost.com
+  sys_updated_by: sara.carothers@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: ''
+  topic: General
+  sys_view_count: 2805
+  helpful_count: 1
+  version: 37c21c8c47778250a87626c2846d4319
+  display_number: KB0011137 v26.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.508Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+:::note
+If you already upgraded to Engine 4.x and upgrading to Engine 5.x you can see [Migrating from PageBuilder Engine 4.x to 5.x](/pagebuilder-engine/developer-docs/migrating-from-pagebuilder-engine-4x-to-5x/)
+:::
+
+Upgrading from Engine 3.x to 4.x require developer effort. We outlined steps below to adjust your feature code and dependencies to be compatible with Node16 runtime and React18.
+
+## Local development environment changes
+
+### 1. Upgrade your Fusion-CLI to the latest version
+
+PageBuilder Engine 4.0 requires fusion-cli version 2.1.1 or later. To update your current fusion-cli, run `npm install -g @arc-fusion/cli@latest` for global installations, or `npm install --save-dev @arc-fusion/cli@latest`.
+
+If you are using a local installation, check your package.json and the version that is installed, and manually bump then `run npm install` to update your CLI version.
+
+:::note
+The clients who are not upgrading to 4.0 and has not pinned the `FUSION_RELEASE` environment variable, Engine will automatically try the `LATEST` version of docker image which may result in errors when running Engine locally.
+:::
+
+### 2. Use `environment/localhost.json` file to configure your environment variables locally instead of `.env` file
+
+Starting with Engine 4.0, environment variables in `.env` will be reserved for Arc system environment variables. All client environment variables should be configured in `environment/localhost.json` file for local development only. This change makes how environment variables are configured consistent between Arc environments and local development environments. Please ensure that decrypted secrets stored in the `localhost.json` are not committed to your repo or added to your uploaded bundle.
+
+See [Environment Variables](/pagebuilder-engine/developer-docs/environment-variables/) document for more information about list of variables that are recognized by PageBuilder Engine. Any other variable defined in .env file will be ignored on Engine 4.x and newer versions.
+
+### 3. Running Engine 4.x on Apple M1/M2/M3 and other ARM architecture machines
+
+PageBuilder Engine docker images ship with [universal images starting with Engine 4.1 version](/pagebuilder-engine/developer-docs/pagebuilder-engine-universal-docker-images-same-engine-version-now-works-with-intel-and-arm-chips/). And no specific action needs to be taken for Arm-based machines. Versions prior to 4.1 require a suffix of `-arm` to be added to `FUSION_RELEASE` environment variable value.
+
+## Upgrading your codebase from Node 14 to Node 16
+
+Node.js 16 introduces several breaking changes that could affect applications and modules that you wrote for Node.js 14. Some of the most significant changes include:
+
+* Deprecation of some built-in modules: Several built-in modules, including `tls.connect()` and `tls.Server()`, are now deprecated and emit a warning when you use them. These modules will be removed in a future version of Node.js.
+* Changes to the way ESM modules are loaded: The behavior of the `require()` function when you use it with ECMAScript (ESM) modules has changed, which could affect the way modules are loaded and executed.
+* Changes to the `Buffer` constructor: The behavior of the `Buffer` constructor has been changed to align with the behavior in web browsers. This could affect code that relies on the previous behavior.
+* Removal of `--inspect-brk`: The `--inspect-brk` option has been removed, and the `--inspect` option now stops on the first line of code by default.
+* Deprecation of `process.argv0`: The `process.argv0` property is now deprecated and should not be relied upon.
+* Changes to the behavior of the `child_process` module: The `child_process.spawnSync()` function now throws an error if the child process returns a non-zero exit code. The behavior of `child_process.exec()` and `child_process.execFile()` has also changed.
+
+These items are just a few of the breaking changes introduced in Node.js 16. Developers should review the Node.js 16 release notes and the migration guide to ensure that your applications and modules are compatible with the new version of Node.js.
+
+## Potential minor changes needed on your existing React components to be compatible with React 18
+
+React 18 is designed to minimize breaking changes when upgrading from earlier versions of React, including React 16. The upgrade process should be relatively smooth for most applications, but you should test your applications thoroughly and review the documentation before upgrading.
+
+Keep an eye out for HTML embeds in your content as they will be processed by PageBuilder and may be affected by [React 18 changes to Strict Mode](https://react.dev/blog/2022/03/29/react-v18#new-strict-mode-behaviors).
+
+Read more about upgrading to React 18 on React's [React v18.0 blog post](https://react.dev/blog/2022/03/29/react-v18).
+
+## Upgrading client bundle npm dependencies
+
+Upgrading to PageBuilder Engine 4.0 may also require upgrading your npm dependencies to ensure compatibility with the new version of Node.js runtime. We suggest:
+
+1. **Use** `npm audit` **to identify security vulnerabilities:** Before upgrading any packages, it's a good idea to run `npm audit` to identify any security vulnerabilities in your current dependencies. You can then prioritize upgrading packages with security issues.
+2. **Use** `npm outdated` **to identify outdated packages:** `npm outdated` can help you identify which packages have newer versions available. You can then determine whether upgrading those packages is necessary.
+3. **Upgrade packages incrementally:** When upgrading packages, it's generally a good idea to upgrade them incrementally rather than all at once. Incremental upgrades help you identify any compatibility issues or unexpected behavior a specific package upgrade causes.
+4. **Check for compatibility issues:** Some packages may not be compatible with Node.js 16, so it's important to check the package's documentation or GitHub repository to see if any compatibility issues or known workarounds exist.
+5. **Test your application thoroughly:** After upgrading your npm dependencies, it's important to thoroughly test your application to ensure that everything works as expected. Testing helps you identify any unexpected behavior a package upgrade causes or compatibility issues with Node.js 16.
+
+Overall, upgrading npm dependencies when changing the Node.js runtime requires careful attention to detail and thorough testing to ensure that your application works as expected. Since this section is probably the most important and unique process for each customer bundle, we have created a separate guide to cover this topic: [How to upgrade your bundle code with major/breaking Engine releases](/pagebuilder-engine/developer-docs/upgrading-your-bundle-code-with-major-or-breaking-pagebuilder-engine-releases/)
+
+## Set up Arc Build configuration for npm Legacy Peer Dependencies
+
+When you update your packages, based on which additional peer dependencies your packages require, you may receive legacy peer dependencies errors. If you receive these errors, as a new process, you need to set a new environment variable in your `package.json` file like:
+
+```json
+{
+   ...
+   "arc": {
+       "npmLegacyPeerDeps": true
+   }
+   ...
+}
+```
+
+This is a new Engine's build-specific environment variables definition, that will be only used in Engine's compiler process. This process run on both local development environments and when you deploy a bundle in Deployer tool. This process and environment variables are not used in final render runtime.
+
+## Review use cases for `cache: false`
+
+PageBuilder Engine comes with a feature in content sources that allows you to set a content source to not use the engine cache. This feature is exposed as a property in the exported module in your content sources as `.cache` property that expects a Boolean value. The default value of this property is true, but you can set this value to false. Engine 4.0 limits this capability to content sources that can be set as only false if they are not exposed to client-side fetches. This change allows only valid use of no cache for content sources that have `.http=false` and `.cache=false` properties set at the same time.
+
+We suggest checking your content sources and see which have `.cache=false`, and review the use cases and the need as PageBuilder Engine 4.0 changes this behavior and ignores this property value.
+
+## Content source parameter validation is enforced via `.strict` property
+
+When a content source is running in `strict` mode, PageBuilder Engine will sanitize request parameters not defined in the content source's `params` property. This ensures that unexpected parameters are not sent to the content source and that they are not used as part of the cache key.
+
+Starting in PageBuidler Engine 4.0, the `strict` parameter is on by default and can be disabled by setting `strict: false` on the content source's properties. Strict mode is also included in PageBuilder Engine 3.3.6 with opt-in, the `strict` parameter that can be enabled using `strict: true` on the content source's properties.
+
+### Impact of strict behavior on Partial Caching
+
+First version of 4.0.0 and 4.0.1 inherited strict behavior into partial caching, namely cachedCall method's cache-key generation process. But since cachedCall methods queries don't have specific subset of params from the content source that applies what's valid for that cached call, and since it can contain valid, custom parameters from the parent content source, there is no defined schema for cachedCalls for the parameters passed to this method. Because of this difference between the parent content source and the cachedCalls, we reverted strict parameters behavior as false to the cachedCall methods in 4.0.2 release, which means it will not enforce parameter validation in cachedCall methods.
+
+If you are using partial caching, you may see the warning message below in your logs, that reminds the strict validation will be introduced to partial caching calls in the future but not enforced today.
+
+:::caution[Deprecation Warning]
+Implicit or explicit usage of `strict: false` will be deprecated in the future. See Engine release notes for applying dependent `cachedCall` params.
+:::
+
+## Themes bundles
+
+Clients using Themes in your bundles can use Themes 2.1, 1.31 or 1.30 versions when deploying from the Themes Settings UI – these versions are [compatible with Engine 4.x](https://docs.arcxp.com/en/what-s-new-in-arc-xp/arc-xp-product-releases-and-dependencies.html), and Theme Settings automatically selects Engine 4.x when you deploy your Themes website with these versions.
+
+Customers managing Arc Blocks using `blocks.json` file in your bundle and deploying using the Deployer tool, you can [define the Themes release](https://docs.arcxp.com/en/products/themes/getting-started-with-theme-settings.html#UUID-176d2cbb-8deb-447c-26b7-612bf1df3a9f_section-idm234665135818336) using the `themesReleaseVersion` property in your `blocks.json`:
+
+```json
+ {
+  ...
+  "themesReleaseVersion": "arc-themes-release-version-2.1.0",
+  ...
+  }
+```
+
+Keep in mind the upcoming deprecations for both Engine and Themes versions that is covered in [PageBuilder Engine 3 and Engine 4 deprecation notice](https://docs.arcxp.com/en/products/pagebuilder-engine/deprecation-notice--pagebuilder-engine-3-and-engine-4.html).
+
+## Outbound Feeds bundles
+
+Outbound Feeds 1.15 is compatible with Engine 4.x (it is also compatible with Engine 3.x and 5.x). However, please note that if you have Custom Blocks in your Outbound Feeds bundle, you may need to make code changes to those to ensure they are compatible with these newer Engine versions. You can choose which Engine version you wish to deploy with in the Deployer. 

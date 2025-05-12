@@ -1,0 +1,17 @@
+{
+	"image": {
+		"styles": {
+			"default": {
+				"block-size": "auto",
+				"max-inline-size": "100%"
+			}
+		}
+	},
+	"image-hover": {
+		"styles": {
+			"default": {
+				"opacity": "1"
+			}
+		}
+	}
+}

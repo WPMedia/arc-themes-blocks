@@ -1,0 +1,111 @@
+---
+title: Configuring local environment variables
+description: Creating with PageBuilder
+lastUpdated: 2025-02-13
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+Once you have credentials to access your Arc XP organization, you can configure your local development environment to connect to your live websites. This guide walks you through the required configurations. 
+
+:::tip
+Be sure to follow the instructions for <Link blank href={`${globals.tutorialsQuickStartPath}/set-up-your-dev-playground/`} text='Setting Up Your Dev Playground' /> before continuing.
+:::
+
+## Step 1. Set variables in the `.env` file
+
+The `.env` file is located in the root directory of your project and stores your local environment variables. When you initiate a bundle with Arc Fusion CLI, the `.env` comes prepopulated with the following:
+
+```
+# CONTENT_BASE=https://api.<environment>.arcpublishing.com
+# FUSION_RELEASE=latest
+# ARC_ACCESS_TOKEN=<token from developer center>
+```
+#### `CONTENT_BASE`
+
+The `CONTENT_BASE` variable is the base URL PageBuilder Engine uses to make API requests to Arc XP applications and services. The following are examples of different values for `CONTENT_BASE`:
+
+- `https://api.sandbox.{org-id}.arcpublishing.com` (sandbox environment)
+- `https://api.{org-id}.arcpublishing.com` (production)
+
+#### `FUSION_RELEASE`
+
+The `FUSION_RELEASE` variable sets the PageBuilder Engine version you want to use in your local environment. The default value is `latest`. See available versions and release notes in <Link blank href='https://docs.arcxp.com/en/what-s-new-in-arc-xp/what-s-new-in-pagebuilder-engine.html' text="What's New in PageBuilder Engine" />.
+
+#### `ARC_ACCESS_TOKEN`
+
+The `ARC_ACCESS_TOKEN` is the token you create in the Developer Center. To create an Arc Access Token, see <Link blank href={`${globals.apiBasePath}/accessing-arcxp-apis/`} text='Using developer access tokens to access the Arc XP APIs' />.
+
+For other local environment variables and more specific information, see <Link blank href={`${globals.pbEngineDevDocsPath}/environment-variables/`} text='Environment variables' />.
+
+## Step 2. Add the `.npmrc` file to your project
+
+You must add the `.npmrc` file and provide your GitHub personal access token to install the arc-themes-components package. Take the following steps:
+
+1. Follow the GitHub guide to <Link blank href='https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic' text='Creating a personal access token (classic)' /> 
+    
+    :::caution[important]
+    Enable only the **read:packages** checkbox in the **Select scopes** section when creating a new token.
+    :::
+
+2. Configure Single Sign-ON for your access token. Take the following steps:<br /><br />
+    `a` On the Personal access tokens (classic) page, click the **Configure SSO** dropdown menu.<br />
+     &emsp; The Single sign-on organizations menu appears.<br />
+    `b` Under the **Available to authorize** section, click the WPMedia organization.<br />
+     &emsp; GitHub redirects you to the Okta authentication page.<br />
+    `c` Provide your Okta credentials.<br />
+     &emsp; Your personal access token can now access the WPMedia GitHub organization.<br /><br />                                      
+
+3. Create the `.npmrc` empty file in the root directory of your project.
+4. Paste the following in your `.npmrc` file:
+
+    ```
+    @wpmedia:registry=https://npm.pkg.github.com/
+    //npm.pkg.github.com/:_authToken=
+    ```
+5. Paste your GitHub personal access token at the end of the second line.
+6. Save your `.npmrc` file.
+
+:::caution 
+See additional requirements and configurations for the arc-themes-components package in <Link blank href={`${globals.themesDevDocsPath}/local-development-process-for-custom-blocks/`} text='Local development process for custom blocks' />
+:::
+
+## Step 3. Add mock data from your website
+
+During development, you can source content directly from your website using the `/mocks` directory in your project. To configure mock data, take the following steps:
+
+1. Go to your Arc XP dashboard.
+2. Click the **sites** tile in the **Experiences** section. 
+    The Websites page opens.
+3.  Click the **Edit** button from the website you want to mock. 
+    The website information displays.
+4. Copy the values from the **ID** and **Website name** fields.
+5. In your project, navigate to the `website` file:
+
+    ```
+    /mocks/siteservice/api/v3/website
+    ```
+6. Open the `website` file.
+7. Paste the ID value (from step 4) in the `_id` field (replace `demo`).
+8. Paste the Website name value (from step 4) in the `display_name` field (replace `Demo`).
+
+    ```
+    [
+        {
+            "_id": "demo",
+            "display_name": "Demo",
+            "is_default_website": true
+        }
+    ]
+    ```
+9. Save your `website` file.
+
+:::note
+The mock resources are not available in the production environment
+:::
+
+
+
+

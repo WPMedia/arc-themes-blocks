@@ -1,0 +1,36 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import usePhrases from ".";
+
+<Meta of={IndexStories} />
+
+# usePhrases
+
+The `usePhrases()` hook simplifies the required imports and de-duplicates logic shared by all the blocks in the current repo. It replaces having to look up the `locale` from `fusion:properties` and the `arcSite` from `fusion:context` every time you need the internationalization phrases.
+
+This does not change the existing translation implementation in any way. It only simplifies the import requirements.
+
+Ref: https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
+
+## Usage
+
+```jsx
+import usePhrases from "./usePhrases";
+
+const MyAwesomeBlock = () => {
+	const phrases = usePhrases();
+
+	return <label>{phrases.t("my_awesome_block.label_text")}</label>;
+};
+```
+
+## Properties
+
+There are no properties passed to this hook.
+
+## Stories
+
+### Default Use
+
+<Story of={IndexStories.DefaultUse} />

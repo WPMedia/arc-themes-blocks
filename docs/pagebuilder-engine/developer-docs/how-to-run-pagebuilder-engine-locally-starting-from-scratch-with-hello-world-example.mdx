@@ -1,0 +1,221 @@
+---
+title: >-
+  How To Run PageBuilder Engine Locally - Starting from scratch with Hello World
+  example
+description: >-
+  How To Run PageBuilder Engine Locally - Starting from scratch with Hello World
+  example
+lastUpdated: 2023-12-13T00:15:36.000Z
+migrationData:
+  short_description: >-
+    How To Run PageBuilder Engine Locally - Starting from scratch with Hello
+    World example
+  number: KB0011253
+  sys_id: ccf4a44e470b3d50a87626c2846d43f2
+  sys_created_on: '2023-12-12 19:14:08'
+  sys_updated_on: '2023-12-12 19:15:36'
+  sys_created_by: Adam.Evans@washpost.com
+  sys_updated_by: Adam.Evans@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: ''
+  topic: General
+  sys_view_count: 177
+  helpful_count: 0
+  version: b145ec4e470b3d50a87626c2846d43e5
+  display_number: KB0011253 v6.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.278Z
+---
+import MediaCard from '/src/components/starlight/media-card.astro';
+
+# Video Tutorial
+
+Here is a 10 minute video version of this tutorial. You can use this page for copy/paste ready snippets for the steps we are walking through in the video.
+
+<MediaCard>
+<iframe src="https://share.descript.com/embed/jddLc33drX8" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+</MediaCard>
+
+If you haven't reviewed yet, for general local development environment notes and system requirements, see introduction notes in [How To Run PageBuilder Engine Locally](https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-run-pagebuilder-engine-locally.html) article.
+
+# Initialize `fusion-cli`
+
+Starting from scratch is easy. PageBuilder Engine CLI (fusion-cli) have an init method that bootstraps an empty project. To do that create a folder in your development environment, navigate to the folder and run `npx @arc-fusion/cli init`
+
+```bash
+mkdir hello-world
+cd hello-world
+npx @arc-fusion/cli init
+```
+
+This command will copy bootstrap folder structure then install npm dependencies.
+
+The folder structure for the empty project will be:
+
+```bash
+.
+├── components
+│   ├── chains
+│   │   ├── div.jsx
+│   │   ├── generators
+│   │   │   └── list.jsx
+│   │   ├── ordered-list.jsx
+│   │   └── unordered-list.jsx
+│   ├── features
+│   ├── layouts
+│   └── output-types
+│       └── default.jsx
+├── content
+│   ├── schemas
+│   └── sources
+│       └── 404.js
+├── data
+│   ├── dumps
+│   └── restore
+├── environment
+│   └── README.md
+├── mocks
+│   ├── apps
+│   ├── dashboard.json
+│   ├── settings
+│   │   └── api
+│   │       └── v1
+│   │           └── user
+│   │               └── pinned
+│   ├── siteservice
+│   │   └── api
+│   │       └── v3
+│   │           └── website
+│   └── user
+├── package-lock.json
+├── package.json
+├── properties
+│   ├── README.md
+│   └── sites
+└── resources
+    └── README.md
+```
+
+# Create your first component
+
+Now you can create a new feature under components/features folder with creating a component folder, let's call it `Greet` and `default.jsx` inside the folder.
+
+Let's add a plain component with a custom field:
+
+```jsx
+import React from 'react';
+import PropTypes from '@arc-fusion/prop-types';
+
+const Greet = ({ customFields }) => (
+  <div className="hello_text">
+    Hello
+    {customFields.name || 'User'}
+    !
+  </div>
+);
+
+Greet.propTypes = {
+  customFields: PropTypes.shape({
+    name: PropTypes.string.tag({
+      label: 'Name',
+      description: 'What is your name?',
+    }),
+  }),
+};
+
+export default Greet;
+```
+
+If you haven't started PageBuilder, now it's time to run `npx fusion start` command which will download required docker images, spin up containers and build your project. Keep in mind that a lot goes on when you start PageBuilder because fusion-cli tries to simulate Arc XP environment with its micro services in your local environment. Once the build is complete, you'll see a message:
+
+```
+fusion-webpack  |
+fusion-webpack  |     .d8888b. 88d888b. .d8888b. dP.  .dP 88d888b.
+fusion-webpack  |     88'  `88 88'  `88 88'  `""  `8bd8'  88'  `88
+fusion-webpack  |     88.  .88 88       88.  ...  .d88b.  88.  .88
+fusion-webpack  |     `88888P8 dP       `88888P' dP'  `dP 88Y888P'
+fusion-webpack  |                                         88
+fusion-webpack  |                                         dP
+fusion-webpack  |
+fusion-webpack  |     Webpack build completed in 27501 ms.
+fusion-webpack  |
+fusion-webpack  |     You can now view PageBuilder Editor in your browser:
+fusion-webpack  |     http://localhost/pagebuilder/pages
+fusion-webpack  |
+```
+
+Now you can visit [http://localhost/pagebuilder/pages](http://localhost/pagebuilder/pages) to see PageBuilder Editor tool.
+
+![PageBuilder Main Page](/images/pagebuilder-engine/localhost_pagebuilder.png)
+
+By default, you'll have an empty PageBuilder. There won't be any pages, templates.
+
+# Create a page
+
+Click "Create Page" button to open create page popup.
+
+![PageBuilder Create Page](/images/pagebuilder-engine/pagebuilder_createpage.png)
+
+Give your page a title and a URI. Page URI has to be unique in PageBuilder. Then click Create.
+
+You will be redirected to PageBuilder Editor interface where the magic happens.
+
+![PageBuilder TestPage](/images/pagebuilder-engine/pagebuilder_testpage.png)
+
+# Curate page and configure blocks
+
+Now click the "Curate" workspace from the left sidebar.
+
+You will see the first panel showing your page layout. Depending on the "layout" you chose (there will be no layout in the beginning until you create one), you'll see sections of your layout that you can "Add Block"s to your page.
+
+![PageBuilder TestPage Add Block](/images/pagebuilder-engine/testpage_addblock.png)
+
+:::note
+Layouts allow you to have multiple columns, sections of your page for you to be able to render the page layout in any combination, and let your editors have a good structure in Editor UI that they would know what blocks are located in which section in your layout.
+:::
+
+When you click "Add Block", a second panel will open up, showing list of all available blocks form your bundle.
+
+![PageBuilder TestPage CustomFields](/images/pagebuilder-engine/testpage_customfields.png)
+
+:::note
+Bundle is all of your features/chains/layouts/content-sources shows up to your Editor staff to use as building blocks. It helps developers to focus on building blocks, Editor staff to focus on curation experience to create scalable digital experiences together.
+:::
+
+When a block is added to the page, or when an Editor staff clicks to the particular feature in the curation panel, they see the secondary panel for configuration options for that block. In this panel, there are general information for the selected block, but more importantly custom fields displayed that your Editor staff can easily configure a block. An Editor staff member can add same block over and over again with different configuration. In this example, an Editor staff could add Greet block multiple times with configuring each with different name. And Engine will render each block instance separately with that configuration.
+
+PageBuilder Editor, shows a preview of the page on the right side and this preview gets re-rendered on every change, so your Editor staff can easily see changes they are making on a page in this preview.
+
+# Publish the page
+
+Now it's time to publish your page. Navigate to Publish workspace on the left sidebar. Then click "Share and Publish" link.
+
+![PageBuilder TestPage MergedDraft](/images/pagebuilder-engine/testpage_mergeddraft.png)
+
+# Test your page
+
+Once page is published, you can access it with 2 methods.
+
+a) Click page URL from PageBuilder Editor:
+
+![PageBuilder TestPage Pages](/images/pagebuilder-engine/testpage_pages.png)
+
+b) Entering its URI directly on the PageBuilder rendering path like:
+
+```bash
+http://localhost/pf/test/
+```
+
+The `/pf/` prefix in the path is omitted in the Arc XP render stack and in live URLs. It is required in local development environment since PageBuilder local stack uses localhost (80) to expose both PageBuilder Editor administrative UI as well as rendering engine that resides under `/pf/` path.
+
+![PageBuilder HelloJohn Page](/images/pagebuilder-engine/testpage_hellojohn.png)
+
+:::note
+You may notice the `_website` query string parameter added to the URL if you click the page link from PageBuilder Editor. This parameter allows you to render a page with different Arc site ids where you may integrate site-specific styling or other access to Content API with specific site id, that the content returned from Content platform will be different depending on the circulation rules.
+:::
+
+This wraps up our tutorial to create a plain Hello World page in PageBuilder.

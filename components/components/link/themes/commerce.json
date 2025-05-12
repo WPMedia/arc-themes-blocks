@@ -1,0 +1,23 @@
+{
+	"link": {
+		"styles": {
+			"default": {
+				"color": "var(--color-primary)"
+			}
+		}
+	},
+	"link-active": {
+		"styles": {
+			"default": {
+				"text-decoration": "none"
+			}
+		}
+	},
+	"link-hover": {
+		"styles": {
+			"default": {
+				"text-decoration": "none"
+			}
+		}
+	}
+}

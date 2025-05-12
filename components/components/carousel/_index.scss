@@ -1,0 +1,204 @@
+@use "../../scss";
+
+.c-carousel {
+	--viewable-slides: var(--slides, 4);
+	--slide-width: var(--carousel-slide-width, 25%);
+
+	display: grid;
+	grid-template-areas: "controls" "carousel" "indicators";
+	grid-template-columns: 100%;
+	overflow: hidden;
+	word-break: break-word;
+
+	> * {
+		grid-area: carousel;
+	}
+
+	&__actions {
+		justify-content: space-between;
+		place-self: center;
+		pointer-events: none;
+		inline-size: 100%;
+		max-inline-size: 100cqi;
+		z-index: 1;
+
+		@include scss.component-properties("carousel-actions");
+	}
+
+	&__button {
+		cursor: pointer;
+		pointer-events: auto;
+
+		&--additional-next {
+			@include scss.component-properties("carousel-button-additional-next");
+		}
+
+		&--additional-previous {
+			@include scss.component-properties("carousel-button-additional-previous");
+		}
+
+		&--enter-full-screen {
+			@include scss.component-properties("carousel-button-enter-full-screen");
+		}
+
+		&--exit-full-screen {
+			@include scss.component-properties("carousel-button-exit-full-screen");
+		}
+
+		&--fullscreen {
+			&:hover {
+				@include scss.component-properties("carousel-button-full-screen-hover");
+			}
+
+			@include scss.component-properties("carousel-button-full-screen");
+		}
+
+		&--next {
+			@include scss.component-properties("carousel-button-next");
+		}
+
+		&--previous {
+			@include scss.component-properties("carousel-button-previous");
+		}
+
+		&--toggle-auto-play {
+			@include scss.component-properties("carousel-button-toggle-auto-play");
+		}
+
+		@include scss.component-properties("carousel-button");
+	}
+
+	&__controls {
+		grid-area: controls;
+		display: flex;
+		justify-content: space-between;
+		place-self: start;
+		inline-size: 100%;
+		max-inline-size: 100cqi;
+
+		@include scss.component-properties("carousel-controls");
+	}
+
+	&__icon {
+		&--fullscreen {
+			@include scss.component-properties("carousel-icon-full-screen");
+		}
+
+		@include scss.component-properties("carousel-icon");
+	}
+
+	&__image-counter-label {
+		@include scss.component-properties("carousel-image-counter");
+	}
+
+	&__slide {
+		flex: 0 0
+			calc(
+				var(--slide-width) - calc(
+						var(--slide-gap) * calc(var(--viewable-slides) - 1) / var(--viewable-slides)
+					)
+			);
+		max-inline-size: 100cqi;
+
+		@include scss.component-properties("carousel-slide");
+	}
+
+	&__track {
+		/* stylelint-disable length-zero-no-unit */
+		// Disabled the rule as the px value is needed within the calc below
+		--slide-gap: var(--c-carousel-track-gap, 0px);
+		display: flex;
+		justify-self: center;
+		transition: transform 0.4s ease-in;
+		will-change: transform;
+
+		@include scss.component-properties("carousel-track");
+	}
+
+	&__additional-controls {
+		@include scss.component-properties("carousel-additional-controls");
+	}
+
+	&__counter-controls-container {
+		display: flex;
+		align-items: center;
+
+		&--full-screen {
+			@include scss.component-properties("carousel-counter-controls-container-full-screen");
+		}
+
+		@include scss.component-properties("carousel-counter-controls-container");
+	}
+
+	&__expand-autoplay-container {
+		display: flex;
+		align-items: center;
+		@include scss.component-properties("carousel-expand-autoplay-container");
+	}
+
+	// add backdrop for setting full-screen background-color
+	&::backdrop {
+		@include scss.component-properties("carousel-backdrop");
+	}
+
+	&__indicator-dots-container {
+		grid-area: indicators;
+		inline-size: 100%;
+		max-inline-size: 100cqi;
+		@include scss.component-properties("carousel-indicator-dots-container");
+	}
+
+	&__indicator-dot {
+		&--active {
+			@include scss.component-properties("carousel-indicator-dot-active");
+		}
+		@include scss.component-properties("carousel-indicator-dot");
+	}
+
+	&__indicator-thumbnails-container {
+		grid-area: indicators;
+		@include scss.component-properties("carousel-indicator-thumbnails-container");
+	}
+
+	&__indicator-thumbnail {
+		&--active {
+			@include scss.component-properties("carousel-indicator-thumbnail-active");
+		}
+		@include scss.component-properties("carousel-indicator-thumbnail");
+	}
+
+	&:fullscreen {
+		.c-carousel {
+			&__controls {
+				@include scss.component-properties("carousel-fullscreen-controls");
+			}
+
+			&__image-counter-label {
+				@include scss.component-properties("carousel-fullscreen-image-counter");
+			}
+
+			&__button {
+				&--toggle-auto-play {
+					@include scss.component-properties("carousel-fullscreen-button-toggle-auto-play");
+				}
+			}
+		}
+
+		@include scss.component-properties("carousel-fullscreen");
+	}
+
+	@include scss.component-properties("carousel");
+}
+
+// styltlint-ignore selector-no-qualifying-type
+*[dir="rtl"] {
+	.c-carousel__button--next {
+		transform: rotate(180deg);
+		@include scss.component-properties("carousel-button-next-rtl");
+	}
+
+	.c-carousel__button--previous {
+		transform: rotate(180deg);
+		@include scss.component-properties("carousel-button-previous-rtl");
+	}
+}

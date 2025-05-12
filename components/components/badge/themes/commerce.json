@@ -1,0 +1,60 @@
+{
+	"badge": {
+		"styles": {
+			"default": {
+				"align-self": "baseline",
+				"border-radius": "var(--border-radius-pill)",
+				"color": "var(--global-white)",
+				"font-size": "var(--body-font-size-tiny)",
+				"font-weight": "var(--heading-level-5-font-weight)",
+				"line-height": "var(--body-line-height-tiny)",
+				"padding-inline-start": "var(--global-spacing-2)",
+				"padding-inline-end": "var(--global-spacing-2)",
+				"padding-block-start": "var(--global-spacing-1)",
+				"padding-block-end": "var(--global-spacing-1)"
+			}
+		}
+	},
+	"badge-danger": {
+		"styles": {
+			"default": {
+				"background-color": "var(--status-color-danger)"
+			}
+		}
+	},
+	"badge-default": {
+		"styles": {
+			"default": {
+				"background-color": "var(--text-color)"
+			}
+		}
+	},
+	"badge-light": {
+		"styles": {
+			"default": {
+				"background-color": "var(--text-color-subtle)"
+			}
+		}
+	},
+	"badge-primary": {
+		"styles": {
+			"default": {
+				"background-color": "var(--color-primary)"
+			}
+		}
+	},
+	"badge-success": {
+		"styles": {
+			"default": {
+				"background-color": "var(--status-color-success)"
+			}
+		}
+	},
+	"badge-warning": {
+		"styles": {
+			"default": {
+				"background-color": "var(--status-color-warning)"
+			}
+		}
+	}
+}

@@ -1,0 +1,52 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Overline from ".";
+
+<Meta of={IndexStories} />
+
+# Overline
+
+By default, the Overline component will render an overline span for use above headlines or headers. If an href is passed as a property, the Overline will instead render as a simple hyperlink for internal navigation. This is not intended for use for external navigation. If you desire this functionality, please utilize the \<Link /> component as a wrap to the Overline.
+
+## Usage
+
+```jsx
+import { Overline } from "@wpmedia/arc-themes-components";
+
+const Feature = () => {
+	return (
+		<>
+			<Overline>Sports</Overline>
+			/* ... */
+		</>
+	);
+};
+```
+
+```jsx
+import { Overline } from "@wpmedia/arc-themes-components";
+
+const Feature = () => {
+	return (
+		<>
+			<Overline href="./sports">Sports</Overline>
+			/* ... */
+		</>
+	);
+};
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### Overline
+
+<Story of={IndexStories.DefaultOverline} />
+
+### Overline as a Hyperlink
+
+<Story of={IndexStories.OverlineHyperlink} />

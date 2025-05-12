@@ -1,0 +1,109 @@
+---
+title: 'CSS logical properties on Arc Blocks'
+description: 'CSS logical properties on Arc Blocks'
+lastUpdated: 2025-03-21T23:40:03.000Z
+migrationData:
+  short_description: 'CSS logical properties on Arc Blocks'
+  number: KB0011262
+  sys_id: fdaccc20c34446101fe095ff05013110
+  sys_created_on: '2024-01-26 18:39:55'
+  sys_updated_on: '2024-01-26 18:40:03'
+  sys_created_by: Adam.Evans@washpost.com
+  sys_updated_by: Adam.Evans@washpost.com
+  author: 13c389ea47ee5550a87626c2846d4300
+  category: Themes
+  kb: Developer Docs
+  kb_category: ba320d8b47dad110a87626c2846d4317
+  meta: ''
+  topic: General
+  sys_view_count: 276
+  helpful_count: 1
+  version: afac4460c34446101fe095ff05013178
+  display_number: KB0011262 v11.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.321Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+Arc Blocks use logical properties in place of some physical properties. This can cause Blocks Styling override conflicts if you use physical properties or shorthand CSS that does not translate to logical properties.
+
+The use of logical properties ensures Arc Blocks fully support <Link blank href={`${globals.pbEngineDevDocsPath}/internationalization/`} text='right-to-left (RTL) languages' /> and can scale to support vertical languages in the future. For more details on CSS logical properties, see <Link blank href='https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values/Basic_concepts_of_logical_properties_and_values' text='Basic concepts of logical properties and values' />.
+
+## Action required
+
+Before deploying <Link blank href='https://docs.arcxp.com/en/what-s-new-in-arc-xp/what-s-new-in-themes.html' text='Themes 2.1.3+' />, ensure your Blocks Styling overrides adhere to the following:
+
+- The <Link blank href='https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values' text='CSS logical properties and values' /> are used in your Blocks Styling. **You must replace some physical properties with the appropriate logical properties.**  
+    :::note
+    Not all physical properties have been converted. For example, button borders that are consistent in all directions are using physical properties, as seen in the <Link blank href='https://github.com/WPMedia/arc-themes-components/blob/arc-themes-release-version-2.1.3/src/components/button/themes/news.json#L55C1-L56C1' text='button component' />.
+    :::
+- CSS Shorthand, like `padding`, does not translate to logical properties and should be avoided.
+
+For more details, see the following recommendations.
+
+## Recommendations
+
+These recommendations are required only if you currently have physical properties or CSS shorthand to support your Blocks Styling. If you are a new customer, you can immediately start using logical properties and refer to our <Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system/`} text='Introduction to Themes design system' />. If you are new to logical properties, the following tips may also be helpful:
+
+- Expand your shorthand using a find and replace methodical approach. For example, `padding` is interpreted as `padding-top padding-right padding-bottom padding-left`, which causes issues where both the logical and physical properties could conflict.  
+  - The W3C does not have a working solution for this yet. For more details, see <Link blank href='https://github.com/w3c/csswg-drafts/issues/1282](https://github.com/w3c/csswg-drafts/issues/1282' text='Flow-relative syntax for margin-like shorthands' />.
+  - You may use <Link blank href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions' text='Regular Expressions' /> replacement and capturing instead of find and replace, depending on your level of comfort with `RegExp`.
+- DO NOT blindly replace `width/height` with `inline-size/block-size` respectively, because doing so replaces `line-height` and some other non-logical values to incorrect CSS. For valid properties and values, see <Link blank href='https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values#reference' text='MDN - CSS logical properties and values' />.
+- Replace the most explicit to least explicit shorthand, for example:
+
+<table>
+    <thead>
+        <tr>
+            <th>CSS shorthand</th>
+            <th>Logical properties</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>padding: a b c d;</code></td>
+            <td>
+                <pre><code>padding-block-end: c;
+padding-block-start: a;
+padding-inline-end: b;
+padding-inline-start: d;</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td><code>padding: a b c;</code></td>
+            <td>
+                <pre><code>padding-block-end: c;
+padding-block-start: a;
+padding-inline: b;</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td><code>padding: a b;</code></td>
+            <td>
+                <pre><code>padding-block: a;
+padding-inline: b;</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td><code>padding: a;</code></td>
+            <td>
+                <pre><code>padding-block: a;
+padding-inline: a;</code></pre>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+- This <Link blank href='https://github.com/csstools/stylelint-use-logical' text='Stylelint plugin' /> may be useful for setting your logical properties, but note that it does not cover all use cases (for example, positioning).
+- As mentioned previously, Themes did not convert all physical properties. For example, button borders that are consistent in all directions are using physical properties, as seen in the <Link blank href='https://github.com/WPMedia/arc-themes-components/blob/arc-themes-release-version-2.1.3/src/components/button/themes/news.json#L55C1-L56C1' text='arc-themes-components' /> GitHub repository. If you need to override these cases, you may need to reset the themes style to apply your own logical properties (`border-width: unset` or `border-width: initial`).
+
+## Resources
+
+- <Link blank href='https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values' text='CSS logical properties and values' /> - Mozilla Developer
+- <Link blank href='https://github.com/w3c/csswg-drafts/issues/1282' text='Flow-relative syntax for margin-like shorthands' /> - GitHub
+- <Link blank href='https://www.w3.org/TR/css-logical-1/#intro' text='CSS Logical Properties and Values Level' /> - W3C
+- <Link blank href='https://github.com/WPMedia/arc-themes-components/blob/arc-themes-release-version-2.1.3/src/components/button/themes/news.json#L55C1-L56C1' text='Example of physical property not replaced on Themes components/blocks' /> - GitHub
+- <Link blank href='https://github.com/csstools/stylelint-use-logical' text='StyleInt Use Logical' /> - GitHub

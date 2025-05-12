@@ -1,0 +1,9 @@
+@use "../../scss";
+
+.c-attribution {
+	a {
+		@include scss.component-with-states("attribution-link", [hover, active, visited]);
+	}
+
+	@include scss.component-properties("attribution");
+}

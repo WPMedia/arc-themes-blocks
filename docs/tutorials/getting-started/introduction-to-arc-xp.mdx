@@ -1,0 +1,201 @@
+---
+title: Discover Arc XP
+description: Introduction to Arc XP
+lastUpdated: 2025-01-21
+---
+
+import { Card, CardGrid, Icon, Aside, Steps, LinkButton } from '@astrojs/starlight/components';
+import Link from '/public/snippets/anchors.astro';
+import * as globals from '/public/globals.js'
+
+<CardGrid>
+<Card title='Purpose' icon='information'>
+Learn about Arc XP and how it works
+</Card>
+<Card title='Audience' icon='star'>
+Developers interested in using the Arc XP platform
+</Card>
+</CardGrid>
+
+Arc XP is a comprehensive cloud-native digital experience platform that helps medium to large organizations build, manage, and deliver content across multiple channels.
+
+The Arc XP platform is built on AWS backend services and leverages <Link blank href="https://www.akamai.com/" text="Akamai's Content Delivery Network" /> (CDN). This introduction presents key information about Arc XP's architecture, core features, and functionalities.
+
+
+
+:::tip[Tips]
+- To discover if Arc XP suits your business needs and strategy, visit <Link blank href="https://www.arcxp.com/" text="ArcXP.com" />
+- To test Arc XP's core functionalities on your local machine, visit <Link href={`${globals.tutorialsQuickStartPath}/set-up-your-dev-playground`} text='Setting Up Your Dev Playground' /> 
+- To see non-developer product documentation, visit <Link blank href='https://docs.arcxp.com/' text='Arc Learning Center' />
+:::
+
+## High-Level Architecture
+
+**Figure 1** shows a high-level architecture diagram of the Arc XP platform. Arc XP relies on microservices or components running on AWS infrastructure and uses server-side rendering.
+
+
+![Arc XP Platform Architecture](/images/tutorials/ArcXPHighLevelArchitecture.png)
+<p style="text-align:center; font-weight:bold;"> Figure 1. Arc XP Platform Architecture</p>
+
+The Arc XP team handles the AWS infrastructure and provides customers with a Graphical User Interface (GUI) to manage key components. Customers also get access to the components' APIs for development using the <Link blank href='https://react.dev/' text='React' /> framework.
+
+Arc XP offers role-based access control with Okta authentication for enhanced security. Administrators grant different access levels to different roles:
+
+- Customer Support Representatives (CSR)
+- Authors
+- Editors
+
+## Core Components
+The Arc XP platform relies on microservices or components grouped according to features and functionalities. The following sections provide an overview of each component and its key features.
+
+<details>
+<summary style="font-size:20px;">Content Management</summary>
+Content Management components control the creation, processing, and storage of articles and media assets within the Arc XP platform.
+<CardGrid>
+   <Card title="Composer" icon="pencil">
+      Central authoring tool for creating and editing content. Composer enables authors to write stories, add internal memo notes, and keep a content revision history.
+      <details>
+      <summary style>See more features</summary>
+
+      - Flexible content types supporting articles, images, videos, and galleries
+      - Rich text editing with customizable templates
+      - Media asset management with automatic optimization
+
+      </details>
+      <br />
+      <Link blank href={`${globals.composerDevDocsPath}/how-fields-in-the-composer-ui-map-to-ans`} text='See Composer documentation' />
+   </Card>
+   <Card title="Photo Center" icon="seti:image">
+      Image management and optimization tool. Photo Center enables authors, photographers, and illustrators to upload, edit, organize, optimize, and reuse images across stories and galleries.
+      <br />
+      <Link blank href={`${globals.photoCenterDevDocsPath}/how-to-upload-an-image-using-photo-api`} text='See Photo Center documentation' />
+   </Card>
+   <Card title="Video Center" icon="seti:video">
+      Video content management and streaming tool. Video Center enables authors to upload videos, create live streams, and playlists, and monitor video engagement with real-time analytics.
+      <br />
+      <Link blank href={`${globals.videoCenterDevDocsPath}/getting-started-with-the-video-module`} text='See Video Center documentation' />
+   </Card>
+   <Card title="Websked" icon="seti:clock">
+      Content planning and distribution workflow tool. Websked enables editors to plan and schedule content distribution, create tasks, and send email and Slack notifications to authors.
+      <br />
+      <Link blank href={`${globals.webskedDevDocsPath}/websked-machine-readable-events`} text='See Websked documentation' />
+   </Card>
+</CardGrid>
+</details>
+
+<details>
+<summary style="font-size:20px;">Frontend Rendering and Development</summary>
+Frontend Rendering and Development components provide users and developers with tools to customize their Arc XP experience.
+<CardGrid>
+   <Card title="PageBuilder Engine" icon="seti:react">
+      Core rendering technology with component-based architecture using React. PageBuilder Engine enables developers to integrate and deploy custom content blocks through bundles.
+      <br />
+      <Link blank href={`${globals.pbEngineDevDocsPath}/how-does-rendering-work-in-pagebuilder-engine`} text='See PageBuilder Engine documentation' />
+   </Card>
+   <Card title="PageBuilder Editor" icon="document">
+      Visual interface for creating and managing pages. PageBuilder Editor enables editors to drag and drop components and select content sources to create pages.
+      <br />
+      <Link blank href={`${globals.pbEditorDevDocsPath}/syncing-pagebuilder-data-across-environments`} text='See PageBuilder Editor documentation' />
+   </Card>
+  <Card title="Mobile SDKs" icon="rocket">
+      Native app development tools for iOS and Android. Our Mobile SDKs are open to the Arc XP community and are at the core of our Open Source Initiative.
+      <br />
+      <Link blank href={`${globals.mobileDevDocsPath}/arc-xp-mobile-documentation-index`} text='See Mobile SDKs documentation' />
+   </Card>
+   <Card title="Themes" icon="puzzle">
+      Framework for building and customizing websites. Themes enables editors to change the styling and layouts of Arc XP's Out-of-the-Box content blocks.
+      <br />
+      <Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-20-design-system-developer-guide`} text='See Themes documentation' />
+   </Card>
+</CardGrid>
+</details>
+
+<details>
+<summary style="font-size:20px;">Content Distribution</summary>
+Content Distribution components control how Arc XP content reaches final users.
+<CardGrid>
+   <Card title="Content API" icon="open-book">
+      Primary interface for accessing reader-facing content. Content API offers content filtering and metadata for embedded media in stories.
+      <br />
+      <Link blank href={`${globals.contentApiPath}`} text='See Content API documentation' />
+   </Card>
+   <Card title="View API" icon="magnifier">
+      Headless interface for accessing reader-facing content. View API is a high-performance and read-only API to deliver content to web and mobile platforms when speed is a priority.
+      <br />
+      <Link blank href={`${globals.viewApiPath}`} text='See View API documentation' />
+   </Card>
+   <Card title="Web Delivery" icon="laptop">
+      CDN integration and content delivery optimization. Akamai's global CDN ensures scalable content availability and speed to serve all your users.
+   <details>
+      <summary>See more features</summary>
+
+      - Intelligent caching system
+      - Edge computing capabilities
+      - SEO optimization features
+
+      </details>
+      <br />
+      <Link blank href={`${globals.webDeliveryDevDocsPath}/real-user-monitoring-beacons-and-maintaining-regulatory-compliance`} text='See Web Delivery documentation' />
+
+   </Card>
+   <Card title="Analytics and Optimization" icon="seti:code-search">
+      Custom analytics reporting tools. Arc XP supports A/B testing capabilities, content testing with Bandito, and personal recommendations via Clavis.
+      <br />
+      <Link blank href={`${globals.arcIntelligenceDevDocsPath}/developer-guide-to-bandito`} text='See Analytics and Optimization documentation' />
+
+   </Card>
+</CardGrid>
+</details>
+
+<details>
+<summary style="font-size:20px;">Account Management</summary>
+Account Management components control final user subscriptions, access, and monetization.
+<CardGrid>
+   <Card title="Subscriptions" icon="pencil">
+      User identity, access management, and monetization. Subscriptions enables customer support representatives to manage user accounts and sales representatives to create digital products that generate revenue.
+      <br />
+      <Link blank href={`${globals.subscriptionsSalesPath}/learn/what-is-a-subscription`} text='See Subscriptions documentation' />
+   </Card>
+   <Card title="Identity Services" icon="seti:lock">
+      Authentication and authorization. Identity services enable administrators to manage and monitor access to the Arc XP platform. Arc XP leverages Okta authentication for enhanced security.
+      <br />
+      <Link blank href={`${globals.subscriptionsIdentityPath}`} text='See Identity Services documentation' />
+   </Card>
+</CardGrid>
+</details>
+
+## Get Started with Arc XP
+
+The full-featured Arc XP platform is only available to signed customers, but any developer can try the <Link blank href='https://www.npmjs.com/package/@arc-fusion/cli?activeTab=readme' text='Arc Fusion CLI' /> for free. The Arc Fusion CLI includes a local server for PageBuilder Engine and PageBuilder Editor. The Arc Fusion CLI enables developers to test Arc XP's core functionalities and develop custom content blocks.
+
+<LinkButton href={`${globals.tutorialsQuickStartPath}/set-up-your-dev-playground`}>Setting Up Your Dev Playground</LinkButton>
+
+### Becoming an Arc XP Customer
+
+When you become our customer, Arc XP provides a dedicated Arc XP instance to which you can link your GitHub repository.
+
+To start creating, publishing, and developing in the Arc XP platform, take the following steps:
+
+
+1. **Get access and permissions to your Arc XP instance**
+   - Obtain necessary access credentials through <Link blank href='https://support.arcpublishing.com/' text='Arc XP Customer Support' />.
+   - Review role-based permissions.
+   - Create developer tokens to access Arc XP's APIs.
+
+2. **Configure a development environment**
+   - Configure your local development setup.
+   - Install required SDKs and tools.
+   - Set up API and SDK access tokens.
+
+3. **Explore the Arc XP User Interface**
+   - Explore dedicated sections for core components.
+   - Understand the relationship between components.
+   - Review available documentation and resources.
+
+
+## Next Steps
+
+Once you get familiar with the Arc XP platform, you can:
+
+- Explore detailed component documentation.
+- Review how-to guides for specific tasks.

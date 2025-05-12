@@ -1,0 +1,47 @@
+---
+title: Using Service Workers with PageBuilder Engine
+description: Using Service Workers with PageBuilder Engine
+lastUpdated: 2023-07-18T21:21:48.000Z
+migrationData:
+  short_description: Using Service Workers with PageBuilder Engine
+  number: KB0010424
+  sys_id: a349476e4788f590eee38788436d4302
+  sys_created_on: '2023-07-18 17:20:52'
+  sys_updated_on: '2023-07-18 17:21:48'
+  sys_created_by: Adam.Evans@washpost.com
+  sys_updated_by: Adam.Evans@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: 'PageBuilder Engine, service workers, scripts, resources, '
+  topic: General
+  sys_view_count: 219
+  helpful_count: 0
+  version: a589cb6e4788f590eee38788436d4335
+  display_number: KB0010424 v2.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.295Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+PageBuilder Engine developers often find themselves wanting to implement the latest and greatest technologies in their PageBuilder Engines applications. This document covers <Link blank href='https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API' text='Service Workers' />, which act as proxies between your apps and the external services they use.
+
+:::caution[Important]
+In order to enable this functionality on your CDN, you will need to create a ticket requesting it.
+:::
+
+We've provided some specific behavior in PageBuilder Engine that is specifically intended to support serving up service worker scripts. Service worker scripts kept in the `resources` directory of your PageBuilder Engine feature pack are automatically stored and served directly from S3, speeding up the delivery of those script assets.
+
+Additionally, we've set up the server to simplify the work needed to pull down those service worker scripts. If a request is made for a `.js` file from the root domain without an `outputType` query param (for example, `[https://www.yourcontextroot.com/sw.js](https://www.yourcontextroot.com/sw.js)` or just `/sw.js`), our server will automatically look for for the file that is placed at `resources/sw.js` in your repo and serve that file. You don't need to concern yourself with figuring out the correct path to get that `.js` file to the front-end.
+
+For a service worker script located in `resources/sw.js` in your repo all you'll need to do to install and register that service worker script is to call something like `navigator.serviceWorker.register('{deployment(/sw.js)}')` (the deployment ID must still be appended) and it will automatically get pulled down from S3. Since all static resources are specific to a deployment, service worker scripts must also have a deploymentID param appended.
+
+:::note
+As of the time of writing this special routing has only been created for files ending in `.js` without an `outputType` query param. No such similar routing has been done for any other type of file in `resources`.
+:::
+

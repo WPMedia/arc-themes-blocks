@@ -1,0 +1,41 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-numbered-stories {
+  @include scss.block-components("numbered-stories");
+  @include scss.block-properties("numbered-stories");
+
+  &__stories-grid {
+    @include scss.block-components("numbered-stories-grid");
+    @include scss.block-properties("numbered-stories-grid");
+  }
+
+  &__story-item {
+    @include scss.block-components("numbered-stories-item");
+    @include scss.block-properties("numbered-stories-item");
+  }
+
+  &__number {
+    @include scss.block-components("numbered-stories-number");
+    @include scss.block-properties("numbered-stories-number");
+  }
+
+  &__image {
+    @include scss.block-components("numbered-stories-image");
+    @include scss.block-properties("numbered-stories-image");
+  }
+
+  &__headline {
+    @include scss.block-components("numbered-stories-headline");
+    @include scss.block-properties("numbered-stories-headline");
+  }
+
+  &__subheadline {
+    @include scss.block-components("numbered-stories-subheadline");
+    @include scss.block-properties("numbered-stories-subheadline");
+  }
+
+  &__author {
+    @include scss.block-components("numbered-stories-author");
+    @include scss.block-properties("numbered-stories-author");
+  }
+} 

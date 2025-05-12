@@ -1,0 +1,42 @@
+import { Meta, Story } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import formatAuthors from ".";
+
+<Meta of={IndexStories} />
+
+# Serial Join
+
+The `formatAuthors()` function takes in an array of author objects and returns an array of nodes of linked and unlinked authors (based on the data provided) using the serial comma (Oxford comma) rules.
+
+## Usage
+
+```jsx
+import formatAuthors from "./formatAuthors";
+
+const htmlString = formatAuthors(globalContent.credits.by);
+```
+
+## Properties
+
+| Name        | Description                                                   | Default |
+| ----------- | ------------------------------------------------------------- | ------- |
+| **authors** | An array of `by-object`s from an `ans-item` `credits` object. | \[]     |
+
+## Stories
+
+### One item
+
+<Story of={IndexStories.OneItem} />
+
+### Two items
+
+<Story of={IndexStories.TwoItems} />
+
+### Three items
+
+<Story of={IndexStories.ThreeItems} />
+
+### Three items, with a custom conjunction
+
+<Story of={IndexStories.ThreeItemsWithACustomConjunction} />

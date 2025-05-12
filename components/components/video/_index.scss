@@ -1,0 +1,26 @@
+@use "../../scss";
+
+.c-video {
+	// first take in the default component aspect-ratio
+	// includes a fallback if no aspect ratio is specified
+	// default of 16:9 from engine-theme-sdk
+	--aspect-ratio: var(--c-video-aspect-ratio, 16 / 9);
+
+	// height is used a percentage of the viewport per the requirements
+	// default of 65 from engine-theme-sdk
+	--height: var(--c-video-height, 65);
+
+	aspect-ratio: var(--aspect-ratio);
+	// convert to vh via * 1vh
+	max-block-size: calc(var(--height) * 1vh);
+
+	&__frame {
+		&:has(.powa-vertical) {
+			@include scss.component-properties("vertical-video-frame");
+		}
+
+		@include scss.component-properties("video-frame");
+	}
+
+	@include scss.component-properties("video");
+}

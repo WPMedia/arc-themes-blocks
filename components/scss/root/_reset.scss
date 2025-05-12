@@ -1,0 +1,79 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 1em;
+	vertical-align: baseline;
+	box-sizing: border-box;
+
+	&::before,
+	&::after {
+		font: inherit;
+	}
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+html {
+	min-height: 100vh;
+}
+html,
+body {
+	height: 100%;
+	line-height: 1.5;
+}
+blockquote,
+q {
+	quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: "";
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+	display: inline-block;
+	min-width: 0;
+	max-width: 100%;
+	vertical-align: middle;
+}
+ul[role="list"],
+ol[role="list"] {
+	list-style: none;
+}
+a {
+	text-decoration-skip-ink: auto;
+}
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+strong {
+	font-weight: bold;
+}
+
+em {
+	font-style: italic;
+}

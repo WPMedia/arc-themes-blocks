@@ -1,0 +1,56 @@
+import LazyLoad from ".";
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+<Meta of={IndexStories} />
+
+# LazyLoad
+
+The `LazyLoad` component is used to add lazy-loading functionality to any valid React component by wrapping the target component as a child. This allows the child component to only load once the reader has scrolled to within a certain threshold of the component. Once they have passed this threshold while scrolling, the child component will by loaded.
+
+## Lazy Loading
+
+This component uses [`lazy-child`](https://www.npmjs.com/package/lazy-child) which has a dependency on IntersectionObserver which is not supported in all browsers [see support](https://caniuse.com/#feat=intersectionobserver) - if you need to support browsers that do not have IntersectionObserver you will need to use a polyfill. The IntersectionObserver polyfill is already included with the theme blocks output types.
+
+The lazyOptions param object allows for checks against the bottom, left, right and top.
+The default is 0 for all 4 options. By adjusting those values, you can force an image to load sooner or later as it approaches the viewport. You also have an option of specifying a custom `throttle` prop that allows you to modify the rate at which the scroll value is recalculated.
+
+# Use
+
+Import it into a block:
+
+```
+import { LazyLoad } from '@wpmedia/arc-themes-components';
+
+...
+
+const ChildComponent = () => <div id="test-child-component" />;
+
+<LazyLoad
+  enabled={true}
+  offsetTop={200}
+  offsetBottom={200}
+  offsetLeft={0}
+  offsetRight={0}
+  throttle={50}
+>
+  <ChildComponent />
+</LazyLoad>
+
+...
+
+```
+
+# ArgsTable
+
+<Controls />
+
+## Stories
+
+### Basic
+
+<Story of={IndexStories.Basic} />
+
+### With custom fields
+
+<Story of={IndexStories.WithCustomFields} />

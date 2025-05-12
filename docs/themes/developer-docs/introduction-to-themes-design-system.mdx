@@ -1,0 +1,2601 @@
+---
+title: Introduction to Themes design system
+description: Introduction to Themes design system
+lastUpdated: 2025-03-24T01:08:08.000Z
+migrationData:
+  short_description: Introduction to Themes 2.0 Design System - Developer Guide
+  number: KB0011205
+  sys_id: 197569b6c3409210a046930a0501312f
+  sys_created_on: '2024-08-19 21:05:23'
+  sys_updated_on: '2024-08-19 21:08:08'
+  sys_created_by: denise.rodriguez@washpost.com
+  sys_updated_by: denise.rodriguez@washpost.com
+  author: 13c389ea47ee5550a87626c2846d4300
+  category: Themes
+  kb: Developer Docs
+  kb_category: ba320d8b47dad110a87626c2846d4317
+  meta: themes, developer, blocks styling, design system
+  topic: General
+  sys_view_count: 2288
+  helpful_count: 0
+  version: 5d1629f6c3409210a046930a05013174
+  display_number: KB0011205 v16.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-10-15T17:18:05.451Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+Arc XP blocks using Themes 2.0 is a comprehensive solution for Arc XP developers to rapidly build, style, and manage websites. Themes 2.0 is an evolution on Arc XP's pre-built blocks, pages, templates, layouts, and resolvers to streamline website development.
+
+The new architecture in Themes 2.0 enables styling of out-of-the-box blocks along with offering a set of atomic components for you to style and compose within your custom blocks. The robust design system based on global tokens, breakpoints, and alias tokens gives you a flexible and scalable solution to create consistent, professional-looking websites with ease.
+
+## Basics
+
+By familiarizing yourself with the folder and file structure of the Arc XP Themes design system, you can quickly find the files you need to make changes to your website's styles and design.
+
+:::note
+To see your style changes reflected, you must run your bundle locally first to build those styles. After running locally, you may upload the updated bundle for deployment. Styles will not be built during a Theme Settings or PageBuilder deployment, so they must be run locally first.  
+:::
+
+### Themes 2.0 design system files
+
+To help you apply styling to specific blocks and components, we created a file structure that allows you to target and define the global tokens, breakpoints, alias tokens, block styles, and component styles used throughout your website. To make changes to these styles, you must access the appropriate files in the `themes` folder within your Arc Themes Feature Pack repository.
+
+The root of your `arc-themes-feature-pack` will need to include:
+
+```bash
+|-- themes
+    |-- styles
+        |-- alias.json
+        |-- blocks.json
+        |-- breakpoints.json
+        |-- components.json
+        |-- global.json
+```
+
+- The `themes` folder is the root of the design system.
+- The `styles` folder within the `themes` folder contains the key design system files, including:
+  - `alias.json`: Defines alias tokens for your styles, allowing you to reuse values throughout your styles.
+  - `blocks.json`: Defines custom styles for individual Blocks within your website. Additionally, this folder can be used to apply styles to components for a single block.
+  - `breakpoints.json`: Defines the breakpoints for your website, allowing you to apply different styles based on screen size.
+  - `components.json`: Defines custom styles for individual Components used across your website.
+  - `global.json`: Defines global styles and tokens for your website, including colors, typography, and spacing.
+
+### Feature pack structure
+
+This provides a visual summary of the entire feature pack folder and file structure for better understanding (including multi-site styles):
+
+```bash
+|-- components
+|-- content
+|-- data
+|-- environment
+|-- resources
+|-- themes
+    |-- styles
+        |-- alias.json
+        |-- blocks.json
+        |-- breakpoints.json
+        |-- components.json
+        |-- global.json
+    |-- sites (optional)
+        |-- {siteId}
+            |-- styles
+                |-- alias.json
+                |-- blocks.json
+                |-- breakpoints.json
+                |-- components.json
+                |-- global.json
+```
+
+When running `npx fusion start`, there will be a watcher running against changes to these files, automatically generating your stylesheet for PageBuilder Engine to pick up on.
+
+## Tokens
+
+### Background on design tokens
+
+- Abstracted, reusable variables that encapsulate the visual properties of a design system. They are typically used in web development and UI engineering to ensure consistency and scalability across all interfaces and platforms.
+- Include values such as font sizes, colors, spacing, and other properties that define the visual characteristics of a design system. By abstracting these values into tokens, designers and developers can create a shared language for the design system, ensuring that all elements within the system are consistent in their appearance and behavior.
+- Typically stored in a centralized location, such as a JSON file, and are accessed by developers using a tokenization tool or library. This allows developers to easily apply design values to user interfaces and ensures that any changes to the design system can be made in a single location and propagated throughout the system.
+
+### Arc XP's design tokens
+
+The Arc Themes design system allows you to manage the look and feel of your website with ease. This system is based on the use of tokens, which provide a flexible and scalable way to define and manage your styles. When you need to update the look and feel of your website, you can simply update the values of your tokens and the changes will be automatically applied throughout your site. There are two primary design tokens to consider: global and alias tokens, but there are additional concepts to tie this all together.
+
+#### Global tokens
+
+Global tokens are the primitive values of your design system. They define the values for key design elements such as colors, typography, spacing, and more. The global tokens are stored in a `global.json` file and are defined as key-value pairs, with the key being the name of the token and the value being its corresponding value.
+
+In the `global.json` file, each level refers to a specific category or type of design property.
+
+The first level, or the top-level keys, generally define broad categories such as colors, typography, or spacing.
+
+The second level, or the sub-keys, represent specific variations or properties within each category. For example, within the "colors" category, sub-keys could include "primary," "secondary," "background," "text," and so on.
+
+By organizing design properties into these two levels, designers and developers can easily reference and apply them throughout the design system, ensuring consistency and scalability across all interfaces and platforms.
+
+For example, you might define a global token for your primary color like this:
+
+```json
+{
+  "color-primary": "rgb(0 0 100)"
+}
+```
+
+By defining your global tokens in a centralized location, you can ensure that your design system is consistent and easy to manage.
+
+### Using a global token
+
+#### **Token Identifier**
+
+After defining tokens in the `global.json`, you can then use those throughout your design system by prefixing a `$` identifier to the value. In the case of a global token it would follow this pattern (given the json path and value in the above `global.json` example).
+
+```
+"$global.color-primary"
+```
+
+### Alias Tokens
+
+Alias tokens are references to other tokens, such as global tokens. They allow you to create more complex styles by reusing existing tokens and defining new ones. The alias tokens are stored in an `alias.json` file and are defined as key-value pairs, with the key being the name of the alias token and the value being a reference to another token (using the token identifier syntax).
+
+For example, you might define an alias token for your primary color that refers to your global primary color token:
+
+```
+"primary-color": "$global.color-primary"
+```
+
+By using alias tokens as values in your styles, you can ensure that your design system is consistent, flexible, and easy to manage.
+
+:::note
+The `$` symbol is necessary for the Arc Themes design system to treat the token as a value, rather than a string. When the platform transforms your styles from JSON to SCSS, it will automatically convert your alias tokens into valid CSS variables, like this:
+:::
+
+```css
+.block-classname {
+  background-color: var(--global-color-primary);
+}
+```
+
+### Custom block styling tokens
+
+For details on creating tokens for custom block styling, see <Link blank href={`${globals.themesDevDocsPath}/creating-a-custom-block-with-styling/#creating-tokens/`} text='Creating a custom block with styling' />.
+
+### Breakpoints
+
+The Arc Themes platform allows you to define breakpoints for your website, so you can apply different styles for different screen sizes. The breakpoints are stored in a `breakpoints.json` file and are defined as key-value pairs, with the key being the name of the breakpoint and the value being the corresponding media query.
+
+For example, you might define a mobile first set of breakpoints like this:
+
+```json
+{
+  "default": "min-width: 0",
+  "desktop": "min-width: 48rem"
+}
+```
+
+In this example, we have defined two breakpoints: "default" and "desktop". The "default" breakpoint corresponds to the default styles for your website, which will be applied when the screen size is 0 or greater. The "desktop" breakpoint corresponds to styles that will be applied when the screen size is 48rem or greater.
+
+The breakpoints you define in your `breakpoints.json` file can be used in conjunction with the alias tokens defined in your `alias.json` file (more on that below). For example, you might define different primary colors for desktop and mobile devices like this:
+
+```json
+{
+  "default": {
+    "primary-color": "$global.color-blue"
+  },
+  "desktop": {
+    "primary-color": "$global.color-blue-50"
+  }
+}
+```
+
+In this example, the primary color for desktop devices will be "$global.color.blue-50", while the primary color for all other devices will be "$global.color.blue".
+
+By defining your breakpoints and making use of alias tokens, you can ensure that your website provides an optimal experience for users on different devices and makes full use of the Arc Themes design system.
+
+### Tying it all together
+
+Here's an example to tie the key concepts together:
+
+```json
+// breakpoint.json
+{
+  "default": "min-width: 0",
+  "desktop": "min-width: 48rem",
+}
+
+// global.json
+  // ...other tokens
+  "typography-font-weight-7": 700,
+  // ...
+  "typography-font-size-1": "0.625rem",
+  "typography-font-size-2": "0.75rem",
+  // ...
+  "typography-line-height-3": 1.2,
+  "typography-line-height-4": 1.3,
+  ...
+}
+
+// alias.json
+{
+  "default": {
+    "heading-level-1-font-size": "$global.typography-font-size-12",
+    "heading-level-1-line-height": "$global.typography.line-height-3",
+    "heading-level-1-font-weight": "$global.typography-font-weight-7",
+    "heading-level-2-font-size": "$global.typography-font-size-11",
+    "heading-level-2-line-height": "$global.typography-line-height-4",
+    "heading-level-2-font-weight": "$global.typography-font-weight-7",
+  },
+  "desktop": {
+    "heading-level-1-font-size": "$global.typography-font-size-15",
+    "heading-level-2-font-size": "$global.typography-font-size-14",
+    "heading-level-2-line-height": "$global.typography-line-height-3",
+  },
+}
+```
+
+### Wrap-up
+
+Global tokens are key-values in a design system that define important design elements such as colors, typography, and spacing. These tokens are stored in a `global.json` file as key-value pairs organized into two levels, with the top-level keys representing broad categories and sub-keys representing specific variations or properties.
+
+Alias tokens enable you to assign your global token values by breakpoint as alias keys in your `alias.json` that you can then use in your component and block styles, while allowing you to provide different styles for different screen sizes.
+
+This approach to defining design tokens keeps you aligned with industry best practices for creating scalable and maintainable design systems. By using global and alias tokens, you can ensure that your design system is flexible, consistent, and easy to manage, making it easier for you to create and maintain a professional-looking website.
+
+### Learn more about design systems
+
+- <Link blank href='https://github.com/styled-system/styled-system?tab=readme-ov-file#styled-system' text='Styled System' />: Styled System is a library for building design systems with React that makes use of global and alias tokens. This library is widely used and well-regarded in the React development community and provides a great example of how global and alias tokens can be used in practice.
+- <Link blank href='https://bradfrost.com/blog/post/atomic-web-design/' text="Brad Frost's Atomic Design" />: Brad Frost's Atomic Design methodology provides a comprehensive approach to building design systems that includes the use of global and alias tokens. This approach has been widely adopted and is considered a best practice for creating scalable and maintainable design systems.
+
+{/* The InVision Design System Manager is now discontinued*/}
+{/* 3. <Link blank href='https://support.invisionapp.com/hc/en-us/articles/360049483352' text='InVision Design System Manager' />: InVision Design System Manager is a platform for managing design systems that includes support for global and alias tokens. This platform is widely used by design teams and provides a great example of how global and alias tokens can be used in a real-world context. */}
+
+:::note
+Many design systems make use of global and alias tokens, but there is no widely-adopted standard for how these tokens should be defined or used. Each design system may have its own conventions and implementation details, and there may be variations in how different systems handle things like naming conventions, syntax, and file structures.
+:::
+
+## Components
+
+In Themes V2, we introduce the concept of **components** to Arc Themes Blocks. Much like in React, these are reusable pieces of code that provide the core UI elements for the blocks. These components minimize business logic, rather they are a means of providing common features that are to be reused between blocks. For example, a block that displays a news article might include components for the headline, author, date, featured image, and body. Using these components across blocks also provides a way for styles to be applied consistently across the site.
+
+### Anatomy
+
+Here we have an Arc `<Heading />` React component, the notable item with this code block is `COMPONENT_CLASS_NAME = "c-heading"`. This is the connection to the specific DOM element that would receive styles you can define against. There is also a `ClassName` prop that will be concatenated with the `COMPONENT_CLASS_NAME`, allowing you to add your own class to a component.
+
+```js
+// arc-themes-components/src/headings/heading/index.jsx
+import PropTypes from "prop-types";
+import LevelContext from "../context";
+
+const COMPONENT_CLASS_NAME = "c-heading";
+
+const Heading = ({ className, children, truncationLines, ...rest }) => (
+	<LevelContext.Consumer>
+		{(level) => {
+			// max heading level is 6
+			const HeadingTag = `h${Math.min(level, 6)}`;
+
+			return (
+				<HeadingTag
+					{...rest}
+					style={{ "--heading-truncation": truncationLines > 0 ? truncationLines : null }}
+					className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
+				>
+					{children}
+				</HeadingTag>
+			);
+		}}
+	</LevelContext.Consumer>
+);
+
+Heading.propTypes = {
+	/** Class name(s) that get appended to default class name of the component */
+	className: PropTypes.string,
+	/** The text, images or any node that will be displayed within the component */
+	children: PropTypes.node.isRequired,
+	/** Number of lines to show before being truncated and augmented with ellipses.
+	 	Default value is `0` and results in no truncation of content.
+	 */
+	truncationLines: PropTypes.number,
+};
+
+export default Heading;
+```
+
+### Styling
+
+:::caution[important]
+With the update to support RTL languages, Themes 2.1.3+ uses <Link blank href='https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values' text='CSS logical properties' />. These properties will conflict with older, physical and shorthand CSS properties causing unexpected results. If you are using custom styling in your blocks, you must update properties, such as using `inline-size` / `max-inline-size`, instead of  `width` /`max-width` . For a full list of properties and values, see CSS logical properties and their older equivalents is <Link blank href='https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values/' text='CSS logical properties and values ' />.
+:::
+
+In the Project Structure guide we described having a `components.json` file where you can define styles. Below are example styles that could be defined for the `<Heading />` component.
+
+```json
+// arc-themes-feature-pack/themes/styles/components.json
+{
+	"heading": {
+		"styles": {
+			"default": {
+				"font-weight": "$heading-level-5-font-weight",
+				"line-height": "$heading-level-4-line-height"
+			},
+			"desktop": {
+				"font-weight": "$heading-level-1-font-weight",
+				"line-height": "$heading-level-1-line-height",
+			}
+		}
+	}
+}
+```
+
+### Component tokens
+
+Below is the full list of components and their corresponding tokens which are available for styling.
+
+<details>
+
+<summary><strong>Components</strong></summary>
+
+<details>
+<summary>attribution</summary>
+
+- attribution
+- attribution-link
+- attribution-link-hover
+- attribution-link-active
+- attribution-link-visited
+
+</details>
+
+<details>
+<summary>badge</summary>
+
+- badge
+- badge-default
+- badge-light
+- badge-primary
+- badge-danger
+- badge-warning
+- badge-success
+
+</details>
+
+<details>
+<summary>button</summary>
+
+- button
+- button-hover
+- button-active
+- button-focus
+- button-disabled
+- button-link
+- button-full-width
+- button-default
+- button-primary
+- button-primary-reverse
+- button-secondary
+- button-secondary-reverse
+- button-small
+- button-medium
+- button-large
+- button-disabled-hover
+- button-disabled-active
+- button-link-hover
+- button-link-active
+- button-default-hover
+- button-default-active
+- button-primary-hover
+- button-primary-active
+- button-primary-reverse-hover
+- button-primary-reverse-active
+- button-secondary-hover
+- button-secondary-active
+- button-secondary-reverse-hover
+- button-secondary-reverse-active
+- button-small-hover
+- button-small-active
+- button-medium-hover
+- button-medium-active
+- button-large-hover
+- button-large-active
+
+</details>
+
+<details>
+<summary>carousel</summary>
+
+- controls
+- carousel
+- indicators
+- carousel-image-counter
+- carousel-fullscreen
+- carousel-fullscreen-image-counter
+- carousel-track
+- carousel-slide
+- carousel-actions
+- carousel-controls
+- carousel-button
+- carousel-button-next
+- carousel-button-previous
+- carousel-button-additional-previous
+- carousel-button-additional-next
+- carousel-button-enter-full-screen
+- carousel-button-exit-full-screen
+- carousel-button-toggle-auto-play
+- carousel-additional-controls
+- carousel-counter-controls-container
+- carousel-expand-autoplay-container
+- carousel-backdrop
+- carousel-indicator-dots-container
+- carousel-indicator-dot-active
+- carousel-indicator-dot
+- carousel-indicator-thumbnails-container
+- carousel-indicator-thumbnail-active
+- carousel-indicator-thumbnail
+
+</details>
+
+<details>
+<summary>date</summary>
+
+- date
+
+</details>
+
+<details>
+<summary>details</summary>
+
+- details-summary
+- details-summary-text
+- details-summary-icon
+- details-with-icon-summary
+- details-with-icon-summary-text
+- details-with-icon-summary-icon
+- details-with-icon-open
+- details-with-icon-open-summary-text
+- details-with-icon-open-summary-icon
+- details-with-icon
+- details-open
+- details-open-summary
+- details-open-summary-text
+- details-open-summary-icon
+- details-content
+- details
+
+</details>
+
+<details>
+<summary>divider</summary>
+
+- divider
+
+</details>
+
+<details>
+<summary>grid</summary>
+
+- grid
+
+</details>
+
+<details>
+<summary>headings</summary>
+
+- heading
+
+</details>
+
+<details>
+<summary>icon</summary>
+
+- icon
+
+</details>
+
+<details>
+<summary>image</summary>
+
+- image
+
+</details>
+
+<details>
+<summary>input</summary>
+
+- input
+- input-input
+- input-label
+- input-tip
+- input-small
+- input-small-input
+- input-small-label
+- input-small-tip
+- input-default
+- input-default-input
+- input-default-label
+- input-default-tip
+- input-error
+- input-error-input
+- input-error-label
+- input-error-tip
+- input-success
+- input-success-input
+- input-success-label
+- input-success-tip
+- input-warning
+- input-warning-input
+- input-warning-label
+- input-warning-tip
+- input-input-focus
+- input-small-input-focus
+- input-default-input-focus
+- input-error-input-focus
+- input-success-input-focus
+- input-warning-input-focus
+
+</details>
+
+<details>
+<summary>link</summary>
+
+- link
+- link-hover
+- link-active
+- link-visited
+
+</details>
+
+<details>
+<summary>media-item</summary>
+
+- media-item
+- media-item-fig-caption
+- media-item-title
+- media-item-caption
+- media-item-credit
+
+</details>
+
+<details>
+<summary>overline</summary>
+
+- overline
+- overline-hover
+- overline-active
+- overline-visited
+- overline-focus
+
+</details>
+
+<details>
+<summary>paragraph</summary>
+
+- paragraph
+
+</details>
+
+<details>
+<summary>picture</summary>
+
+- picture
+
+</details>
+
+<details>
+<summary>pill</summary>
+
+- pill
+- pill-hover
+- pill-active
+- pill-visited
+- pill-focus
+
+</details>
+
+<details>
+<summary>price</summary>
+
+- price-list
+- price-sale
+- price
+
+</details>
+
+<details>
+<summary>separator</summary>
+
+- separator
+
+</details>
+
+<details>
+<summary>stack</summary>
+
+- stack
+- true
+- vertical
+- horizontal
+- stack-divider-vertical
+- stack-divider-horizontal
+- start
+- center
+- end
+- nowrap
+- wrap
+- reverse
+
+</details>
+
+<details>
+<summary>video</summary>
+
+- video
+- video-frame
+
+</details>
+
+</details>
+
+### Component Usage
+
+Below is the full list of components and the corresponding blocks in which they are imported. Applying styles to a component will potentially impact all of the blocks listed for that component.
+
+<details>
+
+<summary><strong>Components</strong></summary>
+
+<details>
+<summary>Attribution</summary>
+
+- byline-block
+- card-list-block
+- extra-large-promo-block
+- large-promo-block
+- medium-promo-block
+- results-list-block
+- search-results-list-block
+- top-table-list-block
+
+</details>
+
+<details>
+<summary>Badge</summary>
+
+- video-player-block
+
+</details>
+
+<details>
+<summary>Button</summary>
+
+- alert-bar-block
+- header-nav-chain-block
+- hero-block
+- lead-art-block
+- product-gallery-block
+- quilted-image-block
+- results-list-block
+- search-results-list-block
+- share-bar-block
+
+</details>
+
+<details>
+<summary>Carousel</summary>
+
+- article-body-block
+- category-carousel-block
+- gallery-block
+- lead-art-block
+- product-assortment-carousel-block
+- product-gallery-block
+- story-carousel-block
+
+</details>
+
+<details>
+<summary>Conditional</summary>
+
+- article-body-block
+- author-bio-block
+- extra-large-manual-promo-block
+- extra-large-promo-block
+- full-author-bio-block
+- large-manual-promo-block
+- large-promo-block
+- medium-manual-promo-block
+- medium-promo-block
+- results-list-block
+- search-results-list-block
+- small-promo-block
+- top-table-list-block
+
+</details>
+
+<details>
+<summary>Date</summary>
+
+- card-list-block
+- date-block
+- extra-large-promo-block
+- large-promo-block
+- medium-promo-block
+- results-list-block
+- search-results-list-block
+- top-table-list-block
+- top-table-list-block
+
+</details>
+
+<details>
+<summary>Details</summary>
+
+- product-content-block
+
+</details>
+
+<details>
+<summary>Divider</summary>
+
+- article-body-block
+- divider-block
+- links-bar-block
+- results-list-block
+- search-results-list-block
+- top-table-list-block
+
+</details>
+
+<details>
+<summary>Grid</summary>
+
+- double-chain-block
+- footer-block
+- large-manual-promo-block
+- large-promo-block
+- product-gallery-block
+- quad-chain-block
+- small-manual-promo-block
+- small-promo-block
+- top-table-list-block
+- triple-chain-block
+
+</details>
+
+<details>
+<summary>Heading</summary>
+
+- article-body-block
+- author-bio-block
+- card-list-block
+- category-carousel-block
+- double-chain-block
+- extra-large-manual-promo-block
+- extra-large-promo-block
+- footer-block
+- full-author-bio-block
+- header-block
+- hero-block
+- large-manual-promo-block
+- large-promo-block
+- medium-manual-promo-block
+- medium-promo-block
+- numbered-list-block
+- product-assortment-carousel-block
+- product-information-block
+- quad-chain-block
+- quilted-image-block
+- results-list-block
+- search-results-list-block
+- section-title-block
+- simple-list-block
+- single-chain-block
+- small-manual-promo-block
+- small-promo-block
+- story-carousel-block
+- subheadline-block
+- tag-title-block
+- top-table-list-block
+- triple-chain-block
+- video-player-block
+
+</details>
+
+<details>
+<summary>HeadingSection</summary>
+
+- article-body-block
+- author-bio-block
+- card-list-block
+- category-carousel-block
+- double-chain-block
+- extra-large-manual-promo-block
+- extra-large-promo-block
+- footer-block
+- full-author-bio-block
+- header-block
+- hero-block
+- large-manual-promo-block
+- large-promo-block
+- medium-manual-promo-block
+- medium-promo-block
+- numbered-list-block
+- product-assortment-carousel-block
+- quad-chain-block
+- quilted-image-block
+- results-list-block
+- search-results-list-block
+- simple-list-block
+- single-chain-block
+- small-manual-promo-block
+- small-promo-block
+- story-carousel-block
+- subheadline-block
+- top-table-list-block
+- triple-chain-block
+- video-player-block
+
+</details>
+
+<details>
+<summary>Icon</summary>
+
+- alert-bar-block
+- article-body-block
+- author-bio-block
+- category-carousel-block
+- extra-large-promo-block
+- footer-block
+- full-author-bio-block
+- gallery-block
+- header-nav-chain-block
+- large-promo-block
+- lead-art-block
+- medium-promo-block
+- product-assortment-carousel-block
+- product-content-block
+- product-gallery-block
+- search-results-list-block
+- share-bar-block
+- story-carousel-block
+- top-table-list-block
+
+</details>
+
+<details>
+<summary>Image</summary>
+
+- article-body-block
+- author-bio-block
+- card-list-block
+- category-carousel-block
+- extra-large-manual-promo-block
+- extra-large-promo-block
+- footer-block
+- full-author-bio-block
+- gallery-block
+- large-manual-promo-block
+- large-promo-block
+- lead-art-block
+- medium-manual-promo-block
+- medium-promo-block
+- numbered-list-block
+- product-assortment-carousel-block
+- product-featured-image-block
+- product-gallery-block
+- quilted-image-block
+- results-list-block
+- search-results-list-block
+- simple-list-block
+- small-manual-promo-block
+- small-promo-block
+- story-carousel-block
+- top-table-list-block
+
+</details>
+
+<details>
+<summary>Input</summary>
+
+- search-results-list-block
+
+</details>
+
+<details>
+<summary>Link</summary>
+
+- alert-bar-block
+- article-body-block
+- author-bio-block
+- card-list-block
+- category-carousel-block
+- extra-large-manual-promo-block
+- extra-large-promo-block
+- footer-block
+- full-author-bio-block
+- header-nav-chain-block
+- large-manual-promo-block
+- large-promo-block
+- links-bar-block
+- masthead-block
+- medium-manual-promo-block
+- medium-promo-block
+- numbered-list-block
+- product-assortment-carousel-block
+- quilted-image-block
+- results-list-block
+- search-results-list-block
+- section-title-block
+- simple-list-block
+- small-manual-promo-block
+- small-promo-block
+- story-carousel-block
+- top-table-list-block
+
+</details>
+
+<details>
+<summary>MediaItem</summary>
+
+- article-body-block
+- extra-large-manual-promo-block
+- extra-large-promo-block
+- footer-block
+- full-author-bio-block
+- gallery-block
+- large-manual-promo-block
+- large-promo-block
+- lead-art-block
+- medium-manual-promo-block
+- medium-promo-block
+- results-list-block
+- search-results-list-block
+- small-manual-promo-block
+- small-promo-block
+- top-table-list-block
+- video-player-block
+
+</details>
+
+<details>
+<summary>Overline</summary>
+
+- card-list-block
+- extra-large-manual-promo-block
+- extra-large-promo-block
+- large-manual-promo-block
+- large-promo-block
+- overline-block
+- results-list-block
+- search-results-list-block
+- top-table-list-block
+
+</details>
+
+<details>
+<summary>Paragraph</summary>
+
+- ads-block
+- article-body-block
+- author-bio-block
+- extra-large-manual-promo-block
+- extra-large-promo-block
+- footer-block
+- full-author-bio-block
+- hero-block
+- large-manual-promo-block
+- large-promo-block
+- masthead-block
+- medium-manual-promo-block
+- medium-promo-block
+- numbered-list-block
+- quilted-image-block
+- results-list-block
+- search-results-list-block
+- story-carousel-block
+- tag-title-block
+- top-table-list-block
+- video-player-block
+
+</details>
+
+<details>
+<summary>Picture</summary>
+
+- hero-block
+
+</details>
+
+<details>
+<summary>Pill</summary>
+
+- article-tag-block
+
+</details>
+
+<details>
+<summary>Price</summary>
+
+- product-assortment-carousel-block
+- product-information-block
+
+</details>
+
+<details>
+<summary>Separator</summary>
+
+- card-list-block
+- extra-large-promo-block
+- header-nav-chain-block
+- large-promo-block
+- links-bar-block
+- medium-promo-block
+- results-list-block
+- search-results-list-block
+- section-title-block
+- top-table-list-block
+
+</details>
+
+<details>
+<summary>Stack</summary>
+
+- ads-block
+- article-body-block
+- article-tag-block
+- author-bio-block
+- card-list-block
+- category-carousel-block
+- double-chain-block
+- extra-large-manual-promo-block
+- extra-large-promo-block
+- footer-block
+- full-author-bio-block
+- header-nav-chain-block
+- hero-block
+- large-manual-promo-block
+- large-promo-block
+- links-bar-block
+- masthead-block
+- numbered-list-block
+- product-assortment-carousel-block
+- product-gallery-block
+- product-information-block
+- quad-chain-block
+- quilted-image-block
+- results-list-block
+- search-results-list-block
+- section-title-block
+- share-bar-block
+- simple-list-block
+- single-chain-block
+- story-carousel-block
+- tag-title-block
+- top-table-list-block
+- triple-chain-block
+- video-player-block
+
+</details>
+
+<details>
+<summary>Video</summary>
+
+- article-body-block
+- extra-large-promo-block
+- large-promo-block
+- lead-art-block
+- top-table-list-block
+- video-player-block
+
+</details>
+</details>
+
+## Blocks
+
+Arc Themes Blocks are blocks available to editors to add to their pages and templates and house the needed logic, data fetching and custom fields. These blocks come out-of-the-box, and can be added to your bundle through the Themes Settings UI.
+
+Each Block is built using an atomic component architecture, which means that it is made up of re-usable components.
+
+### Anatomy
+
+In this example we're viewing a `<Byline />` block. It has imports from `@wpmedia/arc-themes-components` and it defines a `BLOCK_CLASS_NAME` which relates to the token that is used to define it's styles.
+
+```js
+// arc-themes-blocks/blocks/byline-block/features/byline/default.jsx
+import React from "react";
+import { useFusionContext } from "fusion:context";
+import { Attribution, formatAuthors, usePhrases } from "@wpmedia/arc-themes-components";
+
+const BLOCK_CLASS_NAME = "b-byline";
+
+const Byline = () => {
+	const { globalContent } = useFusionContext();
+	const phrases = usePhrases();
+	const bylineNodes = formatAuthors(globalContent?.credits?.by, phrases.t("global.and-text"));
+
+
+	return bylineNodes?.length > 0 ? (
+		<Attribution className={`${BLOCK_CLASS_NAME}`}>
+			<span className={`${BLOCK_CLASS_NAME}__by`}>{phrases.t("global.by-text")}</span>{" "}
+			<span className={`${BLOCK_CLASS_NAME}__names`}>{bylineNodes}</span>
+		</Attribution>
+	) : null;
+};
+
+Byline.label = "Byline – Arc Block";
+
+Byline.icon = "user-question";
+
+export default Byline;
+```
+
+### Styling
+
+:::note
+To see your style changes reflected, you must run your bundle locally first to build those styles. After running locally, you may upload the updated bundle for deployment. Styles will not be built during a Theme Settings or PageBuilder deployment, so they must be run locally first.
+:::
+
+Looking at the Arc styles for this block. Take note of the `components` key with secondary keys `link` and `link-hover`, these correspond to `@wpmedia/arc-themes-component` components and their `COMPONENT_CLASS_NAME`.
+
+```json
+// arc-themes-blocks/blocks/byline-block/themes/news.json
+{
+	"byline": {
+		"styles": {
+			"default": {
+				"font-size": "var(--body-font-weight)",
+				"line-height": "var(--body-line-height)",
+				"components": {
+					"link": {
+						"text-decoration": "none"
+					},
+					"link-hover": {
+						"text-decoration": "underline"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	}
+}
+```
+
+Now let's apply styles from our own feature-pack. In this example,
+
+```json
+// arc-themes-feature-pack/themes/styles/blocks.json
+{
+	"byline": {
+		"styles": {
+			"default": {
+				"font-size": "$body-font-weight-small",
+				"line-height": "$body-line-height-tiny",
+				"components": {
+					"link": {
+						"text-decoration": "green wavy underline"
+					},
+					"link-hover": {
+						"text-decoration": "green dashed underline"
+					}
+				}
+			},
+			"desktop": {}
+		}
+	}
+}
+```
+
+If you're wondering whether you can use CSS variables like `var(--global-font-weight)` rather than `$global.font-weight` (as described in the [Tokens section](#tokens)). Yes, any values you enter will pass directly through to the stylesheet, and it goes without saying that also means typos or invalid variables will.
+
+### Block Tokens
+
+Below is the full list of blocks and their corresponding tokens which are available for styling.
+
+<details>
+<summary><strong>Blocks</strong></summary>
+
+<details>
+<summary>ads-block</summary>
+
+- ads-block-admin
+- ads-block
+
+</details>
+
+<details>
+<summary>alert-bar-block</summary>
+
+- alert-bar
+
+</details>
+
+<details>
+<summary>article-body-block</summary>
+
+- article-body-children
+- article-body-link
+- article-body-h2
+- article-body-h3
+- article-body-h4
+- article-body-h5
+- article-body-h6
+- article-body-ul
+- article-body-ol
+- article-body-blockquote
+- article-body-citation
+- article-body-correction
+- article-body-copyright
+- article-body-divider
+- article-body-gallery
+- article-body-gallery-additional-next
+- article-body-gallery-additional-previous
+- article-body-full-screen-icon
+- article-body-start-icon
+- article-body-stop-icon
+- article-body-image-wrapper
+- article-body-embed-responsive-item
+- article-body-embed-responsive
+- article-body-image
+- article-body-image-float-left
+- article-body-image-float-right
+- article-body-interstitial-link
+- article-body-pullquote
+- article-body-table-thead
+- article-body-table-th
+- article-body-table-td
+- article-body-table
+- article-body
+
+</details>
+
+<details>
+<summary>article-tag-block</summary>
+
+- article-tag
+
+</details>
+
+<details>
+<summary>author-bio-block</summary>
+
+- author-bio-author
+- author-bio-author-name
+- author-bio-author-description
+- author-bio-social-link-hover
+- author-bio-social-link-wrapper
+- author-bio
+
+</details>
+
+<details>
+<summary>byline-block</summary>
+
+- byline-by
+- byline-names
+- byline
+
+</details>
+
+<details>
+<summary>card-list-block</summary>
+
+- card-list-title
+- card-list-list
+- card-list-main-item
+- card-list-main-item-text-container
+- card-list-main-item-image-link
+- card-list-secondary-item
+- card-list-secondary-item-image-link
+- card-list-secondary-item-heading-link
+- card-list
+
+</details>
+
+<details>
+<summary>category-carousel-block</summary>
+
+- category-carousel-slide
+- category-carousel-slide-title
+- category-carousel-title
+- category-carousel
+
+</details>
+
+<details>
+<summary>date-block</summary>
+
+- date
+
+</details>
+
+<details>
+<summary>default-output-block</summary>
+
+- application
+
+</details>
+
+<details>
+<summary>divider-block</summary>
+
+- divider
+
+</details>
+
+<details>
+<summary>double-chain-block</summary>
+
+- double-chain-heading
+- double-chain-children-grid
+- double-chain-child-item-empty
+- double-chain-child-item
+- double-chain
+
+</details>
+
+<details>
+<summary>extra-large-manual-promo-block</summary>
+
+- xl-manual-promo
+
+</details>
+
+<details>
+<summary>extra-large-promo-block</summary>
+
+- xl-promo-icon-label
+- xl-promo-label
+- xl-promo
+
+</details>
+
+<details>
+<summary>footer-block</summary>
+
+- footer-links-group-list-item
+- footer-links-group-list
+- footer-links-group
+- footer-links
+- footer-social-links-container
+- footer-social-links-first
+- footer-social-links-last
+- footer-social-links
+- footer-top-container
+- footer
+
+</details>
+
+<details>
+<summary>full-author-bio-block</summary>
+
+- full-author-bio-text
+- full-author-bio-identification
+- full-author-bio-name-link
+- full-author-bio-name
+- full-author-bio-role
+- full-author-bio-social
+- full-author-bio-social-header
+- full-author-bio-social-icons
+- full-author-bio-social-link-hover
+- full-author-bio-social-link
+- full-author-bio
+
+</details>
+
+<details>
+<summary>gallery-block</summary>
+
+- gallery-track-icon
+- gallery-image-wrapper
+- gallery
+
+</details>
+
+<details>
+<summary>header-block</summary>
+
+- header-extra-large
+- header-large
+- header-medium
+- header-small
+- header
+
+</details>
+
+<details>
+<summary>header-nav-chain-block</summary>
+
+- header-nav-chain-nav-search-input
+- header-nav-chain-nav-search-input-open
+- header-nav-chain-nav-search-button
+- header-nav-chain-nav-search
+- header-nav-chain-flyout-overlay-scrollbar
+- header-nav-chain-flyout-overlay-open
+- header-nav-chain-flyout-overlay-closed
+- header-nav-chain-flyout-overlay
+- header-nav-chain-top-nav-left
+- header-nav-chain-top-nav-right
+- header-nav-chain-top-nav-components-mobile
+- header-nav-chain-top-nav-components-desktop
+- header-nav-chain-flyout-nav-wrapper-open
+- header-nav-chain-flyout-nav-wrapper-closed
+- header-nav-chain-flyout-nav-widgets
+- header-nav-chain-flyout-nav-menu
+- header-nav-chain-flyout-nav-components-mobile
+- header-nav-chain-flyout-nav-components-desktop
+- header-nav-chain-flyout-nav-wrapper
+- header-nav-chain-flyout-nav-item-hover-active
+- header-nav-chain-flyout-nav-item
+- header-nav-chain-flyout-nav
+- header-nav-chain-nav-search-box-svg
+- header-nav-chain-nav-search-box-position
+- header-nav-chain-flyout-nav-subsection-caret-open
+- header-nav-chain-flyout-nav-subsection-caret
+- header-nav-chain-flyout-nav-subsection-anchor
+- header-nav-chain-flyout-nav-subsection-container-open
+- header-nav-chain-flyout-nav-subsection-container
+- header-nav-chain-flyout-nav-subsection-menu
+- header-nav-chain-top-layout
+- header-nav-chain-logo-center
+- header-nav-chain-logo-show
+- header-nav-chain-logo-hidden
+- header-nav-chain-logo-image
+- header-nav-chain-logo
+- header-nav-chain-links-list-item
+- header-nav-chain-links-list
+- header-nav-chain-scrolled-flyout-nav
+- header-nav-chain-scrolled-flyout-overlay
+- header-nav-chain-scrolled
+- header-nav-chain
+
+</details>
+
+<details>
+<summary>headline-block</summary>
+
+- headline
+
+</details>
+
+<details>
+<summary>hero-block</summary>
+
+- hero
+- info
+- hero-stacked
+- hero-light
+- hero-dark
+- hero-text-overlay
+- hero-text-stacked
+- hero-text-left
+- hero-text-center
+- hero-subheadline
+- hero-buttonrow
+
+</details>
+
+<details>
+<summary>large-manual-promo-block</summary>
+
+- large-manual-promo-text
+- large-manual-promo
+
+</details>
+
+<details>
+<summary>large-promo-block</summary>
+
+- large-promo-text
+- large-promo-icon-label
+- large-promo-label
+- large-promo
+
+</details>
+
+<details>
+<summary>lead-art-block</summary>
+
+- lead-art-carousel-track-icon
+- lead-art-carousel-image-wrapper
+- lead-art-close-icon
+- lead-art
+
+</details>
+
+<details>
+<summary>links-bar-block</summary>
+
+- links-bar
+
+</details>
+
+<details>
+<summary>masthead-block</summary>
+
+- masthead-logo-image
+- masthead-logo
+- masthead-content
+- masthead-date
+- masthead-tagline
+- masthead-link
+- masthead-divider
+- masthead
+
+</details>
+
+<details>
+<summary>medium-manual-promo-block</summary>
+
+- medium-manual-promo-show-image
+- medium-manual-promo
+
+</details>
+
+<details>
+<summary>medium-promo-block</summary>
+
+- medium-promo-show-image
+- medium-promo-icon-label
+- medium-promo-label
+- medium-promo
+
+</details>
+
+<details>
+<summary>numbered-list-block</summary>
+
+- numbered-list-items
+- numbered-list-item
+- numbered-list-item-image
+- numbered-list
+
+</details>
+
+<details>
+<summary>overline-block</summary>
+
+- overline
+
+</details>
+
+<details>
+<summary>product-assortment-carousel-block</summary>
+
+- product-assortment-carousel-title
+- product-assortment-carousel-product
+- product-assortment-carousel-product-single-price
+- product-assortment-carousel
+
+</details>
+
+<details>
+<summary>product-content-block</summary>
+
+- product-content-ul
+- product-content-ol
+- product-content
+
+</details>
+
+<details>
+<summary>product-featured-image-block</summary>
+
+- product-featured-image
+
+</details>
+
+<details>
+<summary>product-gallery-block</summary>
+
+- product-gallery-featured-slide
+- product-gallery-thumbnail
+- product-gallery-focus-view
+- product-gallery-focus-view-main-image
+- product-gallery-focus-view-main-images
+- product-gallery-focus-view-thumbnail-bar
+- product-gallery-focus-view-thumbnail-bar-indicator
+- product-gallery-focus-view-thumbnail-bar-images
+- product-gallery-focus-view-thumbnail-image
+- product-gallery-focus-view-thumbnail-image-selected
+- product-gallery-focus-view-close
+- product-gallery
+
+</details>
+
+<details>
+<summary>product-information-block</summary>
+
+- product-information-single-price
+- product-information
+
+</details>
+
+<details>
+<summary>quad-chain-block</summary>
+
+- quad-chain-heading
+- quad-chain-children-grid
+- quad-chain-child-item-empty
+- quad-chain-child-item
+- quad-chain
+
+</details>
+
+<details>
+<summary>quilted-image-block</summary>
+
+- quilted-image
+- quilted-image__wrapper-bottom
+- quilted-image__wrapper-top
+- quilted-image__wrapper
+- quilted-image__overlay-text--light
+- quilted-image__overlay-text--dark
+- overlay
+- quilted-image__media-panel
+- quilted-image__overlay
+
+</details>
+
+<details>
+<summary>results-list-block</summary>
+
+- results-list-wrapper
+- results-list-show-image
+- results-list-see-more
+- results-list-label
+- results-list
+
+</details>
+
+<details>
+<summary>right-rail-advanced-block</summary>
+
+- right-rail-advanced-navigation
+- right-rail-advanced-full-width-1
+- right-rail-advanced-main
+- right-rail-advanced-footer
+- right-rail-advanced-full-width-2
+- right-rail-advanced-main-interior-item
+- right-rail-advanced-main-right-rail
+- right-rail-advanced-rail-container
+- right-rail-advanced-main-interior-item-1
+- right-rail-advanced-main-interior-item-2
+- right-rail-advanced-main-right-rail-top
+- right-rail-advanced-main-right-rail-middle
+- right-rail-advanced-main-right-rail-bottom
+- right-rail-advanced
+
+</details>
+
+<details>
+<summary>right-rail-block</summary>
+
+- right-rail-navigation
+- right-rail-full-width-1
+- right-rail-main
+- right-rail-footer
+- right-rail-main-interior-item
+- right-rail-main-right-rail
+- right-rail-full-width-2
+- right-rail-rail-container
+- right-rail
+
+</details>
+
+<details>
+<summary>search-results-list-block</summary>
+
+- search-results-list-field-wrapper
+- search-results-list-field
+- search-results-list-results-item-show-image
+- search-results-list-results-item
+- search-results-list-results
+- search-results-list
+
+</details>
+
+<details>
+<summary>section-title-block</summary>
+
+- section-title-links
+- section-title
+
+</details>
+
+<details>
+<summary>share-bar-block</summary>
+
+- share-bar
+- share-bar-facebook
+- share-bar-linkedin
+- share-bar-pinterest
+- share-bar-twitter
+- share-bar-email
+
+</details>
+
+<details>
+<summary>simple-list-block</summary>
+
+- simple-list-item
+- simple-list-items
+- simple-list-item-anchor
+- simple-list
+
+</details>
+
+<details>
+<summary>single-chain-block</summary>
+
+- single-chain-heading
+- single-chain-children-stack
+- single-chain
+
+</details>
+
+<details>
+<summary>single-column-layout-block</summary>
+
+- single-column-regular-navigation
+- single-column-regular-main
+- single-column-regular-full-width
+- single-column-regular-body
+- single-column-regular-footer
+- single-column-regular
+
+</details>
+
+<details>
+<summary>small-manual-promo-block</summary>
+
+- small-manual-promo-above
+- small-manual-promo-below
+- small-manual-promo-left
+- small-manual-promo-right
+- small-manual-promo
+
+</details>
+
+<details>
+<summary>small-promo-block</summary>
+
+- small-promo-above
+- small-promo-below
+- small-promo-left
+- small-promo-right
+- small-promo
+
+</details>
+
+<details>
+<summary>story-carousel-block</summary>
+
+- story-carousel-title
+- story-carousel-card
+- story-carousel
+
+</details>
+
+<details>
+<summary>subheadline-block</summary>
+
+- subheadline
+
+</details>
+
+<details>
+<summary>tag-title-block</summary>
+
+- tag-title
+
+</details>
+
+<details>
+<summary>top-table-list-block</summary>
+
+- top-table-list-small-container-1
+- top-table-list-small-container-2
+- top-table-list-small-container-3
+- top-table-list-small-container-4
+- top-table-list-small-container
+- top-table-list-medium-container
+- top-table-list-large-container
+- top-table-list-xl-container
+- top-table-list-xl
+- top-table-list-large-text
+- top-table-list-large-icon-label
+- top-table-list-large-label
+- top-table-list-large
+- top-table-list-medium-show-image
+- top-table-list-medium-icon-label
+- top-table-list-medium-label
+- top-table-list-medium
+- top-table-list-small-below
+- top-table-list-small-above
+- top-table-list-small-right
+- top-table-list-small-left
+- top-table-list-small
+- top-table-list
+
+</details>
+
+<details>
+<summary>triple-chain-block</summary>
+
+- triple-chain-heading
+- triple-chain-children-grid
+- quad-chain-child-item-empty
+- triple-chain-child-item
+- triple-chain
+
+</details>
+
+<details>
+<summary>video-player-block</summary>
+
+- video-player-inline
+- video-player-feature-meta
+- video-player-feature
+- video-player
+
+</details>
+
+</details>
+
+### Block Components
+
+Below is the full list of blocks and all of the components they import. You can apply styles to any component token within a block, as long as the corresponding component is imported into the block. 
+
+<details>
+
+<summary><strong>Blocks</strong></summary>
+
+<details>
+<summary>ads-block</summary>
+
+- Paragraph
+- Stack
+- LazyLoad
+- usePhrases
+
+</details>
+
+<details>
+<summary>alert-bar-block</summary>
+
+- Button
+- Icon
+- isServerSide
+- Link
+</details>
+
+<details>
+<summary>article-body-block</summary>
+
+- Paragraph
+- Stack
+- Carousel
+- Conditional
+- Divider
+- formatCredits
+- Heading
+- HeadingSection
+- Icon
+- Image
+- isServerSide
+- LazyLoad
+- Link
+- MediaItem
+- usePhrases
+- Video
+
+</details>
+
+<details>
+<summary>article-tag-block</summary>
+
+- isServerSide
+- LazyLoad
+- Pill
+- Stack
+
+</details>
+
+<details>
+<summary>author-bio-block</summary>
+
+- Conditional
+- formatSocialURL
+- Heading
+- HeadingSection
+- Icon
+- Image
+- isServerSide
+- LazyLoad
+- Link
+- Paragraph
+- Stack
+- usePhrases
+
+</details>
+
+<details>
+<summary>byline-block</summary>
+
+- Attribution
+- formatAuthors
+- usePhrases
+
+</details>
+
+<details>
+<summary>card-list-block</summary>
+
+- Attribution
+- Date
+- formatAuthors
+- formatURL
+- getImageFromANS
+- Heading
+- HeadingSection
+- Image
+- isServerSide
+- LazyLoad
+- Link
+- localizeDate
+- Overline
+- Separator
+- Stack
+- usePhrases
+
+</details>
+
+<details>
+<summary>category-carousel-block</summary>
+
+- Carousel
+- Heading
+- HeadingSection
+- Link
+- Icon
+- Image
+- Stack
+- usePhrases
+
+</details>
+
+<details>
+<summary>date-block</summary>
+
+- Date as DisplayDate
+- localizeDateTime
+
+</details>
+
+<details>
+<summary>divider-block</summary>
+
+- Divider as DividerComponent
+
+</details>
+
+<details>
+<summary>double-chain-block</summary>
+
+- Heading
+- HeadingSection
+- Stack
+- Grid
+
+</details>
+
+<details>
+<summary>extra-large-manual-promo-block</summary>
+
+- Conditional
+- formatURL
+- Heading
+- HeadingSection
+- Image
+- isServerSide
+- LazyLoad
+- Link
+- MediaItem
+- Overline
+- Paragraph
+- Stack
+
+</details>
+
+<details>
+<summary>extra-large-promo-block</summary>
+
+- Attribution
+- Conditional
+- Date as DateComponent
+- formatAuthors
+- getImageFromANS
+- getVideoFromANS
+- Heading
+- HeadingSection
+- Icon
+- Image
+- Join
+- isServerSide
+- LazyLoad
+- Link
+- localizeDateTime
+- MediaItem
+- Overline
+- Paragraph
+- Separator
+- Stack
+- usePhrases
+- Video
+
+</details>
+
+<details>
+<summary>footer-block</summary>
+
+- Grid
+- Heading
+- HeadingSection
+- isServerSide
+- Icon
+- Image
+- LazyLoad
+- Link
+- MediaItem
+- Paragraph
+- Stack
+- usePhrases
+
+</details>
+
+<details>
+<summary>full-author-bio-block</summary>
+
+- Conditional
+- formatSocialURL
+- Heading
+- HeadingSection
+- Icon
+- Image
+- Link
+- MediaItem
+- Paragraph
+- Stack
+- usePhrases
+- isServerSide
+- LazyLoad
+
+</details>
+
+<details>
+<summary>gallery-block</summary>
+
+- Carousel
+- formatCredits
+- Icon
+- Image
+- imageANSToImageSrc
+- isServerSide
+- LazyLoad
+- MediaItem
+- usePhrases
+
+</details>
+
+<details>
+<summary>header-block</summary>
+
+- Heading
+- HeadingSection
+
+</details>
+
+<details>
+<summary>header-nav-block</summary>
+
+- usePhrases
+
+</details>
+
+<details>
+<summary>header-nav-chain-block</summary>
+
+- Stack
+- Link
+- Separator
+- usePhrases
+- Button
+- Icon
+
+</details>
+
+<details>
+<summary>hero-block</summary>
+
+- Button
+- Heading
+- HeadingSection
+- Paragraph
+- Picture
+- Stack
+
+</details>
+
+<details>
+<summary>large-manual-promo-block</summary>
+
+- Conditional
+- Image
+- isServerSide
+- formatURL
+- Grid
+- Heading
+- HeadingSection
+- LazyLoad
+- Link
+- MediaItem
+- Overline
+- Paragraph
+- Stack
+
+</details>
+
+<details>
+<summary>large-promo-block</summary>
+
+- Conditional
+- Grid
+- HeadingSection
+- Icon
+- Image
+- Join
+- LazyLoad
+- Link
+- localizeDateTime
+- MediaItem
+- Stack
+- formatURL
+- getImageFromANS
+- getVideoFromANS
+- isServerSide
+- Overline
+- Heading
+- Paragraph
+- Date as DateDisplay
+- formatAuthors
+- Attribution
+- Separator
+- usePhrases
+- Video
+
+</details>
+
+<details>
+<summary>lead-art-block</summary>
+
+- Button
+- Carousel
+- formatCredits
+- formatPowaVideoEmbed
+- Icon
+- Image
+- MediaItem
+- usePhrases
+- Video
+
+</details>
+
+<details>
+<summary>links-bar-block</summary>
+
+- Divider
+- Link
+- Stack
+- Separator
+- usePhrases
+
+</details>
+
+<details>
+<summary>masthead-block</summary>
+
+- Link
+- localizeDate
+- Paragraph
+- Stack
+
+</details>
+
+<details>
+<summary>medium-manual-promo-block</summary>
+
+- Conditional
+- formatURL
+- Heading
+- HeadingSection
+- Image
+- isServerSide
+- LazyLoad
+- Link
+- MediaItem
+- Paragraph
+
+</details>
+
+<details>
+<summary>medium-promo-block</summary>
+
+- Attribution
+- Conditional
+- Date as DateComponent
+- formatAuthors
+- formatURL
+- getImageFromANS
+- getPromoType
+- Heading
+- imageANSToImageSrc
+- HeadingSection
+- Icon
+- Image
+- isServerSide
+- Join
+- LazyLoad
+- Link
+- localizeDateTime
+- MediaItem
+- Paragraph
+- Separator
+- usePhrases
+
+</details>
+
+<details>
+<summary>numbered-list-block</summary>
+
+- getImageFromANS
+- isServerSide
+- Heading
+- HeadingSection
+- Image
+- LazyLoad
+- Link
+- Paragraph
+- Stack
+
+</details>
+
+<details>
+<summary>overline-block</summary>
+
+- formatURL
+- Overline as OverlineOutput
+- usePhrases
+
+</details>
+
+<details>
+<summary>product-assortment-carousel-block</summary>
+
+- Carousel
+- Heading
+- HeadingSection
+- Icon
+- Image
+- Link
+- Price
+- Stack
+- usePhrases
+
+</details>
+
+<details>
+<summary>product-content-block</summary>
+
+- Details
+- Icon
+- usePhrases
+
+</details>
+
+<details>
+<summary>product-featured-image-block</summary>
+
+- imageANSToImageSrc
+- Image
+
+</details>
+
+<details>
+<summary>product-gallery-block</summary>
+
+- Image
+- imageANSToImageSrc
+- Button
+- Grid
+- Icon
+- Stack
+- usePhrases
+- Carousel
+
+</details>
+
+<details>
+<summary>product-information-block</summary>
+
+- Heading
+- Price
+- Stack
+- usePhrases
+
+</details>
+
+<details>
+<summary>quad-chain-block</summary>
+
+- Heading
+- HeadingSection
+- Stack
+- Grid
+
+</details>
+
+<details>
+<summary>quilted-image-block</summary>
+
+- Heading
+- HeadingSection
+- Image
+- Link
+- Button
+- Paragraph
+- Stack
+
+</details>
+
+<details>
+<summary>results-list-block</summary>
+
+- isServerSide
+- LazyLoad
+- HeadingSection
+- Button
+- Divider
+- Join
+- Stack
+- usePhrases
+- Attribution
+- Conditional
+- Date as DateComponent
+- formatAuthors
+- formatURL
+- getImageFromANS
+- Heading
+- Image
+- imageANSToImageSrc
+- Link
+- localizeDateTime
+- MediaItem
+- Overline
+- Paragraph
+- Separator
+
+</details>
+
+<details>
+<summary>search-results-list-block</summary>
+
+- Stack
+- Button
+- Divider
+- Join
+- usePhrases
+- Icon
+- Input
+- Paragraph
+- Attribution
+- Conditional
+- Date as DateComponent
+- formatAuthors
+- formatURL
+- getImageFromANS
+- Heading
+- HeadingSection
+- Image
+- Link
+- localizeDateTime
+- MediaItem
+- Separator
+- Overline
+- isServerSide
+- LazyLoad
+
+</details>
+
+<details>
+<summary>section-title-block</summary>
+
+- formatURL
+- Heading
+- Join
+- Link
+- Separator
+- Stack
+
+</details>
+
+<details>
+<summary>share-bar-block</summary>
+
+- Button
+- Icon
+- Stack
+- usePhrases
+
+</details>
+
+<details>
+<summary>simple-list-block</summary>
+
+- getImageFromANS
+- Stack
+- isServerSide
+- Heading
+- HeadingSection
+- Image
+- LazyLoad
+- Link
+
+</details>
+
+<details>
+<summary>single-chain-block</summary>
+
+- Heading
+- HeadingSection
+- Stack
+
+</details>
+
+<details>
+<summary>small-manual-promo-block</summary>
+
+- formatURL
+- Heading
+- HeadingSection
+- Image
+- isServerSide
+- LazyLoad
+- Link
+- MediaItem
+- Grid
+
+</details>
+
+<details>
+<summary>small-promo-block</summary>
+
+- formatURL
+- Heading
+- HeadingSection
+- Image
+- isServerSide
+- LazyLoad
+- Link
+- MediaItem
+- Grid
+- getImageFromANS
+- Conditional
+
+</details>
+
+<details>
+<summary>story-carousel-block</summary>
+
+- Carousel
+- getImageFromANS
+- Heading
+- HeadingSection
+- Icon
+- Image
+- Link
+- Paragraph
+- Stack
+- usePhrases
+
+</details>
+
+<details>
+<summary>subheadline-block</summary>
+
+- Heading
+- HeadingSection
+
+</details>
+
+<details>
+<summary>subscriptions-block</summary>
+
+- usePhrases
+
+</details>
+
+<details>
+<summary>tag-title-block</summary>
+
+- Heading
+- Paragraph
+- Stack
+
+</details>
+
+<details>
+<summary>top-table-list-block</summary>
+
+- Attribution
+- Conditional
+- Date as DateComponent
+- Divider
+- formatAuthors
+- getImageFromANS
+- getVideoFromANS
+- Heading
+- HeadingSection
+- Image
+- Join
+- Link
+- localizeDateTime
+- MediaItem
+- Overline
+- Paragraph
+- Separator
+- Stack
+- usePhrases
+- Video
+- Grid
+- Icon
+- formatURL
+- Date as DateDisplay
+- getPromoType
+- isServerSide
+- LazyLoad
+
+</details>
+
+<details>
+<summary>triple-chain-block</summary>
+
+- Heading
+- HeadingSection
+- Stack
+- Grid
+
+</details>
+
+<details>
+<summary>video-player-block</summary>
+
+- formatCredits
+- formatPowaVideoEmbed
+- Heading
+- HeadingSection
+- MediaItem
+- Paragraph
+- Badge
+- Stack
+- Video
+
+</details>
+
+</details>
+
+### Custom block styling
+
+For full details on how blocks styling is supported on custom blocks, see <Link blank href={`${globals.themesDevDocsPath}/creating-a-custom-block-with-styling/`} text='Creating a custom block with styling' />.

@@ -1,0 +1,94 @@
+---
+title: Upgrading your bundle code with major or breaking PageBuilder Engine releases
+description: Upgrading your bundle code with major or breaking PageBuilder Engine releases
+lastUpdated: 2024-09-05T22:33:59.000Z
+migrationData:
+  short_description: >-
+    Upgrading your bundle code with major or breaking PageBuilder Engine
+    releases
+  number: KB0011243
+  sys_id: 38c5245447e85290a87626c2846d4373
+  sys_created_on: '2024-09-05 18:33:41'
+  sys_updated_on: '2024-09-05 18:33:59'
+  sys_created_by: Adam.Evans@washpost.com
+  sys_updated_by: Adam.Evans@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: ''
+  topic: General
+  sys_view_count: 468
+  helpful_count: 0
+  version: 05d5e85447e85290a87626c2846d432b
+  display_number: KB0011243 v7.0
+migrationStatus: converted
+reviewStatus: pending
+conversionDate: 2024-10-15T17:18:05.421Z
+---
+import YouTubeCard from '/src/components/starlight/youtube-card.astro';
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+Platform upgrades are an important part of upkeep work, to ensure your sites stay performant, secure and maintainable for future development. Arc XP is a hosted platform to provide your development team a foundation to build rich, digital experiences for your users. Your developers may have developed custom features, custom content sources, or custom output for other systems. This requires React-based JavaScript code running in Node.js runtime environments in AWS, which gets at least annual upgrades that require your developers to maintain the custom bundle code.
+
+
+## Preparing for upgrade
+
+In this article, we talk about the approach to platform upgrades, which are generally mapped to major PageBuilder Engine releases (like 4.x, 5.x, 6.x). We cover key steps to follow when upgrading your bundle code:
+
+* Create smoke tests for your bundle before starting
+* Learn about Node.js changes
+* Learn about React changes
+* Audit your dependencies and upgrade them if needed
+* Test well before deploying
+
+
+## Before starting the upgrade, create smoke tests for your bundle
+
+The best way to ensure you are not introducing regressions, while you work on your bundle upgrade, is to have an automated testing system. But tests can be time-consuming to write and maintain. Even if you have robust tests, they can also be impacted by the node.js runtime changes. But we have a lightweight testing strategy that can help you ensure that the most important features of your bundle are still working before and after the upgrade.
+This is a good first step in your upgrade journey, is to create a smoke test that tests the most important pages/templates powered by features, content sources from your bundle. This test should be run before and after the upgrade to create an anchor point to our upgrade steps. In each step, you can run smoke tests to ensure everything is still working as expected. It will also increase confidence in every step of the way.
+
+We covered smoke testing strategy and a simple script in [Creating Smoke Test for your Bundle Code](/pagebuilder-engine/developer-docs/smoke-testing-bundle-code/) guide.
+
+
+## Read Node.js release notes for breaking changes
+
+We provide a summary of the breaking changes on runtime when we release major PageBuilder Engine versions. If Node.js has sizable breaking behaviors, we clearly call those out, for example the deprecation of `tls.connect()` that happened in the Node.js 14 -> Node.js 16 upgrade that came in the PageBuilder Engine 4.0 release. This is an example functionality that you may have used as a custom content source implementation and is impacted by this runtime change. For changes that are even more impactful, we call those out with more emphasis. But you may be using other breaking changes that may not be popular functionality. We suggest you read the breaking changes in these runtime changes if you have custom bundle code.
+
+
+## Read React.js release notes for breaking changes
+
+Similarly, when PageBuilder Engine introduces React.js version upgrades in breaking releases, read the React.js release notes, especially if you have custom components that use native React.js framework capabilities, like React hooks, or component lifecycle. Most clients use simple React components that do not implement custom render methods, or hooks potentially being impacted by these changes. But it's still wise to review the summary of changes in the new React.js version that we include in PageBuilder Engine release notes.
+
+
+## Audit your dependencies for breaking changes
+
+When performing upgrades, it's a good practice to update or upgrade every dependency package you use. It's a common practice that popular `npm` packages expose which version of their packages support which Node.js runtimes in their project pages. But it's not required unless there are incompatibility issues with the version of the packages you are using and the new Node.js runtime.
+
+To see which of your dependencies have new versions, you can use the `npm outdated` command that prints a table view of your dependencies, the version you use, what version it can be updated to based on the required notation in the package.json file, and the latest possible version available.
+
+![npm outdated Screenshot](/images/pagebuilder-engine/KB0011243-1.jpg)
+
+If all packages listed have newer versions that are not major updates, you can update every package, considering everything has non-breaking changes in them. You can use the `npm update --save` command to update all of your dependencies if that's the case.
+
+If there are packages that show a major version bump in their latest column, you should further investigate the contents of these new releases to decide if they contain breaking changes, and if those apply to your code.
+
+
+### Are all major dependency version changes breaking?
+
+Not necessarily. For example, the `styled-components` package didn't have any breaking behavior in the v5 release, which they explain in their documentation:
+
+![Style Components V5 Screenshot](/images/pagebuilder-engine/KB0011243-3.jpg)
+
+It's important for your developer team to review your dependencies, read their release notes, and check if they have any breaking changes when upgrading them.
+
+
+## Test locally and in Sandbox
+
+Testing impact of these upgrades, both runtime and `npm` packages, can have site-wide impact. We suggest you doing as extensive as possible regression on your features, custom content sources, and the end user's (reader) experience. Sometimes the libraries used to create unique user experiences may be impacted by these changes. Because platform changes are good opportunities for developers to introduce breaking behaviors; developers of the packages you use may have introduced breaking changes both in the code or implementation and their libraries user experience for the end user.
+
+For example, a carousel/swiper library may have changed how it treats an animation configuration, or how it handles events. It may have both implementation implications and end-user implications when upgrading from one major version to another.
+
+Another tactic when upgrading packages is to upgrade and test each package one by one without doing one large upgrade and testing everything at once. This tactic minimizes moving pieces and ensures you can troubleshoot issues if there are too many changes happening in these packages.

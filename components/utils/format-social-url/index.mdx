@@ -1,0 +1,93 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import formatSocialURL from ".";
+
+<Meta of={IndexStories} />
+
+# Format Social Media URL
+
+The `formatSocialURL()` function takes in two strings containing the social network type identifier and the
+users social media identifier and returns a URL for the particular social endpoint.
+
+## Usage
+
+```jsx
+import { formatSocialURL, Link } from "@wpmedia/arc-themes-components";
+
+const Feature = () => {
+	const facebookSocialMediaUrl = formatSocialURL("facebook", "mySocialMediaMoniker");
+
+	/*
+		You can also reference the supported type values of the function
+
+		const facebookSocialMediaUrl = formatSocialURL(
+			formatSocialURL.types.Facebook,
+			"mySocialMediaMoniker"
+		);
+	*/
+
+	return <Link href={facebookSocialMediaUrl}>Facebook</Link>;
+};
+```
+
+## Properties
+
+| Name      | Description                                                           | Default |
+| --------- | --------------------------------------------------------------------- | ------- |
+| **type**  | Takes in a string identifier for the social media network in question | -       |
+| **field** | Takes in astring value for the users social media identifier          | -       |
+
+## Stories
+
+### Email
+
+<Story of={IndexStories.Email} />
+
+### Facebook
+
+<Story of={IndexStories.Facebook} />
+
+### Instagram
+
+<Story of={IndexStories.Instagram} />
+
+### LinkedIn
+
+<Story of={IndexStories.LinkedIn} />
+
+### Medium
+
+<Story of={IndexStories.Medium} />
+
+### Pinterest
+
+<Story of={IndexStories.Pinterest} />
+
+### Reddit
+
+<Story of={IndexStories.Reddit} />
+
+### Snapchat
+
+<Story of={IndexStories.Snapchat} />
+
+### SoundCloud
+
+<Story of={IndexStories.SoundCloud} />
+
+### Tumblr
+
+<Story of={IndexStories.Tumblr} />
+
+### Twitter
+
+<Story of={IndexStories.Twitter} />
+
+### WhatsApp
+
+<Story of={IndexStories.WhatsApp} />
+
+### Youtube
+
+<Story of={IndexStories.Youtube} />

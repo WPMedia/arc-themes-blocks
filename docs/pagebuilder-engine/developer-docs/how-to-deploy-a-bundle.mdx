@@ -1,0 +1,292 @@
+---
+title: How to Deploy a Bundle
+description: How to Deploy a Bundle
+lastUpdated: 2023-11-15T19:49:10.000Z
+migrationData:
+  short_description: How to Deploy a Bundle
+  number: KB0010418
+  sys_id: de452895c3627d101fe095ff05013118
+  sys_created_on: '2023-11-15 14:48:48'
+  sys_updated_on: '2023-11-15 14:49:10'
+  sys_created_by: fatih.yildiz@washpost.com
+  sys_updated_by: fatih.yildiz@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: How-To Guides
+  kb_category: 490f3e3e4716d110a87626c2846d432c
+  meta: >-
+    PageBuilder Engine, deployment process, deploy, deploying, zip, bundle,
+    promoting, debugging, build, CI/CD, deployer
+  topic: General
+  sys_view_count: 994
+  helpful_count: 0
+  version: a355e895c3627d101fe095ff05013164
+  display_number: KB0010418 v13.0
+migrationStatus: converted
+reviewStatus: pending
+conversionDate: 2024-08-04T22:16:25.163Z
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+import * as globals from '/public/globals.js';
+import Link from '/public/snippets/anchors.astro';
+
+As a developer, it's natural to be protective of your code - but you can't keep it on `localhost` forever. Eventually, you'll need to release it to the Internet, and in order to do so you'll need to deploy it via PageBuilder's deployment tool, Maestro.
+
+<Aside type="note">With the upcoming deprecation of the Theme Settings application, all organizations should complete deployments using the PageBuilder deployer. If your organization is using any of the Arc XP Themes blocks, take note of the specific requirements outlined below to ensure a successful deployment that is compatible with the blocks.</Aside>
+
+## The deployment process
+
+Deploying your bundle to PageBuilder Engine is simple in concept: you'll create a `.zip` file that contains all the code in your bundle, and then you'll upload that to Maestro. Maestro will handle the process of building your code and deploying it to the various services that work together to make PageBuilder Engine run.
+
+One of the capabilities of PageBuilder Engine's architecture is the ability to have multiple different deployed bundles running simultaneously, while only one of them is "live" (i.e. the one users can see). This has several benefits, most notably the ability to <Link blank href='https://en.wikipedia.org/wiki/Hot_swapping#software' text='"Hot Swap"' /> from one running bundle to another without users experiencing any downtime. You can even preview a running bundle before it goes "live" so that you can test your code on a running server before users see it.
+
+## Configuring your bundle for Themes blocks
+
+If you are using any of the Themes components or blocks for your site, you will need to ensure the following are set within your bundle. If you are not using any of the Themes blocks, you may continue to [Zipping and uploading](#zipping-and-uploading).
+
+### Configure feature pack
+
+If you are just getting started on Arc XP and want to use a starter bundle, you may use the <Link blank href='https://github.com/arcxp/Themes-V2-Starter' text='Themes blocks starter repo' />.
+
+Otherwise, you can make updates directly in your existing bundle. To access your existing bundles, you can download them as outlined in [Debugging and Troubleshooting Failed and Timed out Builds](#debugging-and-troubleshooting-failed-and-timed-out-builds). Once you have your existing bundle open, access your `blocks.json` file.
+
+<Aside type="note">If you previously used the Theme Settings application to set your site settings and select your Themes version, you will need to ensure the following are configured directly within your bundle before deploying within PageBuilder. If you downloaded and are using an existing bundle, these settings will already be set, but you should confirm you are deploying the intended themes version, site, and environment settings based on your organization's needs.</Aside>
+
+#### blocks.json
+
+<Steps>
+
+1. **Set blocks version and theme**<br /><br />
+Within your <Link blank href='/themes/developer-docs/themes-20-upgrade-to-v2-arc-blocks/#blocksjson' text='blocks.json' />, ensure the following are set:<br /><br />
+`themesReleaseVersion`: set this value to the latest or desired 2.x.x version<br /><br />
+`themeComponents`: enables the usage of the `arc-themes-components` React components for you to construct your own custom blocks with<br /><br />
+`theme`: defines which default styles will be applied, which is currently only supports "news"<br /><br />
+For example:
+
+	```json
+	"themesReleaseVersion": "arc-themes-release-version-2.4.1",
+	"themeComponents": "@wpmedia/arc-themes-components",
+	"theme": "news",
+	```
+
+2. **Add/remove blocks**<br /><br />
+As needed, you can add or remove blocks directly in your `blocks` array. By default after provisioning, your `blocks` array will include all out-of-the-box blocks, but to optimize your bundle, we recommend removing any 	blocks that your organization does not intend to use. A block array will look like the following by default:<br />
+	```json
+		"blocks": [
+			"@wpmedia/ad-taboola-block",
+			"@wpmedia/ads-block",
+			"@wpmedia/alert-bar-block",
+			"@wpmedia/alert-bar-content-source-block",
+			"@wpmedia/alias-tokens",
+			"@wpmedia/article-body-block",
+			"@wpmedia/article-tag-block",
+			"@wpmedia/author-content-source-block",
+			"@wpmedia/author-bio-block",
+			"@wpmedia/breakpoint-tokens",
+			"@wpmedia/byline-block",
+			"@wpmedia/card-list-block",
+			"@wpmedia/collections-content-source-block",
+			"@wpmedia/content-api-source-block",
+			"@wpmedia/full-author-bio-block",
+			"@wpmedia/date-block",
+			"@wpmedia/default-output-block",
+			"@wpmedia/double-chain-block",
+			"@wpmedia/divider-block",
+			"@wpmedia/extra-large-manual-promo-block",
+			"@wpmedia/extra-large-promo-block",
+			"@wpmedia/footer-block",
+			"@wpmedia/global-phrases-block",
+			"@wpmedia/global-tokens",
+			"@wpmedia/gallery-block",
+			"@wpmedia/header-block",
+			"@wpmedia/header-nav-chain-block",
+			"@wpmedia/headline-block",
+			"@wpmedia/htmlbox-block",
+			"@wpmedia/identity-block",
+			"@wpmedia/large-manual-promo-block",
+			"@wpmedia/large-promo-block",
+			"@wpmedia/lead-art-block",
+			"@wpmedia/links-bar-block",
+			"@wpmedia/masthead-block",
+			"@wpmedia/medium-manual-promo-block",
+			"@wpmedia/medium-promo-block",
+			"@wpmedia/numbered-list-block",
+			"@wpmedia/overline-block",
+			"@wpmedia/quad-chain-block",
+			"@wpmedia/related-content-content-source-block",
+			"@wpmedia/results-list-block",
+			"@wpmedia/right-rail-advanced-block",
+			"@wpmedia/right-rail-block",
+			"@wpmedia/search-content-source-block",
+			"@wpmedia/search-results-list-block",
+			"@wpmedia/section-title-block",
+			"@wpmedia/share-bar-block",
+			"@wpmedia/signing-service-content-source-block",
+			"@wpmedia/simple-list-block",
+			"@wpmedia/single-chain-block",
+			"@wpmedia/single-column-layout-block",
+			"@wpmedia/site-hierarchy-content-block",
+			"@wpmedia/small-manual-promo-block",
+			"@wpmedia/small-promo-block",
+			"@wpmedia/story-feed-author-content-source-block",
+			"@wpmedia/story-feed-query-content-source-block",
+			"@wpmedia/story-feed-sections-content-source-block",
+			"@wpmedia/story-feed-tag-content-source-block",
+			"@wpmedia/subheadline-block",
+			"@wpmedia/tag-title-block",
+			"@wpmedia/tags-content-source-block",
+			"@wpmedia/top-table-list-block",
+			"@wpmedia/triple-chain-block",
+			"@wpmedia/unpublished-content-source-block",
+			"@wpmedia/video-player-block"
+		],
+	    ```
+3. **Set site properties**<br/><br/>
+As needed, you may set or update the values of your `siteProperties`. For example:<br />
+	```json
+	  "values": {
+			"default": {
+				"siteProperties": {
+					"websiteDomain": "https://www.arcintelligencer.com",
+					"websiteName": "Website Display Name",
+					"lightBackgroundLogo": "https://static.themebuilder.aws.arc.pub/orgid-custom1-env/1646855268779.png",
+					"primaryLogo": "https://static.themebuilder.aws.arc.pub/orgid-custom1-env/1646855268868.png",
+					"fallbackImage": "https://static.themebuilder.aws.arc.pub/orgid-custom1-env/1636037887909.png",
+					"primaryLogoAlt": "The Arc Intelligencer",
+					"facebookPage": "arcintelligencer",
+					"twitterUsername": "arcintelligencer",
+					"resizerURL": "https://orgid-siteid-env.web.arc-cdn.net/resizer/v2/",
+					"rssUrl": "http://feeds.arcintelligencer.com/rss/homepage",
+					"copyrightText": "arcintelligencer.com © 2024 The Arc Intelligencer",
+					"dangerouslyInjectJS": [],
+					"dateLocalization": {
+						"language": "en",
+						"timeZone": "America/New_York",
+						"dateTimeFormat": "%B %d, %Y at %l:%M %P %Z",
+						"dateFormat": "%B %d, %Y"
+					},
+					"locale": "en",
+					"taboolaPublisherId": "arc",
+					"fontUrl": [
+						"https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lora:wght@400;700&display=swap"
+					],
+					"chartbeatAccountId": "12345",
+					"chartbeatDomain": "arcintelligencer.com",
+					"textDirection": "ltr",
+					"textFlow": "horizontal-tb",
+					"api": {
+						"identity": {
+							"origin": "https://orgid-siteid-prod.api.cdn.arcpublishing.com"
+						}
+					}
+				}
+			},
+			"sites": {
+				"arc-demo-1": {
+					"siteProperties": {
+						"websiteDomain": "https://www.arcdemo1.com",
+						"websiteName": "Arc Demo 1",
+						"primaryLogoAlt": "Arc Demo 1 logo",
+						"facebookPage": "https://www.facebook.com/arcdemo1fb",
+						"twitterUsername": "arcdemo1twitter"
+					}
+				},
+				"arc-demo-2": {
+					"siteProperties": {
+						"websiteDomain": "https://www.arcdemo2.com",
+						"websiteName": "Arc Demo 2",
+						"primaryLogoAlt": "Arc Demo 2 logo",
+						"facebookPage": "https://www.facebook.com/arcdemo2fb",
+						"twitterUsername": "arcdemo2twitter"
+					}
+				}
+			}
+  	}
+	  ```
+4. **Set environment settings**<br /><br />
+As needed, set your <Link blank href={`${globals.themesDevDocsPath}/themes-20-upgrade-to-v2-arc-blocks/#environmentjson`} text='environment settings' />. If you are using your existing bundle, these may already be set.<br /><br />
+With those configurations set within your bundle, you can move onto the next step to upload your custom bundle to the deployer. We recommend confirming <Link blank href='https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-run-pagebuilder-engine-locally.html' text='compatible node, npm, and Engine versions' /> to use with the Themes blocks versions.<br />
+</Steps>
+
+## Zipping and uploading
+
+When your code is ready to be deployed, run the `npx fusion zip` command from the root of your bundle directory. This will build your code (to verify that it doesn't have any compilation errors) and then create a timestamped `.zip` file in the `/dist/` directory.
+
+Once you see the `.zip` file is created, go to `https://${endpoint}/deployments/fusion/`, where `endpoint` is the domain of the Arc XP client instance. Alternatively, you can go to your Arc XP admin, navigate to PageBuilder Editor, then from the top menu, Developer Tools > Deployer to access Deployer tool.
+
+![Deployer Main UI](/images/pagebuilder-engine/Deployer-Main-UI.jpg)
+
+Click the "upload bundle" button on the right side of the "BUNDLES" section. This will open up a sidebar asking for the name of your bundle and a file uploader to select the `.zip` file with. Be sure to name your bundle something descriptive so you can differentiate it from other bundles easily (for example, if this bundle is linked to a GitHub pull request, perhaps include the pull request number for reference).
+
+![Upload bundle UI](/images/pagebuilder-engine/Upload-bundle-UI.jpg)
+
+Once you click the “upload” button, Maestro will upload your bundle, and you can see it in the list of “Bundles” at the bottom of the page - however, at this point it is not “deployed” to a server anywhere.
+
+## Deploying and Promoting
+
+To deploy your code, find the bundle you just uploaded in the list, and then click the three dotted icon on the right. From there, click the "Deploy" link in the menu:
+
+![Promote menu](/images/pagebuilder-engine/Promote-menu.jpg)
+
+This will bring up a dialog that asks you to choose what version of PageBuilder Engine you'd like to deploy this bundle on. If you have a specific version of PageBuilder Engine you'd like to deploy with, choose it here - otherwise, select the latest version and click "Deploy".
+
+![Select engine version pop-up when deploying](/images/pagebuilder-engine/Select-engine-version-pop-up-when-deploying.jpg)
+
+If there is an error during deployment, you will see an error message at this point that you may need to resolve before deploying again. If everything goes OK, you should see your bundle displayed in the list of "RUNNING" bundles.
+
+### Deployed bundle is not pushed live until you promote it
+
+At this point, your code is on a server **but not yet** **"live"** for users to see. In order to make this the "live" instance, go to the three dotted icon again, on the right of the bundle name - click the icon, and then click the "Promote" button in the list that is displayed. Now, you should see a "live" message in green next to your running bundle, and your bundle is live on your site!
+
+## Deployment History
+
+You can see last 90 days of your past uploads, promotion, termination, deletion activities in the Deployer History view:
+
+![Deployer history screen](/images/pagebuilder-engine/Deployer-history-screen.jpg)
+
+## Debugging and Troubleshooting Failed and Timed out Builds
+
+Deployer provides access to the build logs from two places that you can download and troubleshoot:
+
+1) From the pop-up deployer displays when a build fails or times out.
+
+![Time out](/images/pagebuilder-engine/time-out.png)
+
+2) In Deployer history view, when browsing past deployments, the download button at the bottom row:
+
+![Download logs for failed deployments](/images/pagebuilder-engine/Download-logs-for-failed-deployments.jpg)
+
+Note: 1) Logs may contain lines from other build sessions if there will be multiple builds that happen seconds from each other.
+
+2) We cap the logs to contain 10,000 lines and 1 MB total log file size.
+
+## Terminating deployments that got stuck
+
+If your builds get stuck on the build time that takes longer than 5 minutes, you get ETIMEDOUT error. In some cases deployer lambda can not update the deployment status and it stays stuck. You can terminate a stuck deployment with clicking ... icon and click Terminate.
+
+## CI/CD integration
+
+It's possible to automate your deploy process using a Continuous Integration/Continuous Deployment strategy. While setting this process up goes beyond the scope of this guide, we would like to provide alternative ways to set up your deployment automation.
+
+### Arc XP provided "Deploy" Github Action
+
+See the <Link blank href='https://github.com/marketplace/actions/deploy-to-arc-xp' text='Deploy to Arc XP Github Action' /> from the Github Marketplace for an example of a simple deployment.
+
+### The generic continuous deployment pipeline steps
+
+*   Configure your CI/CD tool of choice (<Link blank href='https://circleci.com/' text='CircleCI' />, <Link blank href='https://jenkins.io/' text='Jenkins' />, <Link blank href='https://travis-ci.org/' text='Travis CI' />, etc.) to run the `npx fusion zip` command (or equivalent) when code changes to the desired branch are pushed.
+*   Use your CI/CD tool to collect the generated `.zip` file from the previous command and send it via an HTTP `POST` request to `https://{endpoint}/deployments/fusion/bundles`, Using your dev center token for authentication. `endpoint` is the domain of your Arc instance. The Content Type of the request should be `multipart/form-data`, and the format of the body of the request should be in the format:
+
+    ```
+    {
+      name: 'nameOfDeployedBundle',
+      bundle: fs.createReadStream('bundle.zip')
+    }
+    ```
+
+You can feel free to add other steps into your CI/CD pipeline that include testing, code linting and more as needed.
+
+<Aside>
+You can also check out <Link blank href='https://docs.arcxp.com/en/products/pagebuilder-engine/do-it-yourself-ci-cd-deployment-script--for-pagebuilder-engine-bundle-.html' text='this sample node.js script for DIY CI/CD pipeline' />.
+</Aside>

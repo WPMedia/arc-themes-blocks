@@ -1,0 +1,284 @@
+---
+title: How to check feature/content-source usage using pb-data analysis scripts
+description: How to check feature/content-source usage using pb-data analysis scripts
+lastUpdated: 2024-08-29T22:34:34.000Z
+migrationData:
+  short_description: How to check feature/content-source usage using pb-data analysis scripts
+  number: KB0011343
+  sys_id: 005268c247d05650a87626c2846d4333
+  sys_created_on: '2024-08-29 18:32:17'
+  sys_updated_on: '2024-08-29 18:34:34'
+  sys_created_by: fatih.yildiz@washpost.com
+  sys_updated_by: fatih.yildiz@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: >-
+    PageBuilder Editor, Analyzer, Analyzing PB Data, Analyzing PageBuilder Data,
+    pb-data, feature usage, content source usage, feature deprecation
+  topic: General
+  sys_view_count: 327
+  helpful_count: 2
+  version: 9dd2e40647d05650a87626c2846d434d
+  display_number: KB0011343 v7.0
+migrationStatus: converted
+reviewStatus: pending
+conversionDate: 2024-10-15T17:18:05.445Z
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import YouTubeCard from '/src/components/starlight/youtube-card.astro';
+
+
+# Tracking features and content sources in PageBuilder
+
+In PageBuilder, identifying the origins of features and content sources is crucial when planning development work on existing features or content sources.
+
+It's often not easy to understand where these elements are used and how often they are used. We'll talk about a method to explore PageBuilder data using series of shell scripts in your local development environment.
+
+We published a recipe repository with example scripts containing a few different scripts that can provide insights about your features and content sources.
+
+# Video demo and tutorial
+
+<YouTubeCard href="https://www.youtube.com/embed/Sy3FjQv73VM?si=uWylx6RzOfctKHnJ" title="Recipe Tutorial: PB Data Analysis Scripts" description="" />
+
+
+# Set up
+
+1. Clone this repo: [https://github.com/arcxp/pb-data-analysis-scripts](https://github.com/arcxp/pb-data-analysis-scripts)
+2. Install two command line tools these scripts uses:
+    * [Mongodb Tools](https://www.mongodb.com/docs/database-tools/installation/installation-macos/) - convert `bson` to `jsonl` files
+    * [Duckdb CLI](https://duckdb.org/docs/api/cli/overview.html#installation) - allows running SQLs over CSV or JSONL files
+3. Download pb-data from your Arc Admin > PageBuilder > Developer Tools > PB-Data, then untar the package, rename the folder to pb-data and place it in the root folder of this repo's working copy on your machine
+4. Run prepare script: `sh _prepare.sh`.
+
+You're now ready to run any of the scripts in this repository.
+
+# Scripts
+
+## Show all features usage analytics
+
+```shell
+sh all-features-usage.sh
+```
+
+This script lists all features used in your pb-data (not bundle), in published pages, and templates along with how many pages they are used in and the number of times (instances) they are used in these pages.
+
+Example output of this script
+
+```
+\--- All features used in published pages, sorted by most used first ---
+
+┌──────────────────────────────────────────────┬──────────────────┬──────────────────────────────┐
+│                 featureName                  │ countOfTimesUsed │ countOfPagesOrTemplatesUsing │
+│                   varchar                    │      int64       │            int64             │
+├──────────────────────────────────────────────┼──────────────────┼──────────────────────────────┤
+│ form/contact-form                            │              711 │                           48 │
+│ hero/default                                 │              768 │                           47 │
+│ form/contact-us-handler                      │              219 │                           44 │
+│ alternating-image/alternating-image          │             1715 │                           40 │
+│ resources/latestResources                    │              462 │                           34 │
+│ vertical-icon-grid/default                   │              400 │                           23 │
+│ billboard/default                            │              477 │                           21 │
+│ story/default                                │              531 │                           20 │
+│ horizontal-card-grid/default                 │              183 │                           12 │
+│ spacer/default                               │              110 │                            9 │
+│ user-card-grid/default                       │              159 │                            8 │
+│ logo-grid/default                            │              140 │                            7 │
+│ resources/resources-v2                       │               67 │                            6 │
+│ alternating-video/default                    │               52 │                            5 │
+│ cardpromo/card-promo                         │              122 │                            4 │
+│ imagepromo/image-promo                       │               36 │                            4 │
+│ form/form-handler                            │               51 │                            3 │
+│ people-block/default                         │              460 │                            3 │
+│ form/request-demo-form                       │               47 │                            3 │
+│ resources/resources                          │               31 │                            3 │
+│ testimonial/testimonial-simple               │              120 │                            2 │
+│ animated-content/default                     │               48 │                            2 │
+│ header/default                               │                2 │                            1 │
+│ @wpmedia/video-player-block/video-player     │               19 │                            1 │
+│ flip-card/default                            │               17 │                            1 │
+│ link-list/default                            │                8 │                            1 │
+│ @wpmedia/htmlbox-block/htmlbox               │                2 │                            1 │
+├──────────────────────────────────────────────┴──────────────────┴──────────────────────────────┤
+│ 35 rows                                                                              3 columns │
+└────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+## Show all content source usage analytics
+
+```shell
+sh all-content-sources-usage.sh
+```
+
+This script lists all content sources, from both global content source configurations (from resolvers) and feature configurations. This script does not have CSV export option.
+
+Example output of this script
+
+```
+\--- Global content sources in resolvers ---
+
+┌─────────────────────────┬──────────────────┐
+│     contentSourceId     │ countOfResolvers │
+│         varchar         │      int64       │
+├─────────────────────────┼──────────────────┤
+│ content-api             │                1 │
+│ content-api-unpublished │                1 │
+└─────────────────────────┴──────────────────┘
+
+--- Content sources in feature configuration is pages and templates ---
+
+┌─────────────┬────────────────┬──────────────────┬──────────────────────────────┐
+│ featureName │ contentService │ countOfTimesUsed │ countOfPagesOrTemplatesUsing │
+│   varchar   │    varchar     │      int64       │            int64             │
+├─────────────┴────────────────┴──────────────────┴──────────────────────────────┤
+│                                     0 rows                                     │
+└────────────────────────────────────────────────────────────────────────────────┘
+```
+
+## Show all page URLs
+
+```shell
+sh all-page-urls.sh
+```
+
+This script lists all published pages with their URIs.
+
+<Aside>
+This script lists only pages and not templates. Templates are powered by dynamic URL patterns from resolvers and are not included in this script's output.
+</Aside>
+
+Example output of this script
+
+```
+\--- All published pages: ---
+
+┌───────────────────┬────────────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────────────────────────────┐
+│ pageOrTemplateId  │                                uri                                 │                                        name                                         │
+│      varchar      │                              varchar                               │                                       varchar                                       │
+├───────────────────┼────────────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+│ phcICmmeIveOZsd6t │ /products/experience-platform/                                     │ Products: Arc XP Experience Platform                                                │
+│ pBXYkVlwdCALYjn8t │ /solutions/business-leaders/                                       │ Solutions Users: Arc XP for Business Leaders                                        │
+│ p4Ecmu5dLCPY08t   │ /solutions/developers/                                             │ Solutions Users: Arc XP for Developers                                              │
+│ p9NRAEBz90bytDMt  │ /events/                                                           │ Resources: Arc XP Events                                                            │
+│ pn84hmL02c1dpfOt  │ /tei-confirmation/                                                 │ TEI Confirmation Page                                                               │
+│ pxiGuDGazCDjEmXft │ /error/404/                                                        │ 404                                                                                 │
+│        ·          │                      ·                                             │                    ·                                                                │
+│        ·          │                      ·                                             │                    ·                                                                │
+│ p57YpfHF8pUc4yXbt │ /resources/newsroom/                                               │ Newsroom                                                                            │
+├───────────────────┴────────────────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────────────────────────────┤
+│ 63 rows (40 shown)                                                                                                                                                 3 columns │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+## Find pages using a particular feature
+
+```shell
+sh find-pages-by-feature-name.sh -n global/awesome-feature
+```
+
+This script requires the `-n` parameter with a feature name that prints a list of pages and templates that use this feature.
+
+Example output of this script
+
+```
+\--- All published pages using feature: form/contact-form ---
+
+┌───────────────────┬──────────────────┬────────────────────────────────────────────────────────────────────┬──────────────────────────────────────────────────┬───────────────────┬───────────────────┐
+│ pageOrTemplateId  │ isPageOrTemplate │                                uri                                 │                       name                       │ defaultOutputType │     published     │
+│      varchar      │     varchar      │                              varchar                               │                     varchar                      │      varchar      │      varchar      │
+├───────────────────┼──────────────────┼────────────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────┼───────────────────┼───────────────────┤
+│ phGu0qpUuEMvKTv7t │ Page             │ /products/digital-subscriptions/                                   │ Products: Arc XP Subscriptions                   │ default           │ vx5WXpbvcMvKTv7t  │
+│ pTYzUa8GeRgyZe6t  │ Page             │ /solutions/content-creators/                                       │ Solutions Users: Arc XP for Content Creators     │ default           │ vZbqUeoLaRgyZe6t  │
+│        ·          │  ·               │     ·                                                              │            ·                                     │    ·              │        ·          │
+│        ·          │  ·               │     ·                                                              │            ·                                     │    ·              │        ·          │
+│ pxUtJlhzkvjl6ud6t │ Page             │ /solutions/b2c-commerce/                                           │ Solutions Type: Arc XP for B2C Commerce          │ default           │ vxMZbAiMBljl6ud6t │
+├───────────────────┴──────────────────┴────────────────────────────────────────────────────────────────────┴──────────────────────────────────────────────────┴───────────────────┴───────────────────┤
+│ 48 rows (40 shown)                                                                                                                                                                         6 columns │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+You can open PageBuilder Editor with the following URL template with the page or template ID in the query string:
+
+```
+https://YOURORG.arcpublishing.com/pagebuilder/editor/curate?p=PAGEID
+```
+
+## Find or filter pages by its URI
+
+```
+sh find-pages-by-uri.sh -u /events/
+```
+
+This script lists all pages with the URI containing the provided filter.
+
+Example output of this script
+
+```
+\--- All published pages with URI contains: /events/ ---
+
+┌───────────────────┬──────────────────┬────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────────────────────────────┬───────────────────┬───────────────────┐
+│ pageOrTemplateId  │ isPageOrTemplate │                          uri                           │                                        name                                         │ defaultOutputType │     published     │
+│      varchar      │     varchar      │                        varchar                         │                                       varchar                                       │      varchar      │      varchar      │
+├───────────────────┼──────────────────┼────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┼───────────────────┼───────────────────┤
+│ p9NRAEBz90bytDMt  │ Page             │ /events/                                               │ Resources: Arc XP Events                                                            │ default           │ vZYzKx38ly0bytDMt │
+│ pZYzk79LjKcdNN3u  │ Page             │ /events/connect-2024-confirmation/                     │ Events: Connect 2024 Confirmation Page                                              │ default           │ vfNjUAhVTwKcdNN3u │
+│ pyVs5fLodScsuEMt  │ Page             │ /events/event-template/                                │ Events: Event Landing Page Template                                                 │ default           │                   │
+│ pS0giIIu11awjUTt  │ Page             │ /events/state-of-the-content-industry-webinar-12-2023/ │ Event: State of the Content Industry Webinar - December 2023                        │ default           │ vRQS1A18jl1awjUTt │
+│ pUCqUspA84rQNWMt  │ Page             │ /events/ona-conference/                                │ Events: Conference ONA example                                                      │ default           │                   │
+│ pL2mssR6szJLFGS2u │ Page             │ /events/trust-adoption-ai-newsroom/                    │ Event: Building trust and adoption of AI in the newsroom (Semji & Mather Economics) │ default           │ vvWys3fv2JLFGS2u  │
+└───────────────────┴──────────────────┴────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────────────────────────────┴───────────────────┴───────────────────┘
+```
+
+## Describe a page or template's contents
+
+```shell
+sh describe-page-or-template.sh -i p123456
+```
+
+This script describes contents of a page or template by its ID provided by the `-i` argument. This script shows metadata of this page (URI, title), list of features, sorted by how many times they're used in the page or template, and the content sources configured from features.
+
+Example output of this script
+
+```
+\--- Page or Temoplate: #p9NRAEBz90bytDMt ---
+
+┌──────────────────┬──────────────────┬──────────┬──────────────────────────┬───────────────────┬───────────────────┐
+│ pageOrTemplateId │ isPageOrTemplate │   uri    │           name           │ defaultOutputType │     published     │
+│     varchar      │     varchar      │ varchar  │         varchar          │      varchar      │      varchar      │
+├──────────────────┼──────────────────┼──────────┼──────────────────────────┼───────────────────┼───────────────────┤
+│ p9NRAEBz90bytDMt │ Page             │ /events/ │ Resources: Arc XP Events │ default           │ vZYzKx38ly0bytDMt │
+└──────────────────┴──────────────────┴──────────┴──────────────────────────┴───────────────────┴───────────────────┘
+
+--- All features used in: #p9NRAEBz90bytDMt ---
+
+┌─────────────────────────────────────┬──────────────────┐
+│             featureName             │ countOfTimesUsed │
+│               varchar               │      int64       │
+├─────────────────────────────────────┼──────────────────┤
+│ hero/default                        │               15 │
+│ resources/resources-v2              │               15 │
+│ form/contact-form                   │               15 │
+│ alternating-image/alternating-image │               13 │
+│ form/contact-us-handler             │               11 │
+│ resources/latestResources           │                2 │
+└─────────────────────────────────────┴──────────────────┘
+
+--- Content sources used in: #p9NRAEBz90bytDMt ---
+
+┌─────────────┬────────────────┬──────────────────┐
+│ featureName │ contentService │ countOfTimesUsed │
+│   varchar   │    varchar     │      int64       │
+├─────────────┴────────────────┴──────────────────┤
+│                     0 rows                      │
+└─────────────────────────────────────────────────┘
+```
+
+# CSV exports instead of table view printed in command line
+
+Most scripts accept the `-c` parameter that prints a CSV file of the same output you see in table views. You can pipe or save the CSV output to a file.
+
+# Updates
+
+*   Aug 29, 2024: A fix has been published that addresses an issue where some features (at the top level of the curation layout) not being included in the `all-features-usage.sh` script. To update, please pull code from master branch to your local working copy, then run `sh _prepare.sh` to re-create your local views.

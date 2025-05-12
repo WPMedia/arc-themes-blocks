@@ -1,0 +1,28 @@
+{
+  "name": "@wpmedia/multi-section-layout-block",
+  "version": "1.0.0",
+  "description": "A layout block with multiple sections including header, three columns, full width, left rail, main content, and footer",
+  "main": "index.js",
+  "files": [
+    "features"
+  ],
+  "scripts": {
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "dependencies": {
+    "@wpmedia/arc-themes-components": "^1.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^12.0.0",
+    "jest": "^27.0.0"
+  },
+  "peerDependencies": {
+    "@wpmedia/arc-themes-components": "*"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "license": "UNLICENSED"
+} 

@@ -1,0 +1,71 @@
+---
+title: Migrating from PageBuilder Engine 5.x to 6.x
+description: Migrating from PageBuilder Engine 5.x to 6.x
+lastUpdated: 2025-03-10T12:00:00.000Z
+reviewStatus: needs_review
+---
+
+import * as globals from '/public/globals.js';
+import Link from "/public/snippets/anchors.astro";
+
+## Summary
+
+The only changes in PageBuilder Engine 6.0 is the upgrade to Node.js 20. These updates are necessary due to Node.js and AWS deprecation schedules. This upgrade contains:
+
+- **No changes in Arc XP functionality** – Your code does not require changes in how you use and interact with PageBuilder Engine interfaces on React and Node.js.
+- **Node.js upgrade from Node.js 18 to Node.js 20** – While most changes are backward-compatible, some low-level removals and deprecations may impact your dependencies.
+- **Potential dependency issues** – As with any major runtime upgrade, third-party npm packages may require updates or introduce breaking changes.
+
+
+## Changes in Node.js
+
+The move from Node.js 18 to 20 introduces several updates and breaking changes. Most updates enhance security, performance, and the developer experience but may require adjustments in your codebase.
+
+- **Permission Model (Experimental)** – Limits access to files, environment variables, and child processes unless explicitly allowed. Review your usage if you interact with the filesystem or process execution.
+- **V8 Engine Updates** – Stricter handling of JavaScript features may impact older or unoptimized code.
+- **Removed Legacy APIs** – Deprecated modules like `sys` and outdated buffer methods have been removed.
+
+For detailed information, review the [Node.js 20 release notes](https://nodejs.org/en/blog/release/v20 "https://nodejs.org/en/blog/release/v20").
+
+## Upgrading your code and dependencies
+
+While your bundle code itself may not require changes, your npm dependencies might. Many third-party packages use Node.js internal features that change across versions.
+
+- **Check package compatibility** – Run `npm outdated` to identify necessary updates.
+- **Review breaking changes in third-party libraries** – Check your dependencies' documentation for required changes.
+- **Test thoroughly -** We provide <Link href={`${globals.pbEngineDevDocsPath}/smoke-testing-bundle-code/`} text="ways to create and run smoke tests" /> to ensure bundle integrity and monitoring regressions.
+
+For additional guidance, see <Link href={`${globals.pbEngineDevDocsPath}/upgrading-your-bundle-code-with-major-or-breaking-pagebuilder-engine-releases/`} text="Upgrading Your Bundle Code with Major PageBuilder Engine Releases" />.
+
+
+## Upgrading from earlier Engine versions (3.x or 4.x to 6.x)
+
+If your bundle code is currently on Engine 3.x or 4.x, we strongly recommend upgrading incrementally. Upgrading directly from Engine 3.x or 4.x to Engine 6.x introduces multiple changes at once (Node.js 16 to 20), increasing migration complexity.
+
+To minimize risk, follow this upgrade path:
+
+1. **Upgrade to Engine 5.x first** to transition to **Node.js 18**.
+2. **Fully test your bundle code** for any runtime-specific issues.
+3. **Upgrade from Engine 5.x to Engine 6.x**, handling both **Node.js 20** changes in one step.
+
+Following this approach will isolate potential breaking changes, making debugging and troubleshooting easier.
+
+
+## Themes and Outbound Feeds (OBF) bundles
+
+Themes and OBF bundles are compatible with Engine 6.x. See the [compatibility](https://docs.arcxp.com/en/what-s-new-in-arc-xp/arc-xp-product-releases-and-dependencies.html#UUID-5b9a92f1-2896-9501-8884-3df54981bb7f_section-idm234691223592422) table for details.
+
+
+### Themes 3.0.0
+
+Follow the Engine version upgrade path outlined above.
+
+- If you are deploying in PageBuilder Deployer, ensure you have the correct `themesReleaseVersion` set in your [blocks.json](/themes/developer-docs/migrating-from-themes-settings-to-pbdeployer/#step-2-modify-arc-blocks-settings).
+- If you are deploying in Themes Settings, the compatible Engine version with the selected Themes version will deploy.
+
+
+### OBF
+
+1. Follow the Engine version upgrade path outlined above.
+2. Fully test your bundle code for any runtime-specific issues. Verify any added dependencies in your feature pack do not experience compatibility issues in local development.
+3. Deploy your OBF feature pack with Engine 6.

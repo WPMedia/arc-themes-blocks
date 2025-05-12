@@ -1,0 +1,122 @@
+---
+title: Handling redirects in content sources
+description: Handling redirects in content sources
+lastUpdated: 2024-04-10T19:16:37.000Z
+migrationData:
+  short_description: Handling redirects in content sources
+  number: KB0011241
+  sys_id: 470cad6847e1ce50eee38788436d43b0
+  sys_created_on: '2024-04-10 15:10:54'
+  sys_updated_on: '2024-04-10 15:16:37'
+  sys_created_by: fatih.yildiz@washpost.com
+  sys_updated_by: fatih.yildiz@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: ''
+  topic: General
+  sys_view_count: 286
+  helpful_count: 0
+  version: 075da52c47e1ce50eee38788436d43db
+  display_number: KB0011241 v4.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.330Z
+---
+
+As a developer, it's important for you to be familiar with how redirects are stored in ANS and how to handle redirects with various ways to implement content sources. This article covers how to handle different redirect responses from Content API in your content sources. See [Different kind of redirects at Arc XP](https://docs.arcxp.com/en/products/publishing-platform/what-are-the-different-kinds-of-redirects-in-arc-xp-.html) document for broader explanation of different type of redirects at Arc XP.
+
+## Redirect causes
+
+Two primary scenarios cause redirects for a piece of content stored in the Arc XP content authoring tools:
+
+- **Content URL changes.** If a story is published with an original title, that produces a URL, for example, `/storyA`, then gets updated to `/storyB`. The content platform records the previous URL as a new object in the system and then queries to Content API and, using the old content URL, returns a special redirect ANS object.
+- **Content creator explicitly sets a Forward URL in content tools.** This is also a common scenario that a piece of content can be configured with the meta field “Forward URL” that marks that piece of content in Arc XP to be redirected to the URL that is given in that field.
+
+In both cases, ANS returns with a special object “type” when the original URL of the story gets queried on Content API.
+
+## Implementing redirect handling in content sources
+
+You must ensure these redirects are handled correctly in the bundle code. You can implement content fetching in content sources using one of two methods. Only one of them requires handling redirects manually.
+
+### Content sources using the `resolve` method
+
+This method involves using the `resolve` property of content sources where developers construct the URL and return from the `resolve` function (or a string) when defining content sources. PageBuilder Engine takes care of redirects if a content source is configured this way. No extra work is needed to handle redirects.
+
+### Content sources using the `fetch` method
+
+You can choose to implement your own networking orchestration and return the content from the `fetch` function when configuring a content source. While this provides you the most flexibility, it does not handle redirects by default.
+
+You must implement this behavior, check the returned object type, and return a redirect exception so that PageBuilder Engine can return a proper response and HTTP status codes to the origin and CDN for handling redirects.
+
+Implementing redirects in `fetch` is fairly easy. See the following pseudo code sample for an example content source that handles redirects:
+
+:::note
+Don't copy/paste this code, as it does NOT handle every scenario and may not be accurate for the endpoints you are using at ArcXP.
+:::
+
+```js
+import axios from 'axios'
+import get from 'lodash.get'
+import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment'
+
+const RedirectError = (message = 'Redirect', code = 301, location) => {
+    const err = new Error(message)
+    err.statusCode = code
+    err.location = location
+    return err
+}
+
+const fetch = (query) => {
+  const website = query['arc-site']
+  return axios(`${CONTENT_BASE}/content/v4/story?website=${website}&website_url=${query.website_url}`, {
+    headers: {
+      Authorization: `Bearer ${ARC_ACCESS_TOKEN}`
+    },
+    validateStatus: false // This option will allow developers to catch and handle any HTTP status code within the successful promise callback
+  }).then((response) => {
+      if (response.status !== 200) {
+        if (response.status === 404) {
+          throw new NotFoundError(`Not found. Are you sure you've used the right URL? URL: ${fullUrl}`)
+        }
+        // ... TODO: handle other type of http status codes (i.e: 429, 3xx)
+        throw new Error("Unhandled HTTP status")
+      }
+
+      const content = response.data
+      const contentType = content.type
+      const redirectUrl = get(content, "related_content.redirect[0].redirect_url", null) || get(content, "redirect_url", null)
+      // Note, the code above covers 2 types of content platform redirects and does not include all possible type of redirects.
+      // Refer to https://arcxp.com/go/rdrct for more information about redirect types.
+
+      // Handle redirects from ANS
+      if (contentType && (contentType === "story" || contentType === "redirect") && redirectUrl) {
+        throw new RedirectError('Redirect', 301, redirectUrl)
+      }
+
+      // Optional successful content source response logic here...
+
+      return content
+
+  }).catch((e) => {
+      // Unexpected network fetch issue
+      throw new Error("API fetch error")
+      // Important Note: Never return Axios exception object directly (i.e: `return e`, or `throw e`),
+      // which may contain sensitive information (like tokens) that can be exposed in the logs
+  })
+}
+
+export default {
+  fetch
+}
+```
+
+The block we're more interested in here is, before returning the response object, checking if the top `type` property value is “redirect” or not. If it’s redirect, this is a special redirect ANS object that contains the target URL where the request should be redirected to in the top level `redirect_url` property.
+
+When catching this scenario, you can then throw a standard Error object with the following error object properties for handling redirects in PageBuilder Engine:
+
+- `.statusCode` = 301 or 302
+- `.location` the target URL PageBuilder should redirect to
+
+Both of these properties are required in the raised Error object for successful redirect handling.

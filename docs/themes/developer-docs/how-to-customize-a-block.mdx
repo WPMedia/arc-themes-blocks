@@ -1,0 +1,141 @@
+---
+title: How to customize a block
+description: How to customize a block
+lastUpdated: 2025-02-25
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+This guide helps you customize Arc blocks within your Themes-based repository. Customizing Arc blocks saves time compared to developing custom blocks from the start. 
+
+You must use custom blocks when out-of-the-box (OOTB) Arc blocks do not meet your design, styling, or functionality needs. However, you can still use Arc Themes components to avoid rewriting components maintained by Arc XP.
+
+:::note
+You can either customize a block with styling and remain on the Themes upgrade path or make more extensive functionality changes but risk being off the upgrade path for future Arc blocks. See <Link blank href={`${globals.themesDevDocsPath}/ejecting-an-arc-block/`} text='Ejecting (forking) an Arc Block' /> for more details.
+:::
+
+This guide does not work with headless Arc XP implementations.
+
+
+
+## Prerequisites
+
+Before customizing an Arc block, ensure you have the following:
+
+  * React knowledge to create a custom block.
+
+  * Knowledge of the <Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system/`} text='Themes Design System' />.
+
+
+
+
+## High-level workflow
+
+The general process for customizing Arc blocks comprises five fundamental steps:
+
+1. Confirm that an Arc block that meets your requirements does not already exist. Use it if an Arc block fulfills most requirements but needs slight styling modifications with the available tokens. If it meets your needs after this step, it is unnecessary to continue. For Outbound Feeds blocks, start with step 2. 
+
+    :::tip
+    Arc XP University offers <Link blank href='https://learning.arcxp.com/learn/courses/96/outbound-feeds-ejecting-a-block' text='Outbound Feeds ejecting a block' /> and <Link blank href='https://learning.arcxp.com/learn/courses/95/outbound-feeds-custom-block-content-source' text='Outbound Feeds Custom Block and Content Source' /> courses.
+    :::
+
+2. Fork your chosen block keeping only the essential files.
+
+3. Ensure compatibility of all dependencies for your custom block in the `package.json` file. 
+
+4. Customize your forked block based on desired functionality.
+
+5. Deploy your forked block.
+
+## Step-by-step workflow
+
+This step-by-step workflow for customizing blocks is divided into different upgrade paths:
+
+- Full upgrade path guarantees that your custom block is updated whenever you upgrade the Themes version in your project. 
+- Partial upgrade path only updates Arc components that you use in your custom blocks.
+- Off upgrade path means you must update your custom blocks and components. 
+
+### Full upgrade path
+
+#### Step 1: Identify the correct block without forking
+
+Identify an Arc block that serves most of your needs but requires minor styling and no functional adjustments. See the following resources for more details on Arc blocks:
+
+For developers and designers:
+
+  * <Link blank href={`${globals.themesDevDocsPath}/components-and-blocks-storybook/`} text='Components and blocks storybooks' />
+
+  * <Link blank href='https://docs.arcxp.com/en/products/themes/themes-2-0---blocks-styling-figma-library.html' text='Blocks styling Figma library' />
+
+  * <Link blank href='https://docs.google.com/spreadsheets/d/1VOfjPKqo9NYCVAgA7SdR0qHJeJm8ajSY-MRLLj1tR-E/edit#gid=2077144039' text='Block configuration matrix' />
+
+For editors:
+
+  * <Link blank href='https://docs.arcxp.com/en/products/outbound-feeds/getting-started-with-outbound-feeds.html' text='Getting started with Outbound Feeds' />
+
+:::tip
+Use a Figma file to visualize blocks and see available tokens to customize. To do styling customization without forking, see <Link blank href={`${globals.themesDevDocsPath}/introduction-to-themes-design-system/`} text='Introduction to Themes Design System' />.
+:::
+
+If an Arc block meets your requirements after this step, there is no need to continue.
+
+### Partial upgrade path or off upgrade path (full custom)
+
+Before proceeding, review the diagram on <Link blank href={`${globals.themesDevDocsPath}/ejecting-an-arc-block/#deciding-when-to-use-an-out-of-the-box-block-versus-a-custom-block`} text='Deciding when to use an out-of-the-box block versus a custom block' />. Partial upgrade and off upgrade paths mean that you are responsible for maintaining and updating your custom code.
+
+#### Step 2: Fork the block
+
+Arc XP recommends starting from an Arc block with a process known as _forking_ or _ejecting_. Customizing an existing block ensures maximum code reusability. 
+
+To fork a block, take the following steps:
+
+1. From the <Link blank href='https://github.com/WPMedia/arc-themes-blocks/tree/arc-themes-release-version-2.5.3/blocks' text='arc-themes-blocks' /> repository, copy the block directory, including its children and styles (you can exclude storybook files). Ensure to look at the latest branch that matches the Themes version you are using.
+
+2. If the block imports from the `@wpmedia/arc-themes-components` package, verify to list the package as a dependency in your `package.json` file.
+
+:::caution
+Do not fork `@wpmedia/arc-themes-components` because it is designed to be a reusable set of components.
+:::
+
+For outbound feeds, use the source code from the feed-components GitHub repository as starter scaffolding for custom blocks, as mentioned in the <Link blank href='https://learning.arcxp.com/learn/courses/96/outbound-feeds-ejecting-a-block' text='Outbound Feeds ejecting a block' /> Arc XP University course.
+
+
+
+#### Step 3: Ensure dependency compatibility
+
+Ensure you have all dependencies for the forked blocks in your main `package.json` file for seamless integration within your feature pack.
+
+
+#### Step 4: Customize the forked block
+
+Follow the <Link blank href={`${globals.themesDevDocsPath}/creating-a-custom-block-with-styling/`} text='Creating a custom block with styling' /> guide to make styling changes and stay on the partial upgrade path. 
+
+{/* For functional changes, consider building a custom block, [Creating a custom block](https://dev.arcxp.com/themes/developer-docs/themes-20-creating-a-custom-block-with-styling/). To stay on the partial upgrade path, utilize the component-based architecture of Themes 2.0. You can find available components in the [Figma](https://www.figma.com/file/NBjMF1v4mzwv9jkn7NEq9V/Themes-Block-Styling-2.0?type=design&node-id=7447-99432&mode=design&t=Bd6IDpfn440LcWoL-0) file, the [component Storybook](https://dev.arcxp.com/themes/developer-docs/themes-components-and-blocks-storybook/), and the [arc-themes-components](https://github.com/WPMedia/arc-themes-components/tree/arc-themes-release-version-2.1.1/src/components) GitHub repository. All components are imported from @wpmedia/arc-themes-components. */}
+
+If none of the available styling tokens or components from `@wpmedia/arc-themes-components` meet your requirements, you must create fully custom components, which are considered fully off the upgrade path.
+
+#### Step 5: Deploy custom blocks
+
+After customizing the forked block to meet your requirements, you must deploy your custom block. If you currently use Themes Settings for deployments, see the <Link blank href={`${globals.themesDevDocsPath}/migrating-from-themes-settings-to-pbdeployer/`} text='Migrating from Theme Settings UI to PageBuilder Deployer' /> guide to deploy your bundle. 
+
+Alternatively, you can follow the <Link blank href={`${globals.pbEngineDevDocsPath}/how-to-deploy-a-bundle/#the-deployment-process/`} text='How to deploy a bundle' /> guide.
+
+## Best practices
+
+This section contains best practices when forking and customizing Arc blocks.
+
+- **Use a unique name for your custom block**
+
+    Give your custom block a unique name that differentiates it from the original Arc XP block. Using a distinct name avoids conflicts and confusion between your custom and original blocks. If you choose to retain the same name, remove the original block from the `blocks.json` file.
+
+- **Test before full deployment**
+
+    Test your custom block in the sandbox environment before full deployment. This enables you to identify and rectify any errors or glitches that might have occurred during development. The deployment process is a critical phase in customizing Arc blocks. Proper execution ensures your custom blocks work seamlessly within your project.
+
+## Themes against non-Themes
+
+If you do not use Themes, you can still use the Themes blocks as a framework for your own blocks. However, ensuring the blocks have all the necessary dependencies is important.
+
+

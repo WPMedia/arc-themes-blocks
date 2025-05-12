@@ -1,0 +1,81 @@
+{
+  "numbered-stories": {
+    "styles": {
+      "default": {
+        "margin": "$global.spacing-4 0"
+      }
+    }
+  },
+  "numbered-stories-grid": {
+    "styles": {
+      "default": {
+        "display": "grid",
+        "grid-template-columns": "repeat(3, 1fr)",
+        "gap": "$global.spacing-4"
+      }
+    }
+  },
+  "numbered-stories-item": {
+    "styles": {
+      "default": {
+        "position": "relative",
+        "padding": "$global.spacing-4"
+      }
+    }
+  },
+  "numbered-stories-number": {
+    "styles": {
+      "default": {
+        "font-family": "$alias.font-family-primary",
+        "font-size": "$global.font-size-8",
+        "font-weight": "$global.font-weight-bold",
+        "color": "$global.neutral-4",
+        "margin-bottom": "$global.spacing-2"
+      }
+    }
+  },
+  "numbered-stories-image": {
+    "styles": {
+      "default": {
+        "width": "100%",
+        "aspect-ratio": "16/9",
+        "object-fit": "cover",
+        "margin-bottom": "$global.spacing-3"
+      }
+    }
+  },
+  "numbered-stories-headline": {
+    "styles": {
+      "default": {
+        "color": "$global.neutral-4",
+        "text-decoration": "none",
+        "margin-bottom": "$global.spacing-2",
+        "font-family": "$alias.font-family-primary",
+        "font-size": "$global.font-size-4",
+        "font-weight": "$global.font-weight-bold",
+        "line-height": "$global.line-height-tight"
+      }
+    }
+  },
+  "numbered-stories-subheadline": {
+    "styles": {
+      "default": {
+        "color": "$global.neutral-3",
+        "font-family": "$alias.font-family-secondary",
+        "font-size": "$global.font-size-3",
+        "line-height": "$global.line-height-normal",
+        "margin-bottom": "$global.spacing-2"
+      }
+    }
+  },
+  "numbered-stories-author": {
+    "styles": {
+      "default": {
+        "color": "$global.neutral-3",
+        "font-family": "$alias.font-family-secondary",
+        "font-size": "$global.font-size-2",
+        "line-height": "$global.line-height-normal"
+      }
+    }
+  }
+} 

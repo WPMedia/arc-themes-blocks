@@ -1,0 +1,38 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Divider from ".";
+
+<Meta of={IndexStories} />
+
+# Divider
+
+The `<Divider>` components renders an `<hr>` tag. From a visual perspective, the `<hr>` tag separates content depending on theme styles specified.
+
+For example, you may want a blue horizontal line dividing your text. From an accessibility perspective, the `<hr>` tag communicates a "paragraph-level thematic break," according to the [HTML Spec](https://html.spec.whatwg.org/multipage/grouping-content.html#the-hr-element). For example, if you're describing different types of sandwiches, a peanut butter and jelly sandwich would need to be divided semantically before talking about a ham and cheese sandwich.
+
+Yet there may be instances when a custom block developer wants to show only a visual divider without communicating a shift of topic. For example, a divider may be visually useful for separating different items in a list of Top 10 Most Read Stories. Yet the stories are not paragraph-level shifts in topic: they are section-level shifts of topic. In this instance, there's a prop called `assistiveHidden` that takes in boolean. If `true`, then the visual divider will not communicate a content shift via the use of `aria-hidden`. By default, `assistive-hidden` is false.
+
+`aria-hidden="true"` communicates to people who use screen-readers that there is not a shift of paragraph-level topic due to the `<hr>` tag. As a result, the component can look like a divider but not act like one.
+
+## Usage
+
+```jsx
+import { Divider } from "@wpmedia/arc-themes-components";
+
+const Feature = () => <Divider />;
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### Divider
+
+<Story of={IndexStories.DefaultDivider} />
+
+### Divider with assistiveHidden
+
+<Story of={IndexStories.DividerAssistiveHidden} />

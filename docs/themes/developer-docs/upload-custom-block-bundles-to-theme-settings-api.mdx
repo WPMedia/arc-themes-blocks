@@ -1,0 +1,181 @@
+---
+title: Upload custom block bundles to Theme Settings API
+description: Upload custom block bundles to Theme Settings API
+lastUpdated: 2025-02-11T22:27:33.000Z
+migrationData:
+  short_description: Upload custom block bundles to Theme Settings API
+  number: KB0010403
+  sys_id: 9340824f47c5bd50eee38788436d4385
+  sys_created_on: '2023-09-07 18:21:39'
+  sys_updated_on: '2023-09-07 18:27:33'
+  sys_created_by: Adam.Evans@washpost.com
+  sys_updated_by: Adam.Evans@washpost.com
+  author: 368023b947431550a87626c2846d43c9
+  category: Themes
+  kb: Developer Docs
+  kb_category: ba320d8b47dad110a87626c2846d4317
+  meta: Themes, PageBuilder, Themes Settings, API, Custom Blocks, Bundle
+  topic: General
+  sys_view_count: 369
+  helpful_count: 0
+  version: 31a102cf47c5bd50eee38788436d439a
+  display_number: KB0010403 v3.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.350Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+If you're creating custom blocks and you want to have your custom block bundle uploaded from a CI/CD system or just want to upload your bundle with a custom script, you can use the Theme Settings API to upload it without having to interact with the web UI.
+
+## Bearer Token
+
+In order to interact with the API, you'll need a bearer token generated in the Developer Center. Read-Only tokens and All Access tokens will both work since we're only using the API directly to get our upload information and not uploading any actual data that would require write permissions.
+
+## Generating upload information with the API
+
+The first step in the bundle upload process is requesting all our upload information from the API. You'll be uploading your bundle directly to AWS S3, but we'll need some information first like the URL we'll be uploading to, tags for the zip file that S3 will use, and AWS authorization tokens for the request to work.
+
+The URL format for this is as follows:
+
+```
+${ORG_ENV_DOMAIN}/themesettings/api/presigned-bundle-upload?name=${BUNDLE_NAME}&fileType=application%2Fzip
+```
+
+You would replace ORG\_ENV\_DOMAIN with the API domain for the organization and environment you are using. For example if your organization used the organization ID “my-org” in the production environment you would set ORG\_ENV\_DOMAIN to `https://api.{my-org}.arcpublishing.com`, if you were using that organization ID in the sandbox environment it would be set to `https://api.sandbox.{my-org}.arcpublishing.com`, and if you're using another environment you can replace “sandbox” with the other environment ID.
+
+The BUNDLE\_NAME value is the name of the bundle you want to upload. **This value must be unique for each of the bundles you upload.**
+
+In JavaScript, the request itself will look something like this where we include the values explained above and the required bearer token. This example uses [Axios](https://github.com/axios/axios), but if you use another tool or library you will want to ensure you're passing these values correctly (especially the bearer token since authorization may work differently from library to library).
+
+```js
+     const axios = require('axios');
+
+const { data } = await axios.get(
+    `${ORG_ENV_DOMAIN}/themesettings/api/presigned-bundle-upload?name=${BUNDLE_NAME}&fileType=application%2Fzip`,
+    {
+        headers: {
+            'Authorization': `Bearer ${BEARER_TOKEN}`,
+        }
+    },
+);
+```
+
+## Processing metadata for S3 upload
+
+Before we can upload our file to S3 we'll need to process some of the data in the “fields” object we got from the API and turn it into form data (in Node.js you will need to install the <Link blank href='https://github.com/form-data/form-data' text='Form-Data' /> package from NPM):
+
+```js
+     const FormData = require('form-data');
+
+const form = new FormData();
+
+Object.entries(data.fields).forEach(([key, value]) => {
+    form.append(key, value);
+}); 
+```
+
+Then we'll want to add our bundle zip file to the form data:
+
+```js
+     const fs = require('fs');
+
+form.append('file', fs.createReadStream('bundle.zip')); 
+```
+
+## Uploading our bundle
+
+We have all the data we need to upload our bundle so now we just have to construct the request:
+
+```js
+     axios.post(
+    data.url,
+    form,
+    {
+        headers: {
+            ...form.getHeaders(),
+            'Content-Length': await util.promisify(form.getLength.bind(form))(),
+        },
+    },
+);
+```
+
+(Note that the value being passed in as the URL is the “url” value in the response object from our earlier API request. Also, note that all the headers in the request specified above are required.)
+
+And if that POST request succeeds, your bundle should appear in the Theme Settings UI alongside the other custom block bundles listed in your organization settings.
+
+## Complete example
+
+Below is an almost complete working script that accomplishes all that's described above:
+
+```js
+     const fs = require('fs');
+const util = require('util');
+const axios = require('axios');
+const FormData = require('form-data');
+
+const ORG_ENV_DOMAIN = 'your org/env API domain here'
+const BUNDLE_NAME = 'your bundle name here';
+const BEARER_TOKEN = 'your bearer token here';
+
+async function getUploadMetadata() {
+  return axios.get(
+    `${ORG_ENV_DOMAIN}/themesettings/api/presigned-bundle-upload?name=${BUNDLE_NAME}&fileType=application%2Fzip`,
+    {
+      headers: {
+        'Authorization': `Bearer ${BEARER_TOKEN}`,
+      },
+    },
+  );
+}
+
+function buildFormData(fields) {
+  const form = new FormData();
+  Object.entries(fields).forEach(([key, value]) => {
+    form.append(key, value);
+  });
+  form.append('file', fs.createReadStream('bundle.zip'));
+
+  return form;
+}
+
+async function uploadFile(url, form) {
+  return axios.post(
+    url,
+    form,
+    {
+      headers: {
+        ...form.getHeaders(),
+        'Content-Length': await util.promisify(form.getLength.bind(form))(),
+      },
+    },
+  );
+}
+
+(async () => {
+  try {
+    console.log('Requesting upload data from API');
+    const { status: apiStatus, data: apiData } = await getUploadMetadata();
+
+    console.log(`API response status: ${apiStatus}`);
+    console.log(`Uploading to bucket at ${apiData.url} with key ${apiData.fields.key}`);
+
+    const form = buildFormData(apiData.fields);
+
+    const { status: s3Status } = await uploadFile(apiData.url, form);
+
+    console.log(`S3 upload complete: status code ${s3Status}`);
+  } catch (err) {
+    if (err.isAxiosError && err.response.status) {
+      console.error(`Request failed with status ${err.response.status} ${err.response.statusText}: ${err.response.data}`);
+    } else {
+      console.log(err);
+    }
+  }
+})(); 
+```
+
+Read through this script and ensure that it functions as expected and meets your particular needs in the event you are using this example script in your own scripts, deployment pipelines, or anywhere else you are uploading bundles from.

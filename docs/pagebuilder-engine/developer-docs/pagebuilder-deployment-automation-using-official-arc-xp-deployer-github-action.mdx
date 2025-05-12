@@ -1,0 +1,111 @@
+---
+title: Deployment automation using official Arc XP Deployer GitHub Action
+description: PageBuilder deployment automation using official Arc XP Deployer GitHub Action
+lastUpdated: 2024-03-12T00:00:04.000Z
+migrationData:
+  short_description: >-
+    PageBuilder deployment automation using official Arc XP Deployer GitHub
+    Action
+  number: KB0011249
+  sys_id: 7b4e008747bc4210eee38788436d4364
+  sys_created_on: '2024-03-11 19:59:04'
+  sys_updated_on: '2024-03-11 20:00:04'
+  sys_created_by: Paras.Goda@washpost.com
+  sys_updated_by: Paras.Goda@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: ''
+  topic: General
+  sys_view_count: 129
+  helpful_count: 0
+  version: 628e888747bc4210eee38788436d4371
+  display_number: KB0011249 v8.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.265Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+Deployment automation simplifies and accelerates the ship changes in your PageBuilder bundle, from development through testing to Production environments. It reduces manual effort and risk of error, ensuring consistent, efficient delivery.
+
+Deployment automation streamlines the software release process, offering significant benefits to businesses and development teams. Specifically, deployment automation provides:
+
+* **More frequent releases** - Automated deployments, even on non-Production environments, increase the overall lifecycle of a change from start to Production. We have seen users who automate their PageBuilder deployments using Deployer API on their CI/CD tools deploy twice as more frequently than users who don't use automation on deployments.
+* **Increased efficiency and productivity** - If performed manually, deploying can be a time-consuming step for your engineers because they must push changes to an Arc XP environment, whether they push a few times a day or once a week or once a month. By automating this repetitive step, developers are freed from manual processes, enabling them to focus on the development cycle.
+* **Rapid QA feedback** - Deployment automation facilitates quicker implementation of changes and reduces the QA lifecycle. Developers can continuously deliver features and bug fixes to the QA team for smaller, more manageable and quicker QA rounds.
+* **Scalability and adaptability** - Automated deployment is not only consistent but also easily configurable, making it simpler to deploy software in new environments or adapt to different requirements with minimal effort. As your team grows, onboarding a new engineer becomes easier, as deployments are centralized and they can get started faster.
+* **Collaboration and visibility** - Automated pipelines enhance transparency across teams, fostering better collaboration and communication, which is an important factor for agile development practices.
+* **Cost-effectiveness** - By streamlining processes and reducing the need for manual intervention, automated deployment can lead to cost savings over time.
+
+## PageBuilder deployment automation with Arc XP GitHub Action
+
+PageBuilder's Deployer tool has a REST API you can use in your own CI/CD tools with custom scripts. We previously shared a DIY script in <Link blank href='https://docs.arcxp.com/en/products/pagebuilder-engine/do-it-yourself-ci-cd-deployment-script--for-pagebuilder-engine-bundle-.html' text='Do-It-Yourself CI/CD Deployment Script (for PageBuilder Engine Bundle)' /> that you can implement in almost all CI/CD tools.
+
+The <Link blank href='https://github.com/marketplace/actions/deploy-to-arc-xp' text='Arc XP GitHub Deployment Action' /> helps you automate your deployments using GitHub Actions, making this step easier for you if you use GitHub as your version control system and can utilize GitHub Actions to configure PageBuilder deployment automation.
+
+
+After configuring Arc XP's GitHub Action in a workflow, when you create or merge pull requests or when performing a simple push to a GitHub repository, a GitHub Action workflow triggers using Arc XP's deploy action. The bundle zipping, upload, deployment, and promotion steps take place with a simple configuration.
+
+![Completed Github Action](/images/pagebuilder-engine/arcxp-github-actions-workflow.jpg)
+
+When the deployment workflow finishes, the bundle is live and visible in PageBuilder Deployer:
+
+![Completed Deployment in PageBuilder](/images/pagebuilder-engine/page-builder-deployer.jpg)
+
+## Arc XP Deployment Action
+
+Usage of the action (under steps in your workflow file):
+
+```
+- name: Perform the deploy
+  if: ${{ success() }}
+  uses: arcxp/deploy-action@v1
+  with:
+    org-id: your-org-here
+    api-key: "${{ secrets.YOUR_DEPLOYER_TOKEN_HERE }}"
+    api-hostname: api.sandbox.your-org-here.arcpublishing.com
+    bundle-prefix: action-demo-1
+```
+
+This action step uploads your bundle, deploys it, waits for deployment to be completed, and then promotes it to be a live bundle.
+
+## Create your bundle zip package first
+
+A pre-requisite for this GitHub action is to zip your bundle package as .zip file. You must zip your package prior to running this deployment step. By default, the action looks at the `dist/fusion-bundle.zip` location, but you can configure this with the `artifact` property in the action with a custom name. Ensure your zip commands produce the file in the same path this action looks for.
+
+Depending on your previous continuous integration steps, you may already be running the `fusion zip` command to generate the bundle package. If you are using the `fusion zip` command, you may need to provide the name (and path) the deployment action needs with the `-n` parameter. An example command is, `npx fusion zip -n mybundle`.
+
+Alternatively, you can manually run the `zip` command to create package of your bundle. The `fusion zip` command requires the full Docker stack to be running, and that may not be available or feasible on your GitHub actions runner, or you may not need the verifications. In that case, you can run the following `zip` command to create your bundle zip package for upload:
+
+```
+zip mybundle.zip -r . -x .git/\* node_modules/\* coverage/\* .github/\* .fusion/\* mocks/\* dist/\* data/\* README.md .env .npmrc
+```
+
+You can also simply put this command in an `npm` script alias in your `package.json`, and run that alias in your workflow. Your `package.json` could be:
+
+```
+{
+  ...
+  "scripts": {
+    ...
+    "zip": "mkdir dist; zip mybundle.zip -r . -x .git/\\* node_modules/\\* coverage/\\* .github/\\* .fusion/\\* mocks/\\* dist/\\* data/\\* README.md .env .npmrc"
+    ...
+  },
+  ...
+}
+```
+
+Then run the `npm run zip` command in your workflow.
+
+## Demo repository
+
+We demonstrated both the manual Shell script-based workflow and a workflow that uses the Arc XP-provided GitHub Action here: <Link blank href='https://github.com/arcxp/arcxp-demo-1' text='Arc XP Demo 1' />
+
+See a workflow example that uses the new GitHub Action: <Link blank href='https://github.com/arcxp/arcxp-demo-1/blob/main/.github/workflows/new-action-deploy.yml' text='New Action Deploy' />
+
+To demonstrate the manual steps you can implement without Arc XP Deploy GitHub Action, we included an example workflow that relies on Shell commands: <Link blank href='https://github.com/arcxp/arcxp-demo-1/blob/main/.github/workflows/sandbox-deploy.yml' text='Sandbox Deploy' />

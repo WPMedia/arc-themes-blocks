@@ -1,0 +1,712 @@
+---
+title: Output Type API
+description: Output Type API
+lastUpdated: 2025-01-21T20:00:02.000Z
+migrationData:
+  short_description: Output Type API
+  number: KB0010436
+  sys_id: 7c9fb0e7477b4610a87626c2846d43be
+  sys_created_on: '2024-08-09 15:59:38'
+  sys_updated_on: '2024-08-09 16:00:02'
+  sys_created_by: fatih.yildiz@washpost.com
+  sys_updated_by: fatih.yildiz@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: ''
+  meta: >-
+    PageBuilder Engine, Output Type API, outputType, Context, metaValue,
+    CssTags, CssLinks, Fusion, Libs, MetaTag, Resource, Styles, renderProp,
+    contentType, PropTypes, displayPropTypes, fallback, transform, spa,
+  topic: General
+  sys_view_count: 2074
+  helpful_count: 0
+  version: 6eaf3c6b477b4610a87626c2846d43e8
+  display_number: KB0010436 v8.0
+migrationStatus: converted
+reviewStatus: pending
+conversionDate: 2024-10-15T17:18:05.470Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+Use output types to define the HTML wrapping that is applied to server responses (like `head`, `title`, `meta`, `link`, and `script` tags). You must define anything that is part of the server-generated HTML but is not specific to a page or template in an output type.
+
+When rendering a page, the system uses the `outputType` query parameter to determine which output type handles the request. If no parameter is specified, the system uses the `default` output type.
+
+## Implementation
+
+### Naming
+
+You must store and name an output type in the following format: `/components/output-types/{outputTypeName}.(js|jsx)`
+
+Using that format builds a component where the `{outputTypeName}` portion of the file path represents the name of the output type. The `outputTypeName` value should not contain any periods.
+
+:::note
+PageBuilder Engine requires that your output type to contain an element in the body that has an ID value of `fusion-app`, which contains the value `props.children` inside of it. This is the ID that PageBuilder Engine renders the client-side portion of the application into. Without this ID, client-side rendering fails.
+:::
+
+### Example
+
+`/components/output-types/default.jsx`
+
+```js
+import React from 'react'
+
+export default (props) => {
+  return (
+    <html>
+      <head>
+        <title>{props.metaValue('title') || 'Default Title'}</title>
+        <props.MetaTags />
+        <props.Libs />
+        <props.CssLinks />
+        <link rel='icon' type='image/x-icon' href={`${props.contextPath}/resources/img/favicon.ico`} />
+      </head>
+      <body>
+        <h1>Welcome to PageBuilder Engine!</h1>
+        <div id='fusion-app'>
+          {props.children}
+        </div>
+        <props.Fusion />
+      </body>
+    </html>
+  )
+}
+```
+
+## Properties
+
+All properties that the `Context` component makes available are also available on output types. See the <Link href={`${globals.pbEngineDevDocsPath}/context-component-api`} text='Context Component API' /> for a list of these properties.
+
+### `children (Array)`
+
+React uses the convention of a property named `children` to define content that should be inserted inside your component. We respect this convention for output types. In this case, the `children` property defines the rendered content of the page. If you want to perform client-side-only rendering, do not include this property in your page.
+ 
+
+<table><thead>
+  <tr>
+    <th style="min-width:150px;">Parameters</th>
+    <th style="min-width:150px;">Returns</th>
+    <th>Example</th>
+  </tr></thead>
+<tbody>
+  <tr>
+
+<td>n/a</td><td>n/a</td>
+<td>
+`/components/output-types/default.jsx`
+```js
+import React from 'react'
+
+export default (props) => {
+  return (
+    ...
+    <div id='fusion-app'>
+      {props.children}
+    </div>
+    ...
+  )
+}
+```
+</td>
+  </tr>
+</tbody>
+</table>
+
+### `metaValue() (Function)`
+
+Similar to the `MetaTag` component, but this property returns only the value, not a fully rendered HTML meta tag.
+
+  <table style="display:block; overflow-x:scroll; white-space:wrap;"><thead>
+  <tr>
+    <th>Parameters</th>
+    <th style="min-width:200px;">Returns</th>
+    <th>Example</th>
+  </tr></thead>
+<tbody>
+  <tr>
+  <td>
+  `metaValue(name)`
+  </td>
+  <td>This function returns a string with the value of the requested metadata variable (not a fully rendered HTML tag). If no value is found for the provided name parameter, it returns `undefined`.</td>
+  <td>
+  `/components/output-types/default.jsx`
+
+```js
+import React from 'react'
+
+export default (props) => {
+  return (
+    ...
+    <title>{props.metaValue('title') || 'Default Title'}</title>
+    ...
+  )
+}
+```
+</td>
+
+  </tr>
+</tbody>
+</table>
+
+
+
+## Property Components
+
+Property components extend the functionality of output types. This section presents a list of property components, their parameters, return values, and examples. 
+
+### `props.CssLinks (Component)`
+
+Also aliased as `<props.CssTags />`
+
+This component includes the stylesheet `<link>`s for the appropriate page or template and/or output-type. This property inserts a `<link>` reference tag. In the case of page or template, the file name is content hashed to the specific state of the page or template. For inline styles, see `<Props.Styles />`.
+
+`CssLinks` properties have children so that PageBuilder Engine can generate deterministic IDs for them (unless an ID is already specified). Therefore, we recommend adding a `<link>` as a child of `CssLinks` with a defined ID.
+
+<table style="display:block; overflow-x:scroll; white-space:wrap;"><thead>
+  <tr>
+    <th>Parameters</th>
+    <th style="min-width:200px;">Returns</th>
+    <th>Example</th>
+  </tr></thead>
+<tbody>
+  <tr>
+  <td>
+You can invoke the `CssLinks` component on its own or with children. It renders `<link>` tags for both the output type stylesheet as well as the template-specific stylesheet.
+
+`<props.CssLinks />` `<props.CssLinks>{children}</props.CssLinks>`
+
+* `children(linkTag)` (_HTML_): Accepts number of script tags in plain HTML containing stylesheet URLs.
+* `stylesheetObj` (_Object_): A wrapper object containing the `outputTypeHref` and `templateHref` key and value pairs.
+* `stylesheetObj.outputTypeHref` (_String_): The stylesheet URL for CSS included in the Output Type itself.
+* `stylesheetObj.templateHref` (_String_): The stylesheet URL for CSS included in the components specific to this page or template implementation.
+</td>
+
+<td>Renders `<link>` tags for the output type and specified template.</td>
+<td>
+
+**Without Children**
+
+`/components/output-types/default.jsx`
+
+```js
+import React from 'react'
+
+export default (props) => {
+  return (
+    ...
+    <props.CssLinks />
+    ...
+  )
+}
+```
+
+**With Children**
+
+`/components/output-types/default.jsx`
+
+```js
+import React from 'react'
+
+export default (props) => {
+  return (
+    ...
+    <props.CssLinks>
+      <link id="predefinedId" rel='stylesheet' type='text/css' href="linkToCdn" />
+    </props.CssLinks>
+    ...
+  )
+}
+```
+
+:::note
+We do not recommend customizing reference links unless absolutely necessary. If inserting a custom link to the page or template styles, ensure you include `id="fusion-template-styles"` because that ID is used to update the styles in the case of a newly-published template.
+:::
+</td>
+</tr>
+</tbody>
+</table>
+
+### `props.Fusion (Component)`
+
+This component includes a special script block that includes PageBuilder Engine-specific values, as well as the server-fetched content cache that is used during client-side refresh to prevent content flashing.
+
+Content refresh may be specifically disabled. This applies only to content that was previously fetched server-side and is available in the content cache; any content that is not in the cache is fetched from the client, regardless. This feature is generally useful only in the case of pre-rendered HTML. On-demand HTML is already aware that its content is fresh and does not attempt client-side fetching.
+
+PageBuilder Engine properties have children so that PageBuilder Engine can generate deterministic IDs for them (unless an ID is already specified). Therefore, we recommend adding a `<script>` as a child of `Fusion` with a defined ID.
+
+<table style="display:block; overflow-x:scroll; white-space:wrap;"><thead>
+  <tr>
+    <th>Parameters</th>
+    <th style="min-width:200px;">Returns</th>
+    <th>Example</th>
+  </tr></thead>
+<tbody>
+  <tr>
+  <td>
+You can invoke the `Fusion` component on its own or with children.
+
+`<props.Fusion [disableGlobalContent]  [disableContentCache] />`
+
+If invoked with children, it accepts any number of `script` tags.
+
+`<props.Fusion>{children}</props.Fusion>`
+* `children(script)` (_HTML_): Accepts the number of script tags in plain HTML.
+* `disableGlobalContent` (bool) disables encoding global content in the returned HTML under window.Fusion object.
+* `disableContentCache` (bool) disables encoding content cache in the returned HTML under window.Fusion object.
+
+This will help customer developers to optimize SSR HTML size. (Note: Disabling globalContent or contentCache will result client-side refresh to make API calls may impact client-side performance).
+</td>
+<td>
+Renders bootstrapped PageBuilder Engine-specific values, as well as cached content fetched from the server side, to the DOM for PageBuilder Engine's use.
+</td>
+<td>
+**Without Children**
+
+```js
+import React from 'react'
+
+export default (props) => {
+  return (
+    <html>
+      <head>
+        ...
+      </head>
+      <body>
+        ...
+        <props.Fusion />
+      </body>
+    </html>
+  )
+}
+```
+
+**With Children**
+
+```js
+import React from 'react'
+
+export default (props) => {
+  return (
+    <html>
+      <head>
+        ...
+      </head>
+      <body>
+        ...
+        <props.Fusion>
+          <script>console.log('Hello PageBuilder Engine Props!')</script>
+        </props.Fusion>
+      </body>
+    </html>
+  )
+}
+```
+
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### `props.Libs (Component)`
+ 
+This component includes the scripts necessary to perform client-side re-render and content refresh. This includes both a shared React script and a specific page and template script.
+
+Libs properties have children so that PageBuilder Engine can generate deterministic IDs for them (unless an ID is already specified). Therefore, we recommend adding a `<script>` as a child of `Libs` with a defined ID.
+
+<table style="display:block; overflow-x:scroll; white-space:wrap;"><thead>
+  <tr>
+    <th>Parameters</th>
+    <th style="min-width:200px;">Returns</th>
+    <th>Example</th>
+  </tr></thead>
+  <tbody>
+  <tr>
+  <td>
+  You can invoke the `Libs` component on its own or with children.
+
+  `<props.Libs />`
+  If invoked with children, it accepts any number of `script` tags.
+
+  `<props.Libs>{children}</props.Libs>`
+  * `children(script)` (_HTML_): Accepts the number of script tags in plain HTML.
+  </td>
+  <td>
+  Renders the React engine script and PageBuilder Engine template script necessary to re-hydrate and re-render the React app client side.
+  </td>
+
+<td>
+
+**Without Children**
+
+```js
+import React from 'react'
+
+export default (props) => {
+  return (
+    <html>
+      <head>
+        ...
+        <props.Libs />
+        ...
+      </head>
+      ...
+    </html>
+  )
+}
+```
+
+**With Children**
+
+```js
+import React from 'react'
+
+export default (props) => {
+  return (
+    <html>
+      <head>
+        ...
+        <props.Libs>
+          <script>console.log('Hello Libs Props!')</script>
+        </props.Libs>
+        ...
+      </head>
+      ...
+    </html>
+  )
+}
+```
+
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### `props.MetaTag (Component)`
+
+Also aliased as `<props.MetaTags />`
+
+This component inserts meta tags into your rendered HTML. If a name is provided, it inserts the single specified meta tag. If no name is given, it inserts all meta tags that are enabled in the PageBuilder Editor app.
+
+<table style="display:block; overflow-x:scroll; white-space:wrap;"><thead>
+  <tr>
+    <th>Parameters</th>
+    <th style="min-width:200px;">Returns</th>
+    <th>Example</th>
+  </tr></thead>
+  <tbody>
+  <tr>
+  <td>
+  The system passes parameters to the `MetaTag` component as properties.
+
+  `<props.MetaTag [name] [default] />`
+  * `name` (_String_): A string representing the name of the `<meta>` tag to be rendered; this should correspond to a meta option set in PageBuilder Editor.
+  * `default` (_String_): The default value this `<meta>` tag should contain if a value has not been set in PageBuilder Editor.|Renders the specified `<meta>` tag by name if one is provided; if not, it renders all `<meta>` tags for this page.
+
+  </td>
+  <td>
+  Renders the specified `<meta>` tag by name if one is provided; if not, it renders all `<meta>` tags for this page.
+  </td>
+  <td>
+`/components/output-types/default.jsx`
+
+```js
+import React from 'react'
+
+export default (props) => {
+  return (
+    <html>
+      <head>
+        ...
+        <props.MetaTag name='description' default='This is a page about cats.' />
+        ...
+      </head>
+      ...
+    </html>
+  )
+}
+```
+</td>
+</tr>
+</tbody>
+</table>
+
+### `props.Resource (Component)`
+
+This component provides access to the content of static resource files.
+
+<table style="display:block; overflow-x:scroll; white-space:wrap;"><thead>
+  <tr>
+    <th>Parameters</th>
+    <th style="min-width:200px;">Returns</th>
+    <th>Example</th>
+  </tr></thead>
+  <tbody>
+  <tr>
+  <td>
+  The system passes parameters to the `Resource` component as properties.
+
+  `<props.Resource [path] [encoding] />`
+  * `path` (_String_): A string representing the path of the file to be accessed.
+  * `encoding` (_String_): The preferred encoding of the resultant string (should be one of `ascii`, `base64`, `binary`, `buffer`, `hex`, or `utf8`; the default is `utf8`).|Renders the return value of the passed `renderProp`
+  </td>
+  <td>
+  Renders the return value of the passed `renderProp`.
+  </td>
+  <td>
+`/components/output-types/default.jsx`
+
+```js
+import React from 'react'
+
+export default (props) => {
+  return (
+    <html>
+      <head>
+        ...
+        <props.Resource path='resources/css/main.css'>
+          {({ data }) => data ? <style dangerouslySetInnerHTML={{ __html: data }} /> : null}
+        </props.Resource>
+        ...
+      </head>
+      ...
+    </html>
+  )
+}
+```
+</td>
+</tr>
+</tbody>
+</table>
+
+### `props.Styles (Component)`
+  
+This component includes the generated CSS for the appropriate page or template and output-type. It inserts the computed inlined styles appropriate to the rendering. For a reference link, see `<Props.CssLinks />` previously.
+
+Styles properties have render children so that PageBuilder Engine can generate deterministic IDs for them (unless an ID is already specified). Therefore, we recommend adding a `<style>` as a child of `Styles` with a defined ID.
+
+<table  style="display:block; overflow-x:scroll; white-space:wrap;"><thead>
+  <tr>
+    <th>Parameters</th>
+    <th style="min-width:200px;">Returns</th>
+    <th>Example</th>
+  </tr></thead>
+  <tbody>
+  <tr>
+  <td>
+  You can invoke the `Styles` component on its own or with [Render Props](https://reactjs.org/docs/render-props.html). If invoked on its own, it renders `<style>` tags, including the CSS for both the output type stylesheet as well as the template-specific stylesheet.
+
+  `<props.Styles />`
+  If invoked with a render property, it accepts a function that gets passed the URLs for both the output type stylesheet and template-specific stylesheet passed to it, which the function can then use to render the `<link>` tags on its own.
+
+  `<props.Styles>{renderProp}</props.Styles>`
+  * `renderProp(stylesObj)` (_Function_): Function whose purpose is to render `<link>` tags, given an object containing stylesheet URLs.
+  * `stylesObj` (_Object_): A wrapper object containing the `outputTypeStyles` and `templateStyles` key and value pairs.
+  * `stylesObj.outputTypeStyles` (_String_): The CSS for the output type itself.
+  * `stylesObj.templateStyles` (_String_): The CSS for the components specific to this page and template implementation.|Renders the return value of the passed `renderProp` if one is provided; otherwise, it renders `<style>` tags for the output type and specified template containing relevant CSS.
+  </td>
+  <td>
+  Renders the return value of the passed `renderProp` if one is provided; otherwise, it renders `<style>` tags for the output type and specified template containing relevant CSS.
+  </td>
+  <td>
+**Without a Render Property**
+
+```js
+import React from 'react'
+
+export default (props) => {
+  return (
+    <html>
+      <head>
+        ...
+        <props.Styles />
+        ...
+      </head>
+      ...
+    </html>
+  )
+}
+```
+
+**With a Render Property**
+
+```js
+import React from 'react'
+
+export default (props) => {
+  return (
+    <html>
+      <head>
+        ...
+        <props.Styles>
+          {({outputTypeStyles, templateStyles}) => {
+            // Only rendering the outputTypeStyles, not the templateStyles
+            return (<style id='predefinedId' amp-custom='true'>{outputTypeStyles}</style>)
+          }}
+        </props.Styles>
+        ...
+      </head>
+      ...
+    </html>
+  )
+}
+```
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+## Static Values
+
+Some components provide static values. This section presents a list of static value components and examples.
+
+### `contentType (String)`
+
+This component provides a specific value to be used as the `Content-Type` header in the response. If no value is provided, it defaults to `text/html` if the render results in a string, or `application/json` otherwise.
+
+**Example:**
+
+```js
+///components/output-types/json.js
+const JsonOutputType = (props) => {
+  ...
+}
+
+JsonOutputType.contentType = 'application/json'
+
+export default JsonOutputType
+```
+
+### `displayPropTypes (Object)`
+
+This function implements React's [PropTypes](https://github.com/facebook/prop-types), which is available on each feature. These are defined the same way as `propTypes` on Features and Chains; however, unlike custom fields, the values can differ across output types. `displayProperties` are useful for high level page functionality such as hide/show logic, layout grids, or any other settings that you want each feature to have.
+
+The value [Props.DisplayProperties](https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-use-display-properties.html#UUID-958540ac-29bd-8782-fd7b-66307dc8231d_section-idm234653006695808) is available on Features and contains the key names defined here and the values set in PageBuilder.
+
+**Example:**
+
+**On the Output Type**
+
+```js
+///components/output-types/default.jsx
+import React from 'react'
+
+const DefaultOutputType = (props) => {
+  ...
+}
+
+DefaultOutputType.displayPropTypes = {
+  isStatic: PropTypes.bool,
+  width: PropTypes.number,
+  anchor: PropTypes.string
+}
+
+export default DefaultOutputType
+```
+
+### `fallback (Boolean or Array of Strings)`
+
+When rendering, PageBuilder Engine must determine which version of a component it should render relative to the output type being constructed (in this case _component_ means Features, Chains, or Layouts). This property determines how (if at all) child components within a certain output type get rendered.
+
+By default, PageBuilder Engine selects the version of the component that is named after the relevant output type and its file extension (for example, if the output type being rendered is `amp.jsx`, it looks for a component file named `amp.jsx`). If only one version of a component exists (for example, a single `default.jsx` file), by default, all other output types fall back to that single version of the component. Using the `fallback` property, however, you can specify:
+
+- That child components of this output type should not render at all if there is no corresponding version of the component, or
+- An array of "fallback" versions for the given output type that PageBuilder Engine should attempt to render, in order, if there is no corresponding version of the component
+
+The options above use the _Boolean_ version or the _Array of Strings_ version of this property, respectively.
+
+**Examples:**
+
+**Boolean Version**
+
+```js
+///components/output-types/amp.jsx
+import React from 'react'
+
+const AmpOutputType = (props) => {
+  ...
+}
+
+// If no `amp` version exists
+// for a given child component
+// of this Output Type, that
+// component will not render
+AmpOutputType.fallback = false
+
+export default AmpOutputType
+```
+
+**Array of Strings Version**
+
+```js
+///components/output-types/fb-instant.jsx
+import React from 'react'
+
+const FbInstantOutputType = (props) => {
+  ...
+}
+
+// If no `fb-instant` version exists
+// for a given child component of
+// this Output Type, that component
+// will fallback to the `amp` version
+// if it exists, then the
+// `default` version
+FbInstantOutputType.fallback = ['amp', 'default']
+
+export default FbInstantOutputType
+```
+
+### `transform (Object)`
+
+This function extends an output-type to provide separate output-types that are post-render modifications of the original. The transform object should consist of functions whose names are unique output-type names. When a request is made where the output-type is specified as one of these transform types, a render is performed using the base `OutputType` component. The transform function is then called, with the render data and context passed as arguments. The transform function should return an object with a `data` property that is used as the body of the response, and optionally a `contentType` property to be used as the `Content-Type` header.
+
+**Example:**
+
+The following example results in two available output-types: `default` and `json`. Each performs a render using the `DefaultOutputType` component. A request for `?outputType=default` returns the rendered HTML, while a request for `?outputType=json` returns a JSON object with context information.
+
+```js
+///components/output-types/default.jsx
+DefaultOutputType.transform = {
+  json({ context }) {
+    const { props, contentCache } = context;
+    return {
+      contentType: 'application/json',
+      data: {
+        tree: props.tree,
+        globalContent: props.globalContent,
+        featureContent: contentCache,
+      },
+    };
+  },
+};
+```
+
+### `spa (Boolean or Array)`
+
+This attribute denotes which output types you want to use the SPA rendering workflow by adding the attribute `.spa = true`. Because the SPA rendering workflow is enabled at the output type level, any pages that are rendered with an output type marked as "SPA enabled" use that workflow, and any pages rendered with non-SPA-enabled output types use the "traditional" rendering workflow. If a reader is navigating between pages rendered with different output types, PageBuilder Engine always uses the traditional rendering workflow. In other words, SPA rendering works only when navigating between pages of the same output type, even if both output types are SPA-enabled.
+
+You can also choose to make an output type SPA-enabled only for specific sites. To do this, you must set the attribute in an array instead of a Boolean `.spa = [site1_id, site2_id, ...]`.
+
+**Example:**
+
+```js
+///components/output-types/spa-output.jsx
+import React from 'react'
+const SPAOutput = (props) => (
+  <html lang="en">
+    ...
+  </html>
+);
+// The line below denote
+// this Output Type as "SPA enabled"
+SPAOutput.spa = true;
+export default SPAOutput
+```

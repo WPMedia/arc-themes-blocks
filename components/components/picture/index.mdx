@@ -1,0 +1,86 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Picture from ".";
+
+<Meta of={IndexStories} />
+
+# Picture
+
+The `Picture` component and `Picture.Source` subcomponent render the HTML5 `<picture>` and `<source>` tags, respectively. Similar to the Image, the Picture component displays images as both a means of content and content support. Picture, however, allows for different images or image crops to be used explicitly for different media queries. This allows for different Art Direction approaches for specific viewport dimensions.
+
+For `resizedOptions`, here are the query parameters that are available:
+https://github.com/WPMedia/arc-photo-resizer/tree/main/docs/usage#query-parameters
+
+Crucially, an "auth" parameter is required for an image to be resized. This object will resize the image to the specified dimensions. Dimensions as as well as other `resizedOptions` parameters are appended to the image URL as query parameters.
+
+Image dimensions may be provided as `width` and `height` props. NOTE: Dimensions used as `resizedOptions` parameters will not be used. They will be ignored and not used as querystring parameters for the v2 resizer.
+
+The `Picture` component can use zero or more `Picture.Source` subcomponents and should also include one `Image`. While multiple `Soures` are intended to support Art Direction use cases, the `Image` component:
+
+1. May serve as one of the image display variations.
+2. Contains the important `alt` metadata attribute.
+3. Can also serve as a supportive fallback image.
+
+`Source` and `Image` are the two types of children a `Picture` will support.
+
+## Usage
+
+```jsx
+import { Picture } from "@wpmedia/arc-themes-components";
+
+const Feature = () => (
+	<Picture>
+		<Picture.Source
+			src="cat.jpg"
+			width={400}
+			height={300}
+			media="(min-width: 768px)"
+			resizerURL="https://resizer.com/v2/"
+			resizedOptions={{
+				auth: "secret",
+			}}
+		/>
+		<Picture.Image
+			src="cat.jpg"
+			width={200}
+			height={200}
+			resizerURL="https://resizer.com/v2/"
+			resizedOptions={{
+				auth: "secret",
+			}}
+			alt="A cat meowing"
+		/>
+	</Picture>
+);
+```
+
+## Properties
+
+<Controls />
+
+### Picture.Source
+
+<Controls />
+
+### Picture.Image
+
+<Controls />
+
+## Stories
+
+### Picture
+
+`Picture.Source` may be used to target Art Direction requirements for specific viewport widths. The following example displays a `Picture` with three Art Direction variations:
+
+1. At smaller viewport size, the image is displayed with a portait aspect ratio.
+2. As the viewport widens, the image is displayed as a square.
+3. At the viewport widens further, the image is displayed with a landscape aspect ratio.
+
+<Story of={IndexStories.DefaultPicture} />
+
+### Picture source does not render without a media attribute.
+
+`Picture.Source` requires a `media` attribute. When the attribute is not provided, `Picture.Source` renders as `null`.
+
+<Story of={IndexStories.PictureSourceDoesNotRenderWithoutAMediaAttribute} />

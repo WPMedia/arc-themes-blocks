@@ -1,0 +1,10 @@
+/* stylelint-disable selector-class-pattern */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(100%);
+	block-size: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	inline-size: 1px;
+}

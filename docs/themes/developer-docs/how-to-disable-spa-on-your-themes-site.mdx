@@ -1,0 +1,20 @@
+---
+title: How to disable SPA on your Themes site
+description: How to disable SPA on your Themes site
+lastUpdated: 2025-02-25
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+If your Themes site is SPA-enabled, but you are not using any SPA-related features, you may disable SPA on your site. 
+
+To ensure that SPA is off, verify that the `FUSION_SERVICE_WORKER` in the `index.json` file of the environment directory is set to `false`:
+
+```
+///environment/index.json
+{
+  "FUSION_SERVICE_WORKER": false,
+}
+``` 

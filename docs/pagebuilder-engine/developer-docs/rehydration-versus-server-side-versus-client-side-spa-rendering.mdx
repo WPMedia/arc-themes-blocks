@@ -1,0 +1,181 @@
+---
+title: Rehydration versus Server-Side versus Client-Side (SPA) Rendering
+description: Rehydration versus Server-Side versus Client-Side (SPA) Rendering
+lastUpdated: 2024-07-17T22:29:18.000Z
+migrationData:
+  short_description: Rehydration versus Server-Side versus Client-Side (SPA) Rendering
+  number: KB0010368
+  sys_id: 7ca28b4cc3278690a046930a05013199
+  sys_created_on: '2024-07-17 18:17:50'
+  sys_updated_on: '2024-07-17 18:29:18'
+  sys_created_by: Adam.Evans@washpost.com
+  sys_updated_by: Adam.Evans@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: >-
+    PageBuilder Engine, Isomorphic Rendering, Server-Side Rendering, Client-Side
+    (SPA) Rendering, .static, 
+  topic: General
+  sys_view_count: 894
+  helpful_count: 0
+  version: 74458780c3678690a046930a050131b3
+  display_number: KB0010368 v6.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.444Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+
+
+One of the benefits of writing PageBuilder Engine Feature Packs as React components is the ability to render them using rehydration, meaning a render occurs on both the server-side and again on the client-side. However, rehydration rendering isn't the only option when writing Features. PageBuilder Engine gives you the flexibility to choose what context you want each of your Features to render in. The following diagram illustrates the rehydration principle:
+
+<center>
+![Rendering Diagram](/images/pagebuilder-engine/RenderingDiagram.png)
+</center>
+
+For PageBuilder Engine's purposes, Output Types will always be rendered server-side only, since they are the HTML shell of the page itself. Layouts and Chains will always be rendered using rehydration, since they may contain multiple Features - some that are server-side only, and some client-side only. Features, however, can be configured to render using rehydration, server-side only, or client-side only. Let's talk about why you'd want to use each rendering option, and how to do so.  
+
+## Rendering using rehydration and universally
+
+Rehydration rendering offers lots of benefits when building a modern <Link blank href='https://en.wikipedia.org/wiki/Single-page_application' text='Single Page Application' /> - you get the rich interactivity and performance benefits of running a client-side web application, without losing SEO-optimization or the ability to render in non-JavaScript-enabled clients.
+
+If a Feature you're building has some sort of client-side interaction (`onClick`, `onSubmit`, `keyPress` events, etc.), but you also need to render it server-side, you'll want to render using rehydration.
+
+The good news is rehydration rendering is the default in PageBuilder Engine - if you'd like to render a Feature using rehydration, simply write your components normally and they'll render in both contexts.
+
+## Rendering server-side only
+
+Sometimes, rehydration rendering won't be appropriate for a certain component. Perhaps you're writing a component that uses some code that shouldn't be exposed to the client, or maybe you just don't want to send the extra bytes of JavaScript to the browser for this component since it never gets updated client-side. For these situations, you may want to render server-side only.
+
+If you'd like to mark a Feature to be rendered on the server only, you can add a `.static = true` property to it like so:
+
+**/components/features/movies/movie-detail.jsx**
+
+```
+import React, { Component } from 'react'
+
+class MovieDetail extends Component {
+  ...
+}
+
+MovieDetail.static = true
+
+export default MovieDetail
+```
+
+This will tell PageBuilder Engine that this component should be rendered into HTML on the server-side, but then **not** re-hydrated as a React component client-side.
+
+You can also make the component render server side only for specific output types by passing an array of strings of output type names like so:
+
+**/components/features/movies/movie-detail.jsx**
+
+```
+import React, { Component } from 'react'
+
+class MovieDetail extends Component {
+  ...
+}
+
+MovieDetail.static = ['default', 'second-output']
+
+export default MovieDetail
+```
+
+This will tell PageBuilder Engine that this component should be rendered into HTML on the server-side, but then **not** re-hydrated as a React component client-side.
+
+**WARNING**
+
+There are downsides to rendering server-side only. First, your component will be wrapped in a containing `div` that tells PageBuilder Engine not to reload it client-side - this could affect your styling. Another downside is that your content may become stale if it changes before PageBuilder Engine's CDN has expired it.
+
+Good candidates for static components meet the following criteria:
+
+* They have no client-side interactivity implemented by React or PageBuilder Engine
+* They don't use any content from a content source at all, OR they use **only** `globalContent`, not feature-level content, as it's easier to purge caches for `globalContent` and therefore less likely to serve stale content
+
+## Window object not available on server-side
+
+Trying to run functionality on the server side that works only on the client side is a common mistake, for example, trying to implement the window object on server-side code. **This object is available only on browsers, which is on the client-side**. This example breaks the site if window is called at a high level, such as an output type.
+
+Before using window, check that it is defined:
+
+```
+if (typeof window !== 'undefined') {
+  ...[your code]
+}
+```
+
+We recommend testing your client- and server-side code distinctions often by disabling the browser's JavaScript.
+
+If you follow the recommendations and create a website that is mostly running server side, the result should be that the core elements of the site are successfully rendered, and only the client-side items are omitted without breaking the site.
+
+To disable JavaScript, see the browser-specific resources: 
+
+* <Link blank href='https://developer.chrome.com/docs/devtools/javascript/disable' text='Chrome - Disable JavaScript' />
+* <Link blank href='https://support.mozilla.org/en-US/kb/javascript-settings-for-interactive-web-pages#w_allow-and-block-javascript-on-certain-domains' text='FireFox - Allow and block JavaScript on certain domains' />
+
+# Rendering client-side only
+
+The final option available to us is rendering client-side only. This is a bit of a misnomer with PageBuilder Engine, as your React component's `render` function will get invoked on the server no matter what. However, you can choose to render empty markup (without content) on the server, and then fill in the component with content on the client-side later. This may offer a small performance benefit, as you'll avoid fetching content for this component server-side. This option is best for Features that are not crucial to the content of the page and can be loaded with a small delay.
+
+In PageBuilder Engine, there are two ways to ensure that code **only** gets run on the client side: use a conditional to check for the `window` object (which is only available on the client), or to put client-side code inside the `componentDidMount` React lifecycle method. This method will get triggered once your component gets mounted on the page client-side, but does not get executed server-side.
+
+Let's see how that might look in our `MovieList` component:
+
+**/components/features/movies/movie-list/default.jsx**
+
+```
+import Consumer from 'fusion:consumer'
+import React, { Fragment, Component } from 'react'
+import './style.scss'
+
+@Consumer
+class MovieList extends Component {
+  constructor (props) {
+    super(props)
+    this.state = { movies: [], page: 1 }
+  }
+
+  componentDidMount() {
+    // We moved our `this.fetch()` call to `componentDidMount` from `constructor`
+    this.fetch()
+  }
+
+  fetch () {
+    ... // All our fetching logic from earlier is still here
+  }
+
+  render () {
+    // If the window object doesn't exist, we will return an empty Fragment
+    if (typeof window === 'undefined') return null
+
+    ... // All our rendering logic for the rest of the component is still here
+  }
+}
+
+MovieList.propTypes = {
+  customFields: PropTypes.shape({
+    movieListConfig: PropTypes.contentConfig('movies').tag({
+      group: 'Configure Content'
+    })
+  })
+}
+
+export default MovieList
+```
+
+We've done two things to ensure our component doesn't fetch or render server side:
+
+* We moved our content fetch call inside of `componentDidMount`, so now it will only occur client-side
+* Additionally, we added a check in the `render` method to render an empty `Fragment` if the `window` object doesn't exist, which will only be true on the server.
+
+The effect of both these changes is that the HTML rendered from our component on the server will be empty initially, and content will only be fetched and fill the component on the client-side!
+
+:::caution[Warning]
+Rendering client-side only could affect SEO adversely, since web crawlers typically have difficulty reading AJAX-only web pages - although <Link blank href='https://developers.google.com/search/docs/ajax-crawling/docs/learn-more' text='They Have Been Improving' />.
+:::

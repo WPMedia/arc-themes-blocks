@@ -1,0 +1,150 @@
+---
+title: Static Content Component
+description: Static Component API
+lastUpdated: 2023-07-18T19:47:26.000Z
+migrationData:
+  short_description: Static Component API
+  number: KB0010458
+  sys_id: 52b33e664748f590eee38788436d43f5
+  sys_created_on: '2023-07-18 15:46:34'
+  sys_updated_on: '2023-07-18 15:47:26'
+  sys_created_by: Adam.Evans@washpost.com
+  sys_updated_by: Adam.Evans@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: PageBuilder Editor, Static Component API, id, htmlOnly, persistent
+  topic: General
+  sys_view_count: 1204
+  helpful_count: 0
+  version: 4be372a64748f590eee38788436d438e
+  display_number: KB0010458 v2.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.466Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+PageBuilder Engine `<Static>` is a React component for designating static content that should not be re-rendered in the browser.
+
+The primary use for this component is to preserve any content and event handlers exactly as they exist on first browser render.
+
+Unlike static features (or chains) defined with the <Link href={`${globals.pbEngineDevDocsPath}/feature-api`} text='Static' /> property, code defined inside a Static component will still be sent to the client. Do not use a Static component to hide credentials.
+
+Static components can also be used to create persistent elements across SPA pages.
+
+## Implementation
+
+#### Example
+
+```
+import PropTypes from 'prop-types'
+import React from 'react'
+import Static from 'fusion:static'
+
+const Article = ({ customFields, globalContent }) =>
+  <div>
+    <h1>{globalContent.title}</h1>
+    <Static id={ customFields.id }>
+      {globalContent.embeddedHTML}
+    </Static>
+  </div>
+
+Article.propTypes = {
+  customFields: PropTypes.shape({
+    id: PropTypes.string.isRequired
+  })
+}
+
+export default Article
+```
+
+Even though you can not hide plain-text secrets via the Static component, you can reference encrypted environment variables. These are empty on client-side render, but because the Static component uses the server-side rendered HTML, there won't be any errors thrown.
+
+```
+import React from 'react';
+import PropTypes from 'fusion:prop-types';
+import { useFusionContext } from 'fusion:context';
+import { resizerKey } from 'fusion:environment';
+import getProperties from 'fusion:properties';
+import Static from 'fusion:static';
+import Thumbor from 'thumbor-lite';
+
+const StaticImage = ({ customFields: { src = '' } = {} }) => {
+  const { arcSite } = useFusionContext();
+  const { resizerURL } = getProperties(arcSite);
+  const thumbor = new Thumbor(resizerKey || '', resizerURL);
+  const url = thumbor.setImagePath(src.replace(/^http[s]?:\/\//, '').replace(' ', '%20').replace('?', '%3F')).buildUrl();
+  return (
+    <Static id={src} htmlOnly persistent>
+      <img src={url} />
+    </Static>
+  );
+};
+
+StaticImage.propTypes = {
+  customFields: PropTypes.shape({
+    src: PropTypes.string
+  })
+};
+
+export default StaticImage;
+```
+
+Keep in mind that for PageBuilder Engine 2.7+, Static components and features with `.static=true` will re-render in the editor. Encrypted environment variables are available in the editor (PageBuilder Engine 2.7.4+), but not on the published page. Also, as stated earlier, the JavaScript for Static components is included in the bundle sent to the user. In the example above, that would include `thumbor-lite`. In order to remove the JavaScript from the bundle, you should use `.static = true`. If you would like to have this behavior for only select number of output types, you can also pass in an array instead, like `.static = ['<output types strings>']`. For example, either of these codes would work:
+
+Setting a component to be static with `.static = true`:
+
+**/components/features/movies/movie-detail.jsx**
+
+```
+import React, { Component } from 'react'
+
+class MovieDetail extends Component {
+  ...
+}
+
+MovieDetail.static = true
+
+export default MovieDetail
+```
+
+Setting a component to be static with select output types:
+
+**/components/features/movies/movie-detail.jsx**
+
+```
+import React, { Component } from 'react'
+
+class MovieDetail extends Component {
+  ...
+}
+
+MovieDetail.static = ['default', 'second-output']
+
+export default MovieDetail
+```
+
+## Props
+
+### id (String)
+
+An `id` attribute that is both unique and consistent (between server and client renders) must be provided to the Static component.
+
+### htmlOnly (Boolean)
+
+The Static component works by creating a cache of all static components by id before attempting a React client-side render. This cache is then used to hydrate the content of each Static component during the React client-side render. The original DOM elements are generally inserted back into place. This implementation will preserve any event handlers that are attached to the elements. However, in the case that an id cannot be guaranteed to be unique (e.g., an image that may exist in multiple places on a page), only the final instance will be hydrated as the DOM elements will just be moved around the page.
+
+If there are no event handlers expected within the Static component, you may set the `htmlOnly` prop to signal that clones of the original DOM elements are sufficient. In this case, duplicate ids will each get a copy of the original elements, but will have no event handlers.
+
+### persistent (Boolean)
+
+For now, the only type of valid persistent element is a Static component. Because Static components are not meant to be re-rendered client side, they are perfect candidates for persistence, since they will not need to be reloaded on subsequent page loads. This does introduce a limitation in how client-side interactivity is handled for persistent elements - in order for your persistent elements to have any JavaScript functionality (i.e. click handlers, timeout logic, etc.), that code must be handled outside the normal React tree. Because Static components are essentially ignored by React, if you wish to add interactivity to them you’ll need to add your own script (either via inline
+
+## Considerations
+
+The usage of `Static` components with `hydrateOnly` is not supported and won't work because React's hydrate is effectively trading a larger JavaScript bundle (server-side and client-side renders have to match) for faster render and interactivity (it only attaches the event listeners instead of changing the dom). See <Link blank href='https://reactjs.org/docs/react-dom-client.html#hydrateroot' text="React's documentation for hydrateRoot" /> for more information.

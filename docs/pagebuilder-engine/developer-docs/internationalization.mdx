@@ -1,0 +1,177 @@
+---
+title: Internationalization
+description: Internationalization
+lastUpdated: 2024-01-24T00:36:39.000Z
+migrationData:
+  short_description: Internationalization
+  number: KB0010429
+  sys_id: 489cbca7c3ff71101fe095ff05013182
+  sys_created_on: '2024-01-23 19:35:19'
+  sys_updated_on: '2024-01-23 19:36:39'
+  sys_created_by: denise.rodriguez@washpost.com
+  sys_updated_by: denise.rodriguez@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: >-
+    PageBuilder Engine, internationalization, intl.json, Polyglot.js, locale,
+    localeList, getTranslatedPhrases, siteProperties, rtl, textDirection, text
+    direction, text flow
+  topic: General
+  sys_view_count: 521
+  helpful_count: 1
+  version: ebdcb82bc3ff71101fe095ff05013136
+  display_number: KB0010429 v8.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.379Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+Supporting multiple languages and locales is a crucial aspect of building highly available multilingual sites. Internationalization, often abbreviated as i18n, easily allows for your web content to be translated to multiple languages. PageBuilder Engine lets you translate content by using an `intl.json` format powered by an Airbnb library called `Polyglot.js`, which lets you declare files containing your translations. You can place these `intl.json` files at the root of your feature pack.
+
+:::note
+See [Arc XP Supported Languages](https://docs.arcxp.com/en/products/general/languages-supported-in-arc-xp.html) to understand what languages Themes currently supports, along with Arc XP's language support for other tools.
+:::
+
+## Terminology
+
+The following terms are the relevant resources for PageBuilder Engine internationalization:
+
+* `locale` property in site properties.
+* `localeList` value at the top level of a `blocks.json` for filtering languages included in compiled bundle (only for Arc Blocks).
+* `intl.json` at root of your repo. See [example for Themes overrides](#internationalization-in-your-feature-pack).
+* `fusion:intl` and `getTranslatedPhrases` (polyglot.js).
+
+## How to use internationalization
+
+### Internationalization properties in Theme Settings
+
+If you are using [Theme Settings](https://docs.arcxp.com/en/products/themes/getting-started-with-theme-settings.html) to manage your site properties and configurations, you can update the `locale`, `textDirection`, `textFlow`, and `dateLocalization` properties within the application. For more details on the available settings, see [Theme Settings configurations](https://docs.arcxp.com/en/products/themes/theme-settings-configurations.html). If you are not using Themes or prefer to make the updates directly in your feature pack files, follow the guidance below. 
+
+:::note
+Text direction, text flow, and [logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values) are supported on Arc Blocks. While right-to-left text direction is fully supported on the out-of-the-box blocks, vertical language handling is not yet fully supported on all blocks. If your organization is interested in vertical language support, submit a request through <Link blank href='https://ideas.arcxp.com/' text='Ideas for Arc XP' />.
+
+**BLOCKS STYLING USING LOGICAL PROPERTIES**
+
+With the update to support RTL languages, Arc Blocks use [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values). These properties will conflict with older, physical and shorthand CSS properties causing unexpected results. If you are using custom styling in your blocks, some updates will need to be made, such as using `inline-size` / `max-inline-size`, instead of  `width` /`max-width` . The full list of CSS logical properties and their older equivalents is [here](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values). For more details, see [CSS Logical Properties on Arc Blocks](/themes/developer-docs/css-logical-properties-on-arc-blocks).
+:::
+
+### Internationalization in your feature pack
+
+**Only for Arc Blocks**: To add internationalization to a feature, you must first add a `localeList` to your `blocks.json` to declare all the translations that you would like to support:
+
+```json
+...
+"localeList": [
+    "en",
+    "sv",
+    "no",
+    "fr",
+    "de",
+    "es",
+    "ja",
+    "ko"
+],
+...
+```
+
+Then you need to add a `locale` to your `siteProperties`.
+
+```json
+...
+"values": {
+    "default": {
+      "siteProperties": {
+        ...
+        "websiteName": "The Gazette",
+        "locale": "en",
+        ...
+      }
+    }
+}
+...
+```
+
+At the root of your repo you would have a `intl.json` file such as:
+
+```json
+{
+  "results-list-block.see-more":{
+    "en":"See More",
+    "es": "Ver más"
+  }
+}
+```
+
+Then in your feature, you reference this translation by calling the method `getTranslatedPhrases` with your locale's key and the sentence's key within `phrases.t()`:
+
+```js
+import getTranslatedPhrases from 'fusion:intl';
+...
+MyTranslatedFeature = (props) => {
+  const phrases = getTranslatedPhrases(getProperties(props.arcSite).locale || 'en');
+  return phrases.t('results-list-block.see-more-button');
+}
+...
+```
+
+**Only for Arc Blocks**: If you would like to override translations at the root of your repo for a specific feature, you can add a `intl.json` within your feature's directory.
+
+```json
+{
+  "results-list-block.see-more": {
+    "en": "See More Stories",
+    "es": "Ver más historias",
+  }
+}
+```
+
+Additionally, you can leverage Polyglot's template format to display dynamic values within a translation because some languages have these variables at different places within a sentence.
+
+```json
+{
+  "results-list-block.see-more": {
+    "en": "See %{number_of_stories} More Stories",
+    "es": "Ver %{number_of_stories} historias más ",
+  }
+}
+```
+
+**Only for Arc Blocks:** You can set the `locale`, `textDirection`, `textFlow`, and `dateLocalization` properties in your `blocks.json` as a default for all sites, or at the individual site level. For example, if you want to set an individual site to handle right-to-left (rtl) text direction, along with the other localize properties, you can do so in the [accepted formats](https://docs.arcxp.com/en/products/themes/theme-settings-configurations.html).  
+
+```json
+    {
+      "websitename": {
+        "siteProperties": {
+          "locale": "ar",
+          "dateLocalization": {
+            "language": "ar_EG",
+            "timeZone": "Egypt",
+            "dateTimeFormat": "%B %d, %Y at %l:%M%p %Z",
+            "dateFormat": "%B %d, %Y"
+          },
+          "textDirection": "rtl"
+        }
+      }
+    }
+```
+
+### Adding custom fonts in Themes
+
+For details on setting a specific font that is compatible with your site's language, see [Themes FAQ - Add a custom font](/themes/developer-docs/themes-faq/#add-a-custom-font).
+
+## Alternatives
+
+If you do not want to set a language per site in your `blocks.json`, alternatively you could use the `requestUri` prop from context to decide based on the path. For example, for `/china/…` it would use `cn`
+
+## External Resources
+
+* [Airbnb Polyglot.js](https://airbnb.io/polyglot.js/)
+
+* [Https://Github.Com/WPMedia/Fusion-News-Theme-Blocks/Blob/Stable/Blocks/Results-List-Block/Intl.Json](https://github.com/WPMedia/fusion-news-theme-blocks/blob/stable/blocks/results-list-block/intl.json)
+

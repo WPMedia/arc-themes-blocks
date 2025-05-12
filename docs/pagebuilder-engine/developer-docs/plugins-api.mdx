@@ -1,0 +1,188 @@
+---
+title: Plugins API
+description: Plugins API
+lastUpdated: 2023-08-09T19:50:55.000Z
+migrationData:
+  short_description: Plugins API
+  number: KB0010473
+  sys_id: 84a744b547283510eee38788436d435a
+  sys_created_on: '2023-08-09 15:50:36'
+  sys_updated_on: '2023-08-09 15:50:55'
+  sys_created_by: Adam.Evans@washpost.com
+  sys_updated_by: Adam.Evans@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: >-
+    PageBuilder Engine, Plugins API, Feature, Chain, featurePlugin, formPlugin,
+    Plugin, initializePlugin, pluginOptions
+  topic: General
+  sys_view_count: 334
+  helpful_count: 0
+  version: ecb74cb547283510eee38788436d432a
+  display_number: KB0010473 v3.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.345Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+Plugins offer the ability for Feature Pack developers to add a specialized user interface for setting custom field values. Plugins can help editors set complex values when the default behavior of a custom field input isn’t enough. Examples of plugins include a color picker for selecting hexadecimal color values, a WYSIWYG editor for creating HTML snippets, or a calculator for calculating values.
+
+## Feature or chain setup
+
+You can configure plugins at the feature and chain or custom field level. You can use the `featurePlugin` prop to initialize feature- and chain-level plugins. You add the plugin at the top level of your PageBuilder Engine component. The `featurePlugin` prop accepts both string (single plugin) and array (multi plugin) types. You can add the custom field tag `formPlugin` to the following PageBuilder Engine-supported PropTypes: string, richtext, URL, and disabled.
+
+Feature- or chain-level example:
+
+```
+HeaderText.featurePlugins = ['presets', 'change-type']
+```
+
+OR
+
+```
+DoubleChain.featurePlugins = 'presets'
+```
+
+Field-level example:
+
+```
+videoEmbed: PropTypes.url.tag({
+  name: 'Video Url Embed',
+  formPlugin: 'video-url-embed'
+})
+```
+
+OR
+
+```
+text: PropTypes.string.tag({
+  formPlugin: 'wysiwyg-editor'
+})
+```
+
+## Plugin implementation
+
+Plugins in PageBuilder Engine are implemented as HTML web pages that get included as iframes in PageBuilder Editor. Each HTML document must include a JavaScript method named `initializePlugin` set on the global `window` object. This method is responsible for setting the initial state of the plugin UI, and PageBuilder invokes the method when a user opens the proper custom field's plugin.
+
+### Naming
+
+You must store and name a plugin in the following format:
+
+* `/resources/plugins/{pluginName}/index.html`
+
+:::note
+The `{pluginName}` portion of the filepath must correspond exactly to the name of the plugin that is passed as the `formPlugin` value for the custom field.
+:::
+
+Plugins can also have additional files and folders inside of their respective `pluginName` directories. This may include JavaScript, CSS or other resource dependencies of the plugin.
+
+It is common for plugins to require a build process in order to compile higher-level JavaScript into websafe (ES5) JavaScript. In this case, it is recommended that the _source code_ for the plugin be stored and named in the following format:
+
+* `/plugins/{pluginName}/*`
+
+:::note
+The `*` portion of the filepath represents any source files needed to generate the plugin's compiled code (including HTML).
+:::
+
+The source code should contain some build process (typically a webpack config file) that builds a compiled version of the plugin's code into the corresponding `/resources/plugins/{pluginName}` directory.
+
+### Example
+
+**/resources/plugins/color-picker/index.html**
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Plugin</title>
+  </head>
+  <body>
+    <button class="color" data-color="red"></button>
+    <button class="color" data-color="white"></button>
+    <button class="color" data-color="blue"></button>
+
+    <div id="selected-color"></div>
+
+    <button id="save">Save</button>
+    <button id="close">Close</button>
+
+    <script>
+      window.initializePlugin = function ({ field, initVal, onClose, onSave }) {
+        let selectedColor = initVal || '';
+        document.getElementById('selected-color').innerText = 'Selected Color: ' + selectedColor;
+
+        document.querySelectorAll('.color').forEach((el) => {
+          el.addEventListener('click', () => {
+            selectedColor = el.getAttribute('data-color');
+            document.getElementById('selected-color').innerText = 'Selected Color: ' + selectedColor;
+          });
+          el.innerText = el.getAttribute('data-color');
+        });
+
+        document.getElementById('save').addEventListener('click', () => {
+          onSave(selectedColor);
+        });
+
+        document.getElementById('close').addEventListener('click', onClose);
+      };
+    </script>
+  </body>
+</html>
+```
+
+## Required Methods
+
+### window.initializePlugin() (Function)
+
+### Description
+
+The `initializePlugin` method is required in order for a plugin to be able to interface with PageBuilder by receiving an initial value of the plugin or data about the custom field it is set on, or for the plugin to save a value or close itself. This method must be defined on the global `window` object of the HTML document.
+
+### Arguments
+
+`initializePlugin(pluginData)`
+
+* `pluginData` (_Object_): An object containing the data passed by PageBuilder to the plugin
+  * `pluginData.field` (_Object_): Data about the custom field this plugin is attached to
+  * `pluginData.initVal` (_?_): The initial value of the custom field
+  * `pluginData.onClose()` (_Function_): A callback function to be invoked by the plugin when it should be closed
+  * `pluginData.onSave(value)` (_Function_): A callback function to be invoked by the plugin when a value should be saved. The sole argument to be passed is the value to be saved.
+
+### Example
+
+See the previous Implementation section example.
+
+## Options
+
+### window.pluginOptions (Object)
+
+### Description
+
+The `pluginOptions` object can be used to set the height and width of the plugin window. It must be set on the global `window` object, similar to the `initializePlugin` method.
+
+### Keys
+
+* `pluginOptions.height` (_String_): The CSS value of the desired height of the plugin window.
+* `pluginOptions.width` (_String_): The CSS value of the desired width of the plugin window.
+
+### Example
+
+**/resources/plugins/color-picker/index.html**
+
+```
+...
+<script>
+  window.pluginOptions = {
+    height: '300px',
+    width: '400px'
+  }
+  ...
+</script>
+```

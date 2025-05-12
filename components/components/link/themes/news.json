@@ -1,0 +1,24 @@
+{
+	"link": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color)",
+				"font-family": "var(--font-family-primary)"
+			}
+		}
+	},
+	"link-active": {
+		"styles": {
+			"default": {
+				"text-decoration": "none"
+			}
+		}
+	},
+	"link-hover": {
+		"styles": {
+			"default": {
+				"text-decoration": "none"
+			}
+		}
+	}
+}

@@ -1,0 +1,207 @@
+---
+title: Preventing sensitive information leakage in your content sources
+description: Content sources are responsible for organizing your data fetch, caching, and serving your experiences at scale.
+---
+
+import * as globals from "/public/globals";
+import Link from "/public/snippets/anchors.astro";
+
+Arc XP provides you, a customer developer, with powerful ways to extend the Arc XP platform. Specifically, PageBuilder allows you to use your own code, customize presentation features, and adopt a powerful content handling model with content sources. Content sources are responsible for organizing your data fetch, caching, and serving your experiences at scale. You can orchestrate content authoring, use platform APIs, and bring third-party content into Arc XP using content sources.
+
+>See also: 
+>* <Link blank href="https://docs.arcxp.com/en/resources/security/protecting-your-content-sources-from-bad-actors-crawlers-and-bots.html" text="Protecting your content sources from bad actors, bots, and crawlers" />
+>* <Link blank href="https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-ensure-private-editorial-fields-are-not-publicly-available.html" text="How to ensure private editorial fields are not publicly available" />
+>* <Link blank href="https://docs.arcxp.com/en/resources/arc-xp-deprecations/content-api-editorial-fields-deprecation-notice.html" text="Content API editorial fields deprecation notice" />
+
+Note that content sources can expose sensitive information in a number of ways. Content sources return a JSON output to its parent feature when server-side render occurs, and in the client-side content refresh cycle, information can leak from `/pf/api/v3/content/fetch/...` API call responses.
+
+We provide mitigation strategies in the following section, but let's look at the three common examples of how sensitive information can leak from your content sources when they are not carefully designed.
+
+## Know The Contents Of Your APIs And Filter Content
+
+Both Arc XP Content API and your third-party content platforms can carry internal-facing information, like comments, internal notes, or, more dangerously, personally identifiable information (PII). Content sources are the gateway where you work with potentially private data sources, and you return and potentially expose this sensitive information.
+
+_Example of an ANS object that includes editorial team members email addresses (PII) inside the_ photo _object:_
+
+![](/images/pagebuilder-engine/03afa406-b9d9-4b76-8781-96121e6be104.jpeg "03afa406-b9d9-4b76-8781-96121e6be104.jpeg")
+
+In this example, we're viewing the `globalContent` that is already shipped with the server-side-rendered HTML output that contains a serialized content source response inside the HTML. This example is from the browser's developer console, which highlights an email address of the photo owner. The photo is used as a promo item in a publicly visible Composer story.
+
+Similar to this example, multiple locations exist where private information lives in raw ANS objects.
+
+## Mitigating Sensitive Information From Content Source Responses
+
+![](/images/pagebuilder-engine/ac2ba065-d652-4e10-ade7-847bcdc27245.jpeg "ac2ba065-d652-4e10-ade7-847bcdc27245.jpeg")
+
+## Always Return Plain JSON Object From Your Content Sources
+
+Content sources are designed to serialize and deserialize plain JSON objects to and from the cache. This requires that the response object you return from a content source fetch method to be plain JSON objects.
+
+In many cases, developers return complex objects, and sometimes error objects, without much thought. Many object prototypes contain safe ways to allow themselves to be serialized to different types, like `.toString`. In many bad-practice examples, the code just works. Because complex objects (for example, an Axios response object) can serialize themselves to a JSON string on their own logic, developers may not know what gets exposed. It's important that developers remain in control in this serialization process and not trusting any javascript object. The serialized response gets used in cache, and also exposed as content source output in HTTP requests from client-side content refresh. This means content source output becomes public in network traffic, as well as stored as front-end cache in your server-side rendered HTML output.
+
+Never trust the objects you work with in Javascript. Perform simple debugging in debugging tools like your IDE, command line (console.log), or browser console, unless you're explicitly serializing the object (using `JSON.stringify`) and see how it serializes. Simple prints to debug interfaces may not be using the same serialization methods, and you may miss some information that could be exposed in the final output.
+
+## Always Filter Or Construct Your Response Object
+
+The best way to overcome the problem described in the previous section is to construct your responses manually. Constructing your responses manually means designing every piece of information you need in your presentation component. This process is important to become fully aware about how data flows from secure back-end systems (server-side render or your content source API executions) to your public-facing, front-end components.
+
+Here's an example for a plain article/post object, instead of `return post`:
+
+```bash
+return {
+  title: post.title,
+  body: post.body,
+  publish_date: post.publish_date
+  author_name: post.author.name
+}
+```
+
+## Typescript Can Help Address Unknown Objects Issues
+
+Various ways exist to harden your schema between two systems (your content sources acting as an API to your front-end code, your React component features). Because we're talking about coupled code between your content sources (acting as your API middleware) and front-end code, it's hard to determine where one system ends and another starts. Typescript can greatly help to harden your schemas between the two worlds, validate them on runtime, and catch mismatches and odd behaviors and perhaps stop the response before an unknown object/property/value gets exposes. We see more and more adoption of typescript, and we support this movement.
+
+## Never Pass An API's Response As The Response Of The Content Source
+
+Do not pass response objects from network requests without doing any sanitation, filtering, or schema validation.
+
+A good practice is implementing a schema validation mechanism in the content source execution if an invalid schema is being returned from a downstream system, stopping the execution, or handling it gracefully. This ensures no sensitive information gets returned by accident.
+
+This process also future-proofs your content sources. It's possible an API response you consider safe to begins ending sensitive information in the nodes you recognize, so you assume it's valid. The stricter you make schema validate, the harder it is to leak sensitive information.
+
+Use `sourceInclude` in Content API requests to work with "only needed" fields
+
+When working with Arc XP Content Retrieval APIs, most API endpoints accept the sourceInclude parameter, which allows you to tell Content API to return only these nodes from the ANS object(s) that are returned in the response.
+
+![](/images/pagebuilder-engine/a2cc21ee-e1ef-458c-809c-827041940b44.png "a2cc21ee-e1ef-458c-809c-827041940b44.png")
+
+This process helps with both making sure you return only required fields exclude everything else, which removes the risk of sensitive information being transported, even if it gets discarded in the content source.
+
+## Performance Benefits
+
+Aside from the security hardening, using the `sourceInclude` parameter helps network traffic to become more efficient and, in a lot of cases, improves cache performance, assuming developers are not filtering the output for the content source return statement. If not planned carefully, in some cases, these large objects get delivered to the client-side render (`window.Fusion.globalContent` and `window.Fusion.contentCache` objects in the browser), which is really ineffective and decreases your page load and performance metrics.
+
+![](/images/pagebuilder-engine/298dd671-748f-4901-a3db-2e899c5ea574.png "298dd671-748f-4901-a3db-2e899c5ea574.png")
+
+To avoid redundant code, you can improve this code sample by using common object filtering methods, if you're working with the same objects in multiple content sources. For the purposes of this document, the code sample is intentionally simple.
+
+## Beware Of Internal Information In ANS Objects
+
+Your content sources most likely use the Arc XP content platform as its source. Your developer team must be aware of the possible private, internal information that resides in your ANS objects.
+
+A few nodes that are likely to contain private information include:
+
+*   `planning.internal_note`
+*   `planning.budget_line`
+*   `workflow.*`
+*   `editor_note`
+*   `additional_properties.clipboard`
+*   `content_elements.additional_properties.comments`
+*   `content_elements.additional_properties.inline_comments`
+
+Keep in mind that this list is neither exhaustive, nor considering custom schema nodes that may contain sensitive information. The Arc XP content platform lets you extend ANS with a custom schema.
+
+## Error Scenarios
+
+A content source's response is often designed with successful responses in mind first. But just as important, a developer working on designing a content source should be intentional about how errors are handled. This includes how errors are controlled, captured, and returned as correct response signals from content sources.
+
+## Response Signals
+
+![](/images/pagebuilder-engine/118ce630-abd0-49a7-af55-d6ba0e1e3d89.jpeg "118ce630-abd0-49a7-af55-d6ba0e1e3d89.jpeg")
+
+Content sources expect you to return plain JSON objects for successful responses. Aside from plain JSON objects, you can also use JavaScript error objects to control various HTTP status codes. PageBuilder Engine uses these error objects with status code properties and returns correct translations of these common scenarios (for example, 404 content not found or 301 temporary redirect) to upstream Arc XP services like Origin and CDN layers. Various `http` statuses are handled and cached differently at the CDN layer. Even though error-like behaviors are controlled with throwing error objects from content sources, they are perfectly successful outcomes of a content source.
+
+The most risky response signals are unknown error objects that are thrown without consideration. A very common mistake is when a developer uses `return e` by mistake in a catch block if an Axios call fails. The Axios error object serializes itself when JavaScript runtime attempts to convert it to a JSON object (when this object prints with console.log or when a content source tries to construct its cache objects as well as JSON output for its API calls). When this translation occurs, the Axios error object type includes everything about that request, including request headers. This may cause leakage of headers, which can contain sensitive information. Most commonly, the Authorization header with a token can easily get leaked. All it takes is a simple `return e` error object, instead of `throw e` by mistake.
+
+Example output of serialized Axios error object:
+
+```json
+{
+  "message": "Request failed with status code 404",
+  "name": "AxiosError",
+  "stack": "AxiosError: Request failed with status code 404\n    at settle (/Users/yi...r/node_modules/axios/dist/node/axios.cjs:1966:12)\n    at IncomingMessage.handleStreamEnd (/Users/yi...r/node_modules/axios/dist/node/axios.cjs:3065:11)\n    at IncomingMessage.emit (node:events:530:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (/Users/yi...r/node_modules/axios/dist/node/axios.cjs:3876:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async main (/Users/yi...r/index.js:5:20)",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1N.........Ok6yJV_adQssw5c",
+      "User-Agent": "axios/1.6.8",
+      "Accept-Encoding": "gzip, compress, deflate, br"
+    },
+    "method": "get",
+    "url": "https://jsonplaceholder.typicode.com/invalid-url"
+  },
+  "code": "ERR_BAD_REQUEST",
+  "status": 404
+}
+```
+
+## Mitigating Error Objects Being Exposed
+
+Be intentional about how you handle errors in your content sources. Never `return` error objects, which is often a sign that your team wasn't intentional about error handling in content sources.
+
+Errors can occur in a variety of places. Not handling an error intentionally can expose sensitive information, and errors not handled intentionally can bubble up to the top of the content source execution and produce this unwanted outcome.
+
+A best practice is having all `return` statements from content source fetch methods always be plain JSON objects with static values, like pre-defined error code and/or message.
+
+Most error outcomes should be throwing a new error from the content source, including some of the valid expected use cases.
+
+These logical outcomes are returned from a content source with native JavaScript error objects to be thrown instead of returning an object. These objects contain the `statusCode` property that should follow general HTTP conventions, like 404, 403, 429, 301/302. We illustrated some of these common cases in the visual in the previous section.
+
+But they should not be thrown with dynamic content from the downstream API response (unless it's intentionally filtered). Instead, they should have static, pre-defined error message language with the status codes returned from the content source.
+
+```bash
+const error = new Error("We're experiencing unusually high traffic")
+error.statusCode = 429
+throw error
+```
+
+This way, you can ensure that if downstream APIs return anything unexpected, like potentially sensitive information, in their error response bodies, you don't pass that content to your front-end audience.
+
+## Be Mindful Of What Goes In The Logs
+
+A place that is often not planned or is an oversight is what gets exposed in the application logs. This can be as simple as `console.log(rawAPIResponse)` or in `throw error` or in the unhandled network request errors that gets printed with full stack trace that may contain sensitive information.
+
+For example purposes, let's continue with the same common Axios error example that prints full request object in the logs. As seen in this code sample, the unencrypted API token is leaked in the PageBuilder Engine logs.
+
+![](/images/pagebuilder-engine/6b989633-bb05-4b3b-91cc-37afdfe4d2f0.jpeg "6b989633-bb05-4b3b-91cc-37afdfe4d2f0.jpeg")
+
+Even though Engine logs are securely hosted in Arc XP Infrastructure, it's still a security risk that logs could get transported between your systems when you configure log forwarding.
+
+## Does this content source need to be public?
+
+One of the first questions should come to mind is if a content source will be only used in server-side renders, or if they are designed to be used in client-side content refresh.
+
+One particular PageBuilder feature: <Link blank href={`${globals.pbEngineDevDocsPath}/static-component-api`} text="Static" />, minimizes risk of content sources content to be publicly used. When a content source paired with a <Link blank href={`${globals.pbEngineDevDocsPath}/static-component-api`} text="Static" /> feature, content source responses will only used in server-side render runtime. That means the response object of that content source will not make it to server-side render, or it will not cause any `/pf/api` calls. In this case, you can make a content source server-side only.
+
+![](/images/pagebuilder-engine/f7edc393-9e6c-4ce8-b105-e23eceb50bb6.jpeg "f7edc393-9e6c-4ce8-b105-e23eceb50bb6.jpeg")
+
+This is a separate PageBuilder Engine capability to let you control if a content source will be exposed as an API endpoint. If there is no need for client-side render, you could make it fully server-side only. This is done with adding .http property to your content source definition before exporting it in your code, and setting the value of it to false See
+<Link blank href={`${globals.contentDevDocsPath}/writing-and-implementing-complex-custom-content-sources/`} text="Content Source documentation" />, http property section for more information about this feature.
+
+The reason we're covering this top level decision at the end of this article, is because, making a content source server-side only is not an excuse to all points we covered above, and the practices we explained above shouldn't be skipped. http=false option does NOT completely eliminates the risks of sensitive information leakage.
+
+## Use Programmatic Testing To Test All Outcomes Of Your Content Source
+
+You must ensure you know how the content sources in your code behave in all possible scenarios, from downstream behaviors to unexpected behaviors to success scenarios with variations of data being processed and produced as its response. These factors make content sources a perfect candidate for programatic (unit) testing, and they are the most testable parts of your codebase, especially compared to REACT components and their various testing methods.
+
+We highly suggest increasing your test coverage for your content sources as part of your development efforts before pushing them to Production.

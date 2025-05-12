@@ -1,0 +1,129 @@
+@use "../../scss";
+
+.c-input {
+	.c-input__input {
+		&.c-input__dropdown {
+			@include scss.component-with-states("input-dropdown", [focus]);
+		}
+
+		&:checked {
+			@include scss.component-properties("input-checked");
+		}
+
+		@include scss.component-with-states("input-input", [focus]);
+	}
+
+	.c-input__label {
+		@include scss.component-properties("input-label");
+	}
+
+	.c-input__tip {
+		@include scss.component-properties("input-tip");
+	}
+
+	&.c-input--small {
+		.c-input__input {
+			&.c-input__dropdown {
+				@include scss.component-with-states("input-small-dropdown", [focus]);
+			}
+
+			@include scss.component-with-states("input-small-input", [focus]);
+		}
+
+		.c-input__label {
+			@include scss.component-properties("input-small-label");
+		}
+
+		.c-input__tip {
+			@include scss.component-properties("input-small-tip");
+		}
+
+		@include scss.component-properties("input-small");
+	}
+
+	&.c-input--default {
+		.c-input__input {
+			&.c-input__dropdown {
+				@include scss.component-with-states("input-default-dropdown", [focus]);
+			}
+
+			@include scss.component-with-states("input-default-input", [focus]);
+		}
+
+		.c-input__label {
+			@include scss.component-properties("input-default-label");
+		}
+
+		.c-input__tip {
+			@include scss.component-properties("input-default-tip");
+		}
+
+		@include scss.component-properties("input-default");
+	}
+
+	&.c-input--error {
+		.c-input__input {
+			&.c-input__dropdown {
+				@include scss.component-with-states("input-error-dropdown", [focus]);
+			}
+
+			@include scss.component-with-states("input-error-input", [focus]);
+		}
+
+		.c-input__label {
+			@include scss.component-properties("input-error-label");
+		}
+
+		.c-input__tip {
+			@include scss.component-properties("input-error-tip");
+		}
+
+		@include scss.component-properties("input-error");
+	}
+
+	&.c-input--success {
+		.c-input__input {
+			&.c-input__dropdown {
+				@include scss.component-with-states("input-success-dropdown", [focus]);
+			}
+
+			@include scss.component-with-states("input-success-input", [focus]);
+		}
+
+		.c-input__label {
+			@include scss.component-properties("input-success-label");
+		}
+
+		.c-input__tip {
+			@include scss.component-properties("input-success-tip");
+		}
+
+		@include scss.component-properties("input-success");
+	}
+
+	&.c-input--warning {
+		.c-input__input {
+			&.c-input__dropdown {
+				@include scss.component-with-states("input-warning-dropdown", [focus]);
+			}
+
+			@include scss.component-with-states("input-warning-input", [focus]);
+		}
+
+		.c-input__label {
+			@include scss.component-properties("input-warning-label");
+		}
+
+		.c-input__tip {
+			@include scss.component-properties("input-warning-tip");
+		}
+
+		@include scss.component-properties("input-warning");
+	}
+
+	&.c-input__radio {
+		@include scss.component-properties("input-radio");
+	}
+
+	@include scss.component-properties("input");
+}

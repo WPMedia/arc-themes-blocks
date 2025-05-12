@@ -1,0 +1,52 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import formatPowaVideoEmbed from ".";
+
+<Meta of={IndexStories} />
+
+# Format Powa Video Embed
+
+The `formatPowaVideoEmbed()` function takes in a string containing a Powa Video embed code and returns a markup containing the embed code with Powa fields set. To see all available Powa fields, see: https://redirector.arcpublishing.com/alc/arc-products/videocenter/user-docs/video-center-player-settings/
+
+The properties are set on the node using the `data-` attribute.
+
+This follows the [ANS schema](https://github.com/washingtonpost/ans-schema) for Video.
+
+## Usage
+
+```jsx
+import formatPowaVideoEmbed from "./formatPowaVideoEmbed";
+import Video from "./Video";
+
+const CustomVideoFeature = () => {
+	const embedMarkup =
+		'<div class="powa" id="powa-e9zzz" data-org="your-org" data-env="prod" data-uuid="e9zzz" data-api="prod"><script src="//fff.cloudfront.net/prod/powaBoot.js?org=your-org"></script></div>';
+
+	const powaFields = {
+		muted: true,
+		autoplay: true,
+	};
+
+	const configuredEmbed = formatPowaVideoEmbed(embedMarkup, powaFields);
+
+	return <Video embedMarkup={configuredEmbed} />;
+};
+```
+
+## Properties
+
+| Name            | Description                                                                                                                                                                                                       | Default |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| **embedMarkup** | Takes in a string like `<div class="powa" id="powa-e9zzz" data-org="your-org" data-env="prod" data-uuid="e9zzz" data-api="prod"><script src="//fff.cloudfront.net/prod/powaBoot.js?org=your-org"></script></div>` | -       |
+| **powaFields**  | Takes in an object with Powa fields to set on the node. See: https://redirector.arcpublishing.com/alc/arc-products/videocenter/user-docs/video-center-player-settings/                                            | {}      |
+
+## Stories
+
+### With no fields set
+
+<Story of={IndexStories.WithNoFieldsSet} />
+
+### With autoplay and muted fields set
+
+<Story of={IndexStories.WithAutoplayAndMutedFieldsSet} />

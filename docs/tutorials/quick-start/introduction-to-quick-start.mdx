@@ -1,0 +1,65 @@
+---
+title: Introduction to Quick Start
+description: Introduction to Quick Start
+lastUpdated: 2025-01-21
+---
+import * as globals from '/public/globals.js';
+import Link from '/public/snippets/anchors.astro';
+import { Aside, LinkCard, CardGrid, Icon, Card } from '@astrojs/starlight/components';
+
+<CardGrid>
+<Card title='Purpose' icon='information'>
+Explain the purpose of the Quick Start section documentation.
+</Card>
+<Card title='Audience' icon='star'>
+Developers interested in working with Arc XP.
+</Card>
+</CardGrid>
+
+The **Quick Start** section aims to help you begin working with Arc XP. Developers at Arc XP work with multiple tools to generate content online. The principal tool for webpage generation is PageBuilder.
+The documents in this section focus specifically on PageBuilder.
+
+## PageBuilder Overview
+
+The PageBuilder tool consists of:
+
+* **PageBuilder Engine**: The backend service that enables you to create and deliver content to your users. It renders React components and consumes data from Arc XP and external content sources. PageBuilder Engine is the backend service for PageBuilder Editor.
+* **PageBuilder Editor**: The user interface that enables publishers to create pages and layouts, and to select blocks to generate content.
+
+PageBuilder Engine's architecture combines JavaScript code, API content, and Markup using <Link blank href='https://reactjs.org/' text='React' /> and <Link blank href='https://reactjs.org/docs/introducing-jsx.html' text='JSX' />.
+
+**Figure 1** shows how PageBuilder Engine consumes data to display your website content.
+
+<center>
+
+    ![Figure 1. PageBuilder Data Consumption Flow](/images/pagebuilder-engine/PBEngine-data-flow1.png)
+          **Figure 1. PageBuilder Data Consumption Diagram**
+
+</center>
+
+The data consumption steps are as follows:
+
+1. PageBuilder Engine consumes text and multimedia content from different **Content Sources**.
+   For example:
+   * **Arc XP content sources**: For example, Composer, Photo Center, and Video Center.
+   * **External content sources**: For example, <Link blank href='https://developer.apple.com/weatherkit/get-started/' text="Apple's Weatherkit" />.
+2. PageBuilder Engine consumes custom code from the `features` folder in the project's repository.  
+   PageBuilder developers primarily work in the Feature Pack repository. Feature Pack components display website content and provide user functionality based on defined guidelines.
+   Feature Packs contain <Link blank href='https://reactjs.org/' text='React' /> components that render into HTML web pages on both the server and client sides.
+3. PageBuilder Engine consumes configuration options from **PageBuilder Editor**. These configurations include the following:
+   * Features from the Feature Pack that exist on a page or template.
+   * Feature location on the webpage.
+   * URL patterns that must route to those pages or templates.
+   * Content sources from which each page or template pulls data.
+
+
+## Start Practicing
+
+See the following documents to start practicing with PageBuilder:
+
+1. <Link blank href={`${globals.tutorialsQuickStartPath}/set-up-your-dev-playground/`} text='Setting Up Your Dev Playground.' />
+
+   You do not need Arc credentials to complete this step. {/* Update here if we see that they need the creds */}
+
+2. <Link blank href={`${globals.tutorialsQuickStartPath}/pagebuilder-structure/`} text='Exploring the PageBuilder Structure.' />
+3. <Link blank href={`${globals.tutorialsQuickStartPath}/creating-with-pagebuilder`} text='Creating with PageBuilder.' />

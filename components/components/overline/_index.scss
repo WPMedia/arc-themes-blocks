@@ -1,0 +1,5 @@
+@use "../../scss";
+
+.c-overline {
+	@include scss.component-with-states("overline", [hover, active, visited, focus]);
+}

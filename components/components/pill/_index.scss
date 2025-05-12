@@ -1,0 +1,5 @@
+@use "../../scss";
+
+.c-pill {
+	@include scss.component-with-states("pill", [hover, active, visited, focus]);
+}

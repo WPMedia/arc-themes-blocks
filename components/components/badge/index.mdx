@@ -1,0 +1,33 @@
+import { Canvas, Controls, Meta } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Badge from ".";
+
+<Meta of={IndexStories} />
+
+# Badge
+
+Badges are used to display a small amount of color-categorized content. Badges are not interactive
+like a `<Pill>` component, but differ in appearance with the chosen "variant" property.
+
+## Usage
+
+```jsx
+import { Badge } from "@wpmedia/arc-themes-components";
+
+const Feature = () => <Badge>Badge Component</Badge>;
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### Badge
+
+<Canvas of={IndexStories.DefaultBadge} />
+
+### Badge Variants
+
+<Canvas of={IndexStories.BadgeVariants} />

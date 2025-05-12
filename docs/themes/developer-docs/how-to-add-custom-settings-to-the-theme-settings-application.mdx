@@ -1,0 +1,501 @@
+---
+title: How to add custom settings to Themes Settings application 
+description: How to add custom settings to Themes Settings application
+lastUpdated: 2025-02-18
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+  
+All of Theme Settings configurations are stored in a special JSON structure called the manifest. This manifest is read in by Theme Settings to render the various form inputs on the UI. This document will describe the manifest structure and properties. After that, we will show you how you can extend the manifest and add your own custom settings that can be picked up by Theme Settings and allow values to be entered by editors.
+
+This file should be named **manifest.json** and should be included in the Custom Block bundle that you upload to the Theme Settings application.
+
+## Manifest Structure
+
+Let's start by seeing a basic manifest and dive into what each of the properties means. Here's an example **manifest.json** file:
+    
+```
+{
+  “name”: “Custom Manifest”,
+  “description”: “This is a sample custom manifest”,
+  “categories”: [],
+  “fields”: []
+}
+``` 
+
+**Name**
+
+The name field is a string that is the title for your custom manifest. This field is optional and is not rendered in the Theme Settings UI.
+
+**Description**
+
+The description field is a string that gives a brief summary of your custom manifest. This field is also optional.
+
+**Categories**
+
+The category field is a list of objects that describe the information necessary to render a category in the Theme Settings UI. You can see these categories in the left hand side when configuring a site:
+
+![Categories in Themes Settings](/images/themes/categoriesThemeSettings.png)  
+ 
+  
+Below is a table listing the 5 categories that are defined by Arc and their ID and Title attributes. As these are in use by Arc, you must use a different ID for your custom settings categories.
+
+ID| Title  
+---|---  
+brand| Brand Settings  
+social| Social Settings  
+integration| Integration Settings  
+block| Block Settings  
+arc| Arc Settings  
+  
+A category can also define a subcategory. In the Theme Settings manifest, the “logo” subcategory is defined as a child of the “brand” category. In the screenshot below, we can see how the subcategory of logo (title is “Logos”) is placed inside the Brand Setting parent category:
+
+![Categories in Themes Settings](/images/themes/categoriesThemeSettings.png)  
+
+  
+Below is a table that lists the properties that make up a category object. The subcategories field has a list of category objects, but these can not have further subcategories.
+
+Category Object Property Name| Description| Example  
+---|---|---  
+id| The unique id of the category| “custom”  
+title| The reader friendly title of the category that will display in Theme Settings UI| “Custom Settings”  
+description| A reader friendly summary of helpful context about the category that will display in Theme Settings UI| “Enter your custom setting values here”  
+subcategories| A list of subcategories objects associated with this category. This helps to further refine the configuration for the Theme Settings user.| `{“id”: “subcategory”, “title”: “My Subcategory” }`  
+  
+Here is a sample **manifest.json** with a single category that contains a subcategories:
+    
+```
+    {
+        “name”: “Custom Manifest”,
+        “description”: “This is a sample custom manifest”,
+        “categories”: [
+            {
+                “id”: “custom”,
+                “title”: “Custom settings”,
+                “subcategories”: [
+                    {
+                    “id”: “foo”,
+                    “title”: “Foo settings”,
+                    “description”: “Enter in values for FOO settings”
+                    },
+                    {
+                    “id”: “bar”,
+                    “title”: “Bar Settings”,
+                    “description”: “Enter in values for bar settings”
+                    }
+                ]
+            }
+        ],
+        “fields”: []
+    }
+```  
+
+**Fields**
+
+After categories, fields are the next entities to be defined in the manifest. Fields represent an actual input field. There are properties in a field object that define its ID, title, field input type, description as well as the category and subcategories it belongs to. Below is a table of the different field properties:
+
+Field Property Name| Description  
+---|---  
+fieldId| Unique ID for the field. This is fieldId results in the id for the _siteProperty_ or _styleProperty_ in a blocks.json. Field IDs must start with a letter and only contain letters, numbers, dashes (”-”), and underscores (”_”).  
+fieldTitle| Title for the field. This is displayed as a label/header for the input.  
+fieldDescription| Additional information about the fields you want displayed by the input.  
+fieldCategory| The category to which this field belongs.  
+fieldSubcategory| The subcategory to which this field belongs.  
+fieldType| Corresponds to the type of input control to capture the value from the user. Currently, Theme Settings supports the following fieldTypes**text** \- Basic text input**URL** \- URL input**number** \- Number input control**color** \- Color input control**boolean -** Radio input control**list** \- A set of text or number inputs**image** \- Image input control**file** \- File input control (Used internally by the image control)**font** \- Font input control**size** \- Size input control**enum** \- select from an enumerated list**locale** \- select from an enumerated list of locales**object** \- Input control with nested valuesAt the end of this document you can find documentation for the kind of data that each fieldType expects.  
+fieldOptions| A set of configuration available for the field. The options available are dependent on the fieldType.  
+fieldHelpText| Additional helpful text that will display on the input to give users more context.  
+fieldTarget| This describes what type of property this will be translated to in the blocks.json output. It can be one of either **site** or **style**. This field is required, and if none is provided, this property will be omitted from the resulting blocks.json.  
+  
+Below is a quick example of a field defined in a basic **manifest.json** :
+    
+```
+{
+    “name”: “Custom Manifest”,
+    “description”: “This is a sample custom manifest”,
+    “categories”: [
+        {
+            “id”: “custom”,
+            “title”: “Custom settings”
+        }
+    ],
+    “fields”: [
+        {
+            “fieldId”: “customText”,
+            “fieldType”: “text”,
+            “fieldTitle”: “Custom Text”,
+            “fieldDescription”: “This is custom text necessary for the website.”,
+            “fieldHelpText”: “Here is some helpful text to help you fill in the input.”,
+            “fieldCategory”: “custom”,
+            “fieldTarget”: “site”,
+        }
+    ]
+}
+```
+
+Now let's walk through creating a custom manifest from scratch.
+
+## Creating Custom Settings
+
+As we learned earlier, Theme Settings's default categories and settings come from a special manifest. In order to create your own settings, you will need to create your own manifest. To begin, you will need a file called **manifest.json** at the root of your Themes-enabled bundle. Let's revisit the bare-bones **manifest.json** that we will extend to add a custom setting.
+    
+```
+{
+    “name”: “Custom Manifest”,
+    “description”: “This is a sample custom manifest”,
+    “categories”: [
+        {
+            “id”: “custom”,
+            “title”: “Custom settings”,
+            “subcategories”: []
+        }
+    ],
+    “fields”: []
+}
+```
+
+In this template you will see two arrays: categories and fields.
+
+Any new category in the categories array will add new settings to the left-hand side bar. You can create one “Custom Settings” category to capture all custom fields or split them up logically. For example, a manifest looking like this:
+    
+```
+{
+    "name": "Custom Manifest",
+    "description": "This is a sample custom manifest",
+    "categories": [
+        {
+            "id": "custom",
+            "title": "Custom settings",
+            "subcategories": []
+        },
+        {
+            "id": "map",
+            "title": "Map Settings",
+            "subcategories": []
+        }
+    ],
+    "fields": []
+}
+```
+
+Will create a settings page like this:
+
+![Categories in Themes Settings](/images/themes/categoriesThemeSettings.png)  
+  
+  
+Make sure you assign the **id** and **title** appropriately. For adding custom settings, we also need to establish a subcategory that our new custom setting will be a part of. Let's begin.
+
+Let's say MySpace has seen a rebirth and your organization has a presence on MySpace. You need to link your MySpace URL on your website. As of writing, Theme Settings only provides social media links for Facebook, Twitter and RSS. You will need to create a custom setting so that the URL can be configured in Theme Settings and be available in your blocks. To begin, we will create a new subcategory:
+    
+```
+“categories”: [
+    {
+        “id”: “custom”,
+        “title”: “Custom settings”,
+        “subcategories”: [{
+            “id”: “extsocial”,
+            “title”: “Extended Social Settings”,
+            “description”: “Enter in values for additional social media links”
+        }]
+    }
+],
+```
+
+In the above sample, we defined a new subcategory _extsocial_ that will be used for custom fields for social media links that Theme Settings does not currently support in the Social Settings Category. It is recommended to keep the id unique and with no special characters. The title and description fields will be used in the Theme Settings UI as we will see later.
+
+Next we will create the MySpace field and tie that into the _extsocial_ subcategory we just defined. Below is an example of how we could define our MySpace field:
+    
+```   
+{
+    “name”: “Custom Manifest”,
+    “description”: “This is a sample custom manifest”,
+    “categories”: [
+        {
+            “id”: “custom”,
+            “title”: “Custom settings”,
+            “subcategories”: [
+                {
+                    “id”: “extsocial”,
+                    “title”: “Extended Social Settings”,
+                    “description”: “Enter in values for additional social media links”
+                }
+            ]
+        }
+    ],
+    “fields”: [
+        {
+            “fieldId”: “mySpaceURL”,
+            “fieldType”: “text”,
+            “fieldTitle”: “My Space URL”,
+            “fieldDescription”: “Enter in My Space page url.”,
+            “fieldCategory”: “custom”,
+            “fieldSubcategory”: “extsocial”,
+            “fieldTarget”: “site”,
+        }
+    ]
+}
+```  
+
+Above we create a field object in the fields array. We gave the **fieldId** a unique value of “mySpaceURL”; set the **fieldType** to be a basic text input and set the **fieldTitle** and **fieldDescription** to be what we would like displayed on the Theme Settings UI (see screen shot later in this section). Then, we set **fieldCategory** to the parent custom category “custom” and tied **fieldSubcategory** to our recently defined subcategory “extsocial”. Finally, we set the **fieldTarget** to “site” so that the it will be included in the _siteProperties_ of the resulting blocks.json.
+
+If we were to have the above code in **manifest.json** at the root of our Themes-enabled bundle, this is how Theme Settings would show it:
+
+![Categories in Themes Settings](/images/themes/categoriesThemeSettings.png)  
+
+
+Let's create one more custom setting to be sure we have this down. Maybe your site needs an additional color available. Perhaps this will be the site's tertiary color. Here is how we would define it along with our existing setting:
+    
+```  
+{
+    “name”: “Custom Manifest”,
+    “description”: “This is a sample custom manifest”,
+    “categories”: [
+        {
+            “id”: “custom”,
+            “title”: “Custom settings”,
+            “subcategories”: [
+                {
+                “id”: “extsocial”,
+                “title”: “Extended Social Settings”,
+                “description”: “Enter in values for additional social media links”
+                },
+                {
+                “id”: “extbrand”,
+                “title”: “Extended Brand Settings”,
+                “description”: “Enter in values for additional brand settings”
+                }
+            ]
+        }
+    ],
+    “fields”: [
+        {
+        “fieldId”: “mySpaceURL”,
+        “fieldType”: “text”,
+        “fieldTitle”: “My Space URL”,
+        “fieldDescription”: “Enter in My Space page url.”,
+        “fieldCategory”: “custom”,
+        “fieldSubcategory”: “extsocial”,
+        “fieldTarget”: “site”
+        },
+        {
+        “fieldId”: “tertiaryColor”,
+        “fieldType”: “color”,
+        “fieldTitle”: “Tertiary color”,
+        “fieldDescription”: “Tertiary color for UI components”,
+        “fieldCategory”: “custom”,
+        “fieldSubcategory”: “extbrand”,
+        “fieldTarget”: “style”
+        }
+    ]
+}
+```
+    
+
+In the above example, we create a new subcategory for extended brand settings. Then, we created a new field for our color and tied it to the category and subcategory. Instead of giving the fieldType a value of “text”, we gave it “color” so that we will get the better color input control rather than just a plain text input. In Theme Settings, the UI would display the above manifest like this:
+
+![Categories in Themes Settings](/images/themes/categoriesThemeSettings.png)  
+  
+  
+And that's it. You know have your custom settings integrated into Theme Settings UI.
+
+## Rules and Validation
+
+Your custom manifest must follow a certain set of rules in order to avoid duplicates, unused portions, or name collisions with the Arc Manifest. A validation service exists to check through your manifest before allowing it to be uploaded.
+
+There are several places in the Theme Settings process where your uploaded manifest will be validated:
+
+1. **At initial upload** -- when you upload your custom blocks bundle in the Theme Settings UI and click **Save and Exit**, Theme Settings validates your bundle. If there are any issues, you'll see a list of errors pop up in the lower right-hand corner and the UI will re-select your last bundle instead.
+
+2. **At the start of a new build** -- your new build might be using custom bundle that's no longer compatible with a newer Arc manifest, so we need to validate your existing custom bundle (if applicable) to make sure that there is no overlap.
+
+3. **Local development** -- as you work locally on your Custom Manifest, you can validate it using the <Link blank href='https://github.com/WPMedia/arc-themes-validation#cli-usage' text='Arc Themes Validation CLI' />. When you validate a Custom Manifest, you must provide the Arc Manifest that you are validating it against. If you receive errors about the Arc Manifest, it is likely that you are using an outdated version of the Arc Manifest. An Arc Manifest for an example organization is available at: 
+
+    ```
+    https://example.{org}.com/themesettings/api/manifest
+    ```
+
+**Manifest Rules:**
+
+As you set up your manifest, take care that all of your fields are correctly assigned to a category through **fieldCategory**. Fields without valid categories will not be rendered in Theme Settings. **fieldSubcategory** is not required but is helpful for organization. Take care not to have any unused categories.
+
+### Note
+
+The **fieldTarget** field delineates whether the custom setting is for **siteProperties** or **styleProperties,** which is necessary for the blocks.json.
+
+Only assign your custom settings to **use your own custom categories and subcategories**. You will not be able to use Arc's reserved categories for your custom settings, including _brand_ , _social_ , _integration_ , _block_ and _arc_.
+
+In order to ensure that your **fieldId** 's remain unique, it is recommended that you use a namespace before your custom setting. Consider the following example: Arc decides to provide a tertiary color with the **fieldID** of “tertiaryColor”. However, your organization is already using tertiaryColor. This could cause conflicts that require extra work in custom blocks before your next deployment. However, Arc not use “[yourorgid]-tertiaryColor” as an id, thus reducing conflicts.
+
+Likewise, custom manifest blocks should be unique and should not overlap with any blocks in the Arc Manifest.
+
+## Conclusion
+
+We hope this article helps you understand how to create custom settings. Check back periodically for updates and information about future enhancements to custom settings.
+
+## `fieldType` Guide
+
+**text, URL, number, size, color**
+    
+```
+{
+    “fieldType”: “url”,
+    “fieldTitle”: “Example title for a URL field”,
+    “fieldId”: “exampleId”,
+    “fieldCategory”: “custom”,
+    "fieldTarget": "site"
+}
+```
+    
+
+**image**
+
+Images must have a descendants array. Within this array, you can add a file fieldType and text field type. The **file** fieldType handles the upload of a file and translating it into a hosted URL. The **text** fieldType is used to collect alt text related to the image. These will be represented as two separate properties in the resulting blocks.json.
+
+Here are a few things to point about the image input. First, it is the job of the image input to sort all descendants into a category and subcategory. As such, those fields are not required in the descendants. However, it is the job of the descendant to determine what **fieldTarget** is necessary for the input. As such **fieldTarget** should be described in the descendants, not the parent image input.
+
+Additionally, the file fieldType has a special property called **previewBackground**. This allows you to configure the image preview in ThemeSettings to have either a _light_ or _dark_ background color. If not specified, previewBackground will default to _light._ See the _“previewBackground”: “light”_ setting in the file entry in the example below.
+    
+```
+{
+    “fieldId”: “primaryLogo”,
+    “fieldType”: “image”,
+    “fieldTitle”: “Dark Logo”,
+    “fieldCategory”: “custom”,
+    “fieldDescription”: “Upload a dark logo for use on light backgrounds.”,
+    “fieldSubcategory”: “logo”,
+    “descendants”: [
+        {
+            “fieldId”: “primaryLogo”,
+            “fieldType”: “file”,
+            “fieldTitle”: “Dark Logo”,
+            “fieldTarget”: “site”,
+            "previewBackground": "light"
+        },
+        {
+            “fieldId”: “primaryLogoAlt”,
+            “fieldType”: “text”,
+            “fieldTitle”: “Dark logo alt text”,
+            “fieldDescription”: “Enter your dark logo alt text.”,
+            “fieldTarget”: “site”
+        }
+    ]
+}
+```
+
+**boolean**
+
+Boolean fields render a radio input in Theme Settings UI.
+    
+```
+{
+    "fieldId": "likesPotatoes",
+    "fieldType": "boolean",
+    "fieldTitle": "Do you like potatoes?",
+    "fieldDescription": "If you enjoy potatoes, let us know!",
+    "fieldCategory": "custom",
+    "fieldHelpText": "Turn the radio toggle on to show your love for spuds.",
+    "fieldTarget": "site"
+}
+```
+    
+
+**list**
+
+Lists are used to collect an array of values and can either render a set of text inputs or a set of number inputs by assigning the proper value to **listType**. They cannot be mixed, and they are the only types available to use.
+    
+```
+{
+    "fieldId": "stringList",
+    "fieldType": "list",
+    "fieldTitle": "Create a list of strings",
+    "fieldCategory": "custom",
+    "listType": "text",
+    "fieldTarget": "site"
+}
+
+{
+    "fieldId": "numberList",
+    "fieldType": "list",
+    "fieldTitle": "Create a list of numbers",
+    "fieldCategory": "custom",
+    "listType": "number",
+    "fieldTarget": "site"
+}
+```
+
+**font**
+    
+```
+{
+    “fieldId”: “primary-font-family”,
+    “fieldType”: “font”,
+    “fieldTitle”: “Primary Font”,
+    “fieldDescription”: “The primary font is used for headlines and buttons. Choose your font provider below and complete the options.”,
+    “fieldCategory”: “custom”,
+    “fieldSubcategory”: “typography”,
+    “fieldTarget”: “style”
+}
+```
+    
+
+**enum, locale**
+
+**enumValues** are an array stored in **fieldOptions**
+    
+```
+{
+    “fieldType”: “enum”,
+    “fieldTitle”: “Enum Example”,
+    “fieldId”: “enumExample”,
+    “fieldCategory”: “custom”,
+    “fieldTarget”: “site”,
+    “fieldOptions”: {
+        “enumValues”: [
+            “true”,
+            “false”
+        ]
+    }
+}
+```
+
+**object**
+
+In addition to the standard properties used in all other fields, objects also have a **children** property which is a list of the inputs need to generate the object. While these inputs are rendered and handled separately by Theme Settings UI, the resulting property created in the blocks.json will be an object.
+
+Unlike the image input which is a container for several properties, the **fieldTarget** for an object fieldType should be declared as a top level property, not individually for the children fields.
+
+The fieldTypes that are supported as children in an **object fieldType** are: text, URL, number, color, size, enum, locale, and object. Fonts and images are not supported.
+    
+```
+{
+    “fieldId”: “objectExample”,
+    “fieldType”: “object”,
+    “fieldTitle”: “Object Example”,
+    “fieldCategory”: “custom”,
+    “fieldTarget”: “site”,
+    “children": [
+        {
+            “fieldId”: “language”,
+            “fieldType”: “text”,
+            “fieldTitle”: “Language”
+        },
+        {
+            “fieldId”: “timeZone”,
+            “fieldType”: “text”,
+            “fieldTitle”: “Time Zone”
+        },
+        {
+            “fieldId”: “dateTimeFormat”,
+            “fieldType”: “text”,
+            “fieldTitle”: “Date/Time Format”
+        },
+        {
+            “fieldId”: “dateFormat”,
+            “fieldType”: “text”,
+            “fieldTitle”: “Date Format”
+        }
+    ]
+}
+```
+

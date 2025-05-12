@@ -1,0 +1,73 @@
+---
+title: Developer Tools at Arc XP
+description: An introduction and overview to Arc XP's developer tools
+lastUpdated: 2025-01-21
+---
+
+import { Aside, Steps, LinkCard, CardGrid, Icon, Card } from '@astrojs/starlight/components';
+import Link from '/public/snippets/anchors.astro';
+import * as globals from '/public/globals.js';
+
+<CardGrid>
+<Card title='Purpose' icon='information'>
+Get familiar with Arc XP's developer tools
+</Card>
+<Card title='Audience' icon='star'>
+Developers with access to an Arc XP organization
+</Card>
+</CardGrid>
+
+Access to an Arc XP organization provides you with services and tools to perform web content-generating activities, such as creating custom content blocks and integrations or accessing content. This document contains an overview of Arc XP's main developer tools.
+
+## Developer Center
+
+The <Link href={`${globals.patDoc}`} text='Developer Center' /> is part of the Arc XP's user interface and enables you to:
+
+- Create developer access tokens to authenticate and make requests to Arc XP's APIs.
+- Specify access scope for each token: Environments and read and write operations.
+- Revoke unused and compromised tokens. 
+
+<Aside type='note'>
+How you use the Developer Center depends on the permissions that the Arc XP's organization administrator assigns to you. For example, you might only be able to create an access token that works for specific APIs or enables read-only access.
+</Aside> 
+
+## PageBuilder Deployer
+
+The <Link href={`${globals.pbEngineDevDocsPath}/how-to-deploy-a-bundle`} text='PageBuilder Deployer (PB Deployer)' /> service enables you to deploy custom code to specific environments. Customer code examples are custom blocks or Arc XP configurations. 
+
+The following is the basic workflow to deploy changes:
+
+<Steps>
+1. Commit changes to the Arc XP's organization repository.
+2. Create a deployment bundle on your local machine. 
+3. Upload the deployment bundle to the PB Deployer application in the Arc XP's user interface.
+</Steps>
+
+<Aside type='tip'>
+PB Deployer is also available through the <Link href={`${globals.deployerApiSwagger}`} text='PageBuilder Deployer API' /> to enable automatic deployments through custom Continuous Integration and Continuous Delivery (CI/CD) pipelines.
+</Aside>
+
+## Content and Resolver Debuggers
+
+PageBuilder offers a <Link blank href='https://docs.arcxp.com/alc/en/debugging-outdated-story-content?sys_kb_id=bf11e23447639d10a87626c2846d4367&id=kb_article_view&sysparm_rank=7&sysparm_tsqueryId=b31a52de938e92104792b0cdfaba10cd#:~:text=Check%203%3A%20Verifying%20the%20content%20in%20PageBuilder' text='Debugger' /> user interface that enables you to test the following in your code:
+
+- **Content sources:** They define what stories and media show in specific blocks.
+- **Resolvers:** They map reusable templates to specific pages when users access a specific URL.
+
+<Aside type='note'>
+Resolvers use regular expressions that match parameters and websites using URLs.
+</Aside>
+ 
+## Arc XP Fusion Chrome Extension
+
+The <Link blank href='https://chromewebstore.google.com/detail/arc-xp/heojonaoafggmjonoicpcknmamoepjha' text='Arc XP Fusion extension' /> for Google Chrome is compatible with all chromium-based browsers and enables you to:
+
+- Audit an Arc XP live website for content, performance issues, and improvements.
+- Edit and publish content without using the Arc XP user interface.
+- Obtain additional information like cache health, API calls, and response codes.
+- Review anomalies that the Arc XP extension detects. 
+
+
+
+
+

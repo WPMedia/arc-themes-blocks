@@ -1,0 +1,27 @@
+{
+	"attribution": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color)",
+				"font-size": "var(--body-font-size-small)",
+				"line-height": "var(--body-line-height-small)"
+			}
+		}
+	},
+	"attribution-link": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color)",
+				"cursor": "pointer"
+			}
+		}
+	},
+	"attribution-link-hover": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color-subtle)",
+				"text-decoration": "underline"
+			}
+		}
+	}
+}

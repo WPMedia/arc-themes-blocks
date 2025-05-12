@@ -1,0 +1,32 @@
+---
+title: How to set up canonical URL service for Themes
+description: How to set up canonical URL service for Themes
+lastUpdated: 2025-02-21
+---
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+This page lists the configurations you must set up in the Canonical URL Service for each Themes website. This ensures that your content matches the <Link blank href='https://docs.arcxp.com/en/products/themes/themes---setting-up-resolvers.html' text='resolver' /> configured for your Themes website in PageBuilder.
+
+:::note
+You have some flexibility to customize these configuration patterns in Canonical URL Service, but you must also customize your <Link blank href='https://docs.arcxp.com/en/products/themes/themes---setting-up-resolvers.html' text='resolvers' /> to match those patterns.
+:::
+
+To ensure SEO best practices, all other canonical URLs you configure for your organization must have the trailing slash, like the following examples. This prevents an unnecessary CDN redirect to the URL with the trailing slash on the page load. 
+
+Page Type| Priority| Criteria| Format  
+---|---|---|---  
+video| 10| `{“type”:”video”}`| `/video/%publish_date|year()%/%publish_date|month()%/%publish_date|day()%/%headlines.basic|slugify()%/`  
+gallery| 10| `{“type”:”gallery”}`| `/gallery/%publish_date|year()%/%publish_date|month()%/%publish_date|day()%/%headlines.basic|slugify()%/`  
+author| 10| `{“type”:”author”}`| `/author/%slug|slugify()%/`  
+  
+Additionally, set the **Default Format** to the following, which applies to articles:
+    
+```
+    %websites.{website_id}.website_section.path%/%publish_date|year()%/%publish_date|month()%/%publish_date|day()%/%headlines.basic|slugify()%/
+```
+
+:::caution[important]
+Replace `<website_id>` with the website ID of the site you are configuring. Each site must have its own configuration and default format.
+:::

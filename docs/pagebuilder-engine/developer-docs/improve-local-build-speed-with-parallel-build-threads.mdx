@@ -1,0 +1,89 @@
+---
+title: Improve local build speed with parallel build threads
+description: Improve local build speed with parallel build threads
+lastUpdated: 2024-05-03T18:26:52.000Z
+migrationData:
+  short_description: Improve local build speed with parallel build threads
+  number: KB0011313
+  sys_id: 4b7eb73f47b50a10eee38788436d4376
+  sys_created_on: '2024-05-03 14:26:39'
+  sys_updated_on: '2024-05-03 14:26:52'
+  sys_created_by: fatih.yildiz@washpost.com
+  sys_updated_by: fatih.yildiz@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: ''
+  topic: General
+  sys_view_count: 282
+  helpful_count: 0
+  version: 9a8e7b3f47b50a10eee38788436d433c
+  display_number: KB0011313 v11.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.324Z
+---
+import YouTubeCard from '/src/components/starlight/youtube-card.astro';
+
+:::note
+This feature was introduced in Engine 4.1.8 and 5.0.4 releases that brings additional compiler options using a new `arc.config.json` configuration file. See [arc.config.json documentation](/pagebuilder-engine/developer-docs/arcconfigjson) to learn more about other compiler options.
+:::
+
+Arc XP Client developers can now toggle parallelization for faster webpack builds using a `arc.config.json` file added to the bundle source. This option will speed up the local development builds.
+
+## Demo
+
+<YouTubeCard href="https://www.youtube.com/embed/KtANSfp9UCE?si=uXrIFtAkHq14nQdG"/>
+
+## How to enable
+
+To opt-into this capability, add the following to your `arc.config.json` in the root of your bundle folder:
+
+```json
+{
+  "compiler": {
+    "parallel": true,
+    "devtool": "eval"
+  }
+}
+```
+
+- The `parallel` property toggles the behavior of webpack running in a single node process with an Array of configs versus spawning a pool of Node processes to run the webpack configurations in parallel. If not present, the default value is `false`, which is the existing behavior.
+- The `devtool` property enables users to override the default setting of `eval-source-map` to `eval` for faster build times at the cost of source maps. If source maps are not important to your web development workflow, setting the `devtool` option to `eval` is the recommended choice for development builds with maximum performance. If not present, the default value is the existing behavior.
+
+## Benchmarks
+
+We benchmarked this change across a few realistic bundles (using a mix of simple and complex codebases). Here are two examples in total build time numbers (in milliseconds):
+
+**_Bundle 1 (requires more memory, such as increased JS Heap size limits):_**
+
+![Bundle 1](/src/content/docs/pagebuilder-engine/images/bundle-1.jpg)
+
+|                          | Baseline | With Parallelization Enabled | with devtool=eval | parallelization + devtool=eval |
+|--------------------------|----------|------------------------------|-------------------|-------------------------------|
+| Run 1                    | `52102`  | `49252`                      | `36698`           | `34423`                       |
+| Run 2                    | `50410`  | `47588`                      | `31578`           | `34648`                       |
+| Run 3                    | `51095`  | `48276`                      | `32004`           | `35895`                       |
+| Average                  | `51202`  | `48372`                      | `33426`           | `34988`                       |
+| Change from Baseline     |          | - 6%                         | - 35%             | - 32%                         |
+
+_All benchmarks are in total milliseconds to complete the build._
+
+**_Bundle2 (complex dependency tree):_**
+
+![Bundle 2](/src/content/docs/pagebuilder-engine/images/bundle-2.jpg)
+
+|                          | Baseline | With Parallelization Enabled | with devtool=eval | parallelization + devtool=eval |
+|--------------------------|----------|------------------------------|-------------------|-------------------------------|
+| Run 1                    | `86023`  | `73734`                      | `59291`           | `54119`                       |
+| Run 2                    | `85590`  | `72031`                      | `60437`           | `54900`                       |
+| Run 3                    | `86274`  | `75822`                      | `60877`           | `54997`                       |
+| Average                  | `85962`  | `73862`                      | `60201`           | `54672`                       |
+| Change from Baseline     |          | - 15%                        | - 30%             | - 37%                         |
+
+:::note
+All benchmarks are in total milliseconds to complete the build.
+:::
+
+Even though we see consistent around 30% decrease in total build time, it's hard to quote a general number, because the compilation performance is highly correlated to the dependencies used and the code structure (number of output types, blocks, and the dependency tree for the webpack entrypoints).

@@ -1,0 +1,210 @@
+---
+title: Exploring the PageBuilder Structure
+description: PageBuilder Structure
+lastUpdated: 2025-01-17
+---
+
+import Link from '/public/snippets/anchors.astro';
+import * as globals from '/public/globals.js'
+import { CardGrid, Icon, Card } from '@astrojs/starlight/components';
+
+<CardGrid>
+<Card title='Purpose' icon='information'>
+Describe the PageBuilder directory structure and the PageBuilder Editor user interface (UI)
+</Card>
+<Card title='Audience' icon='star'>
+Developers and content managers who want to understand the PageBuilder structure and PageBuilder Editor UI
+</Card>
+</CardGrid>
+
+The Arc Fusion CLI provides a Feature Pack skeleton in a directory structure to support project development. This document explains the directory structure and introduces the PageBuilder Editor UI.
+
+## Project Directory Structure
+
+The `init` method from the `npx @arc-fusion/cli init` command generates a directory structure that organizes folders and files by their specific purposes and functionalities within Arc XP. The following snippet shows the directory structure:
+
+
+    ````text
+    .
+    ├── components
+    │   ├── chains
+    │   ├── features
+    │   ├── layouts
+    │   └── output-types
+    ├── content
+    │   ├── schemas
+    │   └── sources
+    ├── data
+    │   ├── dumps
+    │   └── restore
+    ├── environment
+    ├── mocks
+    │   ├── apps
+    │   ├── settings
+    │   │   └── api
+    │   │       └── v1
+    │   │           └── user
+    │   │               └── pinned
+    │   ├── siteservice
+    │   │   └── api
+    │   │       └── v3
+    │   │           └── website
+    │   └── user
+    ├── node_modules
+    ├── properties
+    │   ├── index.json
+    │   └── sites
+    ├── resources
+    ├── package-lock.json
+    └── package.json
+
+    ````
+
+:::note
+
+To see the folder structure in the terminal, run the command:
+
+```
+tree -I node_modules
+```
+If you do not have the `tree` command installed, run the following command to install it:
+
+```
+brew install tree
+```
+:::
+
+
+To learn more about testing Arc XP's core functionalities in your local machine, see <Link href={`${globals.tutorialsQuickStartPath}/set-up-your-dev-playground`} text='Setting Up Your Dev Playground'/>.
+
+### Directory Descriptions
+This section describes the project directories and their contents.
+
+- `/components/`: Contains the React components that define the structure of your Feature Pack. These components are organized into subdirectories by type:
+  - `chains/`: Code for <Link blank href="/pagebuilder-engine/developer-docs/chain-api/" text="Chain"/> components.
+  - `features/`: Code for <Link blank href="/pagebuilder-engine/developer-docs/feature-api/" text="Feature"/> components.
+  - `layouts/`: Code for <Link blank href="/pagebuilder-engine/developer-docs/layout-api/" text="Layout"/> components.
+  - `output-types/`: Code for <Link blank href="/pagebuilder-engine/developer-docs/output-type-api/" text="Output-Type"/> components.
+- `/content/`: Defines the sources and structure of the data Feature Pack components consume.
+  - `schemas/`: Contains JSON files that define the structure and validation rules for content types used in your Feature Pack.
+  - `sources/`: Contains code for defining content sources your Feature Pack consumes.
+- `/data/`: Contains artifacts related to database management.
+  - `dumps/`: Stores exported database dumps.
+  - `restore/`: Includes scripts and tools for manually restoring your database from a tarball.
+- `/environment/`: Stores server-only environment variables, often encrypted for secret values like credentials.
+- `/mocks/`: Enables local development by serving mock resources directly from the root of your website. Use this directory to simplify testing and development workflows. For more information, see <Link href={`${globals.pbEngineDevDocsPath}/local-mocks`} text="Local Mocks"/>.
+    :::note
+    Arc XP does not deploy mock resources to production environments.
+    :::
+- `/node_modules/`: Stores the locally installed Node modules for your application.
+    :::caution[Warning]
+    **Do not** manually edit this directory. The directory is included in the `.gitignore` file.
+    :::
+- `/properties/`: Contains non-secret site properties that can vary on a per-site basis. These properties are accessible in components.
+  - `sites/`: Contains site-specific overrides of the default site properties.
+  - `index.js` or `index.json`: Stores the default site properties, either as a JavaScript object or a JSON file.
+- `/resources/`: Contains static resources such as images, CSS files, fonts, and other assets that do not require processing.
+- `/package-lock.json`: A lockfile for dependencies listed in `package.json`. Treat as **read-only**. For more information, see <Link blank href="https://docs.npmjs.com/cli/v10/configuring-npm/package-lock-json" text="package-lock.json"/>.
+- `/package.json`: Declares your application's dependencies and scripts. You can edit this file to manage your project's configurations.  For more information, see <Link blank href="https://docs.npmjs.com/cli/v10/configuring-npm/package-json" text="package.json"/>.
+- `/.dockerignore`: Specifies files and directories to ignore when creating Docker images. Treat as read-only. For more information, see <Link blank href="https://docs.docker.com/reference/dockerfile/#dockerignore-file" text=".dockerignore file"/>.
+- `/.env`: Stores environment variables specific to your development environment. Git ignores this file, but Docker and PageBuilder use it. For more information, see <Link blank href="https://docs.arcxp.com/alc/en/how-to-use-environment-variables-and-secrets?sys_kb_id=624059e987543510637f315d0ebb3587&id=kb_article_view&spa=1" text="How To Use Environment Variables and Secrets"/>.
+- `/.gitignore`: Specifies files and directories that Git ignores. For more information, see <Link blank href="https://git-scm.com/docs/gitignore" text="gitignore"/>.
+
+:::caution[Warning]
+**Do not** remove or rename any of the files or directories in the preceding list, as PageBuilder Engine requires them to exist. However, you can add additional files or directories as needed, such as a `/utils/` directory for utility functions.
+:::
+
+## PageBuilder Editor User Interface
+
+PageBuilder Editor is a tool for building and managing your site's pages and templates. It integrates with Fusion Engine, Arc's rendering engine, to encode information about site content and define its layout and appearance.
+
+The PageBuilder Editor UI consists of 13 categories, as illustrated in **Figures 1 to 3**.
+
+![](/images/quick-wins/pagebuilder-editor-01.png)
+
+<p style="text-align:center; font-weight:bold;">Figure 1. PageBuilder Editor User Interface</p>
+
+**Table 1** lists the UI elements displayed in **Figure 1**.
+<table>
+<thead>
+<tr><th style="width: 120px;">UI Component</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr>
+<td style='text-align:center'>1</td>
+<td>**PageBuilder Landing**: Displays the main PageBuilder Editor landing page, listing all pages or templates.</td>
+</tr>
+<tr>
+<td style='text-align:center'>2</td>
+<td>**Workspaces Bar**: Displays the different workspaces available in the PageBuilder Editor.</td>
+</tr>
+<tr>
+<td style='text-align:center'>3</td>
+<td>**Curate Workspace**: Displays the primary workspace for users to curate content, add features or chains, and preview updates.</td>
+</tr>
+<tr>
+<td style='text-align:center'>4</td>
+<td>
+
+**Editor Preview**: Shows real-time updates of your draft page as you modify content, elements, and custom fields.<br />
+
+:::note
+The Editor Preview does not display ads.
+:::
+
+</td>
+</tr>
+<tr>
+<td style='text-align:center'>5</td>
+<td>
+
+**Editor Tool Bar**: Offers dropdown menus for previewing your page draft on various devices, selecting output types, and visualizing design layouts through customized aspect ratios.<br /> 
+
+:::note
+Device previews and customized layouts do not show exclusive content but serve as guides for aspect ratio and design visualization.
+:::
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<p style="text-align:center; font-weight:bold;">Table 1. PageBuilder Editor UI Components</p>
+
+    ![](/images/quick-wins/pagebuilder-editor-02.png)
+
+    <p style="text-align:center; font-weight:bold;">Figure 2. PageBuilder Editor User Interface</p>
+
+**Table 2** lists the UI elements displayed in **Figure 2**.
+<table>
+<thead>
+<tr><th style="width: 120px;">UI Component</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td style='text-align:center'>6</td><td>**Status Card**: Provides current information on the live page version, shared and personal drafts across all workspaces, and options to share edits and revert drafts.</td></tr>
+<tr><td style='text-align:center'>7</td><td>**Blocks and Chains Card**: Displays layout zones and the features or chains of your page within the Curation workspace. Hovering over a block or chain name navigates you to its preview.</td></tr>
+<tr><td style='text-align:center'>8</td><td>**Layout Zone**: Defines the regions of your page based on the Page Layout established in the Set-up workspace, offering design and layout flexibility.</td></tr>
+<tr><td style='text-align:center'>9</td><td>**Add Block or Chain Modal**: Opens a modal that lets you add blocks or chains from lists, other pages, or the clipboard.</td></tr>
+</tbody>
+</table>
+
+<p style="text-align:center; font-weight:bold;">Table 2. PageBuilder Editor UI Components</p>
+
+    ![](/images/quick-wins/pagebuilder-editor-03.png)
+
+    <p style="text-align:center; font-weight:bold;">Figure 3. PageBuilder Editor User Interface</p>
+
+**Table 3** lists the UI elements displayed in **Figure 3**.
+<table>
+<thead>
+<tr><th style="width: 120px;">UI Component</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td style='text-align:center'>10</td><td>**Block or Chain Actions Menu**: Provides a three-dot menu offering actions for blocks or chains.</td></tr>
+<tr><td style='text-align:center'>11</td><td>**Block or Chain Actions**: Lists available actions for a selected block or chain, including renaming, deleting, and changing type.</td></tr>
+<tr><td style='text-align:center'>12</td><td>**Back to Blocks and Chains**: Navigates back to the main Curation workspace from the card interface.</td></tr>
+<tr><td style='text-align:center'>13</td><td>**Card**: Displays metadata, custom curation fields, and linking options for a selected block or chain.</td></tr>
+</tbody>
+</table>
+
+<p style="text-align:center; font-weight:bold;">Table 3. PageBuilder Editor UI Components</p>

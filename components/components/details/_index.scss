@@ -1,0 +1,72 @@
+@use "../../scss";
+
+.c-details {
+	summary {
+		@include scss.component-properties("details-summary");
+	}
+
+	&__summary-text {
+		@include scss.component-properties("details-summary-text");
+	}
+
+	&__summary-icon {
+		@include scss.component-properties("details-summary-icon");
+	}
+
+	&--with-icon {
+		summary {
+			align-items: center;
+			display: flex;
+			// Safari will display default marker with icon if not explicitly stated to remove it
+			&::-webkit-details-marker {
+				display: none;
+			}
+
+			@include scss.component-properties("details-with-icon-summary");
+		}
+
+		&__summary-text {
+			@include scss.component-properties("details-with-icon-summary-text");
+		}
+
+		&__summary-icon {
+			@include scss.component-properties("details-with-icon-summary-icon");
+		}
+
+		&[open] {
+			@include scss.component-properties("details-with-icon-open");
+		}
+
+		&[open] .c-details__summary-text {
+			@include scss.component-properties("details-with-icon-open-summary-text");
+		}
+
+		&[open] .c-details__summary-icon {
+			@include scss.component-properties("details-with-icon-open-summary-icon");
+		}
+
+		@include scss.component-properties("details-with-icon");
+	}
+
+	&[open] {
+		@include scss.component-properties("details-open");
+	}
+
+	&[open] summary {
+		@include scss.component-properties("details-open-summary");
+	}
+
+	&[open] &__summary-text {
+		@include scss.component-properties("details-open-summary-text");
+	}
+
+	&[open] &__summary-icon {
+		@include scss.component-properties("details-open-summary-icon");
+	}
+
+	&__content {
+		@include scss.component-properties("details-content");
+	}
+
+	@include scss.component-properties("details");
+}

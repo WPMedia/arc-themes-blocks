@@ -1,0 +1,53 @@
+import { Meta, Story, Controls, IconGallery, IconItem } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import * as Icons from "./icons";
+import Stack from "../stack";
+
+import Icon from ".";
+
+<Meta of={IndexStories} />
+
+# Icon
+
+Icons are used to provide additional meaning via a visual means in place where
+a text label doesn't fit or work for design. The Icon component has the ability
+to be rendered in the context of an Image if needed. By default the Icon is
+presentatioanl and should be not be used in this context as a standalone item. If
+using an Icon as a action (Button) ensure accessibility considerations are addressed.
+
+## Usage
+
+```jsx
+import { Icon } from "@wpmedia/arc-themes-components";
+
+const Feature = () => <Icon name="User" />;
+```
+
+## Properties
+
+<Controls />
+
+## Icons
+
+<IconGallery>
+	{Object.keys(Icons).map((key) => (
+		<IconItem name={key}>
+			<Icon name={key} />
+		</IconItem>
+	))}
+</IconGallery>
+
+## Stories
+
+### All Icons
+
+<Story of={IndexStories.AllIcons} />
+
+### Single Icon
+
+<Story of={IndexStories.SingleIcon} />
+
+### Single Icon with Fill
+
+<Story of={IndexStories.SingleIconWithFill} />

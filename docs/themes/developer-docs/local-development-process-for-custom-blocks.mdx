@@ -1,0 +1,85 @@
+---
+title: Local development process for custom blocks
+description: Local development process for custom blocks
+lastUpdated: 2025-02-18T23:47:33.000Z
+migrationData:
+  short_description: Local development process for Custom Blocks
+  number: KB0010400
+  sys_id: a15447ae476a0a10a87626c2846d4307
+  sys_created_on: '2024-06-05 19:47:16'
+  sys_updated_on: '2024-06-05 19:47:33'
+  sys_created_by: denise.rodriguez@washpost.com
+  sys_updated_by: denise.rodriguez@washpost.com
+  author: eaa6ebfd47431550a87626c2846d43f5
+  category: Themes
+  kb: How-To Guides
+  kb_category: 021f3e3e4716d110a87626c2846d435d
+  meta: PageBuilder, Local Development, blocks.json, Themes, Themes Settings
+  topic: General
+  sys_view_count: 791
+  helpful_count: 0
+  version: a164c7ae476a0a10a87626c2846d4320
+  display_number: KB0010400 v9.0
+migrationStatus: converted
+reviewStatus: pending
+conversionDate: 2024-08-04T22:16:25.135Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside, LinkButton, Card } from '@astrojs/starlight/components';
+
+The local development process for custom blocks leverages the local installation of PageBuilder Engine. This guide walks you through the requirements and key configurations you must set up before developing custom blocks. 
+
+## Out-of-the-box Arc Blocks
+
+As an Arc XP customer, you can access a collection of Arc Blocks and components that are ready to use in PageBuilder Editor. However, If the out-of-the-box Arc Blocks do not meet your needs, you can develop and test custom blocks in your local environment. For a complete list and details of Arc Blocks and components, see <Link blank href={`${globals.themesDevDocsPath}/components-and-blocks-storybook/`} text='Components and blocks storybooks' />.
+
+## Prerequisites for developing custom blocks
+
+Before developing custom blocks, you must configure a local development environment. Ensure to follow the quickstart guides: 
+
+- <Link blank href={`${globals.tutorialsQuickStartPath}/set-up-your-dev-playground/`} text='Setting up your dev playground' /> 
+- <Link blank href={`${globals.tutorialsQuickStartPath}/configure-local-environment-variables/`} text='Configuring local environment variables' />
+
+## Step 1. Add the `blocks.json` file to your project
+
+The `blocks.json` file specifies which out-of-the-box Arc Blocks to install and make available in your bundle and contains various configurations for your organization's websites. To add the `blocks.json` file to your project, take the following steps:
+
+1. <Link blank href={`${globals.themesDevDocsPath}/migrating-from-themes-settings-to-pbdeployer/#step-1-download-your-live-bundle`} text='Download your live bundle' />.
+2. Open (extract) your downloaded bundle.
+
+    The `blocks.json` file is in the root directory of your bundle.
+3. Copy the `blocks.json` file to the root directory of your project.
+
+:::tip
+Your project is in the directory where you ran the `npx @arc-fusion/cli init` command from the <Link blank href={`${globals.tutorialsQuickStartPath}/set-up-your-dev-playground/`} text='Setting up your dev playground' /> guide.
+:::
+
+## Step 2. Add the `arc-themes-components` dependency to your project
+
+To use Arc Blocks locally, you must add the `arc-themes-components` dependency to your project. On the terminal, run the following command:
+
+```
+npm install @wpmedia/arc-themes-components@arc-themes-release-version-2.x.x
+```
+
+:::caution
+The `arc-themes-components` version specified in the `package.json` file must match the version specified in the `themesReleaseVersion` property of the `blocks.json` file. See the latest themes version in the <Link blank href='https://github.com/WPMedia/arc-themes-components' text='Arc Themes Components Repository' /> to keep your dependencies up-to-date.
+:::
+
+## Step 3. Start PageBuilder Engine
+
+Before starting PageBuilder Engine, open the Docker desktop application to start the Docker daemon. 
+
+To start PageBuilder Engine, run the following command on your terminal:
+
+```
+npx fusion start
+```
+## Step 4. Start developing custom blocks
+
+At this point, you are ready to start developing custom blocks. Use the following guides:
+
+- To build a block from scratch, see <Link blank href={`${globals.themesDevDocsPath}/creating-a-custom-block-with-styling/`} text='Creating a custom block with styling' />
+- To use an existing block as a starting point for your development, see <Link blank href={`${globals.themesDevDocsPath}/ejecting-an-arc-block/`} text='Ejecting (forking) an Arc Block' />

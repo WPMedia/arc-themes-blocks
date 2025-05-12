@@ -1,0 +1,82 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Heading from "./heading";
+import HeadingSection from "./section";
+
+<Meta of={IndexStories} />
+
+# Headings
+
+A set of components (`<Heading>` and `<HeadingSection>`) to allow control of headings to maintain their hierarchy within a page. Used together, the Themes Components are accessible if they are used together. Properly ordered headings make it easier for people using assistive technologies to navigate and comprehend the content.
+
+Headings (`<h1>` -> `<h6>`) are not to be used to achieve styling goals. They are to be used to provide semantic meaning and structure to a web page. Heading level maxes out at level 6.
+
+Headings should always:
+
+- be used in order
+- never skip levels when inceasing in numeric value
+
+Always use the `<Heading>` component in a block that you wish to make an HTML heading. The component will use the correct heading element from 1 to 6 depending on location.
+
+By default, this will output as `<h1>` if used on its own within a page. To ensure corrent hierarchy, please use `<HeadingSection>`.
+
+The `<HeadingSection>` component should be used to wrap all `<Heading>` components that should not be the page title. The `<HeadingSection>` component will increase the heading element value each time it is used. If you are making a feature that has a heading to be output as a title for a group of stories, then using the `<HeadingSection>` will increase the `<Heading>` items for you providing you correct hierarchy output of headings.
+
+In addition, the `<Heading>` component is customizable because custom classes can be passed in via the `className` prop which we will appended to a class name we already provide for the Heading.
+
+## Usage
+
+### Heading
+
+```jsx
+import { Heading } from "@wpmedia/arc-themes-components";
+
+const BlockFeature = () => <Heading>Heading Children</Heading>;
+```
+
+### Heading Section
+
+```jsx
+import { Heading, HeadingSection } from "@wpmedia/arc-themes-components";
+
+const SectionBlockFeature = () => (
+	<HeadingSection>
+		<Heading>Latest Stories</Heading>
+		<HeadingSection>
+			<Heading>Save the clock tower</Heading>
+			<p>...</p>
+			<Heading>Mayor voting this Friday</Heading>
+			<p>...</p>
+		</HeadingSection>
+	</HeadingSection>
+);
+```
+
+## Properties
+
+### Heading
+
+<Controls />
+
+### Heading Section
+
+<Controls />
+
+## Stories
+
+### Heading
+
+<Story of={IndexStories.DefaultHeading} />
+
+### Heading With Custom Additional Classes
+
+<Story of={IndexStories.HeadingWithCustomAdditionalClasses} />
+
+### Heading with truncation
+
+<Story of={IndexStories.HeadingWithTruncation} />
+
+### Nested Headings
+
+<Story of={IndexStories.NestedHeadings} />

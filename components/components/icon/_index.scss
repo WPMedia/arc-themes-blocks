@@ -1,0 +1,7 @@
+@use "../../scss";
+
+.c-icon {
+	display: inline-block;
+
+	@include scss.component-properties("icon");
+}

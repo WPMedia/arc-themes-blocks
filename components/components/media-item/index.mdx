@@ -1,0 +1,78 @@
+import { Meta, Story, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import MediaItem from ".";
+import Image from "../image";
+import Video from "../video";
+
+<Meta of={IndexStories} />
+
+# Media Item
+
+The `<MediaItem>` component is used to display a figure parent element along with a caption element and content. The caption element is using the [`<figcaption>` HTML element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption).
+
+The component can take in HTML to render `title`, `caption`, and `credit`.
+
+The component can also take in as children media, including images, videos, and audio. Specifically, with Themes Components, this can also take in the `<Image>` component.
+
+## Usage
+
+```jsx
+import { MediaItem, Image } from "@wpmedia/arc-themes-components";
+
+const MediaItemFeature = () => (
+	<div>
+		<h1>Media Item</h1>
+		<MediaItem
+			title="Important Alert"
+			caption="<div>There is man on the loose biting dogs</div><div>All dogs should evacuate the area</div>"
+			credit="John Doe (Stock Photo)"
+		>
+			<Image
+				src="your-image-path.png"
+				height={20}
+				width={20}
+				alt="Man on the loose biting people"
+			/>
+		</MediaItem>
+	</div>
+);
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+### Default
+
+<Story of={IndexStories.Default} />
+
+### No caption
+
+<Story of={IndexStories.NoCaption} />
+
+### No credit
+
+<Story of={IndexStories.NoCredit} />
+
+### No title
+
+<Story of={IndexStories.NoTitle} />
+
+### No title, caption, nor credit
+
+<Story of={IndexStories.NoTitleCaptionNorCredit} />
+
+### Renders html passed into title or caption or credit
+
+<Story of={IndexStories.RendersHtmlPassedIntoTitleOrCaption} />
+
+### With image
+
+<Story of={IndexStories.WithImage} />
+
+### With vertical video
+
+<Story of={IndexStories.WithImage} />

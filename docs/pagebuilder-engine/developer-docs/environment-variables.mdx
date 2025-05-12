@@ -1,0 +1,217 @@
+---
+title: Environment Variables
+description: Environment Variables
+lastUpdated: 2025-05-05T19:28:40.000Z
+migrationData:
+  short_description: Environment Variables
+  number: KB0010492
+  sys_id: 46e577c447cd8610eee38788436d43b9
+  sys_created_on: '2024-03-15 15:24:51'
+  sys_updated_on: '2024-03-15 15:28:40'
+  sys_created_by: fatih.yildiz@washpost.com
+  sys_updated_by: fatih.yildiz@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: >-
+    PageBuilder Engine, Environment Variables, .env, local development,
+    DEFAULT_TTL, fusion:environment, environment folder, secret encryption,
+    ARC_ACCESS_TOKEN, special environment variables, 
+  topic: General
+  sys_view_count: 2303
+  helpful_count: 0
+  version: b9c6b70847cd8610eee38788436d4364
+  display_number: KB0010492 v13.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.504Z
+---
+
+import * as globals from "/public/globals";
+import Link from "/public/snippets/anchors.astro";
+
+Environment variables can be configured within your repo to provide them to the server at runtime. This provides more control to the developer than having to make requests to the PB team, who then has to manage all client environments in a single place.
+
+## PageBuilder Engine Environment files
+
+#### Local Development
+
+The system expects you to store environment variables in local dev in two different places.
+
+First one is the PageBuilder-specific system variables to be present in `.env` file and will <u>not</u> pass through environment variable values defined in the bash session of your host (i.e: `PORT=1234 npx fusion start` will not pass PORT), because when running PageBuilder locally, there are multiple layers, of build, docker containerization happens which container orchestration relies the physical `.env` file for reading your system variables. These environment variables are Enginge recognized system variables (listed at the end of this document) in the `.env` file in the **root** of your repo (_not_ within the `/` directory).
+
+Second place to store local (custom) environment variables to go in `environment/localhost.(js|json|ts|yaml|yml)`.
+
+#### Production (non-local) Development
+
+Environment values in all non-dev (i.e., "production") environments are expected to be stored and named in one of the following formats:
+
+- `/environment.(js|json|ts|yaml|yml)`
+- `/environment/index.(js|json|ts|yaml|yml)`
+- `/environment/${environment}.(js|json|ts|yaml|yml)`
+
+### Example
+
+Encrypted values are only decrypted in the production environment and are provided as-is in local development. To address this, local environment variables defined in the `.env` file take precedence.
+
+**Local Development**
+
+In this example, the localhost environment's `environment/localhost.json` file sets `MY_API_CREDENTIALS` to the unencrypted basic-auth credentials `user:password`:
+
+```
+{
+  "MY_API_CREDENTIALS": "user:password"
+}
+```
+
+**Production (non-local) Development**
+
+In this example, all environments set `DEFAULT_TTL` to `240`, all environments _except_ for `org-sandbox` set `API_CREDENTIALS` to the decryption of the string `AWS_ENCRYPTED_CIPHER_TEXT`, and the `org-sandbox` environment sets `API_CREDENTIALS` to the decryption of the string `SANDBOX_AWS_ENCRYPTED_CIPHER_TEXT`.
+
+The `/environment.js` file:
+
+```js
+export default {
+  DEFAULT_TTL: 240,
+  API_CREDENTIALS: "%{AWS_ENCRYPTED_CIPHER_TEXT}"
+}
+```
+
+The `/environment/org-sandbox.js` file:
+
+```js
+export default {
+  API_CREDENTIALS: "%{SANDBOX_AWS_ENCRYPTED_CIPHER_TEXT}"
+}
+```
+
+## Access to Environment variables from your code
+
+You may read environment variables from a JavaScript file by importing the `fusion:environment` module.
+
+**Example**
+
+Define the `OMDB_API_KEY` environment variable in the local-development `environment/localhost.json` file:
+
+```
+{
+  "OMDB_API_KEY": "a1b2c3d4"
+}
+```
+
+Import the `OMDB_API_KEY` environment variable in a sample content source `/content/sources/movie-find.js`:
+
+```js
+import { OMDB_API_KEY } from 'fusion:environment'
+
+const resolve = (query) => {
+  const requestUri = `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&plot=full`
+
+  if (query.hasOwnProperty('movieTitle')) return `${requestUri}&t=${query.movieTitle}`
+
+  throw new Error('movie-find content source requires a movieTitle')
+}
+
+export default {
+  resolve,
+  schemaName: 'movie',
+  params: {
+    movieTitle: 'text'
+  }
+}
+```
+
+:::caution[Important]
+The `fusion:environment` module only reads encrypted environment values during server execution; they are hidden from client-side code to mitigate the security risks of exposing them to the Internet. Unencrypted values are always available and should not contain sensitive information.
+:::
+
+## Encryption using "Secret Manager"
+
+You may find it necessary to use "secret" environment variables, such as API credentials when building a Feature Pack. PageBuilder Engine needs a way to access these "secret" variables in production environments without developers adding unencrypted credentials directly to their bundles.
+
+PageBuilder Engine allows developers to include "secret" variables that have been encrypted with the proper KMS key to their environment variables, provided that these variables are surrounded by "percent-braces" characters (e.g. `%{MY_ENCRYPTED_TEXT_HERE}`). The encrypted values will then be decrypted at deploy-time and available to your bundle without being committed to version control.
+
+To access to PageBuilder Secret Manager, navigate to your Arc Admin, then PageBuilder and Deployer tool under "Developer Tools" top menu. After Deployer opens, navigate to “Secrets” tab to use this tool. Copy the unencrypted value you wish to keep “secret” and paste it into the “encrypt” text input at the top of the page, then click the “encrypt” button. You should get back an encrypted value that looks similar to this:
+
+```
+AQECAHhPwAyPK3nfERyAvm................liUhMKabNeSyk
+```
+
+![PageBuilder Engine Secrets](/images/pagebuilder-engine/pagebuilder-engine-secrets.jpg)
+
+This encrypted value is now safe to be stored in our git repository and added to our `/environment/index.js` file inside of “percent brace” control characters, like so:
+
+```js
+export default {
+  OMDB_API_KEY: "%{AQECAHhPwAyPK3nfERyAvm................liUhMKabNeSyk}"
+}
+```
+
+Since this KMS key is assigned on a per-client, per-environment basis, Fusion will automatically decrypt this variable during deployment so it can be used reliably.
+
+## Local Development Environment Variables
+
+The following environment variables govern special behavior in PageBuilder Engine. They are set automatically set by the PageBuilder Deployer when creating a new deployment and can be set in `.env` files for local development.
+
+#### `FUSION_RELEASE`
+This environment variable controls which release of PageBuilder Engine is downloaded when you run `npx fusion start`. You can set it to any release version (e.g. `5.0.1`) or you can set it to `latest` if you want to always work off the latest release. We recommend using `latest` to catch potential breaking changes early.
+
+#### `CONTENT_BASE`
+This represents the default base path or domain for content sources that use `resolve`. It is appended automatically to the beginning of relative urls paths returned from `resolve`. This typically points back to your Arc API domain. (e.g. `https://api.client-name.arcpublishing.com`)
+
+It is _not_ appended automatically to requests made from `fetch` content sources.
+
+#### `ARC_ACCESS_TOKEN`
+This stores the value of an access token for the Arc API. This value is automatically added as an HTTP Bearer token to any requests generated by `resolve` that fulfill the following conditions:
+
+- The URL begins with the value of `CONTENT_BASE`
+- The URL does not include any Basic Authentication credentials
+
+It is _not_ appended automatically to requests made from `fetch` content sources.
+
+#### `CONTENT_TIMEOUT`
+This environment variable controls the maximum time (in milliseconds) a content source can take before it is terminated. The default value is `5000`.
+
+#### `USE_AXE`
+This environment variable controls if `react-axe` should be run in the browser. It is a boolean and defaults to `false`.
+
+#### `MINIFY`
+This environment variable controls if Webpack should minify and tree-shake the final bundle. It is a boolean and defaults to `false`. Turning it on will cause your build times to be slower locally. This is always enabled in non-local environments.
+
+#### `DEFAULT_ARC_SITE`
+This environment variable controls the value of the `_website` query parameter is when it is not specified. It defaults to an empty string.
+
+#### `FUSION_GENERATE_TRACING_JSON`
+This environment variable controls if a `calls.json` file should be generated locally with content source call data. It is a boolean and defaults to `false`. See <Link blank href="https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-request-tracing-in-content-sources-with-pagebuilder-engine.html" text="Request Tracing" /> for more information.
+
+#### `DEBUG`
+This environment variable allows printing out specific render events. Developers can enable all events with providing value `*`, or specify which events to see in the command line output like `DEBUG=arc.fusion.render.error,arc.fusion.content.fetch.error`. By default these events are not shown in the command line output.
+
+#### `SLS_RELOAD_HANDLER`
+This environment variable controls how Serverless stack (that simulates rendering engine in local environments) cache. We disable cache to engine renders in local environment. True value disables the cache, false value enables it. By default it is set to true.
+
+#### `ENGINE_HEAP_SIZE`
+To configure the memory limits for engine process. This variable is used by Docker to set the actual rendering process container (engine Lambda) to have more memory for rendering more complex pages rendering many features and executes complex content sources. Default value is `2048` (2GB).
+
+#### `WEBPACK_HEAP_SIZE`
+To configure the memory limits for build process. This variable is used by Docker to set the build process container (webpack) to have more memory for building more complex bundles. Build process is independent from the actual render happens. If you bundle have more features, output types, content sources, you may need to increase this. Default value is `4096` (4GB).
+
+#### `PORT`
+This environment variable controls the port that the local development server will run on. The default value is `80`.
+
+## Special Environment Variables
+
+The following environment variables change the bundle behavior/how the bundle is compiled. In most cases, they are not automatically set by the PageBuilder Deployer and are off by default.
+
+#### `BLOCK_DIST_TAG`
+This environment variable controls the tag used for Themes Blocks that don't specify a version in `blocks.json`. It is a string and the default value is `stable`.
+
+#### `FUSION_SERVICE_WORKER`
+This environment variable controls if the service worker is included in the compiled bundle. It is a boolean and the default value is `false`.
+
+#### `FUSION_SKIP_UNSAFE_URL_SANITIZATION`
+This environment variable controls if Fusion should sanitize the final output. By default, PageBuilder Engine will remove all strings (enclosed by quotes) that are URLs in the `.arcpublishing.com` domain. The only exceptions are `*.cdn.arcpublishing.com`, `*.images.arcpublishing.com`, `*.video.arcpublishing.com`, and `*.video-player.arcpublishing.com`. This helps to protect your site from exposing Okta protected URLs. It is a boolean and the default value is `false`.
+
+#### `FUSION_ENABLE_TRACING`
+This environment variable controls if PageBuilder Engine injects headers and logs tracing information for content sources. It is a boolean and defaults to `false`. See <Link href="https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-request-tracing-in-content-sources-with-pagebuilder-engine.html" text="Request Tracing" /> for more information.

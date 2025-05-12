@@ -1,0 +1,57 @@
+import { Meta, Story } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import serialJoin from ".";
+
+<Meta of={IndexStories} />
+
+# Serial Join
+
+The `serialJoin()` function takes in an array of values and returns it using the serial comma (Oxford comma) rules. It provides overrides for replacing the delimiter, conjunction, and spacer characters.
+
+## Usage
+
+```jsx
+import serialJoin from "./serialJoin";
+
+const formattedString = serialJoin(["one", "two", "three"]);
+```
+
+## Properties
+
+| Name            | Description                                                                    | Default |
+| --------------- | ------------------------------------------------------------------------------ | ------- |
+| **list**        | An array of values that can be coerced to a string value or an array of nodes. | \[]     |
+| **conjunction** | A set of characters that should be used for the "and".                         | "and"   |
+| **delimiter**   | A set of characters that should be used for the "comma".                       | ","     |
+| **spacer**      | A set of characters that should be used for the inserted spaces.               | " "     |
+
+## Stories
+
+### One item
+
+<Story of={IndexStories.OneItem} />
+
+### Two items
+
+<Story of={IndexStories.TwoItems} />
+
+### Three items
+
+<Story of={IndexStories.ThreeItems} />
+
+### Three items, with a custom conjunction
+
+<Story of={IndexStories.ThreeItemsWithACustomConjunction} />
+
+### Three items, with an empty conjunction and custom delimiter
+
+<Story of={IndexStories.ThreeItemsWithAnEmptyConjunctionAndCustomDelimiter} />
+
+### Three items, with an empty conjunction, custom delimiter, and empty spacer
+
+<Story of={IndexStories.ThreeItemsWithAnEmptyConjunctionCustomDelimiterAndEmptySpacer} />
+
+### Three node items
+
+<Story of={IndexStories.ThreeNodeItems} />

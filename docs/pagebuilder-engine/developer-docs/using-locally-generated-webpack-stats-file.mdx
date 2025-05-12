@@ -1,0 +1,66 @@
+---
+title: Using Locally Generated Webpack Stats File
+description: Using Locally Generated Webpack Stats File
+lastUpdated: 2023-07-18T21:20:41.000Z
+migrationData:
+  short_description: Using Locally Generated Webpack Stats File
+  number: KB0010425
+  sys_id: c3c80f2e4788f590eee38788436d43e9
+  sys_created_on: '2023-07-18 17:18:38'
+  sys_updated_on: '2023-07-18 17:20:41'
+  sys_created_by: Adam.Evans@washpost.com
+  sys_updated_by: Adam.Evans@washpost.com
+  author: 198467f947431550a87626c2846d433c
+  category: PageBuilder Engine
+  kb: Developer Docs
+  kb_category: 4d32c98b47dad110a87626c2846d439b
+  meta: PageBuilder Engine, Webpack, stats file, stats.json
+  topic: General
+  sys_view_count: 296
+  helpful_count: 1
+  version: 7849476e4788f590eee38788436d43d2
+  display_number: KB0010425 v2.0
+migrationStatus: converted
+reviewStatus: needs_review
+conversionDate: 2024-08-04T22:16:25.337Z
+---
+
+import * as globals from '/public/globals';
+import Link from '/public/snippets/anchors.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+If you're a feature pack developer and you're curious about the composition of the Webpack bundles generated for your pages, PageBuilder Engine is set up to generate a JSON file of Webpack stats that can be ingested by a Webpack bundle analyzer tool.
+
+Note that as of the time of writing this functionality is only available when running PageBuilder Engine locally.
+
+## Caveats
+
+When using `stats.json` to check the size of the final bundle, you may not see the same improvements locally. Because the local bundle is constantly changing, the optimizations applied during deployment are not applied locally. If you want to simulate a production bundle locally, you can set `MINIFY=true` in your `.env` file. Keep in mind that your startup and rebuild times will be slower if you do this.
+
+## Stats File Location
+
+The stats JSON file can be found in two places:
+
+1. In your computer's feature pack repo at `.fusion/dist/stats.json`.
+2. Served from localhost: `<CONTEXT_PATH>/dist/stats.json`.
+
+The file will contain a chunk for each html output type you have. The one most developers want to look at is named `default`.
+
+## Analysis
+
+There are a number of free web-based tools that ingest `stats.json` files and display useful data about your bundle:
+
+* <Link blank href='https://chrisbateman.github.io/webpack-visualizer/' text='Webpack Visualizer' />
+* <Link blank href='http://webpack.github.io/analyse/' text='Webpack Analyse' />
+* <Link blank href='https://statoscope.tech/' text='Statoscope' /> - Visual diffing between two `stats.json` files
+
+If you want to view it locally, you can install the <Link blank href='https://www.npmjs.com/package/webpack-bundle-analyzer' text='Webpack Bundle Analyzer' /> npm package. To install this package, run: 
+
+```
+npm install -D webpack-bundle-analyzer
+```
+To use this package, run: 
+
+```
+npx webpack-bundle-analyzer .fusion/dist/stats.json .fusion/dist/components/combinations/
+```

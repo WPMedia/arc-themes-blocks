@@ -19,6 +19,12 @@ const FormPasswordConfirm = ({
 }) => {
 	const [password, setPassword] = useState("");
 
+	const escapeForHtmlPattern = (value) =>{
+		const specialChars = /[.*+?^${}()|[\]\\]/g;
+		const newValue = value.replace(specialChars, '\\$&');
+		return newValue;
+	};
+
 	const fieldParameters = {
 		...(autoComplete ? { autoComplete } : {}),
 		...(placeholder ? { placeholder } : {}),
@@ -55,7 +61,7 @@ const FormPasswordConfirm = ({
 				name={`${name}-confirmation`}
 				required
 				type="password"
-				validationPattern={`^${password}$`}
+				validationPattern={escapeForHtmlPattern(password)}
 				className={className}
 			/>
 		</>

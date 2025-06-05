@@ -43,3 +43,4 @@ jobs:
           filter_mode: "diff_context"
           stylelint_config: ".stylelintrc.json"
           stylelint_input: "**/*.scss"
+          format: "json"

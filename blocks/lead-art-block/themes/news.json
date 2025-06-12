@@ -92,7 +92,7 @@
 				"display": "flex",
 				"justify-content": "center",
 				"max-block-size": "75vh",
-				"overflow": "auto",
+				"overflow": "hidden",
 				"components": {
 					"image": {
 						"block-size": "auto",

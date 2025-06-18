@@ -43,6 +43,8 @@ const AuthorBioItemsContainer = () => {
 };
 
 const AuthorImage = ({ ansImage, altText }) => {
+	console.log("Before resizing ansImage", JSON.stringify(ansImage, null, 2));
+	// TODO here looks like the code where the auth is
 	if (ansImage?.auth) {
 		return (
 			<Image
@@ -55,6 +57,7 @@ const AuthorImage = ({ ansImage, altText }) => {
 			/>
 		);
 	}
+	// TODO if no auth, fallback to this, just the raw URL
 	if (ansImage?.url) {
 		return <Image alt={altText} src={ansImage.url} width={100} />;
 	}

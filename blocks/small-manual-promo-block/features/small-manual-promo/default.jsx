@@ -90,21 +90,41 @@ const SmallManualPromo = ({ customFields }) => {
 	const { searchableField } = useEditableContent();
 	const { fallbackImage } = getProperties(arcSite);
 	const shouldLazyLoad = lazyLoad && !isAdmin;
+	console.log(`customFields: ${JSON.stringify(customFields)}`);
 
+	// Check if the image is already resized and signed:
+// - imageId exists
+// - imageAuth exists and is not an empty object
+// - imageURL contains the imageId (suggesting it’s a signed URL)
 	const resizedImage = imageId && imageAuth && imageAuth !== "{}" && imageURL?.includes(imageId);
+	// Try to extract the image ID manually from the imageURL
+// This helps when imageId is missing or the image is unsigned
 	const manualImageId = getManualImageID(imageURL, resizedImage);
+
+	// TODO check if the image resized
+	// Attempt to retrieve a resizing auth token via useContent
+// Only call the signing service if:
+// - the image is not already resized (`!resizedImage`)
+// - the imageURL exists
+// Otherwise, just pass an empty config (no request made)
+	// TODO we still need to resize even though no auth exists
 
 	let resizedAuth = useContent(
 		resizedImage || !imageURL
-			? {}
+			? {} // skip fetching new auth if already resized or no image
 			: {
 					source: "signing-service",
-					query: { id: manualImageId || imageURL },
+					query: { id: manualImageId || imageURL }, // send either extracted ID or full URL
 				},
 	);
+	// TODO this is the fallback
+	// If useContent failed to return anything but imageAuth exists,
+// parse the imageAuth JSON string manually as a fallback
 	if (imageAuth && !resizedAuth) {
 		resizedAuth = JSON.parse(imageAuth);
 	}
+	// Some older imageAuth objects may only contain a 'hash' key (legacy token)
+// If the new resizer token version key (e.g. "v1") is missing, copy hash to it
 	if (resizedAuth?.hash && !resizedAuth[RESIZER_TOKEN_VERSION]) {
 		resizedAuth[RESIZER_TOKEN_VERSION] = resizedAuth.hash;
 	}

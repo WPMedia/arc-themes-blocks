@@ -137,14 +137,43 @@ export const AuthorBioItems = ({ content }) => {
 };
 
 const AuthorBio = ({ customFields = {} }) => {
+	const {
+		lazyLoad,
+		imageAuth,
+		imageURL,
+		imageId,
+	} = customFields;
 	const { isAdmin } = useFusionContext();
 
-	if (customFields?.lazyLoad && isServerSide() && !isAdmin) {
+	let resizedAuth = useContent(
+		resizedImage || !imageURL
+			? {}
+			: {
+				source: "signing-service",
+				query: { id: manualImageId || imageURL },
+			},
+	);
+	if (imageAuth && !resizedAuth) {
+		resizedAuth = JSON.parse(imageAuth);
+	}
+	if (resizedAuth?.hash && !resizedAuth[RESIZER_TOKEN_VERSION]) {
+		resizedAuth[RESIZER_TOKEN_VERSION] = resizedAuth.hash;
+	}
+
+	if (lazyLoad && isServerSide() && !isAdmin) {
 		// On Server
 		return null;
 	}
+
+	const ansImage = {
+		_id: resizedImage ? imageId : manualImageId,
+		url: imageURL,
+		auth: resizedAuth,
+		focal_point: imageFocalPoint ? JSON.parse(imageFocalPoint) : undefined,
+	};
+
 	return (
-		<LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
+		<LazyLoad enabled={lazyLoad && !isAdmin}>
 			<AuthorBioItemsContainer />
 		</LazyLoad>
 	);
@@ -161,6 +190,17 @@ AuthorBio.propTypes = {
 			defaultValue: false,
 			description:
 				"Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.",
+		}),
+		imageURL: PropTypes.string.tag({
+			label: "Image URL",
+			group: "Configure Content",
+			searchable: "image",
+		}),
+		imageAuth: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageId: PropTypes.string.tag({
+			hidden: true,
 		}),
 	}),
 };

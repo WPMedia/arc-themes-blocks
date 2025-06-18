@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
+import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import {
 	Conditional,
 	formatSocialURL,
 	getFocalFromANS,
+	getManualImageID,
 	Heading,
 	HeadingSection,
 	Icon,
@@ -36,10 +39,9 @@ const siteMap = {
 	youtube: "Youtube",
 };
 
-const AuthorBioItemsContainer = () => {
+const AuthorBioItemsContainer = (ansImage) => {
 	const { globalContent: content } = useFusionContext();
-
-	return <AuthorBioItems content={content} />;
+	return <AuthorBioItems content={content} alteredAnsImage={ansImage} />;
 };
 
 const AuthorImage = ({ ansImage, altText }) => {
@@ -61,10 +63,12 @@ const AuthorImage = ({ ansImage, altText }) => {
 	return null;
 };
 
-export const AuthorBioItems = ({ content }) => {
+export const AuthorBioItems = ({ content, alteredAnsImage }) => {
 	const phrases = usePhrases();
 	const { credits = {} } = content;
 	const { by = [] } = credits;
+	console.log('--------------------------------');
+	console.log(JSON.stringify(by, null, 2));
 
 	const authors = by
 		.filter(
@@ -142,8 +146,18 @@ const AuthorBio = ({ customFields = {} }) => {
 		imageAuth,
 		imageURL,
 		imageId,
+		imageFocalPoint,
 	} = customFields;
 	const { isAdmin } = useFusionContext();
+	
+	console.log('imageAuth', imageAuth);
+	console.log('imageURL', imageURL);
+	console.log('imageId', imageId);
+	console.log('imageFocalPoint', imageFocalPoint);
+
+	const resizedImage = imageId && imageAuth && imageAuth !== "{}" && imageURL?.includes(imageId);
+	console.log('resizedImage', resizedImage)
+	const manualImageId = getManualImageID(imageURL, resizedImage);
 
 	let resizedAuth = useContent(
 		resizedImage || !imageURL
@@ -159,6 +173,7 @@ const AuthorBio = ({ customFields = {} }) => {
 	if (resizedAuth?.hash && !resizedAuth[RESIZER_TOKEN_VERSION]) {
 		resizedAuth[RESIZER_TOKEN_VERSION] = resizedAuth.hash;
 	}
+	console.log('resizedAuth', resizedAuth)
 
 	if (lazyLoad && isServerSide() && !isAdmin) {
 		// On Server
@@ -174,7 +189,7 @@ const AuthorBio = ({ customFields = {} }) => {
 
 	return (
 		<LazyLoad enabled={lazyLoad && !isAdmin}>
-			<AuthorBioItemsContainer />
+			<AuthorBioItemsContainer ansImage={ansImage}/>
 		</LazyLoad>
 	);
 };
@@ -200,6 +215,9 @@ AuthorBio.propTypes = {
 			hidden: true,
 		}),
 		imageId: PropTypes.string.tag({
+			hidden: true,
+		}),
+		imageFocalPoint: PropTypes.string.tag({
 			hidden: true,
 		}),
 	}),

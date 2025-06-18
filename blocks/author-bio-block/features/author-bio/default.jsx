@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
+import { useContent } from "fusion:content";
 import {
 	Conditional,
 	formatSocialURL,
@@ -43,22 +44,27 @@ const AuthorBioItemsContainer = () => {
 };
 
 const AuthorImage = ({ ansImage, altText }) => {
-	if (ansImage?.auth) {
-		return (
-			<Image
-				alt={altText}
-				ansImage={ansImage}
-				aspectRatio="1:1"
-				resizedOptions={getFocalFromANS(ansImage)}
-				responsiveImages={[100, 200, 400]}
-				width={100}
-			/>
-		);
-	}
-	if (ansImage?.url) {
-		return <Image alt={altText} src={ansImage.url} width={100} />;
-	}
-	return null;
+	const shouldFetchAuth = !ansImage?.auth && ansImage?.url;
+	const fetchedAuth = useContent(
+		shouldFetchAuth
+			? { source: "signing-service", query: { id: ansImage.url } }
+			: null
+	);
+
+	const imageWithAuth = shouldFetchAuth
+		? { ...ansImage, auth: fetchedAuth }
+		: ansImage;
+
+	return (
+		<Image
+			alt={altText}
+			ansImage={imageWithAuth}
+			aspectRatio="1:1"
+			resizedOptions={getFocalFromANS(imageWithAuth)}
+			responsiveImages={[100, 200, 400]}
+			width={100}
+		/>
+	);
 };
 
 export const AuthorBioItems = ({ content }) => {

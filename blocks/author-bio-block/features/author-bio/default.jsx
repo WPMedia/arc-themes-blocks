@@ -48,7 +48,7 @@ const AuthorImage = ({ ansImage, altText }) => {
 	const fetchedAuth = useContent(
 		shouldFetchAuth
 			? { source: "signing-service", query: { id: ansImage.url } }
-			: null
+			:  {}
 	);
 
 	const imageWithAuth = shouldFetchAuth

@@ -6,6 +6,7 @@ import {
 	getNavComponentDefaultSelection,
 	generateNavComponentPropType,
 	generateNavComponentIndexPropType,
+	ensureTrailingSlash,
 } from "./nav-helper";
 
 describe("nav-helper", () => {
@@ -88,6 +89,18 @@ describe("nav-helper", () => {
 				name: "If custom, position of Left Component 1 - Desktop",
 				required: false,
 			});
+		});
+	});
+
+	describe("ensureTrailingSlash()", () => {
+		it("returns the same string if it already ends with a slash", () => {
+			const result = ensureTrailingSlash("https://the-gazette.com/news/");
+			expect(result).toEqual("https://the-gazette.com/news/");
+		});
+
+		it("adds a trailing slash if missing", () => {
+			const result = ensureTrailingSlash("https://the-gazette.com/news");
+			expect(result).toEqual("https://the-gazette.com/news/");
 		});
 	});
 });

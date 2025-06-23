@@ -39,12 +39,14 @@ const siteMap = {
 	youtube: "Youtube",
 };
 
-const AuthorBioItemsContainer = (ansImage) => {
+const AuthorBioItemsContainer = (resizedAnsImage) => {
 	const { globalContent: content } = useFusionContext();
-	return <AuthorBioItems content={content} alteredAnsImage={ansImage} />;
+	return <AuthorBioItems content={content} resizedAnsImage={resizedAnsImage} />;
 };
 
 const AuthorImage = ({ ansImage, altText }) => {
+	console.log('author image component');
+	console.log('ansImage', ansImage);
 	if (ansImage?.auth) {
 		return (
 			<Image
@@ -63,7 +65,7 @@ const AuthorImage = ({ ansImage, altText }) => {
 	return null;
 };
 
-export const AuthorBioItems = ({ content, alteredAnsImage }) => {
+export const AuthorBioItems = ({ content, resizedAnsImage }) => {
 	const phrases = usePhrases();
 	const { credits = {} } = content;
 	const { by = [] } = credits;
@@ -91,7 +93,7 @@ export const AuthorBioItems = ({ content, alteredAnsImage }) => {
 					className={`${BLOCK_CLASS_NAME}__author`}
 					key={`${name}_${authorUrl}`}
 				>
-					<AuthorImage ansImage={ansImage} altText={altText || name || ""} />
+					<AuthorImage ansImage={{ansImage, ...resizedAnsImage}} altText={altText || name || ""} />
 					<Stack>
 						{byline ? (
 							<Conditional
@@ -184,12 +186,12 @@ const AuthorBio = ({ customFields = {} }) => {
 		_id: resizedImage ? imageId : manualImageId,
 		url: imageURL,
 		auth: resizedAuth,
-		focal_point: imageFocalPoint ? JSON.parse(imageFocalPoint) : undefined,
+		// focal_point: imageFocalPoint ? JSON.parse(imageFocalPoint) : undefined,
 	};
 
 	return (
 		<LazyLoad enabled={lazyLoad && !isAdmin}>
-			<AuthorBioItemsContainer ansImage={ansImage}/>
+			<AuthorBioItemsContainer resizedAnsImage={ansImage}/>
 		</LazyLoad>
 	);
 };

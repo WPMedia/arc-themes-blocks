@@ -100,10 +100,18 @@ export const AuthorBioItems = ({ content }) => {
 				social_links: socialLinks = [],
 				url: authorUrl,
 			}) => {
-				const updatedAnsImage = resizedAuth?.hash ? {
-					...ansImage,
-					auth: { [RESIZER_TOKEN_VERSION]: resizedAuth.hash }
-				} : ansImage;
+				let updatedAnsImage = ansImage;
+				if (resizedAuth?.hash) {
+					updatedAnsImage = {
+						...ansImage,
+						auth: { [RESIZER_TOKEN_VERSION]: resizedAuth.hash }
+					};
+				} else if (resizedAuth) {
+					updatedAnsImage = {
+						...ansImage,
+						auth: resizedAuth
+					};
+				}
 
 				return (
 					<Stack

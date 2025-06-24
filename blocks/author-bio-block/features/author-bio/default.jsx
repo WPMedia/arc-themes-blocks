@@ -78,7 +78,7 @@ const AuthorItem = ({ author }) => {
 	const phrases = usePhrases();
 
 	const imageAuth = ansImage?.auth || originalAnsImage?.auth;
-	const imageUrl = ansImage?.url || originalImage || originalAnsImage?.url;
+	const imageUrl = ansImage?.url || originalImage?.url || originalAnsImage?.url;
 
 	let resizedAuth = useContent(
 		imageAuth 

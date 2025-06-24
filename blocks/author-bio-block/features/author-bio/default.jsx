@@ -79,44 +79,55 @@ const AuthorItem = ({ author }) => {
 
 	const imageAuth = ansImage?.auth || originalAnsImage?.auth;
 	const imageUrl = ansImage?.url || originalImage || originalAnsImage?.url;
-	const needsFallbackAuth = !ansImage?.auth && !originalAnsImage?.auth;
 
 	// If auth is already present, no need to fetch again
-	const resizedAuth = imageAuth
-		? imageAuth
-		: useContent({
-		source: "signing-service",
-		query: { id: imageUrl },
-	}) || {};
+	// what format returned by useContent?
+	// { hash: "signed-auth-token" }
+	let resizedAuth = useContent(
+		imageAuth
+			? {}
+			: {
+				source: "signing-service",
+				query: { id: imageUrl },
+			}
+	) || {};
+
+	// what format returned by imageAuth?
+	if (imageAuth) {
+		resizedAuth = imageAuth;
+	}
 
 	let updatedAnsImage = ansImage;
 
-	if (needsFallbackAuth) {
-		// Case 1: resizedAuth has hash property — use it to construct a new auth object on top of ansImage
-		if (resizedAuth?.hash) {
+	// Case 1: resizedAuth has hash property — use it to construct a new auth object on top of ansImage
+	// e.g., resizedAuth = { hash: "abc123" } I assume
+	// This block is for signed URLs from the signing service
+	if (resizedAuth?.hash) {
+		updatedAnsImage = {
+			...ansImage,
+			auth: { [RESIZER_TOKEN_VERSION]: resizedAuth.hash }
+		};
+		console.log(" resizedAuth has hash property: updatedAnsImage", updatedAnsImage);
+	} else if (resizedAuth && Object.keys(resizedAuth).length > 0) {
+		// Case 2: resizedAuth exists but has no hash — fallback to originalAnsImage if it has auth and url
+		// Could come from imageAuth directly
+		// e.g., resizedAuth = { 2: "token" }
+		if (originalAnsImage?.auth && originalAnsImage?.url) {
+			updatedAnsImage = {
+				...originalAnsImage,
+				auth: resizedAuth
+			};
+			console.log("enter second block")
+		} else {
+			// Case 3: resizedAuth exists but originalAnsImage is not usable — fallback to ansImage with resizedAuth
 			updatedAnsImage = {
 				...ansImage,
-				auth: { [RESIZER_TOKEN_VERSION]: resizedAuth.hash }
+				auth: resizedAuth
 			};
-			console.log(" resizedAuth has hash property: updatedAnsImage", updatedAnsImage);
-		} else if (resizedAuth && Object.keys(resizedAuth).length > 0) {
-			// Case 2: resizedAuth exists but has no hash — fallback to originalAnsImage if it has auth and url
-			if (originalAnsImage?.auth && originalAnsImage?.url) {
-				updatedAnsImage = {
-					...originalAnsImage,
-					auth: resizedAuth
-				};
-				console.log("enter second block")
-			} else {
-				// Case 3: resizedAuth exists but originalAnsImage is not usable — fallback to ansImage with resizedAuth
-				updatedAnsImage = {
-					...ansImage,
-					auth: resizedAuth
-				};
-				console.log("enter third block")
-			}
+			console.log("enter third block")
 		}
 	}
+
 
 	console.log("updatedAnsImageNew", updatedAnsImage);
 

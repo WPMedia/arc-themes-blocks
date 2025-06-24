@@ -992,7 +992,7 @@ describe("Given the list of author(s) from the article", () => {
 			const { AuthorBioItems } = require("./default");
 			render(<AuthorBioItems content={content} />);
 
-			expect(useContent).not.toHaveBeenCalled();
+			expect(useContent).toHaveBeenCalledWith({})
 		});
 
 		it("should call useContent with signing-service when imageAuth is not available", () => {
@@ -1030,11 +1030,9 @@ describe("Given the list of author(s) from the article", () => {
 			});
 		});
 
+		// TODO this needs to be clarified
 		// it("should apply resized auth token when useContent returns hash", () => {
-		// 	const mockUseContent = jest.fn().mockReturnValue({ hash: "resizedAuthHash" });
-		// 	jest.doMock("fusion:content", () => ({
-		// 		useContent: mockUseContent,
-		// 	}));
+		// 	useContent.mockReturnValue({ hash: "resizedAuthHash" });
 		//
 		// 	const content = {
 		// 		credits: {
@@ -1045,7 +1043,7 @@ describe("Given the list of author(s) from the article", () => {
 		// 					description: "description",
 		// 					image: {
 		// 						url: "test.jpg",
-		// 						auth: { 2: "originalAuth" },
+		// 						auth: { 2: "originalAuth12345" },
 		// 					},
 		// 					additional_properties: {
 		// 						original: {

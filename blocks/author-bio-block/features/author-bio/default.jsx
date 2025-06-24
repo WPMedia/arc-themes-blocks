@@ -92,8 +92,6 @@ const AuthorItem = ({ author }) => {
 		resizedAuth = imageAuth;
 	}
 
-	console.log("resizedAuth", resizedAuth);
-
 	let updatedAnsImage = ansImage;
 	if (resizedAuth?.hash) {
 		updatedAnsImage = {
@@ -113,8 +111,6 @@ const AuthorItem = ({ author }) => {
 			};
 		}
 	}
-
-	console.log("updatedAnsImage", updatedAnsImage);
 
 	return (
 		<Stack

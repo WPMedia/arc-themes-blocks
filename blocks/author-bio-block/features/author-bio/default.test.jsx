@@ -15,6 +15,10 @@ jest.mock("fusion:context", () => ({
 	useFusionContext: () => ({ isAdmin: false, globalContent: { credits: {} } }),
 }));
 
+jest.mock("fusion:content", () => ({
+	useContent: jest.fn().mockReturnValue({}),
+}));
+
 describe("Given the list of author(s) from the article", () => {
 	beforeEach(() => {
 		jest.spyOn(console, "error").mockImplementation((message) =>

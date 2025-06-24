@@ -77,11 +77,9 @@ const AuthorItem = ({ author }) => {
 
 	const phrases = usePhrases();
 
-	// Extract image data for this specific author
 	const imageAuth = ansImage?.auth || originalAnsImage?.auth;
 	const imageUrl = ansImage?.url || originalImage || originalAnsImage?.url;
 
-	// Call useContent for this specific author's image
 	let resizedAuth = useContent(
 		imageAuth 
 			? {}
@@ -101,10 +99,7 @@ const AuthorItem = ({ author }) => {
 			auth: { [RESIZER_TOKEN_VERSION]: resizedAuth.hash }
 		};
 	} else if (resizedAuth) {
-		// If we have resizedAuth but no hash, it means we have original auth
-		// Check if the auth came from additional_properties.original.ansImage
 		if (originalAnsImage?.auth && originalAnsImage?.url) {
-			// Use the original ansImage data with the auth
 			updatedAnsImage = {
 				...originalAnsImage,
 				auth: resizedAuth

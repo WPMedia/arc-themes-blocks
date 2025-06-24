@@ -82,18 +82,12 @@ const AuthorItem = ({ author }) => {
 	const needsFallbackAuth = !ansImage?.auth && !originalAnsImage?.auth;
 
 	// If auth is already present, no need to fetch again
-	let resizedAuth = useContent(
-		imageAuth
-			? {}
-			: {
-				source: "signing-service",
-				query: { id: imageUrl },
-			}
-	) || {};
-
-	if (imageAuth) {
-		resizedAuth = imageAuth;
-	}
+	const resizedAuth = imageAuth
+		? imageAuth
+		: useContent({
+		source: "signing-service",
+		query: { id: imageUrl },
+	}) || {};
 
 	let updatedAnsImage = ansImage;
 

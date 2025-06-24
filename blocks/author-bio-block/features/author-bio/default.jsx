@@ -44,7 +44,7 @@ const AuthorBioItemsContainer = () => {
 	return <AuthorBioItems content={content} />;
 };
 
-const AuthorImage = ({ ansImage, altText }) => {
+const AuthorImage = ({ ansImage, altText, imageUrl }) => {
 	if (ansImage?.auth) {
 		return (
 			<Image
@@ -57,8 +57,8 @@ const AuthorImage = ({ ansImage, altText }) => {
 			/>
 		);
 	}
-	if (ansImage?.url) {
-		return <Image alt={altText} src={ansImage.url} width={100} />;
+	if (imageUrl) {
+		return <Image alt={altText} src={imageUrl} width={100} />;
 	}
 	return null;
 };
@@ -83,7 +83,6 @@ export const AuthorBioItems = ({ content }) => {
 	if (imageAuth) {
 		resizedAuth = imageAuth;
 	}
-	console.log("Resized Auth", JSON.stringify(resizedAuth));
 
 	const authors = by
 		.filter(
@@ -112,7 +111,7 @@ export const AuthorBioItems = ({ content }) => {
 						className={`${BLOCK_CLASS_NAME}__author`}
 						key={`${name}_${authorUrl}`}
 					>
-						<AuthorImage ansImage={updatedAnsImage} altText={altText || name || ""} />
+						<AuthorImage ansImage={updatedAnsImage} altText={altText || name || ""} imageUrl={imageUrl} />
 						<Stack>
 							{byline ? (
 								<Conditional

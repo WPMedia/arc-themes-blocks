@@ -92,13 +92,15 @@ const AuthorItem = ({ author }) => {
 		resizedAuth = imageAuth;
 	}
 
+	console.log("resizedAuth", resizedAuth);
+
 	let updatedAnsImage = ansImage;
 	if (resizedAuth?.hash) {
 		updatedAnsImage = {
 			...ansImage,
 			auth: { [RESIZER_TOKEN_VERSION]: resizedAuth.hash }
 		};
-	} else if (resizedAuth) {
+	} else if (resizedAuth && Object.keys(resizedAuth).length > 0) {
 		if (originalAnsImage?.auth && originalAnsImage?.url) {
 			updatedAnsImage = {
 				...originalAnsImage,
@@ -111,6 +113,8 @@ const AuthorItem = ({ author }) => {
 			};
 		}
 	}
+
+	console.log("updatedAnsImage", updatedAnsImage);
 
 	return (
 		<Stack

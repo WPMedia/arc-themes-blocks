@@ -63,15 +63,25 @@ const AuthorImage = ({ ansImage, altText, imageUrl }) => {
 	return null;
 };
 
-export const AuthorBioItems = ({ content }) => {
+const AuthorItem = ({ author }) => {
+	const {
+		additional_properties: {
+			original: { byline, ansImage: originalAnsImage, image: originalImage },
+		} = {},
+		description,
+		name,
+		image: { alt_text: altText = "", ...ansImage } = {},
+		social_links: socialLinks = [],
+		url: authorUrl,
+	} = author;
+
 	const phrases = usePhrases();
-	const { credits = {} } = content;
-	const { by = [] } = credits;
-	const author = by[0];
 
-	const imageAuth = author?.image?.auth || author?.additional_properties?.original?.ansImage?.auth
-	const imageUrl = author?.image?.url || author?.additional_properties?.original?.image || author?.additional_properties?.original?.ansImage?.url;
+	// Extract image data for this specific author
+	const imageAuth = ansImage?.auth || originalAnsImage?.auth;
+	const imageUrl = ansImage?.url || originalImage || originalAnsImage?.url;
 
+	// Call useContent for this specific author's image
 	let resizedAuth = useContent(
 		imageAuth 
 			? {}
@@ -79,92 +89,96 @@ export const AuthorBioItems = ({ content }) => {
 				source: "signing-service",
 				query: { id: imageUrl },
 			}
-	);
+	) || {};
 	if (imageAuth) {
 		resizedAuth = imageAuth;
 	}
+
+	let updatedAnsImage = ansImage;
+	if (resizedAuth?.hash) {
+		updatedAnsImage = {
+			...ansImage,
+			auth: { [RESIZER_TOKEN_VERSION]: resizedAuth.hash }
+		};
+	} else if (resizedAuth) {
+		// If we have resizedAuth but no hash, it means we have original auth
+		// Check if the auth came from additional_properties.original.ansImage
+		if (originalAnsImage?.auth && originalAnsImage?.url) {
+			// Use the original ansImage data with the auth
+			updatedAnsImage = {
+				...originalAnsImage,
+				auth: resizedAuth
+			};
+		} else {
+			updatedAnsImage = {
+				...ansImage,
+				auth: resizedAuth
+			};
+		}
+	}
+
+	return (
+		<Stack
+			direction="horizontal"
+			className={`${BLOCK_CLASS_NAME}__author`}
+			key={`${name}_${authorUrl}`}
+		>
+			<AuthorImage ansImage={updatedAnsImage} altText={altText || name || ""} imageUrl={imageUrl} />
+			<Stack>
+				{byline ? (
+					<Conditional
+						className={`${BLOCK_CLASS_NAME}__author-name-link`}
+						condition={authorUrl}
+						component={Link}
+						href={authorUrl}
+					>
+						<HeadingSection>
+							<Heading className={`${BLOCK_CLASS_NAME}__author-name`}>{byline}</Heading>
+						</HeadingSection>
+					</Conditional>
+				) : null}
+				<Paragraph className={`${BLOCK_CLASS_NAME}__author-description`}>
+					{description}
+				</Paragraph>
+				{socialLinks?.length ? (
+					<Stack
+						direction="horizontal"
+						wrap="wrap"
+						className={`${BLOCK_CLASS_NAME}__social-link-wrapper`}
+					>
+						{socialLinks
+							.filter(({ site, url }) => site && url?.length)
+							.map(({ site, url }) => (
+								<Link
+									aria-label={phrases.t(`global.social-${site.toLowerCase()}-connect`, {
+										authorName: name,
+									})}
+									className={`${BLOCK_CLASS_NAME}__social-link`}
+									href={formatSocialURL(site, url)}
+									id={site === "youtube" ? "link-social-youtube" : undefined}
+									key={site}
+									openInNewTab
+								>
+									<Icon name={siteMap[site] || "Envelope"} />
+								</Link>
+							))}
+					</Stack>
+				) : null}
+			</Stack>
+		</Stack>
+	);
+};
+
+export const AuthorBioItems = ({ content }) => {
+	const { credits = {} } = content;
+	const { by = [] } = credits;
 
 	const authors = by
 		.filter(
 			({ additional_properties: additionalProperties = {}, description = "" }) =>
 				description?.length && additionalProperties?.original?.bio?.length,
 		)
-		.map(
-			({
-				additional_properties: {
-					original: { byline },
-				},
-				description,
-				name,
-				image: { alt_text: altText = "", ...ansImage } = {},
-				social_links: socialLinks = [],
-				url: authorUrl,
-			}) => {
-				let updatedAnsImage = ansImage;
-				if (resizedAuth?.hash) {
-					updatedAnsImage = {
-						...ansImage,
-						auth: { [RESIZER_TOKEN_VERSION]: resizedAuth.hash }
-					};
-				} else if (resizedAuth) {
-					updatedAnsImage = {
-						...ansImage,
-						auth: resizedAuth
-					};
-				}
-
-				return (
-					<Stack
-						direction="horizontal"
-						className={`${BLOCK_CLASS_NAME}__author`}
-						key={`${name}_${authorUrl}`}
-					>
-						<AuthorImage ansImage={updatedAnsImage} altText={altText || name || ""} imageUrl={imageUrl} />
-						<Stack>
-							{byline ? (
-								<Conditional
-									className={`${BLOCK_CLASS_NAME}__author-name-link`}
-									condition={authorUrl}
-									component={Link}
-									href={authorUrl}
-								>
-									<HeadingSection>
-										<Heading className={`${BLOCK_CLASS_NAME}__author-name`}>{byline}</Heading>
-									</HeadingSection>
-								</Conditional>
-							) : null}
-							<Paragraph className={`${BLOCK_CLASS_NAME}__author-description`}>
-								{description}
-							</Paragraph>
-							{socialLinks?.length ? (
-								<Stack
-									direction="horizontal"
-									wrap="wrap"
-									className={`${BLOCK_CLASS_NAME}__social-link-wrapper`}
-								>
-									{socialLinks
-										.filter(({ site, url }) => site && url?.length)
-										.map(({ site, url }) => (
-											<Link
-												aria-label={phrases.t(`global.social-${site.toLowerCase()}-connect`, {
-													authorName: name,
-												})}
-												className={`${BLOCK_CLASS_NAME}__social-link`}
-												href={formatSocialURL(site, url)}
-												id={site === "youtube" ? "link-social-youtube" : undefined}
-												key={site}
-												openInNewTab
-											>
-												<Icon name={siteMap[site] || "Envelope"} />
-											</Link>
-										))}
-								</Stack>
-							) : null}
-						</Stack>
-					</Stack>
-				);
-			}
-		);
+		.map((author) => <AuthorItem key={`${author.name}_${author.url}`} author={author} />);
 
 	return authors.length ? <Stack className={BLOCK_CLASS_NAME}>{authors}</Stack> : null;
 };

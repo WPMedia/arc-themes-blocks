@@ -67,25 +67,23 @@ export const AuthorBioItems = ({ content }) => {
 	const phrases = usePhrases();
 	const { credits = {} } = content;
 	const { by = [] } = credits;
+	const author = by[0];
 
+	const imageAuth = author?.image?.auth || author?.additional_properties?.original?.ansImage?.auth
+	const imageUrl = author?.image?.url || author?.additional_properties?.original?.image || author?.additional_properties?.original?.ansImage?.url;
 
-	const imageUrl = by[0]?.image?.url;
-	
-	console.log("imageUrl", imageUrl);
-
-	const ansImageObject = by[0]?.ansImage;
-	console.log("ansImage", JSON.stringify(ansImageObject, null, 2));
-
-	const resizedAuth = useContent(
-		imageUrl
-			? {
+	let resizedAuth = useContent(
+		imageAuth 
+			? {}
+			: {
 				source: "signing-service",
 				query: { id: imageUrl },
 			}
-			: {}
 	);
-
-	console.log("resizedAuth", JSON.stringify(resizedAuth));
+	if (imageAuth) {
+		resizedAuth = imageAuth;
+	}
+	console.log("Resized Auth", JSON.stringify(resizedAuth));
 
 	const authors = by
 		.filter(

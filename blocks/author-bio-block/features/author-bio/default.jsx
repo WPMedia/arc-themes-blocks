@@ -79,38 +79,53 @@ const AuthorItem = ({ author }) => {
 
 	const imageAuth = ansImage?.auth || originalAnsImage?.auth;
 	const imageUrl = ansImage?.url || originalImage || originalAnsImage?.url;
+	const needsFallbackAuth = !ansImage?.auth && !originalAnsImage?.auth;
 
+	// If auth is already present, no need to fetch again
 	let resizedAuth = useContent(
-		imageAuth 
+		imageAuth
 			? {}
 			: {
 				source: "signing-service",
 				query: { id: imageUrl },
 			}
 	) || {};
+
 	if (imageAuth) {
 		resizedAuth = imageAuth;
 	}
 
 	let updatedAnsImage = ansImage;
-	if (resizedAuth?.hash) {
-		updatedAnsImage = {
-			...ansImage,
-			auth: { [RESIZER_TOKEN_VERSION]: resizedAuth.hash }
-		};
-	} else if (resizedAuth && Object.keys(resizedAuth).length > 0) {
-		if (originalAnsImage?.auth && originalAnsImage?.url) {
-			updatedAnsImage = {
-				...originalAnsImage,
-				auth: resizedAuth
-			};
-		} else {
+
+	if (needsFallbackAuth) {
+		// Case 1: resizedAuth has hash property — use it to construct a new auth object on top of ansImage
+		if (resizedAuth?.hash) {
 			updatedAnsImage = {
 				...ansImage,
-				auth: resizedAuth
+				auth: { [RESIZER_TOKEN_VERSION]: resizedAuth.hash }
 			};
+			console.log(" resizedAuth has hash property: updatedAnsImage", updatedAnsImage);
+		} else if (resizedAuth && Object.keys(resizedAuth).length > 0) {
+			// Case 2: resizedAuth exists but has no hash — fallback to originalAnsImage if it has auth and url
+			if (originalAnsImage?.auth && originalAnsImage?.url) {
+				updatedAnsImage = {
+					...originalAnsImage,
+					auth: resizedAuth
+				};
+				console.log("enter second block")
+			} else {
+				// Case 3: resizedAuth exists but originalAnsImage is not usable — fallback to ansImage with resizedAuth
+				updatedAnsImage = {
+					...ansImage,
+					auth: resizedAuth
+				};
+				console.log("enter third block")
+			}
 		}
 	}
+
+	console.log("updatedAnsImageNew", updatedAnsImage);
+
 
 	return (
 		<Stack

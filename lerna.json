@@ -4,7 +4,7 @@
 	"version": "independent",
 	"command": {
 		"publish": {
-			"ignoreChanges": ["package.json", "CHANGELOG.md", "package-lock.json"],
+			"ignoreChanges": ["CHANGELOG.md"],
 			"conventionalCommits": true,
 			"message": "chore(release): publish",
 			"registry": "https://npm.pkg.github.com"

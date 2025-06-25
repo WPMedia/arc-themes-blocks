@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { useContent } from "fusion:content";
 
 import AuthorBio, { AuthorBioItems } from "./default";
 
@@ -18,8 +19,6 @@ jest.mock("fusion:context", () => ({
 jest.mock("fusion:content", () => ({
 	useContent: jest.fn(),
 }));
-
-import { useContent } from "fusion:content";
 
 describe("Given the list of author(s) from the article", () => {
 	beforeEach(() => {
@@ -989,8 +988,8 @@ describe("Given the list of author(s) from the article", () => {
 			};
 
 			// Re-import to get the mocked version
-			const { AuthorBioItems } = require("./default");
-			render(<AuthorBioItems content={content} />);
+			const { AuthorBioItems: MockedAuthorBioItems } = require("./default");
+			render(<MockedAuthorBioItems content={content} />);
 
 			expect(useContent).toHaveBeenCalledWith({})
 		});
@@ -1021,8 +1020,8 @@ describe("Given the list of author(s) from the article", () => {
 			};
 
 			// Re-import to get the mocked version
-			const { AuthorBioItems } = require("./default");
-			render(<AuthorBioItems content={content} />);
+			const { AuthorBioItems: MockedAuthorBioItems } = require("./default");
+			render(<MockedAuthorBioItems content={content} />);
 
 			expect(useContent).toHaveBeenCalledWith({
 				source: "signing-service",
@@ -1057,8 +1056,8 @@ describe("Given the list of author(s) from the article", () => {
 			};
 
 			// Re-import to get the mocked version
-			const { AuthorBioItems } = require("./default");
-			render(<AuthorBioItems content={content} />);
+			const { AuthorBioItems: MockedAuthorBioItems } = require("./default");
+			render(<MockedAuthorBioItems content={content} />);
 
 			const image = screen.getByRole("img", { name: "Sara Carothers" });
 			expect(image?.src).toBe(

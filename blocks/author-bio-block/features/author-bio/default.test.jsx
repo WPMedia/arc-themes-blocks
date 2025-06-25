@@ -718,70 +718,70 @@ describe("Given the list of author(s) from the article", () => {
 	});
 
 	describe("Image handling logic", () => {
-		// it("should extract imageAuth from author.image.auth", () => {
-		// 	const content = {
-		// 		credits: {
-		// 			by: [
-		// 				{
-		// 					type: "author",
-		// 					name: "Sara Carothers",
-		// 					description: "description",
-		// 					image: {
-		// 						url: "test.jpg",
-		// 						auth: { 2: "auth123" },
-		// 					},
-		// 					additional_properties: {
-		// 						original: {
-		// 							_id: "saracarothers",
-		// 							byline: "Sara Lynn Carothers",
-		// 							bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
-		// 						},
-		// 					},
-		// 				},
-		// 			],
-		// 		},
-		// 	};
-		// 	render(<AuthorBioItems content={content} />);
-		//
-		// 	const image = screen.getByRole("img", { name: "Sara Carothers" });
-		// 	expect(image?.src).toBe(
-		// 		"http://url.com/test.jpg?smart=true&auth=auth123&width=100&height=100",
-		// 	);
-		// });
-		//
-		// it("should extract imageAuth from author.additional_properties.original.ansImage.auth", () => {
-		// 	const content = {
-		// 		credits: {
-		// 			by: [
-		// 				{
-		// 					type: "author",
-		// 					name: "Sara Carothers",
-		// 					description: "description",
-		// 					image: {
-		// 						url: "test.jpg",
-		// 					},
-		// 					additional_properties: {
-		// 						original: {
-		// 							_id: "saracarothers",
-		// 							byline: "Sara Lynn Carothers",
-		// 							bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
-		// 							ansImage: {
-		// 								url: "ans-test.jpg",
-		// 								auth: { 2: "ansAuth123" },
-		// 							},
-		// 						},
-		// 					},
-		// 				},
-		// 			],
-		// 		},
-		// 	};
-		// 	render(<AuthorBioItems content={content} />);
-		//
-		// 	const image = screen.getByRole("img", { name: "Sara Carothers" });
-		// 	expect(image?.src).toBe(
-		// 		"http://url.com/ans-test.jpg?smart=true&auth=ansAuth123&width=100&height=100",
-		// 	);
-		// });
+		it("should extract imageAuth from author.image.auth", () => {
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {
+								url: "test.jpg",
+								auth: { 2: "auth123" },
+							},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			const image = screen.getByRole("img", { name: "Sara Carothers" });
+			expect(image?.src).toBe(
+				"http://url.com/test.jpg?smart=true&auth=auth123&width=100&height=100",
+			);
+		});
+
+		it("should extract imageAuth from author.additional_properties.original.ansImage.auth", () => {
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {
+								url: "test.jpg",
+							},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+									ansImage: {
+										url: "ans-test.jpg",
+										auth: { 2: "ansAuth123" },
+									},
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			const image = screen.getByRole("img", { name: "Sara Carothers" });
+			expect(image?.src).toBe(
+				"http://url.com/ans-test.jpg?smart=true&auth=ansAuth123&width=100&height=100",
+			);
+		});
 
 		it("should prioritize author.image.auth over additional_properties.original.ansImage.auth", () => {
 			const content = {

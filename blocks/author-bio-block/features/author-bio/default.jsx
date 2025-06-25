@@ -109,25 +109,27 @@ const AuthorItem = ({ author }) => {
 		};
 		console.log(" resizedAuth has hash property: updatedAnsImage", updatedAnsImage);
 	} else if (resizedAuth && Object.keys(resizedAuth).length > 0) {
-		// Case 2: resizedAuth exists but has no hash — fallback to originalAnsImage if it has auth and url
+		// Case 2: resizedAuth exists but has no hash — fallback logic using available auth + url
 		// Could come from imageAuth directly
 		// e.g., resizedAuth = { 2: "token" }
-		if (originalAnsImage?.auth && originalAnsImage?.url) {
-			updatedAnsImage = {
-				...originalAnsImage,
-				auth: resizedAuth
-			};
-			console.log("enter second block")
-		} else {
-			// Case 3: resizedAuth exists but originalAnsImage is not usable — fallback to ansImage with resizedAuth
+		// Could have multiple versions of tokens
+		// e.g., resizedAuth = { 1: "token1", 2: "token" }
+		// Prefer ansImage if it has both auth and url, otherwise fallback to originalAnsImage
+
+		if (ansImage?.auth && ansImage?.url) {
 			updatedAnsImage = {
 				...ansImage,
-				auth: resizedAuth
+				auth: resizedAuth,
 			};
-			console.log("enter third block")
+			console.log("enter block (ansImage)");
+		} else if (originalAnsImage?.auth && originalAnsImage?.url) {
+			updatedAnsImage = {
+				...originalAnsImage,
+				auth: resizedAuth,
+			};
+			console.log("enter block (originalAnsImage)");
 		}
 	}
-
 
 	console.log("updatedAnsImageNew", updatedAnsImage);
 

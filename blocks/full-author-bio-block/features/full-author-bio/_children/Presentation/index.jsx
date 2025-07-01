@@ -34,7 +34,7 @@ const socialIcons = {
 
 const BLOCK_CLASS_NAME = "b-full-author-bio";
 
-const AuthorImage = ({ image, altText = "" }) => {
+const AuthorImage = ({ image, altText = "", imageUrl }) => {
 	if (image?.auth) {
 		return (
 			<MediaItem>
@@ -55,6 +55,9 @@ const AuthorImage = ({ image, altText = "" }) => {
 				<Image alt={altText} src={image} width={180} />
 			</MediaItem>
 		);
+	}
+	if (imageUrl) {
+		return <Image alt={altText} src={imageUrl} width={100} />;
 	}
 	return null;
 };

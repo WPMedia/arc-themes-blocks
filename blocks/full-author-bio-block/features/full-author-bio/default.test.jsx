@@ -1,16 +1,21 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import {render, screen} from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 
 import FullAuthorBio from "./default";
+import {isServerSide} from "@wpmedia/arc-themes-components";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
 	LazyLoad: ({ children }) => children,
+}));
+
+jest.mock("fusion:content", () => ({
+	useContent: jest.fn(),
 }));
 
 const authors = [
@@ -38,13 +43,14 @@ describe("Full author bio block", () => {
 			message === "No auth token provided for resizer"
 				? null
 				: // eslint-disable-next-line no-console
-					console.warn("Error Thrown:", message),
+				console.warn("Error Thrown:", message),
 		);
 	});
 
 	afterEach(() => {
 		// eslint-disable-next-line no-console
 		console.error.mockRestore();
+		jest.clearAllMocks();
 	});
 
 	describe("lazy load and isAdmin", () => {
@@ -132,4 +138,139 @@ describe("Full author bio block", () => {
 			expect(container).toBeEmptyDOMElement();
 		});
 	});
+
+
+	describe("Image handling logic", () => {
+		beforeEach(() => {
+			getProperties.mockImplementation(() => ({
+				resizerURL: "http://url.com",
+			}));
+			const { isServerSide } = require("@wpmedia/arc-themes-components");
+			isServerSide.mockReturnValue(false);
+		});
+
+		afterEach(() => {
+			jest.clearAllMocks(); // resets mocks between tests
+		});
+
+		it("should extract imageAuth from globalContent.authors[0].ansImage", () => {
+			const authorsWithAuth = [
+				{
+					_id: "Test",
+					byline: "Test User",
+					ansImage: {
+						url: "https://author-service-images-sandbox-us-east-1.publishing.aws.arc.pub/themesinternal/test.png",
+						auth: { "2": "abc123" },
+					},
+				},
+			];
+
+			useFusionContext.mockImplementation(() => ({
+				globalContent: { authors: authorsWithAuth },
+				isAdmin: true,
+			}));
+
+			render(<FullAuthorBio customFields={{ lazyLoad: false }} />);
+			const image = screen.getByRole("img", { name: "Test User" });
+
+			expect(image).toBeInTheDocument();
+			expect(image).toHaveAttribute("src");
+			expect(image.getAttribute("src")).toContain("abc123");
+			expect(image.getAttribute("src")).toContain("http://url.com");
+		});
+
+		it("should extract imageAuth from globalContent.credits.by[0].image.auth", () => {
+			const authorsWithCredits = {
+				credits: {
+					by: [
+						{
+							name: "Tariq Alshwaiki",
+							image: {
+								url: "https://author-service-images-sandbox-us-east-1.publishing.aws.arc.pub/themesinternal/94ef7a64.png",
+								auth: { "2": "abc456" },
+							},
+							additional_properties: {
+								original: {
+									byline: "Tariq Alshwaiki",
+									ansImage: {
+										url: "https://author-service-images-sandbox-us-east-1.publishing.aws.arc.pub/themesinternal/94ef7a64.png",
+										auth: { "2": "abc456" },
+									},
+								},
+							},
+						},
+					],
+				},
+			};
+
+			const { isServerSide } = require("@wpmedia/arc-themes-components");
+			isServerSide.mockReturnValue(false);
+
+			useFusionContext.mockImplementation(() => ({
+				globalContent: authorsWithCredits,
+				isAdmin: true,
+			}));
+
+			getProperties.mockImplementation(() => ({
+				resizerURL: "http://url.com",
+			}));
+
+			render(<FullAuthorBio customFields={{ lazyLoad: false }} />);
+			const image = screen.getByRole("img", { name: "Tariq Alshwaiki" });
+
+			expect(image).toHaveAttribute("src");
+			expect(image.getAttribute("src")).toContain("abc456");
+			expect(image.getAttribute("src")).toContain("http://url.com");
+		});
+
+		it("should call useContent with signing-service when imageAuth is not available from credits", () => {
+			const authorsWithCreditsNoAuth = {
+				credits: {
+					by: [
+						{
+							name: "Tariq Alshwaiki",
+							image: {
+								url: "https://author-service-images-sandbox-us-east-1.publishing.aws.arc.pub/themesinternal/94ef7a64.png",
+							},
+							additional_properties: {
+								original: {
+									byline: "Tariq Alshwaiki",
+									image: "https://author-service-images-sandbox-us-east-1.publishing.aws.arc.pub/themesinternal/94ef7a64.png"
+								},
+							},
+						},
+					],
+				},
+			};
+
+			const { isServerSide } = require("@wpmedia/arc-themes-components");
+			isServerSide.mockReturnValue(false);
+
+			const { useContent } = require("fusion:content");
+			useContent.mockReturnValue({ hash: "signed123" });
+
+			useFusionContext.mockImplementation(() => ({
+				globalContent: authorsWithCreditsNoAuth,
+				isAdmin: true,
+			}));
+
+			getProperties.mockImplementation(() => ({
+				resizerURL: "http://url.com",
+			}));
+
+			render(<FullAuthorBio customFields={{ lazyLoad: false }} />);
+
+			expect(useContent).toHaveBeenCalledWith({
+				source: "signing-service",
+				query: {
+					id: "https://author-service-images-sandbox-us-east-1.publishing.aws.arc.pub/themesinternal/94ef7a64.png",
+				},
+			});
+
+			const image = screen.getByRole("img", { name: "Tariq Alshwaiki" });
+			expect(image).toBeInTheDocument();
+			expect(image.getAttribute("src")).toContain("signed123");
+		});
+	});
+
 });

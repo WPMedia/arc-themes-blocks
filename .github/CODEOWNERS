@@ -5,3 +5,4 @@
 # example via https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners#codeowners-syntax
 # * @global-owner1 @global-owner2
 * @WPMedia/arc-pagebuilder-themes
+* @WPMedia/devxp

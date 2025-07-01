@@ -2,6 +2,7 @@ import React from "react";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import { Stack, Link, Separator, usePhrases } from "@wpmedia/arc-themes-components";
+import { ensureTrailingSlash } from "../../nav-helper";
 
 const NavLinksBar = ({
 	hierarchy,
@@ -60,7 +61,7 @@ const NavLinksBar = ({
 					{item.node_type === "link" ? (
 						<Link href={item.url}>{item.display_name}</Link>
 					) : (
-						<Link href={item._id}>{item.name}</Link>
+						<Link href={ensureTrailingSlash(item._id)}>{item.name}</Link>
 					)}
 				</span>
 			))}

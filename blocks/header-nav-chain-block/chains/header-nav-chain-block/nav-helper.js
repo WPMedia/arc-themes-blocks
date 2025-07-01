@@ -118,3 +118,5 @@ export const hasUserConfiguredNavItems = (customFields) => {
 	});
 	return userHasConfigured;
 };
+
+export const ensureTrailingSlash = (string) => string.endsWith("/") ? string : `${string}/`;

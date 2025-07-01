@@ -15,9 +15,7 @@ const FullAuthorBio = ({ customFields = {} }) => {
 	const { globalContent, isAdmin } = useFusionContext();
 
 	const isLazyLoad = customFields.lazyLoad && !isAdmin;
-	if (isLazyLoad && isServerSide()) {
-		return null;
-	}
+
 
 	const currentAuthor = firstTruthyValue(
 		globalContent?.authors?.[0],
@@ -55,6 +53,10 @@ const FullAuthorBio = ({ customFields = {} }) => {
 				query: { id: rawImageUrl },
 			}
 	) || {};
+
+	if (isLazyLoad && isServerSide()) {
+		return null;
+	}
 
 	if (imageAuth) {
 		resizedAuth = imageAuth;

@@ -6,7 +6,6 @@ import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 
 import FullAuthorBio from "./default";
-import {isServerSide} from "@wpmedia/arc-themes-components";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),

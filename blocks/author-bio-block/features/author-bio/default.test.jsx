@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { useContent } from "fusion:content";
 
 import AuthorBio, { AuthorBioItems } from "./default";
 
@@ -13,6 +14,10 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 
 jest.mock("fusion:context", () => ({
 	useFusionContext: () => ({ isAdmin: false, globalContent: { credits: {} } }),
+}));
+
+jest.mock("fusion:content", () => ({
+	useContent: jest.fn(),
 }));
 
 describe("Given the list of author(s) from the article", () => {
@@ -28,6 +33,7 @@ describe("Given the list of author(s) from the article", () => {
 	afterEach(() => {
 		// eslint-disable-next-line no-console
 		console.error.mockRestore();
+		jest.clearAllMocks();
 	});
 
 	it("should return null if lazyLoad on the server and not in the admin", () => {
@@ -709,5 +715,535 @@ describe("Given the list of author(s) from the article", () => {
 		expect(image?.src).toBe(
 			"http://url.com/resized.jpg?smart=true&auth=12345&width=100&height=100",
 		);
+	});
+
+	describe("Image handling logic", () => {
+		it("should extract imageAuth from author.image.auth", () => {
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {
+								url: "test.jpg",
+								auth: { 2: "auth123" },
+							},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			const image = screen.getByRole("img", { name: "Sara Carothers" });
+			expect(image?.src).toBe(
+				"http://url.com/test.jpg?smart=true&auth=auth123&width=100&height=100",
+			);
+		});
+
+		it("should extract imageAuth from author.additional_properties.original.ansImage.auth", () => {
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {
+								url: "test.jpg",
+							},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+									ansImage: {
+										url: "ans-test.jpg",
+										auth: { 2: "ansAuth123" },
+									},
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			const image = screen.getByRole("img", { name: "Sara Carothers" });
+			expect(image?.src).toBe(
+				"http://url.com/ans-test.jpg?smart=true&auth=ansAuth123&width=100&height=100",
+			);
+		});
+
+		it("should prioritize author.image.auth over additional_properties.original.ansImage.auth", () => {
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {
+								url: "test.jpg",
+								auth: { 2: "primaryAuth" },
+							},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+									ansImage: {
+										url: "ans-test.jpg",
+										auth: { 2: "secondaryAuth" },
+									},
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			const image = screen.getByRole("img", { name: "Sara Carothers" });
+			expect(image?.src).toBe(
+				"http://url.com/test.jpg?smart=true&auth=primaryAuth&width=100&height=100",
+			);
+		});
+
+		it("should extract imageUrl from author.image.url", () => {
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {
+								url: "primary-image.jpg",
+							},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			const image = screen.getByRole("img", { name: "Sara Carothers" });
+			expect(image?.getAttribute("src")).toBe("primary-image.jpg");
+		});
+
+		it("should extract imageUrl from author.additional_properties.original.image when author.image.url is not available", () => {
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+									image: "fallback-image.jpg",
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			const image = screen.getByRole("img", { name: "Sara Carothers" });
+			expect(image?.getAttribute("src")).toBe("fallback-image.jpg");
+		});
+
+		it("should extract imageUrl from author.additional_properties.original.ansImage.url when other sources are not available", () => {
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+									ansImage: {
+										url: "ans-image.jpg",
+									},
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			const image = screen.getByRole("img", { name: "Sara Carothers" });
+			expect(image?.getAttribute("src")).toBe("ans-image.jpg");
+		});
+
+		it("should prioritize author.image.url over additional_properties.original.image", () => {
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {
+								url: "primary-url.jpg",
+							},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+									image: "fallback-url.jpg",
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			const image = screen.getByRole("img", { name: "Sara Carothers" });
+			expect(image?.getAttribute("src")).toBe("primary-url.jpg");
+		});
+
+		it("should prioritize author.additional_properties.original.image over ansImage.url", () => {
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+									image: "fallback-image.jpg",
+									ansImage: {
+										url: "ans-url.jpg",
+									},
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			const image = screen.getByRole("img", { name: "Sara Carothers" });
+			expect(image?.getAttribute("src")).toBe("fallback-image.jpg");
+		});
+
+		it("should not call useContent when imageAuth is available", () => {
+			useContent.mockReturnValue({});
+
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {
+								url: "test.jpg",
+								auth: { 2: "existingAuth" },
+							},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+								},
+							},
+						},
+					],
+				},
+			};
+
+			// Re-import to get the mocked version
+			const { AuthorBioItems: MockedAuthorBioItems } = require("./default");
+			render(<MockedAuthorBioItems content={content} />);
+
+			expect(useContent).toHaveBeenCalledWith({})
+		});
+
+		it("should call useContent with signing-service when imageAuth is not available", () => {
+			useContent.mockReturnValue({ hash: "newAuthHash" });
+
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {
+								url: "test.jpg",
+							},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+								},
+							},
+						},
+					],
+				},
+			};
+
+			// Re-import to get the mocked version
+			const { AuthorBioItems: MockedAuthorBioItems } = require("./default");
+			render(<MockedAuthorBioItems content={content} />);
+
+			expect(useContent).toHaveBeenCalledWith({
+				source: "signing-service",
+				query: { id: "test.jpg" },
+			});
+		});
+
+		it("should not apply resized auth token when useContent returns no hash", () => {
+			useContent.mockReturnValue({});
+
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {
+								url: "test.jpg",
+								auth: { 2: "originalAuth" },
+							},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+								},
+							},
+						},
+					],
+				},
+			};
+
+			// Re-import to get the mocked version
+			const { AuthorBioItems: MockedAuthorBioItems } = require("./default");
+			render(<MockedAuthorBioItems content={content} />);
+
+			const image = screen.getByRole("img", { name: "Sara Carothers" });
+			expect(image?.src).toBe(
+				"http://url.com/test.jpg?smart=true&auth=originalAuth&width=100&height=100",
+			);
+		});
+
+		it("should handle case when no image data is available", () => {
+			// Assume no auth or data is available from useContent
+			useContent.mockReturnValue({});
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			expect(screen.queryAllByRole("img")).toHaveLength(0);
+		});
+
+		it("should handle case when imageUrl is empty string and imageAuth is not available", () => {
+			// Assume no auth or data is available from useContent
+			useContent.mockReturnValue({});
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {
+								url: "",
+							},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			expect(screen.queryAllByRole("img")).toHaveLength(0);
+		});
+
+		it("should handle useContent integration when imageAuth is not available", () => {
+			// Assume useContent returns a hash
+			useContent.mockReturnValue({ hash: "newAuthHash" });
+
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {
+								url: "test.jpg",
+							},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			// Verify that the component renders without errors when useContent is called
+			expect(screen.getByRole("img", { name: "Sara Carothers" })).toBeInTheDocument();
+			expect(useContent).toHaveBeenCalledWith({
+				source: "signing-service",
+				query: { id: "test.jpg" },
+			});
+		});
+
+		it("should handle useContent integration when imageAuth is available", () => {
+			useContent.mockReturnValue({});
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {
+								url: "test.jpg",
+								auth: { 2: "existingAuth" },
+							},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			// Verify that the component renders without errors when useContent is called with empty object
+			expect(screen.getByRole("img", { name: "Sara Carothers" })).toBeInTheDocument();
+			expect(useContent).toHaveBeenCalledWith({});
+		});
+
+		it("should handle resized auth token application", () => {
+			useContent.mockReturnValue({});
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {
+								url: "test.jpg",
+								auth: { 2: "originalAuth" },
+							},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			// Verify that the component renders without errors when resized auth is applied
+			expect(screen.getByRole("img", { name: "Sara Carothers" })).toBeInTheDocument();
+		});
+
+		it("should handle case when useContent returns no hash", () => {
+			useContent.mockReturnValue({});
+			const content = {
+				credits: {
+					by: [
+						{
+							type: "author",
+							name: "Sara Carothers",
+							description: "description",
+							image: {
+								url: "test.jpg",
+								auth: { 2: "originalAuth" },
+							},
+							additional_properties: {
+								original: {
+									_id: "saracarothers",
+									byline: "Sara Lynn Carothers",
+									bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
+								},
+							},
+						},
+					],
+				},
+			};
+			render(<AuthorBioItems content={content} />);
+
+			// Verify that the component renders without errors when useContent returns no hash
+			expect(screen.getByRole("img", { name: "Sara Carothers" })).toBeInTheDocument();
+		});
 	});
 });

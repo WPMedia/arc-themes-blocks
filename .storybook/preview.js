@@ -8,7 +8,7 @@ const parameters = {
 		options: {},
 		manual: false,
 	},
-	chromatic: { delay: 500 },
+	chromatic: { delay: 0 },
 	backgrounds: {
 		default: "white",
 		values: [

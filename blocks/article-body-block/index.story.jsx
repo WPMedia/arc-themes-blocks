@@ -239,7 +239,7 @@ const mockOEmbed = {
 		author_name: "The Washington Post",
 		author_url: "https://twitter.com/washingtonpost",
 		cache_age: "3153600000",
-		html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Sassy, salty preserved lemons belong in your pantry.<br><br>Here’s how to use them. <a href="https://t.co/g96lwAQWDT">https://t.co/g96lwAQWDT</a></p>&mdash; The Washington Post (@washingtonpost) <a href="https://twitter.com/washingtonpost/status/1150785932213346304?ref_src=twsrc%5Etfw">July 15, 2019</a></blockquote>\n<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>\n',
+		html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Sassy, salty preserved lemons belong in your pantry.<br><br>Here’s how to use them. <a href="https://t.co/g96lwAQWDT">https://t.co/g96lwAQWDT</a></p>&mdash; The Washington Post (@washingtonpost) <a href="https://twitter.com/washingtonpost/status/1150785932213346304?ref_src=twsrc%5Etfw">July 15, 2019</a></blockquote>\n',
 		provider_name: "Twitter",
 		provider_url: "https://twitter.com",
 		type: "twitter",

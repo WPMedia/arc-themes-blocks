@@ -3,7 +3,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext, useAppContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { RESIZER_TOKEN_VERSION } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION, ENVIRONMENT } from "fusion:environment";
 import {
 	Button,
 	Carousel,
@@ -48,7 +48,7 @@ export const GalleryPresentation = ({
 		AdBlock = () => <p>Ad block not found</p>;
 	}
 
-	const { galleryCubeClicks, resizerURL } = getProperties(arcSite);
+	const { galleryCubeClicks, resizerURL, resizerURLs } = getProperties(arcSite);
 	const phrases = usePhrases();
 	const content = useContent(
 		galleryContentConfig
@@ -58,6 +58,8 @@ export const GalleryPresentation = ({
 			  }
 			: {}
 	);
+
+	const resizerURLtoUse = resizerURLs ? resizerURLs[ENVIRONMENT] : resizerURL;
 
 	const showGlobalContent =
 		typeof inheritGlobalContent === "undefined"
@@ -146,7 +148,7 @@ export const GalleryPresentation = ({
 						<div className={`${BLOCK_CLASS_NAME}__image-wrapper`}>
 							<Image
 								src={imageANSToImageSrc(galleryItem)}
-								resizerURL={resizerURL}
+								resizerURL={resizerURLtoUse}
 								resizedOptions={{ auth: galleryItem.auth[resizerAppVersion] }}
 								loading={itemIndex === 0 ? "eager" : "lazy"}
 								// 16:9 aspect ratio

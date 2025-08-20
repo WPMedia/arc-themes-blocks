@@ -8,6 +8,7 @@ on:
     branches-ignore:
       - "dependabot/**"
       - "lokalise*"
+  pull_request:
 
 # List of jobs
 jobs:

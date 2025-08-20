@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, Stack, Button, Icon, usePhrases } from "@wpmedia/arc-themes-components";
+import { ensureTrailingSlash } from "../nav-helper";
 
 function hasChildren(node) {
 	return node.children && node.children.length > 0;
@@ -9,7 +10,7 @@ const SectionAnchor = ({ item, isHidden }) =>
 	item.node_type === "link" ? (
 		<Link href={item.url} assistiveHidden={isHidden}>{item.display_name}</Link>
 	) : (
-		<Link href={item._id} assistiveHidden={isHidden}>{item.name}</Link>
+		<Link href={ensureTrailingSlash(item._id)} assistiveHidden={isHidden}>{item.name}</Link>
 	);
 
 const onClickSubsection = (evt) => {
@@ -116,7 +117,7 @@ const SubSectionMenu = ({ items, isOpen, id, isHidden, blockClassName }) => {
 					{item.display_name}
 				</Link>
 			) : (
-				<Link href={item._id} assistiveHidden={isHidden}>
+				<Link href={ensureTrailingSlash(item._id)} assistiveHidden={isHidden}>
 					{item.name}
 				</Link>
 			)}

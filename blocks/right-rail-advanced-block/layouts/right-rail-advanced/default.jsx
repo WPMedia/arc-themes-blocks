@@ -38,7 +38,7 @@ const RightRailAdvancedLayout = ({ children }) => {
 			<Stack as="header" className={`${LAYOUT_CLASS_NAME}__navigation`}>
 				{navigation}
 			</Stack>
-			<section role="main" tabIndex="-1" className={`${LAYOUT_CLASS_NAME}__main`}>
+			<section role="main" id="main" tabIndex="-1" className={`${LAYOUT_CLASS_NAME}__main`}>
 				<Stack className={`${LAYOUT_CLASS_NAME}__full-width-1`}>{fullwidth1}</Stack>
 				<Grid className={`${LAYOUT_CLASS_NAME}__rail-container `}>
 					<Stack

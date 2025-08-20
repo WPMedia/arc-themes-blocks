@@ -60,6 +60,8 @@ export const GalleryPresentation = ({
 			: {}
 	);
 
+	console.log('resizerURLs', resizerURLs);
+	console.log('environment', ENVIRONMENT);
 	const resizerURLtoUse = resizerURLs ? resizerURLs[ENVIRONMENT] : resizerURL;
 
 	const showGlobalContent =

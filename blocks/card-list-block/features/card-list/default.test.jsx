@@ -23,7 +23,7 @@ jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({
 		id: "",
 		arcSite: "the-sun",
-		deployment: jest.fn(() => {}),
+		pagebuilderURL: jest.fn(() => {}),
 	})),
 }));
 
@@ -45,7 +45,7 @@ describe("Card list", () => {
 		useFusionContext.mockReturnValueOnce({
 			id: "",
 			arcSite: "the-sun",
-			deployment: jest.fn(() => {}),
+			pagebuilderURL: jest.fn(() => {}),
 		});
 
 		const { container } = render(<CardList customFields={customFields} />);
@@ -133,7 +133,7 @@ describe("Card list", () => {
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
 				arcSite: "the-mercury",
-				deployment: jest.fn(() => {}),
+				pagebuilderURL: jest.fn(() => {}),
 			})),
 		}));
 		useContent.mockReturnValueOnce(oneListItem);

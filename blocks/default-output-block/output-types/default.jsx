@@ -78,7 +78,7 @@ const fontUrlLink = (fontUrl) => {
 const SampleOutputType = ({
 	children,
 	contextPath,
-	deployment,
+	pagebuilderURL,
 	CssLinks,
 	Fusion,
 	Libs,
@@ -164,7 +164,7 @@ const SampleOutputType = ({
 				<link
 					rel="icon"
 					type="image/x-icon"
-					href={deployment(`${contextPath}/resources/favicon.ico`)}
+					href={pagebuilderURL(`${contextPath}/resources/favicon.ico`)}
 				/>
 				<MetaData
 					arcSite={arcSite}

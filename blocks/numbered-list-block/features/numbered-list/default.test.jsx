@@ -49,7 +49,7 @@ describe("The numbered-list-block", () => {
 		useFusionContext.mockReturnValue({
 			arcSite: "the-sun",
 			contextPath: "pf",
-			deployment: jest.fn((x) => x),
+			pagebuilderURL: jest.fn((x) => x),
 			isAdmin: false,
 		});
 	});
@@ -78,7 +78,7 @@ describe("The numbered-list-block", () => {
 
 			useFusionContext.mockReturnValue({
 				arcSite: "the-sun",
-				deployment: jest.fn((x) => x),
+				pagebuilderURL: jest.fn((x) => x),
 				isAdmin: true,
 			});
 
@@ -172,7 +172,7 @@ describe("The numbered-list-block", () => {
 
 			useFusionContext.mockReturnValue({
 				arcSite: "dagen",
-				deployment: jest.fn(() => {}),
+				pagebuilderURL: jest.fn(() => {}),
 			});
 
 			const { unmount } = render(<NumberedList customFields={customFields} />);

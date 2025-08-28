@@ -114,7 +114,7 @@ describe("The simple-list-block", () => {
 		useFusionContext.mockReturnValue({
 			arcSite: "the-sun",
 			contextPath: "pf",
-			deployment: jest.fn((x) => x),
+			pagebuilderURL: jest.fn((x) => x),
 			isAdmin: false,
 		});
 	});
@@ -143,7 +143,7 @@ describe("The simple-list-block", () => {
 
 			useFusionContext.mockReturnValue({
 				arcSite: "the-sun",
-				deployment: jest.fn((x) => x),
+				pagebuilderURL: jest.fn((x) => x),
 				isAdmin: true,
 			});
 
@@ -233,7 +233,7 @@ describe("The simple-list-block", () => {
 
 			useFusionContext.mockReturnValue({
 				arcSite: "the-sun",
-				deployment: jest.fn(() => {}),
+				pagebuilderURL: jest.fn(() => {}),
 			});
 
 			const { unmount } = render(<SimpleList customFields={customFields} />);

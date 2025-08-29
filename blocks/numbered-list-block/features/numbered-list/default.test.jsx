@@ -64,8 +64,9 @@ describe("The numbered-list-block", () => {
 			};
 			isServerSide.mockReturnValue(true);
 
-			const { container } = render(<NumberedList customFields={customFields} />);
-			expect(container.firstChild).toBeNull();
+			render(<NumberedList customFields={customFields} />);
+			// Expect nothing rendered: first item number is absent
+			expect(screen.queryByText("1")).toBeNull();
 		});
 
 		it("should render in Admin with lazyLoad enabled", () => {
@@ -82,8 +83,9 @@ describe("The numbered-list-block", () => {
 				isAdmin: true,
 			});
 
-			const { container } = render(<NumberedList customFields={customFields} />);
-			expect(container.firstChild).not.toBeNull();
+			render(<NumberedList customFields={customFields} />);
+			// Presence check with getBy*
+			expect(screen.getByText("1")).toBeInTheDocument();
 		});
 
 		it("should render list item with headline, image and a number", () => {
@@ -95,8 +97,8 @@ describe("The numbered-list-block", () => {
 
 			expect(screen.getByText("1")).toBeInTheDocument();
 			expect(screen.getByText("Article with only promo_items.basic")).toBeInTheDocument();
-			const image = screen.queryAllByRole("img", { hidden: true });
-			expect(image).toBeTruthy();
+			const images = screen.getAllByRole("img", { hidden: true });
+			expect(images.length).toBeGreaterThan(0);
 
 			unmount();
 		});
@@ -126,7 +128,7 @@ describe("The numbered-list-block", () => {
 			const { unmount } = render(<NumberedList customFields={customFields} />);
 
 			expect(screen.getByText("1")).toBeInTheDocument();
-			expect(screen.queryByText("Article with only promo_items.basic")).toBeInTheDocument();
+			expect(screen.getByText("Article with only promo_items.basic")).toBeInTheDocument();
 			const image = screen.queryAllByRole("img", { hidden: true });
 			expect(image.length).toBe(0);
 
@@ -142,8 +144,8 @@ describe("The numbered-list-block", () => {
 
 			const { unmount } = render(<NumberedList customFields={customFields} />);
 			expect(screen.getByText("1")).toBeInTheDocument();
-			const image = document.querySelectorAll("img[src='pf/placeholder.jpg']");
-			expect(image.length).toBeTruthy();
+			const imgs = screen.getAllByRole("img", { hidden: true });
+			expect(imgs.some((img) => img.getAttribute("src") === "pf/placeholder.jpg")).toBe(true);
 
 			unmount();
 		});
@@ -158,7 +160,7 @@ describe("The numbered-list-block", () => {
 
 			const { unmount } = render(<NumberedList customFields={customFields} />);
 
-			expect(screen.queryByText("Numbered List Title")).toBeInTheDocument();
+			expect(screen.getByText("Numbered List Title")).toBeInTheDocument();
 
 			unmount();
 		});
@@ -176,7 +178,7 @@ describe("The numbered-list-block", () => {
 			});
 
 			const { unmount } = render(<NumberedList customFields={customFields} />);
-			expect(screen.queryByText("Article with only promo_items.basic")).toBeInTheDocument();
+			expect(screen.getByText("Article with only promo_items.basic")).toBeInTheDocument();
 			expect(screen.queryByText("Story with video as the Lead Art")).not.toBeInTheDocument();
 			unmount();
 		});

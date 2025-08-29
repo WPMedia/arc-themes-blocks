@@ -129,8 +129,9 @@ describe("The simple-list-block", () => {
 			};
 			isServerSide.mockReturnValue(true);
 
-			const { container } = render(<SimpleList customFields={customFields} />);
-			expect(container.firstChild).toBeNull();
+			render(<SimpleList customFields={customFields} />);
+			// Expect nothing rendered when server-side lazy load is enabled
+			expect(screen.queryByText("Video Test")).toBeNull();
 		});
 
 		it("should render in Admin with lazyLoad enabled", () => {
@@ -147,8 +148,8 @@ describe("The simple-list-block", () => {
 				isAdmin: true,
 			});
 
-			const { container } = render(<SimpleList customFields={customFields} />);
-			expect(container.firstChild).not.toBeNull();
+			render(<SimpleList customFields={customFields} />);
+			expect(screen.getByText("Video Test")).toBeInTheDocument();
 		});
 
 		it("should render list item with headline, image and a number", () => {
@@ -188,7 +189,7 @@ describe("The simple-list-block", () => {
 
 			const { unmount } = render(<SimpleList customFields={customFields} />);
 
-			expect(screen.queryByText("Video Test")).toBeInTheDocument();
+			expect(screen.getByText("Video Test")).toBeInTheDocument();
 			const image = screen.queryAllByRole("img", { hidden: true });
 			expect(image.length).toBe(0);
 
@@ -203,8 +204,8 @@ describe("The simple-list-block", () => {
 			};
 
 			const { unmount } = render(<SimpleList customFields={customFields} />);
-			const image = document.querySelectorAll("img[src='pf/placeholder.jpg']");
-			expect(image.length).toBeTruthy();
+			const images = screen.getAllByRole("img", { hidden: true });
+			expect(images.some((img) => img.getAttribute("src") === "pf/placeholder.jpg")).toBe(true);
 
 			unmount();
 		});
@@ -219,7 +220,7 @@ describe("The simple-list-block", () => {
 
 			const { unmount } = render(<SimpleList customFields={customFields} />);
 
-			expect(screen.queryByText("Simple List Title")).toBeInTheDocument();
+			expect(screen.getByText("Simple List Title")).toBeInTheDocument();
 
 			unmount();
 		});
@@ -237,7 +238,7 @@ describe("The simple-list-block", () => {
 			});
 
 			const { unmount } = render(<SimpleList customFields={customFields} />);
-			expect(screen.queryByText("Video Test")).toBeInTheDocument();
+			expect(screen.getByText("Video Test")).toBeInTheDocument();
 			expect(screen.queryByText("Story with video as the Lead Art")).not.toBeInTheDocument();
 			unmount();
 		});

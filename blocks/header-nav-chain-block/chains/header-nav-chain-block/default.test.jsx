@@ -19,7 +19,7 @@ jest.mock("fusion:properties", () => jest.fn(() => ({})));
 jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({
 		contextPath: "pf",
-		deployment: jest.fn(() => ({})).mockReturnValue("path/image.svg"),
+		pagebuilderURL: jest.fn(() => ({})).mockReturnValue("path/image.svg"),
 	})),
 }));
 
@@ -313,14 +313,14 @@ describe("the header navigation feature for the default output type", () => {
 	});
 
 	describe("primary image", () => {
-		it("shown without deployment function prefix if external http url", () => {
+		it("shown without pagebuilderURL function prefix if external http url", () => {
 			jest.useFakeTimers();
 			getProperties.mockReturnValueOnce({
 				primaryLogo: "http://www.example.com/logo.png",
 			});
 			useFusionContext.mockReturnValueOnce({
 				contextPath: "pf",
-				deployment: jest.fn(() => ({})).mockReturnValue("rendered-from-deployment"),
+				pagebuilderURL: jest.fn(() => ({})).mockReturnValue("rendered-from-pagebuilderURL"),
 			});
 
 			render(<Navigation customFields={DEFAULT_SELECTIONS} />);
@@ -339,7 +339,7 @@ describe("the header navigation feature for the default output type", () => {
 			});
 			useFusionContext.mockReturnValueOnce({
 				contextPath: "pf",
-				deployment: jest.fn(() => ({})).mockReturnValue("rendered-from-deployment"),
+				pagebuilderURL: jest.fn(() => ({})).mockReturnValue("rendered-from-pagebuilderURL"),
 			});
 			render(<Navigation customFields={DEFAULT_SELECTIONS} />);
 			act(() => {
@@ -347,17 +347,17 @@ describe("the header navigation feature for the default output type", () => {
 			});
 			const navLogoImg = screen.getByRole("img")
 			expect(navLogoImg).not.toBeNull();
-			expect(navLogoImg.getAttribute("src")).toEqual("rendered-from-deployment");
+			expect(navLogoImg.getAttribute("src")).toEqual("rendered-from-pagebuilderURL");
 		});
 
-		it("shows image with deployment function used with base64", () => {
+		it("shows image with pagebuilderURL function used with base64", () => {
 			jest.useFakeTimers();
 			getProperties.mockReturnValueOnce({
 				primaryLogo: "base64, iVBORw0KGgoAAAANSUhEUgAAAAUA",
 			});
 			useFusionContext.mockReturnValueOnce({
 				contextPath: "pf",
-				deployment: jest.fn(() => ({})).mockReturnValue("rendered-from-deployment"),
+				pagebuilderURL: jest.fn(() => ({})).mockReturnValue("rendered-from-pagebuilderURL"),
 			});
 			render(<Navigation customFields={DEFAULT_SELECTIONS} />);
 			act(() => {

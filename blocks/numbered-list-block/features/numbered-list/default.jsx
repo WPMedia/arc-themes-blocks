@@ -20,11 +20,11 @@ import {
 
 const BLOCK_CLASS_NAME = "b-numbered-list";
 
-const getFallbackImageURL = ({ deployment, contextPath, fallbackImage }) => {
+const getFallbackImageURL = ({ pagebuilderURL, contextPath, fallbackImage }) => {
 	let targetFallbackImage = fallbackImage;
 
 	if (!targetFallbackImage.includes("http")) {
-		targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
+		targetFallbackImage = pagebuilderURL(`${contextPath}/${targetFallbackImage}`);
 	}
 
 	return targetFallbackImage;
@@ -155,11 +155,11 @@ const NumberedList = (props) => {
 };
 
 const NumberedListWrapper = ({ customFields }) => {
-	const { id, arcSite, contextPath, deployment, isAdmin } = useFusionContext();
+	const { id, arcSite, contextPath, pagebuilderURL, isAdmin } = useFusionContext();
 	const { websiteDomain, fallbackImage } = getProperties(arcSite);
 
 	const targetFallbackImage = getFallbackImageURL({
-		deployment,
+		pagebuilderURL,
 		contextPath,
 		fallbackImage,
 	});

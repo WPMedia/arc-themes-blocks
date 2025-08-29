@@ -22,7 +22,7 @@ import {
 const BLOCK_CLASS_NAME = "b-footer";
 
 const FooterItem = ({ customFields: { navigationConfig } }) => {
-	const { arcSite, deployment, contextPath } = useFusionContext();
+	const { arcSite, pagebuilderURL, contextPath } = useFusionContext();
 	const {
 		facebookPage,
 		twitterUsername,
@@ -38,7 +38,7 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 	// Check if URL is absolute/base64
 	let logoUrl = lightBackgroundLogo || primaryLogo;
 	if (logoUrl && !(logoUrl.indexOf("http") === 0 || logoUrl.indexOf("base64") === 0))
-		logoUrl = deployment(`${contextPath}/${logoUrl}`);
+		logoUrl = pagebuilderURL(`${contextPath}/${logoUrl}`);
 
 	const content = useContent({
 		source: navigationConfig.contentService,

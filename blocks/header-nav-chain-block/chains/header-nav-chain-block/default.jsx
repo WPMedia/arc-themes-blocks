@@ -185,7 +185,7 @@ export function PresentationalNav(props) {
 /* Main Component */
 const Nav = (props) => {
 	const [isScrolled, setIsScrolled] = useState(false);
-	const { arcSite, isAdmin, deployment, contextPath } = useFusionContext();
+	const { arcSite, isAdmin, pagebuilderURL, contextPath } = useFusionContext();
 
 	const { primaryLogo, primaryLogoAlt } = getProperties(arcSite);
 
@@ -194,7 +194,7 @@ const Nav = (props) => {
 		primaryLogo &&
 		(primaryLogo.indexOf("http") === 0 || primaryLogo.indexOf("base64") === 0
 			? primaryLogo
-			: deployment(`${contextPath}/${primaryLogo}`));
+			: pagebuilderURL(`${contextPath}/${primaryLogo}`));
 
 	const phrases = usePhrases();
 

@@ -9,14 +9,14 @@ import { resolveDefaultPromoElements } from "./results/helpers";
 import Results from "./results";
 
 const ResultsList = ({ customFields }) => {
-	const { arcSite, contextPath, deployment, isAdmin } = useFusionContext();
+	const { arcSite, contextPath, pagebuilderURL, isAdmin } = useFusionContext();
 	const {
 		lazyLoad,
 		listContentConfig: { contentService, contentConfigValues },
 	} = customFields;
 	const { fallbackImage } = getProperties(arcSite);
 	const targetFallbackImage = !fallbackImage.includes("http")
-		? deployment(`${contextPath}/${fallbackImage}`)
+		? pagebuilderURL(`${contextPath}/${fallbackImage}`)
 		: fallbackImage;
 	const promoElements = resolveDefaultPromoElements(customFields);
 	const isServerSideLazy = lazyLoad && isServerSide() && !isAdmin;

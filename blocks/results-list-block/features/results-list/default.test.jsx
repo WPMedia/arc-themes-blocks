@@ -42,7 +42,7 @@ describe("Results List", () => {
 		useFusionContext.mockReturnValue({
 			arcSite: "the-sun",
 			contextPath: "/pf",
-			deployment: jest.fn((path) => path),
+			pagebuilderURL: jest.fn((path) => path),
 			isAdmin: false,
 		});
 		const customFields = {
@@ -65,7 +65,7 @@ describe("Results List", () => {
 		useFusionContext.mockReturnValue({
 			arcSite: "the-sun",
 			contextPath: "/pf",
-			deployment: jest.fn((path) => path),
+			pagebuilderURL: jest.fn((path) => path),
 			isAdmin: false,
 		});
 		const customFields = {
@@ -92,7 +92,7 @@ describe("getFallbackImageURL", () => {
 		useFusionContext.mockReturnValue({
 			arcSite: "the-sun",
 			contextPath: "/pf",
-			deployment: mockDeployment,
+			pagebuilderURL: mockDeployment,
 			isAdmin: false,
 		});
 
@@ -168,7 +168,7 @@ describe("isServerSideLazy flag", () => {
 		useFusionContext.mockReturnValue({
 			arcSite: "the-sun",
 			contextPath: "/pf",
-			deployment: jest.fn(),
+			pagebuilderURL: jest.fn(),
 			isAdmin: true,
 		});
 
@@ -188,7 +188,7 @@ describe("isServerSideLazy flag", () => {
 		useFusionContext.mockReturnValue({
 			arcSite: "the-sun",
 			contextPath: "/pf",
-			deployment: jest.fn((path) => path),
+			pagebuilderURL: jest.fn((path) => path),
 			isAdmin: false,
 		});
 

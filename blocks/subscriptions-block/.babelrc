@@ -1,0 +1,13 @@
+{
+	"files": ["blocks/subscriptions-block/**/*.{js,jsx}"],
+	"parser": "@babel/eslint-parser",
+	"parserOptions": {
+		"requireConfigFile": true,
+		// absolute or relative path from repo root:
+		"babelOptions": {
+			// You can inline presets OR rely on the .babelrc present in that folder.
+			// If relying on the .babelrc, still include something minimal here so the parser initializes:
+			"presets": ["@babel/preset-react"]
+		}
+	}
+}

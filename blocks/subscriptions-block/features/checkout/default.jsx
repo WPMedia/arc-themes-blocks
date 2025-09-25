@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import PropTypes from "@arc-fusion/prop-types";
 import {
@@ -38,6 +38,9 @@ const Checkout = ({ customFields }) => {
 
 	const { Sales } = useSales();
 	const { Identity } = useIdentity();
+	// track component mounted state to avoid setState on unmounted component (prevents jest open handles)
+	const isUnmountedRef = useRef(false);
+	useEffect(() => () => { isUnmountedRef.current = true; }, []);
 	const phrases = usePhrases();
 
 	const {
@@ -74,26 +77,22 @@ const Checkout = ({ customFields }) => {
 	const checkoutURL = window.location.href;
 
 	useEffect(() => {
-		let isActive = true;
-
-		if (!isFetching && isLoggedIn) {
-			Identity.getUserProfile()
-				.then((userProfile) => {
-					if (isActive) {
+		let active = true;
+		(async () => {
+			if (!isFetching && isLoggedIn) {
+				try {
+					const userProfile = await Identity.getUserProfile();
+					if (active && !isUnmountedRef.current) {
 						setUser(userProfile);
 						setIsOpen((state) => ({ ...state, account: false, billingAddress: true }));
 						setIsComplete((state) => ({ ...state, account: true }));
 					}
-				})
-				.catch(() => {
-					setUser(false);
-				});
-		}
-
-		return () => {
-			isActive = false;
-			return null;
-		};
+				} catch (e) {
+					if (!isUnmountedRef.current) setUser(false);
+				}
+			}
+		})();
+		return () => { active = false; };
 	}, [Identity, isLoggedIn, isFetching]);
 
 	useEffect(() => {
@@ -130,10 +129,12 @@ const Checkout = ({ customFields }) => {
 		}
 	}, [errorPaypal]);
 
-	const logoutAndRedirect = () => {
-		Identity.logout().then(() => {
+	const logoutAndRedirect = async () => {
+		try {
+			await Identity.logout();
+		} finally {
 			window.location.href = `${loginURL}?redirect=${checkoutURL}`;
-		});
+		}
 	};
 
 	const editButton = (type) => {
@@ -147,18 +148,19 @@ const Checkout = ({ customFields }) => {
 		if (type === BILLING_ADDRESS) {
 			return (
 				<Button
-					onClick={async() => {
-						Identity.isLoggedIn();
-						Sales.clearCart().then(() => {
-							const items = order?.items?.map((item) => {
-								const { sku, priceCode, quantity } = item;
-								return { sku, priceCode, quantity };
-							});
-							Sales.addItemToCart(items).then(()=>{
+					onClick={async () => {
+						try {
+							await Identity.isLoggedIn();
+							await Sales.clearCart();
+							const items = order?.items?.map(({ sku, priceCode, quantity }) => ({ sku, priceCode, quantity })) || [];
+							if (items.length) await Sales.addItemToCart(items);
+							if (!isUnmountedRef.current) {
 								setIsOpen((state) => ({ ...state, billingAddress: true, payment: false }));
 								setIsComplete((state) => ({ ...state, billingAddress: false, payment: false }));
-							});
-						})
+							}
+						} catch (e) {
+							// swallow errors for edit interaction; could log
+						}
 					}}
 					className={`${BLOCK_CLASS_NAME}__card-edit`}
 				>

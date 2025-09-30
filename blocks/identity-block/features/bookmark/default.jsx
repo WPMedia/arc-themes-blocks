@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Icon } from "@wpmedia/arc-themes-components";
 import { useIdentity } from "@wpmedia/arc-themes-components";
 import { useFusionContext } from "fusion:context";
+import AudienceInsights from '@arcxp/sdk-audience-insights';
 
 function Bookmark() {
 
     const [loggedIn, setLoggedIn] = useState(false);
-    const [jwtToken, setJwtToken] = useState(null);
+    // const [jwtToken, setJwtToken] = useState(null);
 
     const { isAdmin } = useFusionContext();
     const { Identity } = useIdentity();
@@ -23,7 +24,15 @@ function Bookmark() {
     console.log(" ANS ID:", ansId);
 
     useEffect(() => {
-    const checkLoggedInStatus = async () => {
+    if (Identity) {
+    AudienceInsights._Identity = Identity;
+    AudienceInsights.apiOrigin = Identity.apiOrigin; // or your actual API origin string
+  }    
+  
+  console.log("Identity.apiOrigin" + Identity.apiOrigin)
+  console.log("AudienceInsights.apiOrigin" + AudienceInsights.apiOrigin)
+
+    const getInitalBookmarkStatus = async () => {
     try { 
       const isLoggedIn = await Identity.isLoggedIn();
       if (!isLoggedIn) {
@@ -32,42 +41,23 @@ function Bookmark() {
       }
       setLoggedIn(true);
     
-      const token =
-        JSON.parse(localStorage.getItem("ArcId.USER_INFO") || "{}").accessToken || null;
 
-      console.log("JWT Token:", token);
-      setJwtToken(token);
+      const res = await AudienceInsights.listBookmarks();
+      console.log("Bookmarks response:", res);
 
-      if (!token) {      
-        setBookmarked(false);
-        return;
-      }
+      if (res.statusCode !== 200) throw new Error(`Failed to check if already bookmarked.`); 
 
-      const res = await fetch(
-        `${Identity.apiOrigin}/identity/public/v2/extprofile/readlater`,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${token}`, 
-          },
-        }
-      );
-
-      if (!res.ok) throw new Error(`GET failed ${res.status}`); 
-
-      const data = await res.json();
       setBookmarked(
-        Array.isArray(data) && data.some((item) => item?.ansId === ansId) 
+        Array.isArray(res.items) && res.items.some((item) => item?.ansId === ansId)
       );
     } catch (err) {
-      console.error("Auth or initial bookmarks load failed:", err); 
-      setBookmarked(false); 
+      console.error("Initial bookmarks load failed:", err);
+      setBookmarked(false);
     }
   };
 
   if (Identity && !isAdmin) { 
-    checkLoggedInStatus();
+    getInitalBookmarkStatus();
   }
     }, [Identity, isAdmin, redirectURL, ansId]);
 
@@ -82,24 +72,14 @@ function Bookmark() {
 
         try {
             if (next) {
-                const res = await fetch(`${Identity.apiOrigin}/identity/public/v2/extprofile/readlater`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${jwtToken}`,
-                    },
-                    body: JSON.stringify({ ansId }),
-                });
-                if (!res.ok) throw new Error(`POST failed ${res.status}`);
+                const res = await AudienceInsights.addBookmark(ansId);
+                console.log("res", res);
+                if (res.statusCode !== 202) throw new Error(`POST failed ${res.statusCode}`);
                 console.log("Bookmark added");
             } else {
-                const res = await fetch(`${Identity.apiOrigin}/identity/public/v2/extprofile/readlater/${encodeURIComponent(ansId)}`, {
-                    method: "DELETE",
-                    headers: {
-                        "Authorization": `Bearer ${jwtToken}`,
-                    },
-                });
-                if (!res.ok && res.status !== 404) throw new Error(`DELETE failed ${res.status}`);
+                const res = await AudienceInsights.deleteBookmark(ansId);
+                console.log("res", res);
+                if (res.statusCode !== 202) throw new Error(`DELETE failed ${res.statusCode}`);
                 console.log("Bookmark removed");
             }
         } catch (err) {

@@ -116,7 +116,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		}
 
 		case "interstitial_link": {
-			const { url } = item;
+			const { url, additional_properties: { openInNewTab = false } = {} } = item;
 			// link string will have to be truthy (non-zero length string) to render below
 			if (!(url && content)) return null;
 			const beforeContent = "[&nbsp;";
@@ -129,6 +129,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 				>
 					<span dangerouslySetInnerHTML={{ __html: beforeContent }} />
 					<Link
+						openInNewTab={openInNewTab}
 						href={url}
 						aria-label={phrases.t("article-body-block.interstitial-link-aria-label")}
 					>
@@ -381,7 +382,7 @@ export const ArticleBodyChainPresentation = ({ children, customFields = {}, cont
 						null, // id not used by text type
 						{} // customFields only used in video
 					),
-			  ]
+				]
 			: []),
 	];
 

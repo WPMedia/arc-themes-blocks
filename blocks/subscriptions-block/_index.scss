@@ -264,6 +264,12 @@
 
 		@include scss.block-components("checkout-review");
 		@include scss.block-properties("checkout-review");
+		.c-button[aria-disabled="true"] {
+			cursor: not-allowed !important;
+		}
+		.c-button[aria-disabled="false"] {
+			cursor: pointer !important;
+		}
 	}
 
 	@include scss.block-components("checkout");

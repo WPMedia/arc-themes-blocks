@@ -262,14 +262,19 @@
 			@include scss.block-properties("checkout-payment-paypal-button");
 		}
 
-		@include scss.block-components("checkout-review");
-		@include scss.block-properties("checkout-review");
-		.c-button[aria-disabled="true"] {
+         // stylelint-disable-next-line plugin/no-unsupported-browser-features
+        .c-button[aria-disabled="true"] {
 			cursor: not-allowed !important;
 		}
+
+         // stylelint-disable-next-line plugin/no-unsupported-browser-features
 		.c-button[aria-disabled="false"] {
 			cursor: pointer !important;
 		}
+
+		@include scss.block-components("checkout-review");
+		@include scss.block-properties("checkout-review");
+
 	}
 
 	@include scss.block-components("checkout");

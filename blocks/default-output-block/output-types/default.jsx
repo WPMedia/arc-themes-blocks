@@ -5,22 +5,23 @@ import { MetaData, Stack, usePhrases } from "@wpmedia/arc-themes-components";
 
 import blocks from "~/blocks.json";
 
-const querylyCode = (querylyId, querylyOrg, pageType) => {
+const querylyCode = (querylyId) => {
 	if (!querylyId) {
 		return null;
 	}
-	return (
-		<Fragment key="querylySearch">
-			<script defer data-integration="queryly" src="https://www.queryly.com/js/queryly.v4.min.js" />
-			{pageType === "queryly-search" ? (
-				<script
-					defer
-					data-integration="queryly"
-					src={`https://www.queryly.com/js/${querylyOrg}-advanced-search.js`}
-				/>
-			) : null}
-		</Fragment>
-	);
+	// return (
+	// 	<Fragment key="querylySearch">
+	// 		<script defer data-integration="queryly" src="https://www.queryly.com/js/queryly.v4.min.js" />
+	// 		{pageType === "queryly-search" ? (
+	// 			<script
+	// 				defer
+	// 				data-integration="queryly"
+	// 				src={`https://www.queryly.com/js/${querylyOrg}-advanced-search.js`}
+	// 			/>
+	// 		) : null}
+	// 	</Fragment>
+	// );
+	return null;
 };
 
 const comscoreNoScript = (accountId) => {

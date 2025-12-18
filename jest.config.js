@@ -17,6 +17,7 @@ module.exports = {
 	},
 	// projects: ["<rootDir>/blocks/*/jest.config.js"],
 	testEnvironment: "<rootDir>/jest/custom-test-environment.js",
+	setupFilesAfterEnv: ["<rootDir>/jest/testSetupFile.js"],
 	transform: {
 		"\\.[jt]sx?$": "babel-jest",
 	},

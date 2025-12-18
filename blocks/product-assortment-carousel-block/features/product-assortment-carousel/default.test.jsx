@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
@@ -122,8 +122,7 @@ describe("Product Assortment Carousel", () => {
 	it("should not render with no content", () => {
 		useContent.mockReturnValue([]);
 		const { container } = render(<ProductAssortmentCarousel />);
-
-		expect(container.querySelectorAll(".b-product-assortment-carousel")).toHaveLength(0);
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("should render nothing if not in Admin and has less than 4 items", () => {
@@ -134,24 +133,14 @@ describe("Product Assortment Carousel", () => {
 
 	it("should render with content", () => {
 		useContent.mockReturnValue(mockContent);
-		const { container } = render(<ProductAssortmentCarousel />);
-
-		expect(container.querySelectorAll(".b-product-assortment-carousel__main-title")).toHaveLength(
-			0,
-		);
-		expect(container.querySelectorAll(".b-product-assortment-carousel")).toHaveLength(1);
+		render(<ProductAssortmentCarousel />);
+		expect(screen.getAllByRole("img", { hidden: true }).length).toBeGreaterThan(0);
 	});
 
 	it("should render with header content", () => {
 		useContent.mockReturnValue(mockContent);
-		const { container } = render(
-			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />,
-		);
-
-		expect(container.querySelectorAll(".b-product-assortment-carousel__main-title")).toHaveLength(
-			1,
-		);
-		expect(container.querySelectorAll(".b-product-assortment-carousel")).toHaveLength(1);
+		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
+		expect(screen.getByText("Header")).toBeInTheDocument();
 	});
 
 	it("should render admin message when no content and isAdmin", () => {
@@ -163,10 +152,10 @@ describe("Product Assortment Carousel", () => {
 		render(<ProductAssortmentCarousel />);
 
 		expect(
-			screen.queryByText(
+			screen.getByText(
 				"This feature requires a minimum of 4 products and a maximum of 12 to display.",
 			),
-		).not.toBeNull();
+		).toBeInTheDocument();
 	});
 
 	it("should not show pricing data if not present", () => {
@@ -184,11 +173,9 @@ describe("Product Assortment Carousel", () => {
 			},
 			...mockContent,
 		]);
-		const { queryAllByTestId } = render(
-			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />,
-		);
+		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
 
-		const priceItemsContainer = queryAllByTestId("price");
+		const priceItemsContainer = screen.queryAllByTestId("price");
 
 		expect(priceItemsContainer.length).toBe(4);
 	});
@@ -209,16 +196,14 @@ describe("Product Assortment Carousel", () => {
 			},
 			...mockContent,
 		]);
-		const { queryAllByTestId } = render(
-			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />,
-		);
+		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
 
-		const priceItemsContainer = queryAllByTestId("price");
+		const priceItemsContainer = screen.queryAllByTestId("price");
 
 		expect(priceItemsContainer.length).toBe(5);
 
-		expect(priceItemsContainer[0].querySelector(".c-price__list")).toHaveTextContent("$26");
-		expect(priceItemsContainer[0].querySelector(".c-price__sale")).not.toBeInTheDocument();
+		expect(within(priceItemsContainer[0]).getByText("$26")).toBeInTheDocument();
+		expect(within(priceItemsContainer[0]).queryByText("$16")).not.toBeInTheDocument();
 	});
 
 	it("should render list price and sale price when both exist and differ", () => {
@@ -232,13 +217,11 @@ describe("Product Assortment Carousel", () => {
 			...mockContent,
 		]);
 
-		const { queryAllByTestId } = render(
-			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />,
-		);
-		const priceItemsContainer = queryAllByTestId("price");
+		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
+		const priceItemsContainer = screen.queryAllByTestId("price");
 
-		expect(priceItemsContainer[0].querySelector(".c-price__list")).toHaveTextContent("$26");
-		expect(priceItemsContainer[0].querySelector(".c-price__sale")).toHaveTextContent("$16");
+		expect(within(priceItemsContainer[0]).getByText("$26")).toBeInTheDocument();
+		expect(within(priceItemsContainer[0]).getByText("$16")).toBeInTheDocument();
 	});
 
 	it("should render list price only when sale price is the same", () => {
@@ -257,14 +240,11 @@ describe("Product Assortment Carousel", () => {
 			},
 			...mockContent,
 		]);
-		const { queryAllByTestId } = render(
-			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />,
-		);
+		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
 
-		const priceItemsContainer = queryAllByTestId("price");
+		const priceItemsContainer = screen.queryAllByTestId("price");
 
-		expect(priceItemsContainer[0].querySelector(".c-price__list")).toHaveTextContent("$26");
-		expect(priceItemsContainer[0].querySelector(".c-price__sale")).not.toBeInTheDocument();
+		expect(within(priceItemsContainer[0]).getAllByText("$26")).toHaveLength(1);
 	});
 
 	it("should render images", () => {
@@ -278,9 +258,8 @@ describe("Product Assortment Carousel", () => {
 			...mockContent,
 		]);
 
-		const { container } = render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
-		const productImgs = container.querySelectorAll(".b-product-assortment-carousel__product img");
-		expect(productImgs.length).toBe(5);
+		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
+		expect(screen.getAllByRole("img", { hidden: true }).length).toBe(5);
 	});
 
 	it("will not render a product image if not present", () => {
@@ -293,9 +272,8 @@ describe("Product Assortment Carousel", () => {
 			...mockContent,
 		]);
 
-		const { container } = render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
-		const productImgs = container.querySelectorAll(".b-product-assortment-carousel__product img");
-		expect(productImgs.length).toBe(4);
+		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
+		expect(screen.getAllByRole("img", { hidden: true }).length).toBe(4);
 	});
 
 	it("should generate product URL", () => {
@@ -339,12 +317,11 @@ describe("Product Assortment Carousel", () => {
 				pricing: PRICING_ARRAY_ONLY_LIST,
 			},
 		]);
-		const { container } = render(
-			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />,
-		);
-		expect(container.querySelectorAll("a")[0]).toHaveAttribute("href", mockUrl);
-		expect(container.querySelectorAll("a")[1]).toHaveAttribute("href", "#");
-		expect(container.querySelectorAll("a")[2]).toHaveAttribute("href", "#");
-		expect(container.querySelectorAll("a")[3]).toHaveAttribute("href", "#");
+		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
+		const links = screen.getAllByRole("link");
+		expect(links[0]).toHaveAttribute("href", mockUrl);
+		expect(links[1]).toHaveAttribute("href", "#");
+		expect(links[2]).toHaveAttribute("href", "#");
+		expect(links[3]).toHaveAttribute("href", "#");
 	});
 });

@@ -33,22 +33,23 @@ describe("Thumbnail Bar", () => {
 	});
 
 	it("navigates up and down images using buttons", () => {
-		const { container } = render(
+		render(
 			<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={() => true} />,
 		);
 
 		expect(screen.queryAllByRole("presentation", { hidden: true })).toHaveLength(1);
 		expect(screen.queryAllByRole("button")).toHaveLength(2);
 
-		expect(
-			container
-				.querySelector(".b-product-gallery__focus-view-thumbnail-image--selected")
-				.getAttribute("src")
-				.includes(mockData[1]._id),
-		).toBeTruthy();
+		expect(screen.getByRole("presentation", { hidden: true })).toHaveAttribute(
+			"src",
+			expect.stringContaining(mockData[1]._id),
+		);
 
 		fireEvent.click(screen.getByRole("button", { name: "product-gallery.focus-thumbnail-next" }));
-		expect(screen.queryByRole("presentation", { hidden: true }).getAttribute("src").includes(mockData[2]._id)).toBeTruthy();
+		expect(screen.getByRole("presentation", { hidden: true })).toHaveAttribute(
+			"src",
+			expect.stringContaining(mockData[2]._id),
+		);
 
 		fireEvent.click(
 			screen.getByRole("button", { name: "product-gallery.focus-thumbnail-previous" }),

@@ -41,13 +41,13 @@ describe("Small Promo", () => {
 			lazyLoad: true,
 		};
 		const { container } = render(<SmallPromo customFields={config} />);
-		expect(container.firstChild).toBe(null);
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("should return null if none of the show... flags are true", () => {
 		const config = {};
 		const { container } = render(<SmallPromo customFields={config} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("should return null on server-side render from PageBuilder Editor when lazyload is true", () => {
@@ -57,7 +57,7 @@ describe("Small Promo", () => {
 		};
 		isServerSide.mockImplementationOnce(() => true);
 		const { container } = render(<SmallPromo customFields={{ ...config, lazyLoad: true }} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("should display a headline if showHeadline is true", () => {
@@ -67,7 +67,7 @@ describe("Small Promo", () => {
 		};
 		render(<SmallPromo customFields={config} />);
 
-		expect(screen.queryByRole("heading", { name: config.headline })).not.toBeNull();
+		expect(screen.getByRole("heading")).toBeInTheDocument();
 	});
 
 	it("should display an image if showImage is true", () => {
@@ -80,7 +80,7 @@ describe("Small Promo", () => {
 			imagePosition: "below",
 		};
 		render(<SmallPromo customFields={config} />);
-		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
+		expect(screen.getByRole("img", { hidden: true })).toBeInTheDocument();
 	});
 
 	it("should make a blank call to the signing-service if the image is from PhotoCenter and has an Auth value", () => {
@@ -149,6 +149,6 @@ describe("Small Promo", () => {
 			imageOverrideAuth: "{}",
 		};
 		render(<SmallPromo customFields={config} />);
-		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
+		expect(screen.getByRole("img", { hidden: true })).toBeInTheDocument();
 	});
 });

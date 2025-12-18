@@ -1,5 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import { useContent } from "fusion:content";
 import { isServerSide } from "@wpmedia/arc-themes-components";
 

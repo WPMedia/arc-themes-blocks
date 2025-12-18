@@ -49,7 +49,7 @@ describe("Hero", () => {
 	});
 
 	it("should not render button links", () => {
-		const { container } = render(
+		render(
 			<Hero
 				customFields={{
 					imageURL: "image",
@@ -69,7 +69,7 @@ describe("Hero", () => {
 	});
 
 	it("should render 1 link", () => {
-		const { container } = render(
+		render(
 			<Hero
 				customFields={{
 					imageURL: "image",
@@ -86,7 +86,7 @@ describe("Hero", () => {
 	});
 
 	it("should render 2 links with secondary style", () => {
-		const { container } = render(
+		render(
 			<Hero
 				customFields={{
 					imageURL: "image",
@@ -110,7 +110,7 @@ describe("Hero", () => {
 	});
 
 	it("should render overlay layout by default", () => {
-		const { container } = render(
+		render(
 			<Hero
 				customFields={{
 					imageURL: "image",
@@ -131,7 +131,7 @@ describe("Hero", () => {
 	});
 
 	it("should render stacked layout when specified", () => {
-		const { container } = render(
+		render(
 			<Hero
 				customFields={{
 					layout: "stacked",
@@ -153,7 +153,7 @@ describe("Hero", () => {
 	});
 
 	it("should render center alignment layout by default", () => {
-		const { container } = render(
+		render(
 			<Hero
 				customFields={{
 					imageURL: "image",
@@ -174,7 +174,7 @@ describe("Hero", () => {
 	});
 
 	it("should render left alignment layout when specified", () => {
-		const { container } = render(
+		render(
 			<Hero
 				customFields={{
 					alignment: "left",
@@ -196,7 +196,7 @@ describe("Hero", () => {
 	});
 
 	it("should render light variant when specified", () => {
-		const { container } = render(
+		render(
 			<Hero
 				customFields={{
 					alignment: "left",
@@ -220,7 +220,7 @@ describe("Hero", () => {
 
 	it("should set correct alt text for the image", () => {
 		jest.spyOn(fusionContent, "useContent").mockImplementation(() => ({}));
-		const { container } = render(
+		render(
 			<Hero
 				customFields={{
 					alignment: "left",

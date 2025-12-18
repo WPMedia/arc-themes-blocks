@@ -82,7 +82,7 @@ describe("Product Featured Image", () => {
 			},
 		}));
 		render(<ProductFeaturedImage />);
-		const image = screen.getByRole("img");
+		const image = screen.getByRole("presentation", { hidden: true });
 		expect(image).toBeInTheDocument();
 		expect(image).toHaveAttribute("alt", "");
 	});

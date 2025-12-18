@@ -51,17 +51,15 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
   ...jest.requireActual("@wpmedia/arc-themes-components"),
   useSales: () => ({
     Sales: {
-      getAllSubscriptions: jest.fn(() => mockSubs),
-      getSubscriptionDetails: jest.fn(() => mockSub)
+      getAllSubscriptions: jest.fn(async () => mockSubs),
+      getSubscriptionDetails: jest.fn(async () => mockSub)
     }
   }),
   useIdentity: () => ({Identity: {
-    isLoggedIn: jest.fn(() => true)
+    isLoggedIn: jest.fn(async () => true)
   }}),
   Icon: () => <i />
 }));
-
-jest.mock("@wpmedia/arc-themes-components")
 
 jest.mock("fusion:properties", () => jest.fn(() => ({ api: { retail: { origin: "" } } })));
 

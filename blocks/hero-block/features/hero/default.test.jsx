@@ -34,7 +34,7 @@ describe("Hero", () => {
 				}}
 			/>,
 		);
-		expect(screen.getByRole("img")).toBeInTheDocument();
+		expect(screen.getByRole("presentation", { hidden: true })).toBeInTheDocument();
 		expect(screen.queryByText("My Headline")).toBeInTheDocument();
 		expect(screen.queryByText("My Sub Headline")).toBeInTheDocument();
 		expect(screen.queryByText("My description")).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe("Hero", () => {
 
 	it("should not render headline, subheadline or paragraph", () => {
 		render(<Hero customFields={{ imageURL: "image" }} />);
-		expect(screen.getByRole("img")).toBeInTheDocument();
+		expect(screen.getByRole("presentation", { hidden: true })).toBeInTheDocument();
 		expect(screen.queryByText("My Headline")).not.toBeInTheDocument();
 		expect(screen.queryByText("My Sub Headline")).not.toBeInTheDocument();
 		expect(screen.queryByText("My description")).not.toBeInTheDocument();

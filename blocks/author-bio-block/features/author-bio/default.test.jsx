@@ -568,7 +568,8 @@ describe("Given the list of author(s) from the article", () => {
 		};
 		render(<AuthorBioItems content={content} />);
 
-		expect(screen.getByRole("img", { name: "" })).not.toBeNull();
+		// alt text is empty, so the image maps to role=presentation
+		expect(screen.getByRole("presentation", { hidden: true })).not.toBeNull();
 	});
 
 	it("it should show email link with malito email", () => {
@@ -711,7 +712,8 @@ describe("Given the list of author(s) from the article", () => {
 		};
 		render(<AuthorBioItems content={content} />);
 
-		const image = screen.getByRole("img", { name: "" });
+		// alt text empty results in role=presentation
+		const image = screen.getByRole("presentation", { hidden: true });
 		expect(image?.src).toBe(
 			"http://url.com/resized.jpg?smart=true&auth=12345&width=100&height=100",
 		);
@@ -987,11 +989,10 @@ describe("Given the list of author(s) from the article", () => {
 				},
 			};
 
-			// Re-import to get the mocked version
-			const { AuthorBioItems: MockedAuthorBioItems } = require("./default");
-			render(<MockedAuthorBioItems content={content} />);
+			render(<AuthorBioItems content={content} />);
 
-			expect(useContent).toHaveBeenCalledWith({})
+			// Implementation calls useContent with an empty object when auth exists
+			expect(useContent).toHaveBeenCalledWith({});
 		});
 
 		it("should call useContent with signing-service when imageAuth is not available", () => {
@@ -1019,9 +1020,7 @@ describe("Given the list of author(s) from the article", () => {
 				},
 			};
 
-			// Re-import to get the mocked version
-			const { AuthorBioItems: MockedAuthorBioItems } = require("./default");
-			render(<MockedAuthorBioItems content={content} />);
+			render(<AuthorBioItems content={content} />);
 
 			expect(useContent).toHaveBeenCalledWith({
 				source: "signing-service",

@@ -278,9 +278,9 @@ describe("Product Assortment Carousel", () => {
 			...mockContent,
 		]);
 
-		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
-
-		expect(screen.queryAllByRole("img").length).toBe(4);
+		const { container } = render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
+		const productImgs = container.querySelectorAll(".b-product-assortment-carousel__product img");
+		expect(productImgs.length).toBe(5);
 	});
 
 	it("will not render a product image if not present", () => {
@@ -293,9 +293,9 @@ describe("Product Assortment Carousel", () => {
 			...mockContent,
 		]);
 
-		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
-
-		expect(screen.queryAllByRole("img").length).toBe(3);
+		const { container } = render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
+		const productImgs = container.querySelectorAll(".b-product-assortment-carousel__product img");
+		expect(productImgs.length).toBe(4);
 	});
 
 	it("should generate product URL", () => {

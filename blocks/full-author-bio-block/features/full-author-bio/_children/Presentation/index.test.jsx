@@ -64,7 +64,8 @@ describe("Full Author Bio Block", () => {
 
 	it("should render the photo without byline as blank alt text", () => {
 		render(<Presentation author={{ _id, image }} />);
-		expect(screen.getByRole("img", { name: "" })).not.toBeNull();
+		// Empty alt results in role=presentation
+		expect(screen.getByRole("presentation", { hidden: true })).not.toBeNull();
 	});
 
 	it("should render the resized photo if resizer information is available", () => {

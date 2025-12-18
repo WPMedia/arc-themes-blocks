@@ -204,7 +204,10 @@ describe("The simple-list-block", () => {
 			};
 
 			const { unmount } = render(<SimpleList customFields={customFields} />);
-			const images = screen.getAllByRole("img", { hidden: true });
+			const images = [
+				...screen.queryAllByRole("img", { hidden: true }),
+				...screen.queryAllByRole("presentation", { hidden: true }),
+			];
 			expect(images.some((img) => img.getAttribute("src") === "pf/placeholder.jpg")).toBe(true);
 
 			unmount();

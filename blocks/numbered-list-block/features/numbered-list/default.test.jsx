@@ -97,7 +97,7 @@ describe("The numbered-list-block", () => {
 
 			expect(screen.getByText("1")).toBeInTheDocument();
 			expect(screen.getByText("Article with only promo_items.basic")).toBeInTheDocument();
-			const images = screen.getAllByRole("img", { hidden: true });
+			const images = document.querySelectorAll("img");
 			expect(images.length).toBeGreaterThan(0);
 
 			unmount();
@@ -144,8 +144,8 @@ describe("The numbered-list-block", () => {
 
 			const { unmount } = render(<NumberedList customFields={customFields} />);
 			expect(screen.getByText("1")).toBeInTheDocument();
-			const imgs = screen.getAllByRole("img", { hidden: true });
-			expect(imgs.some((img) => img.getAttribute("src") === "pf/placeholder.jpg")).toBe(true);
+			const placeholderImg = document.querySelector('img[src="pf/placeholder.jpg"]');
+			expect(placeholderImg).not.toBeNull();
 
 			unmount();
 		});

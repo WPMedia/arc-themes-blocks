@@ -1,5 +1,4 @@
-import React from "react";
-import { act } from "react-dom/test-utils";
+import React, { act } from "react";
 import "@testing-library/jest-dom";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import getProperties from "fusion:properties";
@@ -81,14 +80,23 @@ describe("the header navigation feature for the default output type", () => {
 				const navComponents = screen.getByTestId("nav-chain-nav-components-desktop-left")
 				expect(within(navComponents).getByTestId("nav-chain-nav-search")).not.toBeNull();
 				expect(within(navComponents).getByTestId("nav-chain-nav-section-button")).not.toBeNull();
-				expect(within(navComponents).getByText("header-nav-chain-block.sections-button")).not.toBeNull();
+				expect(
+					within(navComponents).getByRole("button", {
+						name: "header-nav-chain-block.sections-button",
+					})
+				).not.toBeNull();
 			});
 
 			it("should render sections menu in the top-left navbar on mobile", () => {
 				render(<Navigation customFields={DEFAULT_SELECTIONS} />);
 				const navComponents = screen.getByTestId("nav-chain-nav-components-mobile-left")
 				expect(within(navComponents).getByTestId("nav-chain-nav-section-button")).not.toBeNull();
-				expect(within(navComponents).queryByText("header-nav-chain-block.sections-button")).toBeNull();
+				// Visible label text should not be present on mobile (only visually-hidden span exists)
+				expect(
+					within(navComponents).queryByText("header-nav-chain-block.sections-button", {
+						selector: "span:not(.visually-hidden)",
+					})
+				).toBeNull();
 			});
 
 			it("should render nothing inside the .nav-right on desktop", () => {
@@ -327,7 +335,7 @@ describe("the header navigation feature for the default output type", () => {
 			act(() => {
 				jest.runAllTimers();
 			});
-			const navLogoImg = screen.getByRole("img")
+			const navLogoImg = screen.getByRole("presentation", { hidden: true })
 			expect(navLogoImg).not.toBeNull();
 			expect(navLogoImg.getAttribute("src")).toEqual("http://www.example.com/logo.png");
 		});
@@ -345,7 +353,7 @@ describe("the header navigation feature for the default output type", () => {
 			act(() => {
 				jest.runAllTimers();
 			});
-			const navLogoImg = screen.getByRole("img")
+			const navLogoImg = screen.getByRole("presentation", { hidden: true })
 			expect(navLogoImg).not.toBeNull();
 			expect(navLogoImg.getAttribute("src")).toEqual("rendered-from-pagebuilderURL");
 		});
@@ -363,7 +371,7 @@ describe("the header navigation feature for the default output type", () => {
 			act(() => {
 				jest.runAllTimers();
 			});
-			const navLogoImg = screen.getByRole("img")
+			const navLogoImg = screen.getByRole("presentation", { hidden: true })
 			expect(navLogoImg).not.toBeNull();
 			expect(navLogoImg.getAttribute("src")).toEqual("base64, iVBORw0KGgoAAAANSUhEUgAAAAUA");
 		});

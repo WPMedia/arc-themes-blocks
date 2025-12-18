@@ -333,9 +333,9 @@ describe("article-body chain", () => {
 			const article = screen.queryByRole('article');
 			expect(article).toBeInTheDocument();
 
-			const paragraphElements = screen.queryAllByRole('paragraph', { container: article });
-
-			expect(paragraphElements).toHaveLength(0);
+			// child at placement 1 should render, child at placement 4 should be ignored
+			expect(screen.getByText('1', { container: article })).toBeInTheDocument();
+			expect(screen.queryByText('2', { container: article })).toBeNull();
 		});
 	});
 

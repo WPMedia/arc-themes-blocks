@@ -21,13 +21,13 @@ describe("Product Focus View : Main Image", () => {
 		render(
 			<MainImage image={mockData[0]} loading={isVisible ? "eager" : "lazy"} onVisible={() => 0} />,
 		);
-		expect(screen.queryAllByRole("img")).toHaveLength(1);
+		expect(screen.queryAllByRole("presentation", { hidden: true })).toHaveLength(1);
 	});
 	it("Renders an image.", () => {
 		const isVisible = false;
 		render(
 			<MainImage image={mockData[0]} loading={isVisible ? "eager" : "lazy"} onVisible={() => 0} />,
 		);
-		expect(screen.queryAllByRole("img")).toHaveLength(1);
+		expect(screen.queryAllByRole("presentation", { hidden: true })).toHaveLength(1);
 	});
 });

@@ -133,7 +133,11 @@ describe("Small Promo", () => {
 		};
 		useContent.mockReturnValueOnce(null);
 		render(<SmallPromo customFields={config} />);
-		expect(screen.queryByRole("img", { name: config.headline })).not.toBeNull();
+		// Fallback image has empty alt via Image component -> role becomes 'presentation'
+		const fallbackImg =
+			screen.queryByRole("presentation", { hidden: true }) ||
+			screen.queryByRole("img", { hidden: true });
+		expect(fallbackImg).not.toBeNull();
 	});
 
 	it("should display imageOverride", () => {

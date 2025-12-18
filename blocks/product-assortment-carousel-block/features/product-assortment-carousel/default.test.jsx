@@ -134,7 +134,7 @@ describe("Product Assortment Carousel", () => {
 	it("should render with content", () => {
 		useContent.mockReturnValue(mockContent);
 		render(<ProductAssortmentCarousel />);
-		expect(screen.getAllByRole("img", { hidden: true }).length).toBeGreaterThan(0);
+		expect(screen.getAllByRole("presentation", { hidden: true }).length).toBeGreaterThan(0);
 	});
 
 	it("should render with header content", () => {
@@ -202,8 +202,8 @@ describe("Product Assortment Carousel", () => {
 
 		expect(priceItemsContainer.length).toBe(5);
 
-		expect(within(priceItemsContainer[0]).getByText("$26")).toBeInTheDocument();
-		expect(within(priceItemsContainer[0]).queryByText("$16")).not.toBeInTheDocument();
+		expect(within(priceItemsContainer[0]).getByText("$26.00")).toBeInTheDocument();
+		expect(within(priceItemsContainer[0]).queryByText("$16.00")).not.toBeInTheDocument();
 	});
 
 	it("should render list price and sale price when both exist and differ", () => {
@@ -220,8 +220,8 @@ describe("Product Assortment Carousel", () => {
 		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
 		const priceItemsContainer = screen.queryAllByTestId("price");
 
-		expect(within(priceItemsContainer[0]).getByText("$26")).toBeInTheDocument();
-		expect(within(priceItemsContainer[0]).getByText("$16")).toBeInTheDocument();
+		expect(within(priceItemsContainer[0]).getByText("$26.00")).toBeInTheDocument();
+		expect(within(priceItemsContainer[0]).getByText("$16.00")).toBeInTheDocument();
 	});
 
 	it("should render list price only when sale price is the same", () => {
@@ -244,7 +244,7 @@ describe("Product Assortment Carousel", () => {
 
 		const priceItemsContainer = screen.queryAllByTestId("price");
 
-		expect(within(priceItemsContainer[0]).getAllByText("$26")).toHaveLength(1);
+		expect(within(priceItemsContainer[0]).getAllByText("$26.00")).toHaveLength(1);
 	});
 
 	it("should render images", () => {
@@ -259,7 +259,7 @@ describe("Product Assortment Carousel", () => {
 		]);
 
 		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
-		expect(screen.getAllByRole("img", { hidden: true }).length).toBe(5);
+		expect(screen.getAllByRole("presentation", { hidden: true }).length).toBe(5);
 	});
 
 	it("will not render a product image if not present", () => {
@@ -273,7 +273,7 @@ describe("Product Assortment Carousel", () => {
 		]);
 
 		render(<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />);
-		expect(screen.getAllByRole("img", { hidden: true }).length).toBe(4);
+		expect(screen.getAllByRole("presentation", { hidden: true }).length).toBe(4);
 	});
 
 	it("should generate product URL", () => {

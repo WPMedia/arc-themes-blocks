@@ -173,7 +173,8 @@ describe("Card list", () => {
 
 		it("should render one image", () => {
 			setup();
-			expect(screen.getByRole("img", {hidden: true})).not.toBeNull();
+			// Decorative images map to role="presentation" when alt is empty
+			expect(screen.getByRole("presentation", { hidden: true })).not.toBeNull();
 		});
 
 		it("should render an overline", () => {

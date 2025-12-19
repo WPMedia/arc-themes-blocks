@@ -32,8 +32,8 @@
     "@arc-fusion/prop-types": "^0.1.5",
     "@arc-publishing/sdk-sales": "^1.91.1",
     "@arc-publishing/sdk-identity": "^1.91.1",
-    "@stripe/react-stripe-js": "^2.4.0",
-    "@stripe/stripe-js": "^2.3.0",
+    "@stripe/react-stripe-js": "^5.4.1",
+    "@stripe/stripe-js": "^8.5.3",
     "is-url": "^1.2.4"
   }
 }

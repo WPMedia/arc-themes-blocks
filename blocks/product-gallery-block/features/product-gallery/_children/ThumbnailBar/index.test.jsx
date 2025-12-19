@@ -22,33 +22,34 @@ describe("Thumbnail Bar", () => {
 			window.dispatchEvent(new Event("resize"));
 		});
 
-		expect(screen.queryAllByRole("img")).toHaveLength(1);
+		expect(screen.queryAllByRole("presentation", { hidden: true })).toHaveLength(1);
 		expect(screen.queryAllByRole("button")).toHaveLength(1);
 	});
 
 	it("does not render buttons", () => {
 		render(<ThumbnailBar images={[mockData[0]]} selectedIndex={0} onImageSelect={() => true} />);
-		expect(screen.queryAllByRole("img")).toHaveLength(1);
+		expect(screen.queryAllByRole("presentation", { hidden: true })).toHaveLength(1);
 		expect(screen.queryAllByRole("button")).toHaveLength(0);
 	});
 
 	it("navigates up and down images using buttons", () => {
-		const { container } = render(
+		render(
 			<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={() => true} />,
 		);
 
-		expect(screen.queryAllByRole("img")).toHaveLength(1);
+		expect(screen.queryAllByRole("presentation", { hidden: true })).toHaveLength(1);
 		expect(screen.queryAllByRole("button")).toHaveLength(2);
 
-		expect(
-			container
-				.querySelector(".b-product-gallery__focus-view-thumbnail-image--selected")
-				.getAttribute("src")
-				.includes(mockData[1]._id),
-		).toBeTruthy();
+		expect(screen.getByRole("presentation", { hidden: true })).toHaveAttribute(
+			"src",
+			expect.stringContaining(mockData[1]._id),
+		);
 
 		fireEvent.click(screen.getByRole("button", { name: "product-gallery.focus-thumbnail-next" }));
-		expect(screen.queryByRole("img").getAttribute("src").includes(mockData[2]._id)).toBeTruthy();
+		expect(screen.getByRole("presentation", { hidden: true })).toHaveAttribute(
+			"src",
+			expect.stringContaining(mockData[2]._id),
+		);
 
 		fireEvent.click(
 			screen.getByRole("button", { name: "product-gallery.focus-thumbnail-previous" }),
@@ -59,10 +60,10 @@ describe("Thumbnail Bar", () => {
 		const imageSelectSpy = jest.fn();
 		render(<ThumbnailBar images={mockData} selectedIndex={1} onImageSelect={imageSelectSpy} />);
 
-		expect(screen.queryAllByRole("img")).toHaveLength(1);
+		expect(screen.queryAllByRole("presentation", { hidden: true })).toHaveLength(1);
 		expect(screen.queryAllByRole("button")).toHaveLength(2);
 
-		fireEvent.click(screen.queryAllByRole("img")[0]);
+		fireEvent.click(screen.queryAllByRole("presentation", { hidden: true })[0]);
 		expect(imageSelectSpy).toHaveBeenCalled();
 	});
 });

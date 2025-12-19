@@ -65,11 +65,11 @@
     "@storybook/react": "^8.0.8",
     "@storybook/react-webpack5": "^8.0.8",
     "@storybook/theming": "^8.0.8",
-    "@stripe/react-stripe-js": "^2.3.1",
-    "@stripe/stripe-js": "^2.1.9",
+    "@stripe/react-stripe-js": "^5.4.1",
+    "@stripe/stripe-js": "^8.5.3",
     "@testing-library/jest-dom": "^6.1.4",
-    "@testing-library/react": "^14.0.0",
-    "@wpmedia/arc-themes-components": "arc-themes-release-version-4.0.0",
+    "@testing-library/react": "^16.0.0",
+    "@wpmedia/arc-themes-components": "^0.0.4-arc-themes-release-version-4-0-0.3",
     "algoliasearch": "^4.20.0",
     "babel-jest": "^29.7.0",
     "babel-loader": "^9.1.3",
@@ -100,10 +100,10 @@
     "lint-staged": "^15.0.2",
     "node-fetch": "^3.3.2",
     "prettier": "^3.0.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "react-google-recaptcha": "^3.1.0",
-    "react-google-recaptcha-v3": "1.10.1",
+    "react-google-recaptcha-v3": "1.11.0",
     "react-oembed-container": "^1.0.1",
     "sass": "^1.69.4",
     "sass-loader": "^14.0.0",
@@ -114,7 +114,7 @@
     "stylelint-config-sass-guidelines": "^11.1.0",
     "stylelint-no-unsupported-browser-features": "^8.0.1",
     "stylelint-order": "^6.0.4",
-    "stylelint-use-logical": "^2.1.2xs"
+    "stylelint-use-logical": "^2.1.2"
   },
   "dependencies": {
     "@wpmedia/ad-taboola-block": "file:blocks/ad-taboola-block",
@@ -189,6 +189,10 @@
     "@wpmedia/video-player-block": "file:blocks/video-player-block",
     "focus-trap-react": "^10.2.3",
     "use-debounce": "^10.0.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "overrides": {
     "react-oembed-container": {

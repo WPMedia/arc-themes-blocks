@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import GalleryFeature, { GalleryPresentation } from "./default"; // import feature and presentation
 
 // Capture Image props for assertions
@@ -24,18 +24,21 @@ jest.mock("fusion:environment", () => ({
 	ENVIRONMENT: "sandbox",
 }));
 
+let mockUseContentReturn = {};
 jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => ({})),
+	useContent: jest.fn(() => mockUseContentReturn),
 }));
 
+let mockFusionContext = { arcSite: "site", isAdmin: false };
+let mockAppContext = { globalContent: {} };
 jest.mock("fusion:context", () => ({
-	useAppContext: jest.fn(() => ({ globalContent: {} })),
-	useFusionContext: jest.fn(() => ({ arcSite: "site", isAdmin: false })),
+	useAppContext: jest.fn(() => mockAppContext),
+	useFusionContext: jest.fn(() => mockFusionContext),
 }));
 
 // Mock phrases
-const lazyLoadCalls = [];
-const carouselIds = [];
+const mockLazyLoadCalls = [];
+const mockCarouselIds = [];
 let mockIsServerSide = jest.fn(() => false);
 
 jest.mock("@wpmedia/arc-themes-components", () => {
@@ -48,12 +51,12 @@ jest.mock("@wpmedia/arc-themes-components", () => {
 			return <img alt={alt || "gallery image"} />;
 		},
 		LazyLoad: ({ enabled, children }) => {
-			lazyLoadCalls.push(enabled);
+			mockLazyLoadCalls.push(enabled);
 			return <div data-enabled={enabled}>{children}</div>;
 		},
 				Carousel: (() => {
 					const CarouselRoot = ({ id, children, ...rest }) => {
-						carouselIds.push(id);
+						mockCarouselIds.push(id);
 						return <div data-testid="carousel" data-carousel-id={id} data-rest={Object.keys(rest).length}>{children}</div>;
 					};
 					const Button = ({ children, ...btnProps }) => <button type="button" data-testid="carousel-button" {...btnProps}>{children}</button>;
@@ -67,28 +70,29 @@ jest.mock("@wpmedia/arc-themes-components", () => {
 	};
 });
 
-jest.mock("fusion:properties", () => jest.fn(() => ({
+let mockPropertiesReturn = {
 	galleryCubeClicks: "3",
 	resizerURL: "https://fallback",
 	resizerURLs: { sandbox: "https://sandbox", prod: "https://prod" },
-})));
+};
+jest.mock("fusion:properties", () => jest.fn(() => mockPropertiesReturn));
 
 // Import after mocks
 
 describe("GalleryPresentation & GalleryFeature comprehensive coverage", () => {
 	beforeEach(() => {
 		imageCalls.length = 0;
-		lazyLoadCalls.length = 0;
-		carouselIds.length = 0;
+		mockLazyLoadCalls.length = 0;
+		mockCarouselIds.length = 0;
 		mockIsServerSide = jest.fn(() => false);
-		const { useFusionContext } = require("fusion:context");
-		useFusionContext.mockReturnValue({ arcSite: "site", isAdmin: false });
-		const getProperties = require("fusion:properties");
-		getProperties.mockImplementation(() => ({
+		mockFusionContext = { arcSite: "site", isAdmin: false };
+		mockAppContext = { globalContent: {} };
+		mockUseContentReturn = {};
+		mockPropertiesReturn = {
 			galleryCubeClicks: "3",
 			resizerURL: "https://fallback",
 			resizerURLs: { sandbox: "https://sandbox", prod: "https://prod" },
-		}));
+		};
 	});
 
 	it("uses environment-specific resizerURLs entry when available", () => {
@@ -118,11 +122,11 @@ describe("GalleryPresentation & GalleryFeature comprehensive coverage", () => {
 	});
 
 	it("falls back to resizerURL when resizerURLs absent", () => {
-		const getProperties = require("fusion:properties");
-		getProperties.mockImplementationOnce(() => ({
+		mockPropertiesReturn = {
 			galleryCubeClicks: "2",
-			resizerURL: "https://single"
-		}));
+			resizerURL: "https://single",
+			// intentionally no resizerURLs
+		};
 		render(
 			<GalleryPresentation
 				arcSite="site"
@@ -147,10 +151,9 @@ describe("GalleryPresentation & GalleryFeature comprehensive coverage", () => {
 		expect(propsPassed).toHaveProperty("resizerURL");
 	});
 
-	it("selects content source vs global content based on inheritGlobalContent logic", () => {
+	it("selects content source vs global content based on inheritGlobalContent logic", async () => {
 		// Case A: inheritGlobalContent undefined & galleryContentConfig defined -> use content
-		const { useContent } = require("fusion:content");
-		useContent.mockReturnValueOnce({ _id: "content-id", content_elements: [{ url: "c", _id: "c1", auth: { 2: "T" } }], headlines: { basic: "Content Head" } });
+		mockUseContentReturn = { _id: "content-id", content_elements: [{ url: "c", _id: "c1", auth: { 2: "T" } }], headlines: { basic: "Content Head" } };
 		render(
 			<GalleryPresentation
 				arcSite="site"
@@ -159,9 +162,9 @@ describe("GalleryPresentation & GalleryFeature comprehensive coverage", () => {
 				resizerAppVersion={2}
 			/>
 		);
-		expect(carouselIds).toContain("content-id");
+		await waitFor(() => expect(mockCarouselIds).toContain("content-id"));
 		// Case B: inheritGlobalContent true overrides and uses global
-		useContent.mockReturnValueOnce({ _id: "content-id2", content_elements: [{ url: "c2", _id: "c2", auth: { 2: "T" } }], headlines: { basic: "Content Head2" } });
+		mockUseContentReturn = { _id: "content-id2", content_elements: [{ url: "c2", _id: "c2", auth: { 2: "T" } }], headlines: { basic: "Content Head2" } };
 		render(
 			<GalleryPresentation
 				arcSite="site"
@@ -170,9 +173,9 @@ describe("GalleryPresentation & GalleryFeature comprehensive coverage", () => {
 				resizerAppVersion={2}
 			/>
 		);
-		expect(carouselIds).toContain("global-id2");
+		await waitFor(() => expect(mockCarouselIds).toContain("global-id2"));
 		// Case C: inheritGlobalContent false uses content
-		useContent.mockReturnValueOnce({ _id: "content-id3", content_elements: [{ url: "c3", _id: "c3", auth: { 2: "T" } }], headlines: { basic: "Content Head3" } });
+		mockUseContentReturn = { _id: "content-id3", content_elements: [{ url: "c3", _id: "c3", auth: { 2: "T" } }], headlines: { basic: "Content Head3" } };
 		render(
 			<GalleryPresentation
 				arcSite="site"
@@ -181,13 +184,12 @@ describe("GalleryPresentation & GalleryFeature comprehensive coverage", () => {
 				resizerAppVersion={2}
 			/>
 		);
-		expect(carouselIds).toContain("content-id3");
+		await waitFor(() => expect(mockCarouselIds).toContain("content-id3"));
 	});
 
 	it("GalleryFeature returns null server-side when lazyLoad true and not admin", () => {
 		mockIsServerSide = jest.fn(() => true);
-		const { useFusionContext } = require("fusion:context");
-		useFusionContext.mockReturnValueOnce({ arcSite: "site", isAdmin: false });
+		mockFusionContext = { arcSite: "site", isAdmin: false };
 		render(<GalleryFeature customFields={{ lazyLoad: true }} />);
 		expect(screen.queryByTestId('carousel')).toBeNull();
 	});
@@ -195,14 +197,13 @@ describe("GalleryPresentation & GalleryFeature comprehensive coverage", () => {
 	it("GalleryFeature renders with LazyLoad enabled when client-side and not admin", () => {
 		mockIsServerSide = jest.fn(() => false);
 		render(<GalleryFeature customFields={{ lazyLoad: true }} />);
-		expect(lazyLoadCalls.pop()).toBe(true);
+		expect(mockLazyLoadCalls.pop()).toBe(true);
 	});
 
 	it("GalleryFeature sets LazyLoad disabled for admin even with lazyLoad true", () => {
-		const { useFusionContext } = require("fusion:context");
-		useFusionContext.mockReturnValueOnce({ arcSite: "site", isAdmin: true });
+		mockFusionContext = { arcSite: "site", isAdmin: true };
 		render(<GalleryFeature customFields={{ lazyLoad: true }} />);
-		expect(lazyLoadCalls.pop()).toBe(false);
+		expect(mockLazyLoadCalls.pop()).toBe(false);
 	});
 
 });

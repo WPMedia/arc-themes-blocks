@@ -57,7 +57,9 @@ describe("<NavWidget/>", () => {
 			<NavWidget type="menu" menuButtonClickAction={menuButtonClick} breakpoint="desktop" />
 		);
 		expect(screen.getByTestId("nav-chain-nav-section-button")).not.toBeNull();
-		expect(screen.getByText("header-nav-chain-block.sections-button")).not.toBeNull();
+		expect(
+			screen.getByRole("button", { name: "header-nav-chain-block.sections-button" })
+		).not.toBeNull();
 	});
 
 	it("renders nav widget - custom with child component", () => {

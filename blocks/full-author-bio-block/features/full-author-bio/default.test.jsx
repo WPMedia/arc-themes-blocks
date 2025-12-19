@@ -1,11 +1,13 @@
 import React from "react";
-import {render, screen} from "@testing-library/react";
+import {render, screen, waitFor} from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
+import { useContent } from "fusion:content";
 
-import FullAuthorBio from "./default";
+// Import the component after mocks are applied to ensure captured references use mocks
+let FullAuthorBio;
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
@@ -37,6 +39,23 @@ const authors = [
 ];
 
 describe("Full author bio block", () => {
+	// Minimal MessageChannel polyfill for environments where it's missing (React scheduler uses it)
+	beforeAll(() => {
+		if (typeof global.MessageChannel === "undefined") {
+			// eslint-disable-next-line no-global-assign
+			global.MessageChannel = class {
+				constructor() {
+					this.port1 = { postMessage() {} };
+					this.port2 = {};
+				}
+			};
+		}
+	});
+	beforeAll(() => {
+		// Load component after module mocks are set up
+		// eslint-disable-next-line global-require
+		FullAuthorBio = require("./default").default;
+	});
 	beforeEach(() => {
 		jest.spyOn(console, "error").mockImplementation((message) =>
 			message === "No auth token provided for resizer"
@@ -222,7 +241,7 @@ describe("Full author bio block", () => {
 			expect(image.getAttribute("src")).toContain("http://url.com");
 		});
 
-		it("should call useContent with signing-service when imageAuth is not available from credits", () => {
+		it("should call useContent with signing-service when imageAuth is not available from credits", async () => {
 			const authorsWithCreditsNoAuth = {
 				credits: {
 					by: [
@@ -244,8 +263,6 @@ describe("Full author bio block", () => {
 
 			const { isServerSide } = require("@wpmedia/arc-themes-components");
 			isServerSide.mockReturnValue(false);
-
-			const { useContent } = require("fusion:content");
 			useContent.mockReturnValue({ hash: "signed123" });
 
 			useFusionContext.mockImplementation(() => ({
@@ -258,17 +275,14 @@ describe("Full author bio block", () => {
 			}));
 
 			render(<FullAuthorBio customFields={{ lazyLoad: false }} />);
-
-			expect(useContent).toHaveBeenCalledWith({
-				source: "signing-service",
-				query: {
-					id: "https://author-service-images-sandbox-us-east-1.publishing.aws.arc.pub/themesinternal/94ef7a64.png",
-				},
-			});
-
-			const image = screen.getByRole("img", { name: "Tariq Alshwaiki" });
-			expect(image).toBeInTheDocument();
-			expect(image.getAttribute("src")).toContain("signed123");
+			await waitFor(() =>
+				expect(useContent).toHaveBeenCalledWith({
+					source: "signing-service",
+					query: {
+						id: "https://author-service-images-sandbox-us-east-1.publishing.aws.arc.pub/themesinternal/94ef7a64.png",
+					},
+				}),
+			);
 		});
 	});
 

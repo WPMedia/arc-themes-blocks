@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import EmbedContainer from "react-oembed-container";
 
 const Oembed = ({ element, classPrefix = "" }) => {
 	// If element is a subtype of youtube or vimeo,
@@ -12,9 +11,7 @@ const Oembed = ({ element, classPrefix = "" }) => {
 
 	return (
 		<div className={className} data-chromatic="ignore" data-testid="oembed-container">
-			<EmbedContainer markup={element.raw_oembed.html}>
-				<div dangerouslySetInnerHTML={{ __html: element.raw_oembed.html }} />
-			</EmbedContainer>
+			<div dangerouslySetInnerHTML={{ __html: element.raw_oembed.html }} />
 		</div>
 	);
 };

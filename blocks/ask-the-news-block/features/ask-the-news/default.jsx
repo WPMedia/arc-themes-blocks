@@ -5,6 +5,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { Button, Input, Stack, Heading, Paragraph, Link } from "@wpmedia/arc-themes-components";
 import { useFusionContext } from "fusion:context";
 import { useContent } from "fusion:content";
+import getTranslatedPhrases from "fusion:intl";
 import "../../_index.scss";
 
 const BLOCK_CLASS_NAME = "b-ask-the-news";
@@ -37,7 +38,9 @@ const extractInputString = (...args) => {
 };
 
 const AskTheNews = ({ customFields = {} }) => {
-  const { arcSite } = useFusionContext() || {};
+  const { arcSite, siteProperties } = useFusionContext() || {};
+  const locale = siteProperties?.locale || "en";
+  const phrases = getTranslatedPhrases(locale);
   const [question, setQuestion] = useState("");
   const [lastQuestion, setLastQuestion] = useState(null);
   const [status, setStatus] = useState("idle");
@@ -62,12 +65,12 @@ const AskTheNews = ({ customFields = {} }) => {
   const charCount = question.length;
 
   const greeting = useMemo(() => {
-    if (typeof window === "undefined") return "Good day";
+    if (typeof window === "undefined") return phrases.t("ask-the-news-block.greeting-good-day");
     const hour = new Date().getHours();
-    if (hour < 12) return "Good morning";
-    if (hour < 18) return "Good afternoon";
-    return "Good evening";
-  }, []);
+    if (hour < 12) return phrases.t("ask-the-news-block.greeting-good-morning");
+    if (hour < 18) return phrases.t("ask-the-news-block.greeting-good-afternoon");
+    return phrases.t("ask-the-news-block.greeting-good-evening");
+  }, [phrases]);
 
   const isLocal = useMemo(() => {
     if (typeof window === "undefined") return process.env.NODE_ENV === "development";
@@ -330,7 +333,9 @@ const AskTheNews = ({ customFields = {} }) => {
   };
 
   const showQuestionList = status === "idle" && !lastQuestion && !streamText;
-  const inputPlaceholder = lastQuestion || streamText ? "Ask another question" : "What do you want to know?";
+  const inputPlaceholder = lastQuestion || streamText
+    ? phrases.t("ask-the-news-block.placeholder-follow-up")
+    : phrases.t("ask-the-news-block.placeholder-initial");
 
   return (
     <Stack className={BLOCK_CLASS_NAME}>
@@ -362,13 +367,13 @@ const AskTheNews = ({ customFields = {} }) => {
               </ul>
             </div>
           ) : (
-            <Paragraph className={`${BLOCK_CLASS_NAME}__suggestions-empty`}>No suggested questions available for this site.</Paragraph>
+            <Paragraph className={`${BLOCK_CLASS_NAME}__suggestions-empty`}>{phrases.t("ask-the-news-block.suggestions-empty")}</Paragraph>
           )
         ) : null}
 
         {error ? <div className={`${BLOCK_CLASS_NAME}__error`}>{error}</div> : null}
-        {status === "streaming" ? <div className={`${BLOCK_CLASS_NAME}__status`}>Streaming…</div> : null}
-        {status === "loading" ? <div className={`${BLOCK_CLASS_NAME}__status`}>Loading…</div> : null}
+        {status === "streaming" ? <div className={`${BLOCK_CLASS_NAME}__status`}>{phrases.t("ask-the-news-block.status-streaming")}</div> : null}
+        {status === "loading" ? <div className={`${BLOCK_CLASS_NAME}__status`}>{phrases.t("ask-the-news-block.status-loading")}</div> : null}
 
         {lastQuestion ? (
           <div className={`${BLOCK_CLASS_NAME}__userBubbleWrap`}>
@@ -390,13 +395,13 @@ const AskTheNews = ({ customFields = {} }) => {
                 className={`${BLOCK_CLASS_NAME}__sourcesPill`}
                 onClick={() => setShowSources((v) => !v)}
               >
-                Sources
+                {phrases.t("ask-the-news-block.sources-label")}
               </button>
               <button
                 type="button"
                 className={`${BLOCK_CLASS_NAME}__actionIcon`}
-                aria-label="Copy answer"
-                title="Copy answer"
+                aria-label={phrases.t("ask-the-news-block.copy-answer")}
+                title={phrases.t("ask-the-news-block.copy-answer")}
                 onClick={() => {
                   const text = streamText || "";
                   if (!text) return;
@@ -405,10 +410,10 @@ const AskTheNews = ({ customFields = {} }) => {
               >
                 ⧉
               </button>
-              <button type="button" className={`${BLOCK_CLASS_NAME}__actionIcon`} aria-label="Thumbs up" title="Thumbs up">
+              <button type="button" className={`${BLOCK_CLASS_NAME}__actionIcon`} aria-label={phrases.t("ask-the-news-block.thumbs-up")} title={phrases.t("ask-the-news-block.thumbs-up")}>
                 +
               </button>
-              <button type="button" className={`${BLOCK_CLASS_NAME}__actionIcon`} aria-label="Thumbs down" title="Thumbs down">
+              <button type="button" className={`${BLOCK_CLASS_NAME}__actionIcon`} aria-label={phrases.t("ask-the-news-block.thumbs-down")} title={phrases.t("ask-the-news-block.thumbs-down")}>
                 –
               </button>
             </div>
@@ -417,7 +422,7 @@ const AskTheNews = ({ customFields = {} }) => {
               <ol className={`${BLOCK_CLASS_NAME}__sourcesList`}>
                 {sources.map((s, idx) => (
                   <li key={s.document_id || `source-${idx}`}>
-                    <div><strong>{s.headline || s.document_id || "Untitled"}</strong></div>
+                    <div><strong>{s.headline || s.document_id || phrases.t("ask-the-news-block.untitled")}</strong></div>
                     <div>
                       {s.source
                         ? `${s.source}${typeof s.score === "number" ? ` (score ${s.score.toFixed(2)})` : ""}`
@@ -445,7 +450,7 @@ const AskTheNews = ({ customFields = {} }) => {
             />
             <Button
               className={`${BLOCK_CLASS_NAME}__submit`}
-              aria-label="Submit"
+              aria-label={phrases.t("ask-the-news-block.submit-aria")}
               disabled={!canSubmit}
               type="submit"
               size="large"
@@ -459,18 +464,18 @@ const AskTheNews = ({ customFields = {} }) => {
 
         <Stack className={`${BLOCK_CLASS_NAME}__helper`} gap="0.5rem">
           <Paragraph className={`${BLOCK_CLASS_NAME}__disclaimer`}>
-            Answers are AI generated from our reporting. Because AI can make mistakes, verify information by referencing provided sources for each answer.
+            {phrases.t("ask-the-news-block.disclaimer")}
           </Paragraph>
           <Stack className={`${BLOCK_CLASS_NAME}__how`} direction="horizontal">
             <span className={`${BLOCK_CLASS_NAME}__info`} aria-hidden="true">i</span>
             <Link href="#" onClick={(e) => e?.preventDefault?.()}>
-              How it works
+              {phrases.t("ask-the-news-block.how-it-works")}
             </Link>
-            <div className={`${BLOCK_CLASS_NAME}__counter`}>{charCount}/{MAX_QUESTION_CHARS}</div>
+            <div className={`${BLOCK_CLASS_NAME}__counter`}>{phrases.t("ask-the-news-block.char-counter", { count: charCount, max: MAX_QUESTION_CHARS })}</div>
           </Stack>
           {status === "streaming" ? (
             <Button onClick={handleCancel} size="large" variant="secondary">
-              Cancel
+              {phrases.t("ask-the-news-block.cancel")}
             </Button>
           ) : null}
         </Stack>

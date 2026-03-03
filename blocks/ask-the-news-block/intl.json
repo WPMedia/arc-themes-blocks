@@ -1,13 +1,211 @@
 {
-    "ask-the-news-block.hello-text": {
-        "de": "Hallo",
-        "en": "Hello World",
-        "es": "Hola Mundo",
-        "fr": "Bonjour le monde",
-        "ja": "こんにちは世界",
-        "ko": "안녕하세요 세계",
-        "no": "Hei Verden",
-        "pt": "Olá Mundo",
-        "sv": "Hej Verden"
+    "ask-the-news-block.greeting-good-day": {
+        "de": "Guten Tag",
+        "en": "Good day",
+        "es": "Buen día",
+        "fr": "Bonne journée",
+        "ja": "こんにちは",
+        "ko": "안녕하세요",
+        "no": "God dag",
+        "pt": "Bom dia",
+        "sv": "God dag"
+    },
+    "ask-the-news-block.greeting-good-morning": {
+        "de": "Guten Morgen",
+        "en": "Good morning",
+        "es": "Buenos días",
+        "fr": "Bonjour",
+        "ja": "おはようございます",
+        "ko": "좋은 아침이에요",
+        "no": "God morgen",
+        "pt": "Bom dia",
+        "sv": "God morgon"
+    },
+    "ask-the-news-block.greeting-good-afternoon": {
+        "de": "Guten Tag",
+        "en": "Good afternoon",
+        "es": "Buenas tardes",
+        "fr": "Bon après-midi",
+        "ja": "こんにちは",
+        "ko": "좋은 오후에요",
+        "no": "God ettermiddag",
+        "pt": "Boa tarde",
+        "sv": "God eftermiddag"
+    },
+    "ask-the-news-block.greeting-good-evening": {
+        "de": "Guten Abend",
+        "en": "Good evening",
+        "es": "Buenas noches",
+        "fr": "Bonsoir",
+        "ja": "こんばんは",
+        "ko": "좋은 저녁이에요",
+        "no": "God kveld",
+        "pt": "Boa noite",
+        "sv": "God kväll"
+    },
+    "ask-the-news-block.placeholder-initial": {
+        "de": "Was möchten Sie wissen?",
+        "en": "What do you want to know?",
+        "es": "¿Qué quieres saber?",
+        "fr": "Que voulez-vous savoir ?",
+        "ja": "何を知りたいですか？",
+        "ko": "무엇을 알고 싶으신가요?",
+        "no": "Hva vil du vite?",
+        "pt": "O que você quer saber?",
+        "sv": "Vad vill du veta?"
+    },
+    "ask-the-news-block.placeholder-follow-up": {
+        "de": "Weitere Frage stellen",
+        "en": "Ask another question",
+        "es": "Haz otra pregunta",
+        "fr": "Poser une autre question",
+        "ja": "別の質問をする",
+        "ko": "다른 질문하기",
+        "no": "Still et annet spørsmål",
+        "pt": "Faça outra pergunta",
+        "sv": "Ställ en annan fråga"
+    },
+    "ask-the-news-block.suggestions-empty": {
+        "de": "Für diese Seite sind keine vorgeschlagenen Fragen verfügbar.",
+        "en": "No suggested questions available for this site.",
+        "es": "No hay preguntas sugeridas disponibles para este sitio.",
+        "fr": "Aucune question suggérée disponible pour ce site.",
+        "ja": "このサイトでは提案された質問はありません。",
+        "ko": "이 사이트에는 추천 질문이 없습니다.",
+        "no": "Ingen foreslåtte spørsmål tilgjengelig for denne siden.",
+        "pt": "Nenhuma pergunta sugerida disponível para este site.",
+        "sv": "Inga föreslagna frågor tillgängliga för denna webbplats."
+    },
+    "ask-the-news-block.status-streaming": {
+        "de": "Wird gestreamt…",
+        "en": "Streaming…",
+        "es": "Transmitiendo…",
+        "fr": "Diffusion en cours…",
+        "ja": "ストリーミング中…",
+        "ko": "스트리밍 중…",
+        "no": "Streamer…",
+        "pt": "Transmitindo…",
+        "sv": "Streamar…"
+    },
+    "ask-the-news-block.status-loading": {
+        "de": "Wird geladen…",
+        "en": "Loading…",
+        "es": "Cargando…",
+        "fr": "Chargement…",
+        "ja": "読み込み中…",
+        "ko": "로딩 중…",
+        "no": "Laster…",
+        "pt": "Carregando…",
+        "sv": "Laddar…"
+    },
+    "ask-the-news-block.sources-label": {
+        "de": "Quellen",
+        "en": "Sources",
+        "es": "Fuentes",
+        "fr": "Sources",
+        "ja": "ソース",
+        "ko": "출처",
+        "no": "Kilder",
+        "pt": "Fontes",
+        "sv": "Källor"
+    },
+    "ask-the-news-block.copy-answer": {
+        "de": "Antwort kopieren",
+        "en": "Copy answer",
+        "es": "Copiar respuesta",
+        "fr": "Copier la réponse",
+        "ja": "回答をコピー",
+        "ko": "답변 복사",
+        "no": "Kopier svar",
+        "pt": "Copiar resposta",
+        "sv": "Kopiera svar"
+    },
+    "ask-the-news-block.thumbs-up": {
+        "de": "Daumen hoch",
+        "en": "Thumbs up",
+        "es": "Pulgar arriba",
+        "fr": "Pouce vers le haut",
+        "ja": "いいね",
+        "ko": "좋아요",
+        "no": "Tommel opp",
+        "pt": "Curtir",
+        "sv": "Tumme upp"
+    },
+    "ask-the-news-block.thumbs-down": {
+        "de": "Daumen runter",
+        "en": "Thumbs down",
+        "es": "Pulgar abajo",
+        "fr": "Pouce vers le bas",
+        "ja": "よくない",
+        "ko": "싫어요",
+        "no": "Tommel ned",
+        "pt": "Não curtir",
+        "sv": "Tumme ner"
+    },
+    "ask-the-news-block.untitled": {
+        "de": "Ohne Titel",
+        "en": "Untitled",
+        "es": "Sin título",
+        "fr": "Sans titre",
+        "ja": "無題",
+        "ko": "제목 없음",
+        "no": "Uten tittel",
+        "pt": "Sem título",
+        "sv": "Namnlös"
+    },
+    "ask-the-news-block.submit-aria": {
+        "de": "Absenden",
+        "en": "Submit",
+        "es": "Enviar",
+        "fr": "Envoyer",
+        "ja": "送信",
+        "ko": "제출",
+        "no": "Send inn",
+        "pt": "Enviar",
+        "sv": "Skicka"
+    },
+    "ask-the-news-block.how-it-works": {
+        "de": "So funktioniert es",
+        "en": "How it works",
+        "es": "Cómo funciona",
+        "fr": "Comment ça marche",
+        "ja": "仕組み",
+        "ko": "작동 방식",
+        "no": "Slik fungerer det",
+        "pt": "Como funciona",
+        "sv": "Så fungerar det"
+    },
+    "ask-the-news-block.char-counter": {
+        "de": "%{count}/%{max}",
+        "en": "%{count}/%{max}",
+        "es": "%{count}/%{max}",
+        "fr": "%{count}/%{max}",
+        "ja": "%{count}/%{max}",
+        "ko": "%{count}/%{max}",
+        "no": "%{count}/%{max}",
+        "pt": "%{count}/%{max}",
+        "sv": "%{count}/%{max}"
+    },
+    "ask-the-news-block.cancel": {
+        "de": "Abbrechen",
+        "en": "Cancel",
+        "es": "Cancelar",
+        "fr": "Annuler",
+        "ja": "キャンセル",
+        "ko": "취소",
+        "no": "Avbryt",
+        "pt": "Cancelar",
+        "sv": "Avbryt"
+    },
+    "ask-the-news-block.disclaimer": {
+        "de": "Antworten werden KI-generiert aus unserer Berichterstattung. Da KI Fehler machen kann, überprüfen Sie die Informationen anhand der angegebenen Quellen zu jeder Antwort.",
+        "en": "Answers are AI generated from our reporting. Because AI can make mistakes, verify information by referencing provided sources for each answer.",
+        "es": "Las respuestas son generadas por IA a partir de nuestra cobertura. Dado que la IA puede cometer errores, verifique la información consultando las fuentes proporcionadas para cada respuesta.",
+        "fr": "Les réponses sont générées par l'IA à partir de notre couverture. L'IA pouvant faire des erreurs, vérifiez les informations en consultant les sources fournies pour chaque réponse.",
+        "ja": "回答は当社の報道に基づいてAIが生成しています。AIは誤りを犯すことがあるため、各回答に記載された情報源を参照して内容をご確認ください。",
+        "ko": "답변은 당사 보도 자료를 바탕으로 AI가 생성했습니다. AI가 실수를 할 수 있으므로 각 답변에 제공된 출처를 참고하여 정보를 확인하세요.",
+        "no": "Svar genereres av AI basert på vår rapportering. Siden AI kan gjøre feil, verifiser informasjonen ved å sjekke de oppgitte kildene for hvert svar.",
+        "pt": "As respostas são geradas por IA com base em nossa cobertura. Como a IA pode cometer erros, verifique as informações consultando as fontes fornecidas para cada resposta.",
+        "sv": "Svar genereras av AI från vår rapportering. Eftersom AI kan göra misstag, verifiera informationen genom att referera till de angivna källorna för varje svar."
     }
 }

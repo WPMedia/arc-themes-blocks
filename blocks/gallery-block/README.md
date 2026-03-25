@@ -5,11 +5,13 @@ The Gallery block shows a carousel with images and captions. It is used to displ
 ## Props
 
 | **Prop**                              | **Required** | **Type**              | **Description**                                                                                                                                     |
-| ------------------------------------- | ------------ | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --- | -------------------------- | --- | ------- | ---------------- | --- | ---------------------------- | --- | ------- | ------------------ |
+| ------------------------------------- | ------------ | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **customFields.inheritGlobalContent** | no           | Boolean               | Determines whether or not the feature will use global content instead of the provided content config at the feature level. This is used by default. |
 | **customFields.galleryContentConfig** | no           | Fusion Content Config | Content config that will be used if `inheritGlobalContent` is false.                                                                                |
 | **customFields.lazyLoad**             | no           | Boolean               | Prevent the block from being rendered on the page until it is nearly in-view for the user                                                           |
-| **customFields.hideCredits**          | no           | Boolean               | Hide image credits                                                                                                                                  |     | **customFields.hideTitle** | no  | Boolean | Hide image title |     | **customFields.hideCaption** | no  | Boolean | Hide image caption |
+| **customFields.hideCredits**          | no           | Boolean               | Hide image credits                                                                                                                                  |
+| **customFields.hideTitle**            | no           | Boolean               | Hide image title                                                                                                                                    |
+| **customFields.hideCaption**          | no           | Boolean               | Hide image caption                                                                                                                                  |
 
 ## Themes Setting
 
@@ -98,3 +100,5 @@ The event object for these events will contain the following information:
 ## Additional Considerations
 
 In case `galleryCubeClicks` is used, an Ad of type `300x250` will be shown on all the cases.
+
+**Note:** The expand button is Android only on mobile devices.

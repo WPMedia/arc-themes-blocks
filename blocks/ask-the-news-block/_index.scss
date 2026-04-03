@@ -1,0 +1,220 @@
+  // components/features/ask-the-news/_index.scss
+  @use "@wpmedia/arc-themes-components/scss";
+
+  .b-ask-the-news {
+    @include scss.block-components("stack");
+    @include scss.block-properties("stack");
+    min-height: 100vh;
+    padding: 2.5rem 1.25rem 1.25rem;
+    justify-content: space-between;
+
+    &__actions {
+      display: flex;
+      justify-content: center;
+      @include scss.block-components("button");
+      @include scss.block-properties("button");
+    }
+
+    &__submit {
+      @include scss.block-components("button");
+      @include scss.block-properties("button");
+    }
+    &__submit[aria-disabled] {
+      cursor: pointer;
+    }
+    &__submit[aria-disabled=true] {
+      cursor: not-allowed;
+    }
+
+    &__input-container {
+      display: flex;
+      justify-content: center;
+      @include scss.block-components("input");
+      @include scss.block-properties("input");
+    }
+
+    &__popular-questions {
+      display: flex;
+      justify-content: center;
+      @include scss.block-components("ul");
+      @include scss.block-properties("ul");
+    }
+
+    &__header {
+      text-align: center;
+      align-items: center;
+    }
+
+    &__body {
+      flex: 1 1 auto;
+      align-items: stretch;
+      justify-content: flex-start;
+      text-align: left;
+      max-width: 56rem;
+      margin: 0 auto;
+    }
+
+    &__footer {
+      position: sticky;
+      bottom: 0;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      background: var(--arc-bg-color, #fff);
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    &__form {
+      width: 100%;
+    }
+
+    &__inputRow {
+      width: 100%;
+      max-width: 56rem;
+      margin: 0 auto;
+      align-items: center;
+      gap: 0.75rem;
+
+      .c-input {
+        width: 100%;
+        &__input {
+          width: 100%;
+        }
+      }
+    }
+
+    &__helper {
+      width: 100%;
+      max-width: 56rem;
+      margin: 0 auto;
+    }
+
+    &__how {
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    &__info {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      font-size: 0.75rem;
+      line-height: 1;
+      opacity: 0.8;
+    }
+
+    &__counter {
+      margin-left: auto;
+      opacity: 0.8;
+    }
+
+    &__answer {
+      width: 100%;
+      text-align: left;
+    }
+
+    &__questionList {
+      width: 100%;
+    }
+
+    &__suggestionRows {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    &__suggestionRow {
+      margin: 0;
+      padding: 0;
+    }
+
+    &__suggestionButton {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1.25rem 0;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      cursor: pointer;
+      text-align: left;
+      font: inherit;
+      line-height: 1.45;
+    }
+
+    &__sparkle {
+      color: #6b5cff;
+      font-size: 1rem;
+      line-height: 1.2;
+      margin-top: 0.15rem;
+      flex: 0 0 auto;
+    }
+
+    &__suggestionText {
+      font-size: 1.125rem;
+    }
+
+    &__userBubbleWrap {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 0.75rem;
+    }
+
+    &__userBubble {
+      max-width: 40rem;
+      background: rgba(0, 0, 0, 0.06);
+      border-radius: 0.9rem;
+      padding: 1rem 1.25rem;
+      line-height: 1.45;
+    }
+
+    &__sources {
+      width: 100%;
+      margin-top: 0.25rem;
+    }
+
+    &__sourceActions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    &__sourcesPill {
+      appearance: none;
+      background: transparent;
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      border-radius: 999px;
+      padding: 0.4rem 0.9rem;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    &__actionIcon {
+      appearance: none;
+      width: 2.25rem;
+      height: 2.25rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      border-radius: 0.6rem;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    &__sourcesList {
+      margin-top: 0.75rem;
+      padding-left: 1.25rem;
+    }
+  }

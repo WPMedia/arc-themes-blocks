@@ -1,0 +1,27 @@
+{
+	"name": "@wpmedia/schema-feed-content-source-block",
+	"version": "0.0.1",
+	"description": "Content source block for Arc Content API v5 schema search",
+	"author": "Arc XP - Themes",
+	"homepage": "https://github.com/WPMedia/arc-themes-blocks",
+	"license": "CC-BY-NC-ND-4.0",
+	"main": "",
+	"files": [
+		"sources"
+	],
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/",
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
+		"directory": "blocks/schema-feed-content-source-block"
+	},
+	"dependencies": {
+		"axios": "^1.5.1"
+	},
+	"peerDependencies": {
+		"@wpmedia/arc-themes-components": "*"
+	}
+}

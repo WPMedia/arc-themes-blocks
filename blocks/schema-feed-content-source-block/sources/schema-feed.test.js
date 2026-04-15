@@ -41,8 +41,8 @@ describe("the schema-feed content source block", () => {
 				type: "text",
 			},
 			{
-				displayName: "Sort Direction",
-				name: "sortDirection",
+				displayName: "Query",
+				name: "query",
 				type: "text",
 			},
 			{
@@ -106,25 +106,7 @@ describe("the schema-feed content source block", () => {
 	});
 
 	describe("when sortBy is provided", () => {
-		it("should include sort param as field:direction", async () => {
-			const result = await contentSource.fetch(
-				{
-					schemaName: "my-schema",
-					sortBy: "publish_date",
-					sortDirection: "asc",
-					"arc-site": "site1",
-				},
-				{ arcSite: "" },
-			);
-
-			expect(result.request.url.searchObject).toEqual(
-				expect.objectContaining({
-					sort: "publish_date:asc",
-				}),
-			);
-		});
-
-		it("should default sortDirection to desc", async () => {
+		it("should include sort param with hardcoded desc direction", async () => {
 			const result = await contentSource.fetch(
 				{
 					schemaName: "my-schema",
@@ -139,6 +121,39 @@ describe("the schema-feed content source block", () => {
 					sort: "publish_date:desc",
 				}),
 			);
+		});
+	});
+
+	describe("when query is provided", () => {
+		it("should include q param", async () => {
+			const result = await contentSource.fetch(
+				{
+					schemaName: "my-schema",
+					query: 'schema_content.venv.status:"CONFIRMED"',
+					"arc-site": "site1",
+				},
+				{ arcSite: "" },
+			);
+
+			expect(result.request.url.searchObject).toEqual(
+				expect.objectContaining({
+					q: 'schema_content.venv.status:"CONFIRMED"',
+				}),
+			);
+		});
+	});
+
+	describe("when query is not provided", () => {
+		it("should not include q param", async () => {
+			const result = await contentSource.fetch(
+				{
+					schemaName: "my-schema",
+					"arc-site": "site1",
+				},
+				{ arcSite: "" },
+			);
+
+			expect(result.request.url.searchObject).not.toHaveProperty("q");
 		});
 	});
 

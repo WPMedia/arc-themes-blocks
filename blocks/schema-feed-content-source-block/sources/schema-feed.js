@@ -19,8 +19,8 @@ const params = [
 		type: "text",
 	},
 	{
-		displayName: "Sort Direction",
-		name: "sortDirection",
+		displayName: "Query",
+		name: "query",
 		type: "text",
 	},
 	{
@@ -41,7 +41,7 @@ const params = [
  * Fetches schema data from v5 search schemas endpoint with sorting and pagination
  */
 const fetch = async (
-	{ schemaName, sortBy, sortDirection = "desc", size = 25, page = 1, "arc-site": website },
+	{ schemaName, sortBy, query, size = 25, page = 1, "arc-site": website },
 	{ arcSite },
 ) => {
 	if (!schemaName) {
@@ -61,7 +61,11 @@ const fetch = async (
 	});
 
 	if (sortBy) {
-		urlSearch.set("sort", `${sortBy.trim()}:${sortDirection.trim()}`);
+		urlSearch.set("sort", `${sortBy.trim()}:desc`);
+	}
+
+	if (query) {
+		urlSearch.set("q", query.trim());
 	}
 
 	const url = new URL(`/content/v5/search/schemas/?${urlSearch.toString()}`, CONTENT_BASE);

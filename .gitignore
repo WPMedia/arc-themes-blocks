@@ -7,3 +7,5 @@ coverage
 
 # output of build-storybook for chromatic usage
 storybook-static
+.devcontainer-logs
+.devcontainer-exclude

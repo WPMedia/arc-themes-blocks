@@ -1,8 +1,3 @@
-/**
- * Fetches data from Arc Content API /content/v5/search/schemas/ endpoint.
- * Configurable schema name parameter with sort options, size, and pagination.
- * Website is pulled from arc-site like content-api.
- */
 import axios from "axios";
 import { ARC_ACCESS_TOKEN, CONTENT_BASE } from "fusion:environment";
 import handleFetchError from "@wpmedia/arc-themes-components/src/utils/handle-fetch-error";
@@ -37,10 +32,7 @@ const params = [
 	},
 ];
 
-/**
- * Fetches schema data from v5 search schemas endpoint with sorting and pagination
- */
-const fetch = async (
+const fetch = (
 	{ schemaName, sortBy, query, size = 25, page = 1, "arc-site": website },
 	{ arcSite },
 ) => {
@@ -56,8 +48,8 @@ const fetch = async (
 	const urlSearch = new URLSearchParams({
 		schema_name: schemaName.trim(),
 		website: siteValue,
-		size: parseInt(size, 10),
-		page: parseInt(page, 10),
+		size,
+		page,
 	});
 
 	if (sortBy) {
@@ -87,16 +79,7 @@ const fetch = async (
 			}
 			return data;
 		})
-		.catch((error) => {
-			if (error.response && error.response.status >= 400) {
-				const fetchError = new Error(
-					`Schema retrieval failed: ${error.response.status}`,
-				);
-				fetchError.statusCode = error.response.status;
-				throw fetchError;
-			}
-			return handleFetchError(error);
-		});
+		.catch(handleFetchError);
 };
 
 export default {

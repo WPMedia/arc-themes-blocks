@@ -1,6 +1,9 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-medium-promo {
+	@include scss.block-properties("medium-promo");
+	@include scss.block-components("medium-promo");
+
 	&__img {
 		@include scss.block-properties("medium-promo-img");
 		@include scss.block-components("medium-promo-img");
@@ -20,7 +23,4 @@
 		@include scss.block-components("medium-promo-label");
 		@include scss.block-properties("medium-promo-label");
 	}
-
-	@include scss.block-properties("medium-promo");
-	@include scss.block-components("medium-promo");
 }

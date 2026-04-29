@@ -5,6 +5,9 @@
 	grid-template-areas: "hero";
 	justify-content: center;
 
+	@include scss.block-properties("hero");
+	@include scss.block-components("hero");
+
 	> * {
 		grid-area: hero;
 	}
@@ -66,7 +69,4 @@
 		@include scss.block-properties("hero-buttonrow");
 		@include scss.block-components("hero-buttonrow");
 	}
-
-	@include scss.block-properties("hero");
-	@include scss.block-components("hero");
 }

@@ -51,16 +51,7 @@
 				"ignoreMediaFeatureNames": ["max-width"]
 			}
 		],
-		"order/order": [
-			"declarations",
-			[
-				{
-					"type": "at-rule",
-					"name": "include"
-				},
-				"rules"
-			]
-		],
+		"order/order": null,
 		"selector-class-pattern": null
 	}
 }

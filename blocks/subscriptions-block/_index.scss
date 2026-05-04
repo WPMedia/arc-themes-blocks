@@ -456,6 +456,7 @@
 					@include scss.block-properties(
 						"subscriptions-subscription-list-detail-cancel-info-button"
 					);
+
 					&:hover {
 						@include scss.block-components(
 							"subscriptions-subscription-list-detail-cancel-info-button-hover"

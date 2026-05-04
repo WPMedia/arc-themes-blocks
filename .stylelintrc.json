@@ -53,11 +53,13 @@
 		],
 		"order/order": [
 			"declarations",
-			"rules",
-			{
-				"type": "at-rule",
-				"name": "include"
-			}
+			[
+				{
+					"type": "at-rule",
+					"name": "include"
+				},
+				"rules"
+			]
 		],
 		"selector-class-pattern": null
 	}

@@ -1,6 +1,9 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-small-manual-promo {
+	@include scss.block-properties("small-manual-promo");
+	@include scss.block-components("small-manual-promo");
+
 	&__img {
 		@include scss.block-properties("small-manual-promo-img");
 		@include scss.block-components("small-manual-promo-img");
@@ -25,7 +28,4 @@
 		@include scss.block-properties("small-manual-promo-right");
 		@include scss.block-components("small-manual-promo-right");
 	}
-
-	@include scss.block-properties("small-manual-promo");
-	@include scss.block-components("small-manual-promo");
 }

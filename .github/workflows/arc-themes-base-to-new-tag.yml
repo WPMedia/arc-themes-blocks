@@ -20,14 +20,14 @@ jobs:
         id: check-target-tag
         run: |
           if [[ ${{ github.event.inputs.target_release_tag }} =~ ^([0-9]+)\.([0-9]+)(\.[0-9]+)?$ ]]; then
-              echo ::set-output name=match::true
+              echo "match=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Check new release tag name
         id: check-new-tag
         run: |
           if [[ ${{ github.event.inputs.new_release_tag }} =~ ^([0-9]+)\.([0-9]+)(\.[0-9]+)?$ ]]; then
-              echo ::set-output name=match::true
+              echo "match=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Validate release tag numbers
@@ -49,10 +49,10 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node and NPM
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           registry-url: "https://npm.pkg.github.com"

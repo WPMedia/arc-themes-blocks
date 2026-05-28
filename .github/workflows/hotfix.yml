@@ -1,0 +1,70 @@
+name: Publish hotfix for previous themes version
+# Usage:
+#   1. Find the tag for the version to hotfix: git tag -l "themes-v*"
+#   2. Create a hotfix branch from that tag: git checkout -b hotfix/4.1.0 themes-v4.1.0
+#   3. Make your fix, commit, and push the branch
+#   4. This workflow runs automatically and publishes under the original dist-tag
+
+on:
+  push:
+    branches:
+      - "hotfix/[0-9]+.[0-9]+"
+      - "hotfix/[0-9]+.[0-9]+.[0-9]+"
+    paths:
+      - "**.js"
+      - "**.json"
+      - "**.jsx"
+      - "**.scss"
+      - "**/intl.json"
+      - "**/README.md"
+
+jobs:
+  publish-hotfix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull tags to give lerna access to git info
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+      - name: Extract version from branch name
+        id: hotfix-version
+        run: |
+          # Branch name is hotfix/X.Y.Z — extract the version part
+          VERSION="${GITHUB_REF_NAME#hotfix/}"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "dist_tag=arc-themes-release-version-${VERSION}" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Cache Node Modules
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Clean install (CI) dependencies if lockfile (above) changed
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run all tests
+        run: npm run test
+
+      - name: Publish hotfix to target tag
+        run: |
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --local user.name "$GITHUB_ACTOR"
+          npx lerna publish --dist-tag ${{ steps.hotfix-version.outputs.dist_tag }} --canary --preid ${{ steps.hotfix-version.outputs.dist_tag }} -y
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

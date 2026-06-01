@@ -25,4 +25,12 @@ module.exports = {
 		"//node_modules/(?!@wpmedia/.*-block).*/",
 		"//node_modules/(?!(@wpmedia)).*/",
 	],
+	moduleNameMapper: {
+		"^@wpmedia/arc-themes-components/src/utils/handle-fetch-error$":
+			"<rootDir>/jest/stubs/arc-themes-components/src/utils/handle-fetch-error.js",
+		"^@wpmedia/arc-themes-components/src/utils/sign-images-in-ans-object$":
+			"<rootDir>/jest/stubs/arc-themes-components/src/utils/sign-images-in-ans-object.js",
+		"^@wpmedia/arc-themes-components/src/utils/handle-redirect$":
+			"<rootDir>/jest/stubs/arc-themes-components/src/utils/handle-redirect.js",
+	},
 };

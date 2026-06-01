@@ -79,6 +79,9 @@ describe("Category Carousel", () => {
 	});
 
 	it("should not render incomplete items", () => {
+		// Each "incomplete" item is missing exactly one of the three required fields
+		// (imageUrl, label, linkUrl) so the component's filter excludes it.
+		// Item 4: missing imageUrl. Item 5: missing linkUrl. Item 6: missing imageUrl.
 		const { unmount } = render(
 			<CategoryCarousel
 				customFields={{
@@ -98,7 +101,6 @@ describe("Category Carousel", () => {
 					linkUrl_4: "#",
 					imageUrl_5: "#",
 					label_5: "Incomplete 2",
-					imageUrl_6: "#",
 					label_6: "ummm",
 					linkUrl_6: "/incomplete/3",
 				}}

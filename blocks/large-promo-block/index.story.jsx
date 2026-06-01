@@ -1,4 +1,5 @@
 import React from "react";
+
 import Promo, { LargePromoPresentation } from "./features/large-promo/default";
 
 export default {

@@ -117,7 +117,12 @@ export const allFields = () => {
 		showByline: true,
 		showDate: true,
 	};
-	return <Promo customFields={updatedCustomFields} />;
+	// Subtle tint to simulate sub-pixel aliasing differences — REMOVE after threshold testing
+	return (
+		<div style={{ backgroundColor: "rgba(0, 0, 0, 0.01)" }}>
+			<Promo customFields={updatedCustomFields} />
+		</div>
+	);
 };
 
 export const onlyImage = () => {

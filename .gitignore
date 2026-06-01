@@ -7,3 +7,7 @@ coverage
 
 # output of build-storybook for chromatic usage
 storybook-static
+.claude-mounts.json
+.claude/settings.local.json
+.devcontainer-logs
+.devcontainer-exclude

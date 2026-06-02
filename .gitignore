@@ -9,5 +9,6 @@ coverage
 storybook-static
 .claude-mounts.json
 .claude/settings.local.json
+.devcontainer
 .devcontainer-logs
 .devcontainer-exclude

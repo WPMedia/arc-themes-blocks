@@ -16,7 +16,9 @@ describe("the htmlbox block", () => {
 
 		const { container } = render(<HTMLBox id="abc123" />);
 
+		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
 		expect(container.querySelector("iframe")).toBeInTheDocument();
+		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
 		expect(container.querySelector("iframe").getAttribute("src")).toBe(
 			"https://www.youtube.com/embed/TKjI4CYThjg",
 		);

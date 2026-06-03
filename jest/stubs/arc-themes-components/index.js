@@ -6,11 +6,9 @@ const GlobalDate = global.Date;
 const cx = (...classes) => classes.filter(Boolean).join(" ") || undefined;
 
 const Heading = ({ children, className, dangerouslySetInnerHTML, ...rest }) =>
-	React.createElement(
-		"h2",
-		{ className: cx("c-heading", className), dangerouslySetInnerHTML, ...rest },
-		children,
-	);
+	dangerouslySetInnerHTML
+		? React.createElement("h2", { className: cx("c-heading", className), dangerouslySetInnerHTML, ...rest })
+		: React.createElement("h2", { className: cx("c-heading", className), ...rest }, children);
 
 const HeadingSection = ({ children }) => React.createElement("div", null, children);
 
@@ -21,11 +19,9 @@ const Grid = ({ children, className, as: Tag = "div", ...rest }) =>
 	React.createElement(Tag, { className, ...rest }, children);
 
 const Paragraph = ({ children, className, dangerouslySetInnerHTML, ...rest }) =>
-	React.createElement(
-		"p",
-		{ className: cx("c-paragraph", className), dangerouslySetInnerHTML, ...rest },
-		children,
-	);
+	dangerouslySetInnerHTML
+		? React.createElement("p", { className: cx("c-paragraph", className), dangerouslySetInnerHTML, ...rest })
+		: React.createElement("p", { className: cx("c-paragraph", className), ...rest }, children);
 
 const Link = ({ children, href, className, openInNewTab, assistiveHidden, ...rest }) => {
 	if (assistiveHidden) {
@@ -73,6 +69,7 @@ const Image = ({
 			// eslint-disable-next-line global-require
 			const mod = require("fusion:properties");
 			// Handle ES module default export interop
+			// eslint-disable-next-line no-underscore-dangle
 			const getProperties = mod.__esModule ? mod.default : mod;
 			const props = typeof getProperties === "function" ? getProperties() : getProperties;
 			baseURL = props?.resizerURL || "";
@@ -83,6 +80,7 @@ const Image = ({
 			// eslint-disable-next-line global-require
 			const env = require("fusion:environment");
 			// Named exports — available directly on the module object
+			// eslint-disable-next-line no-underscore-dangle
 			const envObj = env.__esModule ? env : env;
 			tokenVersion = envObj.RESIZER_TOKEN_VERSION || 2;
 		} catch (e) {
@@ -162,7 +160,8 @@ const Join = ({ children, separator: SepComponent }) => {
 			if (sepValue !== null) {
 				withSeparators.push(sepValue);
 			} else {
-				withSeparators.push(React.createElement(SepComponent, { key: `sep-${i}` }));
+				// eslint-disable-next-line react/no-array-index-key
+			withSeparators.push(React.createElement(SepComponent, { key: `sep-${i}` }));
 			}
 		}
 		withSeparators.push(child);
@@ -246,7 +245,7 @@ const Button = ({
 		{
 			className: combinedClass,
 			onClick,
-			type,
+			type, // eslint-disable-line react/button-has-type
 			"aria-label": ariaLabelAttr,
 			...rest,
 		},
@@ -348,7 +347,7 @@ function CarouselItem({ children, className, label }) {
 	);
 }
 function CarouselButton({ children, className, label }) {
-	return React.createElement("button", { className: cx("c-carousel__button", className), "aria-label": label }, children);
+	return React.createElement("button", { type: "button", className: cx("c-carousel__button", className), "aria-label": label }, children);
 }
 function Carousel({ children, className, label }) {
 	return React.createElement(

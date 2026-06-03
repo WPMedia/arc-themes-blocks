@@ -156,6 +156,7 @@ describe("VideoPlayer", () => {
 			/>,
 		);
 		expect(screen.queryByRole("heading")).not.toBeInTheDocument();
+		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
 		expect(container.querySelector("p")).not.toBeInTheDocument();
 	});
 

@@ -67,6 +67,7 @@ describe("the right rail advanced layout", () => {
 	it("does not apply empty class to main interior item when both main sections have items", () => {
 		useAppContext.mockReturnValue({ renderables: allRenderables });
 		const { container } = render(<RightRailAdvancedLayout />);
+		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
 		const mainItem = container.querySelector(".b-right-rail-advanced__main-interior-item");
 		expect(mainItem).not.toHaveClass("b-right-rail-advanced__empty");
 	});
@@ -74,6 +75,7 @@ describe("the right rail advanced layout", () => {
 	it("applies empty class to main interior item when fewer than 2 main sections have items", () => {
 		useAppContext.mockReturnValue({ renderables: renderablesFewerItems });
 		const { container } = render(<RightRailAdvancedLayout />);
+		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
 		const mainItem = container.querySelector(".b-right-rail-advanced__main-interior-item");
 		expect(mainItem).toHaveClass("b-right-rail-advanced__empty");
 	});
@@ -81,6 +83,7 @@ describe("the right rail advanced layout", () => {
 	it("applies empty class to right rail when fewer than 2 right rail sections have items", () => {
 		useAppContext.mockReturnValue({ renderables: renderablesFewerItems });
 		const { container } = render(<RightRailAdvancedLayout />);
+		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
 		const rightRail = container.querySelector(".b-right-rail-advanced__main-right-rail");
 		expect(rightRail).toHaveClass("b-right-rail-advanced__empty");
 	});

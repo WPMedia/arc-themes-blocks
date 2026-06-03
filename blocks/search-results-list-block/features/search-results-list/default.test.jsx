@@ -1,7 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { useFusionContext } from "fusion:context";
 import SearchResultsListContainer from "./default";
 
 jest.mock("./_children/global-content", () => {
@@ -26,15 +25,6 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	LazyLoad: ({ children }) => children,
 	HeadingSection: ({ children }) => children,
 }));
-
-const defaultPromos = {
-	showByline: true,
-	showDate: true,
-	showDescription: true,
-	showHeadline: true,
-	showImage: true,
-	imageRatio: "16:9",
-};
 
 describe("the search results list feature block", () => {
 	it("renders the global content search list when inheritGlobalContent is true", () => {

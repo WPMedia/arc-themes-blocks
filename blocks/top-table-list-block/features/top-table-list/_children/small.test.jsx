@@ -1,20 +1,10 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { useFusionContext } from "fusion:context";
-import { useContent } from "fusion:content";
 import Small from "./small";
 
 jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({ arcSite: "the-sun" })),
-}));
-
-jest.mock("fusion:content", () => ({
-	useContent: jest.fn(),
-	useEditableContent: jest.fn(() => ({
-		editableContent: () => ({ contentEditable: "true" }),
-		searchableField: () => ({}),
-	})),
 }));
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
@@ -44,46 +34,45 @@ const elementEmpty = {
 
 describe("small promo block", () => {
 	it("renders an image and headline when both are provided", () => {
-		const { container } = render(<Small element={elementWithImage} customFields={baseConfig} />);
-		// Image is inside an assistiveHidden link, so query via DOM
-		expect(container.querySelector("img")).toBeInTheDocument();
+		render(<Small element={elementWithImage} customFields={baseConfig} />);
+		expect(screen.getByRole("img", { hidden: true })).toBeInTheDocument();
 		expect(screen.getByRole("heading")).toHaveTextContent("title");
 	});
 
 	it("renders a separator when showBottomBorderSM is true", () => {
-		const { container } = render(<Small element={elementWithImage} customFields={baseConfig} />);
-		expect(container.querySelector("hr")).toBeInTheDocument();
+		render(<Small element={elementWithImage} customFields={baseConfig} />);
+		expect(screen.getByRole("separator")).toBeInTheDocument();
 	});
 
 	it("renders a placeholder image but no heading when headline is empty", () => {
 		const { container } = render(<Small element={elementEmpty} customFields={baseConfig} />);
+		// Placeholder images render with alt="" (decorative) so they have role "none", not "img"
+		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
 		expect(container.querySelector("img")).toBeInTheDocument();
 		expect(screen.queryByRole("heading")).not.toBeInTheDocument();
 	});
 
 	it("renders only the headline when showImageSM is false", () => {
-		const { container } = render(
-			<Small element={elementWithImage} customFields={{ ...baseConfig, showImageSM: false }} />,
-		);
+		render(<Small element={elementWithImage} customFields={{ ...baseConfig, showImageSM: false }} />);
 		expect(screen.getByRole("heading")).toHaveTextContent("title");
-		expect(container.querySelector("img")).not.toBeInTheDocument();
+		expect(screen.queryByRole("img", { hidden: true })).not.toBeInTheDocument();
 	});
 
 	it("renders only the image when showHeadlineSM is false", () => {
-		const { container } = render(
+		render(
 			<Small element={elementWithImage} customFields={{ ...baseConfig, showHeadlineSM: false }} />,
 		);
-		expect(container.querySelector("img")).toBeInTheDocument();
+		expect(screen.getByRole("img", { hidden: true })).toBeInTheDocument();
 		expect(screen.queryByRole("heading")).not.toBeInTheDocument();
 	});
 
 	it("does not render a separator when showBottomBorderSM is false", () => {
-		const { container } = render(
+		render(
 			<Small
 				element={elementWithImage}
 				customFields={{ ...baseConfig, showBottomBorderSM: false }}
 			/>,
 		);
-		expect(container.querySelector("hr")).not.toBeInTheDocument();
+		expect(screen.queryByRole("separator")).not.toBeInTheDocument();
 	});
 });

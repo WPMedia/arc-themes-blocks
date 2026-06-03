@@ -1,4 +1,4 @@
-function signImagesInANSObject(cachedCall, resizerFetch, resizerTokenVersion) {
+function signImagesInANSObject() {
 	return function passThrough(response) {
 		return response;
 	};

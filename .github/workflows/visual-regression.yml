@@ -89,7 +89,7 @@ jobs:
       - name: Commit comparison screenshots
         run: |
           git add -f visual-regression/screenshots/
-          git commit -m "visual regression comparison"
+          git commit --allow-empty -m "visual regression comparison"
 
       - name: Build comparison Storybook
         run: npx storybook build --config-dir visual-regression/.storybook -o visual-regression/storybook-static

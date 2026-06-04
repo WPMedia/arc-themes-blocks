@@ -22,6 +22,7 @@ jobs:
     env:
       BASELINE_URL: ${{ github.event.inputs.baseline_url || 'https://themesinternal-the-gazette-sandbox.web.arc-cdn.net/empty/?_website=daily-intelligencer&mxId=00000000' }}
       COMPARISON_URL: ${{ github.event.inputs.comparison_url || 'https://themesinternal-the-gazette-sandbox.web.arc-cdn.net/empty/?_website=daily-intelligencer&mxId=00000000&d=253' }}
+      CHROMATIC_BRANCH: visual-regression-${{ github.run_id }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -54,7 +55,7 @@ jobs:
 
       - name: Create temp branch for Chromatic comparison
         run: |
-          git checkout -b visual-regression-${{ github.run_id }}
+          git checkout -b $CHROMATIC_BRANCH
           git config user.email "github-actions@github.com"
           git config user.name "GitHub Actions"
 
@@ -71,15 +72,14 @@ jobs:
         run: npx storybook build --config-dir visual-regression/.storybook -o visual-regression/storybook-static
 
       - name: Publish baseline to Chromatic
-        uses: chromaui/action@v11
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          storybookBuildDir: visual-regression/storybook-static
-          branchName: visual-regression-${{ github.run_id }}
-          autoAcceptChanges: true
-          exitZeroOnChanges: true
-          allowConsoleErrors: true
+        run: |
+          npx chromatic \
+            --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} \
+            --storybook-build-dir=visual-regression/storybook-static \
+            --branch-name=$CHROMATIC_BRANCH \
+            --auto-accept-changes \
+            --exit-zero-on-changes \
+            --allow-console-errors
 
       # --- Comparison ---
       - name: Capture comparison screenshots
@@ -94,19 +94,15 @@ jobs:
         run: npx storybook build --config-dir visual-regression/.storybook -o visual-regression/storybook-static
 
       - name: Publish comparison to Chromatic
-        id: chromatic
-        uses: chromaui/action@v11
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          storybookBuildDir: visual-regression/storybook-static
-          branchName: visual-regression-${{ github.run_id }}
-          exitZeroOnChanges: true
-          allowConsoleErrors: true
+        run: |
+          npx chromatic \
+            --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} \
+            --storybook-build-dir=visual-regression/storybook-static \
+            --branch-name=$CHROMATIC_BRANCH \
+            --exit-zero-on-changes \
+            --allow-console-errors
 
       - name: Print Chromatic results
         if: always()
         run: |
-          echo "Chromatic build: ${{ steps.chromatic.outputs.buildUrl }}"
-          echo "Visual changes: ${{ steps.chromatic.outputs.changeCount }}"
-          echo "Review the comparison at the Chromatic URL above."
+          echo "Check Chromatic dashboard for branch: $CHROMATIC_BRANCH"

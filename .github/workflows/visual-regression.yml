@@ -62,6 +62,9 @@ jobs:
       - name: Capture baseline screenshots
         run: node visual-regression/capture.mjs "$BASELINE_URL"
 
+      - name: Save baseline copies
+        run: cp -r visual-regression/screenshots visual-regression/screenshots-baseline
+
       - name: Commit baseline screenshots
         run: |
           git add -f visual-regression/screenshots/
@@ -99,6 +102,20 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           storybookBuildDir: visual-regression/storybook-static
           exitZeroOnChanges: true
+
+      - name: Upload baseline screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-baseline
+          path: visual-regression/screenshots-baseline/
+
+      - name: Upload comparison screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-comparison
+          path: visual-regression/screenshots/
 
       - name: Print Chromatic results
         if: always()

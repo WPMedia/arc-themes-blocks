@@ -10,18 +10,18 @@ on:
       baseline_url:
         description: "Baseline deployment URL"
         required: true
-        default: "https://themesinternal-the-gazette-sandbox.web.arc-cdn.net/?_website=daily-intelligencer&mxId=00000000"
+        default: "https://themesinternal-the-gazette-sandbox.web.arc-cdn.net/news/2023/06/07/some-parks-see-less-cherry-blossom-trees-blooming-this-year/?_website=daily-intelligencer&mxId=00000000"
       comparison_url:
         description: "Comparison deployment URL"
         required: true
-        default: "https://themesinternal-the-gazette-sandbox.web.arc-cdn.net/?_website=daily-intelligencer&mxId=00000000&d=253"
+        default: "https://themesinternal-the-gazette-sandbox.web.arc-cdn.net/news/2023/06/07/some-parks-see-less-cherry-blossom-trees-blooming-this-year/?_website=daily-intelligencer&mxId=00000000&d=253"
 
 jobs:
   compare:
     runs-on: ubuntu-latest
     env:
-      BASELINE_URL: ${{ github.event.inputs.baseline_url || 'https://themesinternal-the-gazette-sandbox.web.arc-cdn.net/?_website=daily-intelligencer&mxId=00000000' }}
-      COMPARISON_URL: ${{ github.event.inputs.comparison_url || 'https://themesinternal-the-gazette-sandbox.web.arc-cdn.net/?_website=daily-intelligencer&mxId=00000000&d=253' }}
+      BASELINE_URL: ${{ github.event.inputs.baseline_url || 'https://themesinternal-the-gazette-sandbox.web.arc-cdn.net/news/2023/06/07/some-parks-see-less-cherry-blossom-trees-blooming-this-year/?_website=daily-intelligencer&mxId=00000000' }}
+      COMPARISON_URL: ${{ github.event.inputs.comparison_url || 'https://themesinternal-the-gazette-sandbox.web.arc-cdn.net/news/2023/06/07/some-parks-see-less-cherry-blossom-trees-blooming-this-year/?_website=daily-intelligencer&mxId=00000000&d=253' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

@@ -99,7 +99,6 @@ jobs:
             --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} \
             --storybook-build-dir=visual-regression/storybook-static \
             --branch-name=$CHROMATIC_BRANCH \
-            --exit-zero-on-changes \
             --allow-console-errors
 
       - name: Print Chromatic results

@@ -1,0 +1,99 @@
+name: Visual Regression - Deployment Comparison
+
+on:
+  workflow_dispatch:
+    inputs:
+      baseline_url:
+        description: "Baseline deployment URL"
+        required: true
+        default: "https://sandbox.themesinternal.arcpublishing.com/pf/all-blocks-test-ta-sandbox/?_website=daily-intelligencer&mxId=00000000"
+      comparison_url:
+        description: "Comparison deployment URL"
+        required: true
+        default: "https://sandbox.themesinternal.arcpublishing.com/pf/all-blocks-test-ta-sandbox/?_website=daily-intelligencer&mxId=00000000&d=253"
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Cache Node Modules
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Create temp branch for Chromatic comparison
+        run: |
+          git checkout -b visual-regression-${{ github.run_id }}
+          git config user.email "github-actions@github.com"
+          git config user.name "GitHub Actions"
+
+      # --- Baseline ---
+      - name: Capture baseline screenshots
+        run: node visual-regression/capture.mjs "${{ github.event.inputs.baseline_url }}"
+
+      - name: Commit baseline screenshots
+        run: |
+          git add -f visual-regression/screenshots/
+          git commit -m "visual regression baseline"
+
+      - name: Build baseline Storybook
+        run: npx storybook build --config-dir visual-regression/.storybook -o visual-regression/storybook-static
+
+      - name: Publish baseline to Chromatic
+        uses: chromaui/action@v11
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          storybookBuildDir: visual-regression/storybook-static
+          autoAcceptChanges: true
+          exitZeroOnChanges: true
+
+      # --- Comparison ---
+      - name: Capture comparison screenshots
+        run: node visual-regression/capture.mjs "${{ github.event.inputs.comparison_url }}"
+
+      - name: Commit comparison screenshots
+        run: |
+          git add -f visual-regression/screenshots/
+          git commit -m "visual regression comparison"
+
+      - name: Build comparison Storybook
+        run: npx storybook build --config-dir visual-regression/.storybook -o visual-regression/storybook-static
+
+      - name: Publish comparison to Chromatic
+        id: chromatic
+        uses: chromaui/action@v11
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          storybookBuildDir: visual-regression/storybook-static
+          exitZeroOnChanges: true
+
+      - name: Print Chromatic results
+        if: always()
+        run: |
+          echo "Chromatic build: ${{ steps.chromatic.outputs.buildUrl }}"
+          echo "Visual changes: ${{ steps.chromatic.outputs.changeCount }}"
+          echo "Review the comparison at the Chromatic URL above."

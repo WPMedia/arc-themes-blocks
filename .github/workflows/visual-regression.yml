@@ -1,6 +1,10 @@
 name: Visual Regression - Deployment Comparison
 
 on:
+  # TODO: Remove push trigger after testing — only workflow_dispatch should remain
+  push:
+    branches:
+      - playwright-chromatic-action
   workflow_dispatch:
     inputs:
       baseline_url:
@@ -15,6 +19,9 @@ on:
 jobs:
   compare:
     runs-on: ubuntu-latest
+    env:
+      BASELINE_URL: ${{ github.event.inputs.baseline_url || 'https://sandbox.themesinternal.arcpublishing.com/pf/all-blocks-test-ta-sandbox/?_website=daily-intelligencer&mxId=00000000' }}
+      COMPARISON_URL: ${{ github.event.inputs.comparison_url || 'https://sandbox.themesinternal.arcpublishing.com/pf/all-blocks-test-ta-sandbox/?_website=daily-intelligencer&mxId=00000000&d=253' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -51,7 +58,7 @@ jobs:
 
       # --- Baseline ---
       - name: Capture baseline screenshots
-        run: node visual-regression/capture.mjs "${{ github.event.inputs.baseline_url }}"
+        run: node visual-regression/capture.mjs "$BASELINE_URL"
 
       - name: Commit baseline screenshots
         run: |
@@ -72,7 +79,7 @@ jobs:
 
       # --- Comparison ---
       - name: Capture comparison screenshots
-        run: node visual-regression/capture.mjs "${{ github.event.inputs.comparison_url }}"
+        run: node visual-regression/capture.mjs "$COMPARISON_URL"
 
       - name: Commit comparison screenshots
         run: |

@@ -72,7 +72,7 @@ const fetch = async (key = {}) => {
 			content_elements: recs.map((s) => scoredItemToAns(s, siteId)),
 			attribution: data.attribution || null,
 		};
-	} catch (e) {
+	} catch {
 		// Network/HTTP/parse error: degrade to empty so the block renders nothing.
 		return EMPTY;
 	}

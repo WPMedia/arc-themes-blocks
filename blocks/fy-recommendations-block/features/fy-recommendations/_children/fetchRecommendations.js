@@ -32,7 +32,7 @@ const fetchRecommendations = async ({ site, query, contextPath, endpoint, signal
 			content_elements: Array.isArray(data?.content_elements) ? data.content_elements : [],
 			attribution: data?.attribution ?? null,
 		};
-	} catch (e) {
+	} catch {
 		return EMPTY;
 	}
 };

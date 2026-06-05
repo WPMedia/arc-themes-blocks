@@ -11,7 +11,7 @@ const getUserId = () => {
 		const match = document.cookie.match(/(?:^|;\s*)fy_user_id=([^;]+)/);
 		if (match) return decodeURIComponent(match[1]);
 		return localStorage.getItem("fy_user_id") || null;
-	} catch (e) {
+	} catch {
 		return null;
 	}
 };

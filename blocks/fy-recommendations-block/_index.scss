@@ -1,0 +1,40 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-fy-recommendations {
+	&__card {
+		display: flex;
+		flex-direction: column;
+		text-decoration: none;
+		padding: 0;
+
+		img {
+			inline-size: 100%;
+		}
+
+		@include scss.block-properties("fy-recommendations-card");
+		@include scss.block-components("fy-recommendations-card");
+	}
+
+	&__card-category {
+		@include scss.block-properties("fy-recommendations-card-category");
+		@include scss.block-components("fy-recommendations-card-category");
+	}
+
+	&__card-title {
+		@include scss.block-properties("fy-recommendations-card-title");
+		@include scss.block-components("fy-recommendations-card-title");
+	}
+
+	&__card-author {
+		@include scss.block-properties("fy-recommendations-card-author");
+		@include scss.block-components("fy-recommendations-card-author");
+	}
+
+	&__card-premium {
+		@include scss.block-properties("fy-recommendations-card-premium");
+		@include scss.block-components("fy-recommendations-card-premium");
+	}
+
+	@include scss.block-properties("fy-recommendations");
+	@include scss.block-components("fy-recommendations");
+}

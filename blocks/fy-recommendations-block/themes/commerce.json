@@ -1,0 +1,46 @@
+{
+	"fy-recommendations": {
+		"styles": {
+			"default": {
+				"components": {
+					"carousel-actions": {
+						"margin-top": 0
+					},
+					"icon": {
+						"height": "var(--global-font-size-9)",
+						"width": "var(--global-font-size-9)"
+					}
+				},
+				"gap": "var(--global-spacing-2)"
+			},
+			"desktop": {
+				"components": {
+					"carousel-actions": {
+						"margin-top": "-7rem"
+					}
+				}
+			}
+		}
+	},
+	"fy-recommendations-card": {
+		"styles": {
+			"default": {
+				"components": {
+					"heading": {
+						"-webkit-line-clamp": 3,
+						"font-size": "var(--body-font-size-small)",
+						"line-height": "var(--body-line-height-small)",
+						"color": "var(--color-primary)"
+					},
+					"paragraph": {
+						"font-size": "var(--body-font-size-small)",
+						"line-height": "var(--body-line-height-small)",
+						"color": "var(--text-color)"
+					}
+				},
+				"gap": "var(--global-spacing-1)"
+			},
+			"desktop": {}
+		}
+	}
+}

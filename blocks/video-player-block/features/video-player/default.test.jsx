@@ -1,413 +1,198 @@
-describe("This test is disabled", () => {
-	it("should succeed", () => {
-		expect(true);
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import { useFusionContext } from "fusion:context";
+import { useContent } from "fusion:content";
+import VideoPlayer from "./default";
+
+jest.mock("fusion:context", () => ({
+	useFusionContext: jest.fn(),
+}));
+
+jest.mock("fusion:content", () => ({
+	useContent: jest.fn(() => ({})),
+}));
+
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	formatCredits: (value) => value,
+	formatPowaVideoEmbed: (value) => value,
+	getAspectRatio: (width, height) => {
+		if (!width || !height || height === 0) return undefined;
+		const gcd = (a, b) => (b ? gcd(b, a % b) : Math.abs(a));
+		const d = gcd(width, height);
+		return `${width / d}:${height / d}`;
+	},
+	Video: ({ embedMarkup, className }) => (
+		<div data-testid="video-container" className={className}>
+			{embedMarkup}
+		</div>
+	),
+}));
+
+const testEmbed =
+	'<div class="powa" id="powa-abc123" data-org="corecomponents" data-env="prod">' +
+	'<script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+
+describe("VideoPlayer", () => {
+	afterEach(() => {
+		jest.clearAllMocks();
+	});
+
+	it("calls useContent with websiteURL when that deprecated field is provided", () => {
+		useFusionContext.mockReturnValue({ arcSite: "dagen" });
+		render(<VideoPlayer customFields={{ displayStyle: "inlineVideo", websiteURL: "/some/url" }} />);
+		expect(useContent).toHaveBeenCalledWith(
+			expect.objectContaining({
+				query: expect.objectContaining({ website_url: "/some/url", site: "dagen" }),
+				source: "content-api",
+			}),
+		);
+	});
+
+	it("renders video content from globalContent when inheritGlobalContent is true", () => {
+		useFusionContext.mockReturnValue({ globalContent: { embed_html: testEmbed } });
+		render(
+			<VideoPlayer customFields={{ displayStyle: "inlineVideo", inheritGlobalContent: true }} />,
+		);
+		expect(useContent).toHaveBeenCalledWith({ query: null, source: null });
+		expect(screen.getByTestId("video-container")).toBeInTheDocument();
+	});
+
+	it("fetches content when inheritGlobalContent is false", () => {
+		useFusionContext.mockReturnValue({});
+		useContent.mockReturnValue({ embed_html: testEmbed });
+		render(
+			<VideoPlayer
+				customFields={{
+					displayStyle: "inlineVideo",
+					inheritGlobalContent: false,
+					itemContentConfig: { contentConfigValues: "query", contentService: "source" },
+				}}
+			/>,
+		);
+		expect(useContent).toHaveBeenCalledWith({ query: "query", source: "source" });
+		expect(screen.getByTestId("video-container")).toBeInTheDocument();
+	});
+
+	it("renders the title, alert badge, and description when provided", () => {
+		useFusionContext.mockReturnValue({ globalContent: { embed_html: testEmbed } });
+		render(
+			<VideoPlayer
+				customFields={{
+					alertBadge: "Breaking",
+					description: "A description",
+					displayStyle: "inlineVideo",
+					inheritGlobalContent: true,
+					title: "Video Title",
+				}}
+			/>,
+		);
+		expect(screen.getByRole("heading")).toHaveTextContent("Video Title");
+		expect(screen.getByText("Breaking")).toBeInTheDocument();
+		expect(screen.getByText("A description")).toBeInTheDocument();
+	});
+
+	it("renders the featureVideo layout", () => {
+		useFusionContext.mockReturnValue({ globalContent: { embed_html: testEmbed } });
+		render(
+			<VideoPlayer
+				customFields={{ displayStyle: "featureVideo", inheritGlobalContent: true }}
+			/>,
+		);
+		expect(screen.getByTestId("video-container")).toBeInTheDocument();
+	});
+
+	it("renders featureVideo layout with title, alert badge, and description", () => {
+		useFusionContext.mockReturnValue({ globalContent: { embed_html: testEmbed } });
+		render(
+			<VideoPlayer
+				customFields={{
+					alertBadge: "Alert",
+					description: "Feature description",
+					displayStyle: "featureVideo",
+					inheritGlobalContent: true,
+					title: "Feature Title",
+				}}
+			/>,
+		);
+		expect(screen.getByRole("heading")).toHaveTextContent("Feature Title");
+		expect(screen.getByText("Alert")).toBeInTheDocument();
+		expect(screen.getByText("Feature description")).toBeInTheDocument();
+	});
+
+	it("shows globalContent headline and description as caption when inheritGlobalContent is true", () => {
+		useFusionContext.mockReturnValue({
+			globalContent: {
+				embed_html: testEmbed,
+				headlines: { basic: "Content Headline" },
+				description: { basic: "Content Description" },
+			},
+		});
+		render(
+			<VideoPlayer customFields={{ displayStyle: "featureVideo", inheritGlobalContent: true }} />,
+		);
+		expect(screen.getByText("Content Headline")).toBeInTheDocument();
+		expect(screen.getByText("Content Description")).toBeInTheDocument();
+	});
+
+	it("hides title, caption, and credits when the hide flags are set", () => {
+		useFusionContext.mockReturnValue({
+			globalContent: {
+				embed_html: testEmbed,
+				headlines: { basic: "Should hide" },
+				description: { basic: "Should also hide" },
+			},
+		});
+		const { container } = render(
+			<VideoPlayer
+				customFields={{
+					displayStyle: "featureVideo",
+					hideVideoCaption: true,
+					hideVideoCredits: true,
+					hideVideoTitle: true,
+					inheritGlobalContent: true,
+				}}
+			/>,
+		);
+		expect(screen.queryByRole("heading")).not.toBeInTheDocument();
+		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+		expect(container.querySelector("p")).not.toBeInTheDocument();
+	});
+
+	it("renders nothing when there is no video content", () => {
+		useFusionContext.mockReturnValue({});
+		useContent.mockReturnValue(undefined);
+		const { container } = render(
+			<VideoPlayer
+				customFields={{ displayStyle: "featureVideo", inheritGlobalContent: false }}
+			/>,
+		);
+		expect(container).toBeEmptyDOMElement();
+	});
+
+	it("renders nothing when no customFields are provided", () => {
+		useFusionContext.mockReturnValue({});
+		const { container } = render(<VideoPlayer />);
+		expect(container).toBeEmptyDOMElement();
+	});
+
+	it("calculates a 9:16 aspect ratio from promo_items dimensions", () => {
+		const verticalContent = {
+			embed_html: testEmbed,
+			promo_items: { basic: { width: 1080, height: 1920 } },
+		};
+		useFusionContext.mockReturnValue({});
+		useContent.mockReturnValue(verticalContent);
+		render(
+			<VideoPlayer
+				customFields={{
+					displayStyle: "inlineVideo",
+					inheritGlobalContent: false,
+					itemContentConfig: { contentConfigValues: "query", contentService: "source" },
+				}}
+			/>,
+		);
+		expect(screen.getByTestId("video-container")).toBeInTheDocument();
 	});
 });
-
-// import { useFusionContext } from "fusion:context";
-// import { useContent } from "fusion:content";
-
-// import VideoPlayer from "./default";
-
-// const React = require("react");
-// const { mount, shallow } = require("enzyme");
-
-// jest.mock("@wpmedia/arc-themes-components", () => {
-// 	const original = jest.requireActual("@wpmedia/arc-themes-components");
-// 	return {
-// 		...original,
-// 		formatCredits: (value) => value,
-// 		formatPowaVideoEmbed: (value) => value,
-// 		getAspectRatio: (width, height) => {
-// 			// This arrow function is equivalent to what is in @wpmedia/arc-themes-components/src/utils/get-aspect-ratio/utils.js
-// 			// Helper function to find GCD
-// 			const gcd = (valA, valB) => {
-// 				let a = Math.abs(valA);
-// 				let b = Math.abs(valB);
-// 				while (b) {
-// 					const temp = b;
-// 					b = a % b;
-// 					a = temp;
-// 				}
-
-// 				return a;
-// 			};
-
-// 			// Return undefined if height === 0, so there is no division by zero error
-// 			if (height === 0) {
-// 				return undefined;
-// 			}
-
-// 			// Calculate the aspect ratio
-// 			const divisor = gcd(width, height);
-// 			const aspectWidth = width / divisor;
-// 			const aspectHeight = height / divisor;
-
-// 			return `${aspectWidth}:${aspectHeight}`;
-// 		},
-// 		Video: ({ embedMarkup }) => <div dangerouslySetInnerHTML={{ __html: embedMarkup }} />,
-// 	};
-// });
-
-// jest.mock("fusion:content", () => ({
-// 	useContent: jest.fn(() => ({})),
-// }));
-
-// describe("VideoPlayer", () => {
-// 	afterEach(() => {
-// 		jest.resetModules();
-// 		jest.clearAllMocks();
-// 	});
-
-// 	it("renders with deprecated websiteURL custom field", () => {
-// 		const mockFusionContext = { arcSite: "dagen" };
-// 		const websiteURL = "/some/website/url";
-// 		const mockFetchParam = {
-// 			query: {
-// 				site: mockFusionContext.arcSite,
-// 				website_url: websiteURL,
-// 			},
-// 			source: "content-api",
-// 		};
-
-// 		useFusionContext.mockReturnValueOnce(mockFusionContext);
-
-// 		shallow(<VideoPlayer customFields={{ displayStyle: "inlineVideo", websiteURL }} />);
-
-// 		expect(useContent).toHaveBeenCalledTimes(1);
-// 		expect(useContent).toHaveBeenCalledWith(mockFetchParam);
-// 	});
-
-// 	it("does not fetch data and uses globalContent if inheritGlobalContent", () => {
-// 		const testEmbed =
-// 			'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-aspect-ratio="0.5625" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/' +
-// 			'prod/powaBoot.js?org=corecomponents"></script></div>';
-
-// 		const globalContent = { embed_html: testEmbed };
-// 		useFusionContext.mockImplementation(() => ({ globalContent }));
-
-// 		const wrapper = mount(
-// 			<VideoPlayer customFields={{ displayStyle: "inlineVideo", inheritGlobalContent: true }} />
-// 		);
-
-// 		const expectedEmbed =
-// 			'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283' +
-// 			'a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346' +
-// 			'-02283a126943" data-aspect-ratio="0.5625" data-api="prod"><script src="//d2w3jw6424abwq' +
-// 			'.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
-
-// 		expect(useContent).toHaveBeenCalledWith({ query: null, source: null });
-// 		expect(wrapper.find("Video").prop("embedMarkup")).toEqual(expectedEmbed);
-// 	});
-
-// 	it("fetches data if inheritGlobalContent is false", () => {
-// 		const testEmbed =
-// 			'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-aspect-ratio="0.5625" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/' +
-// 			'prod/powaBoot.js?org=corecomponents"></script></div>';
-
-// 		useFusionContext.mockImplementation(() => ({}));
-// 		useContent.mockImplementation(() => ({ embed_html: testEmbed }));
-
-// 		const wrapper = mount(
-// 			<VideoPlayer
-// 				customFields={{
-// 					displayStyle: "inlineVideo",
-// 					inheritGlobalContent: false,
-// 					itemContentConfig: {
-// 						contentConfigValues: "query",
-// 						contentService: "source",
-// 					},
-// 				}}
-// 			/>
-// 		);
-
-// 		const expectedEmbed =
-// 			'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283' +
-// 			'a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346' +
-// 			'-02283a126943" data-aspect-ratio="0.5625" data-api="prod"><script src="//d2w3jw6424abwq' +
-// 			'.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
-
-// 		expect(useContent).toHaveBeenCalledWith({ query: "query", source: "source" });
-// 		expect(wrapper.find("Video").prop("embedMarkup")).toEqual(expectedEmbed);
-// 	});
-
-// 	it("if title, description, alert badge is provided then show those ", () => {
-// 		const alertBadge = "Test Alert Badge";
-// 		const description = "Test Description";
-// 		const title = "Test Title";
-// 		const testEmbed =
-// 			'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-aspect-ratio="0.5625" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/' +
-// 			'prod/powaBoot.js?org=corecomponents"></script></div>';
-
-// 		const globalContent = { embed_html: testEmbed };
-// 		useFusionContext.mockImplementation(() => ({ globalContent }));
-
-// 		const wrapper = mount(
-// 			<VideoPlayer
-// 				customFields={{
-// 					alertBadge,
-// 					description,
-// 					displayStyle: "inlineVideo",
-// 					inheritGlobalContent: true,
-// 					playthrough: true,
-// 					title,
-// 				}}
-// 			/>
-// 		);
-
-// 		expect(wrapper.find("Heading").text()).toEqual(title);
-// 		expect(wrapper.find("MediaItem")).toExist();
-// 		expect(wrapper.find("Badge").text()).toEqual(alertBadge);
-// 		expect(wrapper.find("Paragraph").text()).toEqual(description);
-// 		expect(wrapper.find("Video")).toExist();
-// 	});
-
-// 	it("renders the feature video style", () => {
-// 		const testEmbed =
-// 			'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-aspect-ratio="0.5625" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/' +
-// 			'prod/powaBoot.js?org=corecomponents"></script></div>';
-
-// 		const globalContent = { embed_html: testEmbed };
-// 		useFusionContext.mockImplementation(() => ({ globalContent }));
-
-// 		const wrapper = mount(
-// 			<VideoPlayer
-// 				customFields={{
-// 					displayStyle: "featureVideo",
-// 					inheritGlobalContent: true,
-// 				}}
-// 			/>
-// 		);
-
-// 		expect(wrapper.find("MediaItem")).toExist();
-// 		expect(wrapper.find("Video")).toExist();
-// 	});
-
-// 	it("renders the feature video style with alert badge, header, caption, and description", () => {
-// 		const alertBadge = "Test Alert Badge";
-// 		const description = "Test Description";
-// 		const title = "Test Title";
-// 		const testEmbed =
-// 			'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-aspect-ratio="0.5625" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/' +
-// 			'prod/powaBoot.js?org=corecomponents"></script></div>';
-
-// 		const globalContent = { embed_html: testEmbed };
-// 		useFusionContext.mockImplementation(() => ({ globalContent }));
-
-// 		const wrapper = mount(
-// 			<VideoPlayer
-// 				customFields={{
-// 					alertBadge,
-// 					description,
-// 					displayStyle: "featureVideo",
-// 					inheritGlobalContent: true,
-// 					title,
-// 				}}
-// 			/>
-// 		);
-
-// 		expect(wrapper.find("Heading").text()).toEqual(title);
-// 		expect(wrapper.find("MediaItem")).toExist();
-// 		expect(wrapper.find("Badge").text()).toEqual(alertBadge);
-// 		expect(wrapper.find("Paragraph").text()).toEqual(description);
-// 		expect(wrapper.find("Video")).toExist();
-// 	});
-
-// 	it("renders the title and description in caption if both are provided and inheritGlobalContent is false", () => {
-// 		const description = "Test Description";
-// 		const title = "Test Title";
-// 		const testEmbed =
-// 			'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-aspect-ratio="0.5625" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/' +
-// 			'prod/powaBoot.js?org=corecomponents"></script></div>';
-
-// 		const globalContent = {
-// 			credits: "credits should render",
-// 			embed_html: testEmbed,
-// 			headlines: { basic: "this headline should not render" },
-// 			description: { basic: "this description should not render" },
-// 		};
-// 		useFusionContext.mockImplementation(() => ({ globalContent }));
-// 		useContent.mockImplementation(() => globalContent);
-
-// 		const wrapper = mount(
-// 			<VideoPlayer
-// 				customFields={{
-// 					description,
-// 					displayStyle: "featureVideo",
-// 					inheritGlobalContent: false,
-// 					title,
-// 				}}
-// 			/>
-// 		);
-
-// 		expect(wrapper.find("MediaItem")).toExist();
-// 		expect(wrapper.find("Video")).toExist();
-// 		expect(wrapper.find("MediaItem").text()).toContain(title);
-// 		expect(wrapper.find("MediaItem").text()).toContain(description);
-// 	});
-
-// 	it("does not render the title and description in caption unless both are provided", () => {
-// 		const testEmbed =
-// 			'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-aspect-ratio="0.5625" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/' +
-// 			'prod/powaBoot.js?org=corecomponents"></script></div>';
-
-// 		const globalContent = {
-// 			credits: "credits",
-// 			embed_html: testEmbed,
-// 			headlines: { basic: "this headline should render" },
-// 			description: { basic: "this description should render" },
-// 		};
-// 		useFusionContext.mockImplementation(() => ({ globalContent }));
-
-// 		const wrapper = mount(
-// 			<VideoPlayer
-// 				customFields={{
-// 					displayStyle: "featureVideo",
-// 					inheritGlobalContent: true,
-// 				}}
-// 			/>
-// 		);
-
-// 		expect(wrapper.find("MediaItem")).toExist();
-// 		expect(wrapper.find("MediaItem").text()).toContain("this headline should render");
-// 		expect(wrapper.find("MediaItem").text()).toContain("this description should render");
-// 		expect(wrapper.find("MediaItem").text()).toContain("credits");
-// 	});
-
-// 	it("hides the title, caption, and credits when requested", () => {
-// 		const testEmbed =
-// 			'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943"' +
-// 			' data-aspect-ratio="0.5625" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/' +
-// 			'prod/powaBoot.js?org=corecomponents"></script></div>';
-
-// 		const globalContent = {
-// 			credits: "credits",
-// 			embed_html: testEmbed,
-// 			headlines: { basic: "this headline should not render" },
-// 			description: { basic: "this description should not render" },
-// 		};
-// 		useFusionContext.mockImplementation(() => ({ globalContent }));
-
-// 		const wrapper = mount(
-// 			<VideoPlayer
-// 				customFields={{
-// 					displayStyle: "featureVideo",
-// 					hideVideoCaption: true,
-// 					hideVideoCredits: true,
-// 					hideVideoTitle: true,
-// 					inheritGlobalContent: true,
-// 				}}
-// 			/>
-// 		);
-
-// 		expect(wrapper.find("MediaItem")).toExist();
-// 		expect(wrapper.find("MediaItem").text()).toBe("");
-// 	});
-
-// 	it("if no video content, render nothing", () => {
-// 		useFusionContext.mockImplementation(() => ({}));
-// 		useContent.mockImplementation(() => {});
-
-// 		const wrapper = mount(
-// 			<VideoPlayer
-// 				customFields={{
-// 					displayStyle: "featureVideo",
-// 					inheritGlobalContent: false,
-// 				}}
-// 			/>
-// 		);
-
-// 		expect(wrapper).toBeEmptyRender();
-// 	});
-
-// 	it("if no customFields, render nothing", () => {
-// 		const wrapper = mount(<VideoPlayer />);
-
-// 		expect(wrapper).toBeEmptyRender();
-// 	});
-
-// 	it("confirms that a vertical video's aspect ratio is not changed", () => {
-// 		const testEmbed =
-// 			'<div class="powa" id="powa-3509db8e-aaea-4264-8efa-b9fe039af027"' +
-// 			' data-org="themesinternal" data-env="sandbox" data-uuid="3509db8e-aaea-4264-8efa-b9fe039af027"' +
-// 			' data-aspect-ratio="1.778" data-api="sandbox"><script src="//d3jmjg29t4jdhz.cloudfront.net/' +
-// 			'sandbox/powaBoot.js?org=themesinternal"></script></div>';
-
-// 		useFusionContext.mockImplementation(() => ({}));
-// 		useContent.mockImplementation(() => ({ embed_html: testEmbed }));
-
-// 		const wrapper = mount(
-// 			<VideoPlayer
-// 				customFields={{
-// 					displayStyle: "inlineVideo",
-// 					inheritGlobalContent: false,
-// 					itemContentConfig: {
-// 						contentConfigValues: "query",
-// 						contentService: "source",
-// 					},
-// 				}}
-// 			/>
-// 		);
-
-// 		const expectedEmbed =
-// 			'<div class="powa" id="powa-3509db8e-aaea-4264-8efa-b9fe039af027"' +
-// 			' data-org="themesinternal" data-env="sandbox" data-uuid="3509db8e-aaea-4264-8efa-b9fe039af027"' +
-// 			' data-aspect-ratio="1.778" data-api="sandbox"><script src="//d3jmjg29t4jdhz.cloudfront.net/' +
-// 			'sandbox/powaBoot.js?org=themesinternal"></script></div>';
-
-// 		expect(useContent).toHaveBeenCalledWith({ query: "query", source: "source" });
-// 		expect(wrapper.find("Video").prop("embedMarkup")).toEqual(expectedEmbed);
-// 	});
-
-// 	it("makes sure a vertical video has its aspect ratio calculated correctly (9:16)", () => {
-// 		const testEmbed =
-// 			'<div class="powa" id="powa-3509db8e-aaea-4264-8efa-b9fe039af027"' +
-// 			' data-org="themesinternal" data-env="sandbox" data-uuid="3509db8e-aaea-4264-8efa-b9fe039af027"' +
-// 			' data-aspect-ratio="1.778" data-api="sandbox"><script src="//d3jmjg29t4jdhz.cloudfront.net/' +
-// 			'sandbox/powaBoot.js?org=themesinternal"></script></div>';
-// 		const testContentSource = {
-// 			promo_items: {
-// 				basic: {
-// 					width: 1080,
-// 					height: 1920,
-// 				},
-// 			},
-// 			embed_html: testEmbed,
-// 		};
-
-// 		useFusionContext.mockImplementation(() => ({ testContentSource }));
-// 		useContent.mockImplementation(() => testContentSource);
-
-// 		const wrapper = mount(
-// 			<VideoPlayer
-// 				customFields={{
-// 					displayStyle: "inlineVideo",
-// 					inheritGlobalContent: false,
-// 					itemContentConfig: {
-// 						contentConfigValues: "query",
-// 						contentService: "source",
-// 					},
-// 				}}
-// 			/>
-// 		);
-
-// 		expect(useContent).toHaveBeenCalledWith({ query: "query", source: "source" });
-// 		expect(wrapper.find("Video")).toExist();
-// 		expect(wrapper.find("Video").prop("aspectRatio")).toEqual("9:16");
-// 	});
-// });

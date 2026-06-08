@@ -69,6 +69,7 @@
     "@stripe/stripe-js": "^8.5.3",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^16.0.0",
+    "@testing-library/dom": "^10.4.1",
     "@wpmedia/arc-themes-components": "^0.0.4-arc-themes-release-version-4-0-0",
     "algoliasearch": "^4.20.0",
     "babel-jest": "^29.7.0",

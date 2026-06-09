@@ -1,0 +1,14 @@
+[
+	{
+		"name": "Small Promo Block",
+		"path": "/small-promo-block/"
+	},
+	{
+		"name": "Top Table List Block",
+		"path": "/top-table-list-block/"
+	},
+	{
+		"name": "Large Promo Block",
+		"path": "/large-promo-block/"
+	}
+]

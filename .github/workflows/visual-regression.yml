@@ -7,21 +7,26 @@ on:
       - playwright-chromatic-action
   workflow_dispatch:
     inputs:
-      baseline_url:
-        description: "Baseline deployment URL"
+      base_url:
+        description: "Base URL (without path or d parameter)"
         required: true
-        default: "https://themesinternal-the-gazette-sandbox.web.arc-cdn.net/?_website=daily-intelligencer&mxId=00000000"
-      comparison_url:
-        description: "Comparison deployment URL"
+        default: "https://themesinternal-the-gazette-sandbox.web.arc-cdn.net"
+      url_params:
+        description: "Query parameters appended to all URLs"
         required: true
-        default: "https://themesinternal-the-gazette-sandbox.web.arc-cdn.net/empty/?_website=daily-intelligencer&mxId=00000000"
+        default: "_website=daily-intelligencer&mxId=00000000"
+      deployment_id:
+        description: "Deployment ID for comparison (appended as d= parameter)"
+        required: false
+        default: "253"
 
 jobs:
   compare:
     runs-on: ubuntu-latest
     env:
-      BASELINE_URL: ${{ github.event.inputs.baseline_url || 'https://themesinternal-the-gazette-sandbox.web.arc-cdn.net/?_website=daily-intelligencer&mxId=00000000' }}
-      COMPARISON_URL: ${{ github.event.inputs.comparison_url || 'https://themesinternal-the-gazette-sandbox.web.arc-cdn.net/empty/?_website=daily-intelligencer&mxId=00000000' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://themesinternal-the-gazette-sandbox.web.arc-cdn.net' }}
+      URL_PARAMS: ${{ github.event.inputs.url_params || '_website=daily-intelligencer&mxId=00000000' }}
+      DEPLOYMENT_ID: ${{ github.event.inputs.deployment_id || '253' }}
       CHROMATIC_BRANCH: visual-regression-${{ github.run_id }}
     steps:
       - name: Checkout repository
@@ -59,13 +64,16 @@ jobs:
           git config user.email "github-actions@github.com"
           git config user.name "GitHub Actions"
 
+      - name: Generate stories from pages config
+        run: node visual-regression/generate-stories.mjs
+
       # --- Baseline ---
       - name: Capture baseline screenshots
-        run: node visual-regression/capture.mjs "$BASELINE_URL"
+        run: node visual-regression/capture.mjs "${BASE_URL}?${URL_PARAMS}"
 
       - name: Commit baseline screenshots
         run: |
-          git add -f visual-regression/screenshots/
+          git add -f visual-regression/screenshots/ visual-regression/stories/
           git commit -m "visual regression baseline"
 
       - name: Build baseline Storybook
@@ -83,7 +91,7 @@ jobs:
 
       # --- Comparison ---
       - name: Capture comparison screenshots
-        run: node visual-regression/capture.mjs "$COMPARISON_URL"
+        run: node visual-regression/capture.mjs "${BASE_URL}?${URL_PARAMS}" "$DEPLOYMENT_ID"
 
       - name: Commit comparison screenshots
         run: |

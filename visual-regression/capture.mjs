@@ -7,10 +7,11 @@ const currentDir = dirname(fileURLToPath(import.meta.url));
 const screenshotsDir = resolve(currentDir, "screenshots");
 
 const baseUrl = process.argv[2];
-const deploymentId = process.argv[3];
+const urlParams = process.argv[3];
+const deploymentId = process.argv[4];
 
-if (!baseUrl) {
-	console.error("Usage: node capture.mjs <base-url> [deployment-id]");
+if (!baseUrl || !urlParams) {
+	console.error("Usage: node capture.mjs <base-url> <url-params> [deployment-id]");
 	process.exit(1);
 }
 
@@ -37,9 +38,9 @@ for (const page of pages) {
 			viewport: { width: vp.width, height: vp.height },
 		});
 
-		let url = `${baseUrl}${page.path}`;
+		let url = `${baseUrl}${page.path}?${urlParams}`;
 		if (deploymentId) {
-			url += `${url.includes("?") ? "&" : "?"}d=${deploymentId}`;
+			url += `&d=${deploymentId}`;
 		}
 
 		console.log(`Capturing ${page.name} - ${vp.name} (${vp.width}x${vp.height})...`);

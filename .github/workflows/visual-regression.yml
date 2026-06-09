@@ -69,7 +69,7 @@ jobs:
 
       # --- Baseline ---
       - name: Capture baseline screenshots
-        run: node visual-regression/capture.mjs "${BASE_URL}?${URL_PARAMS}"
+        run: node visual-regression/capture.mjs "$BASE_URL" "$URL_PARAMS"
 
       - name: Commit baseline screenshots
         run: |
@@ -91,7 +91,7 @@ jobs:
 
       # --- Comparison ---
       - name: Capture comparison screenshots
-        run: node visual-regression/capture.mjs "${BASE_URL}?${URL_PARAMS}" "$DEPLOYMENT_ID"
+        run: node visual-regression/capture.mjs "$BASE_URL" "$URL_PARAMS" "$DEPLOYMENT_ID"
 
       - name: Commit comparison screenshots
         run: |

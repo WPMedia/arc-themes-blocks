@@ -1,10 +1,11 @@
-import { readFileSync, writeFileSync } from "fs";
+import { mkdirSync, readFileSync, writeFileSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const currentDir = dirname(fileURLToPath(import.meta.url));
 const pages = JSON.parse(readFileSync(resolve(currentDir, "pages.json"), "utf8"));
 const storiesDir = resolve(currentDir, "stories");
+mkdirSync(storiesDir, { recursive: true });
 
 for (const page of pages) {
 	const slug = page.name.toLowerCase().replace(/\s+/g, "-");

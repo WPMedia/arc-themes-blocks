@@ -18,7 +18,7 @@ on:
       deployment_id:
         description: "Deployment ID for comparison (appended as d= parameter)"
         required: false
-        default: "253"
+        default: "255"
 
 jobs:
   compare:
@@ -26,7 +26,7 @@ jobs:
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://themesinternal-the-gazette-sandbox.web.arc-cdn.net' }}
       URL_PARAMS: ${{ github.event.inputs.url_params || '_website=daily-intelligencer&mxId=00000000' }}
-      DEPLOYMENT_ID: ${{ github.event.inputs.deployment_id || '253' }}
+      DEPLOYMENT_ID: ${{ github.event.inputs.deployment_id || '255' }}
       CHROMATIC_BRANCH: visual-regression-${{ github.run_id }}
     steps:
       - name: Checkout repository

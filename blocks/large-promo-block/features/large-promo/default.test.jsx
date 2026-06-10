@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 
 import { useContent } from "fusion:content";
+import { useFusionContext } from "fusion:context";
 import { isServerSide } from "@wpmedia/arc-themes-components";
 
 import LargePromo from "./default";
@@ -400,4 +401,245 @@ describe("Large Promo", () => {
 	// 	);
 	// 	expect(container.querySelector(".c-video__frame")).not.toBeNull();
 	// });
+
+	it("falls back to parsed imageOverrideAuth when signing service returns nothing", () => {
+		useContent
+			.mockReturnValueOnce(largePromoMock)
+			.mockReturnValueOnce(null);
+		render(
+			<LargePromo
+				customFields={{
+					showImage: true,
+					showHeadline: true,
+					imageRatio: "4:3",
+					imageOverrideURL: "https://example.com/image.jpg",
+					imageOverrideAuth: JSON.stringify({ 2: "auth-token" }),
+				}}
+			/>,
+		);
+		expect(screen.getByText(largePromoMock.headlines.basic)).not.toBeNull();
+	});
+
+	it("sets RESIZER_TOKEN_VERSION when resizedAuth has hash", () => {
+		useContent
+			.mockReturnValueOnce(largePromoMock)
+			.mockReturnValueOnce({ hash: "abc123" });
+		render(
+			<LargePromo
+				customFields={{
+					showImage: true,
+					showHeadline: true,
+					imageRatio: "4:3",
+					imageOverrideURL: "https://example.com/image.jpg",
+				}}
+			/>,
+		);
+		expect(screen.getByText(largePromoMock.headlines.basic)).not.toBeNull();
+	});
+
+	it("should render video embed when playVideoInPlace is true and video content is available", () => {
+		useContent.mockReturnValueOnce({
+			...largePromoMock,
+			promo_items: {
+				lead_art: { type: "video", embed_html: "<div>video</div>" },
+			},
+		});
+		render(
+			<LargePromo
+				customFields={{
+					showImage: true,
+					imageRatio: "4:3",
+					showHeadline: true,
+					playVideoInPlace: true,
+				}}
+			/>,
+		);
+		expect(screen.getByText(largePromoMock.headlines.basic)).not.toBeNull();
+	});
+
+	it("should render only date when contentAuthors is null", () => {
+		useContent.mockReturnValueOnce({
+			...largePromoMock,
+			credits: { by: [] },
+		});
+		render(
+			<LargePromo
+				customFields={{
+					showByline: true,
+					showDate: true,
+					showDescription: false,
+					showHeadline: true,
+					showImage: false,
+					showOverline: false,
+				}}
+			/>,
+		);
+		expect(screen.getByText("December 02, 2019 at 6:58PM UTC")).not.toBeNull();
+	});
+
+	it("should render only authors when contentDate is null", () => {
+		useContent.mockReturnValueOnce(largePromoMock);
+		render(
+			<LargePromo
+				customFields={{
+					showByline: true,
+					showDate: false,
+					showDescription: false,
+					showHeadline: false,
+					showImage: false,
+					showOverline: false,
+				}}
+			/>,
+		);
+		expect(screen.getByRole("link", { name: "Sara Lynn Carothers" })).not.toBeNull();
+	});
+
+	it("should not render text section when no text fields are provided", () => {
+		useContent.mockReturnValueOnce({
+			...largePromoMock,
+			headlines: null,
+			description: null,
+			credits: { by: [] },
+		});
+		render(
+			<LargePromo
+				customFields={{
+					showByline: false,
+					showDate: false,
+					showDescription: false,
+					showHeadline: false,
+					showImage: true,
+					showOverline: false,
+				}}
+			/>,
+		);
+		expect(screen.queryByRole("heading")).toBeNull();
+	});
+
+	it("should render sponsored content overline with label text when label text is present", () => {
+		useContent.mockReturnValueOnce({
+			...largePromoMock,
+			owner: { sponsored: true },
+			label: { basic: { text: "Sponsor Label", display: true, url: "/sponsor" } },
+		});
+		render(
+			<LargePromo
+				customFields={{
+					showOverline: true,
+					showHeadline: true,
+					showImage: false,
+					showDate: false,
+					showDescription: false,
+					showByline: false,
+				}}
+			/>,
+		);
+		expect(screen.getByText("Sponsor Label")).not.toBeNull();
+	});
+
+	it("should render label overline when label display is true and content is not sponsored", () => {
+		useContent.mockReturnValueOnce({
+			...largePromoMock,
+			owner: { sponsored: false },
+			label: { basic: { text: "Breaking", display: true, url: "/breaking" } },
+			websites: {
+				"the-sun": {
+					website_section: null,
+					website_url: "/2019/12/02/baby-panda-born-at-the-zoo/",
+				},
+			},
+		});
+		render(
+			<LargePromo
+				customFields={{
+					showOverline: true,
+					showHeadline: true,
+					showImage: false,
+					showDate: false,
+					showDescription: false,
+					showByline: false,
+				}}
+			/>,
+		);
+		expect(screen.getByText("Breaking")).not.toBeNull();
+	});
+
+	it("should render website section overline when no label and not sponsored", () => {
+		useFusionContext.mockReturnValueOnce({ arcSite: "the-sun", isAdmin: false });
+		useContent.mockReturnValueOnce({
+			...largePromoMock,
+			owner: { sponsored: false },
+			label: { basic: { display: false } },
+		});
+		render(
+			<LargePromo
+				customFields={{
+					showOverline: true,
+					showHeadline: true,
+					showImage: false,
+					showDate: false,
+					showDescription: false,
+					showByline: false,
+				}}
+			/>,
+		);
+		expect(screen.getByText("Health")).not.toBeNull();
+	});
+
+	it("should render nothing when all props are null or falsy", () => {
+		useContent.mockReturnValueOnce({});
+		const { container } = render(
+			<LargePromo
+				customFields={{
+					showByline: false,
+					showDate: false,
+					showDescription: false,
+					showHeadline: false,
+					showImage: false,
+					showOverline: false,
+				}}
+			/>,
+		);
+		expect(container.querySelector("article")).toBeNull();
+	});
+
+	it("should render label icon when content type is gallery", () => {
+		useContent.mockReturnValueOnce({
+			...largePromoMock,
+			type: "gallery",
+		});
+		render(
+			<LargePromo
+				customFields={{
+					showImage: true,
+					imageRatio: "4:3",
+					showHeadline: true,
+					playVideoInPlace: false,
+				}}
+			/>,
+		);
+		expect(screen.getByAltText(largePromoMock.headlines.basic)).not.toBeNull();
+	});
+
+	it("should use editableContent for website section name overline", () => {
+		useFusionContext.mockReturnValueOnce({ arcSite: "the-sun", isAdmin: false });
+		useContent.mockReturnValueOnce({
+			...largePromoMock,
+			owner: { sponsored: false },
+			label: { basic: { display: false } },
+		});
+		render(
+			<LargePromo
+				customFields={{
+					showOverline: true,
+					showHeadline: false,
+					showImage: false,
+					showDate: false,
+					showDescription: false,
+					showByline: false,
+				}}
+			/>,
+		);
+		expect(screen.getByText("Health")).not.toBeNull();
+	});
 });

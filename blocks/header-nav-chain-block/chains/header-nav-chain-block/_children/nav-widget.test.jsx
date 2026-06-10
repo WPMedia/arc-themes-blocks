@@ -79,4 +79,22 @@ describe("<NavWidget/>", () => {
 		const { container } = render(<NavWidget type="none" />);
 		expect(container).toBeEmptyDOMElement();
 	});
+
+	it("renders null when type is custom but no children provided", () => {
+		const { container } = render(<NavWidget type="custom" position={1} />);
+		expect(container).toBeEmptyDOMElement();
+	});
+
+	it("renders null when type is custom with children but position is 0", () => {
+		const ChildComponent = () => <div>something</div>;
+		const { container } = render(
+			<NavWidget
+				type="custom"
+				position={0}
+				// eslint-disable-next-line react/no-children-prop
+				children={[<ChildComponent key="child-test" />]}
+			/>
+		);
+		expect(container).toBeEmptyDOMElement();
+	});
 });

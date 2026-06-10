@@ -109,4 +109,50 @@ describe("the extra large promo feature", () => {
 		render(<ExtraLarge element={modifiedData} customFields={config} />);
 		expect(screen.getByText("video embed")).not.toBeNull();
 	});
+
+	it("should not render bottom border when showBottomBorderXL is false", () => {
+		const config = { showHeadlineXL: true, showBottomBorderXL: false };
+		const { container } = render(<ExtraLarge element={mockData} customFields={config} />);
+		expect(container.querySelector("hr")).toBeNull();
+	});
+
+	it("should render bottom border when showBottomBorderXL is undefined", () => {
+		const config = { showHeadlineXL: true };
+		const { container } = render(<ExtraLarge element={mockData} customFields={config} />);
+		expect(container.querySelector("hr")).not.toBeNull();
+	});
+
+	it("should use empty formattedDate when display_date is invalid", () => {
+		const elementBadDate = { ...mockData, display_date: "not-a-date" };
+		const config = { showDateXL: true, showHeadlineXL: true };
+		render(<ExtraLarge element={elementBadDate} customFields={config} />);
+		expect(screen.queryByText("January 30, 2020", { exact: false })).toBeNull();
+	});
+
+	it("should use label for overline when labelDisplay is true and not sponsored", () => {
+		// mockData has label.basic.display = true, owner is not sponsored
+		const elementWithLabel = { ...mockData, owner: { sponsored: false } };
+		const config = { showOverlineXL: true };
+		render(<ExtraLarge element={elementWithLabel} customFields={config} />);
+		// Label text "Premium" should be shown via shouldUseLabel path
+		expect(screen.getByText("Premium")).not.toBeNull();
+	});
+
+	it("should use fallback image when element has no ANS image", () => {
+		const elementNoImage = { ...mockData, promo_items: {} };
+		const config = { showImageXL: true };
+		const { container } = render(
+			<ExtraLarge element={elementNoImage} customFields={config} fallbackImage="/fallback.jpg" />,
+		);
+		const img = container.querySelector("img");
+		expect(img).not.toBeNull();
+		expect(img.src).toContain("fallback");
+	});
+
+	it("should render icon label when element type is gallery", () => {
+		const galleryElement = { ...mockData, type: "gallery" };
+		const config = { showImageXL: true };
+		const { container } = render(<ExtraLarge element={galleryElement} customFields={config} />);
+		expect(container.querySelector(".b-top-table-list-xl__icon_label")).not.toBeNull();
+	});
 });

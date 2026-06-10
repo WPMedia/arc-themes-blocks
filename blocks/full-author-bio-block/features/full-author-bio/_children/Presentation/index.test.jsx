@@ -213,4 +213,21 @@ describe("Full Author Bio Block", () => {
 		render(<Presentation author={{ _id, youtube: "janedoe" }} />);
 		expect(screen.getByTestId("Youtube")).not.toBeNull();
 	});
+
+	it("should not render an image when ansImage has no auth and no imageUrl is passed", () => {
+		// Exercises AuthorImage when image is an object without auth and imageUrl is undefined
+		// This covers the if (imageUrl) branch with imageUrl=undefined, reaching return null
+		render(
+			<Presentation
+				author={{
+					_id,
+					byline,
+					ansImage: { url: "https://example.com/ans.jpg" },
+				}}
+			/>,
+		);
+		// ansImage has no auth => auth branch skipped; not a string => string branch skipped;
+		// imageUrl is undefined (Presentation never passes it) => imageUrl branch is falsy => null
+		expect(screen.queryByRole("img")).toBeNull();
+	});
 });

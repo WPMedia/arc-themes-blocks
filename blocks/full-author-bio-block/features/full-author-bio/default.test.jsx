@@ -241,6 +241,89 @@ describe("Full author bio block", () => {
 			expect(image.getAttribute("src")).toContain("http://url.com");
 		});
 
+		it("should use originalAnsImage when image has no auth but originalAnsImage has auth and url", () => {
+			const authorsWithOriginalAnsImage = {
+				credits: {
+					by: [
+						{
+							name: "Jane Smith",
+							image: {
+								url: "https://example.com/photo.jpg",
+								// no auth on image
+							},
+							additional_properties: {
+								original: {
+									byline: "Jane Smith",
+									ansImage: {
+										url: "https://example.com/photo.jpg",
+										auth: { "2": "originalAuth456" },
+									},
+								},
+							},
+						},
+					],
+				},
+			};
+
+			const { isServerSide } = require("@wpmedia/arc-themes-components");
+			isServerSide.mockReturnValue(false);
+			useContent.mockReturnValue(null);
+
+			useFusionContext.mockImplementation(() => ({
+				globalContent: authorsWithOriginalAnsImage,
+				isAdmin: true,
+			}));
+
+			getProperties.mockImplementation(() => ({
+				resizerURL: "http://url.com",
+			}));
+
+			render(<FullAuthorBio customFields={{ lazyLoad: false }} />);
+			expect(screen.getByText("Jane Smith")).not.toBeNull();
+		});
+
+		it("should use originalAnsImage when resizedAuth has no hash and rawAnsImage has no auth", async () => {
+			const globalContentWithOriginalAnsImage = {
+				credits: {
+					by: [
+						{
+							name: "John Doe",
+							image: {
+								url: "https://example.com/photo.jpg",
+								// no auth on top-level image
+							},
+							additional_properties: {
+								original: {
+									byline: "John Doe",
+									ansImage: {
+										url: "https://example.com/ans-photo.jpg",
+										auth: { "2": "originalAnsAuth" },
+									},
+								},
+							},
+						},
+					],
+				},
+			};
+
+			const { isServerSide } = require("@wpmedia/arc-themes-components");
+			isServerSide.mockReturnValue(false);
+			// resizedAuth is a plain token map without a ".hash" property — triggers the originalAnsImage fallback
+			useContent.mockReturnValue({ "2": "newToken" });
+
+			useFusionContext.mockImplementation(() => ({
+				globalContent: globalContentWithOriginalAnsImage,
+				isAdmin: true,
+			}));
+
+			getProperties.mockImplementation(() => ({
+				resizerURL: "http://url.com",
+			}));
+
+			render(<FullAuthorBio customFields={{ lazyLoad: false }} />);
+			expect(screen.getByText("John Doe")).not.toBeNull();
+		});
+
 		it("should call useContent with signing-service when imageAuth is not available from credits", async () => {
 			const authorsWithCreditsNoAuth = {
 				credits: {

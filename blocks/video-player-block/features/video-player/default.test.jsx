@@ -176,6 +176,68 @@ describe("VideoPlayer", () => {
 		expect(container).toBeEmptyDOMElement();
 	});
 
+	it("uses description and title as captionTitle/captionDescription when inheritGlobalContent is false and both present", () => {
+		useFusionContext.mockReturnValue({});
+		useContent.mockReturnValue({ embed_html: testEmbed });
+		render(
+			<VideoPlayer
+				customFields={{
+					displayStyle: "inlineVideo",
+					inheritGlobalContent: false,
+					title: "Custom Title",
+					description: "Custom Description",
+					itemContentConfig: { contentConfigValues: {}, contentService: "source" },
+				}}
+			/>,
+		);
+		// title & description provided: captionTitle = description && title = "Custom Title"
+		// captionDescription = title && description = "Custom Description"
+		// Both title heading and captionTitle span may appear — use getAllByText
+		expect(screen.getAllByText("Custom Title").length).toBeGreaterThanOrEqual(1);
+		expect(screen.getAllByText("Custom Description").length).toBeGreaterThanOrEqual(1);
+	});
+
+	it("falls back to contentSource headlines/description when inheritGlobalContent is false and title/description absent", () => {
+		useFusionContext.mockReturnValue({});
+		useContent.mockReturnValue({
+			embed_html: testEmbed,
+			headlines: { basic: "Source Headline" },
+			description: { basic: "Source Description" },
+		});
+		render(
+			<VideoPlayer
+				customFields={{
+					displayStyle: "inlineVideo",
+					inheritGlobalContent: false,
+					// title and description absent — falls through to contentSource
+					itemContentConfig: { contentConfigValues: {}, contentService: "source" },
+				}}
+			/>,
+		);
+		expect(screen.getByText("Source Headline")).toBeInTheDocument();
+		expect(screen.getByText("Source Description")).toBeInTheDocument();
+	});
+
+	it("falls back to 16:9 when getAspectRatio returns null/undefined", () => {
+		// promo_items.basic has no width/height so getAspectRatio returns undefined
+		useFusionContext.mockReturnValue({});
+		useContent.mockReturnValue({
+			embed_html: testEmbed,
+			promo_items: { basic: { width: 0, height: 0 } },
+		});
+		render(
+			<VideoPlayer
+				customFields={{
+					displayStyle: "inlineVideo",
+					inheritGlobalContent: false,
+					itemContentConfig: { contentConfigValues: {}, contentService: "source" },
+				}}
+			/>,
+		);
+		// Should render without error; aspect ratio falls back to "16:9"
+		expect(screen.getByTestId("video-container")).toBeInTheDocument();
+	});
+
 	it("calculates a 9:16 aspect ratio from promo_items dimensions", () => {
 		const verticalContent = {
 			embed_html: testEmbed,

@@ -548,6 +548,85 @@ describe("Story Carousel", () => {
 		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
 		expect(container.querySelectorAll("p")).toHaveLength(1);
 	});
+	it("skips rendering card when websites missing arcSite in 4+ element collection", () => {
+		const makeItem = (id, websiteUrl) => ({
+			_id: id,
+			type: "story",
+			headlines: { basic: "Headline" },
+			description: { basic: "Desc" },
+			promo_items: { basic: { type: "image", url: testImageURL } },
+			websites: websiteUrl ? { "arc-commerce": { website_url: websiteUrl } } : {},
+		});
+		useContent.mockReturnValue({
+			_id: "COL",
+			type: "collection",
+			canonical_website: "arc-commerce",
+			content_elements: [
+				makeItem("A", "/story-a/"),
+				makeItem("B", "/story-b/"),
+				makeItem("C", "/story-c/"),
+				makeItem("D", null), // no arcSite website entry — this item is filtered out
+			],
+		});
+		const { container } = render(
+			<StoryCarousel customFields={{ carouselContentConfig: { contentService: "s", contentConfigValues: {} } }} />,
+		);
+		// 3 valid cards rendered, 1 skipped
+		expect(container.querySelectorAll(".b-story-carousel__story-card")).toHaveLength(3);
+	});
+
+	it("handles items with missing headlines and description properties entirely", () => {
+		// Items with no headlines/description keys at all — exercises the `= {}` default destructuring
+		const contentWithMissingKeys = {
+			_id: "COL-MISSING",
+			type: "collection",
+			canonical_website: "arc-commerce",
+			content_elements: [
+				{
+					_id: "A", websites: { "arc-commerce": { website_url: "/a/" } },
+					promo_items: { basic: { type: "image", url: testImageURL } },
+					// no headlines, no description
+				},
+				{
+					_id: "B", websites: { "arc-commerce": { website_url: "/b/" } },
+					promo_items: { basic: { type: "image", url: testImageURL } },
+				},
+				{
+					_id: "C", websites: { "arc-commerce": { website_url: "/c/" } },
+					promo_items: { basic: { type: "image", url: testImageURL } },
+				},
+				{
+					_id: "D", websites: { "arc-commerce": { website_url: "/d/" } },
+					promo_items: { basic: { type: "image", url: testImageURL } },
+				},
+			],
+		};
+		useContent.mockReturnValue(contentWithMissingKeys);
+		const { container } = render(
+			<StoryCarousel
+				customFields={{
+					carouselContentConfig: { contentService: "s", contentConfigValues: {} },
+				}}
+			/>,
+		);
+		// Renders without error; no headlines means no story-card-header elements
+		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(1);
+		expect(container.querySelectorAll(".b-story-carousel__story-card-header")).toHaveLength(0);
+	});
+
+	it("returns null when useContent returns null/falsy", () => {
+		useContent.mockReturnValue(null);
+		const mockCustomFields = {
+			carouselContentConfig: {
+				contentService: "something",
+				contentConfigValues: { query: "some query" },
+			},
+		};
+		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+		// content_elements defaults to [] so elements.length === 0 → return null
+		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(0);
+	});
+
 	it("should display warning when content is under 4 items", () => {
 		// when content has fewer than 4 items
 		useContent.mockReturnValue(mockCollectionContent3);

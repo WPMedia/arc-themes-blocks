@@ -157,3 +157,9 @@ describe("the content api source block", () => {
 		});
 	});
 });
+
+describe("content-api-gallery source specific", () => {
+	it("should have searchable set to gallery", () => {
+		expect(contentApi.searchable).toBe("gallery");
+	});
+});

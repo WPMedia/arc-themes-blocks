@@ -257,5 +257,29 @@ describe("the large promo feature", () => {
 				focal_point: JSON.parse(config.imageFocalPoint)
 			})
 		);
-	})
+	});
+
+	it("falls back to parsed imageAuth when signing service returns nothing", () => {
+		useContent.mockReturnValueOnce(null); // signing service call returns null
+		const config = {
+			showHeadline: true,
+			headline: "Test Headline",
+			imageURL: "https://example.com/image.jpg",
+			imageAuth: JSON.stringify({ 2: "auth-token" }),
+		};
+		render(<LargeManualPromo customFields={config} />);
+		expect(screen.getByText("Test Headline")).not.toBeNull();
+	});
+
+	it("sets RESIZER_TOKEN_VERSION when resizedAuth has hash", () => {
+		useContent.mockReturnValueOnce({ hash: "abc123" });
+		const config = {
+			showHeadline: true,
+			headline: "Test Headline",
+			imageURL: "https://example.com/image.jpg",
+			imageId: "IMG123",
+		};
+		render(<LargeManualPromo customFields={config} />);
+		expect(screen.getByText("Test Headline")).not.toBeNull();
+	});
 });

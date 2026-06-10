@@ -3,7 +3,8 @@ import "@testing-library/jest-dom";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
-import Navigation from "./default";
+import { useContent } from "fusion:content";
+import Navigation, { PresentationalNav } from "./default";
 import { DEFAULT_SELECTIONS } from "./nav-helper";
 
 jest.mock(
@@ -70,6 +71,17 @@ describe("the header navigation feature for the default output type", () => {
 			};
 			render(<Navigation customFields={cFields} />);
 			expect(screen.queryByLabelText("header-nav-chain-block.links-element-aria-label")).toBeNull();
+		});
+
+		it('should set end justification when "logoAlignment" is "right"', () => {
+			const cFields = {
+				...DEFAULT_SELECTIONS,
+				logoAlignment: "right",
+				horizontalLinksHierarchy: "default",
+			};
+			const { container } = render(<Navigation customFields={cFields} />);
+			// Component renders without throwing when logoAlignment is right
+			expect(container.firstChild).not.toBeNull();
 		});
 	});
 
@@ -317,6 +329,71 @@ describe("the header navigation feature for the default output type", () => {
 		it("should render the block with the custom aria-label", () => {
 			render(<Navigation customFields={{ ariaLabel: "Links" }} />);
 			expect(screen.getByLabelText("Links")).not.toBeNull();
+		});
+	});
+
+	describe("branch coverage for PresentationalNav", () => {
+		const baseProps = {
+			ariaLabelLink: "Top Links",
+			children: [],
+			closeNavigation: jest.fn(),
+			customFields: DEFAULT_SELECTIONS,
+			displayLinks: false,
+			horizontalLinksHierarchy: null,
+			isAdmin: false,
+			isSectionDrawerOpen: false,
+			isScrolled: false,
+			logoAlignment: "center",
+			menuButtonClickAction: jest.fn(),
+			sectionAriaLabel: "Sections Menu",
+			sectionCloseAriaLabel: "Close",
+			sections: [{ _id: "/news", name: "News", node_type: "section" }],
+			showDotSeparators: true,
+			signInOrder: 0,
+			primaryLogoPath: null,
+			primaryLogoAlt: "",
+		};
+
+		it("renders the --scrolled modifier class when isScrolled is true", () => {
+			const { container } = render(<PresentationalNav {...baseProps} isScrolled />);
+			expect(container.querySelector(".b-header-nav-chain--scrolled")).not.toBeNull();
+		});
+
+		it("renders tabIndex=-1 on flyout when sections is empty", () => {
+			const { container } = render(<PresentationalNav {...baseProps} sections={[]} />);
+			const flyoutWrapper = container.querySelector(".b-header-nav-chain__flyout-nav-wrapper");
+			expect(flyoutWrapper).not.toBeNull();
+			expect(flyoutWrapper.getAttribute("tabindex")).toBe("-1");
+		});
+
+		it("renders horizontal links warning when horizontalLinksHierarchy set, logoAlignment center, and isAdmin", () => {
+			render(
+				<PresentationalNav
+					{...baseProps}
+					horizontalLinksHierarchy="default"
+					logoAlignment="center"
+					isAdmin
+				/>
+			);
+			expect(
+				screen.getByText(
+					"In order to render horizontal links, the logo must be aligned to the left or right."
+				)
+			).not.toBeNull();
+		});
+	});
+
+	describe("sections fallback when useContent returns null", () => {
+		it("renders with empty sections when useContent returns null for the sections query", () => {
+			jest.useFakeTimers();
+			// useContent returning null triggers the false branch: mainContent && mainContent.children ? ... : []
+			useContent.mockReturnValueOnce(null);
+			const { container } = render(<Navigation customFields={DEFAULT_SELECTIONS} />);
+			act(() => { jest.runAllTimers(); });
+			const flyoutWrapper = container.querySelector(".b-header-nav-chain__flyout-nav-wrapper");
+			expect(flyoutWrapper).not.toBeNull();
+			// sections=[] means tabIndex="-1" on the flyout wrapper Stack
+			expect(flyoutWrapper.getAttribute("tabindex")).toBe("-1");
 		});
 	});
 

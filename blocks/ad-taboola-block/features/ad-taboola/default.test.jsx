@@ -82,3 +82,78 @@ describe("render Taboola widget", () => {
 		});
 	});
 });
+
+describe("insertLoader branch coverage", () => {
+	const cleanupScripts = () => {
+		const loader = document.getElementById("tbl-loader");
+		if (loader) loader.parentNode.removeChild(loader);
+		const flusher = document.getElementById("tbl-flusher");
+		if (flusher) flusher.parentNode.removeChild(flusher);
+	};
+
+	beforeEach(() => {
+		cleanupScripts();
+	});
+
+	afterEach(() => {
+		cleanupScripts();
+	});
+
+	it("should not append loader script when page type is not in PAGE_TYPE_TABOOLA_MAPPING", () => {
+		getProperties.mockImplementation(() => ({
+			taboolaPublisherId: "taboolaPublisherId",
+		}));
+		const customFields = {
+			placement: "a",
+			mode: "b",
+			container: "tbl-widget-unknown",
+		};
+		// "unknown-type" is not a key in PAGE_TYPE_TABOOLA_MAPPING
+		const unknownMetaValue = () => "unknown-type";
+
+		render(<AdTaboola metaValue={unknownMetaValue} customFields={customFields} />);
+
+		expect(document.getElementById("tbl-loader")).toBeNull();
+	});
+
+	it("should not append a duplicate loader script when #tbl-loader already exists", () => {
+		getProperties.mockImplementation(() => ({
+			taboolaPublisherId: "taboolaPublisherId",
+		}));
+		const customFields = {
+			placement: "a",
+			mode: "b",
+			container: "tbl-widget-dup",
+		};
+
+		// First render inserts the loader
+		render(<AdTaboola metaValue={metaValueMock} customFields={customFields} />);
+		const firstLoader = document.getElementById("tbl-loader");
+		expect(firstLoader).not.toBeNull();
+
+		// Second render — insertLoader should return early without inserting a duplicate
+		render(<AdTaboola metaValue={metaValueMock} customFields={customFields} />);
+		const loaders = document.querySelectorAll("#tbl-loader");
+		expect(loaders.length).toBe(1);
+	});
+
+	it("should not append a duplicate flusher script when #tbl-flusher already exists", () => {
+		getProperties.mockImplementation(() => ({
+			taboolaPublisherId: "taboolaPublisherId",
+		}));
+		const customFields = {
+			placement: "a",
+			mode: "b",
+			container: "tbl-widget-dup-flusher",
+		};
+
+		// First render inserts the flusher
+		render(<AdTaboola metaValue={metaValueMock} customFields={customFields} />);
+		expect(document.getElementById("tbl-flusher")).not.toBeNull();
+
+		// Second render — insertFlusher should return early without inserting a duplicate
+		render(<AdTaboola metaValue={metaValueMock} customFields={customFields} />);
+		const flushers = document.querySelectorAll("#tbl-flusher");
+		expect(flushers.length).toBe(1);
+	});
+});

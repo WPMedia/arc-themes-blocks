@@ -157,3 +157,9 @@ describe("the content api source block", () => {
 		});
 	});
 });
+
+describe("content-api-video source specific", () => {
+	it("should have searchable set to video", () => {
+		expect(contentApi.searchable).toBe("video");
+	});
+});

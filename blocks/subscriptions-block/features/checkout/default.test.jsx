@@ -1,15 +1,18 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { useIdentity, useSales } from "@wpmedia/arc-themes-components";
 import Checkout from "./default";
 
 import useCartOrderDetail from "../../components/useCartOrderDetail";
+import * as usePaymentOptionsModule from "../../components/usePaymentOptions";
+import * as usePayPalPaymentRedirectModule from "../../components/usePayPalPaymentRedirect";
 
 jest.mock("../../components/useCartOrderDetail");
 
 jest.mock("./_children/BillingAddress", () => () => <div>Billing Address</div>);
+jest.mock("./_children/PaymentReview", () => () => <div>Payment Review</div>);
 
 const assignMock = jest.fn(() => "checkoutURL");
 delete window.location;
@@ -161,5 +164,252 @@ describe("Checkout Feature", () => {
 			/>,
 		);
 		expect(await screen.findByText("Billing Address")).toBeInTheDocument();
+	});
+
+	it("returns null when isCheckingPaypal is true", () => {
+		jest
+			.spyOn(usePayPalPaymentRedirectModule, "default")
+			.mockReturnValue({ error: undefined, isCheckingPaypal: true });
+
+		useCartOrderDetail.mockReturnValue({
+			isFetching: false,
+			isFetchingCartOrder: false,
+			isLoggedIn: false,
+			cartDetail: undefined,
+			orderDetail: undefined,
+		});
+
+		const { container } = render(
+			<Checkout
+				customFields={{
+					loginURL: "/login-url/",
+					offerURL: "/offer-url/",
+					successURL: "/success/",
+				}}
+			/>,
+		);
+
+		expect(container.firstChild).toBeNull();
+	});
+
+	it("sets user to false when getUserProfile rejects", async () => {
+		jest
+			.spyOn(usePaymentOptionsModule, "default")
+			.mockReturnValue({ stripeIntents: undefined, paypal: undefined, error: undefined, isFetching: false });
+
+		jest
+			.spyOn(usePayPalPaymentRedirectModule, "default")
+			.mockReturnValue({ error: undefined, isCheckingPaypal: false });
+
+		const cartWithItems = { items: [{ sku: "test", priceCode: "A", quantity: 1 }] };
+
+		useCartOrderDetail.mockReturnValue({
+			isFetching: false,
+			isFetchingCartOrder: false,
+			isLoggedIn: true,
+			cartDetail: cartWithItems,
+			orderDetail: undefined,
+		});
+
+		useIdentity.mockReturnValue({
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				getUserProfile: jest.fn(() => Promise.reject(new Error("profile error"))),
+				logout: jest.fn(() => Promise.resolve()),
+			},
+		});
+
+		render(
+			<Checkout
+				customFields={{
+					loginURL: "/login-url/",
+					offerURL: "/offer-url/",
+				}}
+			/>,
+		);
+
+		// Component should render without crashing after getUserProfile rejects
+		await waitFor(() => expect(screen.getByText("Billing Address")).toBeInTheDocument());
+	});
+
+	it("sets state from orderDetail when orderDetail has items", async () => {
+		jest
+			.spyOn(usePaymentOptionsModule, "default")
+			.mockReturnValue({ stripeIntents: undefined, paypal: undefined, error: undefined, isFetching: false });
+
+		jest
+			.spyOn(usePayPalPaymentRedirectModule, "default")
+			.mockReturnValue({ error: undefined, isCheckingPaypal: false });
+
+		const orderDetail = {
+			orderNumber: "ORD123",
+			items: [{ sku: "test", priceCode: "A", quantity: 1 }],
+			billingAddress: { line1: "123 Main St", country: "US" },
+		};
+
+		useCartOrderDetail.mockReturnValue({
+			isFetching: false,
+			isFetchingCartOrder: false,
+			isLoggedIn: true,
+			cartDetail: undefined,
+			orderDetail,
+		});
+
+		render(
+			<Checkout
+				customFields={{
+					loginURL: "/login-url/",
+					offerURL: "/offer-url/",
+				}}
+			/>,
+		);
+
+		await waitFor(() => expect(screen.getByText("Payment Review")).toBeInTheDocument());
+	});
+
+	it("sets error state when errorPaypal is returned", async () => {
+		jest
+			.spyOn(usePaymentOptionsModule, "default")
+			.mockReturnValue({ stripeIntents: undefined, paypal: undefined, error: undefined, isFetching: false });
+
+		jest
+			.spyOn(usePayPalPaymentRedirectModule, "default")
+			.mockReturnValue({ error: new Error("PayPal error"), isCheckingPaypal: false });
+
+		const cartWithItems = { items: [{ sku: "test", priceCode: "A", quantity: 1 }] };
+
+		useCartOrderDetail.mockReturnValue({
+			isFetching: false,
+			isFetchingCartOrder: false,
+			isLoggedIn: true,
+			cartDetail: cartWithItems,
+			orderDetail: undefined,
+		});
+
+		render(
+			<Checkout
+				customFields={{
+					loginURL: "/login-url/",
+					offerURL: "/offer-url/",
+				}}
+			/>,
+		);
+
+		await waitFor(() => expect(screen.getByText("Billing Address")).toBeInTheDocument());
+	});
+
+	it("calls Identity.logout when account edit button is clicked", async () => {
+		jest
+			.spyOn(usePaymentOptionsModule, "default")
+			.mockReturnValue({ stripeIntents: undefined, paypal: undefined, error: undefined, isFetching: false });
+
+		jest
+			.spyOn(usePayPalPaymentRedirectModule, "default")
+			.mockReturnValue({ error: undefined, isCheckingPaypal: false });
+
+		const logoutMock = jest.fn(() => Promise.resolve());
+
+		useIdentity.mockReturnValue({
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				getUserProfile: jest.fn(async () => ({ firstName: "Jane", email: "jane@test.com" })),
+				logout: logoutMock,
+			},
+		});
+
+		const cartWithItems = { items: [{ sku: "test", priceCode: "A", quantity: 1 }] };
+
+		useCartOrderDetail.mockReturnValue({
+			isFetching: false,
+			isFetchingCartOrder: false,
+			isLoggedIn: true,
+			cartDetail: cartWithItems,
+			orderDetail: undefined,
+		});
+
+		window.location.href = "checkout";
+
+		render(
+			<Checkout
+				customFields={{
+					loginURL: "/login-url/",
+					offerURL: "/offer-url/",
+				}}
+			/>,
+		);
+
+		await waitFor(() => expect(screen.getByText("Billing Address")).toBeInTheDocument());
+
+		// Find the account edit button (first button rendered)
+		const editButtons = screen.getAllByText("checkout-block.edit");
+		fireEvent.click(editButtons[0]);
+
+		await waitFor(() => expect(logoutMock).toHaveBeenCalled());
+	});
+
+	it("renders checkout UI container when payment options and cart order are ready", async () => {
+		jest
+			.spyOn(usePaymentOptionsModule, "default")
+			.mockReturnValue({ stripeIntents: undefined, paypal: undefined, error: undefined, isFetching: false });
+
+		jest
+			.spyOn(usePayPalPaymentRedirectModule, "default")
+			.mockReturnValue({ error: undefined, isCheckingPaypal: false });
+
+		const cartWithItems = { items: [{ sku: "test", priceCode: "A", quantity: 1 }] };
+
+		useCartOrderDetail.mockReturnValue({
+			isFetching: false,
+			isFetchingCartOrder: false,
+			isLoggedIn: true,
+			cartDetail: cartWithItems,
+			orderDetail: undefined,
+		});
+
+		const { container } = render(
+			<Checkout
+				customFields={{
+					loginURL: "/login-url/",
+					offerURL: "/offer-url/",
+				}}
+			/>,
+		);
+
+		expect(container.querySelector(".b-checkout")).toBeInTheDocument();
+	});
+
+	it("renders payment review when orderDetail has items and payment options ready", async () => {
+		jest
+			.spyOn(usePaymentOptionsModule, "default")
+			.mockReturnValue({ stripeIntents: undefined, paypal: undefined, error: undefined, isFetching: false });
+
+		jest
+			.spyOn(usePayPalPaymentRedirectModule, "default")
+			.mockReturnValue({ error: undefined, isCheckingPaypal: false });
+
+		const orderDetail = {
+			orderNumber: "ORD123",
+			items: [{ sku: "test", priceCode: "A", quantity: 1 }],
+			billingAddress: { line1: "123 Main St", country: "US" },
+		};
+
+		useCartOrderDetail.mockReturnValue({
+			isFetching: false,
+			isFetchingCartOrder: false,
+			isLoggedIn: true,
+			cartDetail: undefined,
+			orderDetail,
+		});
+
+		render(
+			<Checkout
+				customFields={{
+					loginURL: "/login-url/",
+					offerURL: "/offer-url/",
+				}}
+			/>,
+		);
+
+		await waitFor(() => expect(screen.getByText("Payment Review")).toBeInTheDocument());
 	});
 });

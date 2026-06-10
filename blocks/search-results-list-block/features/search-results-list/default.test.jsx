@@ -65,4 +65,25 @@ describe("the search results list feature block", () => {
 		mockIsServerSide = false;
 		expect(container).toBeEmptyDOMElement();
 	});
+
+	it("passes customSearchAction to GlobalContentSearch when provided", () => {
+		const mockSearchAction = jest.fn();
+		render(
+			<SearchResultsListContainer
+				customFields={{ inheritGlobalContent: true }}
+				customSearchAction={mockSearchAction}
+			/>,
+		);
+		expect(screen.getByTestId("global-content-search")).toBeInTheDocument();
+	});
+
+	it("passes globalContent from customFields to GlobalContentSearch when present", () => {
+		const fakeGlobalContent = { _id: "fake-content" };
+		render(
+			<SearchResultsListContainer
+				customFields={{ inheritGlobalContent: true, globalContent: fakeGlobalContent }}
+			/>,
+		);
+		expect(screen.getByTestId("global-content-search")).toBeInTheDocument();
+	});
 });

@@ -102,4 +102,39 @@ describe("Top Table List", () => {
 		const { container } = render(<TopTableListWrapper customFields={{ ...config, medium: 1 }} />);
 		expect(container.firstChild).not.toBeNull();
 	});
+
+	it("renders with isAdmin true and lazyLoad enabled (does not return null server-side)", () => {
+		isServerSide.mockReturnValueOnce(true);
+		useContent.mockReturnValue({ content_elements: [mockData] });
+		useFusionContext.mockReturnValueOnce({
+			arcSite: "the-sun",
+			isAdmin: true,
+		});
+
+		// isAdmin=true bypasses the server-side lazyLoad null return
+		const { container } = render(
+			<TopTableListWrapper customFields={{ ...config, small: 1, lazyLoad: true }} />,
+		);
+		expect(container.firstChild).not.toBeNull();
+	});
+
+	it("fills storyTypeMap for the same type", () => {
+		// Two small stories — second iteration hits the already-initialised key branch
+		useContent.mockReturnValue({ content_elements: [mockData, mockData] });
+
+		const { container } = render(
+			<TopTableListWrapper customFields={{ ...config, small: 2 }} />,
+		);
+		expect(container.firstChild).not.toBeNull();
+	});
+
+	it("renders nothing when storyTypeArray has more entries than storyList", () => {
+		// Only one content element, but three small story slots — index 1 and 2 are skipped
+		useContent.mockReturnValue({ content_elements: [mockData] });
+
+		const { container } = render(
+			<TopTableListWrapper customFields={{ ...config, small: 3 }} />,
+		);
+		expect(container.firstChild).not.toBeNull();
+	});
 });

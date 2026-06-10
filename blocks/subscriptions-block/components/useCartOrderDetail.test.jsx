@@ -429,4 +429,382 @@ describe("useCartOrderDetail Hook", () => {
 
 		expect(result.current.cartDetail).toEqual({ ...mockCartFromAdd, items: mockedItemDetails });
 	});
+
+	test("PayPal path: getLastPendingOrder catch sets isFetchingCartOrder false", async () => {
+		mockIdentityState = {
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				extendSession: jest.fn(async () => {}),
+			},
+		};
+
+		setOrderNumber("R2OMXGQBQY6SV670");
+
+		mockSalesState = {
+			Sales: {
+				getCart: jest.fn(async () => ({})),
+				getOrderHistory: jest.fn(() => Promise.reject(new Error("history error"))),
+				getOrderDetails: jest.fn(async () => orderDetail),
+				clearCart: jest.fn(async () => {}),
+				addItemToCart: jest.fn(async () => cart),
+			},
+		};
+
+		const { result } = renderHook(() => useCartOrderDetail("paypal-token-123"));
+
+		await waitFor(() => expect(result.current.isFetchingCartOrder).toBe(false));
+		expect(result.current.cartDetail).toBe(undefined);
+	});
+
+	test("PayPal path: getOrderDetail catch sets isFetchingCartOrder false", async () => {
+		mockIdentityState = {
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				extendSession: jest.fn(async () => {}),
+			},
+		};
+
+		setOrderNumber("R2OMXGQBQY6SV670");
+
+		mockSalesState = {
+			Sales: {
+				getCart: jest.fn(async () => ({})),
+				getOrderHistory: jest.fn(async () => pendingOrder),
+				getOrderDetails: jest.fn(() => Promise.reject(new Error("order details error"))),
+				clearCart: jest.fn(async () => {}),
+				addItemToCart: jest.fn(async () => cart),
+			},
+		};
+
+		const { result } = renderHook(() => useCartOrderDetail("paypal-token-123"));
+
+		await waitFor(() => expect(result.current.isFetchingCartOrder).toBe(false));
+		expect(result.current.cartDetail).toBe(undefined);
+	});
+
+	test("PayPal path: clearCart catch sets isFetchingCartOrder false", async () => {
+		mockIdentityState = {
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				extendSession: jest.fn(async () => {}),
+			},
+		};
+
+		setOrderNumber("R2OMXGQBQY6SV670");
+
+		mockSalesState = {
+			Sales: {
+				getCart: jest.fn(async () => ({})),
+				getOrderHistory: jest.fn(async () => pendingOrder),
+				getOrderDetails: jest.fn(async () => orderDetail),
+				clearCart: jest.fn(() => Promise.reject(new Error("clear cart error"))),
+				addItemToCart: jest.fn(async () => cart),
+			},
+		};
+
+		const { result } = renderHook(() => useCartOrderDetail("paypal-token-123"));
+
+		await waitFor(() => expect(result.current.isFetchingCartOrder).toBe(false));
+		expect(result.current.cartDetail).toBe(undefined);
+	});
+
+	test("pending order exists but is less recent than a paid order - pending order discarded", async () => {
+		mockIdentityState = {
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				extendSession: jest.fn(async () => {}),
+			},
+		};
+
+		const recentDate = new Date().getTime() - 60 * 60 * 24 * 1 * 1000;
+		const olderDate = new Date().getTime() - 60 * 60 * 24 * 2 * 1000;
+
+		const orderHistoryWithPaidOrder = {
+			orders: [
+				{
+					orderNumber: "PENDING001",
+					orderDate: olderDate,
+					orderStatus: "Pending",
+				},
+				{
+					orderNumber: "PAID001",
+					orderDate: recentDate,
+					orderStatus: "Paid",
+				},
+			],
+		};
+
+		mockSalesState = {
+			Sales: {
+				getCart: jest.fn(async () => ({})),
+				getOrderHistory: jest.fn(async () => orderHistoryWithPaidOrder),
+				getOrderDetails: jest.fn(async () => orderDetail),
+				clearCart: jest.fn(async () => {}),
+				addItemToCart: jest.fn(async () => cart),
+			},
+		};
+
+		const { result } = renderHook(() => useCartOrderDetail());
+
+		await waitFor(() => expect(result.current.isFetchingCartOrder).toBe(false));
+		// Pending order was discarded because paid order is more recent
+		expect(result.current.orderDetail).toBe(undefined);
+	});
+
+	test("pending order is older than maxAge (48h) - pending order discarded", async () => {
+		mockIdentityState = {
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				extendSession: jest.fn(async () => {}),
+			},
+		};
+
+		const olderThan48h = new Date().getTime() - 60 * 60 * 24 * 3 * 1000;
+
+		const orderHistoryWithOldPendingOrder = {
+			orders: [
+				{
+					orderNumber: "OLD_PENDING001",
+					orderDate: olderThan48h,
+					orderStatus: "Pending",
+				},
+			],
+		};
+
+		mockSalesState = {
+			Sales: {
+				getCart: jest.fn(async () => ({})),
+				getOrderHistory: jest.fn(async () => orderHistoryWithOldPendingOrder),
+				getOrderDetails: jest.fn(async () => orderDetail),
+				clearCart: jest.fn(async () => {}),
+				addItemToCart: jest.fn(async () => cart),
+			},
+		};
+
+		const { result } = renderHook(() => useCartOrderDetail());
+
+		await waitFor(() => expect(result.current.isFetchingCartOrder).toBe(false));
+		expect(result.current.orderDetail).toBe(undefined);
+	});
+
+	test("getItemDetails catch when cart has items - falls back to cart without enriched details", async () => {
+		mockIdentityState = {
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				extendSession: jest.fn(async () => {}),
+			},
+		};
+
+		mockSalesState = {
+			Sales: {
+				getCart: jest.fn(async () => cart),
+				getOrderHistory: jest.fn(async () => ({})),
+				getOrderDetails: jest.fn(async () => ({})),
+				clearCart: jest.fn(async () => {}),
+				addItemToCart: jest.fn(async () => cart),
+			},
+		};
+
+		getItemDetails.mockRejectedValue(new Error("item details error"));
+
+		const { result } = renderHook(() => useCartOrderDetail());
+
+		await waitFor(() => expect(result.current.isFetchingCartOrder).toBe(false));
+		// Falls back to cart without enriched details
+		expect(result.current.cartDetail).toEqual(cart);
+	});
+
+	test("getOrderDetails catch with itemCart in localStorage - creates new cart", async () => {
+		mockIdentityState = {
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				extendSession: jest.fn(async () => {}),
+			},
+		};
+
+		setCartInLocalStorage({ sku: "test", priceCode: "YLE801", cartDate: Date.now() });
+
+		mockSalesState = {
+			Sales: {
+				getCart: jest.fn(async () => ({})),
+				getOrderHistory: jest.fn(async () => pendingOrder),
+				getOrderDetails: jest.fn(() => Promise.reject(new Error("order details failed"))),
+				clearCart: jest.fn(async () => {}),
+				addItemToCart: jest.fn(async () => cart),
+			},
+		};
+
+		getItemDetails.mockResolvedValue(mockedItemDetails);
+
+		const { result } = renderHook(() => useCartOrderDetail());
+
+		await waitFor(() => expect(result.current.isFetchingCartOrder).toBe(false));
+		expect(result.current.cartDetail).toEqual({ ...cart, items: mockedItemDetails });
+	});
+
+	test("getOrderDetails catch without itemCart - just sets isFetchingCartOrder false", async () => {
+		mockIdentityState = {
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				extendSession: jest.fn(async () => {}),
+			},
+		};
+
+		// No cart in localStorage
+
+		mockSalesState = {
+			Sales: {
+				getCart: jest.fn(async () => ({})),
+				getOrderHistory: jest.fn(async () => pendingOrder),
+				getOrderDetails: jest.fn(() => Promise.reject(new Error("order details failed"))),
+				clearCart: jest.fn(async () => {}),
+				addItemToCart: jest.fn(async () => cart),
+			},
+		};
+
+		const { result } = renderHook(() => useCartOrderDetail());
+
+		await waitFor(() => expect(result.current.isFetchingCartOrder).toBe(false));
+		expect(result.current.cartDetail).toBe(undefined);
+		expect(result.current.orderDetail).toBe(undefined);
+	});
+
+	test("getLastPendingOrder catch with itemCart - creates new cart", async () => {
+		mockIdentityState = {
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				extendSession: jest.fn(async () => {}),
+			},
+		};
+
+		setCartInLocalStorage({ sku: "test", priceCode: "YLE801", cartDate: Date.now() });
+
+		mockSalesState = {
+			Sales: {
+				getCart: jest.fn(async () => ({})),
+				getOrderHistory: jest.fn(() => Promise.reject(new Error("order history failed"))),
+				getOrderDetails: jest.fn(async () => ({})),
+				clearCart: jest.fn(async () => {}),
+				addItemToCart: jest.fn(async () => cart),
+			},
+		};
+
+		getItemDetails.mockResolvedValue(mockedItemDetails);
+
+		const { result } = renderHook(() => useCartOrderDetail());
+
+		await waitFor(() => expect(result.current.isFetchingCartOrder).toBe(false));
+		expect(result.current.cartDetail).toEqual({ ...cart, items: mockedItemDetails });
+	});
+
+	test("getLastPendingOrder catch without itemCart - sets isFetchingCartOrder false", async () => {
+		mockIdentityState = {
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				extendSession: jest.fn(async () => {}),
+			},
+		};
+
+		// No localStorage cart
+
+		mockSalesState = {
+			Sales: {
+				getCart: jest.fn(async () => ({})),
+				getOrderHistory: jest.fn(() => Promise.reject(new Error("order history failed"))),
+				getOrderDetails: jest.fn(async () => ({})),
+				clearCart: jest.fn(async () => {}),
+				addItemToCart: jest.fn(async () => cart),
+			},
+		};
+
+		const { result } = renderHook(() => useCartOrderDetail());
+
+		await waitFor(() => expect(result.current.isFetchingCartOrder).toBe(false));
+		expect(result.current.cartDetail).toBe(undefined);
+		expect(result.current.orderDetail).toBe(undefined);
+	});
+
+	test("getLastestOrderOrCart: only order (no cart) returns lastOrder", async () => {
+		mockIdentityState = {
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				extendSession: jest.fn(async () => {}),
+			},
+		};
+
+		mockSalesState = {
+			Sales: {
+				getCart: jest.fn(async () => ({})),
+				getOrderHistory: jest.fn(async () => pendingOrder),
+				getOrderDetails: jest.fn(async () => orderDetail),
+				clearCart: jest.fn(async () => {}),
+				addItemToCart: jest.fn(async () => cart),
+			},
+		};
+
+		const { result } = renderHook(() => useCartOrderDetail());
+
+		await waitFor(() => expect(result.current.isFetchingCartOrder).toBe(false));
+		expect(result.current.orderDetail).toEqual({ ...orderDetail, items: mockedItemDetails });
+		expect(result.current.cartDetail).toBe(undefined);
+	});
+
+	test("getLastestOrderOrCart: order date >= cart date returns lastOrder (not cart)", async () => {
+		mockIdentityState = {
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				extendSession: jest.fn(async () => {}),
+			},
+		};
+
+		// Cart date is older than order date
+		const olderCartDate = orderDetail.orderDate - 1000;
+		setCartInLocalStorage({ sku: "test", priceCode: "YLE801", cartDate: olderCartDate });
+
+		mockSalesState = {
+			Sales: {
+				getCart: jest.fn(async () => ({})),
+				getOrderHistory: jest.fn(async () => pendingOrder),
+				getOrderDetails: jest.fn(async () => orderDetail),
+				clearCart: jest.fn(async () => {}),
+				addItemToCart: jest.fn(async () => cart),
+			},
+		};
+
+		const { result } = renderHook(() => useCartOrderDetail());
+
+		await waitFor(() => expect(result.current.isFetchingCartOrder).toBe(false));
+		expect(result.current.orderDetail).toEqual({ ...orderDetail, items: mockedItemDetails });
+		expect(result.current.cartDetail).toBe(undefined);
+	});
+
+	test("getLastestOrderOrCart: cart date > order date but addItemToCart returns empty items - falls back to order", async () => {
+		mockIdentityState = {
+			Identity: {
+				isLoggedIn: jest.fn(async () => true),
+				extendSession: jest.fn(async () => {}),
+			},
+		};
+
+		// Cart is more recent than order
+		const newerCartDate = orderDetail.orderDate + 1000;
+		setCartInLocalStorage({ sku: "test", priceCode: "YLE801", cartDate: newerCartDate });
+
+		mockSalesState = {
+			Sales: {
+				getCart: jest.fn(async () => ({})),
+				getOrderHistory: jest.fn(async () => pendingOrder),
+				getOrderDetails: jest.fn(async () => orderDetail),
+				clearCart: jest.fn(async () => {}),
+				// addItemToCart returns cart with no items (empty)
+				addItemToCart: jest.fn(async () => ({ items: [] })),
+			},
+		};
+
+		const { result } = renderHook(() => useCartOrderDetail());
+
+		await waitFor(() => expect(result.current.isFetchingCartOrder).toBe(false));
+		// Falls back to lastOrder since newCart has no items
+		expect(result.current.orderDetail).toEqual({ ...orderDetail, items: mockedItemDetails });
+	});
 });

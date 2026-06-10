@@ -5,6 +5,12 @@ import { useIdentity } from "@wpmedia/arc-themes-components";
 import Login  from "./default";
 import definedMessageByCode  from "../../utils/definedMessageByCode";
 
+const mockLoginByOIDC = jest.fn(() => Promise.resolve());
+jest.mock("../../utils/useOIDCLogin", () => ({
+	__esModule: true,
+	default: () => ({ loginByOIDC: mockLoginByOIDC }),
+}));
+
 const defaultCustomFields = {
 	redirectURL: "",
 	redirectToPreviousPage: true,
@@ -180,6 +186,82 @@ describe("Identity Login Feature - unInitialized", () => {
 	it("renders null if identity not initialized", async () => {
 		render(<Login customFields={defaultCustomFields} />);
 		expect(screen.queryAllByRole("button")).toEqual([]);
+	});
+});
+
+describe("Identity Login Feature - captcha invalid error", () => {
+	beforeEach(() => {
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			Identity: { ...mockIdentity },
+		}));
+		mockLogin.mockRejectedValueOnce({ code: "130001" }); // string code triggers captchaError
+		global.grecaptcha = { reset: jest.fn() };
+	});
+
+	afterEach(() => {
+		jest.clearAllMocks();
+	});
+
+	it("sets captcha error when login rejects with string code 130001", async () => {
+		render(<Login customFields={defaultCustomFields} />);
+		await waitFor(() => screen.getByLabelText("identity-block.email-label"));
+		fireEvent.change(screen.getByLabelText("identity-block.email-label"), {
+			target: { value: "test@test.com" },
+		});
+		fireEvent.change(screen.getByLabelText("identity-block.password"), {
+			target: { value: "password" },
+		});
+		fireEvent.click(screen.getByRole("button"));
+		await waitFor(() => expect(mockLogin).toHaveBeenCalled());
+	});
+});
+
+describe("Identity Login Feature - OIDC", () => {
+	let originalSearchParams;
+
+	beforeEach(() => {
+		// Restore useIdentity to its initialized state
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			Identity: { ...mockIdentity },
+		}));
+		// Set up URL with OIDC params by mocking URLSearchParams.get
+		originalSearchParams = URLSearchParams.prototype.get;
+		URLSearchParams.prototype.get = jest.fn((key) => {
+			if (key === "client_id") return "client1";
+			if (key === "response_type") return "code";
+			return null;
+		});
+	});
+
+	afterEach(() => {
+		URLSearchParams.prototype.get = originalSearchParams;
+		jest.clearAllMocks();
+	});
+
+	it("calls loginByOIDC after successful login when OIDC is true", async () => {
+		render(
+			<Login
+				customFields={{
+					redirectURL: "/redirect",
+					redirectToPreviousPage: false,
+					signUpURL: "",
+					OIDC: true,
+				}}
+			/>,
+		);
+		await waitFor(() => screen.getByLabelText("identity-block.email-label"));
+		fireEvent.change(screen.getByLabelText("identity-block.email-label"), {
+			target: { value: "email@test.com" },
+		});
+		await waitFor(() => screen.getByLabelText("identity-block.password"));
+		fireEvent.change(screen.getByLabelText("identity-block.password"), {
+			target: { value: "password123" },
+		});
+		await waitFor(() => screen.getByRole("button"));
+		fireEvent.click(screen.getByRole("button"));
+		await waitFor(() => expect(mockLoginByOIDC).toHaveBeenCalled());
 	});
 });
 

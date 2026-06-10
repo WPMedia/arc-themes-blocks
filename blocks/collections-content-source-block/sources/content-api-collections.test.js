@@ -325,4 +325,76 @@ describe("the collections content source block", () => {
 			axios.mockReset();
 		});
 	});
+
+	describe("when getNext is true but first response has no content_elements", () => {
+		it("should concatenate using next content_elements when data has none", async () => {
+			let callCount = 0;
+			axios.mockImplementation((request) => {
+				callCount++;
+				const requestUrl = new URL(request.url);
+				const url = {
+					hostname: requestUrl.hostname,
+					pathname: requestUrl.pathname,
+					searchObject: Object.fromEntries(requestUrl.searchParams),
+				};
+				// First call: no content_elements; second call: has content_elements
+				const data =
+					callCount === 1
+						? { request: { ...request, url } }
+						: { content_elements: [{ url }], request: { ...request, url } };
+				return Promise.resolve({ data });
+			});
+
+			const contentSourceFetch = await contentSource.fetch(
+				{
+					_id: "test",
+					"arc-site": "the-sun",
+					from: "0",
+					size: "20",
+					getNext: "true",
+				},
+				{ cachedCall: () => {} }
+			);
+
+			// data has no content_elements so || [] fallback is used; next has one item
+			expect(contentSourceFetch.content_elements.length).toBe(1);
+			axios.mockReset();
+		});
+	});
+
+	describe("when getNext is true but second response has no content_elements", () => {
+		it("should concatenate using data content_elements when next has none", async () => {
+			let callCount = 0;
+			axios.mockImplementation((request) => {
+				callCount++;
+				const requestUrl = new URL(request.url);
+				const url = {
+					hostname: requestUrl.hostname,
+					pathname: requestUrl.pathname,
+					searchObject: Object.fromEntries(requestUrl.searchParams),
+				};
+				// First call: has content_elements; second call: no content_elements
+				const data =
+					callCount === 1
+						? { content_elements: [{ url }], request: { ...request, url } }
+						: { request: { ...request, url } };
+				return Promise.resolve({ data });
+			});
+
+			const contentSourceFetch = await contentSource.fetch(
+				{
+					_id: "test",
+					"arc-site": "the-sun",
+					from: "0",
+					size: "20",
+					getNext: "true",
+				},
+				{ cachedCall: () => {} }
+			);
+
+			// data has one content_element; next has none so || [] fallback is used
+			expect(contentSourceFetch.content_elements.length).toBe(1);
+			axios.mockReset();
+		});
+	});
 });

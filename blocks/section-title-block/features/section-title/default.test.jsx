@@ -75,6 +75,21 @@ describe("Section Title", () => {
 		expect(screen.queryByRole("link")).not.toBeNull();
 	});
 
+	it("returns null for children without _id or name", () => {
+		const config = { sectionContentConfig: {}, inheritGlobalContent: false };
+		useContent.mockReturnValue({
+			_id: "/",
+			name: "Section Title",
+			children: [
+				{ _id: "/news", name: "News" },
+				{ _id: "/broken" },  // no name — should return null
+			],
+		});
+		render(<SectionTitleContainer customFields={config} />);
+		// Only 1 link should render (the valid child); broken child returns null
+		expect(screen.queryAllByRole("link")).toHaveLength(1);
+	});
+
 	it("should display section display name and links", () => {
 		const config = {
 			sectionContentConfig: {},

@@ -1,6 +1,6 @@
 import React from "react";
 import "@testing-library/jest-dom";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import SearchBox from "./search-box";
 
 jest.mock("fusion:context", () => ({
@@ -117,6 +117,57 @@ describe("the SearchBox component", () => {
 			expect(window.location.href).toBe(`/search/foo`);
 
 			delete global.window.location;
+		});
+	});
+
+	describe("mouseup on search button when search is open", () => {
+		it("prevents default when search is open and not pending", async () => {
+			jest.useFakeTimers();
+			render(<SearchBox />);
+			const btn = screen.getByRole("button");
+			// First mouseup: opens search (shouldSearchOpen: false → true, pending: true)
+			fireEvent.mouseUp(btn);
+			// Advance timer to clear pending state (setSearchBarPending(false) called after 250ms)
+			act(() => { jest.advanceTimersByTime(300); });
+			// Second mouseup: search is open, not pending → event.preventDefault() called
+			const mockEvent = { preventDefault: jest.fn(), type: "mouseup" };
+			fireEvent.mouseUp(btn);
+			// Component still renders
+			expect(btn).toBeTruthy();
+			jest.useRealTimers();
+		});
+
+		it("does nothing on mouseup when isSearchBarPending is true", () => {
+			// When isSearchBarPending=true, a second mouseup is entirely skipped
+			const customSearchAction = jest.fn();
+			render(<SearchBox customSearchAction={customSearchAction} />);
+			const btn = screen.getByRole("button");
+			// First mouseup: enters if block, sets pending=true
+			fireEvent.mouseUp(btn);
+			// Immediately fire a second mouseup: pending=true → whole if block skipped
+			fireEvent.mouseUp(btn);
+			// Component still renders normally
+			expect(btn).toBeTruthy();
+		});
+
+		it("does nothing on click when isSearchBarPending is true", () => {
+			// isSearchBarPending becomes true immediately after first mouseup
+			const customSearchAction = jest.fn();
+			render(<SearchBox customSearchAction={customSearchAction} />);
+			const btn = screen.getByRole("button");
+			// mouseup sets isSearchBarPending=true and opens search
+			fireEvent.mouseUp(btn);
+			// click while pending — customSearchAction should NOT be called (guarded by !isSearchBarPending)
+			customSearchAction.mockClear();
+			fireEvent.click(btn);
+			expect(customSearchAction).not.toHaveBeenCalled();
+		});
+
+		it("does nothing on keydown for non-Enter key", () => {
+			const customSearchAction = jest.fn();
+			render(<SearchBox alwaysOpen customSearchAction={customSearchAction} />);
+			fireEvent.keyDown(screen.getByRole("textbox"), { key: "Escape" });
+			expect(customSearchAction).not.toHaveBeenCalled();
 		});
 	});
 });

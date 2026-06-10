@@ -77,4 +77,32 @@ describe("the medium promo feature", () => {
 		render(<Medium element={mockData} customFields={config} />);
 		expect(screen.queryByText("January 30, 2020", { exact: false })).not.toBeNull();
 	});
+
+	it("should show bottom border when showBottomBorderMD is undefined (default true)", () => {
+		// showBottomBorderMD not passed — typeof undefined branch resolves to true
+		const config = { showHeadlineMD: true };
+		const { container } = render(<Medium element={mockData} customFields={config} />);
+		expect(container.querySelector("hr")).not.toBeNull();
+	});
+
+	it("should not show bottom border when showBottomBorderMD is false", () => {
+		const config = { showHeadlineMD: true, showBottomBorderMD: false };
+		const { container } = render(<Medium element={mockData} customFields={config} />);
+		expect(container.querySelector("hr")).toBeNull();
+	});
+
+	it("should not format date when display_date is invalid", () => {
+		const elementNoDate = { ...mockData, display_date: "not-a-date" };
+		const config = { showDateMD: true };
+		render(<Medium element={elementNoDate} customFields={config} />);
+		// A DateComponent should still be rendered but with empty dateString
+		expect(screen.queryByText("January 30, 2020", { exact: false })).toBeNull();
+	});
+
+	it("should render icon label when element type is gallery", () => {
+		const galleryElement = { ...mockData, type: "gallery" };
+		const config = { showImageMD: true };
+		const { container } = render(<Medium element={galleryElement} customFields={config} />);
+		expect(container.querySelector(".b-top-table-list-medium__icon_label")).not.toBeNull();
+	});
 });

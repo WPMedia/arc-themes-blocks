@@ -234,4 +234,166 @@ describe("Card list", () => {
 		render(<CardList customFields={{}} />);
 		expect(screen.getAllByRole("article").length).toEqual(1);
 	});
+
+	describe("getFallbackImageURL when fallbackImage does not include http", () => {
+		it("calls pagebuilderURL to build the fallback image URL", () => {
+			const mockPagebuilderURL = jest.fn(() => "http://cdn.example.com/placeholder.jpg");
+			useFusionContext.mockReturnValueOnce({
+				id: "",
+				arcSite: "the-sun",
+				contextPath: "/pf",
+				pagebuilderURL: mockPagebuilderURL,
+			});
+			// Default getProperties returns fallbackImage: "placeholder.jpg" (no http)
+			useContent.mockReturnValueOnce(oneListItem);
+			render(<CardList customFields={{}} />);
+
+			expect(mockPagebuilderURL).toHaveBeenCalledWith(expect.stringContaining("placeholder.jpg"));
+		});
+	});
+
+	describe("lazyLoad with isAdmin", () => {
+		it("should NOT return null when lazyLoad is true and isAdmin is true", () => {
+			const listContentConfig = {
+				contentConfigValues: {
+					offset: "0",
+					query: "type:story",
+					size: "30",
+				},
+				contentService: "story-feed-query",
+			};
+			const customFields = {
+				listContentConfig,
+				lazyLoad: true,
+			};
+
+			useFusionContext.mockReturnValueOnce({
+				id: "",
+				arcSite: "the-sun",
+				pagebuilderURL: jest.fn(() => {}),
+				isAdmin: true,
+			});
+
+			const { container } = render(<CardList customFields={customFields} isAdmin />);
+			// isAdmin=true bypasses the early null return even with lazyLoad=true
+			expect(container).not.toBeEmptyDOMElement();
+		});
+	});
+
+	describe("getFallbackImageURL when fallbackImage already has http", () => {
+		it("should use the fallbackImage URL directly without calling pagebuilderURL", () => {
+			const mockPagebuilderURL = jest.fn((x) => x);
+			useFusionContext.mockReturnValueOnce({
+				id: "",
+				arcSite: "the-sun",
+				contextPath: "/pf",
+				pagebuilderURL: mockPagebuilderURL,
+			});
+			getProperties.mockReturnValueOnce({
+				fallbackImage: "http://cdn.example.com/placeholder.jpg",
+				resizerURL: "http://url.com/",
+			});
+			useContent.mockReturnValueOnce(oneListItem);
+			render(<CardList customFields={{}} />);
+			// pagebuilderURL should NOT be called for the fallback image since it already has http
+			expect(mockPagebuilderURL).not.toHaveBeenCalled();
+		});
+	});
+
+	describe("sourceContent with no website_section (url and text are both undefined)", () => {
+		it("should not render overline when website_section is absent", () => {
+			const noSectionItem = {
+				...oneListItem,
+				content_elements: [
+					{
+						...oneListItem.content_elements[0],
+						websites: {
+							"the-sun": {
+								website_url: "/this/is/the/correct/url",
+								// no website_section
+							},
+						},
+						owner: {},
+						label: {},
+					},
+				],
+			};
+			useContent.mockReturnValueOnce(noSectionItem);
+			render(<CardList customFields={{}} />);
+			// Overline should not be rendered when url and text are both falsy
+			expect(screen.queryByRole("link", { name: /Entertainment/i })).toBeNull();
+		});
+	});
+
+	describe("secondary item with missing headlines", () => {
+		it("renders secondary items without error when headlines is absent", () => {
+			const itemWithSecondaryNoHeadline = {
+				content_elements: [
+					// First item (source content)
+					{
+						...oneListItem.content_elements[0],
+						websites: {
+							"the-sun": {
+								website_url: "/primary-url",
+								website_section: { _id: "/news", name: "News" },
+							},
+						},
+						owner: {},
+						label: {},
+						credits: { by: [] },
+						display_date: "2019-12-18T17:09:22.308Z",
+					},
+					// Secondary item with no headlines property
+					{
+						_id: "secondary-no-headline",
+						websites: {
+							"the-sun": {
+								website_url: "/secondary-url",
+							},
+						},
+						// headlines intentionally absent
+					},
+				],
+			};
+			useContent.mockReturnValueOnce(itemWithSecondaryNoHeadline);
+			render(<CardList customFields={{}} />);
+			expect(screen.getAllByRole("article").length).toBeGreaterThanOrEqual(1);
+		});
+	});
+
+	describe("items with no author", () => {
+		it("should not render byline or separator when credits.by is empty", () => {
+			const noAuthorItem = {
+				...oneListItem,
+				content_elements: [
+					{
+						...oneListItem.content_elements[0],
+						credits: { by: [] },
+					},
+				],
+			};
+			useContent.mockReturnValueOnce(noAuthorItem);
+			render(<CardList customFields={{}} />);
+
+			expect(screen.queryByText("global.by-text")).toBeNull();
+			expect(screen.queryByTestId("card-list-separator")).toBeNull();
+		});
+
+		it("should not render byline or separator when credits.by is missing", () => {
+			const noAuthorItem = {
+				...oneListItem,
+				content_elements: [
+					{
+						...oneListItem.content_elements[0],
+						credits: {},
+					},
+				],
+			};
+			useContent.mockReturnValueOnce(noAuthorItem);
+			render(<CardList customFields={{}} />);
+
+			expect(screen.queryByText("global.by-text")).toBeNull();
+			expect(screen.queryByTestId("card-list-separator")).toBeNull();
+		});
+	});
 });

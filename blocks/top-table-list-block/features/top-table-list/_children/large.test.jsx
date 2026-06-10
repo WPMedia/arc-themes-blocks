@@ -233,4 +233,69 @@ describe("Large Promo", () => {
 		);
 		expect(container.querySelector(".c-video__frame")).not.toBeNull();
 	});
+
+	it("renders with default showBottomBorder when showBottomBorderLG is undefined", () => {
+		// showBottomBorderLG not passed — typeof undefined resolves to true
+		const { container } = render(
+			<Large element={mockData} customFields={{ showHeadlineLG: true }} />,
+		);
+		expect(container.querySelector("hr")).not.toBeNull();
+	});
+
+	it("does not render bottom border when showBottomBorderLG is false", () => {
+		const { container } = render(
+			<Large
+				element={mockData}
+				customFields={{ showHeadlineLG: true, showBottomBorderLG: false }}
+			/>,
+		);
+		expect(container.querySelector("hr")).toBeNull();
+	});
+
+	it("uses empty string for displayDate when display_date is invalid", () => {
+		const elementBadDate = { ...mockData, display_date: "not-a-date" };
+		render(
+			<Large
+				element={elementBadDate}
+				customFields={{ showDateLG: true, showHeadlineLG: true }}
+			/>,
+		);
+		// Date parsed to "" — the date component is rendered but without January text
+		expect(screen.queryByText("January 30, 2020", { exact: false })).toBeNull();
+	});
+
+	it("uses label overline text when labelDisplay is true", () => {
+		const elementWithLabel = { ...mockData, owner: { sponsored: false } };
+		// mockData already has label.basic.display = true so this exercises the labelDisplay branch
+		render(
+			<Large
+				element={elementWithLabel}
+				customFields={{ showOverlineLG: true, showHeadlineLG: true }}
+			/>,
+		);
+		expect(screen.queryByText("Premium")).not.toBeNull();
+	});
+
+	it("does not render overline text stack when only image shown", () => {
+		render(
+			<Large
+				element={mockData}
+				customFields={{ showImageLG: true, showOverlineLG: false }}
+			/>,
+		);
+		// No overline, no text stack — just image
+		expect(screen.queryByText("Premium")).toBeNull();
+	});
+
+	it("renders attribution with only date when credits.by is empty", () => {
+		const elementNoAuthors = { ...mockData, credits: { by: [] } };
+		render(
+			<Large
+				element={elementNoAuthors}
+				customFields={{ showBylineLG: true, showDateLG: true, showHeadlineLG: true }}
+			/>,
+		);
+		// Byline absent (no authors), but date should still show
+		expect(screen.queryByText("January 30, 2020", { exact: false })).not.toBeNull();
+	});
 });

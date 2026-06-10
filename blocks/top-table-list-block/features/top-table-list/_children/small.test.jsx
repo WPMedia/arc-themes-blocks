@@ -86,4 +86,39 @@ describe("small promo block", () => {
 		);
 		expect(container.querySelector("hr")).not.toBeInTheDocument();
 	});
+
+	it("renders a separator when showBottomBorderSM is undefined (default true)", () => {
+		const { showBottomBorderSM: _, ...configWithoutBorder } = baseConfig;
+		const { container } = render(<Small element={elementWithImage} customFields={configWithoutBorder} />);
+		expect(container.querySelector("hr")).toBeInTheDocument();
+	});
+
+	it("renders an icon label when element type is gallery", () => {
+		const galleryElement = { ...elementWithImage, type: "gallery" };
+		const { container } = render(<Small element={galleryElement} customFields={baseConfig} />);
+		expect(container.querySelector(".b-top-table-list-small__icon_label")).toBeInTheDocument();
+	});
+
+	it("places image before heading when imagePosition is left", () => {
+		const { container } = render(
+			<Small element={elementWithImage} customFields={{ ...baseConfig, imagePositionSM: "left" }} />,
+		);
+		const article = container.querySelector("article");
+		const children = Array.from(article.childNodes);
+		// Image link comes before heading when position is left/above
+		const imgIdx = children.findIndex((n) => n.querySelector && n.querySelector("img"));
+		const headingIdx = children.findIndex((n) => n.tagName === "H2" || (n.querySelector && n.querySelector("h2")));
+		expect(imgIdx).toBeLessThan(headingIdx);
+	});
+
+	it("applies no position class when showImageSM or showHeadlineSM is false", () => {
+		const { container } = render(
+			<Small
+				element={elementWithImage}
+				customFields={{ ...baseConfig, showImageSM: false }}
+			/>,
+		);
+		const article = container.querySelector("article");
+		expect(article.className).not.toContain("--right");
+	});
 });

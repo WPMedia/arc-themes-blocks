@@ -1,7 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { SubHeadlinePresentation } from "./default";
+import { useFusionContext } from "fusion:context";
+import SubHeadline, { SubHeadlinePresentation } from "./default";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	Heading: ({ className, dangerouslySetInnerHTML }) => (
@@ -49,5 +50,28 @@ describe("SubHeadlinePresentation", () => {
 	it("renders nothing when content has no matching value", () => {
 		const { container } = render(<SubHeadlinePresentation content={{}} />);
 		expect(container).toBeEmptyDOMElement();
+	});
+});
+
+describe("SubHeadline (Fusion-connected)", () => {
+	it("renders with content from useFusionContext", () => {
+		useFusionContext.mockReturnValueOnce({
+			globalContent: { subheadlines: { basic: "Fusion subheadline" } },
+			customFields: {},
+		});
+		render(<SubHeadline />);
+		expect(screen.getByRole("heading")).toHaveTextContent("Fusion subheadline");
+	});
+
+	it("uses customFields.valueToDisplay when provided", () => {
+		useFusionContext.mockReturnValueOnce({
+			globalContent: {
+				description: { basic: "desc from context" },
+				subheadlines: { basic: "sub from context" },
+			},
+			customFields: { valueToDisplay: "Description" },
+		});
+		render(<SubHeadline />);
+		expect(screen.getByRole("heading")).toHaveTextContent("desc from context");
 	});
 });

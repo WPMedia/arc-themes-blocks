@@ -134,4 +134,21 @@ describe("Identity Password Reset Feature - Failing reset request", () => {
 	});
 });
 
+describe("Identity Password Reset - getConfig error handling", () => {
+	it("handles error state when getConfig fails", async () => {
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			Identity: {
+				...Identity,
+				getConfig: jest.fn(() => Promise.reject(new Error("config error"))),
+				resetPassword: resetPasswordMock,
+			},
+		}));
+		render(<ResetPassword customFields={{ successActionURL }} />);
+		// Component still renders despite getConfig failure
+		expect(screen.getByRole("form")).not.toBeNull();
+	});
+});
+
+
 window.history.back();

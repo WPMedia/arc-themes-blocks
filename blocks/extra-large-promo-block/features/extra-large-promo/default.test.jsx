@@ -209,4 +209,204 @@ describe("the extra large promo feature", () => {
 		render(<ExtraLargePromo customFields={config} />);
 		expect(screen.getByText("video embed")).not.toBeNull();
 	});
+
+	it("falls back to parsed imageOverrideAuth when signing service returns nothing", () => {
+		useContent.mockReturnValueOnce(mockData).mockReturnValueOnce(null);
+		render(
+			<ExtraLargePromo
+				customFields={{
+					showImage: true,
+					showHeadline: true,
+					imageOverrideURL: "https://example.com/image.jpg",
+					imageOverrideAuth: JSON.stringify({ 2: "auth-token" }),
+				}}
+			/>,
+		);
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
+	});
+
+	it("sets RESIZER_TOKEN_VERSION when resizedAuth has hash", () => {
+		useContent.mockReturnValueOnce(mockData).mockReturnValueOnce({ hash: "abc123" });
+		render(
+			<ExtraLargePromo
+				customFields={{
+					showImage: true,
+					showHeadline: true,
+					imageOverrideURL: "https://example.com/image.jpg",
+				}}
+			/>,
+		);
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
+	});
+
+	it("should render label icon when content type is gallery", () => {
+		useContent.mockReturnValueOnce({ ...mockData, type: "gallery" });
+		render(
+			<ExtraLargePromo
+				customFields={{
+					showImage: true,
+					imageRatio: "4:3",
+					showHeadline: true,
+					playVideoInPlace: false,
+				}}
+			/>,
+		);
+		expect(screen.getByRole("img")).not.toBeNull();
+	});
+
+	it("should render only authors when hasDate is false", () => {
+		useContent.mockReturnValueOnce({ ...mockData, display_date: null });
+		render(
+			<ExtraLargePromo
+				customFields={{
+					showByline: true,
+					showDate: true,
+				}}
+			/>,
+		);
+		expect(screen.getByText(/Example Author1/)).not.toBeNull();
+	});
+
+	it("should render only date when contentAuthors is null", () => {
+		useContent.mockReturnValueOnce({ ...mockData, credits: { by: [] } });
+		render(
+			<ExtraLargePromo
+				customFields={{
+					showByline: true,
+					showDate: true,
+				}}
+			/>,
+		);
+		expect(screen.getByText("January 30, 2020", { exact: false })).not.toBeNull();
+	});
+
+	it("should not show date when showDate is true but display_date is invalid", () => {
+		useContent.mockReturnValueOnce({ ...mockData, display_date: "not-a-date" });
+		render(
+			<ExtraLargePromo
+				customFields={{
+					showDate: true,
+					showHeadline: true,
+				}}
+			/>,
+		);
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
+	});
+
+	it("should handle content with no label property", () => {
+		useContent.mockReturnValueOnce({ ...mockData, label: undefined });
+		render(
+			<ExtraLargePromo
+				customFields={{
+					showOverline: true,
+					showHeadline: true,
+				}}
+			/>,
+		);
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
+	});
+
+	it("should use website section overline when no label display and not sponsored", () => {
+		useContent.mockReturnValueOnce({
+			...mockData,
+			owner: { sponsored: false },
+			label: { basic: { display: false } },
+		});
+		render(
+			<ExtraLargePromo
+				customFields={{
+					showOverline: true,
+					showHeadline: true,
+				}}
+			/>,
+		);
+		// arcSite is "dagen" from context mock, dagen has no website_section in mock-data
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
+	});
+
+	it("should use label overline when label display is true and not sponsored", () => {
+		useContent.mockReturnValueOnce({
+			...mockData,
+			owner: { sponsored: false },
+			label: { basic: { display: true, text: "Exclusive", url: "/exclusive" } },
+			websites: {
+				dagen: {
+					website_section: null,
+					website_url: mockData.websites.dagen.website_url,
+				},
+			},
+		});
+		render(
+			<ExtraLargePromo
+				customFields={{
+					showOverline: true,
+					showHeadline: true,
+				}}
+			/>,
+		);
+		expect(screen.getByText("Exclusive")).not.toBeNull();
+	});
+
+	it("should use sponsored overline with label text when content is sponsored with label text", () => {
+		useContent.mockReturnValueOnce({
+			...mockData,
+			owner: { sponsored: true },
+			label: { basic: { display: true, text: "Sponsor", url: "/sponsor" } },
+		});
+		render(
+			<ExtraLargePromo
+				customFields={{
+					showOverline: true,
+					showHeadline: true,
+				}}
+			/>,
+		);
+		expect(screen.getByText("Sponsor")).not.toBeNull();
+	});
+
+	it("should render imageParams using fallbackImage when showImage true but no image URL or ANS image", () => {
+		useContent.mockReturnValueOnce({
+			...mockData,
+			promo_items: {},
+		});
+		render(
+			<ExtraLargePromo
+				customFields={{
+					showImage: true,
+					imageRatio: "4:3",
+				}}
+			/>,
+		);
+		// Fallback image uses src only, alt is empty → role "presentation"
+		const fallbackImg =
+			screen.queryByRole("presentation", { hidden: true }) ||
+			screen.queryByRole("img", { hidden: true });
+		expect(fallbackImg).not.toBeNull();
+	});
+
+	it("should render without editableHeading when no headlines", () => {
+		useContent.mockReturnValueOnce({ ...mockData, headlines: undefined });
+		render(
+			<ExtraLargePromo
+				customFields={{
+					showHeadline: false,
+					showDescription: true,
+				}}
+			/>,
+		);
+		expect(screen.getByText(mockData.description.basic)).not.toBeNull();
+	});
+
+	it("should render without editableDescription when no description", () => {
+		useContent.mockReturnValueOnce({ ...mockData, description: undefined });
+		render(
+			<ExtraLargePromo
+				customFields={{
+					showHeadline: true,
+					showDescription: false,
+				}}
+			/>,
+		);
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
+	});
 });

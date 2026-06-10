@@ -224,6 +224,21 @@ describe("Share Bar", () => {
 			jest.clearAllMocks();
 		});
 
+		it("Should call ShareBar when globalContent has no website_url", () => {
+			useFusionContext.mockImplementation(() => ({
+				arcSite: "the-sun",
+				customFields: { email: true, facebook: false, pinterest: false, twitter: false, linkedIn: false },
+				// globalContent with missing website_url and basic — triggers = "" defaults
+				globalContent: { headlines: {}, website_url: undefined },
+			}));
+			getProperties.mockImplementation(() => ({
+				websiteDomain: "https://www.thesun.com/",
+				websiteName: "The Sun",
+			}));
+			const { container } = render(<ShareBarContainer />);
+			expect(container.firstChild).not.toBeNull();
+		});
+
 		it("Should call ShareBar", () => {
 			useFusionContext.mockImplementation(() => ({
 				arcSite: "the-sun",

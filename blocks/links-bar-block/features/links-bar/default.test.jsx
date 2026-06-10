@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useContent } from "fusion:content";
-import { useFusionContext } from "fusion:context";
 import LinksBar from "./default";
 
 jest.mock("fusion:content", () => ({

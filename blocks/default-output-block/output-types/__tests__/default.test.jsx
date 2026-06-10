@@ -86,39 +86,46 @@ describe("the default output type", () => {
 
 	it("renders a skip-to-main link", () => {
 		const { container } = render(<DefaultOutputType {...mockProps} />);
+		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
 		expect(container.querySelector(".skip-main")).toBeInTheDocument();
 	});
 
 	it("renders the fusion-app container", () => {
 		const { container } = render(<DefaultOutputType {...mockProps} />);
+		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
 		expect(container.querySelector("#fusion-app")).toBeInTheDocument();
 	});
 
 	it("embeds the default writing-mode style", () => {
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
+		// eslint-disable-next-line testing-library/no-node-access
 		expect(document.head.querySelector('style')?.innerHTML).toContain("writing-mode: horizontal-tb");
 	});
 
 	it("uses a custom textFlow value in the style tag", () => {
 		mockPropertiesOverride = { dangerouslyInjectJS: [], textFlow: "vertical-rl" };
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
+		// eslint-disable-next-line testing-library/no-node-access
 		expect(document.head.querySelector('style')?.innerHTML).toContain("writing-mode: vertical-rl");
 	});
 });
 
 // ─── Conditional script rendering ────────────────────────────────────────────
+// Scripts and links injected into document.head cannot be queried via RTL screen
+// queries; direct document.head access is necessary here.
+/* eslint-disable testing-library/no-node-access */
 
 describe("head content — conditional scripts", () => {
 	it("includes GTM code in the inline scripts block when gtmID is set", () => {
 		mockPropertiesOverride = { dangerouslyInjectJS: [], gtmID: "GTM-12345ID" };
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
 		const inline = document.head.querySelector('script[data-integration="inlineScripts"]');
 		expect(inline?.innerHTML).toMatch(/GTM-12345ID/);
 	});
 
 	it("renders a Google Analytics script tag when gaID is set", () => {
 		mockPropertiesOverride = { dangerouslyInjectJS: [], gaID: "UA-6789ID" };
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
 		expect(
 			document.head.querySelector('script[data-integration="googleAnalyticsTag"]'),
 		).toBeInTheDocument();
@@ -126,12 +133,12 @@ describe("head content — conditional scripts", () => {
 
 	it("renders a Nativo ad script when nativoIntegration is true", () => {
 		mockPropertiesOverride = { dangerouslyInjectJS: [], nativoIntegration: true };
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
 		expect(document.head.querySelector('script[data-integration="nativo-ad"]')).toBeInTheDocument();
 	});
 
 	it("does not render a Nativo ad script when nativoIntegration is not set", () => {
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
 		expect(
 			document.head.querySelector('script[data-integration="nativo-ad"]'),
 		).not.toBeInTheDocument();
@@ -143,13 +150,13 @@ describe("head content — conditional scripts", () => {
 			chartbeatAccountId: 994949,
 			chartbeatDomain: "example.com",
 		};
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
 		expect(document.head.querySelector('script[data-integration="chartbeat"]')).toBeInTheDocument();
 	});
 
 	it("does not render a Chartbeat script when chartbeatAccountId is missing", () => {
 		mockPropertiesOverride = { dangerouslyInjectJS: [], chartbeatDomain: "example.com" };
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
 		expect(
 			document.head.querySelector('script[data-integration="chartbeat"]'),
 		).not.toBeInTheDocument();
@@ -157,7 +164,7 @@ describe("head content — conditional scripts", () => {
 
 	it("does not render a Chartbeat script when chartbeatDomain is missing", () => {
 		mockPropertiesOverride = { dangerouslyInjectJS: [], chartbeatAccountId: 994949 };
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
 		expect(
 			document.head.querySelector('script[data-integration="chartbeat"]'),
 		).not.toBeInTheDocument();
@@ -165,12 +172,12 @@ describe("head content — conditional scripts", () => {
 
 	it("renders a Comscore script when comscoreID is set", () => {
 		mockPropertiesOverride = { dangerouslyInjectJS: [], comscoreID: 88776655 };
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
 		expect(document.head.querySelector('script[data-integration="comscore"]')).toBeInTheDocument();
 	});
 
 	it("does not render a Comscore script when comscoreID is missing", () => {
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
 		expect(
 			document.head.querySelector('script[data-integration="comscore"]'),
 		).not.toBeInTheDocument();
@@ -178,12 +185,12 @@ describe("head content — conditional scripts", () => {
 
 	it("renders a Queryly script when querylyId is set", () => {
 		mockPropertiesOverride = { dangerouslyInjectJS: [], querylyId: 88776655 };
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
 		expect(document.head.querySelector('script[data-integration="queryly"]')).toBeInTheDocument();
 	});
 
 	it("does not render a Queryly script when querylyId is not set", () => {
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
 		expect(
 			document.head.querySelector('script[data-integration="queryly"]'),
 		).not.toBeInTheDocument();
@@ -191,12 +198,12 @@ describe("head content — conditional scripts", () => {
 
 	it("renders a retail API script when api.retail.script is set", () => {
 		mockPropertiesOverride = { dangerouslyInjectJS: [], api: { retail: { script: "/retail/script.js" } } };
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
 		expect(document.head.querySelector('script[data-integration="arcp"]')).toBeInTheDocument();
 	});
 
 	it("does not render a retail API script when the property is missing", () => {
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
 		expect(document.head.querySelector('script[data-integration="arcp"]')).not.toBeInTheDocument();
 	});
 
@@ -205,7 +212,7 @@ describe("head content — conditional scripts", () => {
 			dangerouslyInjectJS: [],
 			fontUrl: ["https://fonts.googleapis.com/css?family=Roboto+Condensed"],
 		};
-		const { container } = render(<DefaultOutputType {...mockProps} />);
+		render(<DefaultOutputType {...mockProps} />);
 		expect(document.head.querySelector('[data-testid="font-loading-url-0"]')).toBeInTheDocument();
 	});
 
@@ -264,10 +271,12 @@ describe("head content — conditional scripts", () => {
 		mockPropertiesOverride = { websiteName: "The Sun", websiteDomain: "", fallbackImage: "/r/placeholder.jpg", resizerURL: "resizer", locale: "en" };
 		expect(() => render(<DefaultOutputType {...mockProps} />)).not.toThrow();
 	});
+	/* eslint-enable testing-library/no-node-access */
 
 	it("renders a comscore noscript element in the body when comscoreID is set", () => {
 		mockPropertiesOverride = { dangerouslyInjectJS: [], comscoreID: 88776655 };
 		const { container } = render(<DefaultOutputType {...mockProps} />);
+		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
 		expect(container.querySelector('noscript[data-integration="comscore"]')).toBeInTheDocument();
 	});
 
@@ -276,6 +285,7 @@ describe("head content — conditional scripts", () => {
 		const { container } = render(<DefaultOutputType {...mockProps} />);
 		// React 19 + JSDOM renders noscript as an empty element (scripting is enabled).
 		// The presence of the noscript tag is sufficient to verify googleTagManagerNoScript ran.
+		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
 		expect(container.querySelector("noscript")).toBeInTheDocument();
 	});
 });

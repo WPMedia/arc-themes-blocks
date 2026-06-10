@@ -156,6 +156,7 @@ describe("VideoPlayer", () => {
 			/>,
 		);
 		expect(screen.queryByRole("heading")).not.toBeInTheDocument();
+		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
 		expect(container.querySelector("p")).not.toBeInTheDocument();
 	});
 
@@ -237,6 +238,7 @@ describe("VideoPlayer", () => {
 		// Should render without error; aspect ratio falls back to "16:9"
 		expect(screen.getByTestId("video-container")).toBeInTheDocument();
 	});
+
 
 	it("calculates a 9:16 aspect ratio from promo_items dimensions", () => {
 		const verticalContent = {

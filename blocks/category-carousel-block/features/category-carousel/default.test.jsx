@@ -41,10 +41,10 @@ describe("Category Carousel", () => {
 				}}
 			/>,
 		);
-		expect(screen.queryByText("Test 1")).toBeInTheDocument();
-		expect(screen.queryByText("Test 2")).toBeInTheDocument();
-		expect(screen.queryByText("Test 3")).toBeInTheDocument();
-		expect(screen.queryByText("Test 4")).toBeInTheDocument();
+		expect(screen.getByText("Test 1")).toBeInTheDocument();
+		expect(screen.getByText("Test 2")).toBeInTheDocument();
+		expect(screen.getByText("Test 3")).toBeInTheDocument();
+		expect(screen.getByText("Test 4")).toBeInTheDocument();
 		unmount();
 	});
 
@@ -68,7 +68,7 @@ describe("Category Carousel", () => {
 				}}
 			/>,
 		);
-		expect(screen.queryByText("Heading Text")).toBeInTheDocument();
+		expect(screen.getByText("Heading Text")).toBeInTheDocument();
 		unmount();
 	});
 
@@ -106,10 +106,10 @@ describe("Category Carousel", () => {
 				}}
 			/>,
 		);
-		expect(screen.queryByText("Test 1")).toBeInTheDocument();
-		expect(screen.queryByText("Test 2")).toBeInTheDocument();
-		expect(screen.queryByText("Test 3")).toBeInTheDocument();
-		expect(screen.queryByText("Test 4")).toBeInTheDocument();
+		expect(screen.getByText("Test 1")).toBeInTheDocument();
+		expect(screen.getByText("Test 2")).toBeInTheDocument();
+		expect(screen.getByText("Test 3")).toBeInTheDocument();
+		expect(screen.getByText("Test 4")).toBeInTheDocument();
 		expect(screen.queryAllByRole("group").length).toBe(4);
 		unmount();
 	});
@@ -161,18 +161,18 @@ describe("Category Carousel", () => {
 			/>,
 		);
 
-		expect(screen.queryByText("Test 1")).toBeInTheDocument();
-		expect(screen.queryByText("Test 2")).toBeInTheDocument();
-		expect(screen.queryByText("Test 3")).toBeInTheDocument();
-		expect(screen.queryByText("Test 4")).toBeInTheDocument();
-		expect(screen.queryByText("Test 5")).toBeInTheDocument();
-		expect(screen.queryByText("Test 6")).toBeInTheDocument();
-		expect(screen.queryByText("Test 7")).toBeInTheDocument();
-		expect(screen.queryByText("Test 8")).toBeInTheDocument();
-		expect(screen.queryByText("Test 9")).toBeInTheDocument();
-		expect(screen.queryByText("Test 10")).toBeInTheDocument();
-		expect(screen.queryByText("Test 11")).toBeInTheDocument();
-		expect(screen.queryByText("Test 12")).toBeInTheDocument();
+		expect(screen.getByText("Test 1")).toBeInTheDocument();
+		expect(screen.getByText("Test 2")).toBeInTheDocument();
+		expect(screen.getByText("Test 3")).toBeInTheDocument();
+		expect(screen.getByText("Test 4")).toBeInTheDocument();
+		expect(screen.getByText("Test 5")).toBeInTheDocument();
+		expect(screen.getByText("Test 6")).toBeInTheDocument();
+		expect(screen.getByText("Test 7")).toBeInTheDocument();
+		expect(screen.getByText("Test 8")).toBeInTheDocument();
+		expect(screen.getByText("Test 9")).toBeInTheDocument();
+		expect(screen.getByText("Test 10")).toBeInTheDocument();
+		expect(screen.getByText("Test 11")).toBeInTheDocument();
+		expect(screen.getByText("Test 12")).toBeInTheDocument();
 		expect(screen.queryByText("Test Fail")).not.toBeInTheDocument();
 		unmount();
 	});
@@ -204,10 +204,10 @@ describe("Category Carousel", () => {
 				}}
 			/>,
 		);
-		expect(screen.queryByText("Test 1")).toBeInTheDocument();
-		expect(screen.queryByText("Test 2")).toBeInTheDocument();
-		expect(screen.queryByText("Test 3")).toBeInTheDocument();
-		expect(screen.queryByText("Test 4")).toBeInTheDocument();
+		expect(screen.getByText("Test 1")).toBeInTheDocument();
+		expect(screen.getByText("Test 2")).toBeInTheDocument();
+		expect(screen.getByText("Test 3")).toBeInTheDocument();
+		expect(screen.getByText("Test 4")).toBeInTheDocument();
 		unmount();
 	});
 
@@ -241,10 +241,10 @@ describe("Category Carousel", () => {
 				}}
 			/>,
 		);
-		expect(screen.queryByText("Test 1")).toBeInTheDocument();
-		expect(screen.queryByText("Test 2")).toBeInTheDocument();
-		expect(screen.queryByText("Test 3")).toBeInTheDocument();
-		expect(screen.queryByText("Test 4")).toBeInTheDocument();
+		expect(screen.getByText("Test 1")).toBeInTheDocument();
+		expect(screen.getByText("Test 2")).toBeInTheDocument();
+		expect(screen.getByText("Test 3")).toBeInTheDocument();
+		expect(screen.getByText("Test 4")).toBeInTheDocument();
 		unmount();
 	});
 });

@@ -9,6 +9,7 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
 	Video: () => "video embed",
+	getPromoType: jest.fn((element) => element?.type || null),
 }));
 
 describe("the extra large promo feature", () => {

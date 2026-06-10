@@ -9,6 +9,7 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	isServerSide: jest.fn(() => true),
 	LazyLoad: ({ children }) => children,
 	Video: () => "video embed",
+	getPromoType: jest.fn((element) => element?.type || null),
 }));
 
 describe("the medium promo feature", () => {

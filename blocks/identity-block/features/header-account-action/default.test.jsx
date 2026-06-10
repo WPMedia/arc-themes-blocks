@@ -1,5 +1,5 @@
 import React from "react";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useFusionContext } from "fusion:context";
 import { useIdentity } from "@wpmedia/arc-themes-components";
@@ -48,16 +48,14 @@ describe("Subscriptions HeaderAccountAction", () => {
 	});
 
 	it("shows sign in url and create account url", async () => {
-		await act(async () => {
-			render(
-				<HeaderAccountAction
-					customFields={{
-						loginURL: "/login",
-						createAccountURL: "/create-account",
-					}}
-				/>,
-			);
-		});
+		render(
+			<HeaderAccountAction
+				customFields={{
+					loginURL: "/login",
+					createAccountURL: "/create-account",
+				}}
+			/>,
+		);
 		const links = screen.queryAllByRole("link");
 		expect(links.length).toBeGreaterThanOrEqual(2);
 		const hrefs = links.map((l) => l.getAttribute("href"));
@@ -66,30 +64,26 @@ describe("Subscriptions HeaderAccountAction", () => {
 	});
 
 	it("renders the mobile toggle button", async () => {
-		await act(async () => {
-			render(
-				<HeaderAccountAction
-					customFields={{
-						loginURL: "/login",
-						createAccountURL: "/create-account",
-					}}
-				/>,
-			);
-		});
+		render(
+			<HeaderAccountAction
+				customFields={{
+					loginURL: "/login",
+					createAccountURL: "/create-account",
+				}}
+			/>,
+		);
 		expect(screen.getAllByRole("button").length).toBeGreaterThan(0);
 	});
 
 	it("toggles the mobile submenu when clicking the mobile button", async () => {
-		await act(async () => {
-			render(
-				<HeaderAccountAction
-					customFields={{
-						loginURL: "/login",
-						createAccountURL: "/create-account",
-					}}
-				/>,
-			);
-		});
+		render(
+			<HeaderAccountAction
+				customFields={{
+					loginURL: "/login",
+					createAccountURL: "/create-account",
+				}}
+			/>,
+		);
 		const buttons = screen.getAllByRole("button");
 		const linksBefore = screen.queryAllByRole("link");
 		fireEvent.click(buttons[buttons.length - 1]);
@@ -98,11 +92,9 @@ describe("Subscriptions HeaderAccountAction", () => {
 	});
 
 	it("renders nothing when both loginURL and createAccountURL are empty", async () => {
-		await act(async () => {
-			render(
-				<HeaderAccountAction customFields={{ loginURL: "", createAccountURL: "" }} />,
-			);
-		});
+		render(
+			<HeaderAccountAction customFields={{ loginURL: "", createAccountURL: "" }} />,
+		);
 		expect(screen.queryAllByRole("link")).toHaveLength(0);
 	});
 
@@ -110,16 +102,14 @@ describe("Subscriptions HeaderAccountAction", () => {
 		getUserProfileMock.mockResolvedValueOnce({ username: "test" });
 		isLoggedInMock.mockResolvedValueOnce(true);
 
-		await act(async () => {
-			render(
-				<HeaderAccountAction
-					customFields={{
-						manageAccountURL: "/manage",
-						logoutURL: "/logout",
-					}}
-				/>,
-			);
-		});
+		render(
+			<HeaderAccountAction
+				customFields={{
+					manageAccountURL: "/manage",
+					logoutURL: "/logout",
+				}}
+			/>,
+		);
 		await screen.findByRole("button");
 		fireEvent.click(screen.getByRole("button"));
 		const links = screen.queryAllByRole("link");
@@ -135,16 +125,14 @@ describe("Subscriptions HeaderAccountAction", () => {
 		delete window.location;
 		window.location = { href: "" };
 
-		await act(async () => {
-			render(
-				<HeaderAccountAction
-					customFields={{
-						manageAccountURL: "/manage",
-						logoutURL: "/logout",
-					}}
-				/>,
-			);
-		});
+		render(
+			<HeaderAccountAction
+				customFields={{
+					manageAccountURL: "/manage",
+					logoutURL: "/logout",
+				}}
+			/>,
+		);
 		await screen.findByRole("button");
 		fireEvent.click(screen.getByRole("button"));
 		await waitFor(() => screen.queryAllByRole("link").length > 0);

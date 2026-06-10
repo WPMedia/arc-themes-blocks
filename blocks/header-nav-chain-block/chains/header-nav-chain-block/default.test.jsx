@@ -81,7 +81,7 @@ describe("the header navigation feature for the default output type", () => {
 			};
 			const { container } = render(<Navigation customFields={cFields} />);
 			// Component renders without throwing when logoAlignment is right
-			expect(container.firstChild).not.toBeNull();
+			expect(container).not.toBeEmptyDOMElement();
 		});
 	});
 
@@ -355,14 +355,19 @@ describe("the header navigation feature for the default output type", () => {
 		};
 
 		it("renders the --scrolled modifier class when isScrolled is true", () => {
-			const { container } = render(<PresentationalNav {...baseProps} isScrolled />);
-			expect(container.querySelector(".b-header-nav-chain--scrolled")).not.toBeNull();
+			render(<PresentationalNav {...baseProps} isScrolled />);
+			const nav = screen.getByRole("navigation");
+			expect(nav.className).toContain("b-header-nav-chain--scrolled");
 		});
 
 		it("renders tabIndex=-1 on flyout when sections is empty", () => {
-			const { container } = render(<PresentationalNav {...baseProps} sections={[]} />);
-			const flyoutWrapper = container.querySelector(".b-header-nav-chain__flyout-nav-wrapper");
-			expect(flyoutWrapper).not.toBeNull();
+			render(<PresentationalNav {...baseProps} sections={[]} />);
+			const allElements = screen.getAllByRole("generic");
+			const flyoutWrapper = allElements.find(
+				(el) => el.getAttribute("tabindex") === "-1" &&
+					el.className.includes("flyout-nav-wrapper")
+			);
+			expect(flyoutWrapper).not.toBeUndefined();
 			expect(flyoutWrapper.getAttribute("tabindex")).toBe("-1");
 		});
 
@@ -388,10 +393,14 @@ describe("the header navigation feature for the default output type", () => {
 			jest.useFakeTimers();
 			// useContent returning null triggers the false branch: mainContent && mainContent.children ? ... : []
 			useContent.mockReturnValueOnce(null);
-			const { container } = render(<Navigation customFields={DEFAULT_SELECTIONS} />);
+			render(<Navigation customFields={DEFAULT_SELECTIONS} />);
 			act(() => { jest.runAllTimers(); });
-			const flyoutWrapper = container.querySelector(".b-header-nav-chain__flyout-nav-wrapper");
-			expect(flyoutWrapper).not.toBeNull();
+			const allElements = screen.getAllByRole("generic");
+			const flyoutWrapper = allElements.find(
+				(el) => el.getAttribute("tabindex") === "-1" &&
+					el.className.includes("flyout-nav-wrapper")
+			);
+			expect(flyoutWrapper).not.toBeUndefined();
 			// sections=[] means tabIndex="-1" on the flyout wrapper Stack
 			expect(flyoutWrapper.getAttribute("tabindex")).toBe("-1");
 		});

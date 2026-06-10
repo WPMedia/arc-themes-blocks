@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
@@ -20,7 +20,7 @@ const customFields = {
 
 describe("Share Bar", () => {
 	it("should show all buttons if those options are chosen", () => {
-		const { getAllByRole } = render(
+		render(
 			<ShareBar
 				customFields={customFields}
 				websiteName={websiteName}
@@ -29,7 +29,7 @@ describe("Share Bar", () => {
 				headlineString={headlineString}
 			/>,
 		);
-		const buttons = getAllByRole("button");
+		const buttons = screen.getAllByRole("button");
 		expect(buttons).toHaveLength(5);
 	});
 
@@ -40,7 +40,7 @@ describe("Share Bar", () => {
 		customFields.twitter = false;
 		customFields.linkedIn = true;
 
-		const { getAllByRole } = render(
+		render(
 			<ShareBar
 				customFields={customFields}
 				websiteName={websiteName}
@@ -50,7 +50,7 @@ describe("Share Bar", () => {
 			/>,
 		);
 
-		const buttons = getAllByRole("button");
+		const buttons = screen.getAllByRole("button");
 		expect(buttons).toHaveLength(3);
 	});
 
@@ -70,7 +70,7 @@ describe("Share Bar", () => {
 				headlineString={headlineString}
 			/>,
 		);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("should not render if custom fields are undefined", () => {
@@ -83,7 +83,7 @@ describe("Share Bar", () => {
 				headlineString={headlineString}
 			/>,
 		);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	describe("Social Buttons Interactions", () => {
@@ -93,7 +93,7 @@ describe("Share Bar", () => {
 			customFields.pinterest = false;
 			customFields.twitter = false;
 			customFields.linkedIn = false;
-			const { container } = render(
+			render(
 				<ShareBar
 					customFields={customFields}
 					websiteName={websiteName}
@@ -104,7 +104,7 @@ describe("Share Bar", () => {
 			);
 			global.open = jest.fn();
 			fireEvent(
-				container.querySelector("button"),
+				screen.getByRole("button"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
@@ -119,7 +119,7 @@ describe("Share Bar", () => {
 			customFields.pinterest = false;
 			customFields.twitter = false;
 			customFields.linkedIn = false;
-			const { container } = render(
+			render(
 				<ShareBar
 					customFields={customFields}
 					websiteName={websiteName}
@@ -130,7 +130,7 @@ describe("Share Bar", () => {
 			);
 			global.open = jest.fn();
 			fireEvent(
-				container.querySelector("button"),
+				screen.getByRole("button"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
@@ -145,7 +145,7 @@ describe("Share Bar", () => {
 			customFields.pinterest = true;
 			customFields.twitter = false;
 			customFields.linkedIn = false;
-			const { container } = render(
+			render(
 				<ShareBar
 					customFields={customFields}
 					websiteName={websiteName}
@@ -156,7 +156,7 @@ describe("Share Bar", () => {
 			);
 			global.open = jest.fn();
 			fireEvent(
-				container.querySelector("button"),
+				screen.getByRole("button"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
@@ -171,7 +171,7 @@ describe("Share Bar", () => {
 			customFields.pinterest = false;
 			customFields.twitter = true;
 			customFields.linkedIn = false;
-			const { container } = render(
+			render(
 				<ShareBar
 					customFields={customFields}
 					websiteName={websiteName}
@@ -182,7 +182,7 @@ describe("Share Bar", () => {
 			);
 			global.open = jest.fn();
 			fireEvent(
-				container.querySelector("button"),
+				screen.getByRole("button"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
@@ -197,7 +197,7 @@ describe("Share Bar", () => {
 			customFields.pinterest = false;
 			customFields.twitter = false;
 			customFields.linkedIn = true;
-			const { container } = render(
+			render(
 				<ShareBar
 					customFields={customFields}
 					websiteName={websiteName}
@@ -208,7 +208,7 @@ describe("Share Bar", () => {
 			);
 			global.open = jest.fn();
 			fireEvent(
-				container.querySelector("button"),
+				screen.getByRole("button"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
@@ -236,7 +236,7 @@ describe("Share Bar", () => {
 				websiteName: "The Sun",
 			}));
 			const { container } = render(<ShareBarContainer />);
-			expect(container.firstChild).not.toBeNull();
+			expect(container).not.toBeEmptyDOMElement();
 		});
 
 		it("Should call ShareBar", () => {
@@ -265,7 +265,7 @@ describe("Share Bar", () => {
 					headlineString={headlineString}
 				/>,
 			);
-			expect(container.firstChild).not.toBeNull();
+			expect(container).not.toBeEmptyDOMElement();
 		});
 		it("Should call ShareBar with unexpected contexts", () => {
 			useFusionContext.mockImplementation(() => ({
@@ -293,7 +293,7 @@ describe("Share Bar", () => {
 					headlineString={headlineString}
 				/>,
 			);
-			expect(container.firstChild).not.toBeNull();
+			expect(container).not.toBeEmptyDOMElement();
 		});
 	});
 });

@@ -12,7 +12,7 @@ const defaultProps = {
 describe("SubscriptionDialog", () => {
 	it("renders the login link", () => {
 		render(<SubscriptionDialog {...defaultProps} />);
-		expect(screen.getByText("Log In").closest("a")).toHaveAttribute("href", "/account/login");
+		expect(screen.getByRole("link", { name: "Log In" })).toHaveAttribute("href", "/account/login");
 	});
 
 	it("renders the action button when both actionText and actionUrl are provided", () => {
@@ -36,8 +36,8 @@ describe("SubscriptionDialog", () => {
 	});
 
 	it("does not render headline when not provided", () => {
-		const { container } = render(<SubscriptionDialog {...defaultProps} />);
-		expect(container.querySelector("h2")).toBeNull();
+		render(<SubscriptionDialog {...defaultProps} />);
+		expect(screen.queryByRole("heading", { level: 2 })).toBeNull();
 	});
 
 	it("renders subheadline when provided", () => {

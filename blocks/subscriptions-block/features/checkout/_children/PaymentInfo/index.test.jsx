@@ -1,5 +1,5 @@
 import React from "react";
-import { act, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useIdentity } from "@wpmedia/arc-themes-components";
 import usePaymentOptions from "../../../../components/usePaymentOptions";
@@ -74,23 +74,17 @@ describe("PaymentInfo", () => {
 	});
 
 	it("renders the payment info container", async () => {
-		await act(async () => {
-			render(<PaymentInfo {...defaultProps} />);
-		});
-		expect(document.querySelector(".b-checkout__payment-info")).not.toBeNull();
+		render(<PaymentInfo {...defaultProps} />);
+		expect(screen.getByText("subscriptions-block.credit-card-information")).not.toBeNull();
 	});
 
 	it("renders the form heading", async () => {
-		await act(async () => {
-			render(<PaymentInfo {...defaultProps} />);
-		});
+		render(<PaymentInfo {...defaultProps} />);
 		expect(screen.getByText("subscriptions-block.credit-card-information")).not.toBeNull();
 	});
 
 	it("does not render PayPal when paypal is null", async () => {
-		await act(async () => {
-			render(<PaymentInfo {...defaultProps} />);
-		});
+		render(<PaymentInfo {...defaultProps} />);
 		expect(screen.queryByTestId("paypal")).toBeNull();
 	});
 
@@ -100,24 +94,18 @@ describe("PaymentInfo", () => {
 			paypal: null,
 			error: "Payment configuration error",
 		});
-		await act(async () => {
-			render(<PaymentInfo {...defaultProps} />);
-		});
+		render(<PaymentInfo {...defaultProps} />);
 		expect(screen.getByRole("alert")).not.toBeNull();
 	});
 
 	it("does not render Stripe Elements when stripe is not initialized", async () => {
-		await act(async () => {
-			render(<PaymentInfo {...defaultProps} />);
-		});
+		render(<PaymentInfo {...defaultProps} />);
 		// stripeInstance starts null so Stripe Elements shouldn't appear initially
 		expect(screen.queryByTestId("stripe-elements")).toBeNull();
 	});
 
 	it("renders for payment method update", async () => {
-		await act(async () => {
-			render(<PaymentInfo {...defaultProps} isPaymentMethodUpdate />);
-		});
-		expect(document.querySelector(".b-checkout__payment-info")).not.toBeNull();
+		render(<PaymentInfo {...defaultProps} isPaymentMethodUpdate />);
+		expect(screen.getByText("subscriptions-block.credit-card-information")).not.toBeNull();
 	});
 });

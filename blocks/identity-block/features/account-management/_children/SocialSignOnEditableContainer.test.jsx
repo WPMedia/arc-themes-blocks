@@ -32,7 +32,7 @@ describe("SocialSignOnEditableFieldContainer", () => {
 
 	it("renders the social sign-on container", () => {
 		render(<SocialSignOnEditableFieldContainer {...defaultProps} />);
-		expect(document.querySelector(".b-account__social-signOn-edit")).not.toBeNull();
+		expect(screen.getByText("Google")).toBeInTheDocument();
 	});
 
 	it("shows disconnect button when isConnected is true", () => {

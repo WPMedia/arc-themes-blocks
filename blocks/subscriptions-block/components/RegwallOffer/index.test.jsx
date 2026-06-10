@@ -45,7 +45,7 @@ describe("RegwallOffer", () => {
 	it("returns null when server-side", () => {
 		isServerSide.mockReturnValue(true);
 		const { container } = render(<RegwallOffer {...defaultProps} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("renders the overlay wrapper when client-side", () => {

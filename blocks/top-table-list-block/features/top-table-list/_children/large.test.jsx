@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import mockData from "../../../mock-data";
@@ -8,6 +9,7 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => false),
 	LazyLoad: ({ children }) => children,
+	Video: () => <div data-testid="video-player">video embed</div>,
 }));
 
 describe("Large Promo", () => {
@@ -31,11 +33,11 @@ describe("Large Promo", () => {
 			/>,
 		);
 
-		expect(screen.queryByText(mockData.label.basic.text)).not.toBeNull();
-		expect(screen.queryByText(mockData.headlines.basic)).not.toBeNull();
-		expect(screen.queryByText(mockData.description.basic)).not.toBeNull();
-		expect(screen.queryByText("January 30, 2020", { exact: false })).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByText(mockData.label.basic.text)).not.toBeNull();
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
+		expect(screen.getByText(mockData.description.basic)).not.toBeNull();
+		expect(screen.getByText("January 30, 2020", { exact: false })).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("should not render overline", () => {
@@ -53,10 +55,10 @@ describe("Large Promo", () => {
 			/>,
 		);
 		expect(screen.queryByText(mockData.label.basic.text)).toBeNull();
-		expect(screen.queryByText(mockData.headlines.basic)).not.toBeNull();
-		expect(screen.queryByText(mockData.description.basic)).not.toBeNull();
-		expect(screen.queryByText("January 30, 2020", { exact: false })).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
+		expect(screen.getByText(mockData.description.basic)).not.toBeNull();
+		expect(screen.getByText("January 30, 2020", { exact: false })).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("should not render date", () => {
@@ -74,10 +76,10 @@ describe("Large Promo", () => {
 			/>,
 		);
 		expect(screen.queryByText(mockData.label.basic.text)).toBeNull();
-		expect(screen.queryByText(mockData.headlines.basic)).not.toBeNull();
-		expect(screen.queryByText(mockData.description.basic)).not.toBeNull();
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
+		expect(screen.getByText(mockData.description.basic)).not.toBeNull();
 		expect(screen.queryByText("January 30, 2020", { exact: false })).toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("should not render byline", () => {
@@ -94,11 +96,11 @@ describe("Large Promo", () => {
 				}}
 			/>,
 		);
-		expect(screen.queryByText(mockData.label.basic.text)).not.toBeNull();
-		expect(screen.queryByText(mockData.headlines.basic)).not.toBeNull();
-		expect(screen.queryByText(mockData.description.basic)).not.toBeNull();
-		expect(screen.queryByText("January 30, 2020", { exact: false })).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByText(mockData.label.basic.text)).not.toBeNull();
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
+		expect(screen.getByText(mockData.description.basic)).not.toBeNull();
+		expect(screen.getByText("January 30, 2020", { exact: false })).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("should not render headline", () => {
@@ -115,11 +117,11 @@ describe("Large Promo", () => {
 				}}
 			/>,
 		);
-		expect(screen.queryByText(mockData.label.basic.text)).not.toBeNull();
+		expect(screen.getByText(mockData.label.basic.text)).not.toBeNull();
 		expect(screen.queryByText(mockData.headlines.basic)).toBeNull();
-		expect(screen.queryByText(mockData.description.basic)).not.toBeNull();
-		expect(screen.queryByText("January 30, 2020", { exact: false })).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByText(mockData.description.basic)).not.toBeNull();
+		expect(screen.getByText("January 30, 2020", { exact: false })).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("should not render description", () => {
@@ -136,11 +138,11 @@ describe("Large Promo", () => {
 				}}
 			/>,
 		);
-		expect(screen.queryByText(mockData.label.basic.text)).not.toBeNull();
-		expect(screen.queryByText(mockData.headlines.basic)).not.toBeNull();
+		expect(screen.getByText(mockData.label.basic.text)).not.toBeNull();
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(mockData.description.basic)).toBeNull();
-		expect(screen.queryByText("January 30, 2020", { exact: false })).not.toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByText("January 30, 2020", { exact: false })).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it("should only render Image", () => {
@@ -156,7 +158,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(mockData.headlines.basic)).toBeNull();
 		expect(screen.queryByText(mockData.description.basic)).toBeNull();
 		expect(screen.queryByText("January 30, 2020", { exact: false })).toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
+		expect(screen.getByRole("img")).not.toBeNull();
 	});
 
 	it('should not render Image if "showImage" is false', () => {
@@ -192,16 +194,16 @@ describe("Large Promo", () => {
 			/>,
 		);
 		expect(screen.queryByText(mockData.label.basic.text)).toBeNull();
-		expect(screen.queryByText("global.sponsored-content")).not.toBeNull();
-		expect(screen.queryByText(mockData.headlines.basic)).not.toBeNull();
+		expect(screen.getByText("global.sponsored-content")).not.toBeNull();
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(mockData.description.basic)).toBeNull();
-		expect(screen.queryByText("January 30, 2020", { exact: false })).not.toBeNull();
+		expect(screen.getByText("January 30, 2020", { exact: false })).not.toBeNull();
 	});
 
 	it("should render image icon label", () => {
 		const modifiedData = { ...mockData };
 		modifiedData.type = "gallery";
-		const { container } = render(
+		render(
 			<Large
 				element={modifiedData}
 				customFields={{
@@ -210,7 +212,7 @@ describe("Large Promo", () => {
 				}}
 			/>,
 		);
-		expect(container.querySelector(".b-top-table-list-large__icon_label")).not.toBeNull();
+		expect(screen.getByText("global.gallery-text")).not.toBeNull();
 	});
 
 	it("should render video player media when 'playVideoInPlace' prop is passed", () => {
@@ -222,7 +224,7 @@ describe("Large Promo", () => {
 				embed_html: `<div class="powa">embed</div>`,
 			},
 		};
-		const { container } = render(
+		render(
 			<Large
 				element={modifiedData}
 				customFields={{
@@ -231,25 +233,25 @@ describe("Large Promo", () => {
 				}}
 			/>,
 		);
-		expect(container.querySelector(".c-video__frame")).not.toBeNull();
+		expect(screen.getByText("video embed")).not.toBeNull();
 	});
 
 	it("renders with default showBottomBorder when showBottomBorderLG is undefined", () => {
 		// showBottomBorderLG not passed — typeof undefined resolves to true
-		const { container } = render(
+		render(
 			<Large element={mockData} customFields={{ showHeadlineLG: true }} />,
 		);
-		expect(container.querySelector("hr")).not.toBeNull();
+		expect(screen.getByRole("separator")).not.toBeNull();
 	});
 
 	it("does not render bottom border when showBottomBorderLG is false", () => {
-		const { container } = render(
+		render(
 			<Large
 				element={mockData}
 				customFields={{ showHeadlineLG: true, showBottomBorderLG: false }}
 			/>,
 		);
-		expect(container.querySelector("hr")).toBeNull();
+		expect(screen.queryByRole("separator")).toBeNull();
 	});
 
 	it("uses empty string for displayDate when display_date is invalid", () => {
@@ -273,7 +275,7 @@ describe("Large Promo", () => {
 				customFields={{ showOverlineLG: true, showHeadlineLG: true }}
 			/>,
 		);
-		expect(screen.queryByText("Premium")).not.toBeNull();
+		expect(screen.getByText("Premium")).not.toBeNull();
 	});
 
 	it("does not render overline text stack when only image shown", () => {
@@ -296,6 +298,6 @@ describe("Large Promo", () => {
 			/>,
 		);
 		// Byline absent (no authors), but date should still show
-		expect(screen.queryByText("January 30, 2020", { exact: false })).not.toBeNull();
+		expect(screen.getByText("January 30, 2020", { exact: false })).not.toBeNull();
 	});
 });

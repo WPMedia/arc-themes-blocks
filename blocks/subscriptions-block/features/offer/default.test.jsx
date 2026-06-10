@@ -1,5 +1,6 @@
+import "@testing-library/jest-dom";
 import React from "react";
-import { act, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 import { isServerSide, useIdentity } from "@wpmedia/arc-themes-components";
 import Offer from "./default";
@@ -76,48 +77,38 @@ describe("The Offer feature", () => {
 	});
 
 	it("renders the offer container", async () => {
-		await act(async () => {
-			render(<Offer customFields={defaultCustomFields} />);
-		});
-		expect(document.querySelector(".b-offer")).not.toBeNull();
+		render(<Offer customFields={defaultCustomFields} />);
+		expect(screen.getByText(HEADLINE_TEXT)).not.toBeNull();
 	});
 
 	it("renders headline and subheadline from offer data", async () => {
-		await act(async () => {
-			render(<Offer customFields={defaultCustomFields} />);
-		});
+		render(<Offer customFields={defaultCustomFields} />);
 		expect(screen.getByText(HEADLINE_TEXT)).not.toBeNull();
 		expect(screen.getByText(SUBHEADLINE_TEXT)).not.toBeNull();
 	});
 
 	it("renders nothing when isFetching is true", async () => {
 		useOffer.mockReturnValue({ isFetching: true, offer: null, fetchOffer: () => null });
-		await act(async () => {
-			render(<Offer customFields={defaultCustomFields} />);
-		});
-		expect(document.querySelector(".b-offer__headings")).toBeNull();
+		render(<Offer customFields={defaultCustomFields} />);
+		expect(screen.queryByText(HEADLINE_TEXT)).toBeNull();
 	});
 
 	it("returns null when server-side", async () => {
 		isServerSide.mockReturnValue(true);
 		const { container } = render(<Offer customFields={defaultCustomFields} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("uses url campaign param when present", async () => {
 		jest.spyOn(URLSearchParams.prototype, "has").mockReturnValueOnce(true);
 		jest.spyOn(URLSearchParams.prototype, "get").mockReturnValueOnce("urlcampaign");
-		await act(async () => {
-			render(<Offer customFields={defaultCustomFields} />);
-		});
+		render(<Offer customFields={defaultCustomFields} />);
 		expect(useOffer).toHaveBeenCalledWith(expect.objectContaining({ campaignCode: "urlcampaign" }));
 	});
 
 	it("falls back to customField campaignCode when no url param", async () => {
 		jest.spyOn(URLSearchParams.prototype, "has").mockReturnValueOnce(false);
-		await act(async () => {
-			render(<Offer customFields={defaultCustomFields} />);
-		});
+		render(<Offer customFields={defaultCustomFields} />);
 		expect(useOffer).toHaveBeenCalledWith(
 			expect.objectContaining({ campaignCode: "allaccess" }),
 		);
@@ -125,9 +116,7 @@ describe("The Offer feature", () => {
 
 	it("falls back to 'default' campaign when campaignCode customField is absent", async () => {
 		jest.spyOn(URLSearchParams.prototype, "has").mockReturnValueOnce(false);
-		await act(async () => {
-			render(<Offer customFields={{ loginURL: "/login/", checkoutURL: "/checkout/" }} />);
-		});
+		render(<Offer customFields={{ loginURL: "/login/", checkoutURL: "/checkout/" }} />);
 		expect(useOffer).toHaveBeenCalledWith(expect.objectContaining({ campaignCode: undefined }));
 	});
 });

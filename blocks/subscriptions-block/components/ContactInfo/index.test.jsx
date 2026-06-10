@@ -19,7 +19,7 @@ describe("ContactInfo", () => {
 
 	it("renders the contact info form", () => {
 		render(<ContactInfo {...defaultProps} />);
-		expect(document.querySelector("form.b-checkout__contact-info")).not.toBeNull();
+		expect(screen.getByTestId("contact-info-form")).not.toBeNull();
 	});
 
 	it("renders email, first name, last name, country, and submit button", () => {
@@ -40,7 +40,7 @@ describe("ContactInfo", () => {
 	it("calls callback on valid form submit", () => {
 		const callback = jest.fn();
 		render(<ContactInfo {...defaultProps} callback={callback} />);
-		fireEvent.submit(document.querySelector("form"));
+		fireEvent.submit(screen.getByTestId("contact-info-form"));
 		// Form checkValidity is not enforced in jsdom without native validation
 	});
 
@@ -101,9 +101,9 @@ describe("ContactInfo", () => {
 	it("shows no identity row for unknown identity type", () => {
 		const user = { email: "test@email.com", firstName: "Jane", lastName: "Doe" };
 		const signedInIdentity = { type: "Unknown" };
-		const { container } = render(
+		render(
 			<ContactInfo {...defaultProps} user={user} signedInIdentity={signedInIdentity} />,
 		);
-		expect(container.querySelector(".b-checkout__identity-row")).toBeNull();
+		expect(screen.queryByTestId("identity-row")).toBeNull();
 	});
 });

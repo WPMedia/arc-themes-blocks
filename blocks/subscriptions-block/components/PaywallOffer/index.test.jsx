@@ -1,5 +1,5 @@
 import React from "react";
-import { act, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { isServerSide } from "@wpmedia/arc-themes-components";
@@ -67,7 +67,7 @@ describe("PaywallOffer", () => {
 	it("returns null when server-side", async () => {
 		isServerSide.mockReturnValue(true);
 		const { container } = render(<PaywallOffer {...defaultProps} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("returns null when offer is not available", async () => {
@@ -77,43 +77,33 @@ describe("PaywallOffer", () => {
 			isFetching: true,
 		});
 		const { container } = render(<PaywallOffer {...defaultProps} campaignCode={undefined} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("renders the overlay when offer is available", async () => {
-		await act(async () => {
-			render(<PaywallOffer {...defaultProps} />);
-		});
+		render(<PaywallOffer {...defaultProps} />);
 		expect(screen.getByTestId("subscription-overlay")).not.toBeNull();
 	});
 
 	it("renders the dialog inside the overlay", async () => {
-		await act(async () => {
-			render(<PaywallOffer {...defaultProps} />);
-		});
+		render(<PaywallOffer {...defaultProps} />);
 		expect(screen.getByTestId("subscription-dialog")).not.toBeNull();
 	});
 
 	it("builds action URL with campaign code query param", async () => {
-		await act(async () => {
-			render(<PaywallOffer {...defaultProps} />);
-		});
+		render(<PaywallOffer {...defaultProps} />);
 		const link = screen.getByRole("link");
 		expect(link).toHaveAttribute("href", "/offer/?campaign=testcampaign");
 	});
 
 	it("uses bare actionUrl when campaignCode is default or absent", async () => {
-		await act(async () => {
-			render(<PaywallOffer {...defaultProps} campaignCode="default" />);
-		});
+		render(<PaywallOffer {...defaultProps} campaignCode="default" />);
 		const link = screen.getByRole("link");
 		expect(link).toHaveAttribute("href", "/offer/");
 	});
 
 	it("displays offer headline", async () => {
-		await act(async () => {
-			render(<PaywallOffer {...defaultProps} />);
-		});
+		render(<PaywallOffer {...defaultProps} />);
 		expect(screen.getByText("Offer Title")).not.toBeNull();
 	});
 });

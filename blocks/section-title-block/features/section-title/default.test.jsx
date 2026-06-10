@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { useContent } from "fusion:content";
@@ -25,7 +26,7 @@ describe("Section Title", () => {
 		useAppContext.mockReturnValue({});
 
 		const { container } = render(<SectionTitleContainer customFields={config} />);
-		expect(container.firstChild).toBe(null);
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("should display section display name from global content", () => {
@@ -34,7 +35,7 @@ describe("Section Title", () => {
 
 		render(<SectionTitleContainer customFields={config} />);
 
-		expect(screen.queryByRole("heading", { name: "Section Title" })).not.toBeNull();
+		expect(screen.getByRole("heading", { name: "Section Title" })).not.toBeNull();
 	});
 
 	it("should display section display name from content", () => {
@@ -46,7 +47,7 @@ describe("Section Title", () => {
 
 		render(<SectionTitleContainer customFields={config} />);
 
-		expect(screen.queryByRole("heading", { name: "Section Title" })).not.toBeNull();
+		expect(screen.getByRole("heading", { name: "Section Title" })).not.toBeNull();
 	});
 
 	it("should display only section display name from content", () => {
@@ -58,7 +59,7 @@ describe("Section Title", () => {
 
 		render(<SectionTitleContainer customFields={config} />);
 
-		expect(screen.queryByRole("heading", { name: "Section Title Display Name" })).not.toBeNull();
+		expect(screen.getByRole("heading", { name: "Section Title Display Name" })).not.toBeNull();
 		expect(screen.queryByRole("link")).toBeNull();
 	});
 
@@ -71,8 +72,8 @@ describe("Section Title", () => {
 
 		render(<SectionTitleContainer customFields={config} />);
 
-		expect(screen.queryByRole("heading", { name: "Section Title" })).not.toBeNull();
-		expect(screen.queryByRole("link")).not.toBeNull();
+		expect(screen.getByRole("heading", { name: "Section Title" })).not.toBeNull();
+		expect(screen.getByRole("link")).not.toBeNull();
 	});
 
 	it("returns null for children without _id or name", () => {
@@ -99,10 +100,10 @@ describe("Section Title", () => {
 
 		render(<SectionTitleContainer customFields={config} />);
 
-		expect(screen.queryByRole("heading", { name: "Section Title" })).not.toBeNull();
-		expect(screen.queryAllByRole("link")).not.toBeNull();
+		expect(screen.getByRole("heading", { name: "Section Title" })).not.toBeNull();
+		expect(screen.getAllByRole("link")).not.toBeNull();
 
-		expect(screen.queryByRole("link", { name: "News" })).not.toBeNull();
-		expect(screen.queryByRole("link", { name: "Sports" })).not.toBeNull();
+		expect(screen.getByRole("link", { name: "News" })).not.toBeNull();
+		expect(screen.getByRole("link", { name: "Sports" })).not.toBeNull();
 	});
 });

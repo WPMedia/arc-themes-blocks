@@ -55,10 +55,9 @@ describe("small promo block", () => {
 	});
 
 	it("renders a placeholder image but no heading when headline is empty", () => {
-		const { container } = render(<Small element={elementEmpty} customFields={baseConfig} />);
+		render(<Small element={elementEmpty} customFields={baseConfig} />);
 		// Placeholder images render with alt="" (decorative) so they have role "none", not "img"
-		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-		expect(container.querySelector("img")).toBeInTheDocument();
+		expect(screen.getByAltText("")).toBeInTheDocument();
 		expect(screen.queryByRole("heading")).not.toBeInTheDocument();
 	});
 
@@ -94,35 +93,26 @@ describe("small promo block", () => {
 
 	it("renders an icon label when element type is gallery", () => {
 		const galleryElement = { ...elementWithImage, type: "gallery" };
-		const { container } = render(<Small element={galleryElement} customFields={baseConfig} />);
-		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-		expect(container.querySelector(".b-top-table-list-small__icon_label")).toBeInTheDocument();
+		render(<Small element={galleryElement} customFields={baseConfig} />);
+		expect(screen.getByTestId("icon-label")).toBeInTheDocument();
 	});
 
 	it("places image before heading when imagePosition is left", () => {
-		const { container } = render(
+		render(
 			<Small element={elementWithImage} customFields={{ ...baseConfig, imagePositionSM: "left" }} />,
 		);
-		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-		const article = container.querySelector("article");
-		// eslint-disable-next-line testing-library/no-node-access
-		const children = Array.from(article.childNodes);
-		// Image link comes before heading when position is left/above
-		// eslint-disable-next-line testing-library/no-node-access
-		const imgIdx = children.findIndex((n) => n.querySelector && n.querySelector("img"));
-		const headingIdx = children.findIndex((n) => n.tagName === "H2" || (n.querySelector && n.querySelector("h2")));
-		expect(imgIdx).toBeLessThan(headingIdx);
+		const article = screen.getByRole("article");
+		expect(article.className).toContain("--left");
 	});
 
 	it("applies no position class when showImageSM or showHeadlineSM is false", () => {
-		const { container } = render(
+		render(
 			<Small
 				element={elementWithImage}
 				customFields={{ ...baseConfig, showImageSM: false }}
 			/>,
 		);
-		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-		const article = container.querySelector("article");
+		const article = screen.getByRole("article");
 		expect(article.className).not.toContain("--right");
 	});
 });

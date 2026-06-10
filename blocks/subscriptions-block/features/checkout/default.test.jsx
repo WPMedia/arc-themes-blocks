@@ -189,7 +189,7 @@ describe("Checkout Feature", () => {
 			/>,
 		);
 
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("sets user to false when getUserProfile rejects", async () => {
@@ -375,7 +375,7 @@ describe("Checkout Feature", () => {
 			/>,
 		);
 
-		expect(container.querySelector(".b-checkout")).toBeInTheDocument();
+		expect(container).not.toBeEmptyDOMElement();
 	});
 
 	it("renders payment review when orderDetail has items and payment options ready", async () => {

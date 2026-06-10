@@ -1,5 +1,5 @@
 import React from "react";
-import { act, render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import useSales from "./useSales";
 import { usePaymentRedirect } from "./usePaymentRedirect";
 
@@ -40,9 +40,7 @@ describe("usePaymentRedirect", () => {
 
 	it("returns no error initially when no orderNumber is provided", async () => {
 		const onResult = jest.fn();
-		await act(async () => {
-			render(<TestComponent onResult={onResult} paymentMethodType={null} orderNumber={null} />);
-		});
+		render(<TestComponent onResult={onResult} paymentMethodType={null} orderNumber={null} />);
 		const result = onResult.mock.calls[0][0];
 		expect(result.error).toBeUndefined();
 	});
@@ -52,17 +50,15 @@ describe("usePaymentRedirect", () => {
 		mockSales.initializePayment.mockResolvedValue({ parameter1: "/redirect" });
 
 		const onResult = jest.fn();
-		await act(async () => {
-			render(
-				<TestComponent
-					onResult={onResult}
-					paymentMethodType={{ paymentMethodID: "pm_test" }}
-					orderNumber="ORD-001"
-					successURL="/success"
-				/>,
-			);
-		});
-		expect(mockSales.getOrderDetails).toHaveBeenCalledWith("ORD-001");
+		render(
+			<TestComponent
+				onResult={onResult}
+				paymentMethodType={{ paymentMethodID: "pm_test" }}
+				orderNumber="ORD-001"
+				successURL="/success"
+			/>,
+		);
+		await waitFor(() => expect(mockSales.getOrderDetails).toHaveBeenCalledWith("ORD-001"));
 	});
 
 	it("sets error when getOrderDetails fails", async () => {
@@ -70,53 +66,49 @@ describe("usePaymentRedirect", () => {
 		mockSales.getOrderDetails.mockRejectedValue(fetchError);
 
 		const onResult = jest.fn();
-		await act(async () => {
-			render(
-				<TestComponent
-					onResult={onResult}
-					paymentMethodType={{ paymentMethodID: "pm_test" }}
-					orderNumber="ORD-001"
-					successURL="/success"
-				/>,
-			);
+		render(
+			<TestComponent
+				onResult={onResult}
+				paymentMethodType={{ paymentMethodID: "pm_test" }}
+				orderNumber="ORD-001"
+				successURL="/success"
+			/>,
+		);
+		await waitFor(() => {
+			const lastResult = onResult.mock.calls[onResult.mock.calls.length - 1][0];
+			expect(lastResult.error).toBe(fetchError);
 		});
-		const lastResult = onResult.mock.calls[onResult.mock.calls.length - 1][0];
-		expect(lastResult.error).toBe(fetchError);
 	});
 
 	it("initializes payment when token is not provided", async () => {
 		mockSales.getOrderDetails.mockResolvedValue({ orderNumber: "ORD-001" });
 		mockSales.initializePayment.mockResolvedValue({ parameter1: "/payment-page" });
 
-		await act(async () => {
-			render(
-				<TestComponent
-					onResult={jest.fn()}
-					paymentMethodType={{ paymentMethodID: "pm_test" }}
-					orderNumber="ORD-001"
-					successURL="/success"
-				/>,
-			);
-		});
-		expect(mockSales.initializePayment).toHaveBeenCalled();
+		render(
+			<TestComponent
+				onResult={jest.fn()}
+				paymentMethodType={{ paymentMethodID: "pm_test" }}
+				orderNumber="ORD-001"
+				successURL="/success"
+			/>,
+		);
+		await waitFor(() => expect(mockSales.initializePayment).toHaveBeenCalled());
 	});
 
 	it("finalizes payment when token is provided", async () => {
 		mockSales.getOrderDetails.mockResolvedValue({ orderNumber: "ORD-001" });
 		mockSales.finalizePayment.mockResolvedValue({ status: "Paid" });
 
-		await act(async () => {
-			render(
-				<TestComponent
-					onResult={jest.fn()}
-					paymentMethodType={{ paymentMethodID: "pm_test" }}
-					orderNumber="ORD-001"
-					token="TOKEN-123"
-					successURL="/success"
-				/>,
-			);
-		});
-		expect(mockSales.finalizePayment).toHaveBeenCalled();
+		render(
+			<TestComponent
+				onResult={jest.fn()}
+				paymentMethodType={{ paymentMethodID: "pm_test" }}
+				orderNumber="ORD-001"
+				token="TOKEN-123"
+				successURL="/success"
+			/>,
+		);
+		await waitFor(() => expect(mockSales.finalizePayment).toHaveBeenCalled());
 	});
 
 	it("sets error when initializePayment throws", async () => {
@@ -125,18 +117,18 @@ describe("usePaymentRedirect", () => {
 		mockSales.initializePayment.mockRejectedValue(initError);
 
 		const onResult = jest.fn();
-		await act(async () => {
-			render(
-				<TestComponent
-					onResult={onResult}
-					paymentMethodType={{ paymentMethodID: "pm_test" }}
-					orderNumber="ORD-001"
-					successURL="/success"
-				/>,
-			);
+		render(
+			<TestComponent
+				onResult={onResult}
+				paymentMethodType={{ paymentMethodID: "pm_test" }}
+				orderNumber="ORD-001"
+				successURL="/success"
+			/>,
+		);
+		await waitFor(() => {
+			const lastResult = onResult.mock.calls[onResult.mock.calls.length - 1][0];
+			expect(lastResult.error).toBe(initError);
 		});
-		const lastResult = onResult.mock.calls[onResult.mock.calls.length - 1][0];
-		expect(lastResult.error).toBe(initError);
 	});
 
 	it("sets error when finalizePayment throws", async () => {
@@ -145,18 +137,18 @@ describe("usePaymentRedirect", () => {
 		mockSales.finalizePayment.mockRejectedValue(finalizeError);
 
 		const onResult = jest.fn();
-		await act(async () => {
-			render(
-				<TestComponent
-					onResult={onResult}
-					paymentMethodType={{ paymentMethodID: "pm_test" }}
-					orderNumber="ORD-001"
-					token="TOKEN-123"
-					successURL="/success"
-				/>,
-			);
+		render(
+			<TestComponent
+				onResult={onResult}
+				paymentMethodType={{ paymentMethodID: "pm_test" }}
+				orderNumber="ORD-001"
+				token="TOKEN-123"
+				successURL="/success"
+			/>,
+		);
+		await waitFor(() => {
+			const lastResult = onResult.mock.calls[onResult.mock.calls.length - 1][0];
+			expect(lastResult.error).toBe(finalizeError);
 		});
-		const lastResult = onResult.mock.calls[onResult.mock.calls.length - 1][0];
-		expect(lastResult.error).toBe(finalizeError);
 	});
 });

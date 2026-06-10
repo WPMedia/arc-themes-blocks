@@ -1,5 +1,5 @@
 import React from "react";
-import { act, render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useIdentity } from "@wpmedia/arc-themes-components";
 
@@ -38,26 +38,20 @@ describe("UpdatePaymentMethod", () => {
 	});
 
 	it("renders PaymentInfo component", async () => {
-		await act(async () => {
-			render(<UpdatePaymentMethod customFields={defaultCustomFields} />);
-		});
-		expect(screen.getByTestId("payment-info")).not.toBeNull();
+		render(<UpdatePaymentMethod customFields={defaultCustomFields} />);
+		expect(await screen.findByTestId("payment-info")).not.toBeNull();
 	});
 
 	it("passes stripeIntentsID and successUpdateURL to PaymentInfo", async () => {
-		await act(async () => {
-			render(<UpdatePaymentMethod customFields={defaultCustomFields} />);
-		});
-		const paymentInfo = screen.getByTestId("payment-info");
+		render(<UpdatePaymentMethod customFields={defaultCustomFields} />);
+		const paymentInfo = await screen.findByTestId("payment-info");
 		expect(paymentInfo).toHaveAttribute("stripeIntentsID", "1234");
 		expect(paymentInfo).toHaveAttribute("successUpdateURL", "/account/");
 	});
 
 	it("passes isPaymentMethodUpdate flag to PaymentInfo", async () => {
-		await act(async () => {
-			render(<UpdatePaymentMethod customFields={defaultCustomFields} />);
-		});
-		expect(screen.getByTestId("payment-info")).toHaveAttribute("isPaymentMethodUpdate", "true");
+		render(<UpdatePaymentMethod customFields={defaultCustomFields} />);
+		expect(await screen.findByTestId("payment-info")).toHaveAttribute("isPaymentMethodUpdate", "true");
 	});
 
 	it("redirects to login when user is not logged in", async () => {
@@ -70,10 +64,8 @@ describe("UpdatePaymentMethod", () => {
 		delete window.location;
 		window.location = { href: "https://example.com/update-payment", pathname: "/update-payment" };
 
-		await act(async () => {
-			render(<UpdatePaymentMethod customFields={defaultCustomFields} />);
-		});
-		expect(window.location.href).toContain("/account/login/");
+		render(<UpdatePaymentMethod customFields={defaultCustomFields} />);
+		await waitFor(() => expect(window.location.href).toContain("/account/login/"));
 
 		window.location = originalLocation;
 	});
@@ -84,10 +76,8 @@ describe("UpdatePaymentMethod", () => {
 		delete window.location;
 		window.location = { href: originalHref, pathname: "/page" };
 
-		await act(async () => {
-			render(<UpdatePaymentMethod customFields={defaultCustomFields} />);
-		});
-		expect(window.location.href).toBe(originalHref);
+		render(<UpdatePaymentMethod customFields={defaultCustomFields} />);
+		await waitFor(() => expect(window.location.href).toBe(originalHref));
 
 		window.location = originalLocation;
 	});

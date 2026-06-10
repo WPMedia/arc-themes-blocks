@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import mockConsole from "jest-mock-console";
 
@@ -388,10 +388,9 @@ describe("Story Carousel", () => {
 			},
 		};
 
-		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+		render(<StoryCarousel customFields={mockCustomFields} />);
 
-		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(1);
-		expect(container.querySelectorAll(".c-carousel__slide")).toHaveLength(6);
+		expect(screen.getAllByRole("link")).toHaveLength(6);
 	});
 
 	it("should not render when content_elements is empty", () => {
@@ -406,10 +405,9 @@ describe("Story Carousel", () => {
 			},
 		};
 
-		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+		render(<StoryCarousel customFields={mockCustomFields} />);
 
-		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(0);
-		expect(container.querySelectorAll(".c-carousel__slide")).toHaveLength(0);
+		expect(screen.queryAllByRole("link")).toHaveLength(0);
 	});
 
 	it("should not render when carouselContentConfig is not configured", () => {
@@ -420,10 +418,9 @@ describe("Story Carousel", () => {
 			headerText: "This is a header",
 		};
 
-		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+		render(<StoryCarousel customFields={mockCustomFields} />);
 
-		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(0);
-		expect(container.querySelectorAll(".c-carousel__slide")).toHaveLength(0);
+		expect(screen.queryAllByRole("link")).toHaveLength(0);
 	});
 
 	it("should not render when carouselContentConfig is missing", () => {
@@ -433,10 +430,9 @@ describe("Story Carousel", () => {
 			headerText: "This is a header",
 		};
 
-		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+		render(<StoryCarousel customFields={mockCustomFields} />);
 
-		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(0);
-		expect(container.querySelectorAll(".c-carousel__slide")).toHaveLength(0);
+		expect(screen.queryAllByRole("link")).toHaveLength(0);
 	});
 
 	it("should not render card headlines or paragraphs when they are not in the content", () => {
@@ -451,12 +447,10 @@ describe("Story Carousel", () => {
 			},
 		};
 
-		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+		render(<StoryCarousel customFields={mockCustomFields} />);
 
-		expect(container.querySelectorAll(".b-story-carousel__story-card-header")).toHaveLength(0);
-		expect(container.querySelectorAll(".b-story-carousel__story-card .c-paragraph")).toHaveLength(
-			0,
-		);
+		expect(screen.queryAllByRole("heading")).toHaveLength(0);
+		expect(screen.queryAllByRole("paragraph")).toHaveLength(0);
 	});
 
 	it("should render card headlines or paragraphs when they are in the content", () => {
@@ -471,12 +465,10 @@ describe("Story Carousel", () => {
 			},
 		};
 
-		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+		render(<StoryCarousel customFields={mockCustomFields} />);
 
-		expect(container.querySelectorAll(".b-story-carousel__story-card-header")).toHaveLength(6);
-		expect(container.querySelectorAll(".b-story-carousel__story-card .c-paragraph")).toHaveLength(
-			6,
-		);
+		expect(screen.getAllByRole("heading")).toHaveLength(6);
+		expect(screen.getAllByRole("paragraph")).toHaveLength(6);
 	});
 
 	it("should not render the optional header", () => {
@@ -490,9 +482,9 @@ describe("Story Carousel", () => {
 			},
 		};
 
-		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+		render(<StoryCarousel customFields={mockCustomFields} />);
 
-		expect(container.querySelectorAll(".b-story-carousel__main-title")).toHaveLength(0);
+		expect(screen.queryByText("This is a header")).toBeNull();
 	});
 
 	it("should render the optional header", () => {
@@ -507,9 +499,9 @@ describe("Story Carousel", () => {
 			headerText: "This is a header",
 		};
 
-		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+		render(<StoryCarousel customFields={mockCustomFields} />);
 
-		expect(container.querySelectorAll(".b-story-carousel__main-title")).toHaveLength(1);
+		expect(screen.getByText("This is a header")).toBeInTheDocument();
 	});
 
 	it("should not render card if website information is not present in content", () => {
@@ -524,12 +516,10 @@ describe("Story Carousel", () => {
 			},
 		};
 
-		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+		render(<StoryCarousel customFields={mockCustomFields} />);
 
-		expect(container.querySelectorAll(".b-story-carousel__story-card-header")).toHaveLength(0);
-		expect(container.querySelectorAll(".b-story-carousel__story-card .c-paragraph")).toHaveLength(
-			0,
-		);
+		expect(screen.queryAllByRole("heading")).toHaveLength(0);
+		expect(screen.queryAllByRole("paragraph")).toHaveLength(0);
 	});
 
 	it("should display warning when content is under 4 items", () => {
@@ -545,8 +535,8 @@ describe("Story Carousel", () => {
 			},
 		};
 
-		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
-		expect(container.querySelectorAll("p")).toHaveLength(1);
+		render(<StoryCarousel customFields={mockCustomFields} />);
+		expect(screen.getByText("This feature requires 4 stories to display.")).toBeInTheDocument();
 	});
 	it("skips rendering card when websites missing arcSite in 4+ element collection", () => {
 		const makeItem = (id, websiteUrl) => ({
@@ -568,11 +558,11 @@ describe("Story Carousel", () => {
 				makeItem("D", null), // no arcSite website entry — this item is filtered out
 			],
 		});
-		const { container } = render(
+		render(
 			<StoryCarousel customFields={{ carouselContentConfig: { contentService: "s", contentConfigValues: {} } }} />,
 		);
 		// 3 valid cards rendered, 1 skipped
-		expect(container.querySelectorAll(".b-story-carousel__story-card")).toHaveLength(3);
+		expect(screen.getAllByRole("link")).toHaveLength(3);
 	});
 
 	it("handles items with missing headlines and description properties entirely", () => {
@@ -602,7 +592,7 @@ describe("Story Carousel", () => {
 			],
 		};
 		useContent.mockReturnValue(contentWithMissingKeys);
-		const { container } = render(
+		render(
 			<StoryCarousel
 				customFields={{
 					carouselContentConfig: { contentService: "s", contentConfigValues: {} },
@@ -610,8 +600,8 @@ describe("Story Carousel", () => {
 			/>,
 		);
 		// Renders without error; no headlines means no story-card-header elements
-		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(1);
-		expect(container.querySelectorAll(".b-story-carousel__story-card-header")).toHaveLength(0);
+		expect(screen.getAllByRole("link")).toHaveLength(4);
+		expect(screen.queryAllByRole("heading")).toHaveLength(0);
 	});
 
 	it("returns null when useContent returns null/falsy", () => {
@@ -624,7 +614,7 @@ describe("Story Carousel", () => {
 		};
 		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
 		// content_elements defaults to [] so elements.length === 0 → return null
-		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(0);
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("should display warning when content is under 4 items", () => {
@@ -645,9 +635,6 @@ describe("Story Carousel", () => {
 		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
 
 		// render nothing
-		// the b-story carousel comes from existing tests
-		expect(container.querySelectorAll("p")).toHaveLength(0);
-		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(0);
-		expect(container.querySelectorAll(".c-carousel__slide")).toHaveLength(0);
+		expect(container).toBeEmptyDOMElement();
 	});
 });

@@ -46,13 +46,13 @@ describe("SubscriptionOverlay", () => {
 	});
 
 	it("renders children with correct class structure", () => {
-		const { container } = render(
+		render(
 			<SubscriptionOverlay usePortal={false} className="b-paywall">
 				<span>test</span>
 			</SubscriptionOverlay>,
 		);
-		expect(container.querySelector(".b-paywall__overlay")).not.toBeNull();
-		expect(container.querySelector(".b-paywall__overlay-content")).not.toBeNull();
+		expect(screen.getByRole("alert")).not.toBeNull();
+		expect(screen.getByTestId("overlay-content")).not.toBeNull();
 	});
 
 	it("handles wheel events on overlay", () => {
@@ -68,12 +68,12 @@ describe("SubscriptionOverlay", () => {
 	});
 
 	it("handles wheel events on content", () => {
-		const { container } = render(
+		render(
 			<SubscriptionOverlay usePortal={false} className="b-paywall">
 				<div>Content</div>
 			</SubscriptionOverlay>,
 		);
-		const content = container.querySelector(".b-paywall__overlay-content");
+		const content = screen.getByTestId("overlay-content");
 		expect(() => {
 			fireEvent.wheel(content, { deltaY: 5 });
 		}).not.toThrow();
@@ -93,12 +93,12 @@ describe("SubscriptionOverlay", () => {
 	});
 
 	it("handles touch events on content div", () => {
-		const { container } = render(
+		render(
 			<SubscriptionOverlay usePortal={false} className="b-paywall">
 				<div>Content</div>
 			</SubscriptionOverlay>,
 		);
-		const content = container.querySelector(".b-paywall__overlay-content");
+		const content = screen.getByTestId("overlay-content");
 		expect(() => {
 			fireEvent.touchStart(content, { changedTouches: [{ clientY: 100 }] });
 			fireEvent.touchMove(content, { changedTouches: [{ clientY: 90 }] });
@@ -148,7 +148,7 @@ describe("Portal", () => {
 				<div>test</div>
 			</Portal>,
 		);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("renders children via portal when client-side", () => {

@@ -12,12 +12,12 @@ describe("Cart Item", () => {
 
 	it("renders item description when provided", () => {
 		render(<Item name="Premium Monthly" description="$10/month" className="b-checkout" />);
-		expect(document.querySelector(".b-checkout__cart-item--description")).not.toBeNull();
+		expect(screen.getByTestId("cart-item-description")).not.toBeNull();
 	});
 
 	it("does not render description element when not provided", () => {
 		render(<Item name="Premium Monthly" className="b-checkout" />);
-		expect(document.querySelector(".b-checkout__cart-item--description")).toBeNull();
+		expect(screen.queryByTestId("cart-item-description")).toBeNull();
 	});
 
 	it("renders additionalInfo when provided", () => {
@@ -29,6 +29,6 @@ describe("Cart Item", () => {
 
 	it("does not render additionalInfo when not provided", () => {
 		render(<Item name="Premium Monthly" className="b-checkout" />);
-		expect(document.querySelector(".b-checkout__cart-item--info")).toBeNull();
+		expect(screen.queryByTestId("cart-item-info")).toBeNull();
 	});
 });

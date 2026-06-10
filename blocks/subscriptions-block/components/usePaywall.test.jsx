@@ -1,5 +1,5 @@
 import React from "react";
-import { act, render } from "@testing-library/react";
+import { act, render, waitFor } from "@testing-library/react";
 import { useIdentity, isServerSide } from "@wpmedia/arc-themes-components";
 import { useFusionContext } from "fusion:context";
 
@@ -72,11 +72,11 @@ describe("usePaywall", () => {
 
 	it("returns non-paywalled state by default", async () => {
 		const onResult = jest.fn();
-		await act(async () => {
-			render(<TestComponent onResult={onResult} />);
+		render(<TestComponent onResult={onResult} />);
+		await waitFor(() => {
+			const result = onResult.mock.calls[onResult.mock.calls.length - 1][0];
+			expect(result.isPaywalled).toBe(false);
 		});
-		const result = onResult.mock.calls[onResult.mock.calls.length - 1][0];
-		expect(result.isPaywalled).toBe(false);
 	});
 
 	it("checks isLoggedIn when identity is initialized", async () => {
@@ -85,10 +85,8 @@ describe("usePaywall", () => {
 			Identity: { isLoggedIn: isLoggedInMock },
 			isInitialized: true,
 		});
-		await act(async () => {
-			render(<TestComponent onResult={jest.fn()} />);
-		});
-		expect(isLoggedInMock).toHaveBeenCalled();
+		render(<TestComponent onResult={jest.fn()} />);
+		await waitFor(() => expect(isLoggedInMock).toHaveBeenCalled());
 	});
 
 	it("does not check isLoggedIn when identity is not initialized", async () => {
@@ -97,21 +95,15 @@ describe("usePaywall", () => {
 			Identity: { isLoggedIn: isLoggedInMock },
 			isInitialized: false,
 		});
-		await act(async () => {
-			render(<TestComponent onResult={jest.fn()} />);
-		});
-		expect(isLoggedInMock).not.toHaveBeenCalled();
+		render(<TestComponent onResult={jest.fn()} />);
+		await waitFor(() => expect(isLoggedInMock).not.toHaveBeenCalled());
 	});
 
 	it("calls ArcP.run when all conditions are met", async () => {
 		const arcPRunMock = jest.fn(() => Promise.resolve({ triggered: null }));
 		window.ArcP = { run: arcPRunMock };
-		await act(async () => {
-			render(<TestComponent onResult={jest.fn()} />);
-		});
-		// ArcP.run called after identity is initialized
-		await act(async () => { await new Promise((r) => setTimeout(r, 0)); });
-		expect(arcPRunMock).toHaveBeenCalled();
+		render(<TestComponent onResult={jest.fn()} />);
+		await waitFor(() => expect(arcPRunMock).toHaveBeenCalled());
 	});
 
 	it("sets isPaywalled when ArcP paywallFunction is called", async () => {
@@ -122,9 +114,8 @@ describe("usePaywall", () => {
 		});
 		window.ArcP = { run: arcPRunMock };
 		const onResult = jest.fn();
-		await act(async () => {
-			render(<TestComponent onResult={onResult} />);
-		});
+		render(<TestComponent onResult={onResult} />);
+		await waitFor(() => expect(arcPRunMock).toHaveBeenCalled());
 		if (paywallFn) {
 			await act(async () => { paywallFn("campaign-123"); });
 		}
@@ -140,10 +131,10 @@ describe("usePaywall", () => {
 			isInitialized: true,
 		});
 		const onResult = jest.fn();
-		await act(async () => {
-			render(<TestComponent onResult={onResult} />);
+		render(<TestComponent onResult={onResult} />);
+		await waitFor(() => {
+			const lastResult = onResult.mock.calls[onResult.mock.calls.length - 1][0];
+			expect(lastResult.isLoggedIn).toBe(true);
 		});
-		const lastResult = onResult.mock.calls[onResult.mock.calls.length - 1][0];
-		expect(lastResult.isLoggedIn).toBe(true);
 	});
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { act, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useFusionContext } from "fusion:context";
 import useSales from "../useSales";
@@ -45,22 +45,20 @@ describe("Cart", () => {
 	it("renders nothing while fetching", () => {
 		mockGetCart.mockReturnValue(new Promise(() => {}));
 		const { container } = render(<Cart offerURL="/offer/" className="b-checkout" />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("renders empty cart link when no items", async () => {
 		mockGetCart.mockResolvedValue({ items: [] });
-		await act(async () => {
-			render(<Cart offerURL="/offer/" className="b-checkout" />);
-		});
+		render(<Cart offerURL="/offer/" className="b-checkout" />);
+		await screen.findByRole("link");
 		expect(screen.getByRole("link")).toHaveAttribute("href", "/offer/");
 	});
 
 	it("renders empty cart when getCart rejects", async () => {
 		mockGetCart.mockRejectedValue(new Error("Cart error"));
-		await act(async () => {
-			render(<Cart offerURL="/offer/" className="b-checkout" />);
-		});
+		render(<Cart offerURL="/offer/" className="b-checkout" />);
+		await screen.findByRole("link");
 		expect(screen.getByRole("link")).toHaveAttribute("href", "/offer/");
 	});
 
@@ -70,10 +68,8 @@ describe("Cart", () => {
 			currency: "USD",
 			total: "10.00",
 		});
-		await act(async () => {
-			render(<Cart offerURL="/offer/" className="b-checkout" />);
-		});
-		expect(screen.getByText("Premium Monthly")).not.toBeNull();
+		render(<Cart offerURL="/offer/" className="b-checkout" />);
+		expect(await screen.findByText("Premium Monthly")).not.toBeNull();
 	});
 
 	it("renders total amount with currency", async () => {
@@ -82,9 +78,7 @@ describe("Cart", () => {
 			currency: "USD",
 			total: "10.00",
 		});
-		await act(async () => {
-			render(<Cart offerURL="/offer/" className="b-checkout" />);
-		});
-		expect(screen.getByText("checkout-block.due-today")).not.toBeNull();
+		render(<Cart offerURL="/offer/" className="b-checkout" />);
+		expect(await screen.findByText("checkout-block.due-today")).not.toBeNull();
 	});
 });

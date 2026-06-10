@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom";
 import React from "react";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
@@ -58,7 +59,7 @@ describe("Top Table List", () => {
 		useContent.mockReturnValueOnce(null);
 
 		const { container } = render(<TopTableListWrapper customFields={config} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("bypass lazyLoad if not isAdmin and has content", () => {
@@ -72,35 +73,35 @@ describe("Top Table List", () => {
 		const { container } = render(
 			<TopTableListWrapper customFields={{ ...config, lazyLoad: true }} />,
 		);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("renders null if no content", () => {
 		useContent.mockReturnValue({ content_elements: [] });
 
 		const { container } = render(<TopTableListWrapper customFields={{ ...config, medium: 1 }} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("does not render content item with incomplete data", () => {
 		useContent.mockReturnValue({ content_elements: [{ _id: "1234" }] });
 
 		const { container } = render(<TopTableListWrapper customFields={{ ...config, medium: 1 }} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("renders one content item with complete data", () => {
 		useContent.mockReturnValue({ content_elements: [mockData] });
 
 		const { container } = render(<TopTableListWrapper customFields={{ ...config, small: 1 }} />);
-		expect(container.firstChild).not.toBeNull();
+		expect(container).not.toBeEmptyDOMElement();
 	});
 
 	it("renders one content item with complete data", () => {
 		useContent.mockReturnValue({ content_elements: [mockData, { _id: 123 }] });
 
 		const { container } = render(<TopTableListWrapper customFields={{ ...config, medium: 1 }} />);
-		expect(container.firstChild).not.toBeNull();
+		expect(container).not.toBeEmptyDOMElement();
 	});
 
 	it("renders with isAdmin true and lazyLoad enabled (does not return null server-side)", () => {
@@ -115,7 +116,7 @@ describe("Top Table List", () => {
 		const { container } = render(
 			<TopTableListWrapper customFields={{ ...config, small: 1, lazyLoad: true }} />,
 		);
-		expect(container.firstChild).not.toBeNull();
+		expect(container).not.toBeEmptyDOMElement();
 	});
 
 	it("fills storyTypeMap for the same type", () => {
@@ -125,7 +126,7 @@ describe("Top Table List", () => {
 		const { container } = render(
 			<TopTableListWrapper customFields={{ ...config, small: 2 }} />,
 		);
-		expect(container.firstChild).not.toBeNull();
+		expect(container).not.toBeEmptyDOMElement();
 	});
 
 	it("renders nothing when storyTypeArray has more entries than storyList", () => {
@@ -135,6 +136,6 @@ describe("Top Table List", () => {
 		const { container } = render(
 			<TopTableListWrapper customFields={{ ...config, small: 3 }} />,
 		);
-		expect(container.firstChild).not.toBeNull();
+		expect(container).not.toBeEmptyDOMElement();
 	});
 });

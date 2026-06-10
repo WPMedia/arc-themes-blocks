@@ -320,7 +320,7 @@ describe("FooterItem", () => {
   });
 
   test("uses empty string alt when lightBackgroundLogo used but no alt provided", () => {
-    const { container } = setup({
+    setup({
       properties: {
         lightBackgroundLogo: "http://cdn.example.com/logo.png",
         // lightBackgroundLogoAlt deliberately absent → falls back to || ""
@@ -328,8 +328,8 @@ describe("FooterItem", () => {
         primaryLogoAlt: undefined,
       },
     });
-    // An img with empty alt gets role="presentation" in ARIA, so query by class
-    const img = container.querySelector(".b-footer__logo");
+    // An img with empty alt gets role="presentation" in ARIA — query by alt text
+    const img = screen.getByAltText("");
     expect(img).not.toBeNull();
     expect(img).toHaveAttribute("src", "http://cdn.example.com/logo.png");
     expect(img).toHaveAttribute("alt", "");

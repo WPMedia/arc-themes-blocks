@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen } from "@testing-library/react";
 
@@ -57,7 +58,7 @@ describe("The Paywall feature", () => {
 	it("renders nothing when neither isPaywalled nor isRegisterwalled", () => {
 		usePaywall.mockReturnValue({ isPaywalled: false, isRegisterwalled: false, isLoggedIn: false });
 		const { container } = render(<Paywall customFields={customFields} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 
 	it("renders RegwallOffer when isAdmin and adminViewState is showRegwall", () => {
@@ -78,6 +79,6 @@ describe("The Paywall feature", () => {
 		useFusionContext.mockReturnValue({ isAdmin: true });
 		usePaywall.mockReturnValue({ isPaywalled: false, isRegisterwalled: false, isLoggedIn: false });
 		const { container } = render(<Paywall customFields={{ ...customFields, adminViewState: "hide" }} />);
-		expect(container.firstChild).toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 });

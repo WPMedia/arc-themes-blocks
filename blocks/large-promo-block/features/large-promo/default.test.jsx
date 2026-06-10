@@ -588,7 +588,7 @@ describe("Large Promo", () => {
 
 	it("should render nothing when all props are null or falsy", () => {
 		useContent.mockReturnValueOnce({});
-		const { container } = render(
+		render(
 			<LargePromo
 				customFields={{
 					showByline: false,
@@ -600,7 +600,7 @@ describe("Large Promo", () => {
 				}}
 			/>,
 		);
-		expect(container.querySelector("article")).toBeNull();
+		expect(screen.queryByRole("article")).toBeNull();
 	});
 
 	it("should render label icon when content type is gallery", () => {

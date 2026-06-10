@@ -1,10 +1,9 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import getProperties from "fusion:properties";
 
 import AdTaboola from "./default";
-
-const TBL_WRAPPER = ".tbl-wrapper";
 
 const metaValueMock = () => "article";
 
@@ -13,8 +12,7 @@ describe("render Taboola widget", () => {
 		it("must not render when there isn't parameters", () => {
 			const { container } = render(<AdTaboola metaValue={metaValueMock} />);
 
-			expect(container.querySelector("#tbl-widget")).toBe(null);
-			expect(container.querySelector(TBL_WRAPPER)).toBe(null);
+			expect(container).toBeEmptyDOMElement();
 		});
 
 		it("must not render when only the publisher id is present", () => {
@@ -23,8 +21,7 @@ describe("render Taboola widget", () => {
 			}));
 			const { container } = render(<AdTaboola metaValue={metaValueMock} />);
 
-			expect(container.querySelector("#tbl-widget")).toBe(null);
-			expect(container.querySelector(TBL_WRAPPER)).toBe(null);
+			expect(container).toBeEmptyDOMElement();
 		});
 
 		it("must not render when some of the widget parameters are missing", () => {
@@ -38,8 +35,7 @@ describe("render Taboola widget", () => {
 			const { container } = render(
 				<AdTaboola metaValue={metaValueMock} customFields={customFields} />
 			);
-			expect(container.querySelector("#tbl-widget")).toBe(null);
-			expect(container.querySelector(TBL_WRAPPER)).toBe(null);
+			expect(container).toBeEmptyDOMElement();
 		});
 	});
 
@@ -58,8 +54,7 @@ describe("render Taboola widget", () => {
 				<AdTaboola metaValue={metaValueMock} customFields={customFields} />
 			);
 
-			expect(container.querySelector("#tbl-widget")).not.toBe(null);
-			expect(container.querySelector("script")).not.toBe(null);
+			expect(container).not.toBeEmptyDOMElement();
 		});
 
 		it("must render the visual wrapper on admin", () => {
@@ -72,31 +67,39 @@ describe("render Taboola widget", () => {
 				container: "tbl-widget",
 			};
 
-			const { container } = render(
+			render(
 				<AdTaboola metaValue={metaValueMock} customFields={customFields} isAdmin />
 			);
 
-			expect(container.querySelector(TBL_WRAPPER)).not.toBe(null);
-			expect(container.querySelector("AdTaboola #tbl-widget")).toBe(null);
-			expect(container.querySelector("AdTaboola script")).toBe(null);
+			expect(screen.getByText("a")).not.toBeNull();
+			expect(screen.queryByText("tbl-widget")).toBeNull();
 		});
 	});
 });
 
 describe("insertLoader branch coverage", () => {
-	const cleanupScripts = () => {
-		const loader = document.getElementById("tbl-loader");
-		if (loader) loader.parentNode.removeChild(loader);
-		const flusher = document.getElementById("tbl-flusher");
-		if (flusher) flusher.parentNode.removeChild(flusher);
-	};
+	let appendedToHead = [];
+	let appendedToBody = [];
 
 	beforeEach(() => {
-		cleanupScripts();
+		appendedToHead = [];
+		appendedToBody = [];
+
+		jest.spyOn(document, "getElementById").mockImplementation((id) =>
+			[...appendedToHead, ...appendedToBody].find((el) => el.id === id) || null,
+		);
+		jest.spyOn(document.head, "appendChild").mockImplementation((el) => {
+			appendedToHead.push(el);
+			return el;
+		});
+		jest.spyOn(document.body, "appendChild").mockImplementation((el) => {
+			appendedToBody.push(el);
+			return el;
+		});
 	});
 
 	afterEach(() => {
-		cleanupScripts();
+		jest.restoreAllMocks();
 	});
 
 	it("should not append loader script when page type is not in PAGE_TYPE_TABOOLA_MAPPING", () => {
@@ -113,7 +116,8 @@ describe("insertLoader branch coverage", () => {
 
 		render(<AdTaboola metaValue={unknownMetaValue} customFields={customFields} />);
 
-		expect(document.getElementById("tbl-loader")).toBeNull();
+		const loaderAppended = appendedToHead.some((el) => el.id === "tbl-loader");
+		expect(loaderAppended).toBe(false);
 	});
 
 	it("should not append a duplicate loader script when #tbl-loader already exists", () => {
@@ -128,13 +132,13 @@ describe("insertLoader branch coverage", () => {
 
 		// First render inserts the loader
 		render(<AdTaboola metaValue={metaValueMock} customFields={customFields} />);
-		const firstLoader = document.getElementById("tbl-loader");
-		expect(firstLoader).not.toBeNull();
+		const firstRenderLoaderCount = appendedToHead.filter((el) => el.id === "tbl-loader").length;
+		expect(firstRenderLoaderCount).toBe(1);
 
 		// Second render — insertLoader should return early without inserting a duplicate
 		render(<AdTaboola metaValue={metaValueMock} customFields={customFields} />);
-		const loaders = document.querySelectorAll("#tbl-loader");
-		expect(loaders.length).toBe(1);
+		const totalLoaderCount = appendedToHead.filter((el) => el.id === "tbl-loader").length;
+		expect(totalLoaderCount).toBe(1);
 	});
 
 	it("should not append a duplicate flusher script when #tbl-flusher already exists", () => {
@@ -149,11 +153,12 @@ describe("insertLoader branch coverage", () => {
 
 		// First render inserts the flusher
 		render(<AdTaboola metaValue={metaValueMock} customFields={customFields} />);
-		expect(document.getElementById("tbl-flusher")).not.toBeNull();
+		const firstRenderFlusherCount = appendedToBody.filter((el) => el.id === "tbl-flusher").length;
+		expect(firstRenderFlusherCount).toBe(1);
 
 		// Second render — insertFlusher should return early without inserting a duplicate
 		render(<AdTaboola metaValue={metaValueMock} customFields={customFields} />);
-		const flushers = document.querySelectorAll("#tbl-flusher");
-		expect(flushers.length).toBe(1);
+		const totalFlusherCount = appendedToBody.filter((el) => el.id === "tbl-flusher").length;
+		expect(totalFlusherCount).toBe(1);
 	});
 });

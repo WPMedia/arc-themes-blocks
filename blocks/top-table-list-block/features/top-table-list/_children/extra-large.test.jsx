@@ -113,14 +113,14 @@ describe("the extra large promo feature", () => {
 
 	it("should not render bottom border when showBottomBorderXL is false", () => {
 		const config = { showHeadlineXL: true, showBottomBorderXL: false };
-		const { container } = render(<ExtraLarge element={mockData} customFields={config} />);
-		expect(container.querySelector("hr")).toBeNull();
+		render(<ExtraLarge element={mockData} customFields={config} />);
+		expect(screen.queryByRole("separator")).toBeNull();
 	});
 
 	it("should render bottom border when showBottomBorderXL is undefined", () => {
 		const config = { showHeadlineXL: true };
-		const { container } = render(<ExtraLarge element={mockData} customFields={config} />);
-		expect(container.querySelector("hr")).not.toBeNull();
+		render(<ExtraLarge element={mockData} customFields={config} />);
+		expect(screen.getByRole("separator")).not.toBeNull();
 	});
 
 	it("should use empty formattedDate when display_date is invalid", () => {
@@ -142,18 +142,17 @@ describe("the extra large promo feature", () => {
 	it("should use fallback image when element has no ANS image", () => {
 		const elementNoImage = { ...mockData, promo_items: {} };
 		const config = { showImageXL: true };
-		const { container } = render(
+		render(
 			<ExtraLarge element={elementNoImage} customFields={config} fallbackImage="/fallback.jpg" />,
 		);
-		const img = container.querySelector("img");
-		expect(img).not.toBeNull();
-		expect(img.src).toContain("fallback");
+		const figure = screen.getByRole("figure");
+		expect(figure.innerHTML).toContain("fallback");
 	});
 
 	it("should render icon label when element type is gallery", () => {
 		const galleryElement = { ...mockData, type: "gallery" };
 		const config = { showImageXL: true };
-		const { container } = render(<ExtraLarge element={galleryElement} customFields={config} />);
-		expect(container.querySelector(".b-top-table-list-xl__icon_label")).not.toBeNull();
+		render(<ExtraLarge element={galleryElement} customFields={config} />);
+		expect(screen.getByText("global.gallery-text")).not.toBeNull();
 	});
 });

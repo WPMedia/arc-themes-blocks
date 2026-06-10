@@ -1,5 +1,5 @@
 import React from "react";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Sales from "@arc-publishing/sdk-sales";
 import { useElements } from "@stripe/react-stripe-js";
@@ -43,7 +43,7 @@ describe("PaymentForm", () => {
 
 	it("renders the payment form", () => {
 		render(<PaymentForm {...defaultProps} />);
-		expect(document.querySelector("form")).not.toBeNull();
+		expect(screen.getByTestId("payment-form")).not.toBeNull();
 	});
 
 	it("renders card number, expiry, and cvc elements", () => {
@@ -83,10 +83,10 @@ describe("PaymentForm", () => {
 		};
 		useElements.mockReturnValue({ getElement: jest.fn(() => ({})) });
 		render(<PaymentForm {...defaultProps} stripeInstance={stripeInstance} formErrorText="Card declined" />);
-		fireEvent.submit(document.querySelector("form"));
+		fireEvent.submit(screen.getByTestId("payment-form"));
 		// After submit with error, error section shows
 		// We verify the prop is accepted without rendering issue
-		expect(document.querySelector("form")).not.toBeNull();
+		expect(screen.getByTestId("payment-form")).not.toBeNull();
 	});
 
 	it("does not show error section initially", () => {
@@ -110,9 +110,7 @@ describe("PaymentForm", () => {
 		window.location = { href: "" };
 		useElements.mockReturnValue({ getElement: jest.fn(() => ({})) });
 		render(<PaymentForm {...defaultProps} stripeInstance={stripeInstance} />);
-		await act(async () => {
-			fireEvent.submit(document.querySelector("form"));
-		});
+		fireEvent.submit(screen.getByTestId("payment-form"));
 		await waitFor(() => expect(stripeInstance.confirmCardPayment).toHaveBeenCalled());
 		expect(Sales.finalizePayment).toHaveBeenCalled();
 	});
@@ -129,9 +127,7 @@ describe("PaymentForm", () => {
 		};
 		useElements.mockReturnValue({ getElement: jest.fn(() => ({})) });
 		render(<PaymentForm {...defaultProps} stripeInstance={stripeInstance} />);
-		await act(async () => {
-			fireEvent.submit(document.querySelector("form"));
-		});
+		fireEvent.submit(screen.getByTestId("payment-form"));
 		await waitFor(() => expect(stripeInstance.confirmCardPayment).toHaveBeenCalled());
 	});
 
@@ -156,9 +152,7 @@ describe("PaymentForm", () => {
 				successUpdateURL="/update-success/"
 			/>,
 		);
-		await act(async () => {
-			fireEvent.submit(document.querySelector("form"));
-		});
+		fireEvent.submit(screen.getByTestId("payment-form"));
 		await waitFor(() => expect(stripeInstance.confirmCardSetup).toHaveBeenCalled());
 		expect(Sales.finalizePaymentUpdate).toHaveBeenCalled();
 	});
@@ -178,9 +172,7 @@ describe("PaymentForm", () => {
 		window.location = { href: "" };
 		useElements.mockReturnValue({ getElement: jest.fn(() => ({})) });
 		render(<PaymentForm {...defaultProps} stripeInstance={stripeInstance} />);
-		await act(async () => {
-			fireEvent.submit(document.querySelector("form"));
-		});
+		fireEvent.submit(screen.getByTestId("payment-form"));
 		await waitFor(() => expect(stripeInstance.confirmCardSetup).toHaveBeenCalled());
 	});
 });

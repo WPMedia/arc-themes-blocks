@@ -198,9 +198,9 @@ describe("the links bar feature for the default output type", () => {
 
 	it("should render nothing when useContent returns null", () => {
 		useContent.mockReturnValueOnce(null);
-		const { container } = render(
+		render(
 			<LinksBar blockClassName="b-header-nav-chain" />
 		);
-		expect(container.querySelector("nav")).toBeNull();
+		expect(screen.queryByRole("navigation")).toBeNull();
 	});
 });

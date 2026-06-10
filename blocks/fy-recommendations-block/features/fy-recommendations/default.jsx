@@ -24,7 +24,12 @@ const getDeviceType = () => {
 };
 
 function FYRecommendations({ customFields = {} }) {
-	const { displayAmount = 5, lazyLoad = true } = customFields;
+	const {
+		displayAmount = 5,
+		lazyLoad = true,
+		subscriptionTier,
+		openInNewTab = false,
+	} = customFields;
 	const { globalContent, arcSite } = useFusionContext();
 	const [items, setItems] = useState(null);
 	const [fetched, setFetched] = useState(false);
@@ -41,6 +46,7 @@ function FYRecommendations({ customFields = {} }) {
 		};
 		if (userId) query.user_id = userId;
 		if (globalContent?._id) query.item_id = globalContent._id;
+		if (subscriptionTier) query.subscription_tier = subscriptionTier;
 
 		fetchRecommendations({ site: arcSite, query })
 			.then(({ content_elements: elements, attribution }) => {
@@ -50,7 +56,7 @@ function FYRecommendations({ customFields = {} }) {
 				}
 			})
 			.finally(() => setFetched(true));
-	}, [arcSite, displayAmount, globalContent]);
+	}, [arcSite, displayAmount, globalContent, subscriptionTier]);
 
 	useEffect(() => {
 		// Never fetch on the server; only after mount in the browser.
@@ -78,7 +84,7 @@ function FYRecommendations({ customFields = {} }) {
 	if (items) {
 		return (
 			<div className={BLOCK_CLASS_NAME}>
-				<RecommendationCarousel items={items} />
+				<RecommendationCarousel items={items} openInNewTab={openInNewTab} />
 			</div>
 		);
 	}
@@ -110,6 +116,17 @@ FYRecommendations.propTypes = {
 			label: "Lazy load",
 			description: "Fetch recommendations when the block scrolls into view",
 			defaultValue: true,
+			group: "Configure Content",
+		}),
+		subscriptionTier: PropTypes.oneOf(["free", "premium"]).tag({
+			label: "Subscription tier",
+			description: "Filter recommendations by subscription tier",
+			group: "Configure Content",
+		}),
+		openInNewTab: PropTypes.bool.tag({
+			label: "Open links in new tab",
+			description: "When enabled, recommendation links open in a new browser tab",
+			defaultValue: false,
 			group: "Configure Content",
 		}),
 	}),

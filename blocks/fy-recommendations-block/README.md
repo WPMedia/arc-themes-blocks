@@ -19,10 +19,10 @@ server-side, where the gateway identity headers are injected.
 
 ### customFields
 
-| **Prop**       | **Required** | **Type**         | **Description**                                        |
-| -------------- | ------------ | ---------------- | ------------------------------------------------------ |
-| displayAmount  | no           | PropTypes.number | Max items to display. Default `5`.                     |
-| lazyLoad       | no           | PropTypes.bool   | Fetch when the block scrolls into view. Default `true`.|
+| **Prop**      | **Required** | **Type**         | **Description**                                         |
+| ------------- | ------------ | ---------------- | ------------------------------------------------------- |
+| displayAmount | no           | PropTypes.number | Max items to display. Default `5`.                      |
+| lazyLoad      | no           | PropTypes.bool   | Fetch when the block scrolls into view. Default `true`. |
 
 ## Behaviour
 
@@ -47,13 +47,13 @@ Consumed from each `content_elements[x]` (missing fields degrade gracefully):
 
 ## Internationalization fields
 
-| Phrase key                            | Default (English)                |
-| ------------------------------------- | -------------------------------- |
-| `fy-recommendations.aria-label`       | `Recommended for you`            |
-| `fy-recommendations.right-arrow-label`| `Next`                           |
-| `fy-recommendations.left-arrow-label` | `Previous`                       |
-| `fy-recommendations.slide-indicator`  | `Slide %{current} of %{maximum}` |
-| `fy-recommendations.premium-label`    | `Premium`                        |
+| Phrase key                             | Default (English)                |
+| -------------------------------------- | -------------------------------- |
+| `fy-recommendations.aria-label`        | `Recommended for you`            |
+| `fy-recommendations.right-arrow-label` | `Next`                           |
+| `fy-recommendations.left-arrow-label`  | `Previous`                       |
+| `fy-recommendations.slide-indicator`   | `Slide %{current} of %{maximum}` |
+| `fy-recommendations.premium-label`     | `Premium`                        |
 
 ## Events
 

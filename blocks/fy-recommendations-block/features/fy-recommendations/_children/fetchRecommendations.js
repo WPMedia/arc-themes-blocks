@@ -1,3 +1,4 @@
+/* global globalThis */
 // Client-side data fetch for the FY Recommendations block.
 //
 // Instead of calling the recommender directly from the browser (blocked by

@@ -2,6 +2,13 @@
 	"ads-block": {
 		"ads-block.ad-label": "ADVERTISEMENT"
 	},
+	"fy-recommendations-block": {
+		"fy-recommendations.aria-label": "Recommended for you",
+		"fy-recommendations.premium-label": "Premium",
+		"fy-recommendations.left-arrow-label": "Previous",
+		"fy-recommendations.right-arrow-label": "Next",
+		"fy-recommendations.slide-indicator": "Slide %{current} of %{maximum}"
+	},
 	"alert-bar-block": {
 		"alert-bar-block.close-button": "Dismiss breaking news alert",
 		"alert-bar-block.element-aria-label": "Breaking News Alert"

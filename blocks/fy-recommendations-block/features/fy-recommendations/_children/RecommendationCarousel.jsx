@@ -19,7 +19,7 @@ const BLOCK_CLASS_NAME = "b-fy-recommendations";
 // fy-recommendations content source as a compact horizontal carousel, at parity
 // with the fy-ui-poc reference card (image, category, headline, author, premium
 // ribbon). Missing fields degrade gracefully.
-const RecommendationCarousel = ({ items = [] }) => {
+const RecommendationCarousel = ({ items = [], openInNewTab = false }) => {
 	const { id } = useComponentContext();
 	const { arcSite } = useFusionContext();
 	const phrases = usePhrases();
@@ -66,6 +66,7 @@ const RecommendationCarousel = ({ items = [] }) => {
 							<Link
 								className={`${BLOCK_CLASS_NAME}__card`}
 								href={url}
+								openInNewTab={openInNewTab}
 								assistiveHidden={viewable ? null : true}
 							>
 								<Image alt={headlineText || ""} src={imageURL} />
@@ -88,9 +89,7 @@ const RecommendationCarousel = ({ items = [] }) => {
 										</HeadingSection>
 									) : null}
 									{author ? (
-										<Paragraph className={`${BLOCK_CLASS_NAME}__card-author`}>
-											{author}
-										</Paragraph>
+										<Paragraph className={`${BLOCK_CLASS_NAME}__card-author`}>{author}</Paragraph>
 									) : null}
 								</Stack>
 							</Link>

@@ -20,22 +20,22 @@ collector on exposure/click events — wiring is a follow-up).
 
 ## Configurable Params
 
-| Param | Notes |
-| ----- | ----- |
-| `num_results` | Defaults to `5`. |
-| `user_id` | First-party user id (read client-side from the `fy_user_id` cookie/localStorage). |
-| `item_id` | Anchor for "more like this"; the id of the article being read. |
-| `device_type` | `mobile` / `desktop` / `tablet`, derived from the user agent. |
-| `subscription_tier` | `free` (default) / `premium`. |
+| Param               | Notes                                                                             |
+| ------------------- | --------------------------------------------------------------------------------- |
+| `num_results`       | Defaults to `5`.                                                                  |
+| `user_id`           | First-party user id (read client-side from the `fy_user_id` cookie/localStorage). |
+| `item_id`           | Anchor for "more like this"; the id of the article being read.                    |
+| `device_type`       | `mobile` / `desktop` / `tablet`, derived from the user agent.                     |
+| `subscription_tier` | `free` (default) / `premium`.                                                     |
 
 `site_id` is taken from `arc-site`.
 
 ## Environment
 
-| Variable | Description |
-| -------- | ----------- |
-| `FY_RECOMMENDER_BASE` | Base URL of the FY Recommender service. |
-| `ORGANIZATION` | Arc tenant id, injected as the `arc-organization` header. |
+| Variable              | Description                                               |
+| --------------------- | --------------------------------------------------------- |
+| `FY_RECOMMENDER_BASE` | Base URL of the FY Recommender service.                   |
+| `ORGANIZATION`        | Arc tenant id, injected as the `arc-organization` header. |
 
 ## TTL
 

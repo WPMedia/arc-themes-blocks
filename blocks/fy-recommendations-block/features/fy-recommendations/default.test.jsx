@@ -1,5 +1,5 @@
 import React from "react";
-import { render, act } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import mockConsole from "jest-mock-console";
 
@@ -20,7 +20,7 @@ const mockContentFetch = (response) => {
 		Promise.resolve({
 			ok: true,
 			json: () => Promise.resolve(response),
-		})
+		}),
 	);
 };
 
@@ -62,31 +62,24 @@ describe("FY Recommendations", () => {
 		delete global.IntersectionObserver;
 	});
 
-	it("does not render the carousel before the fetch resolves", async () => {
+	it("does not render the carousel before the fetch resolves", () => {
 		global.fetch = jest.fn(() => new Promise(() => {})); // never resolves
-		let container;
-		await act(async () => {
-			({ container } = render(<FYRecommendations customFields={{ lazyLoad: false }} />));
-		});
-		expect(container.querySelectorAll(".b-fy-recommendations")).toHaveLength(0);
+		render(<FYRecommendations customFields={{ lazyLoad: false }} />);
+		expect(screen.queryByRole("link")).not.toBeInTheDocument();
 	});
 
 	it("renders nothing when the content source returns no elements", async () => {
 		mockContentFetch({ content_elements: [], attribution: null });
-		let container;
-		await act(async () => {
-			({ container } = render(<FYRecommendations customFields={{ lazyLoad: false }} />));
-		});
-		expect(container.querySelectorAll(".b-fy-recommendations")).toHaveLength(0);
+		render(<FYRecommendations customFields={{ lazyLoad: false }} />);
+		await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
+		expect(screen.queryByRole("link")).not.toBeInTheDocument();
 	});
 
 	it("renders nothing on network error", async () => {
 		mockFetchError();
-		let container;
-		await act(async () => {
-			({ container } = render(<FYRecommendations customFields={{ lazyLoad: false }} />));
-		});
-		expect(container.querySelectorAll(".b-fy-recommendations")).toHaveLength(0);
+		render(<FYRecommendations customFields={{ lazyLoad: false }} />);
+		await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
+		expect(screen.queryByRole("link")).not.toBeInTheDocument();
 	});
 
 	it("fetches via the Fusion content-fetch endpoint with the FY query params", async () => {
@@ -96,11 +89,9 @@ describe("FY Recommendations", () => {
 		});
 		mockContentFetch({ content_elements: [], attribution: null });
 
-		await act(async () => {
-			render(<FYRecommendations customFields={{ displayAmount: 3, lazyLoad: false }} />);
-		});
+		render(<FYRecommendations customFields={{ displayAmount: 3, lazyLoad: false }} />);
+		await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
 
-		expect(global.fetch).toHaveBeenCalledTimes(1);
 		const [calledUrl] = global.fetch.mock.calls[0];
 		expect(calledUrl).toContain("/content/fetch/fy-recommendations");
 		expect(calledUrl).toContain("_website=test-site");
@@ -113,22 +104,51 @@ describe("FY Recommendations", () => {
 		expect(query.device_type).toBeDefined();
 	});
 
-	it("renders the carousel with the mapped ANS fields", async () => {
-		mockContentFetch({ content_elements: [sampleElement], attribution: { exposure_id: "exp-1" } });
+	it("includes subscription_tier in the fetch query when configured", async () => {
+		mockContentFetch({ content_elements: [], attribution: null });
 
-		let container;
-		await act(async () => {
-			({ container } = render(<FYRecommendations customFields={{ lazyLoad: false }} />));
+		render(<FYRecommendations customFields={{ lazyLoad: false, subscriptionTier: "premium" }} />);
+		await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
+
+		const parsed = new URL(global.fetch.mock.calls[0][0], "http://localhost");
+		const query = JSON.parse(parsed.searchParams.get("query"));
+		expect(query.subscription_tier).toBe("premium");
+	});
+
+	it("renders the carousel with the mapped ANS fields", async () => {
+		mockContentFetch({
+			content_elements: [sampleElement],
+			attribution: { exposure_id: "exp-1" },
 		});
 
-		expect(container.querySelectorAll(".b-fy-recommendations")).toHaveLength(1);
-		expect(container.querySelectorAll(".b-fy-recommendations__card")).toHaveLength(1);
-		expect(container.textContent).toContain("Test Article");
-		expect(container.textContent).toContain("Technology");
-		expect(container.textContent).toContain("Sarah Chen");
+		render(<FYRecommendations customFields={{ lazyLoad: false }} />);
 
-		const link = container.querySelector(".b-fy-recommendations__card");
-		expect(link.getAttribute("href")).toBe("https://example.com/article");
+		await screen.findByText("Test Article");
+		expect(screen.getByText("Technology")).toBeInTheDocument();
+		expect(screen.getByText("Sarah Chen")).toBeInTheDocument();
+
+		const cardLink = screen.getByRole("link", { hidden: true, name: /Test Article/i });
+		expect(cardLink).toHaveAttribute("href", "https://example.com/article");
+	});
+
+	it("opens links in a new tab when openInNewTab is enabled", async () => {
+		mockContentFetch({ content_elements: [sampleElement], attribution: null });
+
+		render(<FYRecommendations customFields={{ lazyLoad: false, openInNewTab: true }} />);
+
+		await screen.findByText("Test Article");
+		const cardLink = screen.getByRole("link", { hidden: true, name: /Test Article/i });
+		expect(cardLink).toHaveAttribute("target", "_blank");
+	});
+
+	it("does not set target attribute when openInNewTab is false", async () => {
+		mockContentFetch({ content_elements: [sampleElement], attribution: null });
+
+		render(<FYRecommendations customFields={{ lazyLoad: false, openInNewTab: false }} />);
+
+		await screen.findByText("Test Article");
+		const cardLink = screen.getByRole("link", { hidden: true, name: /Test Article/i });
+		expect(cardLink).not.toHaveAttribute("target");
 	});
 
 	it("defers the fetch until the block scrolls into view when lazyLoad is on", async () => {
@@ -141,19 +161,14 @@ describe("FY Recommendations", () => {
 		});
 		mockContentFetch({ content_elements: [sampleElement], attribution: null });
 
-		await act(async () => {
-			render(<FYRecommendations customFields={{ lazyLoad: true }} />);
-		});
+		render(<FYRecommendations customFields={{ lazyLoad: true }} />);
 
 		// Waiting for intersection — no fetch yet.
 		expect(global.fetch).not.toHaveBeenCalled();
 		expect(observe).toHaveBeenCalledTimes(1);
 
-		await act(async () => {
-			triggerIntersection([{ isIntersecting: true }]);
-		});
-
-		expect(global.fetch).toHaveBeenCalledTimes(1);
+		triggerIntersection([{ isIntersecting: true }]);
+		await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
 		expect(disconnect).toHaveBeenCalled();
 	});
 });

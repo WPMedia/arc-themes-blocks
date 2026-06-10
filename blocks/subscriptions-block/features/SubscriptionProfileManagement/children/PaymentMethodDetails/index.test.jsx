@@ -1,11 +1,11 @@
 import React from "react";
 
-import { act, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-const originalFetch = global.fetch;
-
 import PaymentMethodDetails from "./index";
+
+const originalFetch = global.fetch;
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
   ...jest.requireActual("@wpmedia/arc-themes-components"),
@@ -83,16 +83,14 @@ describe("PaymentMethodDetails component", () => {
 			}),
 		);
 		jest.mock("fusion:properties", () => jest.fn(() => ({ api: { retail: { origin: "https://api.example.com", endpoint: "/retail/public/v1/pricing/paymentInfo/" } } })));
-		await act(async () => {
-			render(
-				<PaymentMethodDetails
-					customFields={{ offerURL: "/offer-url/" }}
-					sub={{ ...sub, priceCode: "ABC123" }}
-					setPrice={jest.fn()}
-					className="b-sub"
-				/>
-			);
-		});
+		render(
+			<PaymentMethodDetails
+				customFields={{ offerURL: "/offer-url/" }}
+				sub={{ ...sub, priceCode: "ABC123" }}
+				setPrice={jest.fn()}
+				className="b-sub"
+			/>
+		);
 		expect(screen.getByText("subscription-block.shared-Payment-method")).not.toBeNull();
 	});
 

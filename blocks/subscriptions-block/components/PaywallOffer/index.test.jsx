@@ -18,25 +18,23 @@ jest.mock("is-url", () => ({
 
 jest.mock("../useOffer");
 
-jest.mock("../SubscriptionOverlay", () => {
-	const React = require("react");
-	const SubscriptionOverlayMock = ({ children }) =>
-		React.createElement("div", { "data-testid": "subscription-overlay" }, children);
-	return { __esModule: true, default: SubscriptionOverlayMock };
-});
+jest.mock("../SubscriptionOverlay", () => ({
+	__esModule: true,
+	default: ({ children }) =>
+		React.createElement("div", { "data-testid": "subscription-overlay" }, children),
+}));
 
-jest.mock("../SubscriptionDialog", () => {
-	const React = require("react");
-	const SubscriptionDialogMock = ({ actionUrl, reasonPrompt, headline }) =>
+jest.mock("../SubscriptionDialog", () => ({
+	__esModule: true,
+	default: ({ actionUrl, reasonPrompt, headline }) =>
 		React.createElement(
 			"div",
 			{ "data-testid": "subscription-dialog" },
 			React.createElement("a", { href: actionUrl }, "Subscribe"),
 			reasonPrompt ? React.createElement("span", null, reasonPrompt) : null,
 			headline ? React.createElement("span", null, headline) : null,
-		);
-	return { __esModule: true, default: SubscriptionDialogMock };
-});
+		),
+}));
 
 const sampleOffer = {
 	pageTitle: "Offer Title",

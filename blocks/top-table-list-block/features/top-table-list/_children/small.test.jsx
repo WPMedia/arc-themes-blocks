@@ -1,8 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { useFusionContext } from "fusion:context";
-import { useContent } from "fusion:content";
 import Small from "./small";
 
 jest.mock("fusion:context", () => ({

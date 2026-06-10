@@ -192,8 +192,8 @@ describe("the SectionNav component", () => {
 			const originalLocation = window.location;
 			delete window.location;
 			window.location = { pathname: undefined };
-			const items = [{ _id: "/news", name: "News", node_type: "section", children: [] }];
-			render(<SectionNav sections={items} />);
+			const singleItem = [{ _id: "/news", name: "News", node_type: "section", children: [] }];
+			render(<SectionNav sections={singleItem} />);
 			// Should render without throwing
 			expect(screen.getByText("News")).toBeInTheDocument();
 			window.location = originalLocation;

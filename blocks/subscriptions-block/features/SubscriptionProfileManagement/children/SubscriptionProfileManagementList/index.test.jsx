@@ -1,10 +1,10 @@
 import React from "react";
 
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { useSales as useSalesMock } from "@wpmedia/arc-themes-components";
 
 import SubscriptionProfileManagementList from "./index";
-import { useSales as useSalesMock } from "@wpmedia/arc-themes-components";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
   ...jest.requireActual("@wpmedia/arc-themes-components"),
@@ -17,10 +17,10 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
   Icon: () => <i />
 }));
 
-jest.mock("../../../../components/SubscriptionOverlay", () => {
-  const React = require("react");
-  return { __esModule: true, default: ({ children }) => React.createElement("div", { "data-testid": "overlay" }, children) };
-});
+jest.mock("../../../../components/SubscriptionOverlay", () => ({
+  __esModule: true,
+  default: ({ children }) => React.createElement("div", { "data-testid": "overlay" }, children),
+}));
 
 jest.mock("fusion:properties", () => jest.fn(() => ({ api: { retail: { origin: "" } } })));
 
@@ -200,7 +200,7 @@ describe("SubscriptionProfileManagementList component", () => {
 			// Modal should be open now
 			const confirmBtn = screen.queryByText("subscriptions-block.subscription-profile-management-cancel-modal-primary-button-text");
 			if (confirmBtn) {
-				await act(async () => { fireEvent.click(confirmBtn); });
+				fireEvent.click(confirmBtn);
 				expect(cancelSubscription).toHaveBeenCalled();
 			}
 		}

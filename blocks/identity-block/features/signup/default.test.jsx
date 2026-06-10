@@ -150,7 +150,8 @@ describe("With initialized identity", () => {
 
 describe("With initialized identity - captcha error", () => {
 	it("shows captcha error when signup rejects with code 010122", async () => {
-		const signUpMock = jest.fn(() => Promise.reject({ code: "010122" }));
+		const captchaErr = Object.assign(new Error("captcha error"), { code: "010122" });
+		const signUpMock = jest.fn(() => Promise.reject(captchaErr));
 		useIdentity.mockImplementation(() => ({
 			Identity: {
 				getConfig: jest.fn(() => Promise.resolve()),

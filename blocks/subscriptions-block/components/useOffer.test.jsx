@@ -3,12 +3,11 @@ import {
 	renderHook
 } from "@testing-library/react";
 import "@testing-library/jest-dom";
-
-const originalFetch = global.fetch;
-
 import getProperties from "fusion:properties";
 
 import useOffer from './useOffer';
+
+const originalFetch = global.fetch;
 
 jest.mock("fusion:context", () => ({
 	__esModule: true,

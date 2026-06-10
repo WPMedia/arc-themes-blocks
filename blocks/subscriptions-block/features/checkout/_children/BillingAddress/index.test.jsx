@@ -1,10 +1,10 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import * as arcThemesComponents from "@wpmedia/arc-themes-components";
 
 import BillingAddress from "./index";
 import getItemDetails from "../../../../utils/itemDetails";
-import * as arcThemesComponents from "@wpmedia/arc-themes-components";
 
 jest.mock("fusion:properties", () =>
 	jest.fn(() => ({

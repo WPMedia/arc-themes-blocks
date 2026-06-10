@@ -10,19 +10,17 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	isServerSide: jest.fn(() => false),
 }));
 
-jest.mock("../SubscriptionOverlay", () => {
-	const React = require("react");
-	const SubscriptionOverlayMock = ({ children }) =>
-		React.createElement("div", { "data-testid": "subscription-overlay" }, children);
-	return { __esModule: true, default: SubscriptionOverlayMock };
-});
+jest.mock("../SubscriptionOverlay", () => ({
+	__esModule: true,
+	default: ({ children }) =>
+		React.createElement("div", { "data-testid": "subscription-overlay" }, children),
+}));
 
-jest.mock("../SubscriptionDialog", () => {
-	const React = require("react");
-	const SubscriptionDialogMock = (props) =>
-		React.createElement("div", { "data-testid": "subscription-dialog", ...props });
-	return { __esModule: true, default: SubscriptionDialogMock };
-});
+jest.mock("../SubscriptionDialog", () => ({
+	__esModule: true,
+	default: (props) =>
+		React.createElement("div", { "data-testid": "subscription-dialog", ...props }),
+}));
 
 const defaultProps = {
 	actionText: "Subscribe",

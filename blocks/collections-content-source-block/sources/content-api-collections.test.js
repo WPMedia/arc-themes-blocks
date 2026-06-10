@@ -330,7 +330,7 @@ describe("the collections content source block", () => {
 		it("should concatenate using next content_elements when data has none", async () => {
 			let callCount = 0;
 			axios.mockImplementation((request) => {
-				callCount++;
+				callCount += 1;
 				const requestUrl = new URL(request.url);
 				const url = {
 					hostname: requestUrl.hostname,
@@ -366,7 +366,7 @@ describe("the collections content source block", () => {
 		it("should concatenate using data content_elements when next has none", async () => {
 			let callCount = 0;
 			axios.mockImplementation((request) => {
-				callCount++;
+				callCount += 1;
 				const requestUrl = new URL(request.url);
 				const url = {
 					hostname: requestUrl.hostname,

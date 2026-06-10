@@ -130,7 +130,6 @@ describe("the SearchBox component", () => {
 			// Advance timer to clear pending state (setSearchBarPending(false) called after 250ms)
 			act(() => { jest.advanceTimersByTime(300); });
 			// Second mouseup: search is open, not pending → event.preventDefault() called
-			const mockEvent = { preventDefault: jest.fn(), type: "mouseup" };
 			fireEvent.mouseUp(btn);
 			// Component still renders
 			expect(btn).toBeTruthy();

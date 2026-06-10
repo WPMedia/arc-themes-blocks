@@ -127,7 +127,6 @@ describe("BasicSubscriptionDetail component", () => {
 	});
 
 	it("renders TERMINATED status with view button", () => {
-		const originalHref = window.location.href;
 		render(
 			<BasicSubscriptionDetail
 				customFields={{ offerURL: "/offer-url/", showCancelLink: true, showResubscribeLink: true }}

@@ -81,7 +81,6 @@ describe("PaymentForm", () => {
 				Promise.resolve({ error: { message: "Card declined" } }),
 			),
 		};
-		const { useElements } = require("@stripe/react-stripe-js");
 		useElements.mockReturnValue({ getElement: jest.fn(() => ({})) });
 		render(<PaymentForm {...defaultProps} stripeInstance={stripeInstance} formErrorText="Card declined" />);
 		fireEvent.submit(document.querySelector("form"));

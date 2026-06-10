@@ -19,7 +19,7 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 
 jest.mock("../../../../components/SubscriptionOverlay", () => ({
   __esModule: true,
-  default: ({ children }) => React.createElement("div", { "data-testid": "overlay" }, children),
+  default: ({ children }) => <div data-testid="overlay">{children}</div>,
 }));
 
 jest.mock("fusion:properties", () => jest.fn(() => ({ api: { retail: { origin: "" } } })));

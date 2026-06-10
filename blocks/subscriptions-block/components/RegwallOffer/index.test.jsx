@@ -12,14 +12,12 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 
 jest.mock("../SubscriptionOverlay", () => ({
 	__esModule: true,
-	default: ({ children }) =>
-		React.createElement("div", { "data-testid": "subscription-overlay" }, children),
+	default: ({ children }) => <div data-testid="subscription-overlay">{children}</div>,
 }));
 
 jest.mock("../SubscriptionDialog", () => ({
 	__esModule: true,
-	default: (props) =>
-		React.createElement("div", { "data-testid": "subscription-dialog", ...props }),
+	default: (props) => <div data-testid="subscription-dialog" {...props} />,
 }));
 
 const defaultProps = {

@@ -20,20 +20,18 @@ jest.mock("../useOffer");
 
 jest.mock("../SubscriptionOverlay", () => ({
 	__esModule: true,
-	default: ({ children }) =>
-		React.createElement("div", { "data-testid": "subscription-overlay" }, children),
+	default: ({ children }) => <div data-testid="subscription-overlay">{children}</div>,
 }));
 
 jest.mock("../SubscriptionDialog", () => ({
 	__esModule: true,
-	default: ({ actionUrl, reasonPrompt, headline }) =>
-		React.createElement(
-			"div",
-			{ "data-testid": "subscription-dialog" },
-			React.createElement("a", { href: actionUrl }, "Subscribe"),
-			reasonPrompt ? React.createElement("span", null, reasonPrompt) : null,
-			headline ? React.createElement("span", null, headline) : null,
-		),
+	default: ({ actionUrl, reasonPrompt, headline }) => (
+		<div data-testid="subscription-dialog">
+			<a href={actionUrl}>Subscribe</a>
+			{reasonPrompt ? <span>{reasonPrompt}</span> : null}
+			{headline ? <span>{headline}</span> : null}
+		</div>
+	),
 }));
 
 const sampleOffer = {

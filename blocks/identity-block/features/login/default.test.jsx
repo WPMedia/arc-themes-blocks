@@ -205,7 +205,7 @@ describe("Identity Login Feature - captcha invalid error", () => {
 
 	it("sets captcha error when login rejects with string code 130001", async () => {
 		render(<Login customFields={defaultCustomFields} />);
-		await waitFor(() => screen.getByLabelText("identity-block.email-label"));
+		await screen.findByLabelText("identity-block.email-label");
 		fireEvent.change(screen.getByLabelText("identity-block.email-label"), {
 			target: { value: "test@test.com" },
 		});
@@ -251,15 +251,15 @@ describe("Identity Login Feature - OIDC", () => {
 				}}
 			/>,
 		);
-		await waitFor(() => screen.getByLabelText("identity-block.email-label"));
+		await screen.findByLabelText("identity-block.email-label");
 		fireEvent.change(screen.getByLabelText("identity-block.email-label"), {
 			target: { value: "email@test.com" },
 		});
-		await waitFor(() => screen.getByLabelText("identity-block.password"));
+		await screen.findByLabelText("identity-block.password");
 		fireEvent.change(screen.getByLabelText("identity-block.password"), {
 			target: { value: "password123" },
 		});
-		await waitFor(() => screen.getByRole("button"));
+		await screen.findByRole("button");
 		fireEvent.click(screen.getByRole("button"));
 		await waitFor(() => expect(mockLoginByOIDC).toHaveBeenCalled());
 	});

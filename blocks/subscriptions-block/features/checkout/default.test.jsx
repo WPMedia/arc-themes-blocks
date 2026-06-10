@@ -229,7 +229,7 @@ describe("Checkout Feature", () => {
 		);
 
 		// Component should render without crashing after getUserProfile rejects
-		await waitFor(() => expect(screen.getByText("Billing Address")).toBeInTheDocument());
+		await screen.findByText("Billing Address");
 	});
 
 	it("sets state from orderDetail when orderDetail has items", async () => {
@@ -264,7 +264,7 @@ describe("Checkout Feature", () => {
 			/>,
 		);
 
-		await waitFor(() => expect(screen.getByText("Payment Review")).toBeInTheDocument());
+		await screen.findByText("Payment Review");
 	});
 
 	it("sets error state when errorPaypal is returned", async () => {
@@ -295,7 +295,7 @@ describe("Checkout Feature", () => {
 			/>,
 		);
 
-		await waitFor(() => expect(screen.getByText("Billing Address")).toBeInTheDocument());
+		await screen.findByText("Billing Address");
 	});
 
 	it("calls Identity.logout when account edit button is clicked", async () => {
@@ -338,7 +338,7 @@ describe("Checkout Feature", () => {
 			/>,
 		);
 
-		await waitFor(() => expect(screen.getByText("Billing Address")).toBeInTheDocument());
+		await screen.findByText("Billing Address");
 
 		// Find the account edit button (first button rendered)
 		const editButtons = screen.getAllByText("checkout-block.edit");
@@ -410,6 +410,6 @@ describe("Checkout Feature", () => {
 			/>,
 		);
 
-		await waitFor(() => expect(screen.getByText("Payment Review")).toBeInTheDocument());
+		await screen.findByText("Payment Review");
 	});
 });

@@ -120,7 +120,7 @@ describe("Subscriptions HeaderAccountAction", () => {
 				/>,
 			);
 		});
-		await waitFor(() => screen.getByRole("button"));
+		await screen.findByRole("button");
 		fireEvent.click(screen.getByRole("button"));
 		const links = screen.queryAllByRole("link");
 		const hrefs = links.map((l) => l.getAttribute("href"));
@@ -145,7 +145,7 @@ describe("Subscriptions HeaderAccountAction", () => {
 				/>,
 			);
 		});
-		await waitFor(() => screen.getByRole("button"));
+		await screen.findByRole("button");
 		fireEvent.click(screen.getByRole("button"));
 		await waitFor(() => screen.queryAllByRole("link").length > 0);
 		const links = screen.queryAllByRole("link");

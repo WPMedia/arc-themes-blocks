@@ -14,19 +14,19 @@ on:
       url_params:
         description: "Query parameters appended to all URLs"
         required: true
-        default: "_website=daily-intelligencer&mxId=00000000"
+        default: "_website=daily-intelligencer&mxId=0f3c88a6"
       deployment_id:
         description: "Deployment ID for comparison (appended as d= parameter)"
         required: false
-        default: "255"
+        default: "11"
 
 jobs:
   compare:
     runs-on: ubuntu-latest
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://themesinternal-the-gazette-sandbox.web.arc-cdn.net' }}
-      URL_PARAMS: ${{ github.event.inputs.url_params || '_website=daily-intelligencer&mxId=00000000' }}
-      DEPLOYMENT_ID: ${{ github.event.inputs.deployment_id || '255' }}
+      URL_PARAMS: ${{ github.event.inputs.url_params || '_website=daily-intelligencer&mxId=0f3c88a6' }}
+      DEPLOYMENT_ID: ${{ github.event.inputs.deployment_id || '11' }}
       CHROMATIC_BRANCH: visual-regression-${{ github.run_id }}
     steps:
       - name: Checkout repository

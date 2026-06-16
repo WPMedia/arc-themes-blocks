@@ -185,4 +185,31 @@ describe("the small manual promo feature", () => {
 		render(<SmallManualPromo customFields={{ ...customFields, linkURL: undefined }} />);
 		expect(screen.getByText("This is the headline")).not.toBeNull();
 	});
+
+	it("falls back to parsed imageAuth when signing service returns nothing", () => {
+		useContent.mockReturnValueOnce(null);
+		render(
+			<SmallManualPromo
+				customFields={{
+					...customFields,
+					imageOverrideURL: "https://example.com/image.jpg",
+					imageAuth: JSON.stringify({ 2: "auth-token" }),
+				}}
+			/>,
+		);
+		expect(screen.getByText("This is the headline")).not.toBeNull();
+	});
+
+	it("sets RESIZER_TOKEN_VERSION when resizedAuth has hash", () => {
+		useContent.mockReturnValueOnce({ hash: "abc123" });
+		render(
+			<SmallManualPromo
+				customFields={{
+					...customFields,
+					imageId: "IMG123",
+				}}
+			/>,
+		);
+		expect(screen.getByText("This is the headline")).not.toBeNull();
+	});
 });

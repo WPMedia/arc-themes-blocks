@@ -165,4 +165,37 @@ describe("the search content source block", () => {
 			);
 		});
 	});
+
+	describe("when SEARCH_KEY is not set", () => {
+		it("should not include a key parameter in the url", async () => {
+			jest.resetModules();
+			jest.mock("fusion:environment", () => ({
+				CONTENT_BASE: "https://content.base",
+				// searchKey intentionally absent
+			}));
+			jest.mock("axios", () => ({
+				__esModule: true,
+				default: jest.fn((request) => {
+					const requestUrl = new URL(request.url);
+					const url = {
+						hostname: requestUrl.hostname,
+						pathname: requestUrl.pathname,
+						searchObject: Object.fromEntries(requestUrl.searchParams),
+					};
+					return Promise.resolve({
+						data: {
+							content_elements: [{ url }],
+							request: { ...request, url },
+						},
+					});
+				}),
+			}));
+			const { default: sourceWithoutKey } = require("./search-api");
+			const result = await sourceWithoutKey.fetch(
+				{ query: "test", "arc-site": "the-sun" },
+				{ cachedCall: () => {} }
+			);
+			expect(result.request.url.searchObject.key).toBeUndefined();
+		});
+	});
 });

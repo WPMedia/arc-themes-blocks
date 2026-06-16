@@ -110,4 +110,31 @@ describe("overline feature", () => {
 			expect(container).toBeEmptyDOMElement();
 		});
 	});
+
+	describe("when content is sponsored", () => {
+		it("renders sponsored content label when owner.sponsored is true", () => {
+			useFusionContext.mockReturnValue({
+				...baseContext,
+				globalContent: {
+					...baseContext.globalContent,
+					owner: { sponsored: true },
+					label: { basic: { text: "Sponsored Story" } },
+				},
+			});
+			render(<Overline />);
+			expect(screen.getByText("Sponsored Story")).toBeInTheDocument();
+		});
+
+		it("renders default sponsored phrase when label text is absent", () => {
+			useFusionContext.mockReturnValue({
+				...baseContext,
+				globalContent: {
+					...baseContext.globalContent,
+					owner: { sponsored: true },
+				},
+			});
+			render(<Overline />);
+			expect(screen.getByText("global.sponsored-content")).toBeInTheDocument();
+		});
+	});
 });

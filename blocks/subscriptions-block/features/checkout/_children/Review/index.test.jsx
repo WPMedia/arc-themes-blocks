@@ -3,6 +3,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { useElements, useStripe } from "@stripe/react-stripe-js";
+import { useSales } from "@wpmedia/arc-themes-components";
 
 import ReviewOrder from "./index";
 
@@ -348,5 +349,201 @@ describe("Payment Review component", () => {
 		expect(screen.getByText("subscriptions-block.terms-sales-service-text")).toBeInTheDocument();
 
 		expect(screen.getByTestId("ApplePay-payment-request-button")).toBeInTheDocument();
+	});
+
+	it("StripeIntentsButtons returns null when paymentOptionSelected is not stripe/apple/google", () => {
+		useElements.mockImplementation(() => ({ create: jest.fn() }));
+		useStripe.mockImplementation(() => ({}));
+
+		render(
+			<ReviewOrder
+				stripeInstance={{}}
+				paymentOptions={paymentOptions}
+				paymentOptionSelected="PayPal"
+				customFields={customFields}
+				setCaptchaError={jest.fn()}
+			/>,
+		);
+		// PayPal button renders, not the stripe submit button
+		expect(screen.getByText("subscriptions-block.submit-payment-paypal")).toBeInTheDocument();
+		expect(screen.queryByText("subscriptions-block.submit-payment")).not.toBeInTheDocument();
+	});
+
+	it("PaymentButton returns null when no stripeInstance and not PayPal", () => {
+		useElements.mockImplementation(() => ({ create: jest.fn() }));
+		useStripe.mockImplementation(() => ({}));
+
+		render(
+			<ReviewOrder
+				paymentOptions={paymentOptions}
+				paymentOptionSelected="StripeIntents"
+				customFields={customFields}
+				setCaptchaError={jest.fn()}
+			/>,
+		);
+		// No submit button rendered since no stripeInstance
+		expect(screen.queryByText("subscriptions-block.submit-payment")).not.toBeInTheDocument();
+		expect(screen.queryByText("subscriptions-block.submit-payment-paypal")).not.toBeInTheDocument();
+	});
+
+	it("handleSubmitStripeIntents calls setError when stripe confirmCardPayment returns error (total > 0)", async () => {
+		const mockElements = { create: jest.fn(), getElement: jest.fn() };
+		useElements.mockImplementation(() => mockElements);
+
+		const mockStripe = {
+			confirmCardPayment: jest.fn(() => ({ error: { message: "Card declined" } })),
+			confirmCardSetup: jest.fn(),
+		};
+		useStripe.mockImplementation(() => mockStripe);
+
+		const setError = jest.fn();
+		const setCaptchaError = jest.fn();
+
+		render(
+			<ReviewOrder
+				stripeInstance={{}}
+				order={order}
+				paymentOptions={paymentOptions}
+				paymentMethod={paymentMethod}
+				paymentOptionSelected="StripeIntents"
+				customFields={customFields}
+				setError={setError}
+				setCaptchaError={setCaptchaError}
+			/>,
+		);
+
+		const button = screen.getByText("subscriptions-block.submit-payment");
+		fireEvent.click(button);
+
+		await waitFor(() => {
+			expect(setError).toHaveBeenCalledWith({ message: "Card declined" });
+		});
+	});
+
+	it("finalizePayment catch for total > 0 calls setError", async () => {
+		const mockElements = { create: jest.fn(), getElement: jest.fn() };
+		useElements.mockImplementation(() => mockElements);
+
+		const mockStripe = {
+			confirmCardPayment: jest.fn(() => ({ paymentIntent: { id: "pi_123" } })),
+			confirmCardSetup: jest.fn(),
+		};
+		useStripe.mockImplementation(() => mockStripe);
+
+		const finalizeError = new Error("finalize failed");
+		useSales.mockImplementation(() => ({
+			isInitialized: true,
+			Sales: {
+				finalizePayment: jest.fn(() => Promise.reject(finalizeError)),
+				initializePayment: jest.fn(async () => {}),
+			},
+		}));
+
+		const setError = jest.fn();
+		const setCaptchaError = jest.fn();
+		const setResetRecaptcha = jest.fn();
+
+		render(
+			<ReviewOrder
+				stripeInstance={{}}
+				order={order}
+				paymentOptions={paymentOptions}
+				paymentMethod={paymentMethod}
+				paymentOptionSelected="StripeIntents"
+				customFields={customFields}
+				setError={setError}
+				setCaptchaError={setCaptchaError}
+				resetRecaptcha={false}
+				setResetRecaptcha={setResetRecaptcha}
+			/>,
+		);
+
+		const button = screen.getByText("subscriptions-block.submit-payment");
+		fireEvent.click(button);
+
+		await waitFor(() => {
+			expect(setError).toHaveBeenCalledWith(finalizeError);
+		});
+	});
+
+	it("finalizePayment catch for total <= 0 calls setError", async () => {
+		const mockElements = { create: jest.fn(), getElement: jest.fn() };
+		useElements.mockImplementation(() => mockElements);
+
+		const mockStripe = {
+			confirmCardPayment: jest.fn(),
+			confirmCardSetup: jest.fn(() => ({ setupIntent: { id: "si_123" } })),
+		};
+		useStripe.mockImplementation(() => mockStripe);
+
+		const finalizeError = new Error("finalize setup failed");
+		useSales.mockImplementation(() => ({
+			isInitialized: true,
+			Sales: {
+				finalizePayment: jest.fn(() => Promise.reject(finalizeError)),
+				initializePayment: jest.fn(async () => {}),
+			},
+		}));
+
+		const setError = jest.fn();
+		const setCaptchaError = jest.fn();
+		const setResetRecaptcha = jest.fn();
+
+		render(
+			<ReviewOrder
+				stripeInstance={{}}
+				order={{ ...order, total: 0 }}
+				paymentOptions={paymentOptions}
+				paymentMethod={paymentMethod}
+				paymentOptionSelected="StripeIntents"
+				customFields={customFields}
+				setError={setError}
+				setCaptchaError={setCaptchaError}
+				resetRecaptcha={false}
+				setResetRecaptcha={setResetRecaptcha}
+			/>,
+		);
+
+		const button = screen.getByText("subscriptions-block.submit-payment");
+		fireEvent.click(button);
+
+		await waitFor(() => {
+			expect(setError).toHaveBeenCalledWith(finalizeError);
+		});
+	});
+
+	it("handleSubmitPayPalPayment catch calls setError", async () => {
+		const paypalError = new Error("PayPal error");
+		useSales.mockImplementation(() => ({
+			isInitialized: true,
+			Sales: {
+				finalizePayment: jest.fn(async () => {}),
+				initializePayment: jest.fn(() => Promise.reject(paypalError)),
+			},
+		}));
+
+		const setError = jest.fn();
+		const setCaptchaError = jest.fn();
+		const setResetRecaptcha = jest.fn();
+
+		render(
+			<ReviewOrder
+				paymentOptions={paymentOptions}
+				paymentOptionSelected="PayPal"
+				customFields={customFields}
+				order={order}
+				setError={setError}
+				setCaptchaError={setCaptchaError}
+				resetRecaptcha={false}
+				setResetRecaptcha={setResetRecaptcha}
+			/>,
+		);
+
+		const button = screen.getByText("subscriptions-block.submit-payment-paypal");
+		fireEvent.click(button);
+
+		await waitFor(() => {
+			expect(setError).toHaveBeenCalledWith(paypalError);
+		});
 	});
 });

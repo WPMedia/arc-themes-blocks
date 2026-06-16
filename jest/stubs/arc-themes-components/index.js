@@ -161,7 +161,7 @@ const Join = ({ children, separator: SepComponent }) => {
 				withSeparators.push(sepValue);
 			} else {
 				// eslint-disable-next-line react/no-array-index-key
-			withSeparators.push(React.createElement(SepComponent, { key: `sep-${i}` }));
+				withSeparators.push(React.createElement(SepComponent, { key: `sep-${i}` }));
 			}
 		}
 		withSeparators.push(child);
@@ -274,6 +274,7 @@ const Input = ({
 	name,
 	type = "text",
 	value,
+	defaultValue,
 	onChange,
 	tip,
 	validationErrorMessage,
@@ -283,7 +284,7 @@ const Input = ({
 	...rest
 }) => {
 	const [hasError, setHasError] = React.useState(!!showDefaultError);
-	const [currentValue, setCurrentValue] = React.useState(value || "");
+	const [currentValue, setCurrentValue] = React.useState(value ?? defaultValue ?? "");
 	const inputId = id || name;
 
 	const valueRef = React.useRef(value || "");
@@ -502,7 +503,7 @@ const getVideoFromANS = (content) => {
 };
 const isServerSide = () => false;
 const formatAuthors = (authors, andText) => {
-	if (!authors || !authors.length) return null;
+	if (!authors || !authors.length) return "";
 	const sep = andText || "and";
 	const authorItems = authors
 		.map((author) => {

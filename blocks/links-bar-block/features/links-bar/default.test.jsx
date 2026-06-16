@@ -94,4 +94,11 @@ describe("the links bar feature", () => {
 			"links-bar-block.element-aria-label",
 		);
 	});
+
+	it("renders correctly when navigationConfig is not provided (uses default empty object)", () => {
+		useContent.mockReturnValue({ children: twoLinks });
+		// navigationConfig defaults to {} when not provided
+		render(<LinksBar customFields={{}} />);
+		expect(screen.getByRole("navigation")).toBeInTheDocument();
+	});
 });

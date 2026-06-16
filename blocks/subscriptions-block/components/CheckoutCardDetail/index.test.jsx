@@ -56,4 +56,16 @@ describe("CheckoutCardDetail component", () => {
 			"4. checkout-block.review",
 		);
 	});
+
+	it("renders billing address summary when card is complete and closed", () => {
+		render(
+			<CheckoutCardDetail type="Billing Address" isOpen={false} isComplete summary={{ line1: "123 Main St" }} />,
+		);
+		expect(screen.getByText("2. checkout-block.billingAddress")).not.toBeNull();
+	});
+
+	it("renders null summary for unknown type when complete and closed", () => {
+		render(<CheckoutCardDetail type="Account" isOpen={false} isComplete summary={{}} />);
+		expect(screen.getByText("1. checkout-block.account")).not.toBeNull();
+	});
 });

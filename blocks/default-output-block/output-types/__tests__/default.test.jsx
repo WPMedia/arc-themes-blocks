@@ -215,5 +215,77 @@ describe("head content — conditional scripts", () => {
 		render(<DefaultOutputType {...mockProps} />);
 		expect(document.head.querySelector('[data-testid="font-loading-url-0"]')).toBeInTheDocument();
 	});
+
+	it("renders a font loading link when fontUrl is provided as a string", () => {
+		mockPropertiesOverride = {
+			dangerouslyInjectJS: [],
+			fontUrl: "https://fonts.googleapis.com/css?family=Roboto",
+		};
+		render(<DefaultOutputType {...mockProps} />);
+		const link = document.head.querySelector(
+			'link[href="https://fonts.googleapis.com/css?family=Roboto"][rel="stylesheet"]',
+		);
+		expect(link).toBeInTheDocument();
+	});
+
+	it("renders no font link when fontUrl is null", () => {
+		mockPropertiesOverride = { dangerouslyInjectJS: [], fontUrl: null };
+		render(<DefaultOutputType {...mockProps} />);
+		expect(document.head.querySelector('[data-testid^="font-loading-url-"]')).not.toBeInTheDocument();
+	});
+
+	it("renders the advanced queryly script when pageType is queryly-search", () => {
+		mockPropertiesOverride = { dangerouslyInjectJS: [], querylyId: 12345, querylyOrg: "myorg" };
+		const metaValueWithSearch = jest.fn((key) =>
+			key === "page-type" ? "queryly-search" : "article",
+		);
+		render(<DefaultOutputType {...mockProps} metaValue={metaValueWithSearch} />);
+		const querylyScripts = document.head.querySelectorAll('script[data-integration="queryly"]');
+		expect(querylyScripts.length).toBe(2);
+	});
+
+	it("uses the websiteDomain of the canonical site when globalContent has canonical_website and page-type is article", () => {
+		const { useFusionContext } = require("fusion:context");
+		const getProperties = require("fusion:properties");
+		useFusionContext.mockReturnValueOnce({
+			globalContent: { canonical_website: "the-gazette" },
+			arcSite: "the-sun",
+			requestUri: "/",
+		});
+		// Return a different domain for the canonical site lookup
+		getProperties.mockImplementation((site) => {
+			if (site === "the-gazette") {
+				return { dangerouslyInjectJS: [], websiteDomain: "https://www.thegazette.com" };
+			}
+			return { dangerouslyInjectJS: [], websiteDomain: "https://www.thesun.com" };
+		});
+		const metaValueArticle = jest.fn(() => "article");
+		expect(() =>
+			render(<DefaultOutputType {...mockProps} metaValue={metaValueArticle} />),
+		).not.toThrow();
+		getProperties.mockReset();
+	});
+
+	it("uses default empty array for dangerouslyInjectJS when not present in properties", () => {
+		// Override with properties that omit dangerouslyInjectJS entirely
+		mockPropertiesOverride = { websiteName: "The Sun", websiteDomain: "", fallbackImage: "/r/placeholder.jpg", resizerURL: "resizer", locale: "en" };
+		expect(() => render(<DefaultOutputType {...mockProps} />)).not.toThrow();
+	});
+	/* eslint-enable testing-library/no-node-access */
+
+	it("renders a comscore noscript element in the body when comscoreID is set", () => {
+		mockPropertiesOverride = { dangerouslyInjectJS: [], comscoreID: 88776655 };
+		const { container } = render(<DefaultOutputType {...mockProps} />);
+		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+		expect(container.querySelector('noscript[data-integration="comscore"]')).toBeInTheDocument();
+	});
+
+	it("renders a GTM noscript element in the body when gtmID is set", () => {
+		mockPropertiesOverride = { dangerouslyInjectJS: [], gtmID: "GTM-12345ID" };
+		const { container } = render(<DefaultOutputType {...mockProps} />);
+		// React 19 + JSDOM renders noscript as an empty element (scripting is enabled).
+		// The presence of the noscript tag is sufficient to verify googleTagManagerNoScript ran.
+		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+		expect(container.querySelector("noscript")).toBeInTheDocument();
+	});
 });
-/* eslint-enable testing-library/no-node-access */

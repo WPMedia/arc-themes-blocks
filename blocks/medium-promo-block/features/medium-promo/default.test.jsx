@@ -161,4 +161,156 @@ describe("the medium promo feature", () => {
 		render(<MediumPromo customFields={config} />);
 		expect(screen.getByText("January 30, 2020", { exact: false })).not.toBeNull();
 	});
+
+	it("falls back to parsed imageOverrideAuth when signing service returns nothing", () => {
+		useContent.mockReturnValueOnce(mockData).mockReturnValueOnce(null);
+		render(
+			<MediumPromo
+				customFields={{
+					showImage: true,
+					showHeadline: true,
+					imageOverrideURL: "https://example.com/image.jpg",
+					imageOverrideAuth: JSON.stringify({ 2: "auth-token" }),
+				}}
+			/>,
+		);
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
+	});
+
+	it("sets RESIZER_TOKEN_VERSION when resizedAuth has hash", () => {
+		useContent.mockReturnValueOnce(mockData).mockReturnValueOnce({ hash: "abc123" });
+		render(
+			<MediumPromo
+				customFields={{
+					showImage: true,
+					showHeadline: true,
+					imageOverrideURL: "https://example.com/image.jpg",
+				}}
+			/>,
+		);
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
+	});
+
+	it("should use content config values when itemContentConfig has contentConfigValues", () => {
+		render(
+			<MediumPromo
+				customFields={{
+					itemContentConfig: {
+						contentService: "ans-item",
+						contentConfigValues: { _id: "test-id" },
+					},
+					showHeadline: true,
+				}}
+			/>,
+		);
+		expect(screen.getByRole("heading", { name: mockData.headlines.basic })).not.toBeNull();
+	});
+
+	it("should render with editableDescription fallback when content has no description", () => {
+		useContent.mockReturnValueOnce({ ...mockData, description: undefined });
+		render(
+			<MediumPromo
+				customFields={{
+					showHeadline: true,
+					showDescription: true,
+				}}
+			/>,
+		);
+		expect(screen.getByRole("heading", { name: mockData.headlines.basic })).not.toBeNull();
+	});
+
+	it("should render with editableHeading fallback when content has no headlines basic", () => {
+		useContent.mockReturnValueOnce({ ...mockData, headlines: undefined });
+		render(
+			<MediumPromo
+				customFields={{
+					showHeadline: false,
+					showDescription: true,
+				}}
+			/>,
+		);
+		expect(screen.getByText(mockData.description.basic)).not.toBeNull();
+	});
+
+	it("should use ansImage for imageParams when no imageOverrideURL", () => {
+		render(
+			<MediumPromo
+				customFields={{
+					showImage: true,
+					imageRatio: "4:3",
+					showHeadline: true,
+				}}
+			/>,
+		);
+		expect(screen.getByRole("img")).not.toBeNull();
+	});
+
+	it("should use resized imageOverrideId when imageOverrideURL contains imageOverrideId", () => {
+		useContent.mockReturnValueOnce(mockData);
+		render(
+			<MediumPromo
+				customFields={{
+					showImage: true,
+					imageRatio: "4:3",
+					imageOverrideURL: "https://example.com/abc123/image.jpg",
+					imageOverrideId: "abc123",
+					imageOverrideAuth: '{"2":"token"}',
+				}}
+			/>,
+		);
+		expect(screen.getByRole("img")).not.toBeNull();
+	});
+
+	it("should render label icon when content type is gallery", () => {
+		useContent.mockReturnValueOnce({ ...mockData, type: "gallery" });
+		render(
+			<MediumPromo
+				customFields={{
+					showImage: true,
+					imageRatio: "4:3",
+					showHeadline: true,
+				}}
+			/>,
+		);
+		expect(screen.getByRole("img")).not.toBeNull();
+	});
+
+	it("should render label icon when content type is video", () => {
+		useContent.mockReturnValueOnce({ ...mockData, type: "video" });
+		render(
+			<MediumPromo
+				customFields={{
+					showImage: true,
+					imageRatio: "4:3",
+					showHeadline: true,
+				}}
+			/>,
+		);
+		expect(screen.getByRole("img")).not.toBeNull();
+	});
+
+	it("should render only date when hasAuthors is falsy", () => {
+		useContent.mockReturnValueOnce({ ...mockData, credits: { by: [] } });
+		render(
+			<MediumPromo
+				customFields={{
+					showByline: true,
+					showDate: true,
+				}}
+			/>,
+		);
+		expect(screen.getByText("January 30, 2020", { exact: false })).not.toBeNull();
+	});
+
+	it("should render only authors when showDate is false", () => {
+		render(
+			<MediumPromo
+				customFields={{
+					showByline: true,
+					showDate: false,
+				}}
+			/>,
+		);
+		expect(screen.getByText(/Example Author1/)).not.toBeNull();
+	});
 });

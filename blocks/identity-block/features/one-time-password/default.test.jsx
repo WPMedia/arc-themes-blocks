@@ -175,5 +175,9 @@ describe("Identity One Time Password Request Form - Arc Block", () => {
 
 		expect(await screen.findByText("identity-block.ota-ivalid-login-link")).not.toBeNull();
 		expect(await screen.findByText("identity-block.ota-ivalid-login-link-subheadline")).not.toBeNull();
+
+		// Clicking "get new link" after an invalid link should not throw
+		const getNewLinkBtn = screen.getByText("identity-block.ota-get-new-link");
+		expect(() => fireEvent.click(getNewLinkBtn)).not.toThrow();
 	});
 });

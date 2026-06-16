@@ -9,6 +9,7 @@ jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
 	Video: () => "video embed",
+	getPromoType: jest.fn((element) => element?.type || null),
 }));
 
 describe("the extra large promo feature", () => {
@@ -108,5 +109,50 @@ describe("the extra large promo feature", () => {
 		};
 		render(<ExtraLarge element={modifiedData} customFields={config} />);
 		expect(screen.getByText("video embed")).not.toBeNull();
+	});
+
+	it("should not render bottom border when showBottomBorderXL is false", () => {
+		const config = { showHeadlineXL: true, showBottomBorderXL: false };
+		render(<ExtraLarge element={mockData} customFields={config} />);
+		expect(screen.queryByRole("separator")).toBeNull();
+	});
+
+	it("should render bottom border when showBottomBorderXL is undefined", () => {
+		const config = { showHeadlineXL: true };
+		render(<ExtraLarge element={mockData} customFields={config} />);
+		expect(screen.getByRole("separator")).not.toBeNull();
+	});
+
+	it("should use empty formattedDate when display_date is invalid", () => {
+		const elementBadDate = { ...mockData, display_date: "not-a-date" };
+		const config = { showDateXL: true, showHeadlineXL: true };
+		render(<ExtraLarge element={elementBadDate} customFields={config} />);
+		expect(screen.queryByText("January 30, 2020", { exact: false })).toBeNull();
+	});
+
+	it("should use label for overline when labelDisplay is true and not sponsored", () => {
+		// mockData has label.basic.display = true, owner is not sponsored
+		const elementWithLabel = { ...mockData, owner: { sponsored: false } };
+		const config = { showOverlineXL: true };
+		render(<ExtraLarge element={elementWithLabel} customFields={config} />);
+		// Label text "Premium" should be shown via shouldUseLabel path
+		expect(screen.getByText("Premium")).not.toBeNull();
+	});
+
+	it("should use fallback image when element has no ANS image", () => {
+		const elementNoImage = { ...mockData, promo_items: {} };
+		const config = { showImageXL: true };
+		render(
+			<ExtraLarge element={elementNoImage} customFields={config} fallbackImage="/fallback.jpg" />,
+		);
+		const figure = screen.getByRole("figure");
+		expect(figure.innerHTML).toContain("fallback");
+	});
+
+	it("should render icon label when element type is gallery", () => {
+		const galleryElement = { ...mockData, type: "gallery" };
+		const config = { showImageXL: true };
+		render(<ExtraLarge element={galleryElement} customFields={config} />);
+		expect(screen.getByText("global.gallery-text")).not.toBeNull();
 	});
 });

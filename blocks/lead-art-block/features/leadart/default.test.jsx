@@ -286,4 +286,79 @@ describe("LeadArt", () => {
 		const { container } = render(<LeadArt customFields={{}} />);
 		expect(container).toBeEmptyDOMElement();
 	});
+
+	const imageContent = {
+		type: "image",
+		url: "https://example.com/test.jpg",
+		alt_text: "test image",
+		_id: "IMG1",
+		auth: { 2: "AUTH_STRING" },
+	};
+
+	it("registers and fires fullscreenchange listener when fullscreenElement is null", () => {
+		Object.defineProperty(document, "fullscreenEnabled", { value: true, configurable: true });
+		Object.defineProperty(document, "fullscreenElement", { value: null, configurable: true, writable: true });
+		const globalContent = { promo_items: { lead_art: imageContent } };
+		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
+		render(<LeadArt customFields={{}} />);
+		// Dispatching fullscreenchange exercises the exit-fullscreen handler
+		expect(() => document.dispatchEvent(new Event("fullscreenchange"))).not.toThrow();
+		Object.defineProperty(document, "fullscreenEnabled", { value: false, configurable: true });
+	});
+
+	it("registers and fires webkitfullscreenchange listener when webkitFullscreenElement is null", () => {
+		Object.defineProperty(document, "fullscreenEnabled", { value: false, configurable: true });
+		Object.defineProperty(document, "webkitFullscreenEnabled", { value: true, configurable: true });
+		Object.defineProperty(document, "webkitFullscreenElement", { value: null, configurable: true, writable: true });
+		const globalContent = { promo_items: { lead_art: imageContent } };
+		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
+		render(<LeadArt customFields={{}} />);
+		// Dispatching webkitfullscreenchange exercises the webkit exit-fullscreen handler
+		expect(() => document.dispatchEvent(new Event("webkitfullscreenchange"))).not.toThrow();
+		Object.defineProperty(document, "webkitFullscreenEnabled", {
+			value: undefined,
+			configurable: true,
+		});
+	});
+
+	it("uses promo_items.basic as fallback when lead_art is absent", () => {
+		// promo_items has no lead_art — should fall back to promo_items.basic
+		const globalContent = {
+			promo_items: {
+				basic: {
+					type: "raw_html",
+					content: "Fallback HTML content",
+					_id: "basic-id",
+				},
+			},
+		};
+		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
+		render(<LeadArt customFields={{}} />);
+		expect(screen.getByText("Fallback HTML content")).not.toBeNull();
+	});
+
+	it("renders image lead art with imageLoadingStrategy lazy", () => {
+		const globalContent = {
+			promo_items: {
+				lead_art: {
+					type: "image",
+					alt_text: "lazy loaded image",
+					auth: { 2: "AUTH" },
+					caption: "Cap",
+					subtitle: "Sub",
+					credits: {},
+				},
+			},
+		};
+		useFusionContext.mockReturnValue({ ...fusionContext, globalContent });
+		render(
+			<LeadArt
+				customFields={{
+					imageLoadingStrategy: "lazy",
+					imageRatio: "4:3",
+				}}
+			/>
+		);
+		expect(screen.getByAltText("lazy loaded image")).not.toBeNull();
+	});
 });

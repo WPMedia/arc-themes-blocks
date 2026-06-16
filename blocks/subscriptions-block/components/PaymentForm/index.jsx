@@ -139,7 +139,7 @@ function PaymentForm({
 
 	return (
 		<section className={`${className}__payment`}>
-			<form onSubmit={handleSubmit} className={`${className}__payment-form`}>
+			<form onSubmit={handleSubmit} className={`${className}__payment-form`} data-testid="payment-form">
 				<Grid className={`${className}__payment-information`}>
 					<Stack>
 						<Input

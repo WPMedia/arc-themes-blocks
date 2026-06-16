@@ -7,8 +7,18 @@ jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({ arcSite: "the-sun" })),
 }));
 
+jest.mock("fusion:content", () => ({
+	useContent: jest.fn(),
+	useEditableContent: jest.fn(() => ({
+		editableContent: () => ({ contentEditable: "true" }),
+		searchableField: () => ({}),
+	})),
+}));
+
+
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
+	getPromoType: jest.fn((element) => element?.type || null),
 }));
 
 const baseConfig = {
@@ -45,10 +55,9 @@ describe("small promo block", () => {
 	});
 
 	it("renders a placeholder image but no heading when headline is empty", () => {
-		const { container } = render(<Small element={elementEmpty} customFields={baseConfig} />);
+		render(<Small element={elementEmpty} customFields={baseConfig} />);
 		// Placeholder images render with alt="" (decorative) so they have role "none", not "img"
-		// eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-		expect(container.querySelector("img")).toBeInTheDocument();
+		expect(screen.getByAltText("")).toBeInTheDocument();
 		expect(screen.queryByRole("heading")).not.toBeInTheDocument();
 	});
 
@@ -74,5 +83,36 @@ describe("small promo block", () => {
 			/>,
 		);
 		expect(screen.queryByRole("separator")).not.toBeInTheDocument();
+	});
+
+	it("renders a separator when showBottomBorderSM is undefined (default true)", () => {
+		const { showBottomBorderSM: _, ...configWithoutBorder } = baseConfig;
+		render(<Small element={elementWithImage} customFields={configWithoutBorder} />);
+		expect(screen.getByRole("separator")).toBeInTheDocument();
+	});
+
+	it("renders an icon label when element type is gallery", () => {
+		const galleryElement = { ...elementWithImage, type: "gallery" };
+		render(<Small element={galleryElement} customFields={baseConfig} />);
+		expect(screen.getByTestId("icon-label")).toBeInTheDocument();
+	});
+
+	it("places image before heading when imagePosition is left", () => {
+		render(
+			<Small element={elementWithImage} customFields={{ ...baseConfig, imagePositionSM: "left" }} />,
+		);
+		const article = screen.getByRole("article");
+		expect(article.className).toContain("--left");
+	});
+
+	it("applies no position class when showImageSM or showHeadlineSM is false", () => {
+		render(
+			<Small
+				element={elementWithImage}
+				customFields={{ ...baseConfig, showImageSM: false }}
+			/>,
+		);
+		const article = screen.getByRole("article");
+		expect(article.className).not.toContain("--right");
 	});
 });

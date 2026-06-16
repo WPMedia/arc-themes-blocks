@@ -284,6 +284,57 @@ describe("FooterItem", () => {
   expect(screen.getByText("© 2025")).toBeInTheDocument();
   });
 
+  test("renders only facebook link when only facebookPage is provided", () => {
+    setup({
+      properties: {
+        facebookPage: "https://facebook.com/only",
+      },
+    });
+    const allLinks = screen.getAllByRole("link");
+    expect(allLinks).toHaveLength(1);
+    expect(allLinks[0]).toHaveAttribute("href", "https://facebook.com/only");
+    // Twitter and RSS icons not present
+    expect(screen.queryByTestId("Icon[data-icon='Twitter']")).toBeNull();
+  });
+
+  test("renders only twitter link when only twitterUsername is provided", () => {
+    setup({
+      properties: {
+        twitterUsername: "onlytwitter",
+      },
+    });
+    const allLinks = screen.getAllByRole("link");
+    expect(allLinks).toHaveLength(1);
+    expect(allLinks[0]).toHaveAttribute("href", "https://twitter.com/onlytwitter");
+  });
+
+  test("renders only rss link when only rssUrl is provided", () => {
+    setup({
+      properties: {
+        rssUrl: "/feed.xml",
+      },
+    });
+    const allLinks = screen.getAllByRole("link");
+    expect(allLinks).toHaveLength(1);
+    expect(allLinks[0]).toHaveAttribute("href", "/feed.xml");
+  });
+
+  test("uses empty string alt when lightBackgroundLogo used but no alt provided", () => {
+    setup({
+      properties: {
+        lightBackgroundLogo: "http://cdn.example.com/logo.png",
+        // lightBackgroundLogoAlt deliberately absent → falls back to || ""
+        lightBackgroundLogoAlt: undefined,
+        primaryLogoAlt: undefined,
+      },
+    });
+    // An img with empty alt gets role="presentation" in ARIA — query by alt text
+    const img = screen.getByAltText("");
+    expect(img).not.toBeNull();
+    expect(img).toHaveAttribute("src", "http://cdn.example.com/logo.png");
+    expect(img).toHaveAttribute("alt", "");
+  });
+
   test("calls useContent with expected params (service, merged query, filter)", () => {
     setup({
       props: makeProps({

@@ -195,4 +195,12 @@ describe("the links bar feature for the default output type", () => {
 
 		expect(screen.getByLabelText("Links")).not.toBeNull();
 	});
+
+	it("should render nothing when useContent returns null", () => {
+		useContent.mockReturnValueOnce(null);
+		render(
+			<LinksBar blockClassName="b-header-nav-chain" />
+		);
+		expect(screen.queryByRole("navigation")).toBeNull();
+	});
 });

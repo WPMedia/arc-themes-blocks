@@ -1,18 +1,82 @@
 [
-	{
-		"name": "Header Block",
-		"path": "/header-block/"
-	},
-	{
-		"name": "Small Promo Block",
-		"path": "/small-promo-block/"
-	},
-	{
-		"name": "Large Promo Block",
-		"path": "/large-promo-block/"
-	},
-	{
-		"name": "Top Table List Block",
-		"path": "/top-table-list-block/"
-	}
+  {
+    "name": "Small Promo Block",
+    "path": "/small-promo-block/"
+  },
+  {
+    "name": "Large Promo Block",
+    "path": "/large-promo-block/"
+  },
+  {
+    "name": "Top Table List Block",
+    "path": "/top-table-list-block/"
+  },
+  {
+    "name": "Header Block",
+    "path": "/header-block/"
+  },
+  {
+    "name": "Alert Bar Block",
+    "path": "/alert-bar-block/"
+  },
+  {
+    "name": "Article Body Block + Single Column Layout",
+    "path": "/article-body-block/single-column-layout/"
+  },
+  {
+    "name": "Article Body Block + Right Rail Layout",
+    "path": "/article-body-block/right-rail-layout/"
+  },
+  {
+    "name": "Article Body Block + Advanced Right Rail Layout",
+    "path": "/article-body-block/advanced-right-rail-layout/"
+  },
+  {
+    "name": "Article Tag Block",
+    "path": "/article-tag-block/"
+  },
+  {
+    "name": "Author Bio Block",
+    "path": "/author-bio-block/"
+  },
+  {
+    "name": "Byline Block",
+    "path": "/byline-block/"
+  },
+  {
+    "name": "Card List Block",
+    "path": "/card-list-block/"
+  },
+  {
+    "name": "Full Author Bio Block",
+    "path": "/full-author-bio-block/"
+  },
+  {
+    "name": "Date Block",
+    "path": "/date-block/"
+  },
+  {
+    "name": "Double Chain Block",
+    "path": "/double-chain-block/"
+  },
+  {
+    "name": "Divider Block",
+    "path": "/divider-block/"
+  },
+  {
+    "name": "Extra Large Manual Promo Block",
+    "path": "/extra-large-manual-promo-block/"
+  },
+  {
+    "name": "Extra Large Promo Block",
+    "path": "/extra-large-promo-block/"
+  },
+  {
+    "name": "Footer Block",
+    "path": "/footer-block/"
+  },
+  {
+    "name": "Gallery Block",
+    "path": "/gallery-block/"
+  }
 ]

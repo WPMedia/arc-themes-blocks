@@ -1,180 +1,118 @@
-describe("This test is disabled", () => {
-	it("should succeed", () => {
-		expect(true);
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import Small from "./small";
+
+jest.mock("fusion:context", () => ({
+	useFusionContext: jest.fn(() => ({ arcSite: "the-sun" })),
+}));
+
+jest.mock("fusion:content", () => ({
+	useContent: jest.fn(),
+	useEditableContent: jest.fn(() => ({
+		editableContent: () => ({ contentEditable: "true" }),
+		searchableField: () => ({}),
+	})),
+}));
+
+
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	getPromoType: jest.fn((element) => element?.type || null),
+}));
+
+const baseConfig = {
+	showHeadlineSM: true,
+	showImageSM: true,
+	showBottomBorderSM: true,
+	imagePositionSM: "right",
+};
+
+const elementWithImage = {
+	headlines: { basic: "title" },
+	promo_items: {
+		basic: { _id: "123", type: "image", url: "pic.jpg", auth: { 2: "ABC" } },
+	},
+	websites: { "the-sun": { website_url: "https://arcxp.com" } },
+};
+
+const elementEmpty = {
+	headlines: { basic: "" },
+	promo_items: {},
+	websites: { "the-sun": { website_url: "https://arcxp.com" } },
+};
+
+describe("small promo block", () => {
+	it("renders an image and headline when both are provided", () => {
+		render(<Small element={elementWithImage} customFields={baseConfig} />);
+		expect(screen.getByRole("img", { hidden: true })).toBeInTheDocument();
+		expect(screen.getByRole("heading")).toHaveTextContent("title");
+	});
+
+	it("renders a separator when showBottomBorderSM is true", () => {
+		render(<Small element={elementWithImage} customFields={baseConfig} />);
+		expect(screen.getByRole("separator")).toBeInTheDocument();
+	});
+
+	it("renders a placeholder image but no heading when headline is empty", () => {
+		render(<Small element={elementEmpty} customFields={baseConfig} />);
+		// Placeholder images render with alt="" (decorative) so they have role "none", not "img"
+		expect(screen.getByAltText("")).toBeInTheDocument();
+		expect(screen.queryByRole("heading")).not.toBeInTheDocument();
+	});
+
+	it("renders only the headline when showImageSM is false", () => {
+		render(<Small element={elementWithImage} customFields={{ ...baseConfig, showImageSM: false }} />);
+		expect(screen.getByRole("heading")).toHaveTextContent("title");
+		expect(screen.queryByRole("img", { hidden: true })).not.toBeInTheDocument();
+	});
+
+	it("renders only the image when showHeadlineSM is false", () => {
+		render(
+			<Small element={elementWithImage} customFields={{ ...baseConfig, showHeadlineSM: false }} />,
+		);
+		expect(screen.getByRole("img", { hidden: true })).toBeInTheDocument();
+		expect(screen.queryByRole("heading")).not.toBeInTheDocument();
+	});
+
+	it("does not render a separator when showBottomBorderSM is false", () => {
+		render(
+			<Small
+				element={elementWithImage}
+				customFields={{ ...baseConfig, showBottomBorderSM: false }}
+			/>,
+		);
+		expect(screen.queryByRole("separator")).not.toBeInTheDocument();
+	});
+
+	it("renders a separator when showBottomBorderSM is undefined (default true)", () => {
+		const { showBottomBorderSM: _, ...configWithoutBorder } = baseConfig;
+		render(<Small element={elementWithImage} customFields={configWithoutBorder} />);
+		expect(screen.getByRole("separator")).toBeInTheDocument();
+	});
+
+	it("renders an icon label when element type is gallery", () => {
+		const galleryElement = { ...elementWithImage, type: "gallery" };
+		render(<Small element={galleryElement} customFields={baseConfig} />);
+		expect(screen.getByTestId("icon-label")).toBeInTheDocument();
+	});
+
+	it("places image before heading when imagePosition is left", () => {
+		render(
+			<Small element={elementWithImage} customFields={{ ...baseConfig, imagePositionSM: "left" }} />,
+		);
+		const article = screen.getByRole("article");
+		expect(article.className).toContain("--left");
+	});
+
+	it("applies no position class when showImageSM or showHeadlineSM is false", () => {
+		render(
+			<Small
+				element={elementWithImage}
+				customFields={{ ...baseConfig, showImageSM: false }}
+			/>,
+		);
+		const article = screen.getByRole("article");
+		expect(article.className).not.toContain("--right");
 	});
 });
-
-// import React from "react";
-// import { mount } from "enzyme";
-
-// jest.mock("fusion:content", () => ({
-// 	useEditableContent: jest.fn(() => ({
-// 		editableContent: () => ({ contentEditable: "true" }),
-// 	})),
-// 	useContent: jest.fn(),
-// }));
-
-// jest.mock("fusion:context", () => ({
-// 	useFusionContext: jest.fn(() => ({
-// 		arcSite: "the-sun",
-// 	})),
-// }));
-
-// jest.mock("fusion:themes", () => jest.fn(() => ({})));
-
-// const config = {
-// 	showHeadlineSM: true,
-// 	showImageSM: true,
-// 	showBottomBorderSM: true,
-// 	imagePositionSM: "right",
-// };
-
-// describe("small image block", () => {
-// 	beforeAll(() => {
-// 		jest.mock("fusion:context", () => ({
-// 			useFusionContext: jest.fn(() => ({
-// 				arcSite: "the-sun",
-// 				globalContent: {},
-// 			})),
-// 		}));
-// 	});
-
-// 	afterAll(() => {
-// 		jest.resetModules();
-// 	});
-
-// 	it("must render title and image with full props", () => {
-// 		const itemTitle = "title";
-// 		const imageURL = "pic.jpg";
-
-// 		const element = {
-// 			headlines: {
-// 				basic: itemTitle,
-// 			},
-// 			promo_items: {
-// 				basic: {
-// 					_id: "123",
-// 					type: "image",
-// 					url: imageURL,
-// 					auth: {
-// 						2: "ABC",
-// 					},
-// 				},
-// 			},
-// 			websites: {
-// 				"the-sun": {
-// 					website_url: "https://arcxp.com",
-// 				},
-// 			},
-// 		};
-
-// 		const { default: Small } = require("./small");
-
-// 		const wrapper = mount(<Small element={element} customFields={config} />);
-
-// 		expect(wrapper.find("img").length).toBe(1);
-// 		expect(wrapper.find("Heading").first().text()).toContain(itemTitle);
-
-// 		expect(wrapper.find("hr").length).toBe(1);
-// 	});
-
-// 	it("must renders neither title nor image with empty props, renders placeholder image", () => {
-// 		const element = {
-// 			headlines: {
-// 				basic: "",
-// 			},
-// 			promo_items: {},
-// 			websites: {
-// 				"the-sun": {
-// 					website_url: "https://arcxp.com",
-// 				},
-// 			},
-// 		};
-// 		const { default: Small } = require("./small");
-
-// 		const wrapper = mount(<Small element={element} customFields={config} />);
-
-// 		expect(wrapper.find("h2").length).toBe(0);
-// 		expect(wrapper.find("img").length).toBe(1);
-// 		expect(wrapper.find("hr").length).toBe(1);
-// 	});
-
-// 	it("must render only title if showImageSM false", () => {
-// 		const itemTitle = "title";
-// 		const imageURL = "pic";
-
-// 		const element = {
-// 			headlines: {
-// 				basic: itemTitle,
-// 			},
-// 			promo_items: {
-// 				basic: {
-// 					_id: "123",
-// 					type: "image",
-// 					url: imageURL,
-// 					auth: {
-// 						2: "ABC",
-// 					},
-// 				},
-// 			},
-// 			websites: {
-// 				"the-sun": {
-// 					website_url: "https://arcxp.com",
-// 				},
-// 			},
-// 		};
-// 		const { default: Small } = require("./small");
-
-// 		const wrapper = mount(
-// 			<Small
-// 				element={element}
-// 				/* eslint-disable-next-line */
-// 				customFields={Object.assign({}, config, { showImageSM: false })}
-// 			/>
-// 		);
-
-// 		expect(wrapper.find("h2").length).toBe(1);
-// 		expect(wrapper.find("h2").text()).toContain(itemTitle);
-// 		expect(wrapper.find("img").length).toBe(0);
-// 		expect(wrapper.find("hr").length).toBe(1);
-// 	});
-
-// 	it("must render only image if showHeadlineSM false", () => {
-// 		const itemTitle = "title";
-// 		const imageURL = "pic";
-
-// 		const element = {
-// 			headlines: {
-// 				basic: itemTitle,
-// 			},
-// 			promo_items: {
-// 				basic: {
-// 					_id: "ID123",
-// 					type: "image",
-// 					url: imageURL,
-// 					auth: {
-// 						2: "AUTH123",
-// 					},
-// 				},
-// 			},
-// 			websites: {
-// 				"the-sun": {
-// 					website_url: "https://arcxp.com",
-// 				},
-// 			},
-// 		};
-// 		const { default: Small } = require("./small");
-
-// 		const wrapper = mount(
-// 			<Small
-// 				element={element}
-// 				/* eslint-disable-next-line */
-// 				customFields={Object.assign({}, config, { showHeadlineSM: false })}
-// 			/>
-// 		);
-
-// 		expect(wrapper.find("h2").length).toBe(0);
-// 		expect(wrapper.find("img").length).toBe(1);
-// 		expect(wrapper.find("hr").length).toBe(1);
-// 	});
-// });

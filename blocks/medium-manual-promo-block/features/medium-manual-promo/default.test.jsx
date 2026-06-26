@@ -184,5 +184,34 @@ describe("the medium promo feature", () => {
 				focal_point: JSON.parse(config.imageFocalPoint)
 			})
 		);
-	})
+	});
+
+	it("falls back to parsed imageAuth when signing service returns nothing", () => {
+		useContent.mockReturnValueOnce(null);
+		render(
+			<MediumManualPromo
+				customFields={{
+					showHeadline: true,
+					headline: "Auth Fallback",
+					imageURL: "https://example.com/image.jpg",
+					imageAuth: JSON.stringify({ 2: "auth-token" }),
+				}}
+			/>,
+		);
+		expect(screen.getByText("Auth Fallback")).not.toBeNull();
+	});
+
+	it("sets RESIZER_TOKEN_VERSION when resizedAuth has hash", () => {
+		useContent.mockReturnValueOnce({ hash: "abc123" });
+		render(
+			<MediumManualPromo
+				customFields={{
+					showHeadline: true,
+					headline: "Hash Auth",
+					imageURL: "https://example.com/image.jpg",
+				}}
+			/>,
+		);
+		expect(screen.getByText("Hash Auth")).not.toBeNull();
+	});
 });

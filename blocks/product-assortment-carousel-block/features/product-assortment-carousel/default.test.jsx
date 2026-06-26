@@ -276,6 +276,19 @@ describe("Product Assortment Carousel", () => {
 		expect(screen.getAllByRole("presentation", { hidden: true }).length).toBe(4);
 	});
 
+	it("fetches content using algolia-assortment source when assortmentCondition is provided", () => {
+		useContent.mockReturnValue(mockContent);
+		render(
+			<ProductAssortmentCarousel
+				customFields={{
+					assortmentCondition: JSON.stringify({ pattern: "category:shoes", context: "pdp" }),
+					assortmentIndex: "products_index",
+				}}
+			/>,
+		);
+		expect(screen.getAllByRole("presentation", { hidden: true }).length).toBeGreaterThan(0);
+	});
+
 	it("should generate product URL", () => {
 		const mockUrl = "a-url";
 		useContent.mockReturnValue([

@@ -7,6 +7,8 @@ import {
 	generateNavComponentPropType,
 	generateNavComponentIndexPropType,
 	ensureTrailingSlash,
+	hasUserConfiguredNavItems,
+	getNavWidgetType,
 } from "./nav-helper";
 
 describe("nav-helper", () => {
@@ -89,6 +91,50 @@ describe("nav-helper", () => {
 				name: "If custom, position of Left Component 1 - Desktop",
 				required: false,
 			});
+		});
+	});
+
+	describe("hasUserConfiguredNavItems()", () => {
+		it("returns false when no customFields provided", () => {
+			expect(hasUserConfiguredNavItems({})).toBe(false);
+		});
+
+		it("returns true when a widget is configured to a non-default value", () => {
+			const key = getNavComponentPropTypeKey("left", "desktop", 1);
+			const defaultValue = getNavComponentDefaultSelection(key);
+			const nonDefault = defaultValue === "SectionNav" ? "Logo" : "SectionNav";
+			const result = hasUserConfiguredNavItems({ [key]: nonDefault });
+			expect(result).toBe(true);
+		});
+
+		it("returns true on first match and short-circuits remaining checks", () => {
+			// Configure multiple non-default items to exercise the short-circuit path
+			const key1 = getNavComponentPropTypeKey("left", "desktop", 1);
+			const key2 = getNavComponentPropTypeKey("left", "desktop", 2);
+			const default1 = getNavComponentDefaultSelection(key1);
+			const default2 = getNavComponentDefaultSelection(key2);
+			const nonDefault1 = default1 === "SectionNav" ? "Logo" : "SectionNav";
+			const nonDefault2 = default2 === "SectionNav" ? "Logo" : "SectionNav";
+			const result = hasUserConfiguredNavItems({
+				[key1]: nonDefault1,
+				[key2]: nonDefault2,
+			});
+			expect(result).toBe(true);
+		});
+	});
+
+	describe("getNavWidgetType()", () => {
+		it("returns the value from customFields for a given key", () => {
+			const key = getNavComponentPropTypeKey("left", "desktop", 1);
+			const result = getNavWidgetType(key, { [key]: "Logo" });
+			expect(result).toBe("Logo");
+		});
+
+		it("returns default value when key not in customFields", () => {
+			const key = getNavComponentPropTypeKey("left", "desktop", 1);
+			const defaultValue = getNavComponentDefaultSelection(key);
+			const result = getNavWidgetType(key, {});
+			expect(result).toBe(defaultValue);
 		});
 	});
 

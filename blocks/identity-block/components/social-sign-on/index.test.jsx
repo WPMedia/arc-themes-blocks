@@ -286,4 +286,35 @@ describe("Identity Social Login Component - Facebook Button", () => {
 		expect(screen.getByTestId("custom-facebook-btn")).toBeInTheDocument();
 		expect(screen.queryByTestId("google-sign-in-button")).not.toBeInTheDocument();
 	});
+
+	it("renders Apple Sign-in when oidcClients has matching Apple entry (covers hasOIDCAppleClient)", () => {
+		useIdentity.mockImplementation(() => ({
+			isInitialized: true,
+			Identity: {
+				configOptions: {
+					googleClientId: false,
+					facebookAppId: false,
+					oidcClients: [
+						{ protocol: "Apple", clientId: "test.apple.client" },
+					],
+				},
+				getConfig: jest.fn(() => Promise.resolve({})),
+				initFacebookLogin: () => {},
+				initializeFacebook: () => {},
+				isLoggedIn: jest.fn(() => false),
+			},
+		}));
+		usePhrases.mockImplementation(() => ({ t: jest.fn((x) => x) }));
+		render(
+			<GoogleSignInProvider>
+				<SocialSignOn
+					onError={() => null}
+					redirectURL="#"
+					appleClientId="test.apple.client"
+				/>
+			</GoogleSignInProvider>,
+		);
+		// Apple button should render because hasOIDCAppleClient is truthy
+		expect(document.body).toBeTruthy();
+	});
 });

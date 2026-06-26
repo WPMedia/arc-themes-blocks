@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
+import getProperties from "fusion:properties";
 import { isServerSide } from "@wpmedia/arc-themes-components";
 import mockConsole from "jest-mock-console";
 
@@ -264,6 +265,42 @@ describe("The simple-list-block", () => {
 			expect(screen.queryByText("Story with video as the Lead Art")).not.toBeInTheDocument();
 
 			unmount();
+		});
+	});
+
+	describe("getFallbackImageURL when fallbackImage already has http", () => {
+		it("should use the fallbackImage URL directly without calling pagebuilderURL", () => {
+			const mockPagebuilderURL = jest.fn((x) => x);
+			useFusionContext.mockReturnValueOnce({
+				arcSite: "the-sun",
+				contextPath: "pf",
+				pagebuilderURL: mockPagebuilderURL,
+				isAdmin: false,
+			});
+
+			getProperties.mockReturnValueOnce({
+				fallbackImage: "http://cdn.example.com/placeholder.jpg",
+				resizerURL: "http://url.com/",
+			});
+
+			const customFields = { listContentConfig, showHeadline: true, showImage: true };
+			render(<SimpleList customFields={customFields} />);
+
+			// pagebuilderURL should NOT be called for the fallback image since it already has http
+			expect(mockPagebuilderURL).not.toHaveBeenCalled();
+		});
+	});
+
+	describe("SimpleList with title renders using HeadingSection wrapper", () => {
+		it("should render with HeadingSection wrapper when title is provided", () => {
+			const customFields = {
+				listContentConfig,
+				title: "My Title",
+				showHeadline: true,
+				showImage: true,
+			};
+			render(<SimpleList customFields={customFields} />);
+			expect(screen.getByText("My Title")).toBeInTheDocument();
 		});
 	});
 });

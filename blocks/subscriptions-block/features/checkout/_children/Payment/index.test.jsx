@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { Elements, useElements } from "@stripe/react-stripe-js";
+import { Elements, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
 import Payment from "./index";
@@ -106,6 +106,7 @@ jest.mock("@stripe/react-stripe-js", () => ({
 	__esModule: true,
 	...jest.requireActual("@stripe/react-stripe-js"),
 	useElements: jest.fn(),
+	useStripe: jest.fn(),
   }));
 
 describe("Payment component", () => {
@@ -168,5 +169,70 @@ describe("Payment component", () => {
         fireEvent.click(button);
 
         await waitFor(() => expect(setIsOpenMock).toHaveBeenCalled());
+	});
+
+	it("triggers stripe form validation when StripeIntents form is submitted", async () => {
+		const createPaymentMethodMock = jest.fn().mockResolvedValue({
+			error: undefined,
+			paymentMethod: { id: "pm_test_123" },
+		});
+
+		useStripe.mockReturnValue({
+			createPaymentMethod: createPaymentMethodMock,
+			paymentRequest: jest.fn(),
+		});
+
+		useElements.mockReturnValue({
+			getElement: jest.fn().mockReturnValue({}),
+		});
+
+		const setIsOpenMock = jest.fn();
+		const setIsCompleteMock = jest.fn();
+		const setPaymentMethodMock = jest.fn();
+
+		render(
+			<Elements stripe={stripePromise}>
+				<Payment
+					stripeInstance={{}}
+					paypal={paypal}
+					customFields={customFields}
+					paymentOptionSelected="StripeIntents"
+					order={order}
+					setIsComplete={setIsCompleteMock}
+					setIsOpen={setIsOpenMock}
+					setPaymentMethod={setPaymentMethodMock}
+					setPaymentMethodAppleGooglePay={jest.fn()}
+				/>
+			</Elements>,
+		);
+
+		const button = screen.getByText("checkout-block.continue");
+		fireEvent.click(button);
+
+		await waitFor(() => expect(createPaymentMethodMock).toHaveBeenCalled());
+	});
+
+	it("moves to review step when stripe payment method is successfully set", async () => {
+		const setIsOpenMock = jest.fn();
+		const setIsCompleteMock = jest.fn();
+
+		render(
+			<Payment
+				paypal={paypal}
+				customFields={customFields}
+				paymentOptionSelected="StripeIntents"
+				order={order}
+				paymentMethod={{ id: "pm_test_123" }}
+				setIsComplete={setIsCompleteMock}
+				setIsOpen={setIsOpenMock}
+			/>,
+		);
+
+		await waitFor(() =>
+			expect(setIsOpenMock).toHaveBeenCalledWith(expect.any(Function)),
+		);
+		await waitFor(() =>
+			expect(setIsCompleteMock).toHaveBeenCalledWith(expect.any(Function)),
+		);
 	});
 });

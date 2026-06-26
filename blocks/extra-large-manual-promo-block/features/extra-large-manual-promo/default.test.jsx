@@ -179,5 +179,18 @@ describe("the extra large promo feature", () => {
 				focal_point: JSON.parse(config.imageFocalPoint)
 			})
 		);
-	})
+	});
+
+	it("falls back to parsed imageAuth when signing service returns nothing", () => {
+		useContent.mockReturnValueOnce(null); // signing service call returns null
+		const config = {
+			showHeadline: true,
+			headline: "Auth Fallback Test",
+			imageURL: "https://example.com/image.jpg",
+			imageAuth: JSON.stringify({ 2: "auth-token" }),
+			// no imageId → resizedImage = false, signing service IS called
+		};
+		render(<ExtraLargeManualPromo customFields={config} />);
+		expect(screen.getByText("Auth Fallback Test")).not.toBeNull();
+	});
 });

@@ -190,10 +190,6 @@
     "focus-trap-react": "^10.2.3",
     "use-debounce": "^10.0.0"
   },
-  "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
   "overrides": {
     "stylelint-config-prettier": {
       "stylelint": "$stylelint"

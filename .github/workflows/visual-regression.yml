@@ -1,115 +1,186 @@
-name: Visual Regression - Deployment Comparison
+name: Visual Regression (reusable)
+
+# Reusable visual-regression pipeline shared across the arcxp org.
+#
+# Lives in arcxp/themes-blocks. Callers invoke it with:
+#   jobs:
+#     vr:
+#       uses: arcxp/themes-blocks/.github/workflows/visual-regression.yml@<ref>
+#       with:
+#         engine_version: <canary-tag>   # default: latest
+#         link_blocks: false             # true = link local themes blocks
+#       secrets:
+#         CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+#         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+#
+# (Private-repo reuse must be enabled in themes-blocks' Actions settings.)
+#
+# Baseline   = live deployed pages (rendered by the CDN) — kept from the existing action.
+# Comparison = the bundle running locally in the dev container.
+# Two intended usages:
+#   - engine repo:   engine_version=<canary>, link_blocks=false  -> catch engine regressions
+#   - themes change: engine_version=latest,   link_blocks=true   -> catch block regressions
 
 on:
-  # TODO: Remove push trigger after testing — only workflow_dispatch should remain
-  push:
-    branches:
-      - playwright-chromatic-action
-  workflow_dispatch:
+  workflow_call:
     inputs:
+      engine_version:
+        description: "Fusion engine release / image tag to render with"
+        type: string
+        required: false
+        default: "latest"
+      link_blocks:
+        description: "Link this repo's local themes blocks (true) or use published blocks (false)"
+        type: boolean
+        required: false
+        default: false
+      # --- Baseline (live deployed pages) — carried over from the existing action. ---
+      # TODO confirm whether these should stay inputs or be hardcoded constants.
       base_url:
-        description: "Base URL (without path or d parameter)"
-        required: true
+        description: "Baseline CDN base URL (no path / query)"
+        type: string
+        required: false
         default: "https://themesinternal-the-gazette-sandbox.web.arc-cdn.net"
       url_params:
-        description: "Query parameters appended to all URLs"
-        required: true
-        default: "_website=daily-intelligencer&mxId=0f3c88a6"
-      deployment_id:
-        description: "Deployment ID for comparison (appended as d= parameter)"
+        description: "Query params appended to BOTH local and baseline URLs (only the host differs)"
+        type: string
         required: false
-        default: "11"
+        default: "_website=the-gazette&mxId=0f3c88a6"
+      # --- which themes-blocks ref to check out (the bundle + devcontainer live here) ---
+      # TODO confirm default ref (release branch vs the @<ref> used in `uses:`).
+      themes_ref:
+        description: "Ref of arcxp/themes-blocks to check out for the bundle"
+        type: string
+        required: false
+        default: "arc-themes-release-version-4.1.0"
+    secrets:
+      CHROMATIC_PROJECT_TOKEN:
+        required: true
+      SLACK_WEBHOOK_URL:
+        required: true
+      # Caller-owned: a token for cross-repo themes-blocks checkout and/or the
+      # .npmrc used to install @wpmedia blocks during the bundle build.
+      # PACKAGES_TOKEN:
+      #   required: false
 
 jobs:
-  compare:
+  visual-regression:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://themesinternal-the-gazette-sandbox.web.arc-cdn.net' }}
-      URL_PARAMS: ${{ github.event.inputs.url_params || '_website=daily-intelligencer&mxId=0f3c88a6' }}
-      DEPLOYMENT_ID: ${{ github.event.inputs.deployment_id || '11' }}
+      ENGINE_VERSION: ${{ inputs.engine_version }}
+      LINK_BLOCKS: ${{ inputs.link_blocks }}
+      BASE_URL: ${{ inputs.base_url }}
+      # Same path + query for both renders; only the host differs.
+      URL_PARAMS: ${{ inputs.url_params }}
+      # PORT defaults to 80 (compose maps ${PORT:-80}:8080), CONTEXT_PATH defaults to "pf".
+      LOCAL_BASE_URL: "http://localhost/pf"
+      # In-container checkout path (devcontainer workspaceFolder).
+      THEMES_BLOCKS_REPO: "/workspaces/themes-blocks"
       CHROMATIC_BRANCH: visual-regression-${{ github.run_id }}
     steps:
-      - name: Checkout repository
+      - name: Checkout themes-blocks (the bundle + devcontainer live here)
         uses: actions/checkout@v4
         with:
+          repository: arcxp/themes-blocks
+          ref: ${{ inputs.themes_ref }}
           fetch-depth: 0
+          # token: ${{ secrets.PACKAGES_TOKEN }}   # TODO cross-repo private checkout
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          registry-url: "https://npm.pkg.github.com"
+      # ====================== HOST SETUP ===================================
+      - name: Setup Node + install deps + Playwright (host)
+        run: |
+          # setup-node (.nvmrc), npm ci, npm install playwright,
+          # npx playwright install --with-deps chromium
+          echo "TODO host node + playwright setup"
 
-      - name: Cache Node Modules
-        id: cache
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('package-lock.json') }}
+      - name: Generate stories from pages config (host)
+        run: |
+          echo "TODO node visual-regression/generate-stories.mjs"
 
-      - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+      # ============ BASELINE: live deployed pages (CDN, host) ==============
+      - name: Capture baseline (live deployed) screenshots (host)
+        run: |
+          # Page list comes from visual-regression/pages.json, via capture.mjs.
+          echo "TODO node visual-regression/capture.mjs \"$BASE_URL\" \"$URL_PARAMS\""
+
+      - name: Build + publish baseline to Chromatic (host)
+        run: |
+          # storybook build, then chromatic --auto-accept-changes --exit-zero-on-changes
+          echo "TODO build baseline storybook + publish (auto-accept)"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 
-      - name: Install Playwright
+      # ============ COMPARISON PREP (host) =================================
+      # --- Step 5: blocks.json (fetched + patched; themes version pinned in step 4) ---
+      - name: Generate blocks.json (host)
         run: |
-          npm install playwright
-          npx playwright install --with-deps chromium
+          # Pulls .../arcxp/Themes-V2-Starter/refs/heads/main/blocks.json.
+          # The themes-blocks version is whatever its themesReleaseVersion declares
+          # (currently 4.1.0) — the single source of truth, not overridden.
+          echo "TODO node visual-regression/generate-blocks-json.mjs"
 
-      - name: Create temp branch for Chromatic comparison
+      # --- Step 2: generate the Fusion env file ----------------------------
+      - name: Generate Fusion env file (host)
         run: |
-          git checkout -b $CHROMATIC_BRANCH
-          git config user.email "github-actions@github.com"
-          git config user.name "GitHub Actions"
+          # Author as .env-example in dev (a real .env trips the killswitch); the CI
+          # step writes the real .env on the runner. Contents (conditional):
+          #   - FUSION_RELEASE=<engine_version>        ONLY when engine_version != latest
+          #   - THEMES_BLOCKS_REPO=<in-container path> ONLY when link_blocks=true
+          echo "TODO write visual-regression/.env on the runner"
 
-      - name: Generate stories from pages config
-        run: node visual-regression/generate-stories.mjs
-
-      # --- Baseline ---
-      - name: Capture baseline screenshots
-        run: node visual-regression/capture.mjs "$BASE_URL" "$URL_PARAMS"
-
-      - name: Commit baseline screenshots
+      # --- Registry auth so the bundle build can install the blocks -------
+      # Required in BOTH modes (link_blocks=false still installs published
+      # @wpmedia blocks). Credential wiring is caller-owned (TODO: you).
+      - name: Configure registry auth (.npmrc) (host)
         run: |
-          git add -f visual-regression/screenshots/ visual-regression/stories/
-          git commit -m "visual regression baseline"
+          # TODO write visual-regression/.npmrc with @wpmedia registry + token
+          echo "TODO .npmrc for @wpmedia package installs"
 
-      - name: Build baseline Storybook
-        run: npx storybook build --config-dir visual-regression/.storybook -o visual-regression/storybook-static
-
-      - name: Publish baseline to Chromatic
+      # --- Step 3: stage the PageBuilder data-restore bundle ---------------
+      # Fusion restores any mongodump found under visual-regression/data/restore/.
+      - name: Move restore bundle into data/restore/ (host)
         run: |
-          npx chromatic \
-            --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} \
-            --storybook-build-dir=visual-regression/storybook-static \
-            --branch-name=$CHROMATIC_BRANCH \
-            --auto-accept-changes \
-            --exit-zero-on-changes \
-            --allow-console-errors
+          mkdir -p visual-regression/data/restore
+          # TODO confirm committed source path (move the .tar.gz into place).
+          echo "TODO mv themesinternal-sandbox-0f3c88a6-local.tar.gz visual-regression/data/restore/"
 
-      # --- Comparison ---
-      - name: Capture comparison screenshots
-        run: node visual-regression/capture.mjs "$BASE_URL" "$URL_PARAMS" "$DEPLOYMENT_ID"
+      # ===== Step 1 + COMPARISON capture: Fusion in the dev container ======
+      # Only Fusion (and the local Playwright capture, since it must reach the
+      # in-container localhost) runs here. Screenshots land in the mounted
+      # workspace, so host steps can publish them afterwards.
+      - name: Render locally + capture comparison (dev container)
+        uses: devcontainers/ci@v0.3
+        with:
+          push: never
+          # TODO confirm Docker mode (DooD vs DinD) so fusion's compose port is reachable.
+          runCmd: |
+            # link_blocks is the ONLY toggle:
+            #   false -> npx fusion start              (published blocks at themesReleaseVersion)
+            #   true  -> npx fusion start -f -l         (-l links ALL blocks in blocks.json from
+            #                                            THEMES_BLOCKS_REPO; -f forces webpack rebuild)
+            # start Fusion (background) -> wait for $LOCAL_BASE_URL to render
+            #   -> node visual-regression/capture.mjs "$LOCAL_BASE_URL" "$URL_PARAMS"
+            echo "TODO fusion start (+ -f -l if linking) and capture localhost"
 
-      - name: Commit comparison screenshots
+      # ============ COMPARISON PUBLISH (host) ==============================
+      - name: Build + publish comparison to Chromatic (host)
         run: |
-          git add -f visual-regression/screenshots/
-          git commit --allow-empty -m "visual regression comparison"
+          # storybook build, then chromatic (diff comparison vs baseline)
+          echo "TODO build comparison storybook + publish"
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 
-      - name: Build comparison Storybook
-        run: npx storybook build --config-dir visual-regression/.storybook -o visual-regression/storybook-static
-
-      - name: Publish comparison to Chromatic
-        run: |
-          npx chromatic \
-            --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} \
-            --storybook-build-dir=visual-regression/storybook-static \
-            --branch-name=$CHROMATIC_BRANCH \
-            --allow-console-errors
-
-      - name: Print Chromatic results
+      # --- Notify ------------------------------------------------------------
+      - name: Notify Slack
         if: always()
-        run: |
-          echo "Check Chromatic dashboard for branch: $CHROMATIC_BRANCH"
+        uses: slackapi/slack-github-action@v2
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: webhook-trigger
+          payload: |
+            {
+              "status": "${{ job.status }}",
+              "repo": "${{ github.repository }}",
+              "run_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            }

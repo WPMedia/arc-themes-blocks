@@ -1,0 +1,14 @@
+{
+  "name": "@wpmedia/arc-themes-blocks-visual-regression",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Local PageBuilder (Fusion) project used to render arc-themes-blocks pages in a container for visual regression testing.",
+  "scripts": {
+    "fusion": "fusion",
+    "start": "fusion start -l",
+    "blocks": "node generate-blocks-json.mjs"
+  },
+  "devDependencies": {
+    "@arc-fusion/cli": "^3.3.0"
+  }
+}

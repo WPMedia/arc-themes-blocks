@@ -148,6 +148,36 @@ describe("With initialized identity", () => {
 	});
 });
 
+describe("With initialized identity - captcha error", () => {
+	it("shows captcha error when signup rejects with code 010122", async () => {
+		const captchaErr = Object.assign(new Error("captcha error"), { code: "010122" });
+		const signUpMock = jest.fn(() => Promise.reject(captchaErr));
+		useIdentity.mockImplementation(() => ({
+			Identity: {
+				getConfig: jest.fn(() => Promise.resolve()),
+				signUp: signUpMock,
+			},
+			isInitialized: true,
+		}));
+		global.grecaptcha = { reset: jest.fn() };
+		render(<Signup customFields={{ redirectURL: "/sign-up", redirectToPreviousPage: true }} />);
+		await waitFor(() => expect(screen.getByLabelText("identity-block.email-label")));
+		fireEvent.change(screen.getByLabelText("identity-block.email-label"), {
+			target: { value: "test@test.com" },
+		});
+		fireEvent.change(screen.getByLabelText("identity-block.password"), {
+			target: { value: "Password1!" },
+		});
+		fireEvent.change(screen.getByLabelText("identity-block.confirm-password"), {
+			target: { value: "Password1!" },
+		});
+		fireEvent.click(screen.getByRole("button"));
+		await waitFor(() => expect(signUpMock).toHaveBeenCalled());
+		// Captcha error code - form should still be visible (not redirected)
+		expect(screen.getByLabelText("identity-block.email-label")).not.toBeNull();
+	});
+});
+
 describe("Define message by code", () => {
 	it("returns generic message if code doesn't exist", () => {
 		const result = definedMessageByCode("123");

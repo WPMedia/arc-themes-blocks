@@ -71,7 +71,7 @@ const Small = (props) => {
 			<MediaItem>
 				<Image {...imageParams} />
 				{labelIconName ? (
-					<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
+					<div className={`${BLOCK_CLASS_NAME}__icon_label`} data-testid="icon-label">
 						<Icon name={labelIconName} />
 					</div>
 				) : null}

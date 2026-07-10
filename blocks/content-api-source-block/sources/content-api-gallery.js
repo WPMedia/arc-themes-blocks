@@ -1,6 +1,5 @@
 import contentAPI from "./content-api";
 
-export default {
-	...contentAPI,
-	searchable: "gallery",
-};
+const contentAPIGallery = { ...contentAPI, searchable: "gallery" };
+
+export default contentAPIGallery;

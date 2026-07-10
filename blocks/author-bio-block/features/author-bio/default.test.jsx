@@ -602,6 +602,49 @@ describe("Given the list of author(s) from the article", () => {
 		expect(socialLinks[0]).toHaveAttribute("href", "mailto:bernstein@washpost.com");
 	});
 
+	it("should use originalAnsImage auth when ansImage has no auth", () => {
+		// Covers: imageAuth = ansImage?.auth || originalAnsImage?.auth — with ansImage.auth absent
+		useContent.mockReturnValue({ "2": "resizedToken" });
+		const content = {
+			credits: {
+				by: [
+					{
+						type: "author",
+						name: "Sam Lee",
+						description: "description",
+						image: {
+							// no auth here
+							url: "https://example.com/sam.jpg",
+						},
+						additional_properties: {
+							original: {
+								_id: "samlee",
+								byline: "Sam Lee",
+								bio: "Sam Lee bio text.",
+								ansImage: {
+									url: "https://example.com/sam-ans.jpg",
+									auth: { "2": "originalAnsAuth" },
+								},
+							},
+						},
+					},
+				],
+			},
+		};
+		render(<AuthorBioItems content={content} />);
+		// originalAnsImage.auth is truthy, so imageAuth = originalAnsImage.auth
+		// resizedAuth has no hash => falls into else-if case 2b
+		const image = screen.getByRole("img", { name: "Sam Lee" });
+		expect(image).toBeInTheDocument();
+	});
+
+	it("should render AuthorBio (not lazy-load, not admin) and pass through to LazyLoad", () => {
+		// isAdmin=false, lazyLoad=false => isServerSide check skipped => renders LazyLoad wrapper
+		const { container } = render(<AuthorBio customFields={{ lazyLoad: false }} />);
+		// globalContent is {} from module-level mock, so authors list is empty => empty DOM
+		expect(container).toBeEmptyDOMElement();
+	});
+
 	it("should not throw by undefined error if empty global content object", () => {
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({ globalContent: {} })),

@@ -1,6 +1,5 @@
 import contentAPI from "./content-api";
 
-export default {
-	...contentAPI,
-	searchable: "video",
-};
+const contentAPIVideo = { ...contentAPI, searchable: "video" };
+
+export default contentAPIVideo;

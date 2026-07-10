@@ -341,6 +341,21 @@ describe("ad-helper", () => {
 			expect(sectionPath).toBeDefined();
 			expect(sectionPath).toBe("search");
 		});
+
+		it("returns the section ID when it is a section page", () => {
+			const sectionPath = getSectionPath(SECTION_MOCK_PROPS);
+			expect(sectionPath).toBeDefined();
+			expect(sectionPath).toBe(SECTION_MOCK._id);
+		});
+
+		it('returns empty string when it is neither a content page nor a section page', () => {
+			const sectionPath = getSectionPath({
+				globalContent: { type: "unsupported", node_type: "other" },
+				arcSite,
+			});
+			expect(sectionPath).toBeDefined();
+			expect(sectionPath).toBe("");
+		});
 	});
 
 	describe("getSectionID", () => {

@@ -142,4 +142,29 @@ describe("the article tag block", () => {
 			expect(container).toBeEmptyDOMElement();
 		});
 	});
+
+	describe("when lazyLoad is false and not on server (renders LazyLoad wrapper)", () => {
+		afterEach(() => {
+			jest.resetModules();
+		});
+
+		beforeEach(() => {
+			const { isServerSide } = require("@wpmedia/arc-themes-components");
+			isServerSide.mockReturnValue(false);
+			useFusionContext.mockReturnValue({
+				arcSite: "the-sun",
+				isAdmin: false,
+				globalContent: {
+					taxonomy: {
+						tags: [{ text: "tag one", slug: "tag-one" }],
+					},
+				},
+			});
+		});
+
+		it("should render tags through the LazyLoad wrapper when not lazy loading", () => {
+			render(<ArticleTags customFields={{ lazyLoad: false }} />);
+			expect(screen.getByText("tag one")).toBeInTheDocument();
+		});
+	});
 });

@@ -1,14 +1,17 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-checkout {
+	@include scss.block-components("checkout");
+	@include scss.block-properties("checkout");
+
 	&__main {
+		@include scss.block-components("checkout-main");
+		@include scss.block-properties("checkout-main");
+
 		&-full {
 			@include scss.block-components("checkout-main-full");
 			@include scss.block-properties("checkout-main-full");
 		}
-
-		@include scss.block-components("checkout-main");
-		@include scss.block-properties("checkout-main");
 	}
 
 	&__section {
@@ -22,6 +25,9 @@
 	}
 
 	&__card {
+		@include scss.block-components("checkout-card");
+		@include scss.block-properties("checkout-card");
+
 		&-children-div {
 			@include scss.block-components("checkout-card-children-div");
 			@include scss.block-properties("checkout-card-children-div");
@@ -33,13 +39,13 @@
 		}
 
 		&-summary {
+			@include scss.block-components("checkout-card-summary");
+			@include scss.block-properties("checkout-card-summary");
+
 			&-icon {
 				@include scss.block-components("checkout-card-summary-icon");
 				@include scss.block-properties("checkout-card-summary-icon");
 			}
-
-			@include scss.block-components("checkout-card-summary");
-			@include scss.block-properties("checkout-card-summary");
 		}
 
 		&-closed {
@@ -58,7 +64,13 @@
 		}
 
 		&__payment {
+			@include scss.block-components("checkout-payment");
+			@include scss.block-properties("checkout-payment");
+
 			&-form {
+				@include scss.block-components("checkout-payment-form");
+				@include scss.block-properties("checkout-payment-form");
+
 				&--stripe-input-container {
 					@include scss.block-components("checkout-payment-form--stripe-input-container");
 					@include scss.block-properties("checkout-payment-form--stripe-input-container");
@@ -108,22 +120,13 @@
 					@include scss.block-components("checkout-payment-form--border-right");
 					@include scss.block-properties("checkout-payment-form--border-right");
 				}
-
-				@include scss.block-components("checkout-payment-form");
-				@include scss.block-properties("checkout-payment-form");
 			}
 
 			&-information {
 				@include scss.block-components("checkout-payment-information");
 				@include scss.block-properties("checkout-payment-information");
 			}
-
-			@include scss.block-components("checkout-payment");
-			@include scss.block-properties("checkout-payment");
 		}
-
-		@include scss.block-components("checkout-card");
-		@include scss.block-properties("checkout-card");
 	}
 
 	&__cart {
@@ -137,6 +140,9 @@
 	}
 
 	&__cart-item {
+		@include scss.block-components("checkout-cart-item");
+		@include scss.block-properties("checkout-cart-item");
+
 		&--name {
 			@include scss.block-components("checkout-cart-item--name");
 			@include scss.block-properties("checkout-cart-item--name");
@@ -146,12 +152,12 @@
 			@include scss.block-components("checkout-cart-item--info");
 			@include scss.block-properties("checkout-cart-item--info");
 		}
-
-		@include scss.block-components("checkout-cart-item");
-		@include scss.block-properties("checkout-cart-item");
 	}
 
 	&__billing-address {
+		@include scss.block-components("checkout-billing-address");
+		@include scss.block-properties("checkout-billing-address");
+
 		&-form-div {
 			@include scss.block-components("checkout-billing-address-form-div");
 			@include scss.block-properties("checkout-billing-address-form-div");
@@ -166,9 +172,6 @@
 			@include scss.block-components("checkout-billing-address-captcha");
 			@include scss.block-properties("checkout-billing-address-captcha");
 		}
-
-		@include scss.block-components("checkout-billing-address");
-		@include scss.block-properties("checkout-billing-address");
 	}
 
 	&__identity-row {
@@ -182,51 +185,54 @@
 	}
 
 	&__orderCard {
+		@include scss.block-components("checkout-order-card");
+		@include scss.block-properties("checkout-order-card");
+
 		&--productPrice {
 			@include scss.block-components("checkout-order-card-productPrice");
 			@include scss.block-properties("checkout-order-card-productPrice");
 		}
 
 		&__card--features {
+			@include scss.block-components("checkout-order-card--features");
+			@include scss.block-properties("checkout-order-card--features");
+
 			&--feature-item {
 				@include scss.block-components("checkout-order-card--features--item");
 				@include scss.block-properties("checkout-order-card--features--item");
 			}
-
-			@include scss.block-components("checkout-order-card--features");
-			@include scss.block-properties("checkout-order-card--features");
 		}
 
 		&__summary {
+			@include scss.block-components("checkout-order-card--summary");
+			@include scss.block-properties("checkout-order-card--summary");
+
 			&--dueToday {
 				@include scss.block-components("checkout-order-card--summary--dueToday");
 				@include scss.block-properties("checkout-order-card--summary--dueToday");
 			}
 
 			&--details {
+				@include scss.block-components("checkout-order-card--summary--details");
+				@include scss.block-properties("checkout-order-card--summary--details");
+
 				&--item {
 					@include scss.block-components("checkout-order-card--summary--details--item");
 					@include scss.block-properties("checkout-order-card--summary--details--item");
 				}
-
-				@include scss.block-components("checkout-order-card--summary--details");
-				@include scss.block-properties("checkout-order-card--summary--details");
 			}
-
-			@include scss.block-components("checkout-order-card--summary");
-			@include scss.block-properties("checkout-order-card--summary");
 		}
 
 		&-borderOn {
 			@include scss.block-components("checkout-order-card-border");
 			@include scss.block-properties("checkout-order-card-border");
 		}
-
-		@include scss.block-components("checkout-order-card");
-		@include scss.block-properties("checkout-order-card");
 	}
 
 	&__review {
+		@include scss.block-components("checkout-review");
+		@include scss.block-properties("checkout-review");
+
 		&-orderInformation {
 			@include scss.block-components("checkout-review-orderInformation");
 			@include scss.block-properties("checkout-review-orderInformation");
@@ -243,18 +249,18 @@
 		}
 
 		&__tos-container {
+			@include scss.block-components("checkout-review-tos-container-link");
+			@include scss.block-properties("checkout-review-tos-container-link");
+
 			a {
+				@include scss.block-components("checkout-review-tos-link");
+				@include scss.block-properties("checkout-review-tos-link");
+
 				&:hover {
 					@include scss.block-components("checkout-review-tos-link-hover");
 					@include scss.block-properties("checkout-review-tos-link-hover");
 				}
-
-				@include scss.block-components("checkout-review-tos-link");
-				@include scss.block-properties("checkout-review-tos-link");
 			}
-
-			@include scss.block-components("checkout-review-tos-container-link");
-			@include scss.block-properties("checkout-review-tos-container-link");
 		}
 
 		&-paypal-button {
@@ -262,26 +268,22 @@
 			@include scss.block-properties("checkout-payment-paypal-button");
 		}
 
-         // stylelint-disable-next-line plugin/no-unsupported-browser-features
-        .c-button[aria-disabled="true"] {
+		// stylelint-disable-next-line plugin/no-unsupported-browser-features
+		.c-button[aria-disabled="true"] {
 			cursor: not-allowed !important;
 		}
 
-         // stylelint-disable-next-line plugin/no-unsupported-browser-features
+		// stylelint-disable-next-line plugin/no-unsupported-browser-features
 		.c-button[aria-disabled="false"] {
 			cursor: pointer !important;
 		}
-
-		@include scss.block-components("checkout-review");
-		@include scss.block-properties("checkout-review");
-
 	}
-
-	@include scss.block-components("checkout");
-	@include scss.block-properties("checkout");
 }
 
 .b-offer {
+	@include scss.block-components("offer");
+	@include scss.block-properties("offer");
+
 	&__headings {
 		@include scss.block-components("offer-headings");
 		@include scss.block-properties("offer-headings");
@@ -308,6 +310,9 @@
 	}
 
 	&__grid-list {
+		@include scss.block-components("offer-grid-list");
+		@include scss.block-properties("offer-grid-list");
+
 		&--1 {
 			@include scss.block-components("offer-grid-list-1");
 			@include scss.block-properties("offer-grid-list-1");
@@ -329,17 +334,14 @@
 		}
 
 		&--5 {
+			@include scss.block-components("offer-grid-list-5");
+			@include scss.block-properties("offer-grid-list-5");
+
 			> * {
 				@include scss.block-components("offer-grid-list-5-children");
 				@include scss.block-properties("offer-grid-list-5-children");
 			}
-
-			@include scss.block-components("offer-grid-list-5");
-			@include scss.block-properties("offer-grid-list-5");
 		}
-
-		@include scss.block-components("offer-grid-list");
-		@include scss.block-properties("offer-grid-list");
 	}
 
 	&__card {
@@ -356,24 +358,27 @@
 		@include scss.block-components("offer-card-features--feature-item");
 		@include scss.block-properties("offer-card-features--feature-item");
 	}
-
-	@include scss.block-components("offer");
-	@include scss.block-properties("offer");
 }
 
 .b-paywall {
 	&__overlay {
+		@include scss.block-components("paywall-overlay");
+		@include scss.block-properties("paywall-overlay");
+
 		&-content {
 			@include scss.block-components("paywall-overlay-content");
 			@include scss.block-properties("paywall-overlay-content");
 		}
-
-		@include scss.block-components("paywall-overlay");
-		@include scss.block-properties("paywall-overlay");
 	}
 
 	&__subscription-dialog {
+		@include scss.block-components("paywall-subscription-dialog");
+		@include scss.block-properties("paywall-subscription-dialog");
+
 		&-link-prompt {
+			@include scss.block-components("paywall-subscription-dialog-reason-prompt");
+			@include scss.block-properties("paywall-subscription-dialog-reason-prompt");
+
 			&-pre-link {
 				@include scss.block-components("paywall-subscription-dialog-link-prompt-pre-link");
 				@include scss.block-properties("paywall-subscription-dialog-link-prompt-pre-link");
@@ -383,9 +388,6 @@
 				@include scss.block-components("paywall-subscription-dialog-link-prompt-link");
 				@include scss.block-properties("paywall-subscription-dialog-link-prompt-link");
 			}
-
-			@include scss.block-components("paywall-subscription-dialog-reason-prompt");
-			@include scss.block-properties("paywall-subscription-dialog-reason-prompt");
 		}
 
 		&-offer-info {
@@ -397,9 +399,6 @@
 			@include scss.block-components("paywall-subscription-dialog-subheadline");
 			@include scss.block-properties("paywall-subscription-dialog-subheadline");
 		}
-
-		@include scss.block-components("paywall-subscription-dialog");
-		@include scss.block-properties("paywall-subscription-dialog");
 	}
 }
 
@@ -447,7 +446,17 @@
 			}
 
 			&-cancel-info {
+				@include scss.block-components("subscriptions-subscription-list-detail-cancel-info");
+				@include scss.block-properties("subscriptions-subscription-list-detail-cancel-info");
+
 				&-button {
+					@include scss.block-components(
+						"subscriptions-subscription-list-detail-cancel-info-button"
+					);
+					@include scss.block-properties(
+						"subscriptions-subscription-list-detail-cancel-info-button"
+					);
+
 					&:hover {
 						@include scss.block-components(
 							"subscriptions-subscription-list-detail-cancel-info-button-hover"
@@ -456,15 +465,7 @@
 							"subscriptions-subscription-list-detail-cancel-info-button-hover"
 						);
 					}
-					@include scss.block-components(
-						"subscriptions-subscription-list-detail-cancel-info-button"
-					);
-					@include scss.block-properties(
-						"subscriptions-subscription-list-detail-cancel-info-button"
-					);
 				}
-				@include scss.block-components("subscriptions-subscription-list-detail-cancel-info");
-				@include scss.block-properties("subscriptions-subscription-list-detail-cancel-info");
 			}
 
 			&-payment-container {
@@ -506,15 +507,19 @@
 			}
 
 			&-billing {
+				@include scss.block-components("subscriptions-subscription-list-detail-billing");
+				@include scss.block-properties("subscriptions-subscription-list-detail-billing");
+
 				&-subtitle {
 					@include scss.block-components("subscriptions-subscription-list-detail-billing-subtitle");
 					@include scss.block-properties("subscriptions-subscription-list-detail-billing-subtitle");
 				}
-				@include scss.block-components("subscriptions-subscription-list-detail-billing");
-				@include scss.block-properties("subscriptions-subscription-list-detail-billing");
 			}
 
 			&-inactive-sub {
+				@include scss.block-components("subscriptions-subscription-list-detail-inactive-sub");
+				@include scss.block-properties("subscriptions-subscription-list-detail-inactive-sub");
+
 				&-paragraph {
 					@include scss.block-components(
 						"subscriptions-subscription-list-detail-inactive-sub-paragraph"
@@ -523,8 +528,6 @@
 						"subscriptions-subscription-list-detail-inactive-sub-paragraph"
 					);
 				}
-				@include scss.block-components("subscriptions-subscription-list-detail-inactive-sub");
-				@include scss.block-properties("subscriptions-subscription-list-detail-inactive-sub");
 			}
 		}
 
@@ -534,15 +537,19 @@
 		}
 
 		&__overlay {
+			@include scss.block-components("subscriptions-subscription-list-overlay");
+			@include scss.block-properties("subscriptions-subscription-list-overlay");
+
 			&-content {
 				@include scss.block-components("subscriptions-subscription-list-overlay-content");
 				@include scss.block-properties("subscriptions-subscription-list-overlay-content");
 			}
-			@include scss.block-components("subscriptions-subscription-list-overlay");
-			@include scss.block-properties("subscriptions-subscription-list-overlay");
 		}
 
 		&-modal {
+			@include scss.block-components("subscriptions-subscription-list-modal");
+			@include scss.block-properties("subscriptions-subscription-list-modal");
+
 			&-title {
 				@include scss.block-components("subscriptions-subscription-list-modal-title");
 				@include scss.block-properties("subscriptions-subscription-list-modal-title");
@@ -552,8 +559,6 @@
 				@include scss.block-components("subscriptions-subscription-list-modal-button-div");
 				@include scss.block-properties("subscriptions-subscription-list-modal-button-div");
 			}
-			@include scss.block-components("subscriptions-subscription-list-modal");
-			@include scss.block-properties("subscriptions-subscription-list-modal");
 		}
 	}
 }

@@ -1,6 +1,9 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-results-list {
+	@include scss.block-components("results-list");
+	@include scss.block-properties("results-list");
+
 	&__wrapper {
 		@include scss.block-properties("results-list-wrapper");
 		@include scss.block-components("results-list-wrapper");
@@ -20,6 +23,4 @@
 		@include scss.block-components("results-list-label");
 		@include scss.block-properties("results-list-label");
 	}
-	@include scss.block-components("results-list");
-	@include scss.block-properties("results-list");
 }

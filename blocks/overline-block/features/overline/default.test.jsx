@@ -1,207 +1,140 @@
-describe("This test is disabled", () => {
-	it("should succeed", () => {
-		expect(true);
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import { useFusionContext } from "fusion:context";
+import Overline from "./default";
+
+jest.mock("fusion:context", () => ({
+	useFusionContext: jest.fn(),
+}));
+
+jest.mock("fusion:content", () => ({
+	useEditableContent: jest.fn(() => ({ editableContent: jest.fn(() => ({})) })),
+}));
+
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	usePhrases: jest.fn(() => ({ t: (key) => key })),
+}));
+
+const baseContext = {
+	arcSite: "site",
+	globalContent: {
+		_id: "12345",
+		websites: {
+			site: { website_section: { _id: "/news", name: "News" } },
+		},
+	},
+};
+
+describe("overline feature", () => {
+	describe("when website_section content is present", () => {
+		beforeEach(() => {
+			useFusionContext.mockReturnValue(baseContext);
+		});
+
+		it("renders a link with the b-overline class", () => {
+			render(<Overline />);
+			expect(screen.getByRole("link")).toHaveClass("b-overline");
+		});
+
+		it("renders the section name as link text", () => {
+			render(<Overline />);
+			expect(screen.getByText("News")).toBeInTheDocument();
+		});
+	});
+
+	describe("when label.basic.display is true with a url", () => {
+		it("displays the label text and links to the label url", () => {
+			useFusionContext.mockReturnValue({
+				...baseContext,
+				globalContent: {
+					...baseContext.globalContent,
+					label: { basic: { display: true, text: "EXCLUSIVE", url: "/exclusive" } },
+				},
+			});
+			render(<Overline />);
+			expect(screen.getByText("EXCLUSIVE")).toBeInTheDocument();
+			expect(screen.getByRole("link")).toBeInTheDocument();
+		});
+	});
+
+	describe("when label.basic.url is missing", () => {
+		it("renders the label text without a link", () => {
+			useFusionContext.mockReturnValue({
+				...baseContext,
+				globalContent: {
+					...baseContext.globalContent,
+					label: { basic: { display: true, text: "EXCLUSIVE" } },
+				},
+			});
+			render(<Overline />);
+			expect(screen.getByText("EXCLUSIVE")).toBeInTheDocument();
+			expect(screen.queryByRole("link")).not.toBeInTheDocument();
+		});
+	});
+
+	describe("when label.basic.url is an empty string", () => {
+		it("renders the label text without a link", () => {
+			useFusionContext.mockReturnValue({
+				...baseContext,
+				globalContent: {
+					...baseContext.globalContent,
+					label: { basic: { display: true, text: "EXCLUSIVE", url: "" } },
+				},
+			});
+			render(<Overline />);
+			expect(screen.getByText("EXCLUSIVE")).toBeInTheDocument();
+			expect(screen.queryByRole("link")).not.toBeInTheDocument();
+		});
+	});
+
+	describe("when label.basic.display is false", () => {
+		it("falls back to the website section name", () => {
+			useFusionContext.mockReturnValue({
+				...baseContext,
+				globalContent: {
+					...baseContext.globalContent,
+					label: { basic: { display: false, text: "EXCLUSIVE", url: "/exclusive/" } },
+				},
+			});
+			render(<Overline />);
+			expect(screen.getByText("News")).toBeInTheDocument();
+		});
+	});
+
+	describe("when globalContent is not present", () => {
+		it("renders nothing", () => {
+			useFusionContext.mockReturnValue({});
+			const { container } = render(<Overline />);
+			expect(container).toBeEmptyDOMElement();
+		});
+	});
+
+	describe("when content is sponsored", () => {
+		it("renders sponsored content label when owner.sponsored is true", () => {
+			useFusionContext.mockReturnValue({
+				...baseContext,
+				globalContent: {
+					...baseContext.globalContent,
+					owner: { sponsored: true },
+					label: { basic: { text: "Sponsored Story" } },
+				},
+			});
+			render(<Overline />);
+			expect(screen.getByText("Sponsored Story")).toBeInTheDocument();
+		});
+
+		it("renders default sponsored phrase when label text is absent", () => {
+			useFusionContext.mockReturnValue({
+				...baseContext,
+				globalContent: {
+					...baseContext.globalContent,
+					owner: { sponsored: true },
+				},
+			});
+			render(<Overline />);
+			expect(screen.getByText("global.sponsored-content")).toBeInTheDocument();
+		});
 	});
 });
-
-// import React from "react";
-// import { shallow, mount } from "enzyme";
-// import { useFusionContext } from "fusion:context";
-// import Overline from "./default";
-
-// const mockContextObj = {
-// 	arcSite: "site",
-// 	globalContent: {
-// 		_id: "12345",
-// 		websites: {
-// 			site: {
-// 				website_section: {
-// 					_id: "/news",
-// 					name: "News",
-// 				},
-// 			},
-// 		},
-// 	},
-// };
-
-// jest.mock("fusion:properties", () => jest.fn(() => ({})));
-// jest.mock("fusion:themes", () => jest.fn(() => ({})));
-// jest.mock("fusion:context", () => ({
-// 	useFusionContext: jest.fn(() => mockContextObj),
-// }));
-
-// jest.mock("fusion:intl", () => ({
-// 	__esModule: true,
-// 	default: jest.fn((locale) => ({
-// 		t: jest.fn((phrase) => require("../../intl.json")[phrase][locale]),
-// 	})),
-// }));
-
-// jest.mock("fusion:content", () => ({
-// 	useEditableContent: jest.fn(() => ({
-// 		editableContent: jest.fn(() => {}),
-// 	})),
-// }));
-
-// describe("overline feature for default output type", () => {
-// 	describe("when website_section content from globalContent is present", () => {
-// 		it("should render an a", () => {
-// 			const wrapper = mount(<Overline />);
-
-// 			expect(wrapper.find("a")).toHaveClassName("b-overline");
-// 		});
-
-// 		it("should dangerously set the inner HTML to the website_section content", () => {
-// 			const wrapper = mount(<Overline />);
-
-// 			expect(wrapper.text()).toMatch("News");
-// 		});
-
-// 		it("should render only text if label do not have url", () => {
-// 			const mockStory = {
-// 				arcSite: "site",
-// 				globalContent: {
-// 					_id: "123456",
-// 					label: {
-// 						basic: {
-// 							display: true,
-// 							text: "label",
-// 						},
-// 					},
-// 					websites: {
-// 						site: {
-// 							website_section: {
-// 								_id: "/mock/",
-// 								name: "Mock",
-// 							},
-// 						},
-// 					},
-// 				},
-// 			};
-// 			useFusionContext.mockImplementation(() => mockStory);
-// 			const wrapper = mount(<Overline />);
-
-// 			expect(wrapper.find("span")).toHaveClassName("b-overline");
-// 			expect(wrapper.find("span").text()).toEqual(mockStory.globalContent.label.basic.text);
-// 		});
-// 	});
-
-// 	describe("when label content from globalContent is present", () => {
-// 		describe("when label.basic.display is true", () => {
-// 			beforeEach(() => {
-// 				const labelObj = {
-// 					label: {
-// 						basic: { display: true, text: "EXCLUSIVE", url: "/exclusive" },
-// 					},
-// 				};
-// 				const contextObjWithLabel = {
-// 					...mockContextObj,
-// 					globalContent: {
-// 						...labelObj,
-// 						...mockContextObj.globalContent,
-// 					},
-// 				};
-// 				useFusionContext.mockImplementation(() => contextObjWithLabel);
-// 			});
-
-// 			it("should display the label name instead of the website section name", () => {
-// 				const wrapper = mount(<Overline />);
-
-// 				expect(wrapper.text()).toMatch("EXCLUSIVE");
-// 			});
-// 		});
-
-// 		describe("when label.basic.url is missing", () => {
-// 			beforeEach(() => {
-// 				const labelObj = {
-// 					label: { basic: { display: true, text: "EXCLUSIVE" } },
-// 				};
-// 				const contextObjWithLabel = {
-// 					...mockContextObj,
-// 					globalContent: {
-// 						...labelObj,
-// 						...mockContextObj.globalContent,
-// 					},
-// 				};
-// 				useFusionContext.mockImplementation(() => contextObjWithLabel);
-// 			});
-
-// 			it("should display the label name instead of the website section name", () => {
-// 				const wrapper = mount(<Overline />);
-
-// 				expect(wrapper.text()).toMatch("EXCLUSIVE");
-// 			});
-
-// 			it("should render as text", () => {
-// 				const wrapper = shallow(<Overline />);
-
-// 				expect(wrapper.at(0).prop("className")).toEqual("b-overline");
-// 				expect(wrapper.at(0).prop("href")).toBeFalsy();
-// 			});
-// 		});
-
-// 		describe("when label.basic.url is empty", () => {
-// 			beforeEach(() => {
-// 				const labelObj = {
-// 					label: { basic: { display: true, text: "EXCLUSIVE", url: "" } },
-// 				};
-// 				const contextObjWithLabel = {
-// 					...mockContextObj,
-// 					globalContent: {
-// 						...labelObj,
-// 						...mockContextObj.globalContent,
-// 					},
-// 				};
-// 				useFusionContext.mockImplementation(() => contextObjWithLabel);
-// 			});
-
-// 			it("should display the label name instead of the website section name", () => {
-// 				const wrapper = mount(<Overline />);
-// 				expect(wrapper.text()).toMatch("EXCLUSIVE");
-// 			});
-
-// 			it("should render as text", () => {
-// 				const wrapper = shallow(<Overline />);
-
-// 				expect(wrapper.at(0).prop("className")).toEqual("b-overline");
-// 				expect(wrapper.at(0).prop("href")).toBeFalsy();
-// 			});
-// 		});
-
-// 		describe("when label.basic.display is NOT true", () => {
-// 			beforeEach(() => {
-// 				const labelObj = {
-// 					label: {
-// 						basic: { display: false, text: "EXCLUSIVE", url: "/exclusive/" },
-// 					},
-// 				};
-// 				const contextObjWithLabel = {
-// 					...mockContextObj,
-// 					globalContent: {
-// 						...labelObj,
-// 						...mockContextObj.globalContent,
-// 					},
-// 				};
-// 				useFusionContext.mockImplementation(() => contextObjWithLabel);
-// 			});
-
-// 			it("should dangerously set the inner HTML to the website_section content", () => {
-// 				const wrapper = mount(<Overline />);
-
-// 				expect(wrapper.text()).toMatch("News");
-// 			});
-// 		});
-// 	});
-
-// 	describe("when headline content from globalContent is NOT present", () => {
-// 		beforeEach(() => {
-// 			useFusionContext.mockImplementation(() => ({}));
-// 		});
-
-// 		it("should not render anything", () => {
-// 			const wrapper = mount(<Overline />);
-
-// 			expect(wrapper).toBeEmptyRender();
-// 		});
-// 	});
-// });

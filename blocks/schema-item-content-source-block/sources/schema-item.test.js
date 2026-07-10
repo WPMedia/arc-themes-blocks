@@ -1,4 +1,4 @@
-import contentSource from "./content-api";
+import contentSource from "./schema-item";
 
 jest.mock("fusion:environment", () => ({
 	CONTENT_BASE: "https://content.base",
@@ -37,6 +37,11 @@ describe("the custom schema item content source block", () => {
 			{
 				displayName: "Document ID",
 				name: "id",
+				type: "text",
+			},
+			{
+				displayName: "Website URL",
+				name: "website_url",
 				type: "text",
 			},
 			{
@@ -103,7 +108,55 @@ describe("the custom schema item content source block", () => {
 		});
 	});
 
-	describe("when id is not provided", () => {
+	describe("when website_url and schemaName are provided with arc-site", () => {
+		it("should build the correct by-url url", async () => {
+			const contentSourceFetch = await contentSource.fetch(
+				{
+					website_url: "/2020/01/17/this-is-a-story/",
+					schemaName: "my-schema",
+					"arc-site": "the-site",
+				},
+				{ cachedCall: () => {} }
+			);
+
+			expect(contentSourceFetch.request.url.pathname).toEqual(
+				"/content/v5/search/schemas/by-url/"
+			);
+			expect(contentSourceFetch.request.url.searchObject).toEqual(
+				expect.objectContaining({
+					url: "/2020/01/17/this-is-a-story/",
+					schema_name: "my-schema",
+					website: "the-site",
+				})
+			);
+		});
+	});
+
+	describe("when both id and website_url are provided", () => {
+		it("should prefer the by-id lookup", async () => {
+			const contentSourceFetch = await contentSource.fetch(
+				{
+					id: "ABC123",
+					website_url: "/2020/01/17/this-is-a-story/",
+					schemaName: "my-schema",
+					"arc-site": "the-site",
+				},
+				{ cachedCall: () => {} }
+			);
+
+			expect(contentSourceFetch.request.url.pathname).toEqual(
+				"/content/v5/search/schemas/by-id/"
+			);
+			expect(contentSourceFetch.request.url.searchObject).toEqual(
+				expect.objectContaining({
+					id: "ABC123",
+				})
+			);
+			expect(contentSourceFetch.request.url.searchObject).not.toHaveProperty("url");
+		});
+	});
+
+	describe("when neither id nor website_url is provided", () => {
 		it("should return empty string", async () => {
 			const contentSourceFetch = await contentSource.fetch(
 				{

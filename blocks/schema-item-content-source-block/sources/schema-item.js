@@ -9,14 +9,28 @@ const params = [
 		type: "text",
 	},
 	{
+		displayName: "Website URL",
+		name: "website_url",
+		type: "text",
+	},
+	{
 		displayName: "Schema Name",
 		name: "schemaName",
 		type: "text",
 	},
+	{
+		default: "2",
+		displayName: "Themes Version",
+		name: "themes",
+		type: "text",
+	},
 ];
 
-const fetch = ({ id, schemaName, "arc-site": website }, { arcSite }) => {
-	if (!id || !schemaName) {
+const fetch = (
+	{ id, schemaName, website_url: websiteUrl, "arc-site": website },
+	{ arcSite }
+) => {
+	if (!schemaName || (!id && !websiteUrl)) {
 		return "";
 	}
 
@@ -25,14 +39,20 @@ const fetch = ({ id, schemaName, "arc-site": website }, { arcSite }) => {
 		return "";
 	}
 
+	// Prefer lookup by id when both are provided, matching the content-api source behavior.
+	const useId = Boolean(id);
+	const endpoint = useId
+		? "/content/v5/search/schemas/by-id/"
+		: "/content/v5/search/schemas/by-url/";
+
 	const urlSearch = new URLSearchParams({
-		id: id.trim(),
+		...(useId ? { id: id.trim() } : { url: websiteUrl.trim() }),
 		schema_name: schemaName.trim(),
 		website: siteValue,
 	});
 
 	return axios({
-		url: `${CONTENT_BASE}/content/v5/search/schemas/by-id/?${urlSearch.toString()}`,
+		url: `${CONTENT_BASE}${endpoint}?${urlSearch.toString()}`,
 		headers: {
 			"content-type": "application/json",
 			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
@@ -53,5 +73,6 @@ const fetch = ({ id, schemaName, "arc-site": website }, { arcSite }) => {
 export default {
 	fetch,
 	params,
+	schemaName: "ans-item",
 	ttl: 300,
 };

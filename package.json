@@ -2,7 +2,7 @@
   "name": "arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "private": true,
-  "themesVersion": "4.1.0",
+  "themesVersion": "4.2.0",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
     "access": "public"

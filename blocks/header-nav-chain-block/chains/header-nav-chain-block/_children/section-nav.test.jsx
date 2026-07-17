@@ -186,4 +186,61 @@ describe("the SectionNav component", () => {
 			expect(sectionMenu).not.toHaveClass("open");
 		});
 	});
+
+	describe("isSamePath fallback", () => {
+		it("renders without active class when window.location.pathname is not available", () => {
+			const originalLocation = window.location;
+			delete window.location;
+			window.location = { pathname: undefined };
+			const singleItem = [{ _id: "/news", name: "News", node_type: "section", children: [] }];
+			render(<SectionNav sections={singleItem} />);
+			// Should render without throwing
+			expect(screen.getByText("News")).toBeInTheDocument();
+			window.location = originalLocation;
+		});
+	});
+
+	describe("SubSectionAnchor isOpen branch", () => {
+		it("renders with open class when current pathname matches section _id", () => {
+			const originalLocation = window.location;
+			delete window.location;
+			window.location = { pathname: "/sports/basketball" };
+			const sportItem = [
+				{
+					_id: "/sports",
+					name: "Sports",
+					node_type: "section",
+					children: [
+						{ _id: "foo", node_type: "link", display_name: "Basketball", url: "/basketball" },
+					],
+				},
+			];
+			render(<SectionNav sections={sportItem} blockClassName="b-header-nav-chain" />);
+			const subsectionAnchor = screen.getByTestId("nav-chain-section-item-subsection");
+			expect(subsectionAnchor).toHaveClass("open");
+			window.location = originalLocation;
+		});
+	});
+
+	describe("isHidden prop branch", () => {
+		it("renders SubSectionAnchor with assistiveHidden links when isHidden is true", () => {
+			const itemsWithChildren = [
+				{
+					_id: "/sports",
+					name: "Sports",
+					node_type: "section",
+					children: [
+						{ _id: "foo", node_type: "link", display_name: "Basketball", url: "/basketball" },
+					],
+				},
+			];
+			render(
+				<SectionNav sections={itemsWithChildren} isHidden blockClassName="b-header-nav-chain" />
+			);
+			// When isHidden=true, SectionAnchor link has assistiveHidden=true → aria-hidden="true"
+			const sportsLink = screen.getByText("Sports");
+			expect(sportsLink).toHaveAttribute("aria-hidden", "true");
+		});
+	});
+
 });

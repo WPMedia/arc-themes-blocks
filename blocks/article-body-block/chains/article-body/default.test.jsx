@@ -2440,4 +2440,141 @@ describe("article-body chain", () => {
 			expect(carouselElement).toBeInTheDocument();
 		});
 	});
+
+	describe("when content has a location (dateline)", () => {
+		it("prepends location to first paragraph", () => {
+			useFusionContext.mockImplementation(() => ({
+				globalContent: {
+					_id: "DATELINE_TEST",
+					type: "story",
+					location: "WASHINGTON",
+					content_elements: [
+						{
+							_id: "PARA1",
+							type: "text",
+							content: "The president announced today...",
+						},
+					],
+				},
+			}));
+			render(<ArticleBodyChain />);
+			expect(document.body.innerHTML.includes("WASHINGTON")).toBe(true);
+		});
+	});
+
+	describe("image display options hide caption, credit, and title", () => {
+		const IMAGE_ELEMENT = {
+			_id: "IMG1",
+			type: "image",
+			url: "https://example.com/photo.jpg",
+			caption: "A caption",
+			subtitle: "A title",
+			credits: { by: [{ byline: "Photographer", name: "Photographer", type: "author" }] },
+			auth: { 2: "AUTH" },
+		};
+
+		it("should hide caption when hideImageCaption is true", () => {
+			useFusionContext.mockImplementation(() => ({
+				globalContent: { content_elements: [IMAGE_ELEMENT] },
+				arcSite: "the-sun",
+			}));
+			render(<ArticleBodyChain customFields={{ hideImageCaption: true }} />);
+			expect(screen.queryByText("A caption")).not.toBeInTheDocument();
+		});
+
+		it("should hide credit when hideImageCredits is true", () => {
+			useFusionContext.mockImplementation(() => ({
+				globalContent: { content_elements: [IMAGE_ELEMENT] },
+				arcSite: "the-sun",
+			}));
+			render(<ArticleBodyChain customFields={{ hideImageCredits: true }} />);
+			// figure still renders but credit is null
+			expect(screen.getByRole("figure")).toBeInTheDocument();
+		});
+
+		it("should hide title when hideImageTitle is true", () => {
+			useFusionContext.mockImplementation(() => ({
+				globalContent: { content_elements: [IMAGE_ELEMENT] },
+				arcSite: "the-sun",
+			}));
+			render(<ArticleBodyChain customFields={{ hideImageTitle: true }} />);
+			expect(screen.queryByText("A title")).not.toBeInTheDocument();
+		});
+	});
+
+	describe("interstitial_link null branch", () => {
+		it("should return null when url is present but content is empty", () => {
+			useFusionContext.mockImplementation(() => ({
+				globalContent: {
+					content_elements: [
+						{
+							_id: "INTER1",
+							type: "interstitial_link",
+							url: "https://example.com/",
+							content: "",
+						},
+					],
+				},
+				arcSite: "the-sun",
+			}));
+			render(<ArticleBodyChain />);
+			expect(screen.queryAllByRole("link")).toHaveLength(0);
+		});
+	});
+
+	describe("list with null items", () => {
+		it("should return null when list items are absent", () => {
+			useFusionContext.mockImplementation(() => ({
+				globalContent: {
+					content_elements: [
+						{
+							_id: "LIST1",
+							type: "list",
+							list_type: "ordered",
+						},
+					],
+				},
+				arcSite: "the-sun",
+			}));
+			render(<ArticleBodyChain />);
+			expect(screen.queryAllByRole("list")).toHaveLength(0);
+		});
+	});
+
+	describe("video display options hide caption, credit, and title", () => {
+		const VIDEO_ELEMENT = {
+			_id: "VID1",
+			type: "video",
+			headlines: { basic: "Video Title" },
+			description: { basic: "Video Caption" },
+			credits: { by: [{ byline: "Videographer", name: "Videographer", type: "author" }] },
+		};
+
+		it("should hide video caption when hideVideoCaption is true", () => {
+			useFusionContext.mockImplementation(() => ({
+				globalContent: { content_elements: [VIDEO_ELEMENT] },
+				arcSite: "the-sun",
+			}));
+			render(<ArticleBodyChain customFields={{ hideVideoCaption: true }} />);
+			expect(screen.queryByText("Video Caption")).not.toBeInTheDocument();
+		});
+
+		it("should hide video credit when hideVideoCredits is true", () => {
+			useFusionContext.mockImplementation(() => ({
+				globalContent: { content_elements: [VIDEO_ELEMENT] },
+				arcSite: "the-sun",
+			}));
+			render(<ArticleBodyChain customFields={{ hideVideoCredits: true }} />);
+			expect(screen.getByTestId("video-container")).toBeInTheDocument();
+		});
+
+		it("should hide video title when hideVideoTitle is true", () => {
+			useFusionContext.mockImplementation(() => ({
+				globalContent: { content_elements: [VIDEO_ELEMENT] },
+				arcSite: "the-sun",
+			}));
+			render(<ArticleBodyChain customFields={{ hideVideoTitle: true }} />);
+			expect(screen.queryByText("Video Title")).not.toBeInTheDocument();
+		});
+	});
 });

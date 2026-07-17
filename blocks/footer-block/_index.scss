@@ -1,27 +1,33 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-footer {
+	@include scss.block-components("footer");
+	@include scss.block-properties("footer");
+
 	&__links {
+		@include scss.block-components("footer-links");
+		@include scss.block-properties("footer-links");
+
 		&-group {
+			@include scss.block-components("footer-links-group");
+			@include scss.block-properties("footer-links-group");
+
 			&-list {
+				@include scss.block-components("footer-links-group-list");
+				@include scss.block-properties("footer-links-group-list");
+
 				&-item {
 					@include scss.block-components("footer-links-group-list-item");
 					@include scss.block-properties("footer-links-group-list-item");
 				}
-
-				@include scss.block-components("footer-links-group-list");
-				@include scss.block-properties("footer-links-group-list");
 			}
-
-			@include scss.block-components("footer-links-group");
-			@include scss.block-properties("footer-links-group");
 		}
-
-		@include scss.block-components("footer-links");
-		@include scss.block-properties("footer-links");
 	}
 
 	&__social-links {
+		@include scss.block-components("footer-social-links");
+		@include scss.block-properties("footer-social-links");
+
 		&-container {
 			@include scss.block-components("footer-social-links-container");
 			@include scss.block-properties("footer-social-links-container");
@@ -41,16 +47,10 @@
 			@include scss.block-components("footer-social-links-last");
 			@include scss.block-properties("footer-social-links-last");
 		}
-
-		@include scss.block-components("footer-social-links");
-		@include scss.block-properties("footer-social-links");
 	}
 
 	&__top-container {
 		@include scss.block-components("footer-top-container");
 		@include scss.block-properties("footer-top-container");
 	}
-
-	@include scss.block-components("footer");
-	@include scss.block-properties("footer");
 }

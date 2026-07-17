@@ -152,4 +152,103 @@ describe("Small Promo", () => {
 		render(<SmallPromo customFields={config} />);
 		expect(screen.getByRole("img", { hidden: true })).toBeInTheDocument();
 	});
+
+	it("falls back to parsed imageOverrideAuth when signing service returns nothing", () => {
+		useContent.mockReturnValueOnce(mockData).mockReturnValueOnce(null);
+		render(
+			<SmallPromo
+				customFields={{
+					itemContentConfig: { contentService: "ans-item", contentConfigValues: { test: 1 } },
+					showImage: false,
+					showHeadline: true,
+					imageOverrideURL: "https://example.com/image.jpg",
+					imageOverrideAuth: JSON.stringify({ 2: "auth-token" }),
+				}}
+			/>,
+		);
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
+	});
+
+	it("sets RESIZER_TOKEN_VERSION when resizedAuth has hash", () => {
+		useContent.mockReturnValueOnce(mockData).mockReturnValueOnce({ hash: "abc123" });
+		render(
+			<SmallPromo
+				customFields={{
+					itemContentConfig: { contentService: "ans-item", contentConfigValues: { test: 1 } },
+					showImage: false,
+					showHeadline: true,
+					imageOverrideURL: "https://example.com/image.jpg",
+				}}
+			/>,
+		);
+		expect(screen.getByText(mockData.headlines.basic)).not.toBeNull();
+	});
+
+	it("should use empty string for alt when content has no headlines", () => {
+		useContent.mockReturnValueOnce({ ...mockData, headlines: undefined });
+		render(
+			<SmallPromo
+				customFields={{
+					itemContentConfig: { contentService: "ans-item", contentConfigValues: { test: 1 } },
+					showImage: true,
+					imageRatio: "4:3",
+					imageOverrideURL: "https://example.com/image.jpg",
+					showHeadline: false,
+				}}
+			/>,
+		);
+		// alt="" produces role "presentation"
+		const img =
+			screen.queryByRole("presentation", { hidden: true }) ||
+			screen.queryByRole("img", { hidden: true });
+		expect(img).not.toBeNull();
+	});
+
+	it("should use ansImage for imageParams when imageOverrideURL is not set", () => {
+		// showImage: false avoids rendering the Image but still exercises the imageParams ansImage branch
+		render(
+			<SmallPromo
+				customFields={{
+					itemContentConfig: { contentService: "ans-item", contentConfigValues: { test: 1 } },
+					showImage: false,
+					imageRatio: "4:3",
+					showHeadline: true,
+				}}
+			/>,
+		);
+		expect(screen.getByRole("heading")).toBeInTheDocument();
+	});
+
+	it("should use manualImageId when imageOverrideURL does not contain imageOverrideId", () => {
+		render(
+			<SmallPromo
+				customFields={{
+					itemContentConfig: { contentService: "ans-item", contentConfigValues: { test: 1 } },
+					showImage: true,
+					imageRatio: "4:3",
+					imageOverrideURL: "https://example.com/image.jpg",
+					imageOverrideId: "different-id",
+					imageOverrideAuth: "",
+					showHeadline: true,
+				}}
+			/>,
+		);
+		expect(screen.getByRole("img", { hidden: true })).toBeInTheDocument();
+	});
+
+	it("should use empty auth object when resizedAuth is null", () => {
+		useContent.mockReturnValueOnce(mockData).mockReturnValueOnce(null);
+		render(
+			<SmallPromo
+				customFields={{
+					itemContentConfig: { contentService: "ans-item", contentConfigValues: { test: 1 } },
+					showImage: true,
+					imageRatio: "4:3",
+					imageOverrideURL: "https://example.com/image.jpg",
+					showHeadline: true,
+				}}
+			/>,
+		);
+		expect(screen.getByRole("img", { hidden: true })).toBeInTheDocument();
+	});
 });

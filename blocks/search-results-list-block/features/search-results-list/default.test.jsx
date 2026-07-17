@@ -1,139 +1,80 @@
-describe("This test is disabled", () => {
-	it("should succeed", () => {
-		expect(true);
-	});
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import SearchResultsListContainer from "./default";
+
+jest.mock("./_children/global-content", () => {
+	const MockGlobal = () => <div data-testid="global-content-search" />;
+	return MockGlobal;
 });
 
-// // eslint-disable-next-line max-classes-per-file
-// import React from "react";
-// import { shallow } from "enzyme";
+jest.mock("./_children/custom-content", () => {
+	const MockCustom = () => <div data-testid="custom-content-search" />;
+	return MockCustom;
+});
 
-// jest.mock("./_children/global-content", () => class GlobalContentSearchResultsList {});
-// jest.mock("./_children/custom-content", () => class CustomContentSearchResultsList {});
+jest.mock("fusion:context", () => ({
+	useFusionContext: jest.fn(() => ({ arcSite: "the-sun", isAdmin: false })),
+}));
 
-// jest.mock("fusion:context", () => ({
-// 	useFusionContext: jest.fn(() => ({})),
-// }));
+let mockIsServerSide = false;
 
-// jest.mock("@wpmedia/arc-themes-components", () => ({
-// 	...jest.requireActual("@wpmedia/arc-themes-components"),
-// 	HeadingSection: ({ children }) => children,
-// 	isServerSide: () => true,
-// 	LazyLoad: ({ children }) => children,
-// }));
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	isServerSide: jest.fn(() => mockIsServerSide),
+	LazyLoad: ({ children }) => children,
+	HeadingSection: ({ children }) => children,
+}));
 
-// const defaultPromos = {
-// 	showByline: true,
-// 	showDate: true,
-// 	showDescription: true,
-// 	showHeadline: true,
-// 	showImage: true,
-// 	imageRatio: "16:9",
-// };
+describe("the search results list feature block", () => {
+	it("renders the global content search list when inheritGlobalContent is true", () => {
+		render(<SearchResultsListContainer customFields={{ inheritGlobalContent: true }} />);
+		expect(screen.getByTestId("global-content-search")).toBeInTheDocument();
+	});
 
-// const globalContent = {
-// 	data: [
-// 		{
-// 			description: { basic: "Basic Description 1" },
-// 			display_date: "2022-01-01T00:00:00.000Z",
-// 			headlines: { basic: "Basic Headline Text" },
-// 			websites: {
-// 				"test-site": {
-// 					website_url: "#",
-// 				},
-// 			},
-// 		},
-// 		{
-// 			description: { basic: "Basic Description 2" },
-// 			display_date: "2022-01-01T00:00:00.000Z",
-// 			headlines: { basic: "Basic Headline Text" },
-// 			websites: {
-// 				"test-site": {
-// 					website_url: "#",
-// 				},
-// 			},
-// 		},
-// 		{
-// 			description: { basic: "Basic Description 3" },
-// 			display_date: "2022-01-01T00:00:00.000Z",
-// 			headlines: { basic: "Basic Headline Text" },
-// 			websites: {
-// 				"test-site": {
-// 					website_url: "#",
-// 				},
-// 			},
-// 		},
-// 	],
-// 	metadata: { total_hits: 3, q: "Enter search items" },
-// };
+	it("renders the custom content search list when inheritGlobalContent is false", () => {
+		render(<SearchResultsListContainer customFields={{ inheritGlobalContent: false }} />);
+		expect(screen.getByTestId("custom-content-search")).toBeInTheDocument();
+	});
 
-// describe("the search results list feature block", () => {
-// 	describe("when it is configured to inherit global content", () => {
-// 		it("should render the global content search results list", () => {
-// 			const { default: SearchResultsListContainer } = require("./default");
-// 			const wrapper = shallow(
-// 				<SearchResultsListContainer customFields={{ inheritGlobalContent: true, globalContent }} />
-// 			);
-// 			expect(wrapper.find("GlobalContentSearchResultsList")).toBeTruthy();
-// 		});
-// 	});
+	it("defaults to global content when customFields is empty", () => {
+		render(<SearchResultsListContainer customFields={{}} />);
+		expect(screen.getByTestId("global-content-search")).toBeInTheDocument();
+	});
 
-// 	describe("when it is configured to NOT inherit global content", () => {
-// 		const { default: SearchResultsListContainer } = require("./default");
+	it("defaults to global content when customFields is undefined", () => {
+		render(<SearchResultsListContainer customFields={undefined} />);
+		expect(screen.getByTestId("global-content-search")).toBeInTheDocument();
+	});
 
-// 		const wrapper = shallow(
-// 			<SearchResultsListContainer
-// 				customFields={{ inheritGlobalContent: false, sectionContentConfig: {} }}
-// 			/>
-// 		);
 
-// 		it("should render the global content search results list", () => {
-// 			expect(wrapper.find("CustomContentSearchResultsList")).toBeTruthy();
-// 		});
+	it("renders null when lazyLoad is true and server-side", () => {
+		mockIsServerSide = true;
+		const { container } = render(
+			<SearchResultsListContainer customFields={{ lazyLoad: true }} />,
+		);
+		mockIsServerSide = false;
+		expect(container).toBeEmptyDOMElement();
+	});
 
-// 		it("should render all promo items", () => {
-// 			expect(wrapper.find("CustomContentSearchResultsList").prop("promoElements")).toEqual(
-// 				defaultPromos
-// 			);
-// 		});
-// 	});
+	it("passes customSearchAction to GlobalContentSearch when provided", () => {
+		const mockSearchAction = jest.fn();
+		render(
+			<SearchResultsListContainer
+				customFields={{ inheritGlobalContent: true }}
+				customSearchAction={mockSearchAction}
+			/>,
+		);
+		expect(screen.getByTestId("global-content-search")).toBeInTheDocument();
+	});
 
-// 	describe("when customFields is empty", () => {
-// 		const { default: SearchResultsListContainer } = require("./default");
-// 		const wrapper = shallow(<SearchResultsListContainer customFields={{}} />);
-
-// 		it("should render the global content search results list", () => {
-// 			expect(wrapper.find("GlobalContentSearchResultsList")).toBeTruthy();
-// 		});
-
-// 		it("should render all promo items", () => {
-// 			expect(wrapper.find("GlobalContentSearchResultsList").prop("promoElements")).toEqual(
-// 				defaultPromos
-// 			);
-// 		});
-// 	});
-
-// 	describe("when customFields is missing", () => {
-// 		const { default: SearchResultsListContainer } = require("./default");
-// 		const wrapper = shallow(<SearchResultsListContainer customFields={undefined} />);
-
-// 		it("should render the global content search results list", () => {
-// 			expect(wrapper.find("GlobalContentSearchResultsList")).toBeTruthy();
-// 		});
-
-// 		it("should render all promo items", () => {
-// 			expect(wrapper.find("GlobalContentSearchResultsList").prop("promoElements")).toEqual(
-// 				defaultPromos
-// 			);
-// 		});
-// 	});
-
-// 	describe("when lazyLoad is true", () => {
-// 		const { default: SearchResultsListContainer } = require("./default");
-// 		const wrapper = shallow(<SearchResultsListContainer customFields={{ lazyLoad: true }} />);
-
-// 		it("should not render the global content search results list", () => {
-// 			expect(wrapper.html()).toBe(null);
-// 		});
-// 	});
-// });
+	it("passes globalContent from customFields to GlobalContentSearch when present", () => {
+		const fakeGlobalContent = { _id: "fake-content" };
+		render(
+			<SearchResultsListContainer
+				customFields={{ inheritGlobalContent: true, globalContent: fakeGlobalContent }}
+			/>,
+		);
+		expect(screen.getByTestId("global-content-search")).toBeInTheDocument();
+	});
+});

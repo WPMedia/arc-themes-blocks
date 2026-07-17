@@ -73,6 +73,7 @@ const SubscriptionOverlay = ({ children, usePortal = true, className }) => {
 		>
 			<div
 				className={`${className}__overlay-content`}
+				data-testid="overlay-content"
 				onWheel={(event) => {
 					setScrollDelta(event.deltaY);
 				}}

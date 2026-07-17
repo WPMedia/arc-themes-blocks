@@ -1,21 +1,21 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-video-player {
+	@include scss.block-components("video-player");
+	@include scss.block-properties("video-player");
+
 	&__inline {
 		@include scss.block-components("video-player-inline");
 		@include scss.block-properties("video-player-inline");
 	}
 
 	&__feature {
+		@include scss.block-components("video-player-feature");
+		@include scss.block-properties("video-player-feature");
+
 		&-meta {
 			@include scss.block-components("video-player-feature-meta");
 			@include scss.block-properties("video-player-feature-meta");
 		}
-
-		@include scss.block-components("video-player-feature");
-		@include scss.block-properties("video-player-feature");
 	}
-
-	@include scss.block-components("video-player");
-	@include scss.block-properties("video-player");
 }

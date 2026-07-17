@@ -1,91 +1,77 @@
-describe("This test is disabled", () => {
-	it("should succeed", () => {
-		expect(true);
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import { useFusionContext } from "fusion:context";
+import SubHeadline, { SubHeadlinePresentation } from "./default";
+
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	Heading: ({ className, dangerouslySetInnerHTML }) => (
+		<h2 className={className} dangerouslySetInnerHTML={dangerouslySetInnerHTML} />
+	),
+	HeadingSection: ({ children }) => <div>{children}</div>,
+}));
+
+describe("SubHeadlinePresentation", () => {
+	it("renders subheadlines.basic content by default", () => {
+		render(
+			<SubHeadlinePresentation
+				content={{ subheadlines: { basic: "subheadline for our story" } }}
+			/>,
+		);
+		expect(screen.getByRole("heading")).toHaveTextContent("subheadline for our story");
+	});
+
+	it("renders description.basic when valueToDisplay is Description", () => {
+		render(
+			<SubHeadlinePresentation
+				content={{
+					description: { basic: "description for our story" },
+					subheadlines: { basic: "subheadline for our story" },
+				}}
+				valueToDisplay="Description"
+			/>,
+		);
+		expect(screen.getByRole("heading")).toHaveTextContent("description for our story");
+	});
+
+	it("renders subheadlines.basic when valueToDisplay is Subheadline", () => {
+		render(
+			<SubHeadlinePresentation
+				content={{
+					description: { basic: "description for our story" },
+					subheadlines: { basic: "subheadline for our story" },
+				}}
+				valueToDisplay="Subheadline"
+			/>,
+		);
+		expect(screen.getByRole("heading")).toHaveTextContent("subheadline for our story");
+	});
+
+	it("renders nothing when content has no matching value", () => {
+		const { container } = render(<SubHeadlinePresentation content={{}} />);
+		expect(container).toBeEmptyDOMElement();
 	});
 });
 
-// import React from "react";
-// import { mount } from "enzyme";
-// import { useFusionContext } from "fusion:context";
-// import SubHeadline from "./default";
+describe("SubHeadline (Fusion-connected)", () => {
+	it("renders with content from useFusionContext", () => {
+		useFusionContext.mockReturnValueOnce({
+			globalContent: { subheadlines: { basic: "Fusion subheadline" } },
+			customFields: {},
+		});
+		render(<SubHeadline />);
+		expect(screen.getByRole("heading")).toHaveTextContent("Fusion subheadline");
+	});
 
-// jest.mock("fusion:themes", () => jest.fn(() => ({})));
-// jest.mock("fusion:context", () => ({
-// 	useFusionContext: jest.fn(() => ({
-// 		globalContent: {
-// 			subheadlines: {
-// 				basic: "subheadline for our story",
-// 			},
-// 		},
-// 		arcSite: "not-real",
-// 	})),
-// }));
-
-// describe("the subheadline feature for the default output type", () => {
-// 	describe("when subheadline content from globalContent is present", () => {
-// 		it("should dangerously set the innerHTML to the subheadline content", () => {
-// 			const wrapper = mount(<SubHeadline />);
-// 			expect(wrapper.text()).toEqual("subheadline for our story");
-// 		});
-// 	});
-
-// 	describe("when configure to use description from globalContent is present", () => {
-// 		beforeEach(() => {
-// 			useFusionContext.mockImplementation(() => ({
-// 				globalContent: {
-// 					description: {
-// 						basic: "description for our story",
-// 					},
-// 					subheadlines: {
-// 						basic: "subheadline for our story",
-// 					},
-// 				},
-// 				customFields: {
-// 					valueToDisplay: "Description",
-// 				},
-// 				arcSite: "not-real",
-// 			}));
-// 		});
-
-// 		it("should dangerously set the innerHTML to the subheadline content using description.basic", () => {
-// 			const wrapper = mount(<SubHeadline />);
-// 			expect(wrapper.text()).toEqual("description for our story");
-// 		});
-// 	});
-
-// 	describe("when configure to use subheadlines from globalContent is present", () => {
-// 		beforeEach(() => {
-// 			useFusionContext.mockImplementation(() => ({
-// 				globalContent: {
-// 					description: {
-// 						basic: "description for our story",
-// 					},
-// 					subheadlines: {
-// 						basic: "subheadline for our story",
-// 					},
-// 				},
-// 				customFields: {
-// 					valueToDisplay: "Subheadline",
-// 				},
-// 				arcSite: "not-real",
-// 			}));
-// 		});
-
-// 		it("should dangerously set the innerHTML to the subheadline content using subheadlines.basic", () => {
-// 			const wrapper = mount(<SubHeadline />);
-// 			expect(wrapper.text()).toEqual("subheadline for our story");
-// 		});
-// 	});
-
-// 	describe("when subheadline content from globalContent is NOT present", () => {
-// 		beforeEach(() => {
-// 			useFusionContext.mockImplementation(() => ({}));
-// 		});
-
-// 		it("should render nothing", () => {
-// 			const wrapper = mount(<SubHeadline />);
-
-// 			expect(wrapper).toBeEmptyRender();
-// 		});
-// 	});
-// });
+	it("uses customFields.valueToDisplay when provided", () => {
+		useFusionContext.mockReturnValueOnce({
+			globalContent: {
+				description: { basic: "desc from context" },
+				subheadlines: { basic: "sub from context" },
+			},
+			customFields: { valueToDisplay: "Description" },
+		});
+		render(<SubHeadline />);
+		expect(screen.getByRole("heading")).toHaveTextContent("desc from context");
+	});
+});

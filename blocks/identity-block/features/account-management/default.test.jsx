@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useIdentity } from "@wpmedia/arc-themes-components";
-import AccountManagement, { AccountManagementPresentational } from "./default";
+import AccountManagement, { AccountManagementPresentational, definedMessageByCode } from "./default";
 
 jest.mock("./_children/EmailEditableFieldContainer", () => () => <div>Email</div>);
 jest.mock("./_children/PasswordEditableFieldContainer", () => () => <div>Password</div>);
@@ -164,5 +164,17 @@ describe("Account management", () => {
 	it("hides social profile if showing social", async () => {
 		render(<AccountManagement customFields={{ showSocialProfile: false }} />);
 		expect(screen.queryByText("Password")).toBeNull();
+	});
+});
+
+describe("definedMessageByCode helper", () => {
+	it("returns the message for a known error code", () => {
+		const result = definedMessageByCode("010122");
+		expect(result).toBe("identity-block.login-form-error.captcha-token-required");
+	});
+
+	it("returns fallback message for unknown code", () => {
+		const result = definedMessageByCode("UNKNOWN");
+		expect(result).toBe("identity-block.login-form-error.something-went-wrong");
 	});
 });

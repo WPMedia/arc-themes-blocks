@@ -69,4 +69,34 @@ describe("SubscriptionCard component", () => {
 		expect(screen.getByText("subscriptions-block.subscription-profile-management-payment-method-details-billing-statement")).not.toBeNull();
 		expect(screen.getByText("subscriptions-block.subscription-profile-management-billing-address")).not.toBeNull();
 	});
+
+	it("renders terminated subscription (status 2)", () => {
+		render(
+			<SubscriptionCard
+				customFields={{ offerURL: "/offer-url/" }}
+				sub={{ ...sub, status: 2 }}
+				setSelectedSub={setSelectedSub}
+				setIsCancelModalOpen={setIsCancelModalOpen}
+				setIsResubModalOpen={setIsResubModalOpen}
+				setSelectedPrice={setSelectedPrice}
+				className="b-sub"
+			/>,
+		);
+		expect(screen.getByText(`#${sub.subscriptionID}`)).not.toBeNull();
+	});
+
+	it("renders canceled subscription (status 3)", () => {
+		render(
+			<SubscriptionCard
+				customFields={{ offerURL: "/offer-url/" }}
+				sub={{ ...sub, status: 3 }}
+				setSelectedSub={setSelectedSub}
+				setIsCancelModalOpen={setIsCancelModalOpen}
+				setIsResubModalOpen={setIsResubModalOpen}
+				setSelectedPrice={setSelectedPrice}
+				className="b-sub"
+			/>,
+		);
+		expect(screen.getByText(`#${sub.subscriptionID}`)).not.toBeNull();
+	});
 });

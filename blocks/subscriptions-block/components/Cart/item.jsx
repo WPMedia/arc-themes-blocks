@@ -8,10 +8,11 @@ const Item = ({ name, description, additionalInfo, className }) => (
 		{description ? (
 			<p
 				className={`${className}__cart-item--description`}
+				data-testid="cart-item-description"
 				dangerouslySetInnerHTML={{ __html: description }}
 			/>
 		) : null}
-		{additionalInfo ? <p className={`${className}__cart-item--info`}>{additionalInfo}</p> : null}
+		{additionalInfo ? <p className={`${className}__cart-item--info`} data-testid="cart-item-info">{additionalInfo}</p> : null}
 	</Stack>
 );
 

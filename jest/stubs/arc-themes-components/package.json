@@ -1,0 +1,6 @@
+{
+  "name": "@wpmedia/arc-themes-components",
+  "version": "0.0.4-arc-themes-release-version-4-0-0",
+  "main": "index.js",
+  "files": ["index.js", "src"]
+}

@@ -102,6 +102,32 @@ describe("utils", () => {
 		expect(PriceRate(rate3, "USD")).toBe("$10 checkout-block.rates-default-day-month");
 	});
 
+	it("PriceRate with UntilCancelled duration, billingCount <= 1", () => {
+		const rate = {
+			duration: "UntilCancelled",
+			durationCount: 1,
+			billingCount: 1,
+			billingFrequency: "Month",
+			amount: 10,
+		};
+		expect(PriceRate(rate, "USD")).toBe(
+			"$10 checkout-block.rates-single-untilCancelled-month",
+		);
+	});
+
+	it("PriceRate with UntilCancelled duration, billingCount > 1", () => {
+		const rate = {
+			duration: "UntilCancelled",
+			durationCount: 1,
+			billingCount: 3,
+			billingFrequency: "Month",
+			amount: 10,
+		};
+		expect(PriceRate(rate, "USD")).toBe(
+			"$10 checkout-block.rates-untilCancelled-month",
+		);
+	});
+
 	it("NextRate", () => {
 		const rate1 = {
 			duration: "Month",
@@ -112,6 +138,42 @@ describe("utils", () => {
 		};
 
 		expect(NextRate({ nextRate: rate1 })).toBe(
+			"subscriptions-block.subscription-profile-management-payment-method-details-billing-frequency",
+		);
+	});
+
+	it("NextRate with UntilCancelled duration, billingCount <= 1", () => {
+		const rate = {
+			duration: "UntilCancelled",
+			durationCount: 1,
+			billingCount: 1,
+			billingFrequency: "Month",
+		};
+		expect(NextRate({ nextRate: rate })).toBe(
+			"subscriptions-block.subscription-profile-management-payment-method-details-billing-frequency",
+		);
+	});
+
+	it("NextRate with UntilCancelled duration, billingCount > 1", () => {
+		const rate = {
+			duration: "UntilCancelled",
+			durationCount: 1,
+			billingCount: 3,
+			billingFrequency: "Month",
+		};
+		expect(NextRate({ nextRate: rate })).toBe(
+			"subscriptions-block.subscription-profile-management-payment-method-details-billing-frequency",
+		);
+	});
+
+	it("NextRate with default (non-one-time, non-UntilCancelled)", () => {
+		const rate = {
+			duration: "Year",
+			durationCount: 1,
+			billingCount: 4,
+			billingFrequency: "Month",
+		};
+		expect(NextRate({ nextRate: rate })).toBe(
 			"subscriptions-block.subscription-profile-management-payment-method-details-billing-frequency",
 		);
 	});
@@ -141,6 +203,30 @@ describe("utils", () => {
 		expect(getCurrentBillingFrequency(rate1)).toBe("checkout-block.rates-oneTime-month");
 		expect(getCurrentBillingFrequency(rate2)).toBe("checkout-block.rates-default-month-year");
 		expect(getCurrentBillingFrequency(rate3)).toBe("checkout-block.rates-default-day-month");
+	});
+
+	it("getCurrentBillingFrequency with UntilCancelled, billingCount <= 1", () => {
+		const rate = {
+			duration: "UntilCancelled",
+			durationCount: 1,
+			billingCount: 1,
+			billingFrequency: "Month",
+		};
+		expect(getCurrentBillingFrequency(rate)).toBe(
+			"checkout-block.rates-single-untilCancelled-month",
+		);
+	});
+
+	it("getCurrentBillingFrequency with UntilCancelled, billingCount > 1", () => {
+		const rate = {
+			duration: "UntilCancelled",
+			durationCount: 1,
+			billingCount: 3,
+			billingFrequency: "Month",
+		};
+		expect(getCurrentBillingFrequency(rate)).toBe(
+			"checkout-block.rates-untilCancelled-month",
+		);
 	});
 
 	it("PriceRates", () => {
@@ -173,5 +259,15 @@ describe("utils", () => {
 				"$10 checkout-block.rates-oneTime-month, $10 checkout-block.rates-default-month-year, $10 checkout-block.rates-default-day-month",
 			),
 		).toBeInTheDocument();
+	});
+
+	it("PriceRates renders null when priceRates is empty", () => {
+		const { container } = render(<PriceRates priceRates={[]} orderCurrency="USD" />);
+		expect(container).toBeEmptyDOMElement();
+	});
+
+	it("PriceRates renders null when priceRates is not provided", () => {
+		const { container } = render(<PriceRates orderCurrency="USD" />);
+		expect(container).toBeEmptyDOMElement();
 	});
 });

@@ -206,4 +206,39 @@ describe("GalleryPresentation & GalleryFeature comprehensive coverage", () => {
 		expect(mockLazyLoadCalls.pop()).toBe(false);
 	});
 
+	it("uses empty object as default when globalContent prop is omitted", () => {
+		// GalleryPresentation has globalContent = {} as default; omitting it should not crash
+		render(
+			<GalleryPresentation
+				arcSite="site"
+				customFields={{ inheritGlobalContent: true }}
+				resizerAppVersion={2}
+				// globalContent intentionally omitted to exercise the default value
+			/>
+		);
+		// Carousel still renders with empty content
+		expect(screen.getByTestId("carousel")).toBeTruthy();
+	});
+
+	it("applies lazy loading to non-first gallery items", () => {
+		render(
+			<GalleryPresentation
+				arcSite="site"
+				globalContent={{
+					content_elements: [
+						{ url: "img1.jpg", _id: "i1", auth: { 2: "T1" }, alt_text: "first" },
+						{ url: "img2.jpg", _id: "i2", auth: { 2: "T2" }, alt_text: "second" },
+					],
+					headlines: {},
+					_id: "multi-gallery",
+				}}
+				customFields={{ inheritGlobalContent: true }}
+				resizerAppVersion={2}
+			/>
+		);
+		// First image is eager, second is lazy — both Image calls recorded
+		expect(imageCalls[0].loading).toBe("eager");
+		expect(imageCalls[1].loading).toBe("lazy");
+	});
+
 });

@@ -5,6 +5,7 @@ import mockConsole from "jest-mock-console";
 
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
+import getProperties from "fusion:properties";
 import { isServerSide } from "@wpmedia/arc-themes-components";
 
 import mockData from "./mock-data";
@@ -205,6 +206,46 @@ describe("The numbered-list-block", () => {
 			expect(screen.queryByText("Story with video as the Lead Art")).not.toBeInTheDocument();
 
 			unmount();
+		});
+
+		it("should render no list if useContent returns null", () => {
+			useContent.mockReturnValueOnce(null);
+
+			const customFields = {
+				listContentConfig,
+				showHeadline: true,
+				showImage: true,
+				lazyLoad: false,
+			};
+
+			const { unmount } = render(<NumberedList customFields={customFields} />);
+
+			expect(screen.queryByText("1")).not.toBeInTheDocument();
+
+			unmount();
+		});
+	});
+
+	describe("getFallbackImageURL when fallbackImage already has http", () => {
+		it("should use the fallbackImage URL directly without calling pagebuilderURL", () => {
+			const mockPagebuilderURL = jest.fn((x) => x);
+			useFusionContext.mockReturnValueOnce({
+				arcSite: "the-sun",
+				contextPath: "pf",
+				pagebuilderURL: mockPagebuilderURL,
+				isAdmin: false,
+			});
+
+			getProperties.mockReturnValueOnce({
+				fallbackImage: "http://cdn.example.com/placeholder.jpg",
+				resizerURL: "http://url.com/",
+			});
+
+			const customFields = { listContentConfig, showHeadline: true, showImage: true };
+			render(<NumberedList customFields={customFields} />);
+
+			// pagebuilderURL should NOT be called for the fallback image since it already has http
+			expect(mockPagebuilderURL).not.toHaveBeenCalled();
 		});
 	});
 });

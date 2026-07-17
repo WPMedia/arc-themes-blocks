@@ -292,6 +292,78 @@ describe("Result parts", () => {
 		unmount();
 	});
 
+	it("should show sponsored overline using phrase fallback when label text is missing", () => {
+		const { unmount } = render(
+			<ResultItem
+				arcSite="the-sun"
+				element={{
+					...element,
+					owner: { sponsored: true },
+					label: { basic: {} }, // no text property
+				}}
+				imageProperties={imageProperties}
+				targetFallbackImage={fallbackImage}
+				placeholderResizedImageOptions={{}}
+				showItemOverline
+			/>,
+		);
+		expect(screen.getByText(/Sample phrases/i)).toBeInTheDocument();
+		unmount();
+	});
+
+	it("should use element headline as alt text when showHeadline is false and image is present", () => {
+		const { unmount } = render(
+			<ResultItem
+				arcSite="the-sun"
+				element={{
+					...element,
+					promo_items: {
+						basic: {
+							_id: "ABCDEFG12345678910",
+							type: "image",
+							url: "http://test/resources/ABCDEFG12345678910.jpg",
+							auth: { "2": "abc123" },
+						},
+					},
+				}}
+				imageProperties={imageProperties}
+				targetFallbackImage={fallbackImage}
+				placeholderResizedImageOptions={{}}
+				showImage
+				showHeadline={false}
+			/>,
+		);
+		// With showHeadline=false and a real ansImage, the alt text comes from element.headlines.basic
+		const img = screen.getByAltText(/Test headline 1/i);
+		expect(img).toBeInTheDocument();
+		unmount();
+	});
+
+	it("should render without overline section URL when website_section is absent", () => {
+		const elementNoSection = {
+			...element,
+			websites: {
+				"the-sun": {
+					website_url: "https://the-sun/no-section",
+					// no website_section
+				},
+			},
+		};
+		const { unmount } = render(
+			<ResultItem
+				arcSite="the-sun"
+				element={elementNoSection}
+				imageProperties={imageProperties}
+				targetFallbackImage={fallbackImage}
+				placeholderResizedImageOptions={{}}
+				showItemOverline
+			/>,
+		);
+		// No section text → no overline rendered
+		expect(screen.queryByText("Section")).toBeNull();
+		unmount();
+	});
+
 	it("should be null if all show* values are false", () => {
 		const { container, unmount } = render(
 			<ResultItem

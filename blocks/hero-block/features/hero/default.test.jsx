@@ -218,6 +218,60 @@ describe("Hero", () => {
 		expect(screen.getByText("My Headline")).toBeInTheDocument();
 	});
 
+	it("sets mobileAuth RESIZER_TOKEN_VERSION when mobileAuth has hash", () => {
+		// First call (desktopAuth): return parseable JSON string
+		// Second call (mobileAuth): return an object with a hash property for the mobile image
+		jest.spyOn(fusionContent, "useContent")
+			.mockReturnValueOnce(JSON.stringify({ 2: "2cc3c2b3" })) // desktopAuth
+			.mockReturnValueOnce({ hash: "abc123", 2: "xyz" }); // mobileAuth with hash
+		render(
+			<Hero
+				customFields={{
+					imageURL: "image",
+					headline: "Hero with hash auth",
+					mobileImageId: "P5EYZ",
+					imageId: "DESKTOP123",
+				}}
+			/>,
+		);
+		expect(screen.getByText("Hero with hash auth")).toBeInTheDocument();
+	});
+
+	it("should render only link2 when link1 is absent", () => {
+		render(
+			<Hero
+				customFields={{
+					headline: "Headline",
+					link2Action: "/page2",
+					link2Text: "Page Two",
+					link2Type: "primary",
+				}}
+			/>,
+		);
+		// Only one link rendered — link2
+		const links = screen.getAllByRole("link");
+		expect(links).toHaveLength(1);
+		expect(links[0]).toHaveTextContent("Page Two");
+	});
+
+	it("should render only link1 when link2 action is present but text is absent", () => {
+		render(
+			<Hero
+				customFields={{
+					headline: "Headline",
+					link1Action: "/page1",
+					link1Text: "Page One",
+					link1Type: "secondary",
+					link2Action: "/page2",
+					// link2Text intentionally omitted — link2 should not render
+				}}
+			/>,
+		);
+		const links = screen.getAllByRole("link");
+		expect(links).toHaveLength(1);
+		expect(links[0]).toHaveTextContent("Page One");
+	});
+
 	it("should set correct alt text for the image", () => {
 		jest.spyOn(fusionContent, "useContent").mockImplementation(() => ({}));
 		render(

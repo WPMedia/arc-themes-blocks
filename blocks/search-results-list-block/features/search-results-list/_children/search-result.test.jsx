@@ -1,6 +1,7 @@
 /* eslint-disable prefer-arrow-callback, camelcase, dot-notation  */
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
 import SearchResult from "./search-result";
 
@@ -135,6 +136,48 @@ describe("The search results", () => {
 			);
 
 			expect(screen.queryByText("Basic Description 1", { exact: false })).toBe(null);
+		});
+	});
+
+	describe("renders overline when showItemOverline is true", () => {
+		it("should render the overline when showItemOverline is true", () => {
+			render(
+				<SearchResult
+					className="test"
+					content={{ ...singleListItem, text: "My Overline" }}
+					arcSite="test-site"
+					promoElements={{
+						showHeadline: true,
+						showImage: true,
+						showDescription: true,
+						showByline: true,
+						showDate: true,
+						showItemOverline: true,
+						overlineURL: "/section",
+					}}
+				/>,
+			);
+			expect(screen.getByText("My Overline")).toBeInTheDocument();
+		});
+	});
+
+	describe("hides attribution when both showDate is false and there are no authors", () => {
+		it("should not render attribution block when showDate is false and showByline is false", () => {
+			render(
+				<SearchResult
+					className="test"
+					content={singleListItem}
+					arcSite="test-site"
+					promoElements={{
+						showHeadline: true,
+						showImage: true,
+						showDescription: true,
+						showByline: false,
+						showDate: false,
+					}}
+				/>,
+			);
+			expect(screen.queryByText("global.by-text")).toBeNull();
 		});
 	});
 

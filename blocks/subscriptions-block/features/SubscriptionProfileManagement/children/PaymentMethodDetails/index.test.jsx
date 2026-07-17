@@ -5,6 +5,8 @@ import "@testing-library/jest-dom";
 
 import PaymentMethodDetails from "./index";
 
+const originalFetch = global.fetch;
+
 jest.mock("@wpmedia/arc-themes-components", () => ({
   ...jest.requireActual("@wpmedia/arc-themes-components"),
   Icon: () => <i />
@@ -41,6 +43,10 @@ const sub = {
 }
 
 describe("PaymentMethodDetails component", () => {
+	afterEach(() => {
+		global.fetch = originalFetch;
+	});
+
 	it("renders component", () => {
 		
 		render(
@@ -59,6 +65,33 @@ describe("PaymentMethodDetails component", () => {
 		expect(screen.getByText("subscriptions-block.subscription-profile-management-payment-method-details-payment-string")).not.toBeNull();
 		expect(screen.getByText("subscriptions-block.subscription-profile-management-payment-method-details-next-bill")).not.toBeNull();
 		expect(screen.getByText("subscriptions-block.subscription-profile-management-payment-method-details-billing-statement")).not.toBeNull();
+	});
+
+	it("calls getNextRate when price and sub are both available", async () => {
+		global.fetch = jest.fn(() =>
+			Promise.resolve({
+				json: () =>
+					Promise.resolve({
+						pricingStrategy: {
+							name: "Monthly Plan",
+							rates: [{ amount: "10.00", billingFrequency: "Month", billingCount: 1, duration: "UntilCancelled", durationCount: 1 }],
+							currencyCode: "USD",
+						},
+						price: "10.00",
+						paymentDate: 1716407853000,
+					}),
+			}),
+		);
+		jest.mock("fusion:properties", () => jest.fn(() => ({ api: { retail: { origin: "https://api.example.com", endpoint: "/retail/public/v1/pricing/paymentInfo/" } } })));
+		render(
+			<PaymentMethodDetails
+				customFields={{ offerURL: "/offer-url/" }}
+				sub={{ ...sub, priceCode: "ABC123" }}
+				setPrice={jest.fn()}
+				className="b-sub"
+			/>
+		);
+		expect(screen.getByText("subscription-block.shared-Payment-method")).not.toBeNull();
 	});
 
   it("renders when there is no subscription", () => {

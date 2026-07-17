@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-import { usePhrases, Heading, Input, Button, Stack, Image, Icon } from "@wpmedia/arc-themes-components";
+import { usePhrases, Heading, Input, Button, Stack, Icon } from "@wpmedia/arc-themes-components";
 import countryCodes from "./countryCodes";
 
 const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, className }) => {
@@ -48,7 +48,7 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, classNa
 			switch (type) {
 				case "google":
 					return (
-						<div className={`${className}__identity-row`}>
+						<div className={`${className}__identity-row`} data-testid="identity-row">
 							<Icon name="GoogleColor"/>
 							<span>
 								{phrases.t("checkout-block.identity-social", {
@@ -60,7 +60,7 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, classNa
 					);
 				case "facebook":
 					return (
-						<div className={`${className}__identity-row`}>
+						<div className={`${className}__identity-row`} data-testid="identity-row">
 							<Icon name="Facebook"/>
 							<span>
 								{phrases.t("checkout-block.identity-social", {
@@ -72,7 +72,7 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, classNa
 					);
 				case "password":
 					return (
-						<div className={`${className}__identity-row`}>
+						<div className={`${className}__identity-row`} data-testid="identity-row">
 							<span>
 								{phrases.t("checkout-block.identity-email", {
 									email: user.email,
@@ -89,7 +89,7 @@ const ContactInfo = ({ callback, user, signedInIdentity, logoutCallback, classNa
 	};
 
 	return (
-		<form onSubmit={handleSubmit} ref={formRef} className={`${className}__contact-info`}>
+		<form onSubmit={handleSubmit} ref={formRef} className={`${className}__contact-info`} data-testid="contact-info-form">
 			<Heading>{phrases.t("checkout-block.contact-info")}</Heading>
 			<Stack>
 				<Input

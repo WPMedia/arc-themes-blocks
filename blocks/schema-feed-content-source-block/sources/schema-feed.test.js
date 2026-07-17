@@ -1,3 +1,4 @@
+import axios from "axios";
 import contentSource from "./schema-feed";
 
 jest.mock("fusion:environment", () => ({
@@ -203,6 +204,22 @@ describe("the schema-feed content source block", () => {
 					page: "1",
 				}),
 			);
+		});
+	});
+
+	describe("when the response has no data", () => {
+		it("should throw a not found error", async () => {
+			axios.mockImplementationOnce(() => Promise.resolve({ data: null }));
+
+			await expect(
+				contentSource.fetch(
+					{
+						schemaName: "my-schema",
+						"arc-site": "site1",
+					},
+					{ arcSite: "" },
+				),
+			).rejects.toThrow("Failed to retrieve schema data");
 		});
 	});
 

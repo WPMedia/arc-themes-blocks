@@ -1,0 +1,28 @@
+{
+	"name": "@wpmedia/schema-item-content-source-block",
+	"version": "5.14.1-beta.1",
+	"description": "Content source block for fetching documents by ID from Arc XP custom schemas",
+	"author": "Arc XP - Themes",
+	"homepage": "https://github.com/WPMedia/arc-themes-blocks",
+	"license": "CC-BY-NC-ND-4.0",
+	"main": "",
+	"files": [
+		"sources"
+	],
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/",
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
+		"directory": "blocks/schema-item-content-source-block"
+	},
+	"dependencies": {
+		"axios": "^1.5.1"
+	},
+	"peerDependencies": {
+		"@wpmedia/arc-themes-components": "*"
+	},
+	"gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
+}

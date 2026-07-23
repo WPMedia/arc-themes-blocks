@@ -22,8 +22,7 @@
 		"axios": "^1.5.1"
 	},
 	"peerDependencies": {
-		"@wpmedia/arc-themes-components": "*",
-		"@wpmedia/signing-service-content-source-block": "*"
+		"@wpmedia/arc-themes-components": "*"
 	},
 	"gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

@@ -3,13 +3,11 @@ name: "Code security scanning"
 on:
   push:
     branches:
-      - arc-themes-release-version-[0-9]+\.[0-9]+
-      - arc-themes-release-version-[0-9]+\.[0-9]+\.[0-9]+
+      - main
   pull_request:
     # The branches below must be a subset of the branches above
     branches:
-      - arc-themes-release-version-[0-9]+\.[0-9]+
-      - arc-themes-release-version-[0-9]+\.[0-9]+\.[0-9]+
+      - main
 
 jobs:
   analyze:
@@ -27,13 +25,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v1
+        uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3

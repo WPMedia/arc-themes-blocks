@@ -1,14 +1,11 @@
-name: Test Blocks And Linting - Changed from themes release base
+name: Test Blocks And Linting - Changed from main
 
 on:
   pull_request:
     # synchronize	commit(s) pushed to the pull request
     types: [synchronize, opened]
     branches:
-      # arc-themes-release-version-{numbers}.{numbers} per product
-      - arc-themes-release-version-[0-9]+\.[0-9]+
-      # arc-themes-release-version-{numbers}.{numbers}.{numbers} per product
-      - arc-themes-release-version-[0-9]+\.[0-9]+\.[0-9]+
+      - main
 
 jobs:
   ensure_minimum_test_coverage_linting:
@@ -18,20 +15,20 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           #  0 indicates all history for all branches and tags
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           registry-url: "https://npm.pkg.github.com"
 
       - name: Cache Node Modules
         id: cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
@@ -42,10 +39,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run tests on changed since base themes release
+      - name: Run tests on changed since main
         run: npm run test:changed-feature-branch
 
-      - name: Check linting of changed since base themes release
+      - name: Check linting of changed since main
         run: npm run lint:changed-feature-branch
 
       - name: Check failure status

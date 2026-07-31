@@ -66,7 +66,7 @@ Fixes any stylelint issues that can be fixed automatically from the files mentio
 
 ### `npm run lint:changed-feature-branch`
 
-Similar to `npm run test:changed-feature-branch`, this runs on pre-push and within the GitHub Workflow. It will run `eslint` on all code that have changed since the last commit on the target release branch. See the `.eslintignore` and the `.eslintrc.js` for the configuration.
+Similar to `npm run test:changed-feature-branch`, this runs on pre-push and within the GitHub Workflow. It will run `eslint` on all code that have changed since `origin/main`. See the `.eslintignore` and the `.eslintrc.js` for the configuration.
 
 ### `npm run lint:changed-feature-branch:fix`
 
@@ -82,7 +82,7 @@ Run all tests for code that has changed. Will also show coverage for changed cod
 
 ### `npm run test:changed-feature-branch`
 
-Similar to `npm run test:watch`, but will run tests for all blocks that have changed since the last commit on the target release branch. This should be updated with each new version `"jest --changedSince=origin/arc-themes-release-version-2.0.3 --coverage --passWithNoTests",` -> `"jest --changedSince=origin/arc-themes-release-version-2.0.4 --coverage --passWithNoTests",` for `2.0.3` -> `2.0.4`. This runs in the [GitHub Workflow for testing blocks on Pull Requests](./.github/workflows/test-coverage-blocks.yml). It also runs on pre-push using [Husky](https://github.com/typicode/husky#usage). Note that the Husky pre-push file is located in [root](./.husky/pre-push) and not in the package.json, per version 7 of Husky.
+Runs tests for all blocks that have changed since `origin/main`. This runs in the [GitHub Workflow for testing blocks on Pull Requests](./.github/workflows/test-coverage-blocks.yml). It also runs on pre-push using [Husky](https://github.com/typicode/husky#usage). Note that the Husky pre-push file is located in [root](./.husky/pre-push) and not in the package.json, per version 7 of Husky.
 
 ## Storybook Setup
 
@@ -99,13 +99,64 @@ registry=https://registry.npmjs.org
 3. `npm i` to install packages
 4. `npm run storybook` to show the blocks in Storybook. For more info on Storybook, see [their documentation](https://storybook.js.org/docs/react/get-started/introduction). In confluence, we have Storybook best practices as well for themes.
 
+## Releasing
+
+This repo uses trunk-based development. All work is merged into `main`, and the `themesVersion` field in the root `package.json` determines which themes release version blocks are published under.
+
+### Publishing blocks (automatic)
+
+Every merge to `main` that changes block code (`.js`, `.jsx`, `.json`, `.scss`) triggers the [publish workflow](./.github/workflows/sync-themes-branch-with-themes-tag.yml). It reads `themesVersion` from `package.json` and publishes all changed blocks to GitHub Packages under the dist-tag `arc-themes-release-version-<themesVersion>`.
+
+No manual steps are needed — just merge your PR and blocks are published.
+
+### Bumping to a new themes version
+
+When you're ready to start a new themes release (e.g., moving from `4.1.0` to `4.2.0`):
+
+1. Create a PR that changes `themesVersion` in `package.json` from `"4.1.0"` to `"4.2.0"`
+2. Merge the PR into `main`
+3. The publish workflow will automatically:
+   - Tag the previous version's final commit as `themes-v4.1.0`
+   - Begin publishing blocks under `arc-themes-release-version-4.2.0`
+
+That's it. The git tag provides a permanent record of exactly which commit was the last publish for each version, and can be used to view history or create hotfix branches later.
+
+```bash
+# View what shipped in a specific version
+git log themes-v4.0.0..themes-v4.1.0
+
+# View what's been published in the current version so far
+git log themes-v4.1.0..main
+```
+
+### Hotfixing a previous version
+
+Hotfixes are for the rare case when you need to patch a version you've already moved past. A dedicated [hotfix workflow](./.github/workflows/hotfix.yml) handles publishing.
+
+1. Find the tag for the version you need to fix:
+   ```bash
+   git tag -l "themes-v*"
+   ```
+
+2. Create a hotfix branch from that tag:
+   ```bash
+   git checkout -b hotfix/4.1.0 themes-v4.1.0
+   ```
+
+3. Make your fix, commit, and push:
+   ```bash
+   git push -u origin hotfix/4.1.0
+   ```
+
+4. The hotfix workflow runs automatically and publishes the fix under the original dist-tag (`arc-themes-release-version-4.1.0`).
+
+> **Note:** Hotfix branches are not merged back into `main`. If the fix is also needed on `main`, cherry-pick it into a separate PR targeting `main`.
+
 ## `dist-tags`
 
 Please see the [release notes in Confluence](https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2344910925/Themes+Releases) if you are a Themes developer.
 
-This package has been published with a number of dist-tags meant for different purposes:
-
-- `arc-themes-release-version-X.XX` - These are versioned versions of all blocks for a given release cycle in the [Theme Manifest repo](https://github.com/WPMedia/arc-themes-manifests).
+Blocks are published with dist-tags in the format `arc-themes-release-version-X.Y.Z`, corresponding to the `themesVersion` in `package.json` at the time of publish. These are used in the [Theme Manifest repo](https://github.com/WPMedia/arc-themes-manifests).
 
 ## License
 

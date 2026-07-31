@@ -2,130 +2,89 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## What This Is
+
+A Lerna monorepo of ~79 Arc Themes blocks published to GitHub Packages (`@wpmedia/*`). Blocks are React components that run inside Arc's Fusion rendering engine. The repo uses independent versioning per block, but all blocks are published together under a shared themes release dist-tag.
+
 ## Commands
 
 ```bash
-# Testing
-npm test                                # run all tests
-npm run test:coverage                   # run with coverage report
-npm run test:watch                      # watch mode (only changed files)
-npm run test:changed-feature-branch    # test only files changed vs origin/arc-themes-release-version-4.1.0
+npm run test                       # Run all tests (jest)
+npm run test -- --testPathPattern=blocks/header-block  # Run tests for one block
+npm run test:watch                 # Watch mode with coverage for changed files
+npm run test:changed-feature-branch # Tests for files changed vs origin/main
 
-# Run a single test file
-npx jest blocks/large-promo-block/features/large-promo/default.test.jsx
+npm run lint                       # ESLint all blocks
+npm run lint:changed-feature-branch # ESLint only files changed vs origin/main
+npm run lint:styles                # Stylelint all SCSS
+npm run lint:styles:fix            # Auto-fix SCSS issues
 
-# Linting
-npm run lint                            # ESLint on blocks/ and .storybook/
-npm run lint:fix                        # auto-fix lint issues
-npm run lint:changed-feature-branch    # lint only changed files vs origin branch
-
-# Formatting
-npm run format                          # Prettier (uses tabs, width 100)
-
-# Storybook
-npm run storybook                       # dev server on port 6006
-npm run build-storybook                 # static build for Chromatic
-
-# Code generation (Hygen templates)
-npm run generate:chain                  # scaffold a new chain block
-npm run generate:feature                # scaffold a new feature block
-npm run generate:content-source         # scaffold a new content source block
+npm run storybook                  # Dev server on port 6006
+npm run format                     # Prettier (uses tabs)
 ```
 
-Node version: 20 (see `.nvmrc`).
+## Release Process
+
+Trunk-based development on `main`. The `themesVersion` field in root `package.json` controls which dist-tag blocks publish under (e.g., `"themesVersion": "4.1.0"` → dist-tag `arc-themes-release-version-4.1.0`).
+
+- **Every merge to `main`** that touches block code auto-publishes via `lerna publish --canary`
+- **Version bump**: change `themesVersion` in a PR; on merge the workflow auto-tags the previous version (e.g., `themes-v4.1.0`) and starts publishing under the new one
+- **Hotfix**: create `hotfix/X.Y.Z` branch from the `themes-vX.Y.Z` tag, push fix, it auto-publishes
 
 ## Architecture
 
-### Monorepo Structure
+### Block Types
 
-This is a Lerna monorepo of 78 independent npm packages under `blocks/`. Each package (`@wpmedia/*-block`) is a self-contained **Arc XP Fusion block** published to GitHub's npm registry.
+Blocks live in `blocks/` and come in four types, each with a corresponding subdirectory:
+- **features/** — UI components (header, promo cards, article body)
+- **chains/** — layout containers that wrap features
+- **sources/** — content sources that fetch data from Arc APIs
+- **output-types/** — page-level output wrappers
 
-The four block types:
+### Block Structure
 
-| Type | Location within block | Purpose |
-|---|---|---|
-| **Feature** | `features/<name>/default.jsx` | Leaf React components rendered on a page |
-| **Chain** | `chains/<name>/default.jsx` | Compositions that arrange features/children |
-| **Layout** | `layouts/<name>/default.jsx` | Full-page structural wrappers with named sections |
-| **Content Source** | `sources/<name>.js` | Data-fetching functions (not React components) |
+Each block is an independent npm package (`@wpmedia/<name>`) with:
+- `features/` or `chains/` or `sources/` containing `default.jsx` + `default.test.jsx`
+- `_index.scss` — styles using BEM naming (`b-block-name`, `b-block-name--variant`)
+- `themes/*.json` — theme token mappings (news.json, commerce.json)
+- `intl.json` — i18n translations (generated from `locale/` via `npm run generate:intl`)
+- `jest.config.js` — extends `../../jest/jest.config.base`
+- `index.story.jsx` — Storybook story
 
-A single block package can contain multiple of these types. Block-level `package.json` files list which directories to publish (`features`, `chains`, `layouts`, `sources`, `themes`, `_index.scss`, `intl.json`).
+### Fusion Integration
 
-### Fusion Framework Integration
+Blocks import from virtual Fusion modules that don't exist on disk — they're provided by the Fusion runtime and mocked in tests via babel module-resolver (`babel.config.js` → `jest/mocks/`):
+- `fusion:content` — `useContent`, `useEditableContent`
+- `fusion:context` — `useFusionContext`, `useAppContext`
+- `fusion:properties` — `getProperties`
+- `fusion:environment` — `RESIZER_TOKEN_VERSION`, `resizerKey`, etc.
+- `fusion:intl` — `usePhrases`
 
-Blocks run inside **Arc XP Fusion**, which injects framework dependencies via `fusion:*` import aliases. These are never installed as npm packages — Fusion resolves them at runtime:
+### Shared Dependencies
 
-- `fusion:content` — `useContent()`, `useEditableContent()` hooks for fetching CMS data
-- `fusion:context` — `useFusionContext()`, `useComponentContext()`, `useAppContext()`
-- `fusion:properties` — `getProperties()` for site-specific configuration
-- `fusion:environment` — env vars like `CONTENT_BASE`, `RESIZER_TOKEN_VERSION`
-- `fusion:themes` — theme injection
-- `fusion:intl` — i18n phrase lookups
+- `@wpmedia/arc-themes-components` — shared component library (LazyLoad, Image, etc.)
+- `@arc-fusion/prop-types` — prop-type helpers with `.tag()` for PageBuilder metadata and `.contentConfig()` for content source config
 
-In tests, `babel.config.js` aliases these to mocks under `jest/mocks/`. In Storybook, `.storybook/alias/` provides stubs. When writing tests, mock them with `jest.mock("fusion:properties", () => jest.fn(() => ({ ... })))`.
+### Testing Patterns
 
-### Component Library
-
-All feature/chain/layout components import UI primitives from `@wpmedia/arc-themes-components` (a peer dependency, not in this repo). Import everything from that single package: `Image`, `Heading`, `Link`, `Stack`, `Grid`, `usePhrases`, `formatURL`, etc.
-
-### Feature Component Pattern
-
-Feature components separate data-fetching from presentation:
-- The **default export** is the Fusion-connected component that calls `useContent()` and `getProperties()`, then passes resolved data as props.
-- A named **`*Presentation`** export is the pure React component used in tests and Storybook.
-
-```jsx
-export const LargePromoPresentation = ({ contentHeading, ... }) => { ... };
-
-const LargePromo = (props) => {
-  const content = useContent({ ... });
-  return <LargePromoPresentation contentHeading={content?.headlines?.basic} ... />;
-};
-
-export default LargePromo;
-```
-
-### Content Sources
-
-Content source files export a plain object (not a React component):
-
+Tests use React Testing Library. Common mocking pattern:
 ```js
-export default {
-  fetch: (params, { cachedCall }) => Promise,
-  params: [{ name: "query", displayName: "Query", type: "text" }],
-  schemaName: "ans-feed",
-};
+jest.mock("fusion:content", () => ({ useContent: jest.fn(() => ({})) }));
+jest.mock("@wpmedia/arc-themes-components", () => ({
+  ...jest.requireActual("@wpmedia/arc-themes-components"),
+  isServerSide: jest.fn(() => false),
+  LazyLoad: ({ children }) => children,
+}));
 ```
 
-### Static Properties for Fusion Registration
+### Styling Rules
 
-Fusion discovers blocks by scanning the filesystem; there is no explicit registry. Components declare metadata via static properties:
-
-```jsx
-Component.label = "Large Promo – Arc Block";
-Component.icon = "picture-feature";
-Component.propTypes = { customFields: PropTypes.shape({ ... }) };
-// Layouts and chains also declare:
-Component.sections = ["navigation", "body", "footer"];
-```
-
-### Theming
-
-Each block has `themes/news.json` and `themes/commerce.json` defining CSS variable overrides per theme. Styles use a BEM-like class naming: blocks use a `BLOCK_CLASS_NAME` constant (`b-<block-name>`).
-
-### Internationalization
-
-Each block has an `intl.json` file with phrase keys and translations. Phrases are consumed via `usePhrases()` from `@wpmedia/arc-themes-components`. The source of truth is Lokalise; `npm run generate:intl` regenerates `intl.json` files from `locale/`.
-
-### Testing Conventions
-
-- Test files live **co-located** with source: `default.test.jsx` next to `default.jsx`
-- Test the **`*Presentation`** component, not the default Fusion-connected export
-- Use React Testing Library with semantic queries (`screen.getByRole`, `screen.getByText`)
-- Each block has its own `jest.config.js` that extends `../../jest/jest.config.base.js`
-- `jest.resetModules()` runs `beforeEach` — each test gets a fresh module registry
-- Coverage thresholds enforced globally: 53% statements, 66% branches, 44% functions, 54% lines
+- CSS logical properties are enforced (use `margin-inline-start` not `margin-left`)
+- Max nesting depth: 5
+- No vendor prefixes
+- `border: none` is disallowed (use `border: 0`)
+- SCSS `@include` calls on the parent selector must precede nested `&` rules (sass 1.92+ hoisting requirement)
 
 ### Code Generation
 
-The Hygen generators under `_templates/` scaffold complete block packages including component, test, Storybook story, SCSS, `package.json`, `intl.json`, and `jest.config.js`. Always prefer generating a new block via `npm run generate:*` rather than copying manually.
+New blocks are scaffolded with hygen: `npm run generate:feature`, `npm run generate:chain`, `npm run generate:content-source`. Variants exist for adding features/sources to existing blocks.

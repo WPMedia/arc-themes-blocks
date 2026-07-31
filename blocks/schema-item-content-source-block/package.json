@@ -1,6 +1,6 @@
 {
 	"name": "@wpmedia/schema-item-content-source-block",
-	"version": "5.14.1-beta.1",
+	"version": "0.0.1",
 	"description": "Content source block for fetching documents by ID from Arc XP custom schemas",
 	"author": "Arc XP - Themes",
 	"homepage": "https://github.com/WPMedia/arc-themes-blocks",

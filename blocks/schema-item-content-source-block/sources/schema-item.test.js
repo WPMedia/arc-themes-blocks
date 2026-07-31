@@ -21,10 +21,12 @@ jest.mock("axios", () => ({
 		return Promise.resolve({
 			data: {
 				_id: "test-doc",
-				type: "story",
-				request: {
-					...request,
-					url,
+				data: {
+					type: "story",
+					request: {
+						...request,
+						url,
+					},
 				},
 			},
 		});

@@ -60,12 +60,12 @@ const fetch = (
 		method: "GET",
 	})
 		.then(({ data }) => {
-			if (!data) {
+			if (!data || !data.data) {
 				const error = new Error("Document not found");
 				error.statusCode = 404;
 				throw error;
 			}
-			return data;
+			return data.data;
 		})
 		.catch(handleFetchError);
 };

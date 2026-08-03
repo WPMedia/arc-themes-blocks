@@ -164,6 +164,7 @@
     "@wpmedia/results-list-block": "file:blocks/results-list-block",
     "@wpmedia/right-rail-advanced-block": "file:blocks/right-rail-advanced-block",
     "@wpmedia/right-rail-block": "file:blocks/right-rail-block",
+    "@wpmedia/schema-item-content-source-block": "file:blocks/schema-item-content-source-block",
     "@wpmedia/search-content-source-block": "file:blocks/search-content-source-block",
     "@wpmedia/search-results-list-block": "file:blocks/search-results-list-block",
     "@wpmedia/section-title-block": "file:blocks/section-title-block",

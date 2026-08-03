@@ -16,15 +16,18 @@ jest.mock("axios", () => ({
 			searchObject: Object.fromEntries(requestUrl.searchParams),
 		};
 
-		return Promise.resolve({
-			data: {
-				content_elements: [{ type: "schema" }],
-				request: {
-					...request,
-					url,
-				},
-			},
-		});
+        return Promise.resolve({
+            data: {
+                _id: "test-feed",
+                data: {
+                    content_elements: [{ type: "schema" }],
+                    request: {
+                        ...request,
+                        url,
+                    },
+                },
+            },
+        });
 	}),
 }));
 

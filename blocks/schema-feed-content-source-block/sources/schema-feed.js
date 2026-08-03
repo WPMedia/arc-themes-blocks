@@ -72,12 +72,12 @@ const fetch = (
 		timeout: 8000,
 	})
 		.then(({ data }) => {
-			if (!data) {
+			if (!data || !data.data) {
 				const error = new Error("Failed to retrieve schema data");
 				error.statusCode = 404;
 				throw error;
 			}
-			return data;
+			return data.data;
 		})
 		.catch(handleFetchError);
 };

@@ -1,12 +1,8 @@
-name: Publish to themes target tag based off of themes branch name
+name: Publish to themes target tag on merge to main
 on:
   push:
     branches:
-      # only run on branch names that match:
-      # arc-themes-release-version-{numbers}.{numbers} per product
-      - arc-themes-release-version-[0-9]+\.[0-9]+
-      # arc-themes-release-version-{numbers}.{numbers}.{numbers} per product
-      - arc-themes-release-version-[0-9]+\.[0-9]+\.[0-9]+
+      - main
     # only run on changes to these files
     paths:
       - "**.js"
@@ -19,11 +15,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    env:
-      SYNCED_RELEASE_TAG: ${{ github.ref_name }} # targets branch name ref_name
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -32,15 +26,34 @@ jobs:
       - name: Pull tags to give lerna access to git info
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
+      - name: Read themesVersion from package.json
+        id: themes-version
+        run: |
+          THEMES_VERSION=$(node -p "require('./package.json').themesVersion")
+          echo "version=$THEMES_VERSION" >> "$GITHUB_OUTPUT"
+          echo "dist_tag=arc-themes-release-version-${THEMES_VERSION}" >> "$GITHUB_OUTPUT"
+
+      - name: Check if themesVersion changed
+        id: version-changed
+        run: |
+          PREV_VERSION=$(git show HEAD~1:package.json | node -p "JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).themesVersion" 2>/dev/null || echo "")
+          CURR_VERSION=${{ steps.themes-version.outputs.version }}
+          if [ "$PREV_VERSION" != "$CURR_VERSION" ] && [ -n "$PREV_VERSION" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "previous_version=$PREV_VERSION" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           registry-url: "https://npm.pkg.github.com"
 
       - name: Cache Node Modules
         id: cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
@@ -54,11 +67,22 @@ jobs:
       - name: Run all tests
         run: npm run test
 
+      # Tag the previous version's final commit before publishing under the new version
+      - name: Tag previous themes version
+        if: steps.version-changed.outputs.changed == 'true'
+        run: |
+          PREV_TAG="themes-v${{ steps.version-changed.outputs.previous_version }}"
+          # Tag the commit before the version bump (parent of current HEAD)
+          git tag "$PREV_TAG" HEAD~1
+          git push origin "$PREV_TAG"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       # See confluence pages https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2983788608/How+To+Do+Product-Facing+Tag+Release and https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/3013541978/Github+Actions+for+NodeJS+Standards+Best+Practices for documentation
-      - name: Publish to target tag based off of branch name
+      - name: Publish to target tag based off of themesVersion
         run: |
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config --local user.name "$GITHUB_ACTOR"
-          npx lerna publish --dist-tag ${{ env.SYNCED_RELEASE_TAG }} --canary --preid ${{ env.SYNCED_RELEASE_TAG }} -y
+          npx lerna publish --dist-tag ${{ steps.themes-version.outputs.dist_tag }} --canary --preid ${{ steps.themes-version.outputs.dist_tag }} -y
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

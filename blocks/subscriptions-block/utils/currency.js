@@ -10,7 +10,10 @@ const CURRECY_MAP = {
 	MXN: "$",
 	BRL: "R$",
 	CAD: "CA$",
-	GBP: "£"
+	GBP: "£",
+	AUD: "A$",
+	ARS: "ARS$",
+	ZAR: "R"
 };
 
 const currency = (name) => CURRECY_MAP[name] || null;

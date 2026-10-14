@@ -1,4 +1,4 @@
-const CURRECY_MAP = {
+const CURRENCY_MAP = {
 	USD: "$",
 	NZD: "$",
 	EUR: "€",
@@ -10,9 +10,12 @@ const CURRECY_MAP = {
 	MXN: "$",
 	BRL: "R$",
 	CAD: "CA$",
-	GBP: "£"
+	GBP: "£",
+	AUD: "A$",
+	ARS: "$",
+	ZAR: "R",
 };
 
-const currency = (name) => CURRECY_MAP[name] || null;
+const currency = (name) => CURRENCY_MAP[name] || null;
 
 export default currency;

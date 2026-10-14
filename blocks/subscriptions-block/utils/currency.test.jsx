@@ -5,6 +5,14 @@ describe("Currency", () => {
 		expect(currency("USD")).toBe("$");
 	});
 
+	it.each([
+		["AUD", "A$"],
+		["ARS", "$"],
+		["ZAR", "R"],
+	])("returns the symbol for %s", (code, symbol) => {
+		expect(currency(code)).toBe(symbol);
+	});
+
 	it("returns null if currency is not supported", () => {
 		expect(currency("HKD")).toBe(null);
 	});

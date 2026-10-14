@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx jest *)",
+      "Bash(node *)",
+      "Bash(find / \\\\\\( -path /proc -o -path /sys \\\\\\) -prune -o -name '*schema-feed*' -print)",
+      "Bash(find / -name '*schema-feed*.tgz')",
+      "Read(//home/node/.npm/_cacache/**)",
+      "Read(//home/node/workspace/dev.arcxp.com/src/content/**)",
+      "Read(//home/node/workspace/arc-skills/shared/arcxp-docs/docs/**)",
+      "Read(//home/node/**)",
+      "Read(//home/node/workspace/arc-skills/**)",
+      "WebFetch(domain:dev.arcxp.com)",
+      "WebSearch"
+    ]
+  }
+}
